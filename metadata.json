@@ -1,0 +1,5 @@
+{
+  "name": "CanPay Insights",
+  "description": "A comprehensive Canadian payroll calculator that estimates bi-weekly and annual income with tax deductions, shift premiums, and provincial overtime rules, powered by AI for financial insights.",
+  "requestFramePermissions": []
+}
