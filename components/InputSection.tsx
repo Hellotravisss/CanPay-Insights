@@ -1,3 +1,4 @@
+
 import React from 'react';
 import { SalaryInputs, Province } from '../types';
 import { PROVINCIAL_DATA, DAYS_OF_WEEK } from '../constants';
@@ -19,16 +20,29 @@ const InputSection: React.FC<Props> = ({ inputs, setInputs }) => {
     setInputs({ ...inputs, premium: { ...inputs.premium, [field]: value } });
   };
 
+  // 优化数字输入：处理空值，防止“0”一直留在输入框前面
+  const handleWageChange = (value: string) => {
+    if (value === '') {
+      // 允许临时为空，方便用户输入
+      setInputs({ ...inputs, hourlyWage: '' as unknown as number });
+    } else {
+      const num = parseFloat(value);
+      if (!isNaN(num)) {
+        setInputs({ ...inputs, hourlyWage: num });
+      }
+    }
+  };
+
   return (
     <div className="bg-white rounded-xl shadow-sm border border-slate-200 p-6 space-y-8 relative overflow-hidden">
       <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-red-500 to-red-600"></div>
 
       {/* Province & Wage */}
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+      <div className="grid grid-cols-1 gap-6">
         <div>
           <label className="block text-sm font-bold text-slate-700 mb-2">Province / Territory</label>
           <select 
-            className="w-full p-3 bg-white text-slate-900 border border-slate-300 rounded-lg focus:ring-2 focus:ring-red-500 focus:outline-none transition-all cursor-pointer hover:border-red-300"
+            className="w-full p-3 bg-white text-slate-900 border border-slate-300 rounded-lg focus:ring-2 focus:ring-red-500 focus:outline-none transition-all cursor-pointer hover:border-red-300 shadow-sm"
             value={inputs.province}
             onChange={(e) => setInputs({...inputs, province: e.target.value})}
           >
@@ -40,13 +54,16 @@ const InputSection: React.FC<Props> = ({ inputs, setInputs }) => {
         <div>
           <label className="block text-sm font-bold text-slate-700 mb-2">Hourly Wage ($/hr)</label>
           <div className="relative">
-            <span className="absolute left-3 top-3 text-slate-500 font-medium">$</span>
+            <span className="absolute left-4 top-3.5 text-slate-400 font-bold">$</span>
             <input 
               type="number" 
-              className="w-full p-3 pl-8 bg-white text-slate-900 border border-slate-300 rounded-lg focus:ring-2 focus:ring-red-500 focus:outline-none font-medium"
-              value={inputs.hourlyWage}
-              onChange={(e) => setInputs({...inputs, hourlyWage: parseFloat(e.target.value) || 0})}
-              placeholder="e.g. 25.00"
+              inputMode="decimal"
+              step="0.01"
+              className="w-full p-3.5 pl-10 bg-white text-slate-900 border border-slate-300 rounded-lg focus:ring-2 focus:ring-red-500 focus:outline-none font-bold text-lg shadow-sm"
+              value={inputs.hourlyWage === 0 && (inputs.hourlyWage as any) !== 0 ? '' : inputs.hourlyWage}
+              onFocus={(e) => e.target.select()} // 点击自动全选，方便覆盖
+              onChange={(e) => handleWageChange(e.target.value)}
+              placeholder="0.00"
             />
           </div>
         </div>
@@ -66,10 +83,10 @@ const InputSection: React.FC<Props> = ({ inputs, setInputs }) => {
             <button
               key={day}
               onClick={() => handleDayToggle(idx)}
-              className={`px-4 py-2 rounded-full text-sm font-bold transition-all transform active:scale-95 ${
+              className={`flex-1 min-w-[55px] py-2.5 rounded-lg text-xs font-bold transition-all transform active:scale-95 border ${
                 inputs.shift.daysActive[idx] 
-                ? 'bg-red-600 text-white shadow-md shadow-red-200' 
-                : 'bg-slate-100 text-slate-500 hover:bg-slate-200'
+                ? 'bg-red-600 text-white border-red-600 shadow-md shadow-red-100' 
+                : 'bg-white text-slate-500 border-slate-200 hover:bg-slate-50'
               }`}
             >
               {day}
@@ -77,33 +94,40 @@ const InputSection: React.FC<Props> = ({ inputs, setInputs }) => {
           ))}
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-          <div>
-            <label className="block text-xs font-bold text-slate-500 uppercase mb-1">Start Time</label>
-            <input 
-              type="time" 
-              className="w-full p-2 bg-white text-slate-900 border border-slate-300 rounded-md focus:ring-2 focus:ring-red-500 focus:outline-none"
-              value={inputs.shift.startTime}
-              onChange={(e) => setInputs({...inputs, shift: { ...inputs.shift, startTime: e.target.value }})}
-            />
+        {/* 改进的时间输入布局：增加间距和宽度 */}
+        <div className="space-y-4">
+          <div className="grid grid-cols-2 gap-4">
+            <div className="flex-1">
+              <label className="block text-xs font-bold text-slate-500 uppercase mb-1.5 ml-1">Start Time</label>
+              <input 
+                type="time" 
+                className="w-full p-3 bg-white text-slate-900 border border-slate-300 rounded-lg focus:ring-2 focus:ring-red-500 focus:outline-none shadow-sm min-h-[48px]"
+                value={inputs.shift.startTime}
+                onChange={(e) => setInputs({...inputs, shift: { ...inputs.shift, startTime: e.target.value }})}
+              />
+            </div>
+            <div className="flex-1">
+              <label className="block text-xs font-bold text-slate-500 uppercase mb-1.5 ml-1">End Time</label>
+              <input 
+                type="time" 
+                className="w-full p-3 bg-white text-slate-900 border border-slate-300 rounded-lg focus:ring-2 focus:ring-red-500 focus:outline-none shadow-sm min-h-[48px]"
+                value={inputs.shift.endTime}
+                onChange={(e) => setInputs({...inputs, shift: { ...inputs.shift, endTime: e.target.value }})}
+              />
+            </div>
           </div>
           <div>
-            <label className="block text-xs font-bold text-slate-500 uppercase mb-1">End Time</label>
-            <input 
-              type="time" 
-              className="w-full p-2 bg-white text-slate-900 border border-slate-300 rounded-md focus:ring-2 focus:ring-red-500 focus:outline-none"
-              value={inputs.shift.endTime}
-              onChange={(e) => setInputs({...inputs, shift: { ...inputs.shift, endTime: e.target.value }})}
-            />
-          </div>
-          <div>
-            <label className="block text-xs font-bold text-slate-500 uppercase mb-1">Unpaid Break (mins)</label>
-            <input 
-              type="number" 
-              className="w-full p-2 bg-white text-slate-900 border border-slate-300 rounded-md focus:ring-2 focus:ring-red-500 focus:outline-none"
-              value={inputs.shift.unpaidBreakMinutes}
-              onChange={(e) => setInputs({...inputs, shift: { ...inputs.shift, unpaidBreakMinutes: parseInt(e.target.value) || 0 }})}
-            />
+            <label className="block text-xs font-bold text-slate-500 uppercase mb-1.5 ml-1">Unpaid Break (mins)</label>
+            <div className="relative">
+              <input 
+                type="number" 
+                className="w-full p-3 bg-white text-slate-900 border border-slate-300 rounded-lg focus:ring-2 focus:ring-red-500 focus:outline-none shadow-sm"
+                value={inputs.shift.unpaidBreakMinutes}
+                onFocus={(e) => e.target.select()}
+                onChange={(e) => setInputs({...inputs, shift: { ...inputs.shift, unpaidBreakMinutes: parseInt(e.target.value) || 0 }})}
+              />
+              <span className="absolute right-4 top-3 text-slate-400 text-sm">min</span>
+            </div>
           </div>
         </div>
       </div>
@@ -129,47 +153,53 @@ const InputSection: React.FC<Props> = ({ inputs, setInputs }) => {
         </div>
 
         {inputs.premium.enabled && (
-          <div className="bg-red-50 p-4 rounded-lg border border-red-100 grid grid-cols-1 sm:grid-cols-3 gap-4 animate-fadeIn">
+          <div className="bg-red-50 p-4 rounded-xl border border-red-100 space-y-4 animate-fadeIn">
              <div>
-                <label className="block text-xs font-bold text-red-800 mb-1">Premium Rate ($/hr)</label>
-                <input 
-                  type="number" 
-                  className="w-full p-2 bg-white text-slate-900 border border-red-200 rounded-md focus:ring-2 focus:ring-red-500 focus:outline-none"
-                  value={inputs.premium.ratePerHour}
-                  onChange={(e) => updatePremium('ratePerHour', parseFloat(e.target.value))}
-                />
+                <label className="block text-xs font-bold text-red-800 mb-1.5 ml-1">Premium Rate ($/hr)</label>
+                <div className="relative">
+                  <span className="absolute left-3 top-2 text-red-400">$</span>
+                  <input 
+                    type="number" 
+                    className="w-full p-2 pl-7 bg-white text-slate-900 border border-red-200 rounded-lg focus:ring-2 focus:ring-red-500 focus:outline-none"
+                    value={inputs.premium.ratePerHour}
+                    onFocus={(e) => e.target.select()}
+                    onChange={(e) => updatePremium('ratePerHour', parseFloat(e.target.value) || 0)}
+                  />
+                </div>
              </div>
-             <div>
-                <label className="block text-xs font-bold text-red-800 mb-1">From</label>
-                <input 
-                  type="time" 
-                  className="w-full p-2 bg-white text-slate-900 border border-red-200 rounded-md focus:ring-2 focus:ring-red-500 focus:outline-none"
-                  value={inputs.premium.startTime}
-                  onChange={(e) => updatePremium('startTime', e.target.value)}
-                />
-             </div>
-             <div>
-                <label className="block text-xs font-bold text-red-800 mb-1">To</label>
-                <input 
-                  type="time" 
-                  className="w-full p-2 bg-white text-slate-900 border border-red-200 rounded-md focus:ring-2 focus:ring-red-500 focus:outline-none"
-                  value={inputs.premium.endTime}
-                  onChange={(e) => updatePremium('endTime', e.target.value)}
-                />
+             <div className="grid grid-cols-2 gap-3">
+               <div>
+                  <label className="block text-xs font-bold text-red-800 mb-1.5 ml-1">From</label>
+                  <input 
+                    type="time" 
+                    className="w-full p-2.5 bg-white text-slate-900 border border-red-200 rounded-lg focus:ring-2 focus:ring-red-500 focus:outline-none"
+                    value={inputs.premium.startTime}
+                    onChange={(e) => updatePremium('startTime', e.target.value)}
+                  />
+               </div>
+               <div>
+                  <label className="block text-xs font-bold text-red-800 mb-1.5 ml-1">To</label>
+                  <input 
+                    type="time" 
+                    className="w-full p-2.5 bg-white text-slate-900 border border-red-200 rounded-lg focus:ring-2 focus:ring-red-500 focus:outline-none"
+                    value={inputs.premium.endTime}
+                    onChange={(e) => updatePremium('endTime', e.target.value)}
+                  />
+               </div>
              </div>
           </div>
         )}
       </div>
 
-      <div className="flex items-center gap-2 bg-slate-50 p-3 rounded-lg border border-slate-100">
+      <div className="flex items-center gap-3 bg-slate-50 p-4 rounded-xl border border-slate-100 hover:bg-slate-100 transition-colors cursor-pointer" onClick={() => setInputs({...inputs, includeVacationPay: !inputs.includeVacationPay})}>
         <input 
           id="vacation"
           type="checkbox" 
           checked={inputs.includeVacationPay}
-          onChange={(e) => setInputs({...inputs, includeVacationPay: e.target.checked})}
+          onChange={(e) => e.stopPropagation()} // 防止触发父容器点击
           className="w-5 h-5 text-red-600 rounded border-gray-300 focus:ring-red-500"
         />
-        <label htmlFor="vacation" className="text-sm font-medium text-slate-700 cursor-pointer">Add 4% Vacation Pay</label>
+        <label htmlFor="vacation" className="text-sm font-bold text-slate-700 cursor-pointer">Include 4% Vacation Pay</label>
       </div>
 
     </div>
