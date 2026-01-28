@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect, useMemo } from 'react';
 import InputSection from './components/InputSection';
 import ResultsSection from './components/ResultsSection';
@@ -48,6 +49,9 @@ const App: React.FC = () => {
     return calculateSalary(inputs);
   }, [inputs]);
 
+  // 已绑定您的收款链接
+  const DONATION_URL = "https://www.buymeacoffee.com/canpay"; 
+
   return (
     <div className="min-h-screen bg-slate-50 pb-20 font-sans">
       {/* Header */}
@@ -87,10 +91,15 @@ const App: React.FC = () => {
         <p>Calculations are estimates based on simplified 2024 tax brackets and provincial employment standards.</p>
         
         <div className="flex justify-center items-center gap-4">
-          <button className="flex items-center gap-2 bg-[#FFDD00] text-slate-900 px-4 py-2 rounded-full font-bold shadow-md hover:bg-[#FFEA00] transition-colors group">
-            <span className="text-lg group-hover:scale-125 transition-transform duration-300">☕</span>
+          <a 
+            href={DONATION_URL}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="flex items-center gap-2 bg-[#FFDD00] text-slate-900 px-6 py-2.5 rounded-full font-bold shadow-md hover:bg-[#FFEA00] hover:shadow-lg transition-all transform hover:-translate-y-1 group decoration-none"
+          >
+            <span className="text-xl group-hover:rotate-12 transition-transform duration-300">☕</span>
             <span>Buy me a double-double</span>
-          </button>
+          </a>
         </div>
 
         <div className="mt-2 flex justify-center gap-2">
@@ -98,6 +107,7 @@ const App: React.FC = () => {
            <span className="w-2 h-2 rounded-full bg-red-400 opacity-50"></span>
            <span className="w-2 h-2 rounded-full bg-red-400 opacity-50"></span>
         </div>
+        <p className="mt-4 opacity-75">Proudly Canadian 🇨🇦 Built for Workers.</p>
       </footer>
     </div>
   );
