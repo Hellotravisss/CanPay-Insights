@@ -40,7 +40,7 @@ const InukshukIcon = ({ className }: { className?: string }) => (
     <rect x="14" y="18" width="3" height="4" rx="0.5" />
   </svg>
 );
-
+ 
 const App: React.FC = () => {
   const [inputs, setInputs] = useState<SalaryInputs>(DEFAULT_INPUTS);
   
