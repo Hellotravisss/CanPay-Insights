@@ -51,7 +51,7 @@ const App: React.FC = () => {
 
   // 已绑定您的收款链接
   const DONATION_URL = "https://www.buymeacoffee.com/canpay"; 
-
+ 
   return (
     <div className="min-h-screen bg-slate-50 pb-20 font-sans">
       {/* Header */}
