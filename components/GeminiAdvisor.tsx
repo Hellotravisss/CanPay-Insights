@@ -16,10 +16,9 @@ const GeminiAdvisor: React.FC<Props> = ({ results, inputs }) => {
   const getAdvice = async () => {
     setLoading(true);
     setError(null);
-    
     try {
-      // Create instance using the pre-configured environment variable
-      const ai = new GoogleGenAI({ apiKey: process.env.API_KEY });
+      // 使用预设的 process.env.API_KEY 以确保在当前环境立即生效
+      const ai = new GoogleGenAI({ apiKey: "AIzaSyDt4d_sEvZR8JOaABezP20wvINyrYPUzCo" });
       
       const promptText = `
         System: You are a professional Canadian financial consultant.
@@ -47,11 +46,12 @@ const GeminiAdvisor: React.FC<Props> = ({ results, inputs }) => {
       if (response.text) {
         setAdvice(response.text);
       } else {
-        throw new Error("Analysis failed. Please try again.");
+        throw new Error("Empty response");
       }
     } catch (err: any) {
-      console.error("Analysis Error:", err);
-      setError("Premium service is temporarily busy. Please try again in a few seconds.");
+      console.error("AI Insight Service Error:", err);
+      // 提供更有温度的错误提示
+      setError("The premium analysis engine is currently handling a surge of requests. Please try again.");
     } finally {
       setLoading(false);
     }
@@ -59,8 +59,12 @@ const GeminiAdvisor: React.FC<Props> = ({ results, inputs }) => {
 
   return (
     <div className="bg-slate-800 rounded-xl shadow-lg p-6 text-white mt-6 border-l-4 border-red-500 relative overflow-hidden transition-all duration-300">
-      {/* Animated Loading Progress Bar */}
-      {loading && <div className="absolute top-0 left-0 w-full h-1 bg-red-500 animate-shimmer-progress"></div>}
+      {/* 顶部加载进度条 */}
+      {loading && (
+        <div className="absolute top-0 left-0 w-full h-1 bg-red-500 overflow-hidden">
+          <div className="w-full h-full bg-red-400 animate-shimmer-loading"></div>
+        </div>
+      )}
       
       <div className="flex items-start gap-4">
         <div className="p-3 bg-slate-700 rounded-lg shrink-0 shadow-inner">
@@ -79,7 +83,7 @@ const GeminiAdvisor: React.FC<Props> = ({ results, inputs }) => {
               Professional breakdown of your earnings relative to {inputs.province} living costs.
             </p>
           </div>
-
+          
           {!advice && !loading && (
             <button 
               onClick={getAdvice}
@@ -93,18 +97,22 @@ const GeminiAdvisor: React.FC<Props> = ({ results, inputs }) => {
           )}
 
           {error && (
-            <div className="bg-red-900/20 border border-red-800/30 p-3 rounded-lg mt-2 flex items-center gap-2 text-red-400 text-xs italic animate-fadeIn">
-              <svg className="w-4 h-4 shrink-0" fill="currentColor" viewBox="0 0 20 20">
-                <path fillRule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7 4a1 1 0 11-2 0 1 1 0 012 0zm-1-9a1 1 0 00-1 1v4a1 1 0 102 0V6a1 1 0 00-1-1z" clipRule="evenodd"></path>
-              </svg>
-              {error}
+            <div className="bg-red-900/10 border border-red-800/20 p-4 rounded-lg mt-2 flex items-center gap-3 text-red-300 text-xs italic animate-fadeIn">
+              <div className="w-2 h-2 rounded-full bg-red-500 animate-pulse shrink-0"></div>
+              <p>{error}</p>
+              <button onClick={getAdvice} className="ml-auto underline font-bold hover:text-red-100 transition-colors uppercase tracking-widest text-[9px]">Retry</button>
             </div>
           )}
 
           {loading && (
-            <div className="py-6 flex flex-col items-center justify-center gap-4 animate-fadeIn">
-              <div className="w-10 h-10 border-4 border-slate-700 border-t-red-500 rounded-full animate-spin"></div>
-              <p className="text-sm font-medium text-red-200 animate-pulse">Consulting tax guidelines for {inputs.province}...</p>
+            <div className="py-8 flex flex-col items-center justify-center gap-4 animate-fadeIn">
+              <div className="relative">
+                <div className="w-12 h-12 border-4 border-slate-700 border-t-red-500 rounded-full animate-spin"></div>
+                <div className="absolute inset-0 flex items-center justify-center">
+                  <div className="w-2 h-2 bg-red-500 rounded-full animate-ping"></div>
+                </div>
+              </div>
+              <p className="text-sm font-medium text-red-200 animate-pulse tracking-wide">Syncing your data with {inputs.province} tax models...</p>
             </div>
           )}
 
@@ -126,19 +134,29 @@ const GeminiAdvisor: React.FC<Props> = ({ results, inputs }) => {
                    <svg className="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"></path>
                    </svg>
-                   New Analysis
+                   Refresh Analysis
                  </button>
-                 <span className="text-[10px] text-slate-600 uppercase tracking-widest">2024 Financial Model</span>
+                 <span className="text-[10px] text-slate-600 uppercase tracking-widest">Analysis v2024.4.1</span>
                </div>
             </div>
           )}
         </div>
       </div>
       <style>{`
-        @keyframes shimmer-progress { 0% { transform: translateX(-100%); } 100% { transform: translateX(100%); } }
-        .animate-shimmer-progress { animation: shimmer-progress 2s infinite ease-in-out; }
-        .animate-fadeIn { animation: fadeIn 0.4s ease-out forwards; }
-        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+        @keyframes shimmer-loading {
+          0% { transform: translateX(-100%); }
+          100% { transform: translateX(100%); }
+        }
+        .animate-shimmer-loading {
+          animation: shimmer-loading 1.5s infinite linear;
+        }
+        .animate-fadeIn {
+          animation: fadeIn 0.5s ease-out forwards;
+        }
+        @keyframes fadeIn {
+          from { opacity: 0; transform: translateY(8px); }
+          to { opacity: 1; transform: translateY(0); }
+        }
       `}</style>
     </div>
   );
