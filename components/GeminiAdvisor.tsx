@@ -17,8 +17,8 @@ const GeminiAdvisor: React.FC<Props> = ({ results, inputs }) => {
     setLoading(true);
     setError(null);
     try {
-      // 使用预设的 process.env.API_KEY 以确保在当前环境立即生效
-      const ai = new GoogleGenAI({ apiKey: "AIzaSyDt4d_sEvZR8JOaABezP20wvINyrYPUzCo" });
+      // 注意：确保你的 Vercel 变量名也是 VITE_GEMINI_API_KEY
+      const ai = new GoogleGenAI({ apiKey: import.meta.env.VITE_GEMINI_API_KEY });
       
       const promptText = `
         System: You are a professional Canadian financial consultant.
