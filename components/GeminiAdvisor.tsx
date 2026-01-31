@@ -34,15 +34,15 @@ const GeminiAdvisor: React.FC<Props> = ({ results, inputs }) => {
   const APP_URL = "https://www.canpayinsights.ca/";
 
   // Pre-load QR Code as Base64 to prevent white blocks in screenshots
+  // Using format=svg for better rendering stability
   useEffect(() => {
     const fetchQr = async () => {
       try {
-        const url = `https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=${encodeURIComponent(APP_URL)}&color=0f172a`;
+        const url = `https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=${encodeURIComponent(APP_URL)}&color=0f172a&format=svg`;
         const response = await fetch(url);
-        const blob = await response.blob();
-        const reader = new FileReader();
-        reader.onloadend = () => setQrBase64(reader.result as string);
-        reader.readAsDataURL(blob);
+        const text = await response.text();
+        const base64 = `data:image/svg+xml;base64,${btoa(unescape(encodeURIComponent(text)))}`;
+        setQrBase64(base64);
       } catch (e) {
         console.error("QR Base64 load failed", e);
       }
@@ -54,8 +54,8 @@ const GeminiAdvisor: React.FC<Props> = ({ results, inputs }) => {
     setLoading(true);
     setError(null);
     try {
-      // MANDATORY: Use process.env.API_KEY
-      const ai = new GoogleGenAI({ apiKey:  import.meta.env.VITE_GEMINI_API_KEY });
+      // MANDATORY: Use process.env.API_KEY as per system instructions
+      const ai = new GoogleGenAI({ apiKey: import.meta.env.VITE_GEMINI_API_KEY });
       
       const promptText = `
         System: You are a professional Canadian financial consultant specializing in 2025-2026 economy.
@@ -97,7 +97,9 @@ const GeminiAdvisor: React.FC<Props> = ({ results, inputs }) => {
     if (!snapshotRef.current) return;
     setExporting(true);
     try {
-      // Force Reflow to get correct scroll height for long text reports
+      // 增加一点点延迟，确保移动端 Base64 图像在离屏 DOM 中完全就绪
+      await new Promise(resolve => setTimeout(resolve, 100));
+
       const fullHeight = snapshotRef.current.scrollHeight;
       
       const dataUrl = await htmlToImage.toPng(snapshotRef.current, {
@@ -119,7 +121,6 @@ const GeminiAdvisor: React.FC<Props> = ({ results, inputs }) => {
       if (isMobile) {
         setPreviewImage(dataUrl);
       } else {
-        // Direct download for desktop
         download(dataUrl, `CanPay-Report-${inputs.province.replace(/\s+/g, '-')}.png`);
       }
     } catch (err) {
@@ -271,7 +272,7 @@ const GeminiAdvisor: React.FC<Props> = ({ results, inputs }) => {
         </div>
       )}
 
-      {/* HIDDEN SNAPSHOT CONTAINER - Uses inline-block to ensure content drives height */}
+      {/* HIDDEN SNAPSHOT CONTAINER */}
       <div style={{ position: 'absolute', left: '-9999px', top: 0 }}>
         <div 
           ref={snapshotRef} 
@@ -333,13 +334,13 @@ const GeminiAdvisor: React.FC<Props> = ({ results, inputs }) => {
                 <p className="text-[12px] text-slate-600 font-bold uppercase tracking-[0.3em] mb-2">Powered by Gemini 3 Pro</p>
                 <p className="text-sm text-slate-500 italic">Official 2025/2026 Tax Estimator Output</p>
               </div>
-              <div className="p-3 bg-white rounded-2xl shadow-2xl border-4 border-slate-800">
-                {/* Use the Base64 QR code to avoid white block issues in screenshot */}
+              <div className="p-2 bg-white rounded-xl shadow-2xl border-[6px] border-slate-800 overflow-hidden">
                 {qrBase64 ? (
                   <img 
                     src={qrBase64}
                     alt="QR Code" 
-                    className="w-20 h-20"
+                    className="w-20 h-20 block"
+                    style={{ minWidth: '80px', minHeight: '80px' }}
                   />
                 ) : (
                   <div className="w-20 h-20 bg-slate-100 animate-pulse"></div>
