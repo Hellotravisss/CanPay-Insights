@@ -29,18 +29,7 @@ const GeminiAdvisor: React.FC<Props> = ({ results, inputs }) => {
   const [previewImage, setPreviewImage] = useState<string | null>(null);
   const snapshotRef = useRef<HTMLDivElement>(null);
 
-  const APP_URL = "https://can-pay-insights.vercel.app/";
-
-  // Helper to convert image to base64 to avoid CORS/loading issues in html-to-image
-  const getBase64FromUrl = async (url: string): Promise<string> => {
-    const data = await fetch(url);
-    const blob = await data.blob();
-    return new Promise((resolve) => {
-      const reader = new FileReader();
-      reader.readAsDataURL(blob);
-      reader.onloadend = () => resolve(reader.result as string);
-    });
-  };
+  const APP_URL = "https://www.canpayinsights.ca/";
 
   const getAdvice = async () => {
     setLoading(true);
@@ -88,15 +77,14 @@ const GeminiAdvisor: React.FC<Props> = ({ results, inputs }) => {
     if (!snapshotRef.current) return;
     setExporting(true);
     try {
-      // 1. Ensure any remote images (like QR) are ready/replaced with base64
-      // The QR code is already set to a data URL if we pre-processed it, 
-      // but for simplicity we'll just use html-to-image with a delay to ensure render.
-      
+      // 增加一点点延迟，确保离屏渲染完全稳定
+      await new Promise(resolve => setTimeout(resolve, 300));
+
       const dataUrl = await htmlToImage.toPng(snapshotRef.current, {
         pixelRatio: 2,
         backgroundColor: '#0f172a',
-        width: 1000, // Fixed width for consistent layout
-        height: 1400, // Fixed height or auto
+        width: 1000, // 保持固定宽度以固定排版
+        // 移除固定的 height，让它自适应内容长度，防止底部被裁
         style: {
           transform: 'scale(1)',
           left: '0',
@@ -218,7 +206,6 @@ const GeminiAdvisor: React.FC<Props> = ({ results, inputs }) => {
 
       {/* 
           MOBILE PREVIEW MODAL 
-          Better for mobile saving: users can long-press to save to photos
       */}
       {previewImage && (
         <div className="fixed inset-0 z-[100] bg-slate-950/95 flex flex-col items-center justify-center p-4 sm:p-8 animate-fadeIn">
@@ -260,15 +247,15 @@ const GeminiAdvisor: React.FC<Props> = ({ results, inputs }) => {
       )}
 
       {/* 
-          HIDDEN SNAPSHOT CONTAINER - FIXED DIMENSIONS 
-          We force width and styling to ensure the image looks consistent everywhere.
+          HIDDEN SNAPSHOT CONTAINER
+          改为 h-auto 自动高度，并增加 pb-20 确保页脚下方有间距
       */}
       <div style={{ position: 'absolute', left: '-9999px', top: 0 }}>
         <div 
           ref={snapshotRef} 
-          className="w-[1000px] bg-slate-900 text-white p-16 font-sans flex flex-col min-h-[1400px]"
+          className="w-[1000px] bg-slate-900 text-white p-16 font-sans flex flex-col h-auto pb-20"
         >
-          {/* Header Section - Force single line */}
+          {/* Header Section */}
           <div className="flex justify-between items-end border-b border-slate-700 pb-12 mb-12 flex-nowrap">
             <div className="flex-shrink-0">
               <div className="flex items-center gap-4 mb-4 whitespace-nowrap">
@@ -298,7 +285,7 @@ const GeminiAdvisor: React.FC<Props> = ({ results, inputs }) => {
             </div>
           </div>
 
-          {/* Main Content Body */}
+          {/* Main Content Body - 移除 min-h 限制，完全由内容撑开 */}
           <div className="flex-grow">
             {advice && (
               <div 
