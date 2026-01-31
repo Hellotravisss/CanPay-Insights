@@ -4,7 +4,6 @@ import { GoogleGenAI } from "@google/genai";
 import React, { useState, useRef } from 'react';
 import { CalculationResult, SalaryInputs } from '../types';
 import * as htmlToImage from 'html-to-image';
-import download from 'downloadjs';
 
 interface Props {
   results: CalculationResult;
@@ -27,18 +26,26 @@ const GeminiAdvisor: React.FC<Props> = ({ results, inputs }) => {
   const [advice, setAdvice] = useState<string | null>(null);
   const [error, setError] = useState<string | null>(null);
   const [exporting, setExporting] = useState(false);
+  const [previewImage, setPreviewImage] = useState<string | null>(null);
   const snapshotRef = useRef<HTMLDivElement>(null);
 
   const APP_URL = "https://can-pay-insights.vercel.app/";
 
-  // Fix: Removed global window.aistudio declaration and related hooks to resolve TypeScript conflicts 
-  // and adhere to "do not ask for API key" guidelines for text-based tasks.
+  // Helper to convert image to base64 to avoid CORS/loading issues in html-to-image
+  const getBase64FromUrl = async (url: string): Promise<string> => {
+    const data = await fetch(url);
+    const blob = await data.blob();
+    return new Promise((resolve) => {
+      const reader = new FileReader();
+      reader.readAsDataURL(blob);
+      reader.onloadend = () => resolve(reader.result as string);
+    });
+  };
 
   const getAdvice = async () => {
     setLoading(true);
     setError(null);
     try {
-      // 记得用 import.meta.env，并确认变量名和 Vercel 里的一样
       const ai = new GoogleGenAI({ apiKey: import.meta.env.VITE_GEMINI_API_KEY });
       
       const promptText = `
@@ -59,13 +66,11 @@ const GeminiAdvisor: React.FC<Props> = ({ results, inputs }) => {
         Constraints: Output MUST be in English. Use Markdown for bold text. Use bullet points for recommendations. Mention that this is based on 2025/2026 tax estimates.
       `;
 
-      // Fix: Utilizing gemini-3-pro-preview for complex reasoning tasks involving financial analysis and tax laws.
       const response = await ai.models.generateContent({
         model: 'gemini-3-pro-preview',
         contents: [{ parts: [{ text: promptText }] }],
       });
 
-      // Fix: Access response text using the .text property directly.
       if (response.text) {
         setAdvice(response.text);
       } else {
@@ -73,21 +78,33 @@ const GeminiAdvisor: React.FC<Props> = ({ results, inputs }) => {
       }
     } catch (err: any) {
       console.error("AI Insight Service Error:", err);
-      setError("The AI engine is currently unavailable. Please check your connection and try again.");
+      setError("The AI engine is currently unavailable. Please try again.");
     } finally {
       setLoading(false);
     }
   };
 
-  const handleSaveImage = async () => {
+  const handleExport = async () => {
     if (!snapshotRef.current) return;
     setExporting(true);
     try {
+      // 1. Ensure any remote images (like QR) are ready/replaced with base64
+      // The QR code is already set to a data URL if we pre-processed it, 
+      // but for simplicity we'll just use html-to-image with a delay to ensure render.
+      
       const dataUrl = await htmlToImage.toPng(snapshotRef.current, {
         pixelRatio: 2,
         backgroundColor: '#0f172a',
+        width: 1000, // Fixed width for consistent layout
+        height: 1400, // Fixed height or auto
+        style: {
+          transform: 'scale(1)',
+          left: '0',
+          top: '0'
+        }
       });
-      download(dataUrl, `CanPay-Insights-${inputs.province}.png`);
+      
+      setPreviewImage(dataUrl);
     } catch (err) {
       console.error('Failed to export image', err);
     } finally {
@@ -98,6 +115,8 @@ const GeminiAdvisor: React.FC<Props> = ({ results, inputs }) => {
   const formatCurrency = (val: number) => {
     return new Intl.NumberFormat('en-CA', { style: 'currency', currency: 'CAD' }).format(val);
   };
+
+  const qrCodeUrl = `https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=${encodeURIComponent(APP_URL)}&color=0f172a`;
 
   return (
     <div className="bg-slate-800 rounded-xl shadow-lg p-4 sm:p-6 text-white mt-6 border-l-4 border-red-500 relative overflow-hidden transition-all duration-300">
@@ -110,33 +129,34 @@ const GeminiAdvisor: React.FC<Props> = ({ results, inputs }) => {
       <div className="flex flex-col gap-4">
         <div className="flex-1 min-w-0">
           <div className="mb-5">
-            <div className="flex items-center gap-2 mb-1.5 flex-wrap">
-              <div className="p-1.5 bg-red-600 rounded-md shadow-inner">
-                <InukshukIcon className="w-4 h-4 text-white" />
+            <div className="flex items-center justify-between mb-1.5 flex-nowrap">
+              <div className="flex items-center gap-2">
+                <div className="p-1.5 bg-red-600 rounded-md shadow-inner">
+                  <InukshukIcon className="w-4 h-4 text-white" />
+                </div>
+                <h3 className="text-lg sm:text-xl font-bold tracking-tight whitespace-nowrap">AI Financial Insights</h3>
               </div>
-              <h3 className="text-lg sm:text-xl font-bold tracking-tight">AI Financial Insights</h3>
               
-              {advice ? (
+              {advice && (
                 <button 
-                  onClick={handleSaveImage}
+                  onClick={handleExport}
                   disabled={exporting}
-                  className="text-[9px] sm:text-[10px] bg-red-600 hover:bg-red-700 text-white px-2 py-0.5 rounded-full uppercase tracking-tighter font-bold border border-red-500/30 transition-colors flex items-center gap-1 disabled:opacity-50"
+                  className="text-[10px] sm:text-xs bg-red-600 hover:bg-red-700 text-white px-3 py-1.5 rounded-full uppercase tracking-tighter font-bold border border-red-500/30 transition-all flex items-center gap-2 disabled:opacity-50 shadow-lg active:scale-95"
                 >
-                  <svg className={`w-3 h-3 ${exporting ? 'animate-spin' : ''}`} fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003 3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path>
+                  <svg className={`w-3.5 h-3.5 ${exporting ? 'animate-spin' : ''}`} fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path>
                   </svg>
-                  {exporting ? 'Saving...' : 'Save Image'}
+                  {exporting ? 'Generating...' : 'Save Report'}
                 </button>
-              ) : (
-                <span className="text-[9px] sm:text-[10px] bg-red-500/20 text-red-400 px-2 py-0.5 rounded-full uppercase tracking-tighter font-mono border border-red-500/30">2025/2026 Edition</span>
               )}
             </div>
-            <p className="text-slate-400 text-xs sm:text-sm">
-              Strategic analysis for {inputs.province}'s current economic climate.
-            </p>
+            {!advice && (
+              <p className="text-slate-400 text-xs sm:text-sm mt-2">
+                Strategic analysis for {inputs.province}'s current economic climate.
+              </p>
+            )}
           </div>
           
-          {/* Fix: Simplified entry point to use pre-configured API key as per instructions. */}
           {!advice && !loading && (
             <button 
               onClick={getAdvice}
@@ -196,65 +216,120 @@ const GeminiAdvisor: React.FC<Props> = ({ results, inputs }) => {
         </div>
       </div>
 
+      {/* 
+          MOBILE PREVIEW MODAL 
+          Better for mobile saving: users can long-press to save to photos
+      */}
+      {previewImage && (
+        <div className="fixed inset-0 z-[100] bg-slate-950/95 flex flex-col items-center justify-center p-4 sm:p-8 animate-fadeIn">
+          <div className="max-w-md w-full flex flex-col items-center">
+            <div className="w-full flex justify-between items-center mb-4 px-2">
+              <h4 className="text-white font-bold">Report Ready</h4>
+              <button 
+                onClick={() => setPreviewImage(null)}
+                className="p-2 bg-slate-800 text-slate-400 rounded-full hover:text-white transition-colors"
+              >
+                <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M6 18L18 6M6 6l12 12"></path>
+                </svg>
+              </button>
+            </div>
+            
+            <div className="bg-white p-1 rounded-lg shadow-2xl max-h-[70vh] overflow-auto">
+              <img src={previewImage} alt="CanPay Insight Report" className="max-w-full h-auto rounded shadow-lg" />
+            </div>
+            
+            <div className="mt-8 bg-red-600/20 border border-red-500/30 p-4 rounded-xl text-center">
+              <p className="text-red-100 text-sm font-medium mb-1 flex items-center justify-center gap-2">
+                <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 18h.01M8 21h8a2 2 0 002-2V5a2 2 0 00-2-2H8a2 2 0 00-2 2v14a2 2 0 002 2z"></path>
+                </svg>
+                Long press the image to save to your Photos
+              </p>
+              <p className="text-red-200/60 text-xs">This ensures the report stays accessible in your gallery.</p>
+            </div>
+            
+            <button 
+              onClick={() => setPreviewImage(null)}
+              className="mt-6 text-slate-500 font-bold text-sm uppercase tracking-widest hover:text-slate-300 transition-colors"
+            >
+              Close Preview
+            </button>
+          </div>
+        </div>
+      )}
+
+      {/* 
+          HIDDEN SNAPSHOT CONTAINER - FIXED DIMENSIONS 
+          We force width and styling to ensure the image looks consistent everywhere.
+      */}
       <div style={{ position: 'absolute', left: '-9999px', top: 0 }}>
         <div 
           ref={snapshotRef} 
-          className="w-[800px] bg-slate-900 text-white p-12 font-sans"
+          className="w-[1000px] bg-slate-900 text-white p-16 font-sans flex flex-col min-h-[1400px]"
         >
-          <div className="flex justify-between items-end border-b border-slate-700 pb-8 mb-10">
-            <div>
-              <div className="flex items-center gap-3 mb-2">
-                <div className="bg-red-600 p-2 rounded-lg">
-                  <InukshukIcon className="w-6 h-6 text-white" />
+          {/* Header Section - Force single line */}
+          <div className="flex justify-between items-end border-b border-slate-700 pb-12 mb-12 flex-nowrap">
+            <div className="flex-shrink-0">
+              <div className="flex items-center gap-4 mb-4 whitespace-nowrap">
+                <div className="bg-red-600 p-3 rounded-xl shadow-lg shadow-red-900/20">
+                  <InukshukIcon className="w-8 h-8 text-white" />
                 </div>
-                <h1 className="text-3xl font-bold tracking-tight">CanPay <span className="text-red-500 font-light">Insights</span></h1>
+                <h1 className="text-4xl font-bold tracking-tight">
+                  CanPay <span className="text-red-500 font-light">Insights</span>
+                </h1>
               </div>
-              <p className="text-slate-400 text-lg">AI Financial Analysis Report</p>
+              <p className="text-slate-400 text-xl font-medium tracking-wide">AI Financial Analysis Report</p>
             </div>
-            <div className="flex gap-8 text-right">
-              <div>
-                <p className="text-slate-500 text-xs font-bold uppercase tracking-widest">Annual Net</p>
-                <p className="text-2xl font-bold text-red-500">{formatCurrency(results.netPayAnnual)}</p>
+            
+            <div className="flex gap-12 text-right flex-nowrap">
+              <div className="whitespace-nowrap">
+                <p className="text-slate-500 text-xs font-bold uppercase tracking-[0.2em] mb-2">Annual Net</p>
+                <p className="text-3xl font-bold text-red-500">{formatCurrency(results.netPayAnnual)}</p>
               </div>
-              <div>
-                <p className="text-slate-500 text-xs font-bold uppercase tracking-widest">Region</p>
-                <p className="text-2xl font-bold">{inputs.province}</p>
+              <div className="whitespace-nowrap">
+                <p className="text-slate-500 text-xs font-bold uppercase tracking-[0.2em] mb-2">Region</p>
+                <p className="text-3xl font-bold">{inputs.province}</p>
               </div>
-              <div>
-                <p className="text-slate-500 text-xs font-bold uppercase tracking-widest">Rate</p>
-                <p className="text-2xl font-bold text-slate-300">${inputs.hourlyWage}/hr</p>
+              <div className="whitespace-nowrap">
+                <p className="text-slate-500 text-xs font-bold uppercase tracking-[0.2em] mb-2">Hourly Rate</p>
+                <p className="text-3xl font-bold text-slate-300">${inputs.hourlyWage}/hr</p>
               </div>
             </div>
           </div>
 
-          <div className="min-h-[400px]">
+          {/* Main Content Body */}
+          <div className="flex-grow">
             {advice && (
               <div 
-                className="text-xl leading-relaxed text-slate-200"
+                className="text-2xl leading-[1.6] text-slate-200"
                 dangerouslySetInnerHTML={{ 
                   __html: advice
-                    .replace(/\*\*(.*?)\*\*/g, '<strong style="color: #f87171;">$1</strong>')
-                    .replace(/^\* (.*)/gm, '<div style="margin: 16px 0 16px 24px; position: relative;"><span style="position: absolute; left: -20px; color: #ef4444;">•</span>$1</div>')
+                    .replace(/\*\*(.*?)\*\*/g, '<strong style="color: #f87171; font-weight: 700;">$1</strong>')
+                    .replace(/^\* (.*)/gm, '<div style="margin: 24px 0 24px 32px; position: relative;"><span style="position: absolute; left: -28px; color: #ef4444; font-size: 1.5rem;">•</span>$1</div>')
+                    .split('\n\n').map(p => `<p style="margin-bottom: 2rem;">${p}</p>`).join('')
                 }} 
               />
             )}
           </div>
 
-          <div className="mt-16 pt-8 border-t border-slate-800 flex justify-between items-center">
+          {/* Report Footer */}
+          <div className="mt-20 pt-12 border-t border-slate-800 flex justify-between items-center">
             <div>
-              <p className="text-xl font-bold text-slate-100">Plan your future with confidence.</p>
-              <p className="text-slate-500 mt-1 font-mono text-sm tracking-tight">{APP_URL}</p>
+              <p className="text-2xl font-bold text-slate-100 mb-2">Plan your future with confidence.</p>
+              <p className="text-slate-500 font-mono text-base tracking-tight">{APP_URL}</p>
             </div>
-            <div className="flex items-center gap-6">
+            <div className="flex items-center gap-10">
               <div className="text-right">
-                <p className="text-[10px] text-slate-600 font-bold uppercase tracking-[0.2em] mb-1">Generated by Gemini 3</p>
-                <p className="text-xs text-slate-500 italic">2025/2026 Tax Estimator</p>
+                <p className="text-[12px] text-slate-600 font-bold uppercase tracking-[0.3em] mb-2">Powered by Gemini 3 Pro</p>
+                <p className="text-sm text-slate-500 italic">Official 2025/2026 Tax Estimator Output</p>
               </div>
-              <div className="p-2 bg-white rounded-lg shadow-xl">
+              <div className="p-3 bg-white rounded-2xl shadow-2xl border-4 border-slate-800">
                 <img 
-                  src={`https://api.qrserver.com/v1/create-qr-code/?size=100x100&data=${encodeURIComponent(APP_URL)}&color=0f172a`} 
+                  src={qrCodeUrl}
                   alt="QR Code" 
-                  className="w-16 h-16"
+                  className="w-20 h-20"
+                  crossOrigin="anonymous"
                 />
               </div>
             </div>
@@ -271,10 +346,10 @@ const GeminiAdvisor: React.FC<Props> = ({ results, inputs }) => {
           animation: shimmer-loading 1.5s infinite linear;
         }
         .animate-fadeIn {
-          animation: fadeIn 0.5s ease-out forwards;
+          animation: fadeIn 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
         }
         @keyframes fadeIn {
-          from { opacity: 0; transform: translateY(8px); }
+          from { opacity: 0; transform: translateY(12px); }
           to { opacity: 1; transform: translateY(0); }
         }
         .prose li {
