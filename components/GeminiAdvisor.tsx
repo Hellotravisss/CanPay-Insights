@@ -1,7 +1,7 @@
 
 // @google/genai used to provide AI financial insights based on payroll data.
 import { GoogleGenAI } from "@google/genai";
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import { CalculationResult, SalaryInputs } from '../types';
 import * as htmlToImage from 'html-to-image';
 import download from 'downloadjs';
@@ -28,15 +28,34 @@ const GeminiAdvisor: React.FC<Props> = ({ results, inputs }) => {
   const [error, setError] = useState<string | null>(null);
   const [exporting, setExporting] = useState(false);
   const [previewImage, setPreviewImage] = useState<string | null>(null);
+  const [qrBase64, setQrBase64] = useState<string | null>(null);
   const snapshotRef = useRef<HTMLDivElement>(null);
 
   const APP_URL = "https://www.canpayinsights.ca/";
+
+  // Pre-load QR Code as Base64 to prevent white blocks in screenshots
+  useEffect(() => {
+    const fetchQr = async () => {
+      try {
+        const url = `https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=${encodeURIComponent(APP_URL)}&color=0f172a`;
+        const response = await fetch(url);
+        const blob = await response.blob();
+        const reader = new FileReader();
+        reader.onloadend = () => setQrBase64(reader.result as string);
+        reader.readAsDataURL(blob);
+      } catch (e) {
+        console.error("QR Base64 load failed", e);
+      }
+    };
+    fetchQr();
+  }, []);
 
   const getAdvice = async () => {
     setLoading(true);
     setError(null);
     try {
-      const ai = new GoogleGenAI({ apiKey: import.meta.env.VITE_GEMINI_API_KEY });
+      // MANDATORY: Use process.env.API_KEY
+      const ai = new GoogleGenAI({ apiKey:  import.meta.env.VITE_GEMINI_API_KEY });
       
       const promptText = `
         System: You are a professional Canadian financial consultant specializing in 2025-2026 economy.
@@ -78,29 +97,29 @@ const GeminiAdvisor: React.FC<Props> = ({ results, inputs }) => {
     if (!snapshotRef.current) return;
     setExporting(true);
     try {
-      // 强制触发重排确保隐藏容器高度正确计算
+      // Force Reflow to get correct scroll height for long text reports
       const fullHeight = snapshotRef.current.scrollHeight;
       
       const dataUrl = await htmlToImage.toPng(snapshotRef.current, {
         pixelRatio: 2,
         backgroundColor: '#0f172a',
         width: 1000,
-        height: fullHeight, // 显式传入计算出的全量高度
+        height: fullHeight,
         style: {
           transform: 'scale(1)',
           left: '0',
           top: '0',
-          display: 'inline-block' // 确保截图容器是流式布局
-        }
+          display: 'inline-block'
+        },
+        cacheBust: true,
       });
       
-      // 判断是否是移动端 (简单的UA判断)
       const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
       
       if (isMobile) {
         setPreviewImage(dataUrl);
       } else {
-        // 电脑端直接下载
+        // Direct download for desktop
         download(dataUrl, `CanPay-Report-${inputs.province.replace(/\s+/g, '-')}.png`);
       }
     } catch (err) {
@@ -113,8 +132,6 @@ const GeminiAdvisor: React.FC<Props> = ({ results, inputs }) => {
   const formatCurrency = (val: number) => {
     return new Intl.NumberFormat('en-CA', { style: 'currency', currency: 'CAD' }).format(val);
   };
-
-  const qrCodeUrl = `https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=${encodeURIComponent(APP_URL)}&color=0f172a`;
 
   return (
     <div className="bg-slate-800 rounded-xl shadow-lg p-4 sm:p-6 text-white mt-6 border-l-4 border-red-500 relative overflow-hidden transition-all duration-300">
@@ -214,9 +231,7 @@ const GeminiAdvisor: React.FC<Props> = ({ results, inputs }) => {
         </div>
       </div>
 
-      {/* 
-          MOBILE PREVIEW MODAL 
-      */}
+      {/* MOBILE PREVIEW MODAL */}
       {previewImage && (
         <div className="fixed inset-0 z-[100] bg-slate-950/95 flex flex-col items-center justify-center p-4 sm:p-8 animate-fadeIn">
           <div className="max-w-md w-full flex flex-col items-center">
@@ -256,10 +271,7 @@ const GeminiAdvisor: React.FC<Props> = ({ results, inputs }) => {
         </div>
       )}
 
-      {/* 
-          HIDDEN SNAPSHOT CONTAINER
-          使用 inline-block 确保容器宽度严格受到 content 影响
-      */}
+      {/* HIDDEN SNAPSHOT CONTAINER - Uses inline-block to ensure content drives height */}
       <div style={{ position: 'absolute', left: '-9999px', top: 0 }}>
         <div 
           ref={snapshotRef} 
@@ -322,12 +334,16 @@ const GeminiAdvisor: React.FC<Props> = ({ results, inputs }) => {
                 <p className="text-sm text-slate-500 italic">Official 2025/2026 Tax Estimator Output</p>
               </div>
               <div className="p-3 bg-white rounded-2xl shadow-2xl border-4 border-slate-800">
-                <img 
-                  src={qrCodeUrl}
-                  alt="QR Code" 
-                  className="w-20 h-20"
-                  crossOrigin="anonymous"
-                />
+                {/* Use the Base64 QR code to avoid white block issues in screenshot */}
+                {qrBase64 ? (
+                  <img 
+                    src={qrBase64}
+                    alt="QR Code" 
+                    className="w-20 h-20"
+                  />
+                ) : (
+                  <div className="w-20 h-20 bg-slate-100 animate-pulse"></div>
+                )}
               </div>
             </div>
           </div>
