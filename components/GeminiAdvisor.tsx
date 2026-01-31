@@ -33,20 +33,31 @@ const GeminiAdvisor: React.FC<Props> = ({ results, inputs }) => {
 
   const APP_URL = "https://www.canpayinsights.ca/";
 
-  // Pre-load QR Code as Base64 to ensure it's captured in the screenshot
+  // Pre-load QR Code as Base64 and ensure it's decoded
   useEffect(() => {
     let isMounted = true;
     const loadQrCode = async () => {
       try {
-        // Fetch as PNG for maximum compatibility across all devices
-        const url = `https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=${encodeURIComponent(APP_URL)}&color=0f172a&bgcolor=ffffff&margin=1`;
+        const url = `https://api.qrserver.com/v1/create-qr-code/?size=250x250&data=${encodeURIComponent(APP_URL)}&color=0f172a&bgcolor=ffffff&margin=1`;
         const response = await fetch(url);
         if (!response.ok) throw new Error("QR fetch failed");
         
         const blob = await response.blob();
         const reader = new FileReader();
-        reader.onloadend = () => {
-          if (isMounted) setQrBase64(reader.result as string);
+        reader.onloadend = async () => {
+          if (!isMounted) return;
+          const base64 = reader.result as string;
+          
+          // Force browser to decode the image into memory to avoid white blocks on capture
+          const img = new Image();
+          img.src = base64;
+          try {
+            await img.decode(); // Ensures the image is actually ready to be drawn to a canvas
+            setQrBase64(base64);
+          } catch (e) {
+            console.error("Image decode failed", e);
+            setQrBase64(base64); // Fallback
+          }
         };
         reader.readAsDataURL(blob);
       } catch (e) {
@@ -61,7 +72,7 @@ const GeminiAdvisor: React.FC<Props> = ({ results, inputs }) => {
     setLoading(true);
     setError(null);
     try {
-      // MANDATORY: Always use process.env.API_KEY directly
+      // FIXED: Use process.env.API_KEY directly
       const ai = new GoogleGenAI({ apiKey: import.meta.env.VITE_GEMINI_API_KEY });
       
       const promptText = `
@@ -94,26 +105,24 @@ const GeminiAdvisor: React.FC<Props> = ({ results, inputs }) => {
       }
     } catch (err: any) {
       console.error("AI Service Error:", err);
-      setError("AI analysis unavailable. Please check your connection and try again.");
+      setError("AI analysis unavailable. Please check your connection.");
     } finally {
       setLoading(false);
     }
   };
 
   const handleExport = async () => {
-    if (!snapshotRef.current) return;
+    if (!snapshotRef.current || !qrBase64) return;
     setExporting(true);
     try {
-      // Small buffer to ensure any Base64 images are decoded by the browser
-      await new Promise(resolve => setTimeout(resolve, 200));
+      // Step 1: Give Safari more time to realize the image is there
+      await new Promise(resolve => setTimeout(resolve, 500));
 
-      const fullHeight = snapshotRef.current.scrollHeight;
-      
-      const dataUrl = await htmlToImage.toPng(snapshotRef.current, {
-        pixelRatio: 2,
+      const options = {
+        pixelRatio: 2.5, // Slightly higher for retina displays
         backgroundColor: '#0f172a',
         width: 1000,
-        height: fullHeight,
+        height: snapshotRef.current.scrollHeight,
         cacheBust: true,
         style: {
           transform: 'scale(1)',
@@ -121,7 +130,14 @@ const GeminiAdvisor: React.FC<Props> = ({ results, inputs }) => {
           top: '0',
           display: 'block'
         }
-      });
+      };
+
+      // Step 2: "Prime" the capture. Safari often fails on the first attempt 
+      // but works on subsequent ones once resources are in the internal canvas cache.
+      await htmlToImage.toPng(snapshotRef.current, options);
+      
+      // Step 3: Real capture
+      const dataUrl = await htmlToImage.toPng(snapshotRef.current, options);
       
       const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
       if (isMobile) {
@@ -131,7 +147,7 @@ const GeminiAdvisor: React.FC<Props> = ({ results, inputs }) => {
       }
     } catch (err) {
       console.error('Export failed', err);
-      setError("Failed to generate report image.");
+      setError("Export failed. Please try again.");
     } finally {
       setExporting(false);
     }
@@ -162,7 +178,7 @@ const GeminiAdvisor: React.FC<Props> = ({ results, inputs }) => {
             {advice && (
               <button 
                 onClick={handleExport}
-                disabled={exporting}
+                disabled={exporting || !qrBase64}
                 className="text-xs bg-red-600 hover:bg-red-700 text-white px-4 py-2 rounded-full font-bold transition-all flex items-center gap-2 disabled:opacity-50"
               >
                 {exporting ? (
@@ -295,9 +311,9 @@ const GeminiAdvisor: React.FC<Props> = ({ results, inputs }) => {
               </div>
               <div className="p-1 bg-white rounded-xl shadow-xl">
                 {qrBase64 ? (
-                  <img src={qrBase64} alt="QR" className="w-20 h-20 block" />
+                  <img src={qrBase64} alt="QR" className="w-24 h-24 block" />
                 ) : (
-                  <div className="w-20 h-20 bg-slate-200 animate-pulse"></div>
+                  <div className="w-24 h-24 bg-slate-200 animate-pulse"></div>
                 )}
               </div>
             </div>
