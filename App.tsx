@@ -63,8 +63,8 @@ const App: React.FC = () => {
              </div>
              <h1 className="text-xl font-bold text-slate-800 tracking-tight">CanPay <span className="text-red-600 font-light">Insights</span></h1>
           </div>
-          <div className="hidden sm:block text-sm text-slate-500">
-            2024/2025 Estimator
+          <div className="hidden sm:block text-sm text-slate-500 font-medium">
+            2025/2026 Payroll Estimator
           </div>
         </div>
       </header>
@@ -88,7 +88,7 @@ const App: React.FC = () => {
 
       {/* Footer */}
       <footer className="text-center text-slate-400 text-xs py-8 space-y-4">
-        <p>Calculations are estimates based on simplified 2024 tax brackets and provincial employment standards.</p>
+        <p>Calculations are estimates based on 2025/2026 tax brackets and provincial employment standards.</p>
         
         <div className="flex justify-center items-center gap-4">
           <a 
