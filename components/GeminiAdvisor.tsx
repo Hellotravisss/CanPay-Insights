@@ -38,8 +38,8 @@ const GeminiAdvisor: React.FC<Props> = ({ results, inputs }) => {
     setLoading(true);
     setError(null);
     try {
-      // Fix: Use the pre-configured process.env.API_KEY directly as per SDK requirements.
-      const ai = new GoogleGenAI({ apiKey: process.env.API_KEY });
+      // 记得用 import.meta.env，并确认变量名和 Vercel 里的一样
+      const ai = new GoogleGenAI({ apiKey: import.meta.env.VITE_GEMINI_API_KEY });
       
       const promptText = `
         System: You are a professional Canadian financial consultant specializing in 2025-2026 economy.
