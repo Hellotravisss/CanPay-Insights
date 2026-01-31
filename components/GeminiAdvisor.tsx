@@ -4,6 +4,7 @@ import { GoogleGenAI } from "@google/genai";
 import React, { useState, useRef } from 'react';
 import { CalculationResult, SalaryInputs } from '../types';
 import * as htmlToImage from 'html-to-image';
+import download from 'downloadjs';
 
 interface Props {
   results: CalculationResult;
@@ -77,22 +78,31 @@ const GeminiAdvisor: React.FC<Props> = ({ results, inputs }) => {
     if (!snapshotRef.current) return;
     setExporting(true);
     try {
-      // 增加一点点延迟，确保离屏渲染完全稳定
-      await new Promise(resolve => setTimeout(resolve, 300));
-
+      // 强制触发重排确保隐藏容器高度正确计算
+      const fullHeight = snapshotRef.current.scrollHeight;
+      
       const dataUrl = await htmlToImage.toPng(snapshotRef.current, {
         pixelRatio: 2,
         backgroundColor: '#0f172a',
-        width: 1000, // 保持固定宽度以固定排版
-        // 移除固定的 height，让它自适应内容长度，防止底部被裁
+        width: 1000,
+        height: fullHeight, // 显式传入计算出的全量高度
         style: {
           transform: 'scale(1)',
           left: '0',
-          top: '0'
+          top: '0',
+          display: 'inline-block' // 确保截图容器是流式布局
         }
       });
       
-      setPreviewImage(dataUrl);
+      // 判断是否是移动端 (简单的UA判断)
+      const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
+      
+      if (isMobile) {
+        setPreviewImage(dataUrl);
+      } else {
+        // 电脑端直接下载
+        download(dataUrl, `CanPay-Report-${inputs.province.replace(/\s+/g, '-')}.png`);
+      }
     } catch (err) {
       console.error('Failed to export image', err);
     } finally {
@@ -248,15 +258,15 @@ const GeminiAdvisor: React.FC<Props> = ({ results, inputs }) => {
 
       {/* 
           HIDDEN SNAPSHOT CONTAINER
-          改为 h-auto 自动高度，并增加 pb-20 确保页脚下方有间距
+          使用 inline-block 确保容器宽度严格受到 content 影响
       */}
       <div style={{ position: 'absolute', left: '-9999px', top: 0 }}>
         <div 
           ref={snapshotRef} 
-          className="w-[1000px] bg-slate-900 text-white p-16 font-sans flex flex-col h-auto pb-20"
+          className="w-[1000px] bg-slate-900 text-white p-16 font-sans flex flex-col h-auto pb-20 inline-block"
         >
           {/* Header Section */}
-          <div className="flex justify-between items-end border-b border-slate-700 pb-12 mb-12 flex-nowrap">
+          <div className="flex justify-between items-end border-b border-slate-700 pb-12 mb-12 flex-nowrap w-full">
             <div className="flex-shrink-0">
               <div className="flex items-center gap-4 mb-4 whitespace-nowrap">
                 <div className="bg-red-600 p-3 rounded-xl shadow-lg shadow-red-900/20">
@@ -285,8 +295,8 @@ const GeminiAdvisor: React.FC<Props> = ({ results, inputs }) => {
             </div>
           </div>
 
-          {/* Main Content Body - 移除 min-h 限制，完全由内容撑开 */}
-          <div className="flex-grow">
+          {/* Main Content Body */}
+          <div className="flex-grow w-full">
             {advice && (
               <div 
                 className="text-2xl leading-[1.6] text-slate-200"
@@ -301,7 +311,7 @@ const GeminiAdvisor: React.FC<Props> = ({ results, inputs }) => {
           </div>
 
           {/* Report Footer */}
-          <div className="mt-20 pt-12 border-t border-slate-800 flex justify-between items-center">
+          <div className="mt-20 pt-12 border-t border-slate-800 flex justify-between items-center w-full">
             <div>
               <p className="text-2xl font-bold text-slate-100 mb-2">Plan your future with confidence.</p>
               <p className="text-slate-500 font-mono text-base tracking-tight">{APP_URL}</p>
