@@ -1,5 +1,6 @@
 
 import React, { useState, useEffect, useMemo } from 'react';
+import { SpeedInsights } from '@vercel/speed-insights/react';
 import InputSection from './components/InputSection';
 import ResultsSection from './components/ResultsSection';
 import GeminiAdvisor from './components/GeminiAdvisor';
@@ -109,6 +110,7 @@ const App: React.FC = () => {
         </div>
         <p className="mt-4 opacity-75">Proudly Canadian 🇨🇦 Built for Workers.</p>
       </footer>
+      <SpeedInsights />
     </div>
   );
 };
