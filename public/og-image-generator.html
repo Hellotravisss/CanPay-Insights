@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>OG Image Generator - CanPay Insights</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 20px;
+      background: #1e293b;
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    }
+    
+    /* OG Image Canvas - 1200x630 */
+    .og-image {
+      width: 1200px;
+      height: 630px;
+      background: linear-gradient(135deg, #0f172a 0%, #1e293b 50%, #334155 100%);
+      position: relative;
+      overflow: hidden;
+      margin: 0 auto;
+      box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+    }
+    
+    /* Background Pattern */
+    .og-image::before {
+      content: '';
+      position: absolute;
+      top: -50%;
+      right: -10%;
+      width: 800px;
+      height: 800px;
+      background: radial-gradient(circle, rgba(220, 38, 38, 0.15) 0%, transparent 70%);
+      border-radius: 50%;
+    }
+    
+    /* Content Container */
+    .content {
+      position: relative;
+      z-index: 1;
+      padding: 80px;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+    
+    /* Logo Area */
+    .logo-section {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+    }
+    
+    .logo {
+      width: 80px;
+      height: 80px;
+      background: #dc2626;
+      border-radius: 16px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 48px;
+      box-shadow: 0 10px 30px rgba(220, 38, 38, 0.3);
+    }
+    
+    .brand {
+      color: white;
+    }
+    
+    .brand-name {
+      font-size: 42px;
+      font-weight: 800;
+      margin: 0;
+      letter-spacing: -0.5px;
+    }
+    
+    .brand-tagline {
+      font-size: 20px;
+      color: #94a3b8;
+      margin: 5px 0 0 0;
+      font-weight: 500;
+    }
+    
+    /* Main Content */
+    .main-content {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      gap: 30px;
+    }
+    
+    .headline {
+      font-size: 72px;
+      font-weight: 900;
+      color: white;
+      line-height: 1.1;
+      margin: 0;
+      text-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+    }
+    
+    .headline span {
+      background: linear-gradient(135deg, #dc2626 0%, #f87171 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    
+    .features {
+      display: flex;
+      gap: 40px;
+      margin-top: 20px;
+    }
+    
+    .feature {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      color: #cbd5e1;
+      font-size: 22px;
+      font-weight: 600;
+    }
+    
+    .feature-icon {
+      width: 40px;
+      height: 40px;
+      background: rgba(220, 38, 38, 0.2);
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 24px;
+    }
+    
+    /* Footer */
+    .footer {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-top: 2px solid rgba(148, 163, 184, 0.2);
+      padding-top: 30px;
+    }
+    
+    .website {
+      font-size: 28px;
+      font-weight: 700;
+      color: #94a3b8;
+    }
+    
+    .badge {
+      background: rgba(220, 38, 38, 0.2);
+      color: #fca5a5;
+      padding: 12px 24px;
+      border-radius: 50px;
+      font-size: 18px;
+      font-weight: 700;
+      border: 2px solid rgba(220, 38, 38, 0.3);
+    }
+    
+    /* Instructions */
+    .instructions {
+      max-width: 1200px;
+      margin: 30px auto;
+      padding: 30px;
+      background: white;
+      border-radius: 12px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+    }
+    
+    .instructions h2 {
+      color: #1e293b;
+      margin-top: 0;
+    }
+    
+    .instructions ol {
+      color: #475569;
+      line-height: 1.8;
+    }
+    
+    .instructions code {
+      background: #f1f5f9;
+      padding: 2px 8px;
+      border-radius: 4px;
+      font-family: 'Monaco', 'Courier New', monospace;
+      font-size: 14px;
+      color: #dc2626;
+    }
+  </style>
+</head>
+<body>
+  <!-- OG Image Preview -->
+  <div class="og-image" id="og-image">
+    <div class="content">
+      <!-- Logo & Brand -->
+      <div class="logo-section">
+        <div class="logo">💰</div>
+        <div class="brand">
+          <h1 class="brand-name">CanPay Insights</h1>
+          <p class="brand-tagline">Canadian Payroll Calculator</p>
+        </div>
+      </div>
+      
+      <!-- Main Content -->
+      <div class="main-content">
+        <h2 class="headline">
+          Calculate Your<br>
+          <span>Take-Home Pay</span>
+        </h2>
+        
+        <div class="features">
+          <div class="feature">
+            <div class="feature-icon">⚡</div>
+            <span>AI Insights</span>
+          </div>
+          <div class="feature">
+            <div class="feature-icon">🇨🇦</div>
+            <span>All Provinces</span>
+          </div>
+          <div class="feature">
+            <div class="feature-icon">📊</div>
+            <span>2025/2026</span>
+          </div>
+        </div>
+      </div>
+      
+      <!-- Footer -->
+      <div class="footer">
+        <div class="website">canpayinsights.ca</div>
+        <div class="badge">🆓 FREE TOOL</div>
+      </div>
+    </div>
+  </div>
+  
+  <!-- Instructions -->
+  <div class="instructions">
+    <h2>📸 如何生成 OG 图片</h2>
+    <ol>
+      <li>在浏览器中打开这个 HTML 文件（已自动打开）</li>
+      <li>按 <code>Cmd + Shift + 4</code>（Mac）或使用截图工具</li>
+      <li>精确截取上方 1200x630 的图片区域</li>
+      <li>保存为 <code>og-image.png</code></li>
+      <li>放到 <code>public/</code> 文件夹中</li>
+      <li>完成！🎉</li>
+    </ol>
+    
+    <h3>或者使用在线工具（推荐）：</h3>
+    <ul>
+      <li><strong>方法 1:</strong> 访问 <a href="https://www.canva.com" target="_blank">Canva.com</a> → 使用 "Social Media" → "Twitter Post" → 调整为 1200x630</li>
+      <li><strong>方法 2:</strong> 使用这个 HTML 模板，通过截图工具精确截取（推荐尺寸：1200x630px）</li>
+    </ul>
+  </div>
+</body>
+</html>
