@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { TimesheetInputs, TimesheetEntry, Province, PayFrequency } from '../types';
 import { PROVINCIAL_DATA } from '../constants';
 
@@ -8,6 +8,29 @@ interface Props {
 }
 
 const TimesheetInput: React.FC<Props> = ({ inputs, setInputs }) => {
+  // Auto-save to localStorage
+  useEffect(() => {
+    try {
+      localStorage.setItem('timesheetData', JSON.stringify(inputs));
+    } catch (err) {
+      console.error('Failed to save to localStorage:', err);
+    }
+  }, [inputs]);
+  
+  // Load from localStorage on mount
+  useEffect(() => {
+    try {
+      const saved = localStorage.getItem('timesheetData');
+      if (saved) {
+        const parsed = JSON.parse(saved);
+        if (parsed.entries && parsed.entries.length > 0) {
+          setInputs(parsed);
+        }
+      }
+    } catch (err) {
+      console.error('Failed to load from localStorage:', err);
+    }
+  }, []);
   
   const [selectedDate, setSelectedDate] = useState<string>(
     new Date().toISOString().split('T')[0]

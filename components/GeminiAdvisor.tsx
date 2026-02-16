@@ -116,13 +116,19 @@ const GeminiAdvisor: React.FC<Props> = ({ results, inputs }) => {
       const ai = new GoogleGenAI({ apiKey: import.meta.env.VITE_GEMINI_API_KEY });
       
       const promptText = `
-         System: Professional Canadian financial consultant for 2025-2026.
-          Data: ${inputs.province}, Wage: $${inputs.hourlyWage}, Net Bi-Weekly: $${results.netPayBiWeekly.toFixed(2)}.
-          Provide 3 paragraphs in English:
-          1. Local competitiveness & 2025 economic context.
-          2. One tax strategy (RRSP/TFSA/FHSA).
-          3. Work-life balance check.
-          Markdown for bold. Reference 2025/2026 estimates.
+You are a Canadian financial advisor. Analyze this worker's income and provide helpful, conversational advice in English.
+
+Worker's data:
+- Province: ${inputs.province}
+- Hourly Wage: $${inputs.hourlyWage}
+- Net Take-Home (Bi-Weekly): $${results.netPayBiWeekly.toFixed(2)}
+
+Write 3 short, friendly paragraphs:
+1. Is this competitive for ${inputs.province}? Consider 2025/2026 cost of living
+2. One specific tax-saving tip (RRSP/TFSA/FHSA)
+3. Practical lifestyle advice (budgeting, savings goals)
+
+Use a warm, conversational tone. No formal introductions. Start directly with insights. Use **bold** for key numbers.
        `;
 
       const response = await ai.models.generateContent({
