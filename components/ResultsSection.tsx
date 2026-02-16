@@ -117,13 +117,14 @@ const ResultsSection: React.FC<Props> = ({ results, provinceName }) => {
                 </Pie>
                 <Tooltip 
                   formatter={(value: number) => formatCurrency(value)} 
-                  contentStyle={{ backgroundColor: '#fff', borderRadius: '8px', boxShadow: '0 4px 6px -1px rgb(0 0 0 / 0.1)' }}
+                  contentStyle={{ backgroundColor: '#fff', borderRadius: '8px', boxShadow: '0 4px 6px -1px rgb(0 0 0 / 0.1)', zIndex: 9999 }}
+                  wrapperStyle={{ zIndex: 9999 }}
                 />
                 <Legend iconType="circle" />
               </PieChart>
             </ResponsiveContainer>
             {/* Center Text */}
-            <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-center pointer-events-none">
+            <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-center pointer-events-none z-0">
               <span className="text-xs text-slate-400 font-bold uppercase">Net Pay</span>
               <p className="text-slate-800 font-bold">{Math.round((results.netPayBiWeekly / results.grossPayBiWeekly) * 100)}%</p>
             </div>
