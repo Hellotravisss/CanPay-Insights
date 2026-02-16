@@ -3,6 +3,7 @@ import React, { useState, useEffect, useMemo } from 'react';
 import InputSection from './components/InputSection';
 import ResultsSection from './components/ResultsSection';
 import GeminiAdvisor from './components/GeminiAdvisor';
+import SEO from './components/SEO';
 import { SalaryInputs, Province } from './types';
 import { calculateSalary } from './utils/taxEngine';
 
@@ -54,8 +55,11 @@ const App: React.FC = () => {
  
   return (
     <div className="min-h-screen bg-slate-50 pb-20 font-sans">
+      {/* SEO Component */}
+      <SEO />
+      
       {/* Header */}
-      <header className="bg-white border-b border-red-100 sticky top-0 z-30 shadow-sm">
+      <header className="bg-white border-b border-red-100 sticky top-0 z-30 shadow-sm" role="banner">
         <div className="max-w-6xl mx-auto px-4 py-4 flex items-center justify-between">
           <div className="flex items-center gap-3">
              <div className="w-10 h-10 bg-red-600 rounded-lg flex items-center justify-center text-white shadow-red-200 shadow-lg hover:scale-105 transition-transform">
@@ -69,7 +73,7 @@ const App: React.FC = () => {
         </div>
       </header>
 
-      <main className="max-w-6xl mx-auto px-4 py-8">
+      <main className="max-w-6xl mx-auto px-4 py-8" role="main" aria-label="Payroll Calculator">
         <div className="flex flex-col lg:flex-row gap-8">
           
           {/* Left Column: Inputs */}
@@ -87,7 +91,7 @@ const App: React.FC = () => {
       </main>
 
       {/* Footer */}
-      <footer className="text-center text-slate-400 text-xs py-8 space-y-4">
+      <footer className="text-center text-slate-400 text-xs py-8 space-y-4" role="contentinfo">
         <p>Calculations are estimates based on 2025/2026 tax brackets and provincial employment standards.</p>
         
         <div className="flex justify-center items-center gap-4">

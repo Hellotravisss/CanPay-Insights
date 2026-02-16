@@ -1,0 +1,13 @@
+# Robots.txt for CanPay Insights
+User-agent: *
+Allow: /
+
+# Disallow admin or API routes if any
+Disallow: /api/
+Disallow: /_next/
+
+# Sitemap
+Sitemap: https://www.canpayinsights.ca/sitemap.xml
+
+# Crawl-delay
+Crawl-delay: 1
