@@ -1,5 +1,5 @@
 
-import React, { useState, useEffect, useMemo } from 'react';
+import React, { useState, useMemo } from 'react';
 import InputSection from './components/InputSection';
 import AnnualSalaryInput from './components/AnnualSalaryInput';
 import TimesheetInput from './components/TimesheetInput';
@@ -7,12 +7,8 @@ import ModeSelector from './components/ModeSelector';
 import ResultsSection from './components/ResultsSection';
 import GeminiAdvisor from './components/GeminiAdvisor';
 import SEO from './components/SEO';
-import AuthModal from './components/AuthModal';
-import UserMenu from './components/UserMenu';
 import { SalaryInputs, Province, CalculationMode, AnnualSalaryInputs, PayFrequency, TimesheetInputs } from './types';
 import { calculateSalary, calculateFromAnnualSalary, calculateFromTimesheet } from './utils/taxEngine';
-import { useAuth } from './hooks/useAuth';
-import { useCalculationSave } from './hooks/useCalculationSave';
 
 // Default State - 简易估算（时薪）
 const DEFAULT_SIMPLE_INPUTS: SalaryInputs = {
@@ -65,10 +61,6 @@ const InukshukIcon = ({ className }: { className?: string }) => (
 );
  
 const App: React.FC = () => {
-  // 认证和保存
-  const { signInWithGoogle, isAuthenticated } = useAuth();
-  const { saveCalculation, isSaving } = useCalculationSave();
-  
   // 页面状态：'home' = 模式选择页, 'calculator' = 计算页
   const [currentPage, setCurrentPage] = useState<'home' | 'calculator'>('home');
   
@@ -84,77 +76,30 @@ const App: React.FC = () => {
   // Timesheet 输入
   const [timesheetInputs, setTimesheetInputs] = useState<TimesheetInputs>(DEFAULT_TIMESHEET_INPUTS);
   
-  // Auth Modal 状态
-  const [showAuthModal, setShowAuthModal] = useState(false);
-  const [hasCalculated, setHasCalculated] = useState(false);
-  
   // 选择模式并进入计算页
   const handleModeSelect = (selectedMode: CalculationMode) => {
     setMode(selectedMode);
     setCurrentPage('calculator');
-    setHasCalculated(false); // Reset calculation flag
   };
   
   // 返回首页
   const handleBackToHome = () => {
     setCurrentPage('home');
-    setHasCalculated(false);
-  };
-  
-  // Handle sign in from modal
-  const handleSignIn = async () => {
-    await signInWithGoogle();
-    setShowAuthModal(false);
   };
   
   // 根据模式计算结果
   const results = useMemo(() => {
-    let result;
     switch (mode) {
       case CalculationMode.SIMPLE:
-        result = calculateSalary(simpleInputs);
-        break;
+        return calculateSalary(simpleInputs);
       case CalculationMode.ANNUAL:
-        result = calculateFromAnnualSalary(annualInputs);
-        break;
+        return calculateFromAnnualSalary(annualInputs);
       case CalculationMode.TIMESHEET:
-        result = calculateFromTimesheet(timesheetInputs);
-        break;
+        return calculateFromTimesheet(timesheetInputs);
       default:
-        result = calculateSalary(simpleInputs);
+        return calculateSalary(simpleInputs);
     }
-    
-    // Mark as calculated
-    if (!hasCalculated && currentPage === 'calculator') {
-      setHasCalculated(true);
-    }
-    
-    return result;
-  }, [mode, simpleInputs, annualInputs, timesheetInputs, currentPage]);
-  
-  // Auto-save calculation when authenticated
-  useEffect(() => {
-    if (isAuthenticated && hasCalculated && currentPage === 'calculator') {
-      const inputs = mode === CalculationMode.ANNUAL 
-        ? annualInputs 
-        : mode === CalculationMode.TIMESHEET
-        ? timesheetInputs
-        : simpleInputs;
-      
-      saveCalculation(mode, inputs, results);
-    }
-  }, [results, isAuthenticated, hasCalculated, currentPage]);
-  
-  // Show auth modal 15 seconds after first calculation (if not authenticated)
-  useEffect(() => {
-    if (hasCalculated && !isAuthenticated && currentPage === 'calculator') {
-      const timer = setTimeout(() => {
-        setShowAuthModal(true);
-      }, 15000); // Show after 15 seconds
-      
-      return () => clearTimeout(timer);
-    }
-  }, [hasCalculated, isAuthenticated, currentPage]);
+  }, [mode, simpleInputs, annualInputs, timesheetInputs]);
 
   // 获取当前输入的省份（用于 GeminiAdvisor）
   const currentProvince = mode === CalculationMode.ANNUAL 
@@ -178,13 +123,6 @@ const App: React.FC = () => {
       {/* SEO Component */}
       <SEO />
       
-      {/* Auth Modal */}
-      <AuthModal 
-        isOpen={showAuthModal}
-        onClose={() => setShowAuthModal(false)}
-        onSignIn={handleSignIn}
-      />
-      
       {/* Header - Only show on calculator page */}
       {currentPage === 'calculator' && (
         <header className="bg-white border-b border-red-100 sticky top-0 z-30 shadow-sm" role="banner">
@@ -195,30 +133,15 @@ const App: React.FC = () => {
               </div>
               <h1 className="text-xl font-bold text-slate-800 tracking-tight">CanPay <span className="text-red-600 font-light">Insights</span></h1>
             </div>
-            <div className="flex items-center gap-3">
-              {/* Saving indicator */}
-              {isSaving && (
-                <span className="text-xs text-slate-500 flex items-center gap-1">
-                  <svg className="animate-spin h-3 w-3" fill="none" viewBox="0 0 24 24">
-                    <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
-                    <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
-                  </svg>
-                  Saving...
-                </span>
-              )}
-              
-              <button 
-                onClick={handleBackToHome}
-                className="flex items-center gap-2 px-4 py-2 bg-slate-100 hover:bg-slate-200 text-slate-700 rounded-lg transition-all text-sm font-medium"
-              >
-                <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M10 19l-7-7m0 0l7-7m-7 7h18" />
-                </svg>
-                Back to Home
-              </button>
-              
-              <UserMenu />
-            </div>
+            <button 
+              onClick={handleBackToHome}
+              className="flex items-center gap-2 px-4 py-2 bg-slate-100 hover:bg-slate-200 text-slate-700 rounded-lg transition-all text-sm font-medium"
+            >
+              <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M10 19l-7-7m0 0l7-7m-7 7h18" />
+              </svg>
+              Back to Home
+            </button>
           </div>
         </header>
       )}

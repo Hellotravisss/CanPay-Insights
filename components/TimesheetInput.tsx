@@ -1,7 +1,6 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { TimesheetInputs, TimesheetEntry, Province, PayFrequency } from '../types';
 import { PROVINCIAL_DATA } from '../constants';
-import { useTimesheetSave } from '../hooks/useTimesheetSave';
 
 interface Props {
   inputs: TimesheetInputs;
@@ -9,7 +8,6 @@ interface Props {
 }
 
 const TimesheetInput: React.FC<Props> = ({ inputs, setInputs }) => {
-  const { saveEntry, deleteEntry: deleteSavedEntry, loadEntries, isSyncing, isAuthenticated } = useTimesheetSave();
   
   const [selectedDate, setSelectedDate] = useState<string>(
     new Date().toISOString().split('T')[0]
@@ -21,20 +19,6 @@ const TimesheetInput: React.FC<Props> = ({ inputs, setInputs }) => {
     unpaidBreakMinutes: 30,
     notes: ''
   });
-  
-  // Load entries from Supabase when authenticated
-  useEffect(() => {
-    if (isAuthenticated) {
-      loadEntries().then((loadedEntries) => {
-        if (loadedEntries.length > 0) {
-          setInputs({
-            ...inputs,
-            entries: loadedEntries
-          });
-        }
-      });
-    }
-  }, [isAuthenticated]);
 
   // Get current month calendar data
   const getCurrentMonthData = () => {
@@ -71,7 +55,7 @@ const TimesheetInput: React.FC<Props> = ({ inputs, setInputs }) => {
   };
 
   // Add new entry
-  const handleAddEntry = async () => {
+  const handleAddEntry = () => {
     const entry: TimesheetEntry = {
       id: Date.now().toString(),
       date: selectedDate,
@@ -90,11 +74,6 @@ const TimesheetInput: React.FC<Props> = ({ inputs, setInputs }) => {
       entries: newEntries
     });
     
-    // Save to Supabase if authenticated
-    if (isAuthenticated) {
-      await saveEntry(entry);
-    }
-    
     setIsAddingEntry(false);
     setNewEntry({
       checkIn: '09:00',
@@ -105,16 +84,11 @@ const TimesheetInput: React.FC<Props> = ({ inputs, setInputs }) => {
   };
 
   // Delete entry
-  const handleDeleteEntry = async (id: string) => {
+  const handleDeleteEntry = (id: string) => {
     setInputs({
       ...inputs,
       entries: inputs.entries.filter(e => e.id !== id)
     });
-    
-    // Delete from Supabase if authenticated
-    if (isAuthenticated) {
-      await deleteSavedEntry(id);
-    }
   };
 
   // Calculate total hours for current period
@@ -159,22 +133,8 @@ const TimesheetInput: React.FC<Props> = ({ inputs, setInputs }) => {
     <div className="bg-white rounded-xl shadow-sm border border-slate-200 overflow-hidden">
       {/* Header */}
       <div className="bg-gradient-to-br from-slate-900 to-slate-800 p-6 text-white">
-        <div className="flex items-center justify-between mb-2">
-          <h2 className="text-xl font-bold">⏱️ Timesheet Tracker</h2>
-          {isSyncing && (
-            <span className="text-xs text-slate-300 flex items-center gap-1">
-              <svg className="animate-spin h-3 w-3" fill="none" viewBox="0 0 24 24">
-                <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
-                <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
-              </svg>
-              Syncing...
-            </span>
-          )}
-        </div>
-        <p className="text-slate-300 text-sm">
-          Track your daily hours with precision
-          {isAuthenticated && <span className="ml-2 text-green-300">• Synced to cloud ☁️</span>}
-        </p>
+        <h2 className="text-xl font-bold mb-1">⏱️ Timesheet Tracker</h2>
+        <p className="text-slate-300 text-sm">Track your daily hours with precision</p>
       </div>
 
       <div className="p-6 space-y-6">
