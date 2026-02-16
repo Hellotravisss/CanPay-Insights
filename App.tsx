@@ -1,6 +1,7 @@
 
 import React, { useState, useMemo } from 'react';
 import { Analytics } from '@vercel/analytics/react';
+import { SpeedInsights } from '@vercel/speed-insights/react';
 import InputSection from './components/InputSection';
 import AnnualSalaryInput from './components/AnnualSalaryInput';
 import TimesheetInput from './components/TimesheetInput';
@@ -210,8 +211,9 @@ const App: React.FC = () => {
         <p className="mt-4 opacity-75">Proudly Canadian 🇨🇦 Built for Workers.</p>
       </footer>
       
-      {/* Vercel Analytics */}
+      {/* Vercel Analytics & Speed Insights */}
       <Analytics />
+      <SpeedInsights />
     </div>
   );
 };
