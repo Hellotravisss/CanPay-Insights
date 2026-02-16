@@ -1,14 +1,21 @@
 
 import React, { useState, useEffect, useMemo } from 'react';
 import InputSection from './components/InputSection';
+import AnnualSalaryInput from './components/AnnualSalaryInput';
+import TimesheetInput from './components/TimesheetInput';
+import ModeSelector from './components/ModeSelector';
 import ResultsSection from './components/ResultsSection';
 import GeminiAdvisor from './components/GeminiAdvisor';
 import SEO from './components/SEO';
-import { SalaryInputs, Province } from './types';
-import { calculateSalary } from './utils/taxEngine';
+import AuthModal from './components/AuthModal';
+import UserMenu from './components/UserMenu';
+import { SalaryInputs, Province, CalculationMode, AnnualSalaryInputs, PayFrequency, TimesheetInputs } from './types';
+import { calculateSalary, calculateFromAnnualSalary, calculateFromTimesheet } from './utils/taxEngine';
+import { useAuth } from './hooks/useAuth';
+import { useCalculationSave } from './hooks/useCalculationSave';
 
-// Default State
-const DEFAULT_INPUTS: SalaryInputs = {
+// Default State - 简易估算（时薪）
+const DEFAULT_SIMPLE_INPUTS: SalaryInputs = {
   province: Province.ON,
   hourlyWage: 20.00,
   shift: {
@@ -24,6 +31,21 @@ const DEFAULT_INPUTS: SalaryInputs = {
     endTime: "06:00"
   },
   includeVacationPay: false
+};
+
+// Default State - Annual Salary (Fixed at Bi-Weekly)
+const DEFAULT_ANNUAL_INPUTS: AnnualSalaryInputs = {
+  province: Province.ON,
+  annualSalary: 100000,
+  payFrequency: PayFrequency.BI_WEEKLY // Fixed for annual salary mode
+};
+
+// Default State - Timesheet
+const DEFAULT_TIMESHEET_INPUTS: TimesheetInputs = {
+  province: Province.ON,
+  hourlyWage: 20.00,
+  payFrequency: PayFrequency.WEEKLY,
+  entries: []
 };
 
 const InukshukIcon = ({ className }: { className?: string }) => (
@@ -43,12 +65,110 @@ const InukshukIcon = ({ className }: { className?: string }) => (
 );
  
 const App: React.FC = () => {
-  const [inputs, setInputs] = useState<SalaryInputs>(DEFAULT_INPUTS);
+  // 认证和保存
+  const { signInWithGoogle, isAuthenticated } = useAuth();
+  const { saveCalculation, isSaving } = useCalculationSave();
   
-  // Memoize results to calculate automatically when inputs change
+  // 页面状态：'home' = 模式选择页, 'calculator' = 计算页
+  const [currentPage, setCurrentPage] = useState<'home' | 'calculator'>('home');
+  
+  // 计算模式状态
+  const [mode, setMode] = useState<CalculationMode>(CalculationMode.SIMPLE);
+  
+  // 简易估算输入
+  const [simpleInputs, setSimpleInputs] = useState<SalaryInputs>(DEFAULT_SIMPLE_INPUTS);
+  
+  // 年薪倒推输入
+  const [annualInputs, setAnnualInputs] = useState<AnnualSalaryInputs>(DEFAULT_ANNUAL_INPUTS);
+  
+  // Timesheet 输入
+  const [timesheetInputs, setTimesheetInputs] = useState<TimesheetInputs>(DEFAULT_TIMESHEET_INPUTS);
+  
+  // Auth Modal 状态
+  const [showAuthModal, setShowAuthModal] = useState(false);
+  const [hasCalculated, setHasCalculated] = useState(false);
+  
+  // 选择模式并进入计算页
+  const handleModeSelect = (selectedMode: CalculationMode) => {
+    setMode(selectedMode);
+    setCurrentPage('calculator');
+    setHasCalculated(false); // Reset calculation flag
+  };
+  
+  // 返回首页
+  const handleBackToHome = () => {
+    setCurrentPage('home');
+    setHasCalculated(false);
+  };
+  
+  // Handle sign in from modal
+  const handleSignIn = async () => {
+    await signInWithGoogle();
+    setShowAuthModal(false);
+  };
+  
+  // 根据模式计算结果
   const results = useMemo(() => {
-    return calculateSalary(inputs);
-  }, [inputs]);
+    let result;
+    switch (mode) {
+      case CalculationMode.SIMPLE:
+        result = calculateSalary(simpleInputs);
+        break;
+      case CalculationMode.ANNUAL:
+        result = calculateFromAnnualSalary(annualInputs);
+        break;
+      case CalculationMode.TIMESHEET:
+        result = calculateFromTimesheet(timesheetInputs);
+        break;
+      default:
+        result = calculateSalary(simpleInputs);
+    }
+    
+    // Mark as calculated
+    if (!hasCalculated && currentPage === 'calculator') {
+      setHasCalculated(true);
+    }
+    
+    return result;
+  }, [mode, simpleInputs, annualInputs, timesheetInputs, currentPage]);
+  
+  // Auto-save calculation when authenticated
+  useEffect(() => {
+    if (isAuthenticated && hasCalculated && currentPage === 'calculator') {
+      const inputs = mode === CalculationMode.ANNUAL 
+        ? annualInputs 
+        : mode === CalculationMode.TIMESHEET
+        ? timesheetInputs
+        : simpleInputs;
+      
+      saveCalculation(mode, inputs, results);
+    }
+  }, [results, isAuthenticated, hasCalculated, currentPage]);
+  
+  // Show auth modal 15 seconds after first calculation (if not authenticated)
+  useEffect(() => {
+    if (hasCalculated && !isAuthenticated && currentPage === 'calculator') {
+      const timer = setTimeout(() => {
+        setShowAuthModal(true);
+      }, 15000); // Show after 15 seconds
+      
+      return () => clearTimeout(timer);
+    }
+  }, [hasCalculated, isAuthenticated, currentPage]);
+
+  // 获取当前输入的省份（用于 GeminiAdvisor）
+  const currentProvince = mode === CalculationMode.ANNUAL 
+    ? annualInputs.province 
+    : mode === CalculationMode.TIMESHEET
+    ? timesheetInputs.province
+    : simpleInputs.province;
+
+  // 获取当前输入对象（用于 GeminiAdvisor）
+  const currentInputs = mode === CalculationMode.ANNUAL
+    ? { province: annualInputs.province, hourlyWage: annualInputs.annualSalary / 2080 } // 简化
+    : mode === CalculationMode.TIMESHEET
+    ? { province: timesheetInputs.province, hourlyWage: timesheetInputs.hourlyWage }
+    : simpleInputs;
 
   // 已绑定您的收款链接
   const DONATION_URL = "https://www.buymeacoffee.com/canpay"; 
@@ -58,36 +178,88 @@ const App: React.FC = () => {
       {/* SEO Component */}
       <SEO />
       
-      {/* Header */}
-      <header className="bg-white border-b border-red-100 sticky top-0 z-30 shadow-sm" role="banner">
-        <div className="max-w-6xl mx-auto px-4 py-4 flex items-center justify-between">
-          <div className="flex items-center gap-3">
-             <div className="w-10 h-10 bg-red-600 rounded-lg flex items-center justify-center text-white shadow-red-200 shadow-lg hover:scale-105 transition-transform">
-               <InukshukIcon className="w-7 h-7" />
-             </div>
-             <h1 className="text-xl font-bold text-slate-800 tracking-tight">CanPay <span className="text-red-600 font-light">Insights</span></h1>
+      {/* Auth Modal */}
+      <AuthModal 
+        isOpen={showAuthModal}
+        onClose={() => setShowAuthModal(false)}
+        onSignIn={handleSignIn}
+      />
+      
+      {/* Header - Only show on calculator page */}
+      {currentPage === 'calculator' && (
+        <header className="bg-white border-b border-red-100 sticky top-0 z-30 shadow-sm" role="banner">
+          <div className="max-w-6xl mx-auto px-4 py-4 flex items-center justify-between">
+            <div className="flex items-center gap-3">
+              <div className="w-10 h-10 bg-red-600 rounded-lg flex items-center justify-center text-white shadow-red-200 shadow-lg hover:scale-105 transition-transform">
+                <InukshukIcon className="w-7 h-7" />
+              </div>
+              <h1 className="text-xl font-bold text-slate-800 tracking-tight">CanPay <span className="text-red-600 font-light">Insights</span></h1>
+            </div>
+            <div className="flex items-center gap-3">
+              {/* Saving indicator */}
+              {isSaving && (
+                <span className="text-xs text-slate-500 flex items-center gap-1">
+                  <svg className="animate-spin h-3 w-3" fill="none" viewBox="0 0 24 24">
+                    <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
+                    <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                  </svg>
+                  Saving...
+                </span>
+              )}
+              
+              <button 
+                onClick={handleBackToHome}
+                className="flex items-center gap-2 px-4 py-2 bg-slate-100 hover:bg-slate-200 text-slate-700 rounded-lg transition-all text-sm font-medium"
+              >
+                <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M10 19l-7-7m0 0l7-7m-7 7h18" />
+                </svg>
+                Back to Home
+              </button>
+              
+              <UserMenu />
+            </div>
           </div>
-          <div className="hidden sm:block text-sm text-slate-500 font-medium">
-            2025/2026 Payroll Estimator
-          </div>
-        </div>
-      </header>
+        </header>
+      )}
 
       <main className="max-w-6xl mx-auto px-4 py-8" role="main" aria-label="Payroll Calculator">
-        <div className="flex flex-col lg:flex-row gap-8">
-          
-          {/* Left Column: Inputs */}
-          <div className="w-full lg:w-5/12 xl:w-1/3">
-            <InputSection inputs={inputs} setInputs={setInputs} />
+        {/* Home Page - Mode Selection */}
+        {currentPage === 'home' && (
+          <div className="min-h-[80vh] flex items-center justify-center">
+            <div className="w-full max-w-4xl">
+              <ModeSelector onModeSelect={handleModeSelect} />
+            </div>
           </div>
+        )}
+        
+        {/* Calculator Page */}
+        {currentPage === 'calculator' && (
+          <div className="flex flex-col lg:flex-row gap-8">
+            
+            {/* Left Column: Inputs */}
+            <div className="w-full lg:w-5/12 xl:w-1/3">
+              {mode === CalculationMode.SIMPLE && (
+                <InputSection inputs={simpleInputs} setInputs={setSimpleInputs} />
+              )}
+              
+              {mode === CalculationMode.ANNUAL && (
+                <AnnualSalaryInput inputs={annualInputs} setInputs={setAnnualInputs} />
+              )}
+              
+              {mode === CalculationMode.TIMESHEET && (
+                <TimesheetInput inputs={timesheetInputs} setInputs={setTimesheetInputs} />
+              )}
+            </div>
 
-          {/* Right Column: Results */}
-          <div className="w-full lg:w-7/12 xl:w-2/3">
-            <ResultsSection results={results} provinceName={inputs.province} />
-            <GeminiAdvisor results={results} inputs={inputs} />
+            {/* Right Column: Results */}
+            <div className="w-full lg:w-7/12 xl:w-2/3">
+              <ResultsSection results={results} provinceName={currentProvince} />
+              <GeminiAdvisor results={results} inputs={currentInputs as SalaryInputs} />
+            </div>
+            
           </div>
-          
-        </div>
+        )}
       </main>
 
       {/* Footer */}

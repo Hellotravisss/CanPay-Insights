@@ -14,6 +14,23 @@ export enum Province {
   YT = 'Yukon',
 }
 
+// 计算模式
+export enum CalculationMode {
+  SIMPLE = 'simple',      // 简易估算（时薪）
+  ANNUAL = 'annual',      // 年薪倒推
+  TIMESHEET = 'timesheet' // 精确打卡
+}
+
+// 发薪频率 (Pay Frequency - for Timesheet mode)
+export enum PayFrequency {
+  DAILY = 'daily',           // Daily - for timesheet mode
+  WEEKLY = 'weekly',         // Weekly - for timesheet mode
+  BI_WEEKLY = 'bi-weekly',   // Bi-Weekly - default for annual salary
+  SEMI_MONTHLY = 'semi-monthly', // Semi-Monthly - for timesheet mode
+  MONTHLY = 'monthly',       // Monthly - for timesheet mode
+  QUARTERLY = 'quarterly'    // Quarterly - for timesheet mode
+}
+
 export interface TaxBracket {
   threshold: number;
   rate: number;
@@ -53,6 +70,31 @@ export interface SalaryInputs {
   includeVacationPay: boolean;
 }
 
+// 年薪输入（新增）
+export interface AnnualSalaryInputs {
+  province: string;
+  annualSalary: number;
+  payFrequency: PayFrequency;
+}
+
+// Timesheet 打卡条目
+export interface TimesheetEntry {
+  id: string;
+  date: string; // YYYY-MM-DD
+  checkIn: string; // HH:MM (24-hour format)
+  checkOut: string; // HH:MM (24-hour format)
+  unpaidBreakMinutes: number;
+  notes?: string;
+}
+
+// Timesheet 输入
+export interface TimesheetInputs {
+  province: string;
+  hourlyWage: number;
+  payFrequency: PayFrequency;
+  entries: TimesheetEntry[];
+}
+
 export interface CalculationResult {
   regularHours: number;
   overtimeHours15: number; // 1.5x
@@ -69,4 +111,9 @@ export interface CalculationResult {
   grossPayAnnual: number;
   netPayAnnual: number;
   totalDeductionsAnnual: number;
+  
+  // 新增：支持不同发薪频率
+  grossPayPerPeriod?: number;  // 每期总收入
+  netPayPerPeriod?: number;    // 每期净收入
+  payFrequency?: PayFrequency; // 发薪频率
 }

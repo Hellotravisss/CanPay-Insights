@@ -3,7 +3,11 @@ import {
   CalculationResult, 
   Province, 
   ProvincialRule, 
-  TaxBracket 
+  TaxBracket,
+  AnnualSalaryInputs,
+  PayFrequency,
+  TimesheetInputs,
+  TimesheetEntry
 } from '../types';
 import { 
   PROVINCIAL_DATA, 
@@ -212,4 +216,256 @@ export const calculateSalary = (inputs: SalaryInputs): CalculationResult => {
     netPayAnnual,
     totalDeductionsAnnual
   };
+};
+
+/**
+ * 年薪倒推计算器
+ * 从年薪计算每期实际到手收入
+ */
+export const calculateFromAnnualSalary = (inputs: AnnualSalaryInputs): CalculationResult => {
+  const { annualSalary, province, payFrequency } = inputs;
+  
+  // 获取省份规则
+  const provinceRule = PROVINCIAL_DATA[province as keyof typeof PROVINCIAL_DATA];
+  if (!provinceRule) {
+    throw new Error(`Invalid province: ${province}`);
+  }
+  
+  // 年薪就是总收入
+  const annualGross = annualSalary;
+  
+  // 1. CPP 扣款（年度）
+  const pensionableEarnings = Math.max(0, annualGross - CPP_EXEMPTION);
+  let cppAnnual = pensionableEarnings * CPP_RATE;
+  cppAnnual = Math.min(cppAnnual, CPP_MAX_CONTRIBUTION);
+  
+  // 2. EI 扣款（年度）
+  let eiAnnual = annualGross * EI_RATE;
+  eiAnnual = Math.min(eiAnnual, EI_MAX_CONTRIBUTION);
+  
+  // 3. 联邦税（年度）
+  const federalTaxable = Math.max(0, annualGross - FEDERAL_BASIC_PERSONAL_AMOUNT - cppAnnual - eiAnnual);
+  const federalTaxAnnual = calculateProgressiveTax(federalTaxable, FEDERAL_BRACKETS);
+  
+  // 4. 省税（年度）
+  const provTaxable = Math.max(0, annualGross - provinceRule.basicPersonalAmount - cppAnnual - eiAnnual);
+  const provTaxAnnual = calculateProgressiveTax(provTaxable, provinceRule.brackets);
+  
+  // 5. 总扣款和净收入（年度）
+  const totalTaxAnnual = federalTaxAnnual + provTaxAnnual;
+  const totalDeductionsAnnual = totalTaxAnnual + cppAnnual + eiAnnual;
+  const netPayAnnual = annualGross - totalDeductionsAnnual;
+  
+  // 6. 根据发薪频率计算每期收入
+  const getPeriodsPerYear = (frequency: PayFrequency): number => {
+    switch (frequency) {
+      case PayFrequency.DAILY: return 365;
+      case PayFrequency.WEEKLY: return 52;
+      case PayFrequency.BI_WEEKLY: return 26;
+      case PayFrequency.SEMI_MONTHLY: return 24;
+      case PayFrequency.MONTHLY: return 12;
+      case PayFrequency.QUARTERLY: return 4;
+      default: return 26; // 默认 bi-weekly
+    }
+  };
+  
+  const periodsPerYear = getPeriodsPerYear(payFrequency);
+  const grossPayPerPeriod = annualGross / periodsPerYear;
+  const netPayPerPeriod = netPayAnnual / periodsPerYear;
+  
+  // 7. 返回结果（兼容现有结构）
+  return {
+    regularHours: 0, // 年薪模式不适用
+    overtimeHours15: 0,
+    overtimeHours20: 0,
+    shiftPremiumHours: 0,
+    
+    // Bi-weekly 作为参考（用于显示）
+    grossPayBiWeekly: annualGross / 26,
+    federalTax: federalTaxAnnual / 26,
+    provincialTax: provTaxAnnual / 26,
+    cppDeduction: cppAnnual / 26,
+    eiDeduction: eiAnnual / 26,
+    netPayBiWeekly: netPayAnnual / 26,
+    
+    grossPayAnnual: annualGross,
+    netPayAnnual,
+    totalDeductionsAnnual,
+    
+    // 新增：按实际发薪频率
+    grossPayPerPeriod,
+    netPayPerPeriod,
+    payFrequency
+  };
+};
+
+/**
+ * Timesheet 精确打卡计算器
+ * 从打卡记录计算实际收入（支持加班、多条目）
+ */
+export const calculateFromTimesheet = (inputs: TimesheetInputs): CalculationResult => {
+  const { hourlyWage, province, payFrequency, entries } = inputs;
+  
+  // 获取省份规则
+  const provinceRule = PROVINCIAL_DATA[province as keyof typeof PROVINCIAL_DATA];
+  if (!provinceRule) {
+    throw new Error(`Invalid province: ${province}`);
+  }
+  
+  // 1. 计算每个条目的工作时长
+  const calculateEntryHours = (entry: TimesheetEntry): number => {
+    const [inH, inM] = entry.checkIn.split(':').map(Number);
+    const [outH, outM] = entry.checkOut.split(':').map(Number);
+    
+    let totalMinutes = (outH * 60 + outM) - (inH * 60 + inM);
+    if (totalMinutes < 0) totalMinutes += 1440; // Crossed midnight
+    
+    const paidMinutes = Math.max(0, totalMinutes - entry.unpaidBreakMinutes);
+    return paidMinutes / 60;
+  };
+  
+  // 2. 按日期分组并计算每日总工时
+  const dailyHours = new Map<string, number>();
+  entries.forEach(entry => {
+    const hours = calculateEntryHours(entry);
+    const current = dailyHours.get(entry.date) || 0;
+    dailyHours.set(entry.date, current + hours);
+  });
+  
+  // 3. 计算加班（逐天处理）
+  let regularHours = 0;
+  let otHours15 = 0;
+  let otHours20 = 0;
+  
+  // 按周分组（用于周加班规则）
+  const weeklyHoursMap = new Map<string, { regular: number; overtime: number }>();
+  
+  dailyHours.forEach((dailyHours, date) => {
+    const weekKey = getWeekKey(date); // Get ISO week
+    
+    let dayRegular = dailyHours;
+    let dayOt15 = 0;
+    let dayOt20 = 0;
+    
+    // 应用每日加班规则（如 BC, AB）
+    if (provinceRule.dailyOtThreshold) {
+      if (provinceRule.doubleTimeThreshold && dailyHours > provinceRule.doubleTimeThreshold) {
+        // BC 双倍时薪
+        dayOt20 = dailyHours - provinceRule.doubleTimeThreshold;
+        dayOt15 = provinceRule.doubleTimeThreshold - provinceRule.dailyOtThreshold;
+        dayRegular = provinceRule.dailyOtThreshold;
+      } else if (dailyHours > provinceRule.dailyOtThreshold) {
+        dayOt15 = dailyHours - provinceRule.dailyOtThreshold;
+        dayRegular = provinceRule.dailyOtThreshold;
+      }
+    }
+    
+    // 累加到周
+    const weekData = weeklyHoursMap.get(weekKey) || { regular: 0, overtime: 0 };
+    weekData.regular += dayRegular;
+    weekData.overtime += (dayOt15 + dayOt20);
+    weeklyHoursMap.set(weekKey, weekData);
+    
+    otHours15 += dayOt15;
+    otHours20 += dayOt20;
+  });
+  
+  // 4. 应用周加班规则
+  weeklyHoursMap.forEach((weekData) => {
+    if (weekData.regular > provinceRule.weeklyOtThreshold) {
+      const weeklyOt = weekData.regular - provinceRule.weeklyOtThreshold;
+      otHours15 += weeklyOt;
+      regularHours += provinceRule.weeklyOtThreshold;
+    } else {
+      regularHours += weekData.regular;
+    }
+  });
+  
+  // 5. 计算总收入（基于所有打卡记录）
+  const regularPay = regularHours * hourlyWage;
+  const ot15Pay = otHours15 * (hourlyWage * provinceRule.otRate);
+  const ot20Pay = otHours20 * (hourlyWage * 2.0);
+  
+  const totalGross = regularPay + ot15Pay + ot20Pay;
+  
+  // 6. 年化收入（用于税收计算）
+  const periodsPerYear = getPeriodsPerYear(payFrequency);
+  const annualGross = totalGross * periodsPerYear;
+  
+  // 7. 计算扣款（年度）
+  const pensionableEarnings = Math.max(0, annualGross - CPP_EXEMPTION);
+  let cppAnnual = pensionableEarnings * CPP_RATE;
+  cppAnnual = Math.min(cppAnnual, CPP_MAX_CONTRIBUTION);
+  
+  let eiAnnual = annualGross * EI_RATE;
+  eiAnnual = Math.min(eiAnnual, EI_MAX_CONTRIBUTION);
+  
+  const federalTaxable = Math.max(0, annualGross - FEDERAL_BASIC_PERSONAL_AMOUNT - cppAnnual - eiAnnual);
+  const federalTaxAnnual = calculateProgressiveTax(federalTaxable, FEDERAL_BRACKETS);
+  
+  const provTaxable = Math.max(0, annualGross - provinceRule.basicPersonalAmount - cppAnnual - eiAnnual);
+  const provTaxAnnual = calculateProgressiveTax(provTaxable, provinceRule.brackets);
+  
+  const totalTaxAnnual = federalTaxAnnual + provTaxAnnual;
+  const totalDeductionsAnnual = totalTaxAnnual + cppAnnual + eiAnnual;
+  const netPayAnnual = annualGross - totalDeductionsAnnual;
+  
+  // 8. 返回结果
+  const grossPayPerPeriod = totalGross;
+  const netPayPerPeriod = netPayAnnual / periodsPerYear;
+  
+  return {
+    regularHours,
+    overtimeHours15: otHours15,
+    overtimeHours20: otHours20,
+    shiftPremiumHours: 0, // Timesheet 模式不使用 shift premium
+    
+    grossPayBiWeekly: totalGross, // 显示当前周期总收入
+    federalTax: federalTaxAnnual / periodsPerYear,
+    provincialTax: provTaxAnnual / periodsPerYear,
+    cppDeduction: cppAnnual / periodsPerYear,
+    eiDeduction: eiAnnual / periodsPerYear,
+    netPayBiWeekly: netPayPerPeriod,
+    
+    grossPayAnnual: annualGross,
+    netPayAnnual,
+    totalDeductionsAnnual,
+    
+    grossPayPerPeriod,
+    netPayPerPeriod,
+    payFrequency
+  };
+};
+
+// Helper: Get ISO week key from date (YYYY-Www)
+const getWeekKey = (dateStr: string): string => {
+  const date = new Date(dateStr);
+  const year = date.getFullYear();
+  
+  // Get Thursday of current week (ISO week date)
+  const thursday = new Date(date);
+  thursday.setDate(date.getDate() + (4 - (date.getDay() || 7)));
+  
+  // Get first Thursday of year
+  const yearStart = new Date(thursday.getFullYear(), 0, 1);
+  const firstThursday = new Date(yearStart);
+  firstThursday.setDate(yearStart.getDate() + ((4 - yearStart.getDay() + 7) % 7));
+  
+  // Calculate week number
+  const weekNumber = Math.ceil((((thursday.getTime() - firstThursday.getTime()) / 86400000) + 1) / 7);
+  
+  return `${year}-W${String(weekNumber).padStart(2, '0')}`;
+};
+
+// Helper: Get periods per year
+const getPeriodsPerYear = (frequency: PayFrequency): number => {
+  switch (frequency) {
+    case PayFrequency.DAILY: return 365;
+    case PayFrequency.WEEKLY: return 52;
+    case PayFrequency.BI_WEEKLY: return 26;
+    case PayFrequency.SEMI_MONTHLY: return 24;
+    case PayFrequency.MONTHLY: return 12;
+    case PayFrequency.QUARTERLY: return 4;
+    default: return 26;
+  }
 };

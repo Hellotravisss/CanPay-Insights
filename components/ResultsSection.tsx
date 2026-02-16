@@ -28,6 +28,23 @@ const ResultsSection: React.FC<Props> = ({ results, provinceName }) => {
   const formatCurrency = (val: number) => {
     return new Intl.NumberFormat('en-CA', { style: 'currency', currency: 'CAD' }).format(val);
   };
+  
+  // Get pay frequency display label
+  const getPayFrequencyLabel = (frequency?: string) => {
+    switch (frequency) {
+      case 'daily': return 'Daily';
+      case 'weekly': return 'Weekly';
+      case 'bi-weekly': return 'Bi-Weekly';
+      case 'semi-monthly': return 'Semi-Monthly';
+      case 'monthly': return 'Monthly';
+      case 'quarterly': return 'Quarterly';
+      default: return 'Bi-Weekly';
+    }
+  };
+  
+  // 是否是年薪或打卡模式（有 payFrequency 字段）
+  const hasCustomFrequency = !!results.payFrequency;
+  const payPeriodLabel = hasCustomFrequency ? getPayFrequencyLabel(results.payFrequency) : 'Bi-Weekly';
 
   const chartData = [
     { name: 'Net Pay', value: results.netPayBiWeekly, color: '#dc2626' }, // Red-600
@@ -43,23 +60,27 @@ const ResultsSection: React.FC<Props> = ({ results, provinceName }) => {
       
       {/* Summary Cards */}
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-        {/* Bi-Weekly Card */}
+        {/* 主收入卡片 - 根据模式显示不同内容 */}
         <div className="bg-gradient-to-br from-red-600 to-red-700 rounded-xl shadow-lg p-6 text-white relative overflow-hidden group">
           <div className="relative z-10">
             <div className="flex justify-between items-start">
                <div>
-                  <h3 className="text-red-100 text-xs font-bold uppercase tracking-widest mb-1">Bi-Weekly Net Pay</h3>
-                  <p className="text-4xl font-extrabold tracking-tight">{formatCurrency(results.netPayBiWeekly)}</p>
+                  <h3 className="text-red-100 text-xs font-bold uppercase tracking-widest mb-1">
+                    {payPeriodLabel} Net Pay
+                  </h3>
+                  <p className="text-4xl font-extrabold tracking-tight">
+                    {formatCurrency(hasCustomFrequency ? (results.netPayPerPeriod || results.netPayBiWeekly) : results.netPayBiWeekly)}
+                  </p>
                </div>
                <div className="bg-white/20 px-3 py-1 rounded text-xs font-semibold backdrop-blur-sm">
-                 {totalHours.toFixed(1)} Hours
+                 {totalHours > 0 ? `${totalHours.toFixed(1)} Hours` : payPeriodLabel}
                </div>
             </div>
             
             <div className="mt-6 pt-4 border-t border-red-400/30 space-y-1">
               <div className="flex justify-between items-center text-sm text-red-50 font-medium">
                 <span>Gross Pay (Pre-tax)</span>
-                <span>{formatCurrency(results.grossPayBiWeekly)}</span>
+                <span>{formatCurrency(hasCustomFrequency ? (results.grossPayPerPeriod || results.grossPayBiWeekly) : results.grossPayBiWeekly)}</span>
               </div>
             </div>
           </div>
@@ -94,7 +115,7 @@ const ResultsSection: React.FC<Props> = ({ results, provinceName }) => {
 
       {/* Detail Breakdown */}
       <div className="bg-white rounded-xl shadow-sm border border-slate-200 p-6">
-        <h3 className="text-lg font-bold text-slate-800 mb-6">Bi-Weekly Paycheck Breakdown</h3>
+        <h3 className="text-lg font-bold text-slate-800 mb-6">{payPeriodLabel} Paycheck Breakdown</h3>
         
         <div className="flex flex-col md:flex-row gap-8 items-center">
           {/* Chart */}
