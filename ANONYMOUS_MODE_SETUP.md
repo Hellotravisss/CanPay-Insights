@@ -12,9 +12,11 @@
 2. 选择你的项目: `csvauvgygdjgljgllter`
 3. 点击左侧菜单 **SQL Editor**
 4. 点击 **New Query**
-5. 复制 `DATABASE_SCHEMA_ANONYMOUS.sql` 的内容
+5. 复制 `DATABASE_SCHEMA_ANONYMOUS_v2.sql` 的内容（⚠️ 使用 v2 版本）
 6. 粘贴到编辑器中
 7. 点击 **Run** 按钮
+
+⚠️ **注意**：使用 `DATABASE_SCHEMA_ANONYMOUS_v2.sql`（修复版），不要用旧版本。
 
 ### 2️⃣ 验证表结构
 
