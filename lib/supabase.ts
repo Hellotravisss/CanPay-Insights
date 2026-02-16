@@ -5,7 +5,7 @@ const supabaseAnonKey = import.meta.env.VITE_SUPABASE_ANON_KEY || 'eyJhbGciOiJIU
 
 export const supabase = createClient(supabaseUrl, supabaseAnonKey);
 
-// Database Types
+// Database Types (Anonymous Mode)
 export interface Database {
   public: {
     Tables: {
@@ -20,7 +20,7 @@ export interface Database {
       calculations: {
         Row: {
           id: string;
-          user_id: string;
+          user_id: string; // Anonymous UUID (TEXT)
           mode: 'simple' | 'annual' | 'timesheet';
           inputs: any;
           results: any;
@@ -29,14 +29,15 @@ export interface Database {
       };
       timesheet_entries: {
         Row: {
-          id: string;
-          user_id: string;
+          id: string; // Frontend-generated ID (TEXT)
+          user_id: string; // Anonymous UUID (TEXT)
           date: string;
-          check_in: string;
-          check_out: string;
+          check_in: string; // Format: "HH:MM"
+          check_out: string; // Format: "HH:MM"
           unpaid_break_minutes: number;
           notes: string | null;
           created_at: string;
+          updated_at: string;
         };
       };
     };

@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { TimesheetInputs, TimesheetEntry, Province, PayFrequency } from '../types';
 import { PROVINCIAL_DATA } from '../constants';
+import { useAnonymousTimesheet } from '../hooks/useAnonymousTimesheet';
 
 interface Props {
   inputs: TimesheetInputs;
@@ -8,29 +9,51 @@ interface Props {
 }
 
 const TimesheetInput: React.FC<Props> = ({ inputs, setInputs }) => {
-  // Auto-save to localStorage
+  const { isSyncing, lastSyncTime, loadEntries, saveEntry, deleteEntry } = useAnonymousTimesheet();
+  const [isInitialLoad, setIsInitialLoad] = useState(true);
+
+  // Load from Supabase on mount
   useEffect(() => {
-    try {
-      localStorage.setItem('timesheetData', JSON.stringify(inputs));
-    } catch (err) {
-      console.error('Failed to save to localStorage:', err);
-    }
-  }, [inputs]);
-  
-  // Load from localStorage on mount
-  useEffect(() => {
-    try {
-      const saved = localStorage.getItem('timesheetData');
-      if (saved) {
-        const parsed = JSON.parse(saved);
-        if (parsed.entries && parsed.entries.length > 0) {
-          setInputs(parsed);
+    const loadFromCloud = async () => {
+      const cloudEntries = await loadEntries();
+      
+      if (cloudEntries.length > 0) {
+        // Cloud data exists, use it
+        setInputs({
+          ...inputs,
+          entries: cloudEntries
+        });
+      } else {
+        // No cloud data, check localStorage backup
+        try {
+          const saved = localStorage.getItem('timesheetData');
+          if (saved) {
+            const parsed = JSON.parse(saved);
+            if (parsed.entries && parsed.entries.length > 0) {
+              setInputs(parsed);
+            }
+          }
+        } catch (err) {
+          console.error('Failed to load from localStorage:', err);
         }
       }
-    } catch (err) {
-      console.error('Failed to load from localStorage:', err);
-    }
+      
+      setIsInitialLoad(false);
+    };
+    
+    loadFromCloud();
   }, []);
+  
+  // Auto-save to localStorage as backup
+  useEffect(() => {
+    if (!isInitialLoad) {
+      try {
+        localStorage.setItem('timesheetData', JSON.stringify(inputs));
+      } catch (err) {
+        console.error('Failed to save to localStorage:', err);
+      }
+    }
+  }, [inputs, isInitialLoad]);
   
   const [selectedDate, setSelectedDate] = useState<string>(
     new Date().toISOString().split('T')[0]
@@ -78,9 +101,9 @@ const TimesheetInput: React.FC<Props> = ({ inputs, setInputs }) => {
   };
 
   // Add new entry
-  const handleAddEntry = () => {
+  const handleAddEntry = async () => {
     const entry: TimesheetEntry = {
-      id: Date.now().toString(),
+      id: `${Date.now()}-${Math.random().toString(36).substr(2, 9)}`,
       date: selectedDate,
       checkIn: newEntry.checkIn,
       checkOut: newEntry.checkOut,
@@ -92,10 +115,14 @@ const TimesheetInput: React.FC<Props> = ({ inputs, setInputs }) => {
       new Date(a.date).getTime() - new Date(b.date).getTime()
     );
     
+    // Update local state immediately (optimistic update)
     setInputs({
       ...inputs,
       entries: newEntries
     });
+    
+    // Save to cloud in background
+    saveEntry(entry);
     
     setIsAddingEntry(false);
     setNewEntry({
@@ -107,11 +134,15 @@ const TimesheetInput: React.FC<Props> = ({ inputs, setInputs }) => {
   };
 
   // Delete entry
-  const handleDeleteEntry = (id: string) => {
+  const handleDeleteEntry = async (id: string) => {
+    // Update local state immediately (optimistic update)
     setInputs({
       ...inputs,
       entries: inputs.entries.filter(e => e.id !== id)
     });
+    
+    // Delete from cloud in background
+    deleteEntry(id);
   };
 
   // Calculate total hours for current period
@@ -156,8 +187,31 @@ const TimesheetInput: React.FC<Props> = ({ inputs, setInputs }) => {
     <div className="bg-white rounded-xl shadow-sm border border-slate-200 overflow-hidden">
       {/* Header */}
       <div className="bg-gradient-to-br from-slate-900 to-slate-800 p-6 text-white">
-        <h2 className="text-xl font-bold mb-1">⏱️ Timesheet Tracker</h2>
-        <p className="text-slate-300 text-sm">Track your daily hours with precision</p>
+        <div className="flex items-center justify-between">
+          <div>
+            <h2 className="text-xl font-bold mb-1">⏱️ Timesheet Tracker</h2>
+            <p className="text-slate-300 text-sm">Track your daily hours with precision</p>
+          </div>
+          {/* Cloud sync indicator */}
+          <div className="flex items-center gap-2 text-xs">
+            {isSyncing ? (
+              <div className="flex items-center gap-1 text-yellow-400">
+                <svg className="animate-spin h-4 w-4" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                  <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
+                  <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                </svg>
+                <span>Syncing...</span>
+              </div>
+            ) : lastSyncTime ? (
+              <div className="flex items-center gap-1 text-green-400">
+                <svg className="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7"></path>
+                </svg>
+                <span>Saved to Cloud</span>
+              </div>
+            ) : null}
+          </div>
+        </div>
       </div>
 
       <div className="p-6 space-y-6">
