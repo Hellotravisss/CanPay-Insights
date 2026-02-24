@@ -28,7 +28,7 @@ const DEFAULT_SIMPLE_INPUTS: SalaryInputs = {
     startTime: "00:00",
     endTime: "06:00"
   },
-  includeVacationPay: false
+  vacationPayRate: 0
 };
 
 // Default State - Annual Salary (Fixed at Bi-Weekly)

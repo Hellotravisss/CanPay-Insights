@@ -318,10 +318,10 @@ const GeminiAdvisor: React.FC<Props> = ({ results, inputs }) => {
                   <InukshukIcon className="w-10 h-10 text-white" />
                 </div>
                 <h1 className="text-5xl font-bold tracking-tight">
-                  CanPay <span className="text-red-500">Tax Optimizer</span>
+                  CanPay <span className="text-red-500">Insights</span>
                 </h1>
               </div>
-              <p className="text-slate-400 text-2xl font-medium">2025/2026 Tax Optimization Report</p>
+              <p className="text-slate-400 text-2xl font-medium">2025/2026 Tax Report</p>
             </div>
             <div className="flex gap-12 text-right">
               <div>

@@ -227,8 +227,9 @@ export const calculateSalary = (inputs: SalaryInputs): CalculationResult => {
   
   let grossPayBiWeekly = biWeeklyRegularPay + biWeeklyOt15Pay + biWeeklyOt20Pay + biWeeklyPremiumPay;
   
-  if (inputs.includeVacationPay) {
-    grossPayBiWeekly += grossPayBiWeekly * provinceRule.vacationPayRate;
+  // Apply vacation pay if selected (4%, 6%, or 8%)
+  if (inputs.vacationPayRate > 0) {
+    grossPayBiWeekly += grossPayBiWeekly * inputs.vacationPayRate;
   }
   
   // 5. Annual Gross

@@ -67,7 +67,7 @@ export interface SalaryInputs {
   hourlyWage: number;
   shift: ShiftDetails;
   premium: ShiftPremium;
-  includeVacationPay: boolean;
+  vacationPayRate: number; // 0, 0.04, 0.06, or 0.08
 }
 
 // 年薪输入（新增）

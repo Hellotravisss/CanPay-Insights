@@ -191,15 +191,22 @@ const InputSection: React.FC<Props> = ({ inputs, setInputs }) => {
         )}
       </div>
 
-      <div className="flex items-center gap-3 bg-slate-50 p-4 rounded-xl border border-slate-100 hover:bg-slate-100 transition-colors cursor-pointer" onClick={() => setInputs({...inputs, includeVacationPay: !inputs.includeVacationPay})}>
-        <input 
-          id="vacation"
-          type="checkbox" 
-          checked={inputs.includeVacationPay}
-          onChange={(e) => e.stopPropagation()} // 防止触发父容器点击
-          className="w-5 h-5 text-red-600 rounded border-gray-300 focus:ring-red-500"
-        />
-        <label htmlFor="vacation" className="text-sm font-bold text-slate-700 cursor-pointer">Include 4% Vacation Pay</label>
+      {/* Vacation Pay Selection */}
+      <div className="bg-slate-50 p-4 rounded-xl border border-slate-100">
+        <label className="block text-sm font-bold text-slate-700 mb-2">Vacation Pay</label>
+        <select
+          className="w-full p-3 bg-white text-slate-900 border border-slate-300 rounded-lg focus:ring-2 focus:ring-red-500 focus:outline-none transition-all cursor-pointer hover:border-red-300 shadow-sm"
+          value={inputs.vacationPayRate}
+          onChange={(e) => setInputs({...inputs, vacationPayRate: parseFloat(e.target.value)})}
+        >
+          <option value={0}>No Vacation Pay (0%)</option>
+          <option value={0.04}>4% - 0-5 years experience (2 weeks vacation)</option>
+          <option value={0.06}>6% - 5+ years experience (3 weeks vacation)</option>
+          <option value={0.08}>8% - 8+ years (SK, 4 weeks vacation)</option>
+        </select>
+        <p className="text-xs text-slate-500 mt-2">
+          Vacation pay is added to each paycheck instead of paid during time off
+        </p>
       </div>
 
     </div>
