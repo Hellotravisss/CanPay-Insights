@@ -307,20 +307,7 @@ const GeminiAdvisor: React.FC<Props> = ({ results, inputs }) => {
           </div>
         </div>
         
-        {advice && (
-          <button
-            onClick={handleExport}
-            disabled={exporting || !qrBase64}
-            className="text-xs bg-red-600 hover:bg-red-700 text-white px-4 py-2 rounded-full font-bold flex items-center gap-2 disabled:opacity-50 shadow-lg active:scale-95"
-          >
-            {exporting ? 'Generating...' : 'Save Tax Report'}
-            {!exporting && (
-              <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
-              </svg>
-            )}
-          </button>
-        )}
+
       </div>
 
       {/* Local Tax Optimization - Always Visible */}
@@ -376,7 +363,31 @@ const GeminiAdvisor: React.FC<Props> = ({ results, inputs }) => {
                   .replace(/^## (.*)/gm, '<h4 class="text-md font-semibold text-slate-300 mt-3 mb-1">$1</h4>'),
               }}
             />
-            <div className="mt-6 pt-4 border-t border-slate-700/50 flex justify-between items-center text-[10px] text-slate-500 font-mono">
+            {/* Save Report Button - Mobile Optimized */}
+            <div className="mt-6 pt-4 border-t border-slate-700/50">
+              <button
+                onClick={handleExport}
+                disabled={exporting || !qrBase64}
+                className="w-full sm:w-auto px-6 py-3 bg-red-600 hover:bg-red-700 disabled:bg-slate-600 text-white font-bold rounded-lg transition-all active:scale-95 shadow-lg flex items-center justify-center gap-2"
+              >
+                {exporting ? (
+                  <>
+                    <div className="w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin" />
+                    Generating...
+                  </>
+                ) : (
+                  <>
+                    <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
+                    </svg>
+                    Save Tax Report
+                  </>
+                )}
+              </button>
+              <p className="text-xs text-slate-500 mt-2">Save this report to your device or share with your financial advisor</p>
+            </div>
+
+            <div className="mt-4 flex justify-between items-center text-[10px] text-slate-500 font-mono">
               <button onClick={() => setAdvice(null)} className="hover:text-red-400 underline uppercase tracking-tighter">
                 Analyze Again
               </button>
