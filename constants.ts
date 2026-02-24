@@ -1,26 +1,47 @@
 
 import { ProvincialRule, Province } from './types';
 
-// Updated Federal Brackets 2025/2026 (Indexed for inflation)
+// ============================================
+// 2025 FEDERAL TAX BRACKETS
+// ============================================
 export const FEDERAL_BRACKETS = [
-  { threshold: 57375, rate: 0.15 },    // 2025 Est.
-  { threshold: 114750, rate: 0.205 },
-  { threshold: 177722, rate: 0.26 },
-  { threshold: 253865, rate: 0.29 },
-  { threshold: Infinity, rate: 0.33 },
+  { threshold: 57375, rate: 0.15 },    // 15% on first $57,375
+  { threshold: 114750, rate: 0.205 },  // 20.5% on $57,376 to $114,750
+  { threshold: 177722, rate: 0.26 },   // 26% on $114,751 to $177,722
+  { threshold: 253865, rate: 0.29 },   // 29% on $177,723 to $253,865
+  { threshold: Infinity, rate: 0.33 }, // 33% on amount over $253,865
 ];
-export const FEDERAL_BASIC_PERSONAL_AMOUNT = 15950; // 2025 Estimated
 
-// CPP & EI 2025/2026 Constants
-// Note: CPP2 (Additional) is simplified into a slightly higher effective cap for calculation
-export const CPP_RATE = 0.0595; 
-export const CPP_MAX_CONTRIBUTION = 4055.25; // 2025 Max (Base + Enhanced)
-export const CPP_EXEMPTION = 3500;
+// Federal Basic Personal Amount (2025)
+// The BPA is a tax CREDIT, not a deduction from income
+// Value: $16,129 (federal) - but the tax credit is 15% of this amount
+export const FEDERAL_BASIC_PERSONAL_AMOUNT = 16129; // 2025 actual value
 
-export const EI_RATE = 0.0164; // 2025 Premium Rate
-export const EI_MAX_CONTRIBUTION = 1077.48; // 2025 Max
+// ============================================
+// CPP CONTRIBUTIONS (2025)
+// ============================================
+// CPP First Tier
+export const CPP_RATE = 0.0595; // 5.95% employee contribution
+export const CPP_MAX_CONTRIBUTION = 4037.40; // 2025 max employee contribution
+export const CPP_EXEMPTION = 3500; // Annual basic exemption
+export const CPP_MAX_PENSIONABLE_EARNINGS = 73600; // 2025 YMPE
 
-// Provincial Rules (Updated for 2025/2026 projections)
+// CPP2 Second Tier (NEW for 2024+)
+export const CPP2_RATE = 0.04; // 4.00% employee contribution
+export const CPP2_MAX_CONTRIBUTION = 423; // 2025 max employee contribution
+export const CPP2_MAX_PENSIONABLE_EARNINGS = 81200; // 2025 YAMPE
+export const CPP2_MIN_PENSIONABLE_EARNINGS = 73600; // Same as CPP max
+
+// ============================================
+// EI PREMIUMS (2025)
+// ============================================
+export const EI_RATE = 0.0164; // 1.64% employee premium rate
+export const EI_MAX_CONTRIBUTION = 1077.48; // 2025 max employee premium
+export const EI_MAX_INSURABLE_EARNINGS = 65700; // 2025 MIE
+
+// ============================================
+// PROVINCIAL DATA (2025)
+// ============================================
 export const PROVINCIAL_DATA: Record<string, ProvincialRule> = {
   [Province.AB]: {
     id: 'AB',
@@ -29,8 +50,11 @@ export const PROVINCIAL_DATA: Record<string, ProvincialRule> = {
     weeklyOtThreshold: 44,
     otRate: 1.5,
     vacationPayRate: 0.04,
-    basicPersonalAmount: 22250, // Highly indexed in Alberta
-    brackets: [{ threshold: 151230, rate: 0.10 }, { threshold: Infinity, rate: 0.12 }]
+    basicPersonalAmount: 22783, // 2025 Alberta BPA
+    brackets: [
+      { threshold: 151839, rate: 0.10 }, 
+      { threshold: Infinity, rate: 0.12 }
+    ]
   },
   [Province.BC]: {
     id: 'BC',
@@ -40,8 +64,15 @@ export const PROVINCIAL_DATA: Record<string, ProvincialRule> = {
     otRate: 1.5,
     doubleTimeThreshold: 12,
     vacationPayRate: 0.04,
-    basicPersonalAmount: 12580,
-    brackets: [{ threshold: 48000, rate: 0.0506 }, { threshold: 96000, rate: 0.077 }, { threshold: Infinity, rate: 0.105 }]
+    basicPersonalAmount: 12680, // 2025 BC BPA
+    brackets: [
+      { threshold: 49180, rate: 0.0506 }, 
+      { threshold: 98360, rate: 0.077 }, 
+      { threshold: 119000, rate: 0.105 },
+      { threshold: 162500, rate: 0.1229 },
+      { threshold: 227091, rate: 0.147 },
+      { threshold: Infinity, rate: 0.168 }
+    ]
   },
   [Province.ON]: {
     id: 'ON',
@@ -50,8 +81,14 @@ export const PROVINCIAL_DATA: Record<string, ProvincialRule> = {
     weeklyOtThreshold: 44,
     otRate: 1.5,
     vacationPayRate: 0.04,
-    basicPersonalAmount: 12399,
-    brackets: [{ threshold: 52446, rate: 0.0505 }, { threshold: 104891, rate: 0.0915 }, { threshold: Infinity, rate: 0.1116 }]
+    basicPersonalAmount: 13229, // 2025 Ontario BPA
+    brackets: [
+      { threshold: 52886, rate: 0.0505 }, 
+      { threshold: 105775, rate: 0.0915 }, 
+      { threshold: 150000, rate: 0.1116 },
+      { threshold: 220000, rate: 0.1216 },
+      { threshold: Infinity, rate: 0.1316 }
+    ]
   },
   [Province.QC]: {
     id: 'QC',
@@ -60,18 +97,142 @@ export const PROVINCIAL_DATA: Record<string, ProvincialRule> = {
     weeklyOtThreshold: 40,
     otRate: 1.5,
     vacationPayRate: 0.04,
-    basicPersonalAmount: 18050,
-    brackets: [{ threshold: 51780, rate: 0.14 }, { threshold: 103545, rate: 0.19 }, { threshold: Infinity, rate: 0.24 }]
+    basicPersonalAmount: 18571, // 2025 Quebec BPA
+    brackets: [
+      { threshold: 53255, rate: 0.14 }, 
+      { threshold: 106495, rate: 0.19 }, 
+      { threshold: 129590, rate: 0.24 },
+      { threshold: Infinity, rate: 0.2575 }
+    ]
   },
-  [Province.MB]: { id: 'MB', name: Province.MB, dailyOtThreshold: 8, weeklyOtThreshold: 40, otRate: 1.5, vacationPayRate: 0.04, basicPersonalAmount: 16000, brackets: [{ threshold: 47000, rate: 0.108 }, { threshold: Infinity, rate: 0.1275 }] },
-  [Province.SK]: { id: 'SK', name: Province.SK, dailyOtThreshold: 8, weeklyOtThreshold: 40, otRate: 1.5, vacationPayRate: 0.04, basicPersonalAmount: 18450, brackets: [{ threshold: 52000, rate: 0.105 }, { threshold: Infinity, rate: 0.125 }] },
-  [Province.NS]: { id: 'NS', name: Province.NS, dailyOtThreshold: null, weeklyOtThreshold: 48, otRate: 1.5, vacationPayRate: 0.04, basicPersonalAmount: 11481, brackets: [{ threshold: 32000, rate: 0.0879 }, { threshold: Infinity, rate: 0.1495 }] },
-  [Province.NB]: { id: 'NB', name: Province.NB, dailyOtThreshold: null, weeklyOtThreshold: 44, otRate: 1.5, vacationPayRate: 0.04, basicPersonalAmount: 13500, brackets: [{ threshold: 49800, rate: 0.094 }, { threshold: Infinity, rate: 0.14 }] },
-  [Province.PE]: { id: 'PE', name: Province.PE, dailyOtThreshold: null, weeklyOtThreshold: 48, otRate: 1.5, vacationPayRate: 0.04, basicPersonalAmount: 13500, brackets: [{ threshold: 33000, rate: 0.098 }, { threshold: Infinity, rate: 0.138 }] },
-  [Province.NL]: { id: 'NL', name: Province.NL, dailyOtThreshold: null, weeklyOtThreshold: 40, otRate: 1.5, vacationPayRate: 0.04, basicPersonalAmount: 10800, brackets: [{ threshold: 43000, rate: 0.087 }, { threshold: Infinity, rate: 0.145 }] },
-  [Province.YT]: { id: 'YT', name: Province.YT, dailyOtThreshold: 8, weeklyOtThreshold: 40, otRate: 1.5, vacationPayRate: 0.04, basicPersonalAmount: 15950, brackets: [{ threshold: 57375, rate: 0.064 }, { threshold: Infinity, rate: 0.09 }] },
-  [Province.NT]: { id: 'NT', name: Province.NT, dailyOtThreshold: 8, weeklyOtThreshold: 40, otRate: 1.5, vacationPayRate: 0.04, basicPersonalAmount: 17300, brackets: [{ threshold: 52000, rate: 0.059 }, { threshold: Infinity, rate: 0.086 }] },
-  [Province.NU]: { id: 'NU', name: Province.NU, dailyOtThreshold: 8, weeklyOtThreshold: 40, otRate: 1.5, vacationPayRate: 0.04, basicPersonalAmount: 18500, brackets: [{ threshold: 54000, rate: 0.04 }, { threshold: Infinity, rate: 0.07 }] },
+  [Province.MB]: { 
+    id: 'MB', 
+    name: Province.MB, 
+    dailyOtThreshold: 8, 
+    weeklyOtThreshold: 40, 
+    otRate: 1.5, 
+    vacationPayRate: 0.04, 
+    basicPersonalAmount: 16399, // 2025
+    brackets: [
+      { threshold: 47915, rate: 0.108 }, 
+      { threshold: Infinity, rate: 0.1275 }
+    ] 
+  },
+  [Province.SK]: { 
+    id: 'SK', 
+    name: Province.SK, 
+    dailyOtThreshold: 8, 
+    weeklyOtThreshold: 40, 
+    otRate: 1.5, 
+    vacationPayRate: 0.04, 
+    basicPersonalAmount: 19139, // 2025
+    brackets: [
+      { threshold: 54300, rate: 0.105 }, 
+      { threshold: Infinity, rate: 0.125 }
+    ] 
+  },
+  [Province.NS]: { 
+    id: 'NS', 
+    name: Province.NS, 
+    dailyOtThreshold: null, 
+    weeklyOtThreshold: 48, 
+    otRate: 1.5, 
+    vacationPayRate: 0.04, 
+    basicPersonalAmount: 12544, // 2025
+    brackets: [
+      { threshold: 30507, rate: 0.0879 }, 
+      { threshold: 61015, rate: 0.1495 },
+      { threshold: 95883, rate: 0.1667 },
+      { threshold: 154650, rate: 0.175 },
+      { threshold: Infinity, rate: 0.21 }
+    ] 
+  },
+  [Province.NB]: { 
+    id: 'NB', 
+    name: Province.NB, 
+    dailyOtThreshold: null, 
+    weeklyOtThreshold: 44, 
+    otRate: 1.5, 
+    vacationPayRate: 0.04, 
+    basicPersonalAmount: 13853, // 2025
+    brackets: [
+      { threshold: 51306, rate: 0.094 }, 
+      { threshold: 102614, rate: 0.14 },
+      { threshold: 190859, rate: 0.16 },
+      { threshold: Infinity, rate: 0.195 }
+    ] 
+  },
+  [Province.PE]: { 
+    id: 'PE', 
+    name: Province.PE, 
+    dailyOtThreshold: null, 
+    weeklyOtThreshold: 48, 
+    otRate: 1.5, 
+    vacationPayRate: 0.04, 
+    basicPersonalAmount: 14250, // 2025
+    brackets: [
+      { threshold: 33328, rate: 0.098 }, 
+      { threshold: 66652, rate: 0.138 },
+      { threshold: Infinity, rate: 0.167 }
+    ] 
+  },
+  [Province.NL]: { 
+    id: 'NL', 
+    name: Province.NL, 
+    dailyOtThreshold: null, 
+    weeklyOtThreshold: 40, 
+    otRate: 1.5, 
+    vacationPayRate: 0.04, 
+    basicPersonalAmount: 11385, // 2025
+    brackets: [
+      { threshold: 44100, rate: 0.087 }, 
+      { threshold: 88200, rate: 0.145 },
+      { threshold: Infinity, rate: 0.158 }
+    ] 
+  },
+  [Province.YT]: { 
+    id: 'YT', 
+    name: Province.YT, 
+    dailyOtThreshold: 8, 
+    weeklyOtThreshold: 40, 
+    otRate: 1.5, 
+    vacationPayRate: 0.04, 
+    basicPersonalAmount: 16129, // Same as federal
+    brackets: [
+      { threshold: 57375, rate: 0.064 }, 
+      { threshold: 114750, rate: 0.09 },
+      { threshold: 177722, rate: 0.109 },
+      { threshold: 253865, rate: 0.128 },
+      { threshold: 500000, rate: 0.15 },
+      { threshold: Infinity, rate: 0.16 }
+    ] 
+  },
+  [Province.NT]: { 
+    id: 'NT', 
+    name: Province.NT, 
+    dailyOtThreshold: 8, 
+    weeklyOtThreshold: 40, 
+    otRate: 1.5, 
+    vacationPayRate: 0.04, 
+    basicPersonalAmount: 17782, // 2025
+    brackets: [
+      { threshold: 52000, rate: 0.059 }, 
+      { threshold: Infinity, rate: 0.086 }
+    ] 
+  },
+  [Province.NU]: { 
+    id: 'NU', 
+    name: Province.NU, 
+    dailyOtThreshold: 8, 
+    weeklyOtThreshold: 40, 
+    otRate: 1.5, 
+    vacationPayRate: 0.04, 
+    basicPersonalAmount: 19025, // 2025
+    brackets: [
+      { threshold: 54000, rate: 0.04 }, 
+      { threshold: Infinity, rate: 0.07 }
+    ] 
+  },
 };
 
 export const DAYS_OF_WEEK = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
