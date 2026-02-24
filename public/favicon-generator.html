@@ -3,268 +3,238 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Favicon Generator - CanPay Insights</title>
+  <title>CanPay Favicon Generator</title>
   <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
     body {
-      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-      max-width: 1200px;
-      margin: 0 auto;
-      padding: 40px;
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
       background: #f8fafc;
-    }
-    
-    h1 {
-      color: #1e293b;
-      margin-bottom: 10px;
-    }
-    
-    .subtitle {
-      color: #64748b;
-      margin-bottom: 40px;
-    }
-    
-    .favicon-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-      gap: 20px;
-      margin-bottom: 40px;
-    }
-    
-    .favicon-card {
-      background: white;
-      border-radius: 12px;
-      padding: 30px;
-      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
-      text-align: center;
-    }
-    
-    .favicon-card h3 {
-      color: #334155;
-      margin-top: 0;
-      font-size: 14px;
-      text-transform: uppercase;
-      letter-spacing: 0.5px;
-    }
-    
-    .favicon-preview {
-      margin: 20px 0;
+      padding: 40px 20px;
       display: flex;
-      justify-content: center;
+      flex-direction: column;
       align-items: center;
-      padding: 20px;
+    }
+    h1 { color: #1e293b; margin-bottom: 10px; }
+    p { color: #64748b; margin-bottom: 30px; }
+    .container {
+      background: white;
+      padding: 40px;
+      border-radius: 16px;
+      box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1);
+      text-align: center;
+      max-width: 900px;
+    }
+    .preview-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 20px;
+      margin: 30px 0;
+    }
+    .preview-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 10px;
+    }
+    .preview-box {
       background: #f1f5f9;
-      border-radius: 8px;
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
     }
-    
-    canvas {
-      border-radius: 8px;
-      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    }
-    
-    .size-info {
+    .size-16 { width: 60px; height: 60px; }
+    .size-16 canvas { width: 16px; height: 16px; }
+    .size-32 { width: 80px; height: 80px; }
+    .size-32 canvas { width: 32px; height: 32px; }
+    .size-180 { width: 120px; height: 120px; }
+    .size-180 canvas { width: 90px; height: 90px; }
+    .size-192 { width: 130px; height: 130px; }
+    .size-192 canvas { width: 96px; height: 96px; }
+    .size-label {
+      font-size: 11px;
       color: #64748b;
-      font-size: 14px;
-      margin-bottom: 15px;
+      font-weight: 600;
     }
-    
     button {
       background: #dc2626;
       color: white;
       border: none;
-      padding: 12px 24px;
+      padding: 14px 40px;
       border-radius: 8px;
+      font-size: 16px;
       font-weight: 600;
       cursor: pointer;
-      font-size: 14px;
-      transition: background 0.2s;
+      transition: all 0.2s;
+      margin-top: 20px;
     }
-    
     button:hover {
       background: #b91c1c;
+      transform: translateY(-1px);
     }
-    
     .instructions {
-      background: white;
-      border-radius: 12px;
-      padding: 30px;
-      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
-      margin-top: 40px;
+      margin-top: 30px;
+      padding: 20px;
+      background: #fef2f2;
+      border-radius: 8px;
+      border-left: 4px solid #dc2626;
+      text-align: left;
     }
-    
-    .instructions h2 {
-      color: #1e293b;
-      margin-top: 0;
+    .instructions h3 {
+      color: #dc2626;
+      margin-bottom: 10px;
     }
-    
     .instructions ol {
-      color: #475569;
+      margin-left: 20px;
+      color: #64748b;
       line-height: 1.8;
     }
-    
-    .instructions code {
-      background: #f1f5f9;
-      padding: 2px 8px;
-      border-radius: 4px;
-      font-family: 'Monaco', monospace;
-      color: #dc2626;
-    }
-    
-    .success {
-      background: #dcfce7;
-      border: 2px solid #86efac;
-      color: #166534;
+    .file-list {
+      background: white;
       padding: 15px;
-      border-radius: 8px;
-      margin-top: 20px;
-      text-align: center;
-      font-weight: 600;
+      border-radius: 6px;
+      margin-top: 10px;
+      font-family: monospace;
+      font-size: 13px;
+    }
+    .file-list li {
+      margin: 5px 0;
+    }
+    @media (max-width: 768px) {
+      .preview-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
     }
   </style>
 </head>
 <body>
-  <h1>🎨 Favicon Generator</h1>
-  <p class="subtitle">为 CanPay Insights 生成各种尺寸的 Favicon</p>
+  <h1>🎨 CanPay Favicon Generator</h1>
+  <p>Generate PNG favicons from the Inukshuk SVG icon</p>
   
-  <div class="favicon-grid">
-    <!-- 16x16 -->
-    <div class="favicon-card">
-      <h3>Favicon 16x16</h3>
-      <div class="size-info">浏览器标签页图标</div>
-      <div class="favicon-preview">
-        <canvas id="favicon-16" width="16" height="16"></canvas>
+  <div class="container">
+    <div class="preview-grid">
+      <div class="preview-item">
+        <div class="preview-box size-16">
+          <canvas id="canvas16" width="16" height="16"></canvas>
+        </div>
+        <span class="size-label">16×16</span>
       </div>
-      <button onclick="downloadFavicon('favicon-16', 'favicon-16x16.png')">下载 PNG</button>
+      <div class="preview-item">
+        <div class="preview-box size-32">
+          <canvas id="canvas32" width="32" height="32"></canvas>
+        </div>
+        <span class="size-label">32×32</span>
+      </div>
+      <div class="preview-item">
+        <div class="preview-box size-180">
+          <canvas id="canvas180" width="180" height="180"></canvas>
+        </div>
+        <span class="size-label">180×180</span>
+      </div>
+      <div class="preview-item">
+        <div class="preview-box size-192">
+          <canvas id="canvas192" width="192" height="192"></canvas>
+        </div>
+        <span class="size-label">192×192</span>
+      </div>
     </div>
     
-    <!-- 32x32 -->
-    <div class="favicon-card">
-      <h3>Favicon 32x32</h3>
-      <div class="size-info">标准 Favicon</div>
-      <div class="favicon-preview">
-        <canvas id="favicon-32" width="32" height="32"></canvas>
-      </div>
-      <button onclick="downloadFavicon('favicon-32', 'favicon-32x32.png')">下载 PNG</button>
-    </div>
+    <button onclick="downloadAll()">📥 Download All Favicons (5 files)</button>
     
-    <!-- 180x180 -->
-    <div class="favicon-card">
-      <h3>Apple Touch Icon</h3>
-      <div class="size-info">iOS 主屏幕图标</div>
-      <div class="favicon-preview">
-        <canvas id="favicon-180" width="180" height="180"></canvas>
-      </div>
-      <button onclick="downloadFavicon('favicon-180', 'apple-touch-icon.png')">下载 PNG</button>
-    </div>
-    
-    <!-- 192x192 -->
-    <div class="favicon-card">
-      <h3>Android Icon</h3>
-      <div class="size-info">Android 主屏幕图标</div>
-      <div class="favicon-preview">
-        <canvas id="favicon-192" width="192" height="192"></canvas>
-      </div>
-      <button onclick="downloadFavicon('favicon-192', 'android-chrome-192x192.png')">下载 PNG</button>
+    <div class="instructions">
+      <h3>📋 Instructions</h3>
+      <ol>
+        <li>Click "Download All Favicons" button above</li>
+        <li>Save all files to your <code>public/</code> folder</li>
+        <li>Required files:
+          <ul class="file-list">
+            <li>✅ favicon-16x16.png (Browser tab)</li>
+            <li>✅ favicon-32x32.png (Browser tab - retina)</li>
+            <li>✅ apple-touch-icon.png (iOS home screen)</li>
+            <li>✅ android-chrome-192x192.png (Android/PWA)</li>
+            <li>✅ android-chrome-512x512.png (Android/PWA - high res)</li>
+          </ul>
+        </li>
+        <li>Refresh your website to see the new icon!</li>
+      </ol>
     </div>
   </div>
-  
-  <div class="instructions">
-    <h2>📝 使用说明</h2>
-    <ol>
-      <li>点击每个卡片下方的"下载 PNG"按钮</li>
-      <li>将下载的图片放到 <code>public/</code> 文件夹</li>
-      <li>确保文件名与上面显示的一致</li>
-      <li>刷新网站，查看新图标！</li>
-    </ol>
-    
-    <div class="success">
-      ✅ SVG 图标已创建：public/favicon.svg
-    </div>
-  </div>
-  
+
   <script>
-    // 绘制 Favicon 的函数
-    function drawFavicon(canvas) {
+    // Inukshuk SVG path data
+    const svgContent = `
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+        <rect width="100" height="100" rx="20" fill="#dc2626"/>
+        <g transform="translate(50, 50)" fill="white">
+          <rect x="-8" y="-35" width="16" height="12" rx="2" />
+          <rect x="-35" y="-15" width="70" height="10" rx="2" />
+          <rect x="-12" y="0" width="24" height="16" rx="2" />
+          <rect x="-32" y="22" width="64" height="10" rx="2" />
+          <rect x="-22" y="38" width="14" height="18" rx="2" />
+          <rect x="8" y="38" width="14" height="18" rx="2" />
+        </g>
+      </svg>
+    `;
+
+    function drawToCanvas(canvasId, size) {
+      const canvas = document.getElementById(canvasId);
       const ctx = canvas.getContext('2d');
-      const size = canvas.width;
-      const scale = size / 100; // 基准尺寸是 100x100
       
-      // 清空画布
-      ctx.clearRect(0, 0, size, size);
+      const img = new Image();
+      const svgBlob = new Blob([svgContent], { type: 'image/svg+xml;charset=utf-8' });
+      const url = URL.createObjectURL(svgBlob);
       
-      // 绘制圆角矩形背景
-      ctx.fillStyle = '#dc2626';
-      ctx.beginPath();
-      const radius = 20 * scale;
-      ctx.roundRect(0, 0, size, size, radius);
-      ctx.fill();
-      
-      // 绘制美元符号 $
-      const centerX = size / 2;
-      const centerY = size / 2;
-      
-      ctx.strokeStyle = 'white';
-      ctx.fillStyle = 'white';
-      ctx.lineWidth = Math.max(2, 8 * scale);
-      ctx.lineCap = 'round';
-      ctx.lineJoin = 'round';
-      
-      // 垂直线
-      const lineWidth = 6 * scale;
-      const lineHeight = 70 * scale;
-      ctx.fillRect(centerX - lineWidth/2, centerY - lineHeight/2, lineWidth, lineHeight);
-      
-      // 上半部分的 S 曲线
-      ctx.beginPath();
-      ctx.arc(centerX, centerY - 10 * scale, 15 * scale, Math.PI * 0.7, Math.PI * 2.3, false);
-      ctx.stroke();
-      
-      // 下半部分的 S 曲线
-      ctx.beginPath();
-      ctx.arc(centerX, centerY + 10 * scale, 15 * scale, Math.PI * 0.7, Math.PI * 2.3, true);
-      ctx.stroke();
-      
-      // 小枫叶装饰（只在大尺寸显示）
-      if (size >= 32) {
-        ctx.save();
-        ctx.translate(size * 0.75, size * 0.25);
-        ctx.scale(scale * 0.15, scale * 0.15);
-        ctx.globalAlpha = 0.6;
-        
-        ctx.fillStyle = 'white';
-        ctx.beginPath();
-        ctx.moveTo(0, -40);
-        ctx.lineTo(-8, -15);
-        ctx.lineTo(-25, -15);
-        ctx.lineTo(-12, -5);
-        ctx.lineTo(-15, 10);
-        ctx.lineTo(0, 0);
-        ctx.lineTo(15, 10);
-        ctx.lineTo(12, -5);
-        ctx.lineTo(25, -15);
-        ctx.lineTo(8, -15);
-        ctx.closePath();
-        ctx.fill();
-        
-        ctx.restore();
-      }
+      img.onload = function() {
+        ctx.drawImage(img, 0, 0, size, size);
+        URL.revokeObjectURL(url);
+      };
+      img.src = url;
     }
-    
-    // 下载 Favicon
-    function downloadFavicon(canvasId, filename) {
+
+    // Draw all sizes
+    drawToCanvas('canvas16', 16);
+    drawToCanvas('canvas32', 32);
+    drawToCanvas('canvas180', 180);
+    drawToCanvas('canvas192', 192);
+
+    function downloadCanvas(canvasId, filename) {
       const canvas = document.getElementById(canvasId);
       const link = document.createElement('a');
       link.download = filename;
       link.href = canvas.toDataURL('image/png');
       link.click();
     }
-    
-    // 页面加载时绘制所有 Favicon
-    window.addEventListener('load', () => {
-      drawFavicon(document.getElementById('favicon-16'));
-      drawFavicon(document.getElementById('favicon-32'));
-      drawFavicon(document.getElementById('favicon-180'));
-      drawFavicon(document.getElementById('favicon-192'));
-    });
+
+    function download512() {
+      // Create a temporary canvas for 512x512
+      const canvas = document.createElement('canvas');
+      canvas.width = 512;
+      canvas.height = 512;
+      const ctx = canvas.getContext('2d');
+      
+      const img = new Image();
+      const svgBlob = new Blob([svgContent], { type: 'image/svg+xml;charset=utf-8' });
+      const url = URL.createObjectURL(svgBlob);
+      
+      img.onload = function() {
+        ctx.drawImage(img, 0, 0, 512, 512);
+        URL.revokeObjectURL(url);
+        
+        const link = document.createElement('a');
+        link.download = 'android-chrome-512x512.png';
+        link.href = canvas.toDataURL('image/png');
+        link.click();
+      };
+      img.src = url;
+    }
+
+    function downloadAll() {
+      setTimeout(() => downloadCanvas('canvas16', 'favicon-16x16.png'), 100);
+      setTimeout(() => downloadCanvas('canvas32', 'favicon-32x32.png'), 400);
+      setTimeout(() => downloadCanvas('canvas180', 'apple-touch-icon.png'), 700);
+      setTimeout(() => downloadCanvas('canvas192', 'android-chrome-192x192.png'), 1000);
+      setTimeout(() => download512(), 1300);
+    }
   </script>
 </body>
 </html>
