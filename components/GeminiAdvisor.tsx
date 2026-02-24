@@ -30,6 +30,21 @@ const InukshukIcon = ({ className }: { className?: string }) => (
   </svg>
 );
 
+// Detect mobile devices
+const isMobileDevice = () => {
+  return /iPhone|iPad|iPod|Android|webOS|BlackBerry|Windows Phone/i.test(navigator.userAgent);
+};
+
+// Detect iOS
+const isIOS = () => {
+  return /iPhone|iPad|iPod/i.test(navigator.userAgent);
+};
+
+// Detect Safari
+const isSafari = () => {
+  return /^((?!chrome|android).)*safari/i.test(navigator.userAgent);
+};
+
 const GeminiAdvisor: React.FC<Props> = ({ results, inputs }) => {
   const APP_URL = 'https://www.canpayinsights.ca/';
 
@@ -40,6 +55,7 @@ const GeminiAdvisor: React.FC<Props> = ({ results, inputs }) => {
   const [qrBase64, setQrBase64] = useState<string | null>(null);
   const [exporting, setExporting] = useState(false);
   const [showRRSPScenarios, setShowRRSPScenarios] = useState(false);
+  const [showSaveOptions, setShowSaveOptions] = useState(false);
   const snapshotRef = useRef<HTMLDivElement>(null);
 
   // Local tax optimization calculations
@@ -106,7 +122,7 @@ const GeminiAdvisor: React.FC<Props> = ({ results, inputs }) => {
   }, []);
 
   useEffect(() => {
-    if (previewImage) {
+    if (previewImage || showSaveOptions) {
       document.body.style.overflow = 'hidden';
       document.body.style.touchAction = 'none';
     } else {
@@ -117,7 +133,7 @@ const GeminiAdvisor: React.FC<Props> = ({ results, inputs }) => {
       document.body.style.overflow = 'auto';
       document.body.style.touchAction = 'auto';
     };
-  }, [previewImage]);
+  }, [previewImage, showSaveOptions]);
 
   const getAdvice = async () => {
     setLoading(true);
@@ -145,36 +161,128 @@ const GeminiAdvisor: React.FC<Props> = ({ results, inputs }) => {
     }
   };
 
+  // Generate image data URL
+  const generateImageDataUrl = async (): Promise<string | null> => {
+    if (!snapshotRef.current) return null;
+    
+    const options = {
+      pixelRatio: 2,
+      backgroundColor: '#0f172a',
+      width: 1000,
+      height: snapshotRef.current.scrollHeight,
+      cacheBust: true,
+      imagePlaceholder: 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII=',
+      style: { transform: 'scale(1)', left: '0', top: '0' },
+    };
+
+    // Double capture for better quality
+    await htmlToImage.toPng(snapshotRef.current, options);
+    return await htmlToImage.toPng(snapshotRef.current, options);
+  };
+
+  // Handle export - main function
   const handleExport = async () => {
-    if (!snapshotRef.current || !qrBase64) return;
+    if (!snapshotRef.current) return;
     setExporting(true);
+    
     try {
-      await new Promise((resolve) => setTimeout(resolve, 600));
+      const dataUrl = await generateImageDataUrl();
+      if (!dataUrl) {
+        throw new Error('Failed to generate image');
+      }
 
-      const options = {
-        pixelRatio: 2.5,
-        backgroundColor: '#0f172a',
-        width: 1000,
-        height: snapshotRef.current.scrollHeight,
-        cacheBust: true,
-        imagePlaceholder: 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII=',
-        style: { transform: 'scale(1)', left: '0', top: '0' },
-      };
+      // Check if Web Share API is available (best for mobile)
+      const canShare = navigator.share && navigator.canShare && navigator.canShare({ files: [new File([], '')] });
+      
+      if (canShare && isMobileDevice()) {
+        // Try native share first
+        try {
+          const response = await fetch(dataUrl);
+          const blob = await response.blob();
+          const file = new File([blob], `CanPay-Tax-Report-${inputs.province}.png`, { type: 'image/png' });
+          
+          await navigator.share({
+            files: [file],
+            title: 'CanPay Tax Report',
+            text: `My tax report for ${inputs.province}`
+          });
+          setExporting(false);
+          return;
+        } catch (shareError) {
+          console.log('Share canceled or failed, falling back to preview');
+        }
+      }
 
-      await htmlToImage.toPng(snapshotRef.current, options);
-      const dataUrl = await htmlToImage.toPng(snapshotRef.current, options);
-
-      const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
-      if (isMobile) {
+      // For mobile without share API, show options modal
+      if (isMobileDevice()) {
+        setShowSaveOptions(true);
         setPreviewImage(dataUrl);
       } else {
+        // Desktop: direct download
         download(dataUrl, `CanPay-Tax-Report-${inputs.province}.png`);
       }
     } catch (err) {
       console.error('Export error:', err);
-      setError('Failed to generate image.');
+      setError('Failed to generate image. Please try again.');
     } finally {
       setExporting(false);
+    }
+  };
+
+  // Save methods for mobile
+  const saveToPhotos = async () => {
+    if (!previewImage) return;
+    
+    try {
+      // Create a temporary link
+      const link = document.createElement('a');
+      link.href = previewImage;
+      link.download = `CanPay-Tax-Report-${inputs.province}.png`;
+      link.target = '_blank';
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+      
+      // On iOS, this often doesn't work, so show instructions
+      if (isIOS()) {
+        alert('If download didn\'t start: Long press the image below and select "Save Image"');
+      }
+    } catch (err) {
+      console.error('Save failed:', err);
+    }
+  };
+
+  const copyToClipboard = async () => {
+    if (!previewImage) return;
+    
+    try {
+      const response = await fetch(previewImage);
+      const blob = await response.blob();
+      await navigator.clipboard.write([
+        new ClipboardItem({ 'image/png': blob })
+      ]);
+      alert('Image copied! You can now paste it in Messages, Notes, or other apps.');
+    } catch (err) {
+      console.error('Copy failed:', err);
+      alert('Could not copy automatically. Please use the Share button or screenshot.');
+    }
+  };
+
+  const shareImage = async () => {
+    if (!previewImage) return;
+    
+    try {
+      const response = await fetch(previewImage);
+      const blob = await response.blob();
+      const file = new File([blob], `CanPay-Tax-Report-${inputs.province}.png`, { type: 'image/png' });
+      
+      await navigator.share({
+        files: [file],
+        title: 'CanPay Tax Report',
+        text: `My tax report for ${inputs.province} - Calculated with CanPay Insights`
+      });
+    } catch (err) {
+      console.log('Share canceled');
     }
   };
 
@@ -278,26 +386,73 @@ const GeminiAdvisor: React.FC<Props> = ({ results, inputs }) => {
         </div>
       )}
 
-      {/* MOBILE PREVIEW MODAL */}
-      {previewImage && (
+      {/* MOBILE SAVE OPTIONS MODAL */}
+      {showSaveOptions && previewImage && (
         <div className="fixed inset-0 z-[100] bg-slate-950/98 flex flex-col items-center justify-center p-4 animate-fadeIn">
           <div className="max-w-md w-full">
             <div className="flex justify-between items-center mb-4 text-white">
-              <span className="text-sm font-bold flex items-center gap-2">
-                <svg className="w-4 h-4 text-red-500" fill="currentColor" viewBox="0 0 20 20">
-                  <path d="M4 3a2 2 0 100 4h12a2 2 0 100-4H4z" />
-                  <path fillRule="evenodd" d="M3 8h14v7a2 2 0 01-2 2H5a2 2 0 01-2-2V8zm5 3a1 1 0 011-1h2a1 1 0 110 2H9a1 1 0 01-1-1z" clipRule="evenodd" />
-                </svg>
-                Long press to save report
-              </span>
-              <button onClick={() => setPreviewImage(null)} className="p-2 text-slate-400 hover:text-white bg-slate-800 rounded-full">
+              <span className="text-lg font-bold">Save Report</span>
+              <button onClick={() => { setShowSaveOptions(false); setPreviewImage(null); }} className="p-2 text-slate-400 hover:text-white bg-slate-800 rounded-full">
                 <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M6 18L18 6M6 6l12 12" />
                 </svg>
               </button>
             </div>
-            <div className="bg-white rounded-xl shadow-2xl overflow-hidden max-h-[75vh] ring-4 ring-slate-800">
+
+            {/* Preview Image */}
+            <div className="bg-white rounded-xl shadow-2xl overflow-hidden max-h-[50vh] ring-4 ring-slate-800 mb-4">
               <img src={previewImage} alt="Report Preview" className="w-full h-auto block" />
+            </div>
+
+            {/* Save Options */}
+            <div className="space-y-3">
+              {/* Share Button - Best for iOS */}
+              {navigator.share && (
+                <button
+                  onClick={shareImage}
+                  className="w-full py-4 bg-blue-600 hover:bg-blue-700 text-white rounded-xl font-bold flex items-center justify-center gap-3 transition-all"
+                >
+                  <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 20 20">
+                    <path d="M15 8a3 3 0 10-2.977-2.63l-4.94 2.47a3 3 0 100 4.319l4.94 2.47a3 3 0 10.895-1.789l-4.94-2.47a3.027 3.027 0 000-.74l4.94-2.47C13.456 7.68 14.19 8 15 8z" />
+                  </svg>
+                  Share / Open in Apps
+                  <span className="text-xs opacity-75">(Recommended)</span>
+                </button>
+              )}
+
+              {/* Save to Photos */}
+              <button
+                onClick={saveToPhotos}
+                className="w-full py-4 bg-green-600 hover:bg-green-700 text-white rounded-xl font-bold flex items-center justify-center gap-3 transition-all"
+              >
+                <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 20 20">
+                  <path fillRule="evenodd" d="M4 3a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V5a2 2 0 00-2-2H4zm12 12H4l4-8 3 6 2-4 3 6z" clipRule="evenodd" />
+                </svg>
+                Download Image
+              </button>
+
+              {/* Copy to Clipboard */}
+              <button
+                onClick={copyToClipboard}
+                className="w-full py-4 bg-slate-700 hover:bg-slate-600 text-white rounded-xl font-bold flex items-center justify-center gap-3 transition-all"
+              >
+                <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 20 20">
+                  <path d="M8 3a1 1 0 011-1h2a1 1 0 110 2H9a1 1 0 01-1-1z" />
+                  <path d="M6 3a2 2 0 00-2 2v11a2 2 0 002 2h8a2 2 0 002-2V5a2 2 0 00-2-2 3 3 0 01-3 3H9a3 3 0 01-3-3z" />
+                </svg>
+                Copy Image
+              </button>
+
+              {/* Manual Instructions */}
+              <div className="bg-slate-800 p-4 rounded-xl text-sm text-slate-300">
+                <p className="font-semibold mb-2">💡 Tip:</p>
+                <p>If the buttons don't work:</p>
+                <ol className="list-decimal list-inside mt-1 space-y-1 text-slate-400">
+                  <li>Long press the image above</li>
+                  <li>Select "Save Image" or "Copy"</li>
+                  <li>Or take a screenshot</li>
+                </ol>
+              </div>
             </div>
           </div>
         </div>
@@ -419,7 +574,6 @@ const TaxOptimizationPanel: React.FC<TaxOptimizationPanelProps> = ({
 }) => {
   const { rrsp, tfsa, fhsa, otherStrategies, summary } = optimization;
 
-  // Filter high priority strategies
   const highPriorityStrategies = otherStrategies.filter(
     s => s.suitability === 'highly-recommended'
   );
