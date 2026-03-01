@@ -1,5 +1,5 @@
 
-import React, { useState, useMemo } from 'react';
+import React, { useState, useMemo, useEffect } from 'react';
 import { Analytics } from '@vercel/analytics/react';
 import { SpeedInsights } from '@vercel/speed-insights/react';
 import InputSection from './components/InputSection';
@@ -8,6 +8,7 @@ import TimesheetInput from './components/TimesheetInput';
 import ModeSelector from './components/ModeSelector';
 import ResultsSection from './components/ResultsSection';
 import GeminiAdvisor from './components/GeminiAdvisor';
+import PrivacyPolicy from './components/PrivacyPolicy';
 import SEO from './components/SEO';
 import { SalaryInputs, Province, CalculationMode, AnnualSalaryInputs, PayFrequency, TimesheetInputs } from './types';
 import { calculateSalary, calculateFromAnnualSalary, calculateFromTimesheet } from './utils/taxEngine';
@@ -62,9 +63,33 @@ const InukshukIcon = ({ className }: { className?: string }) => (
   </svg>
 );
  
+type AppPage = 'home' | 'calculator' | 'privacy';
+
 const App: React.FC = () => {
-  // 页面状态：'home' = 模式选择页, 'calculator' = 计算页
-  const [currentPage, setCurrentPage] = useState<'home' | 'calculator'>('home');
+  // 页面状态：'home' = 模式选择页, 'calculator' = 计算页, 'privacy' = 隐私政策页
+  const [currentPage, setCurrentPage] = useState<AppPage>('home');
+
+  // 检测 URL 路径来设置初始页面（支持 /privacy 路由）
+  useEffect(() => {
+    const path = window.location.pathname;
+    if (path === '/privacy' || path === '/privacy/') {
+      setCurrentPage('privacy');
+    }
+  }, []);
+
+  // 当页面状态改变时，更新浏览器 URL（不刷新页面）
+  useEffect(() => {
+    if (currentPage === 'privacy') {
+      if (window.location.pathname !== '/privacy') {
+        window.history.pushState({}, '', '/privacy');
+      }
+    } else if (currentPage === 'home') {
+      if (window.location.pathname !== '/') {
+        window.history.pushState({}, '', '/');
+      }
+    }
+    // calculator 页面保持当前路径或设为根路径
+  }, [currentPage]);
   
   // 计算模式状态
   const [mode, setMode] = useState<CalculationMode>(CalculationMode.SIMPLE);
@@ -87,6 +112,11 @@ const App: React.FC = () => {
   // 返回首页
   const handleBackToHome = () => {
     setCurrentPage('home');
+  };
+
+  // 跳转到隐私政策页
+  const handleGoToPrivacy = () => {
+    setCurrentPage('privacy');
   };
   
   // 根据模式计算结果
@@ -148,68 +178,87 @@ const App: React.FC = () => {
         </header>
       )}
 
-      <main className="max-w-6xl mx-auto px-4 py-8" role="main" aria-label="Payroll Calculator">
-        {/* Home Page - Mode Selection */}
-        {currentPage === 'home' && (
-          <div className="min-h-[80vh] flex items-center justify-center">
-            <div className="w-full max-w-4xl">
-              <ModeSelector onModeSelect={handleModeSelect} />
+      {currentPage !== 'privacy' && (
+        <main className="max-w-6xl mx-auto px-4 py-8" role="main" aria-label="Payroll Calculator">
+          {/* Home Page - Mode Selection */}
+          {currentPage === 'home' && (
+            <div className="min-h-[80vh] flex items-center justify-center">
+              <div className="w-full max-w-4xl">
+                <ModeSelector onModeSelect={handleModeSelect} />
+              </div>
             </div>
-          </div>
-        )}
-        
-        {/* Calculator Page */}
-        {currentPage === 'calculator' && (
-          <div className="flex flex-col lg:flex-row gap-8">
-            
-            {/* Left Column: Inputs */}
-            <div className="w-full lg:w-5/12 xl:w-1/3">
-              {mode === CalculationMode.SIMPLE && (
-                <InputSection inputs={simpleInputs} setInputs={setSimpleInputs} />
-              )}
+          )}
+          
+          {/* Calculator Page */}
+          {currentPage === 'calculator' && (
+            <div className="flex flex-col lg:flex-row gap-8">
               
-              {mode === CalculationMode.ANNUAL && (
-                <AnnualSalaryInput inputs={annualInputs} setInputs={setAnnualInputs} />
-              )}
+              {/* Left Column: Inputs */}
+              <div className="w-full lg:w-5/12 xl:w-1/3">
+                {mode === CalculationMode.SIMPLE && (
+                  <InputSection inputs={simpleInputs} setInputs={setSimpleInputs} />
+                )}
+                
+                {mode === CalculationMode.ANNUAL && (
+                  <AnnualSalaryInput inputs={annualInputs} setInputs={setAnnualInputs} />
+                )}
+                
+                {mode === CalculationMode.TIMESHEET && (
+                  <TimesheetInput inputs={timesheetInputs} setInputs={setTimesheetInputs} />
+                )}
+              </div>
+
+              {/* Right Column: Results */}
+              <div className="w-full lg:w-7/12 xl:w-2/3">
+                <ResultsSection results={results} provinceName={currentProvince} />
+                <GeminiAdvisor results={results} inputs={currentInputs as SalaryInputs} />
+              </div>
               
-              {mode === CalculationMode.TIMESHEET && (
-                <TimesheetInput inputs={timesheetInputs} setInputs={setTimesheetInputs} />
-              )}
             </div>
+          )}
+        </main>
+      )}
 
-            {/* Right Column: Results */}
-            <div className="w-full lg:w-7/12 xl:w-2/3">
-              <ResultsSection results={results} provinceName={currentProvince} />
-              <GeminiAdvisor results={results} inputs={currentInputs as SalaryInputs} />
-            </div>
-            
+      {/* Privacy Policy Page */}
+      {currentPage === 'privacy' && (
+        <PrivacyPolicy onBackToHome={handleBackToHome} />
+      )}
+
+      {/* Footer - Only show on home and calculator pages */}
+      {currentPage !== 'privacy' && (
+        <footer className="text-center text-slate-400 text-xs py-8 space-y-4" role="contentinfo">
+          <p>Calculations are estimates based on 2025/2026 tax brackets and provincial employment standards.</p>
+          
+          <div className="flex justify-center items-center gap-4">
+            <a 
+              href={DONATION_URL}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex items-center gap-2 bg-[#FFDD00] text-slate-900 px-6 py-2.5 rounded-full font-bold shadow-md hover:bg-[#FFEA00] hover:shadow-lg transition-all transform hover:-translate-y-1 group decoration-none"
+            >
+              <span className="text-xl group-hover:rotate-12 transition-transform duration-300">☕</span>
+              <span>Buy me a double-double</span>
+            </a>
           </div>
-        )}
-      </main>
 
-      {/* Footer */}
-      <footer className="text-center text-slate-400 text-xs py-8 space-y-4" role="contentinfo">
-        <p>Calculations are estimates based on 2025/2026 tax brackets and provincial employment standards.</p>
-        
-        <div className="flex justify-center items-center gap-4">
-          <a 
-            href={DONATION_URL}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="flex items-center gap-2 bg-[#FFDD00] text-slate-900 px-6 py-2.5 rounded-full font-bold shadow-md hover:bg-[#FFEA00] hover:shadow-lg transition-all transform hover:-translate-y-1 group decoration-none"
-          >
-            <span className="text-xl group-hover:rotate-12 transition-transform duration-300">☕</span>
-            <span>Buy me a double-double</span>
-          </a>
-        </div>
-
-        <div className="mt-2 flex justify-center gap-2">
-           <span className="w-2 h-2 rounded-full bg-red-400 opacity-50"></span>
-           <span className="w-2 h-2 rounded-full bg-red-400 opacity-50"></span>
-           <span className="w-2 h-2 rounded-full bg-red-400 opacity-50"></span>
-        </div>
-        <p className="mt-4 opacity-75">Proudly Canadian 🇨🇦 Built for Workers.</p>
-      </footer>
+          <div className="mt-2 flex justify-center gap-2">
+            <span className="w-2 h-2 rounded-full bg-red-400 opacity-50"></span>
+            <span className="w-2 h-2 rounded-full bg-red-400 opacity-50"></span>
+            <span className="w-2 h-2 rounded-full bg-red-400 opacity-50"></span>
+          </div>
+          
+          <div className="flex justify-center items-center gap-4 mt-4">
+            <button 
+              onClick={handleGoToPrivacy}
+              className="text-slate-400 hover:text-red-600 transition-colors underline underline-offset-2"
+            >
+              Privacy Policy
+            </button>
+          </div>
+          
+          <p className="mt-4 opacity-75">Proudly Canadian 🇨🇦 Built for Workers.</p>
+        </footer>
+      )}
       
       {/* Vercel Analytics & Speed Insights */}
       <Analytics />
