@@ -267,6 +267,18 @@ export const calculateSalary = (inputs: SalaryInputs): CalculationResult => {
 // ANNUAL SALARY CALCULATOR
 // ============================================
 
+const getPeriodsPerYear = (frequency: PayFrequency): number => {
+  switch (frequency) {
+    case PayFrequency.DAILY: return 365;
+    case PayFrequency.WEEKLY: return 52;
+    case PayFrequency.BI_WEEKLY: return 26;
+    case PayFrequency.SEMI_MONTHLY: return 24;
+    case PayFrequency.MONTHLY: return 12;
+    case PayFrequency.QUARTERLY: return 4;
+    default: return 26;
+  }
+};
+
 export const calculateFromAnnualSalary = (inputs: AnnualSalaryInputs): CalculationResult => {
   const { annualSalary, province, payFrequency } = inputs;
   
@@ -286,22 +298,14 @@ export const calculateFromAnnualSalary = (inputs: AnnualSalaryInputs): Calculati
   const totalDeductionsAnnual = totalTaxAnnual + cppResult.total + eiAnnual;
   const netPayAnnual = annualGross - totalDeductionsAnnual;
   
-  // Convert to pay period
-  const getPeriodsPerYear = (frequency: PayFrequency): number => {
-    switch (frequency) {
-      case PayFrequency.DAILY: return 365;
-      case PayFrequency.WEEKLY: return 52;
-      case PayFrequency.BI_WEEKLY: return 26;
-      case PayFrequency.SEMI_MONTHLY: return 24;
-      case PayFrequency.MONTHLY: return 12;
-      case PayFrequency.QUARTERLY: return 4;
-      default: return 26;
-    }
-  };
-  
+  // Convert to selected pay period
   const periodsPerYear = getPeriodsPerYear(payFrequency);
   const grossPayPerPeriod = annualGross / periodsPerYear;
   const netPayPerPeriod = netPayAnnual / periodsPerYear;
+  
+  // Calculate bi-weekly equivalent for display consistency
+  const grossPayBiWeekly = annualGross / 26;
+  const netPayBiWeekly = netPayAnnual / 26;
   
   return {
     regularHours: 0,
@@ -309,12 +313,13 @@ export const calculateFromAnnualSalary = (inputs: AnnualSalaryInputs): Calculati
     overtimeHours20: 0,
     shiftPremiumHours: 0,
     
-    grossPayBiWeekly: annualGross / 26,
-    federalTax: taxResult.federalTax / 26,
-    provincialTax: taxResult.provincialTax / 26,
-    cppDeduction: cppResult.total / 26,
-    eiDeduction: eiAnnual / 26,
-    netPayBiWeekly: netPayAnnual / 26,
+    // Use per-period values for the main display
+    grossPayBiWeekly: grossPayPerPeriod,
+    federalTax: taxResult.federalTax / periodsPerYear,
+    provincialTax: taxResult.provincialTax / periodsPerYear,
+    cppDeduction: cppResult.total / periodsPerYear,
+    eiDeduction: eiAnnual / periodsPerYear,
+    netPayBiWeekly: netPayPerPeriod,
     
     grossPayAnnual: annualGross,
     netPayAnnual,
@@ -457,16 +462,4 @@ const getWeekKey = (dateStr: string): string => {
   const weekNumber = Math.ceil((((thursday.getTime() - firstThursday.getTime()) / 86400000) + 1) / 7);
   
   return `${year}-W${String(weekNumber).padStart(2, '0')}`;
-};
-
-const getPeriodsPerYear = (frequency: PayFrequency): number => {
-  switch (frequency) {
-    case PayFrequency.DAILY: return 365;
-    case PayFrequency.WEEKLY: return 52;
-    case PayFrequency.BI_WEEKLY: return 26;
-    case PayFrequency.SEMI_MONTHLY: return 24;
-    case PayFrequency.MONTHLY: return 12;
-    case PayFrequency.QUARTERLY: return 4;
-    default: return 26;
-  }
 };

@@ -1,5 +1,5 @@
 import React from 'react';
-import { CalculationResult } from '../types';
+import { CalculationResult, Province } from '../types';
 import { PieChart, Pie, Cell, Tooltip, ResponsiveContainer, Legend } from 'recharts';
 
 interface Props {
@@ -113,6 +113,25 @@ const ResultsSection: React.FC<Props> = ({ results, provinceName }) => {
         </div>
       </div>
 
+      {/* Quebec Warning */}
+      {provinceName === Province.QC && (
+        <div className="bg-yellow-50 border-l-4 border-yellow-400 p-4 rounded-r-lg">
+          <div className="flex items-start gap-3">
+            <svg className="w-5 h-5 text-yellow-600 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
+            </svg>
+            <div>
+              <p className="text-sm font-semibold text-yellow-800">Quebec Calculation Estimate</p>
+              <p className="text-xs text-yellow-700 mt-1">
+                Quebec uses QPP (Québec Pension Plan) instead of CPP, with different contribution rates. 
+                This calculator provides an estimate. For precise Quebec calculations, please use 
+                <a href="https://www.revenuquebec.ca/" target="_blank" rel="noopener noreferrer" className="underline hover:text-yellow-900"> Revenu Québec</a>.
+              </p>
+            </div>
+          </div>
+        </div>
+      )}
+
       {/* Detail Breakdown */}
       <div className="bg-white rounded-xl shadow-sm border border-slate-200 p-6">
         <h3 className="text-lg font-bold text-slate-800 mb-6">{payPeriodLabel} Paycheck Breakdown</h3>
@@ -147,7 +166,11 @@ const ResultsSection: React.FC<Props> = ({ results, provinceName }) => {
             {/* Center Text */}
             <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-center pointer-events-none z-0">
               <span className="text-xs text-slate-400 font-bold uppercase">Net Pay</span>
-              <p className="text-slate-800 font-bold">{Math.round((results.netPayBiWeekly / results.grossPayBiWeekly) * 100)}%</p>
+              <p className="text-slate-800 font-bold">
+                {results.grossPayBiWeekly > 0 
+                  ? Math.round((results.netPayBiWeekly / results.grossPayBiWeekly) * 100) 
+                  : 0}%
+              </p>
             </div>
           </div>
 
@@ -159,7 +182,11 @@ const ResultsSection: React.FC<Props> = ({ results, provinceName }) => {
                <div className="space-y-2">
                  <div className="flex justify-between text-slate-700">
                    <span>Regular Pay ({results.regularHours.toFixed(1)}h)</span>
-                   <span className="font-medium">{formatCurrency((results.regularHours * (results.grossPayBiWeekly / totalHours)) || 0)}</span>
+                   <span className="font-medium">
+                     {formatCurrency(totalHours > 0 
+                       ? (results.regularHours * (results.grossPayBiWeekly / totalHours)) 
+                       : 0)}
+                   </span>
                  </div>
                  {results.overtimeHours15 > 0 && (
                    <div className="flex justify-between text-amber-600">

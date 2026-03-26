@@ -100,8 +100,45 @@ const TimesheetInput: React.FC<Props> = ({ inputs, setInputs }) => {
     return (paidMinutes / 60).toFixed(2);
   };
 
+  // Validate time entry
+  const validateEntry = (checkIn: string, checkOut: string, breakMinutes: number): string | null => {
+    const [inH, inM] = checkIn.split(':').map(Number);
+    const [outH, outM] = checkOut.split(':').map(Number);
+    
+    let checkInMinutes = inH * 60 + inM;
+    let checkOutMinutes = outH * 60 + outM;
+    
+    // Handle overnight shifts (checkout next day)
+    if (checkOutMinutes < checkInMinutes) {
+      checkOutMinutes += 24 * 60;
+    }
+    
+    const workMinutes = checkOutMinutes - checkInMinutes;
+    
+    if (workMinutes <= 0) {
+      return 'Check-out time must be after check-in time';
+    }
+    
+    if (breakMinutes >= workMinutes) {
+      return 'Break time cannot exceed or equal work duration';
+    }
+    
+    if (breakMinutes < 0) {
+      return 'Break time cannot be negative';
+    }
+    
+    return null;
+  };
+
   // Add new entry
   const handleAddEntry = async () => {
+    // Validate time entry
+    const error = validateEntry(newEntry.checkIn, newEntry.checkOut, newEntry.unpaidBreakMinutes);
+    if (error) {
+      alert(error);
+      return;
+    }
+
     const entry: TimesheetEntry = {
       id: `${Date.now()}-${Math.random().toString(36).substr(2, 9)}`,
       date: selectedDate,

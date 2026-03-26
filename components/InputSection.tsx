@@ -59,8 +59,9 @@ const InputSection: React.FC<Props> = ({ inputs, setInputs }) => {
               type="number" 
               inputMode="decimal"
               step="0.01"
+              min="0"
               className="w-full p-3.5 pl-10 bg-white text-slate-900 border border-slate-300 rounded-lg focus:ring-2 focus:ring-red-500 focus:outline-none font-bold text-lg shadow-sm"
-              value={inputs.hourlyWage === 0 && (inputs.hourlyWage as any) !== 0 ? '' : inputs.hourlyWage}
+              value={inputs.hourlyWage || ''}
               onFocus={(e) => e.target.select()} // 点击自动全选，方便覆盖
               onChange={(e) => handleWageChange(e.target.value)}
               placeholder="0.00"

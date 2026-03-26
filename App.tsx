@@ -10,6 +10,8 @@ import ResultsSection from './components/ResultsSection';
 import GeminiAdvisor from './components/GeminiAdvisor';
 import PrivacyPolicy from './components/PrivacyPolicy';
 import SEO from './components/SEO';
+import BlogList from './src/content/components/BlogList';
+import ArticleView from './src/content/components/ArticleView';
 import { SalaryInputs, Province, CalculationMode, AnnualSalaryInputs, PayFrequency, TimesheetInputs } from './types';
 import { calculateSalary, calculateFromAnnualSalary, calculateFromTimesheet } from './utils/taxEngine';
 
@@ -47,41 +49,39 @@ const DEFAULT_TIMESHEET_INPUTS: TimesheetInputs = {
   entries: []
 };
 
-const InukshukIcon = ({ className }: { className?: string }) => (
-  <svg viewBox="0 0 24 24" fill="currentColor" className={className}>
-    {/* Head */}
-    <rect x="10" y="2" width="4" height="3" rx="0.5" />
-    {/* Arms */}
-    <path d="M4 6h16a1 1 0 0 1 1 1v2a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V7a1 1 0 0 1 1-1z" />
-    {/* Torso */}
-    <rect x="9" y="10" width="6" height="4" rx="0.5" />
-    {/* Hips */}
-    <path d="M5 14h14a1 1 0 0 1 1 1v2a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1v-2a1 1 0 0 1 1-1z" />
-    {/* Legs */}
-    <rect x="7" y="18" width="3" height="4" rx="0.5" />
-    <rect x="14" y="18" width="3" height="4" rx="0.5" />
-  </svg>
-);
- 
-type AppPage = 'home' | 'calculator' | 'privacy';
+type AppPage = 'home' | 'calculator' | 'privacy' | 'blog';
 
 const App: React.FC = () => {
-  // 页面状态：'home' = 模式选择页, 'calculator' = 计算页, 'privacy' = 隐私政策页
+  // Page states: 'home' = mode selection, 'calculator' = calculator, 'privacy' = privacy policy, 'blog' = blog
   const [currentPage, setCurrentPage] = useState<AppPage>('home');
+  const [currentArticleSlug, setCurrentArticleSlug] = useState<string | null>(null);
 
-  // 检测 URL 路径来设置初始页面（支持 /privacy 路由）
+  // Detect URL path for initial page (supports /privacy and /blog routes)
   useEffect(() => {
     const path = window.location.pathname;
     if (path === '/privacy' || path === '/privacy/') {
       setCurrentPage('privacy');
+    } else if (path.startsWith('/blog/')) {
+      const slug = path.replace('/blog/', '');
+      setCurrentPage('blog');
+      setCurrentArticleSlug(slug);
+    } else if (path === '/blog') {
+      setCurrentPage('blog');
+      setCurrentArticleSlug(null);
     }
   }, []);
 
-  // 当页面状态改变时，更新浏览器 URL（不刷新页面）
+  // Update browser URL when page state changes (no page refresh)
   useEffect(() => {
     if (currentPage === 'privacy') {
       if (window.location.pathname !== '/privacy') {
         window.history.pushState({}, '', '/privacy');
+      }
+    } else if (currentPage === 'blog') {
+      if (currentArticleSlug) {
+        window.history.pushState({}, '', `/blog/${currentArticleSlug}`);
+      } else {
+        window.history.pushState({}, '', '/blog');
       }
     } else if (currentPage === 'home') {
       if (window.location.pathname !== '/') {
@@ -89,37 +89,50 @@ const App: React.FC = () => {
       }
     }
     // calculator 页面保持当前路径或设为根路径
-  }, [currentPage]);
+  }, [currentPage, currentArticleSlug]);
   
-  // 计算模式状态
+  // Calculation mode state
   const [mode, setMode] = useState<CalculationMode>(CalculationMode.SIMPLE);
   
-  // 简易估算输入
+  // Simple estimate inputs
   const [simpleInputs, setSimpleInputs] = useState<SalaryInputs>(DEFAULT_SIMPLE_INPUTS);
   
-  // 年薪倒推输入
+  // Annual salary inputs
   const [annualInputs, setAnnualInputs] = useState<AnnualSalaryInputs>(DEFAULT_ANNUAL_INPUTS);
   
-  // Timesheet 输入
+  // Timesheet inputs
   const [timesheetInputs, setTimesheetInputs] = useState<TimesheetInputs>(DEFAULT_TIMESHEET_INPUTS);
   
-  // 选择模式并进入计算页
+  // Select mode and enter calculator
   const handleModeSelect = (selectedMode: CalculationMode) => {
     setMode(selectedMode);
     setCurrentPage('calculator');
   };
   
-  // 返回首页
+  // Return to home
   const handleBackToHome = () => {
     setCurrentPage('home');
+    setCurrentArticleSlug(null);
   };
 
-  // 跳转到隐私政策页
+  // Go to privacy page
   const handleGoToPrivacy = () => {
     setCurrentPage('privacy');
   };
-  
-  // 根据模式计算结果
+
+  // Go to blog
+  const handleGoToBlog = () => {
+    setCurrentPage('blog');
+    setCurrentArticleSlug(null);
+  };
+
+  // Select article
+  const handleSelectArticle = (slug: string) => {
+    setCurrentArticleSlug(slug);
+    window.scrollTo(0, 0);
+  };
+
+  // Calculate results based on mode
   const results = useMemo(() => {
     switch (mode) {
       case CalculationMode.SIMPLE:
@@ -133,21 +146,21 @@ const App: React.FC = () => {
     }
   }, [mode, simpleInputs, annualInputs, timesheetInputs]);
 
-  // 获取当前输入的省份（用于 GeminiAdvisor）
+  // Get current province (for GeminiAdvisor)
   const currentProvince = mode === CalculationMode.ANNUAL 
     ? annualInputs.province 
     : mode === CalculationMode.TIMESHEET
     ? timesheetInputs.province
     : simpleInputs.province;
 
-  // 获取当前输入对象（用于 GeminiAdvisor）
+  // Get current inputs (for GeminiAdvisor)
   const currentInputs = mode === CalculationMode.ANNUAL
-    ? { province: annualInputs.province, hourlyWage: annualInputs.annualSalary / 2080 } // 简化
+    ? { province: annualInputs.province, hourlyWage: annualInputs.annualSalary / 2080 }
     : mode === CalculationMode.TIMESHEET
     ? { province: timesheetInputs.province, hourlyWage: timesheetInputs.hourlyWage }
     : simpleInputs;
 
-  // 已绑定您的收款链接
+  // Donation URL
   const DONATION_URL = "https://www.buymeacoffee.com/canpay"; 
  
   return (
@@ -155,36 +168,94 @@ const App: React.FC = () => {
       {/* SEO Component */}
       <SEO />
       
-      {/* Header - Only show on calculator page */}
-      {currentPage === 'calculator' && (
+      {/* Header */}
+      {(currentPage === 'calculator' || currentPage === 'blog') && (
         <header className="bg-white border-b border-red-100 sticky top-0 z-30 shadow-sm" role="banner">
-          <div className="max-w-6xl mx-auto px-4 py-4 flex items-center justify-between">
-            <div className="flex items-center gap-3">
-              <div className="w-10 h-10 bg-red-600 rounded-lg flex items-center justify-center text-white shadow-red-200 shadow-lg hover:scale-105 transition-transform">
-                <InukshukIcon className="w-7 h-7" />
-              </div>
-              <h1 className="text-xl font-bold text-slate-800 tracking-tight">CanPay <span className="text-red-600 font-light">Insights</span></h1>
-            </div>
+          <div className="max-w-6xl mx-auto px-4 py-3 flex items-center justify-between">
             <button 
               onClick={handleBackToHome}
-              className="flex items-center gap-2 px-4 py-2 bg-slate-100 hover:bg-slate-200 text-slate-700 rounded-lg transition-all text-sm font-medium"
+              className="flex items-center gap-3 hover:opacity-80 transition-opacity"
             >
-              <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M10 19l-7-7m0 0l7-7m-7 7h18" />
-              </svg>
-              Back to Home
+              <div className="w-10 h-10 rounded-lg flex items-center justify-center overflow-hidden bg-red-600 shadow-red-200 shadow-lg">
+                <img src="/logo.png" alt="CanPay" className="w-8 h-8 object-contain" />
+              </div>
+              <h1 className="text-xl font-bold text-slate-800 tracking-tight hidden sm:block">CanPay <span className="text-red-600 font-light">Insights</span></h1>
             </button>
+            
+            <div className="flex items-center gap-2">
+              {currentPage === 'calculator' && (
+                <button 
+                  onClick={handleGoToBlog}
+                  className="flex items-center gap-2 px-4 py-2 bg-slate-100 hover:bg-slate-200 text-slate-700 rounded-lg transition-all text-sm font-medium mr-2"
+                >
+                  <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 20H5a2 2 0 01-2-2V6a2 2 0 012-2h10a2 2 0 012 2v1m2 13a2 2 0 01-2-2V7m2 13a2 2 0 002-2V9.5a2.5 2.5 0 00-2.5-2.5H14" />
+                  </svg>
+                  Tax Guides
+                </button>
+              )}
+              <button 
+                onClick={handleBackToHome}
+                className="flex items-center gap-2 px-4 py-2 bg-slate-100 hover:bg-slate-200 text-slate-700 rounded-lg transition-all text-sm font-medium"
+              >
+                <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 19l-7-7m0 0l7-7m-7 7h18" />
+                </svg>
+                Back
+              </button>
+            </div>
           </div>
         </header>
       )}
 
-      {currentPage !== 'privacy' && (
+      {/* Main Content */}
+      {currentPage === 'blog' ? (
+        currentArticleSlug ? (
+          <ArticleView 
+            slug={currentArticleSlug} 
+            onBack={() => setCurrentArticleSlug(null)} 
+          />
+        ) : (
+          <BlogList onSelectArticle={handleSelectArticle} />
+        )
+      ) : currentPage !== 'privacy' && (
         <main className="max-w-6xl mx-auto px-4 py-8" role="main" aria-label="Payroll Calculator">
           {/* Home Page - Mode Selection */}
           {currentPage === 'home' && (
-            <div className="min-h-[80vh] flex items-center justify-center">
+            <div className="min-h-[80vh] flex flex-col items-center justify-center">
+              {/* Logo Section */}
+              <div className="text-center mb-8">
+                <div className="w-24 h-24 mx-auto mb-4 rounded-2xl overflow-hidden bg-red-600 shadow-red-200 shadow-xl flex items-center justify-center">
+                  <img src="/logo.png" alt="CanPay Insights" className="w-20 h-20 object-contain" />
+                </div>
+                <h1 className="text-4xl md:text-5xl font-bold text-slate-900 mb-2">
+                  CanPay <span className="text-red-600 font-light">Insights</span>
+                </h1>
+                <p className="text-slate-500 text-lg">Canadian Payroll Calculator & Tax Guides</p>
+              </div>
+
               <div className="w-full max-w-4xl">
                 <ModeSelector onModeSelect={handleModeSelect} />
+              </div>
+
+              {/* Blog CTA */}
+              <div className="mt-12 text-center">
+                <div className="inline-flex items-center gap-3 bg-white px-6 py-4 rounded-xl shadow-sm border border-slate-200">
+                  <div className="w-10 h-10 bg-red-100 rounded-lg flex items-center justify-center">
+                    <svg className="w-5 h-5 text-red-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
+                    </svg>
+                  </div>
+                  <div className="text-left">
+                    <p className="text-sm text-slate-500">Learn More</p>
+                    <button 
+                      onClick={handleGoToBlog}
+                      className="font-bold text-slate-800 hover:text-red-600 transition-colors"
+                    >
+                      Browse Tax Guides →
+                    </button>
+                  </div>
+                </div>
               </div>
             </div>
           )}
@@ -225,7 +296,7 @@ const App: React.FC = () => {
       )}
 
       {/* Footer - Only show on home and calculator pages */}
-      {currentPage !== 'privacy' && (
+      {currentPage !== 'privacy' && currentPage !== 'blog' && (
         <footer className="text-center text-slate-400 text-xs py-8 space-y-4" role="contentinfo">
           <p>Calculations are estimates based on 2025/2026 tax brackets and provincial employment standards.</p>
           
@@ -241,19 +312,26 @@ const App: React.FC = () => {
             </a>
           </div>
 
+          {/* Quick Links */}
+          <div className="flex justify-center items-center gap-6 mt-4">
+            <button 
+              onClick={handleGoToBlog}
+              className="text-slate-400 hover:text-red-600 transition-colors"
+            >
+              财务指南
+            </button>
+            <button 
+              onClick={handleGoToPrivacy}
+              className="text-slate-400 hover:text-red-600 transition-colors"
+            >
+              Privacy Policy
+            </button>
+          </div>
+          
           <div className="mt-2 flex justify-center gap-2">
             <span className="w-2 h-2 rounded-full bg-red-400 opacity-50"></span>
             <span className="w-2 h-2 rounded-full bg-red-400 opacity-50"></span>
             <span className="w-2 h-2 rounded-full bg-red-400 opacity-50"></span>
-          </div>
-          
-          <div className="flex justify-center items-center gap-4 mt-4">
-            <button 
-              onClick={handleGoToPrivacy}
-              className="text-slate-400 hover:text-red-600 transition-colors underline underline-offset-2"
-            >
-              Privacy Policy
-            </button>
           </div>
           
           <p className="mt-4 opacity-75">Proudly Canadian 🇨🇦 Built for Workers.</p>

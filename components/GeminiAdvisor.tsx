@@ -45,6 +45,32 @@ const isSafari = () => {
   return /^((?!chrome|android).)*safari/i.test(navigator.userAgent);
 };
 
+// Simple HTML sanitization to prevent XSS
+const sanitizeHTML = (html: string): string => {
+  // First escape HTML entities
+  let sanitized = html
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;');
+  
+  // Then restore safe formatting tags
+  // Bold: **text** or __text__ -> <b>text</b>
+  sanitized = sanitized.replace(/&lt;b&gt;(.*?)&lt;\/b&gt;/g, '<b>$1</b>');
+  sanitized = sanitized.replace(/\*\*(.*?)\*\*/g, '<b class="text-red-400">$1</b>');
+  
+  // List items
+  sanitized = sanitized.replace(/^\* (.*)$/gm, '<li class="ml-4 mb-1">$1</li>');
+  
+  // Headers (allow h3 and h4)
+  sanitized = sanitized.replace(/^# (.*)$/gm, '<h3 class="text-lg font-bold text-white mt-4 mb-2">$1</h3>');
+  sanitized = sanitized.replace(/^## (.*)$/gm, '<h4 class="text-md font-semibold text-slate-300 mt-3 mb-1">$1</h4>');
+  
+  // Paragraphs - wrap lines that don't start with special characters
+  sanitized = sanitized.replace(/^(?!<[lh]|<b)(.+)$/gm, '<p class="mb-2">$1</p>');
+  
+  return sanitized;
+};
+
 const GeminiAdvisor: React.FC<Props> = ({ results, inputs }) => {
   const APP_URL = 'https://www.canpayinsights.ca/';
 
@@ -356,11 +382,7 @@ const GeminiAdvisor: React.FC<Props> = ({ results, inputs }) => {
             <div
               className="prose prose-invert prose-sm max-w-none text-slate-200"
               dangerouslySetInnerHTML={{
-                __html: advice
-                  .replace(/\*\*(.*?)\*\*/g, '<b class="text-red-400">$1</b>')
-                  .replace(/^\* (.*)/gm, '<li class="ml-4 mb-1">$1</li>')
-                  .replace(/^# (.*)/gm, '<h3 class="text-lg font-bold text-white mt-4 mb-2">$1</h3>')
-                  .replace(/^## (.*)/gm, '<h4 class="text-md font-semibold text-slate-300 mt-3 mb-1">$1</h4>'),
+                __html: sanitizeHTML(advice),
               }}
             />
             {/* Save Report Button - Mobile Optimized */}
