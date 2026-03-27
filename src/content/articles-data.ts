@@ -491,7 +491,7 @@ const article3: Article = {
   province: "Federal",
   publishedAt: "2025-01-17",
   readTime: 14,
-  imageUrl: "https://images.unsplash.com/photo-1518471942601-7d0492430e7d?w=800&q=80",
+  imageUrl: "https://images.unsplash.com/photo-1523050854058-8df90110c9f1?w=800&q=80",
   content: `
 ## Newcomer Tax Guide 2025: Your First Year in Canada
 
@@ -2184,7 +2184,7 @@ const article10: Article = {
   province: "Federal",
   publishedAt: "2025-01-24",
   readTime: 12,
-  imageUrl: "https://images.unsplash.com/photo-1502005229766-528352261088?w=800&q=80",
+  imageUrl: "https://images.unsplash.com/photo-1483921020237-2ff51e8e4b22?w=800&q=80",
   content: `
 ## Alberta vs Ontario Taxes 2025: The Complete Comparison
 
