@@ -491,7 +491,7 @@ const article3: Article = {
   province: "Federal",
   publishedAt: "2025-01-17",
   readTime: 14,
-  imageUrl: "https://images.unsplash.com/photo-1523050854058-8df90110c9f1?w=800&q=80",
+  imageUrl: "https://images.unsplash.com/photo-1436491865332-7a61a109cc05?w=800&q=80",
   content: `
 ## Newcomer Tax Guide 2025: Your First Year in Canada
 
