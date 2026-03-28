@@ -1,5 +1,5 @@
 
-import React, { useState, useMemo, useEffect } from 'react';
+import React, { useState, useMemo, useEffect, useCallback } from 'react';
 import { Analytics } from '@vercel/analytics/react';
 import { SpeedInsights } from '@vercel/speed-insights/react';
 import InputSection from './components/InputSection';
@@ -12,8 +12,12 @@ import PrivacyPolicy from './components/PrivacyPolicy';
 import SEO from './components/SEO';
 import BlogList from './src/content/components/BlogList';
 import ArticleView from './src/content/components/ArticleView';
+import UserMenu from './components/UserMenu';
+import AuthModal from './components/AuthModal';
 import { SalaryInputs, Province, CalculationMode, AnnualSalaryInputs, PayFrequency, TimesheetInputs } from './types';
 import { calculateSalary, calculateFromAnnualSalary, calculateFromTimesheet } from './utils/taxEngine';
+import { useAuth, type OAuthProvider } from './hooks/useAuth';
+import { useUserSettings } from './hooks/useUserSettings';
 
 // Default State - 简易估算（时薪）
 const DEFAULT_SIMPLE_INPUTS: SalaryInputs = {
@@ -52,9 +56,61 @@ const DEFAULT_TIMESHEET_INPUTS: TimesheetInputs = {
 type AppPage = 'home' | 'calculator' | 'privacy' | 'blog';
 
 const App: React.FC = () => {
+  // Auth
+  const { user, isAuthenticated, signInWithOAuth } = useAuth();
+  const userId = user?.id || null;
+
+  // User settings persistence
+  const { 
+    settings, 
+    isLoading: isSettingsLoading, 
+    saveSettings, 
+    saveLastMode 
+  } = useUserSettings(userId);
+
   // Page states: 'home' = mode selection, 'calculator' = calculator, 'privacy' = privacy policy, 'blog' = blog
   const [currentPage, setCurrentPage] = useState<AppPage>('home');
   const [currentArticleSlug, setCurrentArticleSlug] = useState<string | null>(null);
+
+  // Auth modal state
+  const [showAuthModal, setShowAuthModal] = useState(false);
+
+  // Calculation mode state - restore from settings
+  const [mode, setMode] = useState<CalculationMode>('simple');
+  
+  // Simple estimate inputs - restore from settings
+  const [simpleInputs, setSimpleInputs] = useState<SalaryInputs>(DEFAULT_SIMPLE_INPUTS);
+  
+  // Annual salary inputs - restore from settings
+  const [annualInputs, setAnnualInputs] = useState<AnnualSalaryInputs>(DEFAULT_ANNUAL_INPUTS);
+  
+  // Timesheet inputs - restore from settings
+  const [timesheetInputs, setTimesheetInputs] = useState<TimesheetInputs>(DEFAULT_TIMESHEET_INPUTS);
+
+  // Load saved settings when they become available
+  useEffect(() => {
+    if (!isSettingsLoading && settings) {
+      // Restore last used mode
+      if (settings.lastMode) {
+        setMode(settings.lastMode);
+      }
+      
+      // Restore simple inputs
+      if (settings.simple) {
+        setSimpleInputs(settings.simple);
+      }
+      
+      // Restore annual inputs
+      if (settings.annual) {
+        setAnnualInputs(settings.annual);
+      }
+      
+      // Restore timesheet inputs
+      if (settings.timesheet) {
+        setTimesheetInputs(settings.timesheet);
+      }
+    }
+  }, [isSettingsLoading, settings]);
 
   // Detect URL path for initial page (supports /privacy and /blog routes)
   useEffect(() => {
@@ -91,46 +147,80 @@ const App: React.FC = () => {
     // calculator 页面保持当前路径或设为根路径
   }, [currentPage, currentArticleSlug]);
   
-  // Calculation mode state
-  const [mode, setMode] = useState<CalculationMode>(CalculationMode.SIMPLE);
-  
-  // Simple estimate inputs
-  const [simpleInputs, setSimpleInputs] = useState<SalaryInputs>(DEFAULT_SIMPLE_INPUTS);
-  
-  // Annual salary inputs
-  const [annualInputs, setAnnualInputs] = useState<AnnualSalaryInputs>(DEFAULT_ANNUAL_INPUTS);
-  
-  // Timesheet inputs
-  const [timesheetInputs, setTimesheetInputs] = useState<TimesheetInputs>(DEFAULT_TIMESHEET_INPUTS);
+  // Save inputs when they change (debounced)
+  useEffect(() => {
+    const timeoutId = setTimeout(() => {
+      if (mode === 'simple') {
+        saveSettings('simple', simpleInputs);
+      }
+    }, 1000); // 1 second debounce
+
+    return () => clearTimeout(timeoutId);
+  }, [simpleInputs, mode, saveSettings]);
+
+  useEffect(() => {
+    const timeoutId = setTimeout(() => {
+      if (mode === 'annual') {
+        saveSettings('annual', annualInputs);
+      }
+    }, 1000);
+
+    return () => clearTimeout(timeoutId);
+  }, [annualInputs, mode, saveSettings]);
+
+  useEffect(() => {
+    const timeoutId = setTimeout(() => {
+      if (mode === 'timesheet') {
+        saveSettings('timesheet', timesheetInputs);
+      }
+    }, 1000);
+
+    return () => clearTimeout(timeoutId);
+  }, [timesheetInputs, mode, saveSettings]);
+
+  // Save last mode when it changes
+  useEffect(() => {
+    saveLastMode(mode);
+  }, [mode, saveLastMode]);
   
   // Select mode and enter calculator
-  const handleModeSelect = (selectedMode: CalculationMode) => {
+  const handleModeSelect = useCallback((selectedMode: CalculationMode) => {
     setMode(selectedMode);
     setCurrentPage('calculator');
-  };
+  }, []);
   
   // Return to home
-  const handleBackToHome = () => {
+  const handleBackToHome = useCallback(() => {
     setCurrentPage('home');
     setCurrentArticleSlug(null);
-  };
+  }, []);
 
   // Go to privacy page
-  const handleGoToPrivacy = () => {
+  const handleGoToPrivacy = useCallback(() => {
     setCurrentPage('privacy');
-  };
+  }, []);
 
   // Go to blog
-  const handleGoToBlog = () => {
+  const handleGoToBlog = useCallback(() => {
     setCurrentPage('blog');
     setCurrentArticleSlug(null);
-  };
+  }, []);
 
   // Select article
-  const handleSelectArticle = (slug: string) => {
+  const handleSelectArticle = useCallback((slug: string) => {
     setCurrentArticleSlug(slug);
     window.scrollTo(0, 0);
-  };
+  }, []);
+
+  // Handle sign in
+  const handleSignIn = useCallback(async (provider: OAuthProvider) => {
+    try {
+      await signInWithOAuth(provider);
+      setShowAuthModal(false);
+    } catch (error) {
+      console.error('Sign in error:', error);
+    }
+  }, [signInWithOAuth]);
 
   // Calculate results based on mode
   const results = useMemo(() => {
@@ -183,10 +273,13 @@ const App: React.FC = () => {
             </button>
             
             <div className="flex items-center gap-2">
+              {/* User Menu / Sign In */}
+              <UserMenu />
+
               {currentPage === 'calculator' && (
                 <button 
                   onClick={handleGoToBlog}
-                  className="flex items-center gap-2 px-4 py-2 bg-slate-100 hover:bg-slate-200 text-slate-700 rounded-lg transition-all text-sm font-medium mr-2"
+                  className="hidden sm:flex items-center gap-2 px-4 py-2 bg-slate-100 hover:bg-slate-200 text-slate-700 rounded-lg transition-all text-sm font-medium mr-2"
                 >
                   <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 20H5a2 2 0 01-2-2V6a2 2 0 012-2h10a2 2 0 012 2v1m2 13a2 2 0 01-2-2V7m2 13a2 2 0 002-2V9.5a2.5 2.5 0 00-2.5-2.5H14" />
@@ -238,6 +331,26 @@ const App: React.FC = () => {
                 <ModeSelector onModeSelect={handleModeSelect} />
               </div>
 
+              {/* Sign In Prompt (if not authenticated) */}
+              {!isAuthenticated && (
+                <div className="mt-8">
+                  <button
+                    onClick={() => setShowAuthModal(true)}
+                    className="inline-flex items-center gap-2 bg-white px-6 py-3 rounded-xl shadow-sm border border-slate-200 hover:shadow-md transition-all"
+                  >
+                    <div className="w-10 h-10 bg-gradient-to-br from-red-500 to-red-600 rounded-lg flex items-center justify-center">
+                      <svg className="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
+                      </svg>
+                    </div>
+                    <div className="text-left">
+                      <p className="text-sm text-slate-500">Want to save your data?</p>
+                      <p className="font-bold text-slate-800">Sign in for free →</p>
+                    </div>
+                  </button>
+                </div>
+              )}
+
               {/* Blog CTA */}
               <div className="mt-12 text-center">
                 <div className="inline-flex items-center gap-3 bg-white px-6 py-4 rounded-xl shadow-sm border border-slate-200">
@@ -276,6 +389,41 @@ const App: React.FC = () => {
                 
                 {mode === CalculationMode.TIMESHEET && (
                   <TimesheetInput inputs={timesheetInputs} setInputs={setTimesheetInputs} />
+                )}
+
+                {/* Sign In Prompt in Calculator */}
+                {!isAuthenticated && (
+                  <div className="mt-6 bg-gradient-to-br from-red-50 to-red-100 rounded-xl p-4 border border-red-200">
+                    <div className="flex items-start gap-3">
+                      <div className="w-10 h-10 bg-white rounded-lg flex items-center justify-center flex-shrink-0 shadow-sm">
+                        <svg className="w-5 h-5 text-red-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7H5a2 2 0 00-2 2v9a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2h-3m-1 4l-3 3m0 0l-3-3m3 3V4" />
+                        </svg>
+                      </div>
+                      <div className="flex-1">
+                        <h3 className="font-bold text-slate-800 mb-1">Save your calculation</h3>
+                        <p className="text-sm text-slate-600 mb-3">
+                          Sign in to save your inputs and access them from any device.
+                        </p>
+                        <button
+                          onClick={() => setShowAuthModal(true)}
+                          className="text-sm font-semibold text-red-600 hover:text-red-700"
+                        >
+                          Sign in for free →
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                )}
+
+                {/* Sync Status (if authenticated) */}
+                {isAuthenticated && (
+                  <div className="mt-6 flex items-center justify-center gap-2 text-sm text-green-600">
+                    <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
+                      <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
+                    </svg>
+                    <span>Auto-saving to cloud</span>
+                  </div>
                 )}
               </div>
 
@@ -337,6 +485,14 @@ const App: React.FC = () => {
           <p className="mt-4 opacity-75">Proudly Canadian 🇨🇦 Built for Workers.</p>
         </footer>
       )}
+
+      {/* Auth Modal */}
+      <AuthModal
+        isOpen={showAuthModal}
+        onClose={() => setShowAuthModal(false)}
+        onSignIn={handleSignIn}
+        message="Sign in to save your calculation data and access it from any device. Your inputs will be automatically restored when you return."
+      />
       
       {/* Vercel Analytics & Speed Insights */}
       <Analytics />

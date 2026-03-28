@@ -1,11 +1,52 @@
 import React from 'react';
+import type { OAuthProvider } from '../hooks/useAuth';
 
 interface Props {
   isOpen: boolean;
   onClose: () => void;
-  onSignIn: () => void;
+  onSignIn: (provider: OAuthProvider) => void;
   message?: string;
 }
+
+// OAuth 提供商配置 (Google, Facebook, Apple)
+const OAUTH_PROVIDERS: { id: OAuthProvider; name: string; icon: React.ReactNode; bgColor: string; hoverColor: string }[] = [
+  {
+    id: 'google',
+    name: 'Continue with Google',
+    bgColor: 'bg-white',
+    hoverColor: 'hover:bg-gray-50',
+    icon: (
+      <svg className="w-5 h-5" viewBox="0 0 24 24">
+        <path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/>
+        <path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/>
+        <path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z"/>
+        <path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"/>
+      </svg>
+    ),
+  },
+  {
+    id: 'facebook',
+    name: 'Continue with Facebook',
+    bgColor: 'bg-[#1877F2]',
+    hoverColor: 'hover:bg-[#166fe5]',
+    icon: (
+      <svg className="w-5 h-5 text-white" fill="currentColor" viewBox="0 0 24 24">
+        <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
+      </svg>
+    ),
+  },
+  {
+    id: 'apple',
+    name: 'Continue with Apple',
+    bgColor: 'bg-black',
+    hoverColor: 'hover:bg-gray-900',
+    icon: (
+      <svg className="w-5 h-5 text-white" fill="currentColor" viewBox="0 0 24 24">
+        <path d="M17.05 20.28c-.98.95-2.05.88-3.08.4-1.09-.5-2.08-.48-3.24 0-1.44.62-2.2.44-3.06-.4C2.79 15.25 3.51 7.59 9.05 7.31c1.35.07 2.29.74 3.08.74s1.79-.75 3.16-.64c1.35.1 2.47.69 3.18 1.8-2.88 1.45-2.38 5.13.58 6.13-.57 1.5-1.31 2.99-2.54 4.09l.01-.01zM12.03 7.25c-.15-2.23 1.66-4.07 3.74-4.25.29 2.58-2.34 4.5-3.74 4.25z"/>
+      </svg>
+    ),
+  },
+];
 
 const AuthModal: React.FC<Props> = ({ isOpen, onClose, onSignIn, message }) => {
   if (!isOpen) return null;
@@ -26,20 +67,20 @@ const AuthModal: React.FC<Props> = ({ isOpen, onClose, onSignIn, message }) => {
 
         {/* Icon */}
         <div className="flex justify-center mb-6">
-          <div className="w-16 h-16 bg-red-100 rounded-full flex items-center justify-center">
-            <svg className="w-8 h-8 text-red-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <div className="w-16 h-16 bg-gradient-to-br from-red-500 to-red-600 rounded-full flex items-center justify-center shadow-lg">
+            <svg className="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
             </svg>
           </div>
         </div>
 
         {/* Content */}
-        <h2 className="text-2xl font-bold text-slate-900 text-center mb-4">
+        <h2 className="text-2xl font-bold text-slate-900 text-center mb-2">
           Save Your Data
         </h2>
         
         <p className="text-slate-600 text-center mb-6 leading-relaxed">
-          {message || 'Your calculation data will be lost when you close the browser. Sign in to save your work and access it from any device.'}
+          {message || 'Sign in to save your calculations and access them from any device. Your data syncs automatically.'}
         </p>
 
         {/* Benefits */}
@@ -49,8 +90,8 @@ const AuthModal: React.FC<Props> = ({ isOpen, onClose, onSignIn, message }) => {
               <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
             </svg>
             <div>
-              <p className="text-sm font-semibold text-slate-800">Save calculation history</p>
-              <p className="text-xs text-slate-600">Access all your past calculations anytime</p>
+              <p className="text-sm font-semibold text-slate-800">Auto-save your inputs</p>
+              <p className="text-xs text-slate-600">Never re-enter the same numbers</p>
             </div>
           </div>
           
@@ -60,7 +101,7 @@ const AuthModal: React.FC<Props> = ({ isOpen, onClose, onSignIn, message }) => {
             </svg>
             <div>
               <p className="text-sm font-semibold text-slate-800">Sync across devices</p>
-              <p className="text-xs text-slate-600">Continue from phone, tablet, or computer</p>
+              <p className="text-xs text-slate-600">Phone, tablet, or computer</p>
             </div>
           </div>
           
@@ -75,19 +116,32 @@ const AuthModal: React.FC<Props> = ({ isOpen, onClose, onSignIn, message }) => {
           </div>
         </div>
 
-        {/* Sign In Button */}
-        <button
-          onClick={onSignIn}
-          className="w-full bg-white border-2 border-slate-200 hover:border-slate-300 text-slate-700 font-semibold py-3 px-4 rounded-lg transition-all flex items-center justify-center gap-3 mb-4 hover:shadow-md"
-        >
-          <svg className="w-5 h-5" viewBox="0 0 24 24">
-            <path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/>
-            <path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/>
-            <path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z"/>
-            <path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"/>
-          </svg>
-          Continue with Google
-        </button>
+        {/* OAuth Buttons */}
+        <div className="space-y-3">
+          {OAUTH_PROVIDERS.map((provider) => (
+            <button
+              key={provider.id}
+              onClick={() => onSignIn(provider.id)}
+              className={`w-full ${provider.bgColor} ${provider.hoverColor} border border-slate-200 
+                ${provider.id === 'google' ? 'text-slate-700' : 'text-white'} 
+                font-semibold py-3 px-4 rounded-lg transition-all flex items-center justify-center gap-3 
+                hover:shadow-md active:scale-[0.98]`}
+            >
+              {provider.icon}
+              {provider.name}
+            </button>
+          ))}
+        </div>
+
+        {/* Divider */}
+        <div className="relative my-6">
+          <div className="absolute inset-0 flex items-center">
+            <div className="w-full border-t border-slate-200"></div>
+          </div>
+          <div className="relative flex justify-center text-xs uppercase">
+            <span className="bg-white px-2 text-slate-400">or</span>
+          </div>
+        </div>
 
         {/* Continue without sign in */}
         <button
@@ -99,7 +153,7 @@ const AuthModal: React.FC<Props> = ({ isOpen, onClose, onSignIn, message }) => {
 
         {/* Privacy note */}
         <p className="text-xs text-slate-400 text-center mt-6">
-          Free forever. No credit card required.
+          Free forever. No credit card required. We never post to your accounts.
         </p>
       </div>
     </div>
