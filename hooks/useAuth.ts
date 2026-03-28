@@ -4,6 +4,19 @@ import type { User, Session, Provider } from '@supabase/supabase-js';
 
 export type OAuthProvider = 'google' | 'facebook' | 'apple';
 
+// Parse hash params from URL
+const parseHashParams = (hash: string): Record<string, string> => {
+  const params: Record<string, string> = {};
+  const cleanHash = hash.startsWith('#') ? hash.slice(1) : hash;
+  cleanHash.split('&').forEach(pair => {
+    const [key, value] = pair.split('=');
+    if (key && value) {
+      params[decodeURIComponent(key)] = decodeURIComponent(value);
+    }
+  });
+  return params;
+};
+
 export interface AuthState {
   user: User | null;
   session: Session | null;
@@ -29,18 +42,47 @@ export const useAuth = (): AuthState & AuthActions => {
         // 检查 URL 中是否有 OAuth 回调的 token
         const hash = window.location.hash;
         if (hash && hash.includes('access_token')) {
-          console.log('Found access_token in URL, processing...');
-          // 给 Supabase 一点时间处理 URL 中的 token
-          await new Promise(resolve => setTimeout(resolve, 500));
+          console.log('Found OAuth callback in URL, extracting tokens...');
+          
+          const params = parseHashParams(hash);
+          const accessToken = params['access_token'];
+          const refreshToken = params['refresh_token'];
+          const tokenType = params['token_type'];
+          
+          console.log('Access token present:', !!accessToken);
+          console.log('Refresh token present:', !!refreshToken);
+          
+          if (accessToken) {
+            // 使用 setSession 手动设置 session
+            const { data: { session }, error: setSessionError } = await supabase.auth.setSession({
+              access_token: accessToken,
+              refresh_token: refreshToken || '',
+            });
+            
+            if (setSessionError) {
+              console.error('Error setting session:', setSessionError);
+            } else if (session) {
+              console.log('Session set successfully:', session.user?.email);
+              setSession(session);
+              setUser(session.user);
+              
+              // 清除 URL hash
+              window.history.replaceState(null, '', window.location.pathname);
+              setLoading(false);
+              return;
+            }
+          }
         }
         
+        // 正常获取 session
         const { data: { session }, error } = await supabase.auth.getSession();
         
         if (error) {
           console.error('Error getting session:', error);
+        } else {
+          console.log('Session loaded:', session?.user?.email || 'none');
         }
         
-        console.log('Session loaded:', session?.user?.email || 'none');
         setSession(session);
         setUser(session?.user ?? null);
       } catch (e) {
