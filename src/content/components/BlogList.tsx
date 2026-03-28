@@ -75,12 +75,12 @@ const BlogList: React.FC<BlogListProps> = ({ onSelectArticle }) => {
                 <p className="text-blue-100 text-sm">Compare take-home pay across all provinces</p>
               </div>
             </div>
-            <a
-              href="/compare-provinces"
+            <button
+              onClick={() => window.location.href = '/compare-provinces'}
               className="px-5 py-2 bg-white text-blue-700 font-bold rounded-lg hover:bg-blue-50 transition-colors whitespace-nowrap"
             >
               Compare Now →
-            </a>
+            </button>
           </div>
         </div>
       </div>

@@ -368,7 +368,8 @@ const App: React.FC = () => {
         currentArticleSlug ? (
           <ArticleView 
             slug={currentArticleSlug} 
-            onBack={() => setCurrentArticleSlug(null)} 
+            onBack={() => setCurrentArticleSlug(null)}
+            onSelectArticle={handleSelectArticle}
           />
         ) : (
           <BlogList onSelectArticle={handleSelectArticle} />

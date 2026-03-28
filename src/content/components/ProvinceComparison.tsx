@@ -217,9 +217,9 @@ const ProvinceComparison: React.FC<ProvinceComparisonProps> = ({ onBackToBlog })
           <div className="flex flex-wrap gap-2">
             {selectedProvinces.map(code => {
               const slugMap: Record<string, string> = {
-                'AB': 'alberta-living-guide-2025',
-                'BC': 'bc-salary-guide-2025',
-                'ON': 'ontario-salary-guide-2025',
+                'AB': 'alberta-salary-guide-2025',
+                'BC': 'british-columbia-salary-guide-2025',
+                'ON': 'ontario-toronto-ottawa-hamilton-salary-guide-2025',
                 'QC': 'quebec-salary-guide-2025',
                 'NS': 'atlantic-canada-salary-guide-2025',
                 'NB': 'atlantic-canada-salary-guide-2025',
@@ -235,6 +235,10 @@ const ProvinceComparison: React.FC<ProvinceComparisonProps> = ({ onBackToBlog })
                 <a
                   key={code}
                   href={`/blog/${slugMap[code] || ''}`}
+                  onClick={(e) => {
+                    e.preventDefault();
+                    window.location.href = `/blog/${slugMap[code] || ''}`;
+                  }}
                   className="px-4 py-2 bg-red-50 text-red-700 rounded-lg hover:bg-red-100 transition-colors text-sm font-medium"
                 >
                   {PROVINCIAL_DATA[code]?.name} Guide →

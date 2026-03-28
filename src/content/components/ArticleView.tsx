@@ -4,9 +4,10 @@ import { getArticleBySlug, allArticles, Article } from '../articles-data';
 interface ArticleViewProps {
   slug: string;
   onBack: () => void;
+  onSelectArticle?: (slug: string) => void;
 }
 
-const ArticleView: React.FC<ArticleViewProps> = ({ slug, onBack }) => {
+const ArticleView: React.FC<ArticleViewProps> = ({ slug, onBack, onSelectArticle }) => {
   const article = getArticleBySlug(slug);
   const [copied, setCopied] = React.useState(false);
 
@@ -443,7 +444,7 @@ const ArticleView: React.FC<ArticleViewProps> = ({ slug, onBack }) => {
               {relatedArticles.map((related) => (
                 <button
                   key={related.id}
-                  onClick={() => onBack()}
+                  onClick={() => onSelectArticle ? onSelectArticle(related.slug) : window.location.href = `/blog/${related.slug}`}
                   className="text-left bg-white p-4 rounded-lg border border-slate-200 hover:shadow-md transition-shadow"
                 >
                   <span className="text-xs text-red-600 font-medium uppercase">
