@@ -24,27 +24,37 @@ export const useAuth = (): AuthState & AuthActions => {
 
   // 获取当前会话（处理 OAuth 回调）
   useEffect(() => {
-    // Supabase 客户端配置了 detectSessionInUrl: true
-    // 会自动处理 URL 中的 access_token
-    
     const getSession = async () => {
-      const { data: { session }, error } = await supabase.auth.getSession();
-      
-      if (error) {
-        console.error('Error getting session:', error);
+      try {
+        // 检查 URL 中是否有 OAuth 回调的 token
+        const hash = window.location.hash;
+        if (hash && hash.includes('access_token')) {
+          console.log('Found access_token in URL, processing...');
+          // 给 Supabase 一点时间处理 URL 中的 token
+          await new Promise(resolve => setTimeout(resolve, 500));
+        }
+        
+        const { data: { session }, error } = await supabase.auth.getSession();
+        
+        if (error) {
+          console.error('Error getting session:', error);
+        }
+        
+        console.log('Session loaded:', session?.user?.email || 'none');
+        setSession(session);
+        setUser(session?.user ?? null);
+      } catch (e) {
+        console.error('Unexpected error in getSession:', e);
+      } finally {
+        setLoading(false);
       }
-      
-      console.log('Initial session:', session?.user?.email || 'none');
-      setSession(session);
-      setUser(session?.user ?? null);
-      setLoading(false);
     };
     
     getSession();
 
     // 监听认证状态变化
     const { data: { subscription } } = supabase.auth.onAuthStateChange((event, session) => {
-      console.log('Auth state changed:', event, session?.user?.email);
+      console.log('Auth event:', event, 'User:', session?.user?.email);
       setSession(session);
       setUser(session?.user ?? null);
       setLoading(false);

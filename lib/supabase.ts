@@ -7,8 +7,7 @@ export const supabase = createClient(supabaseUrl, supabaseAnonKey, {
   auth: {
     autoRefreshToken: true,
     persistSession: true,
-    detectSessionInUrl: true, // 关键：自动检测 URL 中的 session
-    flowType: 'implicit',
+    detectSessionInUrl: true,
   },
 });
 
