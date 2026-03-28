@@ -31,7 +31,7 @@ export const provinceArticles: Article[] = [
     province: 'Alberta',
     publishedAt: '2025-01-15',
     readTime: 13,
-    imageUrl: '/images/articles/alberta-salary-guide-2025.jpg',
+    imageUrl: 'https://images.unsplash.com/photo-1562592306-5496ed1b9478?w=800&q=80',
     content: `<b>Understanding Alberta's Economic Landscape</b>
 
 Alberta's economy in 2025 continues to reflect its historical dependence on oil and gas while gradually diversifying into technology, agriculture, and advanced manufacturing. This economic structure creates a unique salary environment where energy sector premiums influence compensation across industries, and where economic cycles tied to commodity prices affect employment and wages. Understanding Alberta's compensation landscape requires appreciating both its resource-based foundations and its evolving economic composition.
@@ -140,7 +140,7 @@ Technology adoption across industries will change skill requirements and compens
     province: 'Ontario',
     publishedAt: '2025-01-18',
     readTime: 14,
-    imageUrl: '/images/articles/ontario-salary-guide-2025.jpg',
+    imageUrl: 'https://images.unsplash.com/photo-1517090504-cd1b19dd3708?w=800&q=80',
     content: `<b>Ontario's Dominant Economic Position</b>
 
 Ontario maintains its position as Canada's economic engine, generating the largest share of national GDP and employing the greatest number of workers across diverse industries. The province's economy spans financial services in Toronto, government administration in Ottawa, advanced manufacturing in Hamilton and southwestern Ontario, and technology clusters across multiple cities. This economic diversity creates varied compensation landscapes that defy simple characterization, with salaries varying enormously based on location, industry, and occupation.
@@ -241,7 +241,7 @@ Overall cost of living variations within Ontario create different real purchasin
     province: 'British Columbia',
     publishedAt: '2025-01-22',
     readTime: 13,
-    imageUrl: '/images/articles/bc-salary-guide-2025.jpg',
+    imageUrl: 'https://images.unsplash.com/photo-1559511260-66a654ae982a?w=800&q=80',
     content: `<b>British Columbia's Unique Economic Character</b>
 
 British Columbia combines a vibrant coastal economy centered on Vancouver with resource-based employment in the interior and north, creating distinct regional labor markets within a single province. The technology sector has emerged as a significant economic driver, while traditional industries including forestry, mining, and fishing continue providing employment. This economic diversity creates varied compensation patterns that reflect both global market forces and local conditions.
@@ -336,7 +336,7 @@ Overall cost of living in British Columbia, particularly in Vancouver and Victor
     province: 'Quebec',
     publishedAt: '2025-01-25',
     readTime: 13,
-    imageUrl: '/images/articles/quebec-salary-guide-2025.jpg',
+    imageUrl: 'https://images.unsplash.com/photo-1533050487297-09b450131914?w=800&q=80',
     content: `<b>Quebec's Distinctive Labor Market</b>
 
 Quebec's labor market operates within a distinctive framework shaped by language policy, strong labor unions, and a unique social contract between employers, workers, and government. The province's approach to labor relations, social programs, and economic development has created compensation patterns that differ from other Canadian provinces in important ways. Understanding Quebec salaries requires appreciating both these structural factors and the province's economic evolution.
@@ -411,7 +411,7 @@ Overall cost of living in Quebec, when combined with social benefits, often prov
     province: 'Atlantic Canada',
     publishedAt: '2025-01-28',
     readTime: 12,
-    imageUrl: '/images/articles/atlantic-canada-salary-guide-2025.jpg',
+    imageUrl: 'https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=800&q=80',
     content: `<b>Atlantic Canada's Economic Evolution</b>
 
 Atlantic Canada comprising Nova Scotia, New Brunswick, Prince Edward Island, and Newfoundland and Labrador has undergone significant economic transformation in recent years. The region has moved beyond traditional resource-based and public sector employment to develop technology sectors, service industries, and advanced manufacturing. This evolution has created new employment opportunities and gradually shifted compensation patterns, though gaps with central Canada persist.
@@ -502,7 +502,7 @@ Quality of life factors including shorter commutes, less congestion, and proximi
     province: 'Prairies',
     publishedAt: '2025-02-01',
     readTime: 11,
-    imageUrl: '/images/articles/prairies-salary-guide-2025.jpg',
+    imageUrl: 'https://images.unsplash.com/photo-1500382017468-9049fed747ef?w=800&q=80',
     content: `<b>The Prairie Economy Landscape</b>
 
 Saskatchewan and Manitoba share characteristics as Prairie provinces with agriculture-based economies that have diversified into mining, manufacturing, and services. Both provinces offer lower costs of living than major Canadian cities, with housing affordability that improves real purchasing power even when nominal salaries trail national averages. The Prairie provinces appeal to those prioritizing affordability and family-friendly environments.
@@ -567,7 +567,7 @@ Overall cost of living calculations consistently show Prairie provinces offering
     province: 'Northern Territories',
     publishedAt: '2025-02-05',
     readTime: 10,
-    imageUrl: '/images/articles/northern-territories-salary-guide-2025.jpg',
+    imageUrl: 'https://images.unsplash.com/photo-1518182170546-0766bd6f6a56?w=800&q=80',
     content: `<b>Working in Canada's North</b>
 
 Canada's three territories, Yukon, Northwest Territories, and Nunavut, present unique employment environments characterized by small populations, remote locations, extreme climates, and extraordinary costs of living. Compensation in the North reflects these conditions through substantial premiums, allowances, and benefits designed to attract and retain workers willing to accept the challenges of northern living. Understanding northern compensation requires appreciating both the financial incentives and the lifestyle trade-offs they seek to offset.
@@ -640,7 +640,7 @@ Quality of life factors including community connection, outdoor recreation, and 
     province: 'National',
     publishedAt: '2025-02-08',
     readTime: 11,
-    imageUrl: '/images/articles/commuter-towns-salary-guide-2025.jpg',
+    imageUrl: 'https://images.unsplash.com/photo-1449844908441-8829872d2607?w=800&q=80',
     content: `<b>The Commuter Town Phenomenon</b>
 
 The dramatic increase in housing costs in Toronto and Vancouver has driven many workers to seek homes in surrounding communities, accepting longer commutes in exchange for affordable housing. These commuter towns have experienced significant population growth and transformation as they absorb residents priced out of major cities. Understanding the financial implications of commuter town living requires analyzing both salary considerations and the full costs of commuting.
@@ -727,7 +727,7 @@ Retirement planning should consider whether commuter town homes will meet needs 
     province: 'National',
     publishedAt: '2025-02-10',
     readTime: 10,
-    imageUrl: '/images/articles/student-cities-salary-guide-2025.jpg',
+    imageUrl: 'https://images.unsplash.com/photo-1523050854058-8df90110c9f1?w=800&q=80',
     content: `<b>Working While Studying</b>
 
 Canadian university students increasingly work during their studies to offset rising education costs and living expenses. The combination of tuition, housing, food, and other necessities creates financial pressure that employment helps address. Understanding earning opportunities and balancing work with academic demands has become essential for student financial planning.
@@ -802,7 +802,7 @@ Kingston, London, and smaller university cities offer more affordable student li
     province: 'National',
     publishedAt: '2025-02-12',
     readTime: 10,
-    imageUrl: '/images/articles/retirement-destinations-salary-guide-2025.jpg',
+    imageUrl: 'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=800&q=80',
     content: `<b>The New Retirement Reality</b>
 
 The traditional model of full retirement at age sixty-five has evolved as Canadians live longer, healthier lives and face changing economic realities. Many retirees choose to continue working in some capacity, whether for financial necessity, social connection, or personal fulfillment. Understanding income opportunities in retirement destinations helps Canadians plan for this evolving life stage.

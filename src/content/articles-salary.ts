@@ -31,7 +31,7 @@ export const salaryArticles: Article[] = [
     province: 'National',
     publishedAt: '2025-01-15',
     readTime: 12,
-    imageUrl: '/images/articles/tech-salaries-2025.jpg',
+    imageUrl: 'https://images.unsplash.com/photo-1519389950473-47ba0277781c?w=800&q=80',
     content: `<b>The State of Canadian Tech Compensation in 2025</b>
 
 Canada's technology sector has emerged as one of the most dynamic employment markets in North America, with compensation packages reflecting the intense competition for skilled professionals. As we navigate through 2025, understanding the salary landscape has become crucial for both job seekers and employers looking to remain competitive in an evolving marketplace. The technology industry in Canada has weathered global economic uncertainties and continues to demonstrate robust growth, particularly in artificial intelligence, fintech, health tech, and clean technology sectors.
@@ -108,7 +108,7 @@ Employers seeking to attract Canadian technology talent must recognize that comp
     province: 'National',
     publishedAt: '2025-01-18',
     readTime: 14,
-    imageUrl: '/images/articles/healthcare-salaries-2025.jpg',
+    imageUrl: 'https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?w=800&q=80',
     content: `<b>The Canadian Healthcare Compensation Landscape</b>
 
 Canada's healthcare system represents one of the largest employment sectors in the country, providing careers for over two million professionals who deliver essential services to Canadians from coast to coast. The compensation structures within this sector reflect both the critical importance of healthcare work and the complex interplay of public funding, union negotiations, and regional economic factors that shape salaries across provinces and territories. Understanding these compensation patterns has become increasingly important as healthcare systems confront staffing challenges, evolving patient needs, and the ongoing impacts of the global pandemic.
@@ -187,7 +187,7 @@ Northern territories offer among the highest healthcare compensation in Canada, 
     province: 'National',
     publishedAt: '2025-01-20',
     readTime: 11,
-    imageUrl: '/images/articles/remote-work-salaries-2025.jpg',
+    imageUrl: 'https://images.unsplash.com/photo-1593642632559-0c6d3fc62b89?w=800&q=80',
     content: `<b>The Permanent Shift to Remote Work</b>
 
 The transformation of remote work from an emergency response to a permanent feature of Canadian employment has fundamentally altered how organizations approach compensation, talent acquisition, and workforce management. What began as a necessary adaptation during global disruptions has evolved into a strategic choice that employers and employees alike have embraced as a defining characteristic of the modern workplace. By 2025, remote work has matured beyond experimentation into established practice, with compensation models reflecting lessons learned from years of distributed operations.
@@ -280,7 +280,7 @@ Economic conditions will influence remote work compensation as labor markets tig
     province: 'National',
     publishedAt: '2025-01-22',
     readTime: 10,
-    imageUrl: '/images/articles/entry-level-salaries-2025.jpg',
+    imageUrl: 'https://images.unsplash.com/photo-1523240795612-9a054b0db644?w=800&q=80',
     content: `<b>Navigating the Entry-Level Job Market</b>
 
 Entering the Canadian workforce in 2025 presents both opportunities and challenges for new graduates, career changers, and those beginning their professional journeys after completing education or training programs. The economic landscape has shifted considerably from the disruptions of earlier years, with labor markets tightening in some sectors while remaining competitive in others. Understanding the compensation landscape for entry-level positions has become essential for making informed career decisions and negotiating fair starting offers.
@@ -365,7 +365,7 @@ Industry and employer selection at the entry level can have lasting career impli
     province: 'National',
     publishedAt: '2025-01-25',
     readTime: 12,
-    imageUrl: '/images/articles/skilled-trades-salaries-2025.jpg',
+    imageUrl: 'https://images.unsplash.com/photo-1504917595217-d4dc5ebe6122?w=800&q=80',
     content: `<b>The Value of Skilled Trades in Modern Canada</b>
 
 Canada's skilled trades sector represents one of the most vital components of the national economy, providing essential services that keep homes functional, businesses operating, and infrastructure maintained. Despite periodic fluctuations in construction activity and economic conditions, skilled trades professionals enjoy remarkable job security and earning potential that rivals or exceeds many professions requiring university degrees. The persistent shortage of qualified tradespeople has created a seller's market for skilled labor, with wages rising steadily to attract and retain talent in essential occupations.
@@ -462,7 +462,7 @@ Northern territories offer extraordinary earning potential for skilled tradespeo
     province: 'National',
     publishedAt: '2025-01-28',
     readTime: 13,
-    imageUrl: '/images/articles/finance-banking-salaries-2025.jpg',
+    imageUrl: 'https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?w=800&q=80',
     content: `<b>The Canadian Financial Services Landscape</b>
 
 Canada's financial services sector stands as one of the most significant contributors to the national economy, employing hundreds of thousands of professionals across banking, insurance, investment management, and emerging fintech ventures. The sector's stability, sophistication, and global reach have created diverse career opportunities with compensation packages that vary dramatically based on role complexity, performance, and the specific segment of the industry. Understanding these compensation structures is essential for anyone considering or advancing within finance careers.
@@ -555,7 +555,7 @@ Treasury professionals manage corporate cash, investments, and financial risk, e
     province: 'National',
     publishedAt: '2025-02-01',
     readTime: 12,
-    imageUrl: '/images/articles/public-private-sector-pay-2025.jpg',
+    imageUrl: 'https://images.unsplash.com/photo-1556761175-5973dc0f32e7?w=800&q=80',
     content: `<b>Understanding Sector Compensation Differences</b>
 
 The choice between public and private sector employment represents one of the most significant career decisions facing Canadian professionals, with compensation considerations playing a central role in this choice. The comparison between sectors extends far beyond simple salary comparisons to encompass benefits, pension provisions, job security, work-life balance, and long-term earning potential. Understanding these multifaceted differences enables informed career decisions aligned with individual priorities and financial goals.
@@ -638,7 +638,7 @@ Individual risk tolerance and career priorities ultimately determine which secto
     province: 'National',
     publishedAt: '2025-02-05',
     readTime: 10,
-    imageUrl: '/images/articles/minimum-wage-canada-2025.jpg',
+    imageUrl: 'https://images.unsplash.com/photo-1554224155-6726b3ff858f?w=800&q=80',
     content: `<b>The Foundation of Canadian Wage Standards</b>
 
 Minimum wage policy in Canada operates primarily at the provincial and territorial level, creating a patchwork of wage floors that vary considerably across the country. These minimum standards establish the lowest legal compensation that employers can provide to workers, serving both as protection against exploitative labor practices and as instruments of economic and social policy. Understanding current minimum wage rates and their relationship to living costs has become increasingly important as debates about income adequacy and economic inequality continue to shape public discourse.
@@ -727,7 +727,7 @@ The relationship between minimum wage policy and broader social support systems 
     province: 'National',
     publishedAt: '2025-02-08',
     readTime: 11,
-    imageUrl: '/images/articles/executive-compensation-2025.jpg',
+    imageUrl: 'https://images.unsplash.com/photo-1560472354-b33ff0c44a43?w=800&q=80',
     content: `<b>The Landscape of Executive Compensation</b>
 
 Executive compensation in Canada represents a complex and often controversial aspect of corporate governance, with pay packages for senior leaders drawing scrutiny from shareholders, regulators, and the public. The design and disclosure of executive pay has evolved considerably, with increased transparency requirements, shareholder advisory votes, and governance guidelines shaping how Canadian companies reward their top leaders. Understanding executive compensation requires examining not just the headline figures but the structures and performance conditions that determine actual payouts.
@@ -822,7 +822,7 @@ Clawback policies enable companies to recover compensation from executives respo
     province: 'National',
     publishedAt: '2025-02-10',
     readTime: 11,
-    imageUrl: '/images/articles/freelancer-rates-canada-2025.jpg',
+    imageUrl: 'https://images.unsplash.com/photo-1522202176988-66273c2fd55f?w=800&q=80',
     content: `<b>The Freelance Economy in Canada</b>
 
 Independent work has become an increasingly significant component of the Canadian labor market, with professionals across diverse fields choosing freelance careers for flexibility, autonomy, and the potential for higher earnings. The freelance economy encompasses writers, designers, developers, consultants, and specialists in virtually every professional discipline who deliver services to clients on a project or contractual basis rather than as employees. Understanding appropriate rate structures and pricing strategies has become essential for freelancers seeking to build sustainable independent careers.

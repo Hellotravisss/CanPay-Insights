@@ -31,7 +31,7 @@ export const tipsArticles: Article[] = [
     province: 'National',
     publishedAt: '2025-01-15',
     readTime: 12,
-    imageUrl: '/images/articles/rrsp-vs-tfsa-2025.jpg',
+    imageUrl: 'https://images.unsplash.com/photo-1579621970795-87facc2f976d?w=800&q=80',
     content: `<b>Understanding Canada's Tax-Advantaged Accounts</b>
 
 Canada offers two primary vehicles for tax-advantaged savings that every resident should understand and utilize to build long-term wealth. The Registered Retirement Savings Plan (RRSP) and Tax-Free Savings Account (TFSA) serve different purposes and offer distinct advantages depending on your financial situation, income level, and savings goals. Understanding how each account works and when to prioritize one over the other can significantly impact your lifetime wealth accumulation and tax efficiency.
@@ -110,7 +110,7 @@ Reviewing account allocation annually as circumstances change ensures continued 
     province: 'National',
     publishedAt: '2025-01-18',
     readTime: 10,
-    imageUrl: '/images/articles/emergency-fund-2025.jpg',
+    imageUrl: 'https://images.unsplash.com/photo-1579621970563-ebec7560ff3e?w=800&q=80',
     content: `<b>The Foundation of Financial Security</b>
 
 An emergency fund represents the essential foundation upon which all other financial planning is built. Before investing for retirement, saving for a home down payment, or pursuing other financial goals, establishing adequate emergency reserves protects against the inevitable financial shocks that life delivers. Without this protection, unexpected expenses can derail long-term plans, force debt accumulation, or create cascading financial problems.
@@ -177,7 +177,7 @@ As emergency funds grow beyond target levels due to accumulated interest or redu
     province: 'National',
     publishedAt: '2025-01-20',
     readTime: 12,
-    imageUrl: '/images/articles/side-hustle-tax-2025.jpg',
+    imageUrl: 'https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?w=800&q=80',
     content: `<b>The Rise of Side Hustles in Canada</b>
 
 The landscape of work in Canada has transformed dramatically over the past decade, with millions of Canadians now earning income outside their primary employment through various side hustles, freelance work, and entrepreneurial ventures. Whether driving for ride-sharing platforms, selling handmade crafts online, offering consulting services, or monetizing content creation, side hustles have become an integral part of the modern Canadian economy. This additional income, while welcome, creates important tax obligations that many side hustlers fail to fully understand or address.
@@ -304,7 +304,7 @@ Setting aside funds for tax obligations prevents cash flow problems when taxes c
     province: 'National',
     publishedAt: '2025-01-22',
     readTime: 11,
-    imageUrl: '/images/articles/fhsa-canada-2025.jpg',
+    imageUrl: 'https://images.unsplash.com/photo-1560518883-ce09059eeffa?w=800&q=80',
     content: `<b>Introducing the First Home Savings Account</b>
 
 The First Home Savings Account represents one of the most significant innovations in Canadian personal finance, providing first-time homebuyers with a powerful tool to accelerate their down payment savings. Introduced in 2023, the FHSA combines the best features of RRSPs and TFSAs, offering tax-deductible contributions like an RRSP and tax-free withdrawals like a TFSA. For Canadians planning their first home purchase, understanding and maximizing FHSA benefits can save thousands in taxes while building home equity faster.
@@ -387,7 +387,7 @@ Post-purchase planning should address any remaining FHSA funds through RRSP tran
     province: 'National',
     publishedAt: '2025-01-25',
     readTime: 11,
-    imageUrl: '/images/articles/credit-score-canada-2025.jpg',
+    imageUrl: 'https://images.unsplash.com/photo-1554224154-26032ffc0d07?w=800&q=80',
     content: `<b>Understanding Canadian Credit Scores</b>
 
 Your credit score serves as a financial reputation score that lenders, landlords, insurers, and even employers use to evaluate your reliability and responsibility. In Canada, credit scores range from three hundred to nine hundred, with scores above six hundred sixty generally considered good and scores above seven hundred fifty considered excellent. Understanding how these scores are calculated and what factors influence them empowers you to optimize your creditworthiness and access better financial opportunities.
@@ -462,7 +462,7 @@ Employment and rental applications increasingly include credit checks. Good cred
     province: 'National',
     publishedAt: '2025-01-28',
     readTime: 11,
-    imageUrl: '/images/articles/inflation-proof-finances-2025.jpg',
+    imageUrl: 'https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?w=800&q=80',
     content: `<b>Understanding Inflation's Impact</b>
 
 Inflation represents the gradual erosion of purchasing power as prices rise across the economy. For Canadian households, even moderate inflation significantly impacts budgets, savings, and long-term financial plans over time. Understanding how inflation affects different aspects of your finances enables development of comprehensive protection strategies that preserve and grow wealth despite rising prices.
@@ -539,7 +539,7 @@ Cash holdings beyond emergency needs suffer most during inflation. Excessive cas
     province: 'National',
     publishedAt: '2025-02-01',
     readTime: 10,
-    imageUrl: '/images/articles/workplace-benefits-2025.jpg',
+    imageUrl: 'https://images.unsplash.com/photo-1556761175-5973dc0f32e7?w=800&q=80',
     content: `<b>Understanding Your Total Compensation</b>
 
 Canadian employees often focus exclusively on base salary while underappreciating the substantial value provided through workplace benefits. A comprehensive benefits package can add twenty to forty percent to base salary value through insurance coverage, retirement contributions, paid time off, and various programs. Understanding and maximizing these benefits is essential for optimizing total compensation.
@@ -632,7 +632,7 @@ Negotiating benefits may be possible even when salary is fixed. Additional vacat
     province: 'National',
     publishedAt: '2025-02-05',
     readTime: 11,
-    imageUrl: '/images/articles/debt-payoff-strategy-2025.jpg',
+    imageUrl: 'https://images.unsplash.com/photo-1554224155-6726b3ff858f?w=800&q=80',
     content: `<b>The High Cost of Debt in Canada</b>
 
 Canadian household debt levels remain among the highest in the developed world, with many families allocating substantial portions of income to debt service. Credit card interest rates exceeding twenty percent, combined with rising mortgage costs and persistent consumer debt, create financial pressure that limits savings, increases stress, and reduces life options. Eliminating debt represents one of the highest-return financial activities available to most Canadians.
@@ -715,7 +715,7 @@ Regular financial reviews ensure continued progress and early identification of 
     province: 'National',
     publishedAt: '2025-02-08',
     readTime: 10,
-    imageUrl: '/images/articles/automated-savings-2025.jpg',
+    imageUrl: 'https://images.unsplash.com/photo-1579621970795-87facc2f976d?w=800&q=80',
     content: `<b>The Power of Financial Automation</b>
 
 Human willpower is a finite resource that becomes depleted by daily decisions and temptations. Relying on willpower for consistent saving and investing dooms most people to failure and financial stress. Automation removes the burden of repeated decisions, ensuring consistent progress toward financial goals without ongoing effort or discipline.
@@ -806,7 +806,7 @@ Emergency preparedness includes maintaining awareness of automated systems in ca
     province: 'National',
     publishedAt: '2025-02-10',
     readTime: 13,
-    imageUrl: '/images/articles/fire-canada-2025.jpg',
+    imageUrl: 'https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=800&q=80',
     content: `<b>Understanding the FIRE Movement</b>
 
 The Financial Independence, Retire Early movement has gained significant traction among Canadians seeking alternatives to traditional retirement timelines. FIRE practitioners aim to accumulate sufficient investment assets to support living expenses through portfolio returns, enabling work to become optional decades earlier than conventional retirement age. While the movement originated in the United States, Canadian FIRE enthusiasts must adapt strategies to our unique tax system, healthcare provisions, and social benefits.
