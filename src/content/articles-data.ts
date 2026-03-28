@@ -1,4 +1,7 @@
 import type { Article } from './types';
+import { salaryArticles } from './articles-salary';
+import { provinceArticles } from './articles-province';
+import { tipsArticles } from './articles-tips';
 
 // Article 1: Ontario Tax Guide
 const article1: Article = {
@@ -2447,8 +2450,9 @@ Every situation is unique. Use our calculator to:
 };
 
 
-// Export all articles
+// Export all articles (combine original tax articles + new articles)
 export const allArticles: Article[] = [
+  // Original Tax Guide Articles
   article1,
   article2,
   article3,
@@ -2459,6 +2463,12 @@ export const allArticles: Article[] = [
   article8,
   article9,
   article10,
+  // Salary Insights Articles
+  ...salaryArticles,
+  // Provincial Guide Articles
+  ...provinceArticles,
+  // Money Tips Articles
+  ...tipsArticles,
 ];
 
 // Helper functions

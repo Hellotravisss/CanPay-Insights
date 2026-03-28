@@ -7,10 +7,10 @@ interface BlogListProps {
 
 const categories = [
   { id: 'all', label: 'All Articles', color: 'bg-slate-600' },
-  { id: 'tax', label: 'Tax Guides', color: 'bg-red-600' },
   { id: 'salary', label: 'Salary Insights', color: 'bg-blue-600' },
   { id: 'province', label: 'Provincial Guides', color: 'bg-green-600' },
   { id: 'tips', label: 'Money Tips', color: 'bg-amber-600' },
+  { id: 'tax', label: 'Tax Guides', color: 'bg-red-600' },
 ];
 
 const BlogList: React.FC<BlogListProps> = ({ onSelectArticle }) => {
@@ -52,10 +52,10 @@ const BlogList: React.FC<BlogListProps> = ({ onSelectArticle }) => {
                 <path d="M9 4.804A7.968 7.968 0 005.5 4c-1.255 0-2.443.29-3.5.804v10A7.969 7.969 0 015.5 14c1.669 0 3.218.51 4.5 1.385A7.962 7.962 0 0114.5 14c1.255 0 2.443.29 3.5.804v-10A7.968 7.968 0 0014.5 4c-1.255 0-2.443.29-3.5.804V12a1 1 0 11-2 0V4.804z" />
               </svg>
             </div>
-            <h1 className="text-2xl font-bold">CanPay Tax Guides</h1>
+            <h1 className="text-2xl font-bold">CanPay Insights Hub</h1>
           </div>
           <p className="text-red-100 max-w-2xl">
-            Expert guides on Canadian taxes, salaries, and personal finance. Updated regularly to help you make smarter financial decisions.
+            Your comprehensive resource for Canadian payroll, provincial living guides, salary insights, and money-saving tips. Stay informed, earn smarter.
           </p>
         </div>
       </div>
