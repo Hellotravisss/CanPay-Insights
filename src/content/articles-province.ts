@@ -114,6 +114,8 @@ Alberta's cost of living has increased significantly in recent years, particular
 
 Provincial tax advantages including lack of sales tax and flat income tax rate have historically provided Alberta residents with improved after-tax income compared to other provinces. However, recent tax changes have reduced some of these advantages while still leaving Alberta with competitive tax burdens. The tax environment remains a factor in Alberta's overall attractiveness for workers.
 
+Want to see exactly how much more you'd take home in Alberta? Use our Province Comparison Tool to compare after-tax income across all provinces with your specific salary.
+
 Childcare costs in Alberta have been addressed through provincial policies reducing fees for regulated childcare spaces. These programs improve affordability for working families and enhance the attractiveness of Alberta employment for parents. The combination of salary levels and childcare support creates favorable conditions for dual-income families.
 
 Transportation costs in Alberta reflect the car-dependent nature of Calgary and Edmonton development patterns. While fuel costs benefit from Alberta's oil and gas industry, the need for vehicle ownership adds to living costs. Some inner-city neighborhoods offer walkability and transit access that reduce transportation expenses.
@@ -320,7 +322,9 @@ Transportation costs in Metro Vancouver include vehicle expenses for those livin
 
 Childcare costs in British Columbia have been addressed through provincial investments reducing fees for regulated spaces, though waitlists remain challenging. These programs improve affordability for working parents, particularly in high-cost Vancouver. The combination of childcare support and parental leave provisions supports working families.
 
-Overall cost of living in British Columbia, particularly in Vancouver and Victoria, requires careful financial planning even for well-compensated professionals. The lifestyle benefits of BC locations must be weighed against financial pressures that may require trade-offs in housing, transportation, or savings rates.`
+Overall cost of living in British Columbia, particularly in Vancouver and Victoria, requires careful financial planning even for well-compensated professionals. The lifestyle benefits of BC locations must be weighed against financial pressures that may require trade-offs in housing, transportation, or savings rates.
+
+Compare your potential after-tax income in BC versus other provinces using our Province Comparison Tool to make an informed decision about your next career move.`
   },
   {
     id: 'province-004',

@@ -60,6 +60,31 @@ const BlogList: React.FC<BlogListProps> = ({ onSelectArticle }) => {
         </div>
       </div>
 
+      {/* Tools Banner */}
+      <div className="bg-gradient-to-r from-blue-600 to-blue-700 text-white py-4">
+        <div className="max-w-6xl mx-auto px-4">
+          <div className="flex flex-col sm:flex-row items-center justify-between gap-4">
+            <div className="flex items-center gap-3">
+              <div className="w-10 h-10 bg-white/20 rounded-lg flex items-center justify-center">
+                <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
+                </svg>
+              </div>
+              <div>
+                <h3 className="font-bold">Province Comparison Tool</h3>
+                <p className="text-blue-100 text-sm">Compare take-home pay across all provinces</p>
+              </div>
+            </div>
+            <a
+              href="/compare-provinces"
+              className="px-5 py-2 bg-white text-blue-700 font-bold rounded-lg hover:bg-blue-50 transition-colors whitespace-nowrap"
+            >
+              Compare Now →
+            </a>
+          </div>
+        </div>
+      </div>
+
       {/* Category Filter */}
       <div className="bg-white border-b border-slate-200 sticky top-0 z-10">
         <div className="max-w-6xl mx-auto px-4 py-4">

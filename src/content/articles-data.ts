@@ -176,6 +176,8 @@ If you are considering a move, here is how $65,000 looks across Canada:
 
 Alberta's flat tax system means lower-income earners pay more proportionally, but at $65,000, you come out ahead. Quebec's higher taxes fund more social services but leave you with less in your pocket.
 
+Want to compare provinces with your specific salary? Try our [Province Comparison Tool](/compare-provinces) to see exact take-home pay differences.
+
 ### Smart Tax Strategies for Ontarians
 
 **1. Maximize Your RRSP Contributions**

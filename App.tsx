@@ -12,6 +12,7 @@ import PrivacyPolicy from './components/PrivacyPolicy';
 import SEO from './components/SEO';
 import BlogList from './src/content/components/BlogList';
 import ArticleView from './src/content/components/ArticleView';
+import ProvinceComparison from './src/content/components/ProvinceComparison';
 import UserMenu from './components/UserMenu';
 import AuthModal from './components/AuthModal';
 import { SalaryInputs, Province, CalculationMode, AnnualSalaryInputs, PayFrequency, TimesheetInputs, CalculationResult } from './types';
@@ -54,7 +55,7 @@ const DEFAULT_TIMESHEET_INPUTS: TimesheetInputs = {
   entries: []
 };
 
-type AppPage = 'home' | 'calculator' | 'privacy' | 'blog';
+type AppPage = 'home' | 'calculator' | 'privacy' | 'blog' | 'province-comparison';
 
 const App: React.FC = () => {
   // Auth
@@ -125,6 +126,8 @@ const App: React.FC = () => {
     } else if (path === '/blog') {
       setCurrentPage('blog');
       setCurrentArticleSlug(null);
+    } else if (path === '/compare-provinces') {
+      setCurrentPage('province-comparison');
     }
   }, []);
 
@@ -140,6 +143,8 @@ const App: React.FC = () => {
       } else {
         window.history.pushState({}, '', '/blog');
       }
+    } else if (currentPage === 'province-comparison') {
+      window.history.pushState({}, '', '/compare-provinces');
     } else if (currentPage === 'home') {
       if (window.location.pathname !== '/') {
         window.history.pushState({}, '', '/');
@@ -368,6 +373,8 @@ const App: React.FC = () => {
         ) : (
           <BlogList onSelectArticle={handleSelectArticle} />
         )
+      ) : currentPage === 'province-comparison' ? (
+        <ProvinceComparison onBackToBlog={() => setCurrentPage('blog')} />
       ) : currentPage !== 'privacy' && (
         <main className="max-w-6xl mx-auto px-4 py-8" role="main" aria-label="Payroll Calculator">
           {/* Home Page - Mode Selection */}
