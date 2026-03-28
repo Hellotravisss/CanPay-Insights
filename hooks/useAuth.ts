@@ -4,11 +4,6 @@ import type { User, Session, Provider } from '@supabase/supabase-js';
 
 export type OAuthProvider = 'google' | 'facebook' | 'apple';
 
-// Clean stale access_token from URL hash on page load
-if (typeof window !== 'undefined' && window.location.hash && window.location.hash.includes('access_token')) {
-  window.history.replaceState(null, '', window.location.pathname);
-}
-
 export interface AuthState {
   user: User | null;
   session: Session | null;
