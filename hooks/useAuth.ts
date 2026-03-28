@@ -24,22 +24,20 @@ export const useAuth = (): AuthState & AuthActions => {
 
   // 获取当前会话（处理 OAuth 回调）
   useEffect(() => {
+    // Supabase 客户端配置了 detectSessionInUrl: true
+    // 会自动处理 URL 中的 access_token
+    
     const getSession = async () => {
-      // 首先检查 URL 是否有 OAuth 回调的 token
       const { data: { session }, error } = await supabase.auth.getSession();
       
       if (error) {
         console.error('Error getting session:', error);
       }
       
+      console.log('Initial session:', session?.user?.email || 'none');
       setSession(session);
       setUser(session?.user ?? null);
       setLoading(false);
-      
-      // 如果有 token 在 URL 中，清除它（安全考虑）
-      if (window.location.hash.includes('access_token')) {
-        window.history.replaceState(null, '', window.location.pathname);
-      }
     };
     
     getSession();
@@ -57,18 +55,14 @@ export const useAuth = (): AuthState & AuthActions => {
 
   // OAuth 登录 - 支持 Google, Facebook, Apple, GitHub
   const signInWithOAuth = useCallback(async (provider: OAuthProvider) => {
-    // 先清除可能过期的会话
-    try { await supabase.auth.signOut({ scope: 'local' }); } catch (_) {}
+    const redirectUrl = `${window.location.origin}/`;
+    console.log('OAuth redirect URL:', redirectUrl);
 
     const { error } = await supabase.auth.signInWithOAuth({
       provider: provider as Provider,
       options: {
-        redirectTo: window.location.origin,
-        // 请求获取用户邮箱和基本资料
-        queryParams: provider === 'google' ? {
-          access_type: 'offline',
-          prompt: 'consent',
-        } : undefined,
+        redirectTo: redirectUrl,
+        skipBrowserRedirect: false,
       },
     });
     
