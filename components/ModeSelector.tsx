@@ -26,12 +26,6 @@ const ModeSelector: React.FC<Props> = ({ onModeSelect }) => {
 
   return (
     <div className="bg-white rounded-xl shadow-sm border border-slate-200 p-6 mb-6">
-      <div className="text-center mb-12">
-        <h1 className="text-5xl font-bold text-slate-800">
-          CanPay <span className="text-red-600">Insights</span>
-        </h1>
-      </div>
-      
       <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
         {modes.map((mode) => (
           <button

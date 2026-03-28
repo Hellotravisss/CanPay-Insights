@@ -551,7 +551,7 @@ const App: React.FC = () => {
               onClick={handleGoToBlog}
               className="text-slate-400 hover:text-red-600 transition-colors"
             >
-              财务指南
+              Tax Guides
             </button>
             <button 
               onClick={handleGoToPrivacy}
