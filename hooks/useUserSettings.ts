@@ -148,22 +148,28 @@ export const useUserSettings = (userId: string | null): UseUserSettingsReturn =>
       // 如果已登录，异步保存到 Supabase（不等待）
       if (userId) {
         setIsSaving(true);
-        supabase
-          .from('user_settings')
-          .upsert({
-            user_id: userId,
-            simple_inputs: newSettings.simple,
-            annual_inputs: newSettings.annual,
-            timesheet_inputs: {
-              province: newSettings.timesheet.province,
-              hourlyWage: newSettings.timesheet.hourlyWage,
-              payFrequency: newSettings.timesheet.payFrequency
-            },
-            last_mode: newSettings.lastMode,
-            updated_at: new Date().toISOString()
-          }, { onConflict: 'user_id' })
-          .then(() => setIsSaving(false))
-          .catch(() => setIsSaving(false));
+        (async () => {
+          try {
+            await supabase
+              .from('user_settings')
+              .upsert({
+                user_id: userId,
+                simple_inputs: newSettings.simple,
+                annual_inputs: newSettings.annual,
+                timesheet_inputs: {
+                  province: newSettings.timesheet.province,
+                  hourlyWage: newSettings.timesheet.hourlyWage,
+                  payFrequency: newSettings.timesheet.payFrequency
+                },
+                last_mode: newSettings.lastMode,
+                updated_at: new Date().toISOString()
+              }, { onConflict: 'user_id' });
+          } catch (e) {
+            console.warn('Failed to save to Supabase');
+          } finally {
+            setIsSaving(false);
+          }
+        })();
       }
       
       return newSettings;
@@ -178,14 +184,19 @@ export const useUserSettings = (userId: string | null): UseUserSettingsReturn =>
       
       // 如果已登录，异步保存到 Supabase
       if (userId) {
-        supabase
-          .from('user_settings')
-          .upsert({
-            user_id: userId,
-            last_mode: mode,
-            updated_at: new Date().toISOString()
-          }, { onConflict: 'user_id' })
-          .catch(() => {});
+        (async () => {
+          try {
+            await supabase
+              .from('user_settings')
+              .upsert({
+                user_id: userId,
+                last_mode: mode,
+                updated_at: new Date().toISOString()
+              }, { onConflict: 'user_id' });
+          } catch (e) {
+            // Ignore errors
+          }
+        })();
       }
       
       return newSettings;
