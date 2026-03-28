@@ -72,6 +72,7 @@ export const useUserSettings = (userId: string | null): UseUserSettingsReturn =>
   
   // 使用 ref 跟踪是否已经加载过数据，避免重复加载
   const hasLoadedRef = useRef(false);
+  const lastUserIdRef = useRef<string | null>(null);
 
   // 从本地存储加载
   const loadFromLocalStorage = useCallback((): UserSettings | null => {
@@ -140,39 +141,52 @@ export const useUserSettings = (userId: string | null): UseUserSettingsReturn =>
     }
   }, [userId]);
 
-  // 保存到 Supabase
+  // 保存到 Supabase（带防抖）
+  const saveTimeoutRef = useRef<NodeJS.Timeout | null>(null);
+  
   const saveToSupabase = useCallback(async (newSettings: UserSettings) => {
     if (!userId) return;
-
-    try {
-      const { error } = await supabase
-        .from('user_settings')
-        .upsert({
-          user_id: userId,
-          simple_inputs: newSettings.simple,
-          annual_inputs: newSettings.annual,
-          timesheet_inputs: {
-            province: newSettings.timesheet.province,
-            hourlyWage: newSettings.timesheet.hourlyWage,
-            payFrequency: newSettings.timesheet.payFrequency
-          },
-          last_mode: newSettings.lastMode,
-          updated_at: new Date().toISOString()
-        }, {
-          onConflict: 'user_id'
-        });
-
-      if (error) {
-        console.warn('Error saving to Supabase (table may not exist):', error);
-      }
-    } catch (e) {
-      console.warn('Error in saveToSupabase:', e);
+    
+    // 清除之前的定时器
+    if (saveTimeoutRef.current) {
+      clearTimeout(saveTimeoutRef.current);
     }
+    
+    // 延迟保存，避免频繁调用
+    saveTimeoutRef.current = setTimeout(async () => {
+      try {
+        const { error } = await supabase
+          .from('user_settings')
+          .upsert({
+            user_id: userId,
+            simple_inputs: newSettings.simple,
+            annual_inputs: newSettings.annual,
+            timesheet_inputs: {
+              province: newSettings.timesheet.province,
+              hourlyWage: newSettings.timesheet.hourlyWage,
+              payFrequency: newSettings.timesheet.payFrequency
+            },
+            last_mode: newSettings.lastMode,
+            updated_at: new Date().toISOString()
+          }, {
+            onConflict: 'user_id'
+          });
+
+        if (error) {
+          console.warn('Error saving to Supabase:', error.message);
+        } else {
+          console.log('Settings saved to Supabase');
+        }
+      } catch (e) {
+        console.warn('Error in saveToSupabase:', e);
+      }
+    }, 500); // 500ms 防抖
   }, [userId]);
 
   // 加载设置（优先从 Supabase，其次本地存储）
   const loadSettings = useCallback(async () => {
-    if (hasLoadedRef.current) return;
+    // 避免重复加载同一用户的数据
+    if (hasLoadedRef.current && lastUserIdRef.current === userId) return;
     
     setIsLoading(true);
     
@@ -199,19 +213,14 @@ export const useUserSettings = (userId: string | null): UseUserSettingsReturn =>
     } finally {
       setIsLoading(false);
       hasLoadedRef.current = true;
+      lastUserIdRef.current = userId;
     }
   }, [userId, loadFromSupabase, loadFromLocalStorage, saveToLocalStorage]);
 
-  // 初始加载
+  // 初始加载 + 用户状态变化时重新加载
   useEffect(() => {
     loadSettings();
-  }, [loadSettings]);
-
-  // 用户登录状态变化时重新加载
-  useEffect(() => {
-    hasLoadedRef.current = false;
-    loadSettings();
-  }, [userId, loadSettings]);
+  }, [userId]); // 只依赖 userId，不依赖 loadSettings
 
   // 保存特定模式的设置
   const saveSettings = useCallback(async (
