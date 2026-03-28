@@ -17,10 +17,17 @@ const parseProvince = (provinceStr: string): Province => {
   return Province.ON; // Default fallback
 };
 
+interface UserSettings {
+  simple: SalaryInputs;
+  annual: AnnualSalaryInputs;
+  timesheet: TimesheetInputs;
+  lastMode: CalculationMode;
+}
+
 // 默认设置
-const DEFAULT_SETTINGS = {
+const DEFAULT_SETTINGS: UserSettings = {
   simple: {
-    province: 'ON',
+    province: Province.ON,
     hourlyWage: 20.00,
     shift: {
       startTime: "09:00",
@@ -35,27 +42,20 @@ const DEFAULT_SETTINGS = {
       endTime: "06:00"
     },
     vacationPayRate: 0
-  } as SalaryInputs,
+  },
   annual: {
-    province: 'ON',
+    province: Province.ON,
     annualSalary: 100000,
-    payFrequency: 'bi-weekly'
-  } as AnnualSalaryInputs,
+    payFrequency: PayFrequency.BI_WEEKLY
+  },
   timesheet: {
-    province: 'ON',
+    province: Province.ON,
     hourlyWage: 20.00,
-    payFrequency: 'weekly',
+    payFrequency: PayFrequency.WEEKLY,
     entries: []
-  } as TimesheetInputs,
-  lastMode: 'simple' as CalculationMode
+  },
+  lastMode: 'simple'
 };
-
-interface UserSettings {
-  simple: SalaryInputs;
-  annual: AnnualSalaryInputs;
-  timesheet: TimesheetInputs;
-  lastMode: CalculationMode;
-}
 
 interface UseUserSettingsReturn {
   settings: UserSettings;
