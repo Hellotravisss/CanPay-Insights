@@ -27,7 +27,7 @@ interface UserSettings {
 // 默认设置
 const DEFAULT_SETTINGS: UserSettings = {
   simple: {
-    province: Province.ON,
+    province: 'ON', // Use province code abbreviation
     hourlyWage: 20.00,
     shift: {
       startTime: "09:00",
@@ -44,12 +44,12 @@ const DEFAULT_SETTINGS: UserSettings = {
     vacationPayRate: 0
   },
   annual: {
-    province: Province.ON,
+    province: 'ON', // Use province code abbreviation
     annualSalary: 100000,
     payFrequency: PayFrequency.BI_WEEKLY
   },
   timesheet: {
-    province: Province.ON,
+    province: 'ON', // Use province code abbreviation
     hourlyWage: 20.00,
     payFrequency: PayFrequency.WEEKLY,
     entries: []

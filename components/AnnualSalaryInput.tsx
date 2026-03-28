@@ -1,5 +1,6 @@
 import React from 'react';
 import { AnnualSalaryInputs, Province, PayFrequency } from '../types';
+import { PROVINCIAL_DATA } from '../constants';
 
 interface Props {
   inputs: AnnualSalaryInputs;
@@ -59,9 +60,9 @@ const AnnualSalaryInput: React.FC<Props> = ({ inputs, setInputs }) => {
           onChange={(e) => setInputs({ ...inputs, province: e.target.value })}
           className="w-full px-4 py-3 border-2 border-slate-200 rounded-lg focus:border-red-500 focus:outline-none font-medium"
         >
-          {Object.entries(Province).map(([key, value]) => (
-            <option key={key} value={value}>
-              {value}
+          {Object.entries(PROVINCIAL_DATA).map(([key, data]) => (
+            <option key={key} value={key}>
+              {data.name}
             </option>
           ))}
         </select>

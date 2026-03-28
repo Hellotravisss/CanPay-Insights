@@ -46,8 +46,8 @@ const InputSection: React.FC<Props> = ({ inputs, setInputs }) => {
             value={inputs.province}
             onChange={(e) => setInputs({...inputs, province: e.target.value})}
           >
-            {Object.values(PROVINCIAL_DATA).map((p) => (
-              <option key={p.id} value={p.name} className="text-slate-900">{p.name}</option>
+            {Object.entries(PROVINCIAL_DATA).map(([key, data]) => (
+              <option key={key} value={key} className="text-slate-900">{data.name}</option>
             ))}
           </select>
         </div>

@@ -14,14 +14,15 @@ import BlogList from './src/content/components/BlogList';
 import ArticleView from './src/content/components/ArticleView';
 import UserMenu from './components/UserMenu';
 import AuthModal from './components/AuthModal';
-import { SalaryInputs, Province, CalculationMode, AnnualSalaryInputs, PayFrequency, TimesheetInputs } from './types';
+import { SalaryInputs, Province, CalculationMode, AnnualSalaryInputs, PayFrequency, TimesheetInputs, CalculationResult } from './types';
 import { calculateSalary, calculateFromAnnualSalary, calculateFromTimesheet } from './utils/taxEngine';
 import { useAuth, type OAuthProvider } from './hooks/useAuth';
 import { useUserSettings } from './hooks/useUserSettings';
+import { useCalculationHistory, type CalculationRecord } from './hooks/useCalculationHistory';
 
 // Default State - 简易估算（时薪）
 const DEFAULT_SIMPLE_INPUTS: SalaryInputs = {
-  province: Province.ON,
+  province: 'ON', // Use province code abbreviation
   hourlyWage: 20.00,
   shift: {
     startTime: "09:00",
@@ -40,14 +41,14 @@ const DEFAULT_SIMPLE_INPUTS: SalaryInputs = {
 
 // Default State - Annual Salary (Fixed at Bi-Weekly)
 const DEFAULT_ANNUAL_INPUTS: AnnualSalaryInputs = {
-  province: Province.ON,
+  province: 'ON', // Use province code abbreviation
   annualSalary: 100000,
   payFrequency: PayFrequency.BI_WEEKLY // Fixed for annual salary mode
 };
 
 // Default State - Timesheet
 const DEFAULT_TIMESHEET_INPUTS: TimesheetInputs = {
-  province: Province.ON,
+  province: 'ON', // Use province code abbreviation
   hourlyWage: 20.00,
   payFrequency: PayFrequency.WEEKLY,
   entries: []
@@ -250,6 +251,59 @@ const App: React.FC = () => {
     ? { province: timesheetInputs.province, hourlyWage: timesheetInputs.hourlyWage }
     : simpleInputs;
 
+  // Calculation History
+  const { saveCalculation } = useCalculationHistory(userId);
+  const [saveSuccess, setSaveSuccess] = useState(false);
+
+  // Handle save calculation
+  const handleSaveCalculation = useCallback(async () => {
+    let inputs: Record<string, any>;
+    switch (mode) {
+      case CalculationMode.SIMPLE:
+        inputs = simpleInputs;
+        break;
+      case CalculationMode.ANNUAL:
+        inputs = annualInputs;
+        break;
+      case CalculationMode.TIMESHEET:
+        inputs = timesheetInputs;
+        break;
+      default:
+        inputs = simpleInputs;
+    }
+
+    const record = await saveCalculation(mode, currentProvince, inputs, results);
+    if (record) {
+      setSaveSuccess(true);
+      setTimeout(() => setSaveSuccess(false), 2000);
+    }
+  }, [mode, currentProvince, simpleInputs, annualInputs, timesheetInputs, results, saveCalculation]);
+
+  // Handle switch to timesheet from UserMenu
+  const handleSwitchToTimesheet = useCallback(() => {
+    setMode(CalculationMode.TIMESHEET);
+    setCurrentPage('calculator');
+  }, []);
+
+  // Handle load calculation from history
+  const handleLoadCalculation = useCallback((record: CalculationRecord) => {
+    setMode(record.mode);
+    
+    switch (record.mode) {
+      case CalculationMode.SIMPLE:
+        setSimpleInputs(record.inputs as SalaryInputs);
+        break;
+      case CalculationMode.ANNUAL:
+        setAnnualInputs(record.inputs as AnnualSalaryInputs);
+        break;
+      case CalculationMode.TIMESHEET:
+        setTimesheetInputs(record.inputs as TimesheetInputs);
+        break;
+    }
+    
+    setCurrentPage('calculator');
+  }, []);
+
   // Donation URL
   const DONATION_URL = "https://www.buymeacoffee.com/canpay"; 
  
@@ -274,7 +328,10 @@ const App: React.FC = () => {
             
             <div className="flex items-center gap-2">
               {/* User Menu / Sign In */}
-              <UserMenu />
+              <UserMenu 
+                onSwitchToTimesheet={handleSwitchToTimesheet}
+                onLoadCalculation={handleLoadCalculation}
+              />
 
               {currentPage === 'calculator' && (
                 <button 
@@ -428,7 +485,35 @@ const App: React.FC = () => {
               </div>
 
               {/* Right Column: Results */}
-              <div className="w-full lg:w-7/12 xl:w-2/3">
+              <div className="w-full lg:w-7/12 xl:w-2/3 space-y-6">
+                {/* Save Calculation Button */}
+                <div className="flex justify-end">
+                  <button
+                    onClick={handleSaveCalculation}
+                    className={`flex items-center gap-2 px-4 py-2 rounded-lg transition-all text-sm font-medium ${
+                      saveSuccess
+                        ? 'bg-green-100 text-green-700'
+                        : 'bg-red-600 hover:bg-red-700 text-white shadow-sm hover:shadow-md'
+                    }`}
+                  >
+                    {saveSuccess ? (
+                      <>
+                        <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                        </svg>
+                        Saved!
+                      </>
+                    ) : (
+                      <>
+                        <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7H5a2 2 0 00-2 2v9a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2h-3m-1 4l-3 3m0 0l-3-3m3 3V4" />
+                        </svg>
+                        Save Calculation
+                      </>
+                    )}
+                  </button>
+                </div>
+                
                 <ResultsSection results={results} provinceName={currentProvince} />
                 <GeminiAdvisor results={results} inputs={currentInputs as SalaryInputs} />
               </div>
