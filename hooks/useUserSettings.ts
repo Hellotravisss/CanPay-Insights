@@ -109,17 +109,22 @@ export const useUserSettings = (userId: string | null): UseUserSettingsReturn =>
       if (error) {
         // 如果没有记录，创建一条
         if (error.code === 'PGRST116') {
-          const { error: insertError } = await supabase
-            .from('user_settings')
-            .insert([{ user_id: userId }]);
-          
-          if (insertError) {
-            console.error('Error creating user settings:', insertError);
+          try {
+            const { error: insertError } = await supabase
+              .from('user_settings')
+              .insert([{ user_id: userId }]);
+            
+            if (insertError) {
+              console.warn('Error creating user settings (table may not exist):', insertError);
+              return null;
+            }
+            return DEFAULT_SETTINGS;
+          } catch (e) {
+            console.warn('user_settings table may not exist, using localStorage');
             return null;
           }
-          return DEFAULT_SETTINGS;
         }
-        console.error('Error loading from Supabase:', error);
+        console.warn('Error loading from Supabase:', error);
         return null;
       }
 
@@ -130,7 +135,7 @@ export const useUserSettings = (userId: string | null): UseUserSettingsReturn =>
         lastMode: data.last_mode || 'simple'
       };
     } catch (e) {
-      console.error('Error in loadFromSupabase:', e);
+      console.warn('Error in loadFromSupabase:', e);
       return null;
     }
   }, [userId]);
@@ -158,10 +163,10 @@ export const useUserSettings = (userId: string | null): UseUserSettingsReturn =>
         });
 
       if (error) {
-        console.error('Error saving to Supabase:', error);
+        console.warn('Error saving to Supabase (table may not exist):', error);
       }
     } catch (e) {
-      console.error('Error in saveToSupabase:', e);
+      console.warn('Error in saveToSupabase:', e);
     }
   }, [userId]);
 
