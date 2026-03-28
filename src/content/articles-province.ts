@@ -31,7 +31,7 @@ export const provinceArticles: Article[] = [
     province: 'Alberta',
     publishedAt: '2025-01-15',
     readTime: 13,
-    imageUrl: 'https://images.unsplash.com/photo-1562592306-5496ed1b9478?w=800&q=80',
+    imageUrl: 'https://images.unsplash.com/photo-1542273917363-3b1817f69a2d?w=800&q=80',
     content: `<b>Understanding Alberta's Economic Landscape</b>
 
 Alberta's economy in 2025 continues to reflect its historical dependence on oil and gas while gradually diversifying into technology, agriculture, and advanced manufacturing. This economic structure creates a unique salary environment where energy sector premiums influence compensation across industries, and where economic cycles tied to commodity prices affect employment and wages. Understanding Alberta's compensation landscape requires appreciating both its resource-based foundations and its evolving economic composition.
@@ -140,7 +140,7 @@ Technology adoption across industries will change skill requirements and compens
     province: 'Ontario',
     publishedAt: '2025-01-18',
     readTime: 14,
-    imageUrl: 'https://images.unsplash.com/photo-1517090504-cd1b19dd3708?w=800&q=80',
+    imageUrl: 'https://images.unsplash.com/photo-1486325212027-8081e485255e?w=800&q=80',
     content: `<b>Ontario's Dominant Economic Position</b>
 
 Ontario maintains its position as Canada's economic engine, generating the largest share of national GDP and employing the greatest number of workers across diverse industries. The province's economy spans financial services in Toronto, government administration in Ottawa, advanced manufacturing in Hamilton and southwestern Ontario, and technology clusters across multiple cities. This economic diversity creates varied compensation landscapes that defy simple characterization, with salaries varying enormously based on location, industry, and occupation.
@@ -567,7 +567,7 @@ Overall cost of living calculations consistently show Prairie provinces offering
     province: 'Northern Territories',
     publishedAt: '2025-02-05',
     readTime: 10,
-    imageUrl: 'https://images.unsplash.com/photo-1518182170546-0766bd6f6a56?w=800&q=80',
+    imageUrl: 'https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?w=800&q=80',
     content: `<b>Working in Canada's North</b>
 
 Canada's three territories, Yukon, Northwest Territories, and Nunavut, present unique employment environments characterized by small populations, remote locations, extreme climates, and extraordinary costs of living. Compensation in the North reflects these conditions through substantial premiums, allowances, and benefits designed to attract and retain workers willing to accept the challenges of northern living. Understanding northern compensation requires appreciating both the financial incentives and the lifestyle trade-offs they seek to offset.
@@ -727,7 +727,7 @@ Retirement planning should consider whether commuter town homes will meet needs 
     province: 'National',
     publishedAt: '2025-02-10',
     readTime: 10,
-    imageUrl: 'https://images.unsplash.com/photo-1523050854058-8df90110c9f1?w=800&q=80',
+    imageUrl: 'https://images.unsplash.com/photo-1523580846011-d3a5bc25702b?w=800&q=80',
     content: `<b>Working While Studying</b>
 
 Canadian university students increasingly work during their studies to offset rising education costs and living expenses. The combination of tuition, housing, food, and other necessities creates financial pressure that employment helps address. Understanding earning opportunities and balancing work with academic demands has become essential for student financial planning.
