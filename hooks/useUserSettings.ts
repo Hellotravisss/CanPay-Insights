@@ -1,9 +1,21 @@
 import { useState, useEffect, useCallback, useRef } from 'react';
 import { supabase } from '../lib/supabase';
 import type { SalaryInputs, AnnualSalaryInputs, TimesheetInputs, CalculationMode } from '../types';
+import { Province, PayFrequency } from '../types';
 
 // 本地存储键
 const LOCAL_STORAGE_KEY = 'canpay_user_settings';
+
+// Helper: Convert string province to Province enum
+const parseProvince = (provinceStr: string): Province => {
+  // If it's already a valid Province value (e.g., 'Ontario'), return the matching enum
+  const entries = Object.entries(Province);
+  const match = entries.find(([key, value]) => key === provinceStr || value === provinceStr);
+  if (match) {
+    return Province[match[0] as keyof typeof Province];
+  }
+  return Province.ON; // Default fallback
+};
 
 // 默认设置
 const DEFAULT_SETTINGS = {
@@ -74,7 +86,19 @@ export const useUserSettings = (userId: string | null): UseUserSettingsReturn =>
         
         if (stored) {
           try {
-            localSettings = { ...DEFAULT_SETTINGS, ...JSON.parse(stored) };
+            const parsed = JSON.parse(stored);
+            localSettings = { ...DEFAULT_SETTINGS, ...parsed };
+            
+            // Parse provinces from localStorage
+            if (localSettings.simple?.province) {
+              localSettings.simple.province = parseProvince(localSettings.simple.province);
+            }
+            if (localSettings.annual?.province) {
+              localSettings.annual.province = parseProvince(localSettings.annual.province);
+            }
+            if (localSettings.timesheet?.province) {
+              localSettings.timesheet.province = parseProvince(localSettings.timesheet.province);
+            }
           } catch (e) {
             console.warn('Failed to parse local settings');
           }
@@ -90,11 +114,26 @@ export const useUserSettings = (userId: string | null): UseUserSettingsReturn =>
               .single();
 
             if (data && !error) {
-              // 合并 Supabase 数据和本地设置
+              // 合并 Supabase 数据和本地设置，并正确转换省份
+              const simpleInputs = data.simple_inputs || localSettings?.simple || DEFAULT_SETTINGS.simple;
+              const annualInputs = data.annual_inputs || localSettings?.annual || DEFAULT_SETTINGS.annual;
+              const timesheetInputs = { ...DEFAULT_SETTINGS.timesheet, ...(data.timesheet_inputs || localSettings?.timesheet || {}) };
+              
+              // Parse provinces correctly
+              if (simpleInputs.province) {
+                simpleInputs.province = parseProvince(simpleInputs.province);
+              }
+              if (annualInputs.province) {
+                annualInputs.province = parseProvince(annualInputs.province);
+              }
+              if (timesheetInputs.province) {
+                timesheetInputs.province = parseProvince(timesheetInputs.province);
+              }
+              
               setSettings({
-                simple: data.simple_inputs || localSettings?.simple || DEFAULT_SETTINGS.simple,
-                annual: data.annual_inputs || localSettings?.annual || DEFAULT_SETTINGS.annual,
-                timesheet: { ...DEFAULT_SETTINGS.timesheet, ...data.timesheet_inputs } || localSettings?.timesheet || DEFAULT_SETTINGS.timesheet,
+                simple: simpleInputs,
+                annual: annualInputs,
+                timesheet: timesheetInputs,
                 lastMode: data.last_mode || localSettings?.lastMode || DEFAULT_SETTINGS.lastMode
               });
             } else if (localSettings) {
