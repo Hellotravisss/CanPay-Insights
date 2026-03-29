@@ -252,7 +252,7 @@ Use CanPay Insights Free Calculator:
 ✅ Accounts for overtime and shift premiums
 ✅ AI-powered tax optimization suggestions
 
-**[Calculate Your Take-Home Pay Now →](/)**
+<b>Calculate Your Take-Home Pay Now →</b> (Use our calculator at the top of the page)
 
 ---
 
@@ -472,7 +472,7 @@ Every person's situation is unique. Use our calculator to:
 ✅ Estimate monthly budgets for different BC cities
 ✅ Plan RRSP contributions for optimal tax savings
 
-**[Calculate Your BC Take-Home Pay →](/)**
+<b>Calculate Your BC Take-Home Pay →</b> (Use our calculator at the top of the page)
 
 ---
 
@@ -683,7 +683,7 @@ Understanding the Canadian tax system is key to financial success in your new ho
 
 **Ready to calculate your specific tax situation?** Use our calculator designed for newcomers—it handles partial-year calculations automatically.
 
-**[Calculate Your First-Year Canadian Taxes →](/)**
+<b>Calculate Your First-Year Canadian Taxes →</b> (Use our calculator at the top of the page)
 
 ---
 
@@ -889,7 +889,7 @@ Neither program is perfect. CPP returns are modest compared to aggressive invest
 
 **Want to see exactly how CPP and EI affect your take-home pay?** Use our calculator to see your personalized deductions.
 
-**[Calculate Your CPP and EI →](/)**
+<b>Calculate Your CPP and EI →</b> (Use our calculator at the top of the page)
 
 ---
 
@@ -1110,7 +1110,7 @@ Every person's tax situation is unique. Use our calculator to:
 ✅ Account for overtime or bonuses
 ✅ Plan your monthly budget
 
-**[Calculate Your $50,000 Take-Home Pay →](/)**
+<b>Calculate Your $50,000 Take-Home Pay →</b> (Use our calculator at the top of the page)
 
 ---
 
@@ -1352,7 +1352,7 @@ Want to see exactly what you'll earn? Use our calculator for:
 ✅ Overtime calculations
 ✅ Tax and deduction breakdowns
 
-**[Calculate Your Minimum Wage Take-Home →](/)**
+<b>Calculate Your Minimum Wage Take-Home →</b> (Use our calculator at the top of the page)
 
 ---
 
@@ -1623,7 +1623,7 @@ Use our calculator to:
 ✅ Plan optimal contribution timing
 ✅ Project retirement income
 
-**[Calculate Your RRSP Tax Savings →](/)**
+<b>Calculate Your RRSP Tax Savings →</b> (Use our calculator at the top of the page)
 
 ---
 
@@ -1875,7 +1875,7 @@ Every situation is unique. Use our calculator to:
 ✅ Factor in employer matching
 ✅ Plan optimal contribution split
 
-**[Compare TFSA vs RRSP for Your Situation →](/)**
+<b>Compare TFSA vs RRSP for Your Situation →</b> (Use our calculator at the top of the page)
 
 ---
 
@@ -2166,7 +2166,7 @@ Use our calculator to:
 ✅ Compare scenarios (weekly vs averaged)
 ✅ See after-tax overtime pay
 
-**[Calculate Your Overtime Pay →](/)**
+<b>Calculate Your Overtime Pay →</b> (Use our calculator at the top of the page)
 
 ---
 
@@ -2443,7 +2443,7 @@ Every situation is unique. Use our calculator to:
 ✅ See multi-year financial projections
 ✅ Account for career growth potential
 
-**[Compare Alberta vs Ontario for Your Situation →](/)**
+<b>Compare Alberta vs Ontario for Your Situation →</b> (Use our province comparison tool at /compare-provinces)
 
 ---
 

@@ -559,7 +559,13 @@ const App: React.FC = () => {
               onClick={handleGoToBlog}
               className="text-slate-400 hover:text-red-600 transition-colors"
             >
-              Tax Guides
+              Insights Hub
+            </button>
+            <button 
+              onClick={() => window.location.href = '/compare-provinces'}
+              className="text-slate-400 hover:text-red-600 transition-colors"
+            >
+              Compare Provinces
             </button>
             <button 
               onClick={handleGoToPrivacy}
