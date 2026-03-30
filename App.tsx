@@ -541,32 +541,41 @@ const App: React.FC = () => {
         <footer className="text-center text-slate-400 text-xs py-8 space-y-4" role="contentinfo">
           <p>Calculations are estimates based on 2025/2026 tax brackets and provincial employment standards.</p>
           
-          <div className="flex justify-center items-center gap-4">
+          {/* Main CTA Buttons */}
+          <div className="flex flex-col sm:flex-row justify-center items-center gap-4">
+            <button 
+              onClick={handleGoToBlog}
+              className="flex items-center gap-2 bg-red-600 text-white px-8 py-3 rounded-full font-bold shadow-md hover:bg-red-700 hover:shadow-lg transition-all transform hover:-translate-y-1 group"
+            >
+              <svg className="w-5 h-5 group-hover:scale-110 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
+              </svg>
+              <span>Explore Insights Hub</span>
+            </button>
+            
+            <button 
+              onClick={() => window.location.href = '/compare-provinces'}
+              className="flex items-center gap-2 bg-blue-600 text-white px-8 py-3 rounded-full font-bold shadow-md hover:bg-blue-700 hover:shadow-lg transition-all transform hover:-translate-y-1 group"
+            >
+              <svg className="w-5 h-5 group-hover:scale-110 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
+              </svg>
+              <span>Compare Provinces</span>
+            </button>
+          </div>
+
+          {/* Secondary Links */}
+          <div className="flex justify-center items-center gap-6 mt-6 text-sm">
             <a 
               href={DONATION_URL}
               target="_blank"
               rel="noopener noreferrer"
-              className="flex items-center gap-2 bg-[#FFDD00] text-slate-900 px-6 py-2.5 rounded-full font-bold shadow-md hover:bg-[#FFEA00] hover:shadow-lg transition-all transform hover:-translate-y-1 group decoration-none"
+              className="text-slate-400 hover:text-amber-600 transition-colors flex items-center gap-1"
             >
-              <span className="text-xl group-hover:rotate-12 transition-transform duration-300">☕</span>
+              <span>☕</span>
               <span>Buy me a double-double</span>
             </a>
-          </div>
-
-          {/* Quick Links */}
-          <div className="flex justify-center items-center gap-6 mt-4">
-            <button 
-              onClick={handleGoToBlog}
-              className="text-slate-400 hover:text-red-600 transition-colors"
-            >
-              Insights Hub
-            </button>
-            <button 
-              onClick={() => window.location.href = '/compare-provinces'}
-              className="text-slate-400 hover:text-red-600 transition-colors"
-            >
-              Compare Provinces
-            </button>
+            <span className="text-slate-300">|</span>
             <button 
               onClick={handleGoToPrivacy}
               className="text-slate-400 hover:text-red-600 transition-colors"
