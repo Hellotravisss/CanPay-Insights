@@ -3,6 +3,14 @@
     {
       "source": "/privacy",
       "destination": "/index.html"
+    },
+    {
+      "source": "/compare-provinces",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/blog/:slug*",
+      "destination": "/index.html"
     }
   ]
 }
