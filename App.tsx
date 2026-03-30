@@ -389,7 +389,7 @@ const App: React.FC = () => {
                 <h1 className="text-4xl md:text-5xl font-bold text-slate-900 mb-2">
                   CanPay <span className="text-red-600 font-light">Insights</span>
                 </h1>
-                <p className="text-slate-500 text-lg">Canadian Payroll Calculator & Tax Guides</p>
+                <p className="text-slate-500 text-lg">Canadian Payroll Calculator</p>
               </div>
 
               <div className="w-full max-w-4xl">
@@ -536,8 +536,8 @@ const App: React.FC = () => {
         <PrivacyPolicy onBackToHome={handleBackToHome} />
       )}
 
-      {/* Footer - Only show on home and calculator pages */}
-      {currentPage !== 'privacy' && currentPage !== 'blog' && (
+      {/* Footer - Show on home, calculator, and province comparison pages */}
+      {(currentPage === 'home' || currentPage === 'calculator' || currentPage === 'province-comparison') && (
         <footer className="text-center text-slate-400 text-xs py-8 space-y-4" role="contentinfo">
           <p>Calculations are estimates based on 2025/2026 tax brackets and provincial employment standards.</p>
           
