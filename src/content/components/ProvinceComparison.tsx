@@ -11,33 +11,40 @@ const ProvinceComparison: React.FC<ProvinceComparisonProps> = ({ onBackToBlog })
   const [annualSalary, setAnnualSalary] = useState<number>(75000);
   const [selectedProvinces, setSelectedProvinces] = useState<string[]>(['ON', 'AB', 'BC']);
 
-  const provinces = Object.entries(PROVINCIAL_DATA).map(([code, data]) => ({
-    code,
-    name: data.name,
-  }));
+  const provinces = useMemo(() => {
+    return Object.entries(PROVINCIAL_DATA).map(([code, data]) => ({
+      code,
+      name: data.name,
+    }));
+  }, []);
 
   const comparisonData = useMemo(() => {
-    return selectedProvinces.map(provinceCode => {
-      const result = calculateFromAnnualSalary({
-        annualSalary,
-        province: provinceCode,
-        payFrequency: PayFrequency.BI_WEEKLY,
-      });
+    try {
+      return selectedProvinces.map(provinceCode => {
+        const result = calculateFromAnnualSalary({
+          annualSalary,
+          province: provinceCode,
+          payFrequency: PayFrequency.BI_WEEKLY,
+        });
 
-      return {
-        province: provinceCode,
-        provinceName: PROVINCIAL_DATA[provinceCode]?.name || provinceCode,
-        grossAnnual: annualSalary,
-        netAnnual: result.netPayAnnual,
-        netMonthly: result.netPayAnnual / 12,
-        federalTax: result.federalTax * 26,
-        provincialTax: result.provincialTax * 26,
-        cpp: result.cppDeduction * 26,
-        ei: result.eiDeduction * 26,
-        totalDeductions: result.totalDeductionsAnnual,
-        effectiveRate: ((result.totalDeductionsAnnual / annualSalary) * 100).toFixed(1),
-      };
-    }).sort((a, b) => b.netAnnual - a.netAnnual);
+        return {
+          province: provinceCode,
+          provinceName: PROVINCIAL_DATA[provinceCode]?.name || provinceCode,
+          grossAnnual: annualSalary,
+          netAnnual: result.netPayAnnual,
+          netMonthly: result.netPayAnnual / 12,
+          federalTax: result.federalTax * 26,
+          provincialTax: result.provincialTax * 26,
+          cpp: result.cppDeduction * 26,
+          ei: result.eiDeduction * 26,
+          totalDeductions: result.totalDeductionsAnnual,
+          effectiveRate: ((result.totalDeductionsAnnual / annualSalary) * 100).toFixed(1),
+        };
+      }).sort((a, b) => b.netAnnual - a.netAnnual);
+    } catch (error) {
+      console.error('Error calculating comparison data:', error);
+      return [];
+    }
   }, [annualSalary, selectedProvinces]);
 
   const toggleProvince = (provinceCode: string) => {
@@ -97,7 +104,7 @@ const ProvinceComparison: React.FC<ProvinceComparisonProps> = ({ onBackToBlog })
               <input
                 type="number"
                 value={annualSalary}
-                onChange={(e) => setAnnualSalary(Number(e.target.value))}
+                onChange={(e) => setAnnualSalary(Number(e.target.value) || 0)}
                 className="w-full pl-8 pr-4 py-2 border-2 border-slate-200 rounded-lg focus:border-red-500 focus:outline-none font-bold"
                 step="1000"
                 min="0"
@@ -134,79 +141,87 @@ const ProvinceComparison: React.FC<ProvinceComparisonProps> = ({ onBackToBlog })
 
       {/* Results */}
       <div className="max-w-6xl mx-auto px-4 py-8">
-        {/* Summary Card */}
-        {comparisonData.length > 1 && (
-          <div className="bg-white rounded-xl shadow-sm border border-slate-200 p-6 mb-8">
-            <h2 className="text-xl font-bold text-slate-800 mb-4">Key Insight</h2>
-            <p className="text-slate-600">
-              With a <b>{formatCurrency(annualSalary)}</b> salary, you'd take home{' '}
-              <b className="text-green-600">{formatCurrency(difference)} more</b> per year in{' '}
-              <b>{bestProvince?.provinceName}</b> compared to {worstProvince?.provinceName}.
-            </p>
+        {comparisonData.length === 0 ? (
+          <div className="bg-white rounded-xl shadow-sm border border-slate-200 p-8 text-center">
+            <p className="text-slate-600">Please select at least one province to compare.</p>
           </div>
-        )}
+        ) : (
+          <>
+            {/* Summary Card */}
+            {comparisonData.length > 1 && bestProvince && worstProvince && (
+              <div className="bg-white rounded-xl shadow-sm border border-slate-200 p-6 mb-8">
+                <h2 className="text-xl font-bold text-slate-800 mb-4">Key Insight</h2>
+                <p className="text-slate-600">
+                  With a <b>{formatCurrency(annualSalary)}</b> salary, you'd take home{' '}
+                  <b className="text-green-600">{formatCurrency(difference)} more</b> per year in{' '}
+                  <b>{bestProvince.provinceName}</b> compared to {worstProvince.provinceName}.
+                </p>
+              </div>
+            )}
 
-        {/* Comparison Table */}
-        <div className="bg-white rounded-xl shadow-sm border border-slate-200 overflow-hidden mb-8">
-          <div className="overflow-x-auto">
-            <table className="w-full">
-              <thead>
-                <tr className="bg-slate-50 border-b border-slate-200">
-                  <th className="px-4 py-3 text-left text-sm font-bold text-slate-700">Province</th>
-                  <th className="px-4 py-3 text-right text-sm font-bold text-slate-700">Net Annual</th>
-                  <th className="px-4 py-3 text-right text-sm font-bold text-slate-700">Net Monthly</th>
-                  <th className="px-4 py-3 text-right text-sm font-bold text-slate-700">Federal Tax</th>
-                  <th className="px-4 py-3 text-right text-sm font-bold text-slate-700">Provincial Tax</th>
-                  <th className="px-4 py-3 text-right text-sm font-bold text-slate-700">CPP</th>
-                  <th className="px-4 py-3 text-right text-sm font-bold text-slate-700">EI</th>
-                  <th className="px-4 py-3 text-right text-sm font-bold text-slate-700">Effective Rate</th>
-                </tr>
-              </thead>
-              <tbody>
-                {comparisonData.map((data, index) => (
-                  <tr 
-                    key={data.province} 
-                    className={`border-b border-slate-100 ${index === 0 ? 'bg-green-50' : ''}`}
-                  >
-                    <td className="px-4 py-3">
-                      <div className="flex items-center gap-2">
-                        {index === 0 && (
-                          <span className="text-xs bg-green-500 text-white px-2 py-0.5 rounded-full">
-                            Best
+            {/* Comparison Table */}
+            <div className="bg-white rounded-xl shadow-sm border border-slate-200 overflow-hidden mb-8">
+              <div className="overflow-x-auto">
+                <table className="w-full">
+                  <thead>
+                    <tr className="bg-slate-50 border-b border-slate-200">
+                      <th className="px-4 py-3 text-left text-sm font-bold text-slate-700">Province</th>
+                      <th className="px-4 py-3 text-right text-sm font-bold text-slate-700">Net Annual</th>
+                      <th className="px-4 py-3 text-right text-sm font-bold text-slate-700">Net Monthly</th>
+                      <th className="px-4 py-3 text-right text-sm font-bold text-slate-700">Federal Tax</th>
+                      <th className="px-4 py-3 text-right text-sm font-bold text-slate-700">Provincial Tax</th>
+                      <th className="px-4 py-3 text-right text-sm font-bold text-slate-700">CPP</th>
+                      <th className="px-4 py-3 text-right text-sm font-bold text-slate-700">EI</th>
+                      <th className="px-4 py-3 text-right text-sm font-bold text-slate-700">Effective Rate</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {comparisonData.map((data, index) => (
+                      <tr 
+                        key={data.province} 
+                        className={`border-b border-slate-100 ${index === 0 ? 'bg-green-50' : ''}`}
+                      >
+                        <td className="px-4 py-3">
+                          <div className="flex items-center gap-2">
+                            {index === 0 && (
+                              <span className="text-xs bg-green-500 text-white px-2 py-0.5 rounded-full">
+                                Best
+                              </span>
+                            )}
+                            <span className="font-semibold text-slate-800">{data.provinceName}</span>
+                          </div>
+                        </td>
+                        <td className="px-4 py-3 text-right font-bold text-slate-800">
+                          {formatCurrency(data.netAnnual)}
+                        </td>
+                        <td className="px-4 py-3 text-right text-slate-600">
+                          {formatCurrency(data.netMonthly)}
+                        </td>
+                        <td className="px-4 py-3 text-right text-slate-600">
+                          {formatCurrency(data.federalTax)}
+                        </td>
+                        <td className="px-4 py-3 text-right text-slate-600">
+                          {formatCurrency(data.provincialTax)}
+                        </td>
+                        <td className="px-4 py-3 text-right text-slate-600">
+                          {formatCurrency(data.cpp)}
+                        </td>
+                        <td className="px-4 py-3 text-right text-slate-600">
+                          {formatCurrency(data.ei)}
+                        </td>
+                        <td className="px-4 py-3 text-right">
+                          <span className={`font-bold ${parseFloat(data.effectiveRate) < 20 ? 'text-green-600' : parseFloat(data.effectiveRate) > 28 ? 'text-red-600' : 'text-slate-600'}`}>
+                            {data.effectiveRate}%
                           </span>
-                        )}
-                        <span className="font-semibold text-slate-800">{data.provinceName}</span>
-                      </div>
-                    </td>
-                    <td className="px-4 py-3 text-right font-bold text-slate-800">
-                      {formatCurrency(data.netAnnual)}
-                    </td>
-                    <td className="px-4 py-3 text-right text-slate-600">
-                      {formatCurrency(data.netMonthly)}
-                    </td>
-                    <td className="px-4 py-3 text-right text-slate-600">
-                      {formatCurrency(data.federalTax)}
-                    </td>
-                    <td className="px-4 py-3 text-right text-slate-600">
-                      {formatCurrency(data.provincialTax)}
-                    </td>
-                    <td className="px-4 py-3 text-right text-slate-600">
-                      {formatCurrency(data.cpp)}
-                    </td>
-                    <td className="px-4 py-3 text-right text-slate-600">
-                      {formatCurrency(data.ei)}
-                    </td>
-                    <td className="px-4 py-3 text-right">
-                      <span className={`font-bold ${parseFloat(data.effectiveRate) < 20 ? 'text-green-600' : parseFloat(data.effectiveRate) > 28 ? 'text-red-600' : 'text-slate-600'}`}>
-                        {data.effectiveRate}%
-                      </span>
-                    </td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-          </div>
-        </div>
+                        </td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </>
+        )}
 
         {/* Provincial Guides Links */}
         <div className="bg-white rounded-xl shadow-sm border border-slate-200 p-6 mb-8">
@@ -231,14 +246,12 @@ const ProvinceComparison: React.FC<ProvinceComparisonProps> = ({ onBackToBlog })
                 'NT': 'northern-territories-salary-guide-2025',
                 'NU': 'northern-territories-salary-guide-2025',
               };
+              const slug = slugMap[code];
+              if (!slug) return null;
               return (
                 <a
                   key={code}
-                  href={`/blog/${slugMap[code] || ''}`}
-                  onClick={(e) => {
-                    e.preventDefault();
-                    window.location.href = `/blog/${slugMap[code] || ''}`;
-                  }}
+                  href={`/blog/${slug}`}
                   className="px-4 py-2 bg-red-50 text-red-700 rounded-lg hover:bg-red-100 transition-colors text-sm font-medium"
                 >
                   {PROVINCIAL_DATA[code]?.name} Guide →
