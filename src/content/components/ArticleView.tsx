@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { getArticleBySlug, allArticles, Article } from '../articles-data';
+import SEO from '../../components/SEO';
 
 interface ArticleViewProps {
   slug: string;
@@ -351,6 +352,12 @@ const ArticleView: React.FC<ArticleViewProps> = ({ slug, onBack, onSelectArticle
 
   return (
     <div className="min-h-screen bg-slate-50">
+      <SEO 
+        title={`${article.title} | CanPay Insights`}
+        description={article.excerpt}
+        keywords={`${article.category}, Canadian tax, ${article.province || 'Canada'}, salary guide, payroll`}
+        canonicalUrl={`https://www.canpayinsights.ca/blog/${slug}`}
+      />
       {/* Article Header */}
       <div className="bg-white border-b border-slate-200">
         <div className="max-w-4xl mx-auto px-4 py-8">

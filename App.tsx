@@ -15,6 +15,7 @@ import ArticleView from './src/content/components/ArticleView';
 import ProvinceComparison from './src/content/components/ProvinceComparison';
 import UserMenu from './components/UserMenu';
 import AuthModal from './components/AuthModal';
+import LoadingOverlay from './components/LoadingOverlay';
 import { SalaryInputs, Province, CalculationMode, AnnualSalaryInputs, PayFrequency, TimesheetInputs, CalculationResult } from './types';
 import { calculateSalary, calculateFromAnnualSalary, calculateFromTimesheet } from './utils/taxEngine';
 import { useAuth, type OAuthProvider } from './hooks/useAuth';
@@ -73,6 +74,9 @@ const App: React.FC = () => {
   // Page states: 'home' = mode selection, 'calculator' = calculator, 'privacy' = privacy policy, 'blog' = blog
   const [currentPage, setCurrentPage] = useState<AppPage>('home');
   const [currentArticleSlug, setCurrentArticleSlug] = useState<string | null>(null);
+  
+  // Global loading state for page transitions
+  const [isPageLoading, setIsPageLoading] = useState(false);
 
   // Auth modal state
   const [showAuthModal, setShowAuthModal] = useState(false);
@@ -197,26 +201,37 @@ const App: React.FC = () => {
   
   // Return to home
   const handleBackToHome = useCallback(() => {
+    setIsPageLoading(true);
     setCurrentPage('home');
     setCurrentArticleSlug(null);
+    setTimeout(() => setIsPageLoading(false), 300);
+  }, []);
+
+  // Navigate with loading state
+  const navigateWithLoading = useCallback((page: AppPage, articleSlug?: string | null) => {
+    setIsPageLoading(true);
+    if (articleSlug !== undefined) {
+      setCurrentArticleSlug(articleSlug);
+    }
+    setCurrentPage(page);
+    setTimeout(() => setIsPageLoading(false), 300);
   }, []);
 
   // Go to privacy page
   const handleGoToPrivacy = useCallback(() => {
-    setCurrentPage('privacy');
-  }, []);
+    navigateWithLoading('privacy');
+  }, [navigateWithLoading]);
 
   // Go to blog
   const handleGoToBlog = useCallback(() => {
-    setCurrentPage('blog');
-    setCurrentArticleSlug(null);
-  }, []);
+    navigateWithLoading('blog', null);
+  }, [navigateWithLoading]);
 
   // Select article
   const handleSelectArticle = useCallback((slug: string) => {
-    setCurrentArticleSlug(slug);
+    navigateWithLoading('blog', slug);
     window.scrollTo(0, 0);
-  }, []);
+  }, [navigateWithLoading]);
 
   // Handle sign in
   const handleSignIn = useCallback(async (provider: OAuthProvider) => {
@@ -368,14 +383,14 @@ const App: React.FC = () => {
         currentArticleSlug ? (
           <ArticleView 
             slug={currentArticleSlug} 
-            onBack={() => setCurrentArticleSlug(null)}
+            onBack={() => navigateWithLoading('blog', null)}
             onSelectArticle={handleSelectArticle}
           />
         ) : (
           <BlogList onSelectArticle={handleSelectArticle} />
         )
       ) : currentPage === 'province-comparison' ? (
-        <ProvinceComparison onBackToBlog={() => setCurrentPage('blog')} />
+        <ProvinceComparison onBackToBlog={() => navigateWithLoading('blog')} />
       ) : currentPage !== 'privacy' && (
         <main className="max-w-6xl mx-auto px-4 py-8" role="main" aria-label="Payroll Calculator">
           {/* Home Page - Mode Selection */}
@@ -594,6 +609,9 @@ const App: React.FC = () => {
         message="Sign in to save your calculation data and access it from any device. Your inputs will be automatically restored when you return."
       />
       
+      {/* Global Loading Overlay */}
+      <LoadingOverlay isLoading={isPageLoading} message="Loading..." />
+
       {/* Vercel Analytics & Speed Insights */}
       <Analytics />
       <SpeedInsights />

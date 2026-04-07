@@ -2,6 +2,7 @@ import React, { useState, useMemo } from 'react';
 import { PROVINCIAL_DATA } from '../../../constants';
 import { calculateFromAnnualSalary } from '../../../utils/taxEngine';
 import { PayFrequency } from '../../../types';
+import SEO from '../../../components/SEO';
 
 interface ProvinceComparisonProps {
   onBackToBlog: () => void;
@@ -9,7 +10,8 @@ interface ProvinceComparisonProps {
 
 const ProvinceComparison: React.FC<ProvinceComparisonProps> = ({ onBackToBlog }) => {
   const [annualSalary, setAnnualSalary] = useState<number>(75000);
-  const [selectedProvinces, setSelectedProvinces] = useState<string[]>(['ON', 'AB', 'BC']);
+  const [selectedProvinces, setSelectedProvinces] = useState<string[]>([]);
+  const [isComparing, setIsComparing] = useState<boolean>(false);
 
   const provinces = useMemo(() => {
     return Object.entries(PROVINCIAL_DATA).map(([code, data]) => ({
@@ -19,6 +21,9 @@ const ProvinceComparison: React.FC<ProvinceComparisonProps> = ({ onBackToBlog })
   }, []);
 
   const comparisonData = useMemo(() => {
+    if (!isComparing || selectedProvinces.length < 2) {
+      return [];
+    }
     try {
       return selectedProvinces.map(provinceCode => {
         const result = calculateFromAnnualSalary({
@@ -45,13 +50,23 @@ const ProvinceComparison: React.FC<ProvinceComparisonProps> = ({ onBackToBlog })
       console.error('Error calculating comparison data:', error);
       return [];
     }
-  }, [annualSalary, selectedProvinces]);
+  }, [annualSalary, selectedProvinces, isComparing]);
 
   const toggleProvince = (provinceCode: string) => {
     if (selectedProvinces.includes(provinceCode)) {
       setSelectedProvinces(prev => prev.filter(p => p !== provinceCode));
+      // 如果取消选择后省份少于2个，重置对比状态
+      if (selectedProvinces.length <= 2) {
+        setIsComparing(false);
+      }
     } else if (selectedProvinces.length < 6) {
       setSelectedProvinces(prev => [...prev, provinceCode]);
+    }
+  };
+
+  const handleStartComparison = () => {
+    if (selectedProvinces.length >= 2) {
+      setIsComparing(true);
     }
   };
 
@@ -69,6 +84,12 @@ const ProvinceComparison: React.FC<ProvinceComparisonProps> = ({ onBackToBlog })
 
   return (
     <div className="min-h-screen bg-slate-50">
+      <SEO 
+        title="Compare Canadian Provincial Taxes 2025/2026 | CanPay Insights"
+        description="Compare take-home pay across all Canadian provinces. See exactly how much more you'd earn with the same salary in Alberta, BC, Ontario, Quebec and more."
+        keywords="province comparison, provincial tax Canada, Alberta vs Ontario tax, BC tax rate, Quebec tax, salary comparison"
+        canonicalUrl="https://www.canpayinsights.ca/compare-provinces"
+      />
       {/* Hero Section */}
       <div className="bg-gradient-to-br from-red-600 to-red-800 text-white py-12">
         <div className="max-w-6xl mx-auto px-4">
@@ -118,7 +139,7 @@ const ProvinceComparison: React.FC<ProvinceComparisonProps> = ({ onBackToBlog })
           {/* Province Selector */}
           <div>
             <label className="block text-sm font-bold text-slate-700 mb-2">
-              Select Provinces to Compare (max 6)
+              Select Provinces to Compare (select at least 2, max 6)
             </label>
             <div className="flex flex-wrap gap-2">
               {provinces.map(({ code, name }) => (
@@ -135,15 +156,54 @@ const ProvinceComparison: React.FC<ProvinceComparisonProps> = ({ onBackToBlog })
                 </button>
               ))}
             </div>
+            <p className="text-xs text-slate-500 mt-2">
+              Selected: {selectedProvinces.length} province{selectedProvinces.length !== 1 ? 's' : ''}
+              {selectedProvinces.length > 0 && (
+                <span className="ml-2 text-slate-400">
+                  ({selectedProvinces.map(code => provinces.find(p => p.code === code)?.name).join(', ')})
+                </span>
+              )}
+            </p>
+          </div>
+
+          {/* Compare Button */}
+          <div className="mt-6">
+            <button
+              onClick={handleStartComparison}
+              disabled={selectedProvinces.length < 2}
+              className={`px-6 py-3 rounded-lg font-bold text-white transition-all ${
+                selectedProvinces.length >= 2
+                  ? 'bg-red-600 hover:bg-red-700 shadow-md hover:shadow-lg'
+                  : 'bg-slate-300 cursor-not-allowed'
+              }`}
+            >
+              {selectedProvinces.length < 2 
+                ? `Select at least ${2 - selectedProvinces.length} more province${selectedProvinces.length === 0 ? 's' : ''} to compare`
+                : 'Start Comparison'
+              }
+            </button>
           </div>
         </div>
       </div>
 
       {/* Results */}
       <div className="max-w-6xl mx-auto px-4 py-8">
-        {comparisonData.length === 0 ? (
+        {!isComparing || comparisonData.length === 0 ? (
           <div className="bg-white rounded-xl shadow-sm border border-slate-200 p-8 text-center">
-            <p className="text-slate-600">Please select at least one province to compare.</p>
+            <div className="w-16 h-16 mx-auto mb-4 bg-slate-100 rounded-full flex items-center justify-center">
+              <svg className="w-8 h-8 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
+              </svg>
+            </div>
+            <p className="text-slate-600 font-medium mb-2">
+              {selectedProvinces.length < 2 
+                ? `Please select at least ${2 - selectedProvinces.length} more province${selectedProvinces.length === 0 ? 's' : ''} to compare.`
+                : 'Click "Start Comparison" to see the results.'
+              }
+            </p>
+            <p className="text-sm text-slate-400">
+              Select 2-6 provinces to compare their tax differences
+            </p>
           </div>
         ) : (
           <>

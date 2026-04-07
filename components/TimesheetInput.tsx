@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { TimesheetInputs, TimesheetEntry, Province, PayFrequency } from '../types';
 import { PROVINCIAL_DATA } from '../constants';
 import { useAnonymousTimesheet } from '../hooks/useAnonymousTimesheet';
+import Toast from './Toast';
 
 interface Props {
   inputs: TimesheetInputs;
@@ -11,6 +12,7 @@ interface Props {
 const TimesheetInput: React.FC<Props> = ({ inputs, setInputs }) => {
   const { isSyncing, lastSyncTime, loadEntries, saveEntry, deleteEntry } = useAnonymousTimesheet();
   const [isInitialLoad, setIsInitialLoad] = useState(true);
+  const [toast, setToast] = useState<{ message: string; type: 'error' | 'success' } | null>(null);
 
   // Load from Supabase on mount
   useEffect(() => {
@@ -135,7 +137,7 @@ const TimesheetInput: React.FC<Props> = ({ inputs, setInputs }) => {
     // Validate time entry
     const error = validateEntry(newEntry.checkIn, newEntry.checkOut, newEntry.unpaidBreakMinutes);
     if (error) {
-      alert(error);
+      setToast({ message: error, type: 'error' });
       return;
     }
 
@@ -475,6 +477,15 @@ const TimesheetInput: React.FC<Props> = ({ inputs, setInputs }) => {
           </ul>
         </div>
       </div>
+
+      {/* Toast Notification */}
+      {toast && (
+        <Toast
+          message={toast.message}
+          type={toast.type}
+          onClose={() => setToast(null)}
+        />
+      )}
     </div>
   );
 };
