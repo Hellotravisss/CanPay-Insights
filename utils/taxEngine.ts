@@ -22,7 +22,21 @@ import {
   CPP2_MAX_PENSIONABLE_EARNINGS,
   EI_RATE,
   EI_MAX_CONTRIBUTION,
-  EI_MAX_INSURABLE_EARNINGS
+  EI_MAX_INSURABLE_EARNINGS,
+  // Quebec special imports
+  QPP_RATE,
+  QPP_MAX_CONTRIBUTION,
+  QPP_EXEMPTION,
+  QPP_MAX_PENSIONABLE_EARNINGS,
+  QPP2_RATE,
+  QPP2_MAX_CONTRIBUTION,
+  QPP2_MAX_PENSIONABLE_EARNINGS,
+  QPIP_RATE,
+  QPIP_MAX_CONTRIBUTION,
+  QPIP_MAX_INSURABLE_EARNINGS,
+  QC_EI_RATE,
+  QC_EI_MAX_CONTRIBUTION,
+  QUEBEC_ABATEMENT_RATE
 } from '../constants';
 
 // ============================================
@@ -51,13 +65,36 @@ const calculateProgressiveTax = (income: number, brackets: TaxBracket[]): number
 };
 
 /**
- * Calculate CPP contributions (including CPP2 for high earners)
+ * Calculate CPP/QPP contributions (including CPP2/QPP2 for high earners)
  * 2025 CPP Structure:
  * - Tier 1: 5.95% on earnings between $3,500 and $73,600
  * - Tier 2 (CPP2): 4.00% on earnings between $73,600 and $81,200
+ * 
+ * 2025 QPP Structure (Quebec only):
+ * - Tier 1: 6.4% on earnings between $3,500 and $83,200
+ * - Tier 2 (QPP2): 7.15% on earnings between $83,200 and $93,300
  */
-const calculateCPP = (annualGross: number): { cpp1: number; cpp2: number; total: number } => {
-  // CPP Tier 1 Calculation
+const calculateCPP = (annualGross: number, isQuebec: boolean = false): { cpp1: number; cpp2: number; total: number } => {
+  if (isQuebec) {
+    // QPP Tier 1 Calculation (Quebec)
+    const pensionableEarningsTier1 = Math.max(0, Math.min(annualGross, QPP_MAX_PENSIONABLE_EARNINGS) - QPP_EXEMPTION);
+    const qpp1 = Math.min(pensionableEarningsTier1 * QPP_RATE, QPP_MAX_CONTRIBUTION);
+    
+    // QPP Tier 2 (QPP2) Calculation - for high earners
+    let qpp2 = 0;
+    if (annualGross > QPP_MAX_PENSIONABLE_EARNINGS) {
+      const pensionableEarningsTier2 = Math.min(annualGross, QPP2_MAX_PENSIONABLE_EARNINGS) - QPP_MAX_PENSIONABLE_EARNINGS;
+      qpp2 = Math.min(pensionableEarningsTier2 * QPP2_RATE, QPP2_MAX_CONTRIBUTION);
+    }
+    
+    return {
+      cpp1: qpp1,
+      cpp2: qpp2,
+      total: qpp1 + qpp2
+    };
+  }
+  
+  // CPP Tier 1 Calculation (Federal/Other provinces)
   const pensionableEarningsTier1 = Math.max(0, Math.min(annualGross, CPP_MAX_PENSIONABLE_EARNINGS) - CPP_EXEMPTION);
   const cpp1 = Math.min(pensionableEarningsTier1 * CPP_RATE, CPP_MAX_CONTRIBUTION);
   
@@ -76,10 +113,24 @@ const calculateCPP = (annualGross: number): { cpp1: number; cpp2: number; total:
 };
 
 /**
- * Calculate EI premiums
- * 2025: 1.64% on earnings up to $65,700
+ * Calculate QPIP (Québec Parental Insurance Plan) contributions
+ * Only applies to Quebec residents
  */
-const calculateEI = (annualGross: number): number => {
+const calculateQPIP = (annualGross: number): number => {
+  const insurableEarnings = Math.min(annualGross, QPIP_MAX_INSURABLE_EARNINGS);
+  return Math.min(insurableEarnings * QPIP_RATE, QPIP_MAX_CONTRIBUTION);
+};
+
+/**
+ * Calculate EI premiums
+ * 2025 Federal: 1.64% on earnings up to $65,700
+ * 2025 Quebec: 1.27% on earnings up to $65,700 (lower due to QPIP)
+ */
+const calculateEI = (annualGross: number, isQuebec: boolean = false): number => {
+  if (isQuebec) {
+    const insurableEarnings = Math.min(annualGross, EI_MAX_INSURABLE_EARNINGS);
+    return Math.min(insurableEarnings * QC_EI_RATE, QC_EI_MAX_CONTRIBUTION);
+  }
   const insurableEarnings = Math.min(annualGross, EI_MAX_INSURABLE_EARNINGS);
   return Math.min(insurableEarnings * EI_RATE, EI_MAX_CONTRIBUTION);
 };
@@ -87,16 +138,22 @@ const calculateEI = (annualGross: number): number => {
 /**
  * Calculate total tax with proper BPA (Basic Personal Amount) tax credit
  * BPA is a TAX CREDIT, not a deduction from income
+ * 
+ * SPECIAL HANDLING FOR QUEBEC:
+ * - Quebec Abatement: 16.5% reduction on federal tax
+ * - Quebec residents pay into QPP instead of CPP (higher rate)
+ * - Quebec residents pay into QPIP
+ * - Quebec EI rate is lower (1.27% vs 1.64%)
  */
 const calculateTotalTax = (
   annualGross: number,
   cppTotal: number,
   province: string
 ): { federalTax: number; provincialTax: number; total: number } => {
+  const isQuebec = province === Province.QC;
   const provinceRule = PROVINCIAL_DATA[province] || PROVINCIAL_DATA[Province.ON];
   
-  // Step 1: Calculate tax on full income (CPP/EI are not deductible for federal tax in basic calculation)
-  // Note: Quebec has different rules
+  // Step 1: Calculate tax on full income
   const federalTaxBeforeCredits = calculateProgressiveTax(annualGross, FEDERAL_BRACKETS);
   const provincialTaxBeforeCredits = calculateProgressiveTax(annualGross, provinceRule.brackets);
   
@@ -112,15 +169,21 @@ const calculateTotalTax = (
   const cppFederalCredit = cppTotal * 0.15;
   const cppProvincialCredit = cppTotal * lowestProvincialRate;
   
-  const eiFederalCredit = calculateEI(annualGross) * 0.15;
-  const eiProvincialCredit = calculateEI(annualGross) * lowestProvincialRate;
+  const eiAnnual = calculateEI(annualGross, isQuebec);
+  const eiFederalCredit = eiAnnual * 0.15;
+  const eiProvincialCredit = eiAnnual * lowestProvincialRate;
   
   // Step 3: Apply tax credits (cannot reduce tax below zero)
   const totalFederalCredits = federalBPACredit + cppFederalCredit + eiFederalCredit;
   const totalProvincialCredits = provincialBPACredit + cppProvincialCredit + eiProvincialCredit;
   
-  const federalTax = Math.max(0, federalTaxBeforeCredits - totalFederalCredits);
+  let federalTax = Math.max(0, federalTaxBeforeCredits - totalFederalCredits);
   const provincialTax = Math.max(0, provincialTaxBeforeCredits - totalProvincialCredits);
+  
+  // Step 4: Apply Quebec Abatement (16.5% reduction on federal tax)
+  if (isQuebec) {
+    federalTax = federalTax * (1 - QUEBEC_ABATEMENT_RATE);
+  }
   
   return {
     federalTax,
@@ -236,12 +299,14 @@ export const calculateSalary = (inputs: SalaryInputs): CalculationResult => {
   const annualGross = grossPayBiWeekly * 26;
   
   // 6. Deductions using new accurate calculation
-  const cppResult = calculateCPP(annualGross);
-  const eiAnnual = calculateEI(annualGross);
+  const isQuebec = inputs.province === Province.QC;
+  const cppResult = calculateCPP(annualGross, isQuebec);
+  const eiAnnual = calculateEI(annualGross, isQuebec);
+  const qpipAnnual = isQuebec ? calculateQPIP(annualGross) : 0;
   const taxResult = calculateTotalTax(annualGross, cppResult.total, inputs.province);
   
   const totalTaxAnnual = taxResult.total;
-  const totalDeductionsAnnual = totalTaxAnnual + cppResult.total + eiAnnual;
+  const totalDeductionsAnnual = totalTaxAnnual + cppResult.total + eiAnnual + qpipAnnual;
   const netPayAnnual = annualGross - totalDeductionsAnnual;
   
   return {
@@ -253,7 +318,7 @@ export const calculateSalary = (inputs: SalaryInputs): CalculationResult => {
     grossPayBiWeekly,
     federalTax: taxResult.federalTax / 26,
     provincialTax: taxResult.provincialTax / 26,
-    cppDeduction: cppResult.total / 26,
+    cppDeduction: (cppResult.total + qpipAnnual) / 26,
     eiDeduction: eiAnnual / 26,
     netPayBiWeekly: netPayAnnual / 26,
     
@@ -288,14 +353,16 @@ export const calculateFromAnnualSalary = (inputs: AnnualSalaryInputs): Calculati
   }
   
   const annualGross = annualSalary;
+  const isQuebec = province === Province.QC;
   
   // Calculate deductions
-  const cppResult = calculateCPP(annualGross);
-  const eiAnnual = calculateEI(annualGross);
+  const cppResult = calculateCPP(annualGross, isQuebec);
+  const eiAnnual = calculateEI(annualGross, isQuebec);
+  const qpipAnnual = isQuebec ? calculateQPIP(annualGross) : 0;
   const taxResult = calculateTotalTax(annualGross, cppResult.total, province);
   
   const totalTaxAnnual = taxResult.total;
-  const totalDeductionsAnnual = totalTaxAnnual + cppResult.total + eiAnnual;
+  const totalDeductionsAnnual = totalTaxAnnual + cppResult.total + eiAnnual + qpipAnnual;
   const netPayAnnual = annualGross - totalDeductionsAnnual;
   
   // Convert to selected pay period
@@ -317,7 +384,7 @@ export const calculateFromAnnualSalary = (inputs: AnnualSalaryInputs): Calculati
     grossPayBiWeekly: grossPayPerPeriod,
     federalTax: taxResult.federalTax / periodsPerYear,
     provincialTax: taxResult.provincialTax / periodsPerYear,
-    cppDeduction: cppResult.total / periodsPerYear,
+    cppDeduction: (cppResult.total + qpipAnnual) / periodsPerYear,
     eiDeduction: eiAnnual / periodsPerYear,
     netPayBiWeekly: netPayPerPeriod,
     
@@ -414,12 +481,14 @@ export const calculateFromTimesheet = (inputs: TimesheetInputs): CalculationResu
   const annualGross = totalGross * periodsPerYear;
   
   // Calculate deductions
-  const cppResult = calculateCPP(annualGross);
-  const eiAnnual = calculateEI(annualGross);
+  const isQuebec = province === Province.QC;
+  const cppResult = calculateCPP(annualGross, isQuebec);
+  const eiAnnual = calculateEI(annualGross, isQuebec);
+  const qpipAnnual = isQuebec ? calculateQPIP(annualGross) : 0;
   const taxResult = calculateTotalTax(annualGross, cppResult.total, province);
   
   const totalTaxAnnual = taxResult.total;
-  const totalDeductionsAnnual = totalTaxAnnual + cppResult.total + eiAnnual;
+  const totalDeductionsAnnual = totalTaxAnnual + cppResult.total + eiAnnual + qpipAnnual;
   const netPayAnnual = annualGross - totalDeductionsAnnual;
   
   const grossPayPerPeriod = totalGross;
@@ -434,7 +503,7 @@ export const calculateFromTimesheet = (inputs: TimesheetInputs): CalculationResu
     grossPayBiWeekly: totalGross,
     federalTax: taxResult.federalTax / periodsPerYear,
     provincialTax: taxResult.provincialTax / periodsPerYear,
-    cppDeduction: cppResult.total / periodsPerYear,
+    cppDeduction: (cppResult.total + qpipAnnual) / periodsPerYear,
     eiDeduction: eiAnnual / periodsPerYear,
     netPayBiWeekly: netPayPerPeriod,
     

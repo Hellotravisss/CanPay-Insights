@@ -33,6 +33,32 @@ export const CPP2_MAX_PENSIONABLE_EARNINGS = 81200; // 2025 YAMPE
 export const CPP2_MIN_PENSIONABLE_EARNINGS = 73600; // Same as CPP max
 
 // ============================================
+// QUEBEC SPECIAL CONTRIBUTIONS (2025)
+// ============================================
+// QPP (Québec Pension Plan) - Higher rates than CPP
+export const QPP_RATE = 0.064; // 6.4% employee contribution (vs 5.95% CPP)
+export const QPP_MAX_CONTRIBUTION = 5100; // 2025 max (approximate)
+export const QPP_EXEMPTION = 3500; // Same as CPP
+export const QPP_MAX_PENSIONABLE_EARNINGS = 83200; // 2025 YMPE for QPP
+
+// QPP2 Second Tier
+export const QPP2_RATE = 0.0715; // 7.15% employee contribution (vs 4.00% CPP2)
+export const QPP2_MAX_CONTRIBUTION = 724; // 2025 max (approximate)
+export const QPP2_MAX_PENSIONABLE_EARNINGS = 93300; // 2025 YAMPE for QPP
+
+// QPIP (Québec Parental Insurance Plan)
+export const QPIP_RATE = 0.00494; // 0.494% employee contribution
+export const QPIP_MAX_CONTRIBUTION = 424; // 2025 max (approximate)
+export const QPIP_MAX_INSURABLE_EARNINGS = 86000; // 2025 MIE for QPIP
+
+// Quebec EI - Lower rate due to QPIP
+export const QC_EI_RATE = 0.0127; // 1.27% employee premium (vs 1.64% federal)
+export const QC_EI_MAX_CONTRIBUTION = 834; // 2025 max (approximate)
+
+// Quebec Abatement - 16.5% reduction on federal tax
+export const QUEBEC_ABATEMENT_RATE = 0.165;
+
+// ============================================
 // EI PREMIUMS (2025)
 // ============================================
 export const EI_RATE = 0.0164; // 1.64% employee premium rate
