@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { getArticleBySlug, allArticles, Article } from '../articles-data';
-import SEO from '../../components/SEO';
+import SEO from '../../../components/SEO';
 
 interface ArticleViewProps {
   slug: string;
