@@ -60,7 +60,7 @@ type AppPage = 'home' | 'calculator' | 'privacy' | 'blog' | 'province-comparison
 
 const App: React.FC = () => {
   // Auth
-  const { user, isAuthenticated, signInWithOAuth } = useAuth();
+  const { user, isAuthenticated, signInWithOAuth, signInWithEmail } = useAuth();
   const userId = user?.id || null;
 
   // User settings persistence
@@ -606,6 +606,7 @@ const App: React.FC = () => {
         isOpen={showAuthModal}
         onClose={() => setShowAuthModal(false)}
         onSignIn={handleSignIn}
+        onSignInWithEmail={signInWithEmail}
         message="Sign in to save your calculation data and access it from any device. Your inputs will be automatically restored when you return."
       />
       

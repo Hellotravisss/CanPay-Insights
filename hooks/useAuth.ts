@@ -2,7 +2,7 @@ import { useEffect, useState, useCallback } from 'react';
 import { supabase } from '../lib/supabase';
 import type { User, Session, Provider } from '@supabase/supabase-js';
 
-export type OAuthProvider = 'google' | 'facebook';
+export type OAuthProvider = 'google';
 
 // Parse hash params from URL
 const parseHashParams = (hash: string): Record<string, string> => {
@@ -26,6 +26,7 @@ export interface AuthState {
 
 export interface AuthActions {
   signInWithOAuth: (provider: OAuthProvider) => Promise<void>;
+  signInWithEmail: (email: string) => Promise<void>;
   signOut: () => Promise<void>;
   refreshSession: () => Promise<void>;
 }
@@ -124,6 +125,19 @@ export const useAuth = (): AuthState & AuthActions => {
     }
   }, []);
 
+  // 邮箱 Magic Link 登录
+  const signInWithEmail = useCallback(async (email: string) => {
+    const redirectUrl = `${window.location.origin}/`;
+    const { error } = await supabase.auth.signInWithOtp({
+      email,
+      options: { emailRedirectTo: redirectUrl },
+    });
+    if (error) {
+      console.error('Error signing in with email:', error);
+      throw error;
+    }
+  }, []);
+
   // 登出
   const signOut = useCallback(async () => {
     const { error } = await supabase.auth.signOut();
@@ -148,6 +162,7 @@ export const useAuth = (): AuthState & AuthActions => {
     loading,
     isAuthenticated: !!user,
     signInWithOAuth,
+    signInWithEmail,
     signOut,
     refreshSession,
   };
