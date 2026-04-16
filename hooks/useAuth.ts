@@ -2,7 +2,7 @@ import { useEffect, useState, useCallback } from 'react';
 import { supabase } from '../lib/supabase';
 import type { User, Session, Provider } from '@supabase/supabase-js';
 
-export type OAuthProvider = 'google' | 'facebook' | 'apple';
+export type OAuthProvider = 'google' | 'facebook';
 
 // Parse hash params from URL
 const parseHashParams = (hash: string): Record<string, string> => {
