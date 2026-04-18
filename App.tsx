@@ -340,9 +340,7 @@ const App: React.FC = () => {
               onClick={handleBackToHome}
               className="flex items-center gap-3 hover:opacity-80 transition-opacity"
             >
-              <div className="w-10 h-10 rounded-lg flex items-center justify-center overflow-hidden bg-red-600 shadow-red-200 shadow-lg">
-                <img src="/logo.png" alt="CanPay" className="w-8 h-8 object-contain" />
-              </div>
+              <img src="/logo.png" alt="CanPay" className="w-10 h-10 rounded-lg object-contain shadow-lg" />
               <h1 className="text-xl font-bold text-slate-800 tracking-tight hidden sm:block">CanPay <span className="text-red-600 font-light">Insights</span></h1>
             </button>
             
@@ -398,9 +396,7 @@ const App: React.FC = () => {
             <div className="min-h-[80vh] flex flex-col items-center justify-center">
               {/* Logo Section */}
               <div className="text-center mb-8">
-                <div className="w-24 h-24 mx-auto mb-4 rounded-2xl overflow-hidden bg-red-600 shadow-red-200 shadow-xl flex items-center justify-center">
-                  <img src="/logo.png" alt="CanPay Insights" className="w-20 h-20 object-contain" />
-                </div>
+                <img src="/logo.png" alt="CanPay Insights" className="w-24 h-24 mx-auto mb-4 rounded-2xl object-contain shadow-red-200 shadow-xl" />
                 <h1 className="text-4xl md:text-5xl font-bold text-slate-900 mb-2">
                   CanPay <span className="text-red-600 font-light">Insights</span>
                 </h1>
