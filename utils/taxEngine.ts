@@ -360,7 +360,7 @@ const getPeriodsPerYear = (frequency: PayFrequency): number => {
 export const calculateFromAnnualSalary = (inputs: AnnualSalaryInputs): CalculationResult => {
   const { annualSalary, province, payFrequency } = inputs;
   
-  const provinceRule = PROVINCIAL_DATA[province as keyof typeof PROVINCIAL_DATA];
+  const provinceRule = PROVINCIAL_DATA[province as keyof typeof PROVINCIAL_DATA] || PROVINCIAL_DATA[Province.ON];
   if (!provinceRule) {
     throw new Error(`Invalid province: ${province}`);
   }
@@ -416,7 +416,7 @@ export const calculateFromAnnualSalary = (inputs: AnnualSalaryInputs): Calculati
 export const calculateFromTimesheet = (inputs: TimesheetInputs): CalculationResult => {
   const { hourlyWage, province, payFrequency, entries } = inputs;
   
-  const provinceRule = PROVINCIAL_DATA[province as keyof typeof PROVINCIAL_DATA];
+  const provinceRule = PROVINCIAL_DATA[province as keyof typeof PROVINCIAL_DATA] || PROVINCIAL_DATA[Province.ON];
   if (!provinceRule) {
     throw new Error(`Invalid province: ${province}`);
   }

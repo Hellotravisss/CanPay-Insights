@@ -24,7 +24,7 @@ import { useCalculationHistory, type CalculationRecord } from './hooks/useCalcul
 
 // Default State - 简易估算（时薪）
 const DEFAULT_SIMPLE_INPUTS: SalaryInputs = {
-  province: 'ON', // Use province code abbreviation
+  province: Province.ON,
   hourlyWage: 20.00,
   shift: {
     startTime: "09:00",
@@ -43,14 +43,14 @@ const DEFAULT_SIMPLE_INPUTS: SalaryInputs = {
 
 // Default State - Annual Salary (Fixed at Bi-Weekly)
 const DEFAULT_ANNUAL_INPUTS: AnnualSalaryInputs = {
-  province: 'ON', // Use province code abbreviation
+  province: Province.ON,
   annualSalary: 100000,
-  payFrequency: PayFrequency.BI_WEEKLY // Fixed for annual salary mode
+  payFrequency: PayFrequency.BI_WEEKLY
 };
 
 // Default State - Timesheet
 const DEFAULT_TIMESHEET_INPUTS: TimesheetInputs = {
-  province: 'ON', // Use province code abbreviation
+  province: Province.ON,
   hourlyWage: 20.00,
   payFrequency: PayFrequency.WEEKLY,
   entries: []
@@ -101,19 +101,19 @@ const App: React.FC = () => {
         setMode(settings.lastMode);
       }
       
-      // Restore simple inputs
+      // Restore simple inputs (merge with defaults for forward-compat)
       if (settings.simple) {
-        setSimpleInputs(settings.simple);
+        setSimpleInputs({ ...DEFAULT_SIMPLE_INPUTS, ...settings.simple });
       }
       
       // Restore annual inputs
       if (settings.annual) {
-        setAnnualInputs(settings.annual);
+        setAnnualInputs({ ...DEFAULT_ANNUAL_INPUTS, ...settings.annual });
       }
       
       // Restore timesheet inputs
       if (settings.timesheet) {
-        setTimesheetInputs(settings.timesheet);
+        setTimesheetInputs({ ...DEFAULT_TIMESHEET_INPUTS, ...settings.timesheet });
       }
     }
   }, [isSettingsLoading, settings]);
@@ -245,15 +245,20 @@ const App: React.FC = () => {
 
   // Calculate results based on mode
   const results = useMemo(() => {
-    switch (mode) {
-      case CalculationMode.SIMPLE:
-        return calculateSalary(simpleInputs);
-      case CalculationMode.ANNUAL:
-        return calculateFromAnnualSalary(annualInputs);
-      case CalculationMode.TIMESHEET:
-        return calculateFromTimesheet(timesheetInputs);
-      default:
-        return calculateSalary(simpleInputs);
+    try {
+      switch (mode) {
+        case CalculationMode.SIMPLE:
+          return calculateSalary(simpleInputs);
+        case CalculationMode.ANNUAL:
+          return calculateFromAnnualSalary(annualInputs);
+        case CalculationMode.TIMESHEET:
+          return calculateFromTimesheet(timesheetInputs);
+        default:
+          return calculateSalary(simpleInputs);
+      }
+    } catch (err) {
+      console.error('Calculation error:', err);
+      return calculateSalary(simpleInputs);
     }
   }, [mode, simpleInputs, annualInputs, timesheetInputs]);
 
