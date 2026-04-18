@@ -34,67 +34,41 @@ export const tipsArticles: Article[] = [
     imageUrl: 'https://images.unsplash.com/photo-1579621970795-87facc2f976d?w=800&q=80',
     content: `<b>Understanding Canada's Tax-Advantaged Accounts</b>
 
-Canada offers two primary vehicles for tax-advantaged savings that every resident should understand and utilize to build long-term wealth. The Registered Retirement Savings Plan (RRSP) and Tax-Free Savings Account (TFSA) serve different purposes and offer distinct advantages depending on your financial situation, income level, and savings goals. Understanding how each account works and when to prioritize one over the other can significantly impact your lifetime wealth accumulation and tax efficiency.
+Canada offers two primary vehicles for tax-advantaged savings: the Registered Retirement Savings Plan (RRSP) and Tax-Free Savings Account (TFSA). RRSP contributions provide immediate tax deductions, while investment growth in both is tax-sheltered.
 
-Both accounts provide substantial benefits compared to non-registered investment accounts, but they operate on different principles. RRSP contributions provide immediate tax deductions, reducing your current taxable income, while investment growth remains tax-sheltered until withdrawal. TFSA contributions do not provide tax deductions, but investment growth and withdrawals are completely tax-free. These fundamental differences drive different optimal uses for each account type.
-
-The choice between RRSP and TFSA contributions often depends on your current marginal tax rate versus your expected tax rate in retirement. When your current tax rate exceeds your expected retirement tax rate, RRSP contributions generally provide better after-tax outcomes. When your expected retirement tax rate equals or exceeds your current rate, TFSA contributions may be preferable. However, this simple rule ignores important nuances that sophisticated savers should consider.
+The choice between them often depends on your current marginal tax rate versus your expected rate in retirement. Generally, RRSPs provide better outcomes when your current tax rate is higher than your future retirement rate.
 
 <b>How RRSPs Work and Their Benefits</b>
 
-RRSPs were established in 1957 to encourage Canadians to save for retirement through tax incentives. The fundamental mechanism involves deducting contributions from your current taxable income, receiving immediate tax savings at your marginal rate, and allowing investments to grow tax-free within the account. Upon withdrawal in retirement, funds are taxed as ordinary income at your then-current marginal rate.
+RRSPs allow you to deduct contributions from your taxable income, receiving immediate tax savings at your marginal rate. Funds grow tax-free until withdrawal, at which point they are taxed as ordinary income.
 
-The immediate tax deduction makes RRSPs particularly valuable for high-income earners in top tax brackets. A contributor in a fifty percent marginal tax bracket effectively receives a fifty percent discount on their RRSP contribution through tax savings. This immediate benefit can be reinvested, further accelerating wealth accumulation. Lower-income earners in minimal tax brackets receive less immediate benefit from RRSP contributions.
+For 2025, the maximum RRSP contribution is $31,560, or 18% of your previous year's earned income. Unused room carries forward indefinitely, allowing for catch-up contributions during high-income years.
 
-RRSP contribution room is based on earned income, with Canadians accumulating eighteen percent of previous year's earned income up to an annual maximum. For 2025, the maximum RRSP contribution is thirty-one thousand five hundred sixty dollars, an increase from previous years reflecting inflation adjustments. Unused contribution room carries forward indefinitely, allowing catch-up contributions during high-income years.
-
-Investment options within RRSPs are extensive, including cash, guaranteed investment certificates, bonds, stocks, mutual funds, exchange-traded funds, and certain alternative investments. This flexibility allows investors to build diversified portfolios aligned with their risk tolerance and time horizon. Investment growth compounds tax-free within the account, creating substantial advantages over long time periods.
-
-Withdrawals from RRSPs are taxed as ordinary income in the year withdrawn, with withholding taxes applied at source. The withholding rates are ten percent for amounts up to five thousand dollars, twenty percent for five thousand to fifteen thousand dollars, and thirty percent for amounts above fifteen thousand dollars. These withholding rates may not match your actual tax liability, requiring reconciliation when filing your tax return.
+Withdrawals are subject to withholding taxes: 10% for up to $5,000, 20% for $5,000–$15,000, and 30% for amounts above $15,000. These rates may not match your actual tax liability, requiring reconciliation at tax time.
 
 <b>TFSA Mechanics and Strategic Uses</b>
 
-TFSAs were introduced in 2009 and have become essential tools for Canadian wealth building despite initial skepticism about their relatively modest contribution limits. The TFSA operates on a fundamentally different principle than the RRSP, with no immediate tax deduction but complete tax freedom on growth and withdrawals. This structure provides flexibility and certainty that RRSPs cannot match.
+TFSAs offer no immediate tax deduction, but all investment growth and withdrawals are completely tax-free. This provides flexibility and certainty that RRSPs cannot match.
 
-Annual TFSA contribution room is set by the federal government and indexed to inflation in five hundred dollar increments. For 2025, the TFSA contribution limit is seven thousand dollars, bringing the cumulative contribution room for someone who has been eligible since 2009 to one hundred two thousand dollars. This substantial accumulated room enables significant tax-free investment growth for diligent savers.
-
-The true power of TFSAs emerges over long time periods as compound growth accumulates entirely tax-free. A TFSA maximizer contributing the annual limit from 2009 through 2025 and earning seven percent annual returns would have accumulated over one hundred fifty thousand dollars, with all growth permanently tax-free. This tax-free compounding creates extraordinary wealth over multi-decade horizons.
-
-Withdrawal flexibility represents a key TFSA advantage over RRSPs. TFSA withdrawals can be made at any time for any purpose without tax consequences, and the withdrawn amount is added back to contribution room in the following calendar year. This flexibility makes TFSAs suitable for both long-term retirement savings and medium-term goals such as home purchases, education funding, or emergency reserves.
-
-Investment options within TFSAs mirror those available in RRSPs, providing extensive flexibility for portfolio construction. However, certain speculative strategies including frequent trading may trigger attribution rules or business income treatment. Conservative long-term investing aligns with the TFSA's purpose while avoiding compliance complications.
+For 2025, the TFSA contribution limit is $7,000, bringing the cumulative room for someone eligible since 2009 to $102,000. Withdrawn amounts are added back to your contribution room in the following calendar year.
 
 <b>Strategic Account Prioritization</b>
 
-For most Canadians, the optimal strategy involves utilizing both RRSP and TFSA accounts rather than choosing exclusively between them. The specific allocation of savings between accounts depends on individual circumstances including current income, expected future income, employer pension coverage, and savings goals. A balanced approach often provides the best overall outcome.
+High-income earners should prioritize RRSPs to capture immediate tax savings at top marginal rates. Low-income earners often benefit more from TFSAs to avoid potential clawbacks of GIS and OAS benefits in retirement.
 
-High-income earners in top tax brackets should generally prioritize RRSP contributions to capture immediate tax savings at high marginal rates. The tax refund generated can be reinvested, creating a compounding benefit beyond the initial contribution. As these high earners approach retirement and peak accumulated savings, shifting toward TFSA contributions may provide tax diversification benefits.
-
-Middle-income earners face more nuanced decisions depending on their specific tax situation and retirement expectations. Those with generous defined benefit pension plans may find limited RRSP room due to pension adjustments, making TFSA contributions the primary savings vehicle. Those without workplace pensions should generally maximize both RRSP and TFSA contributions if possible.
-
-Low-income earners often benefit more from TFSA contributions than RRSP contributions due to minimal immediate tax savings and potential clawback of income-tested benefits in retirement. GIS and OAS clawbacks can create effective marginal tax rates in retirement that exceed current rates, making tax-free TFSA withdrawals preferable to taxable RRSP withdrawals.
-
-Young professionals expecting significant income growth should consider prioritizing TFSA contributions during low-income years, preserving RRSP contribution room for higher-tax years when deductions provide greater value. This strategy involves accepting lower immediate tax benefits for greater long-term optimization as careers progress.
+Young professionals expecting significant income growth should consider prioritizing TFSA contributions now, preserving RRSP room for higher-tax years in the future.
 
 <b>Withdrawal Strategies and Sequencing</b>
 
-The sequencing of withdrawals from RRSPs, TFSAs, and non-registered accounts in retirement significantly impacts after-tax income and benefit eligibility. Conventional wisdom suggests depleting taxable accounts first while allowing tax-sheltered accounts to continue growing, but individual circumstances may dictate different approaches.
+Strategic RRSP withdrawals before mandatory conversion to a RRIF at age 71 can help smooth taxable income. This reduces the lifetime tax burden and helps manage benefit eligibility.
 
-Strategic RRSP withdrawals before mandatory conversion to RRIFs can smooth taxable income across retirement years and minimize lifetime tax burden. Withdrawals in low-income years before pension and other income sources begin can reduce future taxable income and preserve benefit eligibility. This strategy requires careful planning and may involve voluntary early RRSP withdrawals.
-
-TFSA withdrawals provide flexibility to manage taxable income for tax bracket management and benefit optimization. Drawing from TFSAs in high-income years while deferring RRSP withdrawals can reduce marginal tax rates and preserve OAS and GIS benefits. This income smoothing requires adequate TFSA balances to support spending needs.
-
-Mandatory RRIF withdrawals beginning at age seventy-three create increasing taxable income that may push retirees into higher brackets and trigger benefit clawbacks. Planning for these mandatory withdrawals through earlier voluntary RRSP withdrawals or converting to RRIFs earlier than required can optimize tax outcomes.
+TFSA withdrawals provide flexibility to manage taxable income during high-expense years. Because they are tax-free, they do not trigger OAS benefit clawbacks.
 
 <b>Practical Implementation Guidelines</b>
 
-For those beginning their savings journey, a practical approach involves contributing to employer-matched pension plans first to capture full matching contributions, then maximizing TFSA contributions, then making additional RRSP contributions as capacity allows. This sequence ensures no free money is left on the table while building flexible tax-free savings.
+A practical priority is to first capture employer-matched pension contributions, then maximize TFSA contributions, and finally make RRSP contributions. This sequence ensures you capture "free money" while building flexible savings.
 
-When choosing between RRSP and TFSA contributions with limited savings capacity, consider your current marginal tax rate, expected retirement tax rate, and need for withdrawal flexibility. As a general rule, RRSP contributions benefit those expecting lower retirement tax rates while TFSA contributions suit those expecting stable or higher retirement tax rates.
-
-Regular contribution programs automate savings discipline and enable dollar-cost averaging into investments. Setting up automatic monthly contributions to RRSPs and TFSAs ensures consistent progress toward savings goals without requiring ongoing willpower. Increasing contribution amounts with salary increases accelerates wealth building.
-
-Reviewing account allocation annually as circumstances change ensures continued optimization. Marriage, children, job changes, income fluctuations, and approaching retirement all warrant reassessment of RRSP versus TFSA prioritization. Flexibility and periodic review outperform rigid long-term plans.`
+Review your account allocation annually. Life changes such as marriage, children, or job shifts warrant a reassessment of your RRSP versus TFSA prioritization.`
   },
   {
     id: 'tips-002',
@@ -180,115 +154,69 @@ As emergency funds grow beyond target levels due to accumulated interest or redu
     imageUrl: 'https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?w=800&q=80',
     content: `<b>The Rise of Side Hustles in Canada</b>
 
-The landscape of work in Canada has transformed dramatically over the past decade, with millions of Canadians now earning income outside their primary employment through various side hustles, freelance work, and entrepreneurial ventures. Whether driving for ride-sharing platforms, selling handmade crafts online, offering consulting services, or monetizing content creation, side hustles have become an integral part of the modern Canadian economy. This additional income, while welcome, creates important tax obligations that many side hustlers fail to fully understand or address.
+Millions of Canadians now earn income through freelance work or gig platforms. The CRA requires reporting all worldwide income, regardless of the amount or whether it was received in cash.
 
-The Canada Revenue Agency requires reporting of all worldwide income, including earnings from side hustles regardless of amount. Many Canadians mistakenly believe that small amounts of side income need not be reported or that cash transactions are invisible to tax authorities. These misconceptions can lead to significant penalties, interest charges, and potential legal consequences when unreported income is discovered through audits, third-party reporting, or other compliance mechanisms.
-
-Understanding the tax implications of side hustles before starting them enables better planning and avoids unpleasant surprises at tax time. Proper record keeping, appropriate business structure selection, and strategic expense tracking can significantly reduce the tax burden on side income while ensuring full compliance with Canadian tax law. This knowledge transforms tax compliance from a dreaded annual ordeal into a manageable aspect of side hustle operations.
+Unreported income can lead to significant penalties and interest. Proper record keeping and understanding your obligations from the start can significantly reduce your tax burden.
 
 <b>Understanding Business Income vs Employment Income</b>
 
-Side hustle income is generally classified as business income rather than employment income, creating fundamentally different tax treatment and compliance requirements. Business income is reported on Form T2125 Statement of Business or Professional Activities and is subject to both income tax and Canada Pension Plan contributions. Unlike employment income, business income allows deduction of reasonable expenses incurred to earn that income.
+Side hustle income is generally classified as business income and reported on Form T2125. Unlike employment income, business income allows you to deduct reasonable expenses incurred to earn it.
 
-The distinction between business income and employment income depends on the nature of the working relationship rather than labels applied by the parties. Factors indicating business income include control over work performance, ownership of tools and equipment, assumption of financial risk, opportunity for profit, and integration with the payer's business. Side hustlers operating as genuine independent businesses clearly earn business income.
-
-Some side hustles may blur the line between employment and business relationships, particularly gig economy work where platforms exercise significant control over workers. The CRA examines the substance of working relationships when classifying income. Side hustlers should understand their classification and the corresponding tax obligations.
-
-Business income reporting requires calculating gross revenue and deducting reasonable expenses to determine net business income. This net amount is then included in total income for tax purposes. The ability to deduct expenses represents a significant advantage over employment income where most expenses cannot be deducted.
+The CRA determines classification based on your control over work and ownership of tools. Most independent side hustlers are considered self-employed for tax purposes.
 
 <b>Tracking Income and Expenses</b>
 
-Proper record keeping is essential for side hustle tax compliance and optimal tax outcomes. Records must support all income and expense amounts reported and must be maintained for six years from the end of the tax year. Inadequate records can lead to disallowed deductions, reassessments, and penalties.
+You must maintain records supporting all reported income and expenses for six years. Inadequate records can lead to disallowed deductions and reassessments.
 
-Income tracking requires recording all revenue received including cash payments, e-transfers, platform payments, and barter transactions. The date, amount, source, and nature of each payment should be documented. Bank statements, platform reports, invoices, and receipts provide supporting documentation.
-
-Expense tracking identifies costs deductible against business income. Eligible expenses must be incurred for the purpose of earning business income and must be reasonable in amount. Common deductible expenses include supplies, equipment, home office costs, vehicle expenses, professional fees, advertising, and business insurance.
-
-Digital tools including accounting software, expense tracking apps, and spreadsheet templates can streamline record keeping. Many side hustlers find dedicated business bank accounts and credit cards simplify tracking by separating business and personal transactions. Investment in proper record keeping systems pays dividends at tax time and in potential audit defense.
+Track all revenue, including e-transfers and platform payments. Using dedicated business bank accounts and accounting software can simplify tracking and ensure accuracy.
 
 <b>Deductible Business Expenses</b>
 
-Understanding which expenses are deductible enables side hustlers to minimize taxable income legally. The general rule permits deduction of any reasonable expense incurred to earn business income, provided it is not of a capital nature, personal, or specifically prohibited by tax law.
+You can deduct any reasonable expense incurred to earn business income. Common deductions include supplies, equipment, home office costs, and advertising.
 
-Home office expenses are deductible for side hustlers using their homes for business activities. Eligible expenses include utilities, maintenance, property taxes, mortgage interest, and rent proportional to the space used for business. The workspace must be used regularly and exclusively for business to claim home office deductions.
-
-Vehicle expenses are deductible for business travel including visiting clients, attending meetings, and delivering goods. Expenses including fuel, maintenance, insurance, license fees, and depreciation can be claimed proportional to business use. Detailed mileage logs are essential to support vehicle expense claims.
-
-Equipment and supplies used in the business are generally deductible in the year purchased if under five hundred dollars or depreciated over several years if more expensive. Computers, phones, tools, and other business assets create tax deductions while enabling business operations.
-
-Professional development, training, and education expenses may be deductible if maintaining or improving skills for the existing business. However, education providing new qualifications or enabling entry into a new field may not be deductible. The distinction requires careful analysis.
-
-Marketing and advertising costs including website development, social media promotion, business cards, and networking event fees are generally deductible. These expenses directly contribute to generating business income and are fully deductible in the year incurred.
+Capital assets over $500, like computers, are typically depreciated over several years. Marketing and advertising costs are generally fully deductible in the year they are incurred.
 
 <b>Canada Pension Plan and Side Hustles</b>
 
-Self-employment income is subject to Canada Pension Plan contributions in addition to income tax. Self-employed individuals must pay both employer and employee portions of CPP, resulting in contributions at double the rate of employees. For 2025, the combined CPP contribution rate on self-employment income is approximately eleven point nine percent on earnings between the basic exemption and maximum pensionable earnings.
+Self-employed individuals must pay both the employer and employee portions of CPP contributions. For 2025, the combined rate is approximately 11.9% on earnings between the basic exemption and maximum pensionable earnings.
 
-The CPP contribution requirement applies to net business income after expenses, not gross revenue. Side hustlers with significant expenses may have modest CPP obligations even with substantial gross revenue. However, those with profitable side hustles face meaningful CPP contributions that reduce after-tax income.
-
-CPP contributions create future pension entitlements, providing some return on these mandatory payments. Self-employed individuals earn pension credits based on their contributions, increasing retirement benefits. While CPP contributions reduce current income, they provide valuable future income security.
-
-Those with both employment and self-employment income receive CPP contribution credits from employment and must pay CPP on self-employment income above the maximum employment earnings. Coordination ensures appropriate credits without double contributions on the same earnings.
+These contributions apply to net business income after expenses. While they reduce current income, they increase your future pension entitlements.
 
 <b>GST/HST Considerations</b>
 
-Side hustlers must register for and collect GST/HST once revenues exceed thirty thousand dollars in any twelve-month period. Voluntary registration is permitted before reaching this threshold and may be advantageous for businesses with significant input costs. GST/HST registration creates compliance obligations but enables recovery of tax paid on business expenses.
+You must register for and collect GST/HST once your revenues exceed $30,000 in any twelve-month period. Small suppliers below this threshold can register voluntarily to recover tax paid on business expenses.
 
-Small suppliers below the thirty thousand dollar threshold need not register or collect GST/HST. This simplifies compliance but prevents recovery of GST/HST paid on business purchases. Analysis of the trade-off between compliance costs and input tax recovery should inform registration decisions.
-
-GST/HST collected from customers must be remitted to the CRA less input tax credits for tax paid on business expenses. The net amount represents the business's obligation to government. Proper tracking of GST/HST collected and paid ensures accurate remittances and compliance.
-
-Filing frequencies for GST/HST depend on revenue levels, with annual, quarterly, or monthly filing required depending on business size. Timely filing and remittance avoids penalties and interest charges. Many small businesses benefit from annual filing to simplify compliance.
+GST/HST collected from customers must be remitted to the CRA, minus Input Tax Credits (ITCs) for tax paid on business purchases.
 
 <b>Quarterly Tax Installments</b>
 
-Side hustlers with significant tax obligations may be required to make quarterly tax installments to avoid interest charges. The installment requirement applies when net tax owing exceeds three thousand dollars in the current year and either of the two preceding years. Installments are due March, June, September, and December.
+If your net tax owing exceeds $3,000 in the current year and either of the two preceding years, you may be required to make quarterly installments. These are due in March, June, September, and December.
 
-Calculating appropriate installment amounts requires estimating current year tax obligations including income tax and CPP contributions. Underpayment results in installment interest charges, while overpayment creates opportunity cost. Reasonable estimates based on current year projections are acceptable.
-
-Those with both employment and self-employment income may have insufficient tax withheld from employment to cover total obligations. Adjusting employment tax withholdings through TD1 forms or making voluntary installments can avoid year-end balances owing and interest charges.
+Calculating appropriate installments requires estimating your current year tax and CPP obligations. Underpayment can result in interest charges from the CRA.
 
 <b>Structuring Your Side Hustle</b>
 
-Most side hustlers operate as sole proprietors, reporting business income on personal tax returns. This structure is simple and requires no formal registration beyond business name registration if operating under a name other than the individual's legal name. Sole proprietorship creates unlimited personal liability for business obligations.
+Most side hustlers operate as sole proprietors, which is simple but involves unlimited personal liability. Incorporation offers tax deferral and limited liability but adds administrative complexity and cost.
 
-Incorporation may be advantageous for side hustles generating significant income or carrying liability risks. Corporate structures enable income splitting, tax deferral, and limited liability protection. However, incorporation creates administrative complexity and costs that may exceed benefits for small operations.
-
-Partnerships enable multiple individuals to carry on business together, with income allocated to partners according to partnership agreements. Partnerships file information returns but do not pay tax directly. Partners include their share of partnership income in personal tax calculations.
-
-Professional advice from accountants or tax lawyers can help determine optimal structures for specific situations. Structure decisions have long-term implications and should consider growth plans, liability concerns, and family involvement in the business.
+Partnerships allow multiple individuals to carry on a business together, with income allocated to partners according to their agreement.
 
 <b>Working from Home Deductions</b>
 
-The rise of remote work has increased the relevance of home office deductions for side hustlers. Those using dedicated home workspace for business activities can claim proportional expenses including utilities, maintenance, property taxes, and mortgage interest or rent.
+If you use a dedicated home workspace for business, you can claim a portion of utilities, maintenance, property taxes, and rent. The space must be used regularly and exclusively for business.
 
-The workspace must meet CRA requirements to support deduction claims. The space must be used regularly for business and must be the principal place of business or used exclusively for business purposes and for meeting clients. Personal use of workspace may disqualify deductions.
-
-Calculating the deductible portion involves determining the percentage of home space used for business and applying this percentage to eligible expenses. Detailed records of home expenses and workspace calculations support deduction claims in case of audit.
-
-Simplified methods for claiming home office expenses exist for certain situations, including the temporary flat rate method introduced during pandemic years. However, traditional detailed claims generally produce larger deductions for those with significant home office use.
+Calculate the deductible portion based on the percentage of your home's total area used for business. Detailed records of all home expenses are essential for supporting these claims.
 
 <b>Common Mistakes to Avoid</b>
 
-Failing to report all income represents the most serious error, potentially resulting in penalties, interest, and legal consequences. All income including cash payments, cryptocurrency transactions, and barter exchanges must be reported. The CRA receives information from many sources and can detect unreported income.
+Failing to report all income, including cash and barter transactions, is a serious error. Similarly, claiming personal expenses as business deductions often triggers audit attention.
 
-Claiming personal expenses as business deductions risks denial of deductions and penalties. Expenses must have a genuine business purpose and be reasonable in amount. Aggressive positions on expenses may trigger audit attention and unfavorable reassessments.
-
-Missing filing deadlines creates penalties and interest charges. Self-employed individuals have until June fifteenth to file returns but must pay any balance owing by April thirtieth to avoid interest. Late filing penalties are significant and compound over time.
-
-Neglecting CPP obligations can result in unexpected tax balances and interest charges. Self-employed individuals must account for CPP contributions in their tax planning and payment arrangements. Quarterly installments should include estimated CPP obligations.
-
-Poor record keeping makes compliance difficult and audit defense impossible. Investing time and resources in proper record keeping systems prevents problems and optimizes tax outcomes. Digital tools can streamline record keeping for even small side hustles.
+Missing filing deadlines results in significant penalties. Self-employed individuals have until June 15th to file, but any balance owing must be paid by April 30th.
 
 <b>Planning for Tax Season</b>
 
-Preparing for tax season throughout the year reduces stress and optimizes outcomes. Regular review of income and expenses enables accurate quarterly installments and informed business decisions. Year-end tax planning can identify opportunities for legitimate tax reduction.
+Organize your records throughout the year to make tax filing efficient. Regular reviews of income and expenses enable accurate installments and help identify legitimate tax reduction opportunities.
 
-Organizing records before tax season arrives enables efficient return preparation. Summarizing income and expenses, gathering supporting documents, and reviewing prior year returns prepares for accurate filing. Professional tax preparers appreciate organized clients and can work more efficiently with prepared records.
-
-Maximizing deductions requires understanding available claims and maintaining supporting documentation. Reviewing CRA guidance, consulting tax professionals, and learning from prior year returns improves deduction claims. Legitimate deductions reduce tax burdens and support business growth.
-
-Setting aside funds for tax obligations prevents cash flow problems when taxes come due. Regular transfers to dedicated tax savings accounts based on estimated obligations ensure funds are available. Tax surprises create stress and may force undesirable financial decisions.`
+Setting aside funds in a dedicated tax savings account ensures you have the money ready when taxes are due. Professional advice can help optimize your tax situation as your business grows.`
   },
   {
     id: 'tips-004',
@@ -307,71 +235,47 @@ Setting aside funds for tax obligations prevents cash flow problems when taxes c
     imageUrl: 'https://images.unsplash.com/photo-1560518883-ce09059eeffa?w=800&q=80',
     content: `<b>Introducing the First Home Savings Account</b>
 
-The First Home Savings Account represents one of the most significant innovations in Canadian personal finance, providing first-time homebuyers with a powerful tool to accelerate their down payment savings. Introduced in 2023, the FHSA combines the best features of RRSPs and TFSAs, offering tax-deductible contributions like an RRSP and tax-free withdrawals like a TFSA. For Canadians planning their first home purchase, understanding and maximizing FHSA benefits can save thousands in taxes while building home equity faster.
+The First Home Savings Account (FHSA) provides first-time homebuyers with a powerful tool to accelerate down payment savings. It combines the tax-deductible contributions of an RRSP with the tax-free withdrawals of a TFSA.
 
-Unlike previous home buying programs such as the Home Buyers' Plan, which required repayment of RRSP withdrawals, FHSA withdrawals are completely tax-free with no repayment obligation. This fundamental difference makes the FHSA superior for most first-time buyers, providing permanent tax savings rather than temporary tax deferral. The FHSA stands as a genuine addition to Canadian savings options rather than a repurposing of existing accounts.
-
-Eligibility for FHSA contributions requires being a Canadian resident, at least eighteen years old, and a first-time homebuyer who has not owned a home in the current year or preceding four calendar years. These criteria ensure the program serves genuine first-time buyers rather than existing homeowners. Understanding eligibility requirements helps potential contributors plan their participation.
+Unlike the Home Buyers' Plan, FHSA withdrawals do not need to be repaid. To be eligible, you must be a Canadian resident, at least 18 years old, and a first-time homebuyer.
 
 <b>How the FHSA Works</b>
 
-The FHSA allows annual contributions of up to eight thousand dollars per year, with a lifetime contribution limit of forty thousand dollars. These contributions are tax-deductible, reducing taxable income in the year contributed at the contributor's marginal tax rate. A contributor in a forty percent tax bracket effectively receives a thirty-two hundred dollar tax refund on an eight thousand dollar contribution.
+The FHSA allows annual contributions of up to $8,000, with a lifetime limit of $40,000. Contributions are tax-deductible, reducing your taxable income in the year contributed.
 
-Investment growth within the FHSA is completely tax-free, allowing contributions to compound without drag from annual taxation. This tax-free growth significantly accelerates wealth accumulation compared to non-registered savings. Over a five-year savings period with seven percent returns, the FHSA advantage can amount to several thousand dollars in tax savings.
+Investment growth within the account is completely tax-free. Withdrawals for qualifying first home purchases are also tax-free and do not need to be repaid.
 
-Withdrawals for qualifying first home purchases are completely tax-free and do not need to be repaid. This permanent tax exemption distinguishes the FHSA from the Home Buyers' Plan and creates genuine tax savings. The combination of upfront deductions and tax-free withdrawals provides unprecedented tax advantages for home buyers.
-
-Unused FHSA funds can be transferred to an RRSP without affecting RRSP contribution room or withdrawn as taxable income if not used for home purchase. This flexibility ensures FHSA participation carries no downside risk for those whose home buying plans change. The RRSP transfer option preserves tax-advantaged status for savings not used for home purchase.
+Unused FHSA funds can be transferred to an RRSP without affecting your contribution room, or withdrawn as taxable income if your plans change.
 
 <b>Contribution Strategies and Timing</b>
 
-Maximizing FHSA benefits requires strategic contribution timing aligned with income and tax situations. Higher-income years provide greater tax savings from deductions, making them optimal for FHSA contributions. Contributors expecting income growth should consider deferring FHSA contributions to higher-income years if within the five-year participation window.
+Higher-income years provide greater tax savings from deductions. If you expect income growth, consider deferring FHSA contributions to years where they will provide more value.
 
-The five-year maximum participation period creates planning considerations for those not immediately purchasing homes. FHSA accounts can remain open for fifteen years or until age seventy-one, but contributions can only be made for five years after opening. Strategic timing of account opening maximizes the contribution window relative to planned home purchases.
-
-Spousal coordination enables couples to maximize combined FHSA benefits. Each spouse can maintain their own FHSA, doubling the available tax-advantaged savings to sixteen thousand dollars annually and eighty thousand dollars lifetime. Couples planning joint home purchases should coordinate FHSA strategies to optimize combined benefits.
-
-Annual contribution limits cannot be carried forward, making consistent annual contributions important for maximizing lifetime benefits. Missing a year of contributions permanently reduces the available tax-advantaged savings. Automatic contribution programs help ensure consistent annual deposits.
+The account can remain open for 15 years or until you turn 71. However, contributions can only be made for five years after opening, so timing is critical.
 
 <b>Investment Options Within FHSAs</b>
 
-FHSAs can hold the same investment types as RRSPs and TFSAs, including cash, guaranteed investment certificates, bonds, stocks, mutual funds, and exchange-traded funds. Investment selection should align with the time horizon until expected home purchase and the saver's risk tolerance.
+FHSAs can hold the same investments as RRSPs and TFSAs, including GICs, stocks, and ETFs. Selection should align with your time horizon and risk tolerance.
 
-Cash and GICs provide capital preservation appropriate for short time horizons or risk-averse savers. With interest rates currently elevated, GICs offer respectable returns without market risk. Laddered GICs with staggered maturities can optimize returns while maintaining liquidity for home purchase timing.
-
-Conservative bond funds and balanced portfolios suit medium time horizons of three to five years. These investments provide some growth potential while limiting volatility that could reduce available funds when home purchase opportunities arise. The tax-free growth environment makes even modest returns valuable.
-
-Equity investments including stocks and equity ETFs may be appropriate for longer time horizons where market volatility can be tolerated. The potential for higher returns can accelerate down payment growth, though with risk of temporary declines. Time horizon and purchase flexibility should inform equity allocation decisions.
+For short timelines, GICs provide capital preservation. For longer horizons, a balanced portfolio or equity ETFs may provide higher growth potential, though with more volatility.
 
 <b>Comparing FHSA to Alternatives</b>
 
-The FHSA offers advantages over both the Home Buyers' Plan and non-registered savings for most first-time buyers. Unlike the Home Buyers' Plan, FHSA withdrawals require no repayment and provide permanent rather than temporary tax benefits. The FHSA is unequivocally superior to the HBP for those eligible for both.
+The FHSA is superior to the Home Buyers' Plan (HBP) for most buyers because it provides permanent tax savings rather than a temporary loan. Many buyers choose to use both to maximize their down payment.
 
-Compared to TFSA contributions for home savings, the FHSA provides additional upfront tax deductions while maintaining tax-free growth. For home-specific savings, the FHSA dominates TFSA options. However, TFSA contribution room should generally not be sacrificed for FHSA contributions given the lifetime limits on FHSA participation.
-
-RRSP contributions for home savings through the Home Buyers' Plan are now generally suboptimal compared to FHSA contributions. The HBP requires repayment and provides only temporary tax deferral. Those with limited contribution capacity should prioritize FHSA over RRSP for home-specific savings.
-
-Non-registered savings for home purchase face annual taxation of investment income, creating drag on accumulation. The FHSA's tax-free growth provides meaningful advantages over taxable savings. Even with modest returns, the tax savings over several years can amount to thousands of dollars.
+Compared to a TFSA for home savings, the FHSA offers additional upfront tax deductions. However, TFSA room should still be maintained for general wealth building.
 
 <b>Opening and Managing Your FHSA</b>
 
-FHSAs can be opened at most Canadian financial institutions including banks, credit unions, and investment dealers. Comparing fees, investment options, and account features across providers helps optimize the FHSA experience. Low-cost providers with appropriate investment options generally serve savers best.
+FHSAs can be opened at most Canadian banks and investment dealers. Comparing fees and investment options helps you optimize your savings experience.
 
-Account setup requires providing personal information, designating beneficiaries, and selecting initial investments. The process resembles opening TFSAs or RRSPs at the same institution. Online account opening is available at most major providers.
-
-Ongoing management includes making annual contributions, monitoring investments, and updating beneficiary designations as circumstances change. Regular review ensures the account remains aligned with home buying timelines and goals. Investment rebalancing may be appropriate as purchase dates approach.
-
-Withdrawal for home purchase requires completing CRA forms and providing documentation of qualifying home purchase. The process should be initiated before closing to ensure funds are available when needed. Financial institutions can guide the withdrawal process.
+Ongoing management includes making annual contributions and monitoring your investments. Ensure your strategy remains aligned with your expected home buying timeline.
 
 <b>Planning for Home Purchase</b>
 
-FHSA savings should be coordinated with overall down payment planning including other savings, gifts, and potential Home Buyers' Plan withdrawals. Understanding total available resources informs home purchase budgeting and mortgage qualification. Comprehensive planning optimizes the home buying process.
+Coordinate FHSA savings with other resources like the HBP or personal savings. Understanding your total available funds informs your home purchase budget.
 
-Mortgage pre-approval should consider FHSA funds as part of down payment resources. Lenders recognize FHSA balances as available for down payment purposes. Having FHSA funds accessible streamlines the purchase process.
-
-Timing FHSA withdrawals requires coordination with purchase closing dates. Funds must be withdrawn within specified timeframes relative to purchase agreements. Planning withdrawal timing prevents last-minute complications.
-
-Post-purchase planning should address any remaining FHSA funds through RRSP transfers or taxable withdrawals. Understanding these options enables optimal decisions based on circumstances after home purchase.`
+When ready to buy, you must complete CRA forms and provide documentation of a qualifying home purchase. Plan your withdrawal timing to ensure funds are available for closing.`
   },
   {
     id: 'tips-005',
@@ -809,82 +713,44 @@ Emergency preparedness includes maintaining awareness of automated systems in ca
     imageUrl: 'https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=800&q=80',
     content: `<b>Understanding the FIRE Movement</b>
 
-The Financial Independence, Retire Early movement has gained significant traction among Canadians seeking alternatives to traditional retirement timelines. FIRE practitioners aim to accumulate sufficient investment assets to support living expenses through portfolio returns, enabling work to become optional decades earlier than conventional retirement age. While the movement originated in the United States, Canadian FIRE enthusiasts must adapt strategies to our unique tax system, healthcare provisions, and social benefits.
+The Financial Independence, Retire Early (FIRE) movement aims to accumulate sufficient assets to live off investment returns, making work optional. Canadians must adapt these strategies to our unique tax and healthcare systems.
 
-The mathematical foundation of FIRE involves accumulating investment assets equal to twenty-five to thirty times annual expenses, based on the four percent safe withdrawal rule. This rule suggests that withdrawing four percent of a portfolio annually provides sustainable income without depleting principal over long time horizons. A household spending forty thousand dollars annually would target one to one point two million dollars in investments for FIRE.
-
-Achieving FIRE requires aggressive savings rates, typically fifty to seventy percent of income, sustained over periods of ten to twenty years. This level of saving demands significant lifestyle optimization, income maximization, or usually both. The trade-offs required are substantial but appeal to those prioritizing freedom over consumption.
-
-Canadian FIRE pursuit benefits from universal healthcare, reducing one major expense that burdens American early retirees. However, Canadian taxes on investment income, clawback of income-tested benefits, and limited access to retirement accounts before standard ages create unique challenges requiring strategic adaptation.
+The goal is typically to accumulate 25 to 30 times your annual expenses. Following the "4% rule," a household spending $40,000 annually would target a portfolio of $1 million to $1.2 million.
 
 <b>The Math Behind Financial Independence</b>
 
-The foundation of FIRE calculations rests on the relationship between savings rate, investment returns, and time to achieve financial independence. Higher savings rates dramatically shorten the journey to FIRE while also reducing the total assets required to support lower spending levels. This dual benefit makes savings rate the most powerful lever for FIRE acceleration.
+Your savings rate is the most powerful lever for FIRE. Saving 10% of income might take 50 years to reach independence, while a 50% savings rate can reduce that timeline to 17 years.
 
-A household saving ten percent of income requires approximately fifty years to achieve financial independence assuming seven percent investment returns. Increasing savings rate to fifty percent reduces this timeline to approximately seventeen years. At seventy percent savings, financial independence arrives in approximately eight to ten years. These dramatic differences explain FIRE practitioners' obsession with savings optimization.
-
-The four percent safe withdrawal rule derives from historical analysis of portfolio success rates across various withdrawal rates and time periods. Research by William Bengen and subsequent studies suggest that four percent initial withdrawals, adjusted for inflation annually, succeed in approximately ninety-five percent of historical thirty-year periods for balanced portfolios. Canadian FIRE practitioners may use more conservative three point five percent or three percent rates given lower expected returns and longer potential retirements.
-
-Sequence of returns risk represents the greatest threat to FIRE success, particularly for early retirees with potentially fifty-year retirements. Poor portfolio returns in early retirement years can permanently impair portfolio sustainability even if long-term average returns meet expectations. Strategies to mitigate sequence risk include variable withdrawal approaches, maintaining flexibility in spending, and holding cash buffers.
+The 4% safe withdrawal rule suggests that withdrawing 4% of a portfolio annually provides sustainable income. Some Canadians use a more conservative 3% or 3.5% rate given current market expectations.
 
 <b>Canadian-Specific FIRE Considerations</b>
 
-Universal healthcare coverage represents a significant advantage for Canadian FIRE practitioners compared to American counterparts. Early retirees need not budget for health insurance premiums or worry about coverage gaps. Provincial healthcare coverage continues regardless of employment status, providing security that supports earlier retirement.
+Universal healthcare is a significant advantage for Canadian FIRE practitioners, reducing the need for private insurance premiums. However, you should still budget for costs like dental and vision care.
 
-However, healthcare coverage gaps exist for prescription drugs, dental care, vision care, and other services not covered by provincial plans. FIRE practitioners must budget for these expenses or maintain private insurance coverage. Health benefit costs can add several thousand dollars annually to retirement budgets.
-
-Old Age Security and Canada Pension Plan benefits provide baseline retirement income starting at age sixty-five or later, but accessing these benefits before standard ages reduces payments. FIRE practitioners retiring in their forties or fifties must fund decades of expenses before government benefits begin. This extended self-funding period requires larger portfolios or lower spending than traditional retirement planning.
-
-Taxation of investment income requires careful planning for FIRE practitioners. Interest and foreign dividends are taxed at full marginal rates, Canadian dividends receive preferential treatment through the dividend tax credit, and capital gains are taxed on fifty percent of the gain. Asset location strategies placing less tax-efficient investments in registered accounts optimize after-tax returns.
-
-The Tax-Free Savings Account provides an ideal vehicle for FIRE savings, offering tax-free growth and withdrawals without age restrictions. Maximizing TFSA contributions throughout working years creates a tax-free income source for early retirement years before pension benefits begin. RRSP funds become accessible through conversion to RRIFs at age fifty-five or through gradual withdrawals, though taxable withdrawals affect benefit eligibility.
+Government benefits like CPP and OAS provide baseline income starting at age 60 or 65. Early retirees must fund the preceding decades entirely through their own portfolios.
 
 <b>Savings Strategies for FIRE</b>
 
-Achieving FIRE-level savings rates requires systematic optimization of both income and expenses. Income maximization through career advancement, skill development, side hustles, or entrepreneurship provides the fuel for aggressive saving. Expense minimization through lifestyle optimization, geographic arbitrage, or minimalism reduces the target portfolio required.
+Achieving FIRE-level savings requires optimizing major expenses: housing, transportation, and food. Strategies like house hacking or geographic arbitrage to lower-cost communities can accelerate progress.
 
-Housing represents the largest expense for most households and offers the greatest opportunity for cost reduction. Strategies include house hacking with rental income, geographic arbitrage to lower-cost communities, or extreme downsizing. Some FIRE practitioners achieve housing costs below twenty percent of income through creative approaches.
-
-Transportation optimization includes eliminating vehicle ownership, maintaining older reliable vehicles, or living in walkable communities. The average Canadian household spends fifteen to twenty percent of income on transportation, making this category ripe for optimization. Combining remote work with transit-accessible or walkable living can dramatically reduce transportation costs.
-
-Food and dining optimization includes meal planning, bulk cooking, minimizing restaurant meals, and reducing food waste. While food costs are less elastic than housing or transportation, disciplined approaches can reduce spending significantly. Growing some food, shopping sales, and cooking from scratch support savings goals.
-
-Discretionary spending optimization includes evaluating all subscriptions, memberships, and recurring expenses for value. Many households pay for services rarely used. Periodic spending audits identify elimination opportunities. Experiences often provide more lasting satisfaction than material purchases.
+Transportation costs can be reduced by living in walkable areas or maintaining older vehicles. Disciplined meal planning and reducing discretionary spending further increase your investment capacity.
 
 <b>Investment Strategies for FIRE</b>
 
-Portfolio construction for FIRE emphasizes broad diversification, low costs, and tax efficiency. Passively managed index funds and exchange-traded funds provide market returns at minimal cost. Canadian Couch Potato portfolios and similar approaches suit FIRE investors seeking simplicity and broad market exposure.
+Most FIRE practitioners favor low-cost, diversified index funds or ETFs. A "Couch Potato" portfolio provides broad market exposure with minimal fees, maximizing long-term compounding.
 
-Asset allocation balances growth potential against volatility management. Higher equity allocations support longer time horizons and higher withdrawal rates but increase sequence of returns risk. Conservative allocations preserve capital but may require larger portfolios or lower withdrawal rates. Many FIRE practitioners use age-based or glide path approaches adjusting allocation over time.
-
-Geographic diversification reduces Canada-specific risks including currency fluctuations and home market underperformance. Global equity exposure through low-cost ETFs provides diversification benefits. Currency hedging considerations apply for fixed income allocations.
-
-Tax-efficient investing includes maximizing registered account contributions, optimizing asset location, and harvesting tax losses. RRSPs and TFSAs should be filled before holding taxable investments. Less tax-efficient assets belong in registered accounts while tax-efficient assets can be held taxable.
-
-Withdrawal sequencing in retirement affects tax outcomes and benefit eligibility. Traditional approaches suggest depleting taxable accounts first, then RRSPs, then TFSAs. However, early strategic RRSP withdrawals can reduce future mandatory RRIF withdrawals and preserve GIS eligibility. Professional advice optimizes withdrawal strategies.
+Asset location is critical for tax efficiency. Keep less tax-efficient assets in registered accounts (RRSPs/TFSAs) and tax-efficient Canadian equities in taxable accounts to benefit from the dividend tax credit.
 
 <b>Lifestyle Design and Flexibility</b>
 
-FIRE is ultimately about designing a life aligned with personal values rather than following conventional paths. This design process begins long before financial independence is achieved through intentional lifestyle choices that reduce costs while increasing satisfaction. Many find that the optimization process itself reveals values and priorities previously obscured by consumer culture.
+FIRE is about designing a life aligned with your values. Options like "Barista FIRE" involve working part-time for social connection or basic expenses while your portfolio grows.
 
-Barista FIRE describes partial financial independence where individuals work part-time or in low-stress positions covering living expenses while investment portfolios continue growing. This approach reduces portfolio requirements and provides structure and social connection that full retirement may lack. Many find this hybrid approach more satisfying than complete withdrawal from work.
-
-Lean FIRE pursues financial independence through minimal spending and correspondingly smaller portfolio requirements. Practitioners optimize every expense category and may live on twenty-five to thirty thousand dollars annually. This approach enables earlier independence but requires ongoing discipline and acceptance of constraints.
-
-Fat FIRE maintains higher spending levels requiring larger portfolios but providing greater comfort and flexibility. Practitioners may target one hundred thousand dollars or more in annual spending requiring portfolios of two point five million dollars or more. This approach extends working careers but provides lifestyle margin and risk tolerance.
-
-Coast FIRE describes situations where accumulated savings will grow to required amounts through compounding without further contributions. Individuals reaching Coast FI can reduce savings rates and enjoy increased current spending while career income covers living expenses. This milestone provides psychological benefits even before full financial independence.
+"Coast FIRE" occurs when your current savings will grow to your retirement target without further contributions. This allows you to shift to more fulfilling work much sooner.
 
 <b>Challenges and Criticisms</b>
 
-Healthcare costs in later life create uncertainty for early retirees despite Canadian universal coverage. Long-term care needs, prescription drugs for chronic conditions, and uncovered services may require significant resources. Conservative planning includes buffers for healthcare uncertainty.
+Market volatility and sequence of returns risk are major threats to FIRE success. Poor returns in early retirement can permanently impair a portfolio's sustainability.
 
-Social isolation affects some early retirees who lose workplace social connections without replacing them. Planning for social engagement through community involvement, hobbies, or part-time work addresses this risk. Financial independence without social connection may not provide expected satisfaction.
-
-Boredom and loss of purpose challenge some early retirees who find unstructured time less fulfilling than anticipated. Trial periods of extended leave before full retirement can reveal whether FIRE will provide satisfaction. Planning meaningful activities for retirement years addresses purpose concerns.
-
-Relationship dynamics affect FIRE feasibility and satisfaction. Partners must share FIRE goals and approaches for success. Uneven contribution or commitment creates tension. Open communication and shared vision support relationship health through the FIRE journey.
-
-Market volatility and economic uncertainty create risks for FIRE practitioners with potentially long retirements. Conservative withdrawal rates, flexible spending plans, and willingness to return to work if necessary provide resilience. Perfect certainty is impossible but prudent planning improves outcomes.`
+Beyond finances, early retirees may face social isolation or a loss of purpose. Planning for meaningful activities and community involvement is essential for a satisfying retirement.`
   }
 ];
