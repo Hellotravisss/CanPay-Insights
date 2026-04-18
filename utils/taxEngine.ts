@@ -178,9 +178,18 @@ const calculateTotalTax = (
   const totalProvincialCredits = provincialBPACredit + cppProvincialCredit + eiProvincialCredit;
   
   let federalTax = Math.max(0, federalTaxBeforeCredits - totalFederalCredits);
-  const provincialTax = Math.max(0, provincialTaxBeforeCredits - totalProvincialCredits);
-  
-  // Step 4: Apply Quebec Abatement (16.5% reduction on federal tax)
+  let provincialTax = Math.max(0, provincialTaxBeforeCredits - totalProvincialCredits);
+
+  // Step 4: Ontario Surtax (applied on top of base provincial tax)
+  if (provinceRule.surtaxThreshold1 && provincialTax > provinceRule.surtaxThreshold1) {
+    let surtax = (provincialTax - provinceRule.surtaxThreshold1) * (provinceRule.surtaxRate1 ?? 0);
+    if (provinceRule.surtaxThreshold2 && provincialTax > provinceRule.surtaxThreshold2) {
+      surtax += (provincialTax - provinceRule.surtaxThreshold2) * (provinceRule.surtaxRate2 ?? 0);
+    }
+    provincialTax += surtax;
+  }
+
+  // Step 5: Apply Quebec Abatement (16.5% reduction on federal tax)
   if (isQuebec) {
     federalTax = federalTax * (1 - QUEBEC_ABATEMENT_RATE);
   }
@@ -295,18 +304,21 @@ export const calculateSalary = (inputs: SalaryInputs): CalculationResult => {
     grossPayBiWeekly += grossPayBiWeekly * inputs.vacationPayRate;
   }
   
-  // 5. Annual Gross
+  // 5. Annual Gross & RRSP
   const annualGross = grossPayBiWeekly * 26;
-  
-  // 6. Deductions using new accurate calculation
+  const rrspPerPeriod = inputs.rrspContributionPerPeriod ?? 0;
+  const annualRRSP = rrspPerPeriod * 26;
+  const taxableIncome = Math.max(0, annualGross - annualRRSP);
+
+  // 6. Deductions
   const isQuebec = inputs.province === Province.QC;
   const cppResult = calculateCPP(annualGross, isQuebec);
   const eiAnnual = calculateEI(annualGross, isQuebec);
   const qpipAnnual = isQuebec ? calculateQPIP(annualGross) : 0;
-  const taxResult = calculateTotalTax(annualGross, cppResult.total, inputs.province);
+  const taxResult = calculateTotalTax(taxableIncome, cppResult.total, inputs.province);
   
   const totalTaxAnnual = taxResult.total;
-  const totalDeductionsAnnual = totalTaxAnnual + cppResult.total + eiAnnual + qpipAnnual;
+  const totalDeductionsAnnual = totalTaxAnnual + cppResult.total + eiAnnual + qpipAnnual + annualRRSP;
   const netPayAnnual = annualGross - totalDeductionsAnnual;
   
   return {
@@ -320,6 +332,7 @@ export const calculateSalary = (inputs: SalaryInputs): CalculationResult => {
     provincialTax: taxResult.provincialTax / 26,
     cppDeduction: (cppResult.total + qpipAnnual) / 26,
     eiDeduction: eiAnnual / 26,
+    rrspDeduction: rrspPerPeriod,
     netPayBiWeekly: netPayAnnual / 26,
     
     grossPayAnnual: annualGross,
@@ -354,25 +367,23 @@ export const calculateFromAnnualSalary = (inputs: AnnualSalaryInputs): Calculati
   
   const annualGross = annualSalary;
   const isQuebec = province === Province.QC;
-  
+  const periodsPerYear = getPeriodsPerYear(payFrequency);
+  const rrspPerPeriod = inputs.rrspContributionPerPeriod ?? 0;
+  const annualRRSP = rrspPerPeriod * periodsPerYear;
+  const taxableIncome = Math.max(0, annualGross - annualRRSP);
+
   // Calculate deductions
   const cppResult = calculateCPP(annualGross, isQuebec);
   const eiAnnual = calculateEI(annualGross, isQuebec);
   const qpipAnnual = isQuebec ? calculateQPIP(annualGross) : 0;
-  const taxResult = calculateTotalTax(annualGross, cppResult.total, province);
+  const taxResult = calculateTotalTax(taxableIncome, cppResult.total, province);
   
   const totalTaxAnnual = taxResult.total;
-  const totalDeductionsAnnual = totalTaxAnnual + cppResult.total + eiAnnual + qpipAnnual;
+  const totalDeductionsAnnual = totalTaxAnnual + cppResult.total + eiAnnual + qpipAnnual + annualRRSP;
   const netPayAnnual = annualGross - totalDeductionsAnnual;
   
-  // Convert to selected pay period
-  const periodsPerYear = getPeriodsPerYear(payFrequency);
   const grossPayPerPeriod = annualGross / periodsPerYear;
   const netPayPerPeriod = netPayAnnual / periodsPerYear;
-  
-  // Calculate bi-weekly equivalent for display consistency
-  const grossPayBiWeekly = annualGross / 26;
-  const netPayBiWeekly = netPayAnnual / 26;
   
   return {
     regularHours: 0,
@@ -380,12 +391,12 @@ export const calculateFromAnnualSalary = (inputs: AnnualSalaryInputs): Calculati
     overtimeHours20: 0,
     shiftPremiumHours: 0,
     
-    // Use per-period values for the main display
     grossPayBiWeekly: grossPayPerPeriod,
     federalTax: taxResult.federalTax / periodsPerYear,
     provincialTax: taxResult.provincialTax / periodsPerYear,
     cppDeduction: (cppResult.total + qpipAnnual) / periodsPerYear,
     eiDeduction: eiAnnual / periodsPerYear,
+    rrspDeduction: rrspPerPeriod,
     netPayBiWeekly: netPayPerPeriod,
     
     grossPayAnnual: annualGross,
@@ -479,16 +490,19 @@ export const calculateFromTimesheet = (inputs: TimesheetInputs): CalculationResu
   
   const periodsPerYear = getPeriodsPerYear(payFrequency);
   const annualGross = totalGross * periodsPerYear;
-  
+  const rrspPerPeriod = inputs.rrspContributionPerPeriod ?? 0;
+  const annualRRSP = rrspPerPeriod * periodsPerYear;
+  const taxableIncome = Math.max(0, annualGross - annualRRSP);
+
   // Calculate deductions
   const isQuebec = province === Province.QC;
   const cppResult = calculateCPP(annualGross, isQuebec);
   const eiAnnual = calculateEI(annualGross, isQuebec);
   const qpipAnnual = isQuebec ? calculateQPIP(annualGross) : 0;
-  const taxResult = calculateTotalTax(annualGross, cppResult.total, province);
+  const taxResult = calculateTotalTax(taxableIncome, cppResult.total, province);
   
   const totalTaxAnnual = taxResult.total;
-  const totalDeductionsAnnual = totalTaxAnnual + cppResult.total + eiAnnual + qpipAnnual;
+  const totalDeductionsAnnual = totalTaxAnnual + cppResult.total + eiAnnual + qpipAnnual + annualRRSP;
   const netPayAnnual = annualGross - totalDeductionsAnnual;
   
   const grossPayPerPeriod = totalGross;
@@ -505,6 +519,7 @@ export const calculateFromTimesheet = (inputs: TimesheetInputs): CalculationResu
     provincialTax: taxResult.provincialTax / periodsPerYear,
     cppDeduction: (cppResult.total + qpipAnnual) / periodsPerYear,
     eiDeduction: eiAnnual / periodsPerYear,
+    rrspDeduction: rrspPerPeriod,
     netPayBiWeekly: netPayPerPeriod,
     
     grossPayAnnual: annualGross,

@@ -300,6 +300,37 @@ const TimesheetInput: React.FC<Props> = ({ inputs, setInputs }) => {
               <option value={PayFrequency.QUARTERLY}>Quarterly</option>
             </select>
           </div>
+
+          {/* RRSP Contribution */}
+          <div className="col-span-2">
+            <div className="flex items-center justify-between mb-2">
+              <label className="block text-sm font-semibold text-slate-700">RRSP Per Paycheque</label>
+              <label className="relative inline-flex items-center cursor-pointer">
+                <input
+                  type="checkbox"
+                  className="sr-only peer"
+                  checked={!!(inputs.rrspContributionPerPeriod && inputs.rrspContributionPerPeriod > 0)}
+                  onChange={(e) => setInputs({ ...inputs, rrspContributionPerPeriod: e.target.checked ? 100 : 0 })}
+                />
+                <div className="w-11 h-6 bg-slate-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-red-300 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-red-600"></div>
+              </label>
+            </div>
+            {!!(inputs.rrspContributionPerPeriod && inputs.rrspContributionPerPeriod > 0) && (
+              <div className="relative">
+                <span className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-500">$</span>
+                <input
+                  type="number"
+                  min="0"
+                  step="25"
+                  value={inputs.rrspContributionPerPeriod || ''}
+                  onFocus={(e) => e.target.select()}
+                  onChange={(e) => setInputs({ ...inputs, rrspContributionPerPeriod: parseFloat(e.target.value) || 0 })}
+                  className="w-full pl-8 pr-4 py-2 border border-red-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-500 bg-red-50"
+                  placeholder="100"
+                />
+              </div>
+            )}
+          </div>
         </div>
 
         {/* Calendar */}

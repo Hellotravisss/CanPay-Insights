@@ -229,9 +229,15 @@ const ResultsSection: React.FC<Props> = ({ results, provinceName }) => {
                    <span>CPP & EI</span>
                    <span>- {formatCurrency(results.cppDeduction + results.eiDeduction)}</span>
                  </div>
+                 {(results.rrspDeduction ?? 0) > 0 && (
+                   <div className="flex justify-between text-slate-600">
+                     <span>RRSP Contribution</span>
+                     <span>- {formatCurrency(results.rrspDeduction ?? 0)}</span>
+                   </div>
+                 )}
                  <div className="flex justify-between text-red-600 font-bold pt-2 border-t border-slate-100">
                    <span>Total Deductions</span>
-                   <span>- {formatCurrency(results.federalTax + results.provincialTax + results.cppDeduction + results.eiDeduction)}</span>
+                   <span>- {formatCurrency(results.federalTax + results.provincialTax + results.cppDeduction + results.eiDeduction + (results.rrspDeduction ?? 0))}</span>
                  </div>
                </div>
              </div>

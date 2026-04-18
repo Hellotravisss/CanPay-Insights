@@ -83,6 +83,42 @@ const AnnualSalaryInput: React.FC<Props> = ({ inputs, setInputs }) => {
           </div>
         </div>
       </div>
+
+      {/* RRSP Contribution */}
+      <div>
+        <div className="flex items-center justify-between mb-3">
+          <div>
+            <label className="block text-sm font-bold text-slate-700">RRSP Contribution</label>
+            <p className="text-xs text-slate-500">Per bi-weekly paycheque</p>
+          </div>
+          <label className="relative inline-flex items-center cursor-pointer">
+            <input
+              type="checkbox"
+              className="sr-only peer"
+              checked={!!(inputs.rrspContributionPerPeriod && inputs.rrspContributionPerPeriod > 0)}
+              onChange={(e) => setInputs({ ...inputs, rrspContributionPerPeriod: e.target.checked ? 200 : 0 })}
+            />
+            <div className="w-11 h-6 bg-slate-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-red-300 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-red-600"></div>
+          </label>
+        </div>
+
+        {!!(inputs.rrspContributionPerPeriod && inputs.rrspContributionPerPeriod > 0) && (
+          <div className="relative">
+            <span className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-500 font-bold">$</span>
+            <input
+              type="number"
+              min="0"
+              step="50"
+              className="w-full pl-8 pr-4 py-3 border-2 border-red-200 rounded-lg focus:border-red-500 focus:outline-none font-bold bg-red-50"
+              value={inputs.rrspContributionPerPeriod || ''}
+              onFocus={(e) => e.target.select()}
+              onChange={(e) => setInputs({ ...inputs, rrspContributionPerPeriod: parseFloat(e.target.value) || 0 })}
+              placeholder="200"
+            />
+            <p className="text-xs text-slate-500 mt-1">Reduces taxable income — lowers your federal &amp; provincial tax</p>
+          </div>
+        )}
+      </div>
     </div>
   );
 };

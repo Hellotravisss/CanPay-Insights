@@ -92,12 +92,13 @@ export const PROVINCIAL_DATA: Record<string, ProvincialRule> = {
     vacationPayRate: 0.04,
     basicPersonalAmount: 12680, // 2025 BC BPA
     brackets: [
-      { threshold: 49180, rate: 0.0506 }, 
-      { threshold: 98360, rate: 0.077 }, 
-      { threshold: 119000, rate: 0.105 },
-      { threshold: 162500, rate: 0.1229 },
-      { threshold: 227091, rate: 0.147 },
-      { threshold: Infinity, rate: 0.168 }
+      { threshold: 49279,  rate: 0.0506 },
+      { threshold: 98560,  rate: 0.077  },
+      { threshold: 113158, rate: 0.105  },
+      { threshold: 137407, rate: 0.1229 },
+      { threshold: 186306, rate: 0.147  },
+      { threshold: 259829, rate: 0.168  },
+      { threshold: Infinity, rate: 0.205 }
     ]
   },
   [Province.ON]: {
@@ -108,11 +109,16 @@ export const PROVINCIAL_DATA: Record<string, ProvincialRule> = {
     otRate: 1.5,
     vacationPayRate: 0.04,
     basicPersonalAmount: 13229, // 2025 Ontario BPA
+    // Surtax applied in taxEngine: 20% on ON tax > $5,710; +36% on ON tax > $6,802
+    surtaxThreshold1: 5710,
+    surtaxRate1: 0.20,
+    surtaxThreshold2: 6802,
+    surtaxRate2: 0.36,
     brackets: [
-      { threshold: 52886, rate: 0.0505 }, 
-      { threshold: 105775, rate: 0.0915 }, 
-      { threshold: 150000, rate: 0.1116 },
-      { threshold: 220000, rate: 0.1216 },
+      { threshold: 52886,   rate: 0.0505 },
+      { threshold: 105775,  rate: 0.0915 },
+      { threshold: 150000,  rate: 0.1116 },
+      { threshold: 220000,  rate: 0.1216 },
       { threshold: Infinity, rate: 0.1316 }
     ]
   },
@@ -140,8 +146,9 @@ export const PROVINCIAL_DATA: Record<string, ProvincialRule> = {
     vacationPayRate: 0.04, 
     basicPersonalAmount: 16399, // 2025
     brackets: [
-      { threshold: 47915, rate: 0.108 }, 
-      { threshold: Infinity, rate: 0.1275 }
+      { threshold: 47564,   rate: 0.108  },
+      { threshold: 101200,  rate: 0.1275 },
+      { threshold: Infinity, rate: 0.174 }
     ] 
   },
   [Province.SK]: { 
@@ -211,9 +218,13 @@ export const PROVINCIAL_DATA: Record<string, ProvincialRule> = {
     vacationPayRate: 0.04, 
     basicPersonalAmount: 11385, // 2025
     brackets: [
-      { threshold: 44100, rate: 0.087 }, 
-      { threshold: 88200, rate: 0.145 },
-      { threshold: Infinity, rate: 0.158 }
+      { threshold: 44192,   rate: 0.087  },
+      { threshold: 88382,   rate: 0.145  },
+      { threshold: 157792,  rate: 0.158  },
+      { threshold: 221850,  rate: 0.178  },
+      { threshold: 282214,  rate: 0.198  },
+      { threshold: 564429,  rate: 0.208  },
+      { threshold: Infinity, rate: 0.218 }
     ] 
   },
   [Province.YT]: { 

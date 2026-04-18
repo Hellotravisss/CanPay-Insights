@@ -39,13 +39,18 @@ export interface TaxBracket {
 export interface ProvincialRule {
   id: string;
   name: string;
-  dailyOtThreshold: number | null; // Hours per day before OT, null if not applicable
-  weeklyOtThreshold: number; // Hours per week before OT
-  otRate: number; // Usually 1.5
-  doubleTimeThreshold?: number; // BC specific: hours after which 2x applies
-  vacationPayRate: number; // 0.04
+  dailyOtThreshold: number | null;
+  weeklyOtThreshold: number;
+  otRate: number;
+  doubleTimeThreshold?: number;
+  vacationPayRate: number;
   brackets: TaxBracket[];
   basicPersonalAmount: number;
+  // Ontario surtax (optional)
+  surtaxThreshold1?: number;
+  surtaxRate1?: number;
+  surtaxThreshold2?: number;
+  surtaxRate2?: number;
 }
 
 export interface ShiftDetails {
@@ -67,7 +72,8 @@ export interface SalaryInputs {
   hourlyWage: number;
   shift: ShiftDetails;
   premium: ShiftPremium;
-  vacationPayRate: number; // 0, 0.04, 0.06, or 0.08
+  vacationPayRate: number;
+  rrspContributionPerPeriod?: number; // Optional RRSP deduction per pay period
 }
 
 // 年薪输入（新增）
@@ -75,6 +81,7 @@ export interface AnnualSalaryInputs {
   province: string;
   annualSalary: number;
   payFrequency: PayFrequency;
+  rrspContributionPerPeriod?: number; // Optional RRSP deduction per pay period
 }
 
 // Timesheet 打卡条目
@@ -93,12 +100,13 @@ export interface TimesheetInputs {
   hourlyWage: number;
   payFrequency: PayFrequency;
   entries: TimesheetEntry[];
+  rrspContributionPerPeriod?: number;
 }
 
 export interface CalculationResult {
   regularHours: number;
-  overtimeHours15: number; // 1.5x
-  overtimeHours20: number; // 2.0x
+  overtimeHours15: number;
+  overtimeHours20: number;
   shiftPremiumHours: number;
   
   grossPayBiWeekly: number;
@@ -106,14 +114,14 @@ export interface CalculationResult {
   provincialTax: number;
   cppDeduction: number;
   eiDeduction: number;
+  rrspDeduction: number;       // RRSP per period (0 if not used)
   netPayBiWeekly: number;
   
   grossPayAnnual: number;
   netPayAnnual: number;
   totalDeductionsAnnual: number;
   
-  // 新增：支持不同发薪频率
-  grossPayPerPeriod?: number;  // 每期总收入
-  netPayPerPeriod?: number;    // 每期净收入
-  payFrequency?: PayFrequency; // 发薪频率
+  grossPayPerPeriod?: number;
+  netPayPerPeriod?: number;
+  payFrequency?: PayFrequency;
 }

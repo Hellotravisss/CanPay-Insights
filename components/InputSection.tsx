@@ -210,6 +210,46 @@ const InputSection: React.FC<Props> = ({ inputs, setInputs }) => {
         </p>
       </div>
 
+      <hr className="border-slate-100" />
+
+      {/* RRSP Contribution */}
+      <div>
+        <div className="flex items-center justify-between mb-4">
+          <h3 className="text-lg font-bold text-slate-800 flex items-center">
+            <svg className="w-5 h-5 mr-2 text-red-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"></path></svg>
+            RRSP Contribution
+          </h3>
+          <label className="relative inline-flex items-center cursor-pointer">
+            <input
+              type="checkbox"
+              className="sr-only peer"
+              checked={!!(inputs.rrspContributionPerPeriod && inputs.rrspContributionPerPeriod > 0)}
+              onChange={(e) => setInputs({ ...inputs, rrspContributionPerPeriod: e.target.checked ? 100 : 0 })}
+            />
+            <div className="w-11 h-6 bg-slate-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-red-300 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-red-600"></div>
+          </label>
+        </div>
+
+        {!!(inputs.rrspContributionPerPeriod && inputs.rrspContributionPerPeriod > 0) && (
+          <div className="bg-red-50 p-4 rounded-xl border border-red-100 animate-fadeIn">
+            <label className="block text-xs font-bold text-red-800 mb-1.5 ml-1">Per-Paycheque Contribution ($)</label>
+            <div className="relative">
+              <span className="absolute left-3 top-2.5 text-red-400">$</span>
+              <input
+                type="number"
+                min="0"
+                step="25"
+                className="w-full p-2.5 pl-7 bg-white text-slate-900 border border-red-200 rounded-lg focus:ring-2 focus:ring-red-500 focus:outline-none"
+                value={inputs.rrspContributionPerPeriod || ''}
+                onFocus={(e) => e.target.select()}
+                onChange={(e) => setInputs({ ...inputs, rrspContributionPerPeriod: parseFloat(e.target.value) || 0 })}
+              />
+            </div>
+            <p className="text-xs text-red-700 mt-2">Reduces taxable income — lowers your federal &amp; provincial tax</p>
+          </div>
+        )}
+      </div>
+
     </div>
   );
 };
