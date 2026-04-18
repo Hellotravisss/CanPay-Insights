@@ -1,6 +1,7 @@
+'use client';
 import React, { useEffect, useState } from 'react';
-import { getArticleBySlug, allArticles, Article } from '../articles-data';
-import SEO from '../../../components/SEO';
+import { getArticleBySlug, allArticles } from '../articles-data';
+import type { Article } from '../types';
 
 interface ArticleViewProps {
   slug: string;
@@ -86,8 +87,8 @@ const ArticleView: React.FC<ArticleViewProps> = ({ slug, onBack, onSelectArticle
 
   // Simple Markdown renderer
   const renderContent = (content: string) => {
-    const lines = content.split('\n');
-    const elements: JSX.Element[] = [];
+    const lines = content.split("\n");
+    const elements: React.JSX.Element[] = [];
     let tableRows: string[][] = [];
     let inTable = false;
     let listItems: string[] = [];
@@ -352,12 +353,6 @@ const ArticleView: React.FC<ArticleViewProps> = ({ slug, onBack, onSelectArticle
 
   return (
     <div className="min-h-screen bg-slate-50">
-      <SEO 
-        title={`${article.title} | CanPay Insights`}
-        description={article.excerpt}
-        keywords={`${article.category}, Canadian tax, ${article.province || 'Canada'}, salary guide, payroll`}
-        canonicalUrl={`https://www.canpayinsights.ca/blog/${slug}`}
-      />
       {/* Article Header */}
       <div className="bg-white border-b border-slate-200">
         <div className="max-w-4xl mx-auto px-4 py-8">
@@ -449,10 +444,16 @@ const ArticleView: React.FC<ArticleViewProps> = ({ slug, onBack, onSelectArticle
             <h2 className="text-2xl font-bold text-slate-800 mb-6">Related Articles</h2>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
               {relatedArticles.map((related) => (
-                <button
+                <a
                   key={related.id}
-                  onClick={() => onSelectArticle ? onSelectArticle(related.slug) : window.location.href = `/blog/${related.slug}`}
-                  className="text-left bg-white p-4 rounded-lg border border-slate-200 hover:shadow-md transition-shadow"
+                  href={`/blog/${related.slug}`}
+                  onClick={(e) => {
+                    if (onSelectArticle) {
+                      e.preventDefault();
+                      onSelectArticle(related.slug);
+                    }
+                  }}
+                  className="text-left bg-white p-4 rounded-lg border border-slate-200 hover:shadow-md transition-shadow block no-underline"
                 >
                   <span className="text-xs text-red-600 font-medium uppercase">
                     {categoryLabels[related.category]}
@@ -463,7 +464,7 @@ const ArticleView: React.FC<ArticleViewProps> = ({ slug, onBack, onSelectArticle
                   <p className="text-sm text-slate-500 mt-2 line-clamp-2">
                     {related.excerpt}
                   </p>
-                </button>
+                </a>
               ))}
             </div>
           </div>
@@ -471,15 +472,16 @@ const ArticleView: React.FC<ArticleViewProps> = ({ slug, onBack, onSelectArticle
 
         {/* Back Button */}
         <div className="mt-12 text-center">
-          <button
-            onClick={onBack}
-            className="inline-flex items-center gap-2 text-red-600 hover:text-red-700 font-medium"
+          <a
+            href="/blog"
+            onClick={(e) => { if (onBack) { e.preventDefault(); onBack(); } }}
+            className="inline-flex items-center gap-2 text-red-600 hover:text-red-700 font-medium no-underline"
           >
             <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 19l-7-7m0 0l7-7m-7 7h18" />
             </svg>
             View All Articles
-          </button>
+          </a>
         </div>
       </div>
     </div>

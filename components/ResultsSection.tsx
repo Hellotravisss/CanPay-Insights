@@ -1,3 +1,4 @@
+'use client';
 import React from 'react';
 import { CalculationResult, Province } from '../types';
 import { PieChart, Pie, Cell, Tooltip, ResponsiveContainer, Legend } from 'recharts';

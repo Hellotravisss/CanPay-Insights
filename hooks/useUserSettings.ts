@@ -1,6 +1,8 @@
+'use client';
 import { useState, useEffect, useCallback, useRef } from 'react';
 import { supabase } from '../lib/supabase';
-import type { SalaryInputs, AnnualSalaryInputs, TimesheetInputs, CalculationMode } from '../types';
+import type { SalaryInputs, AnnualSalaryInputs, TimesheetInputs } from '../types';
+import { CalculationMode } from '../types';
 import { Province, PayFrequency } from '../types';
 
 // 本地存储键
@@ -54,7 +56,7 @@ const DEFAULT_SETTINGS: UserSettings = {
     payFrequency: PayFrequency.WEEKLY,
     entries: []
   },
-  lastMode: 'simple'
+  lastMode: CalculationMode.SIMPLE
 };
 
 interface UseUserSettingsReturn {

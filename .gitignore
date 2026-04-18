@@ -26,3 +26,27 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+
+# Next.js build output
+.next/
+
+# Debug screenshots committed by mistake
+*.png
+dialog_state.png
+initial_state.png
+icon_upload.png
+publish_page_disabled.png
+resend_api_key_dialog.png
+resend_api_keys_empty.png
+supabase_auth_settings.png
+supabase_auth_settings_final.png
+supabase_smtp_saved.png
+
+# Temp scripts
+extract_dns.js
+find_remove.js
+find_remove_recursive.js
+search_all.js
+search_exact.js
+search_iframes.js
+search_more.js

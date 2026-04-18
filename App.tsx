@@ -1,18 +1,13 @@
+'use client';
 
 import React, { useState, useMemo, useEffect, useCallback } from 'react';
-import { Analytics } from '@vercel/analytics/react';
-import { SpeedInsights } from '@vercel/speed-insights/react';
+import { useRouter } from 'next/navigation';
 import InputSection from './components/InputSection';
 import AnnualSalaryInput from './components/AnnualSalaryInput';
 import TimesheetInput from './components/TimesheetInput';
 import ModeSelector from './components/ModeSelector';
 import ResultsSection from './components/ResultsSection';
 import GeminiAdvisor from './components/GeminiAdvisor';
-import PrivacyPolicy from './components/PrivacyPolicy';
-import SEO from './components/SEO';
-import BlogList from './src/content/components/BlogList';
-import ArticleView from './src/content/components/ArticleView';
-import ProvinceComparison from './src/content/components/ProvinceComparison';
 import UserMenu from './components/UserMenu';
 import AuthModal from './components/AuthModal';
 import LoadingOverlay from './components/LoadingOverlay';
@@ -56,9 +51,11 @@ const DEFAULT_TIMESHEET_INPUTS: TimesheetInputs = {
   entries: []
 };
 
-type AppPage = 'home' | 'calculator' | 'privacy' | 'blog' | 'province-comparison';
+type AppPage = 'home' | 'calculator';
 
 const App: React.FC = () => {
+  const router = useRouter();
+
   // Auth
   const { user, isAuthenticated, signInWithOAuth, signInWithEmail } = useAuth();
   const userId = user?.id || null;
@@ -71,10 +68,9 @@ const App: React.FC = () => {
     saveLastMode 
   } = useUserSettings(userId);
 
-  // Page states: 'home' = mode selection, 'calculator' = calculator, 'privacy' = privacy policy, 'blog' = blog
+  // Page states: 'home' = mode selection, 'calculator' = calculator
   const [currentPage, setCurrentPage] = useState<AppPage>('home');
-  const [currentArticleSlug, setCurrentArticleSlug] = useState<string | null>(null);
-  
+
   // Global loading state for page transitions
   const [isPageLoading, setIsPageLoading] = useState(false);
 
@@ -82,7 +78,7 @@ const App: React.FC = () => {
   const [showAuthModal, setShowAuthModal] = useState(false);
 
   // Calculation mode state - restore from settings
-  const [mode, setMode] = useState<CalculationMode>('simple');
+  const [mode, setMode] = useState<CalculationMode>(CalculationMode.SIMPLE);
   
   // Simple estimate inputs - restore from settings
   const [simpleInputs, setSimpleInputs] = useState<SalaryInputs>(DEFAULT_SIMPLE_INPUTS);
@@ -118,50 +114,13 @@ const App: React.FC = () => {
     }
   }, [isSettingsLoading, settings]);
 
-  // Detect URL path for initial page (supports /privacy and /blog routes)
-  useEffect(() => {
-    const path = window.location.pathname;
-    if (path === '/privacy' || path === '/privacy/') {
-      setCurrentPage('privacy');
-    } else if (path.startsWith('/blog/')) {
-      const slug = path.replace('/blog/', '');
-      setCurrentPage('blog');
-      setCurrentArticleSlug(slug);
-    } else if (path === '/blog') {
-      setCurrentPage('blog');
-      setCurrentArticleSlug(null);
-    } else if (path === '/compare-provinces') {
-      setCurrentPage('province-comparison');
-    }
-  }, []);
-
-  // Update browser URL when page state changes (no page refresh)
-  useEffect(() => {
-    if (currentPage === 'privacy') {
-      if (window.location.pathname !== '/privacy') {
-        window.history.pushState({}, '', '/privacy');
-      }
-    } else if (currentPage === 'blog') {
-      if (currentArticleSlug) {
-        window.history.pushState({}, '', `/blog/${currentArticleSlug}`);
-      } else {
-        window.history.pushState({}, '', '/blog');
-      }
-    } else if (currentPage === 'province-comparison') {
-      window.history.pushState({}, '', '/compare-provinces');
-    } else if (currentPage === 'home') {
-      if (window.location.pathname !== '/') {
-        window.history.pushState({}, '', '/');
-      }
-    }
-    // calculator 页面保持当前路径或设为根路径
-  }, [currentPage, currentArticleSlug]);
+  // Routing for blog/privacy/compare is now handled by Next.js pages
   
   // Save inputs when they change (debounced)
   useEffect(() => {
     const timeoutId = setTimeout(() => {
-      if (mode === 'simple') {
-        saveSettings('simple', simpleInputs);
+      if (mode === CalculationMode.SIMPLE) {
+        saveSettings(CalculationMode.SIMPLE, simpleInputs);
       }
     }, 1000); // 1 second debounce
 
@@ -170,8 +129,8 @@ const App: React.FC = () => {
 
   useEffect(() => {
     const timeoutId = setTimeout(() => {
-      if (mode === 'annual') {
-        saveSettings('annual', annualInputs);
+      if (mode === CalculationMode.ANNUAL) {
+        saveSettings(CalculationMode.ANNUAL, annualInputs);
       }
     }, 1000);
 
@@ -180,8 +139,8 @@ const App: React.FC = () => {
 
   useEffect(() => {
     const timeoutId = setTimeout(() => {
-      if (mode === 'timesheet') {
-        saveSettings('timesheet', timesheetInputs);
+      if (mode === CalculationMode.TIMESHEET) {
+        saveSettings(CalculationMode.TIMESHEET, timesheetInputs);
       }
     }, 1000);
 
@@ -203,35 +162,13 @@ const App: React.FC = () => {
   const handleBackToHome = useCallback(() => {
     setIsPageLoading(true);
     setCurrentPage('home');
-    setCurrentArticleSlug(null);
     setTimeout(() => setIsPageLoading(false), 300);
   }, []);
 
-  // Navigate with loading state
-  const navigateWithLoading = useCallback((page: AppPage, articleSlug?: string | null) => {
-    setIsPageLoading(true);
-    if (articleSlug !== undefined) {
-      setCurrentArticleSlug(articleSlug);
-    }
-    setCurrentPage(page);
-    setTimeout(() => setIsPageLoading(false), 300);
-  }, []);
-
-  // Go to privacy page
-  const handleGoToPrivacy = useCallback(() => {
-    navigateWithLoading('privacy');
-  }, [navigateWithLoading]);
-
-  // Go to blog
-  const handleGoToBlog = useCallback(() => {
-    navigateWithLoading('blog', null);
-  }, [navigateWithLoading]);
-
-  // Select article
-  const handleSelectArticle = useCallback((slug: string) => {
-    navigateWithLoading('blog', slug);
-    window.scrollTo(0, 0);
-  }, [navigateWithLoading]);
+  // Navigation — delegate to Next.js router
+  const handleGoToPrivacy = useCallback(() => router.push('/privacy'), [router]);
+  const handleGoToBlog = useCallback(() => router.push('/blog'), [router]);
+  const handleSelectArticle = useCallback((slug: string) => router.push(`/blog/${slug}`), [router]);
 
   // Handle sign in
   const handleSignIn = useCallback(async (provider: OAuthProvider) => {
@@ -334,11 +271,8 @@ const App: React.FC = () => {
  
   return (
     <div className="min-h-screen bg-slate-50 pb-20 font-sans">
-      {/* SEO Component */}
-      <SEO />
-      
       {/* Header */}
-      {(currentPage === 'calculator' || currentPage === 'blog') && (
+      {currentPage === 'calculator' && (
         <header className="bg-white border-b border-red-100 sticky top-0 z-30 shadow-sm" role="banner">
           <div className="max-w-6xl mx-auto px-4 py-3 flex items-center justify-between">
             <button 
@@ -382,20 +316,7 @@ const App: React.FC = () => {
       )}
 
       {/* Main Content */}
-      {currentPage === 'blog' ? (
-        currentArticleSlug ? (
-          <ArticleView 
-            slug={currentArticleSlug} 
-            onBack={() => navigateWithLoading('blog', null)}
-            onSelectArticle={handleSelectArticle}
-          />
-        ) : (
-          <BlogList onSelectArticle={handleSelectArticle} />
-        )
-      ) : currentPage === 'province-comparison' ? (
-        <ProvinceComparison onBackToBlog={() => navigateWithLoading('blog')} />
-      ) : currentPage !== 'privacy' && (
-        <main className="max-w-6xl mx-auto px-4 py-8" role="main" aria-label="Payroll Calculator">
+      <main className="max-w-6xl mx-auto px-4 py-8" role="main" aria-label="Payroll Calculator">
           {/* Home Page - Mode Selection */}
           {currentPage === 'home' && (
             <div className="min-h-[80vh] flex flex-col items-center justify-center">
@@ -544,16 +465,10 @@ const App: React.FC = () => {
               
             </div>
           )}
-        </main>
-      )}
+      </main>
 
-      {/* Privacy Policy Page */}
-      {currentPage === 'privacy' && (
-        <PrivacyPolicy onBackToHome={handleBackToHome} />
-      )}
-
-      {/* Footer - Show on home, calculator, and province comparison pages */}
-      {(currentPage === 'home' || currentPage === 'calculator' || currentPage === 'province-comparison') && (
+      {/* Footer */}
+      {(currentPage === 'home' || currentPage === 'calculator') && (
         <footer className="text-center text-slate-400 text-xs py-8 space-y-4" role="contentinfo">
           <p>Calculations are estimates based on 2025/2026 tax brackets and provincial employment standards.</p>
           
@@ -590,7 +505,7 @@ const App: React.FC = () => {
               Insights Hub
             </button>
             <button 
-              onClick={() => window.location.href = '/compare-provinces'}
+              onClick={() => router.push('/compare-provinces')}
               className="text-slate-400 hover:text-red-600 transition-colors"
             >
               Compare Provinces
@@ -625,9 +540,6 @@ const App: React.FC = () => {
       {/* Global Loading Overlay */}
       <LoadingOverlay isLoading={isPageLoading} message="Loading..." />
 
-      {/* Vercel Analytics & Speed Insights */}
-      <Analytics />
-      <SpeedInsights />
     </div>
   );
 };

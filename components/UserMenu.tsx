@@ -1,3 +1,4 @@
+'use client';
 import React, { useState, useRef, useEffect } from 'react';
 import { useAuth, type OAuthProvider } from '../hooks/useAuth';
 import { useCalculationHistory, CalculationRecord } from '../hooks/useCalculationHistory';

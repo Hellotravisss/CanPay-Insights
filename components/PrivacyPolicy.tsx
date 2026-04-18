@@ -1,8 +1,9 @@
+'use client';
 import React from 'react';
-import SEO from './SEO';
+import { useRouter } from 'next/navigation';
 
 interface PrivacyPolicyProps {
-  onBackToHome: () => void;
+  onBackToHome?: () => void;
 }
 
 const InukshukIcon = ({ className }: { className?: string }) => (
@@ -17,28 +18,24 @@ const InukshukIcon = ({ className }: { className?: string }) => (
 );
 
 const PrivacyPolicy: React.FC<PrivacyPolicyProps> = ({ onBackToHome }) => {
+  const router = useRouter();
+  const handleBack = onBackToHome ?? (() => router.push('/'));
   return (
     <>
-      <SEO 
-        title="Privacy Policy - CanPay Insights"
-        description="CanPay Insights privacy policy. We do not collect, store, or share any personal data or financial information. All calculations are performed locally on your device."
-        keywords="privacy policy, CanPay Insights privacy, data protection, no tracking, local calculation"
-        canonicalUrl="https://www.canpayinsights.ca/privacy"
-      />
       <div className="min-h-screen bg-slate-50 pb-20 font-sans">
       {/* Header */}
       <header className="bg-white border-b border-red-100 sticky top-0 z-30 shadow-sm" role="banner">
         <div className="max-w-6xl mx-auto px-4 py-4 flex items-center justify-between">
           <div className="flex items-center gap-3">
-            <div className="w-10 h-10 bg-red-600 rounded-lg flex items-center justify-center text-white shadow-red-200 shadow-lg hover:scale-105 transition-transform cursor-pointer" onClick={onBackToHome}>
+            <div className="w-10 h-10 bg-red-600 rounded-lg flex items-center justify-center text-white shadow-red-200 shadow-lg hover:scale-105 transition-transform cursor-pointer" onClick={handleBack}>
               <InukshukIcon className="w-7 h-7" />
             </div>
-            <h1 className="text-xl font-bold text-slate-800 tracking-tight cursor-pointer" onClick={onBackToHome}>
+            <h1 className="text-xl font-bold text-slate-800 tracking-tight cursor-pointer" onClick={handleBack}>
               CanPay <span className="text-red-600 font-light">Insights</span>
             </h1>
           </div>
           <button 
-            onClick={onBackToHome}
+            onClick={handleBack}
             className="flex items-center gap-2 px-4 py-2 bg-slate-100 hover:bg-slate-200 text-slate-700 rounded-lg transition-all text-sm font-medium"
           >
             <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">

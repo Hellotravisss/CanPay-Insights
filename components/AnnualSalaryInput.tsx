@@ -1,3 +1,4 @@
+'use client';
 import React from 'react';
 import { AnnualSalaryInputs, Province, PayFrequency } from '../types';
 import { PROVINCIAL_DATA } from '../constants';

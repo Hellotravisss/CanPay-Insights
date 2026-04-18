@@ -1,5 +1,7 @@
+'use client';
 import React, { useState, useEffect } from 'react';
-import { allArticles, Article } from '../articles-data';
+import { allArticles } from '../articles-data';
+import type { Article } from '../types';
 
 interface BlogListProps {
   onSelectArticle: (slug: string) => void;

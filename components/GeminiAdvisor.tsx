@@ -1,3 +1,4 @@
+'use client';
 import React, { useState, useEffect, useRef, useMemo } from 'react';
 import { GoogleGenAI } from '@google/genai';
 import * as htmlToImage from 'html-to-image';

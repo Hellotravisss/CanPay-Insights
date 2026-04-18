@@ -1,3 +1,4 @@
+'use client';
 import React, { useState, useMemo } from 'react';
 import { PROVINCIAL_DATA } from '../../../constants';
 import { calculateFromAnnualSalary } from '../../../utils/taxEngine';
