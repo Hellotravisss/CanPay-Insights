@@ -556,8 +556,8 @@ const App: React.FC = () => {
         <footer className="text-center text-slate-400 text-xs py-8 space-y-4" role="contentinfo">
           <p>Calculations are estimates based on 2025/2026 tax brackets and provincial employment standards.</p>
           
-          {/* Buy Me a Coffee Button */}
-          <div className="flex justify-center items-center gap-4">
+          {/* Buy Me a Coffee + App Store */}
+          <div className="flex flex-wrap justify-center items-center gap-3">
             <a 
               href={DONATION_URL}
               target="_blank"
@@ -566,6 +566,17 @@ const App: React.FC = () => {
             >
               <span className="text-xl group-hover:rotate-12 transition-transform duration-300">☕</span>
               <span>Buy me a double-double</span>
+            </a>
+            <a
+              href="https://apps.apple.com/app/canpayinsights/id6759822038"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex items-center gap-2 bg-black text-white px-5 py-2.5 rounded-full font-semibold shadow-md hover:bg-slate-800 hover:shadow-lg transition-all transform hover:-translate-y-1 decoration-none"
+            >
+              <svg className="w-5 h-5" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M17.05 20.28c-.98.95-2.05.88-3.08.4-1.09-.5-2.08-.48-3.24 0-1.44.62-2.2.44-3.06-.4C2.79 15.25 3.51 7.59 9.05 7.31c1.35.07 2.29.74 3.08.74s1.79-.75 3.16-.64c1.35.1 2.47.69 3.18 1.8-2.88 1.45-2.38 5.13.58 6.13-.57 1.5-1.31 2.99-2.54 4.09zM12.03 7.25c-.15-2.23 1.66-4.07 3.74-4.25.29 2.58-2.34 4.5-3.74 4.25z"/>
+              </svg>
+              <span>Download on App Store</span>
             </a>
           </div>
 
