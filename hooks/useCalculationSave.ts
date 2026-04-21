@@ -1,34 +1,34 @@
 'use client';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { supabase } from '../lib/supabase';
 import { useAuth } from './useAuth';
 import { CalculationResult, CalculationMode } from '../types';
 
+// Unified hook for saving/loading calculations — uses calculation_history table only.
+// Anonymous users are handled by useCalculationHistory (localStorage).
 export const useCalculationSave = () => {
   const { user, isAuthenticated } = useAuth();
   const [isSaving, setIsSaving] = useState(false);
   const [lastSaved, setLastSaved] = useState<Date | null>(null);
 
-  // Save calculation to Supabase
   const saveCalculation = async (
     mode: CalculationMode,
     inputs: any,
     results: CalculationResult
   ): Promise<boolean> => {
-    if (!isAuthenticated || !user) {
-      console.log('User not authenticated, skipping save');
-      return false;
-    }
+    if (!isAuthenticated || !user) return false;
 
     setIsSaving(true);
     try {
       const { error } = await supabase
-        .from('calculations')
+        .from('calculation_history')
         .insert({
           user_id: user.id,
           mode,
           inputs,
           results,
+          name: `${mode} — ${new Date().toLocaleDateString('en-CA')}`,
+          province: inputs.province || '',
         });
 
       if (error) {
@@ -46,25 +46,21 @@ export const useCalculationSave = () => {
     }
   };
 
-  // Load calculation history
-  const loadHistory = async (limit: number = 10) => {
-    if (!isAuthenticated || !user) {
-      return [];
-    }
+  const loadHistory = async (limit = 20, offset = 0) => {
+    if (!isAuthenticated || !user) return [];
 
     try {
       const { data, error } = await supabase
-        .from('calculations')
+        .from('calculation_history')
         .select('*')
         .eq('user_id', user.id)
         .order('created_at', { ascending: false })
-        .limit(limit);
+        .range(offset, offset + limit - 1);
 
       if (error) {
         console.error('Error loading history:', error);
         return [];
       }
-
       return data || [];
     } catch (error) {
       console.error('Error loading history:', error);
@@ -72,15 +68,12 @@ export const useCalculationSave = () => {
     }
   };
 
-  // Delete calculation
   const deleteCalculation = async (id: string): Promise<boolean> => {
-    if (!isAuthenticated || !user) {
-      return false;
-    }
+    if (!isAuthenticated || !user) return false;
 
     try {
       const { error } = await supabase
-        .from('calculations')
+        .from('calculation_history')
         .delete()
         .eq('id', id)
         .eq('user_id', user.id);
@@ -89,7 +82,6 @@ export const useCalculationSave = () => {
         console.error('Error deleting calculation:', error);
         return false;
       }
-
       return true;
     } catch (error) {
       console.error('Error deleting calculation:', error);
@@ -97,12 +89,5 @@ export const useCalculationSave = () => {
     }
   };
 
-  return {
-    saveCalculation,
-    loadHistory,
-    deleteCalculation,
-    isSaving,
-    lastSaved,
-    isAuthenticated,
-  };
+  return { saveCalculation, loadHistory, deleteCalculation, isSaving, lastSaved, isAuthenticated };
 };
