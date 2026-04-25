@@ -195,19 +195,19 @@ const InputSection: React.FC<Props> = ({ inputs, setInputs }) => {
 
       {/* Vacation Pay Selection */}
       <div className="bg-slate-50 p-4 rounded-xl border border-slate-100">
-        <label className="block text-sm font-bold text-slate-700 mb-2">Vacation Pay</label>
+        <label className="block text-sm font-bold text-slate-700 mb-2">Vacation Pay <span className="font-normal text-slate-500">(paid each cheque)</span></label>
         <select
           className="w-full p-3 bg-white text-slate-900 border border-slate-300 rounded-lg focus:ring-2 focus:ring-red-500 focus:outline-none transition-all cursor-pointer hover:border-red-300 shadow-sm"
           value={inputs.vacationPayRate}
           onChange={(e) => setInputs({...inputs, vacationPayRate: parseFloat(e.target.value)})}
         >
-          <option value={0}>No Vacation Pay (0%)</option>
-          <option value={0.04}>4% - 0-5 years experience (2 weeks vacation)</option>
-          <option value={0.06}>6% - 5+ years experience (3 weeks vacation)</option>
-          <option value={0.08}>8% - 8+ years (SK, 4 weeks vacation)</option>
+          <option value={0}>Not included each pay — leave at 0%</option>
+          <option value={0.04}>4% included each cheque (0–5 yrs, 2 weeks)</option>
+          <option value={0.06}>6% included each cheque (5+ yrs, 3 weeks)</option>
+          <option value={0.08}>8% included each cheque (8+ yrs / SK, 4 weeks)</option>
         </select>
-        <p className="text-xs text-slate-500 mt-2">
-          Vacation pay is added to each paycheck instead of paid during time off
+        <p className="text-xs text-amber-700 bg-amber-50 border border-amber-200 rounded-md px-3 py-2 mt-2">
+          <strong>Only select this if vacation pay appears on your payslip each period.</strong> If your employer banks vacation time and pays it out separately (e.g. "Vacation Earned" or lump sum), leave this at 0% — otherwise your gross will be overstated by hundreds of dollars.
         </p>
       </div>
 
