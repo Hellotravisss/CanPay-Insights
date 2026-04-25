@@ -8,20 +8,8 @@ interface Props {
   provinceName?: string;
 }
 
-const InukshukWatermark = ({ className }: { className?: string }) => (
-  <svg viewBox="0 0 24 24" fill="currentColor" className={className}>
-    {/* Head */}
-    <rect x="10" y="2" width="4" height="3" rx="0.5" />
-    {/* Arms */}
-    <path d="M4 6h16a1 1 0 0 1 1 1v2a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V7a1 1 0 0 1 1-1z" />
-    {/* Torso */}
-    <rect x="9" y="10" width="6" height="4" rx="0.5" />
-    {/* Hips */}
-    <path d="M5 14h14a1 1 0 0 1 1 1v2a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1v-2a1 1 0 0 1 1-1z" />
-    {/* Legs */}
-    <rect x="7" y="18" width="3" height="4" rx="0.5" />
-    <rect x="14" y="18" width="3" height="4" rx="0.5" />
-  </svg>
+const InukshukWatermark = ({ className, style }: { className?: string; style?: React.CSSProperties }) => (
+  <img src="/logo.png" alt="" aria-hidden="true" className={className} style={style} />
 );
 
 const ResultsSection: React.FC<Props> = ({ results, provinceName }) => {
@@ -86,13 +74,13 @@ const ResultsSection: React.FC<Props> = ({ results, provinceName }) => {
             </div>
           </div>
           {/* Decorative Icon */}
-          <InukshukWatermark className="absolute -right-6 -bottom-6 w-40 h-40 text-red-800 opacity-30 transform group-hover:scale-110 transition-transform duration-500" />
+          <InukshukWatermark className="absolute -right-6 -bottom-6 w-40 h-40 opacity-20 transform group-hover:scale-110 transition-transform duration-500" />
         </div>
 
         {/* Annual Card */}
         <div className="bg-white rounded-xl shadow-sm border-l-4 border-red-600 p-6 relative overflow-hidden">
            <div className="flex items-center gap-2 mb-4">
-              <InukshukWatermark className="w-5 h-5 text-red-600" />
+              <InukshukWatermark className="w-5 h-5 rounded-sm" />
               <h3 className="text-lg font-bold text-slate-800">Annual Projection</h3>
            </div>
            
@@ -110,7 +98,7 @@ const ResultsSection: React.FC<Props> = ({ results, provinceName }) => {
                  <span className="text-2xl font-extrabold text-red-600">{formatCurrency(results.netPayAnnual)}</span>
               </div>
            </div>
-           <InukshukWatermark className="absolute top-4 right-4 w-16 h-16 text-slate-100 -rotate-12 opacity-50" />
+           <InukshukWatermark className="absolute top-4 right-4 w-16 h-16 -rotate-12 opacity-10" />
         </div>
       </div>
 
