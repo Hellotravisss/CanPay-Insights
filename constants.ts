@@ -75,7 +75,6 @@ export const PROVINCIAL_DATA: Record<string, ProvincialRule> = {
     dailyOtThreshold: 8,
     weeklyOtThreshold: 44,
     otRate: 1.5,
-    vacationPayRate: 0.04,
     basicPersonalAmount: 22783, // 2025 Alberta BPA
     brackets: [
       { threshold: 151839, rate: 0.10 }, 
@@ -89,7 +88,6 @@ export const PROVINCIAL_DATA: Record<string, ProvincialRule> = {
     weeklyOtThreshold: 40,
     otRate: 1.5,
     doubleTimeThreshold: 12,
-    vacationPayRate: 0.04,
     basicPersonalAmount: 12680, // 2025 BC BPA
     brackets: [
       { threshold: 49279,  rate: 0.0506 },
@@ -107,7 +105,6 @@ export const PROVINCIAL_DATA: Record<string, ProvincialRule> = {
     dailyOtThreshold: null,
     weeklyOtThreshold: 44,
     otRate: 1.5,
-    vacationPayRate: 0.04,
     basicPersonalAmount: 13229, // 2025 Ontario BPA
     // Surtax applied in taxEngine: 20% on ON tax > $5,710; +36% on ON tax > $6,802
     surtaxThreshold1: 5710,
@@ -128,7 +125,6 @@ export const PROVINCIAL_DATA: Record<string, ProvincialRule> = {
     dailyOtThreshold: null,
     weeklyOtThreshold: 40,
     otRate: 1.5,
-    vacationPayRate: 0.04,
     basicPersonalAmount: 18571, // 2025 Quebec BPA
     brackets: [
       { threshold: 53255, rate: 0.14 }, 
@@ -143,7 +139,6 @@ export const PROVINCIAL_DATA: Record<string, ProvincialRule> = {
     dailyOtThreshold: 8, 
     weeklyOtThreshold: 40, 
     otRate: 1.5, 
-    vacationPayRate: 0.04, 
     basicPersonalAmount: 16399, // 2025
     brackets: [
       { threshold: 47564,   rate: 0.108  },
@@ -157,7 +152,6 @@ export const PROVINCIAL_DATA: Record<string, ProvincialRule> = {
     dailyOtThreshold: 8, 
     weeklyOtThreshold: 40, 
     otRate: 1.5, 
-    vacationPayRate: 0.04, 
     basicPersonalAmount: 19139, // 2025
     brackets: [
       { threshold: 54300, rate: 0.105 }, 
@@ -170,7 +164,6 @@ export const PROVINCIAL_DATA: Record<string, ProvincialRule> = {
     dailyOtThreshold: null, 
     weeklyOtThreshold: 48, 
     otRate: 1.5, 
-    vacationPayRate: 0.04, 
     basicPersonalAmount: 12544, // 2025
     brackets: [
       { threshold: 30507, rate: 0.0879 }, 
@@ -186,7 +179,6 @@ export const PROVINCIAL_DATA: Record<string, ProvincialRule> = {
     dailyOtThreshold: null, 
     weeklyOtThreshold: 44, 
     otRate: 1.5, 
-    vacationPayRate: 0.04, 
     basicPersonalAmount: 13853, // 2025
     brackets: [
       { threshold: 51306, rate: 0.094 }, 
@@ -201,7 +193,6 @@ export const PROVINCIAL_DATA: Record<string, ProvincialRule> = {
     dailyOtThreshold: null, 
     weeklyOtThreshold: 48, 
     otRate: 1.5, 
-    vacationPayRate: 0.04, 
     basicPersonalAmount: 14250, // 2025
     brackets: [
       { threshold: 33328, rate: 0.098 }, 
@@ -215,7 +206,6 @@ export const PROVINCIAL_DATA: Record<string, ProvincialRule> = {
     dailyOtThreshold: null, 
     weeklyOtThreshold: 40, 
     otRate: 1.5, 
-    vacationPayRate: 0.04, 
     basicPersonalAmount: 11385, // 2025
     brackets: [
       { threshold: 44192,   rate: 0.087  },
@@ -233,7 +223,6 @@ export const PROVINCIAL_DATA: Record<string, ProvincialRule> = {
     dailyOtThreshold: 8, 
     weeklyOtThreshold: 40, 
     otRate: 1.5, 
-    vacationPayRate: 0.04, 
     basicPersonalAmount: 16129, // Same as federal
     brackets: [
       { threshold: 57375, rate: 0.064 }, 
@@ -250,7 +239,6 @@ export const PROVINCIAL_DATA: Record<string, ProvincialRule> = {
     dailyOtThreshold: 8, 
     weeklyOtThreshold: 40, 
     otRate: 1.5, 
-    vacationPayRate: 0.04, 
     basicPersonalAmount: 17782, // 2025
     brackets: [
       { threshold: 52000, rate: 0.059 }, 
@@ -263,7 +251,6 @@ export const PROVINCIAL_DATA: Record<string, ProvincialRule> = {
     dailyOtThreshold: 8, 
     weeklyOtThreshold: 40, 
     otRate: 1.5, 
-    vacationPayRate: 0.04, 
     basicPersonalAmount: 19025, // 2025
     brackets: [
       { threshold: 54000, rate: 0.04 }, 

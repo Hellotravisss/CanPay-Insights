@@ -33,7 +33,18 @@ const DEFAULT_SIMPLE_INPUTS: SalaryInputs = {
     startTime: "00:00",
     endTime: "06:00"
   },
-  vacationPayRate: 0
+  rrspContributionPerPeriod: 0,
+  additionalIncome: {
+    statHolidayPay: 0,
+    sickPay: 0,
+    bonus: 0,
+    otherIncome: 0,
+  },
+  deductions: {
+    ltdPremium: 0,
+    unionDues: 0,
+    otherDeductions: 0,
+  },
 };
 
 // Default State - Annual Salary (Fixed at Bi-Weekly)

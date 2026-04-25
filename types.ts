@@ -43,7 +43,6 @@ export interface ProvincialRule {
   weeklyOtThreshold: number;
   otRate: number;
   doubleTimeThreshold?: number;
-  vacationPayRate: number;
   brackets: TaxBracket[];
   basicPersonalAmount: number;
   // Ontario surtax (optional)
@@ -67,13 +66,27 @@ export interface ShiftPremium {
   endTime: string;
 }
 
+export interface AdditionalIncome {
+  statHolidayPay: number;      // per period
+  sickPay: number;             // per period
+  bonus: number;               // per period (one-time or recurring)
+  otherIncome: number;         // per period (tips, commissions, etc.)
+}
+
+export interface Deductions {
+  ltdPremium: number;          // Long-term disability insurance per period
+  unionDues: number;           // Union dues per period
+  otherDeductions: number;     // Other pre/post-tax deductions per period
+}
+
 export interface SalaryInputs {
   province: string;
   hourlyWage: number;
   shift: ShiftDetails;
   premium: ShiftPremium;
-  vacationPayRate: number;
-  rrspContributionPerPeriod?: number; // Optional RRSP deduction per pay period
+  rrspContributionPerPeriod?: number;
+  additionalIncome?: AdditionalIncome;
+  deductions?: Deductions;
 }
 
 // 年薪输入（新增）

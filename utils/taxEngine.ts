@@ -297,17 +297,26 @@ export const calculateSalary = (inputs: SalaryInputs): CalculationResult => {
   const biWeeklyOt20Pay = otHours20 * (inputs.hourlyWage * 2.0) * biWeeklyMultiplier;
   const biWeeklyPremiumPay = totalPremiumHours * inputs.premium.ratePerHour * biWeeklyMultiplier;
   
-  let grossPayBiWeekly = biWeeklyRegularPay + biWeeklyOt15Pay + biWeeklyOt20Pay + biWeeklyPremiumPay;
-  
-  // Apply vacation pay if selected (4%, 6%, or 8%)
-  if (inputs.vacationPayRate > 0) {
-    grossPayBiWeekly += grossPayBiWeekly * inputs.vacationPayRate;
-  }
-  
+  // 4b. Additional income this period
+  const addl = inputs.additionalIncome;
+  const additionalPerPeriod = addl
+    ? (addl.statHolidayPay + addl.sickPay + addl.bonus + addl.otherIncome)
+    : 0;
+
+  const grossPayBiWeekly =
+    biWeeklyRegularPay + biWeeklyOt15Pay + biWeeklyOt20Pay + biWeeklyPremiumPay + additionalPerPeriod;
+
   // 5. Annual Gross & RRSP
   const annualGross = grossPayBiWeekly * 26;
   const rrspPerPeriod = inputs.rrspContributionPerPeriod ?? 0;
   const annualRRSP = rrspPerPeriod * 26;
+
+  // Post-tax deductions (LTD, union dues, other) — do NOT reduce taxable income
+  const ded = inputs.deductions;
+  const postTaxDeductionsPerPeriod = ded
+    ? (ded.ltdPremium + ded.unionDues + ded.otherDeductions)
+    : 0;
+
   const taxableIncome = Math.max(0, annualGross - annualRRSP);
 
   // 6. Deductions
@@ -318,15 +327,16 @@ export const calculateSalary = (inputs: SalaryInputs): CalculationResult => {
   const taxResult = calculateTotalTax(taxableIncome, cppResult.total, inputs.province);
   
   const totalTaxAnnual = taxResult.total;
-  const totalDeductionsAnnual = totalTaxAnnual + cppResult.total + eiAnnual + qpipAnnual + annualRRSP;
+  const annualPostTaxDeductions = postTaxDeductionsPerPeriod * 26;
+  const totalDeductionsAnnual = totalTaxAnnual + cppResult.total + eiAnnual + qpipAnnual + annualRRSP + annualPostTaxDeductions;
   const netPayAnnual = annualGross - totalDeductionsAnnual;
-  
+
   return {
     regularHours: regularHours * biWeeklyMultiplier,
     overtimeHours15: otHours15 * biWeeklyMultiplier,
     overtimeHours20: otHours20 * biWeeklyMultiplier,
     shiftPremiumHours: totalPremiumHours * biWeeklyMultiplier,
-    
+
     grossPayBiWeekly,
     federalTax: taxResult.federalTax / 26,
     provincialTax: taxResult.provincialTax / 26,
@@ -334,7 +344,7 @@ export const calculateSalary = (inputs: SalaryInputs): CalculationResult => {
     eiDeduction: eiAnnual / 26,
     rrspDeduction: rrspPerPeriod,
     netPayBiWeekly: netPayAnnual / 26,
-    
+
     grossPayAnnual: annualGross,
     netPayAnnual,
     totalDeductionsAnnual

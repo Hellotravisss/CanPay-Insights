@@ -1,7 +1,7 @@
 'use client';
 
-import React from 'react';
-import { SalaryInputs, Province } from '../types';
+import React, { useState } from 'react';
+import { SalaryInputs, Province, AdditionalIncome, Deductions } from '../types';
 import { PROVINCIAL_DATA, DAYS_OF_WEEK } from '../constants';
 
 interface Props {
@@ -10,6 +10,18 @@ interface Props {
 }
 
 const InputSection: React.FC<Props> = ({ inputs, setInputs }) => {
+  const [showAdditional, setShowAdditional] = useState(false);
+  const [showDeductions, setShowDeductions] = useState(false);
+
+  const updateAdditional = (field: keyof AdditionalIncome, value: number) => {
+    setInputs({ ...inputs, additionalIncome: { ...inputs.additionalIncome!, [field]: value } });
+  };
+
+  const updateDeductions = (field: keyof Deductions, value: number) => {
+    setInputs({ ...inputs, deductions: { ...inputs.deductions!, [field]: value } });
+  };
+
+  const parseAmount = (v: string) => Math.max(0, parseFloat(v) || 0);
 
   const handleDayToggle = (index: number) => {
     const newDays = [...inputs.shift.daysActive];
@@ -193,22 +205,110 @@ const InputSection: React.FC<Props> = ({ inputs, setInputs }) => {
         )}
       </div>
 
-      {/* Vacation Pay Selection */}
-      <div className="bg-slate-50 p-4 rounded-xl border border-slate-100">
-        <label className="block text-sm font-bold text-slate-700 mb-2">Vacation Pay <span className="font-normal text-slate-500">(paid each cheque)</span></label>
-        <select
-          className="w-full p-3 bg-white text-slate-900 border border-slate-300 rounded-lg focus:ring-2 focus:ring-red-500 focus:outline-none transition-all cursor-pointer hover:border-red-300 shadow-sm"
-          value={inputs.vacationPayRate}
-          onChange={(e) => setInputs({...inputs, vacationPayRate: parseFloat(e.target.value)})}
+      <hr className="border-slate-100" />
+
+      {/* Additional Income */}
+      <div>
+        <button
+          type="button"
+          onClick={() => setShowAdditional(v => !v)}
+          className="w-full flex items-center justify-between text-left"
         >
-          <option value={0}>Not included each pay — leave at 0%</option>
-          <option value={0.04}>4% included each cheque (0–5 yrs, 2 weeks)</option>
-          <option value={0.06}>6% included each cheque (5+ yrs, 3 weeks)</option>
-          <option value={0.08}>8% included each cheque (8+ yrs / SK, 4 weeks)</option>
-        </select>
-        <p className="text-xs text-amber-700 bg-amber-50 border border-amber-200 rounded-md px-3 py-2 mt-2">
-          <strong>Only select this if vacation pay appears on your payslip each period.</strong> If your employer banks vacation time and pays it out separately (e.g. "Vacation Earned" or lump sum), leave this at 0% — otherwise your gross will be overstated by hundreds of dollars.
-        </p>
+          <h3 className="text-lg font-bold text-slate-800 flex items-center">
+            <svg className="w-5 h-5 mr-2 text-red-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 4v16m8-8H4" /></svg>
+            Additional Income
+          </h3>
+          <div className="flex items-center gap-2">
+            {(inputs.additionalIncome && Object.values(inputs.additionalIncome).some(v => v > 0)) && (
+              <span className="text-xs bg-red-100 text-red-700 font-semibold px-2 py-0.5 rounded-full">Active</span>
+            )}
+            <svg className={`w-5 h-5 text-slate-400 transition-transform ${showAdditional ? 'rotate-180' : ''}`} fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" /></svg>
+          </div>
+        </button>
+        <p className="text-xs text-slate-500 mt-1 mb-3">Stat holiday pay, sick pay, bonus, etc. — added to gross this period</p>
+
+        {showAdditional && (
+          <div className="bg-red-50 p-4 rounded-xl border border-red-100 space-y-3 animate-fadeIn">
+            {([
+              { key: 'statHolidayPay', label: 'Statutory Holiday Pay', hint: 'Paid for public holidays worked or not worked' },
+              { key: 'sickPay',        label: 'Sick Pay / Paid Leave',  hint: 'Employer-paid sick or personal days this period' },
+              { key: 'bonus',          label: 'Bonus / Retroactive Pay', hint: 'One-time or recurring bonus, gain-share, retro' },
+              { key: 'otherIncome',   label: 'Other Income',            hint: 'Tips, commissions, allowances, etc.' },
+            ] as { key: keyof AdditionalIncome; label: string; hint: string }[]).map(({ key, label, hint }) => (
+              <div key={key}>
+                <label className="block text-xs font-bold text-red-800 mb-1">{label}</label>
+                <div className="relative">
+                  <span className="absolute left-3 top-2.5 text-red-400 text-sm">$</span>
+                  <input
+                    type="number"
+                    min="0"
+                    step="1"
+                    className="w-full p-2.5 pl-7 bg-white text-slate-900 border border-red-200 rounded-lg focus:ring-2 focus:ring-red-500 focus:outline-none"
+                    value={inputs.additionalIncome?.[key] || ''}
+                    placeholder="0"
+                    onFocus={(e) => e.target.select()}
+                    onChange={(e) => updateAdditional(key, parseAmount(e.target.value))}
+                  />
+                </div>
+                <p className="text-xs text-red-600 mt-0.5 ml-1">{hint}</p>
+              </div>
+            ))}
+          </div>
+        )}
+      </div>
+
+      <hr className="border-slate-100" />
+
+      {/* Deductions */}
+      <div>
+        <button
+          type="button"
+          onClick={() => setShowDeductions(v => !v)}
+          className="w-full flex items-center justify-between text-left"
+        >
+          <h3 className="text-lg font-bold text-slate-800 flex items-center">
+            <svg className="w-5 h-5 mr-2 text-red-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M20 12H4" /></svg>
+            Other Deductions
+          </h3>
+          <div className="flex items-center gap-2">
+            {(inputs.deductions && Object.values(inputs.deductions).some(v => v > 0)) && (
+              <span className="text-xs bg-red-100 text-red-700 font-semibold px-2 py-0.5 rounded-full">Active</span>
+            )}
+            <svg className={`w-5 h-5 text-slate-400 transition-transform ${showDeductions ? 'rotate-180' : ''}`} fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" /></svg>
+          </div>
+        </button>
+        <p className="text-xs text-slate-500 mt-1 mb-3">LTD, union dues, and other after-tax deductions from your cheque</p>
+
+        {showDeductions && (
+          <div className="bg-slate-100 p-4 rounded-xl border border-slate-200 space-y-3 animate-fadeIn">
+            {([
+              { key: 'ltdPremium',       label: 'LTD / Disability Insurance', hint: 'Long-term disability premium per period' },
+              { key: 'unionDues',        label: 'Union Dues',                  hint: 'Monthly dues deducted from your cheque' },
+              { key: 'otherDeductions',  label: 'Other Deductions',            hint: 'Parking, tool rental, garnishment, etc.' },
+            ] as { key: keyof Deductions; label: string; hint: string }[]).map(({ key, label, hint }) => (
+              <div key={key}>
+                <label className="block text-xs font-bold text-slate-700 mb-1">{label}</label>
+                <div className="relative">
+                  <span className="absolute left-3 top-2.5 text-slate-400 text-sm">$</span>
+                  <input
+                    type="number"
+                    min="0"
+                    step="1"
+                    className="w-full p-2.5 pl-7 bg-white text-slate-900 border border-slate-300 rounded-lg focus:ring-2 focus:ring-red-500 focus:outline-none"
+                    value={inputs.deductions?.[key] || ''}
+                    placeholder="0"
+                    onFocus={(e) => e.target.select()}
+                    onChange={(e) => updateDeductions(key, parseAmount(e.target.value))}
+                  />
+                </div>
+                <p className="text-xs text-slate-500 mt-0.5 ml-1">{hint}</p>
+              </div>
+            ))}
+            <p className="text-xs text-slate-500 bg-white border border-slate-200 rounded-md px-3 py-2">
+              These are deducted after tax — they reduce your net pay but not your taxable income.
+            </p>
+          </div>
+        )}
       </div>
 
       <hr className="border-slate-100" />
