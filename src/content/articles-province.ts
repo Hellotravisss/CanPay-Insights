@@ -14,6 +14,8 @@ export interface Article {
   readTime: number;
   imageUrl: string;
   content: string;
+  directAnswer: string;
+  faq: { question: string; answer: string }[];
 }
 
 export const provinceArticles: Article[] = [
@@ -98,7 +100,15 @@ Childcare subsidies and lower fuel costs also improve affordability for working 
 
 The energy transition will create new high-paying roles in hydrogen, carbon management, and renewables. Workers with transition-relevant skills will be best positioned for future growth.
 
-Economic diversification and technology adoption will continue to reshape labor demand. Continuous skill development remains the key to maintaining earning power in Alberta.`
+Economic diversification and technology adoption will continue to reshape labor demand. Continuous skill development remains the key to maintaining earning power in Alberta.`,
+    directAnswer: 'Alberta offers some of Canada\'s most competitive earnings with no provincial sales tax (PST) and a relatively low income tax rate of 10% on the first $151,234, making it a top choice for high real purchasing power.',
+    faq: [
+      { question: 'What is the provincial income tax rate in Alberta for 2025?', answer: 'For 2025, Alberta has a provincial income tax rate of 10% on taxable income up to $151,234. Rates increase for higher brackets, reaching 15% for income over $355,845.' },
+      { question: 'Does Alberta have a provincial sales tax (PST)?', answer: 'No, Alberta is the only province in Canada without a provincial sales tax, charging only the 5% federal GST on most goods and services.' },
+      { question: 'Which cities in Alberta have the highest salaries?', answer: 'Calgary and Edmonton consistently lead the province, with Calgary often seeing higher premiums in corporate finance and energy headquarters, while Edmonton offers strong public sector and industrial wages.' },
+      { question: 'What are the top industries for high earners in Alberta?', answer: 'The energy sector (oil and gas) remains the top payer, but tech, healthcare, and specialized skilled trades also offer competitive salaries exceeding national averages.' },
+      { question: 'How is the cost of living in Alberta compared to Ontario or BC?', answer: 'Alberta generally offers a significantly lower cost of living due to more affordable housing, lower fuel costs, and the absence of provincial sales tax, leading to higher discretionary income.' }
+    ]
   },
   {
     id: 'province-002',
@@ -169,7 +179,15 @@ Full professors at major universities earn $150,000 to $250,000, while college f
 
 Toronto's housing crisis has made affordability a central concern, with average home prices exceeding $1 million. Many professionals now commute long distances or seek remote work to manage costs.
 
-While Ottawa and Hamilton are more affordable, living costs are rising across the province. Geographic arbitrage within Ontario remains a key strategy for optimizing real income.`
+While Ottawa and Hamilton are more affordable, living costs are rising across the province. Geographic arbitrage within Ontario remains a key strategy for optimizing real income.`,
+    directAnswer: 'Ontario is Canada\'s economic powerhouse, led by Toronto\'s finance and tech sectors, where salaries are among the highest in the country, though balanced by significant housing costs in the GTA.',
+    faq: [
+      { question: 'What are the Ontario provincial tax rates for 2025?', answer: 'In 2025, Ontario\'s tax rates start at 5.05% on the first $51,446, with rates increasing to 9.15%, 11.16%, 12.16%, and a top rate of 13.16% for income over $220,000.' },
+      { question: 'How much can I earn in Toronto\'s tech sector?', answer: 'Senior software engineers in Toronto can expect base salaries ranging from $120,000 to $200,000+, often supplemented by bonuses and equity grants.' },
+      { question: 'Is Ottawa a good location for high-paying government jobs?', answer: 'Yes, Ottawa is the federal hub of Canada, offering stable, high-paying executive roles and policy positions with competitive benefits and pensions.' },
+      { question: 'What is the average housing cost in Toronto compared to other Ontario cities?', answer: 'Toronto\'s average home price exceeds $1.1 million, while cities like Hamilton, London, or Ottawa offer lower prices, though they are also seeing significant increases.' },
+      { question: 'Are Ontario teachers well-paid compared to other provinces?', answer: 'Ontario teachers are among the highest-paid in Canada, with senior salaries on the top grid reaching between $100,000 and $115,000.' }
+    ]
   },
   {
     id: 'province-003',
@@ -234,7 +252,15 @@ Successful realtors and architects earn anywhere from $90,000 to over $500,000, 
 
 Extreme housing costs in Vancouver and Victoria consume a large portion of professional incomes. Many residents now look to the Fraser Valley or remote work options to maintain their standard of living.
 
-Compare your potential after-tax income in BC versus other provinces using our Province Comparison Tool to make an informed decision about your next career move.`
+Compare your potential after-tax income in BC versus other provinces using our Province Comparison Tool to make an informed decision about your next career move.`,
+    directAnswer: 'British Columbia offers high wages in tech, film, and resources, with the lowest starting provincial income tax rate (5.06% on first $49,279), though Vancouver\'s housing costs remain a significant factor for real income.',
+    faq: [
+      { question: 'What is British Columbia\'s lowest tax bracket for 2025?', answer: 'For 2025, BC has a starting provincial income tax rate of 5.06% on the first $49,279 of taxable income, which is the lowest entry rate in Canada.' },
+      { question: 'What are typical technology salaries in Vancouver?', answer: 'Software engineers in Vancouver typically earn between $110,000 and $180,000, while specialized roles in AI and fintech can reach over $200,000.' },
+      { question: 'Is the film industry a major employer in BC?', answer: 'Yes, BC (often called Hollywood North) is one of North America\'s largest film hubs, offering high-paying unionized roles for specialized technicians and production staff.' },
+      { question: 'How do salaries in Victoria compare to Vancouver?', answer: 'Victoria salaries are generally 10-15% lower than Vancouver, but the city offers a stable job market driven by the provincial government and a growing tech sector.' },
+      { question: 'What is the provincial sales tax (PST) in British Columbia?', answer: 'BC generally charges a 7% PST on most goods and services, which is combined with the 5% federal GST for a total of 12%.' }
+    ]
   },
   {
     id: 'province-004',
@@ -287,7 +313,15 @@ Forestry and transportation equipment manufacturing also provide high-skill role
 
 Montreal's housing costs are rising but remain more affordable than Toronto's. Quebec's unique social benefits, including low-cost childcare and enhanced parental leave, significantly boost real household income.
 
-The combination of lower costs and high social investment often provides a superior quality of life compared to higher-salary provinces.`
+The combination of lower costs and high social investment often provides a superior quality of life compared to higher-salary provinces.`,
+    directAnswer: 'Quebec balances competitive salaries in AI and aerospace with a lower cost of living and extensive social benefits like subsidized childcare, though it maintains higher provincial income tax rates than the west.',
+    faq: [
+      { question: 'What are Quebec\'s provincial income tax rates for 2025?', answer: 'In 2025, Quebec\'s tax rates start at 14% on the first $51,780, rising to 19%, 24%, and a top rate of 25.75% for income exceeding $126,000.' },
+      { question: 'Is bilingualism necessary for high-paying jobs in Quebec?', answer: 'While English is common in tech hubs, fluency in French is often essential for senior management, legal roles, and public sector employment across the province.' },
+      { question: 'What is Montreal\'s reputation in the global tech industry?', answer: 'Montreal is a world leader in Artificial Intelligence (AI) and Video Game Development, attracting major global firms and offering salaries between $85,000 and $170,000+.' },
+      { question: 'How do social benefits in Quebec impact real income?', answer: 'Subsidized childcare (often under $10/day) and enhanced parental leave significantly reduce household expenses, often making Quebec more affordable than provinces with higher base salaries.' },
+      { question: 'What are the typical salaries for healthcare professionals in Quebec?', answer: 'Registered nurses in Quebec typically earn between $75,000 and $95,000, while family physicians can earn $200,000 to $280,000 before overhead.' }
+    ]
   },
   {
     id: 'province-005',
@@ -344,7 +378,15 @@ Recruitment incentives are common in healthcare to address regional shortages an
 
 Housing affordability is Atlantic Canada's greatest edge. Even in Halifax, home prices are far below national averages, allowing for a high standard of living on moderate incomes.
 
-Shorter commutes and a slower pace of life contribute to a high overall quality of life that attracts many interprovincial migrants.`
+Shorter commutes and a slower pace of life contribute to a high overall quality of life that attracts many interprovincial migrants.`,
+    directAnswer: 'Atlantic Canada provides excellent quality of life and housing affordability, with Halifax emerging as a tech hub offering salaries between $70,000 and $130,000 for skilled professionals.',
+    faq: [
+      { question: 'Which Atlantic city offers the best tech employment opportunities?', answer: 'Halifax is the primary economic and tech hub of the region, offering a growing startup scene and established firms with salaries for developers ranging from $70,000 to $120,000.' },
+      { question: 'Is housing still affordable in Atlantic Canada in 2025?', answer: 'Despite recent price increases, Atlantic Canada remains one of the most affordable regions in Canada, with home prices in cities like Moncton or St. John\'s well below the national average.' },
+      { question: 'What are the main high-wage industries in Newfoundland and Labrador?', answer: 'Offshore oil and gas, along with mining in Labrador, are the highest-paying sectors, with engineering and specialized roles often exceeding $150,000.' },
+      { question: 'What are the income tax rates in the Atlantic provinces?', answer: 'Tax rates vary by province but generally start between 8% and 10% (e.g., Nova Scotia starts at 8.79%, while PEI starts at 9.4%).' },
+      { question: 'Is it easy to find remote work in the Atlantic region?', answer: 'Yes, many professionals from Ontario and BC have moved to Atlantic Canada to maintain remote roles while benefiting from the region\'s lower cost of living and high quality of life.' }
+    ]
   },
   {
     id: 'province-006',
@@ -409,7 +451,15 @@ Housing affordability in Prairie cities represents a significant advantage, with
 
 Transportation costs include vehicle dependence given urban sprawl and limited transit outside Winnipeg. However, shorter commutes and lower housing costs often offset transportation expenses. Some professionals can achieve reasonable commutes even in car-dependent environments.
 
-Overall cost of living calculations consistently show Prairie provinces offering excellent affordability. The combination of moderate salaries and low costs creates comfortable lifestyles for professionals and working families. This affordability attracts those seeking financial security.`
+Overall cost of living calculations consistently show Prairie provinces offering excellent affordability. The combination of moderate salaries and low costs creates comfortable lifestyles for professionals and working families. This affordability attracts those seeking financial security.`,
+    directAnswer: 'Saskatchewan and Manitoba offer some of Canada\'s lowest housing costs and strong earnings in agriculture, mining (potash/uranium), and manufacturing, providing a high standard of living.',
+    faq: [
+      { question: 'What is the 2025 income tax rate in Saskatchewan?', answer: 'For 2025, Saskatchewan\'s provincial income tax starts at 10.5% on the first $52,057, with a top rate of 14.5% for income over $148,734.' },
+      { question: 'What are the 2025 tax brackets for Manitoba?', answer: 'Manitoba\'s provincial tax rates for 2025 start at 10.8% on the first $47,003, with the top rate reaching 17.4% for income over $100,000.' },
+      { question: 'What are the highest-paying industries in Saskatoon?', answer: 'Potash mining, uranium extraction, and the emerging AgTech sector are the primary high-wage drivers in Saskatoon, with professional roles often paying $90,000 to $150,000.' },
+      { question: 'Why is Winnipeg considered a strong manufacturing hub?', answer: 'Winnipeg has a diverse industrial base, including major aerospace (Boeing), bus manufacturing, and food processing, offering stable engineering and management roles up to $120,000.' },
+      { question: 'How does housing affordability in the Prairies compare to the rest of Canada?', answer: 'Winnipeg, Regina, and Saskatoon consistently rank among the most affordable major cities in Canada, with home prices significantly lower than in BC, Ontario, or even parts of the Maritimes.' }
+    ]
   },
   {
     id: 'province-007',
@@ -482,7 +532,15 @@ Housing costs vary by community with some northern markets having limited availa
 
 Overall cost of living substantially exceeds southern Canada even with northern premiums. The compensation packages aim to offset these costs while providing incentive for northern service. Financial planning must account for high costs and limited shopping options.
 
-Quality of life factors including community connection, outdoor recreation, and cultural experiences complement financial considerations. Many northern workers value these aspects of northern living. The decision to work in the North involves lifestyle as well as financial factors.`
+Quality of life factors including community connection, outdoor recreation, and cultural experiences complement financial considerations. Many northern workers value these aspects of northern living. The decision to work in the North involves lifestyle as well as financial factors.`,
+    directAnswer: 'Working in Yukon, NWT, or Nunavut offers exceptional earning potential through high base salaries supplemented by northern allowances and isolation pay to offset the higher cost of living.',
+    faq: [
+      { question: 'What is a Northern Allowance?', answer: 'A Northern Allowance is a supplemental payment (often $10k-$30k+) provided by employers to offset the high costs of food, fuel, and housing in Canada\'s northern territories.' },
+      { question: 'Which territory has the highest average salaries in Canada?', answer: 'Nunavut often reports the highest average salaries in Canada, with senior professionals and healthcare workers frequently earning over $150,000 to $200,000 including allowances.' },
+      { question: 'Are there special tax deductions for living in the North?', answer: 'Yes, residents of the territories may be eligible for the Northern Residents Deduction, which provides tax relief for residency and travel in prescribed northern zones.' },
+      { question: 'What are the main industries for employment in the Territories?', answer: 'The territorial governments are the largest employers, followed by the mining sector (diamonds in NWT, gold/minerals in Yukon) and essential healthcare services.' },
+      { question: 'Is housing usually provided by northern employers?', answer: 'In many remote northern communities, especially in Nunavut and NWT, employers often provide subsidized housing or housing allowances as part of the compensation package.' }
+    ]
   },
   {
     id: 'province-008',
@@ -539,7 +597,15 @@ Entrepreneurship is also thriving in commuter towns, offering lower business ove
 
 While housing in commuter towns has appreciated rapidly, so have property taxes and local infrastructure costs. Families should also research school and childcare capacity in these growing communities.
 
-Retirement planning should consider if these suburbs will remain suitable as healthcare and accessibility needs change with age.`
+Retirement planning should consider if these suburbs will remain suitable as healthcare and accessibility needs change with age.`,
+    directAnswer: 'Commuter towns like Hamilton or Abbotsford allow professionals to earn high Toronto or Vancouver salaries while accessing more affordable housing, though commuting costs and time must be factored into the net benefit.',
+    faq: [
+      { question: 'How much can I save on housing by moving to a commuter town?', answer: 'Professionals can often find housing that is 40-50% cheaper in towns like Barrie or Abbotsford compared to the downtown cores of Toronto or Vancouver.' },
+      { question: 'What are the hidden financial costs of a long commute?', answer: 'Beyond fuel, commuters face increased vehicle depreciation, maintenance costs, and parking fees, which can total over $10,000 annually for a 100km+ daily round trip.' },
+      { question: 'Do employers adjust salaries if I move to a remote commuter town?', answer: 'While most city-based roles maintain their benchmarked salary, some companies are introducing location-based pay scales for fully remote workers living in lower-cost areas.' },
+      { question: 'Which Ontario commuter towns have the best transit to Toronto?', answer: 'Hamilton, Oshawa, and Kitchener-Waterloo are popular due to reliable GO Train service, allowing residents to work during their commute.' },
+      { question: 'Are there SkyTrain-connected commuter options for Vancouver?', answer: 'Yes, cities like Surrey, Coquitlam, and New Westminster are directly connected to Vancouver via SkyTrain, offering a balance of slightly lower costs and transit convenience.' }
+    ]
   },
   {
     id: 'province-009',
@@ -614,7 +680,15 @@ Vancouver combines high costs with strong co-op and employment opportunities par
 
 Waterloo has developed around co-operative education with strong employer relationships supporting student employment. The co-op model enables many Waterloo students to graduate with minimal debt and strong experience. Housing costs have risen though remain below major cities.
 
-Kingston, London, and smaller university cities offer more affordable student living with adequate employment opportunities. These communities provide quality education with manageable costs. Students prioritizing affordability should consider these options.`
+Kingston, London, and smaller university cities offer more affordable student living with adequate employment opportunities. These communities provide quality education with manageable costs. Students prioritizing affordability should consider these options.`,
+    directAnswer: 'Canada\'s student cities offer diverse part-time and co-op opportunities, with engineering and tech students often earning $25-$40 per hour during work terms to offset rising tuition costs.',
+    faq: [
+      { question: 'What is the average part-time wage for students in Canada?', answer: 'Most students earn between $15 and $20 per hour in retail, food service, or on-campus roles, depending on the provincial minimum wage.' },
+      { question: 'Do co-op programs provide enough income to pay for tuition?', answer: 'High-demand fields like Engineering, CS, and Finance offer co-op pay between $20 and $40 per hour, which can generate $10k-$25k per work term, significantly covering annual costs.' },
+      { question: 'Which Canadian cities are most affordable for students?', answer: 'Montreal is widely considered the most affordable major student city, while smaller university towns like Kingston, London, and Sherbrooke also offer lower housing costs.' },
+      { question: 'Can international students work off-campus in Canada?', answer: 'Yes, international students with a valid study permit can typically work up to 24 hours per week off-campus during academic terms and full-time during breaks (as of 2025 regulations).' },
+      { question: 'What is a Graduate Teaching Assistantship (TA)?', answer: 'TAs are graduate students employed by the university to assist with undergraduate courses, typically earning $8,000 to $15,000 per academic year for a set number of hours.' }
+    ]
   },
   {
     id: 'province-010',
@@ -687,6 +761,14 @@ Pension income splitting and tax planning help working retirees minimize tax bur
 
 CPP integration allows continued work while receiving retirement benefits, with contributions potentially increasing future payments. The post-retirement benefit rewards continued CPP contributions. Working retirees should understand these provisions.
 
-Healthcare benefits from employers may provide value for retirees not yet eligible for provincial drug plans. Part-time positions rarely include benefits but some consulting or contract arrangements might. Benefit value should factor into employment decisions.`
+Healthcare benefits from employers may provide value for retirees not yet eligible for provincial drug plans. Part-time positions rarely include benefits but some consulting or contract arrangements might. Benefit value should factor into employment decisions.`,
+    directAnswer: 'Retirees in destinations like Vancouver Island or the Okanagan can supplement their pensions through part-time consulting, seasonal tourism work, or retail roles, often earning $20-$200 per hour depending on expertise.',
+    faq: [
+      { question: 'What are the most popular part-time jobs for Canadian retirees?', answer: 'Many retirees find flexible work in retail, hospitality, administrative support, or specialized consulting based on their previous career expertise.' },
+      { question: 'How does employment income affect Old Age Security (OAS)?', answer: 'If your total annual income (including work) exceeds the threshold (approx. $90,997 for 2024/2025), your OAS benefits may be subject to a recovery tax or "clawback."' },
+      { question: 'Do I still need to pay into CPP if I work after age 65?', answer: 'If you are between 65 and 70 and receiving CPP, contributions are optional. You can choose to stop contributing by filing form CPT30 with your employer.' },
+      { question: 'Which provinces are most tax-friendly for retirees?', answer: 'Alberta and British Columbia are often favored by retirees due to lower provincial income taxes and, in Alberta\'s case, the lack of provincial sales tax.' },
+      { question: 'Can I find seasonal work in retirement destinations?', answer: 'Yes, popular retirement spots like the Okanagan or the Maritimes have strong tourism seasons, offering roles in guiding, hosting, and event management from May to September.' }
+    ]
   }
 ];

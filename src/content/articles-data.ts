@@ -19,6 +19,14 @@ const article1: Article = {
   publishedAt: "2025-01-15",
   readTime: 12,
   imageUrl: "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=800&q=80",
+  directAnswer: "In Ontario for 2025, an average earner (e.g., $65,000) can expect an effective tax rate of about 24.3%, resulting in a take-home pay of approximately $49,221 after federal and provincial taxes, CPP, and EI.",
+  faq: [
+    { question: "What are the Ontario provincial tax brackets for 2025?", answer: "Ontario has five provincial tax brackets in 2025, ranging from 5.05% on the first $51,446 to 13.16% on income over $220,000." },
+    { question: "How much is the maximum CPP contribution in 2025?", answer: "The maximum CPP contribution for employees in 2025 is $4,034.10 for the first tier, plus an additional amount up to $388 for the new CPP2 tier." },
+    { question: "What is the federal basic personal amount for 2025?", answer: "The federal basic personal amount for 2025 is $16,129, which provides a non-refundable tax credit that reduces your federal tax bill." },
+    { question: "How is EI calculated in Ontario for 2025?", answer: "Employment Insurance is calculated as 1.64% of insurable earnings, up to a maximum annual employee contribution of $1,077.48." },
+    { question: "What is a marginal tax rate?", answer: "A marginal tax rate is the tax applied to your next dollar of income; for someone earning $65,000 in Ontario, the combined marginal rate is 29.65%." }
+  ],
   content: `
 ## The Complete Ontario Tax Guide 2025: What You Actually Take Home
 
@@ -278,6 +286,14 @@ const article2: Article = {
   publishedAt: "2025-01-16",
   readTime: 11,
   imageUrl: "https://images.unsplash.com/photo-1559511260-66a654ae982a?w=800&q=80",
+  directAnswer: "British Columbia features a 7-tier progressive tax system in 2025; an $80,000 salary in Vancouver nets approximately $57,579 annually after all mandatory deductions, representing a 28% effective tax rate.",
+  faq: [
+    { question: "How many tax brackets does BC have in 2025?", answer: "BC uses a unique 7-tier provincial tax system, with rates starting at 5.06% and reaching 20.5% for high earners." },
+    { question: "Is BC tax lower than Ontario's?", answer: "For many middle-income earners, BC's provincial tax is slightly lower than Ontario's; at $80,000, you pay about $400 less in provincial tax in BC." },
+    { question: "What is the BC Climate Action Tax Credit?", answer: "It is a quarterly payment (up to $447/year for individuals) provided to BC residents to help offset the costs of carbon taxes." },
+    { question: "Does BC have a property transfer tax exemption for first-time buyers?", answer: "Yes, first-time home buyers in BC can receive a full exemption on property transfer tax for homes priced up to $500,000." },
+    { question: "What is the BC Rental Assistance Program?", answer: "The program provides monthly subsidies to low-to-moderate income families with children to help make private market rentals more affordable." }
+  ],
   content: `
 ## BC Tax Guide 2025: Vancouver Living Costs vs. Take-Home Pay
 
@@ -497,6 +513,14 @@ const article3: Article = {
   publishedAt: "2025-01-17",
   readTime: 14,
   imageUrl: "https://images.unsplash.com/photo-1436491865332-7a61a109cc05?w=800&q=80",
+  directAnswer: "Newcomers to Canada in 2025 must file a tax return even with no income to access benefits like the GST/HST credit and Canada Child Benefit (CCB), which are based on family income.",
+  faq: [
+    { question: "Do I need to file taxes in my first year in Canada?", answer: "Yes, you should file a tax return for the year you arrive to establish your eligibility for various credits and benefits, even if you had no income." },
+    { question: "What is the GST/HST credit?", answer: "It is a tax-free quarterly payment for individuals and families with low or modest incomes to help offset the sales tax they pay." },
+    { question: "How do I claim the Canada Child Benefit (CCB)?", answer: "Newcomers can apply for CCB as soon as they become residents for tax purposes and have children under 18; the amount is based on your family income." },
+    { question: "What are the tax residency rules for newcomers?", answer: "Generally, you become a resident of Canada for tax purposes on the date you arrive and establish significant residential ties." },
+    { question: "Can I claim moving expenses to Canada?", answer: "Most newcomers cannot claim the cost of moving to Canada, but you may be able to claim moves within Canada for work or study later on." }
+  ],
   content: `
 ## Newcomer Tax Guide 2025: Your First Year in Canada
 
@@ -707,6 +731,14 @@ const article4: Article = {
   publishedAt: "2025-01-18",
   readTime: 10,
   imageUrl: "https://images.unsplash.com/photo-1579621970563-ebec7560ff3e?w=800&q=80",
+  directAnswer: "CPP and EI are mandatory payroll deductions in Canada; for 2025, employees contribute 5.95% for CPP (up to $4,034.10) and 1.64% for EI (up to $1,077.48) to fund retirement and social safety nets.",
+  faq: [
+    { question: "What is the new CPP2 deduction?", answer: "Starting in 2024/2025, an additional 4% contribution applies to earnings between $73,200 and $81,200 to further enhance the Canada Pension Plan." },
+    { question: "How much EI will I pay in 2025?", answer: "The employee EI rate is 1.64% of insurable earnings, capped at a maximum annual contribution of $1,077.48." },
+    { question: "What benefits does CPP provide?", answer: "CPP offers retirement pensions, disability benefits, and survivor benefits to those who have contributed to the plan." },
+    { question: "What does EI cover?", answer: "EI provides temporary financial assistance to unemployed workers and covers maternity, parental, sickness, and caregiver benefits." },
+    { question: "Do self-employed individuals pay CPP and EI?", answer: "Self-employed people pay both the employee and employer portions of CPP but can choose whether to opt into EI special benefits." }
+  ],
   content: `
 ## CPP and EI Explained: What You're Paying For
 
@@ -914,6 +946,14 @@ const article5: Article = {
   publishedAt: "2025-01-19",
   readTime: 9,
   imageUrl: "https://images.unsplash.com/photo-1554224155-6726b3ff858f?w=800&q=80",
+  directAnswer: "A $50,000 salary in Canada for 2025 yields a take-home pay ranging from roughly $38,500 to $40,500 depending on the province, with Alberta typically offering the highest net pay due to lower provincial rates.",
+  faq: [
+    { question: "Which province has the lowest tax on a $50,000 salary?", answer: "Alberta generally offers the highest take-home pay for this bracket due to its higher basic personal amount and favorable provincial tax structure." },
+    { question: "How much is the take-home pay for $50k in Ontario?", answer: "In Ontario, a $50,000 salary nets approximately $39,200 after federal tax, provincial tax, CPP, and EI deductions." },
+    { question: "What is the effective tax rate on a $50,000 salary?", answer: "The effective tax rate (total tax divided by gross income) for $50k usually ranges from 19% to 23% depending on your province of residence." },
+    { question: "Does $50,000 qualify for the GST/HST credit?", answer: "A single person earning $50,000 may be above the income threshold for full GST/HST credits, though eligibility depends on your specific family situation." },
+    { question: "How does Quebec's tax differ for a $50k salary?", answer: "Quebec has its own provincial tax system with higher rates, which often results in the lowest net take-home pay for $50k earners compared to other provinces." }
+  ],
   content: `
 ## $50,000 Salary After Tax: Real Take-Home Pay Across Canada
 
@@ -1134,6 +1174,14 @@ const article6: Article = {
   publishedAt: "2025-01-20",
   readTime: 11,
   imageUrl: "https://images.unsplash.com/photo-1521791136064-7986c2920216?w=800&q=80",
+  directAnswer: "As of 2025, Canadian minimum wages range from $15.00 to over $19.00 per hour, with most provinces now indexing their rates to inflation to help low-income workers manage the cost of living.",
+  faq: [
+    { question: "Which province has the highest minimum wage in 2025?", answer: "Nunavut and Yukon typically have the highest rates ($16-$19+), while provinces like BC and Ontario are in the $17-$18 range." },
+    { question: "Does the federal minimum wage apply to everyone?", answer: "No, the federal minimum wage only applies to workers in federally regulated sectors like banking, telecommunications, and interprovincial transport." },
+    { question: "How often do minimum wages change in Canada?", answer: "Most provinces adjust their minimum wage rates annually, often on April 1st or October 1st, based on inflation or specific government policy." },
+    { question: "Is minimum wage enough to live on in major cities?", answer: "In cities like Toronto or Vancouver, the statutory minimum wage is often significantly lower than the calculated 'living wage' required to cover basic costs." },
+    { question: "Do minimum wage earners pay income tax?", answer: "Due to basic personal amount tax credits, minimum wage earners pay very little income tax, though they still contribute to CPP and EI." }
+  ],
   content: `
 ## Minimum Wage Canada 2025: Every Province Compared
 
@@ -1377,6 +1425,14 @@ const article7: Article = {
   publishedAt: "2025-01-21",
   readTime: 13,
   imageUrl: "https://images.unsplash.com/photo-1579621970795-87facc2f976d?w=800&q=80",
+  directAnswer: "For 2025, RRSP contributions can reduce your taxable income and trigger significant refunds; for example, a $10,000 contribution at a 30% marginal rate could result in a $3,000 tax saving.",
+  faq: [
+    { question: "What is the RRSP contribution limit for 2025?", answer: "The limit is 18% of your previous year's earned income, up to a maximum of $32,490 for the 2025 tax year." },
+    { question: "How do RRSP contributions reduce my tax?", answer: "Contributions are deducted from your gross income, lowering your taxable income and potentially moving you into a lower tax bracket." },
+    { question: "When is the deadline for 2025 RRSP contributions?", answer: "You have until the first 60 days of 2026 to make contributions that can be claimed on your 2025 tax return." },
+    { question: "Can I carry forward unused RRSP room?", answer: "Yes, any unused contribution room from previous years carries forward indefinitely until you use it or reach age 71." },
+    { question: "What is the First Home Savings Account (FHSA)?", answer: "A newer account allowing tax-deductible contributions and tax-free withdrawals for a first home purchase, separate from your RRSP." }
+  ],
   content: `
 ## RRSP Tax Savings Guide 2025: Keep More of Your Money
 
@@ -1647,6 +1703,14 @@ const article8: Article = {
   publishedAt: "2025-01-22",
   readTime: 12,
   imageUrl: "https://images.unsplash.com/photo-1554224154-26032ffc0d07?w=800&q=80",
+  directAnswer: "Choosing between a TFSA and RRSP in 2025 depends on your income; generally, RRSPs are best for high-income earners seeking immediate tax relief, while TFSAs offer flexibility and tax-free growth for everyone.",
+  faq: [
+    { question: "What is the TFSA contribution limit for 2025?", answer: "The annual TFSA contribution limit for 2025 is $7,000, plus any unused room carried forward from previous years." },
+    { question: "Are TFSA withdrawals taxable?", answer: "No, withdrawals from a Tax-Free Savings Account (TFSA) are not taxable and do not count as income for government benefits." },
+    { question: "Should I prioritize RRSP or TFSA?", answer: "Generally, prioritize RRSP if you are in a high tax bracket today and TFSA if you expect to be in a higher bracket in the future or need easy access to funds." },
+    { question: "Can I use both an RRSP and a TFSA?", answer: "Yes, many Canadians use both to optimize their tax strategies—using RRSPs for long-term retirement and TFSAs for more flexible, tax-free growth." },
+    { question: "What happens to my TFSA room if I withdraw?", answer: "The amount you withdraw from a TFSA is added back to your contribution room, but only in the following calendar year." }
+  ],
   content: `
 ## TFSA vs RRSP: The Ultimate Canadian Savings Showdown
 
@@ -1900,6 +1964,14 @@ const article9: Article = {
   publishedAt: "2025-01-23",
   readTime: 10,
   imageUrl: "https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?w=800&q=80",
+  directAnswer: "In Ontario for 2025, most employees are entitled to overtime pay at 1.5 times their regular hourly rate for every hour worked in excess of 44 hours in a work week.",
+  faq: [
+    { question: "What is the overtime threshold in Ontario?", answer: "The standard overtime threshold in Ontario is 44 hours per week; any hours worked beyond this must be compensated at the overtime rate." },
+    { question: "Are managers exempt from overtime in Ontario?", answer: "Yes, managers and supervisors are generally exempt from overtime pay if their work is primarily managerial and they perform non-managerial tasks only on an irregular basis." },
+    { question: "Can my employer ask me to 'bank' overtime?", answer: "Yes, if you and your employer agree in writing, you can receive paid time off instead of overtime pay at a rate of 1.5 hours of time off for each hour of overtime worked." },
+    { question: "Does Ontario have a daily overtime limit?", answer: "Ontario's standard overtime rule is based on a weekly threshold of 44 hours, not a daily limit, though individual employment contracts may vary." },
+    { question: "Which professions are exempt from Ontario overtime rules?", answer: "Certain professions, such as IT professionals, doctors, lawyers, and architects, are exempt from the overtime pay provisions of the Employment Standards Act." }
+  ],
   content: `
 ## Ontario Overtime Rules 2025: Know Your Rights
 
@@ -2190,6 +2262,14 @@ const article10: Article = {
   publishedAt: "2025-01-24",
   readTime: 12,
   imageUrl: "https://images.unsplash.com/photo-1483921020237-2ff51e8e4b22?w=800&q=80",
+  directAnswer: "Alberta remains the most tax-friendly province for higher earners in 2025 due to its lower top marginal rates and lack of provincial sales tax (PST), while Ontario offers lower rates for the first $50,000 of income.",
+  faq: [
+    { question: "Does Alberta have a provincial sales tax?", answer: "No, Alberta is the only province in Canada with no provincial sales tax (PST), charging only the 5% federal GST on goods and services." },
+    { question: "Which province has better take-home pay for a $100k salary?", answer: "At the $100,000 income level, Alberta typically provides higher take-home pay than Ontario due to its tax structure and higher basic personal amount." },
+    { question: "How do the basic personal amounts compare between the two?", answer: "Alberta's basic personal amount is significantly higher than Ontario's, meaning you can earn more income in Alberta before paying any provincial tax." },
+    { question: "What is the top provincial tax rate in each province?", answer: "Alberta's top tax rate is 15%, whereas Ontario's top rate is 13.16%; however, Ontario's surtax can significantly increase the effective rate for high earners." },
+    { question: "Is the cost of living generally lower in Alberta or Ontario?", answer: "While housing in Calgary and Edmonton is usually more affordable than in Toronto, other costs like utilities and insurance can sometimes be higher in Alberta." }
+  ],
   content: `
 ## Alberta vs Ontario Taxes 2025: The Complete Comparison
 

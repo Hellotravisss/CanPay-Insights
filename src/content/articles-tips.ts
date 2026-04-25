@@ -4,6 +4,7 @@ export interface Article {
   title: string;
   subtitle: string;
   excerpt: string;
+  directAnswer?: string;
   metaTitle: string;
   metaDescription: string;
   keywords: string[];
@@ -14,6 +15,7 @@ export interface Article {
   readTime: number;
   imageUrl: string;
   content: string;
+  faq?: { question: string; answer: string }[];
 }
 
 export const tipsArticles: Article[] = [
@@ -23,6 +25,7 @@ export const tipsArticles: Article[] = [
     title: 'RRSP vs TFSA in Canada 2025: Which Should You Choose?',
     subtitle: 'A comprehensive guide to maximizing your Canadian tax-advantaged savings',
     excerpt: 'Learn the key differences between RRSPs and TFSAs to optimize your retirement savings strategy and minimize taxes in 2025.',
+    directAnswer: 'Choose RRSP if you\'re in a high tax bracket now and expect lower income in retirement; choose TFSA if you\'re in a low bracket or want tax-free withdrawals at any time for any purpose.',
     metaTitle: 'RRSP vs TFSA Canada 2025 | Which Account is Better?',
     metaDescription: 'Compare RRSP and TFSA accounts for 2025. Learn when to choose each account, contribution limits, withdrawal rules, and how to maximize your savings.',
     keywords: ['RRSP vs TFSA', 'RRSP contribution 2025', 'TFSA limit Canada', 'retirement savings Canada', 'tax free savings account'],
@@ -68,7 +71,14 @@ TFSA withdrawals provide flexibility to manage taxable income during high-expens
 
 A practical priority is to first capture employer-matched pension contributions, then maximize TFSA contributions, and finally make RRSP contributions. This sequence ensures you capture "free money" while building flexible savings.
 
-Review your account allocation annually. Life changes such as marriage, children, or job shifts warrant a reassessment of your RRSP versus TFSA prioritization.`
+Review your account allocation annually. Life changes such as marriage, children, or job shifts warrant a reassessment of your RRSP versus TFSA prioritization.`,
+    faq: [
+      { question: 'What is the TFSA contribution limit for 2025?', answer: 'The TFSA contribution limit for 2025 is $7,000, bringing the cumulative lifetime limit to $102,000 for Canadians who were 18 or older in 2009.' },
+      { question: 'What is the maximum RRSP contribution for 2025?', answer: 'The maximum RRSP contribution limit for 2025 is $31,560, or 18% of your earned income from 2024, whichever is less.' },
+      { question: 'Can I withdraw from my TFSA without penalty?', answer: 'Yes, withdrawals from a TFSA are tax-free and the amount withdrawn is added back to your contribution room on January 1st of the following year.' },
+      { question: 'When does my RRSP need to be converted to a RRIF?', answer: 'You must close your RRSP by December 31st of the year you turn 71, usually by converting it to a Registered Retirement Income Fund (RRIF) or purchasing an annuity.' },
+      { question: 'Is it better to prioritize TFSA or RRSP if I earn under $50,000?', answer: 'Generally, the TFSA is better for lower-income earners as the tax deduction from RRSP contributions is less valuable and future RRSP withdrawals could claw back government benefits.' }
+    ]
   },
   {
     id: 'tips-002',
@@ -76,6 +86,7 @@ Review your account allocation annually. Life changes such as marriage, children
     title: 'Emergency Funds in Canada 2025: How Much You Really Need',
     subtitle: 'Building financial security with the right emergency savings strategy',
     excerpt: 'Learn how to build and maintain an emergency fund that protects you from financial shocks while optimizing your overall savings strategy.',
+    directAnswer: 'An ideal emergency fund should cover 3 to 6 months of essential living expenses, held in a liquid, low-risk account like a High-Interest Savings Account (HISA).',
     metaTitle: 'Emergency Fund Canada 2025 | How Much to Save',
     metaDescription: 'Complete guide to emergency funds in Canada for 2025. Learn how much to save, where to keep it, and how to balance emergency savings with other goals.',
     keywords: ['emergency fund Canada', 'rainy day fund', 'emergency savings', 'how much emergency fund', 'safety net money'],
@@ -135,7 +146,14 @@ Using emergency funds for genuine emergencies requires discipline to avoid deple
 
 Rebuilding after emergency fund use requires the same discipline as initial building. Reducing discretionary spending, temporarily increasing savings rates, or redirecting windfalls can restore emergency reserves efficiently. The stress of depleted emergency funds should motivate rapid rebuilding.
 
-As emergency funds grow beyond target levels due to accumulated interest or reduced needs, excess funds should be redirected to higher-return investments. Maintaining significantly more than necessary in low-return emergency funds represents opportunity cost. Regular assessment ensures optimal allocation between emergency reserves and growth investments.`
+As emergency funds grow beyond target levels due to accumulated interest or reduced needs, excess funds should be redirected to higher-return investments. Maintaining significantly more than necessary in low-return emergency funds represents opportunity cost. Regular assessment ensures optimal allocation between emergency reserves and growth investments.`,
+    faq: [
+      { question: 'Where should I keep my emergency fund in Canada?', answer: 'Keep it in a High-Interest Savings Account (HISA) or a Tax-Free Savings Account (TFSA) held in cash to ensure it is liquid and protected from market volatility.' },
+      { question: 'What counts as an "essential expense" for an emergency fund?', answer: 'Essential expenses include housing (rent/mortgage), groceries, utilities, transportation, insurance, and minimum debt payments.' },
+      { question: 'How much should a single-income household save for emergencies?', answer: 'Single-income households or those with variable income should aim for at least 6 months of expenses to provide a larger safety net.' },
+      { question: 'Should I pay off debt before building an emergency fund?', answer: 'Aim to save a small starter emergency fund (e.g., $1,000 to $2,000) first to avoid taking on more debt when unexpected costs arise, then tackle high-interest debt.' },
+      { question: 'Are HISAs safe for emergency funds?', answer: 'Yes, as long as the institution is a member of the Canada Deposit Insurance Corporation (CDIC) or a provincial equivalent, your deposits are insured up to $100,000.' }
+    ]
   },
  {
     id: 'tips-003',
@@ -143,6 +161,7 @@ As emergency funds grow beyond target levels due to accumulated interest or redu
     title: 'Side Hustle Taxes in Canada 2025: What You Need to Know',
     subtitle: 'Navigating the tax implications of your extra income streams',
     excerpt: 'Understand how to report side income, deduct expenses, and optimize your tax situation when earning extra money in Canada.',
+    directAnswer: 'Side hustle income is considered business income by the CRA; you must report all earnings on Form T2125 but can deduct legitimate business expenses to reduce your taxable income.',
     metaTitle: 'Side Hustle Tax Canada 2025 | Reporting Extra Income',
     metaDescription: 'Complete guide to side hustle taxes in Canada. Learn how to report extra income, claim deductions, and stay compliant with CRA requirements in 2025.',
     keywords: ['side hustle tax Canada', 'freelance taxes', 'self-employment tax', 'reporting side income', 'business expenses Canada'],
@@ -216,7 +235,14 @@ Missing filing deadlines results in significant penalties. Self-employed individ
 
 Organize your records throughout the year to make tax filing efficient. Regular reviews of income and expenses enable accurate installments and help identify legitimate tax reduction opportunities.
 
-Setting aside funds in a dedicated tax savings account ensures you have the money ready when taxes are due. Professional advice can help optimize your tax situation as your business grows.`
+Setting aside funds in a dedicated tax savings account ensures you have the money ready when taxes are due. Professional advice can help optimize your tax situation as your business grows.`,
+    faq: [
+      { question: 'At what point do I need to register for GST/HST?', answer: 'You must register for a GST/HST account once your gross business revenue exceeds $30,000 within four consecutive calendar quarters.' },
+      { question: 'What business expenses can I deduct for my side hustle?', answer: 'You can deduct reasonable expenses like home office costs, supplies, marketing, software subscriptions, and a portion of vehicle expenses if used for work.' },
+      { question: 'Do I need to pay CPP on my side hustle income?', answer: 'Yes, if your net self-employment income exceeds $3,500, you must pay both the employer and employee portions of CPP (approx. 11.9% combined in 2025).' },
+      { question: 'What is the deadline for self-employed tax filing in Canada?', answer: 'Self-employed individuals have until June 15th to file their return, but any taxes owing must be paid by April 30th to avoid interest.' },
+      { question: 'How should I track my side hustle income and expenses?', answer: 'Use a separate bank account for business transactions and keep all receipts digital or physical for at least six years as required by the CRA.' }
+    ]
   },
   {
     id: 'tips-004',
@@ -224,6 +250,7 @@ Setting aside funds in a dedicated tax savings account ensures you have the mone
     title: 'FHSA in Canada 2025: The First Home Savings Account Explained',
     subtitle: 'Maximize tax advantages while saving for your first home purchase',
     excerpt: 'Complete guide to the First Home Savings Account, combining RRSP and TFSA benefits to accelerate your down payment savings.',
+    directAnswer: 'The FHSA is a registered account that allows first-time homebuyers to save up to $8,000 annually ($40,000 lifetime) with tax-deductible contributions and tax-free withdrawals for a home purchase.',
     metaTitle: 'FHSA Canada 2025 | First Home Savings Account Guide',
     metaDescription: 'Everything you need to know about the First Home Savings Account in Canada. Learn contribution limits, tax benefits, and how to maximize your FHSA in 2025.',
     keywords: ['FHSA Canada', 'First Home Savings Account', 'FHSA contribution 2025', 'first home buyer', 'down payment savings Canada'],
@@ -275,7 +302,14 @@ Ongoing management includes making annual contributions and monitoring your inve
 
 Coordinate FHSA savings with other resources like the HBP or personal savings. Understanding your total available funds informs your home purchase budget.
 
-When ready to buy, you must complete CRA forms and provide documentation of a qualifying home purchase. Plan your withdrawal timing to ensure funds are available for closing.`
+When ready to buy, you must complete CRA forms and provide documentation of a qualifying home purchase. Plan your withdrawal timing to ensure funds are available for closing.`,
+    faq: [
+      { question: 'What is the 2025 FHSA contribution limit?', answer: 'The annual contribution limit for the FHSA is $8,000, with a lifetime contribution limit of $40,000.' },
+      { question: 'Can I use both the FHSA and the Home Buyers\' Plan (HBP)?', answer: 'Yes, as of 2023, the CRA allows you to use both the FHSA and the HBP ($60,000 limit in 2025) together for the same home purchase.' },
+      { question: 'What happens if I don\'t buy a home within 15 years of opening an FHSA?', answer: 'If you don\'t buy a home, you must close the account and can transfer the funds tax-free to an RRSP or RRIF, or withdraw them as taxable income.' },
+      { question: 'Are FHSA contributions tax-deductible like an RRSP?', answer: 'Yes, FHSA contributions reduce your taxable income for the year, providing a tax refund similar to RRSP contributions.' },
+      { question: 'Who qualifies as a first-time homebuyer for the FHSA?', answer: 'You are a first-time buyer if you or your spouse/partner did not own a home that you lived in as a principal residence in the current year or the previous four calendar years.' }
+    ]
   },
   {
     id: 'tips-005',
@@ -283,6 +317,7 @@ When ready to buy, you must complete CRA forms and provide documentation of a qu
     title: 'Credit Scores in Canada 2025: Build, Improve, and Maintain',
     subtitle: 'Understanding and optimizing your Canadian credit score for better financial opportunities',
     excerpt: 'Master your credit score with proven strategies to build excellent credit, fix problems, and unlock better rates on loans and mortgages.',
+    directAnswer: 'To build a strong Canadian credit score, ensure 100% on-time payments and keep your credit utilization below 30% of your total available limits.',
     metaTitle: 'Credit Score Canada 2025 | How to Build Good Credit',
     metaDescription: 'Complete guide to Canadian credit scores for 2025. Learn how to build, improve, and maintain excellent credit to unlock better financial opportunities.',
     keywords: ['credit score Canada', 'improve credit score', 'build credit Canada', 'credit report', 'good credit tips'],
@@ -350,7 +385,14 @@ Auto loan rates vary significantly based on credit scores, with excellent credit
 
 Insurance premiums in some provinces consider credit scores in pricing. Score optimization can reduce insurance costs alongside borrowing costs. The benefits of good credit extend beyond lending.
 
-Employment and rental applications increasingly include credit checks. Good credit supports approval for apartments and some employment opportunities. Credit management affects life beyond borrowing.`
+Employment and rental applications increasingly include credit checks. Good credit supports approval for apartments and some employment opportunities. Credit management affects life beyond borrowing.`,
+    faq: [
+      { question: 'What is a good credit score in Canada?', answer: 'In Canada, a score between 660 and 724 is considered good, while 760 or higher is generally considered excellent.' },
+      { question: 'How does credit utilization affect my score?', answer: 'Credit utilization is the percentage of your limit you use; keeping it under 30% is recommended, and under 10% is ideal for a top-tier score.' },
+      { question: 'Will checking my own credit score lower it?', answer: 'No, checking your own score is a "soft inquiry" and does not affect your credit rating. Only "hard inquiries" from lenders during applications can impact it.' },
+      { question: 'How long does negative information stay on my credit report?', answer: 'Most negative information, like late payments or collections, stays on your Equifax or TransUnion report for 6 to 7 years.' },
+      { question: 'Can I improve my score by closing old credit cards?', answer: 'Usually not. Closing old accounts can actually lower your score by reducing your total available credit and shortening your average credit history age.' }
+    ]
   },
   {
     id: 'tips-006',
@@ -358,6 +400,7 @@ Employment and rental applications increasingly include credit checks. Good cred
     title: 'Inflation-Proof Your Finances in Canada 2025',
     subtitle: 'Strategies to protect and grow your wealth during inflationary periods',
     excerpt: 'Learn proven strategies to maintain purchasing power, adjust spending, and invest wisely when inflation threatens your financial security.',
+    directAnswer: 'Protect your wealth from inflation by investing in assets that historically grow faster than prices, such as diversified equities, real estate, and inflation-indexed bonds.',
     metaTitle: 'Inflation Protection Canada 2025 | Beat Rising Prices',
     metaDescription: 'Complete guide to protecting your finances from inflation in Canada. Learn spending adjustments, investment strategies, and wealth preservation techniques.',
     keywords: ['inflation protection Canada', 'beat inflation', 'inflation investing', 'rising prices', 'purchasing power'],
@@ -427,7 +470,14 @@ Emergency fund targets should adjust upward during inflation as expenses increas
 
 High-interest savings accounts provide better inflation protection when interest rates rise with inflation. Current elevated rates partially offset purchasing power erosion. Maintaining emergency funds in competitive savings products optimizes returns.
 
-Cash holdings beyond emergency needs suffer most during inflation. Excessive cash positions should be minimized and invested for growth. The opportunity cost of cash increases during inflationary periods.`
+Cash holdings beyond emergency needs suffer most during inflation. Excessive cash positions should be minimized and invested for growth. The opportunity cost of cash increases during inflationary periods.`,
+    faq: [
+      { question: 'What are the best investments to beat inflation in Canada?', answer: 'Diversified stock ETFs, Real Estate Investment Trusts (REITs), and Government of Canada Real Return Bonds are common choices for inflation protection.' },
+      { question: 'How does inflation affect my mortgage?', answer: 'Inflation benefits those with fixed-rate debt as the real value of the debt decreases over time, while variable-rate holders may face higher payments if the Bank of Canada raises rates.' },
+      { question: 'Should I keep more or less cash during high inflation?', answer: 'Generally less. Cash loses purchasing power rapidly during inflation, so keep only what you need for an emergency fund and short-term goals.' },
+      { question: 'What is a Real Return Bond?', answer: 'Real Return Bonds (RRBs) are government bonds where the principal and interest payments are adjusted for inflation based on the Consumer Price Index (CPI).' },
+      { question: 'How can I adjust my daily spending to handle rising prices?', answer: 'Focus on substituting high-inflation items, buying in bulk, renegotiating recurring bills, and prioritizing needs over wants in your budget.' }
+    ]
   },
   {
     id: 'tips-007',
@@ -435,6 +485,7 @@ Cash holdings beyond emergency needs suffer most during inflation. Excessive cas
     title: 'Maximizing Workplace Benefits in Canada 2025',
     subtitle: 'Get the full value from your employer\'s compensation package',
     excerpt: 'Learn how to evaluate, optimize, and leverage your workplace benefits for maximum financial and personal value.',
+    directAnswer: 'Maximize your total compensation by fully utilizing employer RRSP matching, health spending accounts, and professional development subsidies which can add up to 30% in value beyond your base salary.',
     metaTitle: 'Workplace Benefits Canada 2025 | Employee Benefits Guide',
     metaDescription: 'Complete guide to maximizing Canadian workplace benefits in 2025. Learn to evaluate, optimize, and leverage your employer benefits package effectively.',
     keywords: ['workplace benefits Canada', 'employee benefits', 'group insurance', 'pension plan', 'health benefits'],
@@ -520,7 +571,14 @@ Benefits comparison across job offers enables informed decisions. A lower salary
 
 Benefits portability matters when considering job changes. Group insurance may be convertible to individual coverage. Pension benefits may be transferable or preserved. Understanding portability implications informs transitions.
 
-Negotiating benefits may be possible even when salary is fixed. Additional vacation, flexible arrangements, or professional development support can improve packages. Exploring negotiation opportunities captures additional value.`
+Negotiating benefits may be possible even when salary is fixed. Additional vacation, flexible arrangements, or professional development support can improve packages. Exploring negotiation opportunities captures additional value.`,
+    faq: [
+      { question: 'What is the most valuable workplace benefit to use first?', answer: 'Employer matching for RRSPs or Pension plans is often the most valuable, as it provides an immediate 100% return on your contribution.' },
+      { question: 'What is a Health Spending Account (HSA)?', answer: 'An HSA is a flexible, employer-funded account that can be used to pay for a wide range of medical and dental expenses not covered by your standard insurance.' },
+      { question: 'Does my group life insurance cover my full needs?', answer: 'Likely not. Group life insurance usually provides 1-2 times your salary, which may be insufficient for those with dependents or large mortgages.' },
+      { question: 'What happens to my pension if I leave my job?', answer: 'Depending on the plan, you may be able to transfer the commuted value to a Locked-In Retirement Account (LIRA) or leave it in the plan to receive a future pension.' },
+      { question: 'Are workplace benefits taxable in Canada?', answer: 'Some are, like life insurance premiums paid by your employer, while others, like health and dental coverage, are generally non-taxable (except in Quebec).' }
+    ]
   },
   {
     id: 'tips-008',
@@ -528,6 +586,7 @@ Negotiating benefits may be possible even when salary is fixed. Additional vacat
     title: 'Debt Payoff Strategies That Work in Canada 2025',
     subtitle: 'Proven methods to eliminate debt and achieve financial freedom',
     excerpt: 'Discover the most effective debt elimination strategies for Canadian borrowers, from avalanche and snowball methods to consolidation options.',
+    directAnswer: 'Choose the "Avalanche" method (highest interest first) to save the most money, or the "Snowball" method (smallest balance first) for psychological motivation and quick wins.',
     metaTitle: 'Debt Payoff Canada 2025 | Best Strategies to Eliminate Debt',
     metaDescription: 'Complete guide to paying off debt in Canada for 2025. Learn the avalanche and snowball methods, consolidation options, and proven strategies for debt freedom.',
     keywords: ['debt payoff Canada', 'pay off debt fast', 'debt snowball', 'debt avalanche', 'debt consolidation'],
@@ -603,7 +662,14 @@ Credit card policy changes support debt-free living. Using credit cards for conv
 
 Lifestyle adjustment to spending below income creates ongoing surplus for saving and investing. Sustainable financial health requires permanent spending discipline. The habits developed during debt payoff should continue afterward.
 
-Regular financial reviews ensure continued progress and early identification of problems. Monthly budget reviews, quarterly goal assessments, and annual comprehensive planning maintain financial health. Vigilance prevents backsliding into debt.`
+Regular financial reviews ensure continued progress and early identification of problems. Monthly budget reviews, quarterly goal assessments, and annual comprehensive planning maintain financial health. Vigilance prevents backsliding into debt.`,
+    faq: [
+      { question: 'What is the Debt Avalanche method?', answer: 'The Avalanche method involves paying the minimum on all debts and directing all extra cash to the debt with the highest interest rate to minimize total interest paid.' },
+      { question: 'What is the Debt Snowball method?', answer: 'The Snowball method focuses on paying off the smallest debt balances first to build momentum and psychological motivation through quick successes.' },
+      { question: 'Should I use a consolidation loan to pay off credit cards?', answer: 'A consolidation loan can help if it offers a lower interest rate than your cards, but only if you stop using the cards and address the spending habits that led to the debt.' },
+      { question: 'Is a consumer proposal a good way to handle debt?', answer: 'A consumer proposal is a legal process to pay back a portion of your debt; it protects you from creditors but will significantly impact your credit score for several years.' },
+      { question: 'Can I negotiate a lower interest rate with my credit card company?', answer: 'Yes, if you have a good payment history, you can often call your provider and ask for a lower rate or a temporary promotional rate to help with repayment.' }
+    ]
   },
   {
     id: 'tips-009',
@@ -611,6 +677,7 @@ Regular financial reviews ensure continued progress and early identification of 
     title: 'Automated Savings Strategies for Canadians 2025',
     subtitle: 'Set up systems that build wealth without willpower or effort',
     excerpt: 'Discover how to automate your savings, investments, and financial goals using Canadian banking tools and technology.',
+    directAnswer: 'Use "pay-yourself-first" automation by setting up recurring transfers from your chequing account to your savings or investment accounts immediately after every payday.',
     metaTitle: 'Automated Savings Canada 2025 | Set and Forget Wealth Building',
     metaDescription: 'Complete guide to automated savings in Canada. Learn how to set up automatic transfers, round-ups, and systematic investing to build wealth effortlessly.',
     keywords: ['automated savings Canada', 'automatic savings', 'set and forget investing', 'saving automation', 'wealth building system'],
@@ -694,7 +761,14 @@ Rebalancing automation in investment accounts maintains target asset allocations
 
 Goal adjustment automation includes increasing savings rates when goals are achieved or circumstances improve. Celebrating achieved goals should include setting new automated targets. Continuous improvement compounds results over time.
 
-Emergency preparedness includes maintaining awareness of automated systems in case intervention becomes necessary. While automation should run without attention, understanding what is automated enables response when required. Documentation of automated systems supports management transitions.`
+Emergency preparedness includes maintaining awareness of automated systems in case intervention becomes necessary. While automation should run without attention, understanding what is automated enables response when required. Documentation of automated systems supports management transitions.`,
+    faq: [
+      { question: 'How do I start "paying myself first"?', answer: 'Set up an automatic transfer at your bank that moves a set amount of money to your savings account on the same day your paycheck is deposited.' },
+      { question: 'What are "round-up" features in Canadian banking?', answer: 'Round-ups automatically round your debit or credit purchases to the nearest dollar and move the spare change into a savings or investment account.' },
+      { question: 'Can I automate my RRSP or TFSA contributions?', answer: 'Yes, most Canadian brokerages and robo-advisors allow you to set up Pre-Authorized Contributions (PACs) to automatically buy funds on a schedule.' },
+      { question: 'What is the benefit of automating my bill payments?', answer: 'Automating bills ensures you never miss a deadline, avoiding late fees and protecting your credit score from the damage of missed payments.' },
+      { question: 'Is it safe to use third-party apps for financial automation?', answer: 'Yes, if the app uses bank-level encryption and read-only access, but many major Canadian banks now offer these features directly within their own apps.' }
+    ]
   },
   {
     id: 'tips-010',
@@ -702,6 +776,7 @@ Emergency preparedness includes maintaining awareness of automated systems in ca
     title: 'FIRE in Canada 2025: Financial Independence, Retire Early',
     subtitle: 'Adapting the FIRE movement to Canadian taxes, benefits, and realities',
     excerpt: 'Learn how to achieve financial independence and early retirement using strategies tailored to the Canadian financial landscape.',
+    directAnswer: 'Achieve FIRE (Financial Independence, Retire Early) by maintaining a high savings rate (50%+) and investing in low-cost index funds until your portfolio reaches 25-30 times your annual expenses.',
     metaTitle: 'FIRE Canada 2025 | Financial Independence Retire Early Guide',
     metaDescription: 'Complete guide to achieving FIRE in Canada. Learn savings rates, withdrawal strategies, and how to adapt financial independence to Canadian taxes and benefits.',
     keywords: ['FIRE Canada', 'financial independence', 'early retirement', 'FIRE movement', 'retire early Canada'],
@@ -751,6 +826,13 @@ FIRE is about designing a life aligned with your values. Options like "Barista F
 
 Market volatility and sequence of returns risk are major threats to FIRE success. Poor returns in early retirement can permanently impair a portfolio's sustainability.
 
-Beyond finances, early retirees may face social isolation or a loss of purpose. Planning for meaningful activities and community involvement is essential for a satisfying retirement.`
+Beyond finances, early retirees may face social isolation or a loss of purpose. Planning for meaningful activities and community involvement is essential for a satisfying retirement.` ,
+    faq: [
+      { question: 'What is the "4% Rule" in FIRE?', answer: 'The 4% Rule suggests you can safely withdraw 4% of your initial portfolio value (adjusted for inflation) each year with a high probability of the money lasting 30 years.' },
+      { question: 'How much do I need to save to retire early in Canada?', answer: 'Most FIRE practitioners aim for a "FI Number" that is 25 times their annual living expenses (e.g., $1M for $40k/year in spending).' },
+      { question: 'What is "Lean FIRE" vs "Fat FIRE"?', answer: 'Lean FIRE focuses on a minimalist lifestyle with low expenses (under $40k), while Fat FIRE aims for a more luxurious retirement with higher spending ($100k+).' },
+      { question: 'Can I retire early without a workplace pension?', answer: 'Yes, but you must build your own "pension" using personal accounts like RRSPs, TFSAs, and non-registered investment accounts.' },
+      { question: 'How does healthcare work if I retire early in Canada?', answer: 'While basic healthcare is covered by provincial plans, you must budget for private health insurance or out-of-pocket costs for dental, vision, and prescriptions.' }
+    ]
   }
 ];

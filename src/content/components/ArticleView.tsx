@@ -416,6 +416,14 @@ const ArticleView: React.FC<ArticleViewProps> = ({ slug, onBack, onSelectArticle
             </div>
           )}
 
+          {/* Direct Answer Box — shown first for AI snippet capture */}
+          {article.directAnswer && (
+            <div className="mb-8 p-5 bg-red-50 border-l-4 border-red-500 rounded-r-xl">
+              <p className="text-xs font-semibold text-red-600 uppercase tracking-wide mb-2">Quick Answer</p>
+              <p className="text-slate-800 text-base leading-relaxed">{article.directAnswer}</p>
+            </div>
+          )}
+
           {/* Top CTA */}
           <CalculatorCTA />
 
@@ -423,6 +431,28 @@ const ArticleView: React.FC<ArticleViewProps> = ({ slug, onBack, onSelectArticle
           <div className="prose prose-slate max-w-none">
             {renderContent(article.content)}
           </div>
+
+          {/* FAQ Section */}
+          {article.faq && article.faq.length > 0 && (
+            <div className="mt-10 pt-8 border-t border-slate-200">
+              <h2 className="text-2xl font-bold text-slate-900 mb-6">Frequently Asked Questions</h2>
+              <div className="space-y-4">
+                {article.faq.map((item, idx) => (
+                  <details key={idx} className="group bg-slate-50 rounded-xl border border-slate-200 overflow-hidden">
+                    <summary className="flex items-center justify-between p-5 cursor-pointer font-semibold text-slate-800 hover:bg-slate-100 transition-colors list-none">
+                      <span>{item.question}</span>
+                      <svg className="w-5 h-5 text-slate-400 group-open:rotate-180 transition-transform flex-shrink-0 ml-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+                      </svg>
+                    </summary>
+                    <div className="px-5 pb-5 text-slate-600 leading-relaxed text-sm">
+                      {item.answer}
+                    </div>
+                  </details>
+                ))}
+              </div>
+            </div>
+          )}
 
           {/* Share Buttons */}
           <ShareButtons />

@@ -94,6 +94,15 @@ export default async function ArticlePage({ params }: Props) {
                 { '@type': 'ListItem', position: 3, name: article.title, item: `https://www.canpayinsights.ca/blog/${slug}` },
               ],
             },
+            ...(article.faq && article.faq.length > 0 ? [{
+              '@context': 'https://schema.org',
+              '@type': 'FAQPage',
+              mainEntity: article.faq.map(item => ({
+                '@type': 'Question',
+                name: item.question,
+                acceptedAnswer: { '@type': 'Answer', text: item.answer },
+              })),
+            }] : []),
           ]),
         }}
       />
