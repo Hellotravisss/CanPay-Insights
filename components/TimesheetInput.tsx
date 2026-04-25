@@ -523,15 +523,7 @@ const TimesheetInput: React.FC<Props> = ({ inputs, setInputs }) => {
           </div>
         </div>
 
-        {/* Info box */}
-        <div className="bg-blue-50 border-l-4 border-blue-400 p-4 rounded">
-          <p className="text-sm text-blue-800 font-medium">💡 Calculation Info</p>
-          <ul className="text-xs text-blue-700 mt-2 space-y-1">
-            <li>• Overtime calculated based on {PROVINCIAL_DATA[inputs.province as keyof typeof PROVINCIAL_DATA]?.name || 'provincial'} rules</li>
-            <li>• Pay calculated at {inputs.payFrequency} frequency</li>
-            <li>• Add multiple entries per day for split shifts</li>
-          </ul>
-        </div>
+
       </div>
 
       {/* Toast Notification */}
