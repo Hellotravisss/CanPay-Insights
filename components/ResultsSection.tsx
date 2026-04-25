@@ -9,7 +9,7 @@ interface Props {
 }
 
 const InukshukWatermark = ({ className, style }: { className?: string; style?: React.CSSProperties }) => (
-  <img src="/logo.png" alt="" aria-hidden="true" className={className} style={style} />
+  <img src="/logo_reverse.png" alt="" aria-hidden="true" className={className} style={style} />
 );
 
 const ResultsSection: React.FC<Props> = ({ results, provinceName }) => {
