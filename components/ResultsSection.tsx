@@ -80,7 +80,7 @@ const ResultsSection: React.FC<Props> = ({ results, provinceName }) => {
         {/* Annual Card */}
         <div className="bg-white rounded-xl shadow-sm border-l-4 border-red-600 p-6 relative overflow-hidden">
            <div className="flex items-center gap-2 mb-4">
-              <InukshukWatermark className="w-5 h-5 rounded-sm" />
+              <img src="/logo.png" alt="" aria-hidden="true" className="w-5 h-5 rounded-sm" />
               <h3 className="text-lg font-bold text-slate-800">Annual Projection</h3>
            </div>
            
