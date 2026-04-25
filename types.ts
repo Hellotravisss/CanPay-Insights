@@ -94,7 +94,9 @@ export interface AnnualSalaryInputs {
   province: string;
   annualSalary: number;
   payFrequency: PayFrequency;
-  rrspContributionPerPeriod?: number; // Optional RRSP deduction per pay period
+  rrspContributionPerPeriod?: number;
+  additionalIncome?: AdditionalIncome;
+  deductions?: Deductions;
 }
 
 // Timesheet 打卡条目
@@ -104,6 +106,7 @@ export interface TimesheetEntry {
   checkIn: string; // HH:MM (24-hour format)
   checkOut: string; // HH:MM (24-hour format)
   unpaidBreakMinutes: number;
+  tips?: number; // declared tips this shift (taxable)
   notes?: string;
 }
 
@@ -114,6 +117,7 @@ export interface TimesheetInputs {
   payFrequency: PayFrequency;
   entries: TimesheetEntry[];
   rrspContributionPerPeriod?: number;
+  deductions?: Deductions;
 }
 
 export interface CalculationResult {

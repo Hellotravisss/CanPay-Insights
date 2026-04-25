@@ -335,12 +335,12 @@ const InputSection: React.FC<Props> = ({ inputs, setInputs }) => {
           <div className="bg-red-50 p-4 rounded-xl border border-red-100 animate-fadeIn">
             <label className="block text-xs font-bold text-red-800 mb-1.5 ml-1">Per-Paycheque Contribution ($)</label>
             <div className="relative">
-              <span className="absolute left-3 top-2.5 text-red-400">$</span>
+              <span className="absolute left-3 top-1/2 -translate-y-1/2 text-red-400 font-bold">$</span>
               <input
                 type="number"
                 min="0"
                 step="25"
-                className="w-full p-2.5 pl-7 bg-white text-slate-900 border border-red-200 rounded-lg focus:ring-2 focus:ring-red-500 focus:outline-none"
+                className="w-full py-2.5 pl-8 pr-4 bg-white text-slate-900 border border-red-200 rounded-lg focus:ring-2 focus:ring-red-500 focus:outline-none"
                 value={inputs.rrspContributionPerPeriod || ''}
                 onFocus={(e) => e.target.select()}
                 onChange={(e) => setInputs({ ...inputs, rrspContributionPerPeriod: parseFloat(e.target.value) || 0 })}

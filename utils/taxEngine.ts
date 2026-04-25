@@ -375,11 +375,23 @@ export const calculateFromAnnualSalary = (inputs: AnnualSalaryInputs): Calculati
     throw new Error(`Invalid province: ${province}`);
   }
   
-  const annualGross = annualSalary;
   const isQuebec = province === Province.QC;
   const periodsPerYear = getPeriodsPerYear(payFrequency);
+
+  // Additional income per period → annualize
+  const addl = inputs.additionalIncome;
+  const additionalPerPeriod = addl
+    ? (addl.statHolidayPay + addl.sickPay + addl.bonus + addl.otherIncome)
+    : 0;
+  const annualGross = annualSalary + additionalPerPeriod * periodsPerYear;
+
   const rrspPerPeriod = inputs.rrspContributionPerPeriod ?? 0;
   const annualRRSP = rrspPerPeriod * periodsPerYear;
+
+  const ded = inputs.deductions;
+  const postTaxPerPeriod = ded ? (ded.ltdPremium + ded.unionDues + ded.otherDeductions) : 0;
+  const annualPostTax = postTaxPerPeriod * periodsPerYear;
+
   const taxableIncome = Math.max(0, annualGross - annualRRSP);
 
   // Calculate deductions
@@ -387,11 +399,11 @@ export const calculateFromAnnualSalary = (inputs: AnnualSalaryInputs): Calculati
   const eiAnnual = calculateEI(annualGross, isQuebec);
   const qpipAnnual = isQuebec ? calculateQPIP(annualGross) : 0;
   const taxResult = calculateTotalTax(taxableIncome, cppResult.total, province);
-  
+
   const totalTaxAnnual = taxResult.total;
-  const totalDeductionsAnnual = totalTaxAnnual + cppResult.total + eiAnnual + qpipAnnual + annualRRSP;
+  const totalDeductionsAnnual = totalTaxAnnual + cppResult.total + eiAnnual + qpipAnnual + annualRRSP + annualPostTax;
   const netPayAnnual = annualGross - totalDeductionsAnnual;
-  
+
   const grossPayPerPeriod = annualGross / periodsPerYear;
   const netPayPerPeriod = netPayAnnual / periodsPerYear;
   
@@ -495,13 +507,21 @@ export const calculateFromTimesheet = (inputs: TimesheetInputs): CalculationResu
   const regularPay = regularHours * hourlyWage;
   const ot15Pay = otHours15 * (hourlyWage * provinceRule.otRate);
   const ot20Pay = otHours20 * (hourlyWage * 2.0);
-  
-  const totalGross = regularPay + ot15Pay + ot20Pay;
-  
+
+  // Sum tips from all entries (declared tips are taxable income)
+  const totalTips = entries.reduce((sum, e) => sum + (e.tips ?? 0), 0);
+
+  const totalGross = regularPay + ot15Pay + ot20Pay + totalTips;
+
   const periodsPerYear = getPeriodsPerYear(payFrequency);
   const annualGross = totalGross * periodsPerYear;
   const rrspPerPeriod = inputs.rrspContributionPerPeriod ?? 0;
   const annualRRSP = rrspPerPeriod * periodsPerYear;
+
+  const ded = inputs.deductions;
+  const postTaxPerPeriod = ded ? (ded.ltdPremium + ded.unionDues + ded.otherDeductions) : 0;
+  const annualPostTax = postTaxPerPeriod * periodsPerYear;
+
   const taxableIncome = Math.max(0, annualGross - annualRRSP);
 
   // Calculate deductions
@@ -510,11 +530,11 @@ export const calculateFromTimesheet = (inputs: TimesheetInputs): CalculationResu
   const eiAnnual = calculateEI(annualGross, isQuebec);
   const qpipAnnual = isQuebec ? calculateQPIP(annualGross) : 0;
   const taxResult = calculateTotalTax(taxableIncome, cppResult.total, province);
-  
+
   const totalTaxAnnual = taxResult.total;
-  const totalDeductionsAnnual = totalTaxAnnual + cppResult.total + eiAnnual + qpipAnnual + annualRRSP;
+  const totalDeductionsAnnual = totalTaxAnnual + cppResult.total + eiAnnual + qpipAnnual + annualRRSP + annualPostTax;
   const netPayAnnual = annualGross - totalDeductionsAnnual;
-  
+
   const grossPayPerPeriod = totalGross;
   const netPayPerPeriod = netPayAnnual / periodsPerYear;
   
