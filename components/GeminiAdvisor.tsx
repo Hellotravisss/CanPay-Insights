@@ -1,6 +1,5 @@
 'use client';
 import React, { useState, useEffect, useRef, useMemo } from 'react';
-import { GoogleGenAI } from '@google/genai';
 import * as htmlToImage from 'html-to-image';
 import download from 'downloadjs';
 import type { CalculationResult } from '../types';
@@ -166,16 +165,18 @@ const GeminiAdvisor: React.FC<Props> = ({ results, inputs }) => {
     setLoading(true);
     setError(null);
     try {
-      const ai = new GoogleGenAI({ apiKey: import.meta.env.VITE_GEMINI_API_KEY });
-      
       const promptText = generateTaxPrompt(taxOptimization, results, inputs);
 
-      const response = await ai.models.generateContent({
-        model: 'gemini-2.0-flash',
-        contents: [{ parts: [{ text: promptText }] }],
+      const res = await fetch('/api/gemini', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ prompt: promptText }),
       });
 
-      const text = response.text;
+      if (!res.ok) throw new Error('API error');
+
+      const data = await res.json();
+      const text = data.text;
       if (text) {
         setAdvice(text);
       } else {
