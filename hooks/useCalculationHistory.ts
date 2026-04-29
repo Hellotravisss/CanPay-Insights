@@ -46,7 +46,13 @@ export const useCalculationHistory = (userId: string | null) => {
             results: row.results,
             createdAt: row.created_at,
           }));
-          setRecords(prev => pageIndex === 0 ? formatted : [...prev, ...formatted]);
+          // Merge with localStorage records so pre-login saves are still visible
+          const stored = localStorage.getItem(STORAGE_KEY);
+          const local: CalculationRecord[] = stored ? JSON.parse(stored) : [];
+          const merged = pageIndex === 0
+            ? [...formatted, ...local.filter(l => !formatted.find(f => f.id === l.id))]
+            : [...formatted];
+          setRecords(prev => pageIndex === 0 ? merged : [...prev, ...merged]);
           setHasMore(data.length === PAGE_SIZE);
           setPage(pageIndex);
           return;
