@@ -313,7 +313,27 @@ Forestry and transportation equipment manufacturing also provide high-skill role
 
 Montreal's housing costs are rising but remain more affordable than Toronto's. Quebec's unique social benefits, including low-cost childcare and enhanced parental leave, significantly boost real household income.
 
-The combination of lower costs and high social investment often provides a superior quality of life compared to higher-salary provinces.`,
+The combination of lower costs and high social investment often provides a superior quality of life compared to higher-salary provinces.
+
+<b>The Financial and Insurance Sector in Quebec</b>
+
+Montreal and Quebec City both host major financial hubs. In Montreal, the financial sector is a cornerstone of the economy, with large banks and insurance companies like Desjardins, Sun Life, and National Bank providing thousands of high-paying roles. Actuaries in these cities can expect salaries ranging from $90,000 to $160,000, while senior financial analysts typically earn between $85,000 and $130,000. Quebec City, in particular, is known as a major center for the insurance industry in Canada, offering specialized roles that often come with excellent benefits and stability.
+
+<b>Addressing the Labor Shortage and Wage Growth</b>
+
+Quebec continues to face a significant "main-d'œuvre" (labor) shortage across several sectors, particularly in healthcare, construction, and information technology. This scarcity has driven year-over-year wage growth that often exceeds the national average as employers compete for limited talent. In 2025, many Quebec companies are offering signing bonuses and flexible work arrangements to attract skilled workers. The construction industry has seen particularly sharp increases, with specialized heavy machinery operators and electricians seeing their hourly rates climb by 5-8% compared to previous years.
+
+<b>The Bilingualism Premium</b>
+
+While French is the official language of Quebec, the "bilingualism premium" remains a factual reality in the Montreal labor market. Professionals who can navigate both French and English fluently often command a 10-15% salary premium in international-facing roles, such as global sales, technical support, and executive management. In the West Island of Montreal and the downtown core, many tech firms operate primarily in English but require French for local compliance and community engagement, making bilingual candidates highly sought after.
+
+<b>Regional Economic Diversity: Beyond the Big Cities</b>
+
+Quebec's economic strength extends into its regions. The Estrie region (Sherbrooke) has developed a strong micro-nanotechnology and life sciences cluster, with salaries for researchers and engineers becoming increasingly competitive with Montreal. Meanwhile, the Saguenay-Lac-Saint-Jean region remains a global leader in aluminum production, where specialized industrial workers earn some of the highest hourly wages in the province, often exceeding $45 per hour plus overtime. The Abitibi-Témiscamingue region continues to thrive on mining, with underground miners and geologists earning six-figure salaries due to the remote nature of the work and high demand for minerals.
+
+<b>2025 Economic Outlook and Purchasing Power</b>
+
+As we move through 2025, Quebec's inflation has stabilized, but the cost of housing remains a primary concern for residents. However, when compared to the Greater Toronto Area or Metro Vancouver, Quebec's cities still offer a significantly higher quality of life for the same nominal salary. A professional earning $90,000 in Montreal generally has more discretionary income than a peer earning $110,000 in Toronto, primarily due to lower rent and the massive savings provided by the province's subsidized $10-a-day childcare system and lower auto insurance premiums.`,
     directAnswer: 'Quebec balances competitive salaries in AI and aerospace with a lower cost of living and extensive social benefits like subsidized childcare, though it maintains higher provincial income tax rates than the west.',
     faq: [
       { question: 'What are Quebec\'s provincial income tax rates for 2025?', answer: 'In 2025, Quebec\'s tax rates start at 14% on the first $51,780, rising to 19%, 24%, and a top rate of 25.75% for income exceeding $126,000.' },
@@ -378,7 +398,27 @@ Recruitment incentives are common in healthcare to address regional shortages an
 
 Housing affordability is Atlantic Canada's greatest edge. Even in Halifax, home prices are far below national averages, allowing for a high standard of living on moderate incomes.
 
-Shorter commutes and a slower pace of life contribute to a high overall quality of life that attracts many interprovincial migrants.`,
+Shorter commutes and a slower pace of life contribute to a high overall quality of life that attracts many interprovincial migrants.
+
+<b>The Growing Ocean Economy and "Blue Tech"</b>
+
+Atlantic Canada, particularly Nova Scotia and Newfoundland, is positioning itself as a global leader in the "Blue Economy." This includes ocean technology, sustainable fisheries, and offshore renewable energy. In Halifax, the Centre for Ocean Ventures and Entrepreneurship (COVE) has fostered a tech cluster where marine engineers and data scientists earn between $85,000 and $140,000. This sector is expected to be a primary driver of high-wage growth in the region through 2025 and beyond, as the world looks to the ocean for climate solutions and sustainable resources.
+
+<b>The "Halifax Effect" and Remote Work Influx</b>
+
+The COVID-19 pandemic triggered a demographic shift that continues into 2025, known as the "Halifax Effect." Thousands of professionals from Ontario and BC relocated to Nova Scotia and New Brunswick, bringing "big city" salaries to the local economy. This influx has put upward pressure on local wages, particularly in professional services like law, accounting, and marketing. While this has increased the cost of housing, it has also revitalized downtown cores and created a more robust market for high-end services. Local employers have had to raise their compensation benchmarks to compete with the remote-work options now available to Atlantic Canadians.
+
+<b>Newfoundland's Resource Duality: Mining vs. Oil</b>
+
+Newfoundland and Labrador's economy is uniquely split between offshore oil and onshore mining. While the Hibernia and Hebron oil fields continue to provide the highest-paying roles in the province (often exceeding $200,000 for senior engineers), the mining sector in Labrador is seeing an even faster growth rate. The demand for critical minerals like iron ore and nickel has led to massive investments in the Labrador Trough. Workers in these remote sites often work "fly-in, fly-out" (FIFO) schedules, receiving significant isolation premiums and travel allowances that can add $30,000 to $50,000 to their base pay.
+
+<b>Infrastructure and Construction Boom</b>
+
+Across the Maritimes, a massive population surge has necessitated an unprecedented construction boom. From new apartment complexes in Moncton to hospital expansions in Charlottetown, the demand for skilled trades is at an all-time high. Journey-level carpenters, plumbers, and HVAC technicians in the Atlantic provinces are now seeing wages that are closing the gap with their central Canadian counterparts. In 2025, a senior site supervisor in Halifax can expect to earn between $95,000 and $130,000, reflecting the complexity and urgency of current infrastructure projects.
+
+<b>PEI's Specialized Hubs: Aerospace and Bioscience</b>
+
+Prince Edward Island may be Canada's smallest province, but it has carved out highly profitable niches in aerospace and bioscience. The Slemon Park aerospace hub near Summerside employs hundreds of technicians and engineers in aircraft maintenance and manufacturing, with salaries ranging from $65,000 to $110,000. Simultaneously, the Charlottetown bioscience cluster has become a national leader in animal and human health products. Scientists and quality control specialists in this sector enjoy high job security and salaries that provide a very high standard of living given PEI's relatively low (though rising) cost of real estate.`,
     directAnswer: 'Atlantic Canada provides excellent quality of life and housing affordability, with Halifax emerging as a tech hub offering salaries between $70,000 and $130,000 for skilled professionals.',
     faq: [
       { question: 'Which Atlantic city offers the best tech employment opportunities?', answer: 'Halifax is the primary economic and tech hub of the region, offering a growing startup scene and established firms with salaries for developers ranging from $70,000 to $120,000.' },
@@ -597,7 +637,27 @@ Entrepreneurship is also thriving in commuter towns, offering lower business ove
 
 While housing in commuter towns has appreciated rapidly, so have property taxes and local infrastructure costs. Families should also research school and childcare capacity in these growing communities.
 
-Retirement planning should consider if these suburbs will remain suitable as healthcare and accessibility needs change with age.`,
+Retirement planning should consider if these suburbs will remain suitable as healthcare and accessibility needs change with age.
+
+<b>The Digital Nomad Shift and Secondary City Growth</b>
+
+The definition of a "commuter town" has expanded in 2025. With the stabilization of hybrid work, towns once considered too far for a daily commute—such as London, Ontario or Nanaimo, B.C.—have become viable "super-commuter" hubs. Professionals may only visit the city office once a week or a few times a month, allowing them to live even further from the urban core. This shift has led to a "gentrification of the suburbs," where local amenities in secondary cities are rapidly upgrading to meet the expectations of former downtown dwellers, further increasing the lifestyle value of these communities.
+
+<b>Property Taxes and Infrastructure Costs</b>
+
+One often-overlooked financial factor in moving to a commuter town is the difference in property taxes. While a home in Hamilton or Surrey might be cheaper than in Toronto or Vancouver, the property tax rates are often higher as a percentage of the home's value to fund local infrastructure and services. Additionally, many newer commuter developments in Ontario and BC are subject to "development charges" and higher utility costs. Prospective movers should calculate their total "carrying cost" of a home, including taxes and utilities, to ensure the savings on the mortgage aren't swallowed by higher municipal fees.
+
+<b>Maximizing Productivity: GO Transit vs. West Coast Express</b>
+
+For many commuters, the "cost" of the commute is mitigated by the ability to work while traveling. The expansion of GO Transit's two-way, all-day rail service in the Greater Golden Horseshoe has transformed the commute into a productive part of the workday. Similarly, the West Coast Express in BC's Lower Mainland offers a premium commuting experience where professionals can clear emails or prep for meetings before reaching the office. This "on-the-clock" commuting can effectively reduce the perceived length of the workday, though it requires a role that allows for flexible start and end times.
+
+<b>The 2024-2025 Return to Office (RTO) Impact</b>
+
+Throughout late 2024 and early 2025, many major Canadian employers, particularly in finance and government, have firmed up their Return to Office (RTO) mandates. The standard has settled on a 3-day-in-office model. For commuters in towns like Barrie or Chilliwack, this has made the commute more manageable than a full 5-day week, but more demanding than the early pandemic years. This "middle ground" has caused a stabilization in commuter town real estate prices; the frantic bidding wars of 2021 have subsided, replaced by a more rational market where buyers carefully weigh the 3-day commute against their quality of life.
+
+<b>Lifestyle Trade-offs: Green Space and Community</b>
+
+Beyond the dollars and cents, the move to a commuter town is often a lifestyle choice. Families in the GTA suburbs of Halton or the BC Fraser Valley often cite better access to parks, hiking trails, and organized youth sports as the primary reason for their move. In 2025, these towns have matured into self-sustaining communities where residents no longer feel they need to go to the "big city" for high-end dining or culture. However, the trade-off is often a higher reliance on personal vehicles and a potential feeling of isolation for those used to the high-density social life of a downtown core.`,
     directAnswer: 'Commuter towns like Hamilton or Abbotsford allow professionals to earn high Toronto or Vancouver salaries while accessing more affordable housing, though commuting costs and time must be factored into the net benefit.',
     faq: [
       { question: 'How much can I save on housing by moving to a commuter town?', answer: 'Professionals can often find housing that is 40-50% cheaper in towns like Barrie or Abbotsford compared to the downtown cores of Toronto or Vancouver.' },

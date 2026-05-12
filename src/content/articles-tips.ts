@@ -71,7 +71,27 @@ TFSA withdrawals provide flexibility to manage taxable income during high-expens
 
 A practical priority is to first capture employer-matched pension contributions, then maximize TFSA contributions, and finally make RRSP contributions. This sequence ensures you capture "free money" while building flexible savings.
 
-Review your account allocation annually. Life changes such as marriage, children, or job shifts warrant a reassessment of your RRSP versus TFSA prioritization.`,
+Review your account allocation annually. Life changes such as marriage, children, or job shifts warrant a reassessment of your RRSP versus TFSA prioritization.
+
+<b>Interacting with the First Home Savings Account (FHSA)</b>
+
+In 2025, any discussion of RRSPs and TFSAs must include the First Home Savings Account (FHSA). For first-time buyers, the FHSA should almost always be the first priority, as it offers the tax deduction of an RRSP and the tax-free withdrawal of a TFSA. A savvy strategy is to maximize the $8,000 annual FHSA limit first, then use any remaining savings for the TFSA (for flexibility) or the RRSP (for additional tax deferral). If you don't end up buying a home, the FHSA can be rolled into an RRSP without using up any of your RRSP contribution room, making it a "no-lose" scenario for most young Canadians.
+
+<b>The "Tax Bracket Trap" for Retirees</b>
+
+A common pitfall in RRSP planning is the "Tax Bracket Trap." This occurs when a retiree's income from RRIF withdrawals, CPP, and OAS pushes them into a higher tax bracket than they were in during their working years, or triggers a "clawback" of their Old Age Security. In such cases, the "tax-free" growth of the RRSP is offset by the high tax rate upon withdrawal. This is why the TFSA is often superior for those who expect to have a significant pension or multiple income streams in retirement. Strategic planning in 2025 often involves "melting down" an RRSP in the early years of retirement to avoid these higher tax hits later in life.
+
+<b>US Dividend Withholding Tax: A Hidden Difference</b>
+
+For investors holding US stocks or ETFs that pay dividends, the RRSP has a hidden advantage over the TFSA. Under the Canada-US tax treaty, US dividends held within an RRSP are exempt from the 15% US withholding tax. However, the US does not recognize the TFSA as a retirement account, so that 15% tax is still applied to dividends earned in a TFSA. While this may seem small, for a large portfolio of US dividend-payers, this can result in a drag on returns over decades. Therefore, it is generally recommended to hold US-listed dividend stocks in your RRSP and Canadian-listed or non-dividend growth stocks in your TFSA.
+
+<b>Using the Lifelong Learning Plan (LLP)</b>
+
+The RRSP isn't just for retirement; it can also be used to fund further education through the Lifelong Learning Plan (LLP). This program allows you to withdraw up to $10,000 per year (to a maximum of $20,000) from your RRSP to pay for full-time training or education for yourself or your spouse. Like the Home Buyers' Plan, these funds must be repaid over 10 years. In the rapidly changing job market of 2025, the LLP is a valuable tool for mid-career professionals looking to upskill without having to take out high-interest student loans or deplete their TFSA savings.
+
+<b>2025 Limits and Cumulative Math</b>
+
+For the 2025 tax year, the TFSA limit is $7,000. If you have been eligible since the TFSA's inception in 2009 and have never contributed, your total cumulative room is now $102,000. For the RRSP, the 2025 maximum is $31,560, but remember that your individual limit is based on 18% of your 2024 earned income. Keeping track of these limits via your CRA My Account is crucial. Over-contributing to either account results in a 1% per month penalty on the excess amount, which can quickly wipe out any tax benefits. In 2025, many Canadians are using automated "set and forget" contributions to stay within these limits while building long-term wealth.`,
     faq: [
       { question: 'What is the TFSA contribution limit for 2025?', answer: 'The TFSA contribution limit for 2025 is $7,000, bringing the cumulative lifetime limit to $102,000 for Canadians who were 18 or older in 2009.' },
       { question: 'What is the maximum RRSP contribution for 2025?', answer: 'The maximum RRSP contribution limit for 2025 is $31,560, or 18% of your earned income from 2024, whichever is less.' },
