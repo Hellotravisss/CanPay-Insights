@@ -9,11 +9,11 @@ const inter = Inter({ subsets: ['latin'] });
 export const metadata: Metadata = {
   metadataBase: new URL('https://www.canpayinsights.ca'),
   title: {
-    default: 'CanPay Insights - Canadian Payroll Calculator 2025/2026',
+    default: 'Free Canadian Payroll Calculator 2025/2026 - CanPay Insights',
     template: '%s | CanPay Insights',
   },
   description:
-    'Free Canadian payroll calculator. Calculate your net pay, taxes, CPP, and EI deductions across all provinces for 2025/2026.',
+    'Free Canadian payroll calculator for 2025/2026. Estimate take-home pay by province with federal tax, provincial tax, CPP, EI, hourly wage, salary, and timesheet tools.',
   keywords: [
     'Canada payroll calculator',
     'Canadian salary calculator',

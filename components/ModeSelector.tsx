@@ -11,17 +11,20 @@ const ModeSelector: React.FC<Props> = ({ onModeSelect }) => {
     {
       id: CalculationMode.SIMPLE,
       icon: '💰',
-      title: 'Hourly Wage'
+      title: 'Hourly Wage',
+      description: 'Estimate weekly or bi-weekly take-home pay from your hourly rate, shift hours, CPP, EI, and province.'
     },
     {
       id: CalculationMode.ANNUAL,
       icon: '💼',
-      title: 'Annual Salary'
+      title: 'Annual Salary',
+      description: 'Convert a yearly salary into net pay per cheque with federal tax, provincial tax, CPP, and EI.'
     },
     {
       id: CalculationMode.TIMESHEET,
       icon: '⏱️',
-      title: 'Timesheet Tracker'
+      title: 'Timesheet Tracker',
+      description: 'Track shifts, tips, overtime, deductions, and pay periods for a more detailed payroll estimate.'
     }
   ];
 
@@ -40,6 +43,9 @@ const ModeSelector: React.FC<Props> = ({ onModeSelect }) => {
               <h3 className="font-bold text-slate-800 text-2xl group-hover:text-red-600 transition-colors">
                 {mode.title}
               </h3>
+              <p className="mt-3 text-sm leading-6 text-slate-500">
+                {mode.description}
+              </p>
             </div>
             
             {/* Arrow - Centered */}

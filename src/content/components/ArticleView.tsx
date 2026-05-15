@@ -328,25 +328,21 @@ const ArticleView: React.FC<ArticleViewProps> = ({ slug, onBack, onSelectArticle
   };
 
   const CalculatorCTA = () => {
-    const handleCalculatorClick = () => {
-      window.location.href = window.location.origin + '/';
-    };
-    
     return (
       <div className="bg-gradient-to-br from-red-600 to-red-700 rounded-xl p-6 text-white my-8">
         <h3 className="text-xl font-bold mb-2">Calculate Your Take-Home Pay</h3>
         <p className="text-red-100 mb-4 text-sm">
           Enter your salary and province to see detailed tax breakdowns instantly.
         </p>
-        <button
-          onClick={handleCalculatorClick}
+        <a
+          href="/"
           className="inline-flex items-center gap-2 px-5 py-2.5 bg-white text-red-600 font-bold rounded-lg hover:bg-red-50 transition-colors cursor-pointer"
         >
           <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 7h6m0 10v-3m-3 3h.01M9 17h.01M9 14h.01M12 14h.01M15 11h.01M12 11h.01M9 11h.01M7 21h10a2 2 0 002-2V5a2 2 0 00-2-2H7a2 2 0 00-2 2v14a2 2 0 002 2z" />
           </svg>
           Use Free Calculator
-        </button>
+        </a>
       </div>
     );
   };
@@ -358,7 +354,13 @@ const ArticleView: React.FC<ArticleViewProps> = ({ slug, onBack, onSelectArticle
         <div className="max-w-4xl mx-auto px-4 py-8">
           {/* Breadcrumb */}
           <nav className="flex items-center gap-2 text-sm text-slate-500 mb-4">
-            <button onClick={onBack} className="hover:text-red-600">Tax Guides</button>
+            <a
+              href="/blog"
+              onClick={(e) => { if (onBack) { e.preventDefault(); onBack(); } }}
+              className="hover:text-red-600 no-underline"
+            >
+              Tax Guides
+            </a>
             <span>/</span>
             <span className="text-slate-800">{categoryLabels[article.category]}</span>
           </nav>

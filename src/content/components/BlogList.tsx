@@ -77,12 +77,12 @@ const BlogList: React.FC<BlogListProps> = ({ onSelectArticle }) => {
                 <p className="text-blue-100 text-sm">Compare take-home pay across all provinces</p>
               </div>
             </div>
-            <button
-              onClick={() => window.location.href = '/compare-provinces'}
+            <a
+              href="/compare-provinces"
               className="px-5 py-2 bg-white text-blue-700 font-bold rounded-lg hover:bg-blue-50 transition-colors whitespace-nowrap"
             >
               Compare Now →
-            </button>
+            </a>
           </div>
         </div>
       </div>
@@ -112,10 +112,14 @@ const BlogList: React.FC<BlogListProps> = ({ onSelectArticle }) => {
       <div className="max-w-6xl mx-auto px-4 py-8">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {filteredArticles.map((article) => (
-            <button
+            <a
               key={article.id}
-              onClick={() => onSelectArticle(article.slug)}
-              className="group text-left bg-white rounded-xl shadow-sm border border-slate-200 overflow-hidden hover:shadow-lg transition-all hover:-translate-y-1"
+              href={`/blog/${article.slug}`}
+              onClick={(event) => {
+                event.preventDefault();
+                onSelectArticle(article.slug);
+              }}
+              className="group text-left bg-white rounded-xl shadow-sm border border-slate-200 overflow-hidden hover:shadow-lg transition-all hover:-translate-y-1 no-underline block"
             >
               {/* Article Image */}
               {article.imageUrl && (
@@ -155,7 +159,7 @@ const BlogList: React.FC<BlogListProps> = ({ onSelectArticle }) => {
                   </span>
                 </div>
               </div>
-            </button>
+            </a>
           ))}
         </div>
       </div>
@@ -167,15 +171,15 @@ const BlogList: React.FC<BlogListProps> = ({ onSelectArticle }) => {
           <p className="text-slate-300 mb-6">
             Use the CanPay Insights calculator to get personalized tax analysis and salary projections based on your specific situation.
           </p>
-          <button
-            onClick={() => window.location.href = '/'}
+          <a
+            href="/"
             className="inline-flex items-center gap-2 px-6 py-3 bg-red-600 hover:bg-red-700 text-white font-bold rounded-lg transition-all"
           >
             <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 7h6m0 10v-3m-3 3h.01M9 17h.01M9 14h.01M12 14h.01M15 11h.01M12 11h.01M9 11h.01M7 21h10a2 2 0 002-2V5a2 2 0 00-2-2H7a2 2 0 00-2 2v14a2 2 0 002 2z" />
             </svg>
             Calculate My Salary
-          </button>
+          </a>
         </div>
       </div>
     </div>

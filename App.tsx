@@ -282,6 +282,15 @@ const App: React.FC = () => {
 
   // Donation URL
   const DONATION_URL = "https://www.buymeacoffee.com/canpay"; 
+
+  const calculatorLinks = [
+    { href: '/salary-after-tax-canada', label: 'Salary After Tax Canada', detail: 'Annual salary to net pay' },
+    { href: '/ontario-paycheck-calculator', label: 'Ontario Paycheck Calculator', detail: 'Toronto and Ontario workers' },
+    { href: '/bc-paycheck-calculator', label: 'BC Paycheck Calculator', detail: 'British Columbia take-home pay' },
+    { href: '/alberta-paycheck-calculator', label: 'Alberta Paycheck Calculator', detail: 'Alberta salary and CPP/EI' },
+    { href: '/cpp-ei-calculator', label: 'CPP & EI Calculator', detail: 'Payroll deductions explained' },
+    { href: '/hourly-wage-calculator', label: 'Hourly Wage Calculator', detail: 'Hourly pay, shifts, and overtime' },
+  ];
  
   return (
     <div className="min-h-screen bg-slate-50 pb-20 font-sans">
@@ -337,10 +346,16 @@ const App: React.FC = () => {
               {/* Logo Section */}
               <div className="text-center mb-8">
                 <img src="/logo.png" alt="CanPay Insights" className="w-24 h-24 mx-auto mb-4 rounded-2xl object-contain shadow-red-200 shadow-xl" />
-                <h1 className="text-4xl md:text-5xl font-bold text-slate-900 mb-2">
-                  CanPay <span className="text-red-600 font-light">Insights</span>
+                <p className="text-sm font-semibold uppercase tracking-wide text-red-600 mb-3">
+                  CanPay Insights
+                </p>
+                <h1 className="text-4xl md:text-5xl font-bold text-slate-900 mb-4">
+                  Free Canadian Payroll Calculator 2025/2026
                 </h1>
-                <p className="text-slate-500 text-lg">Canadian Payroll Calculator</p>
+                <p className="text-slate-600 text-lg max-w-2xl mx-auto leading-8">
+                  Calculate take-home pay by province with federal tax, provincial tax, CPP, EI,
+                  hourly wage, annual salary, overtime, and timesheet tools.
+                </p>
               </div>
 
               <div className="w-full max-w-4xl">
@@ -367,8 +382,36 @@ const App: React.FC = () => {
                 </div>
               )}
 
+              {/* SEO-friendly internal links */}
+              <section className="mt-12 w-full max-w-5xl" aria-labelledby="popular-calculators">
+                <div className="flex flex-col gap-2 text-center mb-5">
+                  <h2 id="popular-calculators" className="text-2xl font-bold text-slate-900">
+                    Popular Canadian Paycheck Calculators
+                  </h2>
+                  <p className="text-slate-500">
+                    Pick a province or payroll topic to compare tax deductions before using the calculator.
+                  </p>
+                </div>
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3">
+                  {calculatorLinks.map((link) => (
+                    <a
+                      key={link.href}
+                      href={link.href}
+                      className="group bg-white border border-slate-200 rounded-lg p-4 text-left shadow-sm hover:shadow-md hover:border-red-200 transition-all no-underline"
+                    >
+                      <span className="font-bold text-slate-800 group-hover:text-red-600 transition-colors">
+                        {link.label}
+                      </span>
+                      <span className="block text-sm text-slate-500 mt-1">
+                        {link.detail}
+                      </span>
+                    </a>
+                  ))}
+                </div>
+              </section>
+
               {/* Blog CTA */}
-              <div className="mt-12 text-center">
+              <div className="mt-10 text-center">
                 <div className="inline-flex items-center gap-3 bg-white px-6 py-4 rounded-xl shadow-sm border border-slate-200">
                   <div className="w-10 h-10 bg-red-100 rounded-lg flex items-center justify-center">
                     <svg className="w-5 h-5 text-red-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -377,12 +420,12 @@ const App: React.FC = () => {
                   </div>
                   <div className="text-left">
                     <p className="text-sm text-slate-500">Learn More</p>
-                    <button 
-                      onClick={handleGoToBlog}
-                      className="font-bold text-slate-800 hover:text-red-600 transition-colors"
+                    <a
+                      href="/blog"
+                      className="font-bold text-slate-800 hover:text-red-600 transition-colors no-underline"
                     >
                       Browse Insights Hub →
-                    </button>
+                    </a>
                   </div>
                 </div>
               </div>
@@ -512,24 +555,24 @@ const App: React.FC = () => {
 
           {/* Quick Links */}
           <div className="flex justify-center items-center gap-6 mt-4">
-            <button 
-              onClick={handleGoToBlog}
+            <a
+              href="/blog"
               className="text-slate-400 hover:text-red-600 transition-colors"
             >
               Insights Hub
-            </button>
-            <button 
-              onClick={() => router.push('/compare-provinces')}
+            </a>
+            <a
+              href="/compare-provinces"
               className="text-slate-400 hover:text-red-600 transition-colors"
             >
               Compare Provinces
-            </button>
-            <button 
-              onClick={handleGoToPrivacy}
+            </a>
+            <a
+              href="/privacy"
               className="text-slate-400 hover:text-red-600 transition-colors"
             >
               Privacy Policy
-            </button>
+            </a>
           </div>
           
           <div className="mt-2 flex justify-center gap-2">

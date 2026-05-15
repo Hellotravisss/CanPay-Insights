@@ -2,15 +2,15 @@ import type { Metadata } from 'next';
 import App from '../App';
 
 export const metadata: Metadata = {
-  title: 'CanPay Insights - Free Canadian Payroll Calculator 2025/2026',
+  title: 'Free Canadian Payroll Calculator 2025/2026 - CPP, EI & Take-Home Pay',
   description:
-    'Free Canadian payroll calculator. Calculate your take-home pay, taxes, CPP, and EI deductions across all provinces instantly. Supports hourly, salary, and timesheet modes.',
+    'Calculate Canadian take-home pay by province with federal tax, provincial tax, CPP, EI, hourly wage, annual salary, overtime, and timesheet tools.',
   alternates: {
     canonical: 'https://www.canpayinsights.ca/',
   },
   openGraph: {
-    title: 'CanPay Insights - Free Canadian Payroll Calculator',
-    description: 'Calculate your take-home pay across all Canadian provinces. Free, instant, accurate.',
+    title: 'Free Canadian Payroll Calculator 2025/2026',
+    description: 'Calculate Canadian take-home pay by province with CPP, EI, income tax, salary, hourly wage, and timesheet tools.',
     url: 'https://www.canpayinsights.ca/',
   },
 };
