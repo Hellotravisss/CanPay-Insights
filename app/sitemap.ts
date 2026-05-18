@@ -24,6 +24,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
       changeFrequency: 'monthly',
       priority: 0.7,
     },
+    {
+      url: `${BASE_URL}/link-to-canpay`,
+      lastModified: new Date(),
+      changeFrequency: 'monthly',
+      priority: 0.6,
+    },
   ];
 
   const articlePages: MetadataRoute.Sitemap = allArticles.map((article) => ({

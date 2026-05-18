@@ -11,6 +11,7 @@ import GeminiAdvisor from './components/GeminiAdvisor';
 import UserMenu from './components/UserMenu';
 import AuthModal from './components/AuthModal';
 import LoadingOverlay from './components/LoadingOverlay';
+import ShareLinks from './components/ShareLinks';
 import { SalaryInputs, Province, CalculationMode, AnnualSalaryInputs, PayFrequency, TimesheetInputs, CalculationResult } from './types';
 import { calculateSalary, calculateFromAnnualSalary, calculateFromTimesheet } from './utils/taxEngine';
 import { useAuth, type OAuthProvider } from './hooks/useAuth';
@@ -362,6 +363,21 @@ const App: React.FC = () => {
                 <ModeSelector onModeSelect={handleModeSelect} />
               </div>
 
+              <section className="mt-8 grid w-full max-w-4xl grid-cols-1 gap-3 md:grid-cols-3" aria-label="Why people use CanPay Insights">
+                <div className="rounded-lg border border-slate-200 bg-white p-4 shadow-sm">
+                  <p className="text-sm font-bold text-slate-900">Built for Canada</p>
+                  <p className="mt-1 text-sm leading-6 text-slate-500">Province-aware CPP, EI, income tax, hourly wage, salary, and timesheet estimates.</p>
+                </div>
+                <div className="rounded-lg border border-slate-200 bg-white p-4 shadow-sm">
+                  <p className="text-sm font-bold text-slate-900">Free, no signup</p>
+                  <p className="mt-1 text-sm leading-6 text-slate-500">Start with a quick estimate, then sign in only if you want cloud save.</p>
+                </div>
+                <div className="rounded-lg border border-slate-200 bg-white p-4 shadow-sm">
+                  <p className="text-sm font-bold text-slate-900">Useful for job offers</p>
+                  <p className="mt-1 text-sm leading-6 text-slate-500">Compare what actually lands in your account before changing roles or provinces.</p>
+                </div>
+              </section>
+
               {/* Sign In Prompt (if not authenticated) */}
               {!isAuthenticated && (
                 <div className="mt-8">
@@ -428,6 +444,10 @@ const App: React.FC = () => {
                     </a>
                   </div>
                 </div>
+              </div>
+
+              <div className="mt-8 w-full max-w-5xl">
+                <ShareLinks compact />
               </div>
             </div>
           )}
@@ -572,6 +592,12 @@ const App: React.FC = () => {
               className="text-slate-400 hover:text-red-600 transition-colors"
             >
               Privacy Policy
+            </a>
+            <a
+              href="/link-to-canpay"
+              className="text-slate-400 hover:text-red-600 transition-colors"
+            >
+              Link to Us
             </a>
           </div>
           

@@ -1,5 +1,6 @@
 import type { Metadata } from 'next';
 import { notFound } from 'next/navigation';
+import ShareLinks from '../../components/ShareLinks';
 import { getLandingPage, landingPages } from '../landing-page-data';
 
 const BASE_URL = 'https://www.canpayinsights.ca';
@@ -195,6 +196,12 @@ export default async function LandingPage({ params }: Props) {
                 ))}
               </div>
             </section>
+
+            <ShareLinks
+              url={pageUrl}
+              title={page.title}
+              description={page.description}
+            />
           </article>
 
           <aside className="space-y-4">
