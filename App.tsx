@@ -292,6 +292,15 @@ const App: React.FC = () => {
     { href: '/cpp-ei-calculator', label: 'CPP & EI Calculator', detail: 'Payroll deductions explained' },
     { href: '/hourly-wage-calculator', label: 'Hourly Wage Calculator', detail: 'Hourly pay, shifts, and overtime' },
   ];
+
+  const salarySearchLinks = [
+    { href: '/50000-after-tax-ontario', label: '$50,000 after tax Ontario' },
+    { href: '/60000-after-tax-ontario', label: '$60,000 after tax Ontario' },
+    { href: '/65000-after-tax-ontario', label: '$65,000 after tax Ontario' },
+    { href: '/70000-after-tax-bc', label: '$70,000 after tax BC' },
+    { href: '/80000-after-tax-alberta', label: '$80,000 after tax Alberta' },
+    { href: '/100000-after-tax-ontario', label: '$100,000 after tax Ontario' },
+  ];
  
   return (
     <div className="min-h-screen bg-slate-50 pb-20 font-sans">
@@ -421,6 +430,28 @@ const App: React.FC = () => {
                       <span className="block text-sm text-slate-500 mt-1">
                         {link.detail}
                       </span>
+                    </a>
+                  ))}
+                </div>
+              </section>
+
+              <section className="mt-8 w-full max-w-5xl" aria-labelledby="popular-salary-searches">
+                <div className="flex flex-col gap-2 text-center mb-5">
+                  <h2 id="popular-salary-searches" className="text-2xl font-bold text-slate-900">
+                    Popular Salary After Tax Searches
+                  </h2>
+                  <p className="text-slate-500">
+                    Quick answers for common Canadian job offer and relocation searches.
+                  </p>
+                </div>
+                <div className="flex flex-wrap justify-center gap-2">
+                  {salarySearchLinks.map((link) => (
+                    <a
+                      key={link.href}
+                      href={link.href}
+                      className="rounded-lg border border-slate-200 bg-white px-4 py-2 text-sm font-bold text-slate-700 no-underline shadow-sm transition-colors hover:border-red-200 hover:bg-red-50 hover:text-red-600"
+                    >
+                      {link.label}
                     </a>
                   ))}
                 </div>

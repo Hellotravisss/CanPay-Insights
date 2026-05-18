@@ -17,7 +17,7 @@ export type LandingPage = {
   }>;
 };
 
-export const landingPages: LandingPage[] = [
+const coreLandingPages: LandingPage[] = [
   {
     slug: 'salary-after-tax-canada',
     title: 'Salary After Tax Canada 2025/2026 - Take-Home Pay Calculator',
@@ -387,6 +387,101 @@ export const landingPages: LandingPage[] = [
       },
     ],
   },
+];
+
+const salaryAmounts = [50000, 60000, 65000, 70000, 80000, 100000];
+
+const provinceSalaryConfigs = [
+  {
+    slug: 'ontario',
+    name: 'Ontario',
+    shortName: 'Ontario',
+    cities: 'Toronto, Ottawa, Mississauga, Brampton, Hamilton, London, and workers across Ontario',
+    taxNote:
+      'Ontario workers usually see federal income tax, Ontario income tax, CPP, and EI deductions on every paycheque.',
+    comparison: 'Alberta, British Columbia, Quebec, or another province',
+  },
+  {
+    slug: 'bc',
+    name: 'British Columbia',
+    shortName: 'BC',
+    cities: 'Vancouver, Victoria, Surrey, Burnaby, Kelowna, and workers across British Columbia',
+    taxNote:
+      'BC workers usually see federal income tax, British Columbia income tax, CPP, and EI deductions on every paycheque.',
+    comparison: 'Ontario, Alberta, Quebec, or another province',
+  },
+  {
+    slug: 'alberta',
+    name: 'Alberta',
+    shortName: 'Alberta',
+    cities: 'Calgary, Edmonton, Red Deer, Lethbridge, Fort McMurray, and workers across Alberta',
+    taxNote:
+      'Alberta workers still pay federal income tax, Alberta income tax, CPP, and EI, even though Alberta has no provincial sales tax.',
+    comparison: 'Ontario, British Columbia, Quebec, or another province',
+  },
+  {
+    slug: 'quebec',
+    name: 'Quebec',
+    shortName: 'Quebec',
+    cities: 'Montreal, Quebec City, Laval, Gatineau, Sherbrooke, and workers across Quebec',
+    taxNote:
+      'Quebec payroll is distinct from other provinces, with its own provincial tax and payroll deduction rules.',
+    comparison: 'Ontario, Alberta, British Columbia, or another province',
+  },
+];
+
+const formatSalary = (amount: number) => `$${amount.toLocaleString('en-CA')}`;
+
+const salaryProvinceLandingPages: LandingPage[] = provinceSalaryConfigs.flatMap((province) =>
+  salaryAmounts.map((amount) => {
+    const salary = formatSalary(amount);
+    const slugSalary = String(amount);
+    const keyword = `${salary} after tax ${province.shortName}`;
+
+    return {
+      slug: `${slugSalary}-after-tax-${province.slug}`,
+      title: `${salary} After Tax in ${province.shortName} 2025/2026 - Take-Home Pay`,
+      description: `Estimate ${salary} after tax in ${province.name} for 2025/2026. Calculate take-home pay with federal tax, ${province.shortName} tax, CPP, EI, and paycheque estimates.`,
+      h1: `${salary} After Tax in ${province.shortName}`,
+      kicker: 'Salary after tax estimate',
+      primaryKeyword: keyword,
+      intro: `Estimate what a ${salary} annual salary becomes after tax in ${province.name}. CanPay Insights helps workers in ${province.cities} compare gross salary, net pay, CPP, EI, and paycheque amounts.`,
+      examples: [
+        `${salary} salary after tax ${province.shortName}`,
+        `${salary} take-home pay ${province.shortName}`,
+        `${salary} bi-weekly pay ${province.shortName}`,
+      ],
+      sections: [
+        {
+          heading: `What affects ${salary} take-home pay in ${province.shortName}?`,
+          body: `${province.taxNote} Your actual net pay also depends on pay frequency, credits, RRSP contributions, workplace benefits, union dues, insurance premiums, and any other deductions on your pay stub.`,
+        },
+        {
+          heading: 'Use this before accepting a job offer',
+          body: `A ${salary} offer is easier to understand when you compare annual gross pay with monthly, semi-monthly, or bi-weekly net pay. Use the calculator to estimate what may actually land in your bank account before budgeting rent, transportation, debt payments, or savings.`,
+        },
+        {
+          heading: `Compare ${province.shortName} with other provinces`,
+          body: `The same ${salary} salary can produce different take-home pay in ${province.comparison}. If you are planning a move, compare provinces before assuming a higher gross salary means a higher after-tax income.`,
+        },
+      ],
+      faq: [
+        {
+          question: `How much is ${salary} after tax in ${province.shortName}?`,
+          answer: `It depends on your pay frequency, deductions, credits, and tax situation. Use CanPay Insights to estimate ${salary} after federal tax, ${province.shortName} tax, CPP, EI, and workplace deductions.`,
+        },
+        {
+          question: `Is ${salary} a good salary in ${province.shortName}?`,
+          answer: `It depends on your city, rent, household size, debt, transportation costs, and savings goals. Take-home pay is the better starting point for budgeting than gross salary alone.`,
+        },
+      ],
+    };
+  })
+);
+
+export const landingPages: LandingPage[] = [
+  ...coreLandingPages,
+  ...salaryProvinceLandingPages,
 ];
 
 export function getLandingPage(slug: string) {

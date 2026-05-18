@@ -30,6 +30,21 @@ CanPay Insights is a free Canadian payroll calculator for workers comparing take
    - Add salary-specific pages for common searches: `$50,000 after tax Ontario`, `$60,000 after tax BC`, `$80,000 after tax Alberta`.
    - Add comparison pages: `Ontario vs Alberta take-home pay`, `BC vs Ontario salary after tax`.
 
+## Live Long-Tail Pages
+
+The site now includes common amount + province pages for:
+
+- $50,000, $60,000, $65,000, $70,000, $80,000, and $100,000
+- Ontario, BC, Alberta, and Quebec
+
+Examples:
+
+- https://www.canpayinsights.ca/50000-after-tax-ontario
+- https://www.canpayinsights.ca/65000-after-tax-ontario
+- https://www.canpayinsights.ca/70000-after-tax-bc
+- https://www.canpayinsights.ca/80000-after-tax-alberta
+- https://www.canpayinsights.ca/100000-after-tax-ontario
+
 ## Copy-Paste Posts
 
 ### Reddit / SideProject
