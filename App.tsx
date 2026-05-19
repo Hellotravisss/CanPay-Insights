@@ -416,6 +416,21 @@ const App: React.FC = () => {
                   <p className="text-slate-500">
                     Province and payroll tools for faster take-home pay checks.
                   </p>
+                  <nav
+                    className="mx-auto mt-3 flex max-w-4xl flex-wrap items-center justify-center gap-x-3 gap-y-2 text-sm"
+                    aria-label="Common salary searches"
+                  >
+                    <span className="font-semibold text-slate-400">Salary shortcuts</span>
+                    {salarySearchLinks.map((link) => (
+                      <a
+                        key={link.href}
+                        href={link.href}
+                        className="font-semibold text-slate-600 underline decoration-slate-300 underline-offset-4 transition-colors hover:text-red-600 hover:decoration-red-300"
+                      >
+                        {link.label}
+                      </a>
+                    ))}
+                  </nav>
                 </div>
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3">
                   {calculatorLinks.map((link) => (
@@ -432,38 +447,6 @@ const App: React.FC = () => {
                       </span>
                     </a>
                   ))}
-                </div>
-              </section>
-
-              <section
-                className="mt-6 w-full max-w-5xl rounded-xl border border-slate-200 bg-white/80 px-4 py-4 shadow-sm"
-                aria-labelledby="popular-salary-searches"
-              >
-                <div className="flex flex-col gap-3 md:flex-row md:items-center md:justify-between">
-                  <div className="flex items-center gap-3 text-left md:min-w-[280px]">
-                    <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-red-50 text-sm font-black text-red-600">
-                      $
-                    </div>
-                    <div>
-                      <h2 id="popular-salary-searches" className="text-base font-bold text-slate-900 md:whitespace-nowrap">
-                        Common salary searches
-                      </h2>
-                      <p className="text-sm text-slate-500">
-                        Quick job-offer checks by amount and province.
-                      </p>
-                    </div>
-                  </div>
-                  <div className="flex flex-wrap gap-2 md:justify-end">
-                    {salarySearchLinks.map((link) => (
-                      <a
-                        key={link.href}
-                        href={link.href}
-                        className="rounded-md border border-slate-200 bg-slate-50 px-3 py-1.5 text-sm font-semibold text-slate-700 no-underline transition-colors hover:border-red-200 hover:bg-red-50 hover:text-red-600"
-                      >
-                        {link.label}
-                      </a>
-                    ))}
-                  </div>
                 </div>
               </section>
 
