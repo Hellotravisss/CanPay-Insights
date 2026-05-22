@@ -11,7 +11,6 @@ import GeminiAdvisor from './components/GeminiAdvisor';
 import UserMenu from './components/UserMenu';
 import AuthModal from './components/AuthModal';
 import LoadingOverlay from './components/LoadingOverlay';
-import ShareLinks from './components/ShareLinks';
 import { SalaryInputs, Province, CalculationMode, AnnualSalaryInputs, PayFrequency, TimesheetInputs, CalculationResult } from './types';
 import { calculateSalary, calculateFromAnnualSalary, calculateFromTimesheet } from './utils/taxEngine';
 import { useAuth, type OAuthProvider } from './hooks/useAuth';
@@ -293,15 +292,6 @@ const App: React.FC = () => {
     { href: '/hourly-wage-calculator', label: 'Hourly Wage Calculator', detail: 'Hourly pay, shifts, and overtime' },
   ];
 
-  const salarySearchLinks = [
-    { href: '/65000-after-tax-ontario', label: '$65,000 after tax Ontario' },
-    { href: '/70000-after-tax-bc', label: '$70,000 after tax BC' },
-    { href: '/80000-after-tax-alberta', label: '$80,000 after tax Alberta' },
-    { href: '/90000-after-tax-quebec', label: '$90,000 after tax Quebec' },
-    { href: '/100000-after-tax-quebec', label: '$100,000 after tax Quebec' },
-    { href: '/120000-after-tax-quebec', label: '$120,000 after tax Quebec' },
-  ];
- 
   return (
     <div className="min-h-screen bg-slate-50 pb-20 font-sans">
       {/* Header */}
@@ -352,19 +342,15 @@ const App: React.FC = () => {
       <main className="max-w-6xl mx-auto px-4 py-8" role="main" aria-label="Payroll Calculator">
           {/* Home Page - Mode Selection */}
           {currentPage === 'home' && (
-            <div className="min-h-[80vh] flex flex-col items-center justify-center">
+            <div className="flex min-h-[78vh] flex-col items-center justify-center py-8 md:py-12">
               {/* Logo Section */}
-              <div className="text-center mb-8">
-                <img src="/logo.png" alt="CanPay Insights" className="w-24 h-24 mx-auto mb-4 rounded-2xl object-contain shadow-red-200 shadow-xl" />
-                <p className="text-sm font-semibold uppercase tracking-wide text-red-600 mb-3">
-                  CanPay Insights
-                </p>
-                <h1 className="text-4xl md:text-5xl font-bold text-slate-900 mb-4">
-                  Free Canadian Payroll Calculator 2025/2026
+              <div className="mb-7 text-center">
+                <img src="/logo.png" alt="CanPay Insights" className="mx-auto mb-5 h-20 w-20 rounded-2xl object-contain shadow-lg shadow-red-100" />
+                <h1 className="mx-auto mb-4 max-w-4xl text-4xl font-bold tracking-tight text-slate-950 md:text-6xl">
+                  Canadian Paycheck Calculator
                 </h1>
-                <p className="text-slate-600 text-lg max-w-2xl mx-auto leading-8">
-                  Calculate take-home pay by province with federal tax, provincial tax, CPP, EI,
-                  hourly wage, annual salary, overtime, and timesheet tools.
+                <p className="mx-auto max-w-2xl text-lg leading-8 text-slate-600">
+                  Estimate take-home pay for hourly work, annual salary, or timesheets using 2025/2026 Canadian tax rates.
                 </p>
               </div>
 
@@ -372,20 +358,13 @@ const App: React.FC = () => {
                 <ModeSelector onModeSelect={handleModeSelect} />
               </div>
 
-              <section className="mt-8 grid w-full max-w-4xl grid-cols-1 gap-3 md:grid-cols-3" aria-label="Why people use CanPay Insights">
-                <div className="rounded-lg border border-slate-200 bg-white p-4 shadow-sm">
-                  <p className="text-sm font-bold text-slate-900">Built for Canada</p>
-                  <p className="mt-1 text-sm leading-6 text-slate-500">Province-aware tax, CPP, EI, salary, and hourly estimates.</p>
-                </div>
-                <div className="rounded-lg border border-slate-200 bg-white p-4 shadow-sm">
-                  <p className="text-sm font-bold text-slate-900">Free, no signup</p>
-                  <p className="mt-1 text-sm leading-6 text-slate-500">Start with a quick estimate. Save later if you need it.</p>
-                </div>
-                <div className="rounded-lg border border-slate-200 bg-white p-4 shadow-sm">
-                  <p className="text-sm font-bold text-slate-900">Useful for job offers</p>
-                  <p className="mt-1 text-sm leading-6 text-slate-500">See take-home pay before changing roles or provinces.</p>
-                </div>
-              </section>
+              <div className="mt-3 flex flex-wrap items-center justify-center gap-x-4 gap-y-2 text-sm font-semibold text-slate-500">
+                <span>Built for Canada</span>
+                <span className="text-slate-300">/</span>
+                <span>Free to start</span>
+                <span className="text-slate-300">/</span>
+                <span>No signup needed</span>
+              </div>
 
               {/* Sign In Prompt (if not authenticated) */}
               {!isAuthenticated && (
@@ -407,32 +386,16 @@ const App: React.FC = () => {
                 </div>
               )}
 
-              {/* SEO-friendly internal links */}
-              <section className="mt-12 w-full max-w-5xl" aria-labelledby="popular-calculators">
-                <div className="flex flex-col gap-2 text-center mb-5">
+              <section className="mt-14 w-full max-w-5xl" aria-labelledby="popular-calculators">
+                <div className="mb-5 text-center">
                   <h2 id="popular-calculators" className="text-2xl font-bold text-slate-900">
-                    Popular Calculators
+                    More Tools
                   </h2>
-                  <p className="text-slate-500">
-                    Province and payroll tools for faster take-home pay checks.
+                  <p className="mt-2 text-slate-500">
+                    Province calculators and payroll guides when you need a deeper check.
                   </p>
-                  <nav
-                    className="mx-auto mt-3 flex max-w-4xl flex-wrap items-center justify-center gap-x-3 gap-y-2 text-sm"
-                    aria-label="Common salary searches"
-                  >
-                    <span className="font-semibold text-slate-400">Salary shortcuts</span>
-                    {salarySearchLinks.map((link) => (
-                      <a
-                        key={link.href}
-                        href={link.href}
-                        className="font-semibold text-slate-600 underline decoration-slate-300 underline-offset-4 transition-colors hover:text-red-600 hover:decoration-red-300"
-                      >
-                        {link.label}
-                      </a>
-                    ))}
-                  </nav>
                 </div>
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3">
+                <div className="grid grid-cols-1 gap-3 md:grid-cols-2 lg:grid-cols-3">
                   {calculatorLinks.map((link) => (
                     <a
                       key={link.href}
@@ -451,27 +414,13 @@ const App: React.FC = () => {
               </section>
 
               {/* Blog CTA */}
-              <div className="mt-10 text-center">
-                <div className="inline-flex items-center gap-3 bg-white px-6 py-4 rounded-xl shadow-sm border border-slate-200">
-                  <div className="w-10 h-10 bg-red-100 rounded-lg flex items-center justify-center">
-                    <svg className="w-5 h-5 text-red-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
-                    </svg>
-                  </div>
-                  <div className="text-left">
-                    <p className="text-sm text-slate-500">Learn More</p>
-                    <a
-                      href="/blog"
-                      className="font-bold text-slate-800 hover:text-red-600 transition-colors no-underline"
-                    >
-                      Browse Insights Hub →
-                    </a>
-                  </div>
-                </div>
-              </div>
-
-              <div className="mt-8 w-full max-w-5xl">
-                <ShareLinks compact />
+              <div className="mt-8 text-center">
+                <a
+                  href="/blog"
+                  className="text-sm font-bold text-slate-500 no-underline transition-colors hover:text-red-600"
+                >
+                  Browse Insights Hub →
+                </a>
               </div>
             </div>
           )}

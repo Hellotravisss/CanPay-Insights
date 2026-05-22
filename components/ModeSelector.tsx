@@ -12,51 +12,48 @@ const ModeSelector: React.FC<Props> = ({ onModeSelect }) => {
       id: CalculationMode.SIMPLE,
       icon: '💰',
       title: 'Hourly Wage',
-      description: 'Estimate weekly or bi-weekly take-home pay from your hourly rate, shift hours, CPP, EI, and province.'
+      description: 'Hourly rate to take-home pay.'
     },
     {
       id: CalculationMode.ANNUAL,
       icon: '💼',
       title: 'Annual Salary',
-      description: 'Convert a yearly salary into net pay per cheque with federal tax, provincial tax, CPP, and EI.'
+      description: 'Yearly salary to each paycheque.'
     },
     {
       id: CalculationMode.TIMESHEET,
       icon: '⏱️',
       title: 'Timesheet Tracker',
-      description: 'Track shifts, tips, overtime, deductions, and pay periods for a more detailed payroll estimate.'
+      description: 'Shifts, overtime, tips, and deductions.'
     }
   ];
 
   return (
-    <div className="bg-white rounded-xl shadow-sm border border-slate-200 p-6 mb-6">
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-        {modes.map((mode) => (
-          <button
-            key={mode.id}
-            onClick={() => onModeSelect(mode.id)}
-            className="relative p-8 rounded-xl border-2 border-slate-200 bg-white hover:border-red-500 hover:shadow-xl transition-all group"
-          >
-            {/* Icon and Title - Centered */}
-            <div className="flex flex-col items-center text-center">
-              <span className="text-6xl mb-4 group-hover:scale-110 transition-transform">{mode.icon}</span>
-              <h3 className="font-bold text-slate-800 text-2xl group-hover:text-red-600 transition-colors">
-                {mode.title}
-              </h3>
-              <p className="mt-3 text-sm leading-6 text-slate-500">
-                {mode.description}
-              </p>
-            </div>
-            
-            {/* Arrow - Centered */}
-            <div className="flex justify-center mt-6">
-              <svg className="w-6 h-6 text-red-500 opacity-0 group-hover:opacity-100 transition-opacity" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M13 7l5 5m0 0l-5 5m5-5H6" />
-              </svg>
-            </div>
-          </button>
-        ))}
-      </div>
+    <div className="mb-4 grid grid-cols-1 gap-3 md:grid-cols-3">
+      {modes.map((mode) => (
+        <button
+          key={mode.id}
+          onClick={() => onModeSelect(mode.id)}
+          className="group relative flex h-full items-start gap-4 rounded-xl border border-slate-200 bg-white p-5 text-left shadow-sm transition-all hover:-translate-y-0.5 hover:border-red-200 hover:shadow-lg"
+        >
+          <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-lg bg-red-50 text-2xl transition-transform group-hover:scale-105">
+            {mode.icon}
+          </span>
+          <span className="min-w-0">
+            <span className="block text-lg font-bold text-slate-900 transition-colors group-hover:text-red-600">
+              {mode.title}
+            </span>
+            <span className="mt-1 block text-sm leading-6 text-slate-500">
+              {mode.description}
+            </span>
+          </span>
+          <span className="ml-auto mt-1 text-slate-300 transition-colors group-hover:text-red-500" aria-hidden="true">
+            <svg className="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M13 7l5 5m0 0l-5 5m5-5H6" />
+            </svg>
+          </span>
+        </button>
+      ))}
     </div>
   );
 };
