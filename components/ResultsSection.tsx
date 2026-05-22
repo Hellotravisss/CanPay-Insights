@@ -1,7 +1,6 @@
 'use client';
 import React from 'react';
 import { CalculationResult, Province } from '../types';
-import { PieChart, Pie, Cell, Tooltip, ResponsiveContainer, Legend } from 'recharts';
 
 interface Props {
   results: CalculationResult;
@@ -12,11 +11,148 @@ const InukshukWatermark = ({ className, style }: { className?: string; style?: R
   <img src="/logo_reverse.png" alt="" aria-hidden="true" className={className} style={style} />
 );
 
+type ChartDatum = {
+  name: string;
+  value: number;
+  color: string;
+};
+
+const PaycheckDonutChart = ({
+  data,
+  formatCurrency,
+  netPayPercent,
+}: {
+  data: ChartDatum[];
+  formatCurrency: (value: number) => string;
+  netPayPercent: number;
+}) => {
+  const [activeIndex, setActiveIndex] = React.useState<number | null>(null);
+  const size = 220;
+  const center = size / 2;
+  const radius = 72;
+  const strokeWidth = 28;
+  const circumference = 2 * Math.PI * radius;
+  const total = data.reduce((sum, item) => sum + Math.max(item.value, 0), 0);
+
+  const segments = React.useMemo(() => {
+    if (total <= 0) return [];
+
+    const gap = 4;
+    let cursor = 0;
+
+    return data
+      .map((item, index) => {
+        const rawLength = (Math.max(item.value, 0) / total) * circumference;
+        const visibleLength = Math.max(rawLength - gap, 0);
+        const segment = {
+          ...item,
+          index,
+          length: visibleLength,
+          offset: -cursor,
+          percent: Math.round((Math.max(item.value, 0) / total) * 100),
+        };
+
+        cursor += rawLength;
+        return segment;
+      })
+      .filter((segment) => segment.length > 0);
+  }, [circumference, data, total]);
+
+  const activeSegment = activeIndex === null ? null : segments.find((segment) => segment.index === activeIndex);
+
+  return (
+    <div className="relative mx-auto flex min-h-[16rem] w-full max-w-sm flex-col items-center justify-center">
+      <style>
+        {`
+          @keyframes paycheckDonutIn {
+            from {
+              opacity: 0;
+              transform: rotate(-90deg) scale(0.96);
+            }
+            to {
+              opacity: 1;
+              transform: rotate(-90deg) scale(1);
+            }
+          }
+        `}
+      </style>
+      <div className="relative h-[220px] w-[220px]">
+        <svg
+          viewBox={`0 0 ${size} ${size}`}
+          role="img"
+          aria-label="Paycheck breakdown donut chart"
+          className="h-full w-full overflow-visible"
+        >
+          <circle
+            cx={center}
+            cy={center}
+            r={radius}
+            fill="none"
+            stroke="#e2e8f0"
+            strokeWidth={strokeWidth}
+          />
+          {segments.map((segment) => (
+            <circle
+              key={segment.name}
+              cx={center}
+              cy={center}
+              r={radius}
+              fill="none"
+              stroke={segment.color}
+              strokeWidth={strokeWidth}
+              strokeLinecap="butt"
+              strokeDasharray={`${segment.length} ${circumference - segment.length}`}
+              strokeDashoffset={segment.offset}
+              className="cursor-default transition-opacity duration-150"
+              style={{
+                animation: `paycheckDonutIn 420ms ease-out ${segment.index * 45}ms both`,
+                opacity: activeIndex === null || activeIndex === segment.index ? 1 : 0.42,
+                transformOrigin: `${center}px ${center}px`,
+              }}
+              onMouseEnter={() => setActiveIndex(segment.index)}
+              onMouseLeave={() => setActiveIndex(null)}
+            >
+              <title>{`${segment.name}: ${formatCurrency(segment.value)}`}</title>
+            </circle>
+          ))}
+        </svg>
+        <div className="pointer-events-none absolute inset-0 flex flex-col items-center justify-center text-center">
+          <span className="text-xs font-bold uppercase text-slate-400">Net Pay</span>
+          <p className="text-2xl font-bold text-slate-800">{netPayPercent}%</p>
+        </div>
+      </div>
+
+      {activeSegment && (
+        <div className="absolute top-2 z-10 rounded-lg border border-slate-200 bg-white px-3 py-2 text-xs shadow-lg">
+          <p className="font-bold text-slate-900">{activeSegment.name}</p>
+          <p className="text-slate-600">
+            {formatCurrency(activeSegment.value)} · {activeSegment.percent}%
+          </p>
+        </div>
+      )}
+
+      <div className="mt-2 flex flex-wrap items-center justify-center gap-x-4 gap-y-2 text-sm font-medium text-slate-600">
+        {data.map((item) => (
+          <div key={item.name} className="inline-flex items-center gap-2">
+            <span className="h-3 w-3 rounded-full" style={{ backgroundColor: item.color }} />
+            <span>{item.name}</span>
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+};
+
 const ResultsSection: React.FC<Props> = ({ results, provinceName }) => {
-  
-  const formatCurrency = (val: number) => {
-    return new Intl.NumberFormat('en-CA', { style: 'currency', currency: 'CAD' }).format(val);
-  };
+  const currencyFormatter = React.useMemo(
+    () => new Intl.NumberFormat('en-CA', { style: 'currency', currency: 'CAD' }),
+    [],
+  );
+
+  const formatCurrency = React.useCallback(
+    (val: number) => currencyFormatter.format(Number.isFinite(val) ? val : 0),
+    [currencyFormatter],
+  );
   
   // Get pay frequency display label
   const getPayFrequencyLabel = (frequency?: string) => {
@@ -35,14 +171,17 @@ const ResultsSection: React.FC<Props> = ({ results, provinceName }) => {
   const hasCustomFrequency = !!results.payFrequency;
   const payPeriodLabel = hasCustomFrequency ? getPayFrequencyLabel(results.payFrequency) : 'Bi-Weekly';
 
-  const chartData = [
+  const chartData = React.useMemo(() => [
     { name: 'Net Pay', value: results.netPayBiWeekly, color: '#dc2626' }, // Red-600
     { name: 'Fed Tax', value: results.federalTax, color: '#334155' }, // Slate-700
     { name: 'Prov Tax', value: results.provincialTax, color: '#64748b' }, // Slate-500
     { name: 'CPP/EI', value: results.cppDeduction + results.eiDeduction, color: '#94a3b8' }, // Slate-400
-  ];
+  ], [results.cppDeduction, results.eiDeduction, results.federalTax, results.netPayBiWeekly, results.provincialTax]);
 
   const totalHours = results.regularHours + results.overtimeHours15 + results.overtimeHours20;
+  const netPayPercent = results.grossPayBiWeekly > 0
+    ? Math.round((results.netPayBiWeekly / results.grossPayBiWeekly) * 100)
+    : 0;
 
   return (
     <div className="space-y-6">
@@ -128,39 +267,11 @@ const ResultsSection: React.FC<Props> = ({ results, provinceName }) => {
         <div className="flex flex-col md:flex-row gap-8 items-center">
           {/* Chart */}
           <div className="w-full md:w-1/2 h-64 relative">
-            <ResponsiveContainer width="100%" height="100%">
-              <PieChart>
-                <Pie
-                  data={chartData}
-                  cx="50%"
-                  cy="50%"
-                  innerRadius={65}
-                  outerRadius={85}
-                  paddingAngle={4}
-                  dataKey="value"
-                  stroke="none"
-                >
-                  {chartData.map((entry, index) => (
-                    <Cell key={`cell-${index}`} fill={entry.color} />
-                  ))}
-                </Pie>
-                <Tooltip 
-                  formatter={(value: number) => formatCurrency(value)} 
-                  contentStyle={{ backgroundColor: '#fff', borderRadius: '8px', boxShadow: '0 4px 6px -1px rgb(0 0 0 / 0.1)', zIndex: 9999 }}
-                  wrapperStyle={{ zIndex: 9999 }}
-                />
-                <Legend iconType="circle" />
-              </PieChart>
-            </ResponsiveContainer>
-            {/* Center Text */}
-            <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-center pointer-events-none z-0">
-              <span className="text-xs text-slate-400 font-bold uppercase">Net Pay</span>
-              <p className="text-slate-800 font-bold">
-                {results.grossPayBiWeekly > 0 
-                  ? Math.round((results.netPayBiWeekly / results.grossPayBiWeekly) * 100) 
-                  : 0}%
-              </p>
-            </div>
+            <PaycheckDonutChart
+              data={chartData}
+              formatCurrency={formatCurrency}
+              netPayPercent={netPayPercent}
+            />
           </div>
 
           {/* Detailed Table */}
