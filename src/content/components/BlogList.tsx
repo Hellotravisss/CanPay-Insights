@@ -48,13 +48,24 @@ const BlogList: React.FC<BlogListProps> = ({ onSelectArticle }) => {
       {/* Hero Section */}
       <div className="bg-gradient-to-br from-red-600 to-red-800 text-white py-12">
         <div className="max-w-6xl mx-auto px-4">
-          <div className="flex items-center gap-3 mb-3">
-            <div className="w-10 h-10 bg-white/20 rounded-lg flex items-center justify-center">
-              <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 20 20">
-                <path d="M9 4.804A7.968 7.968 0 005.5 4c-1.255 0-2.443.29-3.5.804v10A7.969 7.969 0 015.5 14c1.669 0 3.218.51 4.5 1.385A7.962 7.962 0 0114.5 14c1.255 0 2.443.29 3.5.804v-10A7.968 7.968 0 0014.5 4c-1.255 0-2.443.29-3.5.804V12a1 1 0 11-2 0V4.804z" />
-              </svg>
+          <div className="mb-4 flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
+            <div className="flex items-center gap-3">
+              <div className="w-10 h-10 bg-white/20 rounded-lg flex items-center justify-center">
+                <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 20 20">
+                  <path d="M9 4.804A7.968 7.968 0 005.5 4c-1.255 0-2.443.29-3.5.804v10A7.969 7.969 0 015.5 14c1.669 0 3.218.51 4.5 1.385A7.962 7.962 0 0114.5 14c1.255 0 2.443.29 3.5.804v-10A7.968 7.968 0 0014.5 4c-1.255 0-2.443.29-3.5.804V12a1 1 0 11-2 0V4.804z" />
+                </svg>
+              </div>
+              <h1 className="text-2xl font-bold">CanPay Insights Hub</h1>
             </div>
-            <h1 className="text-2xl font-bold">CanPay Insights Hub</h1>
+            <a
+              href="/"
+              className="inline-flex w-fit items-center gap-2 rounded-lg border border-white/30 bg-white px-4 py-2 text-sm font-bold text-red-700 shadow-sm transition-colors hover:bg-red-50"
+            >
+              <svg className="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 10.5L12 3l9 7.5M5 10v10h14V10" />
+              </svg>
+              Back to Calculator
+            </a>
           </div>
           <p className="text-red-100 max-w-2xl">
             Your comprehensive resource for Canadian payroll, provincial living guides, salary insights, and money-saving tips. Stay informed, earn smarter.
