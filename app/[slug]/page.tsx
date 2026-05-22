@@ -170,6 +170,28 @@ export default async function LandingPage({ params }: Props) {
               </div>
             </div>
 
+            {page.relatedSalaryLinks && page.relatedSalaryLinks.length > 0 && (
+              <nav
+                className="bg-white border border-slate-200 rounded-xl p-5 shadow-sm"
+                aria-label="Related salary after tax searches"
+              >
+                <h2 className="text-lg font-bold text-slate-900 mb-3">
+                  Related Salary After Tax Searches
+                </h2>
+                <div className="flex flex-wrap gap-2">
+                  {page.relatedSalaryLinks.map((link) => (
+                    <a
+                      key={link.href}
+                      href={link.href}
+                      className="rounded-md border border-slate-200 bg-slate-50 px-3 py-2 text-sm font-semibold text-slate-700 no-underline transition-colors hover:border-red-200 hover:bg-red-50 hover:text-red-600"
+                    >
+                      {link.label}
+                    </a>
+                  ))}
+                </div>
+              </nav>
+            )}
+
             {page.sections.map((section) => (
               <section key={section.heading} className="bg-white border border-slate-200 rounded-xl p-6 shadow-sm">
                 <h2 className="text-2xl font-bold text-slate-900 mb-3">

@@ -294,12 +294,12 @@ const App: React.FC = () => {
   ];
 
   const salarySearchLinks = [
-    { href: '/50000-after-tax-ontario', label: '$50,000 after tax Ontario' },
-    { href: '/60000-after-tax-ontario', label: '$60,000 after tax Ontario' },
     { href: '/65000-after-tax-ontario', label: '$65,000 after tax Ontario' },
     { href: '/70000-after-tax-bc', label: '$70,000 after tax BC' },
     { href: '/80000-after-tax-alberta', label: '$80,000 after tax Alberta' },
-    { href: '/100000-after-tax-ontario', label: '$100,000 after tax Ontario' },
+    { href: '/90000-after-tax-quebec', label: '$90,000 after tax Quebec' },
+    { href: '/100000-after-tax-quebec', label: '$100,000 after tax Quebec' },
+    { href: '/120000-after-tax-quebec', label: '$120,000 after tax Quebec' },
   ];
  
   return (

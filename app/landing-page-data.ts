@@ -15,6 +15,10 @@ export type LandingPage = {
     question: string;
     answer: string;
   }>;
+  relatedSalaryLinks?: Array<{
+    href: string;
+    label: string;
+  }>;
 };
 
 const coreLandingPages: LandingPage[] = [
@@ -57,6 +61,14 @@ const coreLandingPages: LandingPage[] = [
         answer:
           'No. Federal tax is the same across Canada, but provincial tax brackets and credits differ, so the same salary can produce different net pay in Ontario, BC, Alberta, Quebec, and other provinces.',
       },
+    ],
+    relatedSalaryLinks: [
+      { href: '/65000-after-tax-ontario', label: '$65,000 after tax Ontario' },
+      { href: '/70000-after-tax-bc', label: '$70,000 after tax BC' },
+      { href: '/80000-after-tax-alberta', label: '$80,000 after tax Alberta' },
+      { href: '/100000-after-tax-quebec', label: '$100,000 after tax Quebec' },
+      { href: '/90000-after-tax-quebec', label: '$90,000 after tax Quebec' },
+      { href: '/120000-after-tax-quebec', label: '$120,000 after tax Quebec' },
     ],
   },
   {
@@ -356,7 +368,7 @@ const coreLandingPages: LandingPage[] = [
     primaryKeyword: 'Quebec paycheck calculator',
     intro:
       'Estimate take-home pay in Quebec after income tax and payroll deductions. Quebec payroll can differ from other provinces, so province-specific estimates are especially important.',
-    examples: ['$65,000 after tax Quebec', 'Montreal take-home pay calculator', 'Quebec salary calculator'],
+    examples: ['$100,000 after tax Quebec', '$65,000 after tax Quebec', 'Montreal take-home pay calculator', 'Quebec salary calculator'],
     sections: [
       {
         heading: 'Quebec has distinct payroll rules',
@@ -386,10 +398,23 @@ const coreLandingPages: LandingPage[] = [
           'Yes. Use the province comparison page to compare the same salary across Quebec, Ontario, Alberta, BC, and other provinces.',
       },
     ],
+    relatedSalaryLinks: [
+      { href: '/50000-after-tax-quebec', label: '$50,000 after tax Quebec' },
+      { href: '/60000-after-tax-quebec', label: '$60,000 after tax Quebec' },
+      { href: '/70000-after-tax-quebec', label: '$70,000 after tax Quebec' },
+      { href: '/80000-after-tax-quebec', label: '$80,000 after tax Quebec' },
+      { href: '/90000-after-tax-quebec', label: '$90,000 after tax Quebec' },
+      { href: '/100000-after-tax-quebec', label: '$100,000 after tax Quebec' },
+      { href: '/120000-after-tax-quebec', label: '$120,000 after tax Quebec' },
+    ],
   },
 ];
 
-const salaryAmounts = [50000, 60000, 65000, 70000, 80000, 100000];
+const defaultSalaryAmounts = [50000, 60000, 65000, 70000, 80000, 90000, 100000, 120000];
+
+const salaryAmountsByProvince: Record<string, number[]> = {
+  quebec: [45000, 50000, 55000, 60000, 65000, 70000, 75000, 80000, 90000, 100000, 120000, 150000],
+};
 
 const provinceSalaryConfigs = [
   {
@@ -400,6 +425,8 @@ const provinceSalaryConfigs = [
     taxNote:
       'Ontario workers usually see federal income tax, Ontario income tax, CPP, and EI deductions on every paycheque.',
     comparison: 'Alberta, British Columbia, Quebec, or another province',
+    localNote:
+      'This is especially useful when comparing Toronto-area rent, Ottawa public sector offers, or hybrid roles based in Ontario.',
   },
   {
     slug: 'bc',
@@ -409,6 +436,8 @@ const provinceSalaryConfigs = [
     taxNote:
       'BC workers usually see federal income tax, British Columbia income tax, CPP, and EI deductions on every paycheque.',
     comparison: 'Ontario, Alberta, Quebec, or another province',
+    localNote:
+      'This is especially useful for Vancouver, Victoria, and Lower Mainland budgets where gross salary can feel very different from net pay.',
   },
   {
     slug: 'alberta',
@@ -418,6 +447,8 @@ const provinceSalaryConfigs = [
     taxNote:
       'Alberta workers still pay federal income tax, Alberta income tax, CPP, and EI, even though Alberta has no provincial sales tax.',
     comparison: 'Ontario, British Columbia, Quebec, or another province',
+    localNote:
+      'This is especially useful for Calgary and Edmonton offers where Alberta income tax and no provincial sales tax are often part of the decision.',
   },
   {
     slug: 'quebec',
@@ -427,16 +458,32 @@ const provinceSalaryConfigs = [
     taxNote:
       'Quebec payroll is distinct from other provinces, with its own provincial tax and payroll deduction rules.',
     comparison: 'Ontario, Alberta, British Columbia, or another province',
+    localNote:
+      'This is especially useful for Montreal and Quebec City offers because Quebec payroll is different enough that generic Canada estimates can be misleading.',
   },
 ];
 
 const formatSalary = (amount: number) => `$${amount.toLocaleString('en-CA')}`;
 
+const getSalaryAmountsForProvince = (provinceSlug: string) =>
+  salaryAmountsByProvince[provinceSlug] ?? defaultSalaryAmounts;
+
+const getRelatedSalaryLinks = (provinceSlug: string, provinceShortName: string, currentAmount: number) =>
+  getSalaryAmountsForProvince(provinceSlug)
+    .filter((amount) => amount !== currentAmount)
+    .slice(0, 7)
+    .map((amount) => ({
+      href: `/${amount}-after-tax-${provinceSlug}`,
+      label: `${formatSalary(amount)} after tax ${provinceShortName}`,
+    }));
+
 const salaryProvinceLandingPages: LandingPage[] = provinceSalaryConfigs.flatMap((province) =>
-  salaryAmounts.map((amount) => {
+  getSalaryAmountsForProvince(province.slug).map((amount) => {
     const salary = formatSalary(amount);
     const slugSalary = String(amount);
     const keyword = `${salary} after tax ${province.shortName}`;
+    const monthlyKeyword = `${salary} monthly take-home pay ${province.shortName}`;
+    const biWeeklyKeyword = `${salary} bi-weekly pay ${province.shortName}`;
 
     return {
       slug: `${slugSalary}-after-tax-${province.slug}`,
@@ -449,7 +496,8 @@ const salaryProvinceLandingPages: LandingPage[] = provinceSalaryConfigs.flatMap(
       examples: [
         `${salary} salary after tax ${province.shortName}`,
         `${salary} take-home pay ${province.shortName}`,
-        `${salary} bi-weekly pay ${province.shortName}`,
+        biWeeklyKeyword,
+        monthlyKeyword,
       ],
       sections: [
         {
@@ -459,6 +507,10 @@ const salaryProvinceLandingPages: LandingPage[] = provinceSalaryConfigs.flatMap(
         {
           heading: 'Use this before accepting a job offer',
           body: `A ${salary} offer is easier to understand when you compare annual gross pay with monthly, semi-monthly, or bi-weekly net pay. Use the calculator to estimate what may actually land in your bank account before budgeting rent, transportation, debt payments, or savings.`,
+        },
+        {
+          heading: `${salary} monthly and bi-weekly pay in ${province.shortName}`,
+          body: `Many workers search for ${salary} after tax because rent, debt payments, groceries, transit, and savings goals are monthly or bi-weekly. Use CanPay Insights to switch pay frequency and compare estimated annual net pay, monthly take-home pay, semi-monthly pay, bi-weekly pay, and weekly pay in ${province.name}. ${province.localNote}`,
         },
         {
           heading: `Compare ${province.shortName} with other provinces`,
@@ -471,10 +523,15 @@ const salaryProvinceLandingPages: LandingPage[] = provinceSalaryConfigs.flatMap(
           answer: `It depends on your pay frequency, deductions, credits, and tax situation. Use CanPay Insights to estimate ${salary} after federal tax, ${province.shortName} tax, CPP, EI, and workplace deductions.`,
         },
         {
+          question: `What is ${salary} bi-weekly after tax in ${province.shortName}?`,
+          answer: `Bi-weekly take-home pay depends on payroll deductions and your exact tax situation. Enter ${salary} as annual salary, choose ${province.name}, and switch the pay frequency to estimate each paycheque.`,
+        },
+        {
           question: `Is ${salary} a good salary in ${province.shortName}?`,
           answer: `It depends on your city, rent, household size, debt, transportation costs, and savings goals. Take-home pay is the better starting point for budgeting than gross salary alone.`,
         },
       ],
+      relatedSalaryLinks: getRelatedSalaryLinks(province.slug, province.shortName, amount),
     };
   })
 );
