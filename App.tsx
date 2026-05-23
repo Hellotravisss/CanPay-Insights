@@ -356,20 +356,27 @@ const App: React.FC = () => {
               </div>
 
               <section className="flex flex-1 items-center justify-center py-4 md:py-8">
-                <div className="w-full max-w-xl rounded-[2rem] border border-slate-200 bg-white p-5 text-center shadow-xl shadow-slate-200/80 sm:p-7">
-                  <div className="mb-6 flex flex-col items-center">
-                    <img src="/logo.png" alt="" aria-hidden="true" className="h-16 w-16 rounded-2xl object-contain shadow-lg shadow-red-100 sm:h-20 sm:w-20" />
-                    <h1 className="mt-4 text-3xl font-bold tracking-tight text-slate-950 sm:text-4xl">
-                      CanPay <span className="text-red-600">Insights</span>
-                    </h1>
-                    <p className="mt-2 text-base font-semibold text-slate-500">
-                      Canadian Payroll Calculator
-                    </p>
+                <div className="w-full max-w-xl rounded-[2rem] border border-slate-200 bg-white p-5 text-center shadow-xl shadow-slate-200/80 sm:p-7 md:max-w-5xl md:p-8 lg:p-10">
+                  <div className="grid gap-7 md:grid-cols-[0.85fr_1.15fr] md:items-center md:gap-10">
+                    <div className="flex flex-col items-center md:items-start md:text-left">
+                      <img src="/logo.png" alt="" aria-hidden="true" className="h-16 w-16 rounded-2xl object-contain shadow-lg shadow-red-100 sm:h-20 sm:w-20 md:h-24 md:w-24" />
+                      <h1 className="mt-4 text-3xl font-bold tracking-tight text-slate-950 sm:text-4xl md:text-5xl">
+                        CanPay <span className="text-red-600">Insights</span>
+                      </h1>
+                      <p className="mt-2 text-base font-semibold text-slate-500 md:text-lg">
+                        Canadian Payroll Calculator
+                      </p>
+                      <p className="mt-5 hidden max-w-sm text-base font-medium leading-7 text-slate-500 md:block">
+                        Start with the pay type that matches your situation. No signup, no spreadsheet, just a quick take-home pay estimate.
+                      </p>
+                    </div>
+
+                    <div className="md:rounded-3xl md:border md:border-slate-100 md:bg-slate-50 md:p-4">
+                      <ModeSelector onModeSelect={handleModeSelect} />
+                    </div>
                   </div>
 
-                  <ModeSelector onModeSelect={handleModeSelect} />
-
-                  <div className="mt-5 grid grid-cols-1 gap-3 rounded-2xl bg-slate-50 p-3 sm:grid-cols-2">
+                  <div className="mt-5 grid grid-cols-1 gap-3 rounded-2xl bg-slate-50 p-3 sm:grid-cols-2 md:ml-auto md:max-w-[34rem]">
                     <a
                       href={DONATION_URL}
                       target="_blank"
