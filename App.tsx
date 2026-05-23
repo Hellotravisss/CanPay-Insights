@@ -283,15 +283,6 @@ const App: React.FC = () => {
   // Donation URL
   const DONATION_URL = "https://www.buymeacoffee.com/canpay"; 
 
-  const calculatorLinks = [
-    { href: '/salary-after-tax-canada', label: 'Salary After Tax Canada', detail: 'Annual salary to net pay' },
-    { href: '/ontario-paycheck-calculator', label: 'Ontario Paycheck Calculator', detail: 'Toronto and Ontario workers' },
-    { href: '/bc-paycheck-calculator', label: 'BC Paycheck Calculator', detail: 'British Columbia take-home pay' },
-    { href: '/alberta-paycheck-calculator', label: 'Alberta Paycheck Calculator', detail: 'Alberta salary and CPP/EI' },
-    { href: '/cpp-ei-calculator', label: 'CPP & EI Calculator', detail: 'Payroll deductions explained' },
-    { href: '/hourly-wage-calculator', label: 'Hourly Wage Calculator', detail: 'Hourly pay, shifts, and overtime' },
-  ];
-
   return (
     <div className="min-h-screen bg-slate-50 pb-20 font-sans">
       {/* Header */}
@@ -344,13 +335,13 @@ const App: React.FC = () => {
           {currentPage === 'home' && (
             <div className="flex min-h-[78vh] flex-col items-center justify-center py-8 md:py-12">
               {/* Logo Section */}
-              <div className="mb-7 text-center">
-                <img src="/logo.png" alt="CanPay Insights" className="mx-auto mb-5 h-20 w-20 rounded-2xl object-contain shadow-lg shadow-red-100" />
-                <h1 className="mx-auto mb-4 max-w-4xl text-4xl font-bold tracking-tight text-slate-950 md:text-6xl">
+              <div className="mb-8 text-center">
+                <img src="/logo.png" alt="CanPay Insights" className="mx-auto mb-6 h-16 w-16 rounded-2xl object-contain shadow-lg shadow-red-100" />
+                <h1 className="mx-auto mb-3 max-w-4xl text-4xl font-bold tracking-tight text-slate-950 md:text-6xl">
                   Canadian Paycheck Calculator
                 </h1>
-                <p className="mx-auto max-w-2xl text-lg leading-8 text-slate-600">
-                  Estimate take-home pay for hourly work, annual salary, or timesheets using 2025/2026 Canadian tax rates.
+                <p className="mx-auto max-w-2xl text-lg leading-8 text-slate-500">
+                  Pick a pay type to start.
                 </p>
               </div>
 
@@ -358,68 +349,18 @@ const App: React.FC = () => {
                 <ModeSelector onModeSelect={handleModeSelect} />
               </div>
 
-              <div className="mt-3 flex flex-wrap items-center justify-center gap-x-4 gap-y-2 text-sm font-semibold text-slate-500">
-                <span>Built for Canada</span>
-                <span className="text-slate-300">/</span>
-                <span>Free to start</span>
-                <span className="text-slate-300">/</span>
-                <span>No signup needed</span>
-              </div>
-
-              {/* Sign In Prompt (if not authenticated) */}
-              {!isAuthenticated && (
-                <div className="mt-8">
-                  <button
-                    onClick={() => setShowAuthModal(true)}
-                    className="inline-flex items-center gap-2 bg-white px-6 py-3 rounded-xl shadow-sm border border-slate-200 hover:shadow-md transition-all"
-                  >
-                    <div className="w-10 h-10 bg-gradient-to-br from-red-500 to-red-600 rounded-lg flex items-center justify-center">
-                      <svg className="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
-                      </svg>
-                    </div>
-                    <div className="text-left">
-                      <p className="text-sm text-slate-500">Want to save your data?</p>
-                      <p className="font-bold text-slate-800">Sign in for free →</p>
-                    </div>
-                  </button>
-                </div>
-              )}
-
-              <section className="mt-14 w-full max-w-5xl" aria-labelledby="popular-calculators">
-                <div className="mb-5 text-center">
-                  <h2 id="popular-calculators" className="text-2xl font-bold text-slate-900">
-                    More Tools
-                  </h2>
-                  <p className="mt-2 text-slate-500">
-                    Province calculators and payroll guides when you need a deeper check.
-                  </p>
-                </div>
-                <div className="grid grid-cols-1 gap-3 md:grid-cols-2 lg:grid-cols-3">
-                  {calculatorLinks.map((link) => (
-                    <a
-                      key={link.href}
-                      href={link.href}
-                      className="group bg-white border border-slate-200 rounded-lg p-4 text-left shadow-sm hover:shadow-md hover:border-red-200 transition-all no-underline"
-                    >
-                      <span className="font-bold text-slate-800 group-hover:text-red-600 transition-colors">
-                        {link.label}
-                      </span>
-                      <span className="block text-sm text-slate-500 mt-1">
-                        {link.detail}
-                      </span>
-                    </a>
-                  ))}
-                </div>
-              </section>
-
-              {/* Blog CTA */}
-              <div className="mt-8 text-center">
+              <div className="mt-8 flex flex-wrap items-center justify-center gap-x-5 gap-y-2 text-sm">
                 <a
                   href="/blog"
                   className="text-sm font-bold text-slate-500 no-underline transition-colors hover:text-red-600"
                 >
-                  Browse Insights Hub →
+                  Tax guides
+                </a>
+                <a
+                  href="/compare-provinces"
+                  className="text-sm font-bold text-slate-500 no-underline transition-colors hover:text-red-600"
+                >
+                  Compare provinces
                 </a>
               </div>
             </div>

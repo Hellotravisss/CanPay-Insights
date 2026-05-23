@@ -12,19 +12,16 @@ const ModeSelector: React.FC<Props> = ({ onModeSelect }) => {
       id: CalculationMode.SIMPLE,
       icon: '💰',
       title: 'Hourly Wage',
-      description: 'Hourly rate to take-home pay.'
     },
     {
       id: CalculationMode.ANNUAL,
       icon: '💼',
       title: 'Annual Salary',
-      description: 'Yearly salary to each paycheque.'
     },
     {
       id: CalculationMode.TIMESHEET,
       icon: '⏱️',
-      title: 'Timesheet Tracker',
-      description: 'Shifts, overtime, tips, and deductions.'
+      title: 'Timesheet',
     }
   ];
 
@@ -40,11 +37,8 @@ const ModeSelector: React.FC<Props> = ({ onModeSelect }) => {
             {mode.icon}
           </span>
           <span className="min-w-0">
-            <span className="block text-lg font-bold text-slate-900 transition-colors group-hover:text-red-600">
+            <span className="block text-xl font-bold text-slate-900 transition-colors group-hover:text-red-600">
               {mode.title}
-            </span>
-            <span className="mt-1 block text-sm leading-6 text-slate-500">
-              {mode.description}
             </span>
           </span>
           <span className="ml-auto mt-1 text-slate-300 transition-colors group-hover:text-red-500" aria-hidden="true">
