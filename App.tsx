@@ -333,35 +333,39 @@ const App: React.FC = () => {
       <main className="max-w-6xl mx-auto px-4 py-8" role="main" aria-label="Payroll Calculator">
           {/* Home Page - Mode Selection */}
           {currentPage === 'home' && (
-            <div className="flex min-h-[78vh] flex-col items-center justify-center py-8 md:py-12">
-              {/* Logo Section */}
-              <div className="mb-8 text-center">
-                <img src="/logo.png" alt="CanPay Insights" className="mx-auto mb-6 h-16 w-16 rounded-2xl object-contain shadow-lg shadow-red-100" />
+            <div className="mx-auto flex min-h-[78vh] w-full max-w-5xl flex-col">
+              <div className="flex flex-col gap-4 py-4 sm:flex-row sm:items-center sm:justify-between">
+                <a href="/" className="inline-flex items-center gap-3 no-underline">
+                  <img src="/logo.png" alt="" aria-hidden="true" className="h-10 w-10 rounded-xl object-contain shadow-sm shadow-red-100" />
+                  <span className="text-lg font-bold text-slate-950">CanPay Insights</span>
+                </a>
+                <nav className="flex flex-wrap items-center gap-2" aria-label="Home navigation">
+                  <a
+                    href="/blog"
+                    className="rounded-lg border border-slate-200 bg-white px-4 py-2 text-sm font-bold text-slate-600 no-underline shadow-sm transition-colors hover:border-red-200 hover:text-red-600"
+                  >
+                    Tax guides
+                  </a>
+                  <a
+                    href="/compare-provinces"
+                    className="rounded-lg border border-slate-200 bg-white px-4 py-2 text-sm font-bold text-slate-600 no-underline shadow-sm transition-colors hover:border-red-200 hover:text-red-600"
+                  >
+                    Compare provinces
+                  </a>
+                </nav>
+              </div>
+
+              <div className="flex flex-1 flex-col items-center justify-center py-12 text-center md:py-16">
                 <h1 className="mx-auto mb-3 max-w-4xl text-4xl font-bold tracking-tight text-slate-950 md:text-6xl">
                   Canadian Paycheck Calculator
                 </h1>
-                <p className="mx-auto max-w-2xl text-lg leading-8 text-slate-500">
+                <p className="mx-auto mb-9 max-w-2xl text-lg leading-8 text-slate-500">
                   Pick a pay type to start.
                 </p>
-              </div>
 
-              <div className="w-full max-w-4xl">
-                <ModeSelector onModeSelect={handleModeSelect} />
-              </div>
-
-              <div className="mt-8 flex flex-wrap items-center justify-center gap-x-5 gap-y-2 text-sm">
-                <a
-                  href="/blog"
-                  className="text-sm font-bold text-slate-500 no-underline transition-colors hover:text-red-600"
-                >
-                  Tax guides
-                </a>
-                <a
-                  href="/compare-provinces"
-                  className="text-sm font-bold text-slate-500 no-underline transition-colors hover:text-red-600"
-                >
-                  Compare provinces
-                </a>
+                <div className="w-full max-w-4xl">
+                  <ModeSelector onModeSelect={handleModeSelect} />
+                </div>
               </div>
             </div>
           )}
@@ -459,7 +463,21 @@ const App: React.FC = () => {
       </main>
 
       {/* Footer */}
-      {(currentPage === 'home' || currentPage === 'calculator') && (
+      {currentPage === 'home' && (
+        <footer className="pb-8 text-center text-xs text-slate-400" role="contentinfo">
+          <div className="flex flex-wrap items-center justify-center gap-x-4 gap-y-2">
+            <span>© CanPay Insights</span>
+            <a href="/privacy" className="text-slate-400 no-underline transition-colors hover:text-red-600">
+              Privacy
+            </a>
+            <a href="/link-to-canpay" className="text-slate-400 no-underline transition-colors hover:text-red-600">
+              Link to Us
+            </a>
+          </div>
+        </footer>
+      )}
+
+      {currentPage === 'calculator' && (
         <footer className="text-center text-slate-400 text-xs py-8 space-y-4" role="contentinfo">
           <p>Calculations are estimates based on 2025/2026 tax brackets and provincial employment standards.</p>
           
