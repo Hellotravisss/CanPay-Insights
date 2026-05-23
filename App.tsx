@@ -334,11 +334,7 @@ const App: React.FC = () => {
           {/* Home Page - Mode Selection */}
           {currentPage === 'home' && (
             <div className="mx-auto flex min-h-[82vh] w-full max-w-6xl flex-col">
-              <div className="flex flex-col gap-4 py-4 sm:flex-row sm:items-center sm:justify-between">
-                <a href="/" className="inline-flex items-center gap-3 no-underline">
-                  <img src="/logo.png" alt="" aria-hidden="true" className="h-10 w-10 rounded-xl object-contain shadow-sm shadow-red-100" />
-                  <span className="text-lg font-bold text-slate-950">CanPay Insights</span>
-                </a>
+              <div className="flex justify-end py-4">
                 <nav className="flex flex-wrap items-center gap-2" aria-label="Home navigation">
                   <a
                     href="/blog"
