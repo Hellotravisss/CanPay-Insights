@@ -45,7 +45,7 @@
 ### Google 搜索结果预览
 ```
 CanPay Insights - Canadian Payroll Calculator 2025/2026
-https://www.canpayinsights.ca
+https://canpayinsights.ca
 Free Canadian payroll calculator with AI-powered financial insights. Calculate your 
 net pay, taxes, CPP, and EI deductions across all provinces for 2025/2026. Get instant 
 salary estimates and personalized tax strategies.
@@ -110,7 +110,7 @@ salary estimates and personalized tax strategies.
 ```bash
 # Chrome DevTools > Lighthouse > SEO
 # 或使用命令行：
-npx lighthouse https://www.canpayinsights.ca --only-categories=seo
+npx lighthouse https://canpayinsights.ca --only-categories=seo
 ```
 目标分数：**95+**
 

@@ -3,7 +3,7 @@ import { notFound } from 'next/navigation';
 import ShareLinks from '../../components/ShareLinks';
 import { getLandingPage, landingPages } from '../landing-page-data';
 
-const BASE_URL = 'https://www.canpayinsights.ca';
+const BASE_URL = 'https://canpayinsights.ca';
 
 interface Props {
   params: Promise<{ slug: string }>;

@@ -171,7 +171,7 @@ button {
 <meta property="og:title" content="CanPay Insights - 加拿大工资计算器" />
 <meta property="og:description" content="专业的加拿大工资和税收计算工具" />
 <meta property="og:image" content="/og-image.png" />
-<meta property="og:url" content="https://www.canpayinsights.ca" />
+<meta property="og:url" content="https://canpayinsights.ca" />
 
 <!-- Twitter Card -->
 <meta name="twitter:card" content="summary_large_image" />

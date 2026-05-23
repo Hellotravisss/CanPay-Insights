@@ -2,7 +2,7 @@ import type { MetadataRoute } from 'next';
 import allArticles from '../src/content/articles-data';
 import { landingPages } from './landing-page-data';
 
-const BASE_URL = 'https://www.canpayinsights.ca';
+const BASE_URL = 'https://canpayinsights.ca';
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const staticPages: MetadataRoute.Sitemap = [

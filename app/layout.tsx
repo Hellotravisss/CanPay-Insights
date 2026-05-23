@@ -7,7 +7,7 @@ import './globals.css';
 const inter = Inter({ subsets: ['latin'] });
 
 export const metadata: Metadata = {
-  metadataBase: new URL('https://www.canpayinsights.ca'),
+  metadataBase: new URL('https://canpayinsights.ca'),
   title: {
     default: 'Free Canadian Payroll Calculator 2025/2026 - CanPay Insights',
     template: '%s | CanPay Insights',
@@ -73,7 +73,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
               operatingSystem: 'Web Browser',
               offers: { '@type': 'Offer', price: '0', priceCurrency: 'CAD' },
               description: 'Free Canadian payroll calculator for 2025/2026. Calculate net pay, taxes, CPP, and EI deductions.',
-              url: 'https://www.canpayinsights.ca/',
+              url: 'https://canpayinsights.ca/',
             },
             {
               '@context': 'https://schema.org',

@@ -7,6 +7,6 @@ export default function robots(): MetadataRoute.Robots {
       allow: '/',
       disallow: '/api/',
     },
-    sitemap: 'https://www.canpayinsights.ca/sitemap.xml',
+    sitemap: 'https://canpayinsights.ca/sitemap.xml',
   };
 }

@@ -89,7 +89,7 @@ const ProvinceComparison: React.FC<ProvinceComparisonProps> = ({ onBackToBlog })
         title="Compare Canadian Provincial Taxes 2025/2026 | CanPay Insights"
         description="Compare take-home pay across all Canadian provinces. See exactly how much more you'd earn with the same salary in Alberta, BC, Ontario, Quebec and more."
         keywords="province comparison, provincial tax Canada, Alberta vs Ontario tax, BC tax rate, Quebec tax, salary comparison"
-        canonicalUrl="https://www.canpayinsights.ca/compare-provinces"
+        canonicalUrl="https://canpayinsights.ca/compare-provinces"
       />
       {/* Hero Section */}
       <div className="bg-gradient-to-br from-red-600 to-red-800 text-white py-12">

@@ -6,7 +6,7 @@ export const metadata: Metadata = {
   description:
     'Compare take-home pay, tax rates, and salary benchmarks across all Canadian provinces side by side for 2025.',
   alternates: {
-    canonical: 'https://www.canpayinsights.ca/compare-provinces',
+    canonical: 'https://canpayinsights.ca/compare-provinces',
   },
 };
 

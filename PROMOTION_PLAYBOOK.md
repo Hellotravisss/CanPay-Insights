@@ -39,11 +39,11 @@ The site now includes common amount + province pages for:
 
 Examples:
 
-- https://www.canpayinsights.ca/50000-after-tax-ontario
-- https://www.canpayinsights.ca/65000-after-tax-ontario
-- https://www.canpayinsights.ca/70000-after-tax-bc
-- https://www.canpayinsights.ca/80000-after-tax-alberta
-- https://www.canpayinsights.ca/100000-after-tax-ontario
+- https://canpayinsights.ca/50000-after-tax-ontario
+- https://canpayinsights.ca/65000-after-tax-ontario
+- https://canpayinsights.ca/70000-after-tax-bc
+- https://canpayinsights.ca/80000-after-tax-alberta
+- https://canpayinsights.ca/100000-after-tax-ontario
 
 ## Copy-Paste Posts
 
@@ -54,7 +54,7 @@ I built a free Canadian payroll calculator because I kept seeing people compare 
 It supports province-specific estimates for federal tax, provincial tax, CPP, EI, hourly wage, annual salary, overtime, and timesheets.
 
 I would love feedback from Canadians, especially anyone comparing job offers or moving provinces:
-https://www.canpayinsights.ca/
+https://canpayinsights.ca/
 
 ### LinkedIn
 
@@ -63,7 +63,7 @@ Gross salary is not what lands in your bank account.
 I built CanPay Insights to help Canadians estimate take-home pay by province, including federal tax, provincial tax, CPP, EI, hourly wage, annual salary, overtime, and timesheet scenarios.
 
 Useful for job offers, relocation planning, HR conversations, and personal budgeting:
-https://www.canpayinsights.ca/
+https://canpayinsights.ca/
 
 ### Outreach Email
 
@@ -74,10 +74,10 @@ Hi,
 I built CanPay Insights, a free Canadian payroll calculator that estimates take-home pay by province, including federal tax, provincial tax, CPP, EI, hourly wage, annual salary, overtime, and timesheets.
 
 It may be useful for your readers who are comparing job offers, planning a move, or budgeting around Canadian paycheques:
-https://www.canpayinsights.ca/
+https://canpayinsights.ca/
 
 There is also a link/resource page here:
-https://www.canpayinsights.ca/link-to-canpay
+https://canpayinsights.ca/link-to-canpay
 
 Thanks,
 Travis

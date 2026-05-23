@@ -72,7 +72,7 @@ const sanitizeHTML = (html: string): string => {
 };
 
 const GeminiAdvisor: React.FC<Props> = ({ results, inputs }) => {
-  const APP_URL = 'https://www.canpayinsights.ca/';
+  const APP_URL = 'https://canpayinsights.ca/';
 
   const [advice, setAdvice] = useState<string | null>(null);
   const [loading, setLoading] = useState(false);

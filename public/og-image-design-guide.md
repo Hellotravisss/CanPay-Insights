@@ -71,7 +71,7 @@
 │  ✓ AI Financial Insights               │
 │  ✓ 2025/2026 Tax Rates                 │
 │                                         │
-│                www.canpayinsights.ca   │
+│                canpayinsights.ca   │
 └─────────────────────────────────────────┘
 ```
 

@@ -6,13 +6,13 @@ export const metadata: Metadata = {
   description:
     'Share or link to CanPay Insights, a free Canadian payroll calculator for take-home pay, CPP, EI, salary, hourly wage, and province comparisons.',
   alternates: {
-    canonical: 'https://www.canpayinsights.ca/link-to-canpay',
+    canonical: 'https://canpayinsights.ca/link-to-canpay',
   },
   openGraph: {
     title: 'Link to CanPay Insights',
     description:
       'Free Canadian payroll calculator for take-home pay, CPP, EI, salary, hourly wage, and province comparisons.',
-    url: 'https://www.canpayinsights.ca/link-to-canpay',
+    url: 'https://canpayinsights.ca/link-to-canpay',
     type: 'website',
   },
 };
@@ -28,7 +28,7 @@ const snippets = [
   },
   {
     title: 'HTML link',
-    body: '<a href="https://www.canpayinsights.ca/">Free Canadian Payroll Calculator</a>',
+    body: '<a href="https://canpayinsights.ca/">Free Canadian Payroll Calculator</a>',
   },
 ];
 
@@ -86,7 +86,7 @@ export default function LinkToCanPayPage() {
         <aside className="space-y-4">
           <ShareLinks
             compact
-            url="https://www.canpayinsights.ca/"
+            url="https://canpayinsights.ca/"
             title="Free Canadian Payroll Calculator 2025/2026"
             description="Estimate Canadian take-home pay by province with CPP, EI, income tax, salary, hourly wage, and timesheet tools."
           />
