@@ -330,10 +330,10 @@ const App: React.FC = () => {
       )}
 
       {/* Main Content */}
-      <main className="max-w-6xl mx-auto px-4 py-8" role="main" aria-label="Payroll Calculator">
+      <main className="max-w-6xl mx-auto px-4 py-5 md:py-8" role="main" aria-label="Payroll Calculator">
           {/* Home Page - Mode Selection */}
           {currentPage === 'home' && (
-            <div className="mx-auto flex min-h-[78vh] w-full max-w-5xl flex-col">
+            <div className="mx-auto flex min-h-[82vh] w-full max-w-6xl flex-col">
               <div className="flex flex-col gap-4 py-4 sm:flex-row sm:items-center sm:justify-between">
                 <a href="/" className="inline-flex items-center gap-3 no-underline">
                   <img src="/logo.png" alt="" aria-hidden="true" className="h-10 w-10 rounded-xl object-contain shadow-sm shadow-red-100" />
@@ -355,18 +355,59 @@ const App: React.FC = () => {
                 </nav>
               </div>
 
-              <div className="flex flex-1 flex-col items-center justify-center py-12 text-center md:py-16">
-                <h1 className="mx-auto mb-3 max-w-4xl text-4xl font-bold tracking-tight text-slate-950 md:text-6xl">
-                  Canadian Paycheck Calculator
-                </h1>
-                <p className="mx-auto mb-9 max-w-2xl text-lg leading-8 text-slate-500">
-                  Pick a pay type to start.
-                </p>
-
-                <div className="w-full max-w-4xl">
-                  <ModeSelector onModeSelect={handleModeSelect} />
+              <section className="grid flex-1 items-center gap-7 py-6 md:gap-10 md:py-14 lg:grid-cols-[0.9fr_1.1fr] lg:gap-12">
+                <div className="mx-auto max-w-xl text-center lg:mx-0 lg:text-left">
+                  <div className="mb-6 hidden items-center gap-3 rounded-2xl border border-red-100 bg-white px-4 py-3 shadow-sm sm:inline-flex">
+                    <img src="/logo.png" alt="" aria-hidden="true" className="h-11 w-11 rounded-xl object-contain shadow-sm shadow-red-100" />
+                    <div className="text-left">
+                      <p className="text-sm font-bold uppercase tracking-[0.14em] text-red-600">CanPay Insights</p>
+                      <p className="text-sm font-semibold text-slate-500">Free Canadian payroll tools</p>
+                    </div>
+                  </div>
+                  <h1 className="text-4xl font-bold leading-tight tracking-tight text-slate-950 md:text-6xl lg:text-7xl">
+                    Canadian Paycheck Calculator
+                  </h1>
+                  <p className="mt-4 text-lg leading-7 text-slate-500 md:mt-5 md:text-xl md:leading-8">
+                    Pick hourly wage, annual salary, or timesheet mode and see your take-home pay in seconds.
+                  </p>
                 </div>
-              </div>
+
+                <div className="mx-auto w-full max-w-3xl">
+                  <div className="rounded-3xl border border-slate-200 bg-white p-4 shadow-xl shadow-slate-200/70 sm:p-5">
+                    <div className="mb-4 flex items-center justify-between px-1">
+                      <div>
+                        <p className="text-xs font-bold uppercase tracking-[0.14em] text-slate-400">Start here</p>
+                        <h2 className="text-xl font-bold text-slate-950">Choose a calculator</h2>
+                      </div>
+                      <span className="rounded-full bg-red-50 px-3 py-1 text-xs font-bold text-red-600">No signup</span>
+                    </div>
+                    <ModeSelector onModeSelect={handleModeSelect} />
+
+                    <div className="mt-4 flex flex-col gap-3 rounded-2xl border border-slate-100 bg-slate-50 p-3 sm:mt-5 sm:flex-row sm:items-center sm:justify-between">
+                      <a
+                        href={DONATION_URL}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="inline-flex min-h-11 w-full items-center justify-center gap-2 rounded-full bg-[#FFDD00] px-5 py-2.5 text-sm font-bold text-slate-900 no-underline shadow-sm transition-all hover:bg-[#FFEA00] hover:shadow-md sm:w-auto"
+                      >
+                        <span className="text-lg" aria-hidden="true">☕</span>
+                        <span>Buy me a double-double</span>
+                      </a>
+                      <a
+                        href="https://apps.apple.com/app/canpayinsights/id6759822038"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="inline-flex min-h-11 w-full items-center justify-center gap-2 rounded-full bg-slate-950 px-5 py-2.5 text-sm font-bold text-white no-underline shadow-sm transition-all hover:bg-slate-800 hover:shadow-md sm:w-auto"
+                      >
+                        <svg className="h-5 w-5" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                          <path d="M17.05 20.28c-.98.95-2.05.88-3.08.4-1.09-.5-2.08-.48-3.24 0-1.44.62-2.2.44-3.06-.4C2.79 15.25 3.51 7.59 9.05 7.31c1.35.07 2.29.74 3.08.74s1.79-.75 3.16-.64c1.35.1 2.47.69 3.18 1.8-2.88 1.45-2.38 5.13.58 6.13-.57 1.5-1.31 2.99-2.54 4.09zM12.03 7.25c-.15-2.23 1.66-4.07 3.74-4.25.29 2.58-2.34 4.5-3.74 4.25z"/>
+                        </svg>
+                        <span>Download on App Store</span>
+                      </a>
+                    </div>
+                  </div>
+                </div>
+              </section>
             </div>
           )}
           

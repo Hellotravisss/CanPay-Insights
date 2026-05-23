@@ -52,12 +52,12 @@ const ModeSelector: React.FC<Props> = ({ onModeSelect }) => {
         <button
           key={mode.id}
           onClick={() => onModeSelect(mode.id)}
-          className="group flex h-full items-center gap-4 rounded-xl border border-slate-200 bg-white p-5 text-left shadow-sm transition-all hover:-translate-y-0.5 hover:border-red-200 hover:shadow-lg"
+          className="group flex h-full items-center gap-4 rounded-xl border border-slate-200 bg-white p-4 text-left shadow-sm transition-all hover:-translate-y-0.5 hover:border-red-200 hover:shadow-lg sm:p-5"
         >
-          <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-red-50 text-red-600 transition-transform group-hover:scale-105">
+          <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-red-50 text-red-600 transition-transform group-hover:scale-105 sm:h-10 sm:w-10">
             {renderIcon(mode.id)}
           </span>
-          <span className="min-w-0 text-lg font-bold text-slate-900 transition-colors group-hover:text-red-600">
+          <span className="min-w-0 text-base font-bold text-slate-900 transition-colors group-hover:text-red-600 sm:text-lg">
             {mode.title}
           </span>
           <span className="ml-auto text-slate-300 transition-colors group-hover:text-red-500" aria-hidden="true">
