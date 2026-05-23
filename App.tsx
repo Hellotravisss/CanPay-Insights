@@ -355,41 +355,42 @@ const App: React.FC = () => {
                 </nav>
               </div>
 
-              <section className="flex flex-1 flex-col items-center justify-center gap-6 py-6 text-center md:gap-8 md:py-12">
-                <div className="mx-auto max-w-4xl">
-                  <h1 className="text-4xl font-bold leading-tight tracking-tight text-slate-950 md:text-6xl">
-                    Canadian Paycheck Calculator
-                  </h1>
-                  <p className="mx-auto mt-4 max-w-2xl text-lg leading-7 text-slate-500 md:text-xl md:leading-8">
-                    Choose how you get paid. See your take-home pay in seconds.
-                  </p>
-                </div>
+              <section className="flex flex-1 items-center justify-center py-4 md:py-8">
+                <div className="w-full max-w-xl rounded-[2rem] border border-slate-200 bg-white p-5 text-center shadow-xl shadow-slate-200/80 sm:p-7">
+                  <div className="mb-6 flex flex-col items-center">
+                    <img src="/logo.png" alt="" aria-hidden="true" className="h-16 w-16 rounded-2xl object-contain shadow-lg shadow-red-100 sm:h-20 sm:w-20" />
+                    <h1 className="mt-4 text-3xl font-bold tracking-tight text-slate-950 sm:text-4xl">
+                      CanPay <span className="text-red-600">Insights</span>
+                    </h1>
+                    <p className="mt-2 text-base font-semibold text-slate-500">
+                      Canadian Payroll Calculator
+                    </p>
+                  </div>
 
-                <div className="mx-auto w-full max-w-5xl">
                   <ModeSelector onModeSelect={handleModeSelect} />
-                </div>
 
-                <div className="flex w-full max-w-2xl flex-col gap-3 rounded-2xl border border-slate-200 bg-white/80 p-3 shadow-sm sm:flex-row sm:items-center sm:justify-center">
-                  <a
-                    href={DONATION_URL}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="inline-flex min-h-11 w-full items-center justify-center gap-2 rounded-full bg-[#FFDD00] px-5 py-2.5 text-sm font-bold text-slate-900 no-underline shadow-sm transition-all hover:bg-[#FFEA00] hover:shadow-md sm:w-auto"
-                  >
-                    <span className="text-lg" aria-hidden="true">☕</span>
-                    <span>Buy me a double-double</span>
-                  </a>
-                  <a
-                    href="https://apps.apple.com/app/canpayinsights/id6759822038"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="inline-flex min-h-11 w-full items-center justify-center gap-2 rounded-full bg-slate-950 px-5 py-2.5 text-sm font-bold text-white no-underline shadow-sm transition-all hover:bg-slate-800 hover:shadow-md sm:w-auto"
-                  >
-                    <svg className="h-5 w-5" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
-                      <path d="M17.05 20.28c-.98.95-2.05.88-3.08.4-1.09-.5-2.08-.48-3.24 0-1.44.62-2.2.44-3.06-.4C2.79 15.25 3.51 7.59 9.05 7.31c1.35.07 2.29.74 3.08.74s1.79-.75 3.16-.64c1.35.1 2.47.69 3.18 1.8-2.88 1.45-2.38 5.13.58 6.13-.57 1.5-1.31 2.99-2.54 4.09zM12.03 7.25c-.15-2.23 1.66-4.07 3.74-4.25.29 2.58-2.34 4.5-3.74 4.25z"/>
-                    </svg>
-                    <span>Download on App Store</span>
-                  </a>
+                  <div className="mt-5 grid grid-cols-1 gap-3 rounded-2xl bg-slate-50 p-3 sm:grid-cols-2">
+                    <a
+                      href={DONATION_URL}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex min-h-11 items-center justify-center gap-2 rounded-full bg-[#FFDD00] px-4 py-2.5 text-sm font-bold text-slate-900 no-underline shadow-sm transition-all hover:bg-[#FFEA00] hover:shadow-md"
+                    >
+                      <span className="text-lg" aria-hidden="true">☕</span>
+                      <span>Buy me a double-double</span>
+                    </a>
+                    <a
+                      href="https://apps.apple.com/app/canpayinsights/id6759822038"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex min-h-11 items-center justify-center gap-2 rounded-full bg-slate-950 px-4 py-2.5 text-sm font-bold text-white no-underline shadow-sm transition-all hover:bg-slate-800 hover:shadow-md"
+                    >
+                      <svg className="h-5 w-5" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                        <path d="M17.05 20.28c-.98.95-2.05.88-3.08.4-1.09-.5-2.08-.48-3.24 0-1.44.62-2.2.44-3.06-.4C2.79 15.25 3.51 7.59 9.05 7.31c1.35.07 2.29.74 3.08.74s1.79-.75 3.16-.64c1.35.1 2.47.69 3.18 1.8-2.88 1.45-2.38 5.13.58 6.13-.57 1.5-1.31 2.99-2.54 4.09zM12.03 7.25c-.15-2.23 1.66-4.07 3.74-4.25.29 2.58-2.34 4.5-3.74 4.25z"/>
+                      </svg>
+                      <span>App Store</span>
+                    </a>
+                  </div>
                 </div>
               </section>
             </div>
