@@ -19,6 +19,11 @@ export type LandingPage = {
     href: string;
     label: string;
   }>;
+  alternateLanguages?: Array<{
+    href: string;
+    hrefLang: string;
+    label: string;
+  }>;
 };
 
 const coreLandingPages: LandingPage[] = [
@@ -60,6 +65,13 @@ const coreLandingPages: LandingPage[] = [
         question: 'Is take-home pay the same in every province?',
         answer:
           'No. Federal tax is the same across Canada, but provincial tax brackets and credits differ, so the same salary can produce different net pay in Ontario, BC, Alberta, Quebec, and other provinces.',
+      },
+    ],
+    alternateLanguages: [
+      {
+        href: '/fr/calculateur-salaire-net-quebec',
+        hrefLang: 'fr-CA',
+        label: 'Français - calculateur Québec',
       },
     ],
     relatedSalaryLinks: [
@@ -565,6 +577,7 @@ const provinceSalaryConfigs = [
 ];
 
 const formatSalary = (amount: number) => `$${amount.toLocaleString('en-CA')}`;
+const formatFrenchSalary = (amount: number) => `${amount.toLocaleString('fr-CA')} $`;
 
 const getSalaryAmountsForProvince = (provinceSlug: string) =>
   salaryAmountsByProvince[provinceSlug] ?? defaultSalaryAmounts;
@@ -586,7 +599,7 @@ const salaryProvinceLandingPages: LandingPage[] = provinceSalaryConfigs.flatMap(
     const monthlyKeyword = `${salary} monthly take-home pay ${province.shortName}`;
     const biWeeklyKeyword = `${salary} bi-weekly pay ${province.shortName}`;
 
-    return {
+    const page: LandingPage = {
       slug: `${slugSalary}-after-tax-${province.slug}`,
       title: `${salary} After Tax in ${province.shortName} 2025/2026 - Take-Home Pay`,
       description: `Estimate ${salary} after tax in ${province.name} for 2025/2026. Calculate take-home pay with federal tax, ${province.shortName} tax, CPP, EI, and paycheque estimates.`,
@@ -634,8 +647,155 @@ const salaryProvinceLandingPages: LandingPage[] = provinceSalaryConfigs.flatMap(
       ],
       relatedSalaryLinks: getRelatedSalaryLinks(province.slug, province.shortName, amount),
     };
+
+    if (province.slug === 'quebec') {
+      page.alternateLanguages = [
+        {
+          href: `/fr/${slugSalary}-apres-impot-quebec`,
+          hrefLang: 'fr-CA',
+          label: `Français - ${formatFrenchSalary(amount)} après impôt Québec`,
+        },
+      ];
+    }
+
+    return page;
   })
 );
+
+const frenchQuebecAmounts = [50000, 60000, 65000, 70000, 80000, 90000, 100000, 120000];
+
+const getRelatedFrenchQuebecLinks = (currentSlug: string) =>
+  frenchQuebecAmounts
+    .map((amount) => ({
+      href: `/fr/${amount}-apres-impot-quebec`,
+      label: `${formatFrenchSalary(amount)} après impôt Québec`,
+    }))
+    .filter((link) => link.href !== `/fr/${currentSlug}`)
+    .slice(0, 7);
+
+const frenchCoreLandingPages: LandingPage[] = [
+  {
+    slug: 'calculateur-salaire-net-quebec',
+    title: 'Calculateur de salaire net Québec 2025/2026 - Paie après impôt',
+    description:
+      'Calculez votre salaire net au Québec en 2025/2026 avec impôt fédéral, impôt du Québec, RRQ, assurance emploi, RQAP et paie nette.',
+    h1: 'Calculateur de salaire net au Québec',
+    kicker: 'Salaire brut en paie nette',
+    primaryKeyword: 'calculateur salaire net Québec',
+    intro:
+      "Estimez ce qu'un salaire brut devient en paie nette au Québec. CanPay Insights aide les travailleurs de Montréal, Québec, Laval, Gatineau et Sherbrooke à comparer le salaire annuel, les retenues, la RRQ, l'assurance emploi, le RQAP et le montant qui arrive dans le compte bancaire.",
+    examples: [
+      'calcul salaire net Québec',
+      'salaire après impôt Québec',
+      'paie nette Montréal',
+      'calculateur retenues Québec',
+    ],
+    sections: [
+      {
+        heading: 'Pourquoi utiliser un calculateur pour le Québec?',
+        body:
+          "Le Québec a ses propres règles de paie, incluant l'impôt provincial, la RRQ et le RQAP. Une estimation canadienne générale peut être utile, mais une page spécifique au Québec aide mieux à comprendre la paie nette.",
+      },
+      {
+        heading: 'Ce qui réduit votre paie',
+        body:
+          "Les retenues habituelles comprennent l'impôt fédéral, l'impôt du Québec, la RRQ, l'assurance emploi, le RQAP et parfois des avantages sociaux, cotisations REER, assurances, frais syndicaux ou autres déductions.",
+      },
+      {
+        heading: "Utile avant une offre d'emploi",
+        body:
+          "Avant d'accepter une offre à Montréal ou ailleurs au Québec, comparez le salaire brut avec la paie mensuelle, bimensuelle ou aux deux semaines. Le montant net est plus utile pour planifier le loyer, le transport, les dettes et l'épargne.",
+      },
+    ],
+    faq: [
+      {
+        question: 'Comment calculer le salaire net au Québec?',
+        answer:
+          "Commencez avec le salaire brut, puis soustrayez l'impôt fédéral, l'impôt du Québec, la RRQ, l'assurance emploi, le RQAP et les déductions de l'employeur. CanPay Insights donne une estimation rapide pour 2025/2026.",
+      },
+      {
+        question: 'Le Québec est-il différent des autres provinces?',
+        answer:
+          "Oui. Le Québec utilise son propre système d'impôt provincial et des retenues comme la RRQ et le RQAP, donc la paie nette peut différer d'une estimation faite pour l'Ontario, l'Alberta ou la Colombie-Britannique.",
+      },
+    ],
+    relatedSalaryLinks: getRelatedFrenchQuebecLinks('calculateur-salaire-net-quebec'),
+    alternateLanguages: [
+      {
+        href: '/quebec-paycheck-calculator',
+        hrefLang: 'en-CA',
+        label: 'English - Quebec Paycheck Calculator',
+      },
+    ],
+  },
+];
+
+const frenchQuebecSalaryPages: LandingPage[] = frenchQuebecAmounts.map((amount) => {
+  const salary = formatFrenchSalary(amount);
+  const slug = `${amount}-apres-impot-quebec`;
+  const englishSlug = `${amount}-after-tax-quebec`;
+
+  return {
+    slug,
+    title: `${salary} après impôt au Québec 2025/2026 - Salaire net`,
+    description: `Estimez ${salary} après impôt au Québec. Calculez la paie nette avec impôt fédéral, impôt du Québec, RRQ, assurance emploi, RQAP et retenues.`,
+    h1: `${salary} après impôt au Québec`,
+    kicker: 'Estimation de salaire net',
+    primaryKeyword: `${salary} après impôt Québec`,
+    intro: `Estimez ce qu'un salaire annuel de ${salary} devient après impôt au Québec. Cette page aide les travailleurs de Montréal, Québec, Laval, Gatineau et Sherbrooke à comparer le salaire brut, la paie nette, les retenues et le montant par paie.`,
+    examples: [
+      `${salary} salaire net Québec`,
+      `${salary} après impôt Québec`,
+      `${salary} paie nette Montréal`,
+      `${salary} aux deux semaines Québec`,
+    ],
+    sections: [
+      {
+        heading: `Ce qui affecte ${salary} net au Québec`,
+        body:
+          "La paie nette dépend de l'impôt fédéral, de l'impôt du Québec, de la RRQ, de l'assurance emploi, du RQAP, de la fréquence de paie, des crédits personnels et des déductions de l'employeur.",
+      },
+      {
+        heading: 'Salaire mensuel et paie aux deux semaines',
+        body: `Beaucoup de travailleurs cherchent ${salary} après impôt parce que le loyer, les factures, le transport et l'épargne sont planifiés par mois ou par période de paie. Utilisez le calculateur pour comparer le net annuel, mensuel, semi-mensuel, hebdomadaire et aux deux semaines.`,
+      },
+      {
+        heading: 'Avant de signer une offre',
+        body: `Un salaire brut de ${salary} peut sembler clair, mais le budget dépend du montant qui arrive vraiment dans votre compte. Vérifiez la paie nette avant de comparer un poste au Québec avec une offre en Ontario, en Alberta ou en Colombie-Britannique.`,
+      },
+    ],
+    faq: [
+      {
+        question: `Combien donne ${salary} après impôt au Québec?`,
+        answer:
+          "Le montant exact dépend de votre situation fiscale, de la fréquence de paie, des crédits, des avantages et des déductions. Entrez le salaire dans CanPay Insights et choisissez Québec pour obtenir une estimation.",
+      },
+      {
+        question: `Quelle est la paie aux deux semaines pour ${salary} au Québec?`,
+        answer:
+          "La paie aux deux semaines dépend des retenues de paie. Utilisez le mode salaire annuel, choisissez Québec, puis sélectionnez la fréquence de paie pour estimer chaque chèque.",
+      },
+      {
+        question: `${salary} est-il un bon salaire au Québec?`,
+        answer:
+          "Cela dépend de la ville, du loyer, du transport, des dettes, de la taille du ménage et de vos objectifs d'épargne. La paie nette est un meilleur point de départ que le salaire brut.",
+      },
+    ],
+    relatedSalaryLinks: getRelatedFrenchQuebecLinks(slug),
+    alternateLanguages: [
+      {
+        href: `/${englishSlug}`,
+        hrefLang: 'en-CA',
+        label: `English - ${formatSalary(amount)} after tax Quebec`,
+      },
+    ],
+  };
+});
+
+export const frenchLandingPages: LandingPage[] = [
+  ...frenchCoreLandingPages,
+  ...frenchQuebecSalaryPages,
+];
 
 export const landingPages: LandingPage[] = [
   ...coreLandingPages,
@@ -644,4 +804,8 @@ export const landingPages: LandingPage[] = [
 
 export function getLandingPage(slug: string) {
   return landingPages.find((page) => page.slug === slug);
+}
+
+export function getFrenchLandingPage(slug: string) {
+  return frenchLandingPages.find((page) => page.slug === slug);
 }

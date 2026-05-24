@@ -3,6 +3,9 @@ type ShareLinksProps = {
   title?: string;
   description?: string;
   compact?: boolean;
+  heading?: string;
+  helperText?: string;
+  emailLabel?: string;
 };
 
 const DEFAULT_URL = 'https://canpayinsights.ca/';
@@ -15,6 +18,9 @@ export default function ShareLinks({
   title = DEFAULT_TITLE,
   description = DEFAULT_DESCRIPTION,
   compact = false,
+  heading = 'Share this free calculator',
+  helperText = 'Help another Canadian compare take-home pay before accepting a job offer or planning a move.',
+  emailLabel = 'Email',
 }: ShareLinksProps) {
   const encodedUrl = encodeURIComponent(url);
   const encodedTitle = encodeURIComponent(title);
@@ -35,7 +41,7 @@ export default function ShareLinks({
       href: `https://www.reddit.com/submit?url=${encodedUrl}&title=${encodedTitle}`,
     },
     {
-      label: 'Email',
+      label: emailLabel,
       href: `mailto:?subject=${encodedTitle}&body=${emailBody}`,
     },
   ];
@@ -50,10 +56,10 @@ export default function ShareLinks({
       <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
         <div>
           <h2 id="share-canpay" className={`${compact ? 'text-lg' : 'text-xl'} font-bold text-slate-900`}>
-            Share this free calculator
+            {heading}
           </h2>
           <p className="mt-1 text-sm leading-6 text-slate-600">
-            Help another Canadian compare take-home pay before accepting a job offer or planning a move.
+            {helperText}
           </p>
         </div>
         <div className="flex flex-wrap gap-2">

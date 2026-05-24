@@ -1,7 +1,7 @@
 import type { Metadata } from 'next';
 import { notFound } from 'next/navigation';
-import ShareLinks from '../../components/ShareLinks';
-import { getLandingPage, landingPages } from '../landing-page-data';
+import ShareLinks from '../../../components/ShareLinks';
+import { frenchLandingPages, getFrenchLandingPage } from '../../landing-page-data';
 
 const BASE_URL = 'https://canpayinsights.ca';
 
@@ -10,35 +10,34 @@ interface Props {
 }
 
 const relatedLinks = [
-  { href: '/salary-after-tax-canada', label: 'Salary After Tax Canada' },
-  { href: '/hourly-wage-calculator', label: 'Hourly Wage Calculator' },
-  { href: '/salary-calculator', label: 'Canadian Salary Calculator' },
-  { href: '/cpp-ei-calculator', label: 'CPP & EI Calculator' },
-  { href: '/ontario-paycheck-calculator', label: 'Ontario Paycheck Calculator' },
-  { href: '/bc-paycheck-calculator', label: 'BC Paycheck Calculator' },
-  { href: '/alberta-paycheck-calculator', label: 'Alberta Paycheck Calculator' },
+  { href: '/fr/calculateur-salaire-net-quebec', label: 'Calculateur salaire net Québec' },
+  { href: '/fr/60000-apres-impot-quebec', label: '60 000 $ après impôt Québec' },
+  { href: '/fr/70000-apres-impot-quebec', label: '70 000 $ après impôt Québec' },
+  { href: '/fr/80000-apres-impot-quebec', label: '80 000 $ après impôt Québec' },
+  { href: '/fr/100000-apres-impot-quebec', label: '100 000 $ après impôt Québec' },
   { href: '/quebec-paycheck-calculator', label: 'Quebec Paycheck Calculator' },
 ];
 
 export function generateStaticParams() {
-  return landingPages.map((page) => ({ slug: page.slug }));
+  return frenchLandingPages.map((page) => ({ slug: page.slug }));
 }
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { slug } = await params;
-  const page = getLandingPage(slug);
+  const page = getFrenchLandingPage(slug);
 
   if (!page) {
-    return { title: 'Page Not Found' };
+    return { title: 'Page introuvable' };
   }
 
-  const url = `${BASE_URL}/${page.slug}`;
+  const url = `${BASE_URL}/fr/${page.slug}`;
+  const defaultAlternate = page.alternateLanguages?.find((link) => link.hrefLang === 'en-CA')?.href;
   const languageAlternates = page.alternateLanguages?.reduce<Record<string, string>>(
     (languages, link) => ({
       ...languages,
       [link.hrefLang]: `${BASE_URL}${link.href}`,
     }),
-    { 'en-CA': url, 'x-default': url }
+    { 'fr-CA': url, 'x-default': `${BASE_URL}${defaultAlternate ?? '/quebec-paycheck-calculator'}` }
   );
 
   return {
@@ -54,6 +53,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       description: page.description,
       url,
       type: 'website',
+      locale: 'fr_CA',
       images: [{ url: '/og-image.png', width: 1200, height: 630 }],
     },
     twitter: {
@@ -65,16 +65,16 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   };
 }
 
-export default async function LandingPage({ params }: Props) {
+export default async function FrenchLandingPage({ params }: Props) {
   const { slug } = await params;
-  const page = getLandingPage(slug);
+  const page = getFrenchLandingPage(slug);
 
   if (!page) {
     notFound();
   }
 
-  const pageUrl = `${BASE_URL}/${page.slug}`;
-  const filteredRelatedLinks = relatedLinks.filter((link) => link.href !== `/${page.slug}`);
+  const pageUrl = `${BASE_URL}/fr/${page.slug}`;
+  const filteredRelatedLinks = relatedLinks.filter((link) => link.href !== `/fr/${page.slug}`);
 
   const jsonLd = [
     {
@@ -83,7 +83,7 @@ export default async function LandingPage({ params }: Props) {
       name: page.h1,
       description: page.description,
       url: pageUrl,
-      inLanguage: 'en-CA',
+      inLanguage: 'fr-CA',
       isPartOf: {
         '@type': 'WebSite',
         name: 'CanPay Insights',
@@ -119,7 +119,7 @@ export default async function LandingPage({ params }: Props) {
       '@context': 'https://schema.org',
       '@type': 'BreadcrumbList',
       itemListElement: [
-        { '@type': 'ListItem', position: 1, name: 'Home', item: BASE_URL },
+        { '@type': 'ListItem', position: 1, name: 'Accueil', item: BASE_URL },
         { '@type': 'ListItem', position: 2, name: page.h1, item: pageUrl },
       ],
     },
@@ -152,13 +152,13 @@ export default async function LandingPage({ params }: Props) {
               href="/"
               className="inline-flex items-center justify-center rounded-lg bg-red-600 px-5 py-3 font-bold text-white hover:bg-red-700 no-underline"
             >
-              Use Free Calculator
+              Ouvrir le calculateur
             </a>
             <a
               href="/compare-provinces"
               className="inline-flex items-center justify-center rounded-lg border border-slate-300 bg-white px-5 py-3 font-bold text-slate-700 hover:border-red-200 hover:text-red-600 no-underline"
             >
-              Compare Provinces
+              Comparer les provinces
             </a>
           </div>
         </div>
@@ -168,8 +168,8 @@ export default async function LandingPage({ params }: Props) {
         <div className="grid grid-cols-1 lg:grid-cols-[1fr_320px] gap-8">
           <article className="space-y-6">
             <div className="bg-white border border-slate-200 rounded-xl p-6 shadow-sm">
-              <h2 className="text-2xl font-bold mb-4">Common Searches</h2>
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
+              <h2 className="text-2xl font-bold mb-4">Recherches populaires</h2>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
                 {page.examples.map((example) => (
                   <div key={example} className="rounded-lg bg-slate-50 border border-slate-200 p-4 text-sm font-semibold text-slate-700">
                     {example}
@@ -181,10 +181,10 @@ export default async function LandingPage({ params }: Props) {
             {page.relatedSalaryLinks && page.relatedSalaryLinks.length > 0 && (
               <nav
                 className="bg-white border border-slate-200 rounded-xl p-5 shadow-sm"
-                aria-label="Related salary after tax searches"
+                aria-label="Recherches de salaire net liées"
               >
                 <h2 className="text-lg font-bold text-slate-900 mb-3">
-                  Related Salary After Tax Searches
+                  Recherches liées au Québec
                 </h2>
                 <div className="flex flex-wrap gap-2">
                   {page.relatedSalaryLinks.map((link) => (
@@ -203,10 +203,10 @@ export default async function LandingPage({ params }: Props) {
             {page.alternateLanguages && page.alternateLanguages.length > 0 && (
               <nav
                 className="bg-white border border-slate-200 rounded-xl p-5 shadow-sm"
-                aria-label="Language alternatives"
+                aria-label="Autres langues"
               >
                 <h2 className="text-lg font-bold text-slate-900 mb-3">
-                  Other Language Versions
+                  Autres versions
                 </h2>
                 <div className="flex flex-wrap gap-2">
                   {page.alternateLanguages.map((link) => (
@@ -235,7 +235,7 @@ export default async function LandingPage({ params }: Props) {
             ))}
 
             <section className="bg-white border border-slate-200 rounded-xl p-6 shadow-sm">
-              <h2 className="text-2xl font-bold text-slate-900 mb-5">Frequently Asked Questions</h2>
+              <h2 className="text-2xl font-bold text-slate-900 mb-5">Questions fréquentes</h2>
               <div className="space-y-4">
                 {page.faq.map((item) => (
                   <details key={item.question} className="rounded-lg border border-slate-200 bg-slate-50 p-4">
@@ -254,27 +254,30 @@ export default async function LandingPage({ params }: Props) {
               url={pageUrl}
               title={page.title}
               description={page.description}
+              heading="Partager ce calculateur gratuit"
+              helperText="Aidez une autre personne au Québec à comparer sa paie nette avant une offre d'emploi ou un déménagement."
+              emailLabel="Courriel"
             />
           </article>
 
           <aside className="space-y-4">
             <div className="bg-slate-900 text-white rounded-xl p-6 shadow-sm">
-              <h2 className="text-xl font-bold mb-2">Calculate Your Pay</h2>
+              <h2 className="text-xl font-bold mb-2">Calculez votre paie</h2>
               <p className="text-sm leading-6 text-slate-300 mb-5">
-                Enter your wage or salary and province to estimate net pay, taxes, CPP, and EI.
+                Entrez votre salaire et votre province pour estimer la paie nette, les impôts, la RRQ, le RQAP et les retenues.
               </p>
               <a
                 href="/"
                 className="block rounded-lg bg-red-600 px-4 py-3 text-center font-bold text-white hover:bg-red-700 no-underline"
               >
-                Open Calculator
+                Ouvrir le calculateur
               </a>
             </div>
 
             <div className="bg-white border border-slate-200 rounded-xl p-6 shadow-sm">
-              <h2 className="text-lg font-bold mb-4">Related Calculators</h2>
+              <h2 className="text-lg font-bold mb-4">Pages liées</h2>
               <div className="space-y-2">
-                {filteredRelatedLinks.slice(0, 7).map((link) => (
+                {filteredRelatedLinks.slice(0, 6).map((link) => (
                   <a
                     key={link.href}
                     href={link.href}
@@ -287,12 +290,12 @@ export default async function LandingPage({ params }: Props) {
             </div>
 
             <div className="bg-white border border-slate-200 rounded-xl p-6 shadow-sm">
-              <h2 className="text-lg font-bold mb-3">Tax Guides</h2>
+              <h2 className="text-lg font-bold mb-3">Guides fiscaux</h2>
               <p className="text-sm leading-6 text-slate-600 mb-4">
-                Read Canadian tax, RRSP, CPP, EI, and provincial pay guides.
+                Consultez les guides sur les impôts, le salaire, la RRQ, le RPC et les provinces canadiennes.
               </p>
               <a href="/blog" className="text-sm font-bold text-red-600 hover:text-red-700 no-underline">
-                Browse Insights Hub
+                Voir le hub
               </a>
             </div>
           </aside>

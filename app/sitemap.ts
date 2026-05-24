@@ -1,6 +1,6 @@
 import type { MetadataRoute } from 'next';
 import allArticles from '../src/content/articles-data';
-import { landingPages } from './landing-page-data';
+import { frenchLandingPages, landingPages } from './landing-page-data';
 
 const BASE_URL = 'https://canpayinsights.ca';
 
@@ -46,5 +46,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: 0.85,
   }));
 
-  return [...staticPages, ...calculatorPages, ...articlePages];
+  const frenchCalculatorPages: MetadataRoute.Sitemap = frenchLandingPages.map((page) => ({
+    url: `${BASE_URL}/fr/${page.slug}`,
+    lastModified: new Date(),
+    changeFrequency: 'monthly' as const,
+    priority: 0.75,
+  }));
+
+  return [...staticPages, ...calculatorPages, ...frenchCalculatorPages, ...articlePages];
 }
