@@ -66,9 +66,11 @@ const coreLandingPages: LandingPage[] = [
       { href: '/65000-after-tax-ontario', label: '$65,000 after tax Ontario' },
       { href: '/70000-after-tax-bc', label: '$70,000 after tax BC' },
       { href: '/80000-after-tax-alberta', label: '$80,000 after tax Alberta' },
+      { href: '/60000-after-tax-manitoba', label: '$60,000 after tax Manitoba' },
+      { href: '/70000-after-tax-saskatchewan', label: '$70,000 after tax Saskatchewan' },
+      { href: '/80000-after-tax-nova-scotia', label: '$80,000 after tax Nova Scotia' },
+      { href: '/65000-after-tax-new-brunswick', label: '$65,000 after tax New Brunswick' },
       { href: '/100000-after-tax-quebec', label: '$100,000 after tax Quebec' },
-      { href: '/90000-after-tax-quebec', label: '$90,000 after tax Quebec' },
-      { href: '/120000-after-tax-quebec', label: '$120,000 after tax Quebec' },
     ],
   },
   {
@@ -460,6 +462,105 @@ const provinceSalaryConfigs = [
     comparison: 'Ontario, Alberta, British Columbia, or another province',
     localNote:
       'This is especially useful for Montreal and Quebec City offers because Quebec payroll is different enough that generic Canada estimates can be misleading.',
+  },
+  {
+    slug: 'manitoba',
+    name: 'Manitoba',
+    shortName: 'Manitoba',
+    cities: 'Winnipeg, Brandon, Steinbach, Thompson, Portage la Prairie, and workers across Manitoba',
+    taxNote:
+      'Manitoba workers usually see federal income tax, Manitoba income tax, CPP, and EI deductions on every paycheque.',
+    comparison: 'Ontario, Saskatchewan, Alberta, British Columbia, or another province',
+    localNote:
+      'This is especially useful for Winnipeg budgets where rent, transportation, and winter costs can make net pay feel different from gross salary.',
+  },
+  {
+    slug: 'saskatchewan',
+    name: 'Saskatchewan',
+    shortName: 'Saskatchewan',
+    cities: 'Saskatoon, Regina, Prince Albert, Moose Jaw, Yorkton, and workers across Saskatchewan',
+    taxNote:
+      'Saskatchewan workers usually see federal income tax, Saskatchewan income tax, CPP, and EI deductions on every paycheque.',
+    comparison: 'Manitoba, Alberta, Ontario, British Columbia, or another province',
+    localNote:
+      'This is especially useful for Saskatoon and Regina offers where resource, agriculture, healthcare, and public sector salaries can vary by region.',
+  },
+  {
+    slug: 'nova-scotia',
+    name: 'Nova Scotia',
+    shortName: 'Nova Scotia',
+    cities: 'Halifax, Dartmouth, Sydney, Truro, New Glasgow, and workers across Nova Scotia',
+    taxNote:
+      'Nova Scotia workers usually see federal income tax, Nova Scotia income tax, CPP, and EI deductions on every paycheque.',
+    comparison: 'New Brunswick, Prince Edward Island, Newfoundland and Labrador, Ontario, or another province',
+    localNote:
+      'This is especially useful for Halifax-area job offers where housing costs and provincial taxes can change how far a salary goes.',
+  },
+  {
+    slug: 'new-brunswick',
+    name: 'New Brunswick',
+    shortName: 'New Brunswick',
+    cities: 'Moncton, Saint John, Fredericton, Dieppe, Miramichi, and workers across New Brunswick',
+    taxNote:
+      'New Brunswick workers usually see federal income tax, New Brunswick income tax, CPP, and EI deductions on every paycheque.',
+    comparison: 'Nova Scotia, Prince Edward Island, Quebec, Ontario, or another province',
+    localNote:
+      'This is especially useful for Moncton, Saint John, and Fredericton budgets where lower housing costs can still depend heavily on take-home pay.',
+  },
+  {
+    slug: 'newfoundland',
+    name: 'Newfoundland and Labrador',
+    shortName: 'Newfoundland',
+    cities: "St. John's, Mount Pearl, Corner Brook, Grand Falls-Windsor, Labrador City, and workers across Newfoundland and Labrador",
+    taxNote:
+      'Newfoundland and Labrador workers usually see federal income tax, provincial income tax, CPP, and EI deductions on every paycheque.',
+    comparison: 'Nova Scotia, New Brunswick, Prince Edward Island, Alberta, or another province',
+    localNote:
+      "This is especially useful for St. John's and Labrador job offers where commuting, housing, and remote-work costs can change the real value of a salary.",
+  },
+  {
+    slug: 'pei',
+    name: 'Prince Edward Island',
+    shortName: 'PEI',
+    cities: 'Charlottetown, Summerside, Stratford, Cornwall, Montague, and workers across Prince Edward Island',
+    taxNote:
+      'PEI workers usually see federal income tax, Prince Edward Island income tax, CPP, and EI deductions on every paycheque.',
+    comparison: 'Nova Scotia, New Brunswick, Newfoundland and Labrador, Ontario, or another province',
+    localNote:
+      'This is especially useful for Charlottetown and Summerside budgets where smaller-city costs and seasonal work can make net pay planning important.',
+  },
+  {
+    slug: 'yukon',
+    name: 'Yukon',
+    shortName: 'Yukon',
+    cities: 'Whitehorse, Dawson City, Watson Lake, Haines Junction, and workers across Yukon',
+    taxNote:
+      'Yukon workers usually see federal income tax, Yukon territorial tax, CPP, and EI deductions on every paycheque.',
+    comparison: 'British Columbia, Alberta, Northwest Territories, Nunavut, or another province or territory',
+    localNote:
+      'This is especially useful for Whitehorse offers where northern living costs can make take-home pay more important than gross salary alone.',
+  },
+  {
+    slug: 'northwest-territories',
+    name: 'Northwest Territories',
+    shortName: 'Northwest Territories',
+    cities: 'Yellowknife, Hay River, Inuvik, Fort Smith, and workers across the Northwest Territories',
+    taxNote:
+      'Northwest Territories workers usually see federal income tax, territorial tax, CPP, and EI deductions on every paycheque.',
+    comparison: 'Yukon, Nunavut, Alberta, British Columbia, or another province or territory',
+    localNote:
+      'This is especially useful for Yellowknife and northern job offers where housing, travel, and grocery costs make net pay planning essential.',
+  },
+  {
+    slug: 'nunavut',
+    name: 'Nunavut',
+    shortName: 'Nunavut',
+    cities: 'Iqaluit, Rankin Inlet, Cambridge Bay, Arviat, and workers across Nunavut',
+    taxNote:
+      'Nunavut workers usually see federal income tax, Nunavut territorial tax, CPP, and EI deductions on every paycheque.',
+    comparison: 'Northwest Territories, Yukon, Alberta, Ontario, or another province or territory',
+    localNote:
+      'This is especially useful for Iqaluit and northern job offers where high living costs make after-tax income more practical than gross salary alone.',
   },
 ];
 
