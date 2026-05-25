@@ -147,6 +147,26 @@ export default async function FrenchLandingPage({ params }: Props) {
           <p className="text-lg leading-8 text-slate-600 max-w-3xl">
             {page.intro}
           </p>
+          {page.highlights && page.highlights.length > 0 && (
+            <div className="grid grid-cols-1 gap-3 md:grid-cols-3 mt-8">
+              {page.highlights.map((item) => (
+                <div
+                  key={item.label}
+                  className="rounded-xl border border-slate-200 bg-slate-50 p-4"
+                >
+                  <p className="text-xs font-bold uppercase tracking-wide text-slate-500">
+                    {item.label}
+                  </p>
+                  <p className="mt-2 text-2xl font-bold text-slate-950">
+                    {item.value}
+                  </p>
+                  <p className="mt-2 text-sm leading-6 text-slate-600">
+                    {item.detail}
+                  </p>
+                </div>
+              ))}
+            </div>
+          )}
           <div className="flex flex-wrap gap-3 mt-8">
             <a
               href="/"
@@ -221,6 +241,33 @@ export default async function FrenchLandingPage({ params }: Props) {
                   ))}
                 </div>
               </nav>
+            )}
+
+            {page.nextSteps && page.nextSteps.length > 0 && (
+              <section className="bg-white border border-slate-200 rounded-xl p-6 shadow-sm">
+                <h2 className="text-2xl font-bold text-slate-900 mb-4">
+                  Prochaines étapes
+                </h2>
+                <div className="grid grid-cols-1 gap-3 md:grid-cols-3">
+                  {page.nextSteps.map((step) => (
+                    <a
+                      key={`${step.href}-${step.title}`}
+                      href={step.href}
+                      className="block rounded-xl border border-slate-200 bg-slate-50 p-4 no-underline transition-colors hover:border-red-200 hover:bg-red-50"
+                    >
+                      <h3 className="text-base font-bold text-slate-900">
+                        {step.title}
+                      </h3>
+                      <p className="mt-2 text-sm leading-6 text-slate-600">
+                        {step.body}
+                      </p>
+                      <span className="mt-3 inline-flex text-sm font-bold text-red-600">
+                        {step.label} →
+                      </span>
+                    </a>
+                  ))}
+                </div>
+              </section>
             )}
 
             {page.sections.map((section) => (

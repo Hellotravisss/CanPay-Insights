@@ -85,6 +85,51 @@ const ArticleView: React.FC<ArticleViewProps> = ({ slug, onBack, onSelectArticle
     news: 'Latest News',
   };
 
+  const provinceCalculatorLinks: Record<string, Array<{ href: string; label: string; description: string }>> = {
+    Ontario: [
+      { href: '/ontario-paycheck-calculator', label: 'Ontario paycheck calculator', description: 'Estimate Ontario take-home pay with tax, CPP, and EI.' },
+      { href: '/65000-after-tax-ontario', label: '$65,000 after tax Ontario', description: 'A common job-offer salary check for Ontario workers.' },
+      { href: '/compare-provinces', label: 'Compare provinces', description: 'See whether the same salary goes further in another province.' },
+    ],
+    'British Columbia': [
+      { href: '/bc-paycheck-calculator', label: 'BC paycheck calculator', description: 'Estimate BC take-home pay for Vancouver, Victoria, and across BC.' },
+      { href: '/70000-after-tax-bc', label: '$70,000 after tax BC', description: 'A quick salary-after-tax page for BC job offers.' },
+      { href: '/compare-provinces', label: 'Compare provinces', description: 'Compare BC with Ontario, Alberta, Quebec, and more.' },
+    ],
+    Alberta: [
+      { href: '/alberta-paycheck-calculator', label: 'Alberta paycheck calculator', description: 'Estimate Alberta net pay and deductions.' },
+      { href: '/80000-after-tax-alberta', label: '$80,000 after tax Alberta', description: 'Check a common Alberta salary against take-home pay.' },
+      { href: '/compare-provinces', label: 'Compare provinces', description: 'Compare Alberta take-home pay with other provinces.' },
+    ],
+    Quebec: [
+      { href: '/quebec-paycheck-calculator', label: 'Quebec paycheck calculator', description: 'Estimate Quebec take-home pay with province-specific deductions.' },
+      { href: '/fr/calculateur-salaire-net-quebec', label: 'Calculateur salaire net Québec', description: 'French Quebec salary and payroll estimate page.' },
+      { href: '/100000-after-tax-quebec', label: '$100,000 after tax Quebec', description: 'A common high-intent Quebec salary search.' },
+    ],
+  };
+
+  const getCalculatorLinks = () => {
+    if (article.province && provinceCalculatorLinks[article.province]) {
+      return provinceCalculatorLinks[article.province];
+    }
+
+    if (article.slug.includes('newcomer')) {
+      return [
+        { href: '/salary-after-tax-canada', label: 'Salary after tax Canada', description: 'Understand what a Canadian offer becomes after deductions.' },
+        { href: '/compare-provinces', label: 'Compare provinces', description: 'Useful before choosing a city or province for your first job.' },
+        { href: '/hourly-wage-calculator', label: 'Hourly wage calculator', description: 'Helpful for part-time, student, and shift-based work.' },
+      ];
+    }
+
+    return [
+      { href: '/salary-after-tax-canada', label: 'Salary after tax Canada', description: 'Estimate annual salary, monthly pay, and bi-weekly net pay.' },
+      { href: '/cpp-ei-calculator', label: 'CPP & EI calculator', description: 'Understand the payroll deductions that show up on your pay stub.' },
+      { href: '/compare-provinces', label: 'Compare provinces', description: 'Use the same gross salary across provinces.' },
+    ];
+  };
+
+  const calculatorLinks = getCalculatorLinks();
+
   // Simple Markdown renderer
   const renderContent = (content: string) => {
     const lines = content.split("\n");
@@ -347,6 +392,26 @@ const ArticleView: React.FC<ArticleViewProps> = ({ slug, onBack, onSelectArticle
     );
   };
 
+  const CalculatorLinksPanel = () => {
+    return (
+      <div className="mb-8 rounded-xl border border-slate-200 bg-slate-50 p-5">
+        <h2 className="text-lg font-bold text-slate-900 mb-3">Useful calculators for this guide</h2>
+        <div className="grid grid-cols-1 gap-3 md:grid-cols-3">
+          {calculatorLinks.map((link) => (
+            <a
+              key={link.href}
+              href={link.href}
+              className="block rounded-lg border border-slate-200 bg-white p-4 no-underline transition-colors hover:border-red-200 hover:bg-red-50"
+            >
+              <h3 className="text-sm font-bold text-slate-900">{link.label}</h3>
+              <p className="mt-2 text-sm leading-6 text-slate-600">{link.description}</p>
+            </a>
+          ))}
+        </div>
+      </div>
+    );
+  };
+
   return (
     <div className="min-h-screen bg-slate-50">
       {/* Article Header */}
@@ -425,6 +490,8 @@ const ArticleView: React.FC<ArticleViewProps> = ({ slug, onBack, onSelectArticle
               <p className="text-slate-800 text-base leading-relaxed">{article.directAnswer}</p>
             </div>
           )}
+
+          <CalculatorLinksPanel />
 
           {/* Top CTA */}
           <CalculatorCTA />

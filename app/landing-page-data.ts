@@ -19,6 +19,17 @@ export type LandingPage = {
     href: string;
     label: string;
   }>;
+  highlights?: Array<{
+    label: string;
+    value: string;
+    detail: string;
+  }>;
+  nextSteps?: Array<{
+    title: string;
+    body: string;
+    href: string;
+    label: string;
+  }>;
   alternateLanguages?: Array<{
     href: string;
     hrefLang: string;
@@ -83,6 +94,37 @@ const coreLandingPages: LandingPage[] = [
       { href: '/80000-after-tax-nova-scotia', label: '$80,000 after tax Nova Scotia' },
       { href: '/65000-after-tax-new-brunswick', label: '$65,000 after tax New Brunswick' },
       { href: '/100000-after-tax-quebec', label: '$100,000 after tax Quebec' },
+    ],
+    highlights: [
+      {
+        label: 'Best for',
+        value: 'Job offers',
+        detail: 'Compare the number on an offer letter with the estimated pay that actually reaches your bank account.',
+      },
+      {
+        label: 'Includes',
+        value: 'Tax, CPP, EI',
+        detail: 'Use province-specific deductions instead of relying on a generic Canada-wide estimate.',
+      },
+      {
+        label: 'Next check',
+        value: 'Province gap',
+        detail: 'A similar salary can feel different in Ontario, BC, Alberta, Quebec, and Atlantic Canada.',
+      },
+    ],
+    nextSteps: [
+      {
+        title: 'Compare provinces before moving',
+        body: 'Use the same gross salary across provinces to see how provincial tax changes take-home pay.',
+        href: '/compare-provinces',
+        label: 'Compare provinces',
+      },
+      {
+        title: 'Read the newcomer tax guide',
+        body: 'Useful if you are new to Canada and trying to understand tax residency, credits, and first-year filing.',
+        href: '/blog/newcomer-tax-guide-canada-2025',
+        label: 'Newcomer guide',
+      },
     ],
   },
   {
@@ -578,6 +620,69 @@ const provinceSalaryConfigs = [
 
 const formatSalary = (amount: number) => `$${amount.toLocaleString('en-CA')}`;
 const formatFrenchSalary = (amount: number) => `${amount.toLocaleString('fr-CA')} $`;
+const formatMoney = (amount: number) =>
+  `$${Math.round(amount).toLocaleString('en-CA')}`;
+const formatFrenchMoney = (amount: number) =>
+  `${Math.round(amount).toLocaleString('fr-CA')} $`;
+
+const provinceGuideLinks: Record<string, { href: string; label: string }> = {
+  ontario: { href: '/blog/ontario-tax-guide-2025', label: 'Ontario tax guide' },
+  bc: { href: '/blog/bc-tax-guide-2025', label: 'BC tax guide' },
+  alberta: { href: '/blog/alberta-salary-guide-2025', label: 'Alberta salary guide' },
+  quebec: { href: '/blog/quebec-salary-guide-2025', label: 'Quebec salary guide' },
+  'nova-scotia': { href: '/blog/atlantic-canada-salary-guide-2025', label: 'Atlantic Canada guide' },
+  'new-brunswick': { href: '/blog/atlantic-canada-salary-guide-2025', label: 'Atlantic Canada guide' },
+  newfoundland: { href: '/blog/atlantic-canada-salary-guide-2025', label: 'Atlantic Canada guide' },
+  pei: { href: '/blog/atlantic-canada-salary-guide-2025', label: 'Atlantic Canada guide' },
+};
+
+const getSalaryBand = (amount: number) => {
+  if (amount < 65000) {
+    return {
+      value: 'Entry to mid-level',
+      detail:
+        'Good for checking rent, transit, groceries, student debt, and emergency savings before committing to an offer.',
+    };
+  }
+
+  if (amount < 100000) {
+    return {
+      value: 'Mid-career',
+      detail:
+        'Useful for comparing job offers where benefits, RRSP matching, bonus structure, and province choice can change the real value.',
+    };
+  }
+
+  return {
+    value: 'Senior income',
+    detail:
+      'At this level, marginal tax rate, bonus timing, RRSP room, and province choice become more important to after-tax planning.',
+  };
+};
+
+const getFrenchSalaryBand = (amount: number) => {
+  if (amount < 65000) {
+    return {
+      value: 'Début à mi-carrière',
+      detail:
+        "Utile pour vérifier le loyer, le transport, les dettes, l'épicerie et l'épargne d'urgence avant d'accepter une offre.",
+    };
+  }
+
+  if (amount < 100000) {
+    return {
+      value: 'Mi-carrière',
+      detail:
+        "Utile pour comparer les avantages, le REER collectif, les primes, la fréquence de paie et le vrai montant disponible.",
+    };
+  }
+
+  return {
+    value: 'Revenu senior',
+    detail:
+      "À ce niveau, le taux marginal, les primes, les cotisations REER et le choix de province peuvent changer la planification après impôt.",
+  };
+};
 
 const getSalaryAmountsForProvince = (provinceSlug: string) =>
   salaryAmountsByProvince[provinceSlug] ?? defaultSalaryAmounts;
@@ -598,6 +703,11 @@ const salaryProvinceLandingPages: LandingPage[] = provinceSalaryConfigs.flatMap(
     const keyword = `${salary} after tax ${province.shortName}`;
     const monthlyKeyword = `${salary} monthly take-home pay ${province.shortName}`;
     const biWeeklyKeyword = `${salary} bi-weekly pay ${province.shortName}`;
+    const salaryBand = getSalaryBand(amount);
+    const guideLink = provinceGuideLinks[province.slug] ?? {
+      href: '/blog',
+      label: 'Canadian payroll guides',
+    };
 
     const page: LandingPage = {
       slug: `${slugSalary}-after-tax-${province.slug}`,
@@ -646,6 +756,45 @@ const salaryProvinceLandingPages: LandingPage[] = provinceSalaryConfigs.flatMap(
         },
       ],
       relatedSalaryLinks: getRelatedSalaryLinks(province.slug, province.shortName, amount),
+      highlights: [
+        {
+          label: 'Gross monthly',
+          value: formatMoney(amount / 12),
+          detail:
+            'Before tax and payroll deductions. Use the calculator for your estimated net monthly pay.',
+        },
+        {
+          label: 'Gross bi-weekly',
+          value: formatMoney(amount / 26),
+          detail:
+            'A quick paycheque anchor before federal tax, provincial tax, CPP, EI, and workplace deductions.',
+        },
+        {
+          label: 'Salary context',
+          value: salaryBand.value,
+          detail: salaryBand.detail,
+        },
+      ],
+      nextSteps: [
+        {
+          title: `Run the ${province.shortName} estimate`,
+          body: `Open the calculator, choose ${province.name}, and switch between annual, monthly, semi-monthly, bi-weekly, and weekly views.`,
+          href: '/',
+          label: 'Open calculator',
+        },
+        {
+          title: `Compare ${province.shortName} with another province`,
+          body: `Use the same ${salary} salary across provinces before assuming a higher gross offer means more spending money.`,
+          href: '/compare-provinces',
+          label: 'Compare provinces',
+        },
+        {
+          title: `Read the ${province.shortName} context`,
+          body: 'Pair the calculator with a guide on local salary, tax, and cost-of-living tradeoffs.',
+          href: guideLink.href,
+          label: guideLink.label,
+        },
+      ],
     };
 
     if (province.slug === 'quebec') {
@@ -720,6 +869,46 @@ const frenchCoreLandingPages: LandingPage[] = [
       },
     ],
     relatedSalaryLinks: getRelatedFrenchQuebecLinks('calculateur-salaire-net-quebec'),
+    highlights: [
+      {
+        label: 'Idéal pour',
+        value: 'Offres au Québec',
+        detail:
+          "Comparez le salaire brut d'une offre avec une estimation du montant qui arrive vraiment dans votre compte.",
+      },
+      {
+        label: 'Retenues',
+        value: 'Impôt, RRQ, RQAP',
+        detail:
+          "Le Québec a des retenues distinctes, donc une estimation canadienne générale peut être trop vague.",
+      },
+      {
+        label: 'À vérifier',
+        value: 'Paie nette',
+        detail:
+          "Passez du salaire annuel à la paie mensuelle, semi-mensuelle, aux deux semaines ou hebdomadaire.",
+      },
+    ],
+    nextSteps: [
+      {
+        title: 'Calculer votre paie nette',
+        body: 'Ouvrez le calculateur, choisissez Québec et comparez le salaire annuel avec chaque fréquence de paie.',
+        href: '/',
+        label: 'Ouvrir le calculateur',
+      },
+      {
+        title: 'Comparer Québec et Ontario',
+        body: "Utilisez le même salaire brut pour voir l'écart de paie nette entre provinces.",
+        href: '/compare-provinces',
+        label: 'Comparer les provinces',
+      },
+      {
+        title: 'Lire le guide Québec',
+        body: 'Ajoutez le contexte sur les salaires, Montréal, la RRQ, le RQAP et le coût de la vie.',
+        href: '/blog/quebec-salary-guide-2025',
+        label: 'Guide Québec',
+      },
+    ],
     alternateLanguages: [
       {
         href: '/quebec-paycheck-calculator',
@@ -734,6 +923,7 @@ const frenchQuebecSalaryPages: LandingPage[] = frenchQuebecAmounts.map((amount) 
   const salary = formatFrenchSalary(amount);
   const slug = `${amount}-apres-impot-quebec`;
   const englishSlug = `${amount}-after-tax-quebec`;
+  const salaryBand = getFrenchSalaryBand(amount);
 
   return {
     slug,
@@ -782,6 +972,45 @@ const frenchQuebecSalaryPages: LandingPage[] = frenchQuebecAmounts.map((amount) 
       },
     ],
     relatedSalaryLinks: getRelatedFrenchQuebecLinks(slug),
+    highlights: [
+      {
+        label: 'Brut mensuel',
+        value: formatFrenchMoney(amount / 12),
+        detail:
+          "Avant impôt et retenues. Utilisez le calculateur pour estimer la paie nette mensuelle.",
+      },
+      {
+        label: 'Brut aux deux semaines',
+        value: formatFrenchMoney(amount / 26),
+        detail:
+          "Un repère rapide avant impôt fédéral, impôt du Québec, RRQ, RQAP, assurance emploi et déductions.",
+      },
+      {
+        label: 'Contexte salaire',
+        value: salaryBand.value,
+        detail: salaryBand.detail,
+      },
+    ],
+    nextSteps: [
+      {
+        title: 'Calculer le net au Québec',
+        body: `Entrez ${salary}, choisissez Québec et comparez le net annuel, mensuel et aux deux semaines.`,
+        href: '/',
+        label: 'Ouvrir le calculateur',
+      },
+      {
+        title: 'Comparer avec une autre province',
+        body: `Le même salaire brut de ${salary} peut donner une paie nette différente ailleurs au Canada.`,
+        href: '/compare-provinces',
+        label: 'Comparer les provinces',
+      },
+      {
+        title: 'Lire le guide salaire Québec',
+        body: 'Ajoutez le contexte sur Montréal, Québec, les retenues provinciales et le coût de la vie.',
+        href: '/blog/quebec-salary-guide-2025',
+        label: 'Guide Québec',
+      },
+    ],
     alternateLanguages: [
       {
         href: `/${englishSlug}`,
