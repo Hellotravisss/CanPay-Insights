@@ -8,6 +8,9 @@ const inter = Inter({ subsets: ['latin'] });
 
 export const metadata: Metadata = {
   metadataBase: new URL('https://canpayinsights.ca'),
+  alternates: {
+    canonical: 'https://canpayinsights.ca',
+  },
   title: {
     default: 'Free Canadian Payroll Calculator 2025/2026 - CanPay Insights',
     template: '%s | CanPay Insights',
