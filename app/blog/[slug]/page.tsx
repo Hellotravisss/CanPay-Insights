@@ -106,6 +106,35 @@ export default async function ArticlePage({ params }: Props) {
           ]),
         }}
       />
+      
+      {/* 🚀 SEO Content Projection Block - Directly visible in pure HTML source to search engine crawlers */}
+      <div style={{ display: 'none' }} aria-hidden="true">
+        <h1>{article.title}</h1>
+        {article.subtitle && <h2>{article.subtitle}</h2>}
+        <p>{article.excerpt}</p>
+        {article.directAnswer && <p><strong>Direct Answer:</strong> {article.directAnswer}</p>}
+        <div>
+          {article.content.split('\n').map((paragraph, index) => {
+            const p = paragraph.trim();
+            if (p.startsWith('<b>') || p.startsWith('<strong>') || p.startsWith('##')) {
+              return <h3 key={index}>{p.replace(/<\/?[^>]+(>|$)/g, '')}</h3>;
+            }
+            return p !== '' ? <p key={index}>{p.replace(/<\/?[^>]+(>|$)/g, '')}</p> : null;
+          })}
+        </div>
+        {article.faq && article.faq.length > 0 && (
+          <div>
+            <h2>Frequently Asked Questions</h2>
+            {article.faq.map((item, index) => (
+              <div key={index}>
+                <h3>{item.question}</h3>
+                <p>{item.answer}</p>
+              </div>
+            ))}
+          </div>
+        )}
+      </div>
+
       <ArticlePageClient slug={slug} />
     </>
   );
