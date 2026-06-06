@@ -1,6 +1,6 @@
 import type { Metadata } from 'next';
 import BlogListPage from './BlogListPage';
-import { allArticles } from '../src/content/articles-data';
+import { allArticles } from '../../src/content/articles-data';
 
 export const metadata: Metadata = {
   title: 'Canadian Payroll & Tax Insights Hub 2025',
