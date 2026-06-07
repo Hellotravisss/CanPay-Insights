@@ -410,7 +410,7 @@ const InputSection: React.FC<Props> = ({ inputs, setInputs }) => {
                     </div>
                   </div>
                   <div>
-                    <label className="block text-xs font-bold text-red-800 mb-1.5 ml-1">Employer Match Policy</label>
+                    <label className="block text-xs font-bold text-red-800 mb-1.5 ml-1">Employer Match</label>
                     <select
                       className="w-full py-2 pl-2 pr-7 bg-white text-slate-900 border border-red-200 rounded-lg focus:ring-2 focus:ring-red-500 focus:outline-none text-xs sm:text-sm font-semibold truncate"
                       value={(inputs as any).rrspMatchPolicy || 'equal'}
