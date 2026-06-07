@@ -376,7 +376,7 @@ const InputSection: React.FC<Props> = ({ inputs, setInputs }) => {
                     type="number"
                     min="0"
                     step="25"
-                    className="w-full py-2 bg-white text-slate-900 border border-red-200 rounded-lg focus:ring-2 focus:ring-red-500 focus:outline-none text-sm"
+                    className="w-full py-2 pl-7 pr-3 bg-white text-slate-900 border border-red-200 rounded-lg focus:ring-2 focus:ring-red-500 focus:outline-none text-sm font-semibold"
                     value={inputs.rrspContributionPerPeriod || ''}
                     onFocus={(e) => e.target.select()}
                     onChange={(e) => setInputs({ ...inputs, rrspContributionPerPeriod: parseFloat(e.target.value) || 0 })}
@@ -394,7 +394,7 @@ const InputSection: React.FC<Props> = ({ inputs, setInputs }) => {
                         min="0"
                         max="100"
                         step="0.5"
-                        className="w-full py-2 pl-3 pr-8 bg-white text-slate-900 border border-red-200 rounded-lg focus:ring-2 focus:ring-red-500 focus:outline-none text-sm"
+                        className="w-full py-2 pl-3 pr-8 bg-white text-slate-900 border border-red-200 rounded-lg focus:ring-2 focus:ring-red-500 focus:outline-none text-sm font-semibold"
                         value={inputs.rrspPercentage || ''}
                         onFocus={(e) => e.target.select()}
                         onChange={(e) => {
@@ -412,7 +412,7 @@ const InputSection: React.FC<Props> = ({ inputs, setInputs }) => {
                   <div>
                     <label className="block text-xs font-bold text-red-800 mb-1.5 ml-1">Employer Match Policy</label>
                     <select
-                      className="w-full py-2 px-3 bg-white text-slate-900 border border-red-200 rounded-lg focus:ring-2 focus:ring-red-500 focus:outline-none text-sm"
+                      className="w-full py-2 pl-2 pr-7 bg-white text-slate-900 border border-red-200 rounded-lg focus:ring-2 focus:ring-red-500 focus:outline-none text-xs sm:text-sm font-semibold truncate"
                       value={(inputs as any).rrspMatchPolicy || 'equal'}
                       onChange={(e) => {
                         const policy = e.target.value;
@@ -433,9 +433,9 @@ const InputSection: React.FC<Props> = ({ inputs, setInputs }) => {
                         } as any);
                       }}
                     >
-                      <option value="equal">100% Match (Equal)</option>
-                      <option value="half">50% Match (Half)</option>
-                      <option value="none">No Matching (0%)</option>
+                      <option value="equal">100% Match</option>
+                      <option value="half">50% Match</option>
+                      <option value="none">No Match</option>
                       <option value="custom">Custom %</option>
                     </select>
                   </div>
