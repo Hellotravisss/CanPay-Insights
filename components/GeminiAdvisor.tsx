@@ -75,19 +75,18 @@ const sanitizeHTML = (html: string): string => {
 
 /**
  * 🚀 High-end inline Markdown parser for PDF/Image Export
- * Converts **bold** into premium capsule badges and *italics* into elegant text nodes
+ * Converts **bold** numbers into premium coral-red highlights, and standard text into semi-bold white
  */
 const renderInlineMarkdown = (text: string): React.ReactNode[] => {
   if (!text) return [];
   const parts = text.split('**');
   return parts.map((part, index) => {
     if (index % 2 === 1) {
-      // Premium Capsule Badge style for numbers and key ratios
+      // Highlight bold numbers or financial terms in warm premium coral-red
+      const isFin = /[\d$%]/.test(part);
+      const colorClass = isFin ? 'text-red-400 font-extrabold' : 'text-white font-bold';
       return (
-        <strong 
-          key={index} 
-          className="font-extrabold text-white bg-slate-800/80 px-2 py-0.5 rounded border border-slate-700/50 mx-0.5 inline-block shadow-sm"
-        >
+        <strong key={index} className={colorClass}>
           {part}
         </strong>
       );
@@ -96,7 +95,7 @@ const renderInlineMarkdown = (text: string): React.ReactNode[] => {
     const subParts = part.split('*');
     return subParts.map((subPart, subIndex) => {
       if (subIndex % 2 === 1) {
-        return <em key={subIndex} className="italic text-slate-100 font-medium">{subPart}</em>;
+        return <em key={subIndex} className="italic text-slate-300 font-medium">{subPart}</em>;
       }
       return subPart;
     }) as any;
@@ -563,7 +562,7 @@ const GeminiAdvisor: React.FC<Props> = ({ results, inputs }) => {
           <div className="border-b border-slate-700 pb-10 mb-12 flex justify-between items-end">
             <div>
               <div className="flex items-center gap-5 mb-5">
-                <img src="https://canpayinsights.ca/logo_reverse.png" alt="" className="w-14 h-14 object-contain flex-shrink-0" />
+                <img src="/logo_reverse.png" alt="" className="w-14 h-14 object-contain flex-shrink-0" />
                 <h1 className="text-5xl font-bold tracking-tight">
                   CanPay <span className="text-red-500">Insights</span>
                 </h1>
@@ -625,7 +624,7 @@ const GeminiAdvisor: React.FC<Props> = ({ results, inputs }) => {
                   const cleanLine = line.trim();
                   if (cleanLine.startsWith('###')) {
                     return (
-                      <h4 key={idx} className="text-3xl font-bold text-white mt-12 mb-4">
+                      <h4 key={idx} className="text-3xl font-bold text-red-400 mt-12 mb-4">
                         {renderInlineMarkdown(cleanLine.replace('###', ''))}
                       </h4>
                     );
@@ -639,13 +638,14 @@ const GeminiAdvisor: React.FC<Props> = ({ results, inputs }) => {
                   }
                   if (cleanLine.startsWith('-') || cleanLine.startsWith('*')) {
                     return (
-                      <li key={idx} className="ml-6 list-disc text-slate-300 mb-3 text-2xl leading-relaxed">
-                        {renderInlineMarkdown(cleanLine.replace(/^[-*]\s*/, ''))}
+                      <li key={idx} className="ml-6 text-slate-300 mb-3 text-[21px] leading-[1.7] list-none flex items-start gap-2">
+                        <span className="text-amber-400 font-bold text-2xl mt-0.5">•</span>
+                        <span>{renderInlineMarkdown(cleanLine.replace(/^[-*]\s*/, ''))}</span>
                       </li>
                     );
                   }
                   return cleanLine !== '' ? (
-                    <p key={idx} className="text-slate-300 text-2xl leading-relaxed text-justify font-sans mb-5">
+                    <p key={idx} className="text-slate-300 text-[21px] leading-[1.7] text-justify font-sans mb-5">
                       {renderInlineMarkdown(cleanLine)}
                     </p>
                   ) : null;
