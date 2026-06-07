@@ -871,35 +871,6 @@ const TaxOptimizationPanel: React.FC<TaxOptimizationPanelProps> = ({
         </div>
       </div>
 
-      {/* Other Tax Strategies */}
-      {highPriorityStrategies.length > 0 && (
-        <div className="bg-slate-900/60 p-5 rounded-xl border border-slate-700/50">
-          <h4 className="text-md font-bold text-white mb-4">High Priority Tax Strategies</h4>
-          <div className="space-y-4">
-            {highPriorityStrategies.map((strategy, idx) => (
-              <StrategyItem key={idx} strategy={strategy} />
-            ))}
-          </div>
-        </div>
-      )}
-
-      {mediumPriorityStrategies.length > 0 && (
-        <div className="bg-slate-900/40 p-5 rounded-xl border border-slate-700/30">
-          <h4 className="text-md font-bold text-slate-300 mb-4">Additional Strategies to Consider</h4>
-          <div className="space-y-3">
-            {mediumPriorityStrategies.slice(0, 3).map((strategy, idx) => (
-              <div key={idx} className="flex items-start gap-3 text-sm">
-                <span className="text-slate-500 mt-0.5">•</span>
-                <div>
-                  <span className="text-slate-300 font-medium">{strategy.name}</span>
-                  <span className="text-slate-500 ml-2">(Est. savings: {formatCurrency(strategy.estimatedSavings)})</span>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      )}
-
       {/* Summary */}
       <div className="bg-gradient-to-r from-red-900/40 to-slate-900/60 p-5 rounded-xl border border-red-500/30">
         <h4 className="text-md font-bold text-white mb-3">Executive Summary</h4>
