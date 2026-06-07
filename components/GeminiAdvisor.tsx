@@ -531,9 +531,7 @@ const GeminiAdvisor: React.FC<Props> = ({ results, inputs }) => {
           <div className="border-b border-slate-700 pb-10 mb-12 flex justify-between items-end">
             <div>
               <div className="flex items-center gap-5 mb-5">
-                <div className="bg-red-600 p-4 rounded-2xl shadow-xl">
-                  <InukshukIcon className="w-10 h-10 text-white" />
-                </div>
+                <img src="https://canpayinsights.ca/logo_reverse.png" alt="" className="w-14 h-14 object-contain flex-shrink-0" />
                 <h1 className="text-5xl font-bold tracking-tight">
                   CanPay <span className="text-red-500">Insights</span>
                 </h1>
@@ -564,7 +562,7 @@ const GeminiAdvisor: React.FC<Props> = ({ results, inputs }) => {
                 </div>
                 <div>
                   <p className="text-slate-400 text-sm mb-1">Total Tax Savings Potential</p>
-                  <p className="text-3xl font-bold text-red-400">{formatCurrency(taxOptimization.summary.totalPotentialSavings)}</p>
+                  <p className="text-3xl font-bold text-red-400">{formatCurrency(taxOptimization.summary.totalPotentialSavings + annualEmployerMatchActual)}</p>
                   <p className="text-slate-500 text-sm mt-1">Marginal Rate: {(taxOptimization.rrsp.marginalRate * 100).toFixed(1)}%</p>
                 </div>
               </div>
@@ -572,7 +570,7 @@ const GeminiAdvisor: React.FC<Props> = ({ results, inputs }) => {
           </div>
 
           {/* Action Plan */}
-          <div className="mb-10">
+          <div className="mb-12">
             <h3 className="text-xl font-bold text-white mb-4">Action Plan</h3>
             <ul className="space-y-3">
               {taxOptimization.summary.actionPlan.map((action, idx) => (
@@ -583,6 +581,34 @@ const GeminiAdvisor: React.FC<Props> = ({ results, inputs }) => {
               ))}
             </ul>
           </div>
+
+          {/* ✦ AI Personalized Tax Strategies (Only if generated!) */}
+          {advice && (
+            <div className="mb-12 border-t border-slate-800 pt-10">
+              <h3 className="text-2xl font-bold text-white mb-6 flex items-center gap-2">
+                <span className="text-red-500 text-3xl">✦</span> AI Personalized Financial Advisory
+              </h3>
+              <div className="space-y-6 text-slate-300 text-lg leading-relaxed max-w-[850px] text-justify font-sans">
+                {advice.split('\n').map((line, idx) => {
+                  const cleanLine = line.trim();
+                  if (cleanLine.startsWith('###')) {
+                    return <h4 key={idx} className="text-xl font-bold text-white mt-8 mb-3">{cleanLine.replace('###', '')}</h4>;
+                  }
+                  if (cleanLine.startsWith('##')) {
+                    return <h4 key={idx} className="text-2xl font-bold text-white mt-10 mb-4 border-b border-slate-800 pb-2">{cleanLine.replace('##', '')}</h4>;
+                  }
+                  if (cleanLine.startsWith('-') || cleanLine.startsWith('*')) {
+                    return (
+                      <li key={idx} className="ml-5 list-disc text-slate-300 mb-2">
+                        {cleanLine.replace(/^[-*]\s*/, '')}
+                      </li>
+                    );
+                  }
+                  return cleanLine !== '' ? <p key={idx}>{cleanLine}</p> : null;
+                })}
+              </div>
+            </div>
+          )}
 
           {/* Footer */}
           <div className="pt-12 border-t border-slate-800 flex justify-between items-center">
@@ -595,11 +621,11 @@ const GeminiAdvisor: React.FC<Props> = ({ results, inputs }) => {
                 <p className="text-xs text-slate-600 font-bold uppercase tracking-[0.4em] mb-2">Based on 2025 Tax Rules</p>
                 <p className="text-sm text-slate-500 italic">For reference only. Consult a tax professional for personalized advice.</p>
               </div>
-              <div className="p-1.5 bg-white rounded-2xl shadow-2xl border-4 border-slate-800">
+              <div className="w-32 h-32 p-1.5 bg-white rounded-2xl shadow-2xl border-4 border-slate-800 flex-shrink-0 flex items-center justify-center aspect-square">
                 {qrBase64 ? (
-                  <img src={qrBase64} alt="QR" className="w-28 h-28 block" style={{ imageRendering: 'crisp-edges' }} />
+                  <img src={qrBase64} alt="QR" className="w-full h-full block object-contain aspect-square" style={{ imageRendering: 'crisp-edges' }} />
                 ) : (
-                  <div className="w-28 h-28 bg-slate-200 animate-pulse" />
+                  <div className="w-full h-full bg-slate-200 animate-pulse rounded-xl" />
                 )}
               </div>
             </div>
@@ -962,6 +988,24 @@ const generateTaxPrompt = (
 ): string => {
   const { rrsp, tfsa, fhsa, summary } = optimization;
   
+  // Calculate periods and actuals for precise prompt context
+  const periods = (inputs as any).payFrequency ? (
+    (inputs as any).payFrequency === 'monthly' ? 12 :
+    (inputs as any).payFrequency === 'semi-monthly' ? 24 :
+    (inputs as any).payFrequency === 'weekly' ? 52 : 26
+  ) : 26;
+  const annualRRSPActual = (results.rrspDeduction || 0) * periods;
+  const isPercent = (inputs as any).rrspType === 'percent';
+  const rrspPercentage = (inputs as any).rrspPercentage || 0;
+  const rrspEmployerMatch = (inputs as any).rrspEmployerMatch || 0;
+  const grossPay = results.grossPayPerPeriod || results.grossPayBiWeekly || 0;
+  const annualEmployerMatchActual = isPercent && rrspEmployerMatch > 0 
+    ? (grossPay * (rrspEmployerMatch / 100)) * periods 
+    : 0;
+
+  const remainingRRSPOptimum = Math.max(0, rrsp.recommendedAmount - annualRRSPActual);
+  const biweeklyTopUp = Math.round(remainingRRSPOptimum / periods);
+
   return `
 You are a professional Canadian tax planner. Based on the following client's specific financial data, provide detailed, practical, and personalized tax optimization advice.
 
@@ -969,6 +1013,13 @@ You are a professional Canadian tax planner. Based on the following client's spe
 - Province: ${inputs.province}
 - Annual Income: $${results.grossPayAnnual.toLocaleString()}
 - Marginal Tax Rate: ${(rrsp.marginalRate * 100).toFixed(1)}%
+- Client's Current RRSP Setup:
+  - Calculation Type: ${isPercent ? 'Percentage-based' : 'Fixed-amount'}
+  - Personal Contribution Rate: ${isPercent ? `${rrspPercentage}%` : `$${(inputs.rrspContributionPerPeriod || 0).toLocaleString()} per paycheque`}
+  - Personal Annual RRSP Contribution (Already Saved): $${annualRRSPActual.toLocaleString()}
+  - Employer Matching Contribution Rate: ${isPercent ? `${rrspEmployerMatch}%` : 'No matching'}
+  - Employer Annual RRSP Matching Contribution (Already Received): $${annualEmployerMatchActual.toLocaleString()}
+  - Total Current RRSP Annual Saving (Personal + Employer): $${(annualRRSPActual + annualEmployerMatchActual).toLocaleString()}
 
 ## System-Calculated Optimization Plan (Use this as basis for professional interpretation)
 
@@ -991,29 +1042,39 @@ You are a professional Canadian tax planner. Based on the following client's spe
 - Lifetime Limit: $${fhsa.lifetimeLimit.toLocaleString()}
 
 ### Other Tax Strategy Potential
-- Total Tax Savings Potential: $${summary.totalPotentialSavings.toLocaleString()}
+- Total Tax Savings Potential: $${(summary.totalPotentialSavings + annualEmployerMatchActual).toLocaleString()}
 - Priority: ${summary.priority}
+
+## CRITICAL INSTRUCTION FOR TAILORED ADVICE:
+The client has already contributed $${annualRRSPActual.toLocaleString()} personally this year and has received $${annualEmployerMatchActual.toLocaleString()} from their employer, making a total of $${(annualRRSPActual + annualEmployerMatchActual).toLocaleString()} already saved.
+Your advice MUST be tailored to their current situation:
+1. Do NOT just tell them to contribute the raw recommended amount $${rrsp.recommendedAmount.toLocaleString()}. 
+2. Instead, congratulate them on capturing $${annualEmployerMatchActual.toLocaleString()} in FREE matching funds from their employer! That is an incredible and highly smart financial decision.
+3. Tell them exactly how much they still need to contribute as a voluntary personal top-up (which is exactly $${remainingRRSPOptimum.toLocaleString()} -- calculated as Recommended $${rrsp.recommendedAmount.toLocaleString()} minus their current personal contribution $${annualRRSPActual.toLocaleString()}).
+4. Give them concrete, specific, and simple advice on how to do this: e.g., opening a personal RRSP/TFSA/FHSA account with a modern Canadian financial institution like Wealthsimple (highly recommended for beginners, extremely low fees and ad-free), Questrade, or one of Canada's Big Five Banks (TD, RBC, BMO, CIBC, Scotiabank), and setting up automated bi-weekly deposits of $${biweeklyTopUp.toLocaleString()} or making a lump-sum deposit before the March tax deadline.
+5. Keep explanations extremadamente easy to understand. Most people do not understand finance. Use simple analogies and direct instructions.
 
 ## Please provide the following:
 
 1. **RRSP Deep Analysis** (3-4 sentences)
-   - Explain why this contribution amount is recommended
-   - How to maximize refund benefits
-   - Tax implications when withdrawing from RRSP
+   - Acknowledge and congratulate them on their existing $${annualRRSPActual.toLocaleString()} personal and $${annualEmployerMatchActual.toLocaleString()} employer matched contributions.
+   - Explain that to capture the full tax savings, they have a remaining "optimal gap" of **$${remainingRRSPOptimum.toLocaleString()}** to fill.
+   - Explain how filling this gap reduces their taxes and lowers net costs.
+   - Explain tax implications when withdrawing from RRSP in retirement.
 
 2. **TFSA vs RRSP Priority Advice** (2-3 sentences)
-   - Choice recommendations based on client's income level
-   - Best use cases for each account type
+   - Choice recommendations based on client's income level ($${results.grossPayAnnual.toLocaleString()}) and tax bracket (${(rrsp.marginalRate * 100).toFixed(1)}%).
+   - Best use cases for each account type.
 
 3. **FHSA Usage Recommendations** (2-3 sentences)
-   - If client plans to buy a home, explain FHSA advantages
-   - How to combine with RRSP for maximum benefit
+   - Explain FHSA advantages if buying a first home.
+   - How to combine with RRSP for maximum benefit.
 
 4. **Specific Action Steps** (bullet points)
-   - Step 1: Which accounts to open
-   - Step 2: How much to contribute
-   - Step 3: When to contribute (now or year-end)
-   - Step 4: How to file taxes
+   - Step 1: Open Accounts. (Suggest where to open, e.g. Wealthsimple for simple zero-commission automated investing, or major banks).
+   - Step 2: Contribute Amounts. (Specify contributing the voluntary top-up of **$${remainingRRSPOptimum.toLocaleString()}** to RRSP, $${tfsa.recommendedAmount.toLocaleString()} to TFSA, and $${fhsa.recommendedAmount.toLocaleString()} to FHSA).
+   - Step 3: When to Contribute. (Either bi-weekly automated savings of **$${biweeklyTopUp.toLocaleString()}** or a lump sum before the March deadline).
+   - Step 4: How to File Taxes. (Gather tax slips, use software like Wealthsimple Tax or TurboTax, and report RRSP deduction).
 
 5. **Common Pitfall Warnings** (2-3 points)
    - RRSP over-contribution penalties
@@ -1023,7 +1084,7 @@ You are a professional Canadian tax planner. Based on the following client's spe
 ## Output Format Requirements:
 - Use English
 - Use **bold** for key numbers
-- Professional but easy to understand tone
+- Professional but easy to understand tone (like a friendly, expert personal financial planner)
 - Give specific actionable guidance, avoid vague "consult a professional" responses
 `;
 };
