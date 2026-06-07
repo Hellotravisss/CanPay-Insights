@@ -51,9 +51,4 @@ search_exact.js
 search_iframes.js
 search_more.js
 *.p8
-app.json
-App.tsx
-index.html
-index.tsx
-vite.config.ts
-vite-env.d.ts
+
