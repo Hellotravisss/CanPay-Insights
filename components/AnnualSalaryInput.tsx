@@ -182,6 +182,7 @@ const AnnualSalaryInput: React.FC<Props> = ({ inputs, setInputs }) => {
                 rrspType: e.target.checked ? (inputs.rrspType || 'amount') : undefined,
                 rrspContributionPerPeriod: e.target.checked ? (inputs.rrspContributionPerPeriod || 200) : 0,
                 rrspPercentage: e.target.checked ? (inputs.rrspPercentage || 5) : 0,
+                rrspMatchPolicy: e.target.checked ? ((inputs as any).rrspMatchPolicy || 'equal') : undefined,
                 rrspEmployerMatch: e.target.checked ? (inputs.rrspEmployerMatch || 5) : 0
               })}
             />
@@ -235,39 +236,82 @@ const AnnualSalaryInput: React.FC<Props> = ({ inputs, setInputs }) => {
                 </div>
               </div>
             ) : (
-              <div className="grid grid-cols-2 gap-3">
-                <div>
-                  <label className="block text-xs font-bold text-red-800 mb-1.5 ml-1">My Contribution (%)</label>
-                  <div className="relative">
-                    <input
-                      type="number"
-                      min="0"
-                      max="100"
-                      step="0.5"
-                      className="w-full py-2 pl-3 pr-8 bg-white text-slate-900 border border-red-200 rounded-lg focus:ring-2 focus:ring-red-500 focus:outline-none text-sm"
-                      value={inputs.rrspPercentage || ''}
-                      onFocus={(e) => e.target.select()}
-                      onChange={(e) => setInputs({ ...inputs, rrspPercentage: parseFloat(e.target.value) || 0 })}
-                    />
-                    <span className="absolute right-3 top-1/2 -translate-y-1/2 text-red-400 font-bold text-xs">%</span>
+              <div className="space-y-3">
+                <div className="grid grid-cols-2 gap-3">
+                  <div>
+                    <label className="block text-xs font-bold text-red-800 mb-1.5 ml-1">My Contribution (%)</label>
+                    <div className="relative">
+                      <input
+                        type="number"
+                        min="0"
+                        max="100"
+                        step="0.5"
+                        className="w-full py-2 pl-3 pr-8 bg-white text-slate-900 border border-red-200 rounded-lg focus:ring-2 focus:ring-red-500 focus:outline-none text-sm"
+                        value={inputs.rrspPercentage || ''}
+                        onFocus={(e) => e.target.select()}
+                        onChange={(e) => {
+                          const val = parseFloat(e.target.value) || 0;
+                          setInputs({
+                            ...inputs,
+                            rrspPercentage: val,
+                            rrspEmployerMatch: ((inputs as any).rrspMatchPolicy || 'equal') === 'equal' ? val : (((inputs as any).rrspMatchPolicy === 'half') ? (val / 2) : (inputs.rrspEmployerMatch || 0))
+                          });
+                        }}
+                      />
+                      <span className="absolute right-3 top-1/2 -translate-y-1/2 text-red-400 font-bold text-xs">%</span>
+                    </div>
+                  </div>
+                  <div>
+                    <label className="block text-xs font-bold text-red-800 mb-1.5 ml-1">Employer Match Policy</label>
+                    <select
+                      className="w-full py-2 px-3 bg-white text-slate-900 border border-red-200 rounded-lg focus:ring-2 focus:ring-red-500 focus:outline-none text-sm"
+                      value={(inputs as any).rrspMatchPolicy || 'equal'}
+                      onChange={(e) => {
+                        const policy = e.target.value;
+                        let matchVal = 0;
+                        if (policy === 'equal') {
+                          matchVal = inputs.rrspPercentage || 5;
+                        } else if (policy === 'half') {
+                          matchVal = (inputs.rrspPercentage || 5) / 2;
+                        } else if (policy === 'none') {
+                          matchVal = 0;
+                        } else if (policy === 'custom') {
+                          matchVal = inputs.rrspEmployerMatch || 0;
+                        }
+                        setInputs({
+                          ...inputs,
+                          rrspMatchPolicy: policy as any,
+                          rrspEmployerMatch: matchVal
+                        } as any);
+                      }}
+                    >
+                      <option value="equal">100% Match (Equal)</option>
+                      <option value="half">50% Match (Half)</option>
+                      <option value="none">No Matching (0%)</option>
+                      <option value="custom">Custom %</option>
+                    </select>
                   </div>
                 </div>
-                <div>
-                  <label className="block text-xs font-bold text-red-800 mb-1.5 ml-1">Employer Match (%)</label>
-                  <div className="relative">
-                    <input
-                      type="number"
-                      min="0"
-                      max="100"
-                      step="0.5"
-                      className="w-full py-2 pl-3 pr-8 bg-white text-slate-900 border border-red-200 rounded-lg focus:ring-2 focus:ring-red-500 focus:outline-none text-sm"
-                      value={inputs.rrspEmployerMatch || ''}
-                      onFocus={(e) => e.target.select()}
-                      onChange={(e) => setInputs({ ...inputs, rrspEmployerMatch: parseFloat(e.target.value) || 0 })}
-                    />
-                    <span className="absolute right-3 top-1/2 -translate-y-1/2 text-red-400 font-bold text-xs">%</span>
+
+                {/* Show Custom Match Input only if 'custom' is selected */}
+                {((inputs as any).rrspMatchPolicy === 'custom') && (
+                  <div className="animate-fadeIn">
+                    <label className="block text-xs font-bold text-red-800 mb-1.5 ml-1">Custom Employer Match (%)</label>
+                    <div className="relative">
+                      <input
+                        type="number"
+                        min="0"
+                        max="100"
+                        step="0.5"
+                        className="w-full py-2 pl-3 pr-8 bg-white text-slate-900 border border-red-200 rounded-lg focus:ring-2 focus:ring-red-500 focus:outline-none text-sm"
+                        value={inputs.rrspEmployerMatch || ''}
+                        onFocus={(e) => e.target.select()}
+                        onChange={(e) => setInputs({ ...inputs, rrspEmployerMatch: parseFloat(e.target.value) || 0 })}
+                      />
+                      <span className="absolute right-3 top-1/2 -translate-y-1/2 text-red-400 font-bold text-xs">%</span>
+                    </div>
                   </div>
-                </div>
+                )}
               </div>
             )}
             <p className="text-[10px] text-red-700 leading-tight">

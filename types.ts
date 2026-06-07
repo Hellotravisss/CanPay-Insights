@@ -86,6 +86,7 @@ export interface SalaryInputs {
   premium: ShiftPremium;
   rrspType?: 'amount' | 'percent';
   rrspPercentage?: number;
+  rrspMatchPolicy?: 'equal' | 'half' | 'none' | 'custom';
   rrspEmployerMatch?: number;
   rrspContributionPerPeriod?: number;
   additionalIncome?: AdditionalIncome;
@@ -99,6 +100,7 @@ export interface AnnualSalaryInputs {
   payFrequency: PayFrequency;
   rrspType?: 'amount' | 'percent';
   rrspPercentage?: number;
+  rrspMatchPolicy?: 'equal' | 'half' | 'none' | 'custom';
   rrspEmployerMatch?: number;
   rrspContributionPerPeriod?: number;
   additionalIncome?: AdditionalIncome;
@@ -124,6 +126,7 @@ export interface TimesheetInputs {
   entries: TimesheetEntry[];
   rrspType?: 'amount' | 'percent';
   rrspPercentage?: number;
+  rrspMatchPolicy?: 'equal' | 'half' | 'none' | 'custom';
   rrspEmployerMatch?: number;
   rrspContributionPerPeriod?: number;
   deductions?: Deductions;
