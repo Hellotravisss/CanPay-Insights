@@ -871,22 +871,6 @@ const TaxOptimizationPanel: React.FC<TaxOptimizationPanelProps> = ({
         </div>
       </div>
 
-      {/* Summary */}
-      <div className="bg-gradient-to-r from-red-900/40 to-slate-900/60 p-5 rounded-xl border border-red-500/30">
-        <h4 className="text-md font-bold text-white mb-3">Executive Summary</h4>
-        <p className="text-sm text-slate-300 mb-4">{summary.priority}</p>
-        <div className="space-y-2">
-          {summary.actionPlan.slice(0, 3).map((action, idx) => (
-            <div key={idx} className="flex items-center gap-3 text-sm">
-              <span className="w-5 h-5 rounded-full bg-red-600 flex items-center justify-center text-xs font-bold">
-                {idx + 1}
-              </span>
-              <span className="text-slate-200">{action}</span>
-            </div>
-          ))}
-        </div>
-      </div>
-
       <p className="text-xs text-slate-500 text-center">
         Recommendations based on 2025 Canadian tax laws. Actual amounts may vary based on your specific situation. Consult a Registered Tax Preparer (RTP) or financial advisor for personalized advice.
       </p>
