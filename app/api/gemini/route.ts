@@ -25,7 +25,10 @@ export async function POST(req: NextRequest) {
       }
     );
 
-    if (!res.ok) continue; // try next model on any error
+    if (!res.ok) {
+      const errText = await res.text();
+      return NextResponse.json({ error: `Gemini Error on ${model}: ${res.status} - ${errText}` }, { status: res.status });
+    }
 
     const data = await res.json();
     const text = data?.candidates?.[0]?.content?.parts?.[0]?.text ?? '';
