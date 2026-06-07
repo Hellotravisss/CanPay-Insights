@@ -71,6 +71,7 @@ export interface AdditionalIncome {
   sickPay: number;             // per period
   bonus: number;               // per period (one-time or recurring)
   otherIncome: number;         // per period (tips, commissions, etc.)
+  taxableBenefits?: number;    // non-cash taxable benefits (e.g. group life insurance)
 }
 
 export interface Deductions {

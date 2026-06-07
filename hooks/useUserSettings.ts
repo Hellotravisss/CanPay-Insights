@@ -43,7 +43,7 @@ const DEFAULT_SETTINGS: UserSettings = {
       startTime: "00:00",
       endTime: "06:00"
     },
-    additionalIncome: { statHolidayPay: 0, sickPay: 0, bonus: 0, otherIncome: 0 },
+    additionalIncome: { statHolidayPay: 0, sickPay: 0, bonus: 0, otherIncome: 0, taxableBenefits: 0 },
     deductions: { ltdPremium: 0, unionDues: 0, otherDeductions: 0 },
   },
   annual: {

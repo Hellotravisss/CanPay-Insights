@@ -234,6 +234,7 @@ const InputSection: React.FC<Props> = ({ inputs, setInputs }) => {
               { key: 'sickPay',        label: 'Sick Pay / Paid Leave',  hint: 'Employer-paid sick or personal days this period' },
               { key: 'bonus',          label: 'Bonus / Retroactive Pay', hint: 'One-time or recurring bonus, gain-share, retro' },
               { key: 'otherIncome',   label: 'Other Income',            hint: 'Tips, commissions, allowances, etc.' },
+              { key: 'taxableBenefits', label: 'Taxable Benefits (Non-cash)', hint: 'Group life insurance, AD&D, company-paid taxable benefits' },
             ] as { key: keyof AdditionalIncome; label: string; hint: string }[]).map(({ key, label, hint }) => (
               <div key={key}>
                 <label className="block text-xs font-bold text-red-800 mb-1">{label}</label>

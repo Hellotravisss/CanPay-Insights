@@ -327,13 +327,16 @@ export const calculateSalary = (inputs: SalaryInputs): CalculationResult => {
     ? (ded.ltdPremium + ded.unionDues + ded.otherDeductions)
     : 0;
 
-  const taxableIncome = Math.max(0, annualGross - annualRRSP);
+  const taxableBenefitsPerPeriod = inputs.additionalIncome?.taxableBenefits ?? 0;
+  const annualTaxableBenefits = taxableBenefitsPerPeriod * 26;
+
+  const taxableIncome = Math.max(0, (annualGross + annualTaxableBenefits) - annualRRSP);
 
   // 6. Deductions
   const isQuebec = inputs.province === Province.QC;
-  const cppResult = calculateCPP(annualGross, isQuebec);
-  const eiAnnual = calculateEI(annualGross, isQuebec);
-  const qpipAnnual = isQuebec ? calculateQPIP(annualGross) : 0;
+  const cppResult = calculateCPP(annualGross + annualTaxableBenefits, isQuebec);
+  const eiAnnual = calculateEI(annualGross + annualTaxableBenefits, isQuebec);
+  const qpipAnnual = isQuebec ? calculateQPIP(annualGross + annualTaxableBenefits) : 0;
   const taxResult = calculateTotalTax(taxableIncome, cppResult.total, inputs.province);
   
   const totalTaxAnnual = taxResult.total;
@@ -402,12 +405,15 @@ export const calculateFromAnnualSalary = (inputs: AnnualSalaryInputs): Calculati
   const postTaxPerPeriod = ded ? (ded.ltdPremium + ded.unionDues + ded.otherDeductions) : 0;
   const annualPostTax = postTaxPerPeriod * periodsPerYear;
 
-  const taxableIncome = Math.max(0, annualGross - annualRRSP);
+  const taxableBenefitsPerPeriod = inputs.additionalIncome?.taxableBenefits ?? 0;
+  const annualTaxableBenefits = taxableBenefitsPerPeriod * periodsPerYear;
+
+  const taxableIncome = Math.max(0, (annualGross + annualTaxableBenefits) - annualRRSP);
 
   // Calculate deductions
-  const cppResult = calculateCPP(annualGross, isQuebec);
-  const eiAnnual = calculateEI(annualGross, isQuebec);
-  const qpipAnnual = isQuebec ? calculateQPIP(annualGross) : 0;
+  const cppResult = calculateCPP(annualGross + annualTaxableBenefits, isQuebec);
+  const eiAnnual = calculateEI(annualGross + annualTaxableBenefits, isQuebec);
+  const qpipAnnual = isQuebec ? calculateQPIP(annualGross + annualTaxableBenefits) : 0;
   const taxResult = calculateTotalTax(taxableIncome, cppResult.total, province);
 
   const totalTaxAnnual = taxResult.total;
@@ -532,13 +538,16 @@ export const calculateFromTimesheet = (inputs: TimesheetInputs): CalculationResu
   const postTaxPerPeriod = ded ? (ded.ltdPremium + ded.unionDues + ded.otherDeductions) : 0;
   const annualPostTax = postTaxPerPeriod * periodsPerYear;
 
-  const taxableIncome = Math.max(0, annualGross - annualRRSP);
+  const taxableBenefitsPerPeriod = inputs.deductions ? 0 : (inputs as any).additionalIncome?.taxableBenefits ?? 0; // fallback safety
+  const annualTaxableBenefits = taxableBenefitsPerPeriod * periodsPerYear;
+
+  const taxableIncome = Math.max(0, (annualGross + annualTaxableBenefits) - annualRRSP);
 
   // Calculate deductions
   const isQuebec = province === Province.QC;
-  const cppResult = calculateCPP(annualGross, isQuebec);
-  const eiAnnual = calculateEI(annualGross, isQuebec);
-  const qpipAnnual = isQuebec ? calculateQPIP(annualGross) : 0;
+  const cppResult = calculateCPP(annualGross + annualTaxableBenefits, isQuebec);
+  const eiAnnual = calculateEI(annualGross + annualTaxableBenefits, isQuebec);
+  const qpipAnnual = isQuebec ? calculateQPIP(annualGross + annualTaxableBenefits) : 0;
   const taxResult = calculateTotalTax(taxableIncome, cppResult.total, province);
 
   const totalTaxAnnual = taxResult.total;

@@ -39,6 +39,7 @@ const DEFAULT_SIMPLE_INPUTS: SalaryInputs = {
     sickPay: 0,
     bonus: 0,
     otherIncome: 0,
+    taxableBenefits: 0,
   },
   deductions: {
     ltdPremium: 0,
@@ -52,7 +53,7 @@ const DEFAULT_ANNUAL_INPUTS: AnnualSalaryInputs = {
   province: Province.ON,
   annualSalary: 100000,
   payFrequency: PayFrequency.BI_WEEKLY,
-  additionalIncome: { statHolidayPay: 0, sickPay: 0, bonus: 0, otherIncome: 0 },
+  additionalIncome: { statHolidayPay: 0, sickPay: 0, bonus: 0, otherIncome: 0, taxableBenefits: 0 },
   deductions: { ltdPremium: 0, unionDues: 0, otherDeductions: 0 },
 };
 
