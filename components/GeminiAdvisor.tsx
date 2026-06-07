@@ -74,17 +74,40 @@ const sanitizeHTML = (html: string): string => {
 };
 
 /**
- * 🚀 High-end inline Markdown parser for PDF/Image Export
- * Converts **bold** numbers into premium coral-red highlights, and standard text into semi-bold white
+ * 🚀 High-end inline Markdown parser for PDF/Image Export and Web Rendering
+ * Dynamically colors bold text based on financial accounts:
+ * - RRSP / Salaries -> Warm Coral Red (text-red-400)
+ * - TFSA / Room -> Emerald Green (text-emerald-400)
+ * - FHSA / Housing -> Sky Blue (text-sky-400)
  */
 const renderInlineMarkdown = (text: string): React.ReactNode[] => {
   if (!text) return [];
   const parts = text.split('**');
   return parts.map((part, index) => {
     if (index % 2 === 1) {
-      // Highlight bold numbers or financial terms in warm premium coral-red
-      const isFin = /[\d$%]/.test(part);
-      const colorClass = isFin ? 'text-red-400 font-extrabold' : 'text-white font-bold';
+      const cleanPart = part.toLowerCase();
+      let colorClass = 'text-white font-bold'; // Default bold is bright white
+
+      // Check if it contains digits, percentages, or dollar signs to apply custom accounts coloring
+      if (/[\d$%]/.test(part)) {
+        if (cleanPart.includes('tfsa') || cleanPart.includes('$7,000') || cleanPart.includes('$102,000')) {
+          colorClass = 'text-emerald-400 font-extrabold'; // Green for TFSA
+        } else if (cleanPart.includes('fhsa') || cleanPart.includes('$8,000') || cleanPart.includes('$40,000')) {
+          colorClass = 'text-sky-400 font-extrabold'; // Blue for FHSA
+        } else {
+          colorClass = 'text-red-400 font-extrabold'; // Coral-Red for RRSP & General Income
+        }
+      } else {
+        // Highlighting account names even if they don't have numbers
+        if (cleanPart.includes('tfsa') || cleanPart.includes('tax-free savings')) {
+          colorClass = 'text-emerald-400 font-bold';
+        } else if (cleanPart.includes('fhsa') || cleanPart.includes('first home savings')) {
+          colorClass = 'text-sky-400 font-bold';
+        } else if (cleanPart.includes('rrsp') || cleanPart.includes('retirement savings')) {
+          colorClass = 'text-red-400 font-bold';
+        }
+      }
+
       return (
         <strong key={index} className={colorClass}>
           {part}
@@ -100,6 +123,86 @@ const renderInlineMarkdown = (text: string): React.ReactNode[] => {
       return subPart;
     }) as any;
   }) as any;
+};
+
+/**
+ * 🛠️ Complete line-by-line Markdown renderer for BOTH web and image exports.
+ * Guarantees 100% exact rendering match between webpage and downloaded image!
+ */
+const renderMarkdownLine = (line: string, isImage: boolean): React.ReactNode => {
+  const cleanLine = line.trim();
+  if (cleanLine === '') return null;
+
+  // Font sizes: larger on downloaded image for legibility, standard on web screen
+  const pSize = isImage ? 'text-[21px] leading-[1.7]' : 'text-sm md:text-base leading-relaxed';
+  const h2Size = isImage ? 'text-3.5xl' : 'text-lg md:text-xl';
+  const h3Size = isImage ? 'text-3xl' : 'text-base md:text-lg';
+
+  if (cleanLine.startsWith('###')) {
+    const text = cleanLine.replace('###', '').trim();
+    const cleanText = text.toLowerCase();
+    
+    // Colorful, themed headings
+    let colorClass = 'text-red-400'; // Default Coral-Red
+    if (cleanText.includes('tfsa')) {
+      colorClass = 'text-emerald-400'; // Green for TFSA
+    } else if (cleanText.includes('fhsa')) {
+      colorClass = 'text-sky-400'; // Blue for FHSA
+    } else if (cleanText.includes('action') || cleanText.includes('step')) {
+      colorClass = 'text-white border-b border-slate-700/50 pb-2 w-full';
+    } else if (cleanText.includes('pitfall') || cleanText.includes('warning')) {
+      colorClass = 'text-amber-500'; // Warning Orange
+    }
+
+    return (
+      <h4 key={text} className={`${h3Size} font-bold ${colorClass} mt-8 mb-3`}>
+        {renderInlineMarkdown(text)}
+      </h4>
+    );
+  }
+
+  if (cleanLine.startsWith('##')) {
+    const text = cleanLine.replace('##', '').trim();
+    return (
+      <h3 key={text} className={`${h2Size} font-extrabold text-red-500 mt-10 mb-4 border-b border-slate-800 pb-2`}>
+        {renderInlineMarkdown(text)}
+      </h3>
+    );
+  }
+
+  if (cleanLine.startsWith('-') || cleanLine.startsWith('*')) {
+    const text = cleanLine.replace(/^[-*]\s*/, '').trim();
+    const cleanText = text.toLowerCase();
+
+    // Color-coded bullet points for high-end look
+    let bulletColor = 'text-red-500';
+    if (cleanText.includes('tfsa')) {
+      bulletColor = 'text-emerald-500';
+    } else if (cleanText.includes('fhsa')) {
+      bulletColor = 'text-sky-500';
+    } else if (cleanText.includes('step 1') || cleanText.includes('open')) {
+      bulletColor = 'text-amber-400';
+    } else if (cleanText.includes('step 2') || cleanText.includes('contribute')) {
+      bulletColor = 'text-emerald-400';
+    } else if (cleanText.includes('step 3')) {
+      bulletColor = 'text-sky-400';
+    } else if (cleanText.includes('step 4')) {
+      bulletColor = 'text-violet-400';
+    }
+
+    return (
+      <li key={text} className={`ml-4 list-none flex items-start gap-2 ${pSize} text-slate-300 mb-2`}>
+        <span className={`${bulletColor} font-bold text-lg mt-0.5 flex-shrink-0 select-none`}>•</span>
+        <span className="flex-1">{renderInlineMarkdown(text)}</span>
+      </li>
+    );
+  }
+
+  return (
+    <p className={`${pSize} text-slate-300 text-justify font-sans mb-4`}>
+      {renderInlineMarkdown(cleanLine)}
+    </p>
+  );
 };
 
 const GeminiAdvisor: React.FC<Props> = ({ results, inputs }) => {
@@ -439,12 +542,9 @@ const GeminiAdvisor: React.FC<Props> = ({ results, inputs }) => {
             AI Deep Analysis
           </h4>
           <div className="bg-slate-900/60 p-5 rounded-xl border border-slate-700/50 animate-fadeIn">
-            <div
-              className="prose prose-invert prose-sm max-w-none text-slate-200"
-              dangerouslySetInnerHTML={{
-                __html: sanitizeHTML(advice),
-              }}
-            />
+            <div className="max-w-none text-slate-200 space-y-1">
+              {advice.split('\n').map((line, idx) => renderMarkdownLine(line, false))}
+            </div>
             {/* Save Report Button - Mobile Optimized */}
             <div className="mt-6 pt-4 border-t border-slate-700/50">
               <button
@@ -562,7 +662,7 @@ const GeminiAdvisor: React.FC<Props> = ({ results, inputs }) => {
           <div className="border-b border-slate-700 pb-10 mb-12 flex justify-between items-end">
             <div>
               <div className="flex items-center gap-5 mb-5">
-                <img src="/logo_reverse.png" alt="" className="w-14 h-14 object-contain flex-shrink-0" />
+                <img src="/logo.png" alt="" className="w-14 h-14 object-contain flex-shrink-0 rounded-xl shadow-lg border border-slate-800" />
                 <h1 className="text-5xl font-bold tracking-tight">
                   CanPay <span className="text-red-500">Insights</span>
                 </h1>
