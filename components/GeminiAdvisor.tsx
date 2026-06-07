@@ -56,19 +56,51 @@ const sanitizeHTML = (html: string): string => {
   // Then restore safe formatting tags
   // Bold: **text** or __text__ -> <b>text</b>
   sanitized = sanitized.replace(/&lt;b&gt;(.*?)&lt;\/b&gt;/g, '<b>$1</b>');
-  sanitized = sanitized.replace(/\*\*(.*?)\*\*/g, '<b class="text-red-400">$1</b>');
+  sanitized = sanitized.replace(/\*\*(.*?)\*\*/g, '<b class="text-red-400 font-bold">$1</b>');
   
   // List items
-  sanitized = sanitized.replace(/^\* (.*)$/gm, '<li class="ml-4 mb-1">$1</li>');
+  sanitized = sanitized.replace(/^\* (.*)$/gm, '<li class="ml-4 mb-2">$1</li>');
+  sanitized = sanitized.replace(/^- (.*)$/gm, '<li class="ml-4 mb-2">$1</li>');
   
-  // Headers (allow h3 and h4)
-  sanitized = sanitized.replace(/^# (.*)$/gm, '<h3 class="text-lg font-bold text-white mt-4 mb-2">$1</h3>');
-  sanitized = sanitized.replace(/^## (.*)$/gm, '<h4 class="text-md font-semibold text-slate-300 mt-3 mb-1">$1</h4>');
+  // Headers (allow h3, h4 and h5)
+  sanitized = sanitized.replace(/^# (.*)$/gm, '<h3 class="text-xl font-bold text-white mt-6 mb-3 border-b border-slate-700/50 pb-2">$1</h3>');
+  sanitized = sanitized.replace(/^## (.*)$/gm, '<h4 class="text-lg font-bold text-red-400 mt-5 mb-2">$1</h4>');
+  sanitized = sanitized.replace(/^### (.*)$/gm, '<h5 class="text-base md:text-lg font-bold text-red-400 mt-6 mb-3">$1</h5>');
   
   // Paragraphs - wrap lines that don't start with special characters
-  sanitized = sanitized.replace(/^(?!<[lh]|<b)(.+)$/gm, '<p class="mb-2">$1</p>');
+  sanitized = sanitized.replace(/^(?!<[lh]|<b)(.+)$/gm, '<p class="mb-4 text-justify leading-relaxed">$1</p>');
   
   return sanitized;
+};
+
+/**
+ * 🚀 High-end inline Markdown parser for PDF/Image Export
+ * Converts **bold** into premium capsule badges and *italics* into elegant text nodes
+ */
+const renderInlineMarkdown = (text: string): React.ReactNode[] => {
+  if (!text) return [];
+  const parts = text.split('**');
+  return parts.map((part, index) => {
+    if (index % 2 === 1) {
+      // Premium Capsule Badge style for numbers and key ratios
+      return (
+        <strong 
+          key={index} 
+          className="font-extrabold text-white bg-slate-800/80 px-2 py-0.5 rounded border border-slate-700/50 mx-0.5 inline-block shadow-sm"
+        >
+          {part}
+        </strong>
+      );
+    }
+    // Handle single asterisk * for italics
+    const subParts = part.split('*');
+    return subParts.map((subPart, subIndex) => {
+      if (subIndex % 2 === 1) {
+        return <em key={subIndex} className="italic text-slate-100 font-medium">{subPart}</em>;
+      }
+      return subPart;
+    }) as any;
+  }) as any;
 };
 
 const GeminiAdvisor: React.FC<Props> = ({ results, inputs }) => {
@@ -584,27 +616,39 @@ const GeminiAdvisor: React.FC<Props> = ({ results, inputs }) => {
 
           {/* ✦ AI Personalized Tax Strategies (Only if generated!) */}
           {advice && (
-            <div className="mb-12 border-t border-slate-800 pt-10">
-              <h3 className="text-2xl font-bold text-white mb-6 flex items-center gap-2">
-                <span className="text-red-500 text-3xl">✦</span> AI Personalized Financial Advisory
+            <div className="mb-12 border-t border-slate-800 pt-12">
+              <h3 className="text-3.5xl font-extrabold text-white mb-8 flex items-center gap-3 border-b-2 border-red-600 pb-3 w-fit">
+                <span className="text-red-500 text-4xl animate-pulse">✦</span> AI Personalized Financial Advisory
               </h3>
-              <div className="space-y-6 text-slate-300 text-lg leading-relaxed max-w-[850px] text-justify font-sans">
+              <div className="space-y-6 max-w-[850px]">
                 {advice.split('\n').map((line, idx) => {
                   const cleanLine = line.trim();
                   if (cleanLine.startsWith('###')) {
-                    return <h4 key={idx} className="text-xl font-bold text-white mt-8 mb-3">{cleanLine.replace('###', '')}</h4>;
+                    return (
+                      <h4 key={idx} className="text-3xl font-bold text-white mt-12 mb-4">
+                        {renderInlineMarkdown(cleanLine.replace('###', ''))}
+                      </h4>
+                    );
                   }
                   if (cleanLine.startsWith('##')) {
-                    return <h4 key={idx} className="text-2xl font-bold text-white mt-10 mb-4 border-b border-slate-800 pb-2">{cleanLine.replace('##', '')}</h4>;
+                    return (
+                      <h4 key={idx} className="text-3.5xl font-bold text-red-400 mt-16 mb-5 border-b border-slate-800 pb-3">
+                        {renderInlineMarkdown(cleanLine.replace('##', ''))}
+                      </h4>
+                    );
                   }
                   if (cleanLine.startsWith('-') || cleanLine.startsWith('*')) {
                     return (
-                      <li key={idx} className="ml-5 list-disc text-slate-300 mb-2">
-                        {cleanLine.replace(/^[-*]\s*/, '')}
+                      <li key={idx} className="ml-6 list-disc text-slate-300 mb-3 text-2xl leading-relaxed">
+                        {renderInlineMarkdown(cleanLine.replace(/^[-*]\s*/, ''))}
                       </li>
                     );
                   }
-                  return cleanLine !== '' ? <p key={idx}>{cleanLine}</p> : null;
+                  return cleanLine !== '' ? (
+                    <p key={idx} className="text-slate-300 text-2xl leading-relaxed text-justify font-sans mb-5">
+                      {renderInlineMarkdown(cleanLine)}
+                    </p>
+                  ) : null;
                 })}
               </div>
             </div>
