@@ -485,7 +485,7 @@ const ArticleView: React.FC<ArticleViewProps> = ({ slug, onBack, onSelectArticle
 
           {/* Direct Answer Box — shown first for AI snippet capture */}
           {article.directAnswer && (
-            <div className="mb-8 p-5 bg-red-50 border-l-4 border-red-500 rounded-r-xl">
+            <div className="mb-8 p-5 bg-red-50/50 border border-red-100/70 rounded-xl">
               <p className="text-xs font-semibold text-red-600 uppercase tracking-wide mb-2">Quick Answer</p>
               <p className="text-slate-800 text-base leading-relaxed">{article.directAnswer}</p>
             </div>
@@ -530,7 +530,7 @@ const ArticleView: React.FC<ArticleViewProps> = ({ slug, onBack, onSelectArticle
           <CalculatorCTA />
 
           {/* Disclaimer */}
-          <div className="mt-8 p-4 bg-yellow-50 border-l-4 border-yellow-400 rounded-r-lg">
+          <div className="mt-8 p-4 bg-yellow-50/50 border border-yellow-100/60 rounded-xl">
             <p className="text-sm text-yellow-800">
               <strong>Disclaimer:</strong> This content is based on publicly available information and general tax knowledge for reference only. Individual tax situations may vary. Please consult a qualified tax professional or accountant for personalized advice.
             </p>

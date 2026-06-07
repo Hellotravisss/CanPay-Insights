@@ -315,7 +315,7 @@ const GeminiAdvisor: React.FC<Props> = ({ results, inputs }) => {
   };
 
   return (
-    <div className="bg-slate-800 rounded-xl shadow-lg p-4 sm:p-6 text-white mt-6 border-l-4 border-red-500 relative overflow-hidden transition-all">
+    <div className="bg-slate-800/80 rounded-xl shadow-lg p-4 sm:p-6 text-white mt-6 border border-slate-700/40 relative overflow-hidden transition-all backdrop-blur-sm">
       {loading && (
         <div className="absolute top-0 left-0 w-full h-1 bg-red-500 overflow-hidden">
           <div className="w-full h-full bg-red-400 animate-shimmer-loading" />

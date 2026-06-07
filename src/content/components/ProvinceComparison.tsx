@@ -184,7 +184,7 @@ const ProvinceComparison: React.FC<ProvinceComparisonProps> = ({ onBackToBlog })
               }
             </button>
             {selectedProvinces.length >= 2 && (
-              <span className="text-green-600 font-medium text-sm animate-bounce">
+              <span className="text-green-600 font-medium text-sm animate-pulse">
                 👆 Click to compare!
               </span>
             )}

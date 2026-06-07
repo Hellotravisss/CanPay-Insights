@@ -69,7 +69,7 @@ export default function ShareLinks({
               href={link.href}
               target={link.href.startsWith('mailto:') ? undefined : '_blank'}
               rel={link.href.startsWith('mailto:') ? undefined : 'noopener noreferrer'}
-              className="inline-flex items-center justify-center rounded-lg border border-slate-200 bg-slate-50 px-3 py-2 text-sm font-bold text-slate-700 no-underline transition-colors hover:border-red-200 hover:bg-red-50 hover:text-red-600"
+              className="inline-flex items-center justify-center rounded-lg border border-slate-200 bg-slate-50 px-3 py-2 text-sm font-bold text-slate-800 no-underline transition-colors hover:border-slate-300 hover:bg-slate-100 hover:text-slate-900"
             >
               {link.label}
             </a>

@@ -217,10 +217,11 @@ const ResultsSection: React.FC<Props> = ({ results, provinceName }) => {
         </div>
 
         {/* Annual Card */}
-        <div className="bg-white rounded-xl shadow-sm border-l-4 border-red-600 p-6 relative overflow-hidden">
-           <div className="flex items-center gap-2 mb-4">
-              <img src="/logo.png" alt="" aria-hidden="true" className="w-5 h-5 rounded-sm" />
-              <h3 className="text-lg font-bold text-slate-800">Annual Projection</h3>
+        <div className="bg-white rounded-xl shadow-sm border border-slate-100 p-6 relative overflow-hidden">
+            <div className="flex items-center gap-2 mb-4">
+               <span className="w-1.5 h-1.5 bg-red-600 rounded-full flex-shrink-0" />
+               <img src="/logo.png" alt="" aria-hidden="true" className="w-5 h-5 rounded-sm" />
+               <h3 className="text-lg font-bold text-slate-800">Annual Projection</h3>
            </div>
            
            <div className="space-y-4">
@@ -243,7 +244,7 @@ const ResultsSection: React.FC<Props> = ({ results, provinceName }) => {
 
       {/* Quebec Information */}
       {provinceName === Province.QC && (
-        <div className="bg-blue-50 border-l-4 border-blue-400 p-4 rounded-r-lg">
+        <div className="bg-blue-50/40 border border-blue-100/60 p-4 rounded-xl">
           <div className="flex items-start gap-3">
             <svg className="w-5 h-5 text-blue-600 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />

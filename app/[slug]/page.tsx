@@ -211,7 +211,7 @@ export default async function LandingPage({ params }: Props) {
                     <a
                       key={link.href}
                       href={link.href}
-                      className="rounded-md border border-slate-200 bg-slate-50 px-3 py-2 text-sm font-semibold text-slate-700 no-underline transition-colors hover:border-red-200 hover:bg-red-50 hover:text-red-600"
+                      className="rounded-md border border-slate-200 bg-slate-50 px-3 py-2 text-sm font-semibold text-slate-800 no-underline transition-colors hover:border-slate-300 hover:bg-slate-100 hover:text-slate-900"
                     >
                       {link.label}
                     </a>
@@ -325,7 +325,7 @@ export default async function LandingPage({ params }: Props) {
                   <a
                     key={link.href}
                     href={link.href}
-                    className="block rounded-lg px-3 py-2 text-sm font-semibold text-slate-700 hover:bg-red-50 hover:text-red-600 no-underline"
+                    className="block rounded-lg px-3 py-2 text-sm font-semibold text-slate-800 hover:bg-slate-100 hover:text-slate-900 no-underline"
                   >
                     {link.label}
                   </a>
