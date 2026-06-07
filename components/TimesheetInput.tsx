@@ -307,31 +307,112 @@ const TimesheetInput: React.FC<Props> = ({ inputs, setInputs }) => {
 
           {/* RRSP Contribution */}
           <div className="col-span-2">
-            <div className="flex items-center justify-between mb-2">
-              <label className="block text-sm font-semibold text-slate-700">RRSP Per Paycheque</label>
+            <div className="flex items-center justify-between mb-4">
+              <label className="block text-sm font-semibold text-slate-700">RRSP Contribution</label>
               <label className="relative inline-flex items-center cursor-pointer">
                 <input
                   type="checkbox"
                   className="sr-only peer"
-                  checked={!!(inputs.rrspContributionPerPeriod && inputs.rrspContributionPerPeriod > 0)}
-                  onChange={(e) => setInputs({ ...inputs, rrspContributionPerPeriod: e.target.checked ? 100 : 0 })}
+                  checked={!!(inputs.rrspType === 'percent' ? (inputs.rrspPercentage && inputs.rrspPercentage > 0) : (inputs.rrspContributionPerPeriod && inputs.rrspContributionPerPeriod > 0))}
+                  onChange={(e) => setInputs({
+                    ...inputs,
+                    rrspType: e.target.checked ? (inputs.rrspType || 'amount') : undefined,
+                    rrspContributionPerPeriod: e.target.checked ? (inputs.rrspContributionPerPeriod || 100) : 0,
+                    rrspPercentage: e.target.checked ? (inputs.rrspPercentage || 5) : 0,
+                    rrspEmployerMatch: e.target.checked ? (inputs.rrspEmployerMatch || 5) : 0
+                  })}
                 />
                 <div className="w-11 h-6 bg-slate-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-red-300 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-red-600"></div>
               </label>
             </div>
-            {!!(inputs.rrspContributionPerPeriod && inputs.rrspContributionPerPeriod > 0) && (
-              <div className="relative">
-                <span className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-500">$</span>
-                <input
-                  type="number"
-                  min="0"
-                  step="25"
-                  value={inputs.rrspContributionPerPeriod || ''}
-                  onFocus={(e) => e.target.select()}
-                  onChange={(e) => setInputs({ ...inputs, rrspContributionPerPeriod: parseFloat(e.target.value) || 0 })}
-                  className="w-full pl-8 pr-4 py-2 border border-red-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-500 bg-red-50"
-                  placeholder="100"
-                />
+
+            {!!((inputs.rrspType === 'percent' ? inputs.rrspPercentage : inputs.rrspContributionPerPeriod) && ((inputs.rrspPercentage || 0) > 0 || (inputs.rrspContributionPerPeriod || 0) > 0)) && (
+              <div className="bg-red-50/50 p-4 rounded-xl border border-red-100/70 animate-fadeIn space-y-4">
+                {/* Toggle between Amount and Percent */}
+                <div className="flex rounded-lg bg-slate-100 p-0.5" role="group">
+                  <button
+                    type="button"
+                    className={`flex-1 py-1 text-xs font-semibold rounded-md transition-all ${
+                      (inputs.rrspType || 'amount') === 'amount'
+                        ? 'bg-white text-slate-800 shadow-sm'
+                        : 'text-slate-500 hover:text-slate-800'
+                    }`}
+                    onClick={() => setInputs({ ...inputs, rrspType: 'amount' })}
+                  >
+                    Fixed Amount ($)
+                  </button>
+                  <button
+                    type="button"
+                    className={`flex-1 py-1 text-xs font-semibold rounded-md transition-all ${
+                      inputs.rrspType === 'percent'
+                        ? 'bg-white text-slate-800 shadow-sm'
+                        : 'text-slate-500 hover:text-slate-800'
+                    }`}
+                    onClick={() => setInputs({ ...inputs, rrspType: 'percent' })}
+                  >
+                    Percentage (%)
+                  </button>
+                </div>
+
+                {/* Conditionally Render Inputs */}
+                {(inputs.rrspType || 'amount') === 'amount' ? (
+                  <div>
+                    <label className="block text-xs font-bold text-red-800 mb-1.5 ml-1">Per-Paycheque Contribution ($)</label>
+                    <div className="relative">
+                      <span className="absolute left-3 top-1/2 -translate-y-1/2 text-red-400 font-bold">$</span>
+                      <input
+                        type="number"
+                        min="0"
+                        step="25"
+                        className="w-full py-2 bg-white text-slate-900 border border-red-200 rounded-lg focus:ring-2 focus:ring-red-500 focus:outline-none text-sm"
+                        value={inputs.rrspContributionPerPeriod || ''}
+                        onFocus={(e) => e.target.select()}
+                        onChange={(e) => setInputs({ ...inputs, rrspContributionPerPeriod: parseFloat(e.target.value) || 0 })}
+                      />
+                    </div>
+                  </div>
+                ) : (
+                  <div className="grid grid-cols-2 gap-3">
+                    <div>
+                      <label className="block text-xs font-bold text-red-800 mb-1.5 ml-1">My Contribution (%)</label>
+                      <div className="relative">
+                        <input
+                          type="number"
+                          min="0"
+                          max="100"
+                          step="0.5"
+                          className="w-full py-2 pl-3 pr-8 bg-white text-slate-900 border border-red-200 rounded-lg focus:ring-2 focus:ring-red-500 focus:outline-none text-sm"
+                          value={inputs.rrspPercentage || ''}
+                          onFocus={(e) => e.target.select()}
+                          onChange={(e) => setInputs({ ...inputs, rrspPercentage: parseFloat(e.target.value) || 0 })}
+                        />
+                        <span className="absolute right-3 top-1/2 -translate-y-1/2 text-red-400 font-bold text-xs">%</span>
+                      </div>
+                    </div>
+                    <div>
+                      <label className="block text-xs font-bold text-red-800 mb-1.5 ml-1">Employer Match (%)</label>
+                      <div className="relative">
+                        <input
+                          type="number"
+                          min="0"
+                          max="100"
+                          step="0.5"
+                          className="w-full py-2 pl-3 pr-8 bg-white text-slate-900 border border-red-200 rounded-lg focus:ring-2 focus:ring-red-500 focus:outline-none text-sm"
+                          value={inputs.rrspEmployerMatch || ''}
+                          onFocus={(e) => e.target.select()}
+                          onChange={(e) => setInputs({ ...inputs, rrspEmployerMatch: parseFloat(e.target.value) || 0 })}
+                        />
+                        <span className="absolute right-3 top-1/2 -translate-y-1/2 text-red-400 font-bold text-xs">%</span>
+                      </div>
+                    </div>
+                  </div>
+                )}
+                <p className="text-[10px] text-red-700 leading-tight">
+                  {(inputs.rrspType === 'percent') 
+                    ? `You contribute ${inputs.rrspPercentage || 0}% of your gross pay. Employer contributes ${inputs.rrspEmployerMatch || 0}% matching funds directly to Canada Life.`
+                    : 'Reduces taxable income — lowers your federal & provincial tax'
+                  }
+                </p>
               </div>
             )}
           </div>

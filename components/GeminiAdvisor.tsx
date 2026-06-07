@@ -84,6 +84,31 @@ const GeminiAdvisor: React.FC<Props> = ({ results, inputs }) => {
   const [showSaveOptions, setShowSaveOptions] = useState(false);
   const snapshotRef = useRef<HTMLDivElement>(null);
 
+  // Local helper to calculate pay periods per year
+  const getPeriodsPerYear = (frequency?: string): number => {
+    if (frequency === 'monthly') return 12;
+    if (frequency === 'semi-monthly') return 24;
+    if (frequency === 'weekly') return 52;
+    return 26; // bi-weekly
+  };
+
+  const periodsPerYear = useMemo(() => {
+    return getPeriodsPerYear((inputs as any).payFrequency);
+  }, [(inputs as any).payFrequency]);
+
+  const annualRRSPActual = useMemo(() => {
+    return (results.rrspDeduction || 0) * periodsPerYear;
+  }, [results.rrspDeduction, periodsPerYear]);
+
+  const annualEmployerMatchActual = useMemo(() => {
+    const inp = inputs as any;
+    if (inp.rrspType === 'percent' && inp.rrspEmployerMatch && inp.rrspEmployerMatch > 0) {
+      const grossPay = results.grossPayPerPeriod || results.grossPayBiWeekly || 0;
+      return (grossPay * (inp.rrspEmployerMatch / 100)) * periodsPerYear;
+    }
+    return 0;
+  }, [inputs, results.grossPayPerPeriod, results.grossPayBiWeekly, periodsPerYear]);
+
   // Local tax optimization calculations
   const taxOptimization = useMemo(() => {
     return generateTaxOptimization(results.grossPayAnnual, inputs.province);
@@ -345,6 +370,8 @@ const GeminiAdvisor: React.FC<Props> = ({ results, inputs }) => {
         marginalRate={marginalRate}
         showScenarios={showRRSPScenarios}
         onToggleScenarios={() => setShowRRSPScenarios(!showRRSPScenarios)}
+        annualRRSPActual={annualRRSPActual}
+        annualEmployerMatchActual={annualEmployerMatchActual}
       />
 
       {/* AI Enhanced Analysis Button */}
@@ -598,6 +625,8 @@ interface TaxOptimizationPanelProps {
   marginalRate: { federal: number; provincial: number; combined: number };
   showScenarios: boolean;
   onToggleScenarios: () => void;
+  annualRRSPActual?: number;
+  annualEmployerMatchActual?: number;
 }
 
 const TaxOptimizationPanel: React.FC<TaxOptimizationPanelProps> = ({
@@ -606,6 +635,8 @@ const TaxOptimizationPanel: React.FC<TaxOptimizationPanelProps> = ({
   marginalRate,
   showScenarios,
   onToggleScenarios,
+  annualRRSPActual = 0,
+  annualEmployerMatchActual = 0,
 }) => {
   const { rrsp, tfsa, fhsa, otherStrategies, summary } = optimization;
 
@@ -616,16 +647,29 @@ const TaxOptimizationPanel: React.FC<TaxOptimizationPanelProps> = ({
     s => s.suitability === 'recommended'
   );
 
+  const hasActualRRSP = annualRRSPActual > 0;
+  const remainingRRSPOptimum = Math.max(0, rrsp.recommendedAmount - annualRRSPActual);
+  const potentialExtraRefund = Math.floor(remainingRRSPOptimum * marginalRate.combined);
+
   return (
     <div className="space-y-6">
       {/* Core Metric Cards */}
       <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-        <TaxCard
-          title="Recommended RRSP"
-          amount={rrsp.recommendedAmount}
-          subtitle={`Est. Refund ${formatCurrency(rrsp.refundAmount)}`}
-          highlight
-        />
+        {hasActualRRSP ? (
+          <TaxCard
+            title="Optimum Remaining Room"
+            amount={remainingRRSPOptimum}
+            subtitle={`Potential Extra Refund ${formatCurrency(potentialExtraRefund)}`}
+            highlight
+          />
+        ) : (
+          <TaxCard
+            title="Recommended RRSP"
+            amount={rrsp.recommendedAmount}
+            subtitle={`Est. Refund ${formatCurrency(rrsp.refundAmount)}`}
+            highlight
+          />
+        )}
         <TaxCard
           title="Marginal Tax Rate"
           amount={marginalRate.combined * 100}
@@ -634,8 +678,8 @@ const TaxOptimizationPanel: React.FC<TaxOptimizationPanelProps> = ({
         />
         <TaxCard
           title="Total Savings Potential"
-          amount={summary.totalPotentialSavings}
-          subtitle="Annual estimate"
+          amount={summary.totalPotentialSavings + annualEmployerMatchActual}
+          subtitle="Annual estimate (incl. Match)"
           accent="green"
         />
       </div>
@@ -657,6 +701,56 @@ const TaxOptimizationPanel: React.FC<TaxOptimizationPanelProps> = ({
           </div>
           
           <p className="text-sm text-slate-300 mb-4">{rrsp.tierRecommendation}</p>
+
+          {/* Visual Progress Bar and Matching stats if they have actual RRSP */}
+          {hasActualRRSP && (
+            <div className="mb-5 p-4 rounded-xl bg-slate-800/60 border border-slate-700/50 space-y-3">
+              <h5 className="text-xs font-bold text-slate-400 uppercase tracking-wider">Your RRSP Contribution Status</h5>
+              
+              <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 text-sm">
+                <div>
+                  <span className="text-slate-400 block text-xs">My Payroll Deduction</span>
+                  <span className="font-semibold text-white">{formatCurrency(annualRRSPActual)}/yr</span>
+                </div>
+                {annualEmployerMatchActual > 0 && (
+                  <div>
+                    <span className="text-green-400 block text-xs flex items-center gap-1">
+                      <span className="w-1.5 h-1.5 bg-green-500 rounded-full animate-pulse" />
+                      Employer Matching
+                    </span>
+                    <span className="font-semibold text-green-400">+{formatCurrency(annualEmployerMatchActual)}/yr</span>
+                  </div>
+                )}
+                <div>
+                  <span className="text-slate-400 block text-xs">Optimum Deduction Space</span>
+                  <span className="font-semibold text-red-400">{formatCurrency(remainingRRSPOptimum)} left</span>
+                </div>
+              </div>
+
+              {/* Progress Bar */}
+              <div className="w-full h-2 bg-slate-700 rounded-full overflow-hidden flex">
+                <div 
+                  className="bg-red-500 h-full" 
+                  style={{ width: `${Math.min(100, (annualRRSPActual / rrsp.recommendedAmount) * 100)}%` }} 
+                  title={`My Contribution: ${((annualRRSPActual / rrsp.recommendedAmount) * 100).toFixed(0)}%`}
+                />
+                {annualEmployerMatchActual > 0 && (
+                  <div 
+                    className="bg-green-500 h-full border-l border-slate-800" 
+                    style={{ width: `${Math.min(100 - (annualRRSPActual / rrsp.recommendedAmount) * 100, (annualEmployerMatchActual / rrsp.recommendedAmount) * 100)}%` }} 
+                    title={`Employer Match: ${((annualEmployerMatchActual / rrsp.recommendedAmount) * 100).toFixed(0)}%`}
+                  />
+                )}
+              </div>
+              
+              <p className="text-[11px] text-slate-400 italic">
+                {annualEmployerMatchActual > 0 
+                  ? "Fantastic! You are capturing 100% free matching money from your employer. To maximize your tax refund, you can top up the remaining room as a voluntary contribution before the deadline."
+                  : "You are currently making payroll deductions. To maximize your tax refund, consider topping up the remaining room as a voluntary contribution before the deadline."
+                }
+              </p>
+            </div>
+          )}
           
           <div className="grid grid-cols-2 md:grid-cols-4 gap-3 mb-4">
             <MetricBox label="Recommended" value={formatCurrency(rrsp.recommendedAmount)} />

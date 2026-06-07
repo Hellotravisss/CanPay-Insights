@@ -65,6 +65,16 @@ const calculateProgressiveTax = (income: number, brackets: TaxBracket[]): number
 };
 
 /**
+ * Calculate RRSP contribution amount for the period based on Type (Amount or Percentage)
+ */
+export const getRRSPPerPeriod = (inputs: any, grossPayPerPeriod: number): number => {
+  if (inputs.rrspType === 'percent') {
+    return grossPayPerPeriod * (inputs.rrspPercentage ?? 0) / 100;
+  }
+  return inputs.rrspContributionPerPeriod ?? 0;
+};
+
+/**
  * Calculate CPP/QPP contributions (including CPP2/QPP2 for high earners)
  * 2025 CPP Structure:
  * - Tier 1: 5.95% on earnings between $3,500 and $73,600
@@ -308,7 +318,7 @@ export const calculateSalary = (inputs: SalaryInputs): CalculationResult => {
 
   // 5. Annual Gross & RRSP
   const annualGross = grossPayBiWeekly * 26;
-  const rrspPerPeriod = inputs.rrspContributionPerPeriod ?? 0;
+  const rrspPerPeriod = getRRSPPerPeriod(inputs, grossPayBiWeekly);
   const annualRRSP = rrspPerPeriod * 26;
 
   // Post-tax deductions (LTD, union dues, other) — do NOT reduce taxable income
@@ -385,7 +395,7 @@ export const calculateFromAnnualSalary = (inputs: AnnualSalaryInputs): Calculati
     : 0;
   const annualGross = annualSalary + additionalPerPeriod * periodsPerYear;
 
-  const rrspPerPeriod = inputs.rrspContributionPerPeriod ?? 0;
+  const rrspPerPeriod = getRRSPPerPeriod(inputs, annualGross / periodsPerYear);
   const annualRRSP = rrspPerPeriod * periodsPerYear;
 
   const ded = inputs.deductions;
@@ -515,7 +525,7 @@ export const calculateFromTimesheet = (inputs: TimesheetInputs): CalculationResu
 
   const periodsPerYear = getPeriodsPerYear(payFrequency);
   const annualGross = totalGross * periodsPerYear;
-  const rrspPerPeriod = inputs.rrspContributionPerPeriod ?? 0;
+  const rrspPerPeriod = getRRSPPerPeriod(inputs, totalGross);
   const annualRRSP = rrspPerPeriod * periodsPerYear;
 
   const ded = inputs.deductions;
