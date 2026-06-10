@@ -256,6 +256,280 @@ const GeminiAdvisor: React.FC<Props> = ({ results, inputs }) => {
     return calculateMarginalRate(results.grossPayAnnual, inputs.province);
   }, [results.grossPayAnnual, inputs.province]);
 
+  const renderSmartReport = (isSnapshot = false) => {
+    const annualIncome = results.grossPayAnnual || 0;
+    const netIncome = results.netPayAnnual || 0;
+    const totalDeductions = results.totalDeductionsAnnual || 0;
+    const annualCPP = (results.cppDeduction || 0) * periodsPerYear;
+    const annualEI = (results.eiDeduction || 0) * periodsPerYear;
+    const annualTax = (results.federalTax + results.provincialTax) * periodsPerYear;
+    const effectiveRate = annualIncome > 0 ? ((annualTax / annualIncome) * 100).toFixed(1) : '0.0';
+
+    const remainingRRSPOptimum = Math.max(0, taxOptimization.rrsp.recommendedAmount - annualRRSPActual);
+    const biweeklyTopUp = Math.round(remainingRRSPOptimum / periodsPerYear);
+    const extraRefund = Math.floor(remainingRRSPOptimum * marginalRate.combined);
+
+    const getTaxBracketInfo = (income: number) => {
+      if (income <= 57375) return { current: '15%', next: '20.5%', nextThreshold: 57375 };
+      if (income <= 114750) return { current: '20.5%', next: '26%', nextThreshold: 114750 };
+      if (income <= 177722) return { current: '26%', next: '29%', nextThreshold: 177722 };
+      if (income <= 253865) return { current: '29%', next: '33%', nextThreshold: 253865 };
+      return { current: '33%', next: 'Max', nextThreshold: Infinity };
+    };
+    const bracketInfo = getTaxBracketInfo(annualIncome);
+
+    return (
+      <div className={`space-y-6 text-left ${isSnapshot ? 'text-xl' : 'text-sm sm:text-base'}`}>
+        
+        {/* Executive Summary Card */}
+        <div className="bg-slate-900/80 p-6 rounded-xl border border-slate-700/50">
+          <h4 className="text-amber-400 font-extrabold text-lg sm:text-xl mb-3">
+            Executive Summary
+          </h4>
+          <p className="text-slate-200 leading-relaxed">
+            Based on your annual income of <span className="text-red-400 font-bold">{formatCurrency(annualIncome)}</span> in <span className="text-red-400 font-bold">{inputs.province}</span>, you are currently paying <span className="text-red-400 font-bold">{formatCurrency(annualTax)}</span> in total taxes (<span className="text-red-400 font-bold">{effectiveRate}%</span> effective rate). With strategic tax planning, you could save up to <span className="text-green-400 font-bold">{formatCurrency(taxOptimization.summary.totalPotentialSavings + annualEmployerMatchActual)}</span> annually through optimized contributions to registered accounts.
+          </p>
+        </div>
+
+        {/* Income & Tax Analysis + Monthly Breakdown */}
+        <div className={`grid grid-cols-1 ${isSnapshot ? 'grid-cols-2 gap-6' : 'md:grid-cols-2 gap-4'}`}>
+          <div className="bg-slate-900/60 p-5 rounded-xl border border-slate-700/50">
+            <h4 className="text-sky-400 font-bold text-base sm:text-lg mb-3">
+              Income & Tax Analysis
+            </h4>
+            <ul className="space-y-2 text-slate-300">
+              <li className="flex justify-between">
+                <span>Gross Annual Income:</span>
+                <span className="text-white font-bold">{formatCurrency(annualIncome)}</span>
+              </li>
+              <li className="flex justify-between">
+                <span>Net Take-Home Pay:</span>
+                <span className="text-white font-bold">{formatCurrency(netIncome)}</span>
+              </li>
+              <li className="flex justify-between">
+                <span>Total Tax (Fed + Prov):</span>
+                <span className="text-white font-bold">{formatCurrency(annualTax)}</span>
+              </li>
+              <li className="flex justify-between">
+                <span>CPP Contributions:</span>
+                <span className="text-white font-bold">{formatCurrency(annualCPP)}</span>
+              </li>
+              <li className="flex justify-between">
+                <span>EI Premiums:</span>
+                <span className="text-white font-bold">{formatCurrency(annualEI)}</span>
+              </li>
+              <li className="flex justify-between border-t border-slate-700/50 pt-2 mt-2">
+                <span>Marginal Tax Rate:</span>
+                <span className="text-red-400 font-bold">{(marginalRate.combined * 100).toFixed(1)}%</span>
+              </li>
+            </ul>
+          </div>
+
+          <div className="bg-slate-900/60 p-5 rounded-xl border border-slate-700/50 flex flex-col justify-between">
+            <div>
+              <h4 className="text-violet-400 font-bold text-base sm:text-lg mb-3">
+                Monthly Breakdown
+              </h4>
+              <ul className="space-y-2 text-slate-300">
+                <li className="flex justify-between">
+                  <span>Monthly Net Income:</span>
+                  <span className="text-white font-bold">{formatCurrency(netIncome / 12)}</span>
+                </li>
+                <li className="flex justify-between">
+                  <span>Monthly Tax Paid:</span>
+                  <span className="text-white font-bold">{formatCurrency(annualTax / 12)}</span>
+                </li>
+              </ul>
+            </div>
+            <div className="bg-slate-950 p-3 rounded-lg border border-slate-800 mt-4">
+              <p className="text-amber-400 text-xs sm:text-sm">
+                💡 Every extra $1 you earn is taxed at <span className="font-bold">{(marginalRate.combined * 100).toFixed(1)}%</span>.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        {/* Federal Tax Bracket warning */}
+        <div className="bg-slate-900/60 p-5 rounded-xl border border-slate-700/50">
+          <h4 className="text-orange-400 font-bold text-base sm:text-lg mb-2">
+            Federal Tax Bracket
+          </h4>
+          <div className="flex justify-between items-center text-slate-300 text-sm">
+            <span>Current Federal Bracket Rate:</span>
+            <span className="text-white font-bold">{bracketInfo.current}</span>
+          </div>
+          {bracketInfo.nextThreshold !== Infinity && (
+            <p className="text-amber-400 text-xs sm:text-sm mt-2 border-t border-slate-800 pt-2">
+              ⚠️ Next bracket ({bracketInfo.next}) starts at <span className="font-bold">{formatCurrency(bracketInfo.nextThreshold)}</span>.
+            </p>
+          )}
+        </div>
+
+        {/* RRSP Strategy Card */}
+        <div className="bg-slate-900/60 p-5 rounded-xl border border-slate-700/50">
+          <h4 className="text-red-400 font-bold text-base sm:text-lg mb-3">
+            🏦 RRSP Strategy
+          </h4>
+          {annualRRSPActual > 0 ? (
+            <div className="space-y-4">
+              <p className="text-emerald-400 font-bold text-base">
+                Optimum Remaining Room: {formatCurrency(remainingRRSPOptimum)}
+              </p>
+              <p className="text-slate-300">
+                🎉 Great job! You have already saved <span className="text-white font-bold">{formatCurrency(annualRRSPActual)}</span> personally
+                {annualEmployerMatchActual > 0 ? <> and received <span className="text-green-400 font-bold">+{formatCurrency(annualEmployerMatchActual)} FREE employer matching</span></> : ''}!
+              </p>
+              <div className="space-y-2 border-t border-slate-800 pt-3 text-sm text-slate-300">
+                <div className="flex justify-between">
+                  <span>Your contribution:</span>
+                  <span>{formatCurrency(annualRRSPActual)}/yr</span>
+                </div>
+                {annualEmployerMatchActual > 0 && (
+                  <div className="flex justify-between text-green-400">
+                    <span>Employer match:</span>
+                    <span>+{formatCurrency(annualEmployerMatchActual)}/yr (FREE!)</span>
+                  </div>
+                )}
+                {remainingRRSPOptimum > 0 && (
+                  <>
+                    <div className="flex justify-between text-amber-400">
+                      <span>Top-up needed:</span>
+                      <span>{formatCurrency(remainingRRSPOptimum)}/yr (≈ {formatCurrency(biweeklyTopUp)}/bi-weekly)</span>
+                    </div>
+                    <div className="bg-slate-950 p-3 rounded-lg border border-slate-800 mt-2">
+                      <p className="text-green-400 text-xs sm:text-sm">
+                        💡 Top up <span className="font-bold">{formatCurrency(biweeklyTopUp)}/bi-weekly</span> to earn back an extra <span className="font-bold">{formatCurrency(extraRefund)}</span> tax refund!
+                      </p>
+                    </div>
+                  </>
+                )}
+              </div>
+            </div>
+          ) : (
+            <div className="space-y-3">
+              <p className="text-green-400 font-bold text-lg">
+                Contribute {formatCurrency(taxOptimization.rrsp.recommendedAmount)} annually
+              </p>
+              <p className="text-slate-300">
+                Contributing to RRSP saves you <span className="text-white font-bold">{(marginalRate.combined * 100).toFixed(0)}¢</span> in tax for every $1 contributed.
+              </p>
+              <div className="space-y-2 border-t border-slate-800 pt-3 text-sm text-slate-300">
+                <div className="flex justify-between">
+                  <span>Estimated Tax Refund:</span>
+                  <span className="text-amber-400 font-bold">{formatCurrency(taxOptimization.rrsp.taxSavings)}</span>
+                </div>
+                <div className="flex justify-between">
+                  <span>Bi-weekly auto-deposit:</span>
+                  <span className="text-white font-bold">{formatCurrency(Math.round(taxOptimization.rrsp.recommendedAmount / periodsPerYear))}</span>
+                </div>
+              </div>
+            </div>
+          )}
+        </div>
+
+        {/* TFSA Strategy Card */}
+        <div className="bg-slate-900/60 p-5 rounded-xl border border-slate-700/50">
+          <h4 className="text-blue-400 font-bold text-base sm:text-lg mb-3">
+            💰 TFSA Strategy
+          </h4>
+          <p className="text-green-400 font-bold text-lg mb-2">
+            Max out at {formatCurrency(taxOptimization.tfsa.recommendedAmount)}
+          </p>
+          <div className="space-y-2 text-sm text-slate-300">
+            <div className="flex justify-between">
+              <span>2026 Contribution Room:</span>
+              <span className="text-white font-bold">$7,000</span>
+            </div>
+            <div className="flex justify-between">
+              <span>Lifetime Room Available:</span>
+              <span className="text-white">{formatCurrency(taxOptimization.tfsa.lifetimeRoom)}</span>
+            </div>
+            <p className="text-xs text-slate-500 pt-2 border-t border-slate-800">
+              All investment growth in TFSA is completely tax-free. Ideal for emergency funds or long-term growth.
+            </p>
+          </div>
+        </div>
+
+        {/* Action Steps Checklist */}
+        <div className="bg-emerald-950/60 p-5 rounded-xl border border-emerald-800/40 text-left">
+          <h4 className="text-emerald-400 font-bold text-base sm:text-lg mb-3">
+            ✅ Your Action Checklist
+          </h4>
+          <ul className="space-y-2.5 text-slate-200 text-sm">
+            {annualRRSPActual === 0 && (
+              <>
+                <li className="flex items-start gap-2.5">
+                  <span className="text-emerald-400 mt-0.5">☐</span>
+                  <span>Open an RRSP account at Wealthsimple or TD Bank</span>
+                </li>
+                <li className="flex items-start gap-2.5">
+                  <span className="text-emerald-400 mt-0.5">☐</span>
+                  <span>Set up bi-weekly auto-deposit of <span className="font-semibold">{formatCurrency(Math.round(taxOptimization.rrsp.recommendedAmount / periodsPerYear))}</span></span>
+                </li>
+              </>
+            )}
+            {remainingRRSPOptimum > 0 && annualRRSPActual > 0 && (
+              <>
+                <li className="flex items-start gap-2.5">
+                  <span className="text-emerald-400 mt-0.5">☐</span>
+                  <span>Top up <span className="font-semibold">{formatCurrency(remainingRRSPOptimum)}</span> more RRSP before March 1 deadline</span>
+                </li>
+                <li className="flex items-start gap-2.5">
+                  <span className="text-emerald-400 mt-0.5">☐</span>
+                  <span>Set up <span className="font-semibold">{formatCurrency(biweeklyTopUp)}/bi-weekly</span> auto-savings at Wealthsimple</span>
+                </li>
+              </>
+            )}
+            <li className="flex items-start gap-2.5">
+              <span className="text-emerald-400 mt-0.5">☐</span>
+              <span>Invest <span className="font-semibold">{formatCurrency(taxOptimization.tfsa.recommendedAmount)}</span> in TFSA for tax-free growth</span>
+            </li>
+            <li className="flex items-start gap-2.5">
+              <span className="text-emerald-400 mt-0.5">☐</span>
+              <span>File your Canadian taxes before April 30 to avoid any penalties</span>
+            </li>
+            <li className="flex items-start gap-2.5">
+              <span className="text-emerald-400 mt-0.5">☐</span>
+              <span>Claim all RRSP contribution receipts (T4RSP)</span>
+            </li>
+          </ul>
+        </div>
+
+        {/* Tax Filing Tips */}
+        <div className="bg-slate-900/60 p-5 rounded-xl border border-slate-700/50 text-left">
+          <h4 className="text-cyan-400 font-bold text-base sm:text-lg mb-3">
+            📋 Tax Filing Tips
+          </h4>
+          <ul className="space-y-2 text-slate-300 text-sm">
+            <li className="flex items-start gap-2">
+              <span className="text-cyan-400">•</span>
+              <span>File by April 30 to avoid late-filing interest and penalties.</span>
+            </li>
+            <li className="flex items-start gap-2">
+              <span className="text-cyan-400">•</span>
+              <span>Claim work-from-home expenses if eligible.</span>
+            </li>
+            <li className="flex items-start gap-2">
+              <span className="text-cyan-400">•</span>
+              <span>Keep medical expense receipts to claim medical tax credits.</span>
+            </li>
+            <li className="flex items-start gap-2">
+              <span className="text-cyan-400">•</span>
+              <span>Consider charitable donations to receive tax saving credits.</span>
+            </li>
+          </ul>
+        </div>
+
+        {/* Potential Savings Footer */}
+        <div className="bg-red-600 p-5 rounded-xl text-white text-left">
+          <p className="text-sm uppercase tracking-wider mb-1 font-bold">Total Annual Tax Savings Potential</p>
+          <p className="text-2xl sm:text-4xl font-black">{formatCurrency(taxOptimization.summary.totalPotentialSavings + annualEmployerMatchActual)}</p>
+        </div>
+
+      </div>
+    );
+  };
+
   // QR Code generation
   useEffect(() => {
     let isMounted = true;
@@ -324,25 +598,11 @@ const GeminiAdvisor: React.FC<Props> = ({ results, inputs }) => {
     setLoading(true);
     setError(null);
     try {
-      const promptText = generateTaxPrompt(taxOptimization, results, inputs);
-
-      const res = await fetch('/api/gemini', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ prompt: promptText }),
-      });
-
-      if (!res.ok) throw new Error('API error');
-
-      const data = await res.json();
-      const text = data.text;
-      if (text) {
-        setAdvice(text);
-      } else {
-        throw new Error('No response');
-      }
+      // Simulate a premium offline instant calculation delay (300ms)
+      await new Promise((resolve) => setTimeout(resolve, 300));
+      setAdvice('local_strategy_active');
     } catch (err: unknown) {
-      setError('Tax analysis temporarily unavailable. Please refer to the local calculations below.');
+      setError('Tax analysis temporarily unavailable.');
     } finally {
       setLoading(false);
     }
@@ -493,8 +753,6 @@ const GeminiAdvisor: React.FC<Props> = ({ results, inputs }) => {
             <p className="text-xs text-slate-400">Personalized tax reduction strategies based on your income</p>
           </div>
         </div>
-        
-
       </div>
 
       {/* Local Tax Optimization - Always Visible */}
@@ -508,76 +766,42 @@ const GeminiAdvisor: React.FC<Props> = ({ results, inputs }) => {
         annualEmployerMatchActual={annualEmployerMatchActual}
       />
 
-      {/* AI Enhanced Analysis Button */}
-      {!advice && !loading && (
-        <div className="mt-6 pt-6 border-t border-slate-700">
-          <button
-            onClick={getAdvice}
-            className="px-6 py-3 bg-red-600 hover:bg-red-700 text-white font-bold rounded-lg transition-all active:scale-95 w-full sm:w-auto shadow-xl shadow-red-900/20 flex items-center gap-2"
-          >
-            <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
-              <path d="M13 6a3 3 0 11-6 0 3 3 0 016 0zM18 8a2 2 0 11-4 0 2 2 0 014 0zM14 15a4 4 0 00-8 0v3h8v-3z" />
-            </svg>
-            Get AI Deep Tax Analysis
-          </button>
-          <p className="text-xs text-slate-500 mt-2">AI will provide detailed tax planning advice based on your specific situation</p>
-        </div>
-      )}
-
-      {error && <p className="text-red-400 text-xs italic mt-4">{error}</p>}
-
-      {loading && (
-        <div className="py-8 flex flex-col items-center gap-3 mt-6 border-t border-slate-700">
-          <div className="w-8 h-8 border-4 border-slate-700 border-t-red-500 rounded-full animate-spin" />
-          <p className="text-sm text-red-100 animate-pulse">AI is analyzing optimal tax strategies...</p>
-        </div>
-      )}
-
-      {advice && (
-        <div className="mt-6 pt-6 border-t border-slate-700">
-          <h4 className="text-sm font-bold text-red-400 mb-3 flex items-center gap-2">
-            <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
-              <path fillRule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clipRule="evenodd" />
-            </svg>
-            AI Deep Analysis
-          </h4>
-          <div className="bg-slate-900/60 p-5 rounded-xl border border-slate-700/50 animate-fadeIn">
-            <div className="max-w-none text-slate-200 space-y-1">
-              {advice.split('\n').map((line, idx) => renderMarkdownLine(line, false))}
-            </div>
-            {/* Save Report Button - Mobile Optimized */}
-            <div className="mt-6 pt-4 border-t border-slate-700/50">
-              <button
-                onClick={handleExport}
-                disabled={exporting || !qrBase64}
-                className="w-full sm:w-auto px-6 py-3 bg-red-600 hover:bg-red-700 disabled:bg-slate-600 text-white font-bold rounded-lg transition-all active:scale-95 shadow-lg flex items-center justify-center gap-2"
-              >
-                {exporting ? (
-                  <>
-                    <div className="w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin" />
-                    Generating...
-                  </>
-                ) : (
-                  <>
-                    <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
-                    </svg>
-                    Save Tax Report
-                  </>
-                )}
-              </button>
-              <p className="text-xs text-slate-500 mt-2">Save this report to your device or share with your financial advisor</p>
-            </div>
-
-            <div className="mt-4 flex justify-between items-center text-[10px] text-slate-500 font-mono">
-              <button onClick={() => setAdvice(null)} className="hover:text-red-400 underline uppercase tracking-tighter">
-                Analyze Again
-              </button>
-              <span>GEMINI_TAX_2026</span>
-            </div>
+      <div className="mt-6 pt-6 border-t border-slate-700">
+        <h4 className="text-sm font-bold text-red-400 mb-3 flex items-center gap-2">
+          <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
+            <path fillRule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clipRule="evenodd" />
+          </svg>
+          Smart Tax Strategy
+        </h4>
+        <div className="bg-slate-900/60 p-5 rounded-xl border border-slate-700/50 animate-fadeIn">
+          <div className="max-w-none">
+            {renderSmartReport(false)}
+          </div>
+          {/* Save Report Button - Mobile Optimized */}
+          <div className="mt-6 pt-4 border-t border-slate-700/50">
+            <button
+              onClick={handleExport}
+              disabled={exporting || !qrBase64}
+              className="w-full sm:w-auto px-6 py-3 bg-red-600 hover:bg-red-700 disabled:bg-slate-600 text-white font-bold rounded-lg transition-all active:scale-95 shadow-lg flex items-center justify-center gap-2"
+            >
+              {exporting ? (
+                <>
+                  <div className="w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin" />
+                  Generating...
+                </>
+              ) : (
+                <>
+                  <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
+                  </svg>
+                  Save Tax Report
+                </>
+              )}
+            </button>
+            <p className="text-xs text-slate-500 mt-2">Save this report to your device or share with your financial advisor</p>
           </div>
         </div>
-      )}
+      </div>
 
       {/* MOBILE SAVE OPTIONS MODAL */}
       {showSaveOptions && previewImage && (
@@ -662,7 +886,7 @@ const GeminiAdvisor: React.FC<Props> = ({ results, inputs }) => {
           <div className="border-b border-slate-700 pb-10 mb-12 flex justify-between items-end">
             <div>
               <div className="flex items-center gap-5 mb-5">
-                <img src="/logo.png" alt="" className="w-14 h-14 object-contain flex-shrink-0 rounded-xl shadow-lg border border-slate-800" />
+                <img src="/logo_reverse.png" alt="" className="w-14 h-14 object-contain flex-shrink-0 rounded-xl shadow-lg border border-slate-800" />
                 <h1 className="text-5xl font-bold tracking-tight">
                   CanPay <span className="text-red-500">Insights</span>
                 </h1>
@@ -713,46 +937,15 @@ const GeminiAdvisor: React.FC<Props> = ({ results, inputs }) => {
             </ul>
           </div>
 
-          {/* ✦ AI Personalized Tax Strategies (Only if generated!) */}
-          {advice && (
-            <div className="mb-12 border-t border-slate-800 pt-12">
-              <h3 className="text-3.5xl font-extrabold text-white mb-8 flex items-center gap-3 border-b-2 border-red-600 pb-3 w-fit">
-                <span className="text-red-500 text-4xl animate-pulse">✦</span> AI Personalized Financial Advisory
-              </h3>
-              <div className="space-y-6 max-w-[850px]">
-                {advice.split('\n').map((line, idx) => {
-                  const cleanLine = line.trim();
-                  if (cleanLine.startsWith('###')) {
-                    return (
-                      <h4 key={idx} className="text-3xl font-bold text-red-400 mt-12 mb-4">
-                        {renderInlineMarkdown(cleanLine.replace('###', ''))}
-                      </h4>
-                    );
-                  }
-                  if (cleanLine.startsWith('##')) {
-                    return (
-                      <h4 key={idx} className="text-3.5xl font-bold text-red-400 mt-16 mb-5 border-b border-slate-800 pb-3">
-                        {renderInlineMarkdown(cleanLine.replace('##', ''))}
-                      </h4>
-                    );
-                  }
-                  if (cleanLine.startsWith('-') || cleanLine.startsWith('*')) {
-                    return (
-                      <li key={idx} className="ml-6 text-slate-300 mb-3 text-[21px] leading-[1.7] list-none flex items-start gap-2">
-                        <span className="text-amber-400 font-bold text-2xl mt-0.5">•</span>
-                        <span>{renderInlineMarkdown(cleanLine.replace(/^[-*]\s*/, ''))}</span>
-                      </li>
-                    );
-                  }
-                  return cleanLine !== '' ? (
-                    <p key={idx} className="text-slate-300 text-[21px] leading-[1.7] text-justify font-sans mb-5">
-                      {renderInlineMarkdown(cleanLine)}
-                    </p>
-                  ) : null;
-                })}
-              </div>
+          {/* ✦ Smart Tax Strategy (Synchronized with App) */}
+          <div className="mb-12 border-t border-slate-800 pt-12 text-left">
+            <h3 className="text-3.5xl font-extrabold text-white mb-8 flex items-center gap-3 border-b-2 border-red-600 pb-3 w-fit">
+              <span className="text-red-500 text-4xl">✦</span> Smart Tax Strategy
+            </h3>
+            <div className="max-w-[850px]">
+              {renderSmartReport(true)}
             </div>
-          )}
+          </div>
 
           {/* Footer */}
           <div className="pt-12 border-t border-slate-800 flex justify-between items-center">
