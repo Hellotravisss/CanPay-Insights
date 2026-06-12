@@ -870,7 +870,7 @@ Beyond finances, early retirees may face social isolation or a loss of purpose. 
     province: "National",
     publishedAt: "2026-06-05",
     readTime: 12,
-    imageUrl: "https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?w=800&q=80",
+    imageUrl: '/blog/ai-for-all-strategy-2026.png',
     content: `<b>A Historic Leap: Ottawa’s "AI for All" Mandate</b>
 
 Ottawa has officially unveiled its highly anticipated "AI for All" national sovereignty strategy, marking one of the most aggressive economic transformations in modern Canadian history. Announcing the five-year plan, the federal government revealed a robust combination of sweeping legislation and heavy, targeted funding. The central goal? To forcefully accelerate the adoption of artificial intelligence in Canadian local industries, catapulting the current adoption rate of 12% to an unprecedented 60% by 2031. 

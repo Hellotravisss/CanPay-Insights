@@ -27,6 +27,7 @@ export const studyArticles: Article[] = [
     tags: ['Minimum Wage', '2026', 'Data Study', 'All Provinces'],
     publishedAt: '2026-06-12',
     readTime: 9,
+    imageUrl: '/blog/minimum-wage-take-home-2026.png',
     directAnswer:
       'As of June 2026, a full-time minimum wage worker takes home between $26,478 a year (Alberta, $15.00/hr) and $34,098 a year (Nunavut, $19.75/hr) after federal tax, provincial tax, CPP, and EI. In Ontario ($17.60/hr), full-time minimum wage works out to $30,301 a year or about $2,525 a month after deductions.',
     faq: [
