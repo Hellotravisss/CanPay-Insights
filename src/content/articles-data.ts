@@ -2,6 +2,7 @@ import type { Article } from './types';
 import { salaryArticles } from './articles-salary';
 import { provinceArticles } from './articles-province';
 import { tipsArticles } from './articles-tips';
+import { studyArticles } from './articles-studies';
 
 // Article 1: Ontario Tax Guide
 const article1: Article = {
@@ -2551,6 +2552,8 @@ export const allArticles: Article[] = [
   ...provinceArticles,
   // Money Tips Articles
   ...tipsArticles,
+  // Original Data Studies
+  ...studyArticles,
 ];
 
 // Helper functions
