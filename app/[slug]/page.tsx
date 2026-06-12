@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 import ShareLinks from '../../components/ShareLinks';
+import SalaryBreakdownPanel from '../../components/SalaryBreakdownPanel';
 import { getLandingPage, landingPages } from '../landing-page-data';
 
 const BASE_URL = 'https://canpayinsights.ca';
@@ -187,16 +188,20 @@ export default async function LandingPage({ params }: Props) {
       <section className="max-w-5xl mx-auto px-4 py-10">
         <div className="grid grid-cols-1 lg:grid-cols-[1fr_320px] gap-8">
           <article className="space-y-6">
-            <div className="bg-white border border-slate-200 rounded-xl p-6 shadow-sm">
-              <h2 className="text-2xl font-bold mb-4">Common Searches</h2>
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
-                {page.examples.map((example) => (
-                  <div key={example} className="rounded-lg bg-slate-50 border border-slate-200 p-4 text-sm font-semibold text-slate-700">
-                    {example}
-                  </div>
-                ))}
-              </div>
-            </div>
+            {page.salaryBreakdown && (
+              <SalaryBreakdownPanel breakdown={page.salaryBreakdown} locale="en" />
+            )}
+
+            {page.sections.map((section) => (
+              <section key={section.heading} className="bg-white border border-slate-200 rounded-xl p-6 shadow-sm">
+                <h2 className="text-2xl font-bold text-slate-900 mb-3">
+                  {section.heading}
+                </h2>
+                <p className="leading-8 text-slate-600">
+                  {section.body}
+                </p>
+              </section>
+            ))}
 
             {page.relatedSalaryLinks && page.relatedSalaryLinks.length > 0 && (
               <nav
@@ -270,16 +275,16 @@ export default async function LandingPage({ params }: Props) {
               </section>
             )}
 
-            {page.sections.map((section) => (
-              <section key={section.heading} className="bg-white border border-slate-200 rounded-xl p-6 shadow-sm">
-                <h2 className="text-2xl font-bold text-slate-900 mb-3">
-                  {section.heading}
-                </h2>
-                <p className="leading-8 text-slate-600">
-                  {section.body}
-                </p>
-              </section>
-            ))}
+            <div className="bg-white border border-slate-200 rounded-xl p-6 shadow-sm">
+              <h2 className="text-2xl font-bold mb-4">Common Searches</h2>
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
+                {page.examples.map((example) => (
+                  <div key={example} className="rounded-lg bg-slate-50 border border-slate-200 p-4 text-sm font-semibold text-slate-700">
+                    {example}
+                  </div>
+                ))}
+              </div>
+            </div>
 
             <section className="bg-white border border-slate-200 rounded-xl p-6 shadow-sm">
               <h2 className="text-2xl font-bold text-slate-900 mb-5">Frequently Asked Questions</h2>

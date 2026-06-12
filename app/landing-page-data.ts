@@ -1,3 +1,5 @@
+import { buildSalaryBreakdown, getSalaryFigures, type SalaryBreakdown } from '../lib/salaryFigures';
+
 export type LandingPage = {
   slug: string;
   title: string;
@@ -35,6 +37,7 @@ export type LandingPage = {
     hrefLang: string;
     label: string;
   }>;
+  salaryBreakdown?: SalaryBreakdown;
 };
 
 const coreLandingPages: LandingPage[] = [
@@ -466,11 +469,11 @@ const coreLandingPages: LandingPage[] = [
   },
 ];
 
-const defaultSalaryAmounts = [50000, 60000, 65000, 70000, 80000, 90000, 100000, 120000];
-
-const salaryAmountsByProvince: Record<string, number[]> = {
-  quebec: [45000, 50000, 55000, 60000, 65000, 70000, 75000, 80000, 90000, 100000, 120000, 150000],
-};
+const salaryAmounts = [
+  35000, 40000, 45000, 48000, 50000, 52000, 55000, 58000, 60000, 62000, 65000,
+  68000, 70000, 72000, 75000, 78000, 80000, 85000, 90000, 95000, 100000,
+  110000, 120000, 130000, 150000, 175000, 200000,
+];
 
 const provinceSalaryConfigs = [
   {
@@ -684,20 +687,19 @@ const getFrenchSalaryBand = (amount: number) => {
   };
 };
 
-const getSalaryAmountsForProvince = (provinceSlug: string) =>
-  salaryAmountsByProvince[provinceSlug] ?? defaultSalaryAmounts;
-
 const getRelatedSalaryLinks = (provinceSlug: string, provinceShortName: string, currentAmount: number) =>
-  getSalaryAmountsForProvince(provinceSlug)
+  salaryAmounts
     .filter((amount) => amount !== currentAmount)
+    .sort((a, b) => Math.abs(a - currentAmount) - Math.abs(b - currentAmount))
     .slice(0, 7)
+    .sort((a, b) => a - b)
     .map((amount) => ({
       href: `/${amount}-after-tax-${provinceSlug}`,
       label: `${formatSalary(amount)} after tax ${provinceShortName}`,
     }));
 
 const salaryProvinceLandingPages: LandingPage[] = provinceSalaryConfigs.flatMap((province) =>
-  getSalaryAmountsForProvince(province.slug).map((amount) => {
+  salaryAmounts.map((amount) => {
     const salary = formatSalary(amount);
     const slugSalary = String(amount);
     const keyword = `${salary} after tax ${province.shortName}`;
@@ -709,14 +711,26 @@ const salaryProvinceLandingPages: LandingPage[] = provinceSalaryConfigs.flatMap(
       label: 'Canadian payroll guides',
     };
 
+    const breakdown = buildSalaryBreakdown(amount, province.slug, salaryAmounts);
+    const { figures } = breakdown;
+    const netAnnual = formatMoney(figures.netAnnual);
+    const netMonthly = formatMoney(figures.netMonthly);
+    const netBiWeekly = formatMoney(figures.netBiWeekly);
+    const totalTax = formatMoney(figures.federalTax + figures.provincialTax);
+    const averageRate = `${(figures.averageTaxRate * 100).toFixed(1)}%`;
+    const deductionRate = `${(figures.totalDeductionRate * 100).toFixed(1)}%`;
+    const topProvince = breakdown.provinceComparison[0];
+    const bottomProvince = breakdown.provinceComparison[breakdown.provinceComparison.length - 1];
+    const provinceSpread = formatMoney(topProvince.netAnnual - bottomProvince.netAnnual);
+
     const page: LandingPage = {
       slug: `${slugSalary}-after-tax-${province.slug}`,
-      title: `${salary} After Tax in ${province.shortName} 2025/2026 - Take-Home Pay`,
-      description: `Estimate ${salary} after tax in ${province.name} for 2025/2026. Calculate take-home pay with federal tax, ${province.shortName} tax, CPP, EI, and paycheque estimates.`,
+      title: `${salary} After Tax in ${province.shortName}: ${netAnnual} Take-Home (2025/26)`,
+      description: `A ${salary} salary in ${province.name} leaves about ${netAnnual} after tax in 2025/2026 — roughly ${netMonthly}/month or ${netBiWeekly} bi-weekly. See the full federal tax, ${province.shortName} tax, CPP, and EI breakdown.`,
       h1: `${salary} After Tax in ${province.shortName}`,
-      kicker: 'Salary after tax estimate',
+      kicker: 'Salary after tax breakdown',
       primaryKeyword: keyword,
-      intro: `Estimate what a ${salary} annual salary becomes after tax in ${province.name}. CanPay Insights helps workers in ${province.cities} compare gross salary, net pay, CPP, EI, and paycheque amounts.`,
+      intro: `If you earn ${salary} per year in ${province.name}, your estimated take-home pay is about ${netAnnual} — ${netMonthly} per month or ${netBiWeekly} every two weeks. This page breaks down exactly where the other ${formatMoney(figures.totalDeductions)} goes, for workers in ${province.cities}.`,
       examples: [
         `${salary} salary after tax ${province.shortName}`,
         `${salary} take-home pay ${province.shortName}`,
@@ -726,48 +740,50 @@ const salaryProvinceLandingPages: LandingPage[] = provinceSalaryConfigs.flatMap(
       sections: [
         {
           heading: `What affects ${salary} take-home pay in ${province.shortName}?`,
-          body: `${province.taxNote} Your actual net pay also depends on pay frequency, credits, RRSP contributions, workplace benefits, union dues, insurance premiums, and any other deductions on your pay stub.`,
+          body: `${province.taxNote} The estimate on this page assumes the basic personal amount only. Your actual net pay also depends on pay frequency, credits, RRSP contributions, workplace benefits, union dues, insurance premiums, and any other deductions on your pay stub.`,
         },
         {
           heading: 'Use this before accepting a job offer',
-          body: `A ${salary} offer is easier to understand when you compare annual gross pay with monthly, semi-monthly, or bi-weekly net pay. Use the calculator to estimate what may actually land in your bank account before budgeting rent, transportation, debt payments, or savings.`,
+          body: `A ${salary} offer is easier to judge in net terms: about ${netMonthly} per month to cover rent, transportation, debt payments, and savings. If the employer offers RRSP matching or health benefits, the real value is higher than the cash paycheque alone. Run your exact situation through the free calculator before you negotiate.`,
         },
         {
           heading: `${salary} monthly and bi-weekly pay in ${province.shortName}`,
-          body: `Many workers search for ${salary} after tax because rent, debt payments, groceries, transit, and savings goals are monthly or bi-weekly. Use CanPay Insights to switch pay frequency and compare estimated annual net pay, monthly take-home pay, semi-monthly pay, bi-weekly pay, and weekly pay in ${province.name}. ${province.localNote}`,
+          body: `Budgeting usually happens monthly or per paycheque, not annually. On ${salary} in ${province.name}, expect roughly ${netMonthly} per month, ${netBiWeekly} bi-weekly, or ${formatMoney(figures.netWeekly)} per week after deductions. ${province.localNote}`,
         },
         {
           heading: `Compare ${province.shortName} with other provinces`,
-          body: `The same ${salary} salary can produce different take-home pay in ${province.comparison}. If you are planning a move, compare provinces before assuming a higher gross salary means a higher after-tax income.`,
+          body: `The same ${salary} salary keeps the most in ${topProvince.shortName} (about ${formatMoney(topProvince.netAnnual)}) and the least in ${bottomProvince.shortName} (about ${formatMoney(bottomProvince.netAnnual)}) — a gap of ${provinceSpread} per year. If you are weighing offers in ${province.comparison}, compare after-tax pay in the table above before assuming a higher gross salary means more spending money.`,
         },
       ],
       faq: [
         {
           question: `How much is ${salary} after tax in ${province.shortName}?`,
-          answer: `It depends on your pay frequency, deductions, credits, and tax situation. Use CanPay Insights to estimate ${salary} after federal tax, ${province.shortName} tax, CPP, EI, and workplace deductions.`,
+          answer: `A ${salary} annual salary in ${province.name} leaves approximately ${netAnnual} after tax in 2025/2026 — about ${netMonthly} per month or ${netBiWeekly} bi-weekly. This assumes federal tax, ${province.shortName} tax, CPP, and EI with the basic personal amount only.`,
         },
         {
           question: `What is ${salary} bi-weekly after tax in ${province.shortName}?`,
-          answer: `Bi-weekly take-home pay depends on payroll deductions and your exact tax situation. Enter ${salary} as annual salary, choose ${province.name}, and switch the pay frequency to estimate each paycheque.`,
+          answer: `On a ${salary} salary in ${province.name}, each bi-weekly paycheque is approximately ${netBiWeekly} after deductions (26 paycheques per year). Semi-monthly pay would be about ${formatMoney(figures.netSemiMonthly)} per cheque (24 per year).`,
+        },
+        {
+          question: `How much tax do I pay on ${salary} in ${province.shortName}?`,
+          answer: `On ${salary} in ${province.name}, you pay roughly ${formatMoney(figures.federalTax)} federal tax and ${formatMoney(figures.provincialTax)} provincial tax — ${totalTax} in income tax total, an average tax rate of ${averageRate}. Adding ${formatMoney(figures.pensionContribution)} CPP and ${formatMoney(figures.eiPremium)} EI brings total deductions to ${formatMoney(figures.totalDeductions)} (${deductionRate} of gross).`,
         },
         {
           question: `Is ${salary} a good salary in ${province.shortName}?`,
-          answer: `It depends on your city, rent, household size, debt, transportation costs, and savings goals. Take-home pay is the better starting point for budgeting than gross salary alone.`,
+          answer: `${salary} in ${province.name} works out to about ${netMonthly} per month after tax. Whether that is comfortable depends on your city, rent, household size, debt, and savings goals — net pay is the better starting point for that judgment than gross salary.`,
         },
       ],
       relatedSalaryLinks: getRelatedSalaryLinks(province.slug, province.shortName, amount),
       highlights: [
         {
-          label: 'Gross monthly',
-          value: formatMoney(amount / 12),
-          detail:
-            'Before tax and payroll deductions. Use the calculator for your estimated net monthly pay.',
+          label: 'Net per year',
+          value: netAnnual,
+          detail: `Estimated take-home pay on ${salary} gross, after federal tax, ${province.shortName} tax, CPP, and EI.`,
         },
         {
-          label: 'Gross bi-weekly',
-          value: formatMoney(amount / 26),
-          detail:
-            'A quick paycheque anchor before federal tax, provincial tax, CPP, EI, and workplace deductions.',
+          label: 'Net per month',
+          value: netMonthly,
+          detail: `What lands in your account monthly. Bi-weekly paycheques are about ${netBiWeekly}.`,
         },
         {
           label: 'Salary context',
@@ -777,8 +793,8 @@ const salaryProvinceLandingPages: LandingPage[] = provinceSalaryConfigs.flatMap(
       ],
       nextSteps: [
         {
-          title: `Run the ${province.shortName} estimate`,
-          body: `Open the calculator, choose ${province.name}, and switch between annual, monthly, semi-monthly, bi-weekly, and weekly views.`,
+          title: `Run your exact ${province.shortName} numbers`,
+          body: `Add RRSP contributions, benefits, and your real pay frequency to refine this ${salary} estimate.`,
           href: '/',
           label: 'Open calculator',
         },
@@ -795,6 +811,7 @@ const salaryProvinceLandingPages: LandingPage[] = provinceSalaryConfigs.flatMap(
           label: guideLink.label,
         },
       ],
+      salaryBreakdown: breakdown,
     };
 
     if (province.slug === 'quebec') {
@@ -811,16 +828,21 @@ const salaryProvinceLandingPages: LandingPage[] = provinceSalaryConfigs.flatMap(
   })
 );
 
-const frenchQuebecAmounts = [50000, 60000, 65000, 70000, 80000, 90000, 100000, 120000];
+// Keep French Quebec pages in lockstep with the English Quebec set so every
+// hreflang alternate link resolves to a real page.
+const frenchQuebecAmounts = salaryAmounts;
 
-const getRelatedFrenchQuebecLinks = (currentSlug: string) =>
+const getRelatedFrenchQuebecLinks = (currentSlug: string, currentAmount?: number) =>
   frenchQuebecAmounts
+    .filter((amount) => amount !== currentAmount)
+    .sort((a, b) => Math.abs(a - (currentAmount ?? 70000)) - Math.abs(b - (currentAmount ?? 70000)))
+    .slice(0, 7)
+    .sort((a, b) => a - b)
     .map((amount) => ({
       href: `/fr/${amount}-apres-impot-quebec`,
       label: `${formatFrenchSalary(amount)} après impôt Québec`,
     }))
-    .filter((link) => link.href !== `/fr/${currentSlug}`)
-    .slice(0, 7);
+    .filter((link) => link.href !== `/fr/${currentSlug}`);
 
 const frenchCoreLandingPages: LandingPage[] = [
   {
@@ -925,14 +947,30 @@ const frenchQuebecSalaryPages: LandingPage[] = frenchQuebecAmounts.map((amount) 
   const englishSlug = `${amount}-after-tax-quebec`;
   const salaryBand = getFrenchSalaryBand(amount);
 
+  const breakdown = buildSalaryBreakdown(amount, 'quebec', salaryAmounts);
+  // Point in-province salary links at the French pages instead of the English ones.
+  const frenchBreakdown: SalaryBreakdown = {
+    ...breakdown,
+    nearbySalaries: breakdown.nearbySalaries.map((entry) => ({
+      ...entry,
+      href: `/fr/${entry.amount}-apres-impot-quebec`,
+    })),
+  };
+  const { figures } = breakdown;
+  const netAnnual = formatFrenchMoney(figures.netAnnual);
+  const netMonthly = formatFrenchMoney(figures.netMonthly);
+  const netBiWeekly = formatFrenchMoney(figures.netBiWeekly);
+  const totalTax = formatFrenchMoney(figures.federalTax + figures.provincialTax);
+  const averageRate = `${(figures.averageTaxRate * 100).toFixed(1).replace('.', ',')} %`;
+
   return {
     slug,
-    title: `${salary} après impôt au Québec 2025/2026 - Salaire net`,
-    description: `Estimez ${salary} après impôt au Québec. Calculez la paie nette avec impôt fédéral, impôt du Québec, RRQ, assurance emploi, RQAP et retenues.`,
+    title: `${salary} après impôt au Québec : ${netAnnual} net (2025/2026)`,
+    description: `Un salaire de ${salary} au Québec laisse environ ${netAnnual} après impôt en 2025/2026 — soit ${netMonthly} par mois. Voyez le détail : impôt fédéral, impôt du Québec, RRQ, RQAP et assurance emploi.`,
     h1: `${salary} après impôt au Québec`,
-    kicker: 'Estimation de salaire net',
+    kicker: 'Salaire net détaillé',
     primaryKeyword: `${salary} après impôt Québec`,
-    intro: `Estimez ce qu'un salaire annuel de ${salary} devient après impôt au Québec. Cette page aide les travailleurs de Montréal, Québec, Laval, Gatineau et Sherbrooke à comparer le salaire brut, la paie nette, les retenues et le montant par paie.`,
+    intro: `Avec un salaire annuel de ${salary} au Québec, votre paie nette estimée est d'environ ${netAnnual} — soit ${netMonthly} par mois ou ${netBiWeekly} aux deux semaines. Cette page détaille où vont les ${formatFrenchMoney(figures.totalDeductions)} de retenues pour les travailleurs de Montréal, Québec, Laval, Gatineau et Sherbrooke.`,
     examples: [
       `${salary} salaire net Québec`,
       `${salary} après impôt Québec`,
@@ -943,47 +981,46 @@ const frenchQuebecSalaryPages: LandingPage[] = frenchQuebecAmounts.map((amount) 
       {
         heading: `Ce qui affecte ${salary} net au Québec`,
         body:
-          "La paie nette dépend de l'impôt fédéral, de l'impôt du Québec, de la RRQ, de l'assurance emploi, du RQAP, de la fréquence de paie, des crédits personnels et des déductions de l'employeur.",
+          "L'estimation de cette page suppose le montant personnel de base seulement. Votre paie réelle dépend aussi de la fréquence de paie, des crédits personnels, des cotisations REER, des avantages sociaux et des déductions de l'employeur.",
       },
       {
         heading: 'Salaire mensuel et paie aux deux semaines',
-        body: `Beaucoup de travailleurs cherchent ${salary} après impôt parce que le loyer, les factures, le transport et l'épargne sont planifiés par mois ou par période de paie. Utilisez le calculateur pour comparer le net annuel, mensuel, semi-mensuel, hebdomadaire et aux deux semaines.`,
+        body: `Le budget se planifie par mois ou par paie, pas par année. Sur ${salary} au Québec, comptez environ ${netMonthly} par mois, ${netBiWeekly} aux deux semaines ou ${formatFrenchMoney(figures.netWeekly)} par semaine après retenues.`,
       },
       {
         heading: 'Avant de signer une offre',
-        body: `Un salaire brut de ${salary} peut sembler clair, mais le budget dépend du montant qui arrive vraiment dans votre compte. Vérifiez la paie nette avant de comparer un poste au Québec avec une offre en Ontario, en Alberta ou en Colombie-Britannique.`,
+        body: `Un salaire brut de ${salary} peut sembler clair, mais le budget dépend du montant qui arrive vraiment dans votre compte : environ ${netMonthly} par mois. Vérifiez la paie nette avant de comparer un poste au Québec avec une offre en Ontario, en Alberta ou en Colombie-Britannique.`,
       },
     ],
     faq: [
       {
         question: `Combien donne ${salary} après impôt au Québec?`,
-        answer:
-          "Le montant exact dépend de votre situation fiscale, de la fréquence de paie, des crédits, des avantages et des déductions. Entrez le salaire dans CanPay Insights et choisissez Québec pour obtenir une estimation.",
+        answer: `Un salaire annuel de ${salary} au Québec laisse environ ${netAnnual} après impôt en 2025/2026 — soit ${netMonthly} par mois ou ${netBiWeekly} aux deux semaines, avec le montant personnel de base seulement.`,
       },
       {
         question: `Quelle est la paie aux deux semaines pour ${salary} au Québec?`,
-        answer:
-          "La paie aux deux semaines dépend des retenues de paie. Utilisez le mode salaire annuel, choisissez Québec, puis sélectionnez la fréquence de paie pour estimer chaque chèque.",
+        answer: `Sur un salaire de ${salary} au Québec, chaque paie aux deux semaines est d'environ ${netBiWeekly} après retenues (26 paies par année). En paie semi-mensuelle, comptez environ ${formatFrenchMoney(figures.netSemiMonthly)} par chèque.`,
+      },
+      {
+        question: `Combien d'impôt sur ${salary} au Québec?`,
+        answer: `Sur ${salary} au Québec, comptez environ ${formatFrenchMoney(figures.federalTax)} d'impôt fédéral et ${formatFrenchMoney(figures.provincialTax)} d'impôt du Québec — ${totalTax} au total, un taux moyen de ${averageRate}. S'ajoutent ${formatFrenchMoney(figures.pensionContribution)} de RRQ et RQAP et ${formatFrenchMoney(figures.eiPremium)} d'assurance emploi.`,
       },
       {
         question: `${salary} est-il un bon salaire au Québec?`,
-        answer:
-          "Cela dépend de la ville, du loyer, du transport, des dettes, de la taille du ménage et de vos objectifs d'épargne. La paie nette est un meilleur point de départ que le salaire brut.",
+        answer: `${salary} au Québec donne environ ${netMonthly} par mois après impôt. Le confort dépend de la ville, du loyer, du transport, des dettes et de vos objectifs d'épargne — la paie nette est un meilleur point de départ que le brut.`,
       },
     ],
-    relatedSalaryLinks: getRelatedFrenchQuebecLinks(slug),
+    relatedSalaryLinks: getRelatedFrenchQuebecLinks(slug, amount),
     highlights: [
       {
-        label: 'Brut mensuel',
-        value: formatFrenchMoney(amount / 12),
-        detail:
-          "Avant impôt et retenues. Utilisez le calculateur pour estimer la paie nette mensuelle.",
+        label: 'Net par année',
+        value: netAnnual,
+        detail: `Paie nette estimée sur ${salary} brut, après impôt fédéral, impôt du Québec, RRQ, RQAP et assurance emploi.`,
       },
       {
-        label: 'Brut aux deux semaines',
-        value: formatFrenchMoney(amount / 26),
-        detail:
-          "Un repère rapide avant impôt fédéral, impôt du Québec, RRQ, RQAP, assurance emploi et déductions.",
+        label: 'Net par mois',
+        value: netMonthly,
+        detail: `Ce qui arrive dans votre compte chaque mois. Aux deux semaines : environ ${netBiWeekly}.`,
       },
       {
         label: 'Contexte salaire',
@@ -991,6 +1028,7 @@ const frenchQuebecSalaryPages: LandingPage[] = frenchQuebecAmounts.map((amount) 
         detail: salaryBand.detail,
       },
     ],
+    salaryBreakdown: frenchBreakdown,
     nextSteps: [
       {
         title: 'Calculer le net au Québec',

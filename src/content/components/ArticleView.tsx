@@ -81,9 +81,9 @@ const renderContent = (content: string) => {
 
   const renderInlineHtml = (text: string) => {
     const withFormatting = text
-      .replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>')
+      .replace(/\*\*(.+?)\*\*/g, '<strong class="font-semibold text-slate-900">$1</strong>')
       .replace(/\*(.+?)\*/g, '<em>$1</em>')
-      .replace(/\[([^\]]+)\]\(([^)]+)\)/g, '<a href="$2" class="text-red-600 underline hover:text-red-700">$1</a>');
+      .replace(/\[([^\]]+)\]\(([^)]+)\)/g, '<a href="$2" class="font-medium text-red-600 underline decoration-red-200 underline-offset-2 hover:text-red-700 hover:decoration-red-400">$1</a>');
     return { __html: withFormatting };
   };
 
@@ -95,29 +95,33 @@ const renderContent = (content: string) => {
     const header = tableRows[0];
     const body = tableRows.slice(1);
     elements.push(
-      <div key={`table-${elements.length}`} className="my-6 overflow-x-auto">
-        <table className="min-w-full border-collapse border border-slate-300">
-          <thead>
-            <tr className="bg-slate-100">
-              {header.map((cell, index) => (
-                <th key={index} className="border border-slate-300 px-4 py-2 text-left text-sm font-bold">
-                  {cell.trim()}
-                </th>
-              ))}
-            </tr>
-          </thead>
-          <tbody>
-            {body.map((row, rowIndex) => (
-              <tr key={rowIndex} className={rowIndex % 2 === 0 ? 'bg-white' : 'bg-slate-50'}>
-                {row.map((cell, cellIndex) => (
-                  <td key={cellIndex} className="border border-slate-300 px-4 py-2 text-sm">
+      <div key={`table-${elements.length}`} className="my-7 overflow-hidden rounded-xl border border-slate-200">
+        <div className="overflow-x-auto">
+          <table className="min-w-full border-collapse">
+            <thead>
+              <tr className="border-b border-slate-200 bg-slate-50">
+                {header.map((cell, index) => (
+                  <th key={index} className="px-4 py-3 text-left text-xs font-bold uppercase tracking-wide text-slate-500">
                     {cell.trim()}
-                  </td>
+                  </th>
                 ))}
               </tr>
-            ))}
-          </tbody>
-        </table>
+            </thead>
+            <tbody className="divide-y divide-slate-100">
+              {body.map((row, rowIndex) => (
+                <tr key={rowIndex}>
+                  {row.map((cell, cellIndex) => (
+                    <td
+                      key={cellIndex}
+                      className={`px-4 py-3 text-sm ${cellIndex === 0 ? 'font-medium text-slate-800' : 'text-slate-600'}`}
+                      dangerouslySetInnerHTML={renderInlineHtml(cell.trim())}
+                    />
+                  ))}
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
       </div>,
     );
     tableRows = [];
@@ -130,9 +134,9 @@ const renderContent = (content: string) => {
 
     const ListTag = listType === 'ul' ? 'ul' : 'ol';
     elements.push(
-      <ListTag key={`list-${elements.length}`} className={`my-4 ${listType === 'ul' ? 'list-disc' : 'list-decimal'} list-inside space-y-2 text-slate-600`}>
+      <ListTag key={`list-${elements.length}`} className={`my-5 ${listType === 'ul' ? 'list-disc' : 'list-decimal'} space-y-2.5 pl-6 text-[17px] leading-[1.8] text-slate-700 marker:text-red-400`}>
         {listItems.map((item, index) => (
-          <li key={index} className="ml-4" dangerouslySetInnerHTML={renderInlineHtml(item)} />
+          <li key={index} className="pl-1" dangerouslySetInnerHTML={renderInlineHtml(item)} />
         ))}
       </ListTag>,
     );
@@ -173,15 +177,15 @@ const renderContent = (content: string) => {
     flushList();
 
     if (trimmed.startsWith('# ')) {
-      elements.push(<h1 key={index} className="mb-4 mt-8 text-3xl font-bold text-slate-900">{trimmed.substring(2)}</h1>);
+      elements.push(<h1 key={index} className="mb-5 mt-10 text-3xl font-bold tracking-tight text-slate-900">{trimmed.substring(2)}</h1>);
     } else if (trimmed.startsWith('## ')) {
-      elements.push(<h2 key={index} className="mb-4 mt-8 border-b border-slate-200 pb-2 text-2xl font-bold text-slate-800">{trimmed.substring(3)}</h2>);
+      elements.push(<h2 key={index} className="mb-4 mt-10 text-2xl font-bold tracking-tight text-slate-900">{trimmed.substring(3)}</h2>);
     } else if (trimmed.startsWith('### ')) {
-      elements.push(<h3 key={index} className="mb-3 mt-6 text-xl font-bold text-slate-700">{trimmed.substring(4)}</h3>);
+      elements.push(<h3 key={index} className="mb-3 mt-8 text-xl font-semibold text-slate-900">{trimmed.substring(4)}</h3>);
     } else if (trimmed === '---') {
-      elements.push(<hr key={index} className="my-6 border-slate-200" />);
+      elements.push(<hr key={index} className="my-8 border-slate-200" />);
     } else if (trimmed !== '') {
-      elements.push(<p key={index} className="my-4 leading-relaxed text-slate-600" dangerouslySetInnerHTML={renderInlineHtml(trimmed)} />);
+      elements.push(<p key={index} className="my-5 text-[17px] leading-[1.85] text-slate-700" dangerouslySetInnerHTML={renderInlineHtml(trimmed)} />);
     }
   });
 
@@ -253,7 +257,7 @@ export default function ArticleView({ slug }: ArticleViewProps) {
   return (
     <main className="min-h-screen bg-slate-50">
       <header className="border-b border-slate-200 bg-white">
-        <div className="mx-auto max-w-4xl px-4 py-8">
+        <div className="mx-auto max-w-3xl px-4 py-10">
           <nav className="mb-4 flex items-center gap-2 text-sm text-slate-500" aria-label="Breadcrumb">
             <a href="/blog" className="no-underline hover:text-red-600">
               Tax Guides
@@ -284,8 +288,8 @@ export default function ArticleView({ slug }: ArticleViewProps) {
         </div>
       </header>
 
-      <div className="mx-auto max-w-4xl px-4 py-8">
-        <article className="rounded-xl border border-slate-200 bg-white p-6 shadow-sm md:p-8">
+      <div className="mx-auto max-w-3xl px-4 py-8">
+        <article className="rounded-xl border border-slate-200 bg-white p-6 shadow-sm md:p-10">
           {article.imageUrl && (
             <div className="mb-8 overflow-hidden rounded-lg">
               <img
@@ -303,12 +307,11 @@ export default function ArticleView({ slug }: ArticleViewProps) {
             </div>
           )}
 
-          <CalculatorLinksPanel article={article} />
-          <CalculatorCTA />
-
           <div className="prose prose-slate max-w-none">
             {renderContent(article.content)}
           </div>
+
+          <CalculatorCTA />
 
           {article.faq && article.faq.length > 0 && (
             <section className="mt-10 border-t border-slate-200 pt-8">
@@ -329,8 +332,11 @@ export default function ArticleView({ slug }: ArticleViewProps) {
             </section>
           )}
 
+          <div className="mt-10">
+            <CalculatorLinksPanel article={article} />
+          </div>
+
           <ArticleShareButtons slug={article.slug} title={article.title} excerpt={article.excerpt} />
-          <CalculatorCTA />
 
           <div className="mt-8 rounded-xl border border-yellow-100/60 bg-yellow-50/50 p-4">
             <p className="text-sm text-yellow-800">
