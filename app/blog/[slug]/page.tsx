@@ -1,18 +1,19 @@
 import type { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 import { allArticles, getArticleBySlug } from '../../../src/content/articles-data';
-import ArticlePageClient from './ArticlePageClient';
+import ArticleView from '../../../src/content/components/ArticleView';
 
 interface Props {
   params: Promise<{ slug: string }>;
 }
 
-// Pre-render all 40 article pages at build time
+export const dynamic = 'force-static';
+export const dynamicParams = false;
+
 export async function generateStaticParams() {
   return allArticles.map((article) => ({ slug: article.slug }));
 }
 
-// Per-article SEO metadata — this is what Google actually reads
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { slug } = await params;
   const article = getArticleBySlug(slug);
@@ -55,87 +56,59 @@ export default async function ArticlePage({ params }: Props) {
     notFound();
   }
 
-  // Inject article content as static HTML for Google to read
-  // The client component handles interactive elements (share, related articles)
+  const articleJsonLd = [
+    {
+      '@context': 'https://schema.org',
+      '@type': 'Article',
+      headline: article.title,
+      description: article.excerpt,
+      datePublished: article.publishedAt,
+      dateModified: article.publishedAt,
+      author: { '@type': 'Organization', name: 'CanPay Insights', url: 'https://canpayinsights.ca' },
+      publisher: {
+        '@type': 'Organization',
+        name: 'CanPay Insights',
+        url: 'https://canpayinsights.ca',
+        logo: { '@type': 'ImageObject', url: 'https://canpayinsights.ca/logo.png' },
+      },
+      mainEntityOfPage: { '@type': 'WebPage', '@id': `https://canpayinsights.ca/blog/${slug}` },
+      image: article.imageUrl || 'https://canpayinsights.ca/og-image.png',
+      keywords: article.keywords?.join(', '),
+      articleSection: article.category,
+      inLanguage: 'en-CA',
+      isPartOf: { '@type': 'WebSite', name: 'CanPay Insights', url: 'https://canpayinsights.ca' },
+    },
+    {
+      '@context': 'https://schema.org',
+      '@type': 'BreadcrumbList',
+      itemListElement: [
+        { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://canpayinsights.ca' },
+        { '@type': 'ListItem', position: 2, name: 'Tax Guides', item: 'https://canpayinsights.ca/blog' },
+        { '@type': 'ListItem', position: 3, name: article.title, item: `https://canpayinsights.ca/blog/${slug}` },
+      ],
+    },
+    ...(article.faq && article.faq.length > 0
+      ? [
+          {
+            '@context': 'https://schema.org',
+            '@type': 'FAQPage',
+            mainEntity: article.faq.map((item) => ({
+              '@type': 'Question',
+              name: item.question,
+              acceptedAnswer: { '@type': 'Answer', text: item.answer },
+            })),
+          },
+        ]
+      : []),
+  ];
+
   return (
     <>
-      {/* Static HTML for SEO — visible to crawlers before JS loads */}
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{
-          __html: JSON.stringify([
-            {
-              '@context': 'https://schema.org',
-              '@type': 'Article',
-              headline: article.title,
-              description: article.excerpt,
-              datePublished: article.publishedAt,
-              dateModified: article.publishedAt,
-              author: { '@type': 'Organization', name: 'CanPay Insights', url: 'https://canpayinsights.ca' },
-              publisher: {
-                '@type': 'Organization',
-                name: 'CanPay Insights',
-                url: 'https://canpayinsights.ca',
-                logo: { '@type': 'ImageObject', url: 'https://canpayinsights.ca/logo.png' },
-              },
-              mainEntityOfPage: { '@type': 'WebPage', '@id': `https://canpayinsights.ca/blog/${slug}` },
-              image: article.imageUrl || 'https://canpayinsights.ca/og-image.png',
-              keywords: article.keywords?.join(', '),
-              articleSection: article.category,
-              inLanguage: 'en-CA',
-              isPartOf: { '@type': 'WebSite', name: 'CanPay Insights', url: 'https://canpayinsights.ca' },
-            },
-            {
-              '@context': 'https://schema.org',
-              '@type': 'BreadcrumbList',
-              itemListElement: [
-                { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://canpayinsights.ca' },
-                { '@type': 'ListItem', position: 2, name: 'Tax Guides', item: 'https://canpayinsights.ca/blog' },
-                { '@type': 'ListItem', position: 3, name: article.title, item: `https://canpayinsights.ca/blog/${slug}` },
-              ],
-            },
-            ...(article.faq && article.faq.length > 0 ? [{
-              '@context': 'https://schema.org',
-              '@type': 'FAQPage',
-              mainEntity: article.faq.map(item => ({
-                '@type': 'Question',
-                name: item.question,
-                acceptedAnswer: { '@type': 'Answer', text: item.answer },
-              })),
-            }] : []),
-          ]),
-        }}
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(articleJsonLd) }}
       />
-      
-      {/* 🚀 SEO Content Projection Block - Directly visible in pure HTML source to search engine crawlers */}
-      <div style={{ display: 'none' }} aria-hidden="true">
-        <h1>{article.title}</h1>
-        {article.subtitle && <h2>{article.subtitle}</h2>}
-        <p>{article.excerpt}</p>
-        {article.directAnswer && <p><strong>Direct Answer:</strong> {article.directAnswer}</p>}
-        <div>
-          {article.content.split('\n').map((paragraph, index) => {
-            const p = paragraph.trim();
-            if (p.startsWith('<b>') || p.startsWith('<strong>') || p.startsWith('##')) {
-              return <h3 key={index}>{p.replace(/<\/?[^>]+(>|$)/g, '')}</h3>;
-            }
-            return p !== '' ? <p key={index}>{p.replace(/<\/?[^>]+(>|$)/g, '')}</p> : null;
-          })}
-        </div>
-        {article.faq && article.faq.length > 0 && (
-          <div>
-            <h2>Frequently Asked Questions</h2>
-            {article.faq.map((item, index) => (
-              <div key={index}>
-                <h3>{item.question}</h3>
-                <p>{item.answer}</p>
-              </div>
-            ))}
-          </div>
-        )}
-      </div>
-
-      <ArticlePageClient slug={slug} />
+      <ArticleView slug={slug} />
     </>
   );
 }
