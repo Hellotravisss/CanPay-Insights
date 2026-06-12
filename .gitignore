@@ -54,3 +54,6 @@ search_exact.js
 search_iframes.js
 search_more.js
 *.p8
+
+# Allow site assets despite the global *.png screenshot rule
+!public/**/*.png
