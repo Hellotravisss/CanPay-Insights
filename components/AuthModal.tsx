@@ -45,16 +45,26 @@ const AuthModal: React.FC<Props> = ({
       userAgent?: string;
       standalone?: boolean;
     };
-    const w = window as unknown as { median?: unknown; natively?: unknown; gonative?: unknown };
+    const w = window as unknown as {
+      median?: unknown;
+      natively?: unknown;
+      gonative?: unknown;
+      Capacitor?: { isNativePlatform?: () => boolean };
+      cordova?: unknown;
+    };
     const ua = (nav.userAgent || '').toLowerCase();
 
     // Installed PWA (iOS adds navigator.standalone; all platforms match the media query)
     const standalone =
       window.matchMedia?.('(display-mode: standalone)')?.matches === true ||
       nav.standalone === true;
-    // Native WebView wrappers (Median/GoNative, Natively, generic "webview" UA token)
-    const wrapperToken = /median|gonative|natively|webview|; wv\)/.test(ua);
-    const nativeBridge = !!w.median || !!w.natively || !!w.gonative;
+    // Native WebView wrappers (Capacitor/Cordova, Median/GoNative, Natively, generic "webview" UA token)
+    const wrapperToken = /median|gonative|natively|capacitor|cordova|webview|; wv\)/.test(ua);
+    const capacitorNative =
+      typeof w.Capacitor?.isNativePlatform === 'function'
+        ? w.Capacitor.isNativePlatform() === true
+        : !!w.Capacitor;
+    const nativeBridge = !!w.median || !!w.natively || !!w.gonative || !!w.cordova || capacitorNative;
 
     setIsAppEnv(standalone || wrapperToken || nativeBridge);
   }, []);
