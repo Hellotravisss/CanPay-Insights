@@ -11,7 +11,7 @@ interface UserMenuProps {
 }
 
 const UserMenu: React.FC<UserMenuProps> = ({ onSwitchToTimesheet, onLoadCalculation }) => {
-  const { user, signOut, signInWithOAuth, signInWithEmail, isAuthenticated, loading } = useAuth();
+  const { user, signOut, signInWithOAuth, signInWithEmail, signInWithPassword, signUpWithPassword, isAuthenticated, loading } = useAuth();
   const userId = user?.id || null;
   const { records, isLoading: isHistoryLoading, deleteRecord, clearHistory } = useCalculationHistory(userId);
   const [isOpen, setIsOpen] = useState(false);
@@ -93,6 +93,8 @@ const UserMenu: React.FC<UserMenuProps> = ({ onSwitchToTimesheet, onLoadCalculat
           onClose={() => setShowAuthModal(false)}
           onSignIn={handleSignIn}
           onSignInWithEmail={signInWithEmail}
+          onSignInWithPassword={signInWithPassword}
+          onSignUpWithPassword={signUpWithPassword}
         />
       </>
     );
@@ -385,6 +387,8 @@ const UserMenu: React.FC<UserMenuProps> = ({ onSwitchToTimesheet, onLoadCalculat
         onClose={() => setShowAuthModal(false)}
         onSignIn={handleSignIn}
         onSignInWithEmail={signInWithEmail}
+        onSignInWithPassword={signInWithPassword}
+        onSignUpWithPassword={signUpWithPassword}
       />
     </>
   );

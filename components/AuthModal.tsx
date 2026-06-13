@@ -1,5 +1,5 @@
 'use client';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import type { OAuthProvider } from '../hooks/useAuth';
 
 interface Props {
@@ -7,14 +7,57 @@ interface Props {
   onClose: () => void;
   onSignIn: (provider: OAuthProvider) => void;
   onSignInWithEmail: (email: string) => Promise<void>;
+  onSignInWithPassword: (email: string, password: string) => Promise<void>;
+  onSignUpWithPassword: (email: string, password: string) => Promise<void>;
   message?: string;
 }
 
-const AuthModal: React.FC<Props> = ({ isOpen, onClose, onSignIn, onSignInWithEmail, message }) => {
+const AuthModal: React.FC<Props> = ({
+  isOpen,
+  onClose,
+  onSignIn,
+  onSignInWithEmail,
+  onSignInWithPassword,
+  onSignUpWithPassword,
+  message,
+}) => {
   const [email, setEmail] = useState('');
   const [emailSent, setEmailSent] = useState(false);
   const [emailLoading, setEmailLoading] = useState(false);
   const [emailError, setEmailError] = useState('');
+
+  // Email + password state
+  const [password, setPassword] = useState('');
+  const [pwMode, setPwMode] = useState<'signin' | 'signup'>('signin');
+  const [pwLoading, setPwLoading] = useState(false);
+  const [pwError, setPwError] = useState('');
+  const [pwNotice, setPwNotice] = useState('');
+  const [showMagicLink, setShowMagicLink] = useState(false);
+
+  // Detect installed-app / WebView (standalone) context. Apple blocks the
+  // Sign in with Apple / Google web OAuth flow inside an iOS WebView, so those
+  // buttons silently do nothing there. In that context we hide them and rely on
+  // email + password, which works reliably and gives App Review a way in.
+  const [isAppEnv, setIsAppEnv] = useState(false);
+  useEffect(() => {
+    if (typeof window === 'undefined') return;
+    const nav = window.navigator as unknown as {
+      userAgent?: string;
+      standalone?: boolean;
+    };
+    const w = window as unknown as { median?: unknown; natively?: unknown; gonative?: unknown };
+    const ua = (nav.userAgent || '').toLowerCase();
+
+    // Installed PWA (iOS adds navigator.standalone; all platforms match the media query)
+    const standalone =
+      window.matchMedia?.('(display-mode: standalone)')?.matches === true ||
+      nav.standalone === true;
+    // Native WebView wrappers (Median/GoNative, Natively, generic "webview" UA token)
+    const wrapperToken = /median|gonative|natively|webview|; wv\)/.test(ua);
+    const nativeBridge = !!w.median || !!w.natively || !!w.gonative;
+
+    setIsAppEnv(standalone || wrapperToken || nativeBridge);
+  }, []);
 
   if (!isOpen) return null;
 
@@ -30,6 +73,39 @@ const AuthModal: React.FC<Props> = ({ isOpen, onClose, onSignIn, onSignInWithEma
       setEmailError('Failed to send email. Please try again.');
     } finally {
       setEmailLoading(false);
+    }
+  };
+
+  const handlePasswordSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!email.trim() || !password.trim()) return;
+    setPwLoading(true);
+    setPwError('');
+    setPwNotice('');
+    try {
+      if (pwMode === 'signin') {
+        await onSignInWithPassword(email.trim(), password);
+        onClose();
+      } else {
+        await onSignUpWithPassword(email.trim(), password);
+        setPwNotice(
+          'Account created. If a confirmation email is required, please confirm it, then sign in.'
+        );
+        setPwMode('signin');
+      }
+    } catch (err) {
+      const msg = (err as { message?: string })?.message || '';
+      if (pwMode === 'signup' && /already registered|already exists/i.test(msg)) {
+        setPwError('That email already has an account. Try signing in instead.');
+      } else if (/invalid login credentials/i.test(msg)) {
+        setPwError('Incorrect email or password.');
+      } else if (/at least 6/i.test(msg)) {
+        setPwError('Password must be at least 6 characters.');
+      } else {
+        setPwError(msg || 'Something went wrong. Please try again.');
+      }
+    } finally {
+      setPwLoading(false);
     }
   };
 
@@ -85,7 +161,7 @@ const AuthModal: React.FC<Props> = ({ isOpen, onClose, onSignIn, onSignInWithEma
         </div>
 
         {emailSent ? (
-          /* Success state */
+          /* Magic-link success state */
           <div className="text-center py-4">
             <div className="w-12 h-12 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-3">
               <svg className="w-6 h-6 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -98,70 +174,122 @@ const AuthModal: React.FC<Props> = ({ isOpen, onClose, onSignIn, onSignInWithEma
               Click the link to sign in — no password needed.
             </p>
             <button
-              onClick={() => { setEmailSent(false); setEmail(''); }}
+              onClick={() => { setEmailSent(false); }}
               className="mt-4 text-sm text-slate-500 hover:text-slate-700 underline"
             >
-              Use a different email
+              Back to sign in
             </button>
           </div>
         ) : (
           <>
-            {/* Apple button */}
-            <button
-              onClick={() => onSignIn('apple')}
-              className="w-full bg-black hover:bg-gray-900 text-white font-semibold py-3 px-4 rounded-lg transition-all flex items-center justify-center gap-3 hover:shadow-md active:scale-[0.98]"
-            >
-              <svg className="w-5 h-5" viewBox="0 0 24 24" fill="currentColor">
-                <path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/>
-              </svg>
-              Continue with Apple
-            </button>
+            {/* OAuth options — only in a real browser. Inside the iOS app
+                (standalone WebView) the Apple/Google web OAuth flow is blocked
+                by Apple, so we hide these and use email + password instead. */}
+            {!isAppEnv && (
+              <>
+                <button
+                  onClick={() => onSignIn('apple')}
+                  className="w-full bg-black hover:bg-gray-900 text-white font-semibold py-3 px-4 rounded-lg transition-all flex items-center justify-center gap-3 hover:shadow-md active:scale-[0.98]"
+                >
+                  <svg className="w-5 h-5" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/>
+                  </svg>
+                  Continue with Apple
+                </button>
 
-            {/* Google button */}
-            <button
-              onClick={() => onSignIn('google')}
-              className="w-full bg-white hover:bg-gray-50 border border-slate-200 text-slate-700 font-semibold py-3 px-4 rounded-lg transition-all flex items-center justify-center gap-3 hover:shadow-md active:scale-[0.98]"
-            >
-              <svg className="w-5 h-5" viewBox="0 0 24 24">
-                <path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/>
-                <path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/>
-                <path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z"/>
-                <path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"/>
-              </svg>
-              Continue with Google
-            </button>
+                <button
+                  onClick={() => onSignIn('google')}
+                  className="w-full mt-3 bg-white hover:bg-gray-50 border border-slate-200 text-slate-700 font-semibold py-3 px-4 rounded-lg transition-all flex items-center justify-center gap-3 hover:shadow-md active:scale-[0.98]"
+                >
+                  <svg className="w-5 h-5" viewBox="0 0 24 24">
+                    <path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/>
+                    <path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/>
+                    <path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z"/>
+                    <path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"/>
+                  </svg>
+                  Continue with Google
+                </button>
 
-            {/* Divider */}
-            <div className="relative my-4">
-              <div className="absolute inset-0 flex items-center">
-                <div className="w-full border-t border-slate-200"></div>
-              </div>
-              <div className="relative flex justify-center text-xs uppercase">
-                <span className="bg-white px-2 text-slate-400">or</span>
-              </div>
-            </div>
+                <div className="relative my-4">
+                  <div className="absolute inset-0 flex items-center">
+                    <div className="w-full border-t border-slate-200"></div>
+                  </div>
+                  <div className="relative flex justify-center text-xs uppercase">
+                    <span className="bg-white px-2 text-slate-400">or</span>
+                  </div>
+                </div>
+              </>
+            )}
 
-            {/* Email form */}
-            <form onSubmit={handleEmailSubmit} className="space-y-3">
+            {/* Email + password — reliable everywhere, including the iOS app */}
+            <form onSubmit={handlePasswordSubmit} className="space-y-3">
               <input
                 type="email"
                 value={email}
                 onChange={e => setEmail(e.target.value)}
-                placeholder="Enter your email address"
+                placeholder="Email address"
+                autoComplete="email"
                 required
                 className="w-full border border-slate-200 rounded-lg py-3 px-4 text-sm text-slate-800 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-red-400 focus:border-transparent"
               />
-              {emailError && (
-                <p className="text-xs text-red-500">{emailError}</p>
-              )}
+              <input
+                type="password"
+                value={password}
+                onChange={e => setPassword(e.target.value)}
+                placeholder="Password"
+                autoComplete={pwMode === 'signin' ? 'current-password' : 'new-password'}
+                required
+                minLength={6}
+                className="w-full border border-slate-200 rounded-lg py-3 px-4 text-sm text-slate-800 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-red-400 focus:border-transparent"
+              />
+              {pwError && <p className="text-xs text-red-500">{pwError}</p>}
+              {pwNotice && <p className="text-xs text-green-600">{pwNotice}</p>}
               <button
                 type="submit"
-                disabled={emailLoading || !email.trim()}
+                disabled={pwLoading || !email.trim() || !password.trim()}
                 className="w-full bg-red-500 hover:bg-red-600 disabled:bg-slate-300 text-white font-semibold py-3 px-4 rounded-lg transition-all hover:shadow-md active:scale-[0.98] disabled:cursor-not-allowed"
               >
-                {emailLoading ? 'Sending...' : 'Continue with Email'}
+                {pwLoading
+                  ? 'Please wait…'
+                  : pwMode === 'signin'
+                    ? 'Sign in'
+                    : 'Create account'}
               </button>
             </form>
+
+            <button
+              onClick={() => {
+                setPwMode(pwMode === 'signin' ? 'signup' : 'signin');
+                setPwError('');
+                setPwNotice('');
+              }}
+              className="w-full mt-3 text-sm text-slate-500 hover:text-slate-700"
+            >
+              {pwMode === 'signin'
+                ? "Don't have an account? Create one"
+                : 'Already have an account? Sign in'}
+            </button>
+
+            {/* Optional passwordless fallback */}
+            {showMagicLink ? (
+              <div className="mt-3 space-y-2">
+                {emailError && <p className="text-xs text-red-500">{emailError}</p>}
+                <button
+                  onClick={handleEmailSubmit}
+                  disabled={emailLoading || !email.trim()}
+                  className="w-full text-sm font-medium text-red-600 hover:text-red-700 disabled:text-slate-300"
+                >
+                  {emailLoading ? 'Sending…' : 'Email me a sign-in link instead'}
+                </button>
+              </div>
+            ) : (
+              <button
+                onClick={() => setShowMagicLink(true)}
+                className="w-full mt-2 text-xs text-slate-400 hover:text-slate-600"
+              >
+                Prefer a magic link? Email me a sign-in link
+              </button>
+            )}
           </>
         )}
 

@@ -72,7 +72,7 @@ const App: React.FC = () => {
   const router = useRouter();
 
   // Auth
-  const { user, isAuthenticated, signInWithOAuth, signInWithEmail } = useAuth();
+  const { user, isAuthenticated, signInWithOAuth, signInWithEmail, signInWithPassword, signUpWithPassword } = useAuth();
   const userId = user?.id || null;
 
   // User settings persistence
@@ -579,6 +579,8 @@ const App: React.FC = () => {
         onClose={() => setShowAuthModal(false)}
         onSignIn={handleSignIn}
         onSignInWithEmail={signInWithEmail}
+        onSignInWithPassword={signInWithPassword}
+        onSignUpWithPassword={signUpWithPassword}
         message="Sign in to save your calculation data and access it from any device. Your inputs will be automatically restored when you return."
       />
       

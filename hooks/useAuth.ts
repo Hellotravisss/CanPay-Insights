@@ -28,6 +28,8 @@ export interface AuthState {
 export interface AuthActions {
   signInWithOAuth: (provider: OAuthProvider) => Promise<void>;
   signInWithEmail: (email: string) => Promise<void>;
+  signInWithPassword: (email: string, password: string) => Promise<void>;
+  signUpWithPassword: (email: string, password: string) => Promise<void>;
   signOut: () => Promise<void>;
   refreshSession: () => Promise<void>;
 }
@@ -126,6 +128,29 @@ export const useAuth = (): AuthState & AuthActions => {
     }
   }, []);
 
+  // 邮箱 + 密码登录（WebView/iOS app 环境的可靠登录方式，也供 App Review 使用）
+  const signInWithPassword = useCallback(async (email: string, password: string) => {
+    const { error } = await supabase.auth.signInWithPassword({ email, password });
+    if (error) {
+      console.error('Error signing in with password:', error);
+      throw error;
+    }
+  }, []);
+
+  // 邮箱 + 密码注册
+  const signUpWithPassword = useCallback(async (email: string, password: string) => {
+    const redirectUrl = `${window.location.origin}/`;
+    const { error } = await supabase.auth.signUp({
+      email,
+      password,
+      options: { emailRedirectTo: redirectUrl },
+    });
+    if (error) {
+      console.error('Error signing up with password:', error);
+      throw error;
+    }
+  }, []);
+
   // 邮箱 Magic Link 登录
   const signInWithEmail = useCallback(async (email: string) => {
     const redirectUrl = `${window.location.origin}/`;
@@ -164,6 +189,8 @@ export const useAuth = (): AuthState & AuthActions => {
     isAuthenticated: !!user,
     signInWithOAuth,
     signInWithEmail,
+    signInWithPassword,
+    signUpWithPassword,
     signOut,
     refreshSession,
   };
