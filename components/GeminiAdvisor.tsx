@@ -4,6 +4,7 @@ import * as htmlToImage from 'html-to-image';
 import download from 'downloadjs';
 import type { CalculationResult } from '../types';
 import type { SalaryInputs } from '../types';
+import { useT } from '../lib/i18n';
 import { 
   generateTaxOptimization, 
   calculateRRSPScenarios,
@@ -206,6 +207,7 @@ const renderMarkdownLine = (line: string, isImage: boolean): React.ReactNode => 
 };
 
 const GeminiAdvisor: React.FC<Props> = ({ results, inputs }) => {
+  const { t } = useT();
   const APP_URL = 'https://canpayinsights.ca/';
 
   const [advice, setAdvice] = useState<string | null>(null);
@@ -749,8 +751,8 @@ const GeminiAdvisor: React.FC<Props> = ({ results, inputs }) => {
             </svg>
           </div>
           <div>
-            <h3 className="text-lg font-bold">Smart Tax Optimizer</h3>
-            <p className="text-xs text-slate-400">Personalized tax reduction strategies based on your income</p>
+            <h3 className="text-lg font-bold">{t('opt.title')}</h3>
+            <p className="text-xs text-slate-400">{t('opt.subtitle')}</p>
           </div>
         </div>
       </div>
@@ -771,7 +773,7 @@ const GeminiAdvisor: React.FC<Props> = ({ results, inputs }) => {
           <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
             <path fillRule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clipRule="evenodd" />
           </svg>
-          Smart Tax Strategy
+          {t('opt.strategy')}
         </h4>
         <div className="bg-slate-900/60 p-5 rounded-xl border border-slate-700/50 animate-fadeIn">
           <div className="max-w-none">
@@ -787,18 +789,18 @@ const GeminiAdvisor: React.FC<Props> = ({ results, inputs }) => {
               {exporting ? (
                 <>
                   <div className="w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin" />
-                  Generating...
+                  {t('opt.generating')}
                 </>
               ) : (
                 <>
                   <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
                   </svg>
-                  Save Tax Report
+                  {t('opt.saveReport')}
                 </>
               )}
             </button>
-            <p className="text-xs text-slate-500 mt-2">Save this report to your device or share with your financial advisor</p>
+            <p className="text-xs text-slate-500 mt-2">{t('opt.saveReportHint')}</p>
           </div>
         </div>
       </div>
@@ -1010,6 +1012,7 @@ const TaxOptimizationPanel: React.FC<TaxOptimizationPanelProps> = ({
     s => s.suitability === 'recommended'
   );
 
+  const { t } = useT();
   const hasActualRRSP = annualRRSPActual > 0;
   const remainingRRSPOptimum = Math.max(0, rrsp.recommendedAmount - annualRRSPActual);
   const potentialExtraRefund = Math.floor(remainingRRSPOptimum * marginalRate.combined);
@@ -1020,29 +1023,29 @@ const TaxOptimizationPanel: React.FC<TaxOptimizationPanelProps> = ({
       <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
         {hasActualRRSP ? (
           <TaxCard
-            title="Optimum Remaining Room"
+            title={t('opt.optimumRoom')}
             amount={remainingRRSPOptimum}
-            subtitle={`Potential Extra Refund ${formatCurrency(potentialExtraRefund)}`}
+            subtitle={`${t('opt.potentialRefund')} ${formatCurrency(potentialExtraRefund)}`}
             highlight
           />
         ) : (
           <TaxCard
-            title="Recommended RRSP"
+            title={t('opt.recommendedRRSP')}
             amount={rrsp.recommendedAmount}
-            subtitle={`Est. Refund ${formatCurrency(rrsp.refundAmount)}`}
+            subtitle={`${t('opt.estRefund')} ${formatCurrency(rrsp.refundAmount)}`}
             highlight
           />
         )}
         <TaxCard
-          title="Marginal Tax Rate"
+          title={t('opt.marginalRate')}
           amount={marginalRate.combined * 100}
-          subtitle={`Federal ${(marginalRate.federal * 100).toFixed(0)}% + Prov ${(marginalRate.provincial * 100).toFixed(0)}%`}
+          subtitle={`${t('opt.federalShort')} ${(marginalRate.federal * 100).toFixed(0)}% + ${t('opt.provShort')} ${(marginalRate.provincial * 100).toFixed(0)}%`}
           isPercentage
         />
         <TaxCard
-          title="Total Savings Potential"
+          title={t('opt.totalSavings')}
           amount={summary.totalPotentialSavings + annualEmployerMatchActual}
-          subtitle="Annual estimate (incl. Match)"
+          subtitle={t('opt.annualInclMatch')}
           accent="green"
         />
       </div>
@@ -1053,13 +1056,13 @@ const TaxOptimizationPanel: React.FC<TaxOptimizationPanelProps> = ({
           <div className="flex items-center justify-between mb-4">
             <h4 className="text-md font-bold text-white flex items-center gap-2">
               <span className="w-6 h-6 rounded bg-red-600 flex items-center justify-center text-xs">1</span>
-              RRSP - Registered Retirement Savings Plan
+              {t('opt.rrspTitle')}
             </h4>
             <button
               onClick={onToggleScenarios}
               className="text-xs text-red-400 hover:text-red-300 underline"
             >
-              {showScenarios ? 'Hide Comparison' : 'View Contribution Scenarios'}
+              {showScenarios ? t('opt.hideComparison') : t('opt.viewScenarios')}
             </button>
           </div>
           
@@ -1068,25 +1071,25 @@ const TaxOptimizationPanel: React.FC<TaxOptimizationPanelProps> = ({
           {/* Visual Progress Bar and Matching stats if they have actual RRSP */}
           {hasActualRRSP && (
             <div className="mb-5 p-4 rounded-xl bg-slate-800/60 border border-slate-700/50 space-y-3">
-              <h5 className="text-xs font-bold text-slate-400 uppercase tracking-wider">Your RRSP Contribution Status</h5>
+              <h5 className="text-xs font-bold text-slate-400 uppercase tracking-wider">{t('opt.rrspStatus')}</h5>
               
               <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 text-sm">
                 <div>
-                  <span className="text-slate-400 block text-xs">My Payroll Deduction</span>
-                  <span className="font-semibold text-white">{formatCurrency(annualRRSPActual)}/yr</span>
+                  <span className="text-slate-400 block text-xs">{t('opt.myPayroll')}</span>
+                  <span className="font-semibold text-white">{formatCurrency(annualRRSPActual)}{t('opt.perYr')}</span>
                 </div>
                 {annualEmployerMatchActual > 0 && (
                   <div>
                     <span className="text-green-400 block text-xs flex items-center gap-1">
                       <span className="w-1.5 h-1.5 bg-green-500 rounded-full animate-pulse" />
-                      Employer Matching
+                      {t('opt.employerMatching')}
                     </span>
-                    <span className="font-semibold text-green-400">+{formatCurrency(annualEmployerMatchActual)}/yr</span>
+                    <span className="font-semibold text-green-400">+{formatCurrency(annualEmployerMatchActual)}{t('opt.perYr')}</span>
                   </div>
                 )}
                 <div>
-                  <span className="text-slate-400 block text-xs">Optimum Deduction Space</span>
-                  <span className="font-semibold text-red-400">{formatCurrency(remainingRRSPOptimum)} left</span>
+                  <span className="text-slate-400 block text-xs">{t('opt.optimumSpace')}</span>
+                  <span className="font-semibold text-red-400">{formatCurrency(remainingRRSPOptimum)} {t('opt.left')}</span>
                 </div>
               </div>
 
@@ -1107,19 +1110,19 @@ const TaxOptimizationPanel: React.FC<TaxOptimizationPanelProps> = ({
               </div>
               
               <p className="text-[11px] text-slate-400 italic">
-                {annualEmployerMatchActual > 0 
-                  ? "Fantastic! You are capturing 100% free matching money from your employer. To maximize your tax refund, you can top up the remaining room as a voluntary contribution before the deadline."
-                  : "You are currently making payroll deductions. To maximize your tax refund, consider topping up the remaining room as a voluntary contribution before the deadline."
+                {annualEmployerMatchActual > 0
+                  ? t('opt.matchNote')
+                  : t('opt.noMatchNote')
                 }
               </p>
             </div>
           )}
           
           <div className="grid grid-cols-2 md:grid-cols-4 gap-3 mb-4">
-            <MetricBox label="Recommended" value={formatCurrency(rrsp.recommendedAmount)} />
-            <MetricBox label="Max Deductible" value={formatCurrency(rrsp.maxDeductible)} />
-            <MetricBox label="Tax Savings" value={formatCurrency(rrsp.taxSavings)} accent />
-            <MetricBox label="Net Cost" value={formatCurrency(rrsp.effectiveCost)} />
+            <MetricBox label={t('opt.recommended')} value={formatCurrency(rrsp.recommendedAmount)} />
+            <MetricBox label={t('opt.maxDeductible')} value={formatCurrency(rrsp.maxDeductible)} />
+            <MetricBox label={t('opt.taxSavings')} value={formatCurrency(rrsp.taxSavings)} accent />
+            <MetricBox label={t('opt.netCost')} value={formatCurrency(rrsp.effectiveCost)} />
           </div>
 
           {showScenarios && (
@@ -1127,10 +1130,10 @@ const TaxOptimizationPanel: React.FC<TaxOptimizationPanelProps> = ({
               <table className="w-full text-sm">
                 <thead>
                   <tr className="text-slate-500 border-b border-slate-700">
-                    <th className="text-left py-2">Contribution</th>
-                    <th className="text-right py-2">Tax Refund</th>
-                    <th className="text-right py-2">Net Cost</th>
-                    <th className="text-right py-2">Refund Rate</th>
+                    <th className="text-left py-2">{t('opt.contribution')}</th>
+                    <th className="text-right py-2">{t('opt.taxRefund')}</th>
+                    <th className="text-right py-2">{t('opt.netCost')}</th>
+                    <th className="text-right py-2">{t('opt.refundRate')}</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -1142,7 +1145,7 @@ const TaxOptimizationPanel: React.FC<TaxOptimizationPanelProps> = ({
                       <td className="py-2 text-slate-300">
                         {formatCurrency(scenario.amount)}
                         {scenario.amount === rrsp.recommendedAmount && (
-                          <span className="ml-2 text-xs text-red-400">Recommended</span>
+                          <span className="ml-2 text-xs text-red-400">{t('opt.recommended')}</span>
                         )}
                       </td>
                       <td className="py-2 text-right text-green-400">{formatCurrency(scenario.taxSavings)}</td>
@@ -1162,54 +1165,54 @@ const TaxOptimizationPanel: React.FC<TaxOptimizationPanelProps> = ({
         <div className="bg-slate-900/60 p-5 rounded-xl border border-slate-700/50">
           <h4 className="text-md font-bold text-white mb-3 flex items-center gap-2">
             <span className="w-6 h-6 rounded bg-blue-600 flex items-center justify-center text-xs">2</span>
-            TFSA - Tax-Free Savings Account
+            {t('opt.tfsaTitle')}
           </h4>
           <div className="space-y-2 text-sm">
             <div className="flex justify-between">
-              <span className="text-slate-400">2025 Contribution Room</span>
+              <span className="text-slate-400">{t('opt.tfsaRoom2025')}</span>
               <span className="text-white font-semibold">{formatCurrency(tfsa.contributionRoom2025)}</span>
             </div>
             <div className="flex justify-between">
-              <span className="text-slate-400">Recommended Contribution</span>
+              <span className="text-slate-400">{t('opt.recommendedContribution')}</span>
               <span className="text-blue-400 font-semibold">{formatCurrency(tfsa.recommendedAmount)}</span>
             </div>
             <div className="flex justify-between">
-              <span className="text-slate-400">Lifetime Room Available</span>
+              <span className="text-slate-400">{t('opt.lifetimeRoom')}</span>
               <span className="text-slate-300">{formatCurrency(tfsa.lifetimeRoom)}</span>
             </div>
           </div>
           <p className="text-xs text-slate-500 mt-3">
-            TFSA earnings are tax-free. Great for emergency funds or short-term savings.
+            {t('opt.tfsaNote')}
           </p>
         </div>
 
         <div className="bg-slate-900/60 p-5 rounded-xl border border-slate-700/50">
           <h4 className="text-md font-bold text-white mb-3 flex items-center gap-2">
             <span className="w-6 h-6 rounded bg-green-600 flex items-center justify-center text-xs">3</span>
-            FHSA - First Home Savings Account
+            {t('opt.fhsaTitle')}
           </h4>
           <div className="space-y-2 text-sm">
             <div className="flex justify-between">
-              <span className="text-slate-400">Annual Limit</span>
+              <span className="text-slate-400">{t('opt.annualLimit')}</span>
               <span className="text-white font-semibold">{formatCurrency(fhsa.annualLimit)}</span>
             </div>
             <div className="flex justify-between">
-              <span className="text-slate-400">Recommended Contribution</span>
+              <span className="text-slate-400">{t('opt.recommendedContribution')}</span>
               <span className="text-green-400 font-semibold">{formatCurrency(fhsa.recommendedAmount)}</span>
             </div>
             <div className="flex justify-between">
-              <span className="text-slate-400">Lifetime Limit</span>
+              <span className="text-slate-400">{t('opt.lifetimeLimit')}</span>
               <span className="text-slate-300">{formatCurrency(fhsa.lifetimeLimit)}</span>
             </div>
           </div>
           <p className="text-xs text-slate-500 mt-3">
-            FHSA offers tax deduction on contributions AND tax-free withdrawals for home purchase.
+            {t('opt.fhsaNote')}
           </p>
         </div>
       </div>
 
       <p className="text-xs text-slate-500 text-center">
-        Recommendations based on 2025 Canadian tax laws. Actual amounts may vary based on your specific situation. Consult a Registered Tax Preparer (RTP) or financial advisor for personalized advice.
+        {t('opt.disclaimer')}
       </p>
     </div>
   );
