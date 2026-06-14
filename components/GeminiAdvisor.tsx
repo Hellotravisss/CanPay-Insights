@@ -286,7 +286,7 @@ const GeminiAdvisor: React.FC<Props> = ({ results, inputs }) => {
         {/* Executive Summary Card */}
         <div className="bg-slate-900/80 p-6 rounded-xl border border-slate-700/50">
           <h4 className="text-amber-400 font-extrabold text-lg sm:text-xl mb-3">
-            Executive Summary
+            {t('rep.execSummary')}
           </h4>
           <p className="text-slate-200 leading-relaxed">
             Based on your annual income of <span className="text-red-400 font-bold">{formatCurrency(annualIncome)}</span> in <span className="text-red-400 font-bold">{inputs.province}</span>, you are currently paying <span className="text-red-400 font-bold">{formatCurrency(annualTax)}</span> in total taxes (<span className="text-red-400 font-bold">{effectiveRate}%</span> effective rate). With strategic tax planning, you could save up to <span className="text-green-400 font-bold">{formatCurrency(taxOptimization.summary.totalPotentialSavings + annualEmployerMatchActual)}</span> annually through optimized contributions to registered accounts.
@@ -297,31 +297,31 @@ const GeminiAdvisor: React.FC<Props> = ({ results, inputs }) => {
         <div className={`grid grid-cols-1 ${isSnapshot ? 'grid-cols-2 gap-6' : 'md:grid-cols-2 gap-4'}`}>
           <div className="bg-slate-900/60 p-5 rounded-xl border border-slate-700/50">
             <h4 className="text-sky-400 font-bold text-base sm:text-lg mb-3">
-              Income & Tax Analysis
+              {t('rep.incomeAnalysis')}
             </h4>
             <ul className="space-y-2 text-slate-300">
               <li className="flex justify-between">
-                <span>Gross Annual Income:</span>
+                <span>{t('rep.grossAnnual')}:</span>
                 <span className="text-white font-bold">{formatCurrency(annualIncome)}</span>
               </li>
               <li className="flex justify-between">
-                <span>Net Take-Home Pay:</span>
+                <span>{t('rep.netTakeHome')}:</span>
                 <span className="text-white font-bold">{formatCurrency(netIncome)}</span>
               </li>
               <li className="flex justify-between">
-                <span>Total Tax (Fed + Prov):</span>
+                <span>{t('rep.totalTaxFedProv')}:</span>
                 <span className="text-white font-bold">{formatCurrency(annualTax)}</span>
               </li>
               <li className="flex justify-between">
-                <span>CPP Contributions:</span>
+                <span>{t('rep.cppContrib')}:</span>
                 <span className="text-white font-bold">{formatCurrency(annualCPP)}</span>
               </li>
               <li className="flex justify-between">
-                <span>EI Premiums:</span>
+                <span>{t('rep.eiPremiums')}:</span>
                 <span className="text-white font-bold">{formatCurrency(annualEI)}</span>
               </li>
               <li className="flex justify-between border-t border-slate-700/50 pt-2 mt-2">
-                <span>Marginal Tax Rate:</span>
+                <span>{t('rep.marginalRate')}:</span>
                 <span className="text-red-400 font-bold">{(marginalRate.combined * 100).toFixed(1)}%</span>
               </li>
             </ul>
@@ -330,15 +330,15 @@ const GeminiAdvisor: React.FC<Props> = ({ results, inputs }) => {
           <div className="bg-slate-900/60 p-5 rounded-xl border border-slate-700/50 flex flex-col justify-between">
             <div>
               <h4 className="text-violet-400 font-bold text-base sm:text-lg mb-3">
-                Monthly Breakdown
+                {t('rep.monthlyBreakdown')}
               </h4>
               <ul className="space-y-2 text-slate-300">
                 <li className="flex justify-between">
-                  <span>Monthly Net Income:</span>
+                  <span>{t('rep.monthlyNet')}:</span>
                   <span className="text-white font-bold">{formatCurrency(netIncome / 12)}</span>
                 </li>
                 <li className="flex justify-between">
-                  <span>Monthly Tax Paid:</span>
+                  <span>{t('rep.monthlyTax')}:</span>
                   <span className="text-white font-bold">{formatCurrency(annualTax / 12)}</span>
                 </li>
               </ul>
@@ -354,10 +354,10 @@ const GeminiAdvisor: React.FC<Props> = ({ results, inputs }) => {
         {/* Federal Tax Bracket warning */}
         <div className="bg-slate-900/60 p-5 rounded-xl border border-slate-700/50">
           <h4 className="text-orange-400 font-bold text-base sm:text-lg mb-2">
-            Federal Tax Bracket
+            {t('rep.fedBracket')}
           </h4>
           <div className="flex justify-between items-center text-slate-300 text-sm">
-            <span>Current Federal Bracket Rate:</span>
+            <span>{t('rep.currentBracket')}:</span>
             <span className="text-white font-bold">{bracketInfo.current}</span>
           </div>
           {bracketInfo.nextThreshold !== Infinity && (
@@ -370,7 +370,7 @@ const GeminiAdvisor: React.FC<Props> = ({ results, inputs }) => {
         {/* RRSP Strategy Card */}
         <div className="bg-slate-900/60 p-5 rounded-xl border border-slate-700/50">
           <h4 className="text-red-400 font-bold text-base sm:text-lg mb-3">
-            🏦 RRSP Strategy
+            🏦 {t('rep.rrspStrategy')}
           </h4>
           {annualRRSPActual > 0 ? (
             <div className="space-y-4">
@@ -383,19 +383,19 @@ const GeminiAdvisor: React.FC<Props> = ({ results, inputs }) => {
               </p>
               <div className="space-y-2 border-t border-slate-800 pt-3 text-sm text-slate-300">
                 <div className="flex justify-between">
-                  <span>Your contribution:</span>
+                  <span>{t('rep.yourContribution')}:</span>
                   <span>{formatCurrency(annualRRSPActual)}/yr</span>
                 </div>
                 {annualEmployerMatchActual > 0 && (
                   <div className="flex justify-between text-green-400">
-                    <span>Employer match:</span>
+                    <span>{t('rep.employerMatch')}:</span>
                     <span>+{formatCurrency(annualEmployerMatchActual)}/yr (FREE!)</span>
                   </div>
                 )}
                 {remainingRRSPOptimum > 0 && (
                   <>
                     <div className="flex justify-between text-amber-400">
-                      <span>Top-up needed:</span>
+                      <span>{t('rep.topupNeeded')}:</span>
                       <span>{formatCurrency(remainingRRSPOptimum)}/yr (≈ {formatCurrency(biweeklyTopUp)}/bi-weekly)</span>
                     </div>
                     <div className="bg-slate-950 p-3 rounded-lg border border-slate-800 mt-2">
@@ -417,11 +417,11 @@ const GeminiAdvisor: React.FC<Props> = ({ results, inputs }) => {
               </p>
               <div className="space-y-2 border-t border-slate-800 pt-3 text-sm text-slate-300">
                 <div className="flex justify-between">
-                  <span>Estimated Tax Refund:</span>
+                  <span>{t('rep.estRefund')}:</span>
                   <span className="text-amber-400 font-bold">{formatCurrency(taxOptimization.rrsp.taxSavings)}</span>
                 </div>
                 <div className="flex justify-between">
-                  <span>Bi-weekly auto-deposit:</span>
+                  <span>{t('rep.biweeklyDeposit')}:</span>
                   <span className="text-white font-bold">{formatCurrency(Math.round(taxOptimization.rrsp.recommendedAmount / periodsPerYear))}</span>
                 </div>
               </div>
@@ -432,22 +432,22 @@ const GeminiAdvisor: React.FC<Props> = ({ results, inputs }) => {
         {/* TFSA Strategy Card */}
         <div className="bg-slate-900/60 p-5 rounded-xl border border-slate-700/50">
           <h4 className="text-blue-400 font-bold text-base sm:text-lg mb-3">
-            💰 TFSA Strategy
+            💰 {t('rep.tfsaStrategy')}
           </h4>
           <p className="text-green-400 font-bold text-lg mb-2">
             Max out at {formatCurrency(taxOptimization.tfsa.recommendedAmount)}
           </p>
           <div className="space-y-2 text-sm text-slate-300">
             <div className="flex justify-between">
-              <span>2026 Contribution Room:</span>
+              <span>{t('rep.tfsaRoom2026')}:</span>
               <span className="text-white font-bold">$7,000</span>
             </div>
             <div className="flex justify-between">
-              <span>Lifetime Room Available:</span>
+              <span>{t('rep.lifetimeRoom')}:</span>
               <span className="text-white">{formatCurrency(taxOptimization.tfsa.lifetimeRoom)}</span>
             </div>
             <p className="text-xs text-slate-500 pt-2 border-t border-slate-800">
-              All investment growth in TFSA is completely tax-free. Ideal for emergency funds or long-term growth.
+              {t('rep.tfsaNote')}
             </p>
           </div>
         </div>
@@ -455,14 +455,14 @@ const GeminiAdvisor: React.FC<Props> = ({ results, inputs }) => {
         {/* Action Steps Checklist */}
         <div className="bg-emerald-950/60 p-5 rounded-xl border border-emerald-800/40 text-left">
           <h4 className="text-emerald-400 font-bold text-base sm:text-lg mb-3">
-            ✅ Your Action Checklist
+            ✅ {t('rep.checklist')}
           </h4>
           <ul className="space-y-2.5 text-slate-200 text-sm">
             {annualRRSPActual === 0 && (
               <>
                 <li className="flex items-start gap-2.5">
                   <span className="text-emerald-400 mt-0.5">☐</span>
-                  <span>Open an RRSP account at Wealthsimple or TD Bank</span>
+                  <span>{t('rep.openRRSP')}</span>
                 </li>
                 <li className="flex items-start gap-2.5">
                   <span className="text-emerald-400 mt-0.5">☐</span>
@@ -488,11 +488,11 @@ const GeminiAdvisor: React.FC<Props> = ({ results, inputs }) => {
             </li>
             <li className="flex items-start gap-2.5">
               <span className="text-emerald-400 mt-0.5">☐</span>
-              <span>File your Canadian taxes before April 30 to avoid any penalties</span>
+              <span>{t('rep.fileTaxes')}</span>
             </li>
             <li className="flex items-start gap-2.5">
               <span className="text-emerald-400 mt-0.5">☐</span>
-              <span>Claim all RRSP contribution receipts (T4RSP)</span>
+              <span>{t('rep.claimReceipts')}</span>
             </li>
           </ul>
         </div>
@@ -500,31 +500,31 @@ const GeminiAdvisor: React.FC<Props> = ({ results, inputs }) => {
         {/* Tax Filing Tips */}
         <div className="bg-slate-900/60 p-5 rounded-xl border border-slate-700/50 text-left">
           <h4 className="text-cyan-400 font-bold text-base sm:text-lg mb-3">
-            📋 Tax Filing Tips
+            📋 {t('rep.filingTips')}
           </h4>
           <ul className="space-y-2 text-slate-300 text-sm">
             <li className="flex items-start gap-2">
               <span className="text-cyan-400">•</span>
-              <span>File by April 30 to avoid late-filing interest and penalties.</span>
+              <span>{t('rep.tipFile')}</span>
             </li>
             <li className="flex items-start gap-2">
               <span className="text-cyan-400">•</span>
-              <span>Claim work-from-home expenses if eligible.</span>
+              <span>{t('rep.tipWFH')}</span>
             </li>
             <li className="flex items-start gap-2">
               <span className="text-cyan-400">•</span>
-              <span>Keep medical expense receipts to claim medical tax credits.</span>
+              <span>{t('rep.tipMedical')}</span>
             </li>
             <li className="flex items-start gap-2">
               <span className="text-cyan-400">•</span>
-              <span>Consider charitable donations to receive tax saving credits.</span>
+              <span>{t('rep.tipCharity')}</span>
             </li>
           </ul>
         </div>
 
         {/* Potential Savings Footer */}
         <div className="bg-red-600 p-5 rounded-xl text-white text-left">
-          <p className="text-sm uppercase tracking-wider mb-1 font-bold">Total Annual Tax Savings Potential</p>
+          <p className="text-sm uppercase tracking-wider mb-1 font-bold">{t('rep.totalSavings')}</p>
           <p className="text-2xl sm:text-4xl font-black">{formatCurrency(taxOptimization.summary.totalPotentialSavings + annualEmployerMatchActual)}</p>
         </div>
 
