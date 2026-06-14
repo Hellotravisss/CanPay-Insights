@@ -500,6 +500,12 @@ const App: React.FC = () => {
         <footer className="pb-8 text-center text-xs text-slate-400" role="contentinfo">
           <div className="flex flex-wrap items-center justify-center gap-x-4 gap-y-2">
             <span>© CanPay Insights</span>
+            <a href="/about" className="text-slate-400 no-underline transition-colors hover:text-red-600">
+              About
+            </a>
+            <a href="/contact" className="text-slate-400 no-underline transition-colors hover:text-red-600">
+              Contact
+            </a>
             <a href="/privacy" className="text-slate-400 no-underline transition-colors hover:text-red-600">
               Privacy
             </a>
@@ -539,7 +545,7 @@ const App: React.FC = () => {
           </div>
 
           {/* Quick Links */}
-          <div className="flex justify-center items-center gap-6 mt-4">
+          <div className="flex flex-wrap justify-center items-center gap-x-6 gap-y-2 mt-4">
             <a
               href="/blog"
               className="text-slate-400 hover:text-red-600 transition-colors"
@@ -551,6 +557,18 @@ const App: React.FC = () => {
               className="text-slate-400 hover:text-red-600 transition-colors"
             >
               Compare Provinces
+            </a>
+            <a
+              href="/about"
+              className="text-slate-400 hover:text-red-600 transition-colors"
+            >
+              About
+            </a>
+            <a
+              href="/contact"
+              className="text-slate-400 hover:text-red-600 transition-colors"
+            >
+              Contact
             </a>
             <a
               href="/privacy"
