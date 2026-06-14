@@ -1,6 +1,7 @@
 'use client';
 import React, { useEffect, useState } from 'react';
 import type { OAuthProvider } from '../hooks/useAuth';
+import { useT } from '../lib/i18n';
 
 interface Props {
   isOpen: boolean;
@@ -21,6 +22,7 @@ const AuthModal: React.FC<Props> = ({
   onSignUpWithPassword,
   message,
 }) => {
+  const { t } = useT();
   const [email, setEmail] = useState('');
   const [emailSent, setEmailSent] = useState(false);
   const [emailLoading, setEmailLoading] = useState(false);
@@ -80,7 +82,7 @@ const AuthModal: React.FC<Props> = ({
       await onSignInWithEmail(email.trim());
       setEmailSent(true);
     } catch {
-      setEmailError('Failed to send email. Please try again.');
+      setEmailError(t('auth.errSendEmail'));
     } finally {
       setEmailLoading(false);
     }
@@ -98,21 +100,19 @@ const AuthModal: React.FC<Props> = ({
         onClose();
       } else {
         await onSignUpWithPassword(email.trim(), password);
-        setPwNotice(
-          'Account created. If a confirmation email is required, please confirm it, then sign in.'
-        );
+        setPwNotice(t('auth.errAccountCreated'));
         setPwMode('signin');
       }
     } catch (err) {
       const msg = (err as { message?: string })?.message || '';
       if (pwMode === 'signup' && /already registered|already exists/i.test(msg)) {
-        setPwError('That email already has an account. Try signing in instead.');
+        setPwError(t('auth.errEmailExists'));
       } else if (/invalid login credentials/i.test(msg)) {
-        setPwError('Incorrect email or password.');
+        setPwError(t('auth.errInvalid'));
       } else if (/at least 6/i.test(msg)) {
-        setPwError('Password must be at least 6 characters.');
+        setPwError(t('auth.errPwShort'));
       } else {
-        setPwError(msg || 'Something went wrong. Please try again.');
+        setPwError(msg || t('auth.errGeneric'));
       }
     } finally {
       setPwLoading(false);
@@ -144,19 +144,19 @@ const AuthModal: React.FC<Props> = ({
 
         {/* Content */}
         <h2 className="text-2xl font-bold text-slate-900 text-center mb-2">
-          Save Your Data
+          {t('auth.title')}
         </h2>
 
         <p className="text-slate-600 text-center mb-6 leading-relaxed">
-          {message || 'Sign in to save your calculations and access them from any device. Your data syncs automatically.'}
+          {message || t('auth.defaultMsg')}
         </p>
 
         {/* Benefits */}
         <div className="bg-slate-50 rounded-xl p-4 mb-6 space-y-3">
           {[
-            { title: 'Auto-save your inputs', desc: 'Never re-enter the same numbers' },
-            { title: 'Sync across devices', desc: 'Phone, tablet, or computer' },
-            { title: 'Secure timesheet storage', desc: 'Never lose your work hours again' },
+            { title: t('auth.benefit1t'), desc: t('auth.benefit1d') },
+            { title: t('auth.benefit2t'), desc: t('auth.benefit2d') },
+            { title: t('auth.benefit3t'), desc: t('auth.benefit3d') },
           ].map(({ title, desc }) => (
             <div key={title} className="flex items-start gap-3">
               <svg className="w-5 h-5 text-green-600 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
@@ -178,16 +178,16 @@ const AuthModal: React.FC<Props> = ({
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7" />
               </svg>
             </div>
-            <p className="font-semibold text-slate-800 mb-1">Check your email!</p>
+            <p className="font-semibold text-slate-800 mb-1">{t('auth.checkEmail')}</p>
             <p className="text-sm text-slate-600">
-              We sent a sign-in link to <span className="font-medium">{email}</span>.<br />
-              Click the link to sign in — no password needed.
+              {t('auth.linkSent')} <span className="font-medium">{email}</span>.<br />
+              {t('auth.linkNoPw')}
             </p>
             <button
               onClick={() => { setEmailSent(false); }}
               className="mt-4 text-sm text-slate-500 hover:text-slate-700 underline"
             >
-              Back to sign in
+              {t('auth.backToSignin')}
             </button>
           </div>
         ) : (
@@ -204,7 +204,7 @@ const AuthModal: React.FC<Props> = ({
                   <svg className="w-5 h-5" viewBox="0 0 24 24" fill="currentColor">
                     <path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/>
                   </svg>
-                  Continue with Apple
+                  {t('auth.continueApple')}
                 </button>
 
                 <button
@@ -217,7 +217,7 @@ const AuthModal: React.FC<Props> = ({
                     <path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z"/>
                     <path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"/>
                   </svg>
-                  Continue with Google
+                  {t('auth.continueGoogle')}
                 </button>
 
                 <div className="relative my-4">
@@ -225,7 +225,7 @@ const AuthModal: React.FC<Props> = ({
                     <div className="w-full border-t border-slate-200"></div>
                   </div>
                   <div className="relative flex justify-center text-xs uppercase">
-                    <span className="bg-white px-2 text-slate-400">or</span>
+                    <span className="bg-white px-2 text-slate-400">{t('auth.or')}</span>
                   </div>
                 </div>
               </>
@@ -237,7 +237,7 @@ const AuthModal: React.FC<Props> = ({
                 type="email"
                 value={email}
                 onChange={e => setEmail(e.target.value)}
-                placeholder="Email address"
+                placeholder={t('auth.emailPlaceholder')}
                 autoComplete="email"
                 required
                 className="w-full border border-slate-200 rounded-lg py-3 px-4 text-sm text-slate-800 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-red-400 focus:border-transparent"
@@ -246,7 +246,7 @@ const AuthModal: React.FC<Props> = ({
                 type="password"
                 value={password}
                 onChange={e => setPassword(e.target.value)}
-                placeholder="Password"
+                placeholder={t('auth.passwordPlaceholder')}
                 autoComplete={pwMode === 'signin' ? 'current-password' : 'new-password'}
                 required
                 minLength={6}
@@ -260,10 +260,10 @@ const AuthModal: React.FC<Props> = ({
                 className="w-full bg-red-500 hover:bg-red-600 disabled:bg-slate-300 text-white font-semibold py-3 px-4 rounded-lg transition-all hover:shadow-md active:scale-[0.98] disabled:cursor-not-allowed"
               >
                 {pwLoading
-                  ? 'Please wait…'
+                  ? t('auth.pleaseWait')
                   : pwMode === 'signin'
-                    ? 'Sign in'
-                    : 'Create account'}
+                    ? t('auth.signin')
+                    : t('auth.createAccount')}
               </button>
             </form>
 
@@ -276,8 +276,8 @@ const AuthModal: React.FC<Props> = ({
               className="w-full mt-3 text-sm text-slate-500 hover:text-slate-700"
             >
               {pwMode === 'signin'
-                ? "Don't have an account? Create one"
-                : 'Already have an account? Sign in'}
+                ? t('auth.noAccount')
+                : t('auth.haveAccount')}
             </button>
 
             {/* Optional passwordless fallback */}
@@ -289,7 +289,7 @@ const AuthModal: React.FC<Props> = ({
                   disabled={emailLoading || !email.trim()}
                   className="w-full text-sm font-medium text-red-600 hover:text-red-700 disabled:text-slate-300"
                 >
-                  {emailLoading ? 'Sending…' : 'Email me a sign-in link instead'}
+                  {emailLoading ? t('auth.sending') : t('auth.emailLink')}
                 </button>
               </div>
             ) : (
@@ -297,7 +297,7 @@ const AuthModal: React.FC<Props> = ({
                 onClick={() => setShowMagicLink(true)}
                 className="w-full mt-2 text-xs text-slate-400 hover:text-slate-600"
               >
-                Prefer a magic link? Email me a sign-in link
+                {t('auth.preferMagic')}
               </button>
             )}
           </>
@@ -315,12 +315,12 @@ const AuthModal: React.FC<Props> = ({
           onClick={onClose}
           className="w-full text-slate-500 hover:text-slate-700 text-sm font-medium transition-colors"
         >
-          Continue without signing in
+          {t('auth.continueWithout')}
         </button>
 
         {/* Privacy note */}
         <p className="text-xs text-slate-400 text-center mt-4">
-          Free forever. No credit card required. We never post to your accounts.
+          {t('auth.privacy')}
         </p>
       </div>
     </div>

@@ -3,6 +3,7 @@ import React, { useState, useRef, useEffect } from 'react';
 import { useAuth, type OAuthProvider } from '../hooks/useAuth';
 import { useCalculationHistory, CalculationRecord } from '../hooks/useCalculationHistory';
 import AuthModal from './AuthModal';
+import { useT } from '../lib/i18n';
 import { CalculationMode } from '../types';
 
 interface UserMenuProps {
@@ -12,6 +13,7 @@ interface UserMenuProps {
 
 const UserMenu: React.FC<UserMenuProps> = ({ onSwitchToTimesheet, onLoadCalculation }) => {
   const { user, signOut, signInWithOAuth, signInWithEmail, signInWithPassword, signUpWithPassword, isAuthenticated, loading } = useAuth();
+  const { t } = useT();
   const userId = user?.id || null;
   const { records, isLoading: isHistoryLoading, deleteRecord, clearHistory } = useCalculationHistory(userId);
   const [isOpen, setIsOpen] = useState(false);
@@ -85,7 +87,7 @@ const UserMenu: React.FC<UserMenuProps> = ({ onSwitchToTimesheet, onLoadCalculat
           <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
           </svg>
-          Sign In
+          {t('nav.signIn')}
         </button>
 
         <AuthModal
@@ -199,7 +201,7 @@ const UserMenu: React.FC<UserMenuProps> = ({ onSwitchToTimesheet, onLoadCalculat
                   <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
                     <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
                   </svg>
-                  <span>Synced to cloud</span>
+                  <span>{t('auth.syncedCloud')}</span>
                 </div>
               </div>
 
@@ -214,8 +216,8 @@ const UserMenu: React.FC<UserMenuProps> = ({ onSwitchToTimesheet, onLoadCalculat
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
                 </svg>
                 <div>
-                  <p className="text-sm font-medium">Calculation History</p>
-                  <p className="text-xs text-slate-500">View past calculations</p>
+                  <p className="text-sm font-medium">{t('menu.history')}</p>
+                  <p className="text-xs text-slate-500">{t('menu.historyDesc')}</p>
                 </div>
               </button>
 
@@ -227,8 +229,8 @@ const UserMenu: React.FC<UserMenuProps> = ({ onSwitchToTimesheet, onLoadCalculat
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
                 </svg>
                 <div>
-                  <p className="text-sm font-medium">My Timesheets</p>
-                  <p className="text-xs text-slate-500">Saved timesheet entries</p>
+                  <p className="text-sm font-medium">{t('menu.timesheets')}</p>
+                  <p className="text-xs text-slate-500">{t('menu.timesheetsDesc')}</p>
                 </div>
               </button>
 
@@ -244,7 +246,7 @@ const UserMenu: React.FC<UserMenuProps> = ({ onSwitchToTimesheet, onLoadCalculat
                 <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1" />
                 </svg>
-                <p className="text-sm font-medium">Sign Out</p>
+                <p className="text-sm font-medium">{t('menu.signOut')}</p>
               </button>
             </div>
           </div>
@@ -258,9 +260,9 @@ const UserMenu: React.FC<UserMenuProps> = ({ onSwitchToTimesheet, onLoadCalculat
             {/* Header */}
             <div className="p-6 border-b border-slate-200 flex items-center justify-between">
               <div>
-                <h2 className="text-xl font-bold text-slate-800">Calculation History</h2>
+                <h2 className="text-xl font-bold text-slate-800">{t('menu.history')}</h2>
                 <p className="text-sm text-slate-500 mt-1">
-                  {records.length} saved calculation{records.length !== 1 ? 's' : ''}
+                  {records.length} {t('menu.savedCalcs')}
                 </p>
               </div>
               <button
@@ -286,7 +288,7 @@ const UserMenu: React.FC<UserMenuProps> = ({ onSwitchToTimesheet, onLoadCalculat
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
                     </svg>
                   </div>
-                  <p className="text-slate-600 font-medium">No calculations saved yet</p>
+                  <p className="text-slate-600 font-medium">{t('menu.noCalc')}</p>
                   <p className="text-sm text-slate-400 mt-1">
                     Your calculations will appear here when you save them
                   </p>
@@ -321,7 +323,7 @@ const UserMenu: React.FC<UserMenuProps> = ({ onSwitchToTimesheet, onLoadCalculat
                             onClick={() => handleHistoryItemClick(record)}
                             className="px-3 py-1.5 bg-red-600 text-white text-sm rounded-lg hover:bg-red-700 transition-colors"
                           >
-                            Load
+                            {t('menu.load')}
                           </button>
                           <button
                             onClick={() => setShowDeleteConfirm(record.id)}
@@ -337,13 +339,13 @@ const UserMenu: React.FC<UserMenuProps> = ({ onSwitchToTimesheet, onLoadCalculat
                       {/* Delete Confirmation */}
                       {showDeleteConfirm === record.id && (
                         <div className="mt-3 p-3 bg-red-50 rounded-lg flex items-center justify-between">
-                          <p className="text-sm text-red-700">Delete this calculation?</p>
+                          <p className="text-sm text-red-700">{t('menu.deleteConfirm')}</p>
                           <div className="flex items-center gap-2">
                             <button
                               onClick={() => setShowDeleteConfirm(null)}
                               className="px-3 py-1 text-sm text-slate-600 hover:text-slate-800"
                             >
-                              Cancel
+                              {t('common.cancel')}
                             </button>
                             <button
                               onClick={() => {
@@ -352,7 +354,7 @@ const UserMenu: React.FC<UserMenuProps> = ({ onSwitchToTimesheet, onLoadCalculat
                               }}
                               className="px-3 py-1 bg-red-600 text-white text-sm rounded-lg hover:bg-red-700"
                             >
-                              Delete
+                              {t('menu.delete')}
                             </button>
                           </div>
                         </div>
@@ -368,13 +370,13 @@ const UserMenu: React.FC<UserMenuProps> = ({ onSwitchToTimesheet, onLoadCalculat
               <div className="p-4 border-t border-slate-200 bg-slate-50 rounded-b-xl">
                 <button
                   onClick={() => {
-                    if (confirm('Are you sure you want to clear all history?')) {
+                    if (confirm(t('menu.clearConfirm'))) {
                       clearHistory();
                     }
                   }}
                   className="text-sm text-red-600 hover:text-red-700 font-medium"
                 >
-                  Clear all history
+                  {t('menu.clearAll')}
                 </button>
               </div>
             )}

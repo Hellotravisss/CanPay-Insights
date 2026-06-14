@@ -315,7 +315,7 @@ const App: React.FC = () => {
                   <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 20H5a2 2 0 01-2-2V6a2 2 0 012-2h10a2 2 0 012 2v1m2 13a2 2 0 01-2-2V7m2 13a2 2 0 002-2V9.5a2.5 2.5 0 00-2.5-2.5H14" />
                   </svg>
-                  Tax Guides
+                  {t('nav.taxGuides')}
                 </button>
               )}
               <button 
@@ -325,7 +325,7 @@ const App: React.FC = () => {
                 <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 19l-7-7m0 0l7-7m-7 7h18" />
                 </svg>
-                Back
+                {t('nav.back')}
               </button>
             </div>
           </div>
@@ -431,15 +431,15 @@ const App: React.FC = () => {
                         </svg>
                       </div>
                       <div className="flex-1">
-                        <h3 className="font-bold text-slate-800 mb-1">Save your calculation</h3>
+                        <h3 className="font-bold text-slate-800 mb-1">{t('auth.cardTitle')}</h3>
                         <p className="text-sm text-slate-600 mb-3">
-                          Sign in to save your inputs and access them from any device.
+                          {t('auth.cardDesc')}
                         </p>
                         <button
                           onClick={() => setShowAuthModal(true)}
                           className="text-sm font-semibold text-red-600 hover:text-red-700"
                         >
-                          Sign in for free →
+                          {t('auth.cardCta')}
                         </button>
                       </div>
                     </div>
