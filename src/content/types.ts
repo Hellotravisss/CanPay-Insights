@@ -21,6 +21,7 @@ export interface Article {
   imageUrl?: string;
   directAnswer?: string;
   faq?: FAQ[];
+  lang?: 'en' | 'fr';
 }
 
 export interface ArticleTopic {

@@ -75,7 +75,7 @@ export default async function ArticlePage({ params }: Props) {
       image: article.imageUrl || 'https://canpayinsights.ca/og-image.png',
       keywords: article.keywords?.join(', '),
       articleSection: article.category,
-      inLanguage: 'en-CA',
+      inLanguage: article.lang === 'fr' ? 'fr-CA' : 'en-CA',
       isPartOf: { '@type': 'WebSite', name: 'CanPay Insights', url: 'https://canpayinsights.ca' },
     },
     {

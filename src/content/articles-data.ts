@@ -3,6 +3,7 @@ import { salaryArticles } from './articles-salary';
 import { provinceArticles } from './articles-province';
 import { tipsArticles } from './articles-tips';
 import { studyArticles } from './articles-studies';
+import { frenchArticles } from './articles-fr';
 
 // Article 1: Ontario Tax Guide
 const article1: Article = {
@@ -2554,6 +2555,8 @@ export const allArticles: Article[] = [
   ...tipsArticles,
   // Original Data Studies
   ...studyArticles,
+  // French articles (Québec market)
+  ...frenchArticles,
 ];
 
 // Helper functions
