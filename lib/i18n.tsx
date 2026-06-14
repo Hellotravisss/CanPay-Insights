@@ -897,16 +897,29 @@ export function useT() {
   const [lang, setLangState] = useState<Lang>('en');
 
   useEffect(() => {
-    // Apply stored language after mount (SSR renders English to avoid hydration mismatch)
-    let stored: Lang | null = null;
+    // Decide language after mount (SSR renders English to avoid hydration mismatch).
+    // Priority: the user's saved choice, otherwise auto-detect from browser language
+    // (fr → French for Québec/NB users, zh → Chinese), otherwise English.
+    let chosen: Lang | null = null;
     try {
-      stored = localStorage.getItem('canpay_lang') as Lang | null;
+      const stored = localStorage.getItem('canpay_lang') as Lang | null;
+      if (stored && dicts[stored]) {
+        chosen = stored;
+      } else {
+        const navLang = (
+          navigator.language ||
+          (navigator.languages && navigator.languages[0]) ||
+          ''
+        ).toLowerCase();
+        if (navLang.startsWith('fr')) chosen = 'fr';
+        else if (navLang.startsWith('zh')) chosen = 'zh';
+      }
     } catch {
       /* ignore */
     }
-    if (stored && dicts[stored]) {
-      current = stored;
-      setLangState(stored);
+    if (chosen && chosen !== 'en') {
+      current = chosen;
+      setLangState(chosen);
     }
     const fn = (l: Lang) => setLangState(l);
     listeners.add(fn);
