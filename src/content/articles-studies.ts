@@ -127,4 +127,98 @@ You can verify any figure with our [free payroll calculator](/) or the province 
 *This study is free to cite and republish with attribution and a link to this page.*
 `,
   },
+  {
+    id: 'study-2',
+    slug: 'cpp2-second-additional-cpp-2026',
+    title: 'CPP2 in 2026: The Second CPP Contribution Explained (With Real Numbers)',
+    subtitle:
+      'If you earn more than the first CPP ceiling, a second contribution called CPP2 comes off your paycheque. Here is exactly how much, and who pays it.',
+    excerpt:
+      'CPP2 is an extra 4% contribution on income above the first CPP ceiling. In 2025 that means up to about $396 more off your pay. Here is how CPP2 works in 2026, who pays it, and what it costs.',
+    metaTitle: 'CPP2 2026 Explained: Second Additional CPP Contribution & Rates',
+    metaDescription:
+      'What is CPP2 in 2026? The second additional CPP contribution is 4% on earnings above the first ceiling. See who pays CPP2, how much it costs, and 2025 vs 2026 figures.',
+    keywords: [
+      'cpp2 2026',
+      'second additional cpp contribution',
+      'cpp2 contribution 2026',
+      'cpp2 explained',
+      'what is cpp2',
+      'cpp second ceiling 2026',
+    ],
+    category: 'tax',
+    tags: ['CPP', 'CPP2', '2026', 'Payroll Deductions'],
+    publishedAt: '2026-06-13',
+    readTime: 6,
+    directAnswer:
+      'CPP2 is a second CPP contribution of 4% (employee) on the part of your income that falls between the first earnings ceiling (YMPE) and a higher second ceiling (YAMPE). In 2025 it applies between $71,300 and $81,200, costing higher earners up to about $396 extra per year on top of regular CPP. The ceilings rise again in 2026, so anyone earning above the first ceiling will see CPP2 on their pay.',
+    faq: [
+      {
+        question: 'What is CPP2?',
+        answer:
+          'CPP2 (the second additional CPP contribution) is a 4% contribution on earnings between the first CPP ceiling (YMPE) and a higher second ceiling (YAMPE). It was phased in starting in 2024 as part of the CPP enhancement. It is separate from, and on top of, the regular 5.95% CPP contribution.',
+      },
+      {
+        question: 'Who has to pay CPP2 in 2026?',
+        answer:
+          'Only people who earn more than the first CPP ceiling. If your annual pensionable income is below the YMPE (about $71,300 in 2025, higher in 2026), you pay no CPP2 at all. Above that, CPP2 applies to the portion between the two ceilings.',
+      },
+      {
+        question: 'How much does CPP2 cost?',
+        answer:
+          'In 2025, CPP2 applied at 4% on income between $71,300 and $81,200 — a maximum of about $396 for the employee (employers match it). The 2026 ceilings are higher, so the maximum CPP2 amount increases slightly. Use our calculator to see your exact figure.',
+      },
+      {
+        question: 'Is CPP2 the same as the CPP enhancement?',
+        answer:
+          'CPP2 is the final piece of the CPP enhancement that began in 2019. The first part gradually raised the regular contribution rate to 5.95%; CPP2 added a second, higher earnings band starting in 2024. Together they mean higher earners contribute more and will receive a larger CPP pension in retirement.',
+      },
+    ],
+    content: `
+## What is CPP2?
+
+If you earn a higher income, you may have noticed a new line on your pay stub: a second CPP contribution, often labelled **CPP2**. It is not an error — it is the final stage of the CPP enhancement that Canada has been phasing in since 2019.
+
+Regular CPP takes 5.95% of your pensionable earnings up to the first ceiling. **CPP2 adds a second 4% contribution** on the slice of income between that first ceiling and a higher second ceiling. You only pay it if you earn above the first ceiling.
+
+## CPP2 in 2025 vs 2026
+
+The two ceilings have official names: the **YMPE** (Year's Maximum Pensionable Earnings — the first ceiling) and the **YAMPE** (Year's Additional Maximum Pensionable Earnings — the second ceiling).
+
+| | First ceiling (YMPE) | Second ceiling (YAMPE) | CPP2 rate | Max CPP2 (employee) |
+| --- | --- | --- | --- | --- |
+| 2025 | $71,300 | $81,200 | 4% | ~$396 |
+| 2026 | Higher (set by CRA) | Higher (set by CRA) | 4% | Slightly higher |
+
+The CRA announces the new ceilings each autumn for the year ahead. The 4% rate stays the same — only the earnings bands move up with average wages.
+
+## Who actually pays CPP2
+
+- **Earning under the first ceiling** (~$71,300 in 2025): you pay **no CPP2** at all.
+- **Earning between the two ceilings**: you pay 4% on the amount above the first ceiling.
+- **Earning above the second ceiling**: you pay the full maximum CPP2, then contributions stop for the year.
+
+So CPP2 is purely a higher-earner deduction. Someone on $60,000 never sees it; someone on $90,000 pays the full amount.
+
+## What CPP2 costs you on each paycheque
+
+Because CPP2 is capped, the most an employee pays in 2025 is roughly **$396 for the year** — about $15 per bi-weekly cheque if spread evenly. Your employer pays the same amount again. It is modest, but it stacks on top of regular CPP, EI, and income tax, which is why your take-home pay can feel lower than expected once your salary crosses the first ceiling.
+
+## CPP2 vs regular CPP
+
+| | Regular CPP | CPP2 |
+| --- | --- | --- |
+| Rate (employee) | 5.95% | 4% |
+| Applies to | $3,500 up to first ceiling | First ceiling up to second ceiling |
+| Who pays | Almost all workers | Only higher earners |
+
+Both are mandatory and both are matched by your employer. The upside: higher contributions today mean a larger CPP pension when you retire.
+
+## See your own number
+
+CPP2 is built into the CanPay Insights calculator. Enter your salary and province to see exactly how much CPP, CPP2, EI, and tax come off your pay for 2025 and 2026 — try the [free payroll calculator](/), or check a specific salary like [$90,000 after tax in Ontario](/90000-after-tax-ontario).
+
+*Figures reflect 2025 CRA ceilings; 2026 ceilings are higher. Always confirm the current year's amounts with the CRA or use the calculator for an up-to-date estimate.*
+`,
+  },
 ];
