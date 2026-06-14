@@ -4,6 +4,7 @@ import { TimesheetInputs, TimesheetEntry, Province, PayFrequency } from '../type
 import { PROVINCIAL_DATA } from '../constants';
 import { useAnonymousTimesheet } from '../hooks/useAnonymousTimesheet';
 import Toast from './Toast';
+import { useT } from '../lib/i18n';
 
 interface Props {
   inputs: TimesheetInputs;
@@ -11,6 +12,8 @@ interface Props {
 }
 
 const TimesheetInput: React.FC<Props> = ({ inputs, setInputs }) => {
+  const { t, lang } = useT();
+  const dateLocale = lang === 'zh' ? 'zh-CN' : lang === 'fr' ? 'fr-CA' : 'en-US';
   const { isSyncing, lastSyncTime, loadEntries, saveEntry, deleteEntry } = useAnonymousTimesheet();
   const [isInitialLoad, setIsInitialLoad] = useState(true);
   const [toast, setToast] = useState<{ message: string; type: 'error' | 'success' } | null>(null);
@@ -120,15 +123,15 @@ const TimesheetInput: React.FC<Props> = ({ inputs, setInputs }) => {
     const workMinutes = checkOutMinutes - checkInMinutes;
     
     if (workMinutes <= 0) {
-      return 'Check-out time must be after check-in time';
+      return t('ts.errCheckout');
     }
-    
+
     if (breakMinutes >= workMinutes) {
-      return 'Break time cannot exceed or equal work duration';
+      return t('ts.errBreakExceed');
     }
-    
+
     if (breakMinutes < 0) {
-      return 'Break time cannot be negative';
+      return t('ts.errBreakNeg');
     }
     
     return null;
@@ -232,8 +235,8 @@ const TimesheetInput: React.FC<Props> = ({ inputs, setInputs }) => {
       <div className="bg-gradient-to-br from-slate-900 to-slate-800 p-6 text-white">
         <div className="flex items-center justify-between">
           <div>
-            <h2 className="text-xl font-bold mb-1">⏱️ Timesheet Tracker</h2>
-            <p className="text-slate-300 text-sm">Track your daily hours with precision</p>
+            <h2 className="text-xl font-bold mb-1">⏱️ {t('ts.title')}</h2>
+            <p className="text-slate-300 text-sm">{t('ts.subtitle')}</p>
           </div>
           {/* Cloud sync indicator */}
           <div className="flex items-center gap-2 text-xs">
@@ -243,14 +246,14 @@ const TimesheetInput: React.FC<Props> = ({ inputs, setInputs }) => {
                   <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
                   <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
                 </svg>
-                <span>Syncing...</span>
+                <span>{t('ts.syncing')}</span>
               </div>
             ) : lastSyncTime ? (
               <div className="flex items-center gap-1 text-green-400">
                 <svg className="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7"></path>
                 </svg>
-                <span>Saved to Cloud</span>
+                <span>{t('ts.savedCloud')}</span>
               </div>
             ) : null}
           </div>
@@ -262,7 +265,7 @@ const TimesheetInput: React.FC<Props> = ({ inputs, setInputs }) => {
         <div className="grid grid-cols-2 gap-4">
           {/* Province */}
           <div>
-            <label className="block text-sm font-semibold text-slate-700 mb-2">Province</label>
+            <label className="block text-sm font-semibold text-slate-700 mb-2">{t('common.province')}</label>
             <select
               value={inputs.province}
               onChange={(e) => setInputs({ ...inputs, province: e.target.value })}
@@ -276,7 +279,7 @@ const TimesheetInput: React.FC<Props> = ({ inputs, setInputs }) => {
 
           {/* Hourly Wage */}
           <div>
-            <label className="block text-sm font-semibold text-slate-700 mb-2">Hourly Wage</label>
+            <label className="block text-sm font-semibold text-slate-700 mb-2">{t('ts.hourlyWage')}</label>
             <div className="relative">
               <span className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-500">$</span>
               <input
@@ -291,24 +294,24 @@ const TimesheetInput: React.FC<Props> = ({ inputs, setInputs }) => {
 
           {/* Pay Frequency */}
           <div className="col-span-2">
-            <label className="block text-sm font-semibold text-slate-700 mb-2">Pay Frequency</label>
+            <label className="block text-sm font-semibold text-slate-700 mb-2">{t('ts.payFrequency')}</label>
             <select
               value={inputs.payFrequency}
               onChange={(e) => setInputs({ ...inputs, payFrequency: e.target.value as PayFrequency })}
               className="w-full px-4 py-2 border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-500 bg-white text-slate-800"
             >
-              <option value={PayFrequency.DAILY}>Daily</option>
-              <option value={PayFrequency.WEEKLY}>Weekly</option>
-              <option value={PayFrequency.BI_WEEKLY}>Bi-Weekly (Every 2 weeks)</option>
-              <option value={PayFrequency.MONTHLY}>Monthly</option>
-              <option value={PayFrequency.QUARTERLY}>Quarterly</option>
+              <option value={PayFrequency.DAILY}>{t('ts.daily')}</option>
+              <option value={PayFrequency.WEEKLY}>{t('ts.weekly')}</option>
+              <option value={PayFrequency.BI_WEEKLY}>{t('ts.biweekly')}</option>
+              <option value={PayFrequency.MONTHLY}>{t('ts.monthly')}</option>
+              <option value={PayFrequency.QUARTERLY}>{t('ts.quarterly')}</option>
             </select>
           </div>
 
           {/* RRSP Contribution */}
           <div className="col-span-2">
             <div className="flex items-center justify-between mb-4">
-              <label className="block text-sm font-semibold text-slate-700">RRSP Contribution</label>
+              <label className="block text-sm font-semibold text-slate-700">{t('annual.rrsp')}</label>
               <label className="relative inline-flex items-center cursor-pointer">
                 <input
                   type="checkbox"
@@ -340,7 +343,7 @@ const TimesheetInput: React.FC<Props> = ({ inputs, setInputs }) => {
                     }`}
                     onClick={() => setInputs({ ...inputs, rrspType: 'amount' })}
                   >
-                    Fixed Amount ($)
+                    {t('annual.fixedAmount')}
                   </button>
                   <button
                     type="button"
@@ -351,14 +354,14 @@ const TimesheetInput: React.FC<Props> = ({ inputs, setInputs }) => {
                     }`}
                     onClick={() => setInputs({ ...inputs, rrspType: 'percent' })}
                   >
-                    Percentage (%)
+                    {t('annual.percentage')}
                   </button>
                 </div>
 
                 {/* Conditionally Render Inputs */}
                 {(inputs.rrspType || 'amount') === 'amount' ? (
                   <div>
-                    <label className="block text-xs font-bold text-red-800 mb-1.5 ml-1">Per-Paycheque Contribution ($)</label>
+                    <label className="block text-xs font-bold text-red-800 mb-1.5 ml-1">{t('annual.perPaycheque')}</label>
                     <div className="relative">
                       <span className="absolute left-3 top-1/2 -translate-y-1/2 text-red-400 font-bold">$</span>
                       <input
@@ -376,7 +379,7 @@ const TimesheetInput: React.FC<Props> = ({ inputs, setInputs }) => {
                   <div className="space-y-3">
                     <div className="grid grid-cols-2 gap-3">
                       <div>
-                        <label className="block text-xs font-bold text-red-800 mb-1.5 ml-1">My Contribution (%)</label>
+                        <label className="block text-xs font-bold text-red-800 mb-1.5 ml-1">{t('annual.myContribution')}</label>
                         <div className="relative">
                           <input
                             type="number"
@@ -399,7 +402,7 @@ const TimesheetInput: React.FC<Props> = ({ inputs, setInputs }) => {
                         </div>
                       </div>
                       <div>
-                        <label className="block text-xs font-bold text-red-800 mb-1.5 ml-1">Employer Match</label>
+                        <label className="block text-xs font-bold text-red-800 mb-1.5 ml-1">{t('annual.employerMatch')}</label>
                         <select
                           className="w-full py-2 pl-2 pr-7 bg-white text-slate-900 border border-red-200 rounded-lg focus:ring-2 focus:ring-red-500 focus:outline-none text-xs sm:text-sm font-semibold truncate"
                           value={(inputs as any).rrspMatchPolicy || 'equal'}
@@ -422,10 +425,10 @@ const TimesheetInput: React.FC<Props> = ({ inputs, setInputs }) => {
                             } as any);
                           }}
                         >
-                          <option value="equal">100% Match</option>
-                          <option value="half">50% Match</option>
-                          <option value="none">No Match</option>
-                          <option value="custom">Custom %</option>
+                          <option value="equal">{t('annual.match100')}</option>
+                          <option value="half">{t('annual.match50')}</option>
+                          <option value="none">{t('annual.matchNone')}</option>
+                          <option value="custom">{t('annual.matchCustom')}</option>
                         </select>
                       </div>
                     </div>
@@ -433,7 +436,7 @@ const TimesheetInput: React.FC<Props> = ({ inputs, setInputs }) => {
                 {/* Show Custom Match Input only if 'custom' is selected */}
                 {((inputs as any).rrspMatchPolicy === 'custom') && (
                   <div className="animate-fadeIn">
-                    <label className="block text-xs font-bold text-red-800 mb-1.5 ml-1">Custom Employer Match (%)</label>
+                    <label className="block text-xs font-bold text-red-800 mb-1.5 ml-1">{t('annual.customMatch')}</label>
                     <div className="relative">
                       <input
                         type="number"
@@ -452,9 +455,9 @@ const TimesheetInput: React.FC<Props> = ({ inputs, setInputs }) => {
               </div>
             )}
             <p className="text-[10px] text-red-700 leading-tight">
-              {(inputs.rrspType === 'percent') 
-                ? `You contribute ${inputs.rrspPercentage || 0}% of your gross pay. Employer contributes ${inputs.rrspEmployerMatch || 0}% matching funds directly to Canada Life.`
-                : 'Reduces taxable income — lowers your federal & provincial tax'
+              {(inputs.rrspType === 'percent')
+                ? t('annual.rrspNotePercent')
+                : t('annual.rrspNoteAmount')
               }
             </p>
           </div>
@@ -465,7 +468,7 @@ const TimesheetInput: React.FC<Props> = ({ inputs, setInputs }) => {
         {/* Calendar */}
         <div>
           <h3 className="text-sm font-bold text-slate-800 mb-3">
-            {monthNames[month]} {year}
+            {new Date(year, month, 1).toLocaleDateString(dateLocale, { month: 'long' })} {year}
           </h3>
           
           <div className="grid grid-cols-7 gap-2">
@@ -490,23 +493,23 @@ const TimesheetInput: React.FC<Props> = ({ inputs, setInputs }) => {
         <div className="bg-slate-50 rounded-lg p-4 border border-slate-200">
           <div className="flex items-center justify-between mb-3">
             <h3 className="text-sm font-bold text-slate-800">
-              📅 {new Date(selectedDate).toLocaleDateString('en-US', { 
-                weekday: 'long', 
-                month: 'long', 
-                day: 'numeric' 
+              📅 {new Date(selectedDate).toLocaleDateString(dateLocale, {
+                weekday: 'long',
+                month: 'long',
+                day: 'numeric'
               })}
             </h3>
             <button
               onClick={() => setIsAddingEntry(true)}
               className="px-3 py-1 bg-red-600 text-white text-sm rounded-lg hover:bg-red-700 transition-colors font-medium"
             >
-              + Add Entry
+              {t('ts.addEntry')}
             </button>
           </div>
 
           {/* Entry list for selected date */}
           {getEntriesForDate(selectedDate).length === 0 ? (
-            <p className="text-sm text-slate-500 italic">No entries for this date</p>
+            <p className="text-sm text-slate-500 italic">{t('ts.noEntries')}</p>
           ) : (
             <div className="space-y-2">
               {getEntriesForDate(selectedDate).map(entry => (
@@ -521,12 +524,12 @@ const TimesheetInput: React.FC<Props> = ({ inputs, setInputs }) => {
                       </span>
                       {entry.unpaidBreakMinutes > 0 && (
                         <span className="text-xs text-slate-500">
-                          Break: {entry.unpaidBreakMinutes}min
+                          {t('ts.break')}: {entry.unpaidBreakMinutes}min
                         </span>
                       )}
                     </div>
                     {entry.tips ? (
-                      <p className="text-xs text-green-700 font-medium mt-1">+${entry.tips.toFixed(2)} tips</p>
+                      <p className="text-xs text-green-700 font-medium mt-1">+${entry.tips.toFixed(2)} {t('ts.tips')}</p>
                     ) : null}
                     {entry.notes && (
                       <p className="text-xs text-slate-600 mt-1">{entry.notes}</p>
@@ -548,12 +551,12 @@ const TimesheetInput: React.FC<Props> = ({ inputs, setInputs }) => {
         {isAddingEntry && (
           <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4">
             <div className="bg-white rounded-xl shadow-2xl max-w-md w-full p-6">
-              <h3 className="text-lg font-bold text-slate-800 mb-4">Add Time Entry</h3>
+              <h3 className="text-lg font-bold text-slate-800 mb-4">{t('ts.addTimeEntry')}</h3>
               
               <div className="space-y-4">
                 {/* Check-in */}
                 <div>
-                  <label className="block text-sm font-semibold text-slate-700 mb-2">Check In</label>
+                  <label className="block text-sm font-semibold text-slate-700 mb-2">{t('ts.checkIn')}</label>
                   <input
                     type="time"
                     value={newEntry.checkIn}
@@ -564,7 +567,7 @@ const TimesheetInput: React.FC<Props> = ({ inputs, setInputs }) => {
 
                 {/* Check-out */}
                 <div>
-                  <label className="block text-sm font-semibold text-slate-700 mb-2">Check Out</label>
+                  <label className="block text-sm font-semibold text-slate-700 mb-2">{t('ts.checkOut')}</label>
                   <input
                     type="time"
                     value={newEntry.checkOut}
@@ -575,7 +578,7 @@ const TimesheetInput: React.FC<Props> = ({ inputs, setInputs }) => {
 
                 {/* Break */}
                 <div>
-                  <label className="block text-sm font-semibold text-slate-700 mb-2">Unpaid Break (minutes)</label>
+                  <label className="block text-sm font-semibold text-slate-700 mb-2">{t('ts.unpaidBreakMin')}</label>
                   <input
                     type="number"
                     value={newEntry.unpaidBreakMinutes}
@@ -586,7 +589,7 @@ const TimesheetInput: React.FC<Props> = ({ inputs, setInputs }) => {
 
                 {/* Tips */}
                 <div>
-                  <label className="block text-sm font-semibold text-slate-700 mb-2">Tips Declared <span className="font-normal text-slate-500">(optional, taxable)</span></label>
+                  <label className="block text-sm font-semibold text-slate-700 mb-2">{t('ts.tipsDeclared')} <span className="font-normal text-slate-500">{t('ts.optionalTaxable')}</span></label>
                   <div className="relative">
                     <span className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 font-bold">$</span>
                     <input
@@ -599,15 +602,15 @@ const TimesheetInput: React.FC<Props> = ({ inputs, setInputs }) => {
                       className="w-full pl-8 pr-4 py-2 border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-500"
                     />
                   </div>
-                  <p className="text-xs text-slate-500 mt-1">Added to gross income for this shift — affects CPP, EI, and tax</p>
+                  <p className="text-xs text-slate-500 mt-1">{t('ts.tipsHint')}</p>
                 </div>
 
                 {/* Notes */}
                 <div>
-                  <label className="block text-sm font-semibold text-slate-700 mb-2">Notes (optional)</label>
+                  <label className="block text-sm font-semibold text-slate-700 mb-2">{t('ts.notesOpt')}</label>
                   <input
                     type="text"
-                    placeholder="e.g., Training session"
+                    placeholder={t('ts.notesPlaceholder')}
                     value={newEntry.notes}
                     onChange={(e) => setNewEntry({ ...newEntry, notes: e.target.value })}
                     className="w-full px-4 py-2 border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-500"
@@ -621,13 +624,13 @@ const TimesheetInput: React.FC<Props> = ({ inputs, setInputs }) => {
                   onClick={() => setIsAddingEntry(false)}
                   className="flex-1 px-4 py-2 bg-slate-200 text-slate-700 rounded-lg hover:bg-slate-300 transition-colors font-medium"
                 >
-                  Cancel
+                  {t('common.cancel')}
                 </button>
                 <button
                   onClick={handleAddEntry}
                   className="flex-1 px-4 py-2 bg-red-600 text-white rounded-lg hover:bg-red-700 transition-colors font-medium"
                 >
-                  Add Entry
+                  {t('ts.addTimeEntry')}
                 </button>
               </div>
             </div>
@@ -638,12 +641,12 @@ const TimesheetInput: React.FC<Props> = ({ inputs, setInputs }) => {
         <div className="bg-red-50 border border-red-200 rounded-lg p-4">
           <div className="flex items-center justify-between">
             <div>
-              <p className="text-sm font-semibold text-red-900">Total Hours Tracked</p>
-              <p className="text-xs text-red-700 mt-1">{inputs.entries.length} entries</p>
+              <p className="text-sm font-semibold text-red-900">{t('ts.totalHours')}</p>
+              <p className="text-xs text-red-700 mt-1">{inputs.entries.length} {t('ts.entries')}</p>
             </div>
             <div className="text-right">
               <p className="text-2xl font-bold text-red-600">{calculatePeriodHours()}</p>
-              <p className="text-xs text-red-700">hours</p>
+              <p className="text-xs text-red-700">{t('ts.hours')}</p>
             </div>
           </div>
         </div>
