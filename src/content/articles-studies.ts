@@ -221,4 +221,144 @@ CPP2 is built into the CanPay Insights calculator. Enter your salary and provinc
 *Figures reflect 2025 CRA ceilings; 2026 ceilings are higher. Always confirm the current year's amounts with the CRA or use the calculator for an up-to-date estimate.*
 `,
   },
+  {
+    id: 'study-3',
+    slug: 'how-much-cpp-will-i-pay-2026',
+    title: 'How Much CPP Will I Pay in 2026? (Contributions by Salary)',
+    subtitle: 'Your exact CPP and CPP2 contribution at every income level, from $40,000 to $150,000.',
+    excerpt:
+      'On a $60,000 salary you pay about $3,362 in CPP for the year; CPP maxes out at roughly $4,341 once you earn around $90,000. Here is the full CPP contribution table by salary for 2025/2026.',
+    metaTitle: 'How Much CPP Will I Pay in 2026? CPP Contributions by Salary',
+    metaDescription:
+      'See exactly how much CPP you pay by salary in 2025/2026 — from $40k to $150k, including CPP2. On $60,000 you pay about $3,362; CPP maxes out around $4,341.',
+    keywords: [
+      'how much cpp will i pay',
+      'cpp contribution by salary',
+      'how much cpp on 60000',
+      'cpp deduction 2026',
+      'maximum cpp contribution 2026',
+      'cpp on 70000 ontario',
+    ],
+    category: 'tax',
+    tags: ['CPP', '2026', 'Payroll Deductions'],
+    publishedAt: '2026-06-13',
+    readTime: 5,
+    directAnswer:
+      'In 2025, most workers pay 5.95% CPP on earnings between $3,500 and $71,300, plus 4% CPP2 above that. On a $60,000 salary that is about $3,362 for the year; on $80,000 about $4,293; and CPP maxes out at roughly $4,341 once you earn around $90,000. Quebec uses QPP instead, which is slightly higher.',
+    faq: [
+      {
+        question: 'How much CPP do I pay on $60,000?',
+        answer:
+          'About $3,362 for the year in 2025 (roughly $129 per bi-weekly cheque), made up of 5.95% CPP on earnings above the $3,500 exemption. Your employer pays the same amount.',
+      },
+      {
+        question: 'What is the maximum CPP contribution in 2026?',
+        answer:
+          'In 2025 the maximum employee contribution is about $4,341 including CPP2. You hit the maximum once your pensionable income reaches the second ceiling (around $81,200 in 2025). The 2026 maximum is slightly higher as the ceilings rise.',
+      },
+      {
+        question: 'Does everyone pay the same CPP?',
+        answer:
+          'No. CPP is a percentage of income up to a cap, so lower earners pay less in dollars. Quebec workers pay QPP (a higher rate) instead of CPP, plus QPIP. Everyone stops contributing once they reach the yearly maximum.',
+      },
+    ],
+    content: `
+## How much CPP you pay, by salary
+
+CPP (the Canada Pension Plan) takes **5.95% of your earnings** between the $3,500 basic exemption and the first ceiling ($71,300 in 2025). Earn above that and you also pay **CPP2** — an extra 4% up to a second ceiling. Here is what that works out to at each income level for 2025/2026:
+
+| Annual salary | Your CPP contribution (incl. CPP2) | Per bi-weekly cheque |
+| --- | --- | --- |
+| $40,000 | $2,172 | $84 |
+| $50,000 | $2,767 | $106 |
+| $60,000 | $3,362 | $129 |
+| $70,000 | $3,957 | $152 |
+| $80,000 | $4,293 | $165 |
+| $90,000+ | $4,341 (maximum) | $167 |
+
+Your employer pays the same amount again on your behalf.
+
+## When CPP "maxes out"
+
+Notice the numbers stop climbing at about **$4,341**. Once your pensionable income passes the second ceiling (around $81,200 in 2025), you have paid the full year's CPP and contributions stop until January. That is why a December paycheque can suddenly look bigger for higher earners.
+
+## Quebec is different
+
+Quebec workers pay **QPP** instead of CPP. The QPP rate is a little higher than CPP, and Quebec also has QPIP (parental insurance). So a Quebec worker on $60,000 pays more toward QPP than an Ontario worker pays toward CPP. See the [Quebec paycheck calculator](/quebec-paycheck-calculator) for exact figures.
+
+## See your exact number
+
+These are estimates with basic amounts only. For your real number — including income tax, EI, and your province — use the [free payroll calculator](/) or the [CPP & EI calculator](/cpp-ei-calculator). New to CPP2? Read [CPP2 explained for 2026](/blog/cpp2-second-additional-cpp-2026).
+
+*Figures use 2025 CRA ceilings; 2026 ceilings are slightly higher. Confirm current amounts with the CRA or use the calculator.*
+`,
+  },
+  {
+    id: 'study-4',
+    slug: 'how-much-ei-will-i-pay-2026',
+    title: 'How Much EI Will I Pay in 2026? (Premiums by Salary)',
+    subtitle: 'Your Employment Insurance premium at every income level, and where it maxes out.',
+    excerpt:
+      'EI is 1.64% of insurable earnings in 2025, maxing out at about $1,077 once you earn around $65,700. On a $50,000 salary you pay about $820. Full EI premium table by salary, plus Quebec rates.',
+    metaTitle: 'How Much EI Will I Pay in 2026? EI Premiums by Salary',
+    metaDescription:
+      'See how much EI you pay by salary in 2025/2026. EI is 1.64% of insurable earnings, maxing out at about $1,077. Quebec pays a lower EI rate. Full table by income.',
+    keywords: [
+      'how much ei will i pay',
+      'ei premium by salary',
+      'maximum ei contribution 2026',
+      'ei deduction 2026',
+      'how much ei on 50000',
+      'ei rate quebec',
+    ],
+    category: 'tax',
+    tags: ['EI', '2026', 'Payroll Deductions'],
+    publishedAt: '2026-06-13',
+    readTime: 4,
+    directAnswer:
+      'In 2025, EI is deducted at 1.64% of insurable earnings outside Quebec, up to a maximum of about $1,077 per year (reached around $65,700 of income). On $50,000 you pay about $820; on $60,000 about $984. Quebec uses a lower EI rate (it runs QPIP separately), maxing out at about $834.',
+    faq: [
+      {
+        question: 'How much EI do I pay on $50,000?',
+        answer:
+          'About $820 for the year in 2025 outside Quebec (1.64% of insurable earnings). In Quebec the EI rate is lower, so you would pay less but also contribute to QPIP separately.',
+      },
+      {
+        question: 'What is the maximum EI premium in 2026?',
+        answer:
+          'In 2025 the maximum employee EI premium is about $1,077 outside Quebec, reached once your income hits the maximum insurable earnings (around $65,700). Quebec\'s EI maximum is lower at about $834. The 2026 figures rise slightly.',
+      },
+      {
+        question: 'Why is EI lower in Quebec?',
+        answer:
+          'Quebec runs its own parental insurance plan (QPIP), so the federal EI rate is reduced for Quebec workers. You pay less EI but contribute to QPIP instead, which together cover similar benefits.',
+      },
+    ],
+    content: `
+## How much EI you pay, by salary
+
+Employment Insurance (EI) is deducted at **1.64% of insurable earnings** in 2025 (outside Quebec), up to a yearly maximum. Here is the premium at each income level for 2025/2026:
+
+| Annual salary | EI premium (most provinces) | EI premium (Quebec) |
+| --- | --- | --- |
+| $40,000 | $656 | $508 |
+| $50,000 | $820 | $635 |
+| $60,000 | $984 | $762 |
+| $70,000+ | $1,077 (maximum) | $834 (maximum) |
+
+## When EI "maxes out"
+
+EI stops at about **$1,077** (outside Quebec) once your income reaches the maximum insurable earnings — around $65,700 in 2025. After that, no more EI comes off for the rest of the year, regardless of how much you earn.
+
+## Quebec pays less EI
+
+Because Quebec runs its own **QPIP** (Quebec Parental Insurance Plan), Quebec workers pay a lower federal EI rate — maxing out around $834 instead of $1,077 — but also contribute to QPIP separately. The [Quebec paycheck calculator](/quebec-paycheck-calculator) shows both.
+
+## See your exact number
+
+For your real take-home pay including income tax, CPP, and EI for your province, use the [free payroll calculator](/) or the [CPP & EI calculator](/cpp-ei-calculator). Curious how much CPP you pay? See [how much CPP you pay by salary](/blog/how-much-cpp-will-i-pay-2026).
+
+*Figures use 2025 CRA rates; 2026 amounts rise slightly. Confirm current rates with the CRA or use the calculator.*
+`,
+  },
 ];
