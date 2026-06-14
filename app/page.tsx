@@ -15,9 +15,50 @@ export const metadata: Metadata = {
   },
 };
 
+const homeFaqJsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: [
+    {
+      '@type': 'Question',
+      name: 'How much tax do I pay in Canada?',
+      acceptedAnswer: { '@type': 'Answer', text: 'In Canada, income tax is calculated at both federal and provincial levels. For a $65,000 salary in Ontario, you pay roughly $50,000 in take-home pay after federal tax, provincial tax, CPP, and EI. Use our free calculator to get exact numbers for your province and income.' },
+    },
+    {
+      '@type': 'Question',
+      name: 'How is CPP calculated in 2026?',
+      acceptedAnswer: { '@type': 'Answer', text: 'CPP is 5.95% of your earnings between $3,500 and the first ceiling (YMPE, about $74,600 in 2026). Higher earners also pay CPP2 — an extra 4% between the first ceiling and a second ceiling (YAMPE, about $85,000). You and your employer contribute equally.' },
+    },
+    {
+      '@type': 'Question',
+      name: 'What is the EI deduction in Canada?',
+      acceptedAnswer: { '@type': 'Answer', text: 'Employment Insurance (EI) is deducted at 1.64% of insurable earnings, up to a yearly maximum of about $1,077. Quebec workers pay a lower EI rate because the province runs its own parental insurance plan (QPIP).' },
+    },
+    {
+      '@type': 'Question',
+      name: 'Which Canadian province has the lowest income tax?',
+      acceptedAnswer: { '@type': 'Answer', text: 'Alberta has the highest basic personal amount and no provincial sales tax, making it very tax-friendly for higher earners. Quebec has the highest provincial income tax rates but offers more public services. Use the calculator to compare your take-home pay by province.' },
+    },
+    {
+      '@type': 'Question',
+      name: 'How do I calculate my take-home pay in Canada?',
+      acceptedAnswer: { '@type': 'Answer', text: 'Start with gross income, then subtract federal tax (14% on the first bracket in 2026, up to 33%), provincial tax, CPP/CPP2 contributions, and EI premiums. CanPay Insights gives an instant, accurate result for your province and pay frequency.' },
+    },
+    {
+      '@type': 'Question',
+      name: 'What is the RRSP contribution limit for 2026?',
+      acceptedAnswer: { '@type': 'Answer', text: 'The RRSP contribution limit for 2026 is 18% of your earned income, up to a maximum of $33,810. Unused room carries forward. RRSP contributions reduce your taxable income dollar-for-dollar, lowering your federal and provincial tax.' },
+    },
+  ],
+};
+
 export default function HomePage() {
   return (
     <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(homeFaqJsonLd) }}
+      />
       <App />
       <section className="border-t border-slate-200 bg-white">
         <div className="mx-auto max-w-3xl px-4 py-12">
