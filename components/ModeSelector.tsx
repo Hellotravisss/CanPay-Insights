@@ -1,29 +1,31 @@
 'use client';
 import React from 'react';
 import { CalculationMode } from '../types';
+import { useT } from '../lib/i18n';
 
 interface Props {
   onModeSelect: (mode: CalculationMode) => void;
 }
 
 const ModeSelector: React.FC<Props> = ({ onModeSelect }) => {
+  const { t } = useT();
   const modes = [
     {
       id: CalculationMode.SIMPLE,
-      title: 'Hourly Wage',
-      subtitle: 'Calculate from hourly rate',
+      title: t('mode.hourly.title'),
+      subtitle: t('mode.hourly.subtitle'),
       icon: '💰',
     },
     {
       id: CalculationMode.ANNUAL,
-      title: 'Annual Salary',
-      subtitle: 'Calculate from yearly salary',
+      title: t('mode.annual.title'),
+      subtitle: t('mode.annual.subtitle'),
       icon: '💼',
     },
     {
       id: CalculationMode.TIMESHEET,
-      title: 'Timesheet',
-      subtitle: 'Track exact work hours',
+      title: t('mode.timesheet.title'),
+      subtitle: t('mode.timesheet.subtitle'),
       icon: '⏱️',
     }
   ];

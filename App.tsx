@@ -6,6 +6,7 @@ import InputSection from './components/InputSection';
 import AnnualSalaryInput from './components/AnnualSalaryInput';
 import TimesheetInput from './components/TimesheetInput';
 import ModeSelector from './components/ModeSelector';
+import { LanguageSwitcher, useT } from './lib/i18n';
 import ResultsSection from './components/ResultsSection';
 import GeminiAdvisor from './components/GeminiAdvisor';
 import UserMenu from './components/UserMenu';
@@ -73,6 +74,7 @@ const App: React.FC = () => {
 
   // Auth
   const { user, isAuthenticated, signInWithOAuth, signInWithEmail, signInWithPassword, signUpWithPassword } = useAuth();
+  const { t } = useT();
   const userId = user?.id || null;
 
   // User settings persistence
@@ -335,19 +337,20 @@ const App: React.FC = () => {
           {/* Home Page - Mode Selection */}
           {currentPage === 'home' && (
             <div className="mx-auto flex min-h-[82vh] w-full max-w-6xl flex-col">
-              <div className="flex justify-end py-4">
+              <div className="flex items-center justify-between gap-2 py-4">
+                <LanguageSwitcher />
                 <nav className="flex flex-wrap items-center gap-2" aria-label="Home navigation">
                   <a
                     href="/blog"
                     className="rounded-lg border border-slate-200 bg-white px-4 py-2 text-sm font-bold text-slate-600 no-underline shadow-sm transition-colors hover:border-red-200 hover:text-red-600"
                   >
-                    Tax guides
+                    {t('nav.taxGuides')}
                   </a>
                   <a
                     href="/compare-provinces"
                     className="rounded-lg border border-slate-200 bg-white px-4 py-2 text-sm font-bold text-slate-600 no-underline shadow-sm transition-colors hover:border-red-200 hover:text-red-600"
                   >
-                    Compare provinces
+                    {t('nav.compare')}
                   </a>
                 </nav>
               </div>
@@ -361,10 +364,10 @@ const App: React.FC = () => {
                         CanPay <span className="text-red-600">Insights</span>
                       </h1>
                       <p className="mt-2 text-base font-semibold text-slate-500 md:text-lg">
-                        Canadian Payroll Calculator
+                        {t('brand.tagline')}
                       </p>
                       <p className="mt-5 hidden max-w-sm text-base font-medium leading-7 text-slate-500 md:block">
-                        Start with the pay type that matches your situation. No signup, no spreadsheet, just a quick take-home pay estimate.
+                        {t('home.subtitle')}
                       </p>
                     </div>
 
