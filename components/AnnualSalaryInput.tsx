@@ -2,6 +2,7 @@
 import React, { useState } from 'react';
 import { AnnualSalaryInputs, Province, PayFrequency, AdditionalIncome, Deductions } from '../types';
 import { PROVINCIAL_DATA } from '../constants';
+import { useT } from '../lib/i18n';
 
 interface Props {
   inputs: AnnualSalaryInputs;
@@ -9,6 +10,7 @@ interface Props {
 }
 
 const AnnualSalaryInput: React.FC<Props> = ({ inputs, setInputs }) => {
+  const { t } = useT();
   const [showAdditional, setShowAdditional] = useState(false);
   const [showDeductions, setShowDeductions] = useState(false);
 
@@ -34,15 +36,15 @@ const AnnualSalaryInput: React.FC<Props> = ({ inputs, setInputs }) => {
           </svg>
         </div>
         <div>
-          <h2 className="text-lg font-bold text-slate-800">Annual Salary Calculator</h2>
-          <p className="text-xs text-slate-500">Enter your annual salary to see take-home pay</p>
+          <h2 className="text-lg font-bold text-slate-800">{t('annual.title')}</h2>
+          <p className="text-xs text-slate-500">{t('annual.subtitle')}</p>
         </div>
       </div>
 
       {/* Annual Salary Input */}
       <div>
         <label className="block text-sm font-bold text-slate-700 mb-2">
-          Annual Salary <span className="text-red-600">*</span>
+          {t('annual.salaryLabel')} <span className="text-red-600">*</span>
         </label>
         <div className="relative">
           <span className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-500 font-bold">$</span>
@@ -57,14 +59,14 @@ const AnnualSalaryInput: React.FC<Props> = ({ inputs, setInputs }) => {
           />
         </div>
         <p className="text-xs text-slate-500 mt-1">
-          📊 Annual Salary: {formatCurrency(inputs.annualSalary)}
+          📊 {t('annual.salaryLabel')}: {formatCurrency(inputs.annualSalary)}
         </p>
       </div>
 
       {/* Province Selection */}
       <div>
         <label className="block text-sm font-bold text-slate-700 mb-2">
-          Province <span className="text-red-600">*</span>
+          {t('common.province')} <span className="text-red-600">*</span>
         </label>
         <select
           value={inputs.province}
@@ -78,7 +80,7 @@ const AnnualSalaryInput: React.FC<Props> = ({ inputs, setInputs }) => {
           ))}
         </select>
         <p className="text-xs text-slate-500 mt-1">
-          💼 Tax rates and deductions vary by province
+          💼 {t('annual.provinceHint')}
         </p>
       </div>
 
@@ -88,12 +90,12 @@ const AnnualSalaryInput: React.FC<Props> = ({ inputs, setInputs }) => {
       <div>
         <button type="button" onClick={() => setShowAdditional(v => !v)} className="w-full flex items-center justify-between text-left">
           <div>
-            <p className="text-sm font-bold text-slate-700">Additional Income</p>
-            <p className="text-xs text-slate-500">Bonus, stat holiday, retroactive pay, etc.</p>
+            <p className="text-sm font-bold text-slate-700">{t('annual.addIncome')}</p>
+            <p className="text-xs text-slate-500">{t('annual.addIncomeHint')}</p>
           </div>
           <div className="flex items-center gap-2">
             {(inputs.additionalIncome && Object.values(inputs.additionalIncome).some(v => v > 0)) && (
-              <span className="text-xs bg-red-100 text-red-700 font-semibold px-2 py-0.5 rounded-full">Active</span>
+              <span className="text-xs bg-red-100 text-red-700 font-semibold px-2 py-0.5 rounded-full">{t('common.active')}</span>
             )}
             <svg className={`w-5 h-5 text-slate-400 transition-transform ${showAdditional ? 'rotate-180' : ''}`} fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" /></svg>
           </div>
@@ -101,11 +103,11 @@ const AnnualSalaryInput: React.FC<Props> = ({ inputs, setInputs }) => {
         {showAdditional && (
           <div className="mt-3 bg-red-50 p-4 rounded-xl border border-red-100 space-y-3">
             {([
-              { key: 'statHolidayPay', label: 'Statutory Holiday Pay', hint: 'Per pay period' },
-              { key: 'sickPay',        label: 'Sick Pay / Paid Leave',  hint: 'Per pay period' },
-              { key: 'bonus',          label: 'Bonus / Retroactive Pay', hint: 'Per pay period (annualized)' },
-              { key: 'otherIncome',   label: 'Other Income',            hint: 'Tips, commissions, allowances' },
-              { key: 'taxableBenefits', label: 'Taxable Benefits (Non-cash)', hint: 'Life insurance, AD&D taxable benefits' },
+              { key: 'statHolidayPay', label: t('annual.statHoliday'), hint: t('annual.perPeriod') },
+              { key: 'sickPay',        label: t('annual.sickPay'),  hint: t('annual.perPeriod') },
+              { key: 'bonus',          label: t('annual.bonus'), hint: t('annual.bonusHint') },
+              { key: 'otherIncome',   label: t('annual.otherIncome'),            hint: t('annual.otherIncomeHint') },
+              { key: 'taxableBenefits', label: t('annual.taxBenefits'), hint: t('annual.taxBenefitsHint') },
             ] as { key: keyof AdditionalIncome; label: string; hint: string }[]).map(({ key, label, hint }) => (
               <div key={key}>
                 <label className="block text-xs font-bold text-red-800 mb-1">{label} <span className="font-normal text-red-600">({hint})</span></label>
@@ -130,12 +132,12 @@ const AnnualSalaryInput: React.FC<Props> = ({ inputs, setInputs }) => {
       <div>
         <button type="button" onClick={() => setShowDeductions(v => !v)} className="w-full flex items-center justify-between text-left">
           <div>
-            <p className="text-sm font-bold text-slate-700">Other Deductions</p>
-            <p className="text-xs text-slate-500">LTD, union dues — deducted after tax</p>
+            <p className="text-sm font-bold text-slate-700">{t('annual.otherDed')}</p>
+            <p className="text-xs text-slate-500">{t('annual.otherDedHint')}</p>
           </div>
           <div className="flex items-center gap-2">
             {(inputs.deductions && Object.values(inputs.deductions).some(v => v > 0)) && (
-              <span className="text-xs bg-red-100 text-red-700 font-semibold px-2 py-0.5 rounded-full">Active</span>
+              <span className="text-xs bg-red-100 text-red-700 font-semibold px-2 py-0.5 rounded-full">{t('common.active')}</span>
             )}
             <svg className={`w-5 h-5 text-slate-400 transition-transform ${showDeductions ? 'rotate-180' : ''}`} fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" /></svg>
           </div>
@@ -143,9 +145,9 @@ const AnnualSalaryInput: React.FC<Props> = ({ inputs, setInputs }) => {
         {showDeductions && (
           <div className="mt-3 bg-slate-100 p-4 rounded-xl border border-slate-200 space-y-3">
             {([
-              { key: 'ltdPremium',      label: 'LTD / Disability Insurance' },
-              { key: 'unionDues',       label: 'Union Dues' },
-              { key: 'otherDeductions', label: 'Other (parking, tools…)' },
+              { key: 'ltdPremium',      label: t('annual.ltd') },
+              { key: 'unionDues',       label: t('annual.unionDues') },
+              { key: 'otherDeductions', label: t('annual.otherDedItem') },
             ] as { key: keyof Deductions; label: string }[]).map(({ key, label }) => (
               <div key={key}>
                 <label className="block text-xs font-bold text-slate-700 mb-1">{label}</label>
@@ -170,8 +172,8 @@ const AnnualSalaryInput: React.FC<Props> = ({ inputs, setInputs }) => {
       <div className="bg-white rounded-xl shadow-sm border border-slate-100 p-6 mt-6">
         <div className="flex items-center justify-between mb-4">
           <div>
-            <label className="block text-sm font-bold text-slate-700">RRSP Contribution</label>
-            <p className="text-xs text-slate-500">Per pay period — reduces taxable income</p>
+            <label className="block text-sm font-bold text-slate-700">{t('annual.rrsp')}</label>
+            <p className="text-xs text-slate-500">{t('annual.rrspHint')}</p>
           </div>
           <label className="relative inline-flex items-center cursor-pointer">
             <input
@@ -204,7 +206,7 @@ const AnnualSalaryInput: React.FC<Props> = ({ inputs, setInputs }) => {
                 }`}
                 onClick={() => setInputs({ ...inputs, rrspType: 'amount' })}
               >
-                Fixed Amount ($)
+                {t('annual.fixedAmount')}
               </button>
               <button
                 type="button"
@@ -215,14 +217,14 @@ const AnnualSalaryInput: React.FC<Props> = ({ inputs, setInputs }) => {
                 }`}
                 onClick={() => setInputs({ ...inputs, rrspType: 'percent' })}
               >
-                Percentage (%)
+                {t('annual.percentage')}
               </button>
             </div>
 
             {/* Conditionally Render Inputs */}
             {(inputs.rrspType || 'amount') === 'amount' ? (
               <div>
-                <label className="block text-xs font-bold text-red-800 mb-1.5 ml-1">Per-Paycheque Contribution ($)</label>
+                <label className="block text-xs font-bold text-red-800 mb-1.5 ml-1">{t('annual.perPaycheque')}</label>
                 <div className="relative">
                   <span className="absolute left-3 top-1/2 -translate-y-1/2 text-red-400 font-bold">$</span>
                   <input
@@ -240,7 +242,7 @@ const AnnualSalaryInput: React.FC<Props> = ({ inputs, setInputs }) => {
               <div className="space-y-3">
                 <div className="grid grid-cols-2 gap-3">
                   <div>
-                    <label className="block text-xs font-bold text-red-800 mb-1.5 ml-1">My Contribution (%)</label>
+                    <label className="block text-xs font-bold text-red-800 mb-1.5 ml-1">{t('annual.myContribution')}</label>
                     <div className="relative">
                       <input
                         type="number"
@@ -263,7 +265,7 @@ const AnnualSalaryInput: React.FC<Props> = ({ inputs, setInputs }) => {
                     </div>
                   </div>
                   <div>
-                    <label className="block text-xs font-bold text-red-800 mb-1.5 ml-1">Employer Match</label>
+                    <label className="block text-xs font-bold text-red-800 mb-1.5 ml-1">{t('annual.employerMatch')}</label>
                     <select
                       className="w-full py-2 pl-2 pr-7 bg-white text-slate-900 border border-red-200 rounded-lg focus:ring-2 focus:ring-red-500 focus:outline-none text-xs sm:text-sm font-semibold truncate"
                       value={(inputs as any).rrspMatchPolicy || 'equal'}
@@ -286,10 +288,10 @@ const AnnualSalaryInput: React.FC<Props> = ({ inputs, setInputs }) => {
                         } as any);
                       }}
                     >
-                      <option value="equal">100% Match</option>
-                      <option value="half">50% Match</option>
-                      <option value="none">No Match</option>
-                      <option value="custom">Custom %</option>
+                      <option value="equal">{t('annual.match100')}</option>
+                      <option value="half">{t('annual.match50')}</option>
+                      <option value="none">{t('annual.matchNone')}</option>
+                      <option value="custom">{t('annual.matchCustom')}</option>
                     </select>
                   </div>
                 </div>
@@ -297,7 +299,7 @@ const AnnualSalaryInput: React.FC<Props> = ({ inputs, setInputs }) => {
                 {/* Show Custom Match Input only if 'custom' is selected */}
                 {((inputs as any).rrspMatchPolicy === 'custom') && (
                   <div className="animate-fadeIn">
-                    <label className="block text-xs font-bold text-red-800 mb-1.5 ml-1">Custom Employer Match (%)</label>
+                    <label className="block text-xs font-bold text-red-800 mb-1.5 ml-1">{t('annual.customMatch')}</label>
                     <div className="relative">
                       <input
                         type="number"
@@ -316,9 +318,9 @@ const AnnualSalaryInput: React.FC<Props> = ({ inputs, setInputs }) => {
               </div>
             )}
             <p className="text-[10px] text-red-700 leading-tight">
-              {(inputs.rrspType === 'percent') 
-                ? `You contribute ${inputs.rrspPercentage || 0}% of your gross pay. Employer contributes ${inputs.rrspEmployerMatch || 0}% matching funds directly to Canada Life.`
-                : 'Reduces taxable income — lowers your federal & provincial tax'
+              {(inputs.rrspType === 'percent')
+                ? t('annual.rrspNotePercent')
+                : t('annual.rrspNoteAmount')
               }
             </p>
           </div>
