@@ -3,6 +3,7 @@
 import React, { useState } from 'react';
 import { SalaryInputs, Province, AdditionalIncome, Deductions } from '../types';
 import { PROVINCIAL_DATA, DAYS_OF_WEEK } from '../constants';
+import { useT } from '../lib/i18n';
 
 interface Props {
   inputs: SalaryInputs;
@@ -10,6 +11,7 @@ interface Props {
 }
 
 const InputSection: React.FC<Props> = ({ inputs, setInputs }) => {
+  const { t } = useT();
   const [showAdditional, setShowAdditional] = useState(false);
   const [showDeductions, setShowDeductions] = useState(false);
 
@@ -53,7 +55,7 @@ const InputSection: React.FC<Props> = ({ inputs, setInputs }) => {
       {/* Province & Wage */}
       <div className="grid grid-cols-1 gap-6">
         <div>
-          <label className="block text-sm font-bold text-slate-700 mb-2">Province / Territory</label>
+          <label className="block text-sm font-bold text-slate-700 mb-2">{t('hourly.provinceTerritory')}</label>
           <select 
             className="w-full p-3 bg-white text-slate-900 border border-slate-300 rounded-lg focus:ring-2 focus:ring-red-500 focus:outline-none transition-all cursor-pointer hover:border-red-300 shadow-sm"
             value={inputs.province}
@@ -65,7 +67,7 @@ const InputSection: React.FC<Props> = ({ inputs, setInputs }) => {
           </select>
         </div>
         <div>
-          <label className="block text-sm font-bold text-slate-700 mb-2">Hourly Wage ($/hr)</label>
+          <label className="block text-sm font-bold text-slate-700 mb-2">{t('hourly.wage')}</label>
           <div className="relative">
             <span className="absolute left-4 top-3.5 text-slate-400 font-bold">$</span>
             <input 
@@ -89,7 +91,7 @@ const InputSection: React.FC<Props> = ({ inputs, setInputs }) => {
       <div>
         <h3 className="text-lg font-bold text-slate-800 mb-4 flex items-center">
           <svg className="w-5 h-5 mr-2 text-red-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
-          Work Schedule
+          {t('hourly.schedule')}
         </h3>
         
         <div className="flex flex-wrap gap-2 mb-6">
@@ -112,7 +114,7 @@ const InputSection: React.FC<Props> = ({ inputs, setInputs }) => {
         <div className="space-y-4">
           <div className="grid grid-cols-2 gap-4">
             <div className="flex-1">
-              <label className="block text-xs font-bold text-slate-500 uppercase mb-1.5 ml-1">Start Time</label>
+              <label className="block text-xs font-bold text-slate-500 uppercase mb-1.5 ml-1">{t('hourly.startTime')}</label>
               <input 
                 type="time" 
                 className="w-full p-3 bg-white text-slate-900 border border-slate-300 rounded-lg focus:ring-2 focus:ring-red-500 focus:outline-none shadow-sm min-h-[48px]"
@@ -121,7 +123,7 @@ const InputSection: React.FC<Props> = ({ inputs, setInputs }) => {
               />
             </div>
             <div className="flex-1">
-              <label className="block text-xs font-bold text-slate-500 uppercase mb-1.5 ml-1">End Time</label>
+              <label className="block text-xs font-bold text-slate-500 uppercase mb-1.5 ml-1">{t('hourly.endTime')}</label>
               <input 
                 type="time" 
                 className="w-full p-3 bg-white text-slate-900 border border-slate-300 rounded-lg focus:ring-2 focus:ring-red-500 focus:outline-none shadow-sm min-h-[48px]"
@@ -131,7 +133,7 @@ const InputSection: React.FC<Props> = ({ inputs, setInputs }) => {
             </div>
           </div>
           <div>
-            <label className="block text-xs font-bold text-slate-500 uppercase mb-1.5 ml-1">Unpaid Break (mins)</label>
+            <label className="block text-xs font-bold text-slate-500 uppercase mb-1.5 ml-1">{t('hourly.unpaidBreak')}</label>
             <div className="relative">
               <input 
                 type="number" 
@@ -153,7 +155,7 @@ const InputSection: React.FC<Props> = ({ inputs, setInputs }) => {
         <div className="flex items-center justify-between mb-4">
           <h3 className="text-lg font-bold text-slate-800 flex items-center">
             <svg className="w-5 h-5 mr-2 text-red-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>
-            Shift Premium
+            {t('hourly.shiftPremium')}
           </h3>
           <label className="relative inline-flex items-center cursor-pointer">
             <input 
@@ -169,7 +171,7 @@ const InputSection: React.FC<Props> = ({ inputs, setInputs }) => {
         {inputs.premium.enabled && (
           <div className="bg-red-50 p-4 rounded-xl border border-red-100 space-y-4 animate-fadeIn">
              <div>
-                <label className="block text-xs font-bold text-red-800 mb-1.5 ml-1">Premium Rate ($/hr)</label>
+                <label className="block text-xs font-bold text-red-800 mb-1.5 ml-1">{t('hourly.premiumRate')}</label>
                 <div className="relative">
                   <span className="absolute left-3 top-2 text-red-400">$</span>
                   <input 
@@ -183,7 +185,7 @@ const InputSection: React.FC<Props> = ({ inputs, setInputs }) => {
              </div>
              <div className="grid grid-cols-2 gap-3">
                <div>
-                  <label className="block text-xs font-bold text-red-800 mb-1.5 ml-1">From</label>
+                  <label className="block text-xs font-bold text-red-800 mb-1.5 ml-1">{t('hourly.from')}</label>
                   <input 
                     type="time" 
                     className="w-full p-2.5 bg-white text-slate-900 border border-red-200 rounded-lg focus:ring-2 focus:ring-red-500 focus:outline-none"
@@ -192,7 +194,7 @@ const InputSection: React.FC<Props> = ({ inputs, setInputs }) => {
                   />
                </div>
                <div>
-                  <label className="block text-xs font-bold text-red-800 mb-1.5 ml-1">To</label>
+                  <label className="block text-xs font-bold text-red-800 mb-1.5 ml-1">{t('hourly.to')}</label>
                   <input 
                     type="time" 
                     className="w-full p-2.5 bg-white text-slate-900 border border-red-200 rounded-lg focus:ring-2 focus:ring-red-500 focus:outline-none"
@@ -216,25 +218,25 @@ const InputSection: React.FC<Props> = ({ inputs, setInputs }) => {
         >
           <h3 className="text-lg font-bold text-slate-800 flex items-center">
             <svg className="w-5 h-5 mr-2 text-red-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 4v16m8-8H4" /></svg>
-            Additional Income
+            {t('annual.addIncome')}
           </h3>
           <div className="flex items-center gap-2">
             {(inputs.additionalIncome && Object.values(inputs.additionalIncome).some(v => v > 0)) && (
-              <span className="text-xs bg-red-100 text-red-700 font-semibold px-2 py-0.5 rounded-full">Active</span>
+              <span className="text-xs bg-red-100 text-red-700 font-semibold px-2 py-0.5 rounded-full">{t('common.active')}</span>
             )}
             <svg className={`w-5 h-5 text-slate-400 transition-transform ${showAdditional ? 'rotate-180' : ''}`} fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" /></svg>
           </div>
         </button>
-        <p className="text-xs text-slate-500 mt-1 mb-3">Stat holiday pay, sick pay, bonus, etc. — added to gross this period</p>
+        <p className="text-xs text-slate-500 mt-1 mb-3">{t('hourly.addIncomeHint')}</p>
 
         {showAdditional && (
           <div className="bg-red-50 p-4 rounded-xl border border-red-100 space-y-3 animate-fadeIn">
             {([
-              { key: 'statHolidayPay', label: 'Statutory Holiday Pay', hint: 'Paid for public holidays worked or not worked' },
-              { key: 'sickPay',        label: 'Sick Pay / Paid Leave',  hint: 'Employer-paid sick or personal days this period' },
-              { key: 'bonus',          label: 'Bonus / Retroactive Pay', hint: 'One-time or recurring bonus, gain-share, retro' },
-              { key: 'otherIncome',   label: 'Other Income',            hint: 'Tips, commissions, allowances, etc.' },
-              { key: 'taxableBenefits', label: 'Taxable Benefits (Non-cash)', hint: 'Group life insurance, AD&D, company-paid taxable benefits' },
+              { key: 'statHolidayPay', label: t('annual.statHoliday'), hint: t('hourly.statHolidayHint') },
+              { key: 'sickPay',        label: t('annual.sickPay'),  hint: t('hourly.sickPayHint') },
+              { key: 'bonus',          label: t('annual.bonus'), hint: t('hourly.bonusHint') },
+              { key: 'otherIncome',   label: t('annual.otherIncome'),            hint: t('hourly.otherIncomeHint') },
+              { key: 'taxableBenefits', label: t('annual.taxBenefits'), hint: t('hourly.taxBenefitsHint') },
             ] as { key: keyof AdditionalIncome; label: string; hint: string }[]).map(({ key, label, hint }) => (
               <div key={key}>
                 <label className="block text-xs font-bold text-red-800 mb-1">{label}</label>
@@ -269,23 +271,23 @@ const InputSection: React.FC<Props> = ({ inputs, setInputs }) => {
         >
           <h3 className="text-lg font-bold text-slate-800 flex items-center">
             <svg className="w-5 h-5 mr-2 text-red-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M20 12H4" /></svg>
-            Other Deductions
+            {t('annual.otherDed')}
           </h3>
           <div className="flex items-center gap-2">
             {(inputs.deductions && Object.values(inputs.deductions).some(v => v > 0)) && (
-              <span className="text-xs bg-red-100 text-red-700 font-semibold px-2 py-0.5 rounded-full">Active</span>
+              <span className="text-xs bg-red-100 text-red-700 font-semibold px-2 py-0.5 rounded-full">{t('common.active')}</span>
             )}
             <svg className={`w-5 h-5 text-slate-400 transition-transform ${showDeductions ? 'rotate-180' : ''}`} fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" /></svg>
           </div>
         </button>
-        <p className="text-xs text-slate-500 mt-1 mb-3">LTD, union dues, and other after-tax deductions from your cheque</p>
+        <p className="text-xs text-slate-500 mt-1 mb-3">{t('hourly.dedHint')}</p>
 
         {showDeductions && (
           <div className="bg-slate-100 p-4 rounded-xl border border-slate-200 space-y-3 animate-fadeIn">
             {([
-              { key: 'ltdPremium',       label: 'LTD / Disability Insurance', hint: 'Long-term disability premium per period' },
-              { key: 'unionDues',        label: 'Union Dues',                  hint: 'Monthly dues deducted from your cheque' },
-              { key: 'otherDeductions',  label: 'Other Deductions',            hint: 'Parking, tool rental, garnishment, etc.' },
+              { key: 'ltdPremium',       label: t('annual.ltd'), hint: t('hourly.ltdHint') },
+              { key: 'unionDues',        label: t('annual.unionDues'),                  hint: t('hourly.unionDuesHint') },
+              { key: 'otherDeductions',  label: t('annual.otherDed'),            hint: t('hourly.otherDedHint') },
             ] as { key: keyof Deductions; label: string; hint: string }[]).map(({ key, label, hint }) => (
               <div key={key}>
                 <label className="block text-xs font-bold text-slate-700 mb-1">{label}</label>
@@ -306,7 +308,7 @@ const InputSection: React.FC<Props> = ({ inputs, setInputs }) => {
               </div>
             ))}
             <p className="text-xs text-slate-500 bg-white border border-slate-200 rounded-md px-3 py-2">
-              These are deducted after tax — they reduce your net pay but not your taxable income.
+              {t('hourly.dedNote')}
             </p>
           </div>
         )}
@@ -319,7 +321,7 @@ const InputSection: React.FC<Props> = ({ inputs, setInputs }) => {
         <div className="flex items-center justify-between mb-4">
           <h3 className="text-lg font-bold text-slate-800 flex items-center">
             <svg className="w-5 h-5 mr-2 text-red-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"></path></svg>
-            RRSP Contribution
+            {t('annual.rrsp')}
           </h3>
           <label className="relative inline-flex items-center cursor-pointer">
             <input
@@ -352,7 +354,7 @@ const InputSection: React.FC<Props> = ({ inputs, setInputs }) => {
                 }`}
                 onClick={() => setInputs({ ...inputs, rrspType: 'amount' })}
               >
-                Fixed Amount ($)
+                {t('annual.fixedAmount')}
               </button>
               <button
                 type="button"
@@ -363,14 +365,14 @@ const InputSection: React.FC<Props> = ({ inputs, setInputs }) => {
                 }`}
                 onClick={() => setInputs({ ...inputs, rrspType: 'percent' })}
               >
-                Percentage (%)
+                {t('annual.percentage')}
               </button>
             </div>
 
             {/* Conditionally Render Inputs */}
             {(inputs.rrspType || 'amount') === 'amount' ? (
               <div>
-                <label className="block text-xs font-bold text-red-800 mb-1.5 ml-1">Per-Paycheque Contribution ($)</label>
+                <label className="block text-xs font-bold text-red-800 mb-1.5 ml-1">{t('annual.perPaycheque')}</label>
                 <div className="relative">
                   <span className="absolute left-3 top-1/2 -translate-y-1/2 text-red-400 font-bold">$</span>
                   <input
@@ -388,7 +390,7 @@ const InputSection: React.FC<Props> = ({ inputs, setInputs }) => {
               <div className="space-y-3">
                 <div className="grid grid-cols-2 gap-3">
                   <div>
-                    <label className="block text-xs font-bold text-red-800 mb-1.5 ml-1">My Contribution (%)</label>
+                    <label className="block text-xs font-bold text-red-800 mb-1.5 ml-1">{t('annual.myContribution')}</label>
                     <div className="relative">
                       <input
                         type="number"
@@ -411,7 +413,7 @@ const InputSection: React.FC<Props> = ({ inputs, setInputs }) => {
                     </div>
                   </div>
                   <div>
-                    <label className="block text-xs font-bold text-red-800 mb-1.5 ml-1">Employer Match</label>
+                    <label className="block text-xs font-bold text-red-800 mb-1.5 ml-1">{t('annual.employerMatch')}</label>
                     <select
                       className="w-full py-2 pl-2 pr-7 bg-white text-slate-900 border border-red-200 rounded-lg focus:ring-2 focus:ring-red-500 focus:outline-none text-xs sm:text-sm font-semibold truncate"
                       value={(inputs as any).rrspMatchPolicy || 'equal'}
@@ -434,10 +436,10 @@ const InputSection: React.FC<Props> = ({ inputs, setInputs }) => {
                         } as any);
                       }}
                     >
-                      <option value="equal">100% Match</option>
-                      <option value="half">50% Match</option>
-                      <option value="none">No Match</option>
-                      <option value="custom">Custom %</option>
+                      <option value="equal">{t('annual.match100')}</option>
+                      <option value="half">{t('annual.match50')}</option>
+                      <option value="none">{t('annual.matchNone')}</option>
+                      <option value="custom">{t('annual.matchCustom')}</option>
                     </select>
                   </div>
                 </div>
@@ -445,7 +447,7 @@ const InputSection: React.FC<Props> = ({ inputs, setInputs }) => {
                 {/* Show Custom Match Input only if 'custom' is selected */}
                 {((inputs as any).rrspMatchPolicy === 'custom') && (
                   <div className="animate-fadeIn">
-                    <label className="block text-xs font-bold text-red-800 mb-1.5 ml-1">Custom Employer Match (%)</label>
+                    <label className="block text-xs font-bold text-red-800 mb-1.5 ml-1">{t('annual.customMatch')}</label>
                     <div className="relative">
                       <input
                         type="number"
@@ -464,9 +466,9 @@ const InputSection: React.FC<Props> = ({ inputs, setInputs }) => {
               </div>
             )}
             <p className="text-[10px] text-red-700 leading-tight">
-              {(inputs.rrspType === 'percent') 
-                ? `You contribute ${inputs.rrspPercentage || 0}% of your gross pay. Employer contributes ${inputs.rrspEmployerMatch || 0}% matching funds directly to Canada Life.`
-                : 'Reduces taxable income — lowers your federal & provincial tax'
+              {(inputs.rrspType === 'percent')
+                ? t('annual.rrspNotePercent')
+                : t('annual.rrspNoteAmount')
               }
             </p>
           </div>
