@@ -1,6 +1,7 @@
 'use client';
 import React from 'react';
 import { CalculationResult, Province } from '../types';
+import { useT } from '../lib/i18n';
 
 interface Props {
   results: CalculationResult;
@@ -21,10 +22,12 @@ const PaycheckDonutChart = ({
   data,
   formatCurrency,
   netPayPercent,
+  netPayLabel,
 }: {
   data: ChartDatum[];
   formatCurrency: (value: number) => string;
   netPayPercent: number;
+  netPayLabel: string;
 }) => {
   const [activeIndex, setActiveIndex] = React.useState<number | null>(null);
   const size = 220;
@@ -117,7 +120,7 @@ const PaycheckDonutChart = ({
           ))}
         </svg>
         <div className="pointer-events-none absolute inset-0 flex flex-col items-center justify-center text-center">
-          <span className="text-xs font-bold uppercase text-slate-400">Net Pay</span>
+          <span className="text-xs font-bold uppercase text-slate-400">{netPayLabel}</span>
           <p className="text-2xl font-bold text-slate-800">{netPayPercent}%</p>
         </div>
       </div>
@@ -144,6 +147,7 @@ const PaycheckDonutChart = ({
 };
 
 const ResultsSection: React.FC<Props> = ({ results, provinceName }) => {
+  const { t } = useT();
   const currencyFormatter = React.useMemo(
     () => new Intl.NumberFormat('en-CA', { style: 'currency', currency: 'CAD' }),
     [],
@@ -157,26 +161,27 @@ const ResultsSection: React.FC<Props> = ({ results, provinceName }) => {
   // Get pay frequency display label
   const getPayFrequencyLabel = (frequency?: string) => {
     switch (frequency) {
-      case 'daily': return 'Daily';
-      case 'weekly': return 'Weekly';
-      case 'bi-weekly': return 'Bi-Weekly';
-      case 'semi-monthly': return 'Semi-Monthly';
-      case 'monthly': return 'Monthly';
-      case 'quarterly': return 'Quarterly';
-      default: return 'Bi-Weekly';
+      case 'daily': return t('ts.daily');
+      case 'weekly': return t('ts.weekly');
+      case 'bi-weekly': return t('res.biweekly');
+      case 'semi-monthly': return t('res.semiMonthly');
+      case 'monthly': return t('ts.monthly');
+      case 'quarterly': return t('ts.quarterly');
+      default: return t('res.biweekly');
     }
   };
-  
+
+  const netPayLabel = t('res.netPay');
   // 是否是年薪或打卡模式（有 payFrequency 字段）
   const hasCustomFrequency = !!results.payFrequency;
-  const payPeriodLabel = hasCustomFrequency ? getPayFrequencyLabel(results.payFrequency) : 'Bi-Weekly';
+  const payPeriodLabel = hasCustomFrequency ? getPayFrequencyLabel(results.payFrequency) : t('res.biweekly');
 
   const chartData = React.useMemo(() => [
-    { name: 'Net Pay', value: results.netPayBiWeekly, color: '#dc2626' }, // Red-600
-    { name: 'Fed Tax', value: results.federalTax, color: '#334155' }, // Slate-700
-    { name: 'Prov Tax', value: results.provincialTax, color: '#64748b' }, // Slate-500
-    { name: 'CPP/EI', value: results.cppDeduction + results.eiDeduction, color: '#94a3b8' }, // Slate-400
-  ], [results.cppDeduction, results.eiDeduction, results.federalTax, results.netPayBiWeekly, results.provincialTax]);
+    { name: t('res.netPay'), value: results.netPayBiWeekly, color: '#dc2626' }, // Red-600
+    { name: t('res.fedTax'), value: results.federalTax, color: '#334155' }, // Slate-700
+    { name: t('res.provTax'), value: results.provincialTax, color: '#64748b' }, // Slate-500
+    { name: t('res.cppEi'), value: results.cppDeduction + results.eiDeduction, color: '#94a3b8' }, // Slate-400
+  ], [t, results.cppDeduction, results.eiDeduction, results.federalTax, results.netPayBiWeekly, results.provincialTax]);
 
   const totalHours = results.regularHours + results.overtimeHours15 + results.overtimeHours20;
   const netPayPercent = results.grossPayBiWeekly > 0
@@ -194,20 +199,20 @@ const ResultsSection: React.FC<Props> = ({ results, provinceName }) => {
             <div className="flex justify-between items-start">
                <div>
                   <h3 className="text-red-100 text-xs font-bold uppercase tracking-widest mb-1">
-                    {payPeriodLabel} Net Pay
+                    {payPeriodLabel} · {t('res.netPay')}
                   </h3>
                   <p className="text-4xl font-extrabold tracking-tight">
                     {formatCurrency(hasCustomFrequency ? (results.netPayPerPeriod || results.netPayBiWeekly) : results.netPayBiWeekly)}
                   </p>
                </div>
                <div className="bg-white/20 px-3 py-1 rounded text-xs font-semibold backdrop-blur-sm">
-                 {totalHours > 0 ? `${totalHours.toFixed(1)} Hours` : payPeriodLabel}
+                 {totalHours > 0 ? `${totalHours.toFixed(1)} ${t('res.hoursCap')}` : payPeriodLabel}
                </div>
             </div>
             
             <div className="mt-6 pt-4 border-t border-red-400/30 space-y-1">
               <div className="flex justify-between items-center text-sm text-red-50 font-medium">
-                <span>Gross Pay (Pre-tax)</span>
+                <span>{t('res.grossPrePeriod')}</span>
                 <span>{formatCurrency(hasCustomFrequency ? (results.grossPayPerPeriod || results.grossPayBiWeekly) : results.grossPayBiWeekly)}</span>
               </div>
             </div>
@@ -221,20 +226,20 @@ const ResultsSection: React.FC<Props> = ({ results, provinceName }) => {
             <div className="flex items-center gap-2 mb-4">
                <span className="w-1.5 h-1.5 bg-red-600 rounded-full flex-shrink-0" />
                <img src="/logo.png" alt="" aria-hidden="true" className="w-5 h-5 rounded-sm" />
-               <h3 className="text-lg font-bold text-slate-800">Annual Projection</h3>
+               <h3 className="text-lg font-bold text-slate-800">{t('res.annualProjection')}</h3>
            </div>
            
            <div className="space-y-4">
               <div className="flex justify-between items-baseline border-b border-slate-100 pb-2">
-                 <span className="text-slate-500 text-sm">Gross Income (Pre-tax)</span>
+                 <span className="text-slate-500 text-sm">{t('res.grossIncomePre')}</span>
                  <span className="text-xl font-bold text-slate-900">{formatCurrency(results.grossPayAnnual)}</span>
               </div>
               <div className="flex justify-between items-center text-sm text-red-500">
-                 <span>Total Tax & Deductions</span>
+                 <span>{t('res.totalTaxDed')}</span>
                  <span>- {formatCurrency(results.totalDeductionsAnnual)}</span>
               </div>
               <div className="flex justify-between items-baseline pt-2 bg-slate-50 p-3 rounded-lg border border-slate-200">
-                 <span className="text-slate-700 font-bold text-sm">Net Income (Post-tax)</span>
+                 <span className="text-slate-700 font-bold text-sm">{t('res.netIncomePost')}</span>
                  <span className="text-2xl font-extrabold text-red-600">{formatCurrency(results.netPayAnnual)}</span>
               </div>
            </div>
@@ -250,11 +255,9 @@ const ResultsSection: React.FC<Props> = ({ results, provinceName }) => {
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
             </svg>
             <div>
-              <p className="text-sm font-semibold text-blue-800">Québec Special Tax Rules Applied</p>
+              <p className="text-sm font-semibold text-blue-800">{t('res.qcTitle')}</p>
               <p className="text-xs text-blue-700 mt-1">
-                This calculation includes Québec's unique system: QPP (6.4% + 7.15% for high earners), 
-                QPIP (0.494%), lower EI rate (1.27%), and 16.5% federal tax abatement. 
-                Results are estimates based on 2025 rates.
+                {t('res.qcDesc')}
               </p>
             </div>
           </div>
@@ -263,7 +266,7 @@ const ResultsSection: React.FC<Props> = ({ results, provinceName }) => {
 
       {/* Detail Breakdown */}
       <div className="bg-white rounded-xl shadow-sm border border-slate-200 p-6">
-        <h3 className="text-lg font-bold text-slate-800 mb-6">{payPeriodLabel} Paycheck Breakdown</h3>
+        <h3 className="text-lg font-bold text-slate-800 mb-6">{payPeriodLabel} · {t('res.breakdown')}</h3>
         
         <div className="flex flex-col md:flex-row gap-8 items-center">
           {/* Chart */}
@@ -272,6 +275,7 @@ const ResultsSection: React.FC<Props> = ({ results, provinceName }) => {
               data={chartData}
               formatCurrency={formatCurrency}
               netPayPercent={netPayPercent}
+              netPayLabel={netPayLabel}
             />
           </div>
 
@@ -279,10 +283,10 @@ const ResultsSection: React.FC<Props> = ({ results, provinceName }) => {
           <div className="w-full md:w-1/2 text-sm space-y-4">
              {/* Earnings */}
              <div>
-               <h4 className="text-xs font-bold text-slate-400 uppercase mb-2">Earnings</h4>
+               <h4 className="text-xs font-bold text-slate-400 uppercase mb-2">{t('res.earnings')}</h4>
                <div className="space-y-2">
                  <div className="flex justify-between text-slate-700">
-                   <span>Regular Pay ({results.regularHours.toFixed(1)}h)</span>
+                   <span>{t('res.regularPay')} ({results.regularHours.toFixed(1)}h)</span>
                    <span className="font-medium">
                      {formatCurrency(totalHours > 0 
                        ? (results.regularHours * (results.grossPayBiWeekly / totalHours)) 
@@ -291,24 +295,24 @@ const ResultsSection: React.FC<Props> = ({ results, provinceName }) => {
                  </div>
                  {results.overtimeHours15 > 0 && (
                    <div className="flex justify-between text-amber-600">
-                     <span>Overtime 1.5x ({results.overtimeHours15.toFixed(1)}h)</span>
-                     <span className="font-medium">Included</span>
+                     <span>{t('res.ot15')} ({results.overtimeHours15.toFixed(1)}h)</span>
+                     <span className="font-medium">{t('res.included')}</span>
                    </div>
                  )}
                  {results.overtimeHours20 > 0 && (
                    <div className="flex justify-between text-amber-700 font-bold">
-                     <span>Overtime 2.0x ({results.overtimeHours20.toFixed(1)}h)</span>
-                     <span className="font-medium">Included</span>
+                     <span>{t('res.ot20')} ({results.overtimeHours20.toFixed(1)}h)</span>
+                     <span className="font-medium">{t('res.included')}</span>
                    </div>
                  )}
                  {results.shiftPremiumHours > 0 && (
                    <div className="flex justify-between text-red-600">
-                     <span>Shift Premium ({results.shiftPremiumHours.toFixed(1)}h)</span>
-                     <span className="font-medium">+ Premium</span>
+                     <span>{t('hourly.shiftPremium')} ({results.shiftPremiumHours.toFixed(1)}h)</span>
+                     <span className="font-medium">{t('res.plusPremium')}</span>
                    </div>
                  )}
                  <div className="flex justify-between text-slate-900 font-bold pt-2 border-t border-slate-100">
-                   <span>Gross Pay</span>
+                   <span>{t('res.grossPay')}</span>
                    <span>{formatCurrency(results.grossPayBiWeekly)}</span>
                  </div>
                </div>
@@ -316,28 +320,28 @@ const ResultsSection: React.FC<Props> = ({ results, provinceName }) => {
 
              {/* Deductions */}
              <div>
-               <h4 className="text-xs font-bold text-slate-400 uppercase mb-2">Deductions</h4>
+               <h4 className="text-xs font-bold text-slate-400 uppercase mb-2">{t('res.deductions')}</h4>
                <div className="space-y-2">
                  <div className="flex justify-between text-slate-600">
-                   <span>Federal Tax</span>
+                   <span>{t('res.federalTax')}</span>
                    <span>- {formatCurrency(results.federalTax)}</span>
                  </div>
                  <div className="flex justify-between text-slate-600">
-                   <span>Provincial Tax {provinceName ? `(${provinceName})` : ''}</span>
+                   <span>{t('res.provincialTax')} {provinceName ? `(${provinceName})` : ''}</span>
                    <span>- {formatCurrency(results.provincialTax)}</span>
                  </div>
                  <div className="flex justify-between text-slate-600">
-                   <span>CPP & EI</span>
+                   <span>{t('res.cppEiAmp')}</span>
                    <span>- {formatCurrency(results.cppDeduction + results.eiDeduction)}</span>
                  </div>
                  {(results.rrspDeduction ?? 0) > 0 && (
                    <div className="flex justify-between text-slate-600">
-                     <span>RRSP Contribution</span>
+                     <span>{t('annual.rrsp')}</span>
                      <span>- {formatCurrency(results.rrspDeduction ?? 0)}</span>
                    </div>
                  )}
                  <div className="flex justify-between text-red-600 font-bold pt-2 border-t border-slate-100">
-                   <span>Total Deductions</span>
+                   <span>{t('res.totalDeductions')}</span>
                    <span>- {formatCurrency(results.federalTax + results.provincialTax + results.cppDeduction + results.eiDeduction + (results.rrspDeduction ?? 0))}</span>
                  </div>
                </div>

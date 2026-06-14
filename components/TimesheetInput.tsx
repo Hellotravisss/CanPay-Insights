@@ -87,9 +87,6 @@ const TimesheetInput: React.FC<Props> = ({ inputs, setInputs }) => {
   };
 
   const { year, month, daysInMonth, startDayOfWeek } = getCurrentMonthData();
-  const monthNames = ['January', 'February', 'March', 'April', 'May', 'June', 
-                      'July', 'August', 'September', 'October', 'November', 'December'];
-
   // Get entries for selected date
   const getEntriesForDate = (date: string) => {
     return inputs.entries.filter(e => e.date === date);
