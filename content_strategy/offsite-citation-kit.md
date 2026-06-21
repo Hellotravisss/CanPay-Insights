@@ -204,7 +204,10 @@ reply odds than a blog, but each citation is worth far more (and great for GEO/A
 | 2026-06-21 | Email — Savvy New Canadians (enoch@) | Data-citation pitch sent | $80k by-province + $7,620 min-wage | pending |
 | 2026-06-21 | Reddit — r/PFC "$90k FTE vs $70/hr" (1u8tkd4) | Value-first comment posted | $90k BC net $67,806; FTE vs contractor | pending |
 | 2026-06-21 | Email — MoneySense (contact form, "Content suggestions") | Data-citation pitch sent | $80k by-province + $7,620 min-wage | pending |
-| | Email — CIC News | drafted, not sent | — | — |
+| 2026-06-21 | Email — Hardbacon (info@hardbacon.ca) | Tool/resource + FR-Québec angle sent | $80k by-province; FR calculator | pending |
+| 2026-06-21 | Form — Money We Have (Barry Choi) | Data-citation pitch sent | $80k by-province + $7,620 | pending |
+| 2026-06-21 | Form — canadafinancetools.com | Bug report + tool/links pitch sent | TFSA calc bug; $80k by-province | pending |
+| | Email — CIC News | drafted, not sent (low-odds form) | — | — |
 | | Wikidata item | hold until 1 citation lands | — | — |
 
 ---
