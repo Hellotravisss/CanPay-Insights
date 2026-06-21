@@ -108,7 +108,7 @@ const AboutPage: React.FC = () => {
                   behind the calculator. It is a small, self-funded project — not a bank, payroll company, or
                   financial institution. That independence is the point: the tool exists to give workers a
                   straight answer, with no product to upsell. Connect on{" "}
-                  <a href="https://www.linkedin.com/in/qharbert" target="_blank" rel="noopener noreferrer me" className="text-red-600 hover:text-red-700 font-medium underline underline-offset-2 transition-colors">LinkedIn</a>.
+                  <a href="https://www.linkedin.com/in/travis-z" target="_blank" rel="noopener noreferrer me" className="text-red-600 hover:text-red-700 font-medium underline underline-offset-2 transition-colors">LinkedIn</a>.
                 </p>
               </div>
             </section>

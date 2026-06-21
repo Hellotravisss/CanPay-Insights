@@ -82,7 +82,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
                 '@type': 'Person',
                 name: 'Travis Zhang',
                 alternateName: 'Qi Zhang',
-                sameAs: ['https://www.linkedin.com/in/qharbert'],
+                sameAs: ['https://www.linkedin.com/in/travis-z'],
               },
               areaServed: 'CA',
               knowsAbout: ['Canadian payroll', 'take-home pay', 'income tax', 'CPP', 'CPP2', 'EI', 'RRSP', 'TFSA', 'QPP', 'QPIP'],
