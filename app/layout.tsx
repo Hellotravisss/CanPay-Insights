@@ -70,6 +70,20 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             __html: JSON.stringify([
             {
               '@context': 'https://schema.org',
+              '@type': 'Organization',
+              '@id': 'https://canpayinsights.ca/#org',
+              name: 'CanPay Insights',
+              url: 'https://canpayinsights.ca/',
+              logo: 'https://canpayinsights.ca/apple-touch-icon.png',
+              email: 'info@canpayinsights.ca',
+              description:
+                'Free Canadian payroll and take-home pay calculator covering federal tax, provincial tax, CPP/CPP2, EI, and Quebec QPP/QPIP for 2025–2026.',
+              founder: { '@type': 'Person', name: 'Travis Zhang' },
+              areaServed: 'CA',
+              knowsAbout: ['Canadian payroll', 'take-home pay', 'income tax', 'CPP', 'CPP2', 'EI', 'RRSP', 'TFSA', 'QPP', 'QPIP'],
+            },
+            {
+              '@context': 'https://schema.org',
               '@type': 'WebApplication',
               name: 'CanPay Insights',
               applicationCategory: 'FinanceApplication',
@@ -77,6 +91,22 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
               offers: { '@type': 'Offer', price: '0', priceCurrency: 'CAD' },
               description: 'Free Canadian payroll calculator for 2025/2026. Calculate net pay, taxes, CPP, and EI deductions.',
               url: 'https://canpayinsights.ca/',
+              inLanguage: ['en', 'fr', 'zh'],
+              publisher: { '@id': 'https://canpayinsights.ca/#org' },
+            },
+            {
+              '@context': 'https://schema.org',
+              '@type': 'Dataset',
+              name: 'Canadian Take-Home Pay & Payroll Deductions 2025–2026',
+              description:
+                'Net pay, federal and provincial income tax, CPP/CPP2, EI, and Quebec QPP/QPIP by province/territory and income level for 2025 and 2026.',
+              creator: { '@id': 'https://canpayinsights.ca/#org' },
+              license: 'https://creativecommons.org/licenses/by/4.0/',
+              isAccessibleForFree: true,
+              url: 'https://canpayinsights.ca/',
+              spatialCoverage: 'Canada',
+              temporalCoverage: '2025/2026',
+              keywords: ['Canada payroll', 'take-home pay', 'net pay', 'CPP', 'CPP2', 'EI', 'income tax', 'provincial tax', '2026 tax'],
             },
           ]),
           }}

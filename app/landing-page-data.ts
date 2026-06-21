@@ -631,12 +631,12 @@ const formatFrenchMoney = (amount: number) =>
 const provinceGuideLinks: Record<string, { href: string; label: string }> = {
   ontario: { href: '/blog/ontario-tax-guide-2025', label: 'Ontario tax guide' },
   bc: { href: '/blog/bc-tax-guide-2025', label: 'BC tax guide' },
-  alberta: { href: '/blog/alberta-salary-guide-2025', label: 'Alberta salary guide' },
-  quebec: { href: '/blog/quebec-salary-guide-2025', label: 'Quebec salary guide' },
-  'nova-scotia': { href: '/blog/atlantic-canada-salary-guide-2025', label: 'Atlantic Canada guide' },
-  'new-brunswick': { href: '/blog/atlantic-canada-salary-guide-2025', label: 'Atlantic Canada guide' },
-  newfoundland: { href: '/blog/atlantic-canada-salary-guide-2025', label: 'Atlantic Canada guide' },
-  pei: { href: '/blog/atlantic-canada-salary-guide-2025', label: 'Atlantic Canada guide' },
+  alberta: { href: '/blog/alberta-vs-ontario-taxes-2025', label: 'Alberta vs Ontario taxes' },
+  quebec: { href: '/blog/minimum-wage-take-home-pay-canada-2026', label: 'Take-home pay by province' },
+  'nova-scotia': { href: '/blog/minimum-wage-take-home-pay-canada-2026', label: 'Take-home pay by province' },
+  'new-brunswick': { href: '/blog/minimum-wage-take-home-pay-canada-2026', label: 'Take-home pay by province' },
+  newfoundland: { href: '/blog/minimum-wage-take-home-pay-canada-2026', label: 'Take-home pay by province' },
+  pei: { href: '/blog/minimum-wage-take-home-pay-canada-2026', label: 'Take-home pay by province' },
 };
 
 const getSalaryBand = (amount: number) => {
@@ -927,7 +927,7 @@ const frenchCoreLandingPages: LandingPage[] = [
       {
         title: 'Lire le guide Québec',
         body: 'Ajoutez le contexte sur les salaires, Montréal, la RRQ, le RQAP et le coût de la vie.',
-        href: '/blog/quebec-salary-guide-2025',
+        href: '/blog/guide-paie-quebec-2026',
         label: 'Guide Québec',
       },
     ],
@@ -1045,7 +1045,7 @@ const frenchQuebecSalaryPages: LandingPage[] = frenchQuebecAmounts.map((amount) 
       {
         title: 'Lire le guide salaire Québec',
         body: 'Ajoutez le contexte sur Montréal, Québec, les retenues provinciales et le coût de la vie.',
-        href: '/blog/quebec-salary-guide-2025',
+        href: '/blog/guide-paie-quebec-2026',
         label: 'Guide Québec',
       },
     ],

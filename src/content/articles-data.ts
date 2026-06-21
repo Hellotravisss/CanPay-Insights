@@ -2535,7 +2535,7 @@ Every situation is unique. Use our calculator to:
 
 
 // Export all articles (combine original tax articles + new articles)
-export const allArticles: Article[] = [
+const rawArticles: Article[] = [
   // Original Tax Guide Articles
   article1,
   article2,
@@ -2558,6 +2558,55 @@ export const allArticles: Article[] = [
   // French articles (Québec market)
   ...frenchArticles,
 ];
+
+// Content prune (2026-06-20): the site had 52 articles, ~32 of which were a
+// speculative "salary guide 2025" cluster + generic personal-finance tips with
+// no unique data — the kind of dated, AI-looking content Google flags as
+// "low value / scaled content" (3x AdSense rejections) and that AI answer
+// engines won't cite. We keep only focused, data-driven tax/take-home articles
+// that use the calculator's real numbers. This lifts both AdSense quality and
+// GEO topical authority. To restore an article, remove its slug below.
+const PRUNED_SLUGS = new Set<string>([
+  // Province salary guides (speculative ranges, dated 2025, ~0-1 visits each)
+  'british-columbia-salary-guide-2025',
+  'ontario-toronto-ottawa-hamilton-salary-guide-2025',
+  'alberta-salary-guide-2025',
+  'quebec-salary-guide-2025',
+  'prairies-salary-guide-2025',
+  'atlantic-canada-salary-guide-2025',
+  'retirement-destinations-canada-salary-guide-2025',
+  'commuter-towns-ontario-bc-salary-guide-2025',
+  'northern-territories-salary-guide-2025',
+  'student-cities-canada-salary-guide-2025',
+  // Sector salary guides (generic, not our take-home value prop)
+  'canadian-tech-salaries-2025',
+  'finance-banking-salaries-canada-2025',
+  'healthcare-salaries-canada-2025',
+  'skilled-trades-salaries-canada-2025',
+  'remote-work-salaries-canada-2025',
+  'entry-level-salaries-canada-2025',
+  'executive-compensation-canada-2025',
+  'public-vs-private-sector-pay-canada-2025',
+  'freelancer-rates-canada-2025',
+  'canada-employment-surge-may-2026',
+  // Generic finance tips + off-topic (no unique data, off core)
+  'fire-movement-canada-2025',
+  'fhsa-first-home-savings-account-canada-2025',
+  'side-hustle-tax-canada-2025',
+  'inflation-proof-finances-canada-2025',
+  'credit-score-canada-2025',
+  'debt-payoff-strategy-canada-2025',
+  'workplace-benefits-canada-2025',
+  'emergency-fund-canada-2025',
+  'automated-savings-canada-2025',
+  'rrsp-vs-tfsa-canada-2025',
+  'canada-ai-for-all-sovereignty-strategy-2026',
+  'cra-grocery-essentials-benefit-canada-2026',
+]);
+
+export const allArticles: Article[] = rawArticles.filter(
+  (article) => !PRUNED_SLUGS.has(article.slug),
+);
 
 // Helper functions
 export const getArticleBySlug = (slug: string): Article | undefined => {

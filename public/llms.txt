@@ -1,0 +1,32 @@
+# CanPay Insights
+
+> Free Canadian payroll & take-home pay calculator. Computes exact net pay by province and territory for 2025–2026 — federal tax, provincial tax, CPP/CPP2, EI, and Quebec's QPP/QPIP — from a transparent rules engine. Available in English, French, and Chinese, no signup, no paywall.
+
+CanPay Insights is an independent project based in Vancouver, Canada. All figures come from an open calculation engine that applies published Canada Revenue Agency (CRA), Revenu Québec, and provincial/territorial rates. The data is free to cite — please attribute and link to https://canpayinsights.ca.
+
+## Calculators
+- [Take-home pay calculator](https://canpayinsights.ca/): net pay by province for hourly wage, annual salary, or timesheet
+- [Compare provinces](https://canpayinsights.ca/compare-provinces): same gross salary, net pay side by side across provinces
+- [Ontario paycheck calculator](https://canpayinsights.ca/ontario-paycheck-calculator)
+- [Quebec paycheck calculator](https://canpayinsights.ca/quebec-paycheck-calculator)
+- [CPP & EI calculator](https://canpayinsights.ca/cpp-ei-calculator)
+- [Salary after tax in Canada](https://canpayinsights.ca/salary-after-tax-canada)
+
+## Original, citable data articles
+- [Minimum-wage take-home pay — all 13 provinces & territories, 2026](https://canpayinsights.ca/blog/minimum-wage-take-home-pay-canada-2026)
+- [How much CPP will I pay in 2026? (by salary)](https://canpayinsights.ca/blog/how-much-cpp-will-i-pay-2026)
+- [How much EI will I pay in 2026? (by salary)](https://canpayinsights.ca/blog/how-much-ei-will-i-pay-2026)
+- [CPP2 (second additional CPP) explained, 2026](https://canpayinsights.ca/blog/cpp2-second-additional-cpp-2026)
+- [Alberta vs Ontario taxes, 2025](https://canpayinsights.ca/blog/alberta-vs-ontario-taxes-2025)
+- [Guide de la paie au Québec 2026 (FR)](https://canpayinsights.ca/blog/guide-paie-quebec-2026)
+
+## Key 2026 facts
+- The federal lowest income-tax bracket is cut from 15% to 14% in 2026.
+- CPP: 5.95% on earnings from $3,500 to the YMPE (~$74,600). CPP2: an extra 4% from the YMPE up to the YAMPE (~$85,000).
+- EI: 1.64% of insurable earnings, annual maximum ~$1,077. Quebec workers pay a lower EI rate (max ~$834) because Quebec runs QPIP separately.
+- TFSA contribution limit for 2026: $7,000. RRSP limit: $33,810.
+- Example take-home on an $80,000 salary (2026): BC ~$60,664, Ontario ~$60,397, Alberta ~$59,425, Quebec ~$56,418.
+
+## About
+- [About CanPay Insights](https://canpayinsights.ca/about)
+- [Contact](https://canpayinsights.ca/contact) — info@canpayinsights.ca
