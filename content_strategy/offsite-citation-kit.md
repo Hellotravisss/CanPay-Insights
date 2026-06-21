@@ -160,6 +160,43 @@ Personalize the **[their article]** line per recipient (proves you read them).
 
 ---
 
+## Part 2b — Batch 2 (verified live & on-topic 2026-06-21)
+
+**Honest finding:** the Canadian PF-blog vein is low-yield — most top blogs (Money We Have,
+MapleMoney, Million Dollar Journey, Boomer & Echo) have pivoted to investing/credit-cards, Wealth
+Awesome runs its own CPP/payroll calculators (competitor), and Arrive/Prepare-for-Canada wouldn't
+load/verify. Don't keep mining blogs. The two that pass are **higher-authority outlets** — lower
+reply odds than a blog, but each citation is worth far more (and great for GEO/AI visibility).
+
+**→ MoneySense** (moneysense.ca, the Canadian PF magazine) — find editorial contact on their Contact Us page
+> **Subject:** Take-home pay by province — 2026 data, free to cite
+>
+> Hi [editor],
+>
+> Your recent "Tax refunds 2026: How to make every dollar count" got me thinking your readers might
+> like the year-round flip side: what they actually *keep*, by province. I run CanPay Insights, a free
+> Canadian take-home-pay calculator, and just published 2026 data — the same **$80,000 salary nets
+> $60,664 in BC vs $56,418 in Quebec, a $4,246 gap** on identical gross; minimum-wage take-home varies
+> **$7,620** across the country (Nunavut vs Alberta).
+>
+> Free to cite or republish with a link: canpayinsights.ca/blog/minimum-wage-take-home-pay-canada-2026
+> Happy to pull custom province/income figures for a piece. — Travis · info@canpayinsights.ca
+
+**→ CIC News** (cicnews.com, newcomer outlet) — contact via canadavisa.com/contact-us.html
+> **Subject:** What newcomers actually take home by province — 2026 data
+>
+> Hi [editor],
+>
+> Loved your "FHSA for newcomers" piece. A question newcomers ask even earlier: how much of a Canadian
+> salary do you actually keep? I run CanPay Insights (a free take-home-pay calculator) and published
+> 2026 data by province — e.g. **$80,000 nets $60,664 in BC vs $56,418 in Quebec**, and minimum-wage
+> take-home varies **$7,620** nationwide. Useful context for newcomers comparing offers and cities —
+> free to cite with a link: canpayinsights.ca/blog/minimum-wage-take-home-pay-canada-2026
+> Happy to pull figures for any province. — Travis · info@canpayinsights.ca
+
+> **Next lever (higher ROI than more blogs):** Reddit (r/PersonalFinanceCanada) answers + Featured.com
+> journalist queries. See offsite-sop rules; scout live threads rather than cold-pitching dead blogs.
+
 ## Part 3 — Tracker (fill as you send)
 
 | Date | Target | Email (A/B) | Data used | Reply? | Live link? |
