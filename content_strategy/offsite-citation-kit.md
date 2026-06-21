@@ -104,6 +104,48 @@ Personalize the **[their article]** line per recipient (proves you read them).
 >
 > Either way, thanks for the great work. — Travis · info@canpayinsights.ca
 
+### ✅ Ready-to-send (personalized — article references verified real)
+
+**→ Money After Graduation** (Bridget Casey) — get email at moneyaftergraduation.com/contact
+> **Subject:** Canadian take-home-pay data, free to cite
+>
+> Hi Bridget,
+>
+> Your "34 Pieces of Personal Finance Advice I'd Give Absolutely Everyone" makes the case that income
+> is your single biggest lever — I think your readers would like seeing what that income actually *keeps*.
+>
+> I run CanPay Insights, a free Canadian take-home-pay calculator, and just published original 2026
+> data: on the same **$80,000 salary**, take-home ranges from **$60,664 in BC to $56,418 in Quebec —
+> a $4,246 gap** on identical gross. (Minimum-wage version: a full-time worker keeps **$7,620 more in
+> Nunavut than Alberta**.)
+>
+> Free to cite or republish with a link:
+> canpayinsights.ca/blog/minimum-wage-take-home-pay-canada-2026
+>
+> Happy to pull a custom figure for any province or salary if it helps a post.
+>
+> — Travis, CanPay Insights · info@canpayinsights.ca
+
+**→ Savvy New Canadians** (Enoch Omololu) — get email at savvynewcanadians.com/contact
+> **Subject:** Take-home pay by province — data for your salary posts
+>
+> Hi Enoch,
+>
+> I read "$50,000 a Year is How Much an Hour?" — love that you break it down all the way to net pay.
+> Readers asking that often ask the next question too: how much does the same salary keep in a
+> *different* province?
+>
+> I run CanPay Insights (a free Canadian take-home-pay calculator) and just published 2026 data on
+> exactly that: on **$80,000**, take-home runs **$60,664 in BC vs $56,418 in Quebec — a $4,246 gap**
+> on identical gross. For minimum wage, the spread is **$7,620** (Nunavut vs Alberta).
+>
+> Free to cite or republish with a link:
+> canpayinsights.ca/blog/minimum-wage-take-home-pay-canada-2026
+>
+> Happy to pull a custom province/salary figure if it's useful for a post.
+>
+> — Travis, CanPay Insights · info@canpayinsights.ca
+
 ### Rules (from the GEO SOP — don't skip)
 - **Personalize every email** (the [their article] line). Mass-merge = deleted.
 - **One at a time**, from info@canpayinsights.ca. **Follow up once** at day 7, polite close at day 21. Max two touches.
