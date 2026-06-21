@@ -197,11 +197,15 @@ reply odds than a blog, but each citation is worth far more (and great for GEO/A
 > **Next lever (higher ROI than more blogs):** Reddit (r/PersonalFinanceCanada) answers + Featured.com
 > journalist queries. See offsite-sop rules; scout live threads rather than cold-pitching dead blogs.
 
-## Part 3 — Tracker (fill as you send)
+## Part 3 — Tracker
 
-| Date | Target | Email (A/B) | Data used | Reply? | Live link? |
-|---|---|---|---|---|---|
-| | | | | | |
+| Date | Channel / Target | Action | Data used | Reply / result? |
+|---|---|---|---|---|
+| 2026-06-21 | Email — Savvy New Canadians (enoch@) | Data-citation pitch sent | $80k by-province + $7,620 min-wage | pending |
+| 2026-06-21 | Reddit — r/PFC "$90k FTE vs $70/hr" (1u8tkd4) | Value-first comment posted | $90k BC net $67,806; FTE vs contractor | pending |
+| | Email — MoneySense | drafted, not sent | — | — |
+| | Email — CIC News | drafted, not sent | — | — |
+| | Wikidata item | hold until 1 citation lands | — | — |
 
 ---
 
