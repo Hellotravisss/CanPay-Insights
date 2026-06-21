@@ -21,11 +21,11 @@ const article1: Article = {
   publishedAt: "2025-01-15",
   readTime: 12,
   imageUrl: "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=800&q=80",
-  directAnswer: "In Ontario for 2025, an average earner (e.g., $65,000) can expect an effective tax rate of about 24.3%, resulting in a take-home pay of approximately $49,221 after federal and provincial taxes, CPP, and EI.",
+  directAnswer: "In Ontario for 2026, an average earner (e.g., $65,000) can expect an effective deduction rate of about 21.7%, resulting in a take-home pay of approximately $50,880 after federal and provincial taxes, CPP, and EI.",
   faq: [
-    { question: "What are the Ontario provincial tax brackets for 2025?", answer: "Ontario has five provincial tax brackets in 2025, ranging from 5.05% on the first $51,446 to 13.16% on income over $220,000." },
+    { question: "What are the Ontario provincial tax brackets for 2026?", answer: "Ontario has five provincial tax brackets in 2026, ranging from 5.05% on the first $53,891 to 13.16% on income over $220,000." },
     { question: "How much is the maximum CPP contribution in 2026?", answer: "The maximum CPP contribution for employees in 2026 is $4,230.45 for the first tier, plus an additional amount up to $416 for the CPP2 tier." },
-    { question: "What is the federal basic personal amount for 2025?", answer: "The federal basic personal amount for 2025 is $16,129, which provides a non-refundable tax credit that reduces your federal tax bill." },
+    { question: "What is the federal basic personal amount for 2026?", answer: "The federal basic personal amount for 2026 is $16,452, which provides a non-refundable tax credit that reduces your federal tax bill." },
     { question: "How is EI calculated in Ontario for 2026?", answer: "Employment Insurance is calculated as 1.63% of insurable earnings, up to a maximum annual employee contribution of $1,123.07." },
     { question: "What is a marginal tax rate?", answer: "A marginal tax rate is the tax applied to your next dollar of income; for someone earning $65,000 in Ontario, the combined marginal rate is 29.65%." }
   ],
@@ -40,21 +40,21 @@ Canada's tax system is progressive, which means the more you earn, the higher pe
 
 Think of Canada's tax system like climbing a ladder. Each rung represents a different income bracket, and each bracket has its own tax rate. You don't pay the higher rate on your entire income—only on the portion that falls into that bracket.
 
-**2025 Federal Tax Rates (Applied Nationwide):**
+**2026 Federal Tax Rates (Applied Nationwide):**
 
-The federal government takes the first slice of your income pie. For 2025, the rates work like this:
-- On your first $55,375: You pay 15%
-- On the next $55,364 (from $55,375 to $110,739): You pay 20.5%
-- On the next $67,143 (from $110,739 to $177,882): You pay 26%
-- On the next $75,532 (from $177,882 to $253,414): You pay 29%
-- Anything above $253,414: You pay 33%
+The federal government takes the first slice of your income pie. For 2026, the lowest rate was cut from 15% to 14%, and the rates work like this:
+- On your first $58,523: You pay 14%
+- On the next $58,522 (from $58,523 to $117,045): You pay 20.5%
+- On the next $64,395 (from $117,045 to $181,440): You pay 26%
+- On the next $77,042 (from $181,440 to $258,482): You pay 29%
+- Anything above $258,482: You pay 33%
 
-**2025 Ontario Provincial Tax Rates:**
+**2026 Ontario Provincial Tax Rates:**
 
 Then Ontario takes its share, using a similar but different set of brackets:
-- On your first $51,446: You pay 5.05%
-- On the next $51,448 (from $51,446 to $102,894): You pay 9.15%
-- On the next $47,106 (from $102,894 to $150,000): You pay 11.16%
+- On your first $53,891: You pay 5.05%
+- On the next $53,894 (from $53,891 to $107,785): You pay 9.15%
+- On the next $42,215 (from $107,785 to $150,000): You pay 11.16%
 - On the next $70,000 (from $150,000 to $220,000): You pay 12.16%
 - Anything above $220,000: You pay 13.16%
 
@@ -175,12 +175,12 @@ If you are considering a move, here is how $65,000 looks across Canada:
 
 | Province | Provincial Tax | Take-Home Annual Income | Difference from Ontario |
 |----------|---------------|------------------------|------------------------|
-| **Ontario** | $3,838 | $49,221 | Baseline |
-| **Alberta** | $2,600 | $50,459 | **+$1,238** |
-| **British Columbia** | $3,200 | $49,859 | **+$638** |
-| **Quebec** | $4,800 | $48,259 | **-$962** |
+| **Ontario** | $2,844 | $50,880 | Baseline |
+| **Alberta** | $3,077 | $50,647 | **-$233** |
+| **British Columbia** | $2,768 | $50,956 | **+$76** |
+| **Quebec** | $6,319 | $48,207 | **-$2,673** |
 
-Alberta's flat tax system means lower-income earners pay more proportionally, but at $65,000, you come out ahead. Quebec's higher taxes fund more social services but leave you with less in your pocket.
+At $65,000 the gap between Ontario, Alberta, and BC is small — within about $300. Quebec's higher provincial taxes fund more social services but leave you with roughly $2,700 less in your pocket.
 
 Want to compare provinces with your specific salary? Try our [Province Comparison Tool](/compare-provinces) to see exact take-home pay differences.
 
@@ -188,8 +188,8 @@ Want to compare provinces with your specific salary? Try our [Province Compariso
 
 **1. Maximize Your RRSP Contributions**
 
-RRSPs aren't just for retirement—they're powerful tax-saving tools today. For 2025:
-- Contribution limit: $31,560 or 18% of your 2024 income (whichever is lower)
+RRSPs aren't just for retirement—they're powerful tax-saving tools today. For 2026:
+- Contribution limit: $33,810 or 18% of your 2025 income (whichever is lower)
 - If you earn $65,000 and contribute $10,000, you'll get approximately **$2,965 back on your tax return**
 
 Think of it this way: The government is essentially loaning you money at zero interest until retirement. Plus, if you're in a higher tax bracket now than you expect to be in retirement, you win twice.
@@ -197,7 +197,7 @@ Think of it this way: The government is essentially loaning you money at zero in
 **2. Open a TFSA Account**
 
 While RRSPs give you immediate tax relief, TFSAs (Tax-Free Savings Accounts) provide tax-free growth forever:
-- 2025 contribution room: $7,000
+- 2026 contribution room: $7,000
 - All investment growth is tax-free
 - Withdrawals don't count as income (unlike RRSPs)
 
@@ -218,7 +218,7 @@ Keep every receipt—even small amounts add up over a year.
 The First Home Savings Account combines the best of RRSPs and TFSAs:
 - Contributions are tax-deductible (like RRSP)
 - Withdrawals for home purchase are tax-free (like TFSA)
-- 2025 contribution limit: $8,000
+- 2026 contribution limit: $8,000
 - Lifetime limit: $40,000
 
 **5. Claim Work-From-Home Expenses**
@@ -284,7 +284,7 @@ const article2: Article = {
   publishedAt: "2025-01-16",
   readTime: 11,
   imageUrl: "https://images.unsplash.com/photo-1559511260-66a654ae982a?w=800&q=80",
-  directAnswer: "British Columbia features a 7-tier progressive tax system in 2025; an $80,000 salary in Vancouver nets approximately $57,579 annually after all mandatory deductions, representing a 28% effective tax rate.",
+  directAnswer: "British Columbia features a 7-tier progressive tax system in 2026; an $80,000 salary in Vancouver nets approximately $61,038 annually after all mandatory deductions, representing a 23.7% effective tax rate.",
   faq: [
     { question: "How many tax brackets does BC have in 2025?", answer: "BC uses a unique 7-tier provincial tax system, with rates starting at 5.06% and reaching 20.5% for high earners." },
     { question: "Is BC tax lower than Ontario's?", answer: "For many middle-income earners, BC's provincial tax is slightly lower than Ontario's; at $80,000, you pay about $400 less in provincial tax in BC." },
@@ -548,7 +548,7 @@ You become a Canadian tax resident when you establish significant residential ti
 
 Elena arrived on March 15th, meaning she was a resident for 290 days of the year (March 15 to December 31). Her federal basic personal amount is prorated:
 
-$16,129 × (290 ÷ 365) = $12,816
+$16,452 × (290 ÷ 365) = $13,071
 
 This means she can earn about $12,816 tax-free federally.
 
@@ -941,7 +941,7 @@ const article5: Article = {
   publishedAt: "2025-01-19",
   readTime: 9,
   imageUrl: "https://images.unsplash.com/photo-1554224155-6726b3ff858f?w=800&q=80",
-  directAnswer: "A $50,000 salary in Canada for 2025 yields a take-home pay ranging from roughly $38,500 to $40,500 depending on the province, with Alberta typically offering the highest net pay due to lower provincial rates.",
+  directAnswer: "A $50,000 salary in Canada for 2026 yields a take-home pay ranging from roughly $38,900 to $40,500 depending on the province, with British Columbia and Ontario typically offering the highest net pay.",
   faq: [
     { question: "Which province has the lowest tax on a $50,000 salary?", answer: "Alberta generally offers the highest take-home pay for this bracket due to its higher basic personal amount and favorable provincial tax structure." },
     { question: "How much is the take-home pay for $50k in Ontario?", answer: "In Ontario, a $50,000 salary nets approximately $39,200 after federal tax, provincial tax, CPP, and EI deductions." },
@@ -1420,9 +1420,9 @@ const article7: Article = {
   publishedAt: "2025-01-21",
   readTime: 13,
   imageUrl: "https://images.unsplash.com/photo-1579621970795-87facc2f976d?w=800&q=80",
-  directAnswer: "For 2025, RRSP contributions can reduce your taxable income and trigger significant refunds; for example, a $10,000 contribution at a 30% marginal rate could result in a $3,000 tax saving.",
+  directAnswer: "For 2026, RRSP contributions can reduce your taxable income and trigger significant refunds; for example, a $10,000 contribution at a 30% marginal rate could result in a $3,000 tax saving.",
   faq: [
-    { question: "What is the RRSP contribution limit for 2025?", answer: "The limit is 18% of your previous year's earned income, up to a maximum of $32,490 for the 2025 tax year." },
+    { question: "What is the RRSP contribution limit for 2026?", answer: "The limit is 18% of your previous year's earned income, up to a maximum of $33,810 for the 2026 tax year." },
     { question: "How do RRSP contributions reduce my tax?", answer: "Contributions are deducted from your gross income, lowering your taxable income and potentially moving you into a lower tax bracket." },
     { question: "When is the deadline for 2025 RRSP contributions?", answer: "You have until the first 60 days of 2026 to make contributions that can be claimed on your 2025 tax return." },
     { question: "Can I carry forward unused RRSP room?", answer: "Yes, any unused contribution room from previous years carries forward indefinitely until you use it or reach age 71." },
@@ -2257,7 +2257,7 @@ const article10: Article = {
   publishedAt: "2025-01-24",
   readTime: 12,
   imageUrl: "https://images.unsplash.com/photo-1483921020237-2ff51e8e4b22?w=800&q=80",
-  directAnswer: "Alberta remains the most tax-friendly province for higher earners in 2025 due to its lower top marginal rates and lack of provincial sales tax (PST), while Ontario offers lower rates for the first $50,000 of income.",
+  directAnswer: "Alberta remains the most tax-friendly province for higher earners in 2026 due to its lower top marginal rates and lack of provincial sales tax (PST), while Ontario offers lower rates for the first $50,000 of income.",
   faq: [
     { question: "Does Alberta have a provincial sales tax?", answer: "No, Alberta is the only province in Canada with no provincial sales tax (PST), charging only the 5% federal GST on goods and services." },
     { question: "Which province has better take-home pay for a $100k salary?", answer: "At the $100,000 income level, Alberta typically provides higher take-home pay than Ontario due to its tax structure and higher basic personal amount." },
@@ -2284,9 +2284,9 @@ Alberta uses a single tax rate for most income:
 **Ontario's Progressive System:**
 
 Ontario uses five tax brackets:
-- 5.05% on first $51,446
-- 9.15% on $51,446 to $102,894
-- 11.16% on $102,894 to $150,000
+- 5.05% on first $53,891
+- 9.15% on $53,891 to $107,785
+- 11.16% on $107,785 to $150,000
 - 12.16% on $150,000 to $220,000
 - 13.16% above $220,000
 

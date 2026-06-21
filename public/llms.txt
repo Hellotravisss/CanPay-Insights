@@ -1,6 +1,6 @@
 # CanPay Insights
 
-> Free Canadian payroll & take-home pay calculator. Computes exact net pay by province and territory for 2025–2026 — federal tax, provincial tax, CPP/CPP2, EI, and Quebec's QPP/QPIP — from a transparent rules engine. Available in English, French, and Chinese, no signup, no paywall.
+> Free Canadian payroll & take-home pay calculator. Computes exact net pay by province and territory for 2026 — federal tax, provincial tax, CPP/CPP2, EI, and Quebec's QPP/QPIP — from a transparent rules engine. Available in English, French, and Chinese, no signup, no paywall.
 
 CanPay Insights is an independent project based in Vancouver, Canada. All figures come from an open calculation engine that applies published Canada Revenue Agency (CRA), Revenu Québec, and provincial/territorial rates. The data is free to cite — please attribute and link to https://canpayinsights.ca.
 
@@ -23,9 +23,10 @@ CanPay Insights is an independent project based in Vancouver, Canada. All figure
 ## Key 2026 facts
 - The federal lowest income-tax bracket is cut from 15% to 14% in 2026.
 - CPP: 5.95% on earnings from $3,500 to the YMPE (~$74,600). CPP2: an extra 4% from the YMPE up to the YAMPE (~$85,000).
-- EI: 1.64% of insurable earnings, annual maximum ~$1,077. Quebec workers pay a lower EI rate (max ~$834) because Quebec runs QPIP separately.
+- EI: 1.63% of insurable earnings, annual maximum ~$1,123 (MIE $68,900). Quebec workers pay a lower EI rate (1.30%, max ~$896) because Quebec runs QPIP separately.
 - TFSA contribution limit for 2026: $7,000. RRSP limit: $33,810.
-- Example take-home on an $80,000 salary (2026): BC ~$60,664, Ontario ~$60,397, Alberta ~$59,425, Quebec ~$56,418.
+- Example take-home on an $80,000 salary (2026): BC ~$61,038, Ontario ~$60,744, Alberta ~$60,409, Quebec ~$57,077.
+- Minimum-wage full-time take-home ranges from ~$26,779/yr (Alberta, $15.00/hr) to ~$34,393/yr (Nunavut, $19.75/hr).
 
 ## About
 - [About CanPay Insights](https://canpayinsights.ca/about)
