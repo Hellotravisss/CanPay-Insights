@@ -56,6 +56,13 @@ sticks. So: **outreach first → get 1 citation → then create the Wikidata ite
 
 ### Target list (real, relevant — get the exact email from each site's contact/about page)
 
+> **Verified 2026-06-21:**
+> - ☠️ **Money After Graduation — DEFUNCT** (parked page since 2022, points to gildedfinancial.com). **Dropped.**
+> - ✅ **Savvy New Canadians — LIVE & active** (© 2026, Vancouver). Press email: **enoch@savvynewcanadians.com** (put PRESS in subject). **Top target — send now.**
+> - ⚠️ **Money We Have & MapleMoney — live but pivoted** to credit-card/travel content. Weak fit for take-home data — deprioritize.
+> - 🔎 #3/#6 (Hardbacon, canadafinancetools) not yet verified — check they're live + on-topic before sending.
+> - **Lesson:** verify every target is alive *and* on-topic before pitching.
+
 | # | Target | Type | Why it fits | Where to find contact |
 |---|---|---|---|---|
 | 1 | **Money After Graduation** (moneyaftergraduation.com) | PF blog (salary/career) | Bridget Casey writes about salaries, raises, take-home — perfect for the data | /contact |
@@ -106,7 +113,7 @@ Personalize the **[their article]** line per recipient (proves you read them).
 
 ### ✅ Ready-to-send (personalized — article references verified real)
 
-**→ Money After Graduation** (Bridget Casey) — get email at moneyaftergraduation.com/contact
+**→ Money After Graduation — ☠️ DROPPED (site defunct since 2022; do not send. Kept for reference only.)**
 > **Subject:** Canadian take-home-pay data, free to cite
 >
 > Hi Bridget,
@@ -126,8 +133,8 @@ Personalize the **[their article]** line per recipient (proves you read them).
 >
 > — Travis, CanPay Insights · info@canpayinsights.ca
 
-**→ Savvy New Canadians** (Enoch Omololu) — get email at savvynewcanadians.com/contact
-> **Subject:** Take-home pay by province — data for your salary posts
+**→ Savvy New Canadians** (Enoch Omololu) — ✅ VERIFIED LIVE · send to **enoch@savvynewcanadians.com** (put **PRESS** in the subject)
+> **Subject:** PRESS: Take-home pay by province — data for your salary posts
 >
 > Hi Enoch,
 >
