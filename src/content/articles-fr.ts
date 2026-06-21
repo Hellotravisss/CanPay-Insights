@@ -81,7 +81,7 @@ L'impôt provincial du Québec ne change pas avec cette mesure fédérale. Les p
       { question: 'Qu\'est-ce que le RQAP ?', answer: 'Le Régime québécois d\'assurance parentale verse des prestations de maternité, paternité, parentales et d\'adoption. Il est financé par une cotisation distincte sur votre paie.' },
     ],
     content: `
-## Ce qui est retenu sur votre paie au Québec
+## Qu'est-ce qui est retenu sur votre paie au Québec ?
 
 Au Québec, votre **salaire brut** n'est pas ce que vous recevez. Cinq retenues principales s'appliquent avant que l'argent arrive dans votre compte :
 
@@ -241,7 +241,7 @@ Votre décision dépend de votre taux marginal. Calculez-le avec le [calculateur
       { question: 'Pourquoi le net est-il plus bas au Québec ?', answer: 'Le Québec a ses propres paliers d\'impôt provincial et des cotisations distinctes (RRQ, RQAP). Même avec l\'abattement fédéral de 16,5 %, le total des retenues est souvent un peu plus élevé qu\'ailleurs au Canada.' },
     ],
     content: `
-## Du brut au net au Québec en 2026
+## Comment passe-t-on du brut au net au Québec en 2026 ?
 
 Votre salaire annoncé (le **brut**) n'est pas ce qui arrive dans votre compte. Voici ce qu'il reste réellement après l'impôt fédéral, l'impôt du Québec, la RRQ, le RQAP et l'assurance-emploi.
 
@@ -253,7 +253,7 @@ Votre salaire annoncé (le **brut**) n'est pas ce qui arrive dans votre compte. 
 | 75 000 $ | **53 500 $** | ≈ 4 460 $ | ≈ 29 % |
 | 100 000 $ | **68 500 $** | ≈ 5 710 $ | ≈ 31 % |
 
-## Pourquoi le taux de retenue augmente
+## Pourquoi le taux de retenue augmente-t-il ?
 
 Le Québec applique un impôt **progressif** : plus vous gagnez, plus la portion supérieure de votre revenu est imposée à un taux élevé. C'est pourquoi un salaire de 100 000 $ ne laisse pas le double d'un salaire de 50 000 $ en net.
 

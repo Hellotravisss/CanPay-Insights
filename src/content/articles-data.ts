@@ -36,7 +36,7 @@ Sarah just landed her first full-time job in Toronto. Her contract says $65,000 
 
 Canada's tax system is progressive, which means the more you earn, the higher percentage you pay in taxes. In Ontario, you are dealing with both federal and provincial taxes, plus mandatory contributions to CPP (Canada Pension Plan) and EI (Employment Insurance). Let's break down exactly what happens to your hard-earned money.
 
-### Understanding Canada's Progressive Tax System
+### How does Canada's progressive tax system work?
 
 Think of Canada's tax system like climbing a ladder. Each rung represents a different income bracket, and each bracket has its own tax rate. You don't pay the higher rate on your entire income—only on the portion that falls into that bracket.
 
@@ -188,7 +188,7 @@ Alberta's flat tax system means lower-income earners pay more proportionally, bu
 
 Want to compare provinces with your specific salary? Try our [Province Comparison Tool](/compare-provinces) to see exact take-home pay differences.
 
-### Smart Tax Strategies for Ontarians
+### How can you lower your Ontario taxes?
 
 **1. Maximize Your RRSP Contributions**
 
@@ -303,7 +303,7 @@ When Marcus received a job offer in Vancouver with an $80,000 salary, he was thr
 
 British Columbia is unique in Canada. It has the most progressive provincial tax system with seven different tax brackets, and Vancouver's cost of living is among the highest in North America. But there's good news: BC's tax rates are actually slightly lower than Ontario's, and the province offers unique credits that can help offset costs.
 
-### Understanding BC's 7-Tier Tax System
+### How does BC's 7-tier tax system work?
 
 While most provinces use 5 or fewer tax brackets, BC uses seven. This creates a more gradual tax increase as your income rises.
 
@@ -441,7 +441,7 @@ Marcus needs to consider more than just taxes. BC offers:
 - Higher gasoline prices due to carbon tax
 - Limited job market outside Vancouver/Victoria
 
-### Tax Planning Strategies for BC Residents
+### How can BC residents reduce their taxes?
 
 **1. Use the Medical Services Plan (MSP) Savings**
 
@@ -540,7 +540,7 @@ You become a Canadian tax resident when you establish significant residential ti
 
 **Important:** Even if you arrive mid-year, you are taxed on worldwide income from that point forward. However, income earned before becoming a resident is not taxed in Canada.
 
-### Your First Tax Filing: What You Need to Know
+### What do you need for your first tax filing in Canada?
 
 **Deadline:** April 30, 2026 (for 2025 income)
 
@@ -639,7 +639,7 @@ Options for newcomers:
 - **Volunteer tax clinics:** Free help if your income is modest
 - **Professional accountant:** Recommended if your situation is complex
 
-### Common Mistakes Newcomers Make
+### What tax mistakes do newcomers make?
 
 **Mistake #1: Not Filing Because Income Is Low**
 
@@ -813,7 +813,7 @@ Let's compare to investing privately:
 
 **Verdict:** CPP provides guaranteed, inflation-protected income for life. Private investments offer higher potential returns but with significant risk. CPP is essentially insurance against outliving your savings.
 
-### EI: Your Safety Net
+### What is EI and what does it cover?
 
 Employment Insurance provides temporary income support when you're unable to work.
 
@@ -1076,7 +1076,7 @@ Monthly take-home: $3,164
 
 Despite lower take-home pay, Montreal's lower cost of living means Rebecca saves more than in Toronto.
 
-### Making $50,000 Work: Strategies
+### How do you live on $50,000 in Canada?
 
 **1. Choose Your Location Wisely**
 
@@ -1249,7 +1249,7 @@ Hourly wages tell only part of the story. Let's examine actual living standards.
 
 *Iqaluit rents are extremely high; many workers receive Northern allowances.
 
-### The Best and Worst Provinces for Minimum Wage Workers
+### Which provinces are best and worst for minimum-wage workers?
 
 **Best Overall: Manitoba**
 
@@ -1720,7 +1720,7 @@ Alex has $10,000 to invest. His brother says RRSP is better because of the tax r
 
 The TFSA vs RRSP debate has no universal answer. The right choice depends on your income today, your expected income in retirement, your goals, and your timeline. Let's break down the math and psychology behind each account.
 
-### Understanding the Core Difference
+### What's the difference between a TFSA and an RRSP?
 
 **RRSP: Tax Deferral**
 - Contribute pre-tax dollars (get a refund)
@@ -1832,7 +1832,7 @@ Numbers don't tell the whole story. Consider:
 - **Spousal options:** Income splitting opportunities
 - **Home Buyers' Plan:** Access for first home purchase
 
-### Decision Framework by Income
+### TFSA or RRSP: which is better for your income?
 
 | Income Level | Recommendation | Why |
 |--------------|----------------|-----|
@@ -1999,7 +1999,7 @@ In Ontario, overtime kicks in after **44 hours in a work week**.
 - Overtime pay: 4 × $37.50 = $150
 - **Total: $1,250**
 
-### Calculating Your Overtime Pay
+### How is overtime pay calculated in Ontario?
 
 **Hourly Workers:**
 
@@ -2279,7 +2279,7 @@ Rachel received two job offers: one in Toronto for $85,000 and one in Calgary fo
 
 Alberta and Ontario represent Canada's two largest provincial economies, but their tax systems couldn't be more different. This comprehensive comparison will help you understand exactly what each province means for your wallet.
 
-### The Tax Systems: Flat vs Progressive
+### How do Alberta and Ontario tax systems differ?
 
 **Alberta's Flat Tax System:**
 
@@ -2336,7 +2336,7 @@ Let's see how different incomes compare after taxes in each province.
 **The Verdict:**
 Toronto pays $3,000 more gross but only $1,293 more net. The tax advantage is real but smaller than expected because Ontario's lower brackets partially offset the higher brackets.
 
-### Cost of Living: The Real Game Changer
+### How does cost of living compare in Alberta vs Ontario?
 
 Taxes are only part of the equation. Let's look at actual living costs.
 
