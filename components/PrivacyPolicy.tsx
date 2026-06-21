@@ -128,7 +128,7 @@ const PrivacyPolicy: React.FC<PrivacyPolicyProps> = ({ onBackToHome }) => {
 
       {/* Footer */}
       <footer className="text-center text-slate-400 text-xs py-8 space-y-4" role="contentinfo">
-        <p>Calculations are estimates based on 2025/2026 tax brackets and provincial employment standards.</p>
+        <p>Calculations are estimates based on 2026 tax brackets and provincial employment standards.</p>
         <div className="mt-2 flex justify-center gap-2">
           <span className="w-2 h-2 rounded-full bg-red-400 opacity-50"></span>
           <span className="w-2 h-2 rounded-full bg-red-400 opacity-50"></span>

@@ -12,11 +12,11 @@ export const metadata: Metadata = {
     canonical: 'https://canpayinsights.ca',
   },
   title: {
-    default: 'Free Canadian Payroll Calculator 2025/2026 - CanPay Insights',
+    default: 'Free Canadian Payroll Calculator 2026 - CanPay Insights',
     template: '%s | CanPay Insights',
   },
   description:
-    'Free Canadian payroll calculator for 2025/2026. Estimate take-home pay by province with federal tax, provincial tax, CPP, EI, hourly wage, salary, and timesheet tools.',
+    'Free Canadian payroll calculator for 2026. Estimate take-home pay by province with federal tax, provincial tax, CPP, EI, hourly wage, salary, and timesheet tools.',
   keywords: [
     'Canada payroll calculator',
     'Canadian salary calculator',
@@ -77,8 +77,13 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
               logo: 'https://canpayinsights.ca/apple-touch-icon.png',
               email: 'info@canpayinsights.ca',
               description:
-                'Free Canadian payroll and take-home pay calculator covering federal tax, provincial tax, CPP/CPP2, EI, and Quebec QPP/QPIP for 2025–2026.',
-              founder: { '@type': 'Person', name: 'Travis Zhang' },
+                'Free Canadian payroll and take-home pay calculator covering federal tax, provincial tax, CPP/CPP2, EI, and Quebec QPP/QPIP for 2026.',
+              founder: {
+                '@type': 'Person',
+                name: 'Travis Zhang',
+                alternateName: 'Qi Zhang',
+                sameAs: ['https://www.linkedin.com/in/qharbert'],
+              },
               areaServed: 'CA',
               knowsAbout: ['Canadian payroll', 'take-home pay', 'income tax', 'CPP', 'CPP2', 'EI', 'RRSP', 'TFSA', 'QPP', 'QPIP'],
             },
@@ -89,7 +94,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
               applicationCategory: 'FinanceApplication',
               operatingSystem: 'Web Browser',
               offers: { '@type': 'Offer', price: '0', priceCurrency: 'CAD' },
-              description: 'Free Canadian payroll calculator for 2025/2026. Calculate net pay, taxes, CPP, and EI deductions.',
+              description: 'Free Canadian payroll calculator for 2026. Calculate net pay, taxes, CPP, and EI deductions.',
               url: 'https://canpayinsights.ca/',
               inLanguage: ['en', 'fr', 'zh'],
               publisher: { '@id': 'https://canpayinsights.ca/#org' },
@@ -97,16 +102,28 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             {
               '@context': 'https://schema.org',
               '@type': 'Dataset',
-              name: 'Canadian Take-Home Pay & Payroll Deductions 2025–2026',
+              name: 'Canadian Take-Home Pay & Payroll Deductions 2026',
               description:
-                'Net pay, federal and provincial income tax, CPP/CPP2, EI, and Quebec QPP/QPIP by province/territory and income level for 2025 and 2026.',
+                "Net pay, federal and provincial income tax, CPP/CPP2, EI, and Quebec QPP/QPIP by province/territory and income level ($30k–$200k) for 2026. Computed from CanPay Insights' open rules engine using CRA and Revenu Québec 2026 rates.",
               creator: { '@id': 'https://canpayinsights.ca/#org' },
               license: 'https://creativecommons.org/licenses/by/4.0/',
               isAccessibleForFree: true,
-              url: 'https://canpayinsights.ca/',
+              url: 'https://canpayinsights.ca/about',
               spatialCoverage: 'Canada',
-              temporalCoverage: '2025/2026',
+              temporalCoverage: '2026',
               keywords: ['Canada payroll', 'take-home pay', 'net pay', 'CPP', 'CPP2', 'EI', 'income tax', 'provincial tax', '2026 tax'],
+              distribution: [
+                {
+                  '@type': 'DataDownload',
+                  encodingFormat: 'text/csv',
+                  contentUrl: 'https://canpayinsights.ca/data/canpay-take-home-2026.csv',
+                },
+                {
+                  '@type': 'DataDownload',
+                  encodingFormat: 'application/json',
+                  contentUrl: 'https://canpayinsights.ca/data/canpay-take-home-2026.json',
+                },
+              ],
             },
           ]),
           }}

@@ -2,15 +2,15 @@ import type { SalaryBreakdown } from '../lib/salaryFigures';
 
 interface SalaryBreakdownPanelProps {
   breakdown: SalaryBreakdown;
-  locale?: 'en' | 'fr';
+  locale?: 'en' | 'fr' | 'zh';
 }
 
-const formatMoney = (amount: number, locale: 'en' | 'fr') =>
+const formatMoney = (amount: number, locale: 'en' | 'fr' | 'zh') =>
   locale === 'fr'
     ? `${Math.round(amount).toLocaleString('fr-CA')} $`
     : `$${Math.round(amount).toLocaleString('en-CA')}`;
 
-const formatPercent = (rate: number, locale: 'en' | 'fr') =>
+const formatPercent = (rate: number, locale: 'en' | 'fr' | 'zh') =>
   locale === 'fr'
     ? `${(rate * 100).toFixed(1).replace('.', ',')} %`
     : `${(rate * 100).toFixed(1)}%`;
@@ -57,7 +57,7 @@ const COPY = {
     salaryCol: 'Gross salary',
     netBiWeeklyCol: 'Net bi-weekly',
     assumptions:
-      'Estimates use 2025/2026 federal and provincial rates with the basic personal amount only. Benefits, RRSP contributions, union dues, and other credits will change your actual paycheque — run your own numbers in the free calculator.',
+      'Estimates use 2026 federal and provincial rates with the basic personal amount only. Benefits, RRSP contributions, union dues, and other credits will change your actual paycheque — run your own numbers in the free calculator.',
   },
   fr: {
     kicker: 'Paie nette estimée',
@@ -100,7 +100,49 @@ const COPY = {
     salaryCol: 'Salaire brut',
     netBiWeeklyCol: 'Net aux deux semaines',
     assumptions:
-      "Les estimations utilisent les taux 2025/2026 avec le montant personnel de base seulement. Les avantages sociaux, cotisations REER, frais syndicaux et autres crédits changeront votre paie réelle — vérifiez vos chiffres dans le calculateur gratuit.",
+      "Les estimations utilisent les taux 2026 avec le montant personnel de base seulement. Les avantages sociaux, cotisations REER, frais syndicaux et autres crédits changeront votre paie réelle — vérifiez vos chiffres dans le calculateur gratuit.",
+  },
+  zh: {
+    kicker: '预计到手工资',
+    perYear: '每年',
+    monthly: '每月',
+    biWeekly: '每两周',
+    weekly: '每周',
+    summary: (gross: string, province: string, net: string, rate: string) =>
+      `年薪 ${gross}（${province}），扣除联邦税、省税、CPP 和 EI 后，到手约 ${net} —— 实际扣除率约 ${rate}。`,
+    whereItGoes: '钱都去哪了',
+    deduction: '扣款项',
+    amountCol: '每年金额',
+    shareCol: '占税前 %',
+    grossSalary: '税前年薪',
+    federalTax: '联邦所得税',
+    provincialTax: (province: string) => `${province} 省税`,
+    territorialTax: (province: string) => `${province} 地区税`,
+    pension: 'CPP 供款',
+    pensionQc: 'QPP + QPIP 供款',
+    ei: 'EI 保费',
+    eiQc: 'EI 保费（魁省费率）',
+    totalDeductions: '扣款合计',
+    takeHome: '到手工资',
+    rates: (avg: string, marginal: string) =>
+      `平均税率：${avg} · 你下一笔 $1,000 加薪里，约 ${marginal} 进了税和扣款。`,
+    paySchedule: '到账明细',
+    frequency: '发薪频率',
+    netPay: '预计净工资',
+    annual: '每年',
+    semiMonthly: '半月一次',
+    hourlyNote: '时薪（每周 40 小时）',
+    compareTitle: (gross: string) => `${gross} 在加拿大各省的税后对比`,
+    compareIntro: (province: string) => `同样的薪水在各省到手不同。看看 ${province} 与其他省的对比：`,
+    provinceCol: '省份',
+    netAnnualCol: '每年净收入',
+    netMonthlyCol: '每月净收入',
+    current: '本页',
+    nearbyTitle: (province: string) => `${province} 的其他薪资水平`,
+    salaryCol: '税前年薪',
+    netBiWeeklyCol: '每两周净收入',
+    assumptions:
+      '估算采用 2026 年联邦与各省税率，仅计基本个人免税额。福利、RRSP 供款、工会会费等会改变你的实际工资——用上方免费计算器算你的具体数字。',
   },
 };
 

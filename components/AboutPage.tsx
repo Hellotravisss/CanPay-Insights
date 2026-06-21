@@ -103,17 +103,38 @@ const AboutPage: React.FC = () => {
               </h2>
               <div className="pl-11">
                 <p className="text-slate-600 leading-relaxed">
-                  CanPay Insights is built and maintained by an independent developer based in Vancouver, British
-                  Columbia. It is a small, self-funded project — not a bank, payroll company, or financial
-                  institution. That independence is the point: the tool exists to give workers a straight answer,
-                  with no product to upsell.
+                  CanPay Insights is built and maintained by <strong>Travis Zhang</strong> (Qi Zhang), an
+                  independent developer based in Vancouver, British Columbia, who wrote the open rules engine
+                  behind the calculator. It is a small, self-funded project — not a bank, payroll company, or
+                  financial institution. That independence is the point: the tool exists to give workers a
+                  straight answer, with no product to upsell. Connect on{" "}
+                  <a href="https://www.linkedin.com/in/qharbert" target="_blank" rel="noopener noreferrer me" className="text-red-600 hover:text-red-700 font-medium underline underline-offset-2 transition-colors">LinkedIn</a>.
                 </p>
+              </div>
+            </section>
+
+            <section className="mb-10">
+              <h2 className="text-2xl font-bold text-slate-800 mb-4 flex items-center gap-3">
+                <Badge n={4} /> Open data — free to cite
+              </h2>
+              <div className="pl-11">
+                <p className="text-slate-600 leading-relaxed mb-4">
+                  Our 2026 take-home pay figures — net pay, federal and provincial tax, CPP/CPP2, EI and Quebec
+                  QPP/QPIP for every province and territory across $30k–$200k — are published as an open dataset
+                  under a{" "}
+                  <a href="https://creativecommons.org/licenses/by/4.0/" target="_blank" rel="noopener noreferrer" className="text-red-600 hover:text-red-700 font-medium underline underline-offset-2">CC BY 4.0</a>{" "}
+                  licence. Free to use, republish, or cite — please attribute and link to canpayinsights.ca.
+                </p>
+                <div className="flex flex-wrap gap-3">
+                  <a href="/data/canpay-take-home-2026.csv" download className="inline-flex items-center rounded-lg border border-slate-300 bg-white px-4 py-2 font-semibold text-slate-700 hover:border-red-200 hover:text-red-600 no-underline">Download CSV</a>
+                  <a href="/data/canpay-take-home-2026.json" download className="inline-flex items-center rounded-lg border border-slate-300 bg-white px-4 py-2 font-semibold text-slate-700 hover:border-red-200 hover:text-red-600 no-underline">Download JSON</a>
+                </div>
               </div>
             </section>
 
             <section className="mb-6">
               <h2 className="text-2xl font-bold text-slate-800 mb-4 flex items-center gap-3">
-                <Badge n={4} /> A note on accuracy
+                <Badge n={5} /> A note on accuracy
               </h2>
               <div className="pl-11">
                 <p className="text-slate-600 leading-relaxed">
@@ -131,7 +152,7 @@ const AboutPage: React.FC = () => {
 
       {/* Footer */}
       <footer className="text-center text-slate-400 text-xs py-8 space-y-4" role="contentinfo">
-        <p>Calculations are estimates based on 2025/2026 tax brackets and provincial employment standards.</p>
+        <p>Calculations are estimates based on 2026 tax brackets and provincial employment standards.</p>
         <div className="flex flex-wrap items-center justify-center gap-x-4 gap-y-2">
           <a href="/about" className="text-slate-400 hover:text-red-600 transition-colors">About</a>
           <a href="/contact" className="text-slate-400 hover:text-red-600 transition-colors">Contact</a>

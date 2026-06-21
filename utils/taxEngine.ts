@@ -76,13 +76,13 @@ export const getRRSPPerPeriod = (inputs: any, grossPayPerPeriod: number): number
 
 /**
  * Calculate CPP/QPP contributions (including CPP2/QPP2 for high earners)
- * 2025 CPP Structure:
- * - Tier 1: 5.95% on earnings between $3,500 and $73,600
- * - Tier 2 (CPP2): 4.00% on earnings between $73,600 and $81,200
- * 
- * 2025 QPP Structure (Quebec only):
- * - Tier 1: 6.4% on earnings between $3,500 and $83,200
- * - Tier 2 (QPP2): 7.15% on earnings between $83,200 and $93,300
+ * 2026 CPP Structure:
+ * - Tier 1: 5.95% on earnings between $3,500 and $74,600 (YMPE)
+ * - Tier 2 (CPP2): 4.00% on earnings between $74,600 and $85,000 (YAMPE)
+ *
+ * 2026 QPP Structure (Quebec only):
+ * - Tier 1: 6.3% on earnings between $3,500 and $74,600 (MPE)
+ * - Tier 2 (QPP2): 4.00% on earnings between $74,600 and $85,000 (YAMPE)
  */
 const calculateCPP = (annualGross: number, isQuebec: boolean = false): { cpp1: number; cpp2: number; total: number } => {
   if (isQuebec) {
@@ -133,8 +133,8 @@ const calculateQPIP = (annualGross: number): number => {
 
 /**
  * Calculate EI premiums
- * 2025 Federal: 1.64% on earnings up to $65,700
- * 2025 Quebec: 1.27% on earnings up to $65,700 (lower due to QPIP)
+ * 2026 Federal: 1.63% on earnings up to $68,900
+ * 2026 Quebec: 1.30% on earnings up to $68,900 (lower due to QPIP)
  */
 const calculateEI = (annualGross: number, isQuebec: boolean = false): number => {
   if (isQuebec) {
@@ -168,19 +168,19 @@ const calculateTotalTax = (
   const provincialTaxBeforeCredits = calculateProgressiveTax(annualGross, provinceRule.brackets);
   
   // Step 2: Calculate BPA Tax Credits
-  // Federal: 15% of BPA
-  const federalBPACredit = FEDERAL_BASIC_PERSONAL_AMOUNT * 0.15;
+  // Federal: 14% of BPA (2026 lowest federal rate)
+  const federalBPACredit = FEDERAL_BASIC_PERSONAL_AMOUNT * 0.14;
   
   // Provincial: varies by province (lowest rate × BPA)
   const lowestProvincialRate = provinceRule.brackets[0]?.rate || 0.05;
   const provincialBPACredit = provinceRule.basicPersonalAmount * lowestProvincialRate;
   
   // CPP/EI also generate tax credits at lowest rates
-  const cppFederalCredit = cppTotal * 0.15;
+  const cppFederalCredit = cppTotal * 0.14;
   const cppProvincialCredit = cppTotal * lowestProvincialRate;
-  
+
   const eiAnnual = calculateEI(annualGross, isQuebec);
-  const eiFederalCredit = eiAnnual * 0.15;
+  const eiFederalCredit = eiAnnual * 0.14;
   const eiProvincialCredit = eiAnnual * lowestProvincialRate;
   
   // Step 3: Apply tax credits (cannot reduce tax below zero)

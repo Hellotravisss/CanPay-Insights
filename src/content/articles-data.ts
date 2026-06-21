@@ -24,9 +24,9 @@ const article1: Article = {
   directAnswer: "In Ontario for 2025, an average earner (e.g., $65,000) can expect an effective tax rate of about 24.3%, resulting in a take-home pay of approximately $49,221 after federal and provincial taxes, CPP, and EI.",
   faq: [
     { question: "What are the Ontario provincial tax brackets for 2025?", answer: "Ontario has five provincial tax brackets in 2025, ranging from 5.05% on the first $51,446 to 13.16% on income over $220,000." },
-    { question: "How much is the maximum CPP contribution in 2025?", answer: "The maximum CPP contribution for employees in 2025 is $4,034.10 for the first tier, plus an additional amount up to $388 for the new CPP2 tier." },
+    { question: "How much is the maximum CPP contribution in 2026?", answer: "The maximum CPP contribution for employees in 2026 is $4,230.45 for the first tier, plus an additional amount up to $416 for the CPP2 tier." },
     { question: "What is the federal basic personal amount for 2025?", answer: "The federal basic personal amount for 2025 is $16,129, which provides a non-refundable tax credit that reduces your federal tax bill." },
-    { question: "How is EI calculated in Ontario for 2025?", answer: "Employment Insurance is calculated as 1.64% of insurable earnings, up to a maximum annual employee contribution of $1,077.48." },
+    { question: "How is EI calculated in Ontario for 2026?", answer: "Employment Insurance is calculated as 1.63% of insurable earnings, up to a maximum annual employee contribution of $1,123.07." },
     { question: "What is a marginal tax rate?", answer: "A marginal tax rate is the tax applied to your next dollar of income; for someone earning $65,000 in Ontario, the combined marginal rate is 29.65%." }
   ],
   content: `
@@ -71,23 +71,23 @@ This means if you get a $1,000 bonus, you will pay about $296.50 in taxes on it.
 
 Beyond income tax, your pay stub shows deductions for CPP and EI. These are mandatory contributions that fund Canada's social safety net.
 
-**CPP (Canada Pension Plan) in 2025:**
+**CPP (Canada Pension Plan) in 2026:**
 
 The CPP is your retirement pension. Both you and your employer contribute:
 - Your contribution rate: 5.95% of earnings above $3,500
-- Maximum contribution: $4,034.10 per year (kicks in when you earn $73,200)
-- New for 2025: CPP2—if you earn between $73,200 and $81,200, you contribute an additional 4% (up to $388)
+- Maximum contribution: $4,230.45 per year (kicks in when you earn $74,600)
+- CPP2: if you earn between $74,600 and $85,000, you contribute an additional 4% (up to $416)
 
 For someone earning $65,000:
 - Earnings subject to CPP: $65,000 - $3,500 = $61,500
 - Annual CPP contribution: $61,500 × 5.95% = **$3,659.25**
 
-**EI (Employment Insurance) in 2025:**
+**EI (Employment Insurance) in 2026:**
 
 EI provides temporary income if you lose your job, along with parental and sickness benefits:
-- Your contribution rate: 1.64% of insurable earnings
-- Maximum contribution: $1,077.48 (caps out at $65,700 of income)
-- For someone earning $65,000: **$1,066 per year**
+- Your contribution rate: 1.63% of insurable earnings
+- Maximum contribution: $1,123.07 (caps out at $68,900 of income)
+- For someone earning $65,000: **$1,059.50 per year**
 
 ### Three Real-Life Salary Scenarios
 
@@ -97,81 +97,77 @@ Let's look at how this plays out for three different people working in Ontario.
 
 Jamie works full-time at $16.83 per hour. Here is what happens to their paycheck:
 
-First, we calculate the basic personal amount tax credits:
-- Federal basic personal amount: $16,129 × 15% = $2,419 credit
-- Ontario basic personal amount: $12,747 × 5.05% = $644 credit
-- Total credits reduce tax by about $3,063
+First, we calculate the basic personal amount tax credits (2026):
+- Federal basic personal amount: $16,452 × 14% = $2,303 credit
+- Ontario basic personal amount: $12,989 × 5.05% = $656 credit
+- Total credits reduce tax by about $2,959
 
 Tax calculations:
-- Federal tax on $35,000: $5,250 minus credits = $2,831
-- Ontario tax on $35,000: $1,768 minus credits = $1,124
-- CPP contribution: ($35,000 - $3,500) × 5.95% = $1,873
-- EI contribution: $35,000 × 1.64% = $574
+- Federal tax on $35,000: about $2,254 after credits
+- Ontario tax on $35,000: about $988 after credits
+- CPP contribution: ($35,000 - $3,500) × 5.95% = $1,874
+- EI contribution: $35,000 × 1.63% = $571
 
 **Final numbers:**
 - Gross annual income: $35,000
-- Total deductions: $7,214
-- **Net annual income: $27,786 (about $2,316/month)**
-- **Effective tax rate: 20.6%**
+- Total deductions: $5,687
+- **Net annual income: $29,313 (about $2,443/month)**
+- **Effective deduction rate: 16.3%**
 
-Jamie's reality: Living on $2,316 per month in Toronto means finding roommates, cooking at home, and careful budgeting—but it is doable.
+Jamie's reality: Living on $2,443 per month in Toronto means finding roommates, cooking at home, and careful budgeting—but it is doable.
 
 **Scenario 2: Sarah - Mid-Level Professional ($65,000/year)**
 
 Remember Sarah from the beginning? Let us see where her money actually goes.
 
-Federal tax calculation (the step-by-step way):
-- First $55,375 at 15%: $8,306
-- Next $9,625 (from $55,375 to $65,000) at 20.5%: $1,973
-- Subtotal federal tax before credits: $10,279
+Federal tax calculation (2026 — lowest bracket now 14%):
+- First $58,523 at 14%: $8,193
+- Next $6,477 (from $58,523 to $65,000) at 20.5%: $1,328
+- Subtotal federal tax before credits: $9,521
 
 Ontario tax calculation:
-- First $51,446 at 5.05%: $2,598
-- Next $13,554 (from $51,446 to $65,000) at 9.15%: $1,240
-- Subtotal Ontario tax before credits: $3,838
+- First $53,891 at 5.05%: $2,722
+- Next $11,109 (from $53,891 to $65,000) at 9.15%: $1,016
+- Subtotal Ontario tax before credits: $3,738
 
 CPP and EI:
 - CPP: ($65,000 - $3,500) × 5.95% = $3,659
-- EI: $65,000 × 1.64% = $1,066
+- EI: $65,000 × 1.63% = $1,060
 
-Tax credits reduce the total tax burden by about $3,063.
+Basic personal amount credits reduce the total tax by about $2,959.
 
 **Final numbers:**
 - Gross annual income: $65,000
-- Total tax paid: $11,054
-- CPP + EI: $4,725
-- **Net annual income: $49,221 (about $4,102/month)**
-- **Effective tax rate: 24.3%**
+- Total tax paid: $9,401 (federal $6,557 + Ontario $2,844)
+- CPP + EI: $4,719
+- **Net annual income: $50,880 (about $4,240/month)**
+- **Effective deduction rate: 21.7%**
 
-Sarah's reality: With $4,102 per month, she can afford a one-bedroom apartment outside downtown, occasional dining out, and even start building an emergency fund.
+Sarah's reality: With $4,240 per month, she can afford a one-bedroom apartment outside downtown, occasional dining out, and even start building an emergency fund.
 
 **Scenario 3: Michael - Senior Professional ($120,000/year)**
 
 Michael has worked his way up and now earns a six-figure salary. But he also pays significantly more in taxes.
 
-Federal tax:
-- First $55,375 at 15%: $8,306
-- Next $55,364 at 20.5%: $11,350
-- Remaining $9,261 at 26%: $2,408
-- Total federal tax: $22,064
+Federal tax (2026 — lowest bracket now 14%):
+- 14% on the first $58,523, 20.5% to $117,045, then 26%
+- Federal tax after credits: about $17,848
 
 Ontario tax:
-- First $51,446 at 5.05%: $2,598
-- Next $51,448 at 9.15%: $4,708
-- Remaining $17,106 at 11.16%: $1,909
-- Total Ontario tax: $9,215
+- 5.05% / 9.15% / 11.16% across the 2026 brackets, plus the Ontario surtax
+- Ontario tax after credits: about $8,743
 
 CPP and EI (at maximum):
-- CPP: $4,034 (first tier) + $388 (CPP2) = $4,422
-- EI: $1,077 (maximum reached)
+- CPP: $4,230 (first tier) + $416 (CPP2) = $4,646
+- EI: $1,123 (maximum reached)
 
 **Final numbers:**
 - Gross annual income: $120,000
-- Total deductions: $34,778
-- **Net annual income: $85,222 (about $7,102/month)**
-- **Effective tax rate: 29.0%**
+- Total deductions: about $32,360
+- **Net annual income: $87,640 (about $7,303/month)**
+- **Effective deduction rate: 27.0%**
 
-Michael's reality: While $7,102 per month sounds like a lot (and it is), he is also paying nearly $35,000 in taxes and contributions. This is why tax planning becomes crucial at higher income levels.
+Michael's reality: While $7,303 per month sounds like a lot (and it is), he is also paying over $32,000 in taxes and contributions. This is why tax planning becomes crucial at higher income levels.
 
 ### How Ontario Compares to Other Provinces
 
@@ -327,34 +323,31 @@ Let's follow Marcus's journey and see what his $80,000 salary actually looks lik
 
 **Tax Calculation Step by Step:**
 
-Federal tax on $80,000:
-- First $55,375 at 15% = $8,306
-- Next $24,625 at 20.5% = $5,048
-- Total federal tax: $13,354
+Federal tax on $80,000 (2026):
+- 14% on the first $58,523, then 20.5% on the rest to $80,000
+- Federal tax after credits: about $9,513
 
-BC provincial tax on $80,000:
-- First $47,937 at 5.06% = $2,426
-- Next $31,939 at 7.7% = $2,459
-- Next $14,124 at 10.5% = $1,483
-- Total BC tax: $6,368
+BC provincial tax on $80,000 (2026):
+- 5.06% to $50,363, then 7.7% on the rest to $80,000
+- BC tax after credits: about $3,880
 
 CPP and EI:
-- CPP: ($80,000 - $3,500) × 5.95% = $4,552 (capped at $4,034 + $388 CPP2)
-- EI: $80,000 × 1.64% = $1,312 (capped at $1,077)
+- CPP: $4,230 (first tier, maxed) + $216 CPP2 = $4,446
+- EI: capped at the $1,123 maximum
 
 Basic personal amounts reduce total tax by approximately $2,800.
 
 **Marcus's Final Numbers:**
 - Gross annual income: $80,000
-- Total federal + provincial tax: $16,922
-- CPP: $4,422
-- EI: $1,077
-- **Net annual income: $57,579 (about $4,798/month)**
-- **Effective tax rate: 28.0%**
+- Total federal + provincial tax: $13,393 (federal $9,513 + BC $3,880)
+- CPP: $4,446
+- EI: $1,123
+- **Net annual income: $61,038 (about $5,086/month)**
+- **Effective deduction rate: 23.7%**
 
 ### The Vancouver Cost Reality
 
-Now that Marcus knows he has $4,798 per month, let's see what Vancouver living actually costs.
+Now that Marcus knows he has $5,086 per month, let's see what Vancouver living actually costs.
 
 **Monthly Expenses Breakdown:**
 
@@ -378,7 +371,7 @@ Living in a decent one-bedroom apartment in Burnaby (close to SkyTrain):
 - Dining/entertainment: $400
 - Miscellaneous: $300
 - **Total expenses: $3,602**
-- **Remaining for savings: $1,196**
+- **Remaining for savings: $1,484**
 
 Marcus can live comfortably, but home ownership remains distant without a partner's income or significant savings.
 
@@ -388,12 +381,12 @@ At $80,000, who wins?
 
 | Tax Component | British Columbia | Ontario | Difference |
 |--------------|------------------|---------|------------|
-| Federal Tax | $13,354 | $13,354 | Same |
-| Provincial Tax | $6,368 | $6,770 | BC wins by $402 |
-| CPP | $4,422 | $4,422 | Same |
-| EI | $1,077 | $1,077 | Same |
-| **Total Tax + Deductions** | **$25,221** | **$25,623** | **BC wins by $402** |
-| **Net Annual Income** | **$54,779** | **$54,377** | **BC wins by $402** |
+| Federal Tax | $9,513 | $9,513 | Same |
+| Provincial Tax | $3,880 | $4,173 | BC wins by $293 |
+| CPP | $4,446 | $4,446 | Same |
+| EI | $1,123 | $1,123 | Same |
+| **Total Tax + Deductions** | **$18,962** | **$19,256** | **BC wins by $294** |
+| **Net Annual Income** | **$61,038** | **$60,744** | **BC wins by $294** |
 
 **Surprise finding:** BC's tax rate is actually slightly lower than Ontario's at this income level!
 
@@ -733,10 +726,10 @@ const article4: Article = {
   publishedAt: "2025-01-18",
   readTime: 10,
   imageUrl: "https://images.unsplash.com/photo-1579621970563-ebec7560ff3e?w=800&q=80",
-  directAnswer: "CPP and EI are mandatory payroll deductions in Canada; for 2025, employees contribute 5.95% for CPP (up to $4,034.10) and 1.64% for EI (up to $1,077.48) to fund retirement and social safety nets.",
+  directAnswer: "CPP and EI are mandatory payroll deductions in Canada; for 2026, employees contribute 5.95% for CPP (up to $4,230.45) and 1.63% for EI (up to $1,123.07) to fund retirement and social safety nets.",
   faq: [
-    { question: "What is the new CPP2 deduction?", answer: "Starting in 2024/2025, an additional 4% contribution applies to earnings between $73,200 and $81,200 to further enhance the Canada Pension Plan." },
-    { question: "How much EI will I pay in 2025?", answer: "The employee EI rate is 1.64% of insurable earnings, capped at a maximum annual contribution of $1,077.48." },
+    { question: "What is the new CPP2 deduction?", answer: "Since 2024, an additional 4% CPP2 contribution applies to earnings between the first ceiling (YMPE, $74,600 in 2026) and the second ceiling (YAMPE, $85,000 in 2026) to further enhance the Canada Pension Plan." },
+    { question: "How much EI will I pay in 2026?", answer: "The employee EI rate is 1.63% of insurable earnings, capped at a maximum annual contribution of $1,123.07." },
     { question: "What benefits does CPP provide?", answer: "CPP offers retirement pensions, disability benefits, and survivor benefits to those who have contributed to the plan." },
     { question: "What does EI cover?", answer: "EI provides temporary financial assistance to unemployed workers and covers maternity, parental, sickness, and caregiver benefits." },
     { question: "Do self-employed individuals pay CPP and EI?", answer: "Self-employed people pay both the employee and employer portions of CPP but can choose whether to opt into EI special benefits." }
@@ -752,16 +745,16 @@ It's a fair question. CPP and EI are mandatory programs, but many Canadians don'
 
 The Canada Pension Plan is a contributory, earnings-related social insurance program. Think of it as a pension plan that every working Canadian must join.
 
-**How CPP Contributions Work in 2025:**
+**How CPP Contributions Work in 2026:**
 
 | Component | Details | What It Means for You |
 |-----------|---------|----------------------|
 | Employee Rate | 5.95% of pensionable earnings | You pay 5.95%, your employer matches it |
 | Basic Exemption | First $3,500 is exempt | No CPP on income below $3,500 |
-| Year's Maximum Pensionable Earnings (YMPE) | $73,200 | Maximum income subject to base CPP |
-| Maximum Employee Contribution | $4,034.10 | You stop paying base CPP after this |
-| CPP2 Threshold | $81,200 | Higher earners pay additional 4% |
-| CPP2 Maximum | $388 | Additional contribution for high earners |
+| Year's Maximum Pensionable Earnings (YMPE) | $74,600 | Maximum income subject to base CPP |
+| Maximum Employee Contribution | $4,230.45 | You stop paying base CPP after this |
+| CPP2 Ceiling (YAMPE) | $85,000 | Earnings up to here pay the extra 4% |
+| CPP2 Maximum | $416 | Additional contribution for high earners |
 
 **David's Example:**
 - Salary: $68,000
@@ -783,7 +776,7 @@ Your CPP retirement pension depends on:
 
 **Why Most People Don't Get the Maximum:**
 
-To receive the maximum CPP at 65, you need 39 years of maximum contributions (2025: $4,034.10). Most Canadians have gaps:
+To receive the maximum CPP at 65, you need 39 years of maximum contributions (2026: $4,230.45 for the base CPP tier). Most Canadians have gaps:
 - Years with low income
 - Years not working (childcare, education, unemployment)
 - Working years before turning 18 or after 70
@@ -827,14 +820,14 @@ Employment Insurance provides temporary income support when you're unable to wor
 | Parental Benefits | 40-69 weeks | 55% or 33% | Either parent |
 | Caregiving Benefits | 15-35 weeks | 55% of earnings | Caring for critically ill family |
 
-**2025 EI Premiums:**
-- Employee rate: 1.64% of insurable earnings
-- Maximum insurable earnings: $65,700
-- Maximum annual premium: $1,077.48
+**2026 EI Premiums:**
+- Employee rate: 1.63% of insurable earnings
+- Maximum insurable earnings: $68,900
+- Maximum annual premium: $1,123.07
 
 **David's EI Cost:**
 - $68,000 salary
-- EI contribution: $68,000 × 1.64% = $1,115 (capped at $1,077)
+- EI contribution: $68,000 × 1.63% = $1,108
 
 **The Math of EI:**
 
@@ -2301,40 +2294,40 @@ Ontario uses five tax brackets:
 
 Let's see how different incomes compare after taxes in each province.
 
-| Income | Alberta Provincial Tax | Ontario Provincial Tax | Alberta Advantage | Alberta Take-Home | Ontario Take-Home |
+| Income | Alberta Provincial Tax | Ontario Provincial Tax | Alberta Net Advantage | Alberta Take-Home | Ontario Take-Home |
 |--------|----------------------|----------------------|-------------------|-------------------|-------------------|
-| **$40,000** | $1,645 | $1,228 | **-$417** | $35,680 | $36,097 |
-| **$50,000** | $2,190 | $2,207 | **$17** | $43,340 | $43,323 |
-| **$60,000** | $2,765 | $3,123 | **$358** | $50,890 | $50,532 |
-| **$75,000** | $3,856 | $4,722 | **$866** | $61,851 | $60,985 |
-| **$85,000** | $4,757 | $5,638 | **$881** | $68,986 | $68,105 |
-| **$100,000** | $6,224 | $7,069 | **$845** | $78,591 | $77,746 |
-| **$120,000** | $8,224 | $9,369 | **$1,145** | $91,191 | $90,046 |
-| **$150,000** | $11,224 | $13,619 | **$2,395** | $109,941 | $107,546 |
-| **$200,000** | $16,224 | $21,119 | **$4,895** | $143,441 | $138,546 |
+| **$40,000** | $1,153 | $1,221 | **+$69** | $33,122 | $33,053 |
+| **$50,000** | $1,892 | $1,688 | **-$204** | $40,331 | $40,535 |
+| **$60,000** | $2,631 | $2,405 | **-$226** | $47,444 | $47,670 |
+| **$75,000** | $4,025 | $3,726 | **-$299** | $57,090 | $57,389 |
+| **$85,000** | $4,993 | $4,621 | **-$372** | $63,728 | $64,100 |
+| **$100,000** | $6,493 | $6,028 | **-$464** | $74,153 | $74,617 |
+| **$120,000** | $8,493 | $8,743 | **+$250** | $87,890 | $87,640 |
+| **$150,000** | $11,493 | $13,966 | **+$2,473** | $107,090 | $104,617 |
+| **$200,000** | $17,557 | $23,451 | **+$5,895** | $137,470 | $131,575 |
 
-**Key Finding:** Alberta wins at every income level above $50,000. The advantage grows with income.
+**Key Finding:** In 2026 the result is mixed in the middle and clear at the top. Ontario's low 5.05% starting rate keeps mid-range provincial tax down, so **Ontario actually nets slightly more in roughly the $50,000–$100,000 range**. Alberta pulls ahead from about $120,000 up — and its advantage then grows steeply with income (over $5,800 more take-home at $200,000), thanks to its high basic personal amount and flatter brackets.
 
 ### Rachel's Decision: $85K Toronto vs $82K Calgary
 
-**Toronto ($85,000):**
-- Federal tax: $13,354
-- Ontario tax: $5,638
-- CPP: $4,422
-- EI: $1,077
-- **Total deductions: $24,491**
-- **Net income: $60,509** ($5,041/month)
+**Toronto ($85,000), 2026:**
+- Federal tax: $10,510
+- Ontario tax: $4,621
+- CPP: $4,646
+- EI: $1,123
+- **Total deductions: $20,900**
+- **Net income: $64,100** ($5,342/month)
 
-**Calgary ($82,000):**
-- Federal tax: $12,739
-- Alberta tax: $4,546
-- CPP: $4,422
-- EI: $1,077
-- **Total deductions: $22,784**
-- **Net income: $59,216** ($4,935/month)
+**Calgary ($82,000), 2026:**
+- Federal tax: $9,912
+- Alberta tax: $4,703
+- CPP: $4,526
+- EI: $1,123
+- **Total deductions: $20,264**
+- **Net income: $61,736** ($5,145/month)
 
 **The Verdict:**
-Toronto pays $3,000 more gross but only $1,293 more net. The tax advantage is real but smaller than expected because Ontario's lower brackets partially offset the higher brackets.
+In 2026 the math favours Toronto here: the $85K Toronto offer nets about **$2,364 more per year** (~$197/month) than the $82K Calgary offer — the higher gross plus Ontario's low mid-range tax both help. At these incomes Alberta's tax advantage hasn't kicked in yet (it shows up above ~$120K), so the real decision is cost of living, not tax.
 
 ### How does cost of living compare in Alberta vs Ontario?
 

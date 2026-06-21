@@ -43,10 +43,10 @@ export type LandingPage = {
 const coreLandingPages: LandingPage[] = [
   {
     slug: 'salary-after-tax-canada',
-    title: 'Salary After Tax Canada 2025/2026 - Take-Home Pay Calculator',
+    title: 'Salary After Tax Canada 2026 - Take-Home Pay Calculator',
     description:
-      'Estimate salary after tax in Canada for 2025/2026. Calculate federal tax, provincial tax, CPP, EI, net pay, and paycheque amounts by province.',
-    h1: 'Salary After Tax Canada Calculator 2025/2026',
+      'Estimate salary after tax in Canada for 2026. Calculate federal tax, provincial tax, CPP, EI, net pay, and paycheque amounts by province.',
+    h1: 'Salary After Tax Canada Calculator 2026',
     kicker: 'Annual salary to net pay',
     primaryKeyword: 'salary after tax Canada',
     intro:
@@ -73,7 +73,7 @@ const coreLandingPages: LandingPage[] = [
       {
         question: 'How do I calculate salary after tax in Canada?',
         answer:
-          'Start with gross salary, subtract federal income tax, provincial income tax, CPP contributions, EI premiums, and any workplace deductions. CanPay Insights estimates these deductions by province for 2025/2026.',
+          'Start with gross salary, subtract federal income tax, provincial income tax, CPP contributions, EI premiums, and any workplace deductions. CanPay Insights estimates these deductions by province for 2026.',
       },
       {
         question: 'Is take-home pay the same in every province?',
@@ -132,7 +132,7 @@ const coreLandingPages: LandingPage[] = [
   },
   {
     slug: 'hourly-wage-calculator',
-    title: 'Hourly Wage Calculator Canada 2025/2026 - Net Pay by Province',
+    title: 'Hourly Wage Calculator Canada 2026 - Net Pay by Province',
     description:
       'Calculate Canadian hourly wage take-home pay with shift hours, unpaid breaks, overtime, CPP, EI, taxes, and province-specific deductions.',
     h1: 'Hourly Wage Calculator Canada',
@@ -173,10 +173,10 @@ const coreLandingPages: LandingPage[] = [
   },
   {
     slug: 'salary-calculator',
-    title: 'Canadian Salary Calculator 2025/2026 - Annual Salary to Paycheque',
+    title: 'Canadian Salary Calculator 2026 - Annual Salary to Paycheque',
     description:
-      'Convert annual salary into Canadian take-home pay by province. Estimate income tax, CPP, EI, monthly pay, and bi-weekly pay for 2025/2026.',
-    h1: 'Canadian Salary Calculator 2025/2026',
+      'Convert annual salary into Canadian take-home pay by province. Estimate income tax, CPP, EI, monthly pay, and bi-weekly pay for 2026.',
+    h1: 'Canadian Salary Calculator 2026',
     kicker: 'Annual salary calculator',
     primaryKeyword: 'Canadian salary calculator',
     intro:
@@ -255,9 +255,9 @@ const coreLandingPages: LandingPage[] = [
   },
   {
     slug: 'cpp-ei-calculator',
-    title: 'CPP and EI Calculator Canada 2025/2026 - Payroll Deductions',
+    title: 'CPP and EI Calculator Canada 2026 - Payroll Deductions',
     description:
-      'Estimate CPP contributions and EI premiums in Canada for 2025/2026. Learn how CPP, CPP2, and EI affect take-home pay.',
+      'Estimate CPP contributions and EI premiums in Canada for 2026. Learn how CPP, CPP2, and EI affect take-home pay.',
     h1: 'CPP and EI Calculator Canada',
     kicker: 'Payroll deductions explained',
     primaryKeyword: 'CPP EI calculator',
@@ -296,7 +296,7 @@ const coreLandingPages: LandingPage[] = [
   },
   {
     slug: 'ontario-paycheck-calculator',
-    title: 'Ontario Paycheck Calculator 2025/2026 - Take-Home Pay',
+    title: 'Ontario Paycheck Calculator 2026 - Take-Home Pay',
     description:
       'Calculate Ontario take-home pay with federal tax, Ontario tax, CPP, EI, hourly wage, salary, and bi-weekly pay estimates.',
     h1: 'Ontario Paycheck Calculator',
@@ -337,7 +337,7 @@ const coreLandingPages: LandingPage[] = [
   },
   {
     slug: 'bc-paycheck-calculator',
-    title: 'BC Paycheck Calculator 2025/2026 - British Columbia Take-Home Pay',
+    title: 'BC Paycheck Calculator 2026 - British Columbia Take-Home Pay',
     description:
       'Estimate British Columbia take-home pay with federal tax, BC tax, CPP, EI, salary, hourly wage, and pay period deductions.',
     h1: 'BC Paycheck Calculator',
@@ -378,7 +378,7 @@ const coreLandingPages: LandingPage[] = [
   },
   {
     slug: 'alberta-paycheck-calculator',
-    title: 'Alberta Paycheck Calculator 2025/2026 - Take-Home Pay',
+    title: 'Alberta Paycheck Calculator 2026 - Take-Home Pay',
     description:
       'Calculate Alberta take-home pay with federal tax, Alberta tax, CPP, EI, salary, hourly wage, and bi-weekly pay estimates.',
     h1: 'Alberta Paycheck Calculator',
@@ -419,7 +419,7 @@ const coreLandingPages: LandingPage[] = [
   },
   {
     slug: 'quebec-paycheck-calculator',
-    title: 'Quebec Paycheck Calculator 2025/2026 - Take-Home Pay',
+    title: 'Quebec Paycheck Calculator 2026 - Take-Home Pay',
     description:
       'Estimate Quebec take-home pay with federal tax, Quebec tax, payroll deductions, salary, hourly wage, and pay period estimates.',
     h1: 'Quebec Paycheck Calculator',
@@ -725,8 +725,8 @@ const salaryProvinceLandingPages: LandingPage[] = provinceSalaryConfigs.flatMap(
 
     const page: LandingPage = {
       slug: `${slugSalary}-after-tax-${province.slug}`,
-      title: `${salary} After Tax in ${province.shortName}: ${netAnnual} Take-Home (2025/26)`,
-      description: `A ${salary} salary in ${province.name} leaves about ${netAnnual} after tax in 2025/2026 — roughly ${netMonthly}/month or ${netBiWeekly} bi-weekly. See the full federal tax, ${province.shortName} tax, CPP, and EI breakdown.`,
+      title: `${salary} After Tax in ${province.shortName}: ${netAnnual} Take-Home (2026)`,
+      description: `A ${salary} salary in ${province.name} leaves about ${netAnnual} after tax in 2026 — roughly ${netMonthly}/month or ${netBiWeekly} bi-weekly. See the full federal tax, ${province.shortName} tax, CPP, and EI breakdown.`,
       h1: `${salary} After Tax in ${province.shortName}`,
       kicker: 'Salary after tax breakdown',
       primaryKeyword: keyword,
@@ -758,7 +758,7 @@ const salaryProvinceLandingPages: LandingPage[] = provinceSalaryConfigs.flatMap(
       faq: [
         {
           question: `How much is ${salary} after tax in ${province.shortName}?`,
-          answer: `A ${salary} annual salary in ${province.name} leaves approximately ${netAnnual} after tax in 2025/2026 — about ${netMonthly} per month or ${netBiWeekly} bi-weekly. This assumes federal tax, ${province.shortName} tax, CPP, and EI with the basic personal amount only.`,
+          answer: `A ${salary} annual salary in ${province.name} leaves approximately ${netAnnual} after tax in 2026 — about ${netMonthly} per month or ${netBiWeekly} bi-weekly. This assumes federal tax, ${province.shortName} tax, CPP, and EI with the basic personal amount only.`,
         },
         {
           question: `What is ${salary} bi-weekly after tax in ${province.shortName}?`,
@@ -847,9 +847,9 @@ const getRelatedFrenchQuebecLinks = (currentSlug: string, currentAmount?: number
 const frenchCoreLandingPages: LandingPage[] = [
   {
     slug: 'calculateur-salaire-net-quebec',
-    title: 'Calculateur de salaire net Québec 2025/2026 - Paie après impôt',
+    title: 'Calculateur de salaire net Québec 2026 - Paie après impôt',
     description:
-      'Calculez votre salaire net au Québec en 2025/2026 avec impôt fédéral, impôt du Québec, RRQ, assurance emploi, RQAP et paie nette.',
+      'Calculez votre salaire net au Québec en 2026 avec impôt fédéral, impôt du Québec, RRQ, assurance emploi, RQAP et paie nette.',
     h1: 'Calculateur de salaire net au Québec',
     kicker: 'Salaire brut en paie nette',
     primaryKeyword: 'calculateur salaire net Québec',
@@ -882,7 +882,7 @@ const frenchCoreLandingPages: LandingPage[] = [
       {
         question: 'Comment calculer le salaire net au Québec?',
         answer:
-          "Commencez avec le salaire brut, puis soustrayez l'impôt fédéral, l'impôt du Québec, la RRQ, l'assurance emploi, le RQAP et les déductions de l'employeur. CanPay Insights donne une estimation rapide pour 2025/2026.",
+          "Commencez avec le salaire brut, puis soustrayez l'impôt fédéral, l'impôt du Québec, la RRQ, l'assurance emploi, le RQAP et les déductions de l'employeur. CanPay Insights donne une estimation rapide pour 2026.",
       },
       {
         question: 'Le Québec est-il différent des autres provinces?',
@@ -965,8 +965,8 @@ const frenchQuebecSalaryPages: LandingPage[] = frenchQuebecAmounts.map((amount) 
 
   return {
     slug,
-    title: `${salary} après impôt au Québec : ${netAnnual} net (2025/2026)`,
-    description: `Un salaire de ${salary} au Québec laisse environ ${netAnnual} après impôt en 2025/2026 — soit ${netMonthly} par mois. Voyez le détail : impôt fédéral, impôt du Québec, RRQ, RQAP et assurance emploi.`,
+    title: `${salary} après impôt au Québec : ${netAnnual} net (2026)`,
+    description: `Un salaire de ${salary} au Québec laisse environ ${netAnnual} après impôt en 2026 — soit ${netMonthly} par mois. Voyez le détail : impôt fédéral, impôt du Québec, RRQ, RQAP et assurance emploi.`,
     h1: `${salary} après impôt au Québec`,
     kicker: 'Salaire net détaillé',
     primaryKeyword: `${salary} après impôt Québec`,
@@ -995,7 +995,7 @@ const frenchQuebecSalaryPages: LandingPage[] = frenchQuebecAmounts.map((amount) 
     faq: [
       {
         question: `Combien donne ${salary} après impôt au Québec?`,
-        answer: `Un salaire annuel de ${salary} au Québec laisse environ ${netAnnual} après impôt en 2025/2026 — soit ${netMonthly} par mois ou ${netBiWeekly} aux deux semaines, avec le montant personnel de base seulement.`,
+        answer: `Un salaire annuel de ${salary} au Québec laisse environ ${netAnnual} après impôt en 2026 — soit ${netMonthly} par mois ou ${netBiWeekly} aux deux semaines, avec le montant personnel de base seulement.`,
       },
       {
         question: `Quelle est la paie aux deux semaines pour ${salary} au Québec?`,

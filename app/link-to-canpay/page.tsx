@@ -87,7 +87,7 @@ export default function LinkToCanPayPage() {
           <ShareLinks
             compact
             url="https://canpayinsights.ca/"
-            title="Free Canadian Payroll Calculator 2025/2026"
+            title="Free Canadian Payroll Calculator 2026"
             description="Estimate Canadian take-home pay by province with CPP, EI, income tax, salary, hourly wage, and timesheet tools."
           />
           <div className="rounded-xl bg-slate-900 p-6 text-white shadow-sm">

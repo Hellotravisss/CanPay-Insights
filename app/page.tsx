@@ -2,14 +2,14 @@ import type { Metadata } from 'next';
 import App from '../App';
 
 export const metadata: Metadata = {
-  title: 'Free Canadian Payroll Calculator 2025/2026 - CPP, EI & Take-Home Pay',
+  title: 'Free Canadian Payroll Calculator 2026 - CPP, EI & Take-Home Pay',
   description:
     'Calculate Canadian take-home pay by province with federal tax, provincial tax, CPP, EI, hourly wage, annual salary, overtime, and timesheet tools.',
   alternates: {
     canonical: 'https://canpayinsights.ca/',
   },
   openGraph: {
-    title: 'Free Canadian Payroll Calculator 2025/2026',
+    title: 'Free Canadian Payroll Calculator 2026',
     description: 'Calculate Canadian take-home pay by province with CPP, EI, income tax, salary, hourly wage, and timesheet tools.',
     url: 'https://canpayinsights.ca/',
   },
@@ -32,7 +32,7 @@ const homeFaqJsonLd = {
     {
       '@type': 'Question',
       name: 'What is the EI deduction in Canada?',
-      acceptedAnswer: { '@type': 'Answer', text: 'Employment Insurance (EI) is deducted at 1.64% of insurable earnings, up to a yearly maximum of about $1,077. Quebec workers pay a lower EI rate because the province runs its own parental insurance plan (QPIP).' },
+      acceptedAnswer: { '@type': 'Answer', text: 'Employment Insurance (EI) is deducted at 1.63% of insurable earnings in 2026, up to a yearly maximum of about $1,123. Quebec workers pay a lower EI rate because the province runs its own parental insurance plan (QPIP).' },
     },
     {
       '@type': 'Question',
@@ -63,13 +63,13 @@ export default function HomePage() {
       <section className="border-t border-slate-200 bg-white">
         <div className="mx-auto max-w-3xl px-4 py-12">
           <h2 className="mb-3 text-2xl font-bold text-slate-900">
-            How CPP deductions work in 2025/2026
+            How CPP deductions work in 2026
           </h2>
           <p className="mb-6 leading-7 text-slate-600">
             The Canada Pension Plan (CPP) takes 5.95% of your earnings between the $3,500 basic
-            exemption and the yearly maximum ($73,200 in 2025), for a maximum employee contribution
-            of about $4,034. Higher earners also pay CPP2 — an extra 4% on income between $73,200 and
-            roughly $81,200. You and your employer contribute the same amount. Our calculator applies
+            exemption and the yearly maximum ($74,600 in 2026), for a maximum employee contribution
+            of about $4,230. Higher earners also pay CPP2 — an extra 4% on income between $74,600 and
+            $85,000. You and your employer contribute the same amount. Our calculator applies
             these brackets automatically for every province and territory.
           </p>
 
@@ -77,8 +77,8 @@ export default function HomePage() {
             EI premiums and rates across Canada
           </h2>
           <p className="mb-6 leading-7 text-slate-600">
-            Employment Insurance (EI) is deducted at 1.64% of insurable earnings in 2025, up to a
-            maximum of about $1,077 per year. Quebec uses a lower EI rate because it runs its own
+            Employment Insurance (EI) is deducted at 1.63% of insurable earnings in 2026, up to a
+            maximum of about $1,123 per year. Quebec uses a lower EI rate because it runs its own
             parental insurance plan (QPIP) separately. CanPay Insights applies the correct EI and
             QPIP rates based on the province you select.
           </p>
@@ -91,7 +91,7 @@ export default function HomePage() {
             amount in Alberta, Ontario, BC, or Quebec, because each province sets its own tax
             brackets and basic personal amount. Alberta has the highest basic personal amount and no
             provincial sales tax, while Quebec runs its own system with QPP and QPIP. Use the
-            calculator above to compare your real take-home pay by province for 2025 and 2026.
+            calculator above to compare your real take-home pay by province in 2026.
           </p>
         </div>
       </section>

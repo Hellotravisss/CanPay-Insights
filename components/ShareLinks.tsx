@@ -9,7 +9,7 @@ type ShareLinksProps = {
 };
 
 const DEFAULT_URL = 'https://canpayinsights.ca/';
-const DEFAULT_TITLE = 'Free Canadian Payroll Calculator 2025/2026';
+const DEFAULT_TITLE = 'Free Canadian Payroll Calculator 2026';
 const DEFAULT_DESCRIPTION =
   'Estimate Canadian take-home pay by province with CPP, EI, income tax, hourly wage, salary, and timesheet tools.';
 

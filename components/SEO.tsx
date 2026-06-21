@@ -13,8 +13,8 @@ interface SEOProps {
  * 用于动态更新页面的 SEO 标签
  */
 const SEO: React.FC<SEOProps> = ({
-  title = 'CanPay Insights - Canadian Payroll Calculator 2025/2026',
-  description = 'Free Canadian payroll calculator with AI-powered financial insights. Calculate your net pay, taxes, CPP, and EI deductions across all provinces for 2025/2026.',
+  title = 'CanPay Insights - Canadian Payroll Calculator 2026',
+  description = 'Free Canadian payroll calculator with AI-powered financial insights. Calculate your net pay, taxes, CPP, and EI deductions across all provinces for 2026.',
   keywords = 'Canada payroll calculator, Canadian salary calculator, net pay calculator, tax calculator Canada',
   canonicalUrl = 'https://canpayinsights.ca/',
 }) => {

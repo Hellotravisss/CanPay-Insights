@@ -893,7 +893,7 @@ const GeminiAdvisor: React.FC<Props> = ({ results, inputs }) => {
                   CanPay <span className="text-red-500">Insights</span>
                 </h1>
               </div>
-              <p className="text-slate-400 text-2xl font-medium">2025/2026 Tax Report</p>
+              <p className="text-slate-400 text-2xl font-medium">2026 Tax Report</p>
             </div>
             <div className="flex gap-12 text-right">
               <div>
