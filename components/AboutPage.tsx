@@ -107,7 +107,10 @@ const AboutPage: React.FC = () => {
                   independent developer based in Vancouver, British Columbia, who wrote the open rules engine
                   behind the calculator. It is a small, self-funded project — not a bank, payroll company, or
                   financial institution. That independence is the point: the tool exists to give workers a
-                  straight answer, with no product to upsell. Connect on{" "}
+                  straight answer. We have no product of our own to sell, and the calculator stays free. We
+                  sometimes include a clearly labelled referral link (such as Wealthsimple) and may earn a
+                  sign-up bonus, but it never affects our numbers or what we recommend — see our{" "}
+                  <a href="/affiliate-disclosure" className="text-red-600 hover:text-red-700 font-medium underline underline-offset-2 transition-colors">affiliate disclosure</a>. Connect on{" "}
                   <a href="https://www.linkedin.com/in/travis-z" target="_blank" rel="noopener noreferrer me" className="text-red-600 hover:text-red-700 font-medium underline underline-offset-2 transition-colors">LinkedIn</a>.
                 </p>
               </div>

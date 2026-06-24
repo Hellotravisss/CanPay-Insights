@@ -212,6 +212,36 @@ const CalculatorCTA = () => {
   );
 };
 
+// Wealthsimple referral, shown ONLY on the two investment-account articles.
+// Uses the personal invite link for now; swap WEALTHSIMPLE_REFERRAL_URL for a
+// formal affiliate link if/when the Wealthsimple affiliate program is approved.
+const WEALTHSIMPLE_REFERRAL_URL = 'https://www.wealthsimple.com/invite/KGAAWL';
+const WEALTHSIMPLE_ARTICLE_SLUGS = ['tfsa-vs-rrsp-canada-2025', 'rrsp-tax-savings-canada-2025'];
+
+const WealthsimpleCTA = () => {
+  return (
+    <div className="my-8 rounded-xl border border-slate-200 bg-slate-50 p-6">
+      <h2 className="mb-2 text-xl font-bold text-slate-900">Where Canadians actually hold TFSAs and RRSPs</h2>
+      <p className="mb-4 text-sm leading-6 text-slate-600">
+        If you&apos;re opening one of these accounts, Wealthsimple is a low-fee option many Canadians use for
+        self-directed and automated investing.
+      </p>
+      <a
+        href={WEALTHSIMPLE_REFERRAL_URL}
+        target="_blank"
+        rel="noopener noreferrer sponsored"
+        className="inline-flex items-center gap-2 rounded-lg bg-slate-900 px-5 py-2.5 font-bold text-white no-underline transition-colors hover:bg-slate-700"
+      >
+        See Wealthsimple
+      </a>
+      <p className="mt-3 text-xs text-slate-400">
+        Paid referral link — we may earn a bonus if you sign up, at no extra cost to you.{' '}
+        <a href="/affiliate-disclosure" className="underline hover:text-slate-600">Learn more</a>.
+      </p>
+    </div>
+  );
+};
+
 const CalculatorLinksPanel = ({ article }: { article: Article }) => {
   const calculatorLinks = getCalculatorLinks(article);
 
@@ -312,6 +342,8 @@ export default function ArticleView({ slug }: ArticleViewProps) {
           </div>
 
           <CalculatorCTA />
+
+          {WEALTHSIMPLE_ARTICLE_SLUGS.includes(article.slug) && <WealthsimpleCTA />}
 
           {article.faq && article.faq.length > 0 && (
             <section className="mt-10 border-t border-slate-200 pt-8">

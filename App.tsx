@@ -509,6 +509,9 @@ const App: React.FC = () => {
             <a href="/privacy" className="text-slate-400 no-underline transition-colors hover:text-red-600">
               Privacy
             </a>
+            <a href="/affiliate-disclosure" className="text-slate-400 no-underline transition-colors hover:text-red-600">
+              Disclosure
+            </a>
             <a href="/link-to-canpay" className="text-slate-400 no-underline transition-colors hover:text-red-600">
               Link to Us
             </a>
@@ -575,6 +578,12 @@ const App: React.FC = () => {
               className="text-slate-400 hover:text-red-600 transition-colors"
             >
               Privacy Policy
+            </a>
+            <a
+              href="/affiliate-disclosure"
+              className="text-slate-400 hover:text-red-600 transition-colors"
+            >
+              Affiliate Disclosure
             </a>
             <a
               href="/link-to-canpay"
