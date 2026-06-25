@@ -361,4 +361,147 @@ For your real take-home pay including income tax, CPP, and EI for your province,
 *Figures use 2026 CRA rates. Confirm current rates with the CRA or use the calculator.*
 `,
   },
+  {
+    id: 'study-5',
+    slug: 'commission-tax-canada-2026',
+    title: 'Commission Tax in Canada 2026: How Much You Actually Take Home',
+    subtitle: 'Commission is not taxed higher than salary — it is withheld higher. Here is what you really keep.',
+    excerpt:
+      'Commission is taxed at the same rates as salary in Canada — it just gets withheld more on lump-sum cheques. An Ontario salesperson on a $50,000 base keeps about 67% of each commission dollar after tax. Real take-home by province, the bonus-method withholding explained, and the Line 22900 deductions only commission employees can claim.',
+    metaTitle: 'Commission Tax in Canada 2026: How Much You Take Home',
+    metaDescription:
+      'Is commission taxed higher than salary in Canada? No — it is withheld higher, not taxed higher. See how much commission you actually keep after tax by province, plus CPP/EI, the bonus method, and commission-employee deductions.',
+    keywords: [
+      'commission tax calculator canada',
+      'how is commission taxed in canada',
+      'is commission taxed higher than salary canada',
+      'why is my commission taxed so much',
+      'how much of my commission do i keep',
+      'commission take home pay canada',
+      'real estate commission tax canada',
+      'base plus commission tax',
+    ],
+    category: 'tax',
+    tags: ['Commission', 'Sales', '2026', 'Take-Home Pay'],
+    publishedAt: '2026-06-24',
+    readTime: 9,
+    directAnswer:
+      'No — commission is not taxed at a higher rate than salary in Canada. A dollar of commission is taxed at the exact same federal and provincial brackets as a dollar of salary, and CPP and EI apply the same way. It only feels higher because lump-sum commission cheques are often withheld at a higher rate, which you reconcile when you file. In Ontario, someone on a $50,000 base keeps roughly two-thirds — about 67% — of every commission dollar after tax.',
+    faq: [
+      {
+        question: 'Is commission taxed higher than salary in Canada?',
+        answer:
+          'No. Commission earned as an employee is ordinary employment income, taxed at the same federal and provincial brackets as salary. There is no special commission tax rate. It can feel higher because lump-sum commission is often withheld at a higher rate up front, but the actual tax is identical to salary and is settled when you file.',
+      },
+      {
+        question: 'Why was so much tax taken off my commission cheque?',
+        answer:
+          'When commission or a bonus is paid as a separate lump sum, employers use the CRA "bonus method," which annualizes the payment to estimate withholding. On a big cheque that can look like a lot, but it is only an estimate of tax, not the final amount. You reconcile the difference at filing — sometimes a refund, sometimes a balance owing.',
+      },
+      {
+        question: 'How much of my commission do I actually keep?',
+        answer:
+          'In Ontario, a salesperson on a $50,000 base keeps roughly 67-71% of each commission dollar after federal tax, provincial tax, CPP and EI — for example, about $20,200 of a $30,000 commission. The exact share depends on your total income and province.',
+      },
+      {
+        question: 'Do I pay CPP and EI on commission?',
+        answer:
+          'Yes. For an employee, commission is pensionable and insurable just like salary, so CPP (and CPP2 above the first ceiling) and EI come off, up to the same annual maximums. Once you hit the yearly CPP/EI maximum, no more is deducted. Self-employed commission earners pay both halves of CPP and generally no EI.',
+      },
+      {
+        question: 'Is commission self-employment income?',
+        answer:
+          'It depends. A T4 employee paid commission has employment income with tax, CPP and EI withheld at source. An independent contractor (often issued a T4A, like many real estate agents) has self-employment business income: no tax is withheld, you pay by instalments, you pay both halves of CPP, no EI, and you may need to charge GST/HST once revenue passes $30,000.',
+      },
+      {
+        question: 'What can commission employees deduct to lower their tax?',
+        answer:
+          'If your pay varies with sales and you have a signed Form T2200 from your employer, you can claim commission-employee expenses on Form T777 (Line 22900) that salaried employees cannot — such as advertising, client meals (50%), and a portion of home insurance and property tax. The total is capped at the commission you earned that year, except for interest and capital cost allowance on your vehicle. A T2200 is required but does not by itself make an expense deductible.',
+      },
+    ],
+    content: `
+## Is commission taxed higher than salary? (No)
+
+This is the biggest myth in sales pay: **commission is not taxed at a higher rate than salary.** A dollar of commission and a dollar of salary are taxed at the exact same federal and provincial brackets, and the same CPP and EI rules apply.
+
+On your T4, commissions show up in Box 42 — but that amount is **already included** in Box 14 (total employment income). It is shown separately only so the CRA can see how much of your pay was commission. It is **not** added on top of your income.
+
+So why does your commission cheque feel like it gets hammered? Because of **withholding**, not the tax rate.
+
+## How much of your commission do you actually keep?
+
+Here is the real math for an **Ontario** salesperson on a **$50,000 base salary**. The table shows how much of each commission you keep after federal tax, provincial tax, CPP and EI (2026):
+
+| Commission earned | Total income | You keep (after tax) | Keep rate |
+| --- | --- | --- | --- |
+| $10,000 | $60,000 | $7,135 | 71% |
+| $30,000 | $80,000 | $20,209 | 67% |
+| $60,000 | $110,000 | $40,881 | 68% |
+
+So a big commission year nets you roughly **two-thirds of the commission** — not the half-or-less that a lump-sum cheque's withholding makes it look like.
+
+## Why your commission cheque looks so heavily taxed
+
+When commission (or a bonus) is paid as a **separate lump-sum cheque**, the CRA tells employers to use the **"bonus method"** so they do not massively over-withhold. In short, it annualizes the payment: spread the commission across your pay periods, calculate the tax on your regular pay plus that slice, and withhold the difference.
+
+The key point: **withholding is only an estimate of your tax, not the final tax.** Your real tax is always calculated on your **total** annual income when you file. CRA's own illustration shows a $5,000 payment withholding roughly $1,000 under the bonus method versus about $1,800 under the plain periodic method — but actual amounts vary by pay frequency, province and your regular pay.
+
+Because commission is lumpy and can push you into a higher bracket, withholding often does not match your real tax:
+
+- **Over-withheld** → you get a **refund** at filing.
+- **Under-withheld** → you have a **balance owing.**
+
+Neither is "extra tax" — it is just settling up. If you regularly come up short, ask your employer about **Form TD1X**, which can base your withholding on your estimated net annual commission.
+
+## Do you pay CPP and EI on commission?
+
+Yes. For an employee, commission is pensionable and insurable exactly like salary, so **CPP** (plus **CPP2** above the first ceiling) and **EI** are deducted up to the same annual maximums. Once you hit the yearly maximum, deductions stop for the rest of the year.
+
+## Employee (T4) vs. self-employed (T4A) — realtors, contractors, agents
+
+The tax **rate** is the same either way. What changes is everything around it:
+
+| | T4 employee | Self-employed (T4A) |
+| --- | --- | --- |
+| Income type | Employment income | Business income |
+| Tax withheld? | Yes, at source | No — pay by instalments |
+| CPP | You + employer split | You pay **both** halves |
+| EI | Yes | No (optional only) |
+| GST/HST | No | Register once over $30,000 |
+| Expenses | Limited (T2200 / T777) | Broad business expenses (T2125) |
+
+Many **real estate agents** are self-employed, so they typically owe a larger balance at filing (no tax withheld) and pay both halves of CPP. **Insurance and financial commissions** are often GST/HST-exempt — a separate wrinkle from the $30,000 rule.
+
+## Lower your tax: the commission-employee deduction (Line 22900)
+
+This is the one real tax break unique to commission **employees**. With a signed **Form T2200** from your employer, you can deduct employment expenses on **Form T777** (Line 22900) that salaried employees cannot. To qualify, **all** of these must be true:
+
+1. Your pay **varies with sales** volume or contracts (a fixed "commission" does not count);
+2. Your contract requires you to **pay your own expenses**;
+3. You **normally work away** from the employer's place of business;
+4. You did **not** get a tax-free travel allowance.
+
+What you can deduct that salaried employees cannot includes **advertising and promotion**, **client meals and entertainment** (50%), licences and liability insurance, and a portion of **home insurance and property tax** for a work-space at home.
+
+The catch: except for **interest and capital cost allowance on your vehicle**, your total deductions cannot exceed the **commission you earned** that year — you cannot use sales expenses to create a loss. And a T2200 is **necessary but not sufficient**: each expense still has to genuinely qualify, be unreimbursed, and be receipted.
+
+## Same $80,000, different province
+
+A salesperson earning **$50,000 base + $30,000 commission = $80,000** keeps a different amount depending on where they live (2026 take-home):
+
+| Province | Take-home on $80,000 |
+| --- | --- |
+| British Columbia | $61,038 |
+| Ontario | $60,744 |
+| Alberta | $60,409 |
+| Quebec | $57,077 |
+| Nova Scotia | $56,095 |
+
+## See your own number
+
+Add your **base + expected commission** together and drop the total into the [free take-home calculator](/) to see your real net pay for your province — it is the same math the tables above use. You can also [compare provinces](/compare-provinces) or see [how much CPP](/blog/how-much-cpp-will-i-pay-2026) and [EI](/blog/how-much-ei-will-i-pay-2026) come off.
+
+*General information for 2026, not tax advice. Commission tax rules (the bonus method, the four T2200 conditions, Line 22900) are stable year to year, but dollar thresholds like the CPP/EI ceilings change annually — confirm current figures with the CRA.*
+`,
+  },
 ];
