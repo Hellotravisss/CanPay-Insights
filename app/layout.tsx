@@ -76,6 +76,10 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
               url: 'https://canpayinsights.ca/',
               logo: 'https://canpayinsights.ca/apple-touch-icon.png',
               email: 'info@canpayinsights.ca',
+              sameAs: [
+                'https://apps.apple.com/app/canpayinsights/id6759822038',
+                'https://github.com/Hellotravisss/canpay-open-data',
+              ],
               description:
                 'Free Canadian payroll and take-home pay calculator covering federal tax, provincial tax, CPP/CPP2, EI, and Quebec QPP/QPIP for 2026.',
               founder: {
