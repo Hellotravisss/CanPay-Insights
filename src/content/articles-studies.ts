@@ -504,4 +504,107 @@ Add your **base + expected commission** together and drop the total into the [fr
 *General information for 2026, not tax advice. Commission tax rules (the bonus method, the four T2200 conditions, Line 22900) are stable year to year, but dollar thresholds like the CPP/EI ceilings change annually — confirm current figures with the CRA.*
 `,
   },
+  {
+    id: 'study-6',
+    slug: 'canada-groceries-essentials-benefit-2026',
+    title: 'Canada Groceries and Essentials Benefit 2026: Who Gets How Much (and When)',
+    subtitle: 'The GST/HST credit becomes the Groceries and Essentials Benefit on July 3, 2026 — with maximum payments rising 25% a year for five years.',
+    excerpt:
+      'Ottawa is replacing the GST/HST credit with the Canada Groceries and Essentials Benefit starting July 3, 2026. Here is what changes, how much you can get, the one-time June top-up, and the 2026 payment dates.',
+    metaTitle: 'Canada Groceries and Essentials Benefit 2026: Amounts, Dates & Eligibility',
+    metaDescription:
+      'The Canada Groceries and Essentials Benefit replaces the GST/HST credit on July 3, 2026, with maximums up 25% a year for five years. Amounts, the June top-up, payment dates, and who qualifies.',
+    keywords: [
+      'canada groceries and essentials benefit',
+      'groceries and essentials benefit 2026',
+      'GST HST credit replacement 2026',
+      'CRA grocery rebate 2026',
+      'when is the groceries benefit paid',
+      'how much is the groceries and essentials benefit',
+    ],
+    category: 'news',
+    tags: ['CRA', 'benefits', 'GST/HST credit', 'cost of living', '2026'],
+    publishedAt: '2026-06-26',
+    readTime: 5,
+    imageUrl: '/blog/groceries-essentials-benefit-2026.svg',
+    directAnswer:
+      'The Canada Groceries and Essentials Benefit (CGEB) replaces the GST/HST credit starting with the July 3, 2026 payment. It keeps the same eligibility and quarterly schedule, but maximum amounts rise 25% per year for five years — so a couple with two children could receive up to about $1,890 in 2026, versus roughly $1,066 under the old GST/HST credit. Most people get it automatically once they have filed their taxes, and there is also a one-time top-up landing by June 2026 equal to 50% of your 2025–26 GST/HST credit.',
+    faq: [
+      {
+        question: 'When does the Canada Groceries and Essentials Benefit start?',
+        answer:
+          'It replaces the GST/HST credit starting with the July 3, 2026 quarterly payment, then continues quarterly (the next payment is October 5, 2026).',
+      },
+      {
+        question: 'How much is the Groceries and Essentials Benefit?',
+        answer:
+          'It depends on your income and family size. Maximums rise 25% per year for five years from July 2026 — for example, a couple with two children could receive up to about $1,890 in 2026, versus roughly $1,066 under the old GST/HST credit.',
+      },
+      {
+        question: 'Do I need to apply for the Groceries and Essentials Benefit?',
+        answer:
+          'No. It is automatic once you have filed your tax return, even if you had no income. New residents of Canada may need to file a one-time form (RC151) to start receiving it.',
+      },
+      {
+        question: 'Is the Groceries and Essentials Benefit taxable?',
+        answer:
+          'No. Like the GST/HST credit it replaces, the benefit is tax-free and does not count as income on your tax return.',
+      },
+      {
+        question: 'What is the one-time top-up in June 2026?',
+        answer:
+          'Before the switch, the CRA is sending a one-time payment no later than June 2026 equal to 50% of your 2025–26 GST/HST credit — reported as up to about $267 for a single adult and up to about $717 for a family of four.',
+      },
+      {
+        question: 'Does the benefit change my take-home pay?',
+        answer:
+          'No. It is a separate, tax-free payment from the CRA, not a payroll deduction, so it does not change your paycheque — it is extra money toward your budget.',
+      },
+    ],
+    content: `
+## What is the Groceries and Essentials Benefit?
+
+The **Canada Groceries and Essentials Benefit (CGEB)** is the federal government's new, larger version of the **GST/HST credit**. It starts with the **July 3, 2026** quarterly payment and is meant to help offset the cost of groceries and everyday essentials.
+
+The parts you already know stay the same: it is **tax-free**, paid **quarterly**, and you do **not** apply for it — the Canada Revenue Agency (CRA) works out your amount from your tax return. What changes is the size: **maximum payments rise 25% per year for five years**, beginning July 2026.
+
+## How much can you get?
+
+Your amount depends on your **income, marital status, and number of children**, exactly like the old GST/HST credit. The headline change is how much bigger the maximums get. Using the government's own illustration:
+
+| Household | Old GST/HST credit (max) | Groceries & Essentials Benefit, 2026 (max) |
+| --- | --- | --- |
+| Couple with two children | ~$1,066 | up to ~$1,890 |
+
+That is roughly an **$824 increase** for that family — and because the maximum keeps growing 25% a year through 2030, the gap widens every year.
+
+Your own amount depends on your income and family size: lower-income households get the full amount, and it phases out as income rises, the same way the GST/HST credit always has.
+
+## The one-time top-up landing by June 2026
+
+Ahead of the switch, the CRA is sending a **one-time top-up** no later than **June 2026**, equal to **50% of the annual value of your 2025–26 GST/HST credit**. Reported figures put this at up to about **$267 for a single adult** and up to about **$717 for a family of four** — a bonus on top of your regular payment. You don't need to do anything; if you qualified for the GST/HST credit, it arrives automatically.
+
+## 2026 payment dates
+
+| Date | Payment |
+| --- | --- |
+| April 2, 2026 | Final GST/HST credit (no increase) |
+| July 3, 2026 | First Groceries & Essentials Benefit (increased) |
+| October 5, 2026 | Groceries & Essentials Benefit |
+
+Payments continue quarterly after that.
+
+## Do you need to apply?
+
+**No.** For almost everyone the benefit is **automatic** once you have filed your income tax return — even if you had no income. **New residents** of Canada may need to submit a one-time form (RC151) to get started. The single most important thing you can do to keep receiving it is **file your taxes on time every year**.
+
+## What it means for your budget
+
+The CGEB is money **on top of** your paycheque, not a payroll deduction — so it does not change your take-home pay, but it does change how far that pay goes. To see what you actually keep from work first, use the [free take-home pay calculator](/) for your province, then treat the benefit as a separate, tax-free top-up to your monthly budget. You can also check [how much CPP](/blog/how-much-cpp-will-i-pay-2026) and [EI](/blog/how-much-ei-will-i-pay-2026) come off your pay.
+
+## Sources & disclaimer
+
+Based on Government of Canada / CRA announcements and reporting on the Canada Groceries and Essentials Benefit (2026). Amounts and dates are as announced and can change; your exact payment depends on your income and family situation. This is general information, not tax or financial advice — confirm current figures with the [CRA](https://www.canada.ca/en/revenue-agency.html).
+`,
+  },
 ];
