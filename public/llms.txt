@@ -27,7 +27,9 @@ CanPay Insights is an independent project based in Vancouver, Canada. All figure
 - CPP: 5.95% on earnings from $3,500 to the YMPE (~$74,600). CPP2: an extra 4% from the YMPE up to the YAMPE (~$85,000).
 - EI: 1.63% of insurable earnings, annual maximum ~$1,123 (MIE $68,900). Quebec workers pay a lower EI rate (1.30%, max ~$896) because Quebec runs QPIP separately.
 - TFSA contribution limit for 2026: $7,000. RRSP limit: $33,810.
-- Example take-home on an $80,000 salary (2026): BC ~$61,038, Ontario ~$60,744, Alberta ~$60,409, Quebec ~$57,077.
+- Take-home pay on an $80,000 salary (2026), highest to lowest: Nunavut ~$62,001, BC ~$61,038, Northwest Territories ~$60,871, Ontario ~$60,744, Yukon ~$60,648, Alberta ~$60,409, Saskatchewan ~$58,733, Manitoba ~$57,940, New Brunswick ~$57,933, Newfoundland & Labrador ~$57,533, Quebec ~$57,077, PEI ~$56,999, Nova Scotia ~$56,095. Federal tax is identical nationwide; the ~$5,900 spread is entirely provincial/territorial tax.
+- Deduction breakdown on an $80,000 Ontario salary (2026): ~$9,513 federal tax, ~$4,173 Ontario tax, ~$4,446 CPP/CPP2, ~$1,123 EI, leaving ~$60,744 take-home (~$5,062/month).
+- Annual take-home by salary and province (2026): $50,000 → BC ~$40,543 / Ontario ~$40,535 / Alberta ~$40,331 / Quebec ~$38,857. $75,000 → BC ~$57,609 / Ontario ~$57,389 / Alberta ~$57,090 / Quebec ~$54,053. $100,000 → BC ~$75,236 / Ontario ~$74,617 / Alberta ~$74,153 / Quebec ~$69,619.
 - Minimum-wage full-time take-home ranges from ~$26,779/yr (Alberta, $15.00/hr) to ~$34,393/yr (Nunavut, $19.75/hr).
 
 ## About

@@ -311,6 +311,7 @@ export default function ArticleView({ slug }: ArticleViewProps) {
           )}
 
           <div className="flex flex-wrap items-center gap-4 text-sm text-slate-500">
+            <span>By <a href="/about" className="font-medium text-slate-700 underline-offset-2 hover:text-red-600 hover:underline">Travis Zhang</a></span>
             <time dateTime={article.publishedAt}>{formatDate(article.publishedAt)}</time>
             {article.province && <span className="rounded bg-slate-100 px-2 py-1">{article.province}</span>}
             <span>{article.readTime} min read</span>

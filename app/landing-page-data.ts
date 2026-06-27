@@ -139,7 +139,7 @@ const coreLandingPages: LandingPage[] = [
     kicker: 'Hourly pay to take-home pay',
     primaryKeyword: 'hourly wage calculator Canada',
     intro:
-      'Estimate take-home pay from your hourly wage, weekly schedule, unpaid breaks, overtime, and province. This is useful for part-time workers, hourly employees, students, restaurant staff, retail workers, and anyone whose pay changes by shift.',
+      'At $25 an hour working full-time (about $52,000 a year), you take home roughly $42,031 a year in Ontario in 2026 — about $20.21 of every $25 hour after federal tax, provincial tax, CPP/CPP2, and EI. Enter your hourly wage, weekly schedule, unpaid breaks, overtime, and province below for an exact estimate — useful for part-time, hourly, student, restaurant, and retail workers.',
     examples: ['$20 per hour after tax in Ontario', '$25/hour take-home pay Canada', 'Bi-weekly hourly wage calculator'],
     sections: [
       {
@@ -180,7 +180,7 @@ const coreLandingPages: LandingPage[] = [
     kicker: 'Annual salary calculator',
     primaryKeyword: 'Canadian salary calculator',
     intro:
-      'Compare gross salary and take-home pay across Canada. CanPay Insights helps salaried employees estimate deductions by province and understand what lands in each paycheque.',
+      'A $60,000 salary in Canada takes home about $47,670 a year in Ontario in 2026 — roughly $3,972 a month — after federal tax, provincial tax, CPP/CPP2, and EI. CanPay Insights breaks any gross salary down into monthly and bi-weekly net pay by province; choose yours and enter your salary below.',
     examples: ['$70,000 salary calculator Canada', 'Bi-weekly salary after tax', 'Monthly net pay calculator Canada'],
     sections: [
       {
@@ -262,7 +262,7 @@ const coreLandingPages: LandingPage[] = [
     kicker: 'Payroll deductions explained',
     primaryKeyword: 'CPP EI calculator',
     intro:
-      'CPP and EI are two of the most common deductions on Canadian paycheques. CanPay Insights estimates how these payroll deductions affect your take-home pay alongside income tax.',
+      'On an $80,000 salary in 2026, CPP and CPP2 take about $4,446 and EI takes about $1,123 — roughly $5,569 a year combined, before any income tax. CPP is 5.95% of earnings between $3,500 and $74,600, plus 4% CPP2 up to $85,000; EI is 1.63% to a $1,123 maximum (Quebec workers pay a lower 1.30% EI rate plus QPIP). Enter your salary and province below to see your exact CPP, CPP2, and EI for the year.',
     examples: ['CPP deduction calculator 2025', 'EI premium calculator Canada', 'CPP and EI on bi-weekly pay'],
     sections: [
       {
@@ -303,7 +303,7 @@ const coreLandingPages: LandingPage[] = [
     kicker: 'Ontario take-home pay',
     primaryKeyword: 'Ontario paycheck calculator',
     intro:
-      'Estimate your Ontario paycheque after federal tax, Ontario provincial tax, CPP, EI, and workplace deductions. Useful for Toronto, Ottawa, Mississauga, Brampton, Hamilton, London, and workers across Ontario.',
+      'On an $80,000 salary in Ontario in 2026, you take home about $60,744 a year — roughly $5,062 a month — after about $9,513 federal tax, $4,173 Ontario tax, $4,446 CPP/CPP2, and $1,123 EI. Enter your own wage or salary below to estimate your Ontario paycheque, useful for Toronto, Ottawa, Mississauga, Brampton, Hamilton, and across Ontario.',
     examples: ['$65,000 after tax Ontario', '$25/hour after tax Ontario', 'Toronto take-home pay calculator'],
     sections: [
       {
@@ -395,7 +395,7 @@ const coreLandingPages: LandingPage[] = [
     kicker: 'Alberta take-home pay',
     primaryKeyword: 'Alberta paycheck calculator',
     intro:
-      'Estimate your Alberta paycheque after federal tax, Alberta provincial tax, CPP, EI, and workplace deductions. Useful for Calgary, Edmonton, Red Deer, Lethbridge, Fort McMurray, and workers across Alberta.',
+      'On an $80,000 salary in Alberta in 2026, you take home about $60,409 a year — roughly $5,034 a month — after about $9,513 federal tax, $4,509 Alberta tax, $4,446 CPP/CPP2, and $1,123 EI. Enter your own wage or salary below to estimate your Alberta paycheque, useful for Calgary, Edmonton, Red Deer, Lethbridge, Fort McMurray, and across Alberta.',
     examples: ['$80,000 after tax Alberta', '$35/hour after tax Calgary', 'Alberta salary calculator'],
     sections: [
       {
@@ -436,7 +436,7 @@ const coreLandingPages: LandingPage[] = [
     kicker: 'Quebec take-home pay',
     primaryKeyword: 'Quebec paycheck calculator',
     intro:
-      'Estimate take-home pay in Quebec after income tax and payroll deductions. Quebec payroll can differ from other provinces, so province-specific estimates are especially important.',
+      'On an $80,000 salary in Quebec in 2026, you take home about $57,077 a year — roughly $4,756 a month — after about $7,941 federal tax (reduced by the Quebec abatement), $9,047 Quebec tax, $5,039 QPP and QPIP, and $896 EI. Quebec payroll differs from the rest of Canada, so a Quebec-specific estimate matters — enter your wage or salary below for Montreal, Quebec City, Laval, Gatineau, and across Quebec.',
     examples: ['$100,000 after tax Quebec', '$65,000 after tax Quebec', 'Montreal take-home pay calculator', 'Quebec salary calculator'],
     sections: [
       {

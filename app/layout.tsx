@@ -82,6 +82,9 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
               ],
               description:
                 'Free Canadian payroll and take-home pay calculator covering federal tax, provincial tax, CPP/CPP2, EI, and Quebec QPP/QPIP for 2026.',
+              disambiguatingDescription:
+                'An independent, free Canadian take-home-pay and payroll calculator website for the 2026 tax year, created in Vancouver by Travis Zhang. It is a web tool for estimating net pay by province — not a payroll-processing company or a payments application.',
+              slogan: 'Free Canadian take-home pay calculator',
               founder: {
                 '@type': 'Person',
                 name: 'Travis Zhang',
@@ -89,6 +92,17 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
                 sameAs: ['https://www.linkedin.com/in/travis-z'],
               },
               areaServed: 'CA',
+              foundingLocation: {
+                '@type': 'Place',
+                address: { '@type': 'PostalAddress', addressLocality: 'Vancouver', addressRegion: 'BC', addressCountry: 'CA' },
+              },
+              address: { '@type': 'PostalAddress', addressLocality: 'Vancouver', addressRegion: 'BC', addressCountry: 'CA' },
+              contactPoint: {
+                '@type': 'ContactPoint',
+                contactType: 'customer support',
+                email: 'info@canpayinsights.ca',
+                availableLanguage: ['en', 'fr', 'zh'],
+              },
               knowsAbout: ['Canadian payroll', 'take-home pay', 'income tax', 'CPP', 'CPP2', 'EI', 'RRSP', 'TFSA', 'QPP', 'QPIP'],
             },
             {
