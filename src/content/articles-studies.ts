@@ -122,7 +122,7 @@ We will update this study when the new rates take effect.
 
 Calculations use the CanPay Insights tax engine with 2026 federal and provincial tax brackets, CPP/CPP2 (QPP/QPP2 and QPIP for Quebec), and EI premiums. We assume a single worker, full-time hours (2,080 hours/year), no RRSP contributions, no benefits, and basic personal amounts only. Real paycheques will vary with credits, benefits, and actual hours. Minimum wage rates are current as of June 12, 2026, sourced from the [Government of Canada minimum wage database](https://minwage-salairemin.service.canada.ca/en/general.html) and provincial announcements.
 
-You can verify any figure with our [free payroll calculator](/) or the province pages, for example [$35,000 after tax in Ontario](/35000-after-tax-ontario) and the [hourly wage calculator](/hourly-wage-calculator).
+You can verify any figure with our [free payroll calculator](/) or the province pages, for example the [Ontario paycheck calculator](/ontario-paycheck-calculator) and the [hourly wage calculator](/hourly-wage-calculator).
 
 *This study is free to cite and republish with attribution and a link to this page.*
 `,
@@ -216,7 +216,7 @@ Both are mandatory and both are matched by your employer. The upside: higher con
 
 ## See your own number
 
-CPP2 is built into the CanPay Insights calculator. Enter your salary and province to see exactly how much CPP, CPP2, EI, and tax come off your pay for 2025 and 2026 — try the [free payroll calculator](/), or check a specific salary like [$90,000 after tax in Ontario](/90000-after-tax-ontario).
+CPP2 is built into the CanPay Insights calculator. Enter your salary and province to see exactly how much CPP, CPP2, EI, and tax come off your pay for 2025 and 2026 — try the [free payroll calculator](/), or check any salary with [salary after tax in Canada](/salary-after-tax-canada).
 
 *Figures reflect 2025 CRA ceilings; 2026 ceilings are higher. Always confirm the current year's amounts with the CRA or use the calculator for an up-to-date estimate.*
 `,

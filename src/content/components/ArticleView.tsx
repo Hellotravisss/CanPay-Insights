@@ -18,23 +18,23 @@ const categoryLabels: Record<string, string> = {
 const provinceCalculatorLinks: Record<string, Array<{ href: string; label: string; description: string }>> = {
   Ontario: [
     { href: '/ontario-paycheck-calculator', label: 'Ontario paycheck calculator', description: 'Estimate Ontario take-home pay with tax, CPP, and EI.' },
-    { href: '/65000-after-tax-ontario', label: '$65,000 after tax Ontario', description: 'A common job-offer salary check for Ontario workers.' },
+    { href: '/salary-after-tax-canada', label: 'Salary after tax in Canada', description: 'See take-home pay for any salary, province by province.' },
     { href: '/compare-provinces', label: 'Compare provinces', description: 'See whether the same salary goes further in another province.' },
   ],
   'British Columbia': [
     { href: '/bc-paycheck-calculator', label: 'BC paycheck calculator', description: 'Estimate BC take-home pay for Vancouver, Victoria, and across BC.' },
-    { href: '/70000-after-tax-bc', label: '$70,000 after tax BC', description: 'A quick salary-after-tax page for BC job offers.' },
+    { href: '/hourly-wage-calculator', label: 'Hourly wage calculator', description: 'Turn an hourly rate into BC take-home pay.' },
     { href: '/compare-provinces', label: 'Compare provinces', description: 'Compare BC with Ontario, Alberta, Quebec, and more.' },
   ],
   Alberta: [
     { href: '/alberta-paycheck-calculator', label: 'Alberta paycheck calculator', description: 'Estimate Alberta net pay and deductions.' },
-    { href: '/80000-after-tax-alberta', label: '$80,000 after tax Alberta', description: 'Check a common Alberta salary against take-home pay.' },
+    { href: '/salary-after-tax-canada', label: 'Salary after tax in Canada', description: 'Check any salary against take-home pay across Canada.' },
     { href: '/compare-provinces', label: 'Compare provinces', description: 'Compare Alberta take-home pay with other provinces.' },
   ],
   Quebec: [
     { href: '/quebec-paycheck-calculator', label: 'Quebec paycheck calculator', description: 'Estimate Quebec take-home pay with province-specific deductions.' },
     { href: '/fr/calculateur-salaire-net-quebec', label: 'Calculateur salaire net Québec', description: 'French Quebec salary and payroll estimate page.' },
-    { href: '/100000-after-tax-quebec', label: '$100,000 after tax Quebec', description: 'A common high-intent Quebec salary search.' },
+    { href: '/compare-provinces', label: 'Compare provinces', description: 'See how Quebec take-home compares with other provinces.' },
   ],
 };
 

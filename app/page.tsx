@@ -22,7 +22,7 @@ const homeFaqJsonLd = {
     {
       '@type': 'Question',
       name: 'How much tax do I pay in Canada?',
-      acceptedAnswer: { '@type': 'Answer', text: 'In Canada, income tax is calculated at both federal and provincial levels. For a $65,000 salary in Ontario, you pay roughly $50,000 in take-home pay after federal tax, provincial tax, CPP, and EI. Use our free calculator to get exact numbers for your province and income.' },
+      acceptedAnswer: { '@type': 'Answer', text: 'In Canada, income tax is calculated at both federal and provincial levels. On a $65,000 salary in Ontario in 2026, you keep about $50,880 in take-home pay (roughly $4,240 a month) after federal tax, provincial tax, CPP, and EI. Use our free calculator to get exact numbers for your province and income.' },
     },
     {
       '@type': 'Question',
@@ -93,6 +93,85 @@ export default function HomePage() {
             provincial sales tax, while Quebec runs its own system with QPP and QPIP. Use the
             calculator above to compare your real take-home pay by province in 2026.
           </p>
+        </div>
+      </section>
+
+      <section className="border-t border-slate-200 bg-white">
+        <div className="mx-auto max-w-3xl px-4 py-12">
+          <h2 className="mb-3 text-2xl font-bold text-slate-900">
+            2026 take-home pay by province: an $80,000 salary compared
+          </h2>
+          <p className="mb-6 leading-7 text-slate-600">
+            On an $80,000 salary in 2026, your take-home pay ranges from about $57,077 in Quebec to
+            about $61,038 in British Columbia — a gap of nearly $5,000 a year on the exact same gross
+            salary, simply because of where you live. The table below shows the annual take-home,
+            monthly pay, and total deductions (federal tax, provincial tax, CPP/CPP2, and EI) for a
+            single employee in six provinces.
+          </p>
+          <div className="overflow-x-auto">
+            <table className="w-full border-collapse text-left text-sm">
+              <thead>
+                <tr className="border-b-2 border-slate-300 text-slate-900">
+                  <th scope="col" className="py-2 pr-4 font-bold">Province</th>
+                  <th scope="col" className="py-2 pr-4 font-bold">Take-home (year)</th>
+                  <th scope="col" className="py-2 pr-4 font-bold">Per month</th>
+                  <th scope="col" className="py-2 font-bold">Total deductions</th>
+                </tr>
+              </thead>
+              <tbody className="text-slate-600">
+                <tr className="border-b border-slate-200"><td className="py-2 pr-4 font-medium text-slate-800">British Columbia</td><td className="py-2 pr-4">$61,038</td><td className="py-2 pr-4">$5,086</td><td className="py-2">$18,962</td></tr>
+                <tr className="border-b border-slate-200"><td className="py-2 pr-4 font-medium text-slate-800">Ontario</td><td className="py-2 pr-4">$60,744</td><td className="py-2 pr-4">$5,062</td><td className="py-2">$19,256</td></tr>
+                <tr className="border-b border-slate-200"><td className="py-2 pr-4 font-medium text-slate-800">Alberta</td><td className="py-2 pr-4">$60,409</td><td className="py-2 pr-4">$5,034</td><td className="py-2">$19,591</td></tr>
+                <tr className="border-b border-slate-200"><td className="py-2 pr-4 font-medium text-slate-800">Manitoba</td><td className="py-2 pr-4">$57,940</td><td className="py-2 pr-4">$4,828</td><td className="py-2">$22,060</td></tr>
+                <tr className="border-b border-slate-200"><td className="py-2 pr-4 font-medium text-slate-800">Quebec</td><td className="py-2 pr-4">$57,077</td><td className="py-2 pr-4">$4,756</td><td className="py-2">$22,923</td></tr>
+                <tr><td className="py-2 pr-4 font-medium text-slate-800">Nova Scotia</td><td className="py-2 pr-4">$56,095</td><td className="py-2 pr-4">$4,675</td><td className="py-2">$23,905</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <p className="mt-3 text-xs leading-5 text-slate-400">
+            2026 estimates for employment income, single with no additional credits, from the CanPay
+            Insights rules engine using CRA and provincial rates. Your own result will vary with RRSP
+            contributions, dependants, and other credits.
+          </p>
+
+          <h2 className="mb-3 mt-12 text-2xl font-bold text-slate-900">
+            How take-home pay changes as your salary rises
+          </h2>
+          <p className="mb-6 leading-7 text-slate-600">
+            Canada uses progressive tax brackets, so each extra dollar is taxed at a higher rate and a
+            larger salary keeps a smaller share. Here is the 2026 annual take-home pay at three income
+            levels in the four largest provinces.
+          </p>
+          <div className="overflow-x-auto">
+            <table className="w-full border-collapse text-left text-sm">
+              <thead>
+                <tr className="border-b-2 border-slate-300 text-slate-900">
+                  <th scope="col" className="py-2 pr-4 font-bold">Gross salary</th>
+                  <th scope="col" className="py-2 pr-4 font-bold">BC</th>
+                  <th scope="col" className="py-2 pr-4 font-bold">Ontario</th>
+                  <th scope="col" className="py-2 pr-4 font-bold">Alberta</th>
+                  <th scope="col" className="py-2 font-bold">Quebec</th>
+                </tr>
+              </thead>
+              <tbody className="text-slate-600">
+                <tr className="border-b border-slate-200"><td className="py-2 pr-4 font-medium text-slate-800">$50,000</td><td className="py-2 pr-4">$40,543</td><td className="py-2 pr-4">$40,535</td><td className="py-2 pr-4">$40,331</td><td className="py-2">$38,857</td></tr>
+                <tr className="border-b border-slate-200"><td className="py-2 pr-4 font-medium text-slate-800">$75,000</td><td className="py-2 pr-4">$57,609</td><td className="py-2 pr-4">$57,389</td><td className="py-2 pr-4">$57,090</td><td className="py-2">$54,053</td></tr>
+                <tr><td className="py-2 pr-4 font-medium text-slate-800">$100,000</td><td className="py-2 pr-4">$75,236</td><td className="py-2 pr-4">$74,617</td><td className="py-2 pr-4">$74,153</td><td className="py-2">$69,619</td></tr>
+              </tbody>
+            </table>
+          </div>
+
+          <h2 className="mb-5 mt-12 text-2xl font-bold text-slate-900">
+            Frequently asked questions
+          </h2>
+          <div className="space-y-6">
+            {homeFaqJsonLd.mainEntity.map((item) => (
+              <div key={item.name}>
+                <h3 className="mb-2 text-lg font-bold text-slate-900">{item.name}</h3>
+                <p className="leading-7 text-slate-600">{item.acceptedAnswer.text}</p>
+              </div>
+            ))}
+          </div>
         </div>
       </section>
     </>
