@@ -34,6 +34,11 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   }
 
   const url = `${BASE_URL}/${page.slug}`;
+  // Salary x province permutation pages (slug starts with a dollar amount) are
+  // near-identical templates with little unique content. Keep them live and
+  // crawlable for internal links, but noindex them so the site's indexable
+  // surface is the calculator + articles + hub pages (AdSense / GEO quality).
+  const isThinPermutation = /^\d/.test(page.slug);
   const languageAlternates = page.alternateLanguages?.reduce<Record<string, string>>(
     (languages, link) => ({
       ...languages,
@@ -50,6 +55,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       canonical: url,
       ...(languageAlternates ? { languages: languageAlternates } : {}),
     },
+    ...(isThinPermutation ? { robots: { index: false, follow: true } } : {}),
     openGraph: {
       title: page.title,
       description: page.description,

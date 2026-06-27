@@ -32,6 +32,9 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   }
 
   const url = `${BASE_URL}/fr/${page.slug}`;
+  // Salary x province permutation pages (slug starts with a dollar amount) are
+  // near-identical templates — noindex them, keep the Québec hub indexed.
+  const isThinPermutation = /^\d/.test(page.slug);
   const defaultAlternate = page.alternateLanguages?.find((link) => link.hrefLang === 'en-CA')?.href;
   const languageAlternates = page.alternateLanguages?.reduce<Record<string, string>>(
     (languages, link) => ({
@@ -49,6 +52,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       canonical: url,
       ...(languageAlternates ? { languages: languageAlternates } : {}),
     },
+    ...(isThinPermutation ? { robots: { index: false, follow: true } } : {}),
     openGraph: {
       title: page.title,
       description: page.description,

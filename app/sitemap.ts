@@ -69,19 +69,28 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: 0.8,
   }));
 
-  const calculatorPages: MetadataRoute.Sitemap = landingPages.map((page) => ({
-    url: `${BASE_URL}/${page.slug}`,
-    lastModified: new Date(),
-    changeFrequency: 'monthly' as const,
-    priority: 0.85,
-  }));
+  // Only the hub pages (named calculators) belong in the sitemap. The ~378
+  // salary x province permutation pages (slug starts with a dollar amount) are
+  // noindexed thin templates, so they are excluded here too.
+  const isHub = (slug: string) => !/^\d/.test(slug);
 
-  const frenchCalculatorPages: MetadataRoute.Sitemap = frenchLandingPages.map((page) => ({
-    url: `${BASE_URL}/fr/${page.slug}`,
-    lastModified: new Date(),
-    changeFrequency: 'monthly' as const,
-    priority: 0.75,
-  }));
+  const calculatorPages: MetadataRoute.Sitemap = landingPages
+    .filter((page) => isHub(page.slug))
+    .map((page) => ({
+      url: `${BASE_URL}/${page.slug}`,
+      lastModified: new Date(),
+      changeFrequency: 'monthly' as const,
+      priority: 0.85,
+    }));
+
+  const frenchCalculatorPages: MetadataRoute.Sitemap = frenchLandingPages
+    .filter((page) => isHub(page.slug))
+    .map((page) => ({
+      url: `${BASE_URL}/fr/${page.slug}`,
+      lastModified: new Date(),
+      changeFrequency: 'monthly' as const,
+      priority: 0.75,
+    }));
 
   return [...staticPages, ...calculatorPages, ...frenchCalculatorPages, ...articlePages];
 }
