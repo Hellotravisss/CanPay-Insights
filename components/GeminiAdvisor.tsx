@@ -476,7 +476,6 @@ const GeminiAdvisor: React.FC<Props> = ({ results, inputs }) => {
                     >
                       {t('rep.wsCta')}
                     </a>
-                    <span className="ml-1.5 text-[10px] text-slate-400">({t('rep.wsDisclosure')})</span>
                   </span>
                 </li>
                 <li className="flex items-start gap-2.5">

@@ -34,7 +34,6 @@ const AuthModal: React.FC<Props> = ({
   const [pwLoading, setPwLoading] = useState(false);
   const [pwError, setPwError] = useState('');
   const [pwNotice, setPwNotice] = useState('');
-  const [showMagicLink, setShowMagicLink] = useState(false);
 
   // Detect installed-app / WebView (standalone) context. Apple blocks the
   // Sign in with Apple / Google web OAuth flow inside an iOS WebView, so those
@@ -280,26 +279,7 @@ const AuthModal: React.FC<Props> = ({
                 : t('auth.haveAccount')}
             </button>
 
-            {/* Optional passwordless fallback */}
-            {showMagicLink ? (
-              <div className="mt-3 space-y-2">
-                {emailError && <p className="text-xs text-red-500">{emailError}</p>}
-                <button
-                  onClick={handleEmailSubmit}
-                  disabled={emailLoading || !email.trim()}
-                  className="w-full text-sm font-medium text-red-600 hover:text-red-700 disabled:text-slate-300"
-                >
-                  {emailLoading ? t('auth.sending') : t('auth.emailLink')}
-                </button>
-              </div>
-            ) : (
-              <button
-                onClick={() => setShowMagicLink(true)}
-                className="w-full mt-2 text-xs text-slate-400 hover:text-slate-600"
-              >
-                {t('auth.preferMagic')}
-              </button>
-            )}
+            {emailError && <p className="mt-2 text-xs text-red-500">{emailError}</p>}
           </>
         )}
 
