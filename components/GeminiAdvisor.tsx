@@ -17,6 +17,10 @@ interface Props {
   inputs: SalaryInputs;
 }
 
+// Personal invite link — swap to the Wealthsimple Affiliate Program URL once approved
+// (same constant as in src/content/components/ArticleView.tsx).
+const WEALTHSIMPLE_REFERRAL_URL = 'https://www.wealthsimple.com/invite/KGAAWL';
+
 const formatCurrency = (val: number) =>
   new Intl.NumberFormat('en-CA', { style: 'currency', currency: 'CAD', maximumFractionDigits: 0 }).format(val);
 
@@ -462,7 +466,18 @@ const GeminiAdvisor: React.FC<Props> = ({ results, inputs }) => {
               <>
                 <li className="flex items-start gap-2.5">
                   <span className="text-emerald-400 mt-0.5">☐</span>
-                  <span>{t('rep.openRRSP')}</span>
+                  <span>
+                    {t('rep.openRRSP')}{' — '}
+                    <a
+                      href={WEALTHSIMPLE_REFERRAL_URL}
+                      target="_blank"
+                      rel="sponsored noopener noreferrer"
+                      className="font-semibold text-emerald-300 underline underline-offset-2 hover:text-emerald-200"
+                    >
+                      {t('rep.wsCta')}
+                    </a>
+                    <span className="ml-1.5 text-[10px] text-slate-400">({t('rep.wsDisclosure')})</span>
+                  </span>
                 </li>
                 <li className="flex items-start gap-2.5">
                   <span className="text-emerald-400 mt-0.5">☐</span>

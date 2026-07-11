@@ -299,6 +299,8 @@ const en: Dict = {
   'rep.autosavePost': ' auto-savings at Wealthsimple',
   'rep.investPre': 'Invest ',
   'rep.investPost': ' in TFSA for tax-free growth',
+  'rep.wsCta': 'Open your RRSP at Wealthsimple →',
+  'rep.wsDisclosure': 'paid referral link',
 };
 
 const zh: Dict = {
@@ -587,6 +589,8 @@ const zh: Dict = {
   'rep.autosavePost': ' 自动储蓄',
   'rep.investPre': '向 TFSA 投入 ',
   'rep.investPost': ' 以获得免税增值',
+  'rep.wsCta': '去 Wealthsimple 开设 RRSP →',
+  'rep.wsDisclosure': '付费推荐链接',
 };
 
 const fr: Dict = {
@@ -875,6 +879,8 @@ const fr: Dict = {
   'rep.autosavePost': " d'épargne automatique chez Wealthsimple",
   'rep.investPre': 'Investissez ',
   'rep.investPost': ' dans le CELI pour une croissance libre d\'impôt',
+  'rep.wsCta': 'Ouvrez votre REER chez Wealthsimple →',
+  'rep.wsDisclosure': 'lien de parrainage rémunéré',
 };
 
 const dicts: Record<Lang, Dict> = { en, zh, fr };

@@ -46,26 +46,19 @@ export const useCalculationHistory = (userId: string | null) => {
             results: row.results,
             createdAt: row.created_at,
           }));
-          // Merge with localStorage records so pre-login saves are still visible
-          const stored = localStorage.getItem(STORAGE_KEY);
-          const local: CalculationRecord[] = stored ? JSON.parse(stored) : [];
-          const merged = pageIndex === 0
-            ? [...formatted, ...local.filter(l => !formatted.find(f => f.id === l.id))]
-            : [...formatted];
-          setRecords(prev => pageIndex === 0 ? merged : [...prev, ...merged]);
+          setRecords(prev => pageIndex === 0 ? formatted : [...prev, ...formatted]);
           setHasMore(data.length === PAGE_SIZE);
           setPage(pageIndex);
           return;
         }
       }
 
-      // Anonymous or Supabase failed: use localStorage only
-      const stored = localStorage.getItem(STORAGE_KEY);
-      if (stored) {
-        const parsed = JSON.parse(stored);
-        setRecords(Array.isArray(parsed) ? parsed : []);
-      }
+      // Anonymous (or Supabase failed): history is account-only.
+      // Signed out => empty list, so records never linger after logout.
+      setRecords([]);
       setHasMore(false);
+      // Clean up any legacy anonymous history from older versions
+      try { localStorage.removeItem(STORAGE_KEY); } catch {}
     } catch (err) {
       console.warn('Failed to load calculation history:', err);
     } finally {
@@ -88,6 +81,8 @@ export const useCalculationHistory = (userId: string | null) => {
     results: CalculationResult,
     name?: string
   ): Promise<CalculationRecord | null> => {
+    // Saving requires an account — callers should open the auth modal instead.
+    if (!userId) return null;
     const record: CalculationRecord = {
       id: `${Date.now()}-${Math.random().toString(36).substr(2, 9)}`,
       mode,
@@ -98,14 +93,7 @@ export const useCalculationHistory = (userId: string | null) => {
       createdAt: new Date().toISOString(),
     };
 
-    setRecords(prev => {
-      const next = [record, ...prev].slice(0, MAX_LOCAL_RECORDS);
-      if (!userId) {
-        // Anonymous: persist to localStorage only
-        try { localStorage.setItem(STORAGE_KEY, JSON.stringify(next)); } catch {}
-      }
-      return next;
-    });
+    setRecords(prev => [record, ...prev].slice(0, MAX_LOCAL_RECORDS));
 
     if (userId) {
       // Authenticated: save to Supabase (single table: calculation_history)
@@ -134,9 +122,6 @@ export const useCalculationHistory = (userId: string | null) => {
   const deleteRecord = useCallback(async (id: string) => {
     setRecords(prev => {
       const next = prev.filter(r => r.id !== id);
-      if (!userId) {
-        try { localStorage.setItem(STORAGE_KEY, JSON.stringify(next)); } catch {}
-      }
       return next;
     });
 

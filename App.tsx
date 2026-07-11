@@ -236,6 +236,11 @@ const App: React.FC = () => {
 
   // Handle save calculation
   const handleSaveCalculation = useCallback(async () => {
+    // Not signed in: prompt sign-up/sign-in instead of silently "saving"
+    if (!userId) {
+      setShowAuthModal(true);
+      return;
+    }
     let inputs: Record<string, any>;
     switch (mode) {
       case CalculationMode.SIMPLE:
@@ -256,7 +261,7 @@ const App: React.FC = () => {
       setSaveSuccess(true);
       setTimeout(() => setSaveSuccess(false), 2000);
     }
-  }, [mode, currentProvince, simpleInputs, annualInputs, timesheetInputs, results, saveCalculation]);
+  }, [userId, mode, currentProvince, simpleInputs, annualInputs, timesheetInputs, results, saveCalculation]);
 
   // Handle switch to timesheet from UserMenu
   const handleSwitchToTimesheet = useCallback(() => {
