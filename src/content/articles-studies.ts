@@ -607,4 +607,201 @@ The CGEB is money **on top of** your paycheque, not a payroll deduction — so i
 Based on Government of Canada / CRA announcements and reporting on the Canada Groceries and Essentials Benefit (2026). Amounts and dates are as announced and can change; your exact payment depends on your income and family situation. This is general information, not tax or financial advice — confirm current figures with the [CRA](https://www.canada.ca/en/revenue-agency.html).
 `,
   },
+  {
+    id: 'study-7',
+    slug: 'canada-child-benefit-increase-2026',
+    title: 'Canada Child Benefit Increase 2026: New Amounts From the July 20 Payment',
+    subtitle: 'The new CCB benefit year starts this month — up to $8,157 per child under 6 and $6,883 per child aged 6–17, tax-free.',
+    excerpt:
+      'The Canada Child Benefit rises 2% for the July 2026–June 2027 benefit year. Here are the new monthly and annual maximums, the income cut-off for the full amount, and when the higher payments start.',
+    metaTitle: 'Canada Child Benefit Increase 2026: New CCB Amounts & July 20 Payment',
+    metaDescription:
+      'CCB rises 2% for 2026-27: up to $8,157/year per child under 6 and $6,883 for ages 6-17, starting with the July 20, 2026 payment. New amounts, income thresholds, and dates.',
+    keywords: [
+      'canada child benefit increase 2026',
+      'CCB payment july 2026',
+      'how much is CCB 2026',
+      'canada child benefit amount 2026',
+      'CCB payment dates 2026',
+      'CCB income threshold 2026',
+    ],
+    category: 'news',
+    tags: ['CRA', 'benefits', 'CCB', 'families', '2026'],
+    publishedAt: '2026-07-15',
+    readTime: 5,
+    imageUrl: '/blog/canada-child-benefit-2026.svg',
+    directAnswer:
+      'For the new benefit year starting July 2026, the Canada Child Benefit rises 2%: up to $8,157 per year ($679.75 per month) for each child under 6, and up to $6,883 per year ($573.58 per month) for each child aged 6 to 17. Families with adjusted family net income under $38,237 (from the 2025 tax return) get the full amount; it phases down above that. The first payment at the new rates lands July 20, 2026, and the money is tax-free and automatic once you have filed your taxes.',
+    faq: [
+      {
+        question: 'How much is the Canada Child Benefit in 2026?',
+        answer:
+          'For July 2026 to June 2027, the maximum is $8,157 per year ($679.75/month) for each child under 6 and $6,883 per year ($573.58/month) for each child aged 6 to 17 — a 2% increase over last year.',
+      },
+      {
+        question: 'When do the higher CCB payments start?',
+        answer:
+          'With the July 20, 2026 payment — the first deposit of the new 2026–27 benefit year. Payments then continue monthly around the 20th.',
+      },
+      {
+        question: 'What income do I need to get the full CCB?',
+        answer:
+          'If your adjusted family net income (AFNI) on your 2025 tax return is under $38,237, you receive the maximum for each child. Above that, the benefit is gradually reduced as income rises.',
+      },
+      {
+        question: 'Is the Canada Child Benefit taxable?',
+        answer:
+          'No. The CCB is completely tax-free — it does not appear as income on your tax return and does not affect your tax refund.',
+      },
+      {
+        question: 'Do I need to apply for the increase?',
+        answer:
+          'No. If you already receive the CCB and filed your 2025 tax return, the new amounts are calculated automatically. Both spouses must file a return every year, even with zero income.',
+      },
+      {
+        question: 'How much more money is the 2026 CCB increase worth?',
+        answer:
+          'About $160 more per year for each child under 6 and about $135 more per year for each child aged 6 to 17, compared with the 2025–26 benefit year.',
+      },
+    ],
+    content: `
+## The new CCB benefit year starts this month
+
+Every July, the **Canada Child Benefit (CCB)** resets for a new benefit year, indexed to inflation. For **July 2026 to June 2027** the indexation is **2%**, and the first payment at the new rates arrives on **July 20, 2026**.
+
+## The new maximum amounts
+
+| Child | 2025–26 max | 2026–27 max | Increase |
+| --- | --- | --- | --- |
+| Under 6 | $7,997/yr | **$8,157/yr ($679.75/mo)** | +$160/yr |
+| Aged 6–17 | $6,748/yr | **$6,883/yr ($573.58/mo)** | +$135/yr |
+
+For a family with **two children under 6**, the maximum is now about **$16,314 a year, tax-free** — roughly $1,360 a month.
+
+## Who gets the full amount?
+
+Your CCB is based on your **adjusted family net income (AFNI)** from your **2025 tax return**:
+
+- **AFNI under $38,237** → you get the **maximum** for each child.
+- Above that, the benefit **phases down gradually** as income rises — many middle-income families still receive a substantial monthly amount.
+
+Because the CCB is income-tested, your **net family income** is the number that matters. If you are negotiating a raise or comparing job offers, it helps to know both your [take-home pay](/) and how a higher gross income interacts with income-tested benefits like the CCB.
+
+## Key facts
+
+- **Tax-free:** the CCB never appears as taxable income.
+- **Automatic:** no application needed for the increase — but **both spouses must file a tax return every year**, even with zero income, or payments stop.
+- **Monthly:** paid around the 20th of each month; the July 20, 2026 deposit is the first at the new rates.
+
+## What it means for your family budget
+
+The CCB is paid **on top of** your employment income — it does not change your paycheque. To plan your monthly budget, start with your real after-tax pay from the [free take-home pay calculator](/), then add your CCB. Families juggling work schedules can also estimate hourly pay with the [hourly wage calculator](/hourly-wage-calculator).
+
+## Sources & disclaimer
+
+Based on CRA indexation figures for the 2026–27 benefit year as reported in July 2026. Your exact amount depends on your family income, number and ages of children, and custody arrangements. This is general information, not tax or financial advice — confirm your amounts in CRA My Account or with the [CRA](https://www.canada.ca/en/revenue-agency.html).
+`,
+  },
+  {
+    id: 'study-8',
+    slug: 'canada-workers-benefit-payments-2026',
+    title: 'Canada Workers Benefit 2026: New Amounts and the July 10 Advance Payment',
+    subtitle: 'Low- and modest-income workers get up to $272 (single) or $469 (family) per advance instalment — and the 2026 maximums are going up.',
+    excerpt:
+      'The Advanced Canada Workers Benefit paid its first 2026-27 instalment on July 10, 2026. Who qualifies, how much the advances are, the new 2026 maximums, and the October and January payment dates.',
+    metaTitle: 'Canada Workers Benefit 2026: ACWB Payment Dates & New Amounts',
+    metaDescription:
+      'ACWB advance payments for 2026-27: up to ~$272 single / ~$469 family per instalment (July 10, October, January), with 2026 tax-year maximums rising to $1,665 single and $2,869 family.',
+    keywords: [
+      'canada workers benefit 2026',
+      'ACWB payment dates 2026',
+      'advanced canada workers benefit july 2026',
+      'CWB amount 2026',
+      'who qualifies for canada workers benefit',
+      'CWB disability supplement 2026',
+    ],
+    category: 'news',
+    tags: ['CRA', 'benefits', 'CWB', 'workers', '2026'],
+    publishedAt: '2026-07-15',
+    readTime: 5,
+    imageUrl: '/blog/canada-workers-benefit-2026.svg',
+    directAnswer:
+      'The Canada Workers Benefit (CWB) is a refundable tax credit for low- and modest-income workers. Advance payments (ACWB) for the 2026–27 cycle are paid in three instalments — July 10, 2026, October 2026, and January 2027 — worth up to about $272 per instalment for a single worker and about $469 for a family, based on your 2025 tax return. For the 2026 tax year itself, the maximum basic CWB rises to $1,665 for singles and $2,869 for families, plus a disability supplement of up to $843. It is automatic: if you qualified on your 2025 return, the CRA pays you without any application.',
+    faq: [
+      {
+        question: 'What is the Canada Workers Benefit?',
+        answer:
+          'A refundable federal tax credit that tops up the income of low- and modest-income workers. You must have working income (a job or self-employment) and be 19 or older (or live with a spouse or child). It is refundable, so you can receive it even if you owe no tax.',
+      },
+      {
+        question: 'When are the ACWB payment dates in 2026?',
+        answer:
+          'Advance instalments for the 2026–27 cycle are paid July 10, 2026, in October 2026, and in January 2027. The remainder is settled when you file your 2026 tax return in spring 2027.',
+      },
+      {
+        question: 'How much is the ACWB advance payment?',
+        answer:
+          'Each instalment is up to about $272 for a single worker and about $469 for a family — advances total 50% of your CWB entitlement from your 2025 return, split into three payments.',
+      },
+      {
+        question: 'How much is the CWB for 2026?',
+        answer:
+          'For the 2026 tax year, the maximum basic amount rises to $1,665 for single workers and $2,869 for families, plus a disability supplement of up to $843. Amounts phase down as income rises past your province&apos;s threshold.',
+      },
+      {
+        question: 'Do I need to apply for the Canada Workers Benefit?',
+        answer:
+          'No. The CRA calculates it automatically from your tax return (line 45300). If you qualified on your 2025 return, advance payments arrive automatically — the only requirement is filing your taxes.',
+      },
+      {
+        question: 'Does working more hours reduce my CWB?',
+        answer:
+          'The CWB grows with working income at first, then phases out as net income rises past your province&apos;s threshold. A raise can reduce the credit but almost always leaves you ahead overall — use a take-home pay calculator to see your net gain.',
+      },
+    ],
+    content: `
+## What happened on July 10
+
+The CRA paid the **first Advanced Canada Workers Benefit (ACWB) instalment** of the 2026–27 cycle on **July 10, 2026** — up to about **$272 for a single worker** and **$469 for a family**. If you qualified for the CWB on your 2025 tax return (line 45300), the money arrived automatically.
+
+## What is the Canada Workers Benefit?
+
+The **CWB** is a **refundable tax credit** for people who **work** but earn a low or modest income. Refundable means you get the money even if you owe no tax. There are two parts:
+
+- a **basic amount**, and
+- a **disability supplement** (up to **$843**) if you qualify for the disability tax credit.
+
+## The numbers for 2026
+
+| | Single worker | Family |
+| --- | --- | --- |
+| Max basic CWB, 2026 tax year | **$1,665** | **$2,869** |
+| Advance instalment (Jul/Oct/Jan) | up to ~$272 | up to ~$469 |
+
+Advance payments equal **50% of your entitlement** from your **2025 return**, split into three instalments — **July 10, 2026**, **October 2026**, and **January 2027**. The rest arrives after you file your 2026 return next spring.
+
+## Who qualifies?
+
+- You have **working income** (employment or self-employment) and your net income is below your **province&apos;s threshold** (the cut-offs differ by province and family type);
+- You are **19 or older** on December 31, or live with a spouse/common-law partner or your child;
+- Full-time students (13+ weeks) without dependants generally do **not** qualify.
+
+## Will earning more cost me my CWB?
+
+The CWB **grows** with your working income at first, then **phases out** as net income rises. A raise can shrink the credit, but you almost always come out ahead in total. To see the real effect of more hours or a higher wage on your pocket, run your numbers in the [hourly wage calculator](/hourly-wage-calculator) or the [take-home pay calculator](/) — and if you earn minimum wage, see the province-by-province [minimum-wage take-home study](/blog/minimum-wage-take-home-pay-canada-2026).
+
+## Key dates
+
+| Date | What |
+| --- | --- |
+| July 10, 2026 | First 2026–27 ACWB instalment (paid) |
+| October 2026 | Second instalment |
+| January 2027 | Third instalment |
+| Spring 2027 | Balance settled when you file your 2026 return |
+
+## Sources & disclaimer
+
+Based on CRA figures for the 2026–27 ACWB cycle and 2026 tax-year indexation as reported in July 2026. Exact amounts depend on your income, province, and family situation. This is general information, not tax or financial advice — confirm your amounts in CRA My Account or with the [CRA](https://www.canada.ca/en/revenue-agency.html).
+`,
+  },
 ];
