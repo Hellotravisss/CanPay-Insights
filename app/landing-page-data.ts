@@ -296,9 +296,9 @@ const coreLandingPages: LandingPage[] = [
   },
   {
     slug: 'ontario-paycheck-calculator',
-    title: 'Ontario Paycheck Calculator 2026 - Take-Home Pay',
+    title: 'Ontario Paycheck Calculator 2026: See Your Exact Net Pay',
     description:
-      'Calculate Ontario take-home pay with federal tax, Ontario tax, CPP, EI, hourly wage, salary, and bi-weekly pay estimates.',
+      'On $80,000 in Ontario you keep about $60,744 in 2026. Free calculator for your exact take-home pay — federal tax, Ontario tax, CPP, EI, hourly or salary. No signup.',
     h1: 'Ontario Paycheck Calculator',
     kicker: 'Ontario take-home pay',
     primaryKeyword: 'Ontario paycheck calculator',
