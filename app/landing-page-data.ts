@@ -326,12 +326,17 @@ const coreLandingPages: LandingPage[] = [
       {
         question: 'How much tax is deducted from an Ontario paycheque?',
         answer:
-          'It depends on your income, pay period, credits, and deductions. Ontario paycheques usually include federal tax, Ontario tax, CPP, and EI deductions.',
+          'On an $80,000 salary in 2026, an Ontario paycheque loses about $9,513 to federal tax, $4,173 to Ontario tax, $4,446 to CPP/CPP2, and $1,123 to EI over the year — about 24% of gross in total. Your exact deductions depend on your income, pay period, and credits; enter your numbers above for a precise breakdown.',
+      },
+      {
+        question: 'Can I use this as a Toronto paycheck calculator?',
+        answer:
+          'Yes. Toronto has no separate city income tax — Toronto paycheques use exactly the same federal and Ontario rates as the rest of the province, so this calculator works for Toronto, Ottawa, Mississauga, Brampton, Hamilton, and every Ontario city.',
       },
       {
         question: 'Is Ontario take-home pay lower than Alberta?',
         answer:
-          'Often, yes for many incomes, but the exact difference depends on salary and deductions. Use the province comparison tool for your own income.',
+          'At $80,000 in 2026 they are very close: Ontario keeps about $60,744 versus about $60,409 in Alberta — Ontario is actually slightly ahead at this income. The gap shifts with salary, so compare your own number with the province comparison tool.',
       },
     ],
   },
