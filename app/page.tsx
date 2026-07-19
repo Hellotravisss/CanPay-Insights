@@ -2,15 +2,15 @@ import type { Metadata } from 'next';
 import App from '../App';
 
 export const metadata: Metadata = {
-  title: 'Free Canadian Payroll Calculator 2026 - CPP, EI & Take-Home Pay',
+  title: 'Canadian Take-Home Pay Calculator 2026 – Paycheck After Tax',
   description:
-    'Calculate Canadian take-home pay by province with federal tax, provincial tax, CPP, EI, hourly wage, annual salary, overtime, and timesheet tools.',
+    'Find out how much of your salary or hourly wage you actually keep. Free take-home pay calculator for Canadian employees — federal & provincial income tax, CPP, EI, by province, for 2026. No signup.',
   alternates: {
     canonical: 'https://canpayinsights.ca/',
   },
   openGraph: {
-    title: 'Free Canadian Payroll Calculator 2026',
-    description: 'Calculate Canadian take-home pay by province with CPP, EI, income tax, salary, hourly wage, and timesheet tools.',
+    title: 'Canadian Take-Home Pay Calculator 2026 – Paycheck After Tax',
+    description: 'How much do you really keep from your paycheck? Free Canadian take-home pay & income tax calculator for employees — CPP, EI, provincial tax, salary or hourly.',
     url: 'https://canpayinsights.ca/',
   },
 };
@@ -62,6 +62,18 @@ export default function HomePage() {
       <App />
       <section className="border-t border-slate-200 bg-white">
         <div className="mx-auto max-w-3xl px-4 py-12">
+          <h2 className="mb-3 text-2xl font-bold text-slate-900">
+            What is CanPay Insights?
+          </h2>
+          <p className="mb-8 leading-7 text-slate-600">
+            CanPay Insights is a free take-home pay calculator for people who work in Canada. Enter
+            your salary or hourly wage and your province, and it shows exactly how much you keep after
+            federal and provincial income tax, CPP/CPP2, and EI for the 2026 tax year. It is a
+            paycheck calculator for employees and hourly workers — not a payroll service, a payment
+            processor, or a merchant-services provider. No signup and no spreadsheet, in English,
+            French, and Chinese.
+          </p>
+
           <h2 className="mb-3 text-2xl font-bold text-slate-900">
             How CPP deductions work in 2026
           </h2>
