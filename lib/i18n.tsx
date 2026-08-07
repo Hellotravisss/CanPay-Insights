@@ -27,6 +27,14 @@ const en: Dict = {
   'nav.compare': 'Compare provinces',
   'nav.signIn': 'Sign In',
   'nav.back': 'Back',
+  'app.autoSaving': 'Auto-saving to cloud',
+  'app.saveCalc': 'Save Calculation',
+  'app.saved': 'Saved!',
+  'day.0': 'Sun', 'day.1': 'Mon', 'day.2': 'Tue', 'day.3': 'Wed', 'day.4': 'Thu', 'day.5': 'Fri', 'day.6': 'Sat',
+  'tier.emergency': 'Focus on building emergency fund first. Keep RRSP contribution under $5,000.',
+  'tier.bracket': 'Contribute enough to drop into a lower tax bracket for maximum refund benefit.',
+  'tier.maximize': 'Maximize RRSP contribution for significant tax refund.',
+  'tier.maxAll': 'Contribute the maximum amount to optimize tax benefits.',
   'mode.hourly.title': 'Hourly Wage',
   'mode.hourly.subtitle': 'Calculate from hourly rate',
   'mode.annual.title': 'Annual Salary',
@@ -321,6 +329,14 @@ const zh: Dict = {
   'nav.compare': '各省对比',
   'nav.signIn': '登录',
   'nav.back': '返回',
+  'app.autoSaving': '自动同步到云端',
+  'app.saveCalc': '保存计算',
+  'app.saved': '已保存!',
+  'day.0': '周日', 'day.1': '周一', 'day.2': '周二', 'day.3': '周三', 'day.4': '周四', 'day.5': '周五', 'day.6': '周六',
+  'tier.emergency': '先集中建立应急储备金,RRSP 供款控制在 $5,000 以内。',
+  'tier.bracket': '供款到刚好降入更低的税级,退税收益最大化。',
+  'tier.maximize': '尽量拉满 RRSP 供款,获得可观退税。',
+  'tier.maxAll': '按上限供款,税务优化效果最佳。',
   'mode.hourly.title': '时薪',
   'mode.hourly.subtitle': '按小时工资计算',
   'mode.annual.title': '年薪',
@@ -615,6 +631,14 @@ const fr: Dict = {
   'nav.compare': 'Comparer les provinces',
   'nav.signIn': 'Connexion',
   'nav.back': 'Retour',
+  'app.autoSaving': 'Sauvegarde automatique dans le nuage',
+  'app.saveCalc': 'Enregistrer le calcul',
+  'app.saved': 'Enregistré !',
+  'day.0': 'Dim', 'day.1': 'Lun', 'day.2': 'Mar', 'day.3': 'Mer', 'day.4': 'Jeu', 'day.5': 'Ven', 'day.6': 'Sam',
+  'tier.emergency': 'Constituez d\'abord un fonds d\'urgence. Limitez la cotisation RRSP à moins de 5 000 $.',
+  'tier.bracket': 'Cotisez juste assez pour descendre dans une tranche d\'imposition inférieure et maximiser le remboursement.',
+  'tier.maximize': 'Maximisez la cotisation RRSP pour un remboursement d\'impôt important.',
+  'tier.maxAll': 'Cotisez le maximum pour optimiser vos avantages fiscaux.',
   'mode.hourly.title': 'Taux horaire',
   'mode.hourly.subtitle': 'Calculer à partir du taux horaire',
   'mode.annual.title': 'Salaire annuel',
@@ -972,18 +996,19 @@ export function useT() {
 
 export function LanguageSwitcher({ className = '' }: { className?: string }) {
   const { lang, setLang } = useT();
-  // 10 languages no longer fit as a button row — native select stays compact
-  // on mobile and gets the OS picker for free.
+  // Icon-only switcher: a globe button anyone recognizes; the invisible
+  // native <select> stretched over it opens the OS language picker on tap.
   return (
-    <div className={`inline-flex items-center gap-1 rounded-lg border border-slate-200 bg-white px-2 py-1 ${className}`}>
-      <svg className="h-3.5 w-3.5 text-slate-400" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24" aria-hidden="true">
-        <path strokeLinecap="round" strokeLinejoin="round" d="M3 5h12M9 3v2m1.048 9.5A18.022 18.022 0 016.412 9m6.088 9h7.5m-7.5 0l-1 2m8.5-2l1 2m-1-2l-3.75-7.5L14.5 18" />
+    <div className={`relative inline-flex h-9 w-9 items-center justify-center rounded-full border border-slate-200 bg-white shadow-sm ${className}`}>
+      <svg className="h-5 w-5 text-slate-600" fill="none" stroke="currentColor" strokeWidth="1.8" viewBox="0 0 24 24" aria-hidden="true">
+        <circle cx="12" cy="12" r="9" />
+        <path strokeLinecap="round" d="M3 12h18M12 3c2.5 2.6 3.75 5.7 3.75 9S14.5 18.4 12 21c-2.5-2.6-3.75-5.7-3.75-9S9.5 5.6 12 3z" />
       </svg>
       <select
         value={lang}
         onChange={(e) => setLang(e.target.value as Lang)}
         aria-label="Language"
-        className="cursor-pointer appearance-none bg-transparent pr-1 text-xs font-bold text-slate-700 focus:outline-none"
+        className="absolute inset-0 h-full w-full cursor-pointer opacity-0"
       >
         {LANGS.map(({ code, label }) => (
           <option key={code} value={code}>{label}</option>

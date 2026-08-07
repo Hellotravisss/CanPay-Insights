@@ -1,5 +1,13 @@
 // Hindi (हिन्दी) translations — auto-loaded by lib/i18n.tsx
 export const main: Record<string, string> = {
+  'app.autoSaving': 'क्लाउड में अपने आप सेव हो रहा है',
+  'app.saveCalc': 'कैलकुलेशन सेव करें',
+  'app.saved': 'सेव हो गया!',
+  'day.0': 'रवि', 'day.1': 'सोम', 'day.2': 'मंगल', 'day.3': 'बुध', 'day.4': 'गुरु', 'day.5': 'शुक्र', 'day.6': 'शनि',
+  'tier.emergency': 'पहले इमरजेंसी फंड बनाने पर ध्यान दें। RRSP योगदान $5,000 से कम रखें।',
+  'tier.bracket': 'निचले टैक्स ब्रैकेट में आने लायक योगदान करें ताकि रिफंड अधिकतम हो।',
+  'tier.maximize': 'बड़े टैक्स रिफंड के लिए RRSP योगदान अधिकतम करें।',
+  'tier.maxAll': 'टैक्स लाभ अनुकूलित करने के लिए अधिकतम राशि का योगदान करें।',
   'brand.tagline': 'कनाडा पेरोल कैलकुलेटर',
   'nav.taxGuides': 'टैक्स गाइड',
   'nav.compare': 'प्रांतों की तुलना करें',

@@ -1,5 +1,13 @@
 // Tagalog (Filipino) translations — auto-loaded by lib/i18n.tsx
 export const main: Record<string, string> = {
+  'app.autoSaving': 'Awtomatikong nagse-save sa cloud',
+  'app.saveCalc': 'I-save ang Kalkulasyon',
+  'app.saved': 'Na-save!',
+  'day.0': 'Lin', 'day.1': 'Lun', 'day.2': 'Mar', 'day.3': 'Miy', 'day.4': 'Huw', 'day.5': 'Biy', 'day.6': 'Sab',
+  'tier.emergency': 'Unahin muna ang emergency fund. Panatilihing wala pang $5,000 ang RRSP contribution.',
+  'tier.bracket': 'Mag-contribute nang sapat para bumaba sa mas mababang tax bracket at ma-maximize ang refund.',
+  'tier.maximize': 'I-maximize ang RRSP contribution para sa malaking tax refund.',
+  'tier.maxAll': 'I-contribute ang maximum para ma-optimize ang tax benefits.',
   'brand.tagline': 'Canadian Payroll Calculator',
   'nav.taxGuides': 'Mga gabay sa buwis',
   'nav.compare': 'Ikumpara ang mga probinsya',

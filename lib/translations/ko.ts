@@ -1,5 +1,13 @@
 // Korean (한국어) translations — auto-loaded by lib/i18n.tsx
 export const main: Record<string, string> = {
+  'app.autoSaving': '클라우드에 자동 저장 중',
+  'app.saveCalc': '계산 저장',
+  'app.saved': '저장됨!',
+  'day.0': '일', 'day.1': '월', 'day.2': '화', 'day.3': '수', 'day.4': '목', 'day.5': '금', 'day.6': '토',
+  'tier.emergency': '먼저 비상금 마련에 집중하세요. RRSP 납입은 $5,000 미만으로 유지하세요.',
+  'tier.bracket': '더 낮은 세율 구간으로 내려갈 만큼 납입해 환급을 극대화하세요.',
+  'tier.maximize': '큰 세금 환급을 위해 RRSP 납입을 최대화하세요.',
+  'tier.maxAll': '세제 혜택 최적화를 위해 최대 금액을 납입하세요.',
   'brand.tagline': '캐나다 급여 계산기',
   'nav.taxGuides': '세금 가이드',
   'nav.compare': '주(州) 비교',

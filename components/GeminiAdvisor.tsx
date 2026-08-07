@@ -9,7 +9,8 @@ import {
   generateTaxOptimization, 
   calculateRRSPScenarios,
   calculateMarginalRate,
-  TaxOptimizationResult 
+  TaxOptimizationResult,
+  TIER_EN,
 } from '../utils/taxOptimizer';
 
 interface Props {
@@ -1112,7 +1113,7 @@ const TaxOptimizationPanel: React.FC<TaxOptimizationPanelProps> = ({
             </button>
           </div>
           
-          <p className="text-sm text-slate-300 mb-4">{rrsp.tierRecommendation}</p>
+          <p className="text-sm text-slate-300 mb-4">{t(rrsp.tierRecommendation)}</p>
 
           {/* Visual Progress Bar and Matching stats if they have actual RRSP */}
           {hasActualRRSP && (
@@ -1370,7 +1371,7 @@ You are a professional Canadian tax planner. Based on the following client's spe
 - Estimated Tax Savings: $${rrsp.taxSavings.toLocaleString()}
 - Effective Net Cost: $${rrsp.effectiveCost.toLocaleString()}
 - Estimated Refund: $${rrsp.refundAmount.toLocaleString()}
-- Strategy Description: ${rrsp.tierRecommendation}
+- Strategy Description: ${TIER_EN[rrsp.tierRecommendation] ?? rrsp.tierRecommendation}
 
 ### TFSA Recommendations
 - 2025 Contribution Room: $${tfsa.contributionRoom2025.toLocaleString()}

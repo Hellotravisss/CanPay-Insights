@@ -123,7 +123,7 @@ const calculateRRSPRecommendation = (
   if (annualIncome <= 50000) {
     // Low income: prioritize TFSA, limited RRSP
     recommendedAmount = Math.min(5000, maxDeductible);
-    tierRecommendation = 'Focus on building emergency fund first. Keep RRSP contribution under $5,000.';
+    tierRecommendation = 'tier.emergency';
   } else if (annualIncome <= 100000) {
     // Medium income: contribute to drop to lower tax bracket
     const targetIncome = 90000;
@@ -131,18 +131,18 @@ const calculateRRSPRecommendation = (
       Math.max(0, annualIncome - targetIncome),
       maxDeductible
     );
-    tierRecommendation = 'Contribute enough to drop into a lower tax bracket for maximum refund benefit.';
+    tierRecommendation = 'tier.bracket';
   } else if (annualIncome <= 150000) {
     // Upper medium income: contribute near maximum limit
     recommendedAmount = Math.min(
       Math.floor(maxDeductible * 0.8),
       maxDeductible
     );
-    tierRecommendation = 'Maximize RRSP contribution for significant tax refund.';
+    tierRecommendation = 'tier.maximize';
   } else {
     // High income: maximum limit
     recommendedAmount = maxDeductible;
-    tierRecommendation = 'Contribute the maximum amount to optimize tax benefits.';
+    tierRecommendation = 'tier.maxAll';
   }
 
   // Calculate tax savings
@@ -424,4 +424,13 @@ export const calculateRRSPScenarios = (
       refundRate: marginalRate.combined * 100,
     };
   });
+};
+
+// English fallback for the tier keys — used in plain-text report exports,
+// which stay English regardless of UI language.
+export const TIER_EN: Record<string, string> = {
+  'tier.emergency': 'Focus on building emergency fund first. Keep RRSP contribution under $5,000.',
+  'tier.bracket': 'Contribute enough to drop into a lower tax bracket for maximum refund benefit.',
+  'tier.maximize': 'Maximize RRSP contribution for significant tax refund.',
+  'tier.maxAll': 'Contribute the maximum amount to optimize tax benefits.',
 };

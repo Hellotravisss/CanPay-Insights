@@ -1,5 +1,13 @@
 // Punjabi (ਪੰਜਾਬੀ) translations — auto-loaded by lib/i18n.tsx
 export const main: Record<string, string> = {
+  'app.autoSaving': 'ਕਲਾਊਡ ਵਿੱਚ ਆਪਣੇ ਆਪ ਸੇਵ ਹੋ ਰਿਹਾ ਹੈ',
+  'app.saveCalc': 'ਹਿਸਾਬ ਸੇਵ ਕਰੋ',
+  'app.saved': 'ਸੇਵ ਹੋ ਗਿਆ!',
+  'day.0': 'ਐਤ', 'day.1': 'ਸੋਮ', 'day.2': 'ਮੰਗਲ', 'day.3': 'ਬੁੱਧ', 'day.4': 'ਵੀਰ', 'day.5': 'ਸ਼ੁੱਕਰ', 'day.6': 'ਸ਼ਨਿੱਚਰ',
+  'tier.emergency': 'ਪਹਿਲਾਂ ਐਮਰਜੈਂਸੀ ਫੰਡ ਬਣਾਉਣ ਤੇ ਧਿਆਨ ਦਿਓ। RRSP ਯੋਗਦਾਨ $5,000 ਤੋਂ ਘੱਟ ਰੱਖੋ।',
+  'tier.bracket': 'ਹੇਠਲੀ ਟੈਕਸ ਬ੍ਰੈਕਟ ਵਿੱਚ ਆਉਣ ਜਿੰਨਾ ਯੋਗਦਾਨ ਪਾਓ ਤਾਂ ਜੋ ਵੱਧ ਤੋਂ ਵੱਧ ਰਿਫੰਡ ਮਿਲੇ।',
+  'tier.maximize': 'ਵੱਡੇ ਟੈਕਸ ਰਿਫੰਡ ਲਈ RRSP ਯੋਗਦਾਨ ਵੱਧ ਤੋਂ ਵੱਧ ਕਰੋ।',
+  'tier.maxAll': 'ਟੈਕਸ ਲਾਭ ਵਧਾਉਣ ਲਈ ਵੱਧ ਤੋਂ ਵੱਧ ਰਕਮ ਦਾ ਯੋਗਦਾਨ ਪਾਓ।',
   'brand.tagline': 'ਕੈਨੇਡੀਅਨ ਪੇਰੋਲ ਕੈਲਕੁਲੇਟਰ',
   'nav.taxGuides': 'ਟੈਕਸ ਗਾਈਡ',
   'nav.compare': 'ਸੂਬਿਆਂ ਦੀ ਤੁਲਨਾ ਕਰੋ',

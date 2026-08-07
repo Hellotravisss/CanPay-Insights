@@ -1,5 +1,13 @@
 // Spanish (español) translations — auto-loaded by lib/i18n.tsx
 export const main: Record<string, string> = {
+  'app.autoSaving': 'Guardado automático en la nube',
+  'app.saveCalc': 'Guardar cálculo',
+  'app.saved': '¡Guardado!',
+  'day.0': 'Dom', 'day.1': 'Lun', 'day.2': 'Mar', 'day.3': 'Mié', 'day.4': 'Jue', 'day.5': 'Vie', 'day.6': 'Sáb',
+  'tier.emergency': 'Primero enfócate en tu fondo de emergencia. Mantén la aportación al RRSP por debajo de $5,000.',
+  'tier.bracket': 'Aporta lo suficiente para bajar a un tramo de impuestos inferior y maximizar el reembolso.',
+  'tier.maximize': 'Maximiza tu aportación al RRSP para un reembolso de impuestos significativo.',
+  'tier.maxAll': 'Aporta el máximo para optimizar tus beneficios fiscales.',
   'brand.tagline': 'Calculadora de nómina canadiense',
   'nav.taxGuides': 'Guías de impuestos',
   'nav.compare': 'Comparar provincias',

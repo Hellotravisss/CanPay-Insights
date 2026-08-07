@@ -1,5 +1,13 @@
 // Vietnamese (Tiếng Việt) translations — auto-loaded by lib/i18n.tsx
 export const main: Record<string, string> = {
+  'app.autoSaving': 'Đang tự động lưu lên đám mây',
+  'app.saveCalc': 'Lưu Kết Quả',
+  'app.saved': 'Đã lưu!',
+  'day.0': 'CN', 'day.1': 'T2', 'day.2': 'T3', 'day.3': 'T4', 'day.4': 'T5', 'day.5': 'T6', 'day.6': 'T7',
+  'tier.emergency': 'Ưu tiên xây dựng quỹ khẩn cấp trước. Giữ mức đóng RRSP dưới $5,000.',
+  'tier.bracket': 'Đóng vừa đủ để xuống bậc thuế thấp hơn nhằm tối đa hóa tiền hoàn thuế.',
+  'tier.maximize': 'Tối đa hóa mức đóng RRSP để nhận khoản hoàn thuế đáng kể.',
+  'tier.maxAll': 'Đóng mức tối đa để tối ưu lợi ích thuế.',
   'brand.tagline': 'Máy Tính Lương Canada',
   'nav.taxGuides': 'Hướng dẫn thuế',
   'nav.compare': 'So sánh các tỉnh bang',

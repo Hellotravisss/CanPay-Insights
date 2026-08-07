@@ -105,7 +105,7 @@ const InputSection: React.FC<Props> = ({ inputs, setInputs }) => {
                 : 'bg-white text-slate-500 border-slate-200 hover:bg-slate-50'
               }`}
             >
-              {day}
+              {t(`day.${idx}`)}
             </button>
           ))}
         </div>
