@@ -140,6 +140,10 @@ export function recordCalcEvent(e: {
         avg_daily_hours: w?.avgDailyHours ?? null,
         session_id: getSessionId(),
         seq: seqCounter,
+        // User's LOCAL clock (not UTC): powers "what hour / which weekday do
+        // Canadians check their pay" and payday-cycle analysis.
+        local_hour: new Date().getHours(),
+        local_dow: new Date().getDay(),
       })
       .then(({ error }) => {
         // Telemetry must never affect the user experience — swallow errors.
