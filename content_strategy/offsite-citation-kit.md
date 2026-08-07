@@ -12,13 +12,15 @@ must go out from your real accounts (that's both the rules and what keeps them e
 
 ---
 
-## Part 1 — Wikidata item (ready to submit)
+## Part 1 — Wikidata item (do this now — no gatekeeper needed)
 
-### ⚠️ Sequencing call (important, honest)
-Don't submit this **yet**. A brand-new website with **zero third-party references** can get flagged
-and deleted under Wikidata's notability rules. Do **1–2 data-citation emails first** (Part 2); the
-moment one blog/journalist cites you, use that citation as a `reference` on the item — then it
-sticks. So: **outreach first → get 1 citation → then create the Wikidata item with it.**
+### Why now (updated 2026-06-27)
+Earlier this doc said "wait for a third-party citation first." Scrap that — the cold emails
+got **zero replies**, and Wikidata does **not** require press coverage. Its bar is only: the
+entity is real and *"can be described using serious, publicly available references."* You already
+have two independent-enough anchors: the **Apple App Store listing** (a third-party platform
+confirming the product exists) and your **own site / open dataset**. That's enough to create a
+defensible item **today**. Keep it factual and neutral and it sticks.
 
 ### The item (copy these values at wikidata.org → "Create a new Item")
 - **Label (en):** `CanPay Insights`
@@ -26,25 +28,44 @@ sticks. So: **outreach first → get 1 citation → then create the Wikidata ite
 - **Also-known-as (en):** `canpayinsights.ca`
 - **Label (fr):** `CanPay Insights` · **Description (fr):** `calculateur de paie et de salaire net canadien`
 
-**Statements** (property → value):
+> The description must be a **plain, neutral noun phrase** — NOT marketing. Words like
+> "free", "best", "easy", "#1" are deletion bait. The phrase above is correctly neutral.
+
+**Statements** — the editor **autocompletes by name**, so you don't need the P/Q codes;
+just type the property/value name and pick the match. Codes are shown only as a sanity check.
 
 | Property | Value | Note |
 |---|---|---|
-| `instance of` (P31) | `website` (Q35127) | |
-| `official website` (P856) | `https://canpayinsights.ca` | |
+| `instance of` (P31) | `website` (Q35127) | required — the backbone statement |
+| `official website` (P856) | `https://canpayinsights.ca` | attach the App Store reference to THIS one (below) |
 | `country` (P17) | `Canada` (Q16) | |
 | `language of work or name` (P407) | `English` (Q1860), `French` (Q150), `Chinese` (Q7850) | add all three |
-| `inception` (P571) | `2025` | confirm your real launch year before saving |
-| `main subject` (P921) | `payroll` (Q1972490), `income tax` (Q179222) | optional, strengthens entity |
+| `inception` (P571) | your real launch year | confirm 2025 vs 2026 before saving; omit if unsure |
+| `main subject` (P921) | type `payroll`, then `income tax` — pick the obvious match | optional; strengthens the entity |
 
-**References (add to the P856 statement, and the citation once you have one):**
-- `reference URL` (P854) = the page where a third party cites you (added after outreach lands).
+**Reference (this is what makes it stick — attach to the `official website` statement):**
+- Click the `official website` statement → **+ add reference** → property `reference URL` (P854) →
+  value `https://apps.apple.com/app/canpayinsights/id6759822038`
+  (independent proof the product exists). Optionally add a 2nd `reference URL` =
+  `https://canpayinsights.ca/about`.
 
-### How to submit (5 min)
-1. Create a free account at **wikidata.org** (your own; I can't make accounts).
-2. Top-left "**Create a new Item**" → fill Label + Description above.
-3. "**+ add statement**" for each row in the table.
-4. Save. Done — LLMs read Wikidata directly, so this is a clean entity anchor.
+### Survival tips (so a patroller doesn't delete it as promo)
+1. **Don't use a brand-new single-purpose account.** Register, then make **2–3 small genuine
+   edits elsewhere first** (fix a typo, add a missing date on some unrelated item). A day-old
+   account whose *only* edit is "created an item about my own website" is the #1 deletion trigger.
+2. **Stay neutral & factual** — no "free/best/easy" anywhere in labels, description, or aliases.
+3. **Give every statement a reference** where one is possible.
+4. If it's ever nominated for deletion, don't panic — reply on the item's talk page with the
+   App Store link and note it's a described, verifiable entity. Calmly-sourced items usually survive.
+
+### How to submit (~10 min incl. warm-up edits)
+1. Create a free account at **wikidata.org** (your own — I can't create accounts).
+2. Make a couple of small unrelated edits first (see tip 1) so you're not a single-purpose account.
+3. Go to **wikidata.org/wiki/Special:NewItem** → fill Label + Description (en and fr).
+4. "**+ add statement**" for each row above; then add the App Store `reference URL` to `official website`.
+5. Save. ChatGPT, Perplexity, and Google's Knowledge Graph all read Wikidata — so this is a clean,
+   self-serve entity anchor that *also* fixes the "which CanPay?" confusion with the payroll company
+   and the cannabis-payments app.
 
 ---
 

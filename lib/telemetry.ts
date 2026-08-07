@@ -8,6 +8,18 @@ import { supabase } from './supabase';
 
 export type CalcMode = 'simple' | 'annual' | 'timesheet';
 
+// Work-schedule PATTERN only — hour-of-day buckets, days per week, break
+// length. Never specific calendar dates (a list of exact shift dates could
+// identify someone; the pattern is all the analysis needs).
+export interface WorkPattern {
+  shiftStartHour: number; // 0-23
+  shiftEndHour: number; // 0-23
+  unpaidBreakMin: number; // minutes, typical shift
+  daysPerWeek: number; // 1-7
+  worksWeekend: boolean;
+  avgDailyHours: number; // paid hours per active day
+}
+
 export function bracketIncome(annual: number): string {
   if (annual < 30_000) return 'under-30k';
   if (annual < 50_000) return '30-50k';
@@ -85,6 +97,7 @@ export function recordCalcEvent(e: {
   source?: 'web' | 'widget';
   embedHost?: string | null;
   industry?: string | null;
+  work?: WorkPattern | null;
 }) {
   if (!e.annualIncome || e.annualIncome <= 0 || !e.province) return;
 
@@ -93,7 +106,11 @@ export function recordCalcEvent(e: {
     const bracket = bracketIncome(e.annualIncome);
     const lang = e.lang === 'zh' || e.lang === 'fr' ? e.lang : 'en';
     const source = e.source ?? 'web';
-    const key = `${source}|${e.mode}|${e.province}|${bracket}|${lang}|${e.industry ?? ''}`;
+    const w = e.work ?? null;
+    const workKey = w
+      ? `${w.shiftStartHour}-${w.shiftEndHour}-${w.unpaidBreakMin}-${w.daysPerWeek}`
+      : '';
+    const key = `${source}|${e.mode}|${e.province}|${bracket}|${lang}|${e.industry ?? ''}|${workKey}`;
     if (sentThisPageLoad.has(key)) return;
     sentThisPageLoad.add(key);
 
@@ -115,6 +132,12 @@ export function recordCalcEvent(e: {
         lon: geo.lon,
         device: detectDevice(),
         industry: e.industry ?? null,
+        shift_start_hour: w?.shiftStartHour ?? null,
+        shift_end_hour: w?.shiftEndHour ?? null,
+        unpaid_break_min: w?.unpaidBreakMin ?? null,
+        days_per_week: w?.daysPerWeek ?? null,
+        works_weekend: w?.worksWeekend ?? null,
+        avg_daily_hours: w?.avgDailyHours ?? null,
         session_id: getSessionId(),
         seq: seqCounter,
       })

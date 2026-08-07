@@ -7,7 +7,7 @@ import AnnualSalaryInput from './components/AnnualSalaryInput';
 import TimesheetInput from './components/TimesheetInput';
 import ModeSelector from './components/ModeSelector';
 import { LanguageSwitcher, useT } from './lib/i18n';
-import { recordCalcEvent } from './lib/telemetry';
+import { recordCalcEvent, type WorkPattern } from './lib/telemetry';
 import IndustryComparison from './components/IndustryComparison';
 import ResultsSection from './components/ResultsSection';
 import GeminiAdvisor from './components/GeminiAdvisor';
@@ -21,6 +21,74 @@ import { useUserSettings } from './hooks/useUserSettings';
 import { useCalculationHistory, type CalculationRecord } from './hooks/useCalculationHistory';
 
 // Default State - 简易估算（时薪）
+// Derive the anonymous work-schedule PATTERN for telemetry: hour-of-day,
+// days/week, unpaid break length. Deliberately drops calendar dates — the
+// pattern is the dataset ("who works weekends", "whose break is unpaid"),
+// specific dates could identify a person and add nothing analytically.
+const hourOf = (hhmm: string): number | null => {
+  const h = parseInt(hhmm?.split(':')[0] ?? '', 10);
+  return Number.isFinite(h) && h >= 0 && h <= 23 ? h : null;
+};
+const modal = (xs: number[]): number => {
+  const counts = new Map<number, number>();
+  xs.forEach((x) => counts.set(x, (counts.get(x) ?? 0) + 1));
+  return [...counts.entries()].sort((a, b) => b[1] - a[1])[0][0];
+};
+function buildWorkPattern(
+  mode: CalculationMode,
+  simple: SalaryInputs,
+  timesheet: TimesheetInputs
+): WorkPattern | null {
+  if (mode === CalculationMode.SIMPLE) {
+    const s = simple.shift;
+    const start = hourOf(s.startTime);
+    const end = hourOf(s.endTime);
+    const daysPerWeek = s.daysActive.filter(Boolean).length;
+    if (start === null || end === null || daysPerWeek === 0) return null;
+    const span = end - start + (end <= start ? 24 : 0); // overnight shifts wrap
+    const paid = Math.max(0, span - s.unpaidBreakMinutes / 60);
+    return {
+      shiftStartHour: start,
+      shiftEndHour: end,
+      unpaidBreakMin: Math.max(0, Math.min(480, s.unpaidBreakMinutes || 0)),
+      daysPerWeek,
+      worksWeekend: s.daysActive[0] || s.daysActive[6],
+      avgDailyHours: Math.round(paid * 10) / 10,
+    };
+  }
+  if (mode === CalculationMode.TIMESHEET) {
+    const entries = timesheet.entries.filter(
+      (en) => hourOf(en.checkIn) !== null && hourOf(en.checkOut) !== null && en.date
+    );
+    if (entries.length === 0) return null;
+    const starts = entries.map((en) => hourOf(en.checkIn) as number);
+    const ends = entries.map((en) => hourOf(en.checkOut) as number);
+    const breaks = entries.map((en) => Math.max(0, Math.min(480, en.unpaidBreakMinutes || 0)));
+    const paidHours = entries.map((en, i) => {
+      const span = ends[i] - starts[i] + (ends[i] <= starts[i] ? 24 : 0);
+      return Math.max(0, span - breaks[i] / 60);
+    });
+    const dates = [...new Set(entries.map((en) => en.date))];
+    const weeks = new Set(
+      dates.map((d) => {
+        const dt = new Date(`${d}T00:00:00Z`);
+        const jan1 = new Date(Date.UTC(dt.getUTCFullYear(), 0, 1));
+        return `${dt.getUTCFullYear()}-${Math.floor((dt.getTime() - jan1.getTime()) / 604800000)}`;
+      })
+    );
+    return {
+      shiftStartHour: modal(starts),
+      shiftEndHour: modal(ends),
+      unpaidBreakMin: modal(breaks),
+      daysPerWeek: Math.max(1, Math.min(7, Math.round(dates.length / Math.max(1, weeks.size)))),
+      worksWeekend: dates.some((d) => [0, 6].includes(new Date(`${d}T00:00:00Z`).getUTCDay())),
+      avgDailyHours:
+        Math.round((paidHours.reduce((a, b) => a + b, 0) / paidHours.length) * 10) / 10,
+    };
+  }
+  return null; // annual mode has no schedule
+}
+
 const DEFAULT_SIMPLE_INPUTS: SalaryInputs = {
   province: Province.ON,
   hourlyWage: 20.00,
@@ -248,6 +316,7 @@ const App: React.FC = () => {
       province: currentProvince,
       annualIncome: results.grossPayAnnual,
       lang,
+      work: buildWorkPattern(mode, simpleInputs, timesheetInputs),
     });
   }, [currentPage, mode, simpleInputs, annualInputs, timesheetInputs, currentProvince, results.grossPayAnnual, lang]);
 
