@@ -74,45 +74,61 @@ export default function HomePage() {
             French, and Chinese.
           </p>
 
-          <h2 className="mb-3 text-2xl font-bold text-slate-900">
-            How CPP deductions work in 2026
-          </h2>
-          <p className="mb-6 leading-7 text-slate-600">
-            The Canada Pension Plan (CPP) takes 5.95% of your earnings between the $3,500 basic
-            exemption and the yearly maximum ($74,600 in 2026), for a maximum employee contribution
-            of about $4,230. Higher earners also pay CPP2 — an extra 4% on income between $74,600 and
-            $85,000. You and your employer contribute the same amount. Our calculator applies
-            these brackets automatically for every province and territory.
-          </p>
+          {/* Collapsed on all viewports: full text stays in the HTML for
+              crawlers/AI engines (details content is fully indexed), while
+              mobile users see one tappable line per topic instead of screens
+              of text. */}
+          <details className="group border-t border-slate-200">
+            <summary className="cursor-pointer list-none py-4 text-base font-bold text-slate-800 marker:content-none [&::-webkit-details-marker]:hidden flex items-center justify-between">
+              How CPP deductions work in 2026
+              <span className="ml-3 text-slate-400 transition-transform group-open:rotate-90">›</span>
+            </summary>
+            <p className="pb-5 leading-7 text-slate-600">
+              The Canada Pension Plan (CPP) takes 5.95% of your earnings between the $3,500 basic
+              exemption and the yearly maximum ($74,600 in 2026), for a maximum employee contribution
+              of about $4,230. Higher earners also pay CPP2 — an extra 4% on income between $74,600 and
+              $85,000. You and your employer contribute the same amount. Our calculator applies
+              these brackets automatically for every province and territory.
+            </p>
+          </details>
 
-          <h2 className="mb-3 text-2xl font-bold text-slate-900">
-            EI premiums and rates across Canada
-          </h2>
-          <p className="mb-6 leading-7 text-slate-600">
-            Employment Insurance (EI) is deducted at 1.63% of insurable earnings in 2026, up to a
-            maximum of about $1,123 per year. Quebec uses a lower EI rate because it runs its own
-            parental insurance plan (QPIP) separately. CanPay Insights applies the correct EI and
-            QPIP rates based on the province you select.
-          </p>
+          <details className="group border-t border-slate-200">
+            <summary className="cursor-pointer list-none py-4 text-base font-bold text-slate-800 marker:content-none [&::-webkit-details-marker]:hidden flex items-center justify-between">
+              EI premiums and rates across Canada
+              <span className="ml-3 text-slate-400 transition-transform group-open:rotate-90">›</span>
+            </summary>
+            <p className="pb-5 leading-7 text-slate-600">
+              Employment Insurance (EI) is deducted at 1.63% of insurable earnings in 2026, up to a
+              maximum of about $1,123 per year. Quebec uses a lower EI rate because it runs its own
+              parental insurance plan (QPIP) separately. CanPay Insights applies the correct EI and
+              QPIP rates based on the province you select.
+            </p>
+          </details>
 
-          <h2 className="mb-3 text-2xl font-bold text-slate-900">
-            How provincial tax changes your take-home pay
-          </h2>
-          <p className="leading-7 text-slate-600">
-            Your net pay depends heavily on where you live. The same $65,000 salary keeps a different
-            amount in Alberta, Ontario, BC, or Quebec, because each province sets its own tax
-            brackets and basic personal amount. Alberta has the highest basic personal amount and no
-            provincial sales tax, while Quebec runs its own system with QPP and QPIP. Use the
-            calculator above to compare your real take-home pay by province in 2026.
-          </p>
+          <details className="group border-t border-b border-slate-200">
+            <summary className="cursor-pointer list-none py-4 text-base font-bold text-slate-800 marker:content-none [&::-webkit-details-marker]:hidden flex items-center justify-between">
+              How provincial tax changes your take-home pay
+              <span className="ml-3 text-slate-400 transition-transform group-open:rotate-90">›</span>
+            </summary>
+            <p className="pb-5 leading-7 text-slate-600">
+              Your net pay depends heavily on where you live. The same $65,000 salary keeps a different
+              amount in Alberta, Ontario, BC, or Quebec, because each province sets its own tax
+              brackets and basic personal amount. Alberta has the highest basic personal amount and no
+              provincial sales tax, while Quebec runs its own system with QPP and QPIP. Use the
+              calculator above to compare your real take-home pay by province in 2026.
+            </p>
+          </details>
         </div>
       </section>
 
       <section className="border-t border-slate-200 bg-white">
         <div className="mx-auto max-w-3xl px-4 py-12">
-          <h2 className="mb-3 text-2xl font-bold text-slate-900">
-            2026 take-home pay by province: an $80,000 salary compared
-          </h2>
+          <details className="group border-t border-slate-200">
+            <summary className="cursor-pointer list-none py-4 text-base font-bold text-slate-800 marker:content-none [&::-webkit-details-marker]:hidden flex items-center justify-between">
+              2026 take-home pay by province: an $80,000 salary compared
+              <span className="ml-3 text-slate-400 transition-transform group-open:rotate-90">›</span>
+            </summary>
+            <div className="pb-5">
           <p className="mb-6 leading-7 text-slate-600">
             On an $80,000 salary in 2026, your take-home pay ranges from about $57,077 in Quebec to
             about $61,038 in British Columbia — a gap of nearly $5,000 a year on the exact same gross
@@ -145,10 +161,15 @@ export default function HomePage() {
             Insights rules engine using CRA and provincial rates. Your own result will vary with RRSP
             contributions, dependants, and other credits.
           </p>
+            </div>
+          </details>
 
-          <h2 className="mb-3 mt-12 text-2xl font-bold text-slate-900">
-            How take-home pay changes as your salary rises
-          </h2>
+          <details className="group border-t border-slate-200">
+            <summary className="cursor-pointer list-none py-4 text-base font-bold text-slate-800 marker:content-none [&::-webkit-details-marker]:hidden flex items-center justify-between">
+              How take-home pay changes as your salary rises
+              <span className="ml-3 text-slate-400 transition-transform group-open:rotate-90">›</span>
+            </summary>
+            <div className="pb-5">
           <p className="mb-6 leading-7 text-slate-600">
             Canada uses progressive tax brackets, so each extra dollar is taxed at a higher rate and a
             larger salary keeps a smaller share. Here is the 2026 annual take-home pay at three income
@@ -172,16 +193,21 @@ export default function HomePage() {
               </tbody>
             </table>
           </div>
+            </div>
+          </details>
 
-          <h2 className="mb-5 mt-12 text-2xl font-bold text-slate-900">
+          <h2 className="mb-2 mt-10 text-2xl font-bold text-slate-900">
             Frequently asked questions
           </h2>
-          <div className="space-y-6">
-            {homeFaqJsonLd.mainEntity.map((item) => (
-              <div key={item.name}>
-                <h3 className="mb-2 text-lg font-bold text-slate-900">{item.name}</h3>
-                <p className="leading-7 text-slate-600">{item.acceptedAnswer.text}</p>
-              </div>
+          <div>
+            {homeFaqJsonLd.mainEntity.map((item, i) => (
+              <details key={item.name} className={`group border-t border-slate-200 ${i === homeFaqJsonLd.mainEntity.length - 1 ? 'border-b' : ''}`}>
+                <summary className="cursor-pointer list-none py-4 text-base font-bold text-slate-800 marker:content-none [&::-webkit-details-marker]:hidden flex items-center justify-between">
+                  {item.name}
+                  <span className="ml-3 text-slate-400 transition-transform group-open:rotate-90">›</span>
+                </summary>
+                <p className="pb-5 leading-7 text-slate-600">{item.acceptedAnswer.text}</p>
+              </details>
             ))}
           </div>
         </div>
