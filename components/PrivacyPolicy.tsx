@@ -60,11 +60,11 @@ const PrivacyPolicy: React.FC<PrivacyPolicyProps> = ({ onBackToHome }) => {
             <section className="mb-10">
               <h2 className="text-2xl font-bold text-slate-800 mb-4 flex items-center gap-3">
                 <span className="flex items-center justify-center w-8 h-8 bg-red-100 text-red-600 rounded-lg text-sm font-bold">1</span>
-                Information We Do Not Collect
+                Your Calculations Stay on Your Device
               </h2>
               <div className="pl-11">
                 <p className="text-slate-600 leading-relaxed mb-4">
-                  We strongly believe in your right to privacy. <strong className="text-slate-800">CanPay Insights does not collect, store, transmit, or share any personal data, financial information, or usage metrics.</strong> All payroll and tax calculations are performed entirely locally on your device. The numbers you input (such as hourly wages, annual salary, or timesheet hours) never leave your phone or computer. We do not have servers that store your financial data.
+                  All payroll and tax calculations are performed <strong className="text-slate-800">entirely locally on your device</strong>. The exact numbers you input (such as your hourly wage, annual salary, or timesheet hours) are not transmitted to us and we do not store them — unless you create an account and choose to save a calculation, in which case that saved calculation is stored securely so you can access it across your devices.
                 </p>
               </div>
             </section>
@@ -72,11 +72,11 @@ const PrivacyPolicy: React.FC<PrivacyPolicyProps> = ({ onBackToHome }) => {
             <section className="mb-10">
               <h2 className="text-2xl font-bold text-slate-800 mb-4 flex items-center gap-3">
                 <span className="flex items-center justify-center w-8 h-8 bg-red-100 text-red-600 rounded-lg text-sm font-bold">2</span>
-                No Third-Party Tracking
+                Anonymous Aggregate Statistics
               </h2>
               <div className="pl-11">
-                <p className="text-slate-600 leading-relaxed">
-                  We do not integrate any third-party analytics, tracking cookies, or advertising frameworks that monitor your behavior across other apps or websites.
+                <p className="text-slate-600 leading-relaxed mb-4">
+                  To understand how the calculator is used and to publish aggregate research (for example, "which income ranges Canadians calculate most, by province"), we record <strong className="text-slate-800">anonymous usage statistics</strong>: the calculator mode, the province, a broad income range (a bracket such as "$50k–$70k" — never your exact amount), and the interface language. These events contain <strong className="text-slate-800">no names, no account identifiers, no IP addresses, and no device fingerprints</strong>, and cannot be linked back to you. We also use privacy-friendly page analytics (Vercel Analytics) to count page views. We do not use advertising trackers and do not monitor your behavior across other apps or websites.
                 </p>
               </div>
             </section>

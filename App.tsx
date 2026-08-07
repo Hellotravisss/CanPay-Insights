@@ -7,6 +7,7 @@ import AnnualSalaryInput from './components/AnnualSalaryInput';
 import TimesheetInput from './components/TimesheetInput';
 import ModeSelector from './components/ModeSelector';
 import { LanguageSwitcher, useT } from './lib/i18n';
+import { recordCalcEvent } from './lib/telemetry';
 import ResultsSection from './components/ResultsSection';
 import GeminiAdvisor from './components/GeminiAdvisor';
 import UserMenu from './components/UserMenu';
@@ -74,7 +75,7 @@ const App: React.FC = () => {
 
   // Auth
   const { user, isAuthenticated, signInWithOAuth, signInWithEmail, signInWithPassword, signUpWithPassword } = useAuth();
-  const { t } = useT();
+  const { t, lang } = useT();
   const userId = user?.id || null;
 
   // User settings persistence
@@ -229,6 +230,18 @@ const App: React.FC = () => {
     : mode === CalculationMode.TIMESHEET
     ? { province: timesheetInputs.province, hourlyWage: timesheetInputs.hourlyWage }
     : simpleInputs;
+
+  // Anonymous aggregate telemetry (debounced + deduped inside recordCalcEvent).
+  // Only bucketed values leave the browser — never exact amounts or identity.
+  useEffect(() => {
+    if (currentPage !== 'calculator') return;
+    recordCalcEvent({
+      mode,
+      province: currentProvince,
+      annualIncome: results.grossPayAnnual,
+      lang,
+    });
+  }, [currentPage, mode, currentProvince, results.grossPayAnnual, lang]);
 
   // Calculation History
   const { saveCalculation } = useCalculationHistory(userId);
