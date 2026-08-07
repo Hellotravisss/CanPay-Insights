@@ -21,14 +21,31 @@ export function bracketIncome(annual: number): string {
 const sentThisPageLoad = new Set<string>();
 let debounceTimer: ReturnType<typeof setTimeout> | null = null;
 
-// Coarse geo (country code + region), resolved once per page load from our own
-// /api/geo endpoint (Vercel edge headers). IP is never stored — see route.
-let geoPromise: Promise<{ country: string | null; region: string | null }> | null = null;
+// Anonymous per-page-load session: a random UUID minted in the browser, kept
+// in memory only (gone on close, never reused across visits, no fingerprint).
+// Lets analysis tell "2 people" apart from "1 person comparing 2 provinces",
+// and surfaces comparison pairs (relocation intent). seq = order in session.
+let sessionId: string | null = null;
+let seqCounter = 0;
+function getSessionId(): string {
+  if (!sessionId) {
+    sessionId =
+      typeof crypto !== 'undefined' && crypto.randomUUID
+        ? crypto.randomUUID()
+        : `${Date.now()}-${Math.random().toString(36).slice(2)}`;
+  }
+  return sessionId;
+}
+
+// Coarse geo (country / region / city), resolved once per page load from our
+// own /api/geo endpoint (Vercel edge headers). IP is never stored — see route.
+type Geo = { country: string | null; region: string | null; city: string | null };
+let geoPromise: Promise<Geo> | null = null;
 function getGeo() {
   if (!geoPromise) {
     geoPromise = fetch('/api/geo', { cache: 'no-store' })
-      .then((r) => (r.ok ? r.json() : { country: null, region: null }))
-      .catch(() => ({ country: null, region: null }));
+      .then((r) => (r.ok ? r.json() : { country: null, region: null, city: null }))
+      .catch(() => ({ country: null, region: null, city: null }));
   }
   return geoPromise;
 }
@@ -59,6 +76,7 @@ export function recordCalcEvent(e: {
     sentThisPageLoad.add(key);
 
     const geo = await getGeo();
+    seqCounter += 1;
     supabase
       .from('anon_calc_events')
       .insert({
@@ -70,6 +88,9 @@ export function recordCalcEvent(e: {
         embed_host: e.embedHost ?? null,
         country: geo.country,
         region: geo.region,
+        city: geo.city,
+        session_id: getSessionId(),
+        seq: seqCounter,
       })
       .then(({ error }) => {
         // Telemetry must never affect the user experience — swallow errors.
