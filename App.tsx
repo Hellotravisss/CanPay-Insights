@@ -8,6 +8,7 @@ import TimesheetInput from './components/TimesheetInput';
 import ModeSelector from './components/ModeSelector';
 import { LanguageSwitcher, useT } from './lib/i18n';
 import { recordCalcEvent } from './lib/telemetry';
+import IndustryComparison from './components/IndustryComparison';
 import ResultsSection from './components/ResultsSection';
 import GeminiAdvisor from './components/GeminiAdvisor';
 import UserMenu from './components/UserMenu';
@@ -513,6 +514,12 @@ const App: React.FC = () => {
                 </div>
                 
                 <ResultsSection results={results} provinceName={currentProvince} />
+                <IndustryComparison
+                  mode={mode}
+                  province={currentProvince}
+                  annualIncome={results.grossPayAnnual}
+                  lang={lang}
+                />
                 <GeminiAdvisor results={results} inputs={currentInputs as SalaryInputs} />
               </div>
               

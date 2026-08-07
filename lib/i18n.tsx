@@ -300,6 +300,10 @@ const en: Dict = {
   'rep.investPre': 'Invest ',
   'rep.investPost': ' in TFSA for tax-free growth',
   'rep.wsCta': 'Open your RRSP at Wealthsimple →',
+  'opt.runAnalysis': 'Generate Deep Tax Analysis →',
+  'opt.think1': 'Analyzing your tax profile…',
+  'opt.think2': 'Checking RRSP contribution room…',
+  'opt.think3': 'Optimizing bracket strategy…',
   'rep.wsDisclosure': 'paid referral link',
 };
 
@@ -590,6 +594,10 @@ const zh: Dict = {
   'rep.investPre': '向 TFSA 投入 ',
   'rep.investPost': ' 以获得免税增值',
   'rep.wsCta': '去 Wealthsimple 开设 RRSP →',
+  'opt.runAnalysis': '生成深度税务分析 →',
+  'opt.think1': '正在分析你的税务档案…',
+  'opt.think2': '正在检查 RRSP 供款空间…',
+  'opt.think3': '正在优化税级策略…',
   'rep.wsDisclosure': '付费推荐链接',
 };
 
@@ -880,6 +888,10 @@ const fr: Dict = {
   'rep.investPre': 'Investissez ',
   'rep.investPost': ' dans le CELI pour une croissance libre d\'impôt',
   'rep.wsCta': 'Ouvrez votre REER chez Wealthsimple →',
+  'opt.runAnalysis': "Générer l'analyse fiscale approfondie →",
+  'opt.think1': 'Analyse de votre profil fiscal…',
+  'opt.think2': "Vérification de l'espace REER…",
+  'opt.think3': 'Optimisation de la stratégie fiscale…',
   'rep.wsDisclosure': 'lien de parrainage rémunéré',
 };
 

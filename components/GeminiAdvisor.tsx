@@ -222,6 +222,20 @@ const GeminiAdvisor: React.FC<Props> = ({ results, inputs }) => {
   const [exporting, setExporting] = useState(false);
   const [showRRSPScenarios, setShowRRSPScenarios] = useState(false);
   const [showSaveOptions, setShowSaveOptions] = useState(false);
+  // Analysis reveal: button → brief staged "working" state → report.
+  // The stage messages describe computations the engine genuinely performs.
+  const [analysisState, setAnalysisState] = useState<'idle' | 'thinking' | 'done'>('idle');
+  const [thinkStep, setThinkStep] = useState(0);
+
+  const runAnalysis = () => {
+    setAnalysisState('thinking');
+    setThinkStep(0);
+    const stepTimer = setInterval(() => setThinkStep((s) => Math.min(s + 1, 2)), 700);
+    setTimeout(() => {
+      clearInterval(stepTimer);
+      setAnalysisState('done');
+    }, 2100);
+  };
   const snapshotRef = useRef<HTMLDivElement>(null);
 
   // Local helper to calculate pay periods per year
@@ -789,6 +803,23 @@ const GeminiAdvisor: React.FC<Props> = ({ results, inputs }) => {
           </svg>
           {t('opt.strategy')}
         </h4>
+        {analysisState === 'idle' && (
+          <button
+            onClick={runAnalysis}
+            className="w-full rounded-xl bg-red-600 py-4 text-base font-bold text-white shadow-lg transition-all hover:bg-red-700 active:scale-[0.99]"
+          >
+            {t('opt.runAnalysis')}
+          </button>
+        )}
+        {analysisState === 'thinking' && (
+          <div className="flex flex-col items-center gap-3 rounded-xl border border-slate-700/50 bg-slate-900/60 py-10">
+            <div className="h-8 w-8 animate-spin rounded-full border-4 border-red-600/30 border-t-red-600" />
+            <p className="text-sm font-medium text-slate-300 animate-fadeIn" key={thinkStep}>
+              {t(thinkStep === 0 ? 'opt.think1' : thinkStep === 1 ? 'opt.think2' : 'opt.think3')}
+            </p>
+          </div>
+        )}
+        {analysisState === 'done' && (
         <div className="bg-slate-900/60 p-5 rounded-xl border border-slate-700/50 animate-fadeIn">
           <div className="max-w-none">
             {renderSmartReport(false)}
@@ -817,6 +848,7 @@ const GeminiAdvisor: React.FC<Props> = ({ results, inputs }) => {
             <p className="text-xs text-slate-500 mt-2">{t('opt.saveReportHint')}</p>
           </div>
         </div>
+        )}
       </div>
 
       {/* MOBILE SAVE OPTIONS MODAL */}

@@ -84,6 +84,7 @@ export function recordCalcEvent(e: {
   lang: string;
   source?: 'web' | 'widget';
   embedHost?: string | null;
+  industry?: string | null;
 }) {
   if (!e.annualIncome || e.annualIncome <= 0 || !e.province) return;
 
@@ -92,7 +93,7 @@ export function recordCalcEvent(e: {
     const bracket = bracketIncome(e.annualIncome);
     const lang = e.lang === 'zh' || e.lang === 'fr' ? e.lang : 'en';
     const source = e.source ?? 'web';
-    const key = `${source}|${e.mode}|${e.province}|${bracket}|${lang}`;
+    const key = `${source}|${e.mode}|${e.province}|${bracket}|${lang}|${e.industry ?? ''}`;
     if (sentThisPageLoad.has(key)) return;
     sentThisPageLoad.add(key);
 
@@ -113,6 +114,7 @@ export function recordCalcEvent(e: {
         lat: geo.lat,
         lon: geo.lon,
         device: detectDevice(),
+        industry: e.industry ?? null,
         session_id: getSessionId(),
         seq: seqCounter,
       })
