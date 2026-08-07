@@ -104,7 +104,8 @@ export function recordCalcEvent(e: {
   if (debounceTimer) clearTimeout(debounceTimer);
   debounceTimer = setTimeout(async () => {
     const bracket = bracketIncome(e.annualIncome);
-    const lang = e.lang === 'zh' || e.lang === 'fr' ? e.lang : 'en';
+    const KNOWN_LANGS = ['en', 'zh', 'fr', 'pa', 'tl', 'hi', 'es', 'uk', 'ko', 'vi'];
+    const lang = KNOWN_LANGS.includes(e.lang) ? e.lang : 'en';
     const source = e.source ?? 'web';
     const w = e.work ?? null;
     const workKey = w

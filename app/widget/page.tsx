@@ -31,7 +31,7 @@ const widgetFaq = [
   {
     question: 'Can I set a default province or language?',
     answer:
-      'Yes — add URL parameters to the iframe src: ?province=BC (two-letter code) and &lang=en, fr, or zh for English, French, or Chinese.',
+      'Yes — add URL parameters to the iframe src: ?province=BC (two-letter code) and &lang= with one of ten languages: en, fr, zh, pa (Punjabi), hi (Hindi), tl (Tagalog), es (Spanish), uk (Ukrainian), ko (Korean), or vi (Vietnamese).',
   },
   {
     question: 'Does the widget track my visitors?',
@@ -91,7 +91,7 @@ export default function WidgetPage() {
             <h3 className="mb-2 mt-6 text-sm font-bold text-slate-900">Options</h3>
             <ul className="space-y-1.5 text-sm leading-6 text-slate-600">
               <li><code className="rounded bg-slate-200 px-1.5 py-0.5 text-xs">?province=BC</code> — default province (ON, BC, AB, QC, MB, SK, NS, NB, PE, NL, YT, NT, NU)</li>
-              <li><code className="rounded bg-slate-200 px-1.5 py-0.5 text-xs">&amp;lang=fr</code> — interface language: <code className="text-xs">en</code>, <code className="text-xs">fr</code>, or <code className="text-xs">zh</code></li>
+              <li><code className="rounded bg-slate-200 px-1.5 py-0.5 text-xs">&amp;lang=fr</code> — interface language: <code className="text-xs">en</code>, <code className="text-xs">fr</code>, <code className="text-xs">zh</code>, <code className="text-xs">pa</code>, <code className="text-xs">hi</code>, <code className="text-xs">tl</code>, <code className="text-xs">es</code>, <code className="text-xs">uk</code>, <code className="text-xs">ko</code>, <code className="text-xs">vi</code></li>
             </ul>
 
             <h3 className="mb-2 mt-6 text-sm font-bold text-slate-900">Need something custom?</h3>

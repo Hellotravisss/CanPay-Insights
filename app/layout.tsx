@@ -105,7 +105,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
                 '@type': 'ContactPoint',
                 contactType: 'customer support',
                 email: 'info@canpayinsights.ca',
-                availableLanguage: ['en', 'fr', 'zh'],
+                availableLanguage: ['en', 'fr', 'zh', 'pa', 'hi', 'tl', 'es', 'uk', 'ko', 'vi'],
               },
               knowsAbout: ['take-home pay', 'net pay', 'paycheck calculator', 'salary after tax', 'hourly wage after tax', 'income tax', 'payroll deductions', 'CPP', 'CPP2', 'EI', 'RRSP', 'TFSA', 'QPP', 'QPIP'],
             },
@@ -120,7 +120,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
               description: 'Free take-home pay and paycheck calculator for Canadian employees — estimate the net pay you keep from a salary or hourly wage after income tax, CPP/CPP2, and EI, by province, for 2026.',
               featureList: ['Take-home pay by province', 'Hourly wage and annual salary modes', 'Federal and provincial income tax', 'CPP, CPP2 and EI deductions', 'Quebec QPP and QPIP', 'RRSP and TFSA planning'],
               url: 'https://canpayinsights.ca/',
-              inLanguage: ['en', 'fr', 'zh'],
+              inLanguage: ['en', 'fr', 'zh', 'pa', 'hi', 'tl', 'es', 'uk', 'ko', 'vi'],
               publisher: { '@id': 'https://canpayinsights.ca/#org' },
             },
             {

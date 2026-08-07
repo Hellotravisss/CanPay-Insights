@@ -70,8 +70,9 @@ export default function HomePage() {
             your salary or hourly wage and your province, and it shows exactly how much you keep after
             federal and provincial income tax, CPP/CPP2, and EI for the 2026 tax year. It is a
             paycheck calculator for employees and hourly workers — not a payroll service, a payment
-            processor, or a merchant-services provider. No signup and no spreadsheet, in English,
-            French, and Chinese.
+            processor, or a merchant-services provider. No signup and no spreadsheet, in ten
+            languages: English, French, Chinese, Punjabi, Hindi, Tagalog, Spanish, Ukrainian,
+            Korean, and Vietnamese.
           </p>
 
           {/* Collapsed on all viewports: full text stays in the HTML for

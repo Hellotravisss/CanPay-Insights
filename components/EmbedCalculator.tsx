@@ -7,9 +7,18 @@ import { recordCalcEvent } from '../lib/telemetry';
 // third-party sites (job boards, immigration services, finance blogs).
 // The Ookla "Speedtest Custom" play: the tool itself becomes distribution.
 
-type Lang = 'en' | 'fr' | 'zh';
+import { embed as paEmbed } from '../lib/translations/pa';
+import { embed as tlEmbed } from '../lib/translations/tl';
+import { embed as hiEmbed } from '../lib/translations/hi';
+import { embed as esEmbed } from '../lib/translations/es';
+import { embed as ukEmbed } from '../lib/translations/uk';
+import { embed as koEmbed } from '../lib/translations/ko';
+import { embed as viEmbed } from '../lib/translations/vi';
 
-const DICT: Record<Lang, Record<string, string>> = {
+type Lang = 'en' | 'fr' | 'zh' | 'pa' | 'tl' | 'hi' | 'es' | 'uk' | 'ko' | 'vi';
+
+const DICT: Record<string, Record<string, string>> = {
+  pa: paEmbed, tl: tlEmbed, hi: hiEmbed, es: esEmbed, uk: ukEmbed, ko: koEmbed, vi: viEmbed,
   en: {
     title: 'Take-Home Pay Calculator',
     province: 'Province',
@@ -75,7 +84,7 @@ export default function EmbedCalculator({
   initialProvince?: string;
   initialLang?: string;
 }) {
-  const lang: Lang = initialLang === 'fr' || initialLang === 'zh' ? initialLang : 'en';
+  const lang: Lang = initialLang && DICT[initialLang] ? (initialLang as Lang) : 'en';
   const t = DICT[lang];
 
   const startSlug =

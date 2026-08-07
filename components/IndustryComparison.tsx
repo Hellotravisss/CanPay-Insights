@@ -7,7 +7,19 @@ import { recordCalcEvent, type CalcMode } from '../lib/telemetry';
 // industry to see their standing; the dataset gains a declared industry
 // dimension — no popup, no tracking, still anonymous.
 
-type Lang = 'en' | 'fr' | 'zh';
+import { industry as paInd } from '../lib/translations/pa';
+import { industry as tlInd } from '../lib/translations/tl';
+import { industry as hiInd } from '../lib/translations/hi';
+import { industry as esInd } from '../lib/translations/es';
+import { industry as ukInd } from '../lib/translations/uk';
+import { industry as koInd } from '../lib/translations/ko';
+import { industry as viInd } from '../lib/translations/vi';
+
+type Lang = 'en' | 'fr' | 'zh' | 'pa' | 'tl' | 'hi' | 'es' | 'uk' | 'ko' | 'vi';
+
+const EXTRA_DICTS: Record<string, Record<string, string>> = {
+  pa: paInd, tl: tlInd, hi: hiInd, es: esInd, uk: ukInd, ko: koInd, vi: viInd,
+};
 
 // Module-level = once per page load, matching the telemetry session model.
 let industrySentThisPageLoad = false;
@@ -31,7 +43,7 @@ const BENCHMARKS: { slug: string; p: [number, number, number, number, number] }[
   { slug: 'all-industries', p: [28000, 42000, 62000, 86000, 115000] },
 ];
 
-const DICT: Record<Lang, Record<string, string>> = {
+const DICT: Record<string, Record<string, string>> = {
   en: {
     prompt: 'Optional: pick your industry to see where your pay stands',
     industry: 'Your industry',
@@ -138,8 +150,11 @@ export default function IndustryComparison({
   annualIncome: number;
   lang: string;
 }) {
-  const lang: Lang = rawLang === 'fr' || rawLang === 'zh' ? rawLang : 'en';
-  const t = DICT[lang];
+  const lang: Lang =
+    rawLang === 'fr' || rawLang === 'zh' ? rawLang
+    : EXTRA_DICTS[rawLang] ? (rawLang as Lang)
+    : 'en';
+  const t = (DICT as Record<string, Record<string, string>>)[lang] ?? EXTRA_DICTS[lang];
   const [slug, setSlug] = useState('');
 
   const bench = useMemo(() => BENCHMARKS.find((b) => b.slug === slug) ?? null, [slug]);
@@ -183,7 +198,7 @@ export default function IndustryComparison({
     // so it gets a short verdict name.
     const industryName =
       slug === 'all-industries'
-        ? { en: 'all workers', fr: 'l’ensemble des travailleurs', zh: '全体打工人' }[lang]
+        ? ({ en: 'all workers', fr: 'l’ensemble des travailleurs', zh: '全体打工人' } as Record<string, string>)[lang] ?? t[slug] ?? 'all workers'
         : t[slug] ?? slug;
     const fill = (tpl: string) => {
       let s = tpl;

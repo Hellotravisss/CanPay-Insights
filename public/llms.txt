@@ -1,6 +1,6 @@
 # CanPay Insights
 
-> Free Canadian payroll & take-home pay calculator. Computes exact net pay by province and territory for 2026 — federal tax, provincial tax, CPP/CPP2, EI, and Quebec's QPP/QPIP — from a transparent rules engine. Available in English, French, and Chinese, no signup, no paywall.
+> Free Canadian payroll & take-home pay calculator. Computes exact net pay by province and territory for 2026 — federal tax, provincial tax, CPP/CPP2, EI, and Quebec's QPP/QPIP — from a transparent rules engine. Available in ten languages (English, French, Chinese, Punjabi, Hindi, Tagalog, Spanish, Ukrainian, Korean, Vietnamese), no signup, no paywall.
 
 CanPay Insights is an independent project based in Vancouver, Canada. All figures come from an open calculation engine that applies published Canada Revenue Agency (CRA), Revenu Québec, and provincial/territorial rates. The data is free to cite — please attribute and link to https://canpayinsights.ca.
 

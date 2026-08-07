@@ -3,11 +3,19 @@ import { useEffect, useState } from 'react';
 
 // Lightweight client-side i18n for the CALCULATOR TOOL UI only.
 // Articles/blog stay English. No provider needed — components call useT().
-export type Lang = 'en' | 'zh' | 'fr';
+export type Lang = 'en' | 'zh' | 'fr' | 'pa' | 'tl' | 'hi' | 'es' | 'uk' | 'ko' | 'vi';
+// Labels are each language's own name (endonym) — that's what its speakers scan for.
 export const LANGS: { code: Lang; label: string }[] = [
   { code: 'en', label: 'EN' },
   { code: 'zh', label: '中文' },
   { code: 'fr', label: 'FR' },
+  { code: 'pa', label: 'ਪੰਜਾਬੀ' },
+  { code: 'hi', label: 'हिन्दी' },
+  { code: 'tl', label: 'Tagalog' },
+  { code: 'es', label: 'Español' },
+  { code: 'uk', label: 'Українська' },
+  { code: 'ko', label: '한국어' },
+  { code: 'vi', label: 'Tiếng Việt' },
 ];
 
 type Dict = Record<string, string>;
@@ -895,7 +903,15 @@ const fr: Dict = {
   'rep.wsDisclosure': 'lien de parrainage rémunéré',
 };
 
-const dicts: Record<Lang, Dict> = { en, zh, fr };
+import { main as pa } from './translations/pa';
+import { main as tl } from './translations/tl';
+import { main as hi } from './translations/hi';
+import { main as es } from './translations/es';
+import { main as uk } from './translations/uk';
+import { main as ko } from './translations/ko';
+import { main as vi } from './translations/vi';
+
+const dicts: Record<Lang, Dict> = { en, zh, fr, pa, tl, hi, es, uk, ko, vi };
 
 // Module-level state + subscriber broadcast (so all components re-render on change)
 let current: Lang = 'en';
@@ -929,8 +945,12 @@ export function useT() {
           (navigator.languages && navigator.languages[0]) ||
           ''
         ).toLowerCase();
-        if (navLang.startsWith('fr')) chosen = 'fr';
-        else if (navLang.startsWith('zh')) chosen = 'zh';
+        const prefix = navLang.split('-')[0];
+        // 'fil' = Filipino locale code some devices use for Tagalog
+        const detected = prefix === 'fil' ? 'tl' : prefix;
+        if (detected !== 'en' && (dicts as Record<string, Dict>)[detected]) {
+          chosen = detected as Lang;
+        }
       }
     } catch {
       /* ignore */
@@ -952,20 +972,23 @@ export function useT() {
 
 export function LanguageSwitcher({ className = '' }: { className?: string }) {
   const { lang, setLang } = useT();
+  // 10 languages no longer fit as a button row — native select stays compact
+  // on mobile and gets the OS picker for free.
   return (
-    <div className={`inline-flex items-center rounded-lg border border-slate-200 bg-white p-0.5 ${className}`}>
-      {LANGS.map(({ code, label }) => (
-        <button
-          key={code}
-          onClick={() => setLang(code)}
-          className={`rounded-md px-2 py-1 text-xs font-bold transition-colors ${
-            lang === code ? 'bg-red-600 text-white' : 'text-slate-500 hover:text-slate-800'
-          }`}
-          aria-pressed={lang === code}
-        >
-          {label}
-        </button>
-      ))}
+    <div className={`inline-flex items-center gap-1 rounded-lg border border-slate-200 bg-white px-2 py-1 ${className}`}>
+      <svg className="h-3.5 w-3.5 text-slate-400" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24" aria-hidden="true">
+        <path strokeLinecap="round" strokeLinejoin="round" d="M3 5h12M9 3v2m1.048 9.5A18.022 18.022 0 016.412 9m6.088 9h7.5m-7.5 0l-1 2m8.5-2l1 2m-1-2l-3.75-7.5L14.5 18" />
+      </svg>
+      <select
+        value={lang}
+        onChange={(e) => setLang(e.target.value as Lang)}
+        aria-label="Language"
+        className="cursor-pointer appearance-none bg-transparent pr-1 text-xs font-bold text-slate-700 focus:outline-none"
+      >
+        {LANGS.map(({ code, label }) => (
+          <option key={code} value={code}>{label}</option>
+        ))}
+      </select>
     </div>
   );
 }
