@@ -39,13 +39,20 @@ function getSessionId(): string {
 
 // Coarse geo (country / region / city), resolved once per page load from our
 // own /api/geo endpoint (Vercel edge headers). IP is never stored — see route.
-type Geo = { country: string | null; region: string | null; city: string | null };
+type Geo = {
+  country: string | null;
+  region: string | null;
+  city: string | null;
+  lat: number | null;
+  lon: number | null;
+};
+const EMPTY_GEO: Geo = { country: null, region: null, city: null, lat: null, lon: null };
 let geoPromise: Promise<Geo> | null = null;
 function getGeo() {
   if (!geoPromise) {
     geoPromise = fetch('/api/geo', { cache: 'no-store' })
-      .then((r) => (r.ok ? r.json() : { country: null, region: null, city: null }))
-      .catch(() => ({ country: null, region: null, city: null }));
+      .then((r) => (r.ok ? r.json() : EMPTY_GEO))
+      .catch(() => EMPTY_GEO);
   }
   return geoPromise;
 }
@@ -89,6 +96,8 @@ export function recordCalcEvent(e: {
         country: geo.country,
         region: geo.region,
         city: geo.city,
+        lat: geo.lat,
+        lon: geo.lon,
         session_id: getSessionId(),
         seq: seqCounter,
       })

@@ -19,8 +19,12 @@ export async function GET(request: Request) {
       city = rawCity;
     }
   }
+  // City-centroid coordinates (same geo DB as the city name — the city's
+  // center point, not the user's position). Powers heat-map visualizations.
+  const lat = parseFloat(h.get('x-vercel-ip-latitude') || '') || null;
+  const lon = parseFloat(h.get('x-vercel-ip-longitude') || '') || null;
   return NextResponse.json(
-    { country, region, city },
+    { country, region, city, lat, lon },
     { headers: { 'Cache-Control': 'no-store', 'Access-Control-Allow-Origin': '*' } }
   );
 }
