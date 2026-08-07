@@ -21,6 +21,18 @@ export function bracketIncome(annual: number): string {
 const sentThisPageLoad = new Set<string>();
 let debounceTimer: ReturnType<typeof setTimeout> | null = null;
 
+// Coarse geo (country code + region), resolved once per page load from our own
+// /api/geo endpoint (Vercel edge headers). IP is never stored — see route.
+let geoPromise: Promise<{ country: string | null; region: string | null }> | null = null;
+function getGeo() {
+  if (!geoPromise) {
+    geoPromise = fetch('/api/geo', { cache: 'no-store' })
+      .then((r) => (r.ok ? r.json() : { country: null, region: null }))
+      .catch(() => ({ country: null, region: null }));
+  }
+  return geoPromise;
+}
+
 /**
  * Debounced + deduped, fire-and-forget. Call on every recalculation; it only
  * writes after the inputs have been stable for 3s, and only once per distinct
@@ -32,20 +44,33 @@ export function recordCalcEvent(e: {
   province: string;
   annualIncome: number;
   lang: string;
+  source?: 'web' | 'widget';
+  embedHost?: string | null;
 }) {
   if (!e.annualIncome || e.annualIncome <= 0 || !e.province) return;
 
   if (debounceTimer) clearTimeout(debounceTimer);
-  debounceTimer = setTimeout(() => {
+  debounceTimer = setTimeout(async () => {
     const bracket = bracketIncome(e.annualIncome);
     const lang = e.lang === 'zh' || e.lang === 'fr' ? e.lang : 'en';
-    const key = `${e.mode}|${e.province}|${bracket}|${lang}`;
+    const source = e.source ?? 'web';
+    const key = `${source}|${e.mode}|${e.province}|${bracket}|${lang}`;
     if (sentThisPageLoad.has(key)) return;
     sentThisPageLoad.add(key);
 
+    const geo = await getGeo();
     supabase
       .from('anon_calc_events')
-      .insert({ mode: e.mode, province: e.province, income_bracket: bracket, lang, source: 'web' })
+      .insert({
+        mode: e.mode,
+        province: e.province,
+        income_bracket: bracket,
+        lang,
+        source,
+        embed_host: e.embedHost ?? null,
+        country: geo.country,
+        region: geo.region,
+      })
       .then(({ error }) => {
         // Telemetry must never affect the user experience — swallow errors.
         if (error) console.debug('telemetry skipped:', error.message);
