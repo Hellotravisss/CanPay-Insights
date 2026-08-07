@@ -37,6 +37,20 @@ function getSessionId(): string {
   return sessionId;
 }
 
+// Coarse device class only — never the raw user-agent string (fingerprint risk).
+function detectDevice(): 'mobile' | 'tablet' | 'desktop' {
+  try {
+    const ua = navigator.userAgent;
+    if (/iPad|Tablet|PlayBook|Silk/i.test(ua) || (/Android/i.test(ua) && !/Mobile/i.test(ua))) {
+      return 'tablet';
+    }
+    if (/Mobi|iPhone|Android.*Mobile/i.test(ua)) return 'mobile';
+    return 'desktop';
+  } catch {
+    return 'desktop';
+  }
+}
+
 // Coarse geo (country / region / city), resolved once per page load from our
 // own /api/geo endpoint (Vercel edge headers). IP is never stored — see route.
 type Geo = {
@@ -98,6 +112,7 @@ export function recordCalcEvent(e: {
         city: geo.city,
         lat: geo.lat,
         lon: geo.lon,
+        device: detectDevice(),
         session_id: getSessionId(),
         seq: seqCounter,
       })
