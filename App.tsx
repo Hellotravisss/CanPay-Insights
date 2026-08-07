@@ -233,15 +233,22 @@ const App: React.FC = () => {
 
   // Anonymous aggregate telemetry (debounced + deduped inside recordCalcEvent).
   // Only bucketed values leave the browser — never exact amounts or identity.
+  // Skip untouched default states (object identity vs DEFAULT_* constants) so
+  // merely opening the calculator doesn't skew the data toward the defaults.
   useEffect(() => {
     if (currentPage !== 'calculator') return;
+    const untouched =
+      (mode === CalculationMode.SIMPLE && simpleInputs === DEFAULT_SIMPLE_INPUTS) ||
+      (mode === CalculationMode.ANNUAL && annualInputs === DEFAULT_ANNUAL_INPUTS) ||
+      (mode === CalculationMode.TIMESHEET && timesheetInputs === DEFAULT_TIMESHEET_INPUTS);
+    if (untouched) return;
     recordCalcEvent({
       mode,
       province: currentProvince,
       annualIncome: results.grossPayAnnual,
       lang,
     });
-  }, [currentPage, mode, currentProvince, results.grossPayAnnual, lang]);
+  }, [currentPage, mode, simpleInputs, annualInputs, timesheetInputs, currentProvince, results.grossPayAnnual, lang]);
 
   // Calculation History
   const { saveCalculation } = useCalculationHistory(userId);
