@@ -9,6 +9,9 @@ import { recordCalcEvent, type CalcMode } from '../lib/telemetry';
 
 type Lang = 'en' | 'fr' | 'zh';
 
+// Module-level = once per page load, matching the telemetry session model.
+let industrySentThisPageLoad = false;
+
 // Approximate full-time annual wage percentiles by broad sector, Canada-wide,
 // based on Statistics Canada Labour Force Survey wage data (rounded).
 // [p10, p25, p50, p75, p90]
@@ -25,7 +28,7 @@ const BENCHMARKS: { slug: string; p: [number, number, number, number, number] }[
   { slug: 'finance', p: [42000, 55000, 72000, 95000, 130000] },
   { slug: 'professional', p: [42000, 55000, 72000, 95000, 128000] },
   { slug: 'tech', p: [50000, 65000, 85000, 110000, 145000] },
-  { slug: 'other', p: [30000, 45000, 62000, 85000, 110000] },
+  { slug: 'all-industries', p: [28000, 42000, 62000, 86000, 115000] },
 ];
 
 const DICT: Record<Lang, Record<string, string>> = {
@@ -53,7 +56,7 @@ const DICT: Record<Lang, Record<string, string>> = {
     finance: 'Finance & insurance',
     professional: 'Professional services',
     tech: 'Technology & IT',
-    other: 'Other',
+    'all-industries': 'All industries (Canada average)',
   },
   fr: {
     prompt: 'Facultatif : choisissez votre secteur pour situer votre salaire',
@@ -79,7 +82,7 @@ const DICT: Record<Lang, Record<string, string>> = {
     finance: 'Finance et assurances',
     professional: 'Services professionnels',
     tech: 'Technologies et TI',
-    other: 'Autre',
+    'all-industries': 'Tous les secteurs (moyenne canadienne)',
   },
   zh: {
     prompt: '可选:选择你的行业,看看你的工资在行业中的位置',
@@ -105,7 +108,7 @@ const DICT: Record<Lang, Record<string, string>> = {
     finance: '金融与保险',
     professional: '专业服务',
     tech: '科技/IT',
-    other: '其他',
+    'all-industries': '全行业平均(加拿大)',
   },
 };
 
@@ -149,7 +152,11 @@ export default function IndustryComparison({
 
   const onSelect = (value: string) => {
     setSlug(value);
-    if (value) {
+    // Only the FIRST selection per page load is telemetry: that's the honest
+    // self-declaration. Later switches are curiosity-browsing ("how would I
+    // rank in tech?") and would poison the declared-industry dataset.
+    if (value && !industrySentThisPageLoad) {
+      industrySentThisPageLoad = true;
       recordCalcEvent({ mode: mode as CalcMode, province, annualIncome, lang, industry: value });
     }
   };
@@ -171,14 +178,28 @@ export default function IndustryComparison({
     const lo = bench.p[0] * 0.85;
     const hi = bench.p[4] * 1.15;
     const clamp = (x: number) => Math.min(98, Math.max(2, ((x - lo) / (hi - lo)) * 100));
-    const industryName = t[slug] ?? slug;
+    // The all-industries benchmark reads awkwardly inside the "{industry} in
+    // Canada" verdict templates ("All industries (Canada average) in Canada"),
+    // so it gets a short verdict name.
+    const industryName =
+      slug === 'all-industries'
+        ? { en: 'all workers', fr: 'l’ensemble des travailleurs', zh: '全体打工人' }[lang]
+        : t[slug] ?? slug;
+    const fill = (tpl: string) => {
+      let s = tpl;
+      if (slug === 'all-industries') {
+        if (lang === 'zh') s = s.replace('{industry}行业', '{industry}');
+        if (lang === 'fr') s = s.replace('du secteur {industry}', 'de {industry}');
+      }
+      return s.replace('{industry}', industryName);
+    };
     let verdict: string;
     if (pct >= 75) {
-      verdict = t.verdictTop.replace('{pct}', String(Math.max(1, Math.round(100 - pct)))).replace('{industry}', industryName);
+      verdict = fill(t.verdictTop).replace('{pct}', String(Math.max(1, Math.round(100 - pct))));
     } else if (pct >= 50) {
-      verdict = t.verdictAbove.replace('{industry}', industryName);
+      verdict = fill(t.verdictAbove);
     } else {
-      verdict = t.verdictBelow.replace('{industry}', industryName);
+      verdict = fill(t.verdictBelow);
     }
     chart = {
       youX: clamp(annualIncome),
