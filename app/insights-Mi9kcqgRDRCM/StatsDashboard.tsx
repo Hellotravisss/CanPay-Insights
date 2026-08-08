@@ -147,7 +147,7 @@ export default function StatsDashboard() {
         <div className="mb-8 grid grid-cols-2 gap-4 md:grid-cols-4">
           {[
             { n: t.toLocaleString(), l: 'Calculations recorded' },
-            { n: stats.sessions.toLocaleString(), l: 'Distinct visits' },
+            { n: stats.sessions.toLocaleString(), l: 'Visits (with a visit id)' },
             { n: stats.last_7d.toLocaleString(), l: 'Last 7 days' },
             { n: `${days}d`, l: 'Collecting since' },
           ].map((s) => (
@@ -157,6 +157,12 @@ export default function StatsDashboard() {
             </div>
           ))}
         </div>
+
+        <p className="mb-8 -mt-4 text-xs leading-5 text-slate-400">
+          A visit id is minted per page load and discarded when the visitor leaves, so a returning
+          person counts as a new visit, and the earliest events predate visit ids entirely. Treat the
+          visit count as a floor, not a headcount — calculations recorded is the reliable number.
+        </p>
 
         {/* Media-readiness gauge: how close the dataset is to being pitchable */}
         <div className="mb-10 rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
