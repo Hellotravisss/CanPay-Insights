@@ -144,7 +144,10 @@ export default function StatsDashboard() {
           </div>
           <p className="mt-2 text-xs text-slate-500">
             {t.toLocaleString()} / 5,000 ({Math.min(100, Math.round((t / 5000) * 100))}%)
-            {t < 5000 && ` — about ${Math.max(1, Math.ceil((5000 - t) / Math.max(1, stats.last_7d / 7)))} days at the current rate.`}
+            {/* Rate over the whole collection window, not last_7d/7 — with only
+                a few days of history the 7-day divisor understates badly. */}
+            {t < 5000 &&
+              ` — ~${(t / days).toFixed(1)}/day so far, about ${Math.ceil((5000 - t) / Math.max(0.5, t / days))} days to target.`}
           </p>
         </div>
 
