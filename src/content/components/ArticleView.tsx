@@ -322,12 +322,8 @@ export default function ArticleView({ slug }: ArticleViewProps) {
       <div className="mx-auto max-w-3xl px-4 py-8">
         <article className="rounded-xl border border-slate-200 bg-white p-6 shadow-sm md:p-10">
           {article.imageUrl && (
-            <div className="mb-8 overflow-hidden rounded-lg bg-slate-100" style={{ aspectRatio: '1200 / 630' }}>
-              <img
-                src={article.imageUrl}
-                alt={article.title}
-                className="h-full w-full object-contain"
-              />
+            <div className="cover-frame mb-8 rounded-lg">
+              <img src={article.imageUrl} alt={article.title} />
             </div>
           )}
 
