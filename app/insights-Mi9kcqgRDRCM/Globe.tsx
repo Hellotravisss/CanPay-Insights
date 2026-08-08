@@ -67,12 +67,13 @@ export default function Globe({
             <stop offset="100%" stopColor="#020617" />
           </radialGradient>
           <radialGradient id="glow" cx="50%" cy="50%">
-            <stop offset="70%" stopColor="#dc2626" stopOpacity="0" />
-            <stop offset="100%" stopColor="#dc2626" stopOpacity="0.35" />
+            <stop offset="88%" stopColor="#dc2626" stopOpacity="0" />
+            <stop offset="96%" stopColor="#dc2626" stopOpacity="0.14" />
+            <stop offset="100%" stopColor="#dc2626" stopOpacity="0" />
           </radialGradient>
         </defs>
 
-        <circle cx={CX} cy={CY} r={R + 12} fill="url(#glow)" />
+        <circle cx={CX} cy={CY} r={R + 8} fill="url(#glow)" />
         <circle cx={CX} cy={CY} r={R} fill="url(#ocean)" />
 
         {/* graticule */}
