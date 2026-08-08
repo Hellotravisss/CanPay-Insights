@@ -3,6 +3,7 @@ import { useEffect, useState } from 'react';
 import { supabase } from '../../lib/supabase';
 import Globe from './Globe';
 import Donut from './Donut';
+import { countryName } from './countries';
 
 // Private data room. Deliberately styled the way a published data story would
 // look — this doubles as the visual rehearsal for the eventual public /data
@@ -225,8 +226,15 @@ export default function StatsDashboard() {
             <Bars rows={stats.by_dow} total={t} label={(k) => DOW[Number(k)] ?? String(k)} />
           </Card>
 
-          <Card title="Source">
-            <Bars rows={stats.by_source} total={t} />
+          <Card title="Where it was calculated" hint="Website, iPhone app, or a widget embedded on another site.">
+            <Donut
+              rows={stats.by_source}
+              label={(k) =>
+                ({ web: 'Website', app: 'iPhone app', widget: 'Embedded widget' } as Record<string, string>)[
+                  String(k)
+                ] ?? String(k)
+              }
+            />
           </Card>
         </div>
 

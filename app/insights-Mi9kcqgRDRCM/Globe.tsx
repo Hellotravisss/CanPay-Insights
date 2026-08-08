@@ -1,5 +1,6 @@
 'use client';
 import { useEffect, useMemo, useRef, useState } from 'react';
+import { countryName } from './countries';
 
 // Orthographic globe, hand-rolled in SVG — no mapping library, no tiles, no
 // external requests. Coastlines are a hand-digitised low-poly set: dense enough
@@ -362,7 +363,7 @@ export default function Globe({
         <div className="flex flex-wrap gap-2">
           {countries.map((c) => (
             <span key={String(c.k)} className="rounded-full bg-slate-100 px-3 py-1 text-xs font-medium text-slate-700">
-              {c.k} · {c.n}
+              {countryName(String(c.k))} · {c.n}
             </span>
           ))}
         </div>
