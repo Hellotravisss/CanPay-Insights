@@ -26,21 +26,28 @@ let industrySentThisPageLoad = false;
 
 // Approximate full-time annual wage percentiles by broad sector, Canada-wide,
 // based on Statistics Canada Labour Force Survey wage data (rounded).
+// Vintage: StatCan Table 14-10-0064-01 "Employee wages by industry, annual"
+// (median hourly wage, full-time employees, Canada), reference year 2025,
+// annualized as hourly x 2080; a few sectors (retail, finance, tech) cross-
+// checked / supplemented against Table 14-10-0204-01 (SEPH average weekly
+// earnings x 52) where 14-10-0064-01 only reports a blended NAICS grouping
+// or omits the sub-industry entirely. Percentile shape scaled from the prior
+// benchmarks by the ratio of new-to-old median. Semi-annual audit: 2026-H2.
 // [p10, p25, p50, p75, p90]
 const BENCHMARKS: { slug: string; p: [number, number, number, number, number] }[] = [
-  { slug: 'food-hospitality', p: [26000, 30000, 35000, 45000, 58000] },
-  { slug: 'retail', p: [28000, 33000, 42000, 55000, 72000] },
-  { slug: 'arts-media', p: [30000, 38000, 48000, 65000, 85000] },
-  { slug: 'transportation', p: [34000, 45000, 55000, 70000, 88000] },
-  { slug: 'manufacturing', p: [36000, 46000, 58000, 75000, 95000] },
-  { slug: 'healthcare', p: [34000, 45000, 58000, 78000, 105000] },
-  { slug: 'education', p: [36000, 48000, 62000, 80000, 98000] },
-  { slug: 'construction', p: [38000, 48000, 62000, 78000, 100000] },
-  { slug: 'public-admin', p: [46000, 60000, 75000, 92000, 112000] },
-  { slug: 'finance', p: [42000, 55000, 72000, 95000, 130000] },
-  { slug: 'professional', p: [42000, 55000, 72000, 95000, 128000] },
-  { slug: 'tech', p: [50000, 65000, 85000, 110000, 145000] },
-  { slug: 'all-industries', p: [28000, 42000, 62000, 86000, 115000] },
+  { slug: 'food-hospitality', p: [31000, 36000, 42000, 53000, 69000] },
+  { slug: 'retail', p: [35000, 41000, 52000, 68000, 89000] },
+  { slug: 'arts-media', p: [44000, 56000, 71000, 96000, 126000] },
+  { slug: 'transportation', p: [39000, 52000, 63000, 81000, 101000] },
+  { slug: 'manufacturing', p: [40000, 51000, 64000, 83000, 106000] },
+  { slug: 'healthcare', p: [38000, 50000, 64000, 86000, 116000] },
+  { slug: 'education', p: [50000, 67000, 87000, 112000, 137000] },
+  { slug: 'construction', p: [46000, 58000, 75000, 94000, 121000] },
+  { slug: 'public-admin', p: [57000, 74000, 93000, 114000, 139000] },
+  { slug: 'finance', p: [47000, 61000, 80000, 106000, 144000] },
+  { slug: 'professional', p: [53000, 69000, 90000, 119000, 160000] },
+  { slug: 'tech', p: [66000, 85000, 112000, 144000, 190000] },
+  { slug: 'all-industries', p: [32000, 47000, 70000, 97000, 130000] },
 ];
 
 const DICT: Record<string, Record<string, string>> = {
