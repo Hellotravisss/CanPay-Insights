@@ -12,6 +12,15 @@ export const metadata: Metadata = {
 // widget publishers.
 const ENTRIES: { date: string; title: string; points: string[] }[] = [
   {
+    date: '2026-08-08',
+    title: 'Industry wage benchmarks recalibrated to Statistics Canada 2025 data',
+    points: [
+      'All 13 industry benchmarks in the wage-comparison chart were rebased on Statistics Canada Table 14-10-0064-01 (median wage, full-time employees, 2025 reference year).',
+      'Technology uses the Job Bank occupation median rather than a payroll average; retail is adjusted for the wholesale-retail blend in the source table.',
+      'These benchmarks are now audited every six months.',
+    ],
+  },
+  {
     date: '2026-08-07',
     title: '7 new languages — now 10 in total',
     points: [
