@@ -33,10 +33,14 @@ let industrySentThisPageLoad = false;
 // earnings x 52) where 14-10-0064-01 only reports a blended NAICS grouping
 // or omits the sub-industry entirely. Percentile shape scaled from the prior
 // benchmarks by the ratio of new-to-old median. Semi-annual audit: 2026-H2.
+// Two manual corrections to the audit output: tech uses the Job Bank LFS
+// occupation median (NOC 21230, $89,982) instead of the SEPH payroll MEAN,
+// which runs high; retail uses the midpoint between the wholesale+retail
+// blended median and the retail-only SEPH mean, since the blend skews up.
 // [p10, p25, p50, p75, p90]
 const BENCHMARKS: { slug: string; p: [number, number, number, number, number] }[] = [
   { slug: 'food-hospitality', p: [31000, 36000, 42000, 53000, 69000] },
-  { slug: 'retail', p: [35000, 41000, 52000, 68000, 89000] },
+  { slug: 'retail', p: [30000, 35000, 45000, 59000, 77000] },
   { slug: 'arts-media', p: [44000, 56000, 71000, 96000, 126000] },
   { slug: 'transportation', p: [39000, 52000, 63000, 81000, 101000] },
   { slug: 'manufacturing', p: [40000, 51000, 64000, 83000, 106000] },
@@ -46,7 +50,7 @@ const BENCHMARKS: { slug: string; p: [number, number, number, number, number] }[
   { slug: 'public-admin', p: [57000, 74000, 93000, 114000, 139000] },
   { slug: 'finance', p: [47000, 61000, 80000, 106000, 144000] },
   { slug: 'professional', p: [53000, 69000, 90000, 119000, 160000] },
-  { slug: 'tech', p: [66000, 85000, 112000, 144000, 190000] },
+  { slug: 'tech', p: [53000, 68000, 90000, 116000, 153000] },
   { slug: 'all-industries', p: [32000, 47000, 70000, 97000, 130000] },
 ];
 
