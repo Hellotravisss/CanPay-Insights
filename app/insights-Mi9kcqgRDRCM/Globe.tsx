@@ -159,30 +159,45 @@ export default function Globe({
   const CX = 170;
   const CY = 170;
 
+  // Orthographic projection. Returns the screen point plus whether the point is
+  // on the near side; far-side points are CLAMPED to the limb rather than
+  // dropped, so a coastline that wraps around the edge stays glued to the rim
+  // instead of being closed off with a straight line across the sphere.
   const project = useMemo(() => {
     const p0 = (lat0 * Math.PI) / 180;
     const l0 = (lon0 * Math.PI) / 180;
-    return (lat: number, lon: number): [number, number] | null => {
+    return (lat: number, lon: number): { x: number; y: number; visible: boolean } => {
       const p = (lat * Math.PI) / 180;
       const l = (lon * Math.PI) / 180;
       const cosc = Math.sin(p0) * Math.sin(p) + Math.cos(p0) * Math.cos(p) * Math.cos(l - l0);
-      if (cosc < 0) return null;
-      return [
-        CX + R * Math.cos(p) * Math.sin(l - l0),
-        CY - R * (Math.cos(p0) * Math.sin(p) - Math.sin(p0) * Math.cos(p) * Math.cos(l - l0)),
-      ];
+      let x = R * Math.cos(p) * Math.sin(l - l0);
+      let y = -R * (Math.cos(p0) * Math.sin(p) - Math.sin(p0) * Math.cos(p) * Math.cos(l - l0));
+      if (cosc < 0) {
+        const d = Math.hypot(x, y) || 1;
+        x = (x / d) * R;
+        y = (y / d) * R;
+      }
+      return { x: CX + x, y: CY + y, visible: cosc >= 0 };
     };
   }, [lon0, lat0]);
 
-  // Split a ring at the horizon so only the visible parts are drawn.
-  const toPaths = (ring: number[][]) => {
-    const segs: string[][] = [[]];
-    ring.forEach(([lon, lat]) => {
-      const p = project(lat, lon);
-      if (p) segs[segs.length - 1].push(`${p[0].toFixed(1)},${p[1].toFixed(1)}`);
-      else if (segs[segs.length - 1].length) segs.push([]);
+  // Visible-only helper for point markers.
+  const projectVisible = (lat: number, lon: number): [number, number] | null => {
+    const q = project(lat, lon);
+    return q.visible ? [q.x, q.y] : null;
+  };
+
+  // A ring becomes ONE polygon of clamped points. Rings with nothing on the
+  // near side are skipped entirely (otherwise their limb-clamped outline would
+  // smear a meaningless arc across the edge).
+  const ringPoints = (ring: number[][]): string | null => {
+    let anyVisible = false;
+    const pts = ring.map(([lon, lat]) => {
+      const q = project(lat, lon);
+      if (q.visible) anyVisible = true;
+      return `${q.x.toFixed(1)},${q.y.toFixed(1)}`;
     });
-    return segs.filter((s) => s.length > 1);
+    return anyVisible ? pts.join(' ') : null;
   };
 
   const maxCity = Math.max(1, ...cities.map((c) => c.n));
@@ -196,8 +211,11 @@ export default function Globe({
     if (!drag.current) return;
     const dx = e.clientX - drag.current.x;
     const dy = e.clientY - drag.current.y;
-    setLon0(drag.current.lon + dx * 0.4);
-    setLat0(Math.max(-80, Math.min(80, drag.current.lat - dy * 0.4)));
+    // Drag moves the globe's SURFACE with the pointer: dragging right spins the
+    // Earth eastward under your finger, which means decreasing the centre
+    // longitude. Same logic vertically.
+    setLon0(drag.current.lon - dx * 0.4);
+    setLat0(Math.max(-80, Math.min(80, drag.current.lat + dy * 0.4)));
   };
   const onUp = () => {
     drag.current = null;
@@ -247,7 +265,7 @@ export default function Globe({
             {Array.from({ length: 11 }, (_, i) => (i - 5) * 15).map((lat) => {
               const pts: string[] = [];
               for (let lon = -180; lon <= 180; lon += 3) {
-                const p = project(lat, lon);
+                const p = projectVisible(lat, lon);
                 if (p) pts.push(p.join(','));
               }
               return (
@@ -263,37 +281,39 @@ export default function Globe({
             {Array.from({ length: 24 }, (_, i) => i * 15 - 180).map((lon) => {
               const pts: string[] = [];
               for (let lat = -90; lat <= 90; lat += 3) {
-                const p = project(lat, lon);
+                const p = projectVisible(lat, lon);
                 if (p) pts.push(p.join(','));
               }
               return <polyline key={`m${lon}`} points={pts.join(' ')} fill="none" stroke="#1e4468" strokeWidth="0.4" />;
             })}
 
-            {LAND.map((ring, i) =>
-              toPaths(ring).map((seg, j) => (
+            {LAND.map((ring, i) => {
+              const pts = ringPoints(ring);
+              return pts ? (
                 <polygon
-                  key={`l${i}-${j}`}
-                  points={seg.join(' ')}
+                  key={`l${i}`}
+                  points={pts}
                   fill="#1f3d2e"
                   stroke="#4d8f6a"
                   strokeWidth="0.7"
                   strokeLinejoin="round"
                 />
-              ))
-            )}
+              ) : null;
+            })}
 
-            {LAKES.map((ring, i) =>
-              toPaths(ring).map((seg, j) => (
-                <polygon key={`w${i}-${j}`} points={seg.join(' ')} fill="#12314f" stroke="#2b628f" strokeWidth="0.4" />
-              ))
-            )}
+            {LAKES.map((ring, i) => {
+              const pts = ringPoints(ring);
+              return pts ? (
+                <polygon key={`w${i}`} points={pts} fill="#12314f" stroke="#2b628f" strokeWidth="0.4" />
+              ) : null;
+            })}
 
             {/* lighting last so land is lit consistently */}
             <circle cx={CX} cy={CY} r={R} fill="url(#shade)" />
           </g>
 
           {cities.map((c) => {
-            const p = project(c.lat, c.lon);
+            const p = projectVisible(c.lat, c.lon);
             if (!p) return null;
             const r = 2.5 + (c.n / maxCity) * 5;
             return (
