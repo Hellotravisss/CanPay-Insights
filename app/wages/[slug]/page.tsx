@@ -8,6 +8,8 @@ import {
   annualFromHourly,
 } from '../../../lib/provincialWages';
 import { getSalaryFigures } from '../../../lib/salaryFigures';
+import { WageHeader, WageFooter } from '../WageChrome';
+import PayDonut from '../PayDonut';
 
 // One page per industry × province, built entirely from Statistics Canada's
 // published median wage plus our own tax engine. Every number here is either
@@ -137,10 +139,12 @@ export default async function IndustryProvincePage({ params }: Props) {
   return (
     <div className="min-h-screen bg-slate-50 font-sans">
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
-      <main className="mx-auto max-w-3xl px-4 py-12">
-        <a href="/" className="text-sm font-medium text-red-600 hover:text-red-700">← CanPay Insights</a>
-
-        <h1 className="mt-4 text-3xl font-bold leading-tight text-slate-900">
+      <WageHeader />
+      <main className="mx-auto max-w-3xl px-4 py-10">
+        <p className="text-xs font-bold uppercase tracking-[0.18em] text-red-600">
+          {province} · {WAGE_DATA_YEAR} wage data
+        </p>
+        <h1 className="mt-2 text-3xl font-bold leading-tight text-slate-900 md:text-4xl">
           {industry} salary in {province}: what you actually take home
         </h1>
 
@@ -154,19 +158,36 @@ export default async function IndustryProvincePage({ params }: Props) {
           {money(figures.netBiWeekly)} on a bi-weekly paycheque.
         </p>
 
-        <div className="mt-8 grid grid-cols-2 gap-4 md:grid-cols-4">
-            {[
-              { l: 'Gross salary', v: money(annual) },
-              { l: 'Take-home', v: money(figures.netAnnual) },
-              { l: 'Total deductions', v: money(annual - figures.netAnnual) },
-              { l: 'Per month', v: money(figures.netMonthly) },
+        <div className="mt-8 grid grid-cols-2 gap-3 md:grid-cols-4">
+          {[
+            { l: 'Gross salary', v: money(annual), tone: 'bg-slate-900 text-white' },
+            { l: 'Take-home', v: money(figures.netAnnual), tone: 'bg-emerald-600 text-white' },
+            { l: 'Total deductions', v: money(annual - figures.netAnnual), tone: 'bg-red-600 text-white' },
+            { l: 'Per month', v: money(figures.netMonthly), tone: 'bg-white text-slate-900 ring-1 ring-slate-200' },
           ].map((s) => (
-            <div key={s.l} className="rounded-2xl border border-slate-200 bg-white p-4">
-              <div className="text-xl font-bold tabular-nums text-slate-900">{s.v}</div>
-              <div className="mt-1 text-xs text-slate-500">{s.l}</div>
+            <div key={s.l} className={`rounded-2xl p-4 shadow-sm ${s.tone}`}>
+              <div className="text-xl font-bold tabular-nums md:text-2xl">{s.v}</div>
+              <div className="mt-1 text-xs opacity-80">{s.l}</div>
             </div>
           ))}
         </div>
+
+        {/* Where the money goes */}
+        <section className="mt-8 rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
+          <h2 className="mb-1 text-lg font-bold text-slate-900">Where the money goes</h2>
+          <p className="mb-5 text-sm text-slate-500">
+            Every dollar of that {money(annual)}, split between what you keep and what is deducted.
+          </p>
+          <PayDonut
+            gross={annual}
+            netAnnual={figures.netAnnual}
+            federalTax={figures.federalTax}
+            provincialTax={figures.provincialTax}
+            pension={figures.pensionContribution}
+            ei={figures.eiPremium}
+            provinceLabel={province}
+          />
+        </section>
 
         <h2 className="mt-12 text-2xl font-bold text-slate-900">
           How {province} compares for {industry.toLowerCase()} workers
@@ -187,17 +208,30 @@ export default async function IndustryProvincePage({ params }: Props) {
               </tr>
             </thead>
             <tbody className="text-slate-600">
-              {acrossProvinces.map((r) => (
-                <tr
-                  key={r.code}
-                  className={`border-b border-slate-200 ${r.code === combo.province ? 'bg-red-50 font-semibold text-slate-900' : ''}`}
-                >
-                  <td className="py-2 pr-4">{PROVINCE_LABELS[r.code]}</td>
-                  <td className="py-2 pr-4">${r.wage.toFixed(2)}/hr</td>
-                  <td className="py-2 pr-4">{money(r.annual)}</td>
-                  <td className="py-2">{money(r.net)}</td>
-                </tr>
-              ))}
+              {acrossProvinces.map((r) => {
+                const top = acrossProvinces[0].net;
+                return (
+                  <tr
+                    key={r.code}
+                    className={`border-b border-slate-200 ${r.code === combo.province ? 'bg-red-50 font-semibold text-slate-900' : ''}`}
+                  >
+                    <td className="py-2.5 pr-4 whitespace-nowrap">{PROVINCE_LABELS[r.code]}</td>
+                    <td className="py-2.5 pr-4 tabular-nums">${r.wage.toFixed(2)}/hr</td>
+                    <td className="py-2.5 pr-4 tabular-nums">{money(r.annual)}</td>
+                    <td className="py-2.5">
+                      <div className="flex items-center gap-2">
+                        <div className="h-2 w-24 shrink-0 rounded-full bg-slate-100">
+                          <div
+                            className={`h-2 rounded-full ${r.code === combo.province ? 'bg-red-600' : 'bg-emerald-500'}`}
+                            style={{ width: `${Math.round((r.net / top) * 100)}%` }}
+                          />
+                        </div>
+                        <span className="tabular-nums">{money(r.net)}</span>
+                      </div>
+                    </td>
+                  </tr>
+                );
+              })}
             </tbody>
           </table>
         </div>
@@ -288,6 +322,7 @@ export default async function IndustryProvincePage({ params }: Props) {
           </div>
         </nav>
       </main>
+      <WageFooter />
     </div>
   );
 }

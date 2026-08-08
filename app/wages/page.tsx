@@ -6,6 +6,7 @@ import {
   WAGE_DATA_YEAR,
   annualFromHourly,
 } from '../../lib/provincialWages';
+import { WageHeader, WageFooter } from './WageChrome';
 
 export const metadata: Metadata = {
   title: `Canadian Wages by Industry and Province ${WAGE_DATA_YEAR} — With Take-Home Pay`,
@@ -28,9 +29,12 @@ export default function WagesIndex() {
 
   return (
     <div className="min-h-screen bg-slate-50 font-sans">
-      <main className="mx-auto max-w-4xl px-4 py-12">
-        <a href="/" className="text-sm font-medium text-red-600 hover:text-red-700">← CanPay Insights</a>
-        <h1 className="mt-4 text-3xl font-bold text-slate-900">
+      <WageHeader />
+      <main className="mx-auto max-w-4xl px-4 py-10">
+        <p className="text-xs font-bold uppercase tracking-[0.18em] text-red-600">
+          Statistics Canada {WAGE_DATA_YEAR}
+        </p>
+        <h1 className="mt-2 text-3xl font-bold text-slate-900 md:text-4xl">
           Canadian wages by industry and province
         </h1>
         <p className="mt-3 max-w-2xl text-lg leading-8 text-slate-700">
@@ -54,9 +58,19 @@ export default function WagesIndex() {
             <tbody className="text-slate-600">
               {national.map((r) => (
                 <tr key={r.slug} className="border-b border-slate-200">
-                  <td className="py-2 pr-4 font-medium text-slate-800">{INDUSTRY_LABELS[r.slug]}</td>
-                  <td className="py-2 pr-4">${r.hourly.toFixed(2)}/hr</td>
-                  <td className="py-2">${annualFromHourly(r.hourly).toLocaleString('en-CA')}</td>
+                  <td className="py-2.5 pr-4 font-medium text-slate-800">{INDUSTRY_LABELS[r.slug]}</td>
+                  <td className="py-2.5 pr-4">
+                    <div className="flex items-center gap-2">
+                      <div className="h-2 w-20 shrink-0 rounded-full bg-slate-100">
+                        <div
+                          className="h-2 rounded-full bg-red-600"
+                          style={{ width: `${Math.round((r.hourly / national[0].hourly) * 100)}%` }}
+                        />
+                      </div>
+                      <span className="tabular-nums">${r.hourly.toFixed(2)}/hr</span>
+                    </div>
+                  </td>
+                  <td className="py-2.5 tabular-nums">${annualFromHourly(r.hourly).toLocaleString('en-CA')}</td>
                 </tr>
               ))}
             </tbody>
@@ -92,6 +106,7 @@ export default function WagesIndex() {
           territories are not published separately in this table.
         </p>
       </main>
+      <WageFooter />
     </div>
   );
 }
