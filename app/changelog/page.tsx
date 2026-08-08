@@ -19,6 +19,15 @@ export const metadata: Metadata = {
 const ENTRIES: { date: string; title: string; points: string[] }[] = [
   {
     date: '2026-08-08',
+    title: 'iOS app 1.1.0 — ten languages',
+    points: [
+      'The iPhone app now matches the website: English, French, Chinese, Punjabi, Hindi, Tagalog, Spanish, Ukrainian, Korean, and Vietnamese.',
+      'The app picks your language automatically from your iPhone settings, and you can switch any time from the globe button.',
+      'Same 2026 tax engine as the website, verified line for line.',
+    ],
+  },
+  {
+    date: '2026-08-08',
     title: 'Industry wage benchmarks recalibrated to Statistics Canada 2025 data',
     points: [
       'All 13 industry benchmarks in the wage-comparison chart were rebased on Statistics Canada Table 14-10-0064-01 (median wage, full-time employees, 2025 reference year).',
