@@ -16,6 +16,8 @@ import {
 interface Props {
   results: CalculationResult;
   inputs: SalaryInputs;
+  /** Fired when the visitor opens the deep tax report — engagement telemetry. */
+  onReportOpen?: () => void;
 }
 
 // Personal invite link — swap to the Wealthsimple Affiliate Program URL once approved
@@ -211,7 +213,7 @@ const renderMarkdownLine = (line: string, isImage: boolean): React.ReactNode => 
   );
 };
 
-const GeminiAdvisor: React.FC<Props> = ({ results, inputs }) => {
+const GeminiAdvisor: React.FC<Props> = ({ results, inputs, onReportOpen }) => {
   const { t } = useT();
   const APP_URL = 'https://canpayinsights.ca/';
 
@@ -229,6 +231,7 @@ const GeminiAdvisor: React.FC<Props> = ({ results, inputs }) => {
   const [thinkStep, setThinkStep] = useState(0);
 
   const runAnalysis = () => {
+    onReportOpen?.();
     setAnalysisState('thinking');
     setThinkStep(0);
     const stepTimer = setInterval(() => setThinkStep((s) => Math.min(s + 1, 2)), 700);

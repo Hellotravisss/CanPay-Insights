@@ -7,7 +7,15 @@ import AnnualSalaryInput from './components/AnnualSalaryInput';
 import TimesheetInput from './components/TimesheetInput';
 import ModeSelector from './components/ModeSelector';
 import { LanguageSwitcher, useT } from './lib/i18n';
-import { recordCalcEvent, type WorkPattern } from './lib/telemetry';
+import {
+  recordCalcEvent,
+  bucketRrspPct,
+  bucketPremiumRate,
+  bucketOtHours,
+  bucketTipsPct,
+  type WorkPattern,
+  type BehaviourSignals,
+} from './lib/telemetry';
 import IndustryComparison from './components/IndustryComparison';
 import ResultsSection from './components/ResultsSection';
 import GeminiAdvisor from './components/GeminiAdvisor';
@@ -87,6 +95,47 @@ function buildWorkPattern(
     };
   }
   return null; // annual mode has no schedule
+}
+
+// Savings / premium-pay / tips signals, all derived from values the user
+// already entered and stored as buckets — the dataset gains the RRSP, overtime
+// and tipping dimensions without asking anyone an extra question.
+function buildBehaviour(
+  mode: CalculationMode,
+  simple: SalaryInputs,
+  annual: AnnualSalaryInputs,
+  timesheet: TimesheetInputs,
+  results: CalculationResult
+): BehaviourSignals {
+  const inputs: any = mode === CalculationMode.SIMPLE ? simple : mode === CalculationMode.ANNUAL ? annual : timesheet;
+  const gross = results.grossPayPerPeriod || results.grossPayBiWeekly || 0;
+  const rrspPerPeriod = results.rrspDeduction || 0;
+  const rrspPct =
+    inputs.rrspType === 'percent'
+      ? (inputs.rrspPercentage || 0)
+      : gross > 0 ? (rrspPerPeriod / gross) * 100 : 0;
+  const otHours = (results.overtimeHours15 || 0) + (results.overtimeHours20 || 0);
+  const tipsThisPeriod =
+    mode === CalculationMode.TIMESHEET
+      ? (timesheet.entries || []).reduce((a, en) => a + (en.tips || 0), 0)
+      : 0;
+
+  return {
+    hasRrsp: rrspPerPeriod > 0 || (inputs.rrspPercentage || 0) > 0,
+    rrspPctBucket: bucketRrspPct(rrspPct),
+    employerMatch: (inputs.rrspEmployerMatch || 0) > 0,
+    shiftPremium: mode === CalculationMode.SIMPLE ? !!simple.premium?.enabled : false,
+    premiumRateBucket:
+      mode === CalculationMode.SIMPLE && simple.premium?.enabled
+        ? bucketPremiumRate(simple.premium.ratePerHour || 0)
+        : null,
+    otHoursBucket: bucketOtHours(otHours),
+    tipsPctBucket:
+      mode === CalculationMode.TIMESHEET && gross > 0
+        ? bucketTipsPct((tipsThisPeriod / gross) * 100)
+        : null,
+    payFrequency: inputs.payFrequency ?? null,
+  };
 }
 
 const DEFAULT_SIMPLE_INPUTS: SalaryInputs = {
@@ -300,6 +349,9 @@ const App: React.FC = () => {
     ? { province: timesheetInputs.province, hourlyWage: timesheetInputs.hourlyWage }
     : simpleInputs;
 
+  // Engagement signal: did the visitor open the deep tax report.
+  const [reportOpened, setReportOpened] = useState(false);
+
   // Anonymous aggregate telemetry (debounced + deduped inside recordCalcEvent).
   // Only bucketed values leave the browser — never exact amounts or identity.
   // Skip untouched default states (object identity vs DEFAULT_* constants) so
@@ -317,8 +369,10 @@ const App: React.FC = () => {
       annualIncome: results.grossPayAnnual,
       lang,
       work: buildWorkPattern(mode, simpleInputs, timesheetInputs),
+      behaviour: buildBehaviour(mode, simpleInputs, annualInputs, timesheetInputs, results),
+      viewedReport: reportOpened,
     });
-  }, [currentPage, mode, simpleInputs, annualInputs, timesheetInputs, currentProvince, results.grossPayAnnual, lang]);
+  }, [currentPage, mode, simpleInputs, annualInputs, timesheetInputs, currentProvince, results, lang, reportOpened]);
 
   // Calculation History
   const { saveCalculation } = useCalculationHistory(userId);
@@ -589,7 +643,7 @@ const App: React.FC = () => {
                   annualIncome={results.grossPayAnnual}
                   lang={lang}
                 />
-                <GeminiAdvisor results={results} inputs={currentInputs as SalaryInputs} />
+                <GeminiAdvisor onReportOpen={() => setReportOpened(true)} results={results} inputs={currentInputs as SalaryInputs} />
               </div>
               
             </div>

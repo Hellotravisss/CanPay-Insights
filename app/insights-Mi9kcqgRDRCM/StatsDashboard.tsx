@@ -37,6 +37,27 @@ type Stats = {
     median_days_week: number | null;
   } | null;
   comparison_sessions: number;
+  rrsp: { n: number; has_rrsp_share: number | null; employer_match_share: number | null } | null;
+  by_rrsp_pct: Row[];
+  by_ot: Row[];
+  premium: { n: number; share: number | null } | null;
+  by_premium_rate: Row[];
+  by_tips: Row[];
+  by_pay_freq: Row[];
+  engagement: { report_share: number | null; median_calcs_per_session: number | null } | null;
+};
+
+const RRSP_LABEL: Record<string, string> = {
+  '0': 'None', '1-5': '1–5% of pay', '5-10': '5–10%', '10-15': '10–15%', '15-plus': '15%+',
+};
+const OT_LABEL: Record<string, string> = {
+  '0': 'No overtime', 'under-5': 'Under 5 h', '5-10': '5–10 h', '10-plus': '10 h+',
+};
+const TIPS_LABEL: Record<string, string> = {
+  '0': 'No tips', '1-10': '1–10% of pay', '10-20': '10–20%', '20-30': '20–30%', '30-plus': '30%+',
+};
+const PREMIUM_LABEL: Record<string, string> = {
+  'under-2': 'Under $2/h', '2-4': '$2–4/h', '4-6': '$4–6/h', '6-plus': '$6+/h',
 };
 
 const LANG_NAMES: Record<string, string> = {
@@ -252,6 +273,71 @@ export default function StatsDashboard() {
               This is the dataset nobody else has: someone weighing a move sees two provinces side by
               side in one sitting. At scale it becomes the interprovincial-migration story.
             </p>
+          </Card>
+        </div>
+
+        {/* Savings, premium pay, tips — signals nobody else collects */}
+        <div className="mt-6 grid gap-6 md:grid-cols-2">
+          <Card
+            title="RRSP behaviour"
+            hint={`From ${stats.rrsp?.n ?? 0} calculations. Contribution stored as a share of pay, bucketed.`}
+          >
+            <div className="mb-4 grid grid-cols-2 gap-3">
+              <div className="rounded-xl bg-slate-50 p-3">
+                <div className="text-2xl font-bold tabular-nums text-slate-900">
+                  {stats.rrsp?.has_rrsp_share != null ? `${stats.rrsp.has_rrsp_share}%` : '—'}
+                </div>
+                <div className="text-xs text-slate-500">contribute to an RRSP</div>
+              </div>
+              <div className="rounded-xl bg-slate-50 p-3">
+                <div className="text-2xl font-bold tabular-nums text-slate-900">
+                  {stats.rrsp?.employer_match_share != null ? `${stats.rrsp.employer_match_share}%` : '—'}
+                </div>
+                <div className="text-xs text-slate-500">get an employer match</div>
+              </div>
+            </div>
+            <Bars rows={stats.by_rrsp_pct} total={t} label={(k) => RRSP_LABEL[String(k)] ?? String(k)} />
+          </Card>
+
+          <Card title="Overtime & shift premium" hint="Canada has no systematic public data on night-shift premiums.">
+            <div className="mb-4 rounded-xl bg-slate-50 p-3">
+              <div className="text-2xl font-bold tabular-nums text-slate-900">
+                {stats.premium?.share != null ? `${stats.premium.share}%` : '—'}
+              </div>
+              <div className="text-xs text-slate-500">receive a shift premium</div>
+            </div>
+            <Bars rows={stats.by_ot} total={t} label={(k) => OT_LABEL[String(k)] ?? String(k)} />
+            {stats.by_premium_rate?.length > 0 && (
+              <div className="mt-4 border-t border-slate-100 pt-3">
+                <p className="mb-2 text-xs font-semibold uppercase tracking-wide text-slate-400">Premium rate</p>
+                <Bars rows={stats.by_premium_rate} total={t} label={(k) => PREMIUM_LABEL[String(k)] ?? String(k)} />
+              </div>
+            )}
+          </Card>
+
+          <Card title="Tips" hint="Declared tips as a share of pay, from the timesheet calculator. Official tip data barely exists.">
+            <Bars rows={stats.by_tips} total={t} label={(k) => TIPS_LABEL[String(k)] ?? String(k)} />
+          </Card>
+
+          <Card title="Pay frequency">
+            <Donut rows={stats.by_pay_freq} />
+          </Card>
+
+          <Card title="Engagement" hint="Product diagnostics — not for publication.">
+            <dl className="space-y-3 text-sm">
+              <div className="flex items-baseline justify-between border-b border-slate-100 pb-2">
+                <dt className="text-slate-600">Open the deep tax report</dt>
+                <dd className="text-lg font-bold tabular-nums text-slate-900">
+                  {stats.engagement?.report_share != null ? `${stats.engagement.report_share}%` : '—'}
+                </dd>
+              </div>
+              <div className="flex items-baseline justify-between border-b border-slate-100 pb-2">
+                <dt className="text-slate-600">Median calculations per visit</dt>
+                <dd className="text-lg font-bold tabular-nums text-slate-900">
+                  {stats.engagement?.median_calcs_per_session ?? '—'}
+                </dd>
+              </div>
+            </dl>
           </Card>
         </div>
 

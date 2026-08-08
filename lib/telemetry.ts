@@ -11,6 +11,50 @@ export type CalcMode = 'simple' | 'annual' | 'timesheet';
 // Work-schedule PATTERN only — hour-of-day buckets, days per week, break
 // length. Never specific calendar dates (a list of exact shift dates could
 // identify someone; the pattern is all the analysis needs).
+// Savings / premium-pay / tips behaviour. All bucketed, all derived from what
+// the user already typed into the calculator — no extra questions asked.
+export interface BehaviourSignals {
+  hasRrsp: boolean;
+  rrspPctBucket: '0' | '1-5' | '5-10' | '10-15' | '15-plus';
+  employerMatch: boolean;
+  shiftPremium: boolean;
+  premiumRateBucket: 'under-2' | '2-4' | '4-6' | '6-plus' | null;
+  otHoursBucket: '0' | 'under-5' | '5-10' | '10-plus';
+  tipsPctBucket: '0' | '1-10' | '10-20' | '20-30' | '30-plus' | null;
+  payFrequency: string | null;
+}
+
+export function bucketRrspPct(pct: number): BehaviourSignals['rrspPctBucket'] {
+  if (pct <= 0) return '0';
+  if (pct < 5) return '1-5';
+  if (pct < 10) return '5-10';
+  if (pct < 15) return '10-15';
+  return '15-plus';
+}
+
+export function bucketPremiumRate(rate: number): BehaviourSignals['premiumRateBucket'] {
+  if (rate <= 0) return null;
+  if (rate < 2) return 'under-2';
+  if (rate < 4) return '2-4';
+  if (rate < 6) return '4-6';
+  return '6-plus';
+}
+
+export function bucketOtHours(hours: number): BehaviourSignals['otHoursBucket'] {
+  if (hours <= 0) return '0';
+  if (hours < 5) return 'under-5';
+  if (hours < 10) return '5-10';
+  return '10-plus';
+}
+
+export function bucketTipsPct(pct: number): BehaviourSignals['tipsPctBucket'] {
+  if (pct <= 0) return '0';
+  if (pct < 10) return '1-10';
+  if (pct < 20) return '10-20';
+  if (pct < 30) return '20-30';
+  return '30-plus';
+}
+
 export interface WorkPattern {
   shiftStartHour: number; // 0-23
   shiftEndHour: number; // 0-23
@@ -118,6 +162,8 @@ export function recordCalcEvent(e: {
   embedHost?: string | null;
   industry?: string | null;
   work?: WorkPattern | null;
+  behaviour?: BehaviourSignals | null;
+  viewedReport?: boolean;
 }) {
   if (!e.annualIncome || e.annualIncome <= 0 || !e.province) return;
   if (isLikelyBot()) return;
@@ -129,10 +175,12 @@ export function recordCalcEvent(e: {
     const lang = KNOWN_LANGS.includes(e.lang) ? e.lang : 'en';
     const source = e.source ?? 'web';
     const w = e.work ?? null;
+    const b = e.behaviour ?? null;
     const workKey = w
       ? `${w.shiftStartHour}-${w.shiftEndHour}-${w.unpaidBreakMin}-${w.daysPerWeek}`
       : '';
-    const key = `${source}|${e.mode}|${e.province}|${bracket}|${lang}|${e.industry ?? ''}|${workKey}`;
+    const behaviourKey = b ? `${b.rrspPctBucket}-${b.otHoursBucket}-${b.tipsPctBucket ?? ''}-${b.shiftPremium}` : '';
+    const key = `${source}|${e.mode}|${e.province}|${bracket}|${lang}|${e.industry ?? ''}|${workKey}|${behaviourKey}`;
     if (sentThisPageLoad.has(key)) return;
     sentThisPageLoad.add(key);
 
@@ -160,6 +208,15 @@ export function recordCalcEvent(e: {
         days_per_week: w?.daysPerWeek ?? null,
         works_weekend: w?.worksWeekend ?? null,
         avg_daily_hours: w?.avgDailyHours ?? null,
+        has_rrsp: b?.hasRrsp ?? null,
+        rrsp_pct_bucket: b?.rrspPctBucket ?? null,
+        employer_match: b?.employerMatch ?? null,
+        shift_premium: b?.shiftPremium ?? null,
+        premium_rate_bucket: b?.premiumRateBucket ?? null,
+        ot_hours_bucket: b?.otHoursBucket ?? null,
+        tips_pct_bucket: b?.tipsPctBucket ?? null,
+        pay_frequency: b?.payFrequency ?? null,
+        viewed_report: e.viewedReport ?? false,
         session_id: getSessionId(),
         seq: seqCounter,
         // User's LOCAL clock (not UTC): powers "what hour / which weekday do
