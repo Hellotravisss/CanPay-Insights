@@ -10,6 +10,12 @@ export const metadata: Metadata = {
 // Newest first. Keep entries honest and concrete — this page doubles as a
 // freshness signal for search/AI engines and as proof of maintenance for
 // widget publishers.
+//
+// MAINTENANCE RULE: add an entry whenever a user-visible capability ships —
+// new languages, new features, tax-year or benchmark updates, app releases.
+// Write for a non-technical reader: no file names, no code, no commit hashes.
+// Routine blog articles do NOT belong here (they have their own index); this
+// page is the product's history, not a publishing log.
 const ENTRIES: { date: string; title: string; points: string[] }[] = [
   {
     date: '2026-08-08',
