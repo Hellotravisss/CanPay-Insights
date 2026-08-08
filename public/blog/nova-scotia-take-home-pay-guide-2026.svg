@@ -4,45 +4,41 @@
       <stop offset="0%" stop-color="#0284c7"/>
       <stop offset="100%" stop-color="#0c4a6e"/>
     </linearGradient>
-    <linearGradient id="fade" x1="0" y1="0" x2="0" y2="1">
-      <stop offset="0%" stop-color="#ffffff" stop-opacity="0.12"/>
+    <radialGradient id="spot" cx="50%" cy="34%" r="62%">
+      <stop offset="0%" stop-color="#ffffff" stop-opacity="0.16"/>
       <stop offset="100%" stop-color="#ffffff" stop-opacity="0"/>
-    </linearGradient>
+    </radialGradient>
   </defs>
   <rect width="1200" height="630" fill="url(#bg)"/>
-  <rect width="1200" height="630" fill="url(#fade)"/>
+  <rect width="1200" height="630" fill="url(#spot)"/>
 
-  <!-- graph paper -->
-  <g stroke="#ffffff" stroke-opacity="0.10" stroke-width="1">
-    <line x1="0" y1="0" x2="0" y2="630"/><line x1="120" y1="0" x2="120" y2="630"/><line x1="240" y1="0" x2="240" y2="630"/><line x1="360" y1="0" x2="360" y2="630"/><line x1="480" y1="0" x2="480" y2="630"/><line x1="600" y1="0" x2="600" y2="630"/><line x1="720" y1="0" x2="720" y2="630"/><line x1="840" y1="0" x2="840" y2="630"/><line x1="960" y1="0" x2="960" y2="630"/><line x1="1080" y1="0" x2="1080" y2="630"/><line x1="1200" y1="0" x2="1200" y2="630"/>
-    <line x1="0" y1="0" x2="1200" y2="0"/><line x1="0" y1="126" x2="1200" y2="126"/><line x1="0" y1="252" x2="1200" y2="252"/><line x1="0" y1="378" x2="1200" y2="378"/><line x1="0" y1="504" x2="1200" y2="504"/><line x1="0" y1="630" x2="1200" y2="630"/>
+  <g stroke="#ffffff" stroke-opacity="0.09" stroke-width="1">
+    <line x1="0" y1="0" x2="0" y2="630"/><line x1="100" y1="0" x2="100" y2="630"/><line x1="200" y1="0" x2="200" y2="630"/><line x1="300" y1="0" x2="300" y2="630"/><line x1="400" y1="0" x2="400" y2="630"/><line x1="500" y1="0" x2="500" y2="630"/><line x1="600" y1="0" x2="600" y2="630"/><line x1="700" y1="0" x2="700" y2="630"/><line x1="800" y1="0" x2="800" y2="630"/><line x1="900" y1="0" x2="900" y2="630"/><line x1="1000" y1="0" x2="1000" y2="630"/><line x1="1100" y1="0" x2="1100" y2="630"/><line x1="1200" y1="0" x2="1200" y2="630"/>
+    <line x1="0" y1="0" x2="1200" y2="0"/><line x1="0" y1="105" x2="1200" y2="105"/><line x1="0" y1="210" x2="1200" y2="210"/><line x1="0" y1="315" x2="1200" y2="315"/><line x1="0" y1="420" x2="1200" y2="420"/><line x1="0" y1="525" x2="1200" y2="525"/><line x1="0" y1="630" x2="1200" y2="630"/>
   </g>
 
-  <!-- rising bars, drawn from the province's own salary ladder -->
-  <g opacity="0.22">
-    <rect x="760" y="481" width="52" height="79" rx="8" fill="#ffffff"/><rect x="838" y="449" width="52" height="111" rx="8" fill="#ffffff"/><rect x="916" y="420" width="52" height="140" rx="8" fill="#ffffff"/><rect x="994" y="389" width="52" height="171" rx="8" fill="#ffffff"/><rect x="1072" y="316" width="52" height="244" rx="8" fill="#ffffff"/>
-  </g>
-
-  <!-- logo -->
-  <g transform="translate(72,64)">
-    <rect width="56" height="56" rx="14" fill="#ffffff" fill-opacity="0.95"/>
-    <g transform="translate(16,12) scale(1.05)" fill="#0284c7">
-      <rect x="10" y="2" width="4" height="3" rx="0.5"/>
-      <path d="M4 6h16a1 1 0 0 1 1 1v2a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V7a1 1 0 0 1 1-1z"/>
-      <rect x="9" y="10" width="6" height="4" rx="0.5"/>
-      <path d="M5 14h14a1 1 0 0 1 1 1v2a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1v-2a1 1 0 0 1 1-1z"/>
-      <rect x="7" y="18" width="3" height="4" rx="0.5"/>
-      <rect x="14" y="18" width="3" height="4" rx="0.5"/>
+  <!-- Everything sits inside a centred 700px-wide safe area, because blog cards
+       and social previews crop the left and right edges at different ratios. -->
+  <g transform="translate(600,0)" text-anchor="middle" font-family="Inter,Helvetica,Arial,sans-serif">
+    <g transform="translate(-150,60)">
+      <rect width="46" height="46" rx="12" fill="#ffffff" fill-opacity="0.95"/>
+      <g transform="translate(11,9) scale(1)" fill="#0284c7">
+        <rect x="10" y="2" width="4" height="3" rx="0.5"/>
+        <path d="M4 6h16a1 1 0 0 1 1 1v2a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V7a1 1 0 0 1 1-1z"/>
+        <rect x="9" y="10" width="6" height="4" rx="0.5"/>
+        <path d="M5 14h14a1 1 0 0 1 1 1v2a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1v-2a1 1 0 0 1 1-1z"/>
+        <rect x="7" y="18" width="3" height="4" rx="0.5"/>
+        <rect x="14" y="18" width="3" height="4" rx="0.5"/>
+      </g>
+      <text x="60" y="31" font-size="24" font-weight="700" fill="#ffffff" text-anchor="start">CanPay Insights</text>
     </g>
-    <text x="72" y="37" font-family="Inter,Helvetica,Arial,sans-serif" font-size="26" font-weight="700" fill="#ffffff">CanPay Insights</text>
+
+    <text y="215" font-size="21" font-weight="700" letter-spacing="5" fill="#ffffff" fill-opacity="0.8">NOVA SCOTIA · 2026</text>
+    <text y="286" font-size="52" font-weight="800" fill="#ffffff">Take-home pay guide</text>
+
+    <text y="430" font-size="118" font-weight="800" fill="#ffffff">$29.80</text>
+    <text y="474" font-size="24" fill="#ffffff" fill-opacity="0.85">median full-time wage, per hour</text>
+    <text y="522" font-size="21" fill="#ffffff" fill-opacity="0.7">≈ $62,000/yr · $56,095 take-home on $80k</text>
+    <text y="580" font-size="16" fill="#ffffff" fill-opacity="0.55">Statistics Canada wage data · CanPay Insights 2026 tax engine</text>
   </g>
-
-  <text x="72" y="228" font-family="Inter,Helvetica,Arial,sans-serif" font-size="22" font-weight="700" letter-spacing="4" fill="#ffffff" fill-opacity="0.75">NOVA SCOTIA · 2026</text>
-  <text x="72" y="316" font-family="Inter,Helvetica,Arial,sans-serif" font-size="66" font-weight="800" fill="#ffffff">Take-home pay guide</text>
-
-  <text x="72" y="452" font-family="Inter,Helvetica,Arial,sans-serif" font-size="104" font-weight="800" fill="#ffffff">$29.80</text>
-  <text x="72" y="492" font-family="Inter,Helvetica,Arial,sans-serif" font-size="24" fill="#ffffff" fill-opacity="0.8">median full-time wage, per hour</text>
-  <text x="72" y="536" font-family="Inter,Helvetica,Arial,sans-serif" font-size="20" fill="#ffffff" fill-opacity="0.65">≈ $62,000/yr · $56,095 take-home on $80k</text>
-
-  <text x="72" y="592" font-family="Inter,Helvetica,Arial,sans-serif" font-size="17" fill="#ffffff" fill-opacity="0.55">Statistics Canada wage data · CanPay Insights 2026 tax engine</text>
 </svg>

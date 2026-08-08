@@ -273,7 +273,7 @@ Every figure above is a median or a computed example. Your own pay depends on yo
     province: '${name}',
     publishedAt: '2026-08-08',
     readTime: ${wages.length ? 8 : 6},
-    imageUrl: '/blog/${slug}-take-home-pay-guide-2026.svg',
+    imageUrl: '/blog/${slug}-take-home-pay-guide-2026.png',
     directAnswer: ${JSON.stringify(directAnswer)},
     faq: ${JSON.stringify(faq, null, 6).replace(/\n/g, '\n    ')},
     content: \`${esc(content)}\`,

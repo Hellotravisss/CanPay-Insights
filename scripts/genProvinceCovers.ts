@@ -45,52 +45,43 @@ for (const cfg of PROVINCE_SEO_CONFIGS) {
       <stop offset="0%" stop-color="${c1}"/>
       <stop offset="100%" stop-color="${c2}"/>
     </linearGradient>
-    <linearGradient id="fade" x1="0" y1="0" x2="0" y2="1">
-      <stop offset="0%" stop-color="#ffffff" stop-opacity="0.12"/>
+    <radialGradient id="spot" cx="50%" cy="34%" r="62%">
+      <stop offset="0%" stop-color="#ffffff" stop-opacity="0.16"/>
       <stop offset="100%" stop-color="#ffffff" stop-opacity="0"/>
-    </linearGradient>
+    </radialGradient>
   </defs>
   <rect width="1200" height="630" fill="url(#bg)"/>
-  <rect width="1200" height="630" fill="url(#fade)"/>
+  <rect width="1200" height="630" fill="url(#spot)"/>
 
-  <!-- graph paper -->
-  <g stroke="#ffffff" stroke-opacity="0.10" stroke-width="1">
-    ${Array.from({ length: 11 }, (_, i) => `<line x1="${i * 120}" y1="0" x2="${i * 120}" y2="630"/>`).join('')}
-    ${Array.from({ length: 6 }, (_, i) => `<line x1="0" y1="${i * 126}" x2="1200" y2="${i * 126}"/>`).join('')}
+  <g stroke="#ffffff" stroke-opacity="0.09" stroke-width="1">
+    ${Array.from({ length: 13 }, (_, i) => `<line x1="${i * 100}" y1="0" x2="${i * 100}" y2="630"/>`).join('')}
+    ${Array.from({ length: 7 }, (_, i) => `<line x1="0" y1="${i * 105}" x2="1200" y2="${i * 105}"/>`).join('')}
   </g>
 
-  <!-- rising bars, drawn from the province's own salary ladder -->
-  <g opacity="0.22">
-    ${[40000, 60000, 80000, 100000, 150000]
-      .map((s, i) => {
-        const h = Math.round((getSalaryFigures(s, cfg.slug).netAnnual / 120000) * 300);
-        return `<rect x="${760 + i * 78}" y="${560 - h}" width="52" height="${h}" rx="8" fill="#ffffff"/>`;
-      })
-      .join('')}
-  </g>
-
-  <!-- logo -->
-  <g transform="translate(72,64)">
-    <rect width="56" height="56" rx="14" fill="#ffffff" fill-opacity="0.95"/>
-    <g transform="translate(16,12) scale(1.05)" fill="${c1}">
-      <rect x="10" y="2" width="4" height="3" rx="0.5"/>
-      <path d="M4 6h16a1 1 0 0 1 1 1v2a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V7a1 1 0 0 1 1-1z"/>
-      <rect x="9" y="10" width="6" height="4" rx="0.5"/>
-      <path d="M5 14h14a1 1 0 0 1 1 1v2a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1v-2a1 1 0 0 1 1-1z"/>
-      <rect x="7" y="18" width="3" height="4" rx="0.5"/>
-      <rect x="14" y="18" width="3" height="4" rx="0.5"/>
+  <!-- Everything sits inside a centred 700px-wide safe area, because blog cards
+       and social previews crop the left and right edges at different ratios. -->
+  <g transform="translate(600,0)" text-anchor="middle" font-family="Inter,Helvetica,Arial,sans-serif">
+    <g transform="translate(-150,60)">
+      <rect width="46" height="46" rx="12" fill="#ffffff" fill-opacity="0.95"/>
+      <g transform="translate(11,9) scale(1)" fill="${c1}">
+        <rect x="10" y="2" width="4" height="3" rx="0.5"/>
+        <path d="M4 6h16a1 1 0 0 1 1 1v2a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V7a1 1 0 0 1 1-1z"/>
+        <rect x="9" y="10" width="6" height="4" rx="0.5"/>
+        <path d="M5 14h14a1 1 0 0 1 1 1v2a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1v-2a1 1 0 0 1 1-1z"/>
+        <rect x="7" y="18" width="3" height="4" rx="0.5"/>
+        <rect x="14" y="18" width="3" height="4" rx="0.5"/>
+      </g>
+      <text x="60" y="31" font-size="24" font-weight="700" fill="#ffffff" text-anchor="start">CanPay Insights</text>
     </g>
-    <text x="72" y="37" font-family="Inter,Helvetica,Arial,sans-serif" font-size="26" font-weight="700" fill="#ffffff">CanPay Insights</text>
+
+    <text y="215" font-size="21" font-weight="700" letter-spacing="5" fill="#ffffff" fill-opacity="0.8">${cfg.name.toUpperCase()} · 2026</text>
+    <text y="286" font-size="52" font-weight="800" fill="#ffffff">Take-home pay guide</text>
+
+    <text y="430" font-size="118" font-weight="800" fill="#ffffff">${headline}</text>
+    <text y="474" font-size="24" fill="#ffffff" fill-opacity="0.85">${caption}</text>
+    <text y="522" font-size="21" fill="#ffffff" fill-opacity="0.7">${sub}</text>
+    <text y="580" font-size="16" fill="#ffffff" fill-opacity="0.55">Statistics Canada wage data · CanPay Insights 2026 tax engine</text>
   </g>
-
-  <text x="72" y="228" font-family="Inter,Helvetica,Arial,sans-serif" font-size="22" font-weight="700" letter-spacing="4" fill="#ffffff" fill-opacity="0.75">${cfg.name.toUpperCase()} · 2026</text>
-  <text x="72" y="316" font-family="Inter,Helvetica,Arial,sans-serif" font-size="66" font-weight="800" fill="#ffffff">Take-home pay guide</text>
-
-  <text x="72" y="452" font-family="Inter,Helvetica,Arial,sans-serif" font-size="104" font-weight="800" fill="#ffffff">${headline}</text>
-  <text x="72" y="492" font-family="Inter,Helvetica,Arial,sans-serif" font-size="24" fill="#ffffff" fill-opacity="0.8">${caption}</text>
-  <text x="72" y="536" font-family="Inter,Helvetica,Arial,sans-serif" font-size="20" fill="#ffffff" fill-opacity="0.65">${sub}</text>
-
-  <text x="72" y="592" font-family="Inter,Helvetica,Arial,sans-serif" font-size="17" fill="#ffffff" fill-opacity="0.55">Statistics Canada wage data · CanPay Insights 2026 tax engine</text>
 </svg>
 `;
   writeFileSync(`public/blog/${cfg.slug}-take-home-pay-guide-2026.svg`, svg);

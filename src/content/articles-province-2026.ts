@@ -19,7 +19,7 @@ export const provinceGuides2026: Article[] = [
     province: 'Ontario',
     publishedAt: '2026-08-08',
     readTime: 8,
-    imageUrl: '/blog/ontario-take-home-pay-guide-2026.svg',
+    imageUrl: '/blog/ontario-take-home-pay-guide-2026.png',
     directAnswer: "The median full-time wage in Ontario is $34.62 an hour, about $72,000 a year, which leaves roughly $55,416 after tax in 2026. On an $80,000 salary, Ontario ranks #4 of 13 provinces and territories for take-home pay, keeping $60,744.",
     faq: [
           {
@@ -127,7 +127,7 @@ Every figure above is a median or a computed example. Your own pay depends on yo
     province: 'British Columbia',
     publishedAt: '2026-08-08',
     readTime: 8,
-    imageUrl: '/blog/bc-take-home-pay-guide-2026.svg',
+    imageUrl: '/blog/bc-take-home-pay-guide-2026.png',
     directAnswer: "The median full-time wage in British Columbia is $35.00 an hour, about $72,800 a year, which leaves roughly $56,130 after tax in 2026. On an $80,000 salary, British Columbia ranks #2 of 13 provinces and territories for take-home pay, keeping $61,038.",
     faq: [
           {
@@ -235,7 +235,7 @@ Every figure above is a median or a computed example. Your own pay depends on yo
     province: 'Alberta',
     publishedAt: '2026-08-08',
     readTime: 8,
-    imageUrl: '/blog/alberta-take-home-pay-guide-2026.svg',
+    imageUrl: '/blog/alberta-take-home-pay-guide-2026.png',
     directAnswer: "The median full-time wage in Alberta is $34.97 an hour, about $72,700 a year, which leaves roughly $55,592 after tax in 2026. On an $80,000 salary, Alberta ranks #6 of 13 provinces and territories for take-home pay, keeping $60,409.",
     faq: [
           {
@@ -343,7 +343,7 @@ Every figure above is a median or a computed example. Your own pay depends on yo
     province: 'Quebec',
     publishedAt: '2026-08-08',
     readTime: 8,
-    imageUrl: '/blog/quebec-take-home-pay-guide-2026.svg',
+    imageUrl: '/blog/quebec-take-home-pay-guide-2026.png',
     directAnswer: "The median full-time wage in Quebec is $33.00 an hour, about $68,600 a year, which leaves roughly $50,288 after tax in 2026. On an $80,000 salary, Quebec ranks #11 of 13 provinces and territories for take-home pay, keeping $57,077.",
     faq: [
           {
@@ -451,7 +451,7 @@ Every figure above is a median or a computed example. Your own pay depends on yo
     province: 'Manitoba',
     publishedAt: '2026-08-08',
     readTime: 8,
-    imageUrl: '/blog/manitoba-take-home-pay-guide-2026.svg',
+    imageUrl: '/blog/manitoba-take-home-pay-guide-2026.png',
     directAnswer: "The median full-time wage in Manitoba is $28.74 an hour, about $59,800 a year, which leaves roughly $45,392 after tax in 2026. On an $80,000 salary, Manitoba ranks #8 of 13 provinces and territories for take-home pay, keeping $57,940.",
     faq: [
           {
@@ -559,7 +559,7 @@ Every figure above is a median or a computed example. Your own pay depends on yo
     province: 'Saskatchewan',
     publishedAt: '2026-08-08',
     readTime: 8,
-    imageUrl: '/blog/saskatchewan-take-home-pay-guide-2026.svg',
+    imageUrl: '/blog/saskatchewan-take-home-pay-guide-2026.png',
     directAnswer: "The median full-time wage in Saskatchewan is $31.25 an hour, about $65,000 a year, which leaves roughly $49,325 after tax in 2026. On an $80,000 salary, Saskatchewan ranks #7 of 13 provinces and territories for take-home pay, keeping $58,733.",
     faq: [
           {
@@ -667,7 +667,7 @@ Every figure above is a median or a computed example. Your own pay depends on yo
     province: 'Nova Scotia',
     publishedAt: '2026-08-08',
     readTime: 8,
-    imageUrl: '/blog/nova-scotia-take-home-pay-guide-2026.svg',
+    imageUrl: '/blog/nova-scotia-take-home-pay-guide-2026.png',
     directAnswer: "The median full-time wage in Nova Scotia is $29.80 an hour, about $62,000 a year, which leaves roughly $45,618 after tax in 2026. On an $80,000 salary, Nova Scotia ranks #13 of 13 provinces and territories for take-home pay, keeping $56,095.",
     faq: [
           {
@@ -775,7 +775,7 @@ Every figure above is a median or a computed example. Your own pay depends on yo
     province: 'New Brunswick',
     publishedAt: '2026-08-08',
     readTime: 8,
-    imageUrl: '/blog/new-brunswick-take-home-pay-guide-2026.svg',
+    imageUrl: '/blog/new-brunswick-take-home-pay-guide-2026.png',
     directAnswer: "The median full-time wage in New Brunswick is $28.85 an hour, about $60,000 a year, which leaves roughly $45,775 after tax in 2026. On an $80,000 salary, New Brunswick ranks #9 of 13 provinces and territories for take-home pay, keeping $57,933.",
     faq: [
           {
@@ -883,7 +883,7 @@ Every figure above is a median or a computed example. Your own pay depends on yo
     province: 'Newfoundland and Labrador',
     publishedAt: '2026-08-08',
     readTime: 8,
-    imageUrl: '/blog/newfoundland-take-home-pay-guide-2026.svg',
+    imageUrl: '/blog/newfoundland-take-home-pay-guide-2026.png',
     directAnswer: "The median full-time wage in Newfoundland and Labrador is $30.07 an hour, about $62,500 a year, which leaves roughly $46,962 after tax in 2026. On an $80,000 salary, Newfoundland and Labrador ranks #10 of 13 provinces and territories for take-home pay, keeping $57,533.",
     faq: [
           {
@@ -991,7 +991,7 @@ Every figure above is a median or a computed example. Your own pay depends on yo
     province: 'Prince Edward Island',
     publishedAt: '2026-08-08',
     readTime: 8,
-    imageUrl: '/blog/pei-take-home-pay-guide-2026.svg',
+    imageUrl: '/blog/pei-take-home-pay-guide-2026.png',
     directAnswer: "The median full-time wage in Prince Edward Island is $28.21 an hour, about $58,700 a year, which leaves roughly $44,394 after tax in 2026. On an $80,000 salary, Prince Edward Island ranks #12 of 13 provinces and territories for take-home pay, keeping $56,999.",
     faq: [
           {
@@ -1099,7 +1099,7 @@ Every figure above is a median or a computed example. Your own pay depends on yo
     province: 'Yukon',
     publishedAt: '2026-08-08',
     readTime: 6,
-    imageUrl: '/blog/yukon-take-home-pay-guide-2026.svg',
+    imageUrl: '/blog/yukon-take-home-pay-guide-2026.png',
     directAnswer: "On an $80,000 salary, Yukon ranks #5 of 13 provinces and territories for take-home pay in 2026, keeping $60,648 after federal tax, territorial tax, CPP and EI.",
     faq: [
           {
@@ -1184,7 +1184,7 @@ Every figure above is a median or a computed example. Your own pay depends on yo
     province: 'Northwest Territories',
     publishedAt: '2026-08-08',
     readTime: 6,
-    imageUrl: '/blog/northwest-territories-take-home-pay-guide-2026.svg',
+    imageUrl: '/blog/northwest-territories-take-home-pay-guide-2026.png',
     directAnswer: "On an $80,000 salary, Northwest Territories ranks #3 of 13 provinces and territories for take-home pay in 2026, keeping $60,871 after federal tax, territorial tax, CPP and EI.",
     faq: [
           {
@@ -1269,7 +1269,7 @@ Every figure above is a median or a computed example. Your own pay depends on yo
     province: 'Nunavut',
     publishedAt: '2026-08-08',
     readTime: 6,
-    imageUrl: '/blog/nunavut-take-home-pay-guide-2026.svg',
+    imageUrl: '/blog/nunavut-take-home-pay-guide-2026.png',
     directAnswer: "On an $80,000 salary, Nunavut ranks #1 of 13 provinces and territories for take-home pay in 2026, keeping $62,001 after federal tax, territorial tax, CPP and EI.",
     faq: [
           {
