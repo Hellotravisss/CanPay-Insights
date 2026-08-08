@@ -1,6 +1,8 @@
 'use client';
 import { useEffect, useState } from 'react';
 import { supabase } from '../../lib/supabase';
+import Globe from './Globe';
+import Donut from './Donut';
 
 // Private data room. Deliberately styled the way a published data story would
 // look — this doubles as the visual rehearsal for the eventual public /data
@@ -18,6 +20,7 @@ type Stats = {
   by_lang: Row[];
   by_country: Row[];
   by_city: Row[];
+  cities_geo: { city: string; lat: number; lon: number; n: number }[];
   by_device: Row[];
   by_mode: Row[];
   by_source: Row[];
@@ -151,6 +154,16 @@ export default function StatsDashboard() {
           </p>
         </div>
 
+        {/* Globe — where in the world people are calculating Canadian pay */}
+        <div className="mb-6 rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
+          <h2 className="text-base font-bold text-slate-800">Live map</h2>
+          <p className="mb-4 mt-0.5 text-xs leading-5 text-slate-400">
+            City centroids only — the centre point of the city a visit came from, never a precise
+            location and never an IP address. Dot size is volume.
+          </p>
+          <Globe cities={stats.cities_geo ?? []} countries={stats.by_country} />
+        </div>
+
         <div className="grid gap-6 md:grid-cols-2">
           <Card title="Province calculated" hint="The province the user selected — the core, untamperable signal.">
             <Bars rows={stats.by_province} total={t} />
@@ -164,20 +177,12 @@ export default function StatsDashboard() {
             <Bars rows={stats.by_lang} total={t} label={(k) => LANG_NAMES[String(k)] ?? String(k)} />
           </Card>
 
-          <Card title="Where they are" hint="Country from the connection, city-level at most. IP is never stored.">
-            <Bars rows={stats.by_country} total={t} />
-          </Card>
-
-          <Card title="Cities" hint="Metro-level only — useful for regional wage stories.">
-            <Bars rows={stats.by_city} total={t} />
-          </Card>
-
           <Card title="Calculator used">
-            <Bars rows={stats.by_mode} total={t} />
+            <Donut rows={stats.by_mode} />
           </Card>
 
           <Card title="Device">
-            <Bars rows={stats.by_device} total={t} />
+            <Donut rows={stats.by_device} label={(k) => (k === '?' ? 'Unknown' : String(k))} />
           </Card>
 
           <Card title="Declared industry" hint="Voluntary — users pick it to see where their pay stands.">

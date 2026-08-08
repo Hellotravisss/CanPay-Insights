@@ -30,6 +30,26 @@ export function bracketIncome(annual: number): string {
   return '160k-plus';
 }
 
+// Bot guard. Crawlers mostly can't reach here anyway (events only fire after a
+// user edits an input), but headless/automation traffic would otherwise count
+// as real people and poison a dataset whose whole value is being trustworthy.
+const BOT_UA =
+  /bot|crawl|spider|slurp|bingpreview|headless|phantom|puppeteer|playwright|selenium|lighthouse|pagespeed|gtmetrix|pingdom|uptime|curl|wget|python-requests|axios|node-fetch|scrapy|semrush|ahrefs|mj12|dotbot|petalbot|yandex|baiduspider|gptbot|claudebot|ccbot|perplexity|applebot|facebookexternalhit|preview/i;
+
+function isLikelyBot(): boolean {
+  try {
+    const nav = navigator as Navigator & { webdriver?: boolean };
+    if (nav.webdriver) return true; // automation flag (Playwright/Puppeteer/Selenium)
+    if (BOT_UA.test(nav.userAgent)) return true;
+    // Real browsers report a plugin list, a language, and a non-zero screen.
+    if (!nav.languages || nav.languages.length === 0) return true;
+    if (!window.screen || window.screen.width === 0) return true;
+    return false;
+  } catch {
+    return true; // if we can't tell, don't record
+  }
+}
+
 const sentThisPageLoad = new Set<string>();
 let debounceTimer: ReturnType<typeof setTimeout> | null = null;
 
@@ -100,6 +120,7 @@ export function recordCalcEvent(e: {
   work?: WorkPattern | null;
 }) {
   if (!e.annualIncome || e.annualIncome <= 0 || !e.province) return;
+  if (isLikelyBot()) return;
 
   if (debounceTimer) clearTimeout(debounceTimer);
   debounceTimer = setTimeout(async () => {
