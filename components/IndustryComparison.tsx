@@ -1,6 +1,7 @@
 'use client';
 import { useMemo, useState } from 'react';
 import { recordCalcEvent, type CalcMode } from '../lib/telemetry';
+import { PROVINCIAL_WAGES, WAGE_DATA_YEAR, annualFromHourly } from '../lib/provincialWages';
 
 // Optional industry selector + "where does your wage sit in this industry"
 // visual. The Glassdoor/levels.fyi voluntary-data play: the user selects an
@@ -135,6 +136,42 @@ const DICT: Record<string, Record<string, string>> = {
   },
 };
 
+
+// Province name → StatCan geography code. The calculator passes full names.
+const PROVINCE_CODE: Record<string, string> = {
+  'Ontario': 'ON', 'Quebec': 'QC', 'British Columbia': 'BC', 'Alberta': 'AB',
+  'Manitoba': 'MB', 'Saskatchewan': 'SK', 'Nova Scotia': 'NS',
+  'New Brunswick': 'NB', 'Newfoundland and Labrador': 'NL',
+  'Prince Edward Island': 'PE',
+  // The three territories are not published separately in the wage table;
+  // they fall back to the national benchmark rather than borrowing a province's.
+};
+
+/**
+ * Re-centre the national percentile curve on the province's own median.
+ *
+ * Statistics Canada publishes a median wage per industry PER PROVINCE, but the
+ * full percentile spread only nationally. Scaling the national shape by
+ * (provincial median / national median) keeps the real provincial level — the
+ * number that actually differs — without inventing percentiles we don't have.
+ */
+function localisedBenchmark(
+  slug: string,
+  provinceName: string,
+  national: [number, number, number, number, number]
+): { p: [number, number, number, number, number]; provincial: boolean; medianHourly: number | null } {
+  const code = PROVINCE_CODE[provinceName];
+  const row = PROVINCIAL_WAGES[slug];
+  if (!code || !row || !row[code] || !row.CA) {
+    return { p: national, provincial: false, medianHourly: null };
+  }
+  const ratio = row[code] / row.CA;
+  const scaled = national.map((v) => Math.round((v * ratio) / 500) * 500) as [
+    number, number, number, number, number
+  ];
+  return { p: scaled, provincial: true, medianHourly: row[code] };
+}
+
 // Piecewise-linear percentile estimate through the five known points.
 function estimatePercentile(annual: number, p: [number, number, number, number, number]): number {
   const pts: Array<[number, number]> = [[p[0], 10], [p[1], 25], [p[2], 50], [p[3], 75], [p[4], 90]];
@@ -168,7 +205,15 @@ export default function IndustryComparison({
   const t = (DICT as Record<string, Record<string, string>>)[lang] ?? EXTRA_DICTS[lang];
   const [slug, setSlug] = useState('');
 
-  const bench = useMemo(() => BENCHMARKS.find((b) => b.slug === slug) ?? null, [slug]);
+  const baseBench = useMemo(() => BENCHMARKS.find((b) => b.slug === slug) ?? null, [slug]);
+  const local = useMemo(
+    () => (baseBench ? localisedBenchmark(slug, province, baseBench.p) : null),
+    [baseBench, slug, province]
+  );
+  const bench = useMemo(
+    () => (baseBench && local ? { slug: baseBench.slug, p: local.p } : null),
+    [baseBench, local]
+  );
   const pct = useMemo(
     () => (bench && annualIncome > 0 ? estimatePercentile(annualIncome, bench.p) : null),
     [bench, annualIncome]
@@ -283,7 +328,18 @@ export default function IndustryComparison({
             <span>{t.high} →</span>
           </div>
           <p className="text-sm font-semibold text-slate-800">{chart.verdict}</p>
-          <p className="mt-2 text-[11px] leading-4 text-slate-400">{t.note}</p>
+          {local?.provincial && local.medianHourly ? (
+            <p className="mt-3 rounded-lg bg-slate-50 px-3 py-2 text-[11px] leading-5 text-slate-500">
+              The median full-time wage for {t[slug] ?? slug} in {province} is{' '}
+              <strong className="text-slate-700">${local.medianHourly.toFixed(2)}/hour</strong> — about{' '}
+              <strong className="text-slate-700">
+                ${annualFromHourly(local.medianHourly).toLocaleString('en-CA')} a year
+              </strong>{' '}
+              before tax. Source: Statistics Canada, Table 14-10-0064-01, {WAGE_DATA_YEAR}.
+            </p>
+          ) : (
+            <p className="mt-2 text-[11px] leading-4 text-slate-400">{t.note}</p>
+          )}
         </div>
       )}
     </div>
