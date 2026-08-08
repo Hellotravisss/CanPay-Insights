@@ -1,6 +1,7 @@
 import type { MetadataRoute } from 'next';
 import allArticles from '../src/content/articles-data';
 import { frenchLandingPages, landingPages } from './landing-page-data';
+import { PROVINCIAL_WAGES } from '../lib/provincialWages';
 
 const BASE_URL = 'https://canpayinsights.ca';
 
@@ -30,6 +31,26 @@ export default function sitemap(): MetadataRoute.Sitemap {
       changeFrequency: 'monthly',
       priority: 0.8,
     },
+    {
+      url: `${BASE_URL}/wages`,
+      lastModified: new Date(),
+      changeFrequency: 'monthly',
+      priority: 0.8,
+    },
+    ...Object.keys(PROVINCIAL_WAGES).flatMap((industry) =>
+      Object.entries({
+        ON: 'ontario', QC: 'quebec', BC: 'british-columbia', AB: 'alberta',
+        MB: 'manitoba', SK: 'saskatchewan', NS: 'nova-scotia', NB: 'new-brunswick',
+        NL: 'newfoundland-and-labrador', PE: 'prince-edward-island',
+      })
+        .filter(([code]) => PROVINCIAL_WAGES[industry]?.[code])
+        .map(([, provinceSlug]) => ({
+          url: `${BASE_URL}/wages/${industry}-wages-${provinceSlug}`,
+          lastModified: new Date(),
+          changeFrequency: 'monthly' as const,
+          priority: 0.6,
+        }))
+    ),
     {
       url: `${BASE_URL}/changelog`,
       lastModified: new Date(),
