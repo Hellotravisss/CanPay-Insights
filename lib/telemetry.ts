@@ -94,6 +94,30 @@ function isLikelyBot(): boolean {
   }
 }
 
+
+// Owner / tester opt-out. Visiting any page with ?notelemetry=1 stores a
+// permanent flag in this browser; ?notelemetry=0 clears it. Our own testing
+// then never enters the dataset — the value of this data is that it reflects
+// real users, and corporate WiFi can even egress in another country, which
+// would distort the geography badly.
+const OPTOUT_KEY = 'canpay_no_telemetry';
+
+function isOptedOut(): boolean {
+  try {
+    const param = new URLSearchParams(window.location.search).get('notelemetry');
+    if (param === '1') {
+      localStorage.setItem(OPTOUT_KEY, '1');
+      console.info('CanPay: telemetry disabled on this device.');
+    } else if (param === '0') {
+      localStorage.removeItem(OPTOUT_KEY);
+      console.info('CanPay: telemetry re-enabled on this device.');
+    }
+    return localStorage.getItem(OPTOUT_KEY) === '1';
+  } catch {
+    return false;
+  }
+}
+
 const sentThisPageLoad = new Set<string>();
 let debounceTimer: ReturnType<typeof setTimeout> | null = null;
 
@@ -166,7 +190,7 @@ export function recordCalcEvent(e: {
   viewedReport?: boolean;
 }) {
   if (!e.annualIncome || e.annualIncome <= 0 || !e.province) return;
-  if (isLikelyBot()) return;
+  if (isLikelyBot() || isOptedOut()) return;
 
   if (debounceTimer) clearTimeout(debounceTimer);
   debounceTimer = setTimeout(async () => {

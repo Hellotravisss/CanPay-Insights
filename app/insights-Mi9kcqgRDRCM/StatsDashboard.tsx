@@ -16,6 +16,7 @@ type Stats = {
   last_event: string | null;
   last_7d: number;
   geo_known: number;
+  excluded_rows: number;
   by_province: Row[];
   by_bracket: Row[];
   by_lang: Row[];
@@ -136,7 +137,9 @@ export default function StatsDashboard() {
           <p className="mt-2 max-w-2xl text-sm leading-6 text-slate-500">
             Anonymous aggregate statistics from the CanPay Insights calculator. Income is recorded as a
             bracket, never an exact amount; no IP addresses, accounts, or device fingerprints are stored.
-            This page is unlisted and not indexed.
+            This page is unlisted and not indexed. Owner and testing traffic is excluded from every
+            number here — add <code className="rounded bg-slate-100 px-1">?notelemetry=1</code> to any
+            page URL to permanently silence a browser you test from.
           </p>
         </header>
 
@@ -351,7 +354,8 @@ export default function StatsDashboard() {
         </div>
 
         <p className="mt-10 text-center text-xs text-slate-400">
-          Live from the anonymous events table · last event{' '}
+          Live from the anonymous events table · {stats.excluded_rows} owner/test event
+          {stats.excluded_rows === 1 ? '' : 's'} excluded · last event{' '}
           {stats.last_event ? new Date(stats.last_event).toLocaleString('en-CA') : '—'}
         </p>
       </div>
