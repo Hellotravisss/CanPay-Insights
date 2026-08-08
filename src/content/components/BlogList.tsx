@@ -38,7 +38,7 @@ const ArticleCard = ({ article }: { article: Article }) => {
       className="group block overflow-hidden rounded-2xl border border-slate-200 bg-white text-left no-underline shadow-sm transition-all hover:-translate-y-0.5 hover:shadow-lg"
     >
       {article.imageUrl && (
-        <div className="aspect-[1200/630] overflow-hidden bg-slate-100">
+        <div className="overflow-hidden bg-slate-100" style={{ aspectRatio: '1200 / 630' }}>
           <img
             src={article.imageUrl}
             alt={article.title}
@@ -150,7 +150,7 @@ export default function BlogList() {
             className="group mb-6 grid overflow-hidden rounded-2xl border border-slate-200 bg-white text-left no-underline shadow-sm transition-all hover:-translate-y-0.5 hover:shadow-lg md:grid-cols-[1.05fr_0.95fr]"
           >
             {featuredArticle.imageUrl && (
-              <div className="aspect-[1200/630] overflow-hidden bg-slate-100 md:aspect-auto md:h-full">
+              <div className="overflow-hidden bg-slate-100 md:h-full" style={{ aspectRatio: '1200 / 630' }}>
                 <img
                   src={featuredArticle.imageUrl}
                   alt={featuredArticle.title}
