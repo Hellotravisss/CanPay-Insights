@@ -16,8 +16,8 @@ const AI_BOTS = [
 export default function robots(): MetadataRoute.Robots {
   return {
     rules: [
-      { userAgent: '*', allow: '/', disallow: '/api/' },
-      ...AI_BOTS.map((userAgent) => ({ userAgent, allow: '/', disallow: '/api/' })),
+      { userAgent: '*', allow: '/', disallow: ['/api/', '/insights-'] },
+      ...AI_BOTS.map((userAgent) => ({ userAgent, allow: '/', disallow: ['/api/', '/insights-'] })),
     ],
     sitemap: 'https://canpayinsights.ca/sitemap.xml',
     host: 'https://canpayinsights.ca',
