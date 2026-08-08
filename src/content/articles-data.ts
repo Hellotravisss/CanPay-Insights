@@ -4,6 +4,7 @@ import { provinceArticles } from './articles-province';
 import { tipsArticles } from './articles-tips';
 import { studyArticles } from './articles-studies';
 import { frenchArticles } from './articles-fr';
+import { provinceGuides2026 } from './articles-province-2026';
 
 // Article 1: Ontario Tax Guide
 const article1: Article = {
@@ -2529,6 +2530,8 @@ Every situation is unique. Use our calculator to:
 
 // Export all articles (combine original tax articles + new articles)
 const rawArticles: Article[] = [
+  // Provincial guides, generated from StatCan wages + our 2026 engine
+  ...provinceGuides2026,
   // Original Tax Guide Articles
   article1,
   article2,
