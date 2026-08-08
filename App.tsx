@@ -670,6 +670,9 @@ const App: React.FC = () => {
             <a href="/link-to-canpay" className="text-slate-400 no-underline transition-colors hover:text-red-600">
               Link to Us
             </a>
+            <a href="/widget" className="text-slate-400 no-underline transition-colors hover:text-red-600">
+              Embed this calculator
+            </a>
             <a href="/changelog" className="text-slate-400 no-underline transition-colors hover:text-red-600">
               Changelog
             </a>
