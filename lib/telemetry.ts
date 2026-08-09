@@ -183,8 +183,13 @@ function isLikelyBot(): boolean {
 // would distort the geography badly.
 const OPTOUT_KEY = 'canpay_no_telemetry';
 
-function isOptedOut(): boolean {
+// Read the switch as soon as this module loads, not only when an event is about
+// to be sent: someone told to "open this URL once on each device" expects that
+// to be enough, and on a page where they never touch the calculator no event is
+// ever attempted.
+function applyOptOutParam(): void {
   try {
+    if (typeof window === 'undefined') return; // prerender
     const param = new URLSearchParams(window.location.search).get('notelemetry');
     if (param === '1') {
       localStorage.setItem(OPTOUT_KEY, '1');
@@ -193,6 +198,16 @@ function isOptedOut(): boolean {
       localStorage.removeItem(OPTOUT_KEY);
       console.info('CanPay: telemetry re-enabled on this device.');
     }
+  } catch {
+    /* private mode, blocked storage — nothing to do */
+  }
+}
+
+applyOptOutParam();
+
+function isOptedOut(): boolean {
+  try {
+    applyOptOutParam();
     return localStorage.getItem(OPTOUT_KEY) === '1';
   } catch {
     return false;
