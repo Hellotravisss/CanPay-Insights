@@ -9,11 +9,23 @@
  *   that made the complaint reasonable in the first place.
  *
  * HOW THIS LIST WAS CHOSEN
- *   Not by guessing which salaries look popular. Every page below earned at
- *   least 30 Search Console impressions over 77 days WHILE NOINDEXED — real,
- *   measured demand. These 89 pages account for 87% of all impressions the
- *   permutation set received (11,296 of 12,984); the other 172 pages had almost
- *   none and stay blocked.
+ *   Not by guessing which salaries look popular. Every page below earned real
+ *   Search Console impressions WHILE NOINDEXED — measured demand, not a hunch.
+ *
+ *   Batch 1 (2026-08-08): >= 30 impressions over 77 days. 89 pages, 87% of all
+ *   impressions the permutation set received.
+ *   Batch 2 (2026-08-09): 15-29 impressions. 43 more pages carrying 53% of what
+ *   was left (905 of 1,720). Several already rank on page one despite the block
+ *   — 75000-after-tax-new-brunswick at 4.2, 90000-after-tax-pei at 4.3.
+ *
+ *   Cumulative: 132 pages, 94% of measured impressions. The remaining 129 pages
+ *   averaged under 11 impressions each in 77 days and stay blocked; releasing
+ *   them would add pages without adding demand, which is exactly the pattern
+ *   that got the set flagged in the first place.
+ *
+ *   ⚠️ Read from the NON-www property (https://canpayinsights.ca/). The www
+ *   property is also verified but holds almost nothing — 3 salary pages versus
+ *   262 — so querying it makes the whole set look like it has no demand.
  *
  *   Several already rank on page one despite the block: 70000-after-tax-
  *   saskatchewan at 4.1, 70000-after-tax-manitoba at 4.4, 58000-after-tax-
@@ -117,6 +129,51 @@ export const INDEXABLE_SALARY_PAGES = new Set<string>([
   '72000-after-tax-nova-scotia', // 33 impr, pos 9.1
   '58000-after-tax-saskatchewan', // 31 impr, pos 8.1
   '100000-after-tax-manitoba', // 30 impr, pos 8.2
+
+  // ---- Batch 2 (2026-08-09): 15-29 impressions while noindexed ----
+  '130000-after-tax-saskatchewan', // 29 impr, pos 5.8
+  '35000-after-tax-alberta', // 29 impr, pos 9.7
+  '50000-after-tax-nova-scotia', // 29 impr, pos 7.9
+  '75000-after-tax-manitoba', // 29 impr, pos 8.3
+  '85000-after-tax-bc', // 29 impr, pos 7.8
+  '200000-after-tax-bc', // 28 impr, pos 9.9
+  '70000-after-tax-northwest-territories', // 28 impr, pos 6.2
+  '90000-after-tax-saskatchewan', // 28 impr, pos 5.9
+  '150000-after-tax-ontario', // 27 impr, pos 7.0
+  '48000-after-tax-saskatchewan', // 27 impr, pos 8.1
+  '200000-after-tax-alberta', // 25 impr, pos 12.6
+  '52000-after-tax-nunavut', // 24 impr, pos 5.8
+  '75000-after-tax-new-brunswick', // 24 impr, pos 4.2
+  '100000-after-tax-saskatchewan', // 23 impr, pos 5.1
+  '40000-after-tax-ontario', // 23 impr, pos 11.8
+  '75000-after-tax-pei', // 23 impr, pos 5.2
+  '48000-after-tax-quebec', // 22 impr, pos 8.3
+  '95000-after-tax-manitoba', // 22 impr, pos 6.9
+  '175000-after-tax-nova-scotia', // 21 impr, pos 8.9
+  '78000-after-tax-manitoba', // 21 impr, pos 7.4
+  '130000-after-tax-manitoba', // 20 impr, pos 8.7
+  '90000-after-tax-pei', // 20 impr, pos 4.3
+  '68000-after-tax-saskatchewan', // 19 impr, pos 8.5
+  '40000-after-tax-manitoba', // 19 impr, pos 5.5
+  '60000-after-tax-newfoundland', // 19 impr, pos 4.2
+  '80000-after-tax-nunavut', // 19 impr, pos 6.4
+  '85000-after-tax-manitoba', // 18 impr, pos 6.5
+  '130000-after-tax-new-brunswick', // 18 impr, pos 9
+  '200000-after-tax-nova-scotia', // 18 impr, pos 9.9
+  '48000-after-tax-newfoundland', // 18 impr, pos 8.2
+  '62000-after-tax-saskatchewan', // 18 impr, pos 7.7
+  '95000-after-tax-new-brunswick', // 18 impr, pos 6
+  '58000-after-tax-manitoba', // 16 impr, pos 5.9
+  '48000-after-tax-ontario', // 16 impr, pos 12.1
+  '100000-after-tax-nova-scotia', // 16 impr, pos 8.7
+  '55000-after-tax-new-brunswick', // 16 impr, pos 10.6
+  '65000-after-tax-newfoundland', // 16 impr, pos 7.4
+  '110000-after-tax-saskatchewan', // 15 impr, pos 8.9
+  '150000-after-tax-alberta', // 15 impr, pos 8.7
+  '52000-after-tax-yukon', // 15 impr, pos 5.5
+  '58000-after-tax-new-brunswick', // 15 impr, pos 8.9
+  '62000-after-tax-manitoba', // 15 impr, pos 8.9
+  '72000-after-tax-pei', // 15 impr, pos 3.1
 ]);
 
 /** A permutation page is one whose slug starts with a digit. */
