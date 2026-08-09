@@ -36,6 +36,7 @@ export default function Globe({
   const [spinning, setSpinning] = useState(true);
   const drag = useRef<{ x: number; y: number; lon: number; lat: number } | null>(null);
   const [hoverCity, setHoverCity] = useState<string | null>(null);
+  const [zoom, setZoom] = useState(1);
 
   useEffect(() => {
     if (!spinning) return;
@@ -43,9 +44,15 @@ export default function Globe({
     return () => clearInterval(id);
   }, [spinning]);
 
-  const R = 148;
   const CX = 170;
   const CY = 170;
+  // Zooming grows the sphere and lets it overflow the frame — the same feel as
+  // zooming a map. The clip path grows with it, so land is still cut at the
+  // horizon rather than at the old radius.
+  const BASE_R = 148;
+  const MIN_ZOOM = 1;
+  const MAX_ZOOM = 8;
+  const R = BASE_R * zoom;
 
   // Orthographic projection: screen point plus whether it is on the near side.
   const project = useMemo(() => {
@@ -86,6 +93,10 @@ export default function Globe({
   const ringArcs = (ring: number[][]): string[] =>
     visibleArcs(ring.map(([lon, lat]) => [lat, lon] as [number, number]));
 
+  // Sample the graticule more finely when zoomed, or the curves turn into
+  // visible straight facets.
+  const step = zoom > 3 ? 1 : zoom > 1.5 ? 2 : 3;
+
   const maxCity = Math.max(1, ...cities.map((c) => c.n));
   // No labels are drawn by default. Two earlier rules both failed for the same
   // reason: Canada's traffic clusters in southern Ontario, so any always-on
@@ -104,11 +115,21 @@ export default function Globe({
     // Drag moves the globe's SURFACE with the pointer: dragging right spins the
     // Earth eastward under your finger, which means decreasing the centre
     // longitude. Same logic vertically.
-    setLon0(drag.current.lon - dx * 0.4);
-    setLat0(Math.max(-80, Math.min(80, drag.current.lat + dy * 0.4)));
+    // Same pixel drag should move the same amount of SURFACE, so sensitivity
+    // falls as the sphere grows — otherwise one flick spins the globe wildly
+    // when zoomed in.
+    const k = 0.4 / zoom;
+    setLon0(drag.current.lon - dx * k);
+    setLat0(Math.max(-80, Math.min(80, drag.current.lat + dy * k)));
   };
   const onUp = () => {
     drag.current = null;
+  };
+
+  const clampZoom = (z: number) => Math.min(MAX_ZOOM, Math.max(MIN_ZOOM, z));
+  const onWheel = (e: React.WheelEvent<SVGSVGElement>) => {
+    e.preventDefault();
+    setZoom((z) => clampZoom(z * (e.deltaY < 0 ? 1.15 : 1 / 1.15)));
   };
 
   return (
@@ -121,6 +142,8 @@ export default function Globe({
           onPointerMove={onMove}
           onPointerUp={onUp}
           onPointerLeave={onUp}
+          onWheel={onWheel}
+          onDoubleClick={() => setZoom(1)}
         >
           <defs>
             <radialGradient id="ocean" cx="34%" cy="28%" r="78%">
@@ -147,14 +170,14 @@ export default function Globe({
             <circle key={i} cx={s.x} cy={s.y} r={s.r} fill="#e2e8f0" opacity={s.o} />
           ))}
 
-          <circle cx={CX} cy={CY} r={R + 10} fill="url(#atmo)" />
+          <circle cx={CX} cy={CY} r={R + 10 * zoom} fill="url(#atmo)" />
           <circle cx={CX} cy={CY} r={R} fill="url(#ocean)" />
 
           <g clipPath="url(#sphere)">
             {/* graticule every 15° */}
             {Array.from({ length: 11 }, (_, i) => (i - 5) * 15).flatMap((lat) => {
               const coords: Array<[number, number]> = [];
-              for (let lon = -180; lon <= 180; lon += 3) coords.push([lat, lon]);
+              for (let lon = -180; lon <= 180; lon += step) coords.push([lat, lon]);
               return visibleArcs(coords).map((pts, j) => (
                 <polyline
                   key={`p${lat}-${j}`}
@@ -167,7 +190,7 @@ export default function Globe({
             })}
             {Array.from({ length: 24 }, (_, i) => i * 15 - 180).flatMap((lon) => {
               const coords: Array<[number, number]> = [];
-              for (let lat = -90; lat <= 90; lat += 3) coords.push([lat, lon]);
+              for (let lat = -90; lat <= 90; lat += step) coords.push([lat, lon]);
               return visibleArcs(coords).map((pts, j) => (
                 <polyline key={`m${lon}-${j}`} points={pts} fill="none" stroke="#1e4468" strokeWidth="0.4" />
               ));
@@ -227,9 +250,30 @@ export default function Globe({
             );
           })}
         </svg>
+        <div className="mt-1 flex items-center justify-center gap-2">
+          <button
+            onClick={() => setZoom((z) => clampZoom(z / 1.4))}
+            disabled={zoom <= MIN_ZOOM}
+            aria-label="Zoom out"
+            className="h-6 w-6 rounded-md border border-slate-200 text-sm font-bold text-slate-500 disabled:opacity-30 hover:bg-slate-100"
+          >
+            −
+          </button>
+          <span className="w-10 text-center text-[10px] tabular-nums text-slate-400">
+            {zoom.toFixed(1)}×
+          </span>
+          <button
+            onClick={() => setZoom((z) => clampZoom(z * 1.4))}
+            disabled={zoom >= MAX_ZOOM}
+            aria-label="Zoom in"
+            className="h-6 w-6 rounded-md border border-slate-200 text-sm font-bold text-slate-500 disabled:opacity-30 hover:bg-slate-100"
+          >
+            +
+          </button>
+        </div>
         <p className="mt-1 text-center text-[10px] text-slate-400">
           {spinning ? (
-            'Drag to spin the globe'
+            'Drag to spin · scroll to zoom · double-click to reset'
           ) : (
             <button onClick={() => setSpinning(true)} className="underline hover:text-slate-600">
               Resume rotation

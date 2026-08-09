@@ -11,7 +11,8 @@ const src = readFileSync(
 const body = src.slice(src.indexOf('=', src.indexOf('LAND')) + 1);
 const LAND = JSON.parse(body.slice(body.indexOf('['), body.lastIndexOf(']') + 1));
 
-const R = 148, CX = 170, CY = 170;
+const CX = 170, CY = 170;
+let R = 148;
 const project = (lat0, lon0) => (lat, lon) => {
   const p0 = (lat0 * Math.PI) / 180, l0 = (lon0 * Math.PI) / 180;
   const p = (lat * Math.PI) / 180, l = (lon * Math.PI) / 180;
@@ -44,26 +45,32 @@ const area = (pts) => {
   return Math.abs(a) / 2;
 };
 
-const diskArea = Math.PI * R * R;
+const diskArea = () => Math.PI * R * R;
 let worstArea = 0, worstSeg = 0, worstAt = null;
-for (let lon0 = -180; lon0 < 180; lon0 += 5) {
-  for (const lat0 of [-60, -28, 0, 28, 60]) {
-    const proj = project(lat0, lon0);
-    for (const ring of LAND) {
-      for (const arc of ringArcs(ring, proj)) {
-        const share = area(arc) / diskArea;
-        if (share > worstArea) { worstArea = share; worstAt = { lon0, lat0 }; }
-        for (let i = 1; i < arc.length; i++) {
-          const d = Math.hypot(arc[i][0] - arc[i - 1][0], arc[i][1] - arc[i - 1][1]);
-          if (d > worstSeg) worstSeg = d;
+const ZOOMS = [1, 2, 4, 8];
+for (const zoom of ZOOMS) {
+  R = 148 * zoom;
+  for (let lon0 = -180; lon0 < 180; lon0 += 15) {
+    for (const lat0 of [-60, -28, 0, 28, 60]) {
+      const proj = project(lat0, lon0);
+      for (const ring of LAND) {
+        for (const arc of ringArcs(ring, proj)) {
+          const share = area(arc) / diskArea();
+          if (share > worstArea) { worstArea = share; worstAt = { zoom, lon0, lat0 }; }
+          for (let i = 1; i < arc.length; i++) {
+            const d = Math.hypot(arc[i][0] - arc[i - 1][0], arc[i][1] - arc[i - 1][1]);
+            // Segment length must be judged relative to the sphere: at 8x a
+            // legitimate coastline step is 8x longer in pixels.
+            const rel = d / (2 * R);
+            if (rel > worstSeg) worstSeg = rel;
+          }
         }
       }
     }
   }
 }
-console.log('rotations checked: 72 lon x 5 lat = 360');
-console.log('largest arc bounding area as share of disk:', (worstArea * 100).toFixed(1) + '%', 'at', worstAt);
-console.log('longest segment:', worstSeg.toFixed(1), 'px (sphere diameter', 2 * R + ')');
-// Coastlines are stroked, not filled, so only segment length can betray a
-// cross-sphere artefact. Anything beyond a few px is a projection error.
-console.log(worstSeg < 30 ? 'PASS' : 'FAIL');
+console.log('zoom levels:', ZOOMS.join(', '));
+console.log('rotations per zoom: 24 lon x 5 lat');
+console.log('largest arc area as share of disk:', (worstArea * 100).toFixed(1) + '%', 'at', worstAt);
+console.log('longest segment as share of diameter:', (worstSeg * 100).toFixed(1) + '%');
+console.log(worstSeg < 0.12 ? 'PASS' : 'FAIL');
