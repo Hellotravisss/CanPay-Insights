@@ -87,14 +87,10 @@ export default function Globe({
     visibleArcs(ring.map(([lon, lat]) => [lat, lon] as [number, number]));
 
   const maxCity = Math.max(1, ...cities.map((c) => c.n));
-  // Which cities get a name on the globe. The old rule — at least half the
-  // busiest city's volume — meant only ever the single top city qualified once
-  // one place pulled ahead, which reads as "the map only knows Toronto".
-  // A fixed top three always labels something meaningful, and hovering any dot
-  // names it, so nothing is hidden, just unlabelled by default.
-  const labelled = new Set(
-    [...cities].sort((a, b) => b.n - a.n).slice(0, 3).map((c) => c.city)
-  );
+  // No labels are drawn by default. Two earlier rules both failed for the same
+  // reason: Canada's traffic clusters in southern Ontario, so any always-on
+  // label set puts Toronto, Nepean and Brampton on top of each other. Hover is
+  // the only presentation that stays readable no matter how the dots bunch up.
 
   const onDown = (e: React.PointerEvent<SVGSVGElement>) => {
     drag.current = { x: e.clientX, y: e.clientY, lon: lon0, lat: lat0 };
@@ -217,7 +213,7 @@ export default function Globe({
                   onMouseEnter={() => setHoverCity(c.city)}
                   onMouseLeave={() => setHoverCity((v) => (v === c.city ? null : v))}
                 />
-                {(labelled.has(c.city) || hoverCity === c.city) && (
+                {hoverCity === c.city && (
                   <text
                     x={p[0] + r + 3}
                     y={p[1] + 3}
