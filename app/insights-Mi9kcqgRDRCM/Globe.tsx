@@ -74,17 +74,29 @@ export default function Globe({
     return q.visible ? [q.x, q.y] : null;
   };
 
-  // A ring becomes ONE polygon of clamped points. Rings with nothing on the
-  // near side are skipped entirely (otherwise their limb-clamped outline would
-  // smear a meaningless arc across the edge).
-  const ringPoints = (ring: number[][]): string | null => {
-    let anyVisible = false;
-    const pts = ring.map(([lon, lat]) => {
+  // Split a landmass into the arcs that are actually on the near side, and draw
+  // each as its own closed polygon.
+  //
+  // Two earlier attempts were wrong in opposite directions: dropping far-side
+  // points and keeping ONE polygon joined the arcs with a chord straight across
+  // the globe (visible as stray lines), while clamping far-side points onto the
+  // limb made a ring with one visible point wrap the entire rim and flood the
+  // sphere with fill. Per-arc polygons avoid both: a continent crossing the edge
+  // is closed along a chord near the rim, which the sphere clip then hides.
+  const ringArcs = (ring: number[][]): string[] => {
+    const arcs: string[][] = [[]];
+    for (const [lon, lat] of ring) {
       const q = project(lat, lon);
-      if (q.visible) anyVisible = true;
-      return `${q.x.toFixed(1)},${q.y.toFixed(1)}`;
-    });
-    return anyVisible ? pts.join(' ') : null;
+      if (q.visible) arcs[arcs.length - 1].push(`${q.x.toFixed(1)},${q.y.toFixed(1)}`);
+      else if (arcs[arcs.length - 1].length) arcs.push([]);
+    }
+    // A ring can start mid-arc and wrap; merge the tail into the head so a
+    // continent straddling the array boundary is not split in two.
+    if (arcs.length > 1 && arcs[0].length && arcs[arcs.length - 1].length) {
+      const first = arcs.shift() as string[];
+      arcs[arcs.length - 1] = arcs[arcs.length - 1].concat(first);
+    }
+    return arcs.filter((a) => a.length > 2).map((a) => a.join(' '));
   };
 
   // Graticule lines wrap around the far side, so the visible part can arrive in
@@ -186,19 +198,18 @@ export default function Globe({
               ));
             })}
 
-            {LAND.map((ring, i) => {
-              const pts = ringPoints(ring);
-              return pts ? (
+            {LAND.flatMap((ring, i) =>
+              ringArcs(ring).map((pts, j) => (
                 <polygon
-                  key={`l${i}`}
+                  key={`l${i}-${j}`}
                   points={pts}
                   fill="#1f3d2e"
                   stroke="#5fa87e"
                   strokeWidth="0.35"
                   strokeLinejoin="round"
                 />
-              ) : null;
-            })}
+              ))
+            )}
 
 
             {/* lighting last so land is lit consistently */}
