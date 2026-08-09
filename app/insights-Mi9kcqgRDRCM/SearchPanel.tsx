@@ -43,27 +43,27 @@ function QueryTable({ rows, caption }: { rows: Q[]; caption: string }) {
   if (!rows?.length) return <p className="text-sm text-slate-400">No data yet.</p>;
   const max = Math.max(...rows.map((r) => r.impressions), 1);
   return (
-    <div className="overflow-x-auto">
-      <table className="w-full text-left text-sm">
+    <div>
+      <table className="w-full table-auto text-left text-sm">
         <caption className="sr-only">{caption}</caption>
         <thead>
           <tr className="border-b border-slate-200 text-xs uppercase tracking-wide text-slate-400">
             <th className="py-1.5 pr-3 font-semibold">Query</th>
             <th className="py-1.5 pr-3 text-right font-semibold">Clicks</th>
-            <th className="py-1.5 pr-3 font-semibold">Impressions</th>
+            <th className="py-1.5 pr-3 font-semibold w-[38%]">Impressions</th>
             <th className="py-1.5 text-right font-semibold">Position</th>
           </tr>
         </thead>
         <tbody>
           {rows.map((r) => (
             <tr key={r.k} className="border-b border-slate-100">
-              <td className="max-w-[15rem] truncate py-2 pr-3 text-slate-700">{r.k}</td>
+              <td className="py-2 pr-4 text-slate-700">{r.k}</td>
               <td className="py-2 pr-3 text-right tabular-nums font-semibold text-slate-900">
                 {r.clicks}
               </td>
               <td className="py-2 pr-3">
                 <div className="flex items-center gap-2">
-                  <div className="h-1.5 w-16 shrink-0 rounded-full bg-slate-100">
+                  <div className="h-1.5 w-full min-w-[3rem] max-w-[8rem] rounded-full bg-slate-100">
                     <div
                       className="h-1.5 rounded-full bg-sky-500"
                       style={{ width: `${(r.impressions / max) * 100}%` }}
@@ -153,7 +153,10 @@ export default function SearchPanel() {
         </div>
       )}
 
-      <div className="grid gap-6 md:grid-cols-2">
+      {/* Full width, stacked. Side by side these tables got ~490px each, which
+          forced a horizontal scrollbar on a five-column table — the query text
+          is the point, so it gets the room instead. */}
+      <div className="space-y-8">
         <div>
           <h3 className="mb-2 text-sm font-bold text-slate-700">Top queries, 28 days</h3>
           <QueryTable rows={g.top_queries} caption="Top queries" />

@@ -137,7 +137,7 @@ export default function StatsDashboard() {
 
   return (
     <div className="min-h-screen bg-slate-50 font-sans">
-      <div className="mx-auto max-w-5xl px-4 py-12">
+      <div className="mx-auto max-w-7xl px-4 py-12">
         <header className="mb-10">
           <p className="text-xs font-bold uppercase tracking-[0.2em] text-red-600">Private data room</p>
           <h1 className="mt-2 text-3xl font-bold text-slate-900">What Canadians are calculating</h1>
