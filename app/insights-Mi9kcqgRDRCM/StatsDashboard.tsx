@@ -4,6 +4,7 @@ import { supabase } from '../../lib/supabase';
 import Globe from './Globe';
 import Donut from './Donut';
 import { countryName } from './countries';
+import TrendChart from './TrendChart';
 
 // Private data room. Deliberately styled the way a published data story would
 // look — this doubles as the visual rehearsal for the eventual public /data
@@ -106,9 +107,13 @@ function Card({ title, hint, children }: { title: string; hint?: string; childre
 
 export default function StatsDashboard() {
   const [stats, setStats] = useState<Stats | null>(null);
+  const [series, setSeries] = useState<any | null>(null);
   const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
+    supabase.rpc('calc_series').then(({ data }) => {
+      if (data) setSeries(data);
+    });
     supabase.rpc('calc_stats').then(({ data, error }) => {
       if (error) setError(error.message);
       else setStats(data as Stats);
@@ -360,12 +365,12 @@ export default function StatsDashboard() {
           </Card>
         </div>
 
-        {/* Daily volume */}
-        <div className="mt-6">
-          <Card title="Daily volume (last 30 days)">
-            <Bars rows={stats.by_daily} total={t} />
-          </Card>
-        </div>
+        {/* Activity over time */}
+        {series && (
+          <div className="mt-6">
+            <TrendChart series={series} />
+          </div>
+        )}
 
         <p className="mt-10 text-center text-xs text-slate-400">
           Live from the anonymous events table · {stats.excluded_rows} owner/test event
