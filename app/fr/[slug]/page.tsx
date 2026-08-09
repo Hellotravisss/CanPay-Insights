@@ -34,6 +34,8 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const url = `${BASE_URL}/fr/${page.slug}`;
   // Salary x province permutation pages (slug starts with a dollar amount) are
   // near-identical templates — noindex them, keep the Québec hub indexed.
+  // French pages have no measured demand yet, so the original blanket block
+  // stands here; revisit once the French archive shows impressions.
   const isThinPermutation = /^\d/.test(page.slug);
   const defaultAlternate = page.alternateLanguages?.find((link) => link.hrefLang === 'en-CA')?.href;
   const languageAlternates = page.alternateLanguages?.reduce<Record<string, string>>(

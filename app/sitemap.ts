@@ -1,4 +1,5 @@
 import type { MetadataRoute } from 'next';
+import { isIndexable } from '../lib/indexableSalaryPages';
 import allArticles from '../src/content/articles-data';
 import { frenchLandingPages, landingPages } from './landing-page-data';
 import { PROVINCIAL_WAGES } from '../lib/provincialWages';
@@ -102,10 +103,10 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: 0.8,
   }));
 
-  // Only the hub pages (named calculators) belong in the sitemap. The ~378
-  // salary x province permutation pages (slug starts with a dollar amount) are
-  // noindexed thin templates, so they are excluded here too.
-  const isHub = (slug: string) => !/^\d/.test(slug);
+  // Hubs, plus the permutation pages released from noindex. A page that is
+  // indexable but missing from the sitemap sends a mixed signal, so the two
+  // decisions come from the same function.
+  const isHub = (slug: string) => isIndexable(slug);
 
   const calculatorPages: MetadataRoute.Sitemap = landingPages
     .filter((page) => isHub(page.slug))

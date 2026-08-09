@@ -1,4 +1,6 @@
 import type { Metadata } from 'next';
+import SalaryContext from '../../components/SalaryContext';
+import { isIndexable } from '../../lib/indexableSalaryPages';
 import { notFound } from 'next/navigation';
 import ShareLinks from '../../components/ShareLinks';
 import SalaryBreakdownPanel from '../../components/SalaryBreakdownPanel';
@@ -34,11 +36,11 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   }
 
   const url = `${BASE_URL}/${page.slug}`;
-  // Salary x province permutation pages (slug starts with a dollar amount) are
-  // near-identical templates with little unique content. Keep them live and
-  // crawlable for internal links, but noindex them so the site's indexable
-  // surface is the calculator + articles + hub pages (AdSense / GEO quality).
-  const isThinPermutation = /^\d/.test(page.slug);
+  // Salary x province permutation pages were blanket-noindexed in June 2026.
+  // That block is now lifted only for the 89 pages with MEASURED search demand
+  // (see lib/indexableSalaryPages.ts); the rest stay out of the index so the
+  // site never looks like bulk-generated permutations.
+  const isThinPermutation = !isIndexable(page.slug);
   const languageAlternates = page.alternateLanguages?.reduce<Record<string, string>>(
     (languages, link) => ({
       ...languages,
@@ -197,6 +199,14 @@ export default async function LandingPage({ params }: Props) {
             {page.salaryBreakdown && (
               <SalaryBreakdownPanel breakdown={page.salaryBreakdown} locale="en" />
             )}
+
+            {/* Statistics Canada context for this exact salary and province —
+                the thing that makes each permutation page its own page rather
+                than the same template with two numbers swapped. */}
+            {(() => {
+              const m = page.slug.match(/^(\d+)-after-tax-(.+)$/);
+              return m ? <SalaryContext amount={Number(m[1])} provinceSlug={m[2]} /> : null;
+            })()}
 
             {page.sections.map((section) => (
               <section key={section.heading} className="bg-white border border-slate-200 rounded-xl p-6 shadow-sm">
