@@ -46,10 +46,7 @@ export default function Globe({
   const CX = 170;
   const CY = 170;
 
-  // Orthographic projection. Returns the screen point plus whether the point is
-  // on the near side; far-side points are CLAMPED to the limb rather than
-  // dropped, so a coastline that wraps around the edge stays glued to the rim
-  // instead of being closed off with a straight line across the sphere.
+  // Orthographic projection: screen point plus whether it is on the near side.
   const project = useMemo(() => {
     const p0 = (lat0 * Math.PI) / 180;
     const l0 = (lon0 * Math.PI) / 180;
@@ -57,13 +54,8 @@ export default function Globe({
       const p = (lat * Math.PI) / 180;
       const l = (lon * Math.PI) / 180;
       const cosc = Math.sin(p0) * Math.sin(p) + Math.cos(p0) * Math.cos(p) * Math.cos(l - l0);
-      let x = R * Math.cos(p) * Math.sin(l - l0);
-      let y = -R * (Math.cos(p0) * Math.sin(p) - Math.sin(p0) * Math.cos(p) * Math.cos(l - l0));
-      if (cosc < 0) {
-        const d = Math.hypot(x, y) || 1;
-        x = (x / d) * R;
-        y = (y / d) * R;
-      }
+      const x = R * Math.cos(p) * Math.sin(l - l0);
+      const y = -R * (Math.cos(p0) * Math.sin(p) - Math.sin(p0) * Math.cos(p) * Math.cos(l - l0));
       return { x: CX + x, y: CY + y, visible: cosc >= 0 };
     };
   }, [lon0, lat0]);
@@ -74,46 +66,24 @@ export default function Globe({
     return q.visible ? [q.x, q.y] : null;
   };
 
-  // Split a landmass into the arcs that are actually on the near side, and draw
-  // each as its own closed polygon.
-  //
-  // Two earlier attempts were wrong in opposite directions: dropping far-side
-  // points and keeping ONE polygon joined the arcs with a chord straight across
-  // the globe (visible as stray lines), while clamping far-side points onto the
-  // limb made a ring with one visible point wrap the entire rim and flood the
-  // sphere with fill. Per-arc polygons avoid both: a continent crossing the edge
-  // is closed along a chord near the rim, which the sphere clip then hides.
-  const ringArcs = (ring: number[][]): string[] => {
+  // Coastlines are drawn as OPEN polylines: stroke only, never closed, never
+  // filled. This is the approach VisaScout's globe uses, and it removes the
+  // whole class of bug outright — a line across the sphere can only appear when
+  // a shape is closed or filled, so two earlier fixes here (chords between
+  // disjoint arcs, then a rim-hugging fill that flooded the globe) were both
+  // fighting a problem that simply does not exist without a fill.
+  const visibleArcs = (coords: Array<[number, number]>): string[] => {
     const arcs: string[][] = [[]];
-    for (const [lon, lat] of ring) {
+    for (const [lat, lon] of coords) {
       const q = project(lat, lon);
       if (q.visible) arcs[arcs.length - 1].push(`${q.x.toFixed(1)},${q.y.toFixed(1)}`);
       else if (arcs[arcs.length - 1].length) arcs.push([]);
     }
-    // A ring can start mid-arc and wrap; merge the tail into the head so a
-    // continent straddling the array boundary is not split in two.
-    if (arcs.length > 1 && arcs[0].length && arcs[arcs.length - 1].length) {
-      const first = arcs.shift() as string[];
-      arcs[arcs.length - 1] = arcs[arcs.length - 1].concat(first);
-    }
-    return arcs.filter((a) => a.length > 2).map((a) => a.join(' '));
-  };
-
-  // Graticule lines wrap around the far side, so the visible part can arrive in
-  // TWO disjoint arcs. Joining them in one polyline draws a straight chord
-  // across the globe — the same failure the coastlines had. Emit each arc
-  // separately instead.
-  const visibleArcs = (
-    coords: Array<[number, number]>
-  ): string[] => {
-    const arcs: string[][] = [[]];
-    for (const [lat, lon] of coords) {
-      const p = projectVisible(lat, lon);
-      if (p) arcs[arcs.length - 1].push(`${p[0].toFixed(1)},${p[1].toFixed(1)}`);
-      else if (arcs[arcs.length - 1].length) arcs.push([]);
-    }
     return arcs.filter((a) => a.length > 1).map((a) => a.join(' '));
   };
+
+  const ringArcs = (ring: number[][]): string[] =>
+    visibleArcs(ring.map(([lon, lat]) => [lat, lon] as [number, number]));
 
   const maxCity = Math.max(1, ...cities.map((c) => c.n));
 
@@ -200,13 +170,15 @@ export default function Globe({
 
             {LAND.flatMap((ring, i) =>
               ringArcs(ring).map((pts, j) => (
-                <polygon
+                <polyline
                   key={`l${i}-${j}`}
                   points={pts}
-                  fill="#1f3d2e"
-                  stroke="#5fa87e"
-                  strokeWidth="0.35"
+                  fill="none"
+                  stroke="#7dd3fc"
+                  strokeOpacity="0.75"
+                  strokeWidth="0.6"
                   strokeLinejoin="round"
+                  strokeLinecap="round"
                 />
               ))
             )}

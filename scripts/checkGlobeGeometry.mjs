@@ -62,6 +62,8 @@ for (let lon0 = -180; lon0 < 180; lon0 += 5) {
   }
 }
 console.log('rotations checked: 72 lon x 5 lat = 360');
-console.log('largest single landmass as share of disk:', (worstArea * 100).toFixed(1) + '%', 'at', worstAt);
+console.log('largest arc bounding area as share of disk:', (worstArea * 100).toFixed(1) + '%', 'at', worstAt);
 console.log('longest segment:', worstSeg.toFixed(1), 'px (sphere diameter', 2 * R + ')');
-console.log(worstArea < 0.55 && worstSeg < 60 ? 'PASS' : 'FAIL');
+// Coastlines are stroked, not filled, so only segment length can betray a
+// cross-sphere artefact. Anything beyond a few px is a projection error.
+console.log(worstSeg < 30 ? 'PASS' : 'FAIL');
