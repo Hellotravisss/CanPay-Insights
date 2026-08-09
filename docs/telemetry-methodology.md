@@ -41,6 +41,9 @@ stream. Repeat identical calculations within a single page load are deduplicated
 | `local_hour` / `local_dow` | Hour and weekday in the **user's own** timezone |
 | `session_id` / `seq` | A random identifier minted per page load and discarded when the visitor leaves, plus the order of the calculation within that visit |
 | `viewed_report` | Whether the deep tax report was opened |
+| `is_registered` | Whether the visitor was signed in. A boolean — the account is never identified |
+| `from_history` | This calculation started from a saved record |
+| `change_direction`, `change_pct_bucket`, `days_since_saved_bucket`, `province_changed` | The observed pay change versus the reopened record, in buckets |
 | `excluded` | Owner/testing traffic. Excluded from every published number |
 
 ### What is deliberately **not** recorded
@@ -73,6 +76,18 @@ stream. Repeat identical calculations within a single page load are deduplicated
 > decades, which is why both are recorded.
 
 **Intent**: `new-job`, `raise`, `moving`, `budgeting`, `tax-filing`, `curious`
+
+**Pay change** (versus the reopened saved calculation, computed in the browser):
+direction `up` / `down` / `same`; size `0`, `under-3`, `3-5`, `5-10`, `10-20`, `20-plus` (percent);
+elapsed `same-day` … `over-year`.
+
+> A change is only treated as a **pay change** when the province did not also
+> change. If the province changed it is a relocation, and mixing the two would
+> read a cost-of-living move as a raise.
+>
+> Direction alone does not distinguish a raise from a job change — that is what
+> the optional `intent` field is for. `raise` + up is an in-place increase;
+> `new-job` + up is a job-change premium.
 
 ### Known limitations
 

@@ -87,6 +87,62 @@ export function bucketMedianRatio(annual: number): string {
   return '3-plus';
 }
 
+
+// A reopened saved calculation, compared with what was saved. Derived in the
+// browser; only direction, size band and elapsed band are sent. The account id
+// is never included, so these rows stay unlinkable to a person while still
+// forming a genuine panel of observed pay changes.
+export interface PayChange {
+  fromHistory: true;
+  direction: 'up' | 'down' | 'same';
+  pctBucket: '0' | 'under-3' | '3-5' | '5-10' | '10-20' | '20-plus';
+  daysBucket:
+    | 'same-day' | 'under-week' | '1-4-weeks' | '1-3-months'
+    | '3-6-months' | '6-12-months' | 'over-year';
+  provinceChanged: boolean;
+}
+
+export function bucketChangePct(pct: number): PayChange['pctBucket'] {
+  const a = Math.abs(pct);
+  if (a < 0.5) return '0';
+  if (a < 3) return 'under-3';
+  if (a < 5) return '3-5';
+  if (a < 10) return '5-10';
+  if (a < 20) return '10-20';
+  return '20-plus';
+}
+
+export function bucketDaysSince(days: number): PayChange['daysBucket'] {
+  if (days < 1) return 'same-day';
+  if (days < 7) return 'under-week';
+  if (days < 28) return '1-4-weeks';
+  if (days < 90) return '1-3-months';
+  if (days < 180) return '3-6-months';
+  if (days < 365) return '6-12-months';
+  return 'over-year';
+}
+
+/** Builds the pay-change signal from a saved record and the current state. */
+export function buildPayChange(
+  savedGross: number,
+  savedProvince: string,
+  savedAt: string,
+  nowGross: number,
+  nowProvince: string
+): PayChange | null {
+  if (!savedGross || savedGross <= 0 || !nowGross || nowGross <= 0) return null;
+  const pct = ((nowGross - savedGross) / savedGross) * 100;
+  const days = (Date.now() - new Date(savedAt).getTime()) / 86_400_000;
+  if (!Number.isFinite(days) || days < 0) return null;
+  return {
+    fromHistory: true,
+    direction: Math.abs(pct) < 0.5 ? 'same' : pct > 0 ? 'up' : 'down',
+    pctBucket: bucketChangePct(pct),
+    daysBucket: bucketDaysSince(days),
+    provinceChanged: savedProvince !== nowProvince,
+  };
+}
+
 export type Intent = 'new-job' | 'raise' | 'moving' | 'budgeting' | 'tax-filing' | 'curious';
 
 export function bracketIncome(annual: number): string {
@@ -214,6 +270,8 @@ export function recordCalcEvent(e: {
   behaviour?: BehaviourSignals | null;
   viewedReport?: boolean;
   intent?: Intent | null;
+  isRegistered?: boolean;
+  payChange?: PayChange | null;
 }) {
   if (!e.annualIncome || e.annualIncome <= 0 || !e.province) return;
   if (isLikelyBot() || isOptedOut()) return;
@@ -230,7 +288,7 @@ export function recordCalcEvent(e: {
       ? `${w.shiftStartHour}-${w.shiftEndHour}-${w.unpaidBreakMin}-${w.daysPerWeek}`
       : '';
     const behaviourKey = b ? `${b.rrspPctBucket}-${b.otHoursBucket}-${b.tipsPctBucket ?? ''}-${b.shiftPremium}` : '';
-    const key = `${source}|${e.mode}|${e.province}|${bracket}|${lang}|${e.industry ?? ''}|${workKey}|${behaviourKey}|${e.intent ?? ''}`;
+    const key = `${source}|${e.mode}|${e.province}|${bracket}|${lang}|${e.industry ?? ''}|${workKey}|${behaviourKey}|${e.intent ?? ''}|${e.payChange ? `${e.payChange.direction}-${e.payChange.pctBucket}` : ''}`;
     if (sentThisPageLoad.has(key)) return;
     sentThisPageLoad.add(key);
 
@@ -271,6 +329,12 @@ export function recordCalcEvent(e: {
         median_ratio_bucket: bucketMedianRatio(e.annualIncome),
         median_wage_ref: NATIONAL_MEDIAN_ANNUAL,
         intent: e.intent ?? null,
+        is_registered: e.isRegistered ?? null,
+        from_history: e.payChange ? true : null,
+        change_direction: e.payChange?.direction ?? null,
+        change_pct_bucket: e.payChange?.pctBucket ?? null,
+        days_since_saved_bucket: e.payChange?.daysBucket ?? null,
+        province_changed: e.payChange?.provinceChanged ?? null,
         session_id: getSessionId(),
         seq: seqCounter,
         // User's LOCAL clock (not UTC): powers "what hour / which weekday do

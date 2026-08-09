@@ -13,8 +13,10 @@ import {
   bucketPremiumRate,
   bucketOtHours,
   bucketTipsPct,
+  buildPayChange,
   type WorkPattern,
   type BehaviourSignals,
+  type PayChange,
 } from './lib/telemetry';
 import IndustryComparison from './components/IndustryComparison';
 import IntentPrompt from './components/IntentPrompt';
@@ -295,6 +297,13 @@ const App: React.FC = () => {
     setCurrentPage('calculator');
   }, []);
   
+  // What the user reopened from history, kept so the next recalculation can be
+  // compared against it. Only the gross, province and date are needed — no
+  // record id, no account id, nothing that identifies the person.
+  const [loadedFrom, setLoadedFrom] = useState<
+    { gross: number; province: string; savedAt: string } | null
+  >(null);
+
   // Return to home
   const handleBackToHome = useCallback(() => {
     setIsPageLoading(true);
@@ -370,10 +379,20 @@ const App: React.FC = () => {
       annualIncome: results.grossPayAnnual,
       lang,
       work: buildWorkPattern(mode, simpleInputs, timesheetInputs),
+      isRegistered: !!userId,
+      payChange: loadedFrom
+        ? buildPayChange(
+            loadedFrom.gross,
+            loadedFrom.province,
+            loadedFrom.savedAt,
+            results.grossPayAnnual,
+            currentProvince
+          )
+        : null,
       behaviour: buildBehaviour(mode, simpleInputs, annualInputs, timesheetInputs, results),
       viewedReport: reportOpened,
     });
-  }, [currentPage, mode, simpleInputs, annualInputs, timesheetInputs, currentProvince, results, lang, reportOpened]);
+  }, [currentPage, mode, simpleInputs, annualInputs, timesheetInputs, currentProvince, results, lang, reportOpened, userId, loadedFrom]);
 
   // Calculation History
   const { saveCalculation } = useCalculationHistory(userId);
@@ -416,6 +435,11 @@ const App: React.FC = () => {
 
   // Handle load calculation from history
   const handleLoadCalculation = useCallback((record: CalculationRecord) => {
+    setLoadedFrom({
+      gross: record.results?.grossPayAnnual ?? 0,
+      province: record.province,
+      savedAt: record.createdAt,
+    });
     setMode(record.mode);
     
     switch (record.mode) {
