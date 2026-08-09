@@ -4,6 +4,8 @@ import { isIndexable } from '../../lib/indexableSalaryPages';
 import { notFound } from 'next/navigation';
 import ShareLinks from '../../components/ShareLinks';
 import SalaryBreakdownPanel from '../../components/SalaryBreakdownPanel';
+import JobsAtThisSalary from '../../components/JobsAtThisSalary';
+import PartnerSlot from '../../components/PartnerSlot';
 import { getLandingPage, landingPages } from '../landing-page-data';
 
 const BASE_URL = 'https://canpayinsights.ca';
@@ -205,7 +207,22 @@ export default async function LandingPage({ params }: Props) {
                 than the same template with two numbers swapped. */}
             {(() => {
               const m = page.slug.match(/^(\d+)-after-tax-(.+)$/);
-              return m ? <SalaryContext amount={Number(m[1])} provinceSlug={m[2]} /> : null;
+              if (!m) return null;
+              const amount = Number(m[1]);
+              const provinceSlug = m[2];
+              const provinceName = provinceSlug
+                .split('-')
+                .map((w) => w.charAt(0).toUpperCase() + w.slice(1))
+                .join(' ');
+              return (
+                <>
+                  <SalaryContext amount={amount} provinceSlug={provinceSlug} />
+                  <JobsAtThisSalary amount={amount} provinceName={provinceName} />
+                  {/* Tax-filing slot appears by itself in February and hides
+                      again after the April deadline. */}
+                  <PartnerSlot id="wealthsimple-tax" />
+                </>
+              );
             })()}
 
             {page.sections.map((section) => (
