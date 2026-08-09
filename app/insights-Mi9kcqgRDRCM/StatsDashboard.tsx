@@ -196,7 +196,8 @@ export default function StatsDashboard() {
           <h2 className="text-base font-bold text-slate-800">Live map</h2>
           <p className="mb-4 mt-0.5 text-xs leading-5 text-slate-400">
             City centroids only — the centre point of the city a visit came from, never a precise
-            location and never an IP address. Dot size is volume. Based on {stats.geo_known} of{' '}
+            location and never an IP address. Dot size is volume; the three busiest are named, hover any
+            dot for the rest. Based on {stats.geo_known} of{' '}
             {t} events; the earliest {t - stats.geo_known} predate location collection.
           </p>
           <Globe cities={stats.cities_geo ?? []} countries={stats.by_country} />
