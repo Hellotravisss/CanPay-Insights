@@ -17,6 +17,7 @@ import {
   type BehaviourSignals,
 } from './lib/telemetry';
 import IndustryComparison from './components/IndustryComparison';
+import IntentPrompt from './components/IntentPrompt';
 import ResultsSection from './components/ResultsSection';
 import GeminiAdvisor from './components/GeminiAdvisor';
 import UserMenu from './components/UserMenu';
@@ -638,6 +639,12 @@ const App: React.FC = () => {
                 
                 <ResultsSection results={results} provinceName={currentProvince} />
                 <IndustryComparison
+                  mode={mode}
+                  province={currentProvince}
+                  annualIncome={results.grossPayAnnual}
+                  lang={lang}
+                />
+                <IntentPrompt
                   mode={mode}
                   province={currentProvince}
                   annualIncome={results.grossPayAnnual}

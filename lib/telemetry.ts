@@ -64,6 +64,31 @@ export interface WorkPattern {
   avgDailyHours: number; // paid hours per active day
 }
 
+
+// Schema version for every row written by this build. Bump it — and document
+// the change in docs/telemetry-methodology.md — whenever the MEANING of a
+// field changes. Old rows keep their old version; they are never reinterpreted.
+export const SCHEMA_VERSION = 1;
+
+// National median full-time wage, used to express income as a ratio that stays
+// comparable across decades. Nominal brackets drift with inflation; this does
+// not. Sourced from Statistics Canada and refreshed with the wage data.
+export const NATIONAL_MEDIAN_ANNUAL = 71_760; // $34.50/h x 2080, StatCan 2025
+
+export function bucketMedianRatio(annual: number): string {
+  const r = annual / NATIONAL_MEDIAN_ANNUAL;
+  if (r < 0.5) return 'under-0.5';
+  if (r < 0.75) return '0.5-0.75';
+  if (r < 1) return '0.75-1';
+  if (r < 1.25) return '1-1.25';
+  if (r < 1.5) return '1.25-1.5';
+  if (r < 2) return '1.5-2';
+  if (r < 3) return '2-3';
+  return '3-plus';
+}
+
+export type Intent = 'new-job' | 'raise' | 'moving' | 'budgeting' | 'tax-filing' | 'curious';
+
 export function bracketIncome(annual: number): string {
   if (annual < 30_000) return 'under-30k';
   if (annual < 50_000) return '30-50k';
@@ -188,6 +213,7 @@ export function recordCalcEvent(e: {
   work?: WorkPattern | null;
   behaviour?: BehaviourSignals | null;
   viewedReport?: boolean;
+  intent?: Intent | null;
 }) {
   if (!e.annualIncome || e.annualIncome <= 0 || !e.province) return;
   if (isLikelyBot() || isOptedOut()) return;
@@ -204,7 +230,7 @@ export function recordCalcEvent(e: {
       ? `${w.shiftStartHour}-${w.shiftEndHour}-${w.unpaidBreakMin}-${w.daysPerWeek}`
       : '';
     const behaviourKey = b ? `${b.rrspPctBucket}-${b.otHoursBucket}-${b.tipsPctBucket ?? ''}-${b.shiftPremium}` : '';
-    const key = `${source}|${e.mode}|${e.province}|${bracket}|${lang}|${e.industry ?? ''}|${workKey}|${behaviourKey}`;
+    const key = `${source}|${e.mode}|${e.province}|${bracket}|${lang}|${e.industry ?? ''}|${workKey}|${behaviourKey}|${e.intent ?? ''}`;
     if (sentThisPageLoad.has(key)) return;
     sentThisPageLoad.add(key);
 
@@ -241,6 +267,10 @@ export function recordCalcEvent(e: {
         tips_pct_bucket: b?.tipsPctBucket ?? null,
         pay_frequency: b?.payFrequency ?? null,
         viewed_report: e.viewedReport ?? false,
+        schema_version: SCHEMA_VERSION,
+        median_ratio_bucket: bucketMedianRatio(e.annualIncome),
+        median_wage_ref: NATIONAL_MEDIAN_ANNUAL,
+        intent: e.intent ?? null,
         session_id: getSessionId(),
         seq: seqCounter,
         // User's LOCAL clock (not UTC): powers "what hour / which weekday do

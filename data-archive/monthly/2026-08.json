@@ -1,0 +1,90 @@
+{
+  "by_bracket": {
+    "120-160k": 1,
+    "160k-plus": 12,
+    "30-50k": 13,
+    "50-70k": 13,
+    "70-90k": 11,
+    "90-120k": 7,
+    "under-30k": 7
+  },
+  "by_city": {
+    "Brampton": 4,
+    "Burlington": 4,
+    "Lantzville": 3,
+    "Miami": 3,
+    "Nepean": 6,
+    "Pitt Meadows": 4,
+    "Toronto": 23
+  },
+  "by_country": {
+    "CA": 50,
+    "RS": 1,
+    "US": 3
+  },
+  "by_device": {
+    "desktop": 24,
+    "mobile": 30
+  },
+  "by_dow": {
+    "5": 15,
+    "6": 39
+  },
+  "by_hour": {
+    "1": 8,
+    "12": 4,
+    "13": 7,
+    "16": 1,
+    "17": 2,
+    "18": 8,
+    "19": 4,
+    "20": 13,
+    "21": 1,
+    "6": 2,
+    "8": 3,
+    "9": 1
+  },
+  "by_industry": {
+    "construction": 2,
+    "manufacturing": 1,
+    "tech": 2
+  },
+  "by_intent": {},
+  "by_lang": {
+    "en": 56,
+    "zh": 8
+  },
+  "by_median_ratio": {},
+  "by_mode": {
+    "annual": 26,
+    "simple": 36,
+    "timesheet": 2
+  },
+  "by_province": {
+    "Alberta": 8,
+    "British Columbia": 6,
+    "Nova Scotia": 2,
+    "Ontario": 47,
+    "Saskatchewan": 1
+  },
+  "by_source": {
+    "web": 64
+  },
+  "comparison_sessions": 1,
+  "events": 64,
+  "methodology": "docs/telemetry-methodology.md",
+  "month": "2026-08",
+  "rrsp": {
+    "has_rrsp_share": 7.1,
+    "n": 28
+  },
+  "schema_version": 1,
+  "visits": 16,
+  "work": {
+    "median_break": 30,
+    "median_daily_hours": 8,
+    "n": 34,
+    "unpaid_break_share": 85.3,
+    "weekend_share": 5.9
+  }
+}
