@@ -27,17 +27,6 @@ const WEALTHSIMPLE_REFERRAL_URL = 'https://www.wealthsimple.com/invite/KGAAWL';
 const formatCurrency = (val: number) =>
   new Intl.NumberFormat('en-CA', { style: 'currency', currency: 'CAD', maximumFractionDigits: 0 }).format(val);
 
-const InukshukIcon = ({ className }: { className?: string }) => (
-  <svg viewBox="0 0 24 24" fill="currentColor" className={className}>
-    <rect x="10" y="2" width="4" height="3" rx="0.5" />
-    <path d="M4 6h16a1 1 0 0 1 1 1v2a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V7a1 1 0 0 1 1-1z" />
-    <rect x="9" y="10" width="6" height="4" rx="0.5" />
-    <path d="M5 14h14a1 1 0 0 1 1 1v2a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1v-2a1 1 0 0 1 1-1z" />
-    <rect x="7" y="18" width="3" height="4" rx="0.5" />
-    <rect x="14" y="18" width="3" height="4" rx="0.5" />
-  </svg>
-);
-
 // Detect mobile devices
 const isMobileDevice = () => {
   return /iPhone|iPad|iPod|Android|webOS|BlackBerry|Windows Phone/i.test(navigator.userAgent);

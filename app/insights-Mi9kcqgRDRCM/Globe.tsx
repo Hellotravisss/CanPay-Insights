@@ -87,6 +87,22 @@ export default function Globe({
     return anyVisible ? pts.join(' ') : null;
   };
 
+  // Graticule lines wrap around the far side, so the visible part can arrive in
+  // TWO disjoint arcs. Joining them in one polyline draws a straight chord
+  // across the globe — the same failure the coastlines had. Emit each arc
+  // separately instead.
+  const visibleArcs = (
+    coords: Array<[number, number]>
+  ): string[] => {
+    const arcs: string[][] = [[]];
+    for (const [lat, lon] of coords) {
+      const p = projectVisible(lat, lon);
+      if (p) arcs[arcs.length - 1].push(`${p[0].toFixed(1)},${p[1].toFixed(1)}`);
+      else if (arcs[arcs.length - 1].length) arcs.push([]);
+    }
+    return arcs.filter((a) => a.length > 1).map((a) => a.join(' '));
+  };
+
   const maxCity = Math.max(1, ...cities.map((c) => c.n));
 
   const onDown = (e: React.PointerEvent<SVGSVGElement>) => {
@@ -149,29 +165,25 @@ export default function Globe({
 
           <g clipPath="url(#sphere)">
             {/* graticule every 15° */}
-            {Array.from({ length: 11 }, (_, i) => (i - 5) * 15).map((lat) => {
-              const pts: string[] = [];
-              for (let lon = -180; lon <= 180; lon += 3) {
-                const p = projectVisible(lat, lon);
-                if (p) pts.push(p.join(','));
-              }
-              return (
+            {Array.from({ length: 11 }, (_, i) => (i - 5) * 15).flatMap((lat) => {
+              const coords: Array<[number, number]> = [];
+              for (let lon = -180; lon <= 180; lon += 3) coords.push([lat, lon]);
+              return visibleArcs(coords).map((pts, j) => (
                 <polyline
-                  key={`p${lat}`}
-                  points={pts.join(' ')}
+                  key={`p${lat}-${j}`}
+                  points={pts}
                   fill="none"
                   stroke="#1e4468"
                   strokeWidth={lat === 0 ? 0.9 : 0.4}
                 />
-              );
+              ));
             })}
-            {Array.from({ length: 24 }, (_, i) => i * 15 - 180).map((lon) => {
-              const pts: string[] = [];
-              for (let lat = -90; lat <= 90; lat += 3) {
-                const p = projectVisible(lat, lon);
-                if (p) pts.push(p.join(','));
-              }
-              return <polyline key={`m${lon}`} points={pts.join(' ')} fill="none" stroke="#1e4468" strokeWidth="0.4" />;
+            {Array.from({ length: 24 }, (_, i) => i * 15 - 180).flatMap((lon) => {
+              const coords: Array<[number, number]> = [];
+              for (let lat = -90; lat <= 90; lat += 3) coords.push([lat, lon]);
+              return visibleArcs(coords).map((pts, j) => (
+                <polyline key={`m${lon}-${j}`} points={pts} fill="none" stroke="#1e4468" strokeWidth="0.4" />
+              ));
             })}
 
             {LAND.map((ring, i) => {

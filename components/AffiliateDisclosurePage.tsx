@@ -2,17 +2,6 @@
 import React from 'react';
 import { useRouter } from 'next/navigation';
 
-const InukshukIcon = ({ className }: { className?: string }) => (
-  <svg viewBox="0 0 24 24" fill="currentColor" className={className}>
-    <rect x="10" y="2" width="4" height="3" rx="0.5" />
-    <path d="M4 6h16a1 1 0 0 1 1 1v2a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V7a1 1 0 0 1 1-1z" />
-    <rect x="9" y="10" width="6" height="4" rx="0.5" />
-    <path d="M5 14h14a1 1 0 0 1 1 1v2a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1v-2a1 1 0 0 1 1-1z" />
-    <rect x="7" y="18" width="3" height="4" rx="0.5" />
-    <rect x="14" y="18" width="3" height="4" rx="0.5" />
-  </svg>
-);
-
 const AffiliateDisclosurePage: React.FC = () => {
   const router = useRouter();
   const handleBack = () => router.push('/');
@@ -22,9 +11,12 @@ const AffiliateDisclosurePage: React.FC = () => {
       <header className="bg-white border-b border-red-100 sticky top-0 z-30 shadow-sm" role="banner">
         <div className="max-w-6xl mx-auto px-4 py-4 flex items-center justify-between">
           <div className="flex items-center gap-3">
-            <div className="w-10 h-10 bg-red-600 rounded-lg flex items-center justify-center text-white shadow-red-200 shadow-lg hover:scale-105 transition-transform cursor-pointer" onClick={handleBack}>
-              <InukshukIcon className="w-7 h-7" />
-            </div>
+            <img
+              src="/logo.png"
+              alt="CanPay Insights"
+              onClick={handleBack}
+              className="w-10 h-10 rounded-lg object-contain shadow-lg shadow-red-200 hover:scale-105 transition-transform cursor-pointer"
+            />
             <h1 className="text-xl font-bold text-slate-800 tracking-tight cursor-pointer" onClick={handleBack}>
               CanPay <span className="text-red-600 font-light">Insights</span>
             </h1>

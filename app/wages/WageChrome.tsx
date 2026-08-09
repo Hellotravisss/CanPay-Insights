@@ -3,25 +3,16 @@ import React from 'react';
 // Shared header/footer for the wage pages so they look like part of the site
 // rather than bare data dumps. Server component — no interactivity needed.
 
-export const InukshukIcon = ({ className }: { className?: string }) => (
-  <svg viewBox="0 0 24 24" fill="currentColor" className={className} aria-hidden="true">
-    <rect x="10" y="2" width="4" height="3" rx="0.5" />
-    <path d="M4 6h16a1 1 0 0 1 1 1v2a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V7a1 1 0 0 1 1-1z" />
-    <rect x="9" y="10" width="6" height="4" rx="0.5" />
-    <path d="M5 14h14a1 1 0 0 1 1 1v2a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1v-2a1 1 0 0 1 1-1z" />
-    <rect x="7" y="18" width="3" height="4" rx="0.5" />
-    <rect x="14" y="18" width="3" height="4" rx="0.5" />
-  </svg>
-);
-
 export function WageHeader() {
   return (
     <header className="sticky top-0 z-30 border-b border-red-100 bg-white/90 backdrop-blur">
       <div className="mx-auto flex max-w-4xl items-center justify-between px-4 py-3">
         <a href="/" className="flex items-center gap-3 no-underline">
-          <span className="flex h-9 w-9 items-center justify-center rounded-lg bg-red-600 text-white shadow-lg shadow-red-200">
-            <InukshukIcon className="h-6 w-6" />
-          </span>
+          <img
+            src="/logo.png"
+            alt=""
+            className="h-9 w-9 rounded-lg object-contain shadow-lg shadow-red-200"
+          />
           <span className="text-lg font-bold tracking-tight text-slate-800">
             CanPay <span className="font-light text-red-600">Insights</span>
           </span>
