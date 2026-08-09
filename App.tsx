@@ -20,6 +20,7 @@ import {
 } from './lib/telemetry';
 import IndustryComparison from './components/IndustryComparison';
 import IntentPrompt from './components/IntentPrompt';
+import PayCurve from './components/PayCurve';
 import ResultsSection from './components/ResultsSection';
 import GeminiAdvisor from './components/GeminiAdvisor';
 import UserMenu from './components/UserMenu';
@@ -395,7 +396,7 @@ const App: React.FC = () => {
   }, [currentPage, mode, simpleInputs, annualInputs, timesheetInputs, currentProvince, results, lang, reportOpened, userId, loadedFrom]);
 
   // Calculation History
-  const { saveCalculation } = useCalculationHistory(userId);
+  const { records, saveCalculation } = useCalculationHistory(userId);
   const [saveSuccess, setSaveSuccess] = useState(false);
 
   // Handle save calculation
@@ -668,6 +669,7 @@ const App: React.FC = () => {
                   annualIncome={results.grossPayAnnual}
                   lang={lang}
                 />
+                {isAuthenticated && records.length > 0 && <PayCurve records={records} />}
                 <IntentPrompt
                   mode={mode}
                   province={currentProvince}
