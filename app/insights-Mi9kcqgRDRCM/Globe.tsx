@@ -66,7 +66,12 @@ export default function Globe({
       const y = -R * (Math.cos(p0) * Math.sin(p) - Math.sin(p0) * Math.cos(p) * Math.cos(l - l0));
       return { x: CX + x, y: CY + y, visible: cosc >= 0 };
     };
-  }, [lon0, lat0]);
+    // R must be a dependency: it is derived from zoom, and leaving it out meant
+    // the projection kept the previous radius after a zoom. The sphere circles
+    // resized immediately (they use R directly) while every coastline stayed at
+    // the old scale until some other state change — the spin tick — happened to
+    // rebuild this memo. That is the "nothing moves until I click" symptom.
+  }, [lon0, lat0, R]);
 
   // Visible-only helper for point markers.
   const projectVisible = (lat: number, lon: number): [number, number] | null => {
