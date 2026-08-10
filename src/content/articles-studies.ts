@@ -804,4 +804,110 @@ The CWB **grows** with your working income at first, then **phases out** as net 
 Based on CRA figures for the 2026–27 ACWB cycle and 2026 tax-year indexation as reported in July 2026. Exact amounts depend on your income, province, and family situation. This is general information, not tax or financial advice — confirm your amounts in CRA My Account or with the [CRA](https://www.canada.ca/en/revenue-agency.html).
 `,
   },
+  {
+    id: 'study-9',
+    slug: 'minimum-wage-increases-october-2026',
+    title: 'Minimum Wage Rises in 4 Provinces on October 1, 2026: What It Means for Your Paycheque',
+    subtitle:
+      'Ontario, Nova Scotia, Prince Edward Island, and Manitoba all raise their minimum wage on October 1, 2026 — we ran the new rates through the CanPay Insights tax engine to see what full-time workers actually gain.',
+    excerpt:
+      'Four provinces raise minimum wage on October 1, 2026: Ontario to $17.95, Nova Scotia to $17.00, PEI to $17.30, and Manitoba to $16.40. A full-time Ontario worker gains about $545 a year after tax; a Manitoba worker gains about $578.',
+    metaTitle: 'Minimum Wage Rises in 4 Provinces Oct 1, 2026',
+    metaDescription:
+      'Ontario, Nova Scotia, PEI & Manitoba raise minimum wage Oct 1, 2026. See the new hourly rates and exactly how much extra take-home pay each province gains.',
+    keywords: [
+      'minimum wage increase october 2026',
+      'ontario minimum wage october 2026',
+      'nova scotia minimum wage october 2026',
+      'pei minimum wage october 2026',
+      'manitoba minimum wage october 2026',
+      'minimum wage october 1 2026',
+    ],
+    category: 'news',
+    tags: ['Minimum Wage', 'Ontario', 'Nova Scotia', 'PEI', 'Manitoba', '2026'],
+    publishedAt: '2026-08-10',
+    readTime: 6,
+    imageUrl: '/blog/minimum-wage-increases-october-2026.svg',
+    directAnswer:
+      'On October 1, 2026, four provinces raise their general minimum wage: Ontario from $17.60 to $17.95, Nova Scotia from $16.75 to $17.00, Prince Edward Island from $17.00 to $17.30, and Manitoba from $16.00 to $16.40. Running the new rates through the CanPay Insights tax engine, a full-time (2,080 hours/year) minimum wage worker gains about $545 more take-home pay a year in Ontario, $339 in Nova Scotia, $416 in PEI, and $578 in Manitoba, after federal tax, provincial tax, CPP, and EI.',
+    faq: [
+      {
+        question: 'Which provinces are raising minimum wage on October 1, 2026?',
+        answer:
+          'Ontario, Nova Scotia, Prince Edward Island, and Manitoba. All four increases take effect October 1, 2026, and all four are tied to provincial inflation-indexing formulas (CPI, or CPI plus 1%, depending on the province) rather than one-off political decisions.',
+      },
+      {
+        question: 'What is Ontario’s new minimum wage?',
+        answer:
+          'Ontario’s general minimum wage rises from $17.60 to $17.95 per hour on October 1, 2026, a 35-cent increase tied to Ontario’s 1.9% Consumer Price Index change, as required under the Employment Standards Act, 2000. The province says the increase affects more than 700,000 workers. The student minimum wage rises to $16.90 and the homeworker rate to $19.70.',
+      },
+      {
+        question: 'How much extra will a full-time minimum wage worker take home?',
+        answer:
+          'For 2,080 hours a year (40 hours/week), the after-tax gain is about $545/year (~$45/month) in Ontario, $339/year (~$28/month) in Nova Scotia, $416/year (~$35/month) in PEI, and $578/year (~$48/month) in Manitoba. Manitoba and Ontario see the largest dollar gains because CPP and EI take a smaller bite out of the raise at their income levels.',
+      },
+      {
+        question: 'Why is Nova Scotia raising its minimum wage twice in one year?',
+        answer:
+          'Nova Scotia raised its minimum wage on April 1, 2026 (to $16.75) and raises it again on October 1, 2026 (to $17.00), as recommended by its Minimum Wage Review Committee under a CPI-plus-1% formula. Prince Edward Island is on a similar path, aiming for $17.60 by April 2027.',
+      },
+      {
+        question: 'What is the minimum wage in the rest of Canada after October 1, 2026?',
+        answer:
+          'The other nine provinces and territories are not changing their minimum wage on October 1 — most adjust on a different date (commonly April 1 or annually in the fall). See our full province-by-province minimum wage take-home pay study for every current rate.',
+      },
+      {
+        question: 'Does a higher minimum wage change CPP and EI deductions?',
+        answer:
+          'Yes, proportionally — CPP (5.95%) and EI (1.63%) apply to the extra gross pay just like income tax does, which is why the after-tax raise is smaller than the pre-tax raise. On Ontario’s 35-cent increase, for example, the extra $728 in gross annual pay becomes about $545 in extra take-home pay.',
+      },
+    ],
+    content: `
+## Four provinces, one date: October 1, 2026
+
+Minimum wage rarely moves on a single national date, but this fall four provinces line up: **Ontario, Nova Scotia, Prince Edward Island, and Manitoba** all raise their general minimum wage on **October 1, 2026**. Each increase comes from a provincial inflation-indexing formula, not a one-off announcement, so the raises are modest — but they still change what full-time workers take home.
+
+We ran the new rates through the CanPay Insights tax engine (2026 federal and provincial brackets, CPP/CPP2, and EI) to see exactly how much of each raise survives payroll deductions.
+
+### What's changing
+
+| Province | Old rate | New rate (Oct 1) | Increase | Reason |
+| --- | --- | --- | --- | --- |
+| Ontario | $17.60 | **$17.95** | +$0.35 | CPI (1.9%), per the Employment Standards Act |
+| Manitoba | $16.00 | **$16.40** | +$0.40 | 2025 inflation rate, rounded to nearest 5¢ |
+| Prince Edward Island | $17.00 | **$17.30** | +$0.30 | CPI + 1% formula |
+| Nova Scotia | $16.75 | **$17.00** | +$0.25 | CPI + 1% formula (second increase of 2026) |
+
+Ontario's increase is the largest in absolute cents and affects the most workers — the province says **more than 700,000 workers** will see a bigger paycheque. Nova Scotia's move is its second of 2026: the province already raised its minimum wage from $16.50 to $16.75 on April 1.
+
+### What it's actually worth after tax
+
+Full-time hours (40/week, 2,080/year), 2026 federal and provincial tax rates, basic personal amounts only:
+
+| Province | New gross (full-time) | New take-home / year | New take-home / month | Extra vs. today | Extra / month |
+| --- | --- | --- | --- | --- | --- |
+| Manitoba | $34,112 | **$27,872** | $2,323 | +$578/yr | +$48 |
+| Ontario | $37,336 | **$31,060** | $2,588 | +$545/yr | +$45 |
+| Prince Edward Island | $35,984 | **$29,247** | $2,437 | +$416/yr | +$35 |
+| Nova Scotia | $35,360 | **$28,476** | $2,373 | +$339/yr | +$28 |
+
+*Extra take-home = new annual take-home minus current annual take-home for the same worker in the same province, after federal tax, provincial tax, CPP/CPP2, and EI.*
+
+### Why the gain is smaller than the raise looks
+
+A 35-cent Ontario raise sounds like $728 more a year (35¢ × 2,080 hours) — but only about **$545** of that survives payroll deductions, because the extra income is taxed and subject to CPP and EI exactly like the rest of the paycheque. Ontario keeps the largest share of its raise (about 75 cents of every extra dollar); Nova Scotia keeps the smallest share (about 65 cents), since it already has the highest deduction rate on minimum-wage income in the country.
+
+### How these rates compare nationally
+
+Even after October 1, Ontario's $17.95 and PEI's $17.30 remain below British Columbia ($18.25) and well below Nunavut ($19.75), the two highest rates in the country. Manitoba's $16.40 and Nova Scotia's $17.00 stay in the middle of the pack. None of the other nine provinces and territories change their minimum wage on October 1 — for the full current picture across all 13 jurisdictions, see our [minimum wage take-home pay study](/blog/minimum-wage-take-home-pay-canada-2026).
+
+### See your own numbers
+
+These figures assume a single worker with no other income or credits. To check your own paycheque under the new rate, use the [free take-home pay calculator](/), or go straight to your province: [Ontario paycheck calculator](/ontario-paycheck-calculator), the [Ontario take-home pay guide](/blog/ontario-take-home-pay-guide-2026), the [Manitoba take-home pay guide](/blog/manitoba-take-home-pay-guide-2026), the [Nova Scotia take-home pay guide](/blog/nova-scotia-take-home-pay-guide-2026), or the [PEI take-home pay guide](/blog/pei-take-home-pay-guide-2026).
+
+## Sources & disclaimer
+
+Rate and effective-date figures are based on official government announcements: the Government of Ontario (Employment Standards Act minimum wage indexing, April 2026), the Government of Nova Scotia (news release, December 2025 and April 2026), the Government of Manitoba (news release, April 2026), and Prince Edward Island's published minimum wage schedule, cross-checked against contemporaneous reporting. Take-home figures are calculated with the CanPay Insights tax engine using 2026 federal and provincial rates, full-time hours (2,080/year), a single worker, and basic personal amounts only — real paycheques vary with credits, benefits, and actual hours worked. This is general information, not tax advice.
+`,
+  },
 ];
