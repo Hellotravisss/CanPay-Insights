@@ -168,19 +168,21 @@ const calculateTotalTax = (
   const provincialTaxBeforeCredits = calculateProgressiveTax(annualGross, provinceRule.brackets);
   
   // Step 2: Calculate BPA Tax Credits
-  // Federal: 14% of BPA (2026 lowest federal rate)
-  const federalBPACredit = FEDERAL_BASIC_PERSONAL_AMOUNT * 0.14;
-  
+  // Federal: lowest-bracket rate × BPA. Read from FEDERAL_BRACKETS rather than
+  // a literal so a future bracket change cannot leave credits at the old rate.
+  const lowestFederalRate = FEDERAL_BRACKETS[0].rate;
+  const federalBPACredit = FEDERAL_BASIC_PERSONAL_AMOUNT * lowestFederalRate;
+
   // Provincial: varies by province (lowest rate × BPA)
   const lowestProvincialRate = provinceRule.brackets[0]?.rate || 0.05;
   const provincialBPACredit = provinceRule.basicPersonalAmount * lowestProvincialRate;
-  
+
   // CPP/EI also generate tax credits at lowest rates
-  const cppFederalCredit = cppTotal * 0.14;
+  const cppFederalCredit = cppTotal * lowestFederalRate;
   const cppProvincialCredit = cppTotal * lowestProvincialRate;
 
   const eiAnnual = calculateEI(annualGross, isQuebec);
-  const eiFederalCredit = eiAnnual * 0.14;
+  const eiFederalCredit = eiAnnual * lowestFederalRate;
   const eiProvincialCredit = eiAnnual * lowestProvincialRate;
   
   // Step 3: Apply tax credits (cannot reduce tax below zero)

@@ -12,6 +12,11 @@ import { ProvincialRule, Province } from './types';
 // credit rate in utils/taxEngine.ts is therefore 0.14 (lowest federal rate).
 // ============================================================================
 
+// The tax year every constant in this file implements. Anything that needs
+// "the engine's year" (audit scripts, disclaimers) must read it from here so
+// a year roll-over is one edit, not a hunt for hardcoded 2026s.
+export const TAX_YEAR = 2026;
+
 // ============================================
 // 2026 FEDERAL TAX BRACKETS
 // ============================================

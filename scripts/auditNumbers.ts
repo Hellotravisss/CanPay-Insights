@@ -29,7 +29,9 @@ import { allArticles } from '../src/content/articles-data';
 import { getSalaryFigures, PROVINCE_SEO_CONFIGS } from '../lib/salaryFigures';
 import * as C from '../constants';
 
-const CURRENT_YEAR = 2026;
+// Read from the engine so the audit's idea of "current" can never drift from
+// the constants it audits — when they disagree, the HISTORICAL bucket inverts.
+const CURRENT_YEAR = C.TAX_YEAR;
 
 /**
  * Rates and amounts are kept apart and never compared across. A percentage was
@@ -108,6 +110,27 @@ const TOPICS: Topic[] = [
     amounts: [...perPeriod(C.QC_EI_MAX_CONTRIBUTION)],
   },
   {
+    // Quebec runs its own pension plan; without these the audit flags every
+    // correct QPP figure as UNEXPLAINED, inviting a "fix" that breaks it.
+    label: 'QPP/QPP2',
+    mentions: /QPP|Quebec Pension/i,
+    rates: [C.QPP_RATE * 100, C.QPP_RATE * 100 * 2, C.QPP2_RATE * 100],
+    amounts: [
+      ...perPeriod(C.QPP_MAX_CONTRIBUTION),
+      ...perPeriod(C.QPP2_MAX_CONTRIBUTION),
+      ...perPeriod(C.QPP_MAX_CONTRIBUTION + C.QPP2_MAX_CONTRIBUTION),
+      C.QPP_EXEMPTION,
+      C.QPP_MAX_PENSIONABLE_EARNINGS,
+      C.QPP2_MAX_PENSIONABLE_EARNINGS,
+    ],
+  },
+  {
+    label: 'QPIP',
+    mentions: /QPIP|parental insurance/i,
+    rates: [C.QPIP_RATE * 100],
+    amounts: [...perPeriod(C.QPIP_MAX_CONTRIBUTION), C.QPIP_MAX_INSURABLE_EARNINGS],
+  },
+  {
     // The quarterly routine checks these against the CRA, so the prose quoting
     // them has to be checked too — otherwise a bracket change is corrected in
     // the engine while every article still prints last year's rate.
@@ -148,7 +171,9 @@ const STATES_A_RULE =
 
 /** Negative lookahead on "k"/"K": "$50k earners" is shorthand, not a figure of $50. */
 const MONEY = /\$\s?([0-9][0-9,]*(?:\.[0-9]{1,2})?)(?![0-9]*[kK])/g;
-const PERCENT = /\b([0-9]{1,3}(?:\.[0-9]{1,2})?)\s?%/g;
+// Three decimals matters: QPIP is printed as 0.494% — at two, the regex read
+// it as "494%" and the self-test's planted stale QPIP rate slipped through.
+const PERCENT = /\b([0-9]{1,3}(?:\.[0-9]{1,3})?)\s?%/g;
 
 /** Gains and gaps are computed between two scenarios, not read off a rate table. */
 const DESCRIBES_A_CHANGE = /\b(gains?|more take-home|increase[sd]?|difference|extra|raise[sd]?)\b/i;
@@ -306,6 +331,8 @@ if (process.argv.includes('--selftest')) {
     ['The federal basic personal amount is $16,129 for 2026.', '$16,129'],
     ['The lowest federal tax rate is 15% on the first $58,523.', '15%'],
     ['Ontario’s basic personal amount is $12,747.', '$12,747'],
+    ['The QPP rate in Quebec is 6.4% of pensionable earnings.', '6.4%'],
+    ['QPIP premiums are 0.494% of insurable earnings.', '0.494%'],
   ];
   let failed = 0;
   for (const [sentence, expected] of cases) {
@@ -359,5 +386,16 @@ const report = (title: string, list: Finding[]) => {
 report('UNEXPLAINED — no engine value or constant produces these', wrong);
 report(`HISTORICAL — figures from before ${CURRENT_YEAR}, check they are still framed as past`, stale);
 
-if (!findings.length) console.log('Clean: every figure traces back to the engine.');
+// The last line is the contract for anything scripted on top of this — an
+// unsupervised agent once had "wait until it prints Clean" as its stop
+// condition, which no run with a legitimate historical note could satisfy.
+// PASS/FAIL here always agrees with the exit code, by construction.
+if (wrong.length) {
+  console.log(`AUDIT FAIL — ${wrong.length} unexplained figure(s).`);
+} else {
+  console.log(
+    `AUDIT PASS — 0 unexplained figures` +
+      (stale.length ? ` (${stale.length} historical note(s), informational only).` : `. Every figure traces back to the engine.`),
+  );
+}
 process.exit(wrong.length ? 1 : 0);
