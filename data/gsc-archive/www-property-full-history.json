@@ -1,0 +1,4382 @@
+{
+ "property": "https://www.canpayinsights.ca/",
+ "exported_at": "2026-08-11T05:04:55Z",
+ "why": "The www property holds the earliest weeks of this site's search history (2026-04-17 onward). The non-www property, which now carries all real traffic, only starts 2026-05-22. Search Console deletes everything after 16 months, so this is the only durable copy of that period.",
+ "daily": [
+  {
+   "date": "2026-04-17",
+   "clicks": 0,
+   "impressions": 4,
+   "ctr": 0,
+   "position": 33.25
+  },
+  {
+   "date": "2026-04-18",
+   "clicks": 0,
+   "impressions": 1,
+   "ctr": 0,
+   "position": 8
+  },
+  {
+   "date": "2026-04-19",
+   "clicks": 0,
+   "impressions": 17,
+   "ctr": 0,
+   "position": 34.06
+  },
+  {
+   "date": "2026-04-20",
+   "clicks": 0,
+   "impressions": 48,
+   "ctr": 0,
+   "position": 27.71
+  },
+  {
+   "date": "2026-04-21",
+   "clicks": 0,
+   "impressions": 6,
+   "ctr": 0,
+   "position": 20
+  },
+  {
+   "date": "2026-04-22",
+   "clicks": 0,
+   "impressions": 20,
+   "ctr": 0,
+   "position": 15.45
+  },
+  {
+   "date": "2026-04-23",
+   "clicks": 0,
+   "impressions": 10,
+   "ctr": 0,
+   "position": 9.9
+  },
+  {
+   "date": "2026-04-24",
+   "clicks": 0,
+   "impressions": 32,
+   "ctr": 0,
+   "position": 9.22
+  },
+  {
+   "date": "2026-04-25",
+   "clicks": 0,
+   "impressions": 22,
+   "ctr": 0,
+   "position": 14.82
+  },
+  {
+   "date": "2026-04-26",
+   "clicks": 0,
+   "impressions": 25,
+   "ctr": 0,
+   "position": 7.08
+  },
+  {
+   "date": "2026-04-27",
+   "clicks": 0,
+   "impressions": 44,
+   "ctr": 0,
+   "position": 7.82
+  },
+  {
+   "date": "2026-04-28",
+   "clicks": 0,
+   "impressions": 39,
+   "ctr": 0,
+   "position": 7.95
+  },
+  {
+   "date": "2026-04-29",
+   "clicks": 0,
+   "impressions": 56,
+   "ctr": 0,
+   "position": 7.41
+  },
+  {
+   "date": "2026-04-30",
+   "clicks": 0,
+   "impressions": 72,
+   "ctr": 0,
+   "position": 7.82
+  },
+  {
+   "date": "2026-05-01",
+   "clicks": 0,
+   "impressions": 43,
+   "ctr": 0,
+   "position": 9.28
+  },
+  {
+   "date": "2026-05-02",
+   "clicks": 1,
+   "impressions": 31,
+   "ctr": 0.03226,
+   "position": 8.61
+  },
+  {
+   "date": "2026-05-03",
+   "clicks": 0,
+   "impressions": 37,
+   "ctr": 0,
+   "position": 10.22
+  },
+  {
+   "date": "2026-05-04",
+   "clicks": 0,
+   "impressions": 30,
+   "ctr": 0,
+   "position": 9.13
+  },
+  {
+   "date": "2026-05-05",
+   "clicks": 0,
+   "impressions": 40,
+   "ctr": 0,
+   "position": 10.82
+  },
+  {
+   "date": "2026-05-06",
+   "clicks": 0,
+   "impressions": 34,
+   "ctr": 0,
+   "position": 13.85
+  },
+  {
+   "date": "2026-05-07",
+   "clicks": 0,
+   "impressions": 39,
+   "ctr": 0,
+   "position": 9.38
+  },
+  {
+   "date": "2026-05-08",
+   "clicks": 0,
+   "impressions": 38,
+   "ctr": 0,
+   "position": 7.61
+  },
+  {
+   "date": "2026-05-09",
+   "clicks": 0,
+   "impressions": 27,
+   "ctr": 0,
+   "position": 10.44
+  },
+  {
+   "date": "2026-05-10",
+   "clicks": 0,
+   "impressions": 33,
+   "ctr": 0,
+   "position": 10.03
+  },
+  {
+   "date": "2026-05-11",
+   "clicks": 0,
+   "impressions": 34,
+   "ctr": 0,
+   "position": 11.15
+  },
+  {
+   "date": "2026-05-12",
+   "clicks": 0,
+   "impressions": 23,
+   "ctr": 0,
+   "position": 10.3
+  },
+  {
+   "date": "2026-05-13",
+   "clicks": 0,
+   "impressions": 26,
+   "ctr": 0,
+   "position": 9.62
+  },
+  {
+   "date": "2026-05-14",
+   "clicks": 0,
+   "impressions": 28,
+   "ctr": 0,
+   "position": 22.61
+  },
+  {
+   "date": "2026-05-15",
+   "clicks": 0,
+   "impressions": 48,
+   "ctr": 0,
+   "position": 18.79
+  },
+  {
+   "date": "2026-05-16",
+   "clicks": 0,
+   "impressions": 34,
+   "ctr": 0,
+   "position": 8.41
+  },
+  {
+   "date": "2026-05-17",
+   "clicks": 0,
+   "impressions": 39,
+   "ctr": 0,
+   "position": 10.69
+  },
+  {
+   "date": "2026-05-18",
+   "clicks": 0,
+   "impressions": 29,
+   "ctr": 0,
+   "position": 11.41
+  },
+  {
+   "date": "2026-05-19",
+   "clicks": 0,
+   "impressions": 39,
+   "ctr": 0,
+   "position": 21.1
+  },
+  {
+   "date": "2026-05-20",
+   "clicks": 1,
+   "impressions": 83,
+   "ctr": 0.01205,
+   "position": 16.63
+  },
+  {
+   "date": "2026-05-21",
+   "clicks": 0,
+   "impressions": 79,
+   "ctr": 0,
+   "position": 14.53
+  },
+  {
+   "date": "2026-05-22",
+   "clicks": 0,
+   "impressions": 37,
+   "ctr": 0,
+   "position": 16.54
+  },
+  {
+   "date": "2026-05-23",
+   "clicks": 0,
+   "impressions": 11,
+   "ctr": 0,
+   "position": 45.45
+  },
+  {
+   "date": "2026-05-24",
+   "clicks": 0,
+   "impressions": 20,
+   "ctr": 0,
+   "position": 16.9
+  },
+  {
+   "date": "2026-05-25",
+   "clicks": 0,
+   "impressions": 32,
+   "ctr": 0,
+   "position": 11.78
+  },
+  {
+   "date": "2026-05-26",
+   "clicks": 1,
+   "impressions": 40,
+   "ctr": 0.025,
+   "position": 23.43
+  },
+  {
+   "date": "2026-05-27",
+   "clicks": 0,
+   "impressions": 66,
+   "ctr": 0,
+   "position": 27.14
+  },
+  {
+   "date": "2026-05-28",
+   "clicks": 0,
+   "impressions": 100,
+   "ctr": 0,
+   "position": 49.13
+  },
+  {
+   "date": "2026-05-29",
+   "clicks": 0,
+   "impressions": 68,
+   "ctr": 0,
+   "position": 17.44
+  },
+  {
+   "date": "2026-05-30",
+   "clicks": 0,
+   "impressions": 98,
+   "ctr": 0,
+   "position": 13.78
+  },
+  {
+   "date": "2026-05-31",
+   "clicks": 0,
+   "impressions": 69,
+   "ctr": 0,
+   "position": 16.09
+  },
+  {
+   "date": "2026-06-01",
+   "clicks": 0,
+   "impressions": 76,
+   "ctr": 0,
+   "position": 14.62
+  },
+  {
+   "date": "2026-06-02",
+   "clicks": 0,
+   "impressions": 48,
+   "ctr": 0,
+   "position": 29.67
+  },
+  {
+   "date": "2026-06-03",
+   "clicks": 0,
+   "impressions": 75,
+   "ctr": 0,
+   "position": 17.35
+  },
+  {
+   "date": "2026-06-04",
+   "clicks": 0,
+   "impressions": 69,
+   "ctr": 0,
+   "position": 11.29
+  },
+  {
+   "date": "2026-06-05",
+   "clicks": 0,
+   "impressions": 38,
+   "ctr": 0,
+   "position": 9.68
+  },
+  {
+   "date": "2026-06-06",
+   "clicks": 0,
+   "impressions": 27,
+   "ctr": 0,
+   "position": 9.81
+  },
+  {
+   "date": "2026-06-07",
+   "clicks": 0,
+   "impressions": 28,
+   "ctr": 0,
+   "position": 9.68
+  },
+  {
+   "date": "2026-06-08",
+   "clicks": 0,
+   "impressions": 38,
+   "ctr": 0,
+   "position": 8.92
+  },
+  {
+   "date": "2026-06-09",
+   "clicks": 0,
+   "impressions": 31,
+   "ctr": 0,
+   "position": 10.16
+  },
+  {
+   "date": "2026-06-10",
+   "clicks": 0,
+   "impressions": 61,
+   "ctr": 0,
+   "position": 9.18
+  },
+  {
+   "date": "2026-06-11",
+   "clicks": 0,
+   "impressions": 67,
+   "ctr": 0,
+   "position": 9.55
+  },
+  {
+   "date": "2026-06-12",
+   "clicks": 0,
+   "impressions": 35,
+   "ctr": 0,
+   "position": 9.4
+  },
+  {
+   "date": "2026-06-13",
+   "clicks": 1,
+   "impressions": 44,
+   "ctr": 0.02273,
+   "position": 9.25
+  },
+  {
+   "date": "2026-06-14",
+   "clicks": 0,
+   "impressions": 38,
+   "ctr": 0,
+   "position": 9.71
+  },
+  {
+   "date": "2026-06-15",
+   "clicks": 0,
+   "impressions": 61,
+   "ctr": 0,
+   "position": 8.69
+  },
+  {
+   "date": "2026-06-16",
+   "clicks": 1,
+   "impressions": 43,
+   "ctr": 0.02326,
+   "position": 10.93
+  },
+  {
+   "date": "2026-06-17",
+   "clicks": 0,
+   "impressions": 58,
+   "ctr": 0,
+   "position": 10.62
+  },
+  {
+   "date": "2026-06-18",
+   "clicks": 0,
+   "impressions": 42,
+   "ctr": 0,
+   "position": 9.19
+  },
+  {
+   "date": "2026-06-19",
+   "clicks": 2,
+   "impressions": 63,
+   "ctr": 0.03175,
+   "position": 9.94
+  },
+  {
+   "date": "2026-06-20",
+   "clicks": 0,
+   "impressions": 27,
+   "ctr": 0,
+   "position": 8.41
+  },
+  {
+   "date": "2026-06-21",
+   "clicks": 0,
+   "impressions": 34,
+   "ctr": 0,
+   "position": 10.71
+  },
+  {
+   "date": "2026-06-22",
+   "clicks": 1,
+   "impressions": 50,
+   "ctr": 0.02,
+   "position": 9.06
+  },
+  {
+   "date": "2026-06-23",
+   "clicks": 0,
+   "impressions": 75,
+   "ctr": 0,
+   "position": 8.93
+  },
+  {
+   "date": "2026-06-24",
+   "clicks": 0,
+   "impressions": 43,
+   "ctr": 0,
+   "position": 9.58
+  },
+  {
+   "date": "2026-06-25",
+   "clicks": 0,
+   "impressions": 36,
+   "ctr": 0,
+   "position": 9.81
+  },
+  {
+   "date": "2026-06-26",
+   "clicks": 0,
+   "impressions": 35,
+   "ctr": 0,
+   "position": 9
+  },
+  {
+   "date": "2026-06-27",
+   "clicks": 0,
+   "impressions": 40,
+   "ctr": 0,
+   "position": 8.85
+  },
+  {
+   "date": "2026-06-28",
+   "clicks": 0,
+   "impressions": 22,
+   "ctr": 0,
+   "position": 9.41
+  },
+  {
+   "date": "2026-06-29",
+   "clicks": 0,
+   "impressions": 36,
+   "ctr": 0,
+   "position": 8.25
+  },
+  {
+   "date": "2026-06-30",
+   "clicks": 0,
+   "impressions": 29,
+   "ctr": 0,
+   "position": 8.66
+  },
+  {
+   "date": "2026-07-01",
+   "clicks": 0,
+   "impressions": 32,
+   "ctr": 0,
+   "position": 8.91
+  },
+  {
+   "date": "2026-07-02",
+   "clicks": 0,
+   "impressions": 27,
+   "ctr": 0,
+   "position": 9.15
+  },
+  {
+   "date": "2026-07-03",
+   "clicks": 0,
+   "impressions": 31,
+   "ctr": 0,
+   "position": 8.84
+  },
+  {
+   "date": "2026-07-04",
+   "clicks": 0,
+   "impressions": 31,
+   "ctr": 0,
+   "position": 7.97
+  },
+  {
+   "date": "2026-07-05",
+   "clicks": 0,
+   "impressions": 28,
+   "ctr": 0,
+   "position": 9.21
+  },
+  {
+   "date": "2026-07-06",
+   "clicks": 0,
+   "impressions": 32,
+   "ctr": 0,
+   "position": 9.09
+  },
+  {
+   "date": "2026-07-07",
+   "clicks": 0,
+   "impressions": 25,
+   "ctr": 0,
+   "position": 10.4
+  },
+  {
+   "date": "2026-07-08",
+   "clicks": 0,
+   "impressions": 22,
+   "ctr": 0,
+   "position": 10.09
+  },
+  {
+   "date": "2026-07-09",
+   "clicks": 0,
+   "impressions": 19,
+   "ctr": 0,
+   "position": 10.32
+  },
+  {
+   "date": "2026-07-10",
+   "clicks": 0,
+   "impressions": 15,
+   "ctr": 0,
+   "position": 8.53
+  },
+  {
+   "date": "2026-07-11",
+   "clicks": 0,
+   "impressions": 2,
+   "ctr": 0,
+   "position": 5.5
+  },
+  {
+   "date": "2026-07-12",
+   "clicks": 0,
+   "impressions": 2,
+   "ctr": 0,
+   "position": 5
+  },
+  {
+   "date": "2026-07-13",
+   "clicks": 0,
+   "impressions": 0,
+   "ctr": 0,
+   "position": 0
+  },
+  {
+   "date": "2026-07-14",
+   "clicks": 0,
+   "impressions": 0,
+   "ctr": 0,
+   "position": 0
+  },
+  {
+   "date": "2026-07-15",
+   "clicks": 0,
+   "impressions": 0,
+   "ctr": 0,
+   "position": 0
+  },
+  {
+   "date": "2026-07-16",
+   "clicks": 0,
+   "impressions": 2,
+   "ctr": 0,
+   "position": 8.5
+  },
+  {
+   "date": "2026-07-17",
+   "clicks": 0,
+   "impressions": 1,
+   "ctr": 0,
+   "position": 7
+  },
+  {
+   "date": "2026-07-18",
+   "clicks": 0,
+   "impressions": 5,
+   "ctr": 0,
+   "position": 8
+  },
+  {
+   "date": "2026-07-19",
+   "clicks": 0,
+   "impressions": 3,
+   "ctr": 0,
+   "position": 10.33
+  },
+  {
+   "date": "2026-07-20",
+   "clicks": 0,
+   "impressions": 5,
+   "ctr": 0,
+   "position": 9
+  },
+  {
+   "date": "2026-07-21",
+   "clicks": 0,
+   "impressions": 3,
+   "ctr": 0,
+   "position": 14.67
+  },
+  {
+   "date": "2026-07-22",
+   "clicks": 0,
+   "impressions": 5,
+   "ctr": 0,
+   "position": 8.6
+  },
+  {
+   "date": "2026-07-23",
+   "clicks": 0,
+   "impressions": 3,
+   "ctr": 0,
+   "position": 11
+  },
+  {
+   "date": "2026-07-24",
+   "clicks": 0,
+   "impressions": 8,
+   "ctr": 0,
+   "position": 9.25
+  },
+  {
+   "date": "2026-07-25",
+   "clicks": 0,
+   "impressions": 3,
+   "ctr": 0,
+   "position": 11
+  },
+  {
+   "date": "2026-07-26",
+   "clicks": 0,
+   "impressions": 6,
+   "ctr": 0,
+   "position": 7.17
+  },
+  {
+   "date": "2026-07-27",
+   "clicks": 0,
+   "impressions": 0,
+   "ctr": 0,
+   "position": 0
+  },
+  {
+   "date": "2026-07-28",
+   "clicks": 0,
+   "impressions": 1,
+   "ctr": 0,
+   "position": 4
+  },
+  {
+   "date": "2026-07-29",
+   "clicks": 0,
+   "impressions": 0,
+   "ctr": 0,
+   "position": 0
+  },
+  {
+   "date": "2026-07-30",
+   "clicks": 0,
+   "impressions": 0,
+   "ctr": 0,
+   "position": 0
+  },
+  {
+   "date": "2026-07-31",
+   "clicks": 0,
+   "impressions": 0,
+   "ctr": 0,
+   "position": 0
+  },
+  {
+   "date": "2026-08-01",
+   "clicks": 0,
+   "impressions": 1,
+   "ctr": 0,
+   "position": 8
+  },
+  {
+   "date": "2026-08-02",
+   "clicks": 0,
+   "impressions": 0,
+   "ctr": 0,
+   "position": 0
+  },
+  {
+   "date": "2026-08-03",
+   "clicks": 0,
+   "impressions": 0,
+   "ctr": 0,
+   "position": 0
+  },
+  {
+   "date": "2026-08-04",
+   "clicks": 0,
+   "impressions": 0,
+   "ctr": 0,
+   "position": 0
+  },
+  {
+   "date": "2026-08-05",
+   "clicks": 0,
+   "impressions": 0,
+   "ctr": 0,
+   "position": 0
+  },
+  {
+   "date": "2026-08-06",
+   "clicks": 0,
+   "impressions": 0,
+   "ctr": 0,
+   "position": 0
+  },
+  {
+   "date": "2026-08-07",
+   "clicks": 0,
+   "impressions": 0,
+   "ctr": 0,
+   "position": 0
+  },
+  {
+   "date": "2026-08-08",
+   "clicks": 0,
+   "impressions": 0,
+   "ctr": 0,
+   "position": 0
+  },
+  {
+   "date": "2026-08-09",
+   "clicks": 0,
+   "impressions": 0,
+   "ctr": 0,
+   "position": 0
+  }
+ ],
+ "queries": [
+  {
+   "query": "quebec payroll calculator",
+   "clicks": 1,
+   "impressions": 3,
+   "position": 39.67
+  },
+  {
+   "query": "100 000 salary after taxes",
+   "clicks": 0,
+   "impressions": 1,
+   "position": 8
+  },
+  {
+   "query": "100000 after taxes",
+   "clicks": 0,
+   "impressions": 1,
+   "position": 47
+  },
+  {
+   "query": "100000 gross to net",
+   "clicks": 0,
+   "impressions": 1,
+   "position": 12
+  },
+  {
+   "query": "100k a year hourly after taxes",
+   "clicks": 0,
+   "impressions": 1,
+   "position": 1
+  },
+  {
+   "query": "100k after tax quebec",
+   "clicks": 0,
+   "impressions": 2,
+   "position": 10
+  },
+  {
+   "query": "126 000 salary to hourly",
+   "clicks": 0,
+   "impressions": 1,
+   "position": 1
+  },
+  {
+   "query": "180 000 gross to net",
+   "clicks": 0,
+   "impressions": 1,
+   "position": 3
+  },
+  {
+   "query": "2025 payroll calculator",
+   "clicks": 0,
+   "impressions": 1,
+   "position": 28
+  },
+  {
+   "query": "50000 after tax ontario",
+   "clicks": 0,
+   "impressions": 11,
+   "position": 11.91
+  },
+  {
+   "query": "50k after tax ontario",
+   "clicks": 0,
+   "impressions": 1,
+   "position": 12
+  },
+  {
+   "query": "50k salary after taxes ontario",
+   "clicks": 0,
+   "impressions": 1,
+   "position": 17
+  },
+  {
+   "query": "55k after tax ontario",
+   "clicks": 0,
+   "impressions": 1,
+   "position": 23
+  },
+  {
+   "query": "65000 after tax",
+   "clicks": 0,
+   "impressions": 1,
+   "position": 7
+  },
+  {
+   "query": "65000 after tax alberta",
+   "clicks": 0,
+   "impressions": 4,
+   "position": 6
+  },
+  {
+   "query": "65000 after tax ontario",
+   "clicks": 0,
+   "impressions": 2,
+   "position": 1
+  },
+  {
+   "query": "65000 salary after taxes ontario",
+   "clicks": 0,
+   "impressions": 1,
+   "position": 1
+  },
+  {
+   "query": "65k after tax ontario",
+   "clicks": 0,
+   "impressions": 1,
+   "position": 1
+  },
+  {
+   "query": "65k bi weekly after taxes",
+   "clicks": 0,
+   "impressions": 1,
+   "position": 20
+  },
+  {
+   "query": "85000 after tax ontario",
+   "clicks": 0,
+   "impressions": 2,
+   "position": 1
+  },
+  {
+   "query": "85000 salary after taxes ontario",
+   "clicks": 0,
+   "impressions": 1,
+   "position": 1
+  },
+  {
+   "query": "annual pay calculator",
+   "clicks": 0,
+   "impressions": 1,
+   "position": 77
+  },
+  {
+   "query": "average income in canada",
+   "clicks": 0,
+   "impressions": 1,
+   "position": 3
+  },
+  {
+   "query": "bc income tax bracket",
+   "clicks": 0,
+   "impressions": 1,
+   "position": 93
+  },
+  {
+   "query": "bc tax brackets 2024",
+   "clicks": 0,
+   "impressions": 1,
+   "position": 80
+  },
+  {
+   "query": "biweekly payroll calculator",
+   "clicks": 0,
+   "impressions": 1,
+   "position": 74
+  },
+  {
+   "query": "british columbia income tax brackets",
+   "clicks": 0,
+   "impressions": 1,
+   "position": 78
+  },
+  {
+   "query": "british columbia personal income tax rates 2025 5.06 7.7 10.5 brackets",
+   "clicks": 0,
+   "impressions": 1,
+   "position": 4
+  },
+  {
+   "query": "british columbia tax brackets",
+   "clicks": 0,
+   "impressions": 1,
+   "position": 92
+  },
+  {
+   "query": "british columbia tax rate",
+   "clicks": 0,
+   "impressions": 1,
+   "position": 79
+  },
+  {
+   "query": "british columbia tax rates",
+   "clicks": 0,
+   "impressions": 1,
+   "position": 78
+  },
+  {
+   "query": "calculate employee payroll taxes",
+   "clicks": 0,
+   "impressions": 1,
+   "position": 56
+  },
+  {
+   "query": "calculate payroll",
+   "clicks": 0,
+   "impressions": 1,
+   "position": 47
+  },
+  {
+   "query": "calculate payroll for employee",
+   "clicks": 0,
+   "impressions": 1,
+   "position": 63
+  },
+  {
+   "query": "calculate payroll free",
+   "clicks": 0,
+   "impressions": 2,
+   "position": 29
+  },
+  {
+   "query": "calculate payroll ontario",
+   "clicks": 0,
+   "impressions": 1,
+   "position": 75
+  },
+  {
+   "query": "calculator paycheck",
+   "clicks": 0,
+   "impressions": 1,
+   "position": 72
+  },
+  {
+   "query": "calculator payroll",
+   "clicks": 0,
+   "impressions": 1,
+   "position": 72
+  },
+  {
+   "query": "canada hourly wage calculator",
+   "clicks": 0,
+   "impressions": 1,
+   "position": 64
+  },
+  {
+   "query": "canada minimum wage 2025",
+   "clicks": 0,
+   "impressions": 1,
+   "position": 47
+  },
+  {
+   "query": "canada minimum wage changes 2025",
+   "clicks": 0,
+   "impressions": 1,
+   "position": 66
+  },
+  {
+   "query": "canada paycheck",
+   "clicks": 0,
+   "impressions": 1,
+   "position": 53
+  },
+  {
+   "query": "canada paycheck calculator",
+   "clicks": 0,
+   "impressions": 1,
+   "position": 86
+  },
+  {
+   "query": "canada payroll calc",
+   "clicks": 0,
+   "impressions": 1,
+   "position": 60
+  },
+  {
+   "query": "canada payroll calculation",
+   "clicks": 0,
+   "impressions": 1,
+   "position": 51
+  },
+  {
+   "query": "canada payroll calculator",
+   "clicks": 0,
+   "impressions": 3,
+   "position": 92.67
+  },
+  {
+   "query": "canada payroll calculator ontario",
+   "clicks": 0,
+   "impressions": 3,
+   "position": 62.33
+  },
+  {
+   "query": "canada payroll deduction calculator",
+   "clicks": 0,
+   "impressions": 1,
+   "position": 88
+  },
+  {
+   "query": "canada payroll tax calculator",
+   "clicks": 0,
+   "impressions": 2,
+   "position": 81
+  },
+  {
+   "query": "canada tax",
+   "clicks": 0,
+   "impressions": 1,
+   "position": 3
+  },
+  {
+   "query": "canada tax rate",
+   "clicks": 0,
+   "impressions": 1,
+   "position": 3
+  },
+  {
+   "query": "canadian payroll calculator",
+   "clicks": 0,
+   "impressions": 2,
+   "position": 49.5
+  },
+  {
+   "query": "canadian payroll deductions calculator",
+   "clicks": 0,
+   "impressions": 1,
+   "position": 78
+  },
+  {
+   "query": "canadian payroll tax calculator",
+   "clicks": 0,
+   "impressions": 2,
+   "position": 78.5
+  },
+  {
+   "query": "canadian payroll tax deduction calculator",
+   "clicks": 0,
+   "impressions": 2,
+   "position": 95.5
+  },
+  {
+   "query": "canadian taxes",
+   "clicks": 0,
+   "impressions": 1,
+   "position": 3
+  },
+  {
+   "query": "canadian wage calculator",
+   "clicks": 0,
+   "impressions": 2,
+   "position": 70
+  },
+  {
+   "query": "canadian wage inflation calculator",
+   "clicks": 0,
+   "impressions": 1,
+   "position": 76
+  },
+  {
+   "query": "census 2026",
+   "clicks": 0,
+   "impressions": 1,
+   "position": 2
+  },
+  {
+   "query": "construction jobs kamloops",
+   "clicks": 0,
+   "impressions": 1,
+   "position": 7
+  },
+  {
+   "query": "cra calculator payroll",
+   "clicks": 0,
+   "impressions": 1,
+   "position": 91
+  },
+  {
+   "query": "cra learn about your taxes",
+   "clicks": 0,
+   "impressions": 1,
+   "position": 2
+  },
+  {
+   "query": "cra online payroll calculator",
+   "clicks": 0,
+   "impressions": 1,
+   "position": 88
+  },
+  {
+   "query": "cra payroll calculator",
+   "clicks": 0,
+   "impressions": 4,
+   "position": 87.25
+  },
+  {
+   "query": "cra payroll calculator 2024",
+   "clicks": 0,
+   "impressions": 2,
+   "position": 83.5
+  },
+  {
+   "query": "cra payroll calculator 2025",
+   "clicks": 0,
+   "impressions": 3,
+   "position": 71.67
+  },
+  {
+   "query": "cra payroll calculator 2026",
+   "clicks": 0,
+   "impressions": 1,
+   "position": 75
+  },
+  {
+   "query": "cra payroll deductions calculator 2026",
+   "clicks": 0,
+   "impressions": 1,
+   "position": 81
+  },
+  {
+   "query": "cra tax brackets",
+   "clicks": 0,
+   "impressions": 1,
+   "position": 2
+  },
+  {
+   "query": "cra wages calculator",
+   "clicks": 0,
+   "impressions": 1,
+   "position": 87
+  },
+  {
+   "query": "current news",
+   "clicks": 0,
+   "impressions": 1,
+   "position": 6
+  },
+  {
+   "query": "do you need a visa to visit canada",
+   "clicks": 0,
+   "impressions": 1,
+   "position": 3
+  },
+  {
+   "query": "doors open toronto 2026",
+   "clicks": 0,
+   "impressions": 1,
+   "position": 7
+  },
+  {
+   "query": "dunrobin weather",
+   "clicks": 0,
+   "impressions": 1,
+   "position": 6
+  },
+  {
+   "query": "employee payroll calculator",
+   "clicks": 0,
+   "impressions": 1,
+   "position": 82
+  },
+  {
+   "query": "employee payroll tax calculator",
+   "clicks": 0,
+   "impressions": 1,
+   "position": 87
+  },
+  {
+   "query": "estimated payroll tax",
+   "clicks": 0,
+   "impressions": 1,
+   "position": 73
+  },
+  {
+   "query": "family income tax brackets",
+   "clicks": 0,
+   "impressions": 1,
+   "position": 3
+  },
+  {
+   "query": "free canadian payroll calculator",
+   "clicks": 0,
+   "impressions": 8,
+   "position": 39.38
+  },
+  {
+   "query": "free online payroll calculator",
+   "clicks": 0,
+   "impressions": 2,
+   "position": 73.5
+  },
+  {
+   "query": "free online payroll calculator canada",
+   "clicks": 0,
+   "impressions": 1,
+   "position": 50
+  },
+  {
+   "query": "free paycheck",
+   "clicks": 0,
+   "impressions": 1,
+   "position": 27
+  },
+  {
+   "query": "free payroll calculator",
+   "clicks": 0,
+   "impressions": 4,
+   "position": 57.5
+  },
+  {
+   "query": "free payroll calculator ontario",
+   "clicks": 0,
+   "impressions": 1,
+   "position": 62
+  },
+  {
+   "query": "gov payroll calculator",
+   "clicks": 0,
+   "impressions": 1,
+   "position": 45
+  },
+  {
+   "query": "government payroll calculator",
+   "clicks": 0,
+   "impressions": 1,
+   "position": 63
+  },
+  {
+   "query": "h r block",
+   "clicks": 0,
+   "impressions": 1,
+   "position": 2
+  },
+  {
+   "query": "holiday payroll calculator",
+   "clicks": 0,
+   "impressions": 3,
+   "position": 91
+  },
+  {
+   "query": "hourly paycheck calculator canada",
+   "clicks": 0,
+   "impressions": 1,
+   "position": 63
+  },
+  {
+   "query": "hourly salary calculator quebec",
+   "clicks": 0,
+   "impressions": 1,
+   "position": 21
+  },
+  {
+   "query": "how much do you make part time minimum wage",
+   "clicks": 0,
+   "impressions": 1,
+   "position": 1
+  },
+  {
+   "query": "how much income tax do i pay in ontario calculator",
+   "clicks": 0,
+   "impressions": 1,
+   "position": 4
+  },
+  {
+   "query": "how much tax do i pay on 50000 in ontario",
+   "clicks": 0,
+   "impressions": 1,
+   "position": 1
+  },
+  {
+   "query": "how much tax do you pay on 100k in canada",
+   "clicks": 0,
+   "impressions": 1,
+   "position": 1
+  },
+  {
+   "query": "how much tax is deducted from a paycheck ontario",
+   "clicks": 0,
+   "impressions": 1,
+   "position": 1
+  },
+  {
+   "query": "how will rrsp contribution limits affect my tax deductions in 2025 and beyond?",
+   "clicks": 0,
+   "impressions": 1,
+   "position": 12
+  },
+  {
+   "query": "income tax canada calculator",
+   "clicks": 0,
+   "impressions": 2,
+   "position": 4.5
+  },
+  {
+   "query": "income tax cut canada",
+   "clicks": 0,
+   "impressions": 1,
+   "position": 3
+  },
+  {
+   "query": "income tax deduction calculator",
+   "clicks": 0,
+   "impressions": 1,
+   "position": 5
+  },
+  {
+   "query": "income tax in canada for foreigners",
+   "clicks": 0,
+   "impressions": 1,
+   "position": 2
+  },
+  {
+   "query": "income tax rates ontario",
+   "clicks": 0,
+   "impressions": 1,
+   "position": 6
+  },
+  {
+   "query": "income tax vancouver",
+   "clicks": 0,
+   "impressions": 1,
+   "position": 79
+  },
+  {
+   "query": "incorporation canada",
+   "clicks": 0,
+   "impressions": 1,
+   "position": 5
+  },
+  {
+   "query": "mercs calculator",
+   "clicks": 0,
+   "impressions": 1,
+   "position": 38
+  },
+  {
+   "query": "notice of assessment cra",
+   "clicks": 0,
+   "impressions": 1,
+   "position": 2
+  },
+  {
+   "query": "nurse anesthetist salary canada",
+   "clicks": 0,
+   "impressions": 1,
+   "position": 3
+  },
+  {
+   "query": "online payroll calculator",
+   "clicks": 0,
+   "impressions": 2,
+   "position": 83.5
+  },
+  {
+   "query": "online payroll calculator alberta",
+   "clicks": 0,
+   "impressions": 2,
+   "position": 80
+  },
+  {
+   "query": "online payroll calculator canada",
+   "clicks": 0,
+   "impressions": 1,
+   "position": 88
+  },
+  {
+   "query": "online payroll calculator ontario",
+   "clicks": 0,
+   "impressions": 2,
+   "position": 76
+  },
+  {
+   "query": "ontario after tax pay",
+   "clicks": 0,
+   "impressions": 3,
+   "position": 20.67
+  },
+  {
+   "query": "ontario payroll",
+   "clicks": 0,
+   "impressions": 1,
+   "position": 55
+  },
+  {
+   "query": "ontario payroll calculator",
+   "clicks": 0,
+   "impressions": 2,
+   "position": 91.5
+  },
+  {
+   "query": "ontario take home pay",
+   "clicks": 0,
+   "impressions": 1,
+   "position": 18
+  },
+  {
+   "query": "ottawa tulip festival",
+   "clicks": 0,
+   "impressions": 1,
+   "position": 5
+  },
+  {
+   "query": "pay after tax ontario",
+   "clicks": 0,
+   "impressions": 2,
+   "position": 19
+  },
+  {
+   "query": "pay period calculator",
+   "clicks": 0,
+   "impressions": 2,
+   "position": 76.5
+  },
+  {
+   "query": "pay stub tax deduction calculator",
+   "clicks": 0,
+   "impressions": 1,
+   "position": 64
+  },
+  {
+   "query": "pay stubs calculator",
+   "clicks": 0,
+   "impressions": 1,
+   "position": 83
+  },
+  {
+   "query": "paycheck calculator",
+   "clicks": 0,
+   "impressions": 9,
+   "position": 44.33
+  },
+  {
+   "query": "paycheck calculator canada",
+   "clicks": 0,
+   "impressions": 1,
+   "position": 79
+  },
+  {
+   "query": "paycheck calculator quebec",
+   "clicks": 0,
+   "impressions": 1,
+   "position": 32
+  },
+  {
+   "query": "paycheck calculator take home",
+   "clicks": 0,
+   "impressions": 1,
+   "position": 65
+  },
+  {
+   "query": "paycheck deduction calculator ontario",
+   "clicks": 0,
+   "impressions": 1,
+   "position": 85
+  },
+  {
+   "query": "paycheck estimator calculator",
+   "clicks": 0,
+   "impressions": 1,
+   "position": 79
+  },
+  {
+   "query": "paycheck estimator canada",
+   "clicks": 0,
+   "impressions": 3,
+   "position": 63
+  },
+  {
+   "query": "paycheque calculator",
+   "clicks": 0,
+   "impressions": 1,
+   "position": 83
+  },
+  {
+   "query": "payroll alberta calculator",
+   "clicks": 0,
+   "impressions": 1,
+   "position": 65
+  },
+  {
+   "query": "payroll calc",
+   "clicks": 0,
+   "impressions": 1,
+   "position": 65
+  },
+  {
+   "query": "payroll calculation",
+   "clicks": 0,
+   "impressions": 1,
+   "position": 47
+  },
+  {
+   "query": "payroll calculations",
+   "clicks": 0,
+   "impressions": 1,
+   "position": 70
+  },
+  {
+   "query": "payroll calculator",
+   "clicks": 0,
+   "impressions": 8,
+   "position": 70.38
+  },
+  {
+   "query": "payroll calculator alberta",
+   "clicks": 0,
+   "impressions": 3,
+   "position": 65
+  },
+  {
+   "query": "payroll calculator calgary",
+   "clicks": 0,
+   "impressions": 1,
+   "position": 64
+  },
+  {
+   "query": "payroll calculator canada",
+   "clicks": 0,
+   "impressions": 2,
+   "position": 50.5
+  },
+  {
+   "query": "payroll calculator cra",
+   "clicks": 0,
+   "impressions": 2,
+   "position": 83
+  },
+  {
+   "query": "payroll calculator edmonton",
+   "clicks": 0,
+   "impressions": 2,
+   "position": 66.5
+  },
+  {
+   "query": "payroll calculator hourly",
+   "clicks": 0,
+   "impressions": 1,
+   "position": 65
+  },
+  {
+   "query": "payroll calculator in ontario",
+   "clicks": 0,
+   "impressions": 2,
+   "position": 75.5
+  },
+  {
+   "query": "payroll calculator montreal",
+   "clicks": 0,
+   "impressions": 3,
+   "position": 71.33
+  },
+  {
+   "query": "payroll calculator nl",
+   "clicks": 0,
+   "impressions": 1,
+   "position": 78
+  },
+  {
+   "query": "payroll calculator online",
+   "clicks": 0,
+   "impressions": 2,
+   "position": 81
+  },
+  {
+   "query": "payroll calculator ontario",
+   "clicks": 0,
+   "impressions": 2,
+   "position": 74.5
+  },
+  {
+   "query": "payroll calculator ontario free",
+   "clicks": 0,
+   "impressions": 4,
+   "position": 52
+  },
+  {
+   "query": "payroll calculator ottawa",
+   "clicks": 0,
+   "impressions": 3,
+   "position": 60
+  },
+  {
+   "query": "payroll calculator quebec",
+   "clicks": 0,
+   "impressions": 1,
+   "position": 51
+  },
+  {
+   "query": "payroll calculator saskatchewan",
+   "clicks": 0,
+   "impressions": 2,
+   "position": 34
+  },
+  {
+   "query": "payroll calculator winnipeg",
+   "clicks": 0,
+   "impressions": 3,
+   "position": 63.33
+  },
+  {
+   "query": "payroll check calculator",
+   "clicks": 0,
+   "impressions": 1,
+   "position": 86
+  },
+  {
+   "query": "payroll deduction calculator alberta",
+   "clicks": 0,
+   "impressions": 1,
+   "position": 76
+  },
+  {
+   "query": "payroll deductions calculator alberta",
+   "clicks": 0,
+   "impressions": 1,
+   "position": 63
+  },
+  {
+   "query": "payroll deductions calculator saskatchewan",
+   "clicks": 0,
+   "impressions": 2,
+   "position": 55
+  },
+  {
+   "query": "payroll deductions online calculator 2025",
+   "clicks": 0,
+   "impressions": 1,
+   "position": 72
+  },
+  {
+   "query": "payroll estimator",
+   "clicks": 0,
+   "impressions": 1,
+   "position": 76
+  },
+  {
+   "query": "payroll evolution calculator",
+   "clicks": 0,
+   "impressions": 1,
+   "position": 96
+  },
+  {
+   "query": "payroll hourly calculator",
+   "clicks": 0,
+   "impressions": 1,
+   "position": 88
+  },
+  {
+   "query": "payroll online calculator",
+   "clicks": 0,
+   "impressions": 2,
+   "position": 79.5
+  },
+  {
+   "query": "payroll tax calculator canada",
+   "clicks": 0,
+   "impressions": 1,
+   "position": 86
+  },
+  {
+   "query": "payroll taxes quebec city",
+   "clicks": 0,
+   "impressions": 1,
+   "position": 26
+  },
+  {
+   "query": "paystub calculator canada",
+   "clicks": 0,
+   "impressions": 3,
+   "position": 67
+  },
+  {
+   "query": "paystub calculator ontario",
+   "clicks": 0,
+   "impressions": 1,
+   "position": 76
+  },
+  {
+   "query": "pd7a calculator",
+   "clicks": 0,
+   "impressions": 1,
+   "position": 82
+  },
+  {
+   "query": "pdoc 2025 calculator",
+   "clicks": 0,
+   "impressions": 1,
+   "position": 60
+  },
+  {
+   "query": "pdoc calculator 2025",
+   "clicks": 0,
+   "impressions": 1,
+   "position": 39
+  },
+  {
+   "query": "public holiday pay calculator",
+   "clicks": 0,
+   "impressions": 1,
+   "position": 93
+  },
+  {
+   "query": "public sector vs private sector pay",
+   "clicks": 0,
+   "impressions": 1,
+   "position": 16
+  },
+  {
+   "query": "quebec pay calculator",
+   "clicks": 0,
+   "impressions": 1,
+   "position": 36
+  },
+  {
+   "query": "quebec paycheck calculator",
+   "clicks": 0,
+   "impressions": 1,
+   "position": 9
+  },
+  {
+   "query": "quebec payroll",
+   "clicks": 0,
+   "impressions": 1,
+   "position": 29
+  },
+  {
+   "query": "quebec salary calculator",
+   "clicks": 0,
+   "impressions": 1,
+   "position": 27
+  },
+  {
+   "query": "quebec wage calculator",
+   "clicks": 0,
+   "impressions": 1,
+   "position": 29
+  },
+  {
+   "query": "rent calgary",
+   "clicks": 0,
+   "impressions": 1,
+   "position": 4
+  },
+  {
+   "query": "retro pay calculator canada",
+   "clicks": 0,
+   "impressions": 3,
+   "position": 55.33
+  },
+  {
+   "query": "retroactive pay calculator canada",
+   "clicks": 0,
+   "impressions": 3,
+   "position": 45.67
+  },
+  {
+   "query": "rrsp rules 2025",
+   "clicks": 0,
+   "impressions": 25,
+   "position": 25.48
+  },
+  {
+   "query": "rrsp tax calculator",
+   "clicks": 0,
+   "impressions": 1,
+   "position": 2
+  },
+  {
+   "query": "rrsp tax savings by income level comparison canada",
+   "clicks": 0,
+   "impressions": 10,
+   "position": 14.2
+  },
+  {
+   "query": "rrsp vs tfsa which is better",
+   "clicks": 0,
+   "impressions": 1,
+   "position": 59
+  },
+  {
+   "query": "salary after tax ontario",
+   "clicks": 0,
+   "impressions": 3,
+   "position": 15
+  },
+  {
+   "query": "salary calculator cra",
+   "clicks": 0,
+   "impressions": 2,
+   "position": 60.5
+  },
+  {
+   "query": "salary calculator montreal",
+   "clicks": 0,
+   "impressions": 2,
+   "position": 34
+  },
+  {
+   "query": "salary calculator quebec",
+   "clicks": 0,
+   "impressions": 1,
+   "position": 28
+  },
+  {
+   "query": "salary forecast",
+   "clicks": 0,
+   "impressions": 2,
+   "position": 79
+  },
+  {
+   "query": "salary guide calculator",
+   "clicks": 0,
+   "impressions": 2,
+   "position": 73.5
+  },
+  {
+   "query": "salary insights",
+   "clicks": 0,
+   "impressions": 4,
+   "position": 45.25
+  },
+  {
+   "query": "salary tax calculator canada",
+   "clicks": 0,
+   "impressions": 1,
+   "position": 10
+  },
+  {
+   "query": "simplepay calculator",
+   "clicks": 0,
+   "impressions": 1,
+   "position": 58
+  },
+  {
+   "query": "stat holiday payroll calculator",
+   "clicks": 0,
+   "impressions": 4,
+   "position": 90.25
+  },
+  {
+   "query": "stat pay calculator",
+   "clicks": 0,
+   "impressions": 2,
+   "position": 93
+  },
+  {
+   "query": "statutory pay calculator",
+   "clicks": 0,
+   "impressions": 2,
+   "position": 82.5
+  },
+  {
+   "query": "take home on 65k",
+   "clicks": 0,
+   "impressions": 2,
+   "position": 5.5
+  },
+  {
+   "query": "take home pay ontario",
+   "clicks": 0,
+   "impressions": 1,
+   "position": 17
+  },
+  {
+   "query": "tax brackets 2025",
+   "clicks": 0,
+   "impressions": 1,
+   "position": 3
+  },
+  {
+   "query": "tax brackets canada",
+   "clicks": 0,
+   "impressions": 1,
+   "position": 3
+  },
+  {
+   "query": "tax brackets cra",
+   "clicks": 0,
+   "impressions": 1,
+   "position": 2
+  },
+  {
+   "query": "tax deadline 2026",
+   "clicks": 0,
+   "impressions": 1,
+   "position": 2
+  },
+  {
+   "query": "tax filing deadline 2026",
+   "clicks": 0,
+   "impressions": 1,
+   "position": 2
+  },
+  {
+   "query": "tax in canada on salary",
+   "clicks": 0,
+   "impressions": 2,
+   "position": 3
+  },
+  {
+   "query": "tax slabs in bc",
+   "clicks": 0,
+   "impressions": 1,
+   "position": 91
+  },
+  {
+   "query": "tax vancouver canada",
+   "clicks": 0,
+   "impressions": 1,
+   "position": 59
+  },
+  {
+   "query": "taxes deadline 2026",
+   "clicks": 0,
+   "impressions": 1,
+   "position": 2
+  },
+  {
+   "query": "taxes in vancouver",
+   "clicks": 0,
+   "impressions": 1,
+   "position": 77
+  },
+  {
+   "query": "taxes in vancouver canada",
+   "clicks": 0,
+   "impressions": 1,
+   "position": 51
+  },
+  {
+   "query": "taxes vancouver",
+   "clicks": 0,
+   "impressions": 1,
+   "position": 54
+  },
+  {
+   "query": "tfsa vs rrsp",
+   "clicks": 0,
+   "impressions": 2,
+   "position": 80.5
+  },
+  {
+   "query": "tfsa vs rrsp tax comparison",
+   "clicks": 0,
+   "impressions": 1,
+   "position": 92
+  },
+  {
+   "query": "tfsa vs rrsp which is better",
+   "clicks": 0,
+   "impressions": 1,
+   "position": 69
+  },
+  {
+   "query": "toronto",
+   "clicks": 0,
+   "impressions": 1,
+   "position": 5
+  },
+  {
+   "query": "toronto tax calculator",
+   "clicks": 0,
+   "impressions": 1,
+   "position": 3
+  },
+  {
+   "query": "toronto temperature now",
+   "clicks": 0,
+   "impressions": 1,
+   "position": 2
+  },
+  {
+   "query": "toronto time right now",
+   "clicks": 0,
+   "impressions": 1,
+   "position": 2
+  },
+  {
+   "query": "vacation pay calculator alberta",
+   "clicks": 0,
+   "impressions": 4,
+   "position": 74.75
+  },
+  {
+   "query": "vancouver income tax",
+   "clicks": 0,
+   "impressions": 1,
+   "position": 51
+  },
+  {
+   "query": "vancouver taxes income",
+   "clicks": 0,
+   "impressions": 2,
+   "position": 57.5
+  },
+  {
+   "query": "wage calculator",
+   "clicks": 0,
+   "impressions": 1,
+   "position": 50
+  },
+  {
+   "query": "what is $65 an hour annually",
+   "clicks": 0,
+   "impressions": 1,
+   "position": 1
+  },
+  {
+   "query": "what is vancouver known for",
+   "clicks": 0,
+   "impressions": 1,
+   "position": 3
+  },
+  {
+   "query": "when will toronto warm up",
+   "clicks": 0,
+   "impressions": 1,
+   "position": 4
+  }
+ ],
+ "pages": [
+  {
+   "page": "https://www.canpayinsights.ca/65000-after-tax-alberta",
+   "clicks": 3,
+   "impressions": 639,
+   "position": 8.47
+  },
+  {
+   "page": "https://www.canpayinsights.ca/50000-after-tax-ontario",
+   "clicks": 2,
+   "impressions": 1213,
+   "position": 10.14
+  },
+  {
+   "page": "https://www.canpayinsights.ca/",
+   "clicks": 1,
+   "impressions": 491,
+   "position": 30.08
+  },
+  {
+   "page": "https://www.canpayinsights.ca/blog/cpp-ei-explained-2025",
+   "clicks": 1,
+   "impressions": 292,
+   "position": 10.84
+  },
+  {
+   "page": "https://www.canpayinsights.ca/quebec-paycheck-calculator",
+   "clicks": 1,
+   "impressions": 52,
+   "position": 23.38
+  },
+  {
+   "page": "https://www.canpayinsights.ca/100000-after-tax-quebec",
+   "clicks": 0,
+   "impressions": 110,
+   "position": 9.5
+  },
+  {
+   "page": "https://www.canpayinsights.ca/blog",
+   "clicks": 0,
+   "impressions": 14,
+   "position": 4.14
+  },
+  {
+   "page": "https://www.canpayinsights.ca/blog/bc-tax-guide-2025",
+   "clicks": 0,
+   "impressions": 130,
+   "position": 17.4
+  },
+  {
+   "page": "https://www.canpayinsights.ca/blog/minimum-wage-provincial-guide-canada-2025",
+   "clicks": 0,
+   "impressions": 37,
+   "position": 13.51
+  },
+  {
+   "page": "https://www.canpayinsights.ca/blog/public-vs-private-sector-pay-canada-2025",
+   "clicks": 0,
+   "impressions": 268,
+   "position": 9.55
+  },
+  {
+   "page": "https://www.canpayinsights.ca/blog/rrsp-tax-savings-canada-2025",
+   "clicks": 0,
+   "impressions": 208,
+   "position": 12.82
+  },
+  {
+   "page": "https://www.canpayinsights.ca/blog/rrsp-vs-tfsa-canada-2025",
+   "clicks": 0,
+   "impressions": 19,
+   "position": 25
+  }
+ ],
+ "date_query": [
+  {
+   "date": "2026-05-20",
+   "query": "quebec payroll calculator",
+   "clicks": 1,
+   "impressions": 1,
+   "position": 31
+  },
+  {
+   "date": "2026-04-17",
+   "query": "2025 payroll calculator",
+   "clicks": 0,
+   "impressions": 1,
+   "position": 28
+  },
+  {
+   "date": "2026-04-17",
+   "query": "payroll calculator canada",
+   "clicks": 0,
+   "impressions": 1,
+   "position": 30
+  },
+  {
+   "date": "2026-04-17",
+   "query": "salary insights",
+   "clicks": 0,
+   "impressions": 1,
+   "position": 34
+  },
+  {
+   "date": "2026-04-19",
+   "query": "bc income tax bracket",
+   "clicks": 0,
+   "impressions": 1,
+   "position": 93
+  },
+  {
+   "date": "2026-04-19",
+   "query": "british columbia tax brackets",
+   "clicks": 0,
+   "impressions": 1,
+   "position": 92
+  },
+  {
+   "date": "2026-04-19",
+   "query": "british columbia tax rate",
+   "clicks": 0,
+   "impressions": 1,
+   "position": 79
+  },
+  {
+   "date": "2026-04-19",
+   "query": "income tax vancouver",
+   "clicks": 0,
+   "impressions": 1,
+   "position": 79
+  },
+  {
+   "date": "2026-04-19",
+   "query": "public sector vs private sector pay",
+   "clicks": 0,
+   "impressions": 1,
+   "position": 16
+  },
+  {
+   "date": "2026-04-19",
+   "query": "vancouver income tax",
+   "clicks": 0,
+   "impressions": 1,
+   "position": 51
+  },
+  {
+   "date": "2026-04-19",
+   "query": "vancouver taxes income",
+   "clicks": 0,
+   "impressions": 2,
+   "position": 57.5
+  },
+  {
+   "date": "2026-04-20",
+   "query": "bc tax brackets 2024",
+   "clicks": 0,
+   "impressions": 1,
+   "position": 80
+  },
+  {
+   "date": "2026-04-20",
+   "query": "british columbia income tax brackets",
+   "clicks": 0,
+   "impressions": 1,
+   "position": 78
+  },
+  {
+   "date": "2026-04-20",
+   "query": "british columbia tax rates",
+   "clicks": 0,
+   "impressions": 1,
+   "position": 78
+  },
+  {
+   "date": "2026-04-20",
+   "query": "canada minimum wage changes 2025",
+   "clicks": 0,
+   "impressions": 1,
+   "position": 66
+  },
+  {
+   "date": "2026-04-20",
+   "query": "rrsp vs tfsa which is better",
+   "clicks": 0,
+   "impressions": 1,
+   "position": 59
+  },
+  {
+   "date": "2026-04-20",
+   "query": "tax slabs in bc",
+   "clicks": 0,
+   "impressions": 1,
+   "position": 91
+  },
+  {
+   "date": "2026-04-20",
+   "query": "tax vancouver canada",
+   "clicks": 0,
+   "impressions": 1,
+   "position": 59
+  },
+  {
+   "date": "2026-04-20",
+   "query": "taxes in vancouver",
+   "clicks": 0,
+   "impressions": 1,
+   "position": 77
+  },
+  {
+   "date": "2026-04-20",
+   "query": "taxes in vancouver canada",
+   "clicks": 0,
+   "impressions": 1,
+   "position": 51
+  },
+  {
+   "date": "2026-04-20",
+   "query": "taxes vancouver",
+   "clicks": 0,
+   "impressions": 1,
+   "position": 54
+  },
+  {
+   "date": "2026-04-20",
+   "query": "tfsa vs rrsp",
+   "clicks": 0,
+   "impressions": 2,
+   "position": 80.5
+  },
+  {
+   "date": "2026-04-20",
+   "query": "tfsa vs rrsp tax comparison",
+   "clicks": 0,
+   "impressions": 1,
+   "position": 92
+  },
+  {
+   "date": "2026-04-20",
+   "query": "tfsa vs rrsp which is better",
+   "clicks": 0,
+   "impressions": 1,
+   "position": 69
+  },
+  {
+   "date": "2026-04-21",
+   "query": "canadian payroll calculator",
+   "clicks": 0,
+   "impressions": 1,
+   "position": 28
+  },
+  {
+   "date": "2026-04-22",
+   "query": "annual pay calculator",
+   "clicks": 0,
+   "impressions": 1,
+   "position": 77
+  },
+  {
+   "date": "2026-04-22",
+   "query": "canada minimum wage 2025",
+   "clicks": 0,
+   "impressions": 1,
+   "position": 47
+  },
+  {
+   "date": "2026-04-22",
+   "query": "free canadian payroll calculator",
+   "clicks": 0,
+   "impressions": 1,
+   "position": 34
+  },
+  {
+   "date": "2026-04-22",
+   "query": "rrsp rules 2025",
+   "clicks": 0,
+   "impressions": 1,
+   "position": 22
+  },
+  {
+   "date": "2026-04-23",
+   "query": "rrsp rules 2025",
+   "clicks": 0,
+   "impressions": 1,
+   "position": 21
+  },
+  {
+   "date": "2026-04-24",
+   "query": "rrsp rules 2025",
+   "clicks": 0,
+   "impressions": 2,
+   "position": 21.5
+  },
+  {
+   "date": "2026-04-25",
+   "query": "rrsp rules 2025",
+   "clicks": 0,
+   "impressions": 2,
+   "position": 37.5
+  },
+  {
+   "date": "2026-04-26",
+   "query": "65000 after tax ontario",
+   "clicks": 0,
+   "impressions": 1,
+   "position": 1
+  },
+  {
+   "date": "2026-04-26",
+   "query": "british columbia personal income tax rates 2025 5.06 7.7 10.5 brackets",
+   "clicks": 0,
+   "impressions": 1,
+   "position": 4
+  },
+  {
+   "date": "2026-04-26",
+   "query": "how much tax is deducted from a paycheck ontario",
+   "clicks": 0,
+   "impressions": 1,
+   "position": 1
+  },
+  {
+   "date": "2026-04-26",
+   "query": "rrsp rules 2025",
+   "clicks": 0,
+   "impressions": 1,
+   "position": 21
+  },
+  {
+   "date": "2026-04-26",
+   "query": "salary insights",
+   "clicks": 0,
+   "impressions": 1,
+   "position": 34
+  },
+  {
+   "date": "2026-04-27",
+   "query": "cra tax brackets",
+   "clicks": 0,
+   "impressions": 1,
+   "position": 2
+  },
+  {
+   "date": "2026-04-27",
+   "query": "family income tax brackets",
+   "clicks": 0,
+   "impressions": 1,
+   "position": 3
+  },
+  {
+   "date": "2026-04-27",
+   "query": "h r block",
+   "clicks": 0,
+   "impressions": 1,
+   "position": 2
+  },
+  {
+   "date": "2026-04-27",
+   "query": "rrsp rules 2025",
+   "clicks": 0,
+   "impressions": 1,
+   "position": 23
+  },
+  {
+   "date": "2026-04-27",
+   "query": "tax brackets cra",
+   "clicks": 0,
+   "impressions": 1,
+   "position": 2
+  },
+  {
+   "date": "2026-04-27",
+   "query": "tax deadline 2026",
+   "clicks": 0,
+   "impressions": 1,
+   "position": 2
+  },
+  {
+   "date": "2026-04-28",
+   "query": "cra learn about your taxes",
+   "clicks": 0,
+   "impressions": 1,
+   "position": 2
+  },
+  {
+   "date": "2026-04-28",
+   "query": "income tax rates ontario",
+   "clicks": 0,
+   "impressions": 1,
+   "position": 6
+  },
+  {
+   "date": "2026-04-28",
+   "query": "rrsp rules 2025",
+   "clicks": 0,
+   "impressions": 1,
+   "position": 23
+  },
+  {
+   "date": "2026-04-29",
+   "query": "65000 after tax ontario",
+   "clicks": 0,
+   "impressions": 1,
+   "position": 1
+  },
+  {
+   "date": "2026-04-29",
+   "query": "65000 salary after taxes ontario",
+   "clicks": 0,
+   "impressions": 1,
+   "position": 1
+  },
+  {
+   "date": "2026-04-29",
+   "query": "65k after tax ontario",
+   "clicks": 0,
+   "impressions": 1,
+   "position": 1
+  },
+  {
+   "date": "2026-04-29",
+   "query": "free canadian payroll calculator",
+   "clicks": 0,
+   "impressions": 1,
+   "position": 26
+  },
+  {
+   "date": "2026-04-29",
+   "query": "how much tax do you pay on 100k in canada",
+   "clicks": 0,
+   "impressions": 1,
+   "position": 1
+  },
+  {
+   "date": "2026-04-29",
+   "query": "rrsp rules 2025",
+   "clicks": 0,
+   "impressions": 1,
+   "position": 27
+  },
+  {
+   "date": "2026-04-30",
+   "query": "85000 after tax ontario",
+   "clicks": 0,
+   "impressions": 2,
+   "position": 1
+  },
+  {
+   "date": "2026-04-30",
+   "query": "85000 salary after taxes ontario",
+   "clicks": 0,
+   "impressions": 1,
+   "position": 1
+  },
+  {
+   "date": "2026-04-30",
+   "query": "canada tax",
+   "clicks": 0,
+   "impressions": 1,
+   "position": 3
+  },
+  {
+   "date": "2026-04-30",
+   "query": "cra payroll calculator 2025",
+   "clicks": 0,
+   "impressions": 1,
+   "position": 49
+  },
+  {
+   "date": "2026-04-30",
+   "query": "income tax in canada for foreigners",
+   "clicks": 0,
+   "impressions": 1,
+   "position": 2
+  },
+  {
+   "date": "2026-04-30",
+   "query": "rrsp rules 2025",
+   "clicks": 0,
+   "impressions": 1,
+   "position": 20
+  },
+  {
+   "date": "2026-04-30",
+   "query": "tax brackets canada",
+   "clicks": 0,
+   "impressions": 1,
+   "position": 3
+  },
+  {
+   "date": "2026-04-30",
+   "query": "toronto tax calculator",
+   "clicks": 0,
+   "impressions": 1,
+   "position": 3
+  },
+  {
+   "date": "2026-05-01",
+   "query": "how much income tax do i pay in ontario calculator",
+   "clicks": 0,
+   "impressions": 1,
+   "position": 4
+  },
+  {
+   "date": "2026-05-01",
+   "query": "how much tax do i pay on 50000 in ontario",
+   "clicks": 0,
+   "impressions": 1,
+   "position": 1
+  },
+  {
+   "date": "2026-05-01",
+   "query": "income tax canada calculator",
+   "clicks": 0,
+   "impressions": 1,
+   "position": 5
+  },
+  {
+   "date": "2026-05-01",
+   "query": "tax in canada on salary",
+   "clicks": 0,
+   "impressions": 2,
+   "position": 3
+  },
+  {
+   "date": "2026-05-02",
+   "query": "income tax canada calculator",
+   "clicks": 0,
+   "impressions": 1,
+   "position": 4
+  },
+  {
+   "date": "2026-05-03",
+   "query": "notice of assessment cra",
+   "clicks": 0,
+   "impressions": 1,
+   "position": 2
+  },
+  {
+   "date": "2026-05-03",
+   "query": "rent calgary",
+   "clicks": 0,
+   "impressions": 1,
+   "position": 4
+  },
+  {
+   "date": "2026-05-03",
+   "query": "rrsp rules 2025",
+   "clicks": 0,
+   "impressions": 1,
+   "position": 30
+  },
+  {
+   "date": "2026-05-03",
+   "query": "taxes deadline 2026",
+   "clicks": 0,
+   "impressions": 1,
+   "position": 2
+  },
+  {
+   "date": "2026-05-03",
+   "query": "wage calculator",
+   "clicks": 0,
+   "impressions": 1,
+   "position": 50
+  },
+  {
+   "date": "2026-05-04",
+   "query": "canada tax rate",
+   "clicks": 0,
+   "impressions": 1,
+   "position": 3
+  },
+  {
+   "date": "2026-05-04",
+   "query": "rrsp rules 2025",
+   "clicks": 0,
+   "impressions": 2,
+   "position": 26
+  },
+  {
+   "date": "2026-05-04",
+   "query": "salary tax calculator canada",
+   "clicks": 0,
+   "impressions": 1,
+   "position": 10
+  },
+  {
+   "date": "2026-05-04",
+   "query": "tax brackets 2025",
+   "clicks": 0,
+   "impressions": 1,
+   "position": 3
+  },
+  {
+   "date": "2026-05-05",
+   "query": "canadian taxes",
+   "clicks": 0,
+   "impressions": 1,
+   "position": 3
+  },
+  {
+   "date": "2026-05-05",
+   "query": "rrsp rules 2025",
+   "clicks": 0,
+   "impressions": 1,
+   "position": 27
+  },
+  {
+   "date": "2026-05-05",
+   "query": "rrsp tax savings by income level comparison canada",
+   "clicks": 0,
+   "impressions": 2,
+   "position": 15
+  },
+  {
+   "date": "2026-05-06",
+   "query": "cra payroll calculator 2024",
+   "clicks": 0,
+   "impressions": 1,
+   "position": 95
+  },
+  {
+   "date": "2026-05-06",
+   "query": "do you need a visa to visit canada",
+   "clicks": 0,
+   "impressions": 1,
+   "position": 3
+  },
+  {
+   "date": "2026-05-06",
+   "query": "free canadian payroll calculator",
+   "clicks": 0,
+   "impressions": 1,
+   "position": 29
+  },
+  {
+   "date": "2026-05-06",
+   "query": "rrsp rules 2025",
+   "clicks": 0,
+   "impressions": 2,
+   "position": 26.5
+  },
+  {
+   "date": "2026-05-06",
+   "query": "rrsp tax calculator",
+   "clicks": 0,
+   "impressions": 1,
+   "position": 2
+  },
+  {
+   "date": "2026-05-06",
+   "query": "rrsp tax savings by income level comparison canada",
+   "clicks": 0,
+   "impressions": 1,
+   "position": 15
+  },
+  {
+   "date": "2026-05-06",
+   "query": "tax filing deadline 2026",
+   "clicks": 0,
+   "impressions": 1,
+   "position": 2
+  },
+  {
+   "date": "2026-05-07",
+   "query": "payroll calculator ontario free",
+   "clicks": 0,
+   "impressions": 1,
+   "position": 29
+  },
+  {
+   "date": "2026-05-08",
+   "query": "180 000 gross to net",
+   "clicks": 0,
+   "impressions": 1,
+   "position": 3
+  },
+  {
+   "date": "2026-05-08",
+   "query": "construction jobs kamloops",
+   "clicks": 0,
+   "impressions": 1,
+   "position": 7
+  },
+  {
+   "date": "2026-05-08",
+   "query": "income tax deduction calculator",
+   "clicks": 0,
+   "impressions": 1,
+   "position": 5
+  },
+  {
+   "date": "2026-05-08",
+   "query": "rrsp rules 2025",
+   "clicks": 0,
+   "impressions": 1,
+   "position": 25
+  },
+  {
+   "date": "2026-05-09",
+   "query": "income tax cut canada",
+   "clicks": 0,
+   "impressions": 1,
+   "position": 3
+  },
+  {
+   "date": "2026-05-09",
+   "query": "rrsp rules 2025",
+   "clicks": 0,
+   "impressions": 4,
+   "position": 25.5
+  },
+  {
+   "date": "2026-05-09",
+   "query": "rrsp tax savings by income level comparison canada",
+   "clicks": 0,
+   "impressions": 1,
+   "position": 13
+  },
+  {
+   "date": "2026-05-10",
+   "query": "current news",
+   "clicks": 0,
+   "impressions": 1,
+   "position": 6
+  },
+  {
+   "date": "2026-05-10",
+   "query": "ottawa tulip festival",
+   "clicks": 0,
+   "impressions": 1,
+   "position": 5
+  },
+  {
+   "date": "2026-05-10",
+   "query": "rrsp rules 2025",
+   "clicks": 0,
+   "impressions": 2,
+   "position": 26
+  },
+  {
+   "date": "2026-05-10",
+   "query": "rrsp tax savings by income level comparison canada",
+   "clicks": 0,
+   "impressions": 1,
+   "position": 13
+  },
+  {
+   "date": "2026-05-10",
+   "query": "what is vancouver known for",
+   "clicks": 0,
+   "impressions": 1,
+   "position": 3
+  },
+  {
+   "date": "2026-05-11",
+   "query": "census 2026",
+   "clicks": 0,
+   "impressions": 1,
+   "position": 2
+  },
+  {
+   "date": "2026-05-11",
+   "query": "doors open toronto 2026",
+   "clicks": 0,
+   "impressions": 1,
+   "position": 7
+  },
+  {
+   "date": "2026-05-11",
+   "query": "nurse anesthetist salary canada",
+   "clicks": 0,
+   "impressions": 1,
+   "position": 3
+  },
+  {
+   "date": "2026-05-11",
+   "query": "payroll evolution calculator",
+   "clicks": 0,
+   "impressions": 1,
+   "position": 96
+  },
+  {
+   "date": "2026-05-11",
+   "query": "rrsp tax savings by income level comparison canada",
+   "clicks": 0,
+   "impressions": 1,
+   "position": 14
+  },
+  {
+   "date": "2026-05-11",
+   "query": "toronto",
+   "clicks": 0,
+   "impressions": 1,
+   "position": 5
+  },
+  {
+   "date": "2026-05-11",
+   "query": "toronto temperature now",
+   "clicks": 0,
+   "impressions": 1,
+   "position": 2
+  },
+  {
+   "date": "2026-05-11",
+   "query": "toronto time right now",
+   "clicks": 0,
+   "impressions": 1,
+   "position": 2
+  },
+  {
+   "date": "2026-05-11",
+   "query": "when will toronto warm up",
+   "clicks": 0,
+   "impressions": 1,
+   "position": 4
+  },
+  {
+   "date": "2026-05-12",
+   "query": "average income in canada",
+   "clicks": 0,
+   "impressions": 1,
+   "position": 3
+  },
+  {
+   "date": "2026-05-12",
+   "query": "dunrobin weather",
+   "clicks": 0,
+   "impressions": 1,
+   "position": 6
+  },
+  {
+   "date": "2026-05-12",
+   "query": "incorporation canada",
+   "clicks": 0,
+   "impressions": 1,
+   "position": 5
+  },
+  {
+   "date": "2026-05-12",
+   "query": "online payroll calculator alberta",
+   "clicks": 0,
+   "impressions": 1,
+   "position": 98
+  },
+  {
+   "date": "2026-05-13",
+   "query": "free canadian payroll calculator",
+   "clicks": 0,
+   "impressions": 1,
+   "position": 37
+  },
+  {
+   "date": "2026-05-13",
+   "query": "rrsp tax savings by income level comparison canada",
+   "clicks": 0,
+   "impressions": 1,
+   "position": 15
+  },
+  {
+   "date": "2026-05-14",
+   "query": "calculate payroll free",
+   "clicks": 0,
+   "impressions": 1,
+   "position": 4
+  },
+  {
+   "date": "2026-05-14",
+   "query": "free canadian payroll calculator",
+   "clicks": 0,
+   "impressions": 1,
+   "position": 63
+  },
+  {
+   "date": "2026-05-14",
+   "query": "payroll calculator edmonton",
+   "clicks": 0,
+   "impressions": 1,
+   "position": 67
+  },
+  {
+   "date": "2026-05-14",
+   "query": "pd7a calculator",
+   "clicks": 0,
+   "impressions": 1,
+   "position": 82
+  },
+  {
+   "date": "2026-05-14",
+   "query": "salary calculator cra",
+   "clicks": 0,
+   "impressions": 1,
+   "position": 44
+  },
+  {
+   "date": "2026-05-15",
+   "query": "canadian wage inflation calculator",
+   "clicks": 0,
+   "impressions": 1,
+   "position": 76
+  },
+  {
+   "date": "2026-05-15",
+   "query": "payroll calculator hourly",
+   "clicks": 0,
+   "impressions": 1,
+   "position": 65
+  },
+  {
+   "date": "2026-05-15",
+   "query": "rrsp rules 2025",
+   "clicks": 0,
+   "impressions": 1,
+   "position": 21
+  },
+  {
+   "date": "2026-05-15",
+   "query": "rrsp tax savings by income level comparison canada",
+   "clicks": 0,
+   "impressions": 1,
+   "position": 12
+  },
+  {
+   "date": "2026-05-15",
+   "query": "salary insights",
+   "clicks": 0,
+   "impressions": 1,
+   "position": 53
+  },
+  {
+   "date": "2026-05-16",
+   "query": "126 000 salary to hourly",
+   "clicks": 0,
+   "impressions": 1,
+   "position": 1
+  },
+  {
+   "date": "2026-05-17",
+   "query": "how much do you make part time minimum wage",
+   "clicks": 0,
+   "impressions": 1,
+   "position": 1
+  },
+  {
+   "date": "2026-05-17",
+   "query": "salary guide calculator",
+   "clicks": 0,
+   "impressions": 1,
+   "position": 82
+  },
+  {
+   "date": "2026-05-18",
+   "query": "payroll taxes quebec city",
+   "clicks": 0,
+   "impressions": 1,
+   "position": 26
+  },
+  {
+   "date": "2026-05-18",
+   "query": "rrsp tax savings by income level comparison canada",
+   "clicks": 0,
+   "impressions": 2,
+   "position": 15
+  },
+  {
+   "date": "2026-05-19",
+   "query": "65000 after tax alberta",
+   "clicks": 0,
+   "impressions": 1,
+   "position": 1
+  },
+  {
+   "date": "2026-05-19",
+   "query": "free canadian payroll calculator",
+   "clicks": 0,
+   "impressions": 1,
+   "position": 30
+  },
+  {
+   "date": "2026-05-19",
+   "query": "government payroll calculator",
+   "clicks": 0,
+   "impressions": 1,
+   "position": 63
+  },
+  {
+   "date": "2026-05-19",
+   "query": "mercs calculator",
+   "clicks": 0,
+   "impressions": 1,
+   "position": 38
+  },
+  {
+   "date": "2026-05-19",
+   "query": "paycheck calculator",
+   "clicks": 0,
+   "impressions": 3,
+   "position": 40.33
+  },
+  {
+   "date": "2026-05-19",
+   "query": "paycheck calculator take home",
+   "clicks": 0,
+   "impressions": 1,
+   "position": 65
+  },
+  {
+   "date": "2026-05-19",
+   "query": "payroll calculator saskatchewan",
+   "clicks": 0,
+   "impressions": 1,
+   "position": 34
+  },
+  {
+   "date": "2026-05-19",
+   "query": "paystub calculator canada",
+   "clicks": 0,
+   "impressions": 1,
+   "position": 47
+  },
+  {
+   "date": "2026-05-19",
+   "query": "quebec pay calculator",
+   "clicks": 0,
+   "impressions": 1,
+   "position": 36
+  },
+  {
+   "date": "2026-05-19",
+   "query": "quebec payroll",
+   "clicks": 0,
+   "impressions": 1,
+   "position": 29
+  },
+  {
+   "date": "2026-05-19",
+   "query": "quebec payroll calculator",
+   "clicks": 0,
+   "impressions": 2,
+   "position": 44
+  },
+  {
+   "date": "2026-05-19",
+   "query": "quebec salary calculator",
+   "clicks": 0,
+   "impressions": 1,
+   "position": 27
+  },
+  {
+   "date": "2026-05-19",
+   "query": "quebec wage calculator",
+   "clicks": 0,
+   "impressions": 1,
+   "position": 29
+  },
+  {
+   "date": "2026-05-19",
+   "query": "salary calculator quebec",
+   "clicks": 0,
+   "impressions": 1,
+   "position": 28
+  },
+  {
+   "date": "2026-05-20",
+   "query": "100k after tax quebec",
+   "clicks": 0,
+   "impressions": 1,
+   "position": 10
+  },
+  {
+   "date": "2026-05-20",
+   "query": "50000 after tax ontario",
+   "clicks": 0,
+   "impressions": 6,
+   "position": 11.83
+  },
+  {
+   "date": "2026-05-20",
+   "query": "50k after tax ontario",
+   "clicks": 0,
+   "impressions": 1,
+   "position": 12
+  },
+  {
+   "date": "2026-05-20",
+   "query": "55k after tax ontario",
+   "clicks": 0,
+   "impressions": 1,
+   "position": 23
+  },
+  {
+   "date": "2026-05-20",
+   "query": "65000 after tax alberta",
+   "clicks": 0,
+   "impressions": 2,
+   "position": 7
+  },
+  {
+   "date": "2026-05-20",
+   "query": "65k bi weekly after taxes",
+   "clicks": 0,
+   "impressions": 1,
+   "position": 20
+  },
+  {
+   "date": "2026-05-20",
+   "query": "canada payroll calc",
+   "clicks": 0,
+   "impressions": 1,
+   "position": 60
+  },
+  {
+   "date": "2026-05-20",
+   "query": "canada payroll calculator ontario",
+   "clicks": 0,
+   "impressions": 1,
+   "position": 54
+  },
+  {
+   "date": "2026-05-20",
+   "query": "free paycheck",
+   "clicks": 0,
+   "impressions": 1,
+   "position": 27
+  },
+  {
+   "date": "2026-05-20",
+   "query": "hourly salary calculator quebec",
+   "clicks": 0,
+   "impressions": 1,
+   "position": 21
+  },
+  {
+   "date": "2026-05-20",
+   "query": "online payroll calculator ontario",
+   "clicks": 0,
+   "impressions": 1,
+   "position": 77
+  },
+  {
+   "date": "2026-05-20",
+   "query": "pay stub tax deduction calculator",
+   "clicks": 0,
+   "impressions": 1,
+   "position": 64
+  },
+  {
+   "date": "2026-05-20",
+   "query": "paycheck calculator",
+   "clicks": 0,
+   "impressions": 3,
+   "position": 8.67
+  },
+  {
+   "date": "2026-05-20",
+   "query": "paycheck calculator quebec",
+   "clicks": 0,
+   "impressions": 1,
+   "position": 32
+  },
+  {
+   "date": "2026-05-20",
+   "query": "paycheck estimator calculator",
+   "clicks": 0,
+   "impressions": 1,
+   "position": 79
+  },
+  {
+   "date": "2026-05-20",
+   "query": "payroll calculator montreal",
+   "clicks": 0,
+   "impressions": 1,
+   "position": 57
+  },
+  {
+   "date": "2026-05-20",
+   "query": "payroll calculator quebec",
+   "clicks": 0,
+   "impressions": 1,
+   "position": 51
+  },
+  {
+   "date": "2026-05-20",
+   "query": "payroll calculator winnipeg",
+   "clicks": 0,
+   "impressions": 1,
+   "position": 53
+  },
+  {
+   "date": "2026-05-20",
+   "query": "quebec paycheck calculator",
+   "clicks": 0,
+   "impressions": 1,
+   "position": 9
+  },
+  {
+   "date": "2026-05-20",
+   "query": "salary calculator montreal",
+   "clicks": 0,
+   "impressions": 2,
+   "position": 34
+  },
+  {
+   "date": "2026-05-20",
+   "query": "take home on 65k",
+   "clicks": 0,
+   "impressions": 2,
+   "position": 5.5
+  },
+  {
+   "date": "2026-05-20",
+   "query": "what is $65 an hour annually",
+   "clicks": 0,
+   "impressions": 1,
+   "position": 1
+  },
+  {
+   "date": "2026-05-21",
+   "query": "100 000 salary after taxes",
+   "clicks": 0,
+   "impressions": 1,
+   "position": 8
+  },
+  {
+   "date": "2026-05-21",
+   "query": "100000 after taxes",
+   "clicks": 0,
+   "impressions": 1,
+   "position": 47
+  },
+  {
+   "date": "2026-05-21",
+   "query": "100000 gross to net",
+   "clicks": 0,
+   "impressions": 1,
+   "position": 12
+  },
+  {
+   "date": "2026-05-21",
+   "query": "100k after tax quebec",
+   "clicks": 0,
+   "impressions": 1,
+   "position": 10
+  },
+  {
+   "date": "2026-05-21",
+   "query": "50000 after tax ontario",
+   "clicks": 0,
+   "impressions": 5,
+   "position": 12
+  },
+  {
+   "date": "2026-05-21",
+   "query": "50k salary after taxes ontario",
+   "clicks": 0,
+   "impressions": 1,
+   "position": 17
+  },
+  {
+   "date": "2026-05-21",
+   "query": "65000 after tax",
+   "clicks": 0,
+   "impressions": 1,
+   "position": 7
+  },
+  {
+   "date": "2026-05-21",
+   "query": "65000 after tax alberta",
+   "clicks": 0,
+   "impressions": 1,
+   "position": 9
+  },
+  {
+   "date": "2026-05-21",
+   "query": "cra payroll calculator 2025",
+   "clicks": 0,
+   "impressions": 1,
+   "position": 79
+  },
+  {
+   "date": "2026-05-21",
+   "query": "holiday payroll calculator",
+   "clicks": 0,
+   "impressions": 2,
+   "position": 91.5
+  },
+  {
+   "date": "2026-05-21",
+   "query": "ontario after tax pay",
+   "clicks": 0,
+   "impressions": 3,
+   "position": 20.67
+  },
+  {
+   "date": "2026-05-21",
+   "query": "salary after tax ontario",
+   "clicks": 0,
+   "impressions": 3,
+   "position": 15
+  },
+  {
+   "date": "2026-05-21",
+   "query": "take home pay ontario",
+   "clicks": 0,
+   "impressions": 1,
+   "position": 17
+  },
+  {
+   "date": "2026-05-21",
+   "query": "vacation pay calculator alberta",
+   "clicks": 0,
+   "impressions": 1,
+   "position": 74
+  },
+  {
+   "date": "2026-05-22",
+   "query": "canada payroll calculator",
+   "clicks": 0,
+   "impressions": 1,
+   "position": 90
+  },
+  {
+   "date": "2026-05-22",
+   "query": "ontario take home pay",
+   "clicks": 0,
+   "impressions": 1,
+   "position": 18
+  },
+  {
+   "date": "2026-05-22",
+   "query": "pay after tax ontario",
+   "clicks": 0,
+   "impressions": 2,
+   "position": 19
+  },
+  {
+   "date": "2026-05-22",
+   "query": "payroll calculator",
+   "clicks": 0,
+   "impressions": 1,
+   "position": 71
+  },
+  {
+   "date": "2026-05-22",
+   "query": "payroll deductions online calculator 2025",
+   "clicks": 0,
+   "impressions": 1,
+   "position": 72
+  },
+  {
+   "date": "2026-05-23",
+   "query": "cra payroll calculator",
+   "clicks": 0,
+   "impressions": 1,
+   "position": 85
+  },
+  {
+   "date": "2026-05-23",
+   "query": "paycheck deduction calculator ontario",
+   "clicks": 0,
+   "impressions": 1,
+   "position": 85
+  },
+  {
+   "date": "2026-05-23",
+   "query": "payroll calculator ontario free",
+   "clicks": 0,
+   "impressions": 1,
+   "position": 61
+  },
+  {
+   "date": "2026-05-23",
+   "query": "payroll calculator ottawa",
+   "clicks": 0,
+   "impressions": 1,
+   "position": 66
+  },
+  {
+   "date": "2026-05-23",
+   "query": "stat holiday payroll calculator",
+   "clicks": 0,
+   "impressions": 1,
+   "position": 97
+  },
+  {
+   "date": "2026-05-24",
+   "query": "pay period calculator",
+   "clicks": 0,
+   "impressions": 1,
+   "position": 77
+  },
+  {
+   "date": "2026-05-24",
+   "query": "salary insights",
+   "clicks": 0,
+   "impressions": 1,
+   "position": 60
+  },
+  {
+   "date": "2026-05-24",
+   "query": "vacation pay calculator alberta",
+   "clicks": 0,
+   "impressions": 1,
+   "position": 74
+  },
+  {
+   "date": "2026-05-26",
+   "query": "cra payroll deductions calculator 2026",
+   "clicks": 0,
+   "impressions": 1,
+   "position": 81
+  },
+  {
+   "date": "2026-05-26",
+   "query": "free payroll calculator",
+   "clicks": 0,
+   "impressions": 1,
+   "position": 49
+  },
+  {
+   "date": "2026-05-26",
+   "query": "hourly paycheck calculator canada",
+   "clicks": 0,
+   "impressions": 1,
+   "position": 63
+  },
+  {
+   "date": "2026-05-26",
+   "query": "online payroll calculator",
+   "clicks": 0,
+   "impressions": 1,
+   "position": 82
+  },
+  {
+   "date": "2026-05-26",
+   "query": "payroll calculator",
+   "clicks": 0,
+   "impressions": 1,
+   "position": 73
+  },
+  {
+   "date": "2026-05-26",
+   "query": "payroll calculator online",
+   "clicks": 0,
+   "impressions": 1,
+   "position": 82
+  },
+  {
+   "date": "2026-05-26",
+   "query": "retro pay calculator canada",
+   "clicks": 0,
+   "impressions": 1,
+   "position": 57
+  },
+  {
+   "date": "2026-05-26",
+   "query": "retroactive pay calculator canada",
+   "clicks": 0,
+   "impressions": 1,
+   "position": 46
+  },
+  {
+   "date": "2026-05-27",
+   "query": "calculate payroll for employee",
+   "clicks": 0,
+   "impressions": 1,
+   "position": 63
+  },
+  {
+   "date": "2026-05-27",
+   "query": "canada paycheck calculator",
+   "clicks": 0,
+   "impressions": 1,
+   "position": 86
+  },
+  {
+   "date": "2026-05-27",
+   "query": "canadian payroll deductions calculator",
+   "clicks": 0,
+   "impressions": 1,
+   "position": 78
+  },
+  {
+   "date": "2026-05-27",
+   "query": "cra online payroll calculator",
+   "clicks": 0,
+   "impressions": 1,
+   "position": 88
+  },
+  {
+   "date": "2026-05-27",
+   "query": "cra payroll calculator",
+   "clicks": 0,
+   "impressions": 1,
+   "position": 86
+  },
+  {
+   "date": "2026-05-27",
+   "query": "online payroll calculator alberta",
+   "clicks": 0,
+   "impressions": 1,
+   "position": 62
+  },
+  {
+   "date": "2026-05-27",
+   "query": "pay stubs calculator",
+   "clicks": 0,
+   "impressions": 1,
+   "position": 83
+  },
+  {
+   "date": "2026-05-27",
+   "query": "payroll calculation",
+   "clicks": 0,
+   "impressions": 1,
+   "position": 47
+  },
+  {
+   "date": "2026-05-27",
+   "query": "payroll calculator",
+   "clicks": 0,
+   "impressions": 1,
+   "position": 68
+  },
+  {
+   "date": "2026-05-27",
+   "query": "payroll calculator calgary",
+   "clicks": 0,
+   "impressions": 1,
+   "position": 64
+  },
+  {
+   "date": "2026-05-27",
+   "query": "payroll calculator canada",
+   "clicks": 0,
+   "impressions": 1,
+   "position": 71
+  },
+  {
+   "date": "2026-05-27",
+   "query": "payroll calculator nl",
+   "clicks": 0,
+   "impressions": 1,
+   "position": 78
+  },
+  {
+   "date": "2026-05-27",
+   "query": "payroll calculator ottawa",
+   "clicks": 0,
+   "impressions": 2,
+   "position": 57
+  },
+  {
+   "date": "2026-05-27",
+   "query": "payroll deduction calculator alberta",
+   "clicks": 0,
+   "impressions": 1,
+   "position": 76
+  },
+  {
+   "date": "2026-05-27",
+   "query": "payroll deductions calculator alberta",
+   "clicks": 0,
+   "impressions": 1,
+   "position": 63
+  },
+  {
+   "date": "2026-05-27",
+   "query": "statutory pay calculator",
+   "clicks": 0,
+   "impressions": 1,
+   "position": 81
+  },
+  {
+   "date": "2026-05-28",
+   "query": "calculate employee payroll taxes",
+   "clicks": 0,
+   "impressions": 1,
+   "position": 56
+  },
+  {
+   "date": "2026-05-28",
+   "query": "canada hourly wage calculator",
+   "clicks": 0,
+   "impressions": 1,
+   "position": 64
+  },
+  {
+   "date": "2026-05-28",
+   "query": "canada paycheck",
+   "clicks": 0,
+   "impressions": 1,
+   "position": 53
+  },
+  {
+   "date": "2026-05-28",
+   "query": "canada payroll calculation",
+   "clicks": 0,
+   "impressions": 1,
+   "position": 51
+  },
+  {
+   "date": "2026-05-28",
+   "query": "canada payroll calculator",
+   "clicks": 0,
+   "impressions": 1,
+   "position": 93
+  },
+  {
+   "date": "2026-05-28",
+   "query": "canada payroll calculator ontario",
+   "clicks": 0,
+   "impressions": 2,
+   "position": 66.5
+  },
+  {
+   "date": "2026-05-28",
+   "query": "canada payroll deduction calculator",
+   "clicks": 0,
+   "impressions": 1,
+   "position": 88
+  },
+  {
+   "date": "2026-05-28",
+   "query": "canada payroll tax calculator",
+   "clicks": 0,
+   "impressions": 2,
+   "position": 81
+  },
+  {
+   "date": "2026-05-28",
+   "query": "canadian payroll tax calculator",
+   "clicks": 0,
+   "impressions": 1,
+   "position": 79
+  },
+  {
+   "date": "2026-05-28",
+   "query": "canadian payroll tax deduction calculator",
+   "clicks": 0,
+   "impressions": 1,
+   "position": 96
+  },
+  {
+   "date": "2026-05-28",
+   "query": "canadian wage calculator",
+   "clicks": 0,
+   "impressions": 2,
+   "position": 70
+  },
+  {
+   "date": "2026-05-28",
+   "query": "cra payroll calculator",
+   "clicks": 0,
+   "impressions": 1,
+   "position": 87
+  },
+  {
+   "date": "2026-05-28",
+   "query": "cra payroll calculator 2025",
+   "clicks": 0,
+   "impressions": 1,
+   "position": 87
+  },
+  {
+   "date": "2026-05-28",
+   "query": "employee payroll tax calculator",
+   "clicks": 0,
+   "impressions": 1,
+   "position": 87
+  },
+  {
+   "date": "2026-05-28",
+   "query": "free canadian payroll calculator",
+   "clicks": 0,
+   "impressions": 2,
+   "position": 48
+  },
+  {
+   "date": "2026-05-28",
+   "query": "free online payroll calculator",
+   "clicks": 0,
+   "impressions": 2,
+   "position": 73.5
+  },
+  {
+   "date": "2026-05-28",
+   "query": "free payroll calculator",
+   "clicks": 0,
+   "impressions": 2,
+   "position": 55.5
+  },
+  {
+   "date": "2026-05-28",
+   "query": "online payroll calculator canada",
+   "clicks": 0,
+   "impressions": 1,
+   "position": 88
+  },
+  {
+   "date": "2026-05-28",
+   "query": "online payroll calculator ontario",
+   "clicks": 0,
+   "impressions": 1,
+   "position": 75
+  },
+  {
+   "date": "2026-05-28",
+   "query": "ontario payroll calculator",
+   "clicks": 0,
+   "impressions": 1,
+   "position": 97
+  },
+  {
+   "date": "2026-05-28",
+   "query": "paycheck calculator",
+   "clicks": 0,
+   "impressions": 3,
+   "position": 84
+  },
+  {
+   "date": "2026-05-28",
+   "query": "paycheck calculator canada",
+   "clicks": 0,
+   "impressions": 1,
+   "position": 79
+  },
+  {
+   "date": "2026-05-28",
+   "query": "paycheck estimator canada",
+   "clicks": 0,
+   "impressions": 3,
+   "position": 63
+  },
+  {
+   "date": "2026-05-28",
+   "query": "paycheque calculator",
+   "clicks": 0,
+   "impressions": 1,
+   "position": 83
+  },
+  {
+   "date": "2026-05-28",
+   "query": "payroll calc",
+   "clicks": 0,
+   "impressions": 1,
+   "position": 65
+  },
+  {
+   "date": "2026-05-28",
+   "query": "payroll calculator",
+   "clicks": 0,
+   "impressions": 1,
+   "position": 68
+  },
+  {
+   "date": "2026-05-28",
+   "query": "payroll calculator alberta",
+   "clicks": 0,
+   "impressions": 2,
+   "position": 63.5
+  },
+  {
+   "date": "2026-05-28",
+   "query": "payroll calculator cra",
+   "clicks": 0,
+   "impressions": 1,
+   "position": 82
+  },
+  {
+   "date": "2026-05-28",
+   "query": "payroll calculator edmonton",
+   "clicks": 0,
+   "impressions": 1,
+   "position": 66
+  },
+  {
+   "date": "2026-05-28",
+   "query": "payroll calculator in ontario",
+   "clicks": 0,
+   "impressions": 2,
+   "position": 75.5
+  },
+  {
+   "date": "2026-05-28",
+   "query": "payroll calculator montreal",
+   "clicks": 0,
+   "impressions": 2,
+   "position": 78.5
+  },
+  {
+   "date": "2026-05-28",
+   "query": "payroll calculator ontario",
+   "clicks": 0,
+   "impressions": 2,
+   "position": 74.5
+  },
+  {
+   "date": "2026-05-28",
+   "query": "payroll calculator ontario free",
+   "clicks": 0,
+   "impressions": 2,
+   "position": 59
+  },
+  {
+   "date": "2026-05-28",
+   "query": "payroll calculator saskatchewan",
+   "clicks": 0,
+   "impressions": 1,
+   "position": 34
+  },
+  {
+   "date": "2026-05-28",
+   "query": "payroll calculator winnipeg",
+   "clicks": 0,
+   "impressions": 2,
+   "position": 68.5
+  },
+  {
+   "date": "2026-05-28",
+   "query": "payroll deductions calculator saskatchewan",
+   "clicks": 0,
+   "impressions": 2,
+   "position": 55
+  },
+  {
+   "date": "2026-05-28",
+   "query": "payroll online calculator",
+   "clicks": 0,
+   "impressions": 1,
+   "position": 81
+  },
+  {
+   "date": "2026-05-28",
+   "query": "paystub calculator canada",
+   "clicks": 0,
+   "impressions": 2,
+   "position": 77
+  },
+  {
+   "date": "2026-05-28",
+   "query": "paystub calculator ontario",
+   "clicks": 0,
+   "impressions": 1,
+   "position": 76
+  },
+  {
+   "date": "2026-05-28",
+   "query": "public holiday pay calculator",
+   "clicks": 0,
+   "impressions": 1,
+   "position": 93
+  },
+  {
+   "date": "2026-05-28",
+   "query": "salary calculator cra",
+   "clicks": 0,
+   "impressions": 1,
+   "position": 77
+  },
+  {
+   "date": "2026-05-28",
+   "query": "salary forecast",
+   "clicks": 0,
+   "impressions": 2,
+   "position": 79
+  },
+  {
+   "date": "2026-05-28",
+   "query": "statutory pay calculator",
+   "clicks": 0,
+   "impressions": 1,
+   "position": 84
+  },
+  {
+   "date": "2026-05-28",
+   "query": "vacation pay calculator alberta",
+   "clicks": 0,
+   "impressions": 1,
+   "position": 74
+  },
+  {
+   "date": "2026-05-29",
+   "query": "canada payroll calculator",
+   "clicks": 0,
+   "impressions": 1,
+   "position": 95
+  },
+  {
+   "date": "2026-05-29",
+   "query": "cra payroll calculator 2026",
+   "clicks": 0,
+   "impressions": 1,
+   "position": 75
+  },
+  {
+   "date": "2026-05-29",
+   "query": "employee payroll calculator",
+   "clicks": 0,
+   "impressions": 1,
+   "position": 82
+  },
+  {
+   "date": "2026-05-29",
+   "query": "free payroll calculator ontario",
+   "clicks": 0,
+   "impressions": 1,
+   "position": 62
+  },
+  {
+   "date": "2026-05-29",
+   "query": "payroll calculator",
+   "clicks": 0,
+   "impressions": 1,
+   "position": 71
+  },
+  {
+   "date": "2026-05-29",
+   "query": "stat holiday payroll calculator",
+   "clicks": 0,
+   "impressions": 2,
+   "position": 88.5
+  },
+  {
+   "date": "2026-05-29",
+   "query": "stat pay calculator",
+   "clicks": 0,
+   "impressions": 1,
+   "position": 92
+  },
+  {
+   "date": "2026-05-30",
+   "query": "cra payroll calculator 2024",
+   "clicks": 0,
+   "impressions": 1,
+   "position": 72
+  },
+  {
+   "date": "2026-05-30",
+   "query": "cra wages calculator",
+   "clicks": 0,
+   "impressions": 1,
+   "position": 87
+  },
+  {
+   "date": "2026-05-30",
+   "query": "how will rrsp contribution limits affect my tax deductions in 2025 and beyond?",
+   "clicks": 0,
+   "impressions": 1,
+   "position": 12
+  },
+  {
+   "date": "2026-05-30",
+   "query": "payroll calculator cra",
+   "clicks": 0,
+   "impressions": 1,
+   "position": 84
+  },
+  {
+   "date": "2026-05-30",
+   "query": "pdoc 2025 calculator",
+   "clicks": 0,
+   "impressions": 1,
+   "position": 60
+  },
+  {
+   "date": "2026-05-30",
+   "query": "retro pay calculator canada",
+   "clicks": 0,
+   "impressions": 1,
+   "position": 58
+  },
+  {
+   "date": "2026-05-30",
+   "query": "retroactive pay calculator canada",
+   "clicks": 0,
+   "impressions": 1,
+   "position": 39
+  },
+  {
+   "date": "2026-05-30",
+   "query": "stat pay calculator",
+   "clicks": 0,
+   "impressions": 1,
+   "position": 94
+  },
+  {
+   "date": "2026-05-31",
+   "query": "calculate payroll",
+   "clicks": 0,
+   "impressions": 1,
+   "position": 47
+  },
+  {
+   "date": "2026-05-31",
+   "query": "calculator paycheck",
+   "clicks": 0,
+   "impressions": 1,
+   "position": 72
+  },
+  {
+   "date": "2026-05-31",
+   "query": "pay period calculator",
+   "clicks": 0,
+   "impressions": 1,
+   "position": 76
+  },
+  {
+   "date": "2026-05-31",
+   "query": "payroll calculations",
+   "clicks": 0,
+   "impressions": 1,
+   "position": 70
+  },
+  {
+   "date": "2026-05-31",
+   "query": "payroll calculator",
+   "clicks": 0,
+   "impressions": 1,
+   "position": 69
+  },
+  {
+   "date": "2026-05-31",
+   "query": "payroll check calculator",
+   "clicks": 0,
+   "impressions": 1,
+   "position": 86
+  },
+  {
+   "date": "2026-05-31",
+   "query": "pdoc calculator 2025",
+   "clicks": 0,
+   "impressions": 1,
+   "position": 39
+  },
+  {
+   "date": "2026-05-31",
+   "query": "salary guide calculator",
+   "clicks": 0,
+   "impressions": 1,
+   "position": 65
+  },
+  {
+   "date": "2026-06-01",
+   "query": "canadian payroll tax calculator",
+   "clicks": 0,
+   "impressions": 1,
+   "position": 78
+  },
+  {
+   "date": "2026-06-01",
+   "query": "canadian payroll tax deduction calculator",
+   "clicks": 0,
+   "impressions": 1,
+   "position": 95
+  },
+  {
+   "date": "2026-06-01",
+   "query": "cra calculator payroll",
+   "clicks": 0,
+   "impressions": 1,
+   "position": 91
+  },
+  {
+   "date": "2026-06-01",
+   "query": "free online payroll calculator canada",
+   "clicks": 0,
+   "impressions": 1,
+   "position": 50
+  },
+  {
+   "date": "2026-06-01",
+   "query": "free payroll calculator",
+   "clicks": 0,
+   "impressions": 1,
+   "position": 70
+  },
+  {
+   "date": "2026-06-01",
+   "query": "payroll hourly calculator",
+   "clicks": 0,
+   "impressions": 1,
+   "position": 88
+  },
+  {
+   "date": "2026-06-02",
+   "query": "biweekly payroll calculator",
+   "clicks": 0,
+   "impressions": 1,
+   "position": 74
+  },
+  {
+   "date": "2026-06-02",
+   "query": "calculate payroll free",
+   "clicks": 0,
+   "impressions": 1,
+   "position": 54
+  },
+  {
+   "date": "2026-06-02",
+   "query": "calculate payroll ontario",
+   "clicks": 0,
+   "impressions": 1,
+   "position": 75
+  },
+  {
+   "date": "2026-06-02",
+   "query": "calculator payroll",
+   "clicks": 0,
+   "impressions": 1,
+   "position": 72
+  },
+  {
+   "date": "2026-06-02",
+   "query": "canadian payroll calculator",
+   "clicks": 0,
+   "impressions": 1,
+   "position": 71
+  },
+  {
+   "date": "2026-06-02",
+   "query": "cra payroll calculator",
+   "clicks": 0,
+   "impressions": 1,
+   "position": 91
+  },
+  {
+   "date": "2026-06-02",
+   "query": "estimated payroll tax",
+   "clicks": 0,
+   "impressions": 1,
+   "position": 73
+  },
+  {
+   "date": "2026-06-02",
+   "query": "gov payroll calculator",
+   "clicks": 0,
+   "impressions": 1,
+   "position": 45
+  },
+  {
+   "date": "2026-06-02",
+   "query": "holiday payroll calculator",
+   "clicks": 0,
+   "impressions": 1,
+   "position": 90
+  },
+  {
+   "date": "2026-06-02",
+   "query": "payroll calculator alberta",
+   "clicks": 0,
+   "impressions": 1,
+   "position": 68
+  },
+  {
+   "date": "2026-06-02",
+   "query": "payroll estimator",
+   "clicks": 0,
+   "impressions": 1,
+   "position": 76
+  },
+  {
+   "date": "2026-06-02",
+   "query": "payroll online calculator",
+   "clicks": 0,
+   "impressions": 1,
+   "position": 78
+  },
+  {
+   "date": "2026-06-02",
+   "query": "retro pay calculator canada",
+   "clicks": 0,
+   "impressions": 1,
+   "position": 51
+  },
+  {
+   "date": "2026-06-02",
+   "query": "retroactive pay calculator canada",
+   "clicks": 0,
+   "impressions": 1,
+   "position": 52
+  },
+  {
+   "date": "2026-06-03",
+   "query": "online payroll calculator",
+   "clicks": 0,
+   "impressions": 1,
+   "position": 85
+  },
+  {
+   "date": "2026-06-03",
+   "query": "ontario payroll",
+   "clicks": 0,
+   "impressions": 1,
+   "position": 55
+  },
+  {
+   "date": "2026-06-03",
+   "query": "payroll alberta calculator",
+   "clicks": 0,
+   "impressions": 1,
+   "position": 65
+  },
+  {
+   "date": "2026-06-03",
+   "query": "payroll calculator",
+   "clicks": 0,
+   "impressions": 2,
+   "position": 71.5
+  },
+  {
+   "date": "2026-06-03",
+   "query": "payroll calculator online",
+   "clicks": 0,
+   "impressions": 1,
+   "position": 80
+  },
+  {
+   "date": "2026-06-03",
+   "query": "payroll tax calculator canada",
+   "clicks": 0,
+   "impressions": 1,
+   "position": 86
+  },
+  {
+   "date": "2026-06-03",
+   "query": "simplepay calculator",
+   "clicks": 0,
+   "impressions": 1,
+   "position": 58
+  },
+  {
+   "date": "2026-06-03",
+   "query": "vacation pay calculator alberta",
+   "clicks": 0,
+   "impressions": 1,
+   "position": 77
+  },
+  {
+   "date": "2026-06-04",
+   "query": "ontario payroll calculator",
+   "clicks": 0,
+   "impressions": 1,
+   "position": 86
+  },
+  {
+   "date": "2026-06-04",
+   "query": "stat holiday payroll calculator",
+   "clicks": 0,
+   "impressions": 1,
+   "position": 87
+  },
+  {
+   "date": "2026-06-25",
+   "query": "100k a year hourly after taxes",
+   "clicks": 0,
+   "impressions": 1,
+   "position": 1
+  }
+ ]
+}
