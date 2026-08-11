@@ -224,13 +224,13 @@ CPP2 is built into the CanPay Insights calculator. Enter your salary and provinc
   {
     id: 'study-3',
     slug: 'how-much-cpp-will-i-pay-2026',
-    title: 'How Much CPP Will I Pay in 2026? (Contributions by Salary)',
+    title: 'CPP Contributions 2026: Rates, Maximums, and What You Pay by Salary',
     subtitle: 'Your exact CPP and CPP2 contribution at every income level, from $40,000 to $150,000.',
     excerpt:
-      'On a $60,000 salary you pay about $3,362 in CPP for the year; CPP maxes out at roughly $4,341 once you earn around $90,000. Here is the full CPP contribution table by salary for 2025/2026.',
-    metaTitle: 'How Much CPP Will I Pay in 2026? CPP Contributions by Salary',
+      'CPP costs 5.95% between $3,500 and $74,600 — a maximum of $4,230.45 — plus 4% CPP2 up to $85,000, another $416. The most anyone pays in 2026 is $4,646.45, reached at a salary of $85,000.',
+    metaTitle: 'CPP 2026: Rates, Maximum Contribution and Cost by Salary',
     metaDescription:
-      'See exactly how much CPP you pay by salary in 2025/2026 — from $40k to $150k, including CPP2. On $60,000 you pay about $3,362; CPP maxes out around $4,341.',
+      'The 2026 CPP maximum is $4,230.45 on earnings to $74,600, plus $416 of CPP2 to $85,000 — $4,646.45 in total. See what you pay at every salary level.',
     keywords: [
       'how much cpp will i pay',
       'cpp contribution by salary',
@@ -263,6 +263,21 @@ CPP2 is built into the CanPay Insights calculator. Enter your salary and provinc
       },
     ],
     content: `
+## 2026 CPP rates and maximums at a glance
+
+| | Rate | Applies to | Maximum you pay |
+| --- | --- | --- | --- |
+| **CPP** | 5.95% | $3,500 – $74,600 | **$4,230.45** |
+| **CPP2** | 4.00% | $74,600 – $85,000 | **$416.00** |
+| **Combined** | | | **$4,646.45** |
+
+Those are the employee amounts. Your employer pays the same again, so twice that
+goes into your CPP account. Self-employed workers pay both halves — $9,292.90 at
+the maximum.
+
+You hit the maximum once you earn $85,000; below that you pay less, and the table
+below shows exactly how much at each salary.
+
 ## How much CPP you pay, by salary
 
 CPP (the Canada Pension Plan) takes **5.95% of your earnings** between the $3,500 basic exemption and the first ceiling ($74,600 in 2026). Earn above that and you also pay **CPP2** — an extra 4% up to a second ceiling. Here is what that works out to at each income level for 2026:
