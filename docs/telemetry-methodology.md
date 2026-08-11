@@ -110,3 +110,19 @@ elapsed `same-day` … `over-year`.
 - Each year's **tax engine constants and wage benchmarks** are archived to
   `data-archive/vintages/YYYY.json`, so any historical take-home figure can be
   recomputed under the rules that applied at the time.
+
+### 2026-08-11 — where the visit started
+
+Added `entry_path` and `referrer_path`: the path on **this site** the visitor was
+on before a calculation, so "which article sends people to the calculator" can be
+answered separately from "which article gets read".
+
+- Same-origin paths only. External referrers are dropped entirely rather than
+  trimmed, because a referring URL can carry the user's search terms or a token
+  in its query string.
+- Query strings and fragments are never stored; the path is capped at 200 chars.
+- `entry_path` lives in sessionStorage, so it survives moving from an article to
+  the calculator within a tab and disappears when the tab closes — the same
+  lifetime as the visit id, never a cross-visit identifier.
+- Not backfillable. Rows written before this date have both fields null, and any
+  "articles that convert" figure starts from this date, not from launch.

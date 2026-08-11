@@ -214,6 +214,52 @@ function isOptedOut(): boolean {
   }
 }
 
+
+/**
+ * Where on this site the visitor was before the calculation.
+ *
+ * `entry_path` is the first page of the tab's visit, kept in sessionStorage so
+ * it survives navigating from an article into the calculator but disappears
+ * when the tab closes — the same lifetime as the visit id, and never a
+ * cross-visit identifier.
+ *
+ * Only same-origin PATHS are recorded. An external referrer can carry the
+ * user's search terms or an auth token in its query string, so those are
+ * dropped entirely rather than trimmed.
+ */
+const ENTRY_KEY = 'canpay_entry_path';
+
+function samePath(url: string): string | null {
+  try {
+    const u = new URL(url, window.location.origin);
+    if (u.origin !== window.location.origin) return null;
+    return u.pathname.slice(0, 200) || '/';
+  } catch {
+    return null;
+  }
+}
+
+function getEntryPath(): string | null {
+  try {
+    const stored = sessionStorage.getItem(ENTRY_KEY);
+    if (stored) return stored;
+    // First page of this visit: whichever page is loading right now.
+    const here = window.location.pathname.slice(0, 200) || '/';
+    sessionStorage.setItem(ENTRY_KEY, here);
+    return here;
+  } catch {
+    return null; // private mode / storage blocked
+  }
+}
+
+function getReferrerPath(): string | null {
+  try {
+    return document.referrer ? samePath(document.referrer) : null;
+  } catch {
+    return null;
+  }
+}
+
 const sentThisPageLoad = new Set<string>();
 let debounceTimer: ReturnType<typeof setTimeout> | null = null;
 
@@ -354,6 +400,8 @@ export function recordCalcEvent(e: {
         seq: seqCounter,
         // User's LOCAL clock (not UTC): powers "what hour / which weekday do
         // Canadians check their pay" and payday-cycle analysis.
+        entry_path: getEntryPath(),
+        referrer_path: getReferrerPath(),
         local_hour: new Date().getHours(),
         local_dow: new Date().getDay(),
       })

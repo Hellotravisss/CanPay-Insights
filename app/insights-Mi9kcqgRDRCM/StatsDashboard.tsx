@@ -6,6 +6,7 @@ import Donut from './Donut';
 import { countryName } from './countries';
 import TrendChart from './TrendChart';
 import SearchPanel from './SearchPanel';
+import ContentPanel from './ContentPanel';
 
 // Private data room. Deliberately styled the way a published data story would
 // look — this doubles as the visual rehearsal for the eventual public /data
@@ -375,6 +376,7 @@ export default function StatsDashboard() {
 
         {/* What people searched to get here */}
         <SearchPanel />
+        <ContentPanel />
 
         <p className="mt-10 text-center text-xs text-slate-400">
           Live from the anonymous events table · {stats.excluded_rows} owner/test event
