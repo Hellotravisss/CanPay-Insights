@@ -167,7 +167,9 @@ const TOPICS: Topic[] = [
       /\bfederal\b.{0,24}\b(bracket|rate|tax|BPA)\b|\b(bracket|rate|tax)\b.{0,24}\bfederal\b|imp[oô]t f[ée]d[ée]ral|palier|联邦/i,
     rates: C.FEDERAL_BRACKETS.map((b) => b.rate * 100),
     amounts: [
-      ...C.FEDERAL_BRACKETS.filter((b) => isFinite(b.threshold)).map((b) => b.threshold),
+      // Bracket tables print both edges: "up to 58,523" and "58,524 – …" are
+      // the same threshold, one dollar apart, and both are correct.
+      ...C.FEDERAL_BRACKETS.filter((b) => isFinite(b.threshold)).flatMap((b) => [b.threshold, b.threshold + 1]),
       C.FEDERAL_BASIC_PERSONAL_AMOUNT,
       FEDERAL_BPA_CREDIT,
       // "credits reduce your tax by $2,959" = the federal and provincial ones together
@@ -183,7 +185,7 @@ const TOPICS: Topic[] = [
     rates: Object.values(C.PROVINCIAL_DATA).flatMap((p) => p.brackets.map((b) => b.rate * 100)),
     amounts: Object.values(C.PROVINCIAL_DATA).flatMap((p) => [
       p.basicPersonalAmount,
-      ...p.brackets.filter((b) => isFinite(b.threshold)).map((b) => b.threshold),
+      ...p.brackets.filter((b) => isFinite(b.threshold)).flatMap((b) => [b.threshold, b.threshold + 1]),
       p.basicPersonalAmount * p.brackets[0].rate,
       p.basicPersonalAmount * p.brackets[0].rate + FEDERAL_BPA_CREDIT,
     ]),
@@ -339,17 +341,39 @@ function auditText(slug: string, field: string, rawText: string, out: Finding[],
     }
   }
 
+  // A markdown table separates its words from its numbers: "Rate" and
+  // "Maximum" live in the header row, the figures in the data rows below.
+  // Judged line by line, every data row looks like it states no rule and is
+  // skipped — a planted $4,341 sailed through inside a CPP rates table. So a
+  // table row is GATED on its header + itself, while its figures and years
+  // are still read from the row alone.
+  const gate = all.map((line, i) => {
+    if (!line.startsWith('|')) return line;
+    let top = i;
+    while (top > 0 && all[top - 1].startsWith('|')) top--;
+    // The table's subject often lives just above it ("## Les paliers d'impôt
+    // fédéral 2026" over a header of "| Revenu imposable | Taux |"), so the
+    // line introducing the table joins the gate as well.
+    const intro = top > 0 ? all[top - 1] : '';
+    return [intro, top === i ? '' : all[top], line].filter(Boolean).join(' ');
+  });
+
   all.forEach((s, i) => {
-    const topics = TOPICS.filter((t) => t.mentions.test(s) && (!t.requires || t.requires.test(s)));
-    if (!topics.length || !STATES_A_RULE.test(s)) return;
+    const g = gate[i];
+    const topics = TOPICS.filter((t) => t.mentions.test(g) && (!t.requires || t.requires.test(g)));
+    if (!topics.length || !STATES_A_RULE.test(g)) return;
+    // Commission/bonus example tables stack one income on another and quote
+    // the marginal outcome — arithmetic across two incomes at once, which the
+    // per-salary engine derivation cannot reproduce. Documented blind spot.
+    if (/\bcommission\b/i.test(g)) return;
     // A sentence about how much a raise adds is doing arithmetic across two
     // scenarios, not quoting a rule; there is nothing here to compare against.
-    if (DESCRIBES_A_CHANGE.test(s)) return;
+    if (DESCRIBES_A_CHANGE.test(g)) return;
 
     const acceptedAmounts = [...topics.flatMap((t) => t.amounts), ...derivedMoney];
     const acceptedRates = topics.flatMap((t) => t.rates);
     // Only a sentence that says it is reporting a computed rate may lean on one.
-    if (DESCRIBES_A_COMPUTED_RATE.test(s)) acceptedRates.push(...derivedRates);
+    if (DESCRIBES_A_COMPUTED_RATE.test(g)) acceptedRates.push(...derivedRates);
 
     // A sentence dated to a different year — "in 2025", or "announced for
     // 2027" — is not making a claim about the engine's year, so it cannot be
@@ -360,14 +384,22 @@ function auditText(slug: string, field: string, rawText: string, out: Finding[],
     const historical =
       years.length > 0 && !years.includes(CURRENT_YEAR) && years.some((y) => y !== CURRENT_YEAR);
 
-    const figures = [...s.matchAll(MONEY), ...s.matchAll(PERCENT)].map((m) => ({
+    // "14 % (était 15 %)" quotes last year's value in passing; the
+    // parenthetical is commentary, not a claim about the current year.
+    const sf = s.replace(/\((?:était|was|previously|anciennement)[^)]*\)/gi, '');
+    const figures = [...sf.matchAll(MONEY), ...sf.matchAll(PERCENT)].map((m) => ({
       raw: m[0].trim(),
       printed: m[1].replace(/,/g, ''),
       v: num(m[1]),
-      // An hourly wage is an input like a salary, just a smaller number.
-      isWageInput: /^\s*(an hour|per hour|\/\s?hr|\/\s?hour|hourly|minimum wage)/i.test(
-        s.slice(m.index + m[0].length),
-      ),
+      // An hourly wage is an input like a salary, just a smaller number; a
+      // trailing "+" ("$70,000+") marks an income bucket, not a stated rule.
+      isWageInput:
+        /^\s*(an hour|per hour|\/\s?hr|\/\s?hour|hourly|minimum wage)|^\+/i.test(
+          sf.slice(m.index + m[0].length),
+        ) ||
+        // In a wage table the hourly figures carry no per-hour marker of their
+        // own — the header says it once for the whole column.
+        (m[0].startsWith('$') && num(m[1]) < 100 && /minimum wage|hourly|per hour|salaire minimum|时薪|最低工资/i.test(g)),
     }));
 
     for (const f of figures) {
@@ -375,7 +407,7 @@ function auditText(slug: string, field: string, rawText: string, out: Finding[],
       // system — unless the sentence presents it as a limit. Judging every
       // example salary would bury the findings that matter.
       if (f.isWageInput) continue;
-      if (f.raw.startsWith('$') && f.v >= 15000 && !NAMES_A_LIMIT.test(s)) continue;
+      if (f.raw.startsWith('$') && f.v >= 15000 && !NAMES_A_LIMIT.test(g)) continue;
       stats.checked++;
       const pool = f.raw.endsWith('%') ? acceptedRates : acceptedAmounts;
       if (pool.some((a) => matchesAtPrintedPrecision(f.printed, a))) continue;
@@ -458,6 +490,8 @@ if (process.argv.includes('--selftest')) {
     ['The lowest federal tax rate is 15% on the first $58,523.', '15%'],
     ['Ontario’s basic personal amount is $12,747.', '$12,747'],
     ['The QPP rate in Quebec is 6.4% of pensionable earnings.', '6.4%'],
+    ['| | Rate | Applies to | Maximum you pay |\n| --- | --- | --- | --- |\n| **CPP** | 5.95% | $3,500 – $74,600 | **$4,341.00** |', '$4,341.00'],
+    ["## Les paliers d'impôt fédéral 2026\n| Revenu imposable | Taux 2026 |\n| --- | --- |\n| Jusqu'à 57 375 $ | **14 %** (était 15 %) |", '$57,375'],
     ['QPIP premiums are 0.494% of insurable earnings.', '0.494%'],
   ];
   /**
