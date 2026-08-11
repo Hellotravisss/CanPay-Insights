@@ -6,6 +6,7 @@ import ShareLinks from '../../components/ShareLinks';
 import SalaryBreakdownPanel from '../../components/SalaryBreakdownPanel';
 import JobsAtThisSalary from '../../components/JobsAtThisSalary';
 import PartnerSlot from '../../components/PartnerSlot';
+import SisterSiteCard from '../../components/SisterSiteCard';
 import { getLandingPage, landingPages } from '../landing-page-data';
 
 const BASE_URL = 'https://canpayinsights.ca';
@@ -340,6 +341,9 @@ export default async function LandingPage({ params }: Props) {
               title={page.title}
               description={page.description}
             />
+
+            {/* Sister site — U.S. edition, honest same-team recommendation */}
+            <SisterSiteCard className="mt-6" />
           </article>
 
           <aside className="space-y-4">

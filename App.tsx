@@ -26,6 +26,7 @@ import GeminiAdvisor from './components/GeminiAdvisor';
 import UserMenu from './components/UserMenu';
 import AuthModal from './components/AuthModal';
 import LoadingOverlay from './components/LoadingOverlay';
+import SisterSiteCard from './components/SisterSiteCard';
 import { SalaryInputs, Province, CalculationMode, AnnualSalaryInputs, PayFrequency, TimesheetInputs, CalculationResult } from './types';
 import { calculateSalary, calculateFromAnnualSalary, calculateFromTimesheet } from './utils/taxEngine';
 import { useAuth, type OAuthProvider } from './hooks/useAuth';
@@ -588,9 +589,14 @@ const App: React.FC = () => {
                   </div>
                 </div>
               </section>
+
+              {/* Sister site — U.S. edition, honest same-team recommendation */}
+              <div className="mt-6">
+                <SisterSiteCard />
+              </div>
             </div>
           )}
-          
+
           {/* Calculator Page */}
           {currentPage === 'calculator' && (
             <div className="flex flex-col lg:flex-row gap-8">
