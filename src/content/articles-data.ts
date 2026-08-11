@@ -739,7 +739,7 @@ const article4: Article = {
   content: `
 ## CPP and EI Explained: What You're Paying For
 
-Every pay period, David sees deductions on his pay stub: CPP $142.47, EI $41.55. Over a year, that's nearly $4,000 gone before he even sees it. "What am I actually getting for this money?" he wonders. "Would I be better off investing it myself?"
+Every pay period, David sees deductions on his pay stub: CPP $147.61, EI $42.63. Over a year, that's nearly $5,000 gone before he even sees it. "What am I actually getting for this money?" he wonders. "Would I be better off investing it myself?"
 
 It's a fair question. CPP and EI are mandatory programs, but many Canadians don't fully understand what they're paying for or what they'll receive in return. Let's break down exactly what these deductions fund and whether they're worth the cost.
 
@@ -908,7 +908,7 @@ Request a CPP Statement of Contributions from Service Canada annually. Verify yo
 
 ### The Bottom Line
 
-David's annual CPP + EI contributions: $4,915
+David's annual CPP + EI contributions: $4,946
 
 Is it worth it?
 - CPP: Yes. Guaranteed, inflation-protected income for life. Most people receive more than they contributed.

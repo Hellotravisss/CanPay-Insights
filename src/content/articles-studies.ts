@@ -194,7 +194,7 @@ The CRA announces the new ceilings each autumn for the year ahead. The 4% rate s
 
 ## Who actually pays CPP2
 
-- **Earning under the first ceiling** (~$71,300 in 2025): you pay **no CPP2** at all.
+- **Earning under the first ceiling** ($74,600 in 2026): you pay **no CPP2** at all.
 - **Earning between the two ceilings**: you pay 4% on the amount above the first ceiling.
 - **Earning above the second ceiling**: you pay the full maximum CPP2, then contributions stop for the year.
 
@@ -202,7 +202,7 @@ So CPP2 is purely a higher-earner deduction. Someone on $60,000 never sees it; s
 
 ## What CPP2 costs you on each paycheque
 
-Because CPP2 is capped, the most an employee pays in 2025 is roughly **$396 for the year** — about $15 per bi-weekly cheque if spread evenly. Your employer pays the same amount again. It is modest, but it stacks on top of regular CPP, EI, and income tax, which is why your take-home pay can feel lower than expected once your salary crosses the first ceiling.
+Because CPP2 is capped, the most an employee pays in 2026 is **$416 for the year** — about $16 per bi-weekly cheque if spread evenly. Your employer pays the same amount again. It is modest, but it stacks on top of regular CPP, EI, and income tax, which is why your take-home pay can feel lower than expected once your salary crosses the first ceiling.
 
 ## CPP2 vs regular CPP
 

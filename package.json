@@ -7,7 +7,9 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "audit:numbers": "tsx scripts/auditNumbers.ts",
+    "audit:numbers:selftest": "tsx scripts/auditNumbers.ts --selftest"
   },
   "dependencies": {
     "@google/genai": "^1.30.0",
