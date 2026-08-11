@@ -25,6 +25,8 @@
  *   npx tsx scripts/auditNumbers.ts            # exits 1 if anything is unexplained
  *   npx tsx scripts/auditNumbers.ts --verbose  # print the sentence behind each one
  */
+import { readFileSync, readdirSync } from 'node:fs';
+import { join } from 'node:path';
 import { allArticles } from '../src/content/articles-data';
 import { getSalaryFigures, PROVINCE_SEO_CONFIGS } from '../lib/salaryFigures';
 import * as C from '../constants';
@@ -43,6 +45,10 @@ type Topic = {
   label: string;
   /** Sentence must mention this to bring the topic's figures into play. */
   mentions: RegExp;
+  /** Extra gate: mentioning the topic is not enough, the sentence must also
+   * match this. Used where the topic word appears in prose that is not about
+   * the topic's constants (RRSP investment advice vs the RRSP limit). */
+  requires?: RegExp;
   /** Percentages that are legitimate when this topic is in play. */
   rates: number[];
   /** Dollar figures that are legitimate when this topic is in play. */
@@ -67,7 +73,7 @@ const TOPICS: Topic[] = [
     label: 'CPP',
     // Deliberately not \bCPP\b: "CPP2" would not match (the digit is a word
     // character), yet a sentence about CPP2 discusses base CPP alongside it.
-    mentions: /CPP|Canada Pension Plan/i,
+    mentions: /CPP|Canada Pension Plan|RPC|Régime de pensions/i,
     rates: [C.CPP_RATE * 100, C.CPP_RATE * 100 * 2 /* employee + employer, for self-employed */],
     amounts: [
       ...perPeriod(C.CPP_MAX_CONTRIBUTION),
@@ -95,7 +101,7 @@ const TOPICS: Topic[] = [
   },
   {
     label: 'EI',
-    mentions: /\bEI\b|Employment Insurance|insurable/i,
+    mentions: /\bEI\b|\bAE\b|Employment Insurance|assurance-emploi|insurable|assurable/i,
     rates: [C.EI_RATE * 100],
     amounts: [
       ...perPeriod(C.EI_MAX_CONTRIBUTION),
@@ -113,7 +119,7 @@ const TOPICS: Topic[] = [
     // Quebec runs its own pension plan; without these the audit flags every
     // correct QPP figure as UNEXPLAINED, inviting a "fix" that breaks it.
     label: 'QPP/QPP2',
-    mentions: /QPP|Quebec Pension/i,
+    mentions: /QPP|RRQ|Quebec Pension|Régime de rentes/i,
     rates: [C.QPP_RATE * 100, C.QPP_RATE * 100 * 2, C.QPP2_RATE * 100],
     amounts: [
       ...perPeriod(C.QPP_MAX_CONTRIBUTION),
@@ -126,16 +132,39 @@ const TOPICS: Topic[] = [
   },
   {
     label: 'QPIP',
-    mentions: /QPIP|parental insurance/i,
+    mentions: /QPIP|RQAP|parental insurance|assurance parentale/i,
     rates: [C.QPIP_RATE * 100],
     amounts: [...perPeriod(C.QPIP_MAX_CONTRIBUTION), C.QPIP_MAX_INSURABLE_EARNINGS],
+  },
+  {
+    label: 'Quebec abatement',
+    mentions: /abatement|abattement|联邦税减免/i,
+    rates: [C.QUEBEC_ABATEMENT_RATE * 100],
+    amounts: [],
+  },
+  {
+    // Not payroll, but the site states them beside payroll figures (llms.txt
+    // key-facts, savings articles) and a stale limit is the same failure mode.
+    label: 'TFSA/RRSP limits',
+    mentions: /TFSA|CELI|RRSP|REER/i,
+    // Savings articles are full of worked examples ("a $10,000 contribution at
+    // a 30% marginal rate") and unrelated rates (mortgages); only a sentence
+    // about the LIMIT is stating a constant.
+    requires: /limit|plafond|room|上限/i,
+    rates: [C.RRSP_CONTRIBUTION_RATE_OF_INCOME * 100],
+    amounts: [C.TFSA_LIMIT, C.RRSP_DOLLAR_LIMIT],
   },
   {
     // The quarterly routine checks these against the CRA, so the prose quoting
     // them has to be checked too — otherwise a bracket change is corrected in
     // the engine while every article still prints last year's rate.
     label: 'Federal brackets and BPA',
-    mentions: /federal (tax )?(bracket|rate|tax)|basic personal amount|\bBPA\b/i,
+    // "federal lowest rate", "premier palier ... fédéral", "联邦最低档" — the
+    // word order varies, but bare "Federal" is NOT enough: "US Federal minimum
+    // wage" and "the Federal government" are not income-tax sentences. The
+    // keyword must appear near a tax word in either order.
+    mentions:
+      /\bfederal\b.{0,24}\b(bracket|rate|tax|BPA)\b|\b(bracket|rate|tax)\b.{0,24}\bfederal\b|imp[oô]t f[ée]d[ée]ral|palier|联邦/i,
     rates: C.FEDERAL_BRACKETS.map((b) => b.rate * 100),
     amounts: [
       ...C.FEDERAL_BRACKETS.filter((b) => isFinite(b.threshold)).map((b) => b.threshold),
@@ -149,7 +178,8 @@ const TOPICS: Topic[] = [
     // A sentence rarely says which province's BPA it means, so accept any of
     // them; the point is to catch a figure that belongs to no province at all.
     label: 'Provincial brackets and BPAs',
-    mentions: /basic personal amount|\bBPA\b|provincial (tax )?(bracket|rate)/i,
+    mentions:
+      /basic personal amount|montant personnel de base|\bBPA\b|provincial tax|provincial.{0,16}(bracket|rate)|paliers? (?:d'imposition )?(?:provinciaux|qu[ée]b[ée]cois)|imp[oô]t du Qu[ée]bec|省税/i,
     rates: Object.values(C.PROVINCIAL_DATA).flatMap((p) => p.brackets.map((b) => b.rate * 100)),
     amounts: Object.values(C.PROVINCIAL_DATA).flatMap((p) => [
       p.basicPersonalAmount,
@@ -167,20 +197,23 @@ const TOPICS: Topic[] = [
  * sentence is only examined when it is stating a rule, not doing arithmetic.
  */
 const STATES_A_RULE =
-  /\b(rate|rates|maximum|maximums|max|maxes|most|ceiling|ceilings|exemption|threshold|premium|premiums|contribution|contributions|insurable|pensionable|YMPE|YAMPE|cap|capped|bracket|brackets|BPA)\b|basic personal amount/i;
+  /\b(rate|rates|maximum|maximums|max|maxes|most|ceiling|ceilings|exemption|threshold|premium|premiums|contribution|contributions|insurable|pensionable|YMPE|YAMPE|cap|capped|bracket|brackets|BPA|limit|limits|taux|plafond|plafonds|cotisation|cotisations|palier|paliers|assurable|exonération)\b|basic personal amount|montant personnel de base|上限|免税额|费率|税率|最低档|供款|保费|封顶|减免/i;
 
 /** Negative lookahead on "k"/"K": "$50k earners" is shorthand, not a figure of $50. */
-const MONEY = /\$\s?([0-9][0-9,]*(?:\.[0-9]{1,2})?)(?![0-9]*[kK])/g;
+// The digits group must end on a digit — "jusqu'à $54,345, puis" would
+// otherwise capture the list comma into the figure.
+const MONEY = /\$\s?([0-9](?:[0-9,]*[0-9])?(?:\.[0-9]{1,2})?)(?![0-9]*[kK])/g;
 // Three decimals matters: QPIP is printed as 0.494% — at two, the regex read
 // it as "494%" and the self-test's planted stale QPIP rate slipped through.
 const PERCENT = /\b([0-9]{1,3}(?:\.[0-9]{1,3})?)\s?%/g;
 
 /** Gains and gaps are computed between two scenarios, not read off a rate table. */
-const DESCRIBES_A_CHANGE = /\b(gains?|more take-home|increase[sd]?|difference|extra|raise[sd]?)\b/i;
+const DESCRIBES_A_CHANGE =
+  /\b(gains?|more take-home|increase[sd]?|difference|extra|raise[sd]?|cut|reduced|lowered|dropped|rose|down from|up from|baisse|hausse|passe de)\b|降至|降到|升至|升到|由.{1,8}降|由.{1,8}升/i;
 
 /** Large figures are salaries being discussed unless the sentence calls them a limit. */
 const NAMES_A_LIMIT =
-  /\b(ceiling|ceilings|YMPE|YAMPE|insurable|pensionable|maximum|maximums|exemption|bracket|brackets|BPA)\b|basic personal amount/i;
+  /\b(ceiling|ceilings|YMPE|YAMPE|insurable|pensionable|maximum|maximums|exemption|bracket|brackets|BPA|limit|limits|plafond|plafonds|palier|paliers|assurable)\b|basic personal amount|montant personnel de base|上限|免税额|封顶/i;
 
 /**
  * A rate the engine derives from a salary (effective, average, marginal) must
@@ -191,6 +224,20 @@ const NAMES_A_LIMIT =
 const DESCRIBES_A_COMPUTED_RATE = /\b(effective|average|marginal|combined|overall|take-home|keeps?)\b/i;
 
 const num = (s: string) => parseFloat(s.replace(/,/g, ''));
+
+/**
+ * Canadian French prints "1 123,07 $" and "16,5 %" — space-grouped thousands
+ * (often non-breaking), decimal comma, trailing currency sign. Without this
+ * pass every figure in articles-fr.ts was simply invisible to the audit.
+ */
+function normalizeFrenchNumbers(text: string): string {
+  return text
+    .replace(/([0-9]{1,3}(?:[\s\u00A0\u202F][0-9]{3})+(?:,[0-9]{1,2})?)[\s\u00A0\u202F]?\$/g,
+      (_, n) => '$' + n.replace(/[\s\u00A0\u202F]/g, ',').replace(/,([0-9]{1,2})$/, '.$1'))
+    .replace(/\b([0-9]{1,4}(?:,[0-9]{1,2})?)[\s\u00A0\u202F]?\$/g,
+      (_, n) => '$' + n.replace(',', '.'))
+    .replace(/\b([0-9]{1,3}),([0-9]{1,3})[\s\u00A0\u202F]?%/g, '$1.$2%');
+}
 /**
  * Compare at the precision the author chose, rather than picking a tolerance.
  * "about 21.7%" is one decimal, so it is right if the engine's 21.65% rounds to
@@ -201,7 +248,18 @@ const num = (s: string) => parseFloat(s.replace(/,/g, ''));
 function matchesAtPrintedPrecision(printed: string, actual: number): boolean {
   const dp = (printed.split('.')[1] || '').length;
   const f = Math.pow(10, dp);
-  return Math.round(parseFloat(printed) * f) === Math.round(actual * f);
+  if (Math.round(parseFloat(printed) * f) === Math.round(actual * f)) return true;
+  // Trailing zeros signal deliberate rounding: "environ 58 500 $" is the
+  // bracket threshold 58,523 stated to the nearest hundred, and is not wrong.
+  // Capped at thousands so coarse rounding cannot launder a stale figure.
+  if (dp === 0) {
+    const zeros = Math.min((printed.match(/0+$/) || [''])[0].length, 3);
+    if (zeros > 0) {
+      const mag = Math.pow(10, zeros);
+      return Math.round(actual / mag) * mag === parseFloat(printed);
+    }
+  }
+  return false;
 }
 
 /**
@@ -251,12 +309,13 @@ function splitSentences(text: string): string[] {
   // Tables hold most of these figures, so rows count as sentences; a whole
   // table read as one string would let any number clear against any other.
   return text
-    .split(/\n|(?<=[.!?])\s+/)
+    .split(/\n|(?<=[.!?])\s+|(?<=[。！？；])/)
     .map((s) => s.trim())
     .filter(Boolean);
 }
 
-function auditText(slug: string, field: string, text: string, out: Finding[], stats: { checked: number }) {
+function auditText(slug: string, field: string, rawText: string, out: Finding[], stats: { checked: number }) {
+  const text = normalizeFrenchNumbers(rawText);
   const all = splitSentences(text);
 
   // An article works one example salary for pages at a time ("David earns
@@ -267,15 +326,21 @@ function auditText(slug: string, field: string, text: string, out: Finding[], st
   const derivedRates: number[] = [];
   for (const m of [...text.matchAll(MONEY)]) {
     const v = num(m[1]);
-    if (v >= 15000 && v <= 500000) {
-      const e = engineValuesFor(v);
+    let salary = v >= 15000 && v <= 500000 ? v : 0;
+    // "$17.60 minimum wage" or "$33.00/hr" is a salary too, stated hourly.
+    if (!salary && v >= 10 && v <= 150) {
+      const after = text.slice(m.index + m[0].length, m.index + m[0].length + 20);
+      if (/^\s*(an hour|per hour|\/\s?hr|\/\s?hour|hourly|minimum wage)/i.test(after)) salary = v * 2080;
+    }
+    if (salary) {
+      const e = engineValuesFor(salary);
       derivedMoney.push(...e.money);
       derivedRates.push(...e.rates);
     }
   }
 
   all.forEach((s, i) => {
-    const topics = TOPICS.filter((t) => t.mentions.test(s));
+    const topics = TOPICS.filter((t) => t.mentions.test(s) && (!t.requires || t.requires.test(s)));
     if (!topics.length || !STATES_A_RULE.test(s)) return;
     // A sentence about how much a raise adds is doing arithmetic across two
     // scenarios, not quoting a rule; there is nothing here to compare against.
@@ -286,9 +351,14 @@ function auditText(slug: string, field: string, text: string, out: Finding[], st
     // Only a sentence that says it is reporting a computed rate may lean on one.
     if (DESCRIBES_A_COMPUTED_RATE.test(s)) acceptedRates.push(...derivedRates);
 
-    // "in 2025", "2024 rates" — the figures are allowed to be last year's.
+    // A sentence dated to a different year — "in 2025", or "announced for
+    // 2027" — is not making a claim about the engine's year, so it cannot be
+    // judged against the engine's constants. It is reported, not failed; this
+    // is also what lets a forward-looking rates article pass the build gate.
+    // A sentence that names the current year alongside others IS judged.
     const years = [...s.matchAll(/\b(20[0-9]{2})\b/g)].map((m) => parseInt(m[1], 10));
-    const historical = years.some((y) => y < CURRENT_YEAR);
+    const historical =
+      years.length > 0 && !years.includes(CURRENT_YEAR) && years.some((y) => y !== CURRENT_YEAR);
 
     const figures = [...s.matchAll(MONEY), ...s.matchAll(PERCENT)].map((m) => ({
       raw: m[0].trim(),
@@ -314,6 +384,62 @@ function auditText(slug: string, field: string, text: string, out: Finding[], st
   });
 }
 
+/**
+ * The audit's original blind spot: the articles were checked while the
+ * homepage's FAQ JSON-LD, the Chinese landing page, llms.txt's key-facts
+ * block, the published dataset, and two components kept stating rates as
+ * hardcoded strings nothing verified. These are exactly the surfaces AI
+ * engines and Google quote. Each is scanned as text; the topic gate keeps
+ * class names and other code noise out because they never mention CPP or EI.
+ */
+const SURFACE_SOURCES = [
+  'app/page.tsx',
+  'app/zh/page.tsx',
+  'app/landing-page-data.ts',
+  'components/DataPage.tsx',
+  'components/AboutPage.tsx',
+];
+const SURFACE_TEXTS = ['public/llms.txt'];
+
+/** Pull every string literal out of a TS/TSX source file, minus interpolations. */
+function stringLiteralsOf(source: string): string {
+  const out: string[] = [];
+  // No dotAll flag: the negated classes already cross newlines for template
+  // literals, and the repo's TS target predates es2018's /s.
+  const re = /'((?:[^'\\\n]|\\.)*)'|"((?:[^"\\\n]|\\.)*)"|`((?:[^`\\]|\\.)*)`/g;
+  for (const m of source.matchAll(re)) {
+    const lit = (m[1] ?? m[2] ?? m[3] ?? '').replace(/\$\{[^}]*\}/g, ' ');
+    if (lit.length >= 8) out.push(lit);
+  }
+  return out.join('\n');
+}
+
+function jsonStrings(v: unknown): string[] {
+  if (typeof v === 'string') return [v];
+  if (Array.isArray(v)) return v.flatMap(jsonStrings);
+  if (v && typeof v === 'object') return Object.values(v).flatMap(jsonStrings);
+  return [];
+}
+
+function auditSurfaces(out: Finding[], stats: { checked: number }): number {
+  let count = 0;
+  for (const rel of SURFACE_SOURCES) {
+    auditText(rel, 'strings', stringLiteralsOf(readFileSync(join(process.cwd(), rel), 'utf8')), out, stats);
+    count++;
+  }
+  for (const rel of SURFACE_TEXTS) {
+    auditText(rel, 'text', readFileSync(join(process.cwd(), rel), 'utf8'), out, stats);
+    count++;
+  }
+  // The dataset filename is year-stamped, so find it rather than hardcode it.
+  const dataDir = join(process.cwd(), 'public', 'data');
+  for (const name of readdirSync(dataDir).filter((n) => n.endsWith('.json'))) {
+    auditText(`public/data/${name}`, 'json', jsonStrings(JSON.parse(readFileSync(join(dataDir, name), 'utf8'))).join('\n'), out, stats);
+    count++;
+  }
+  return count;
+}
+
 const verbose = process.argv.includes('--verbose');
 
 /**
@@ -334,6 +460,48 @@ if (process.argv.includes('--selftest')) {
     ['The QPP rate in Quebec is 6.4% of pensionable earnings.', '6.4%'],
     ['QPIP premiums are 0.494% of insurable earnings.', '0.494%'],
   ];
+  /**
+   * Hand cases rot: a value planted as "wrong" can become next year's real
+   * figure (EI 1.64% will, eventually). So on top of the fixed regression
+   * cases, one probe per topic is GENERATED by perturbing the topic's own
+   * first rate and amount — when the constants move, the probes move with
+   * them, and a collision with any legitimate value is stepped over.
+   */
+  const allPools = TOPICS.flatMap((t) => [...t.rates, ...t.amounts]);
+  const collides = (v: number, printed: string) => allPools.some((a) => matchesAtPrintedPrecision(printed, a));
+  const fmtRate = (v: number) => (Number.isInteger(v) ? String(v) : v.toFixed(2)) + '%';
+  const fmtMoney = (v: number) =>
+    '$' + (Number.isInteger(v) ? v.toLocaleString('en-CA') : v.toLocaleString('en-CA', { minimumFractionDigits: 2, maximumFractionDigits: 2 }));
+  const PROBES: Record<string, { rate?: string; amount?: string }> = {
+    CPP: { rate: 'The CPP contribution rate is {V} of pensionable earnings.', amount: 'The CPP maximum contribution is {V} for the year.' },
+    CPP2: { rate: 'The CPP2 rate is {V} above the first ceiling.', amount: 'The CPP2 maximum contribution is {V} for the year.' },
+    EI: { rate: 'The EI premium rate is {V} of insurable earnings.', amount: 'The EI maximum premium is {V} for the year.' },
+    'EI (Quebec)': { rate: 'The Quebec EI premium rate is {V}.', amount: 'The Quebec EI maximum premium is {V} for the year.' },
+    'QPP/QPP2': { rate: 'The QPP contribution rate is {V} of pensionable earnings.', amount: 'The QPP maximum contribution is {V} for the year.' },
+    QPIP: { rate: 'The QPIP premium rate is {V} of insurable earnings.', amount: 'The QPIP maximum premium is {V} for the year.' },
+    'Quebec abatement': { rate: 'The Quebec abatement rate is {V} of federal tax.' },
+    'TFSA/RRSP limits': { amount: 'The TFSA contribution limit is {V} for the year.' },
+    'Federal brackets and BPA': { rate: 'The lowest federal tax rate is {V}.', amount: 'The federal basic personal amount is {V}.' },
+  };
+  for (const t of TOPICS) {
+    const probe = PROBES[t.label];
+    if (!probe) continue;
+    const jobs: Array<['rate' | 'amount', number, string]> = [];
+    if (probe.rate && t.rates.length) jobs.push(['rate', t.rates[0], probe.rate]);
+    if (probe.amount && t.amounts.length) jobs.push(['amount', t.amounts[0], probe.amount]);
+    for (const [kind, base, template] of jobs) {
+      let wrong = 0;
+      let printed = '';
+      for (const mult of [1.13, 1.31, 1.57, 0.83]) {
+        wrong = kind === 'rate' ? Math.round(base * mult * 100) / 100 : Math.round(base * mult);
+        printed = String(wrong);
+        if (!collides(wrong, printed)) break;
+      }
+      const rendered = kind === 'rate' ? fmtRate(wrong) : fmtMoney(wrong);
+      cases.push([template.replace('{V}', rendered), rendered]);
+    }
+  }
+
   let failed = 0;
   for (const [sentence, expected] of cases) {
     const found: Finding[] = [];
@@ -349,6 +517,8 @@ if (process.argv.includes('--selftest')) {
 const findings: Finding[] = [];
 const stats = { checked: 0 };
 
+const surfaceCount = auditSurfaces(findings, stats);
+
 for (const a of allArticles) {
   auditText(a.slug, 'title', a.title, findings, stats);
   auditText(a.slug, 'excerpt', a.excerpt, findings, stats);
@@ -363,7 +533,9 @@ for (const a of allArticles) {
 const wrong = findings.filter((f) => !f.historical);
 const stale = findings.filter((f) => f.historical);
 
-console.log(`${allArticles.length} articles · ${stats.checked} figures checked against the engine\n`);
+console.log(
+  `${allArticles.length} articles + ${surfaceCount} site surfaces · ${stats.checked} figures checked against the engine\n`,
+);
 
 const report = (title: string, list: Finding[]) => {
   if (!list.length) return;
@@ -384,7 +556,10 @@ const report = (title: string, list: Finding[]) => {
 };
 
 report('UNEXPLAINED — no engine value or constant produces these', wrong);
-report(`HISTORICAL — figures from before ${CURRENT_YEAR}, check they are still framed as past`, stale);
+report(
+  `HISTORICAL — figures framed as a year other than ${CURRENT_YEAR} (past, or announced future); informational`,
+  stale,
+);
 
 // The last line is the contract for anything scripted on top of this — an
 // unsupervised agent once had "wait until it prints Clean" as its stop

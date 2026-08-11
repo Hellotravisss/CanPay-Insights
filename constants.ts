@@ -73,6 +73,15 @@ export const QC_EI_MAX_CONTRIBUTION = 895.70; // 2026 max (1.30% × 68,900)
 export const QUEBEC_ABATEMENT_RATE = 0.165;
 
 // ============================================
+// SAVINGS-ROOM LIMITS (2026) — not used by the payroll engine, but the site
+// states them (llms.txt key facts, savings articles) and the number audit
+// checks the prose against them, same as any payroll constant.
+// ============================================
+export const TFSA_LIMIT = 7000; // 2026 TFSA contribution limit (CRA)
+export const RRSP_DOLLAR_LIMIT = 33810; // 2026 RRSP dollar limit (CRA)
+export const RRSP_CONTRIBUTION_RATE_OF_INCOME = 0.18; // 18% of earned income up to the dollar limit
+
+// ============================================
 // EI PREMIUMS (2026)
 // ============================================
 export const EI_RATE = 0.0163; // 1.63% employee premium rate (2026, down from 1.64%)

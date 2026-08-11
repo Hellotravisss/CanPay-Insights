@@ -5,6 +5,7 @@
   "type": "module",
   "scripts": {
     "dev": "next dev",
+    "prebuild": "npm run audit:numbers:selftest && npm run audit:numbers",
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
