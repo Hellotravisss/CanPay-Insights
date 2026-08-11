@@ -23,7 +23,7 @@ export const main: Record<string, string> = {
   'tier.maximize': 'बड़े टैक्स रिफंड के लिए RRSP योगदान अधिकतम करें।',
   'tier.maxAll': 'टैक्स लाभ अनुकूलित करने के लिए अधिकतम राशि का योगदान करें।',
   'brand.tagline': 'कनाडा पेरोल कैलकुलेटर',
-  'nav.taxGuides': 'टैक्स गाइड',
+  'nav.taxGuides': 'गाइड और खबरें',
   'nav.compare': 'प्रांतों की तुलना करें',
   'nav.signIn': 'साइन इन करें',
   'nav.back': 'वापस',

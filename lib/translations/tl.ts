@@ -23,7 +23,7 @@ export const main: Record<string, string> = {
   'tier.maximize': 'I-maximize ang RRSP contribution para sa malaking tax refund.',
   'tier.maxAll': 'I-contribute ang maximum para ma-optimize ang tax benefits.',
   'brand.tagline': 'Canadian Payroll Calculator',
-  'nav.taxGuides': 'Mga gabay sa buwis',
+  'nav.taxGuides': 'Mga gabay at balita',
   'nav.compare': 'Ikumpara ang mga probinsya',
   'nav.signIn': 'Mag-sign In',
   'nav.back': 'Bumalik',

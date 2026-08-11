@@ -23,7 +23,7 @@ export const main: Record<string, string> = {
   'tier.maximize': 'Максимізуйте внесок у RRSP для суттєвого повернення податків.',
   'tier.maxAll': 'Внесіть максимальну суму, щоб оптимізувати податкові переваги.',
   'brand.tagline': 'Канадський калькулятор зарплати',
-  'nav.taxGuides': 'Податкові гіди',
+  'nav.taxGuides': 'Гіди та новини',
   'nav.compare': 'Порівняти провінції',
   'nav.signIn': 'Увійти',
   'nav.back': 'Назад',

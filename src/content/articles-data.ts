@@ -2600,9 +2600,15 @@ const PRUNED_SLUGS = new Set<string>([
   'cra-grocery-essentials-benefit-canada-2026',
 ]);
 
-export const allArticles: Article[] = rawArticles.filter(
-  (article) => !PRUNED_SLUGS.has(article.slug),
-);
+// Newest first, always. The source arrays are concatenated in whatever order
+// they happen to be written, which put thirteen province guides ahead of every
+// news article — so the twice-weekly piece published today landed below the
+// fold on the blog index, which is the opposite of what a news stream is for.
+// Sorting here means every consumer (index, featured slot, related links,
+// sitemap) agrees on the order without each one remembering to sort.
+export const allArticles: Article[] = rawArticles
+  .filter((article) => !PRUNED_SLUGS.has(article.slug))
+  .sort((a, b) => new Date(b.publishedAt).getTime() - new Date(a.publishedAt).getTime());
 
 // Helper functions
 export const getArticleBySlug = (slug: string): Article | undefined => {
@@ -2614,9 +2620,10 @@ export const getArticlesByCategory = (category: string): Article[] => {
 };
 
 export const getRecentArticles = (limit: number = 5): Article[] => {
-  return allArticles
-    .sort((a, b) => new Date(b.publishedAt).getTime() - new Date(a.publishedAt).getTime())
-    .slice(0, limit);
+  // No sort here: allArticles is already newest-first, and the previous version
+  // called .sort() on it directly, which reorders the shared array in place for
+  // every other caller depending on who runs first.
+  return allArticles.slice(0, limit);
 };
 
 export const getRelatedArticles = (currentSlug: string, limit: number = 3): Article[] => {

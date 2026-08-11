@@ -23,7 +23,7 @@ export const main: Record<string, string> = {
   'tier.maximize': 'Maximiza tu aportación al RRSP para un reembolso de impuestos significativo.',
   'tier.maxAll': 'Aporta el máximo para optimizar tus beneficios fiscales.',
   'brand.tagline': 'Calculadora de nómina canadiense',
-  'nav.taxGuides': 'Guías de impuestos',
+  'nav.taxGuides': 'Guías y noticias',
   'nav.compare': 'Comparar provincias',
   'nav.signIn': 'Iniciar sesión',
   'nav.back': 'Atrás',

@@ -91,10 +91,11 @@ export default function BlogList() {
             <div>
               <p className="mb-3 text-sm font-bold uppercase tracking-[0.16em] text-red-600">Insights Hub</p>
               <h1 className="max-w-3xl text-4xl font-bold leading-tight tracking-tight text-slate-950 md:text-5xl">
-                Canadian payroll, tax, and take-home pay guides.
+                Canadian payroll, tax, and take-home pay guides &amp; news.
               </h1>
               <p className="mt-4 max-w-2xl text-lg leading-8 text-slate-500">
-                Practical articles for comparing job offers, provinces, deductions, and salary decisions in Canada.
+                Practical articles for comparing job offers, provinces, deductions, and salary decisions in
+                Canada — plus what changes to tax and benefit rules mean for your paycheque, twice a week.
               </p>
             </div>
 

@@ -23,7 +23,7 @@ export const main: Record<string, string> = {
   'tier.maximize': '큰 세금 환급을 위해 RRSP 납입을 최대화하세요.',
   'tier.maxAll': '세제 혜택 최적화를 위해 최대 금액을 납입하세요.',
   'brand.tagline': '캐나다 급여 계산기',
-  'nav.taxGuides': '세금 가이드',
+  'nav.taxGuides': '가이드 및 소식',
   'nav.compare': '주(州) 비교',
   'nav.signIn': '로그인',
   'nav.back': '뒤로',

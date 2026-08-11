@@ -23,7 +23,7 @@ export const main: Record<string, string> = {
   'tier.maximize': 'Tối đa hóa mức đóng RRSP để nhận khoản hoàn thuế đáng kể.',
   'tier.maxAll': 'Đóng mức tối đa để tối ưu lợi ích thuế.',
   'brand.tagline': 'Máy Tính Lương Canada',
-  'nav.taxGuides': 'Hướng dẫn thuế',
+  'nav.taxGuides': 'Hướng dẫn & tin tức',
   'nav.compare': 'So sánh các tỉnh bang',
   'nav.signIn': 'Đăng nhập',
   'nav.back': 'Quay lại',

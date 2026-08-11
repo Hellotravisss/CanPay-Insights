@@ -23,7 +23,7 @@ export const main: Record<string, string> = {
   'tier.maximize': 'ਵੱਡੇ ਟੈਕਸ ਰਿਫੰਡ ਲਈ RRSP ਯੋਗਦਾਨ ਵੱਧ ਤੋਂ ਵੱਧ ਕਰੋ।',
   'tier.maxAll': 'ਟੈਕਸ ਲਾਭ ਵਧਾਉਣ ਲਈ ਵੱਧ ਤੋਂ ਵੱਧ ਰਕਮ ਦਾ ਯੋਗਦਾਨ ਪਾਓ।',
   'brand.tagline': 'ਕੈਨੇਡੀਅਨ ਪੇਰੋਲ ਕੈਲਕੁਲੇਟਰ',
-  'nav.taxGuides': 'ਟੈਕਸ ਗਾਈਡ',
+  'nav.taxGuides': 'ਗਾਈਡ ਤੇ ਖ਼ਬਰਾਂ',
   'nav.compare': 'ਸੂਬਿਆਂ ਦੀ ਤੁਲਨਾ ਕਰੋ',
   'nav.signIn': 'ਸਾਈਨ ਇਨ',
   'nav.back': 'ਪਿੱਛੇ',
