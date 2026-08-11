@@ -31,13 +31,33 @@ import * as C from '../constants';
 
 const CURRENT_YEAR = 2026;
 
+/**
+ * Rates and amounts are kept apart and never compared across. A percentage was
+ * once cleared by a dollar figure that happened to round to the same integer —
+ * "the lowest federal rate is 15%" passed because Quebec's weekly EI premium is
+ * $14.63. Nothing about a dollar amount can vouch for a rate, or the reverse.
+ */
 type Topic = {
   label: string;
   /** Sentence must mention this to bring the topic's figures into play. */
   mentions: RegExp;
-  /** Values that are legitimate when this topic is in play. */
-  values: number[];
+  /** Percentages that are legitimate when this topic is in play. */
+  rates: number[];
+  /** Dollar figures that are legitimate when this topic is in play. */
+  amounts: number[];
 };
+
+/** An annual maximum is quoted per cheque as often as per year. */
+const perPeriod = (n: number) => [n, n / 12, n / 24, n / 26, n / 52];
+
+/**
+ * A basic personal amount is an amount, but what a reader is usually told is
+ * the tax it saves them — the amount times the lowest rate. Both forms appear.
+ */
+const FEDERAL_BPA_CREDIT = C.FEDERAL_BASIC_PERSONAL_AMOUNT * C.FEDERAL_BRACKETS[0].rate;
+const PROVINCIAL_BPA_CREDITS = Object.values(C.PROVINCIAL_DATA).map(
+  (p) => p.basicPersonalAmount * p.brackets[0].rate,
+);
 
 /** Engine constants, expressed as the numbers a reader would see in print. */
 const TOPICS: Topic[] = [
@@ -46,10 +66,9 @@ const TOPICS: Topic[] = [
     // Deliberately not \bCPP\b: "CPP2" would not match (the digit is a word
     // character), yet a sentence about CPP2 discusses base CPP alongside it.
     mentions: /CPP|Canada Pension Plan/i,
-    values: [
-      C.CPP_RATE * 100,
-      C.CPP_RATE * 100 * 2, // employee + employer, quoted for self-employed
-      C.CPP_MAX_CONTRIBUTION,
+    rates: [C.CPP_RATE * 100, C.CPP_RATE * 100 * 2 /* employee + employer, for self-employed */],
+    amounts: [
+      ...perPeriod(C.CPP_MAX_CONTRIBUTION),
       C.CPP_MAX_CONTRIBUTION * 2,
       C.CPP_EXEMPTION,
       C.CPP_MAX_PENSIONABLE_EARNINGS,
@@ -59,27 +78,25 @@ const TOPICS: Topic[] = [
   {
     label: 'CPP2',
     mentions: /CPP2|second additional|second ceiling|YAMPE/i,
-    values: [
-      C.CPP2_RATE * 100,
-      C.CPP2_RATE * 100 * 2,
-      C.CPP2_MAX_CONTRIBUTION,
+    rates: [C.CPP2_RATE * 100, C.CPP2_RATE * 100 * 2, C.CPP_RATE * 100],
+    amounts: [
+      ...perPeriod(C.CPP2_MAX_CONTRIBUTION),
       C.CPP2_MAX_CONTRIBUTION * 2,
       C.CPP2_MAX_PENSIONABLE_EARNINGS,
-      C.CPP_MAX_CONTRIBUTION + C.CPP2_MAX_CONTRIBUTION,
+      ...perPeriod(C.CPP_MAX_CONTRIBUTION + C.CPP2_MAX_CONTRIBUTION),
       C.CPP2_MAX_PENSIONABLE_EARNINGS - C.CPP_MAX_PENSIONABLE_EARNINGS,
       // CPP2 is always explained beside the base band it sits on top of, and
       // comparison tables name that band without repeating the word "CPP".
       C.CPP_EXEMPTION,
       C.CPP_MAX_PENSIONABLE_EARNINGS,
-      C.CPP_RATE * 100,
     ],
   },
   {
     label: 'EI',
     mentions: /\bEI\b|Employment Insurance|insurable/i,
-    values: [
-      C.EI_RATE * 100,
-      C.EI_MAX_CONTRIBUTION,
+    rates: [C.EI_RATE * 100],
+    amounts: [
+      ...perPeriod(C.EI_MAX_CONTRIBUTION),
       C.EI_MAX_INSURABLE_EARNINGS,
       C.EI_MAX_CONTRIBUTION * 1.4, // employer pays 1.4×
     ],
@@ -87,7 +104,36 @@ const TOPICS: Topic[] = [
   {
     label: 'EI (Quebec)',
     mentions: /Quebec|QPIP|QPP/i,
-    values: [C.QC_EI_RATE * 100, C.QC_EI_MAX_CONTRIBUTION],
+    rates: [C.QC_EI_RATE * 100],
+    amounts: [...perPeriod(C.QC_EI_MAX_CONTRIBUTION)],
+  },
+  {
+    // The quarterly routine checks these against the CRA, so the prose quoting
+    // them has to be checked too — otherwise a bracket change is corrected in
+    // the engine while every article still prints last year's rate.
+    label: 'Federal brackets and BPA',
+    mentions: /federal (tax )?(bracket|rate|tax)|basic personal amount|\bBPA\b/i,
+    rates: C.FEDERAL_BRACKETS.map((b) => b.rate * 100),
+    amounts: [
+      ...C.FEDERAL_BRACKETS.filter((b) => isFinite(b.threshold)).map((b) => b.threshold),
+      C.FEDERAL_BASIC_PERSONAL_AMOUNT,
+      FEDERAL_BPA_CREDIT,
+      // "credits reduce your tax by $2,959" = the federal and provincial ones together
+      ...PROVINCIAL_BPA_CREDITS.map((c) => c + FEDERAL_BPA_CREDIT),
+    ],
+  },
+  {
+    // A sentence rarely says which province's BPA it means, so accept any of
+    // them; the point is to catch a figure that belongs to no province at all.
+    label: 'Provincial brackets and BPAs',
+    mentions: /basic personal amount|\bBPA\b|provincial (tax )?(bracket|rate)/i,
+    rates: Object.values(C.PROVINCIAL_DATA).flatMap((p) => p.brackets.map((b) => b.rate * 100)),
+    amounts: Object.values(C.PROVINCIAL_DATA).flatMap((p) => [
+      p.basicPersonalAmount,
+      ...p.brackets.filter((b) => isFinite(b.threshold)).map((b) => b.threshold),
+      p.basicPersonalAmount * p.brackets[0].rate,
+      p.basicPersonalAmount * p.brackets[0].rate + FEDERAL_BPA_CREDIT,
+    ]),
   },
 ];
 
@@ -98,17 +144,26 @@ const TOPICS: Topic[] = [
  * sentence is only examined when it is stating a rule, not doing arithmetic.
  */
 const STATES_A_RULE =
-  /\b(rate|rates|maximum|maximums|max|maxes|most|ceiling|ceilings|exemption|threshold|premium|premiums|contribution|contributions|insurable|pensionable|YMPE|YAMPE|cap|capped)\b/i;
+  /\b(rate|rates|maximum|maximums|max|maxes|most|ceiling|ceilings|exemption|threshold|premium|premiums|contribution|contributions|insurable|pensionable|YMPE|YAMPE|cap|capped|bracket|brackets|BPA)\b|basic personal amount/i;
 
-/** Negative lookahead on "k": "$50k earners" is shorthand, not a figure of $50. */
-const MONEY = /\$\s?([0-9][0-9,]*(?:\.[0-9]{1,2})?)(?![0-9]*k)/g;
+/** Negative lookahead on "k"/"K": "$50k earners" is shorthand, not a figure of $50. */
+const MONEY = /\$\s?([0-9][0-9,]*(?:\.[0-9]{1,2})?)(?![0-9]*[kK])/g;
 const PERCENT = /\b([0-9]{1,3}(?:\.[0-9]{1,2})?)\s?%/g;
 
 /** Gains and gaps are computed between two scenarios, not read off a rate table. */
 const DESCRIBES_A_CHANGE = /\b(gains?|more take-home|increase[sd]?|difference|extra|raise[sd]?)\b/i;
 
 /** Large figures are salaries being discussed unless the sentence calls them a limit. */
-const NAMES_A_LIMIT = /\b(ceiling|ceilings|YMPE|YAMPE|insurable|pensionable|maximum|maximums|exemption)\b/i;
+const NAMES_A_LIMIT =
+  /\b(ceiling|ceilings|YMPE|YAMPE|insurable|pensionable|maximum|maximums|exemption|bracket|brackets|BPA)\b|basic personal amount/i;
+
+/**
+ * A rate the engine derives from a salary (effective, average, marginal) must
+ * not be allowed to vouch for a statutory rate. "The lowest federal rate is 15%"
+ * was cleared for exactly that reason: 15% happened to be some province's
+ * effective rate at the salary named in the same sentence.
+ */
+const DESCRIBES_A_COMPUTED_RATE = /\b(effective|average|marginal|combined|overall|take-home|keeps?)\b/i;
 
 const num = (s: string) => parseFloat(s.replace(/,/g, ''));
 /**
@@ -129,10 +184,17 @@ function matchesAtPrintedPrecision(printed: string, actual: number): boolean {
  * sentence — the deductions themselves, the rates they imply, and the take-home
  * they leave. Articles quote all three, so all three must clear.
  */
-function engineValuesFor(salary: number): number[] {
+function engineValuesFor(salary: number): { money: number[]; rates: number[] } {
   const out: number[] = [];
+  const rates: number[] = [];
   for (const { slug } of PROVINCE_SEO_CONFIGS) {
     const f = getSalaryFigures(salary, slug);
+    rates.push(
+      f.averageTaxRate * 100,
+      f.totalDeductionRate * 100,
+      f.marginalRate * 100,
+      (1 - f.totalDeductionRate) * 100, // "keeps 79.5%"
+    );
     out.push(
       f.pensionContribution,
       f.pensionContribution * 2,
@@ -148,10 +210,6 @@ function engineValuesFor(salary: number): number[] {
       f.netWeekly,
       f.netSemiMonthly,
       f.netHourly,
-      f.averageTaxRate * 100,
-      f.totalDeductionRate * 100,
-      f.marginalRate * 100,
-      (1 - f.totalDeductionRate) * 100, // "keeps 79.5%"
       salary - C.CPP_EXEMPTION,
     );
     // Articles quote deductions per cheque as often as per year.
@@ -159,7 +217,7 @@ function engineValuesFor(salary: number): number[] {
       out.push(f.pensionContribution / periods, f.eiPremium / periods);
     }
   }
-  return out;
+  return { money: out, rates };
 }
 
 type Finding = { slug: string; field: string; value: string; sentence: string; historical: boolean };
@@ -180,10 +238,15 @@ function auditText(slug: string, field: string, text: string, out: Finding[], st
   // $68,000"), so the salary behind a figure can be far above it. Scope salary
   // detection to the whole field; the figures themselves are still judged
   // sentence by sentence, which is what keeps unrelated numbers apart.
-  const salaryValues: number[] = [];
+  const derivedMoney: number[] = [];
+  const derivedRates: number[] = [];
   for (const m of [...text.matchAll(MONEY)]) {
     const v = num(m[1]);
-    if (v >= 15000 && v <= 500000) salaryValues.push(...engineValuesFor(v));
+    if (v >= 15000 && v <= 500000) {
+      const e = engineValuesFor(v);
+      derivedMoney.push(...e.money);
+      derivedRates.push(...e.rates);
+    }
   }
 
   all.forEach((s, i) => {
@@ -193,7 +256,10 @@ function auditText(slug: string, field: string, text: string, out: Finding[], st
     // scenarios, not quoting a rule; there is nothing here to compare against.
     if (DESCRIBES_A_CHANGE.test(s)) return;
 
-    const accepted = [...topics.flatMap((t) => t.values), ...salaryValues];
+    const acceptedAmounts = [...topics.flatMap((t) => t.amounts), ...derivedMoney];
+    const acceptedRates = topics.flatMap((t) => t.rates);
+    // Only a sentence that says it is reporting a computed rate may lean on one.
+    if (DESCRIBES_A_COMPUTED_RATE.test(s)) acceptedRates.push(...derivedRates);
 
     // "in 2025", "2024 rates" — the figures are allowed to be last year's.
     const years = [...s.matchAll(/\b(20[0-9]{2})\b/g)].map((m) => parseInt(m[1], 10));
@@ -216,7 +282,8 @@ function auditText(slug: string, field: string, text: string, out: Finding[], st
       if (f.isWageInput) continue;
       if (f.raw.startsWith('$') && f.v >= 15000 && !NAMES_A_LIMIT.test(s)) continue;
       stats.checked++;
-      if (accepted.some((a) => matchesAtPrintedPrecision(f.printed, a))) continue;
+      const pool = f.raw.endsWith('%') ? acceptedRates : acceptedAmounts;
+      if (pool.some((a) => matchesAtPrintedPrecision(f.printed, a))) continue;
       out.push({ slug, field, value: f.raw, sentence: s.slice(0, 160), historical });
     }
   });
@@ -236,6 +303,9 @@ if (process.argv.includes('--selftest')) {
     ['CPP2 applies between the first ceiling and $81,200.', '$81,200'],
     ['EI is charged at a rate of 1.64% on insurable earnings.', '1.64%'],
     ['The CPP basic exemption is $3,800 a year.', '$3,800'],
+    ['The federal basic personal amount is $16,129 for 2026.', '$16,129'],
+    ['The lowest federal tax rate is 15% on the first $58,523.', '15%'],
+    ['Ontario’s basic personal amount is $12,747.', '$12,747'],
   ];
   let failed = 0;
   for (const [sentence, expected] of cases) {
