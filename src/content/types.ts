@@ -17,6 +17,12 @@ export interface Article {
   tags: string[];
   province?: string;
   publishedAt: string;
+  /**
+   * Set when an article's facts are refreshed. Kept separate from publishedAt so
+   * a refresh does not quietly rewrite history — the original date stays true,
+   * and dateModified in the schema tells search engines what actually changed.
+   */
+  updatedAt?: string;
   readTime: number;
   imageUrl?: string;
   directAnswer?: string;

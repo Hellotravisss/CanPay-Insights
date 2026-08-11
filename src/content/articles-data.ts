@@ -497,16 +497,17 @@ Every person's situation is unique. Use our calculator to:
 const article3: Article = {
   id: "3",
   slug: "newcomer-tax-guide-canada-2025",
-  title: "Newcomer Tax Guide 2025: Your First Year in Canada",
+  title: "Newcomer Tax Guide 2026: Your First Year in Canada",
   subtitle: "Everything you need to know about filing taxes, credits, and benefits as a new permanent resident",
   excerpt: "Just arrived in Canada? This comprehensive guide explains your tax obligations, available benefits, and how to maximize your first-year returns. Learn about the GST/HST credit, CCB, and more.",
-  metaTitle: "Newcomer Tax Guide 2025 - First Year in Canada | CanPay Insights",
+  metaTitle: "Newcomer Tax Guide 2026 - First Year in Canada | CanPay Insights",
   metaDescription: "Complete tax guide for newcomers to Canada 2025. Learn about filing requirements, available credits, and benefits for permanent residents.",
   keywords: ["newcomer tax guide", "first year canada tax", "new immigrant taxes", "canada tax filing new resident"],
   category: "tax",
   tags: ["Newcomers", "Immigration", "2025", "Tax Guide"],
   province: "Federal",
   publishedAt: "2025-01-17",
+  updatedAt: "2026-08-11",
   readTime: 14,
   imageUrl: "https://images.unsplash.com/photo-1436491865332-7a61a109cc05?w=800&q=80",
   directAnswer: "Newcomers to Canada in 2025 must file a tax return even with no income to access benefits like the GST/HST credit and Canada Child Benefit (CCB), which are based on family income.",
@@ -518,9 +519,9 @@ const article3: Article = {
     { question: "Can I claim moving expenses to Canada?", answer: "Most newcomers cannot claim the cost of moving to Canada, but you may be able to claim moves within Canada for work or study later on." }
   ],
   content: `
-## Newcomer Tax Guide 2025: Your First Year in Canada
+## Newcomer Tax Guide 2026: Your First Year in Canada
 
-Elena landed in Toronto on March 15th, 2025, with her husband and two children. As a software engineer from Ukraine, she secured a good job paying $75,000 per year. But the Canadian tax system seemed overwhelming compared to what she was used to. When should she file? What credits can she claim? What about her husband, who isn't working yet?
+Elena landed in Toronto on March 15th, 2026, with her husband and two children. As a software engineer from Ukraine, she secured a good job paying $75,000 per year. But the Canadian tax system seemed overwhelming compared to what she was used to. When should she file? What credits can she claim? What about her husband, who isn't working yet?
 
 If you are new to Canada, you likely have similar questions. This guide will walk you through everything you need to know about your tax obligations and opportunities in your first year.
 
@@ -536,7 +537,7 @@ You become a Canadian tax resident when you establish significant residential ti
 
 ### What do you need for your first tax filing in Canada?
 
-**Deadline:** April 30, 2026 (for 2025 income)
+**Deadline:** April 30, 2027 (for 2026 income)
 
 **Documents to Gather:**
 - T4 slip from employer (arrives by end of February 2026)
@@ -707,7 +708,7 @@ Understanding the Canadian tax system is key to financial success in your new ho
 
 ---
 
-*Disclaimer: Tax rules change frequently. This guide reflects 2025 rates and regulations. For personalized advice, consult a qualified tax professional familiar with newcomer situations.*
+*Disclaimer: Tax rules change frequently. This guide reflects 2026 rates and regulations. For personalized advice, consult a qualified tax professional familiar with newcomer situations.*
 `
 };
 
@@ -1948,16 +1949,17 @@ Every situation is unique. Use our calculator to:
 const article9: Article = {
   id: "9",
   slug: "ontario-overtime-rules-2025",
-  title: "Ontario Overtime Rules 2025: Know Your Rights",
+  title: "Ontario Overtime Rules 2026: Know Your Rights",
   subtitle: "Everything Ontario workers need to know about overtime pay, exemptions, and calculations",
   excerpt: "Are you getting paid correctly for overtime? Ontario has specific rules about overtime thresholds, rates, and exemptions. Learn your rights as an employee.",
-  metaTitle: "Ontario Overtime Rules 2025 - Employee Rights Guide | CanPay Insights",
+  metaTitle: "Ontario Overtime Rules 2026 - Employee Rights Guide | CanPay Insights",
   metaDescription: "Complete guide to Ontario overtime rules 2025. Learn about overtime pay rates, exemptions, and how to calculate what you're owed.",
   keywords: ["ontario overtime rules", "overtime pay ontario", "ontario employment standards", "overtime exemption ontario"],
   category: "tax",
   tags: ["Ontario", "Overtime", "Employment Law", "2025"],
   province: "Ontario",
   publishedAt: "2025-01-23",
+  updatedAt: "2026-08-11",
   readTime: 10,
   imageUrl: "https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?w=800&q=80",
   directAnswer: "In Ontario for 2025, most employees are entitled to overtime pay at 1.5 times their regular hourly rate for every hour worked in excess of 44 hours in a work week.",
@@ -1969,7 +1971,7 @@ const article9: Article = {
     { question: "Which professions are exempt from Ontario overtime rules?", answer: "Certain professions, such as IT professionals, doctors, lawyers, and architects, are exempt from the overtime pay provisions of the Employment Standards Act." }
   ],
   content: `
-## Ontario Overtime Rules 2025: Know Your Rights
+## Ontario Overtime Rules 2026: Know Your Rights
 
 Priya works at a Toronto marketing agency. Her boss expects her to stay late "when needed" but never mentions overtime pay. Last month, she worked 50 hours one week during a campaign launch. Should she be getting overtime? How much? And what can she do if her employer refuses?
 
@@ -2036,10 +2038,16 @@ The Employment Standards Act (ESA) covers most Ontario employees. If you're cove
 
 **IT Professional Exemption Details:**
 
-To be exempt, you must:
-- Be employed in IT
-- Primarily do IT work
-- Be paid at least $66,500/year (2025 threshold)
+To be exempt, the work itself has to qualify:
+- Be employed as an information technology professional
+- Be **primarily engaged** in the investigation, analysis, design, development,
+  implementation, operation or management of information systems
+- Apply specialized knowledge and professional judgment
+
+**There is no salary threshold.** Ontario's exemption (O. Reg. 285/01, s. 8)
+turns entirely on the nature of the work — whether you are paid hourly or on
+salary, and how much, is not part of the test. A job title with "IT" in it is
+not enough either; what matters is what you actually spend your time doing.
 
 **Manager/Supervisor Test:**
 
@@ -2238,7 +2246,7 @@ Use our calculator to:
 
 ---
 
-*Disclaimer: Employment standards change. This guide reflects Ontario's Employment Standards Act as of January 2025. For specific situations, consult the Ministry of Labour or an employment lawyer.*
+*Disclaimer: Employment standards change. This guide reflects Ontario's Employment Standards Act as of August 2026. For specific situations, consult the Ministry of Labour or an employment lawyer.*
 `
 };
 
@@ -2563,6 +2571,14 @@ const rawArticles: Article[] = [
 // that use the calculator's real numbers. This lifts both AdSense quality and
 // GEO topical authority. To restore an article, remove its slug below.
 const PRUNED_SLUGS = new Set<string>([
+  // ---- Retired 2026-08-11: 2025-dated, zero impressions in 19 months, and
+  // superseded by a current-data page. 301 redirects live in next.config.ts;
+  // removing them here keeps them out of the sitemap and the article lists so
+  // the redirect is the only thing anyone reaches.
+  'bc-tax-guide-2025',
+  'alberta-vs-ontario-taxes-2025',
+  'minimum-wage-canada-2025-comparison',
+
   // Province salary guides (speculative ranges, dated 2025, ~0-1 visits each)
   'british-columbia-salary-guide-2025',
   'ontario-toronto-ottawa-hamilton-salary-guide-2025',
