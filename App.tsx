@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState, useMemo, useEffect, useCallback } from 'react';
+import React, { useState, useMemo, useEffect, useCallback, useRef } from 'react';
 import { useRouter } from 'next/navigation';
 import InputSection from './components/InputSection';
 import AnnualSalaryInput from './components/AnnualSalaryInput';
@@ -301,9 +301,15 @@ const App: React.FC = () => {
   // What the user reopened from history, kept so the next recalculation can be
   // compared against it. Only the gross, province and date are needed — no
   // record id, no account id, nothing that identifies the person.
-  const [loadedFrom, setLoadedFrom] = useState<
-    { gross: number; province: string; savedAt: string } | null
-  >(null);
+  //
+  // A ref, not state, and cleared as soon as one changed comparison is
+  // recorded: as state it lived for the whole session, so after loading one
+  // record EVERY later calculation — a friend's salary, idle fiddling — was
+  // compared against the stale baseline and logged as a "raise". One reopened
+  // record earns exactly one change event; the raise data is only worth
+  // collecting if that gesture is what it actually measures.
+  const loadedFromRef = useRef<{ gross: number; province: string; savedAt: string } | null>(null);
+  const loadedModeRef = useRef<CalculationMode | null>(null);
 
   // Return to home
   const handleBackToHome = useCallback(() => {
@@ -374,6 +380,20 @@ const App: React.FC = () => {
       (mode === CalculationMode.ANNUAL && annualInputs === DEFAULT_ANNUAL_INPUTS) ||
       (mode === CalculationMode.TIMESHEET && timesheetInputs === DEFAULT_TIMESHEET_INPUTS);
     if (untouched) return;
+    // Switching modes abandons the reopened record — a timesheet started after
+    // loading an annual calculation is new work, not an edit of the old one.
+    if (loadedFromRef.current && loadedModeRef.current !== null && mode !== loadedModeRef.current) {
+      loadedFromRef.current = null;
+    }
+    const loaded = loadedFromRef.current;
+    const payChange = loaded
+      ? buildPayChange(loaded.gross, loaded.province, loaded.savedAt, results.grossPayAnnual, currentProvince)
+      : null;
+    // The reopened-unchanged event ("same") keeps the baseline armed so the
+    // edit that follows is still captured; the first real change consumes it.
+    if (payChange && payChange.direction !== 'same') {
+      loadedFromRef.current = null;
+    }
     recordCalcEvent({
       mode,
       province: currentProvince,
@@ -381,19 +401,11 @@ const App: React.FC = () => {
       lang,
       work: buildWorkPattern(mode, simpleInputs, timesheetInputs),
       isRegistered: !!userId,
-      payChange: loadedFrom
-        ? buildPayChange(
-            loadedFrom.gross,
-            loadedFrom.province,
-            loadedFrom.savedAt,
-            results.grossPayAnnual,
-            currentProvince
-          )
-        : null,
+      payChange,
       behaviour: buildBehaviour(mode, simpleInputs, annualInputs, timesheetInputs, results),
       viewedReport: reportOpened,
     });
-  }, [currentPage, mode, simpleInputs, annualInputs, timesheetInputs, currentProvince, results, lang, reportOpened, userId, loadedFrom]);
+  }, [currentPage, mode, simpleInputs, annualInputs, timesheetInputs, currentProvince, results, lang, reportOpened, userId]);
 
   // Calculation History
   const { records, saveCalculation } = useCalculationHistory(userId);
@@ -436,11 +448,12 @@ const App: React.FC = () => {
 
   // Handle load calculation from history
   const handleLoadCalculation = useCallback((record: CalculationRecord) => {
-    setLoadedFrom({
+    loadedFromRef.current = {
       gross: record.results?.grossPayAnnual ?? 0,
       province: record.province,
       savedAt: record.createdAt,
-    });
+    };
+    loadedModeRef.current = record.mode;
     setMode(record.mode);
     
     switch (record.mode) {

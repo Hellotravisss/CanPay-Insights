@@ -60,11 +60,9 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang="en">
       <head>
-        <script
-          async
-          src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2057246579245289"
-          crossOrigin="anonymous"
-        />
+        {/* AdSense was abandoned (5 rejections) — its loader lived on here,
+            mutating <head> on every visit and tripping hydration warnings,
+            costing every visitor a pointless third-party request. */}
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{
