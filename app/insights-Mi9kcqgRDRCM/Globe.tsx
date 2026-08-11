@@ -108,12 +108,48 @@ export default function Globe({
   // label set puts Toronto, Nepean and Brampton on top of each other. Hover is
   // the only presentation that stays readable no matter how the dots bunch up.
 
-  const onDown = (e: React.PointerEvent<SVGSVGElement>) => {
-    drag.current = { x: e.clientX, y: e.clientY, lon: lon0, lat: lat0 };
-    setSpinning(false);
-    (e.currentTarget as Element).setPointerCapture?.(e.pointerId);
+  // All interaction lives on the wrapping DIV, not the SVG. It was on the SVG
+  // first, and desktop worked while every phone froze on first touch: iOS
+  // Safari does not reliably honour touch-action or setPointerCapture on SVG
+  // elements, so the browser reclaimed the gesture for scrolling and
+  // pointermove simply stopped arriving. On an HTML element both are solid.
+  //
+  // Pointers are tracked in a map so two fingers become a pinch: one active
+  // pointer rotates, two zoom around their spread. pointercancel must clear
+  // state too — iOS fires it whenever it takes the gesture back.
+  const pointers = useRef(new Map<number, { x: number; y: number }>());
+  const pinch = useRef<{ dist: number; zoom: number } | null>(null);
+
+  const pinchDist = () => {
+    const [a, b] = [...pointers.current.values()];
+    return Math.hypot(a.x - b.x, a.y - b.y);
   };
-  const onMove = (e: React.PointerEvent<SVGSVGElement>) => {
+
+  const onDown = (e: React.PointerEvent<HTMLDivElement>) => {
+    pointers.current.set(e.pointerId, { x: e.clientX, y: e.clientY });
+    setSpinning(false);
+    if (pointers.current.size === 2) {
+      pinch.current = { dist: pinchDist(), zoom };
+      drag.current = null;
+    } else {
+      drag.current = { x: e.clientX, y: e.clientY, lon: lon0, lat: lat0 };
+    }
+    // Last, and allowed to fail: capture only insures against the pointer
+    // straying off the element mid-drag (onPointerLeave ends the drag then).
+    // It can throw NotFoundError, and when it sat above the state assignment
+    // that exception silently killed every drag before it began.
+    try {
+      (e.currentTarget as Element).setPointerCapture?.(e.pointerId);
+    } catch {}
+  };
+  const onMove = (e: React.PointerEvent<HTMLDivElement>) => {
+    if (!pointers.current.has(e.pointerId)) return;
+    pointers.current.set(e.pointerId, { x: e.clientX, y: e.clientY });
+    if (pinch.current && pointers.current.size >= 2) {
+      const d = pinchDist();
+      if (d > 0 && pinch.current.dist > 0) setZoom(clampZoom(pinch.current.zoom * (d / pinch.current.dist)));
+      return;
+    }
     if (!drag.current) return;
     const dx = e.clientX - drag.current.x;
     const dy = e.clientY - drag.current.y;
@@ -127,12 +163,21 @@ export default function Globe({
     setLon0(drag.current.lon - dx * k);
     setLat0(Math.max(-80, Math.min(80, drag.current.lat + dy * k)));
   };
-  const onUp = () => {
-    drag.current = null;
+  const onUp = (e: React.PointerEvent<HTMLDivElement>) => {
+    pointers.current.delete(e.pointerId);
+    if (pointers.current.size < 2) pinch.current = null;
+    if (pointers.current.size === 1) {
+      // Pinch ended with one finger still down: restart the drag from where
+      // that finger is, or the globe would jump on its next move.
+      const [p] = [...pointers.current.values()];
+      drag.current = { x: p.x, y: p.y, lon: lon0, lat: lat0 };
+    } else if (pointers.current.size === 0) {
+      drag.current = null;
+    }
   };
 
   const clampZoom = (z: number) => Math.min(MAX_ZOOM, Math.max(MIN_ZOOM, z));
-  const onWheel = (e: React.WheelEvent<SVGSVGElement>) => {
+  const onWheel = (e: React.WheelEvent<HTMLDivElement>) => {
     e.preventDefault();
     setZoom((z) => clampZoom(z * (e.deltaY < 0 ? 1.15 : 1 / 1.15)));
   };
@@ -140,16 +185,24 @@ export default function Globe({
   return (
     <div className="flex flex-col items-center gap-4 md:flex-row md:items-start md:gap-8">
       <div className="shrink-0">
-        <svg
-          viewBox="0 0 340 340"
-          className="h-[340px] w-[340px] cursor-grab touch-none active:cursor-grabbing"
+        {/* The interactive layer wraps ONLY the sphere — with the controls
+            inside it, tapping "+" twice was a double-click and reset the
+            zoom the user was in the middle of adjusting. */}
+        <div
+          className="cursor-grab select-none active:cursor-grabbing"
+          // Inline, not a class: this style being missed is the difference
+          // between a globe and a frozen circle on iOS, so it must not depend
+          // on a utility surviving a purge.
+          style={{ touchAction: 'none' }}
           onPointerDown={onDown}
           onPointerMove={onMove}
           onPointerUp={onUp}
+          onPointerCancel={onUp}
           onPointerLeave={onUp}
           onWheel={onWheel}
           onDoubleClick={() => setZoom(1)}
         >
+          <svg viewBox="0 0 340 340" className="h-[340px] w-[340px]">
           <defs>
             <radialGradient id="ocean" cx="34%" cy="28%" r="78%">
               <stop offset="0%" stopColor="#1e3a5f" />
@@ -255,6 +308,7 @@ export default function Globe({
             );
           })}
         </svg>
+        </div>
         <div className="mt-1 flex items-center justify-center gap-2">
           <button
             onClick={() => setZoom((z) => clampZoom(z / 1.4))}
