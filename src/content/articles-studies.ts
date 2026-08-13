@@ -925,4 +925,122 @@ These figures assume a single worker with no other income or credits. To check y
 Rate and effective-date figures are based on official government announcements: the Government of Ontario (Employment Standards Act minimum wage indexing, April 2026), the Government of Nova Scotia (news release, December 2025 and April 2026), the Government of Manitoba (news release, April 2026), and Prince Edward Island's published minimum wage schedule, cross-checked against contemporaneous reporting. Take-home figures are calculated with the CanPay Insights tax engine using 2026 federal and provincial rates, full-time hours (2,080/year), a single worker, and basic personal amounts only — real paycheques vary with credits, benefits, and actual hours worked. This is general information, not tax advice.
 `,
   },
+  {
+    id: 'study-10',
+    slug: 'cpp-contribution-rate-cut-2027',
+    title: 'CPP Contribution Rate Cut 2027: What It Actually Saves You',
+    subtitle:
+      'Ottawa is cutting the base CPP rate from 9.9% to 9.5% on January 1, 2027 — we ran the new employee rate through the CanPay Insights tax engine to see exactly how much extra you keep.',
+    excerpt:
+      'Bill C-30 cuts the base CPP contribution rate from 4.95% to 4.75% for employees starting January 1, 2027 — worth up to $142.20 more take-home pay a year for anyone earning $74,600 or more, and about $133 for a worker on $70,000. Self-employed Canadians save roughly double.',
+    metaTitle: 'CPP Rate Cut 2027: Up to $142 More Take-Home Pay',
+    metaDescription:
+      'CPP’s base rate falls from 9.9% to 9.5% on Jan 1, 2027 — up to $142.20 more take-home pay a year for employees. See exact savings by salary.',
+    keywords: [
+      'cpp rate cut 2027',
+      'cpp contribution rate 2027',
+      'cpp 9.9 to 9.5',
+      'base cpp rate cut',
+      'how much will i save cpp 2027',
+      'bill c-30 cpp',
+    ],
+    category: 'news',
+    tags: ['CRA', 'CPP', 'Payroll Deductions', 'Federal Budget', '2027'],
+    publishedAt: '2026-08-13',
+    readTime: 6,
+    imageUrl: '/blog/cpp-contribution-rate-cut-2027.svg',
+    directAnswer:
+      'Starting January 1, 2027, the base CPP contribution rate falls from 9.9% to 9.5% combined, with the employee share dropping from 4.95% to 4.75% and employers matching. The cut was legislated by Bill C-30, which received Royal Assent in June 2026. For an employee earning $70,000, the 2027 rate cut is worth about $133 more take-home pay a year, and anyone earning $74,600 or more saves the 2027 maximum of about $142.20. Self-employed workers, who pay both the employee and employer share, save roughly double. The CPP2 rate of 4% on income above the first ceiling is unchanged.',
+    faq: [
+      {
+        question: 'What is the CPP contribution rate cut in 2027?',
+        answer:
+          'The base CPP contribution rate — the original, pre-2019-enhancement part of CPP — falls from 9.9% combined (employer + employee) to 9.5%, a 0.40 percentage point cut. For an individual employee, that means the rate drops from 4.95% to 4.75%; employers see the same cut. It takes effect January 1, 2027.',
+      },
+      {
+        question: 'How much will I save from the CPP rate cut?',
+        answer:
+          'It depends on your income. Applying the 2027 rate cut of 0.20 percentage points to the current CPP earnings band ($3,500 to $74,600) works out to about $73 a year at a $40,000 salary, $113 at $60,000, $133 at $70,000 in 2027 (the government’s own example), and a maximum of about $142.20 in 2027 for anyone earning $74,600 or more. Self-employed workers, who pay both halves, save roughly double these amounts in 2027.',
+      },
+      {
+        question: 'When does the CPP rate cut take effect?',
+        answer:
+          'January 1, 2027. It was announced in the federal government’s Spring Economic Update on April 28, 2026, and became law when Bill C-30 (the Spring Economic Update 2026 Implementation Act) received Royal Assent on June 18, 2026. It does not change anything on your 2026 paycheque.',
+      },
+      {
+        question: 'Does the CPP rate cut affect CPP2?',
+        answer:
+          'No. The cut applies only to the base CPP rate on earnings up to the first ceiling (the YMPE, $74,600 in 2026). CPP2 — the extra 4% contribution on earnings between the first and second ceilings — is unchanged, so higher earners still pay CPP2 in full on top of the reduced base rate.',
+      },
+      {
+        question: 'Will the CPP rate cut reduce my CPP pension?',
+        answer:
+          'No, according to the government and an independent actuarial review. Canada’s Chief Actuary submitted a report on May 28, 2026 confirming the reduced 9.5% base rate still clears the minimum contribution rate needed to sustain the base CPP plan long-term, so the cut does not reduce the benefits the base plan is designed to pay.',
+      },
+      {
+        question: 'Is the CPP rate cut definitely happening?',
+        answer:
+          'Yes — it is now law. Bill C-30 passed and received Royal Assent on June 18, 2026, and all provincial finance ministers agreed to the change (CPP rate changes require provincial sign-off). The only remaining unknown is the exact 2027 CPP earnings ceiling (YMPE), which the CRA typically announces each November; this article uses the 2026 ceiling to estimate 2027 savings.',
+      },
+    ],
+    content: `
+## Your CPP deduction is about to get smaller
+
+For the first time since the CPP enhancement began phasing in back in 2019, a piece of your CPP contribution is coming back **off** your paycheque instead of going up. Starting **January 1, 2027**, the **base CPP contribution rate** falls from **9.9% to 9.5%** combined (employer + employee) — a 0.40 percentage point cut. For an individual employee, that is a drop from **4.95% to 4.75%**.
+
+It is now law: the change was announced in Ottawa's **Spring Economic Update** on April 28, 2026, and became law when **Bill C-30** (the *Spring Economic Update 2026 Implementation Act*) received **Royal Assent on June 18, 2026**. All provincial finance ministers signed off, which CPP rate changes require.
+
+We ran the new rate through the CanPay Insights tax engine to see exactly what it is worth, salary by salary.
+
+### What's changing
+
+| | 2026 (current) | 2027 (after the cut) | Change |
+| --- | --- | --- | --- |
+| Base CPP rate, employee | 4.95% | **4.75%** | −0.20 pp |
+| Enhanced ("first additional") CPP, employee | 1.00% | 1.00% (unchanged) | — |
+| **Total CPP rate, employee** | **5.95%** | **5.75%** | −0.20 pp |
+| CPP2 rate (income $74,600–$85,000) | 4.00% | 4.00% (unchanged) | — |
+| Combined rate (employer + employee) | 9.90% | **9.50%** | −0.40 pp |
+
+Only the base rate moves. The "first additional" enhancement (the part phased in 2019–2023) and CPP2 (the second additional contribution above the first ceiling) are untouched — so higher earners still pay CPP2 in full on top of the lower base rate.
+
+### What it's worth on your paycheque
+
+The 2027 CPP earnings ceiling (YMPE) has not been announced yet — the CRA typically confirms it each November. Using the 2026 ceiling ($74,600) as an estimate, here is what the rate cut is worth at different salaries:
+
+| Annual salary | 2026 CPP (current) | 2027 CPP (after cut) | Annual savings |
+| --- | --- | --- | --- |
+| $40,000 | $2,172 | $2,099 | **+$73** |
+| $50,000 | $2,767 | $2,674 | **+$93** |
+| $60,000 | $3,362 | $3,249 | **+$113** |
+| $70,000 | $3,957 | $3,824 | **+$133** |
+| $74,600+ (max) | $4,230.45 | $4,088.25 | **+$142.20** |
+
+*Figures are the employee share only, using 2026 CPP figures with the new 2027 base rate applied; CPP2 (for income above $74,600) is unaffected and not included. The $133 figure at $70,000 matches the federal government's own published example.*
+
+Every dollar saved comes from the base rate alone, so the gain is capped once you reach the first ceiling — earning more above $74,600 does not save you anything extra on the base rate, though you still pay CPP2 on that portion exactly as before.
+
+### Self-employed workers save about double
+
+Self-employed Canadians pay both the employee and employer share of CPP, so the rate cut is worth roughly **twice** as much to them: about **$266 a year** at $70,000 of net self-employment income, and up to about **$284.40** at the maximum. Ottawa says the combined cut will reduce total CPP contributions across the country by more than **$3 billion a year**, spread across roughly **16 million contributors**.
+
+### Why the government is doing this
+
+The stated reason is affordability: "many hard-working Canadians continue to face affordability pressures as the cost of essential goods, housing, and everyday expenses remains high," the government said in announcing the measure. Because the CPP is self-financed through its own investment fund and contributions — not general tax revenue — the cut does not affect the federal budget's bottom line the way a tax cut would.
+
+The bigger question was whether cutting the rate would leave the CPP short of money to pay future pensions. **Canada's Chief Actuary** reviewed the change and submitted a report on **May 28, 2026** confirming the reduced 9.5% base rate still clears the **minimum contribution rate** needed to sustain the base plan over the long term — so the cut is not expected to reduce the CPP retirement benefits the base plan pays out.
+
+### How this fits with CPP2
+
+If you already know about **CPP2**, the extra 4% contribution on income between the first and second CPP ceilings, this cut does not touch it. In 2027, a worker earning $90,000 will pay the new 4.75% base rate up to $74,600, the unchanged 1.00% enhancement on the same band, and the unchanged 4% CPP2 rate on the portion between $74,600 and $85,000. See [CPP2 explained](/blog/cpp2-second-additional-cpp-2026) and [how much CPP you pay by salary](/blog/how-much-cpp-will-i-pay-2026) for the full current-year picture.
+
+### See your own number
+
+These figures use the 2026 CPP earnings ceiling as an estimate for 2027; CanPay Insights will update this article with the exact 2027 ceiling once the CRA announces it this fall. For your current, exact take-home pay for 2026, use the [free payroll calculator](/) or the [CPP & EI calculator](/cpp-ei-calculator).
+
+## Sources & disclaimer
+
+Based on the Government of Canada's Spring Economic Update 2026 and the Department of Finance Canada announcement that Bill C-30 (the Spring Economic Update 2026 Implementation Act) received Royal Assent on June 18, 2026, cross-checked against contemporaneous news reporting on the rate cut and the Chief Actuary's May 28, 2026 report. Savings figures are calculated with the CanPay Insights tax engine, applying the new 2027 base rate to the current 2026 CPP earnings ceiling and exemption, since the official 2027 ceiling has not yet been published. This is general information, not tax or financial advice — confirm current CPP figures with the [Canada Revenue Agency](https://www.canada.ca/en/revenue-agency.html) or [Department of Finance Canada](https://www.canada.ca/en/department-finance.html).
+`,
+  },
 ];
