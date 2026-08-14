@@ -177,6 +177,23 @@ export default function StatsDashboard() {
           visit count as a floor, not a headcount — calculations recorded is the reliable number.
         </p>
 
+        {/* Deliberately near the top. Anyone who also has page analytics open —
+            Travis, a journalist, a buyer — will compare the two and read the
+            gap as an error unless the difference is named first. */}
+        <div className="mb-8 rounded-xl border border-slate-200 bg-white p-4">
+          <p className="text-xs font-semibold uppercase tracking-wider text-slate-500">
+            This is not page analytics
+          </p>
+          <p className="mt-1.5 text-xs leading-5 text-slate-500">
+            Every number here counts a <strong className="text-slate-700">calculation</strong> —
+            someone entering a wage and getting an answer. Page analytics counts everyone who loads
+            a page, most of whom never calculate anything, so the two will never agree and are not
+            meant to. The gap is itself a finding: visitors from outside Canada land often and
+            calculate almost never, which is why this page skews more Canadian and more mobile than
+            raw traffic does.
+          </p>
+        </div>
+
         {/* Media-readiness gauge: how close the dataset is to being pitchable */}
         <div className="mb-10 rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
           <div className="mb-2 flex items-baseline justify-between">
@@ -204,7 +221,9 @@ export default function StatsDashboard() {
           <p className="mb-4 mt-0.5 text-xs leading-5 text-slate-400">
             City centroids only — the centre point of the city a visit came from, never a precise
             location and never an IP address. Dot size is volume; hover a dot to name it. Based on {stats.geo_known} of{' '}
-            {t} events; the earliest {t - stats.geo_known} predate location collection.
+            {t} events. The rest cannot be placed rather than failed to be: calculations from the
+            iOS app never pass through the web edge that resolves location, and the earliest events
+            predate location collection entirely.
           </p>
           <Globe cities={stats.cities_geo ?? []} countries={stats.by_country} />
         </div>
