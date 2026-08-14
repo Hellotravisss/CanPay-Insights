@@ -5,6 +5,7 @@ import Globe from './Globe';
 import Donut from './Donut';
 import { countryName } from './countries';
 import TrendChart from './TrendChart';
+import Candles, { type CandleData } from './Candles';
 import SearchPanel from './SearchPanel';
 import ContentPanel from './ContentPanel';
 
@@ -110,11 +111,15 @@ function Card({ title, hint, children }: { title: string; hint?: string; childre
 export default function StatsDashboard() {
   const [stats, setStats] = useState<Stats | null>(null);
   const [series, setSeries] = useState<any | null>(null);
+  const [candles, setCandles] = useState<CandleData | null>(null);
   const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
     supabase.rpc('calc_series').then(({ data }) => {
       if (data) setSeries(data);
+    });
+    supabase.rpc('calc_candles').then(({ data }) => {
+      if (data) setCandles(data as CandleData);
     });
     supabase.rpc('calc_stats').then(({ data, error }) => {
       if (error) setError(error.message);
@@ -204,7 +209,7 @@ export default function StatsDashboard() {
           <Globe cities={stats.cities_geo ?? []} countries={stats.by_country} />
         </div>
 
-        <div className="grid gap-6 md:grid-cols-2">
+        <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
           <Card title="Province calculated" hint="The province the user selected — the core, untamperable signal.">
             <Bars rows={stats.by_province} total={t} />
           </Card>
@@ -264,7 +269,7 @@ export default function StatsDashboard() {
         </div>
 
         {/* Work patterns — the story nobody else has */}
-        <div className="mt-6 grid gap-6 md:grid-cols-2">
+        <div className="mt-6 grid grid-cols-1 gap-6 md:grid-cols-2">
           <Card
             title="Work patterns"
             hint={`From ${stats.work?.n ?? 0} shift/timesheet calculations. Schedule shape only — never specific dates.`}
@@ -303,7 +308,7 @@ export default function StatsDashboard() {
         </div>
 
         {/* Savings, premium pay, tips — signals nobody else collects */}
-        <div className="mt-6 grid gap-6 md:grid-cols-2">
+        <div className="mt-6 grid grid-cols-1 gap-6 md:grid-cols-2">
           <Card
             title="RRSP behaviour"
             hint={`From ${stats.rrsp?.n ?? 0} calculations. Contribution stored as a share of pay, bucketed.`}
@@ -371,6 +376,15 @@ export default function StatsDashboard() {
         {series && (
           <div className="mt-6">
             <TrendChart series={series} />
+          </div>
+        )}
+
+        {/* Who turned up, by income bracket, day by day */}
+        {candles && candles.candles.length > 0 && (
+          <div className="mt-6">
+            <Card title="Income mix by day" hint="Who turned up to check their pay — never what anyone actually earns.">
+              <Candles data={candles} />
+            </Card>
           </div>
         )}
 

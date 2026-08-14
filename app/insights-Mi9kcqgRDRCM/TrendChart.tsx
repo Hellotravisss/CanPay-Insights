@@ -1,5 +1,26 @@
 'use client';
-import { useMemo, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
+
+/**
+ * How many points fit before the bars stop being legible.
+ *
+ * The chart used to keep a 520px minimum inside a horizontal scroller, which
+ * on a phone meant a scrollbar Travis disliked and, on the sparkline beside
+ * it, a chart clipped clean off the card. Shrinking the type was ruled out,
+ * so the window shortens instead: two weeks on a phone, the full run on a
+ * desktop. Same bar size either way.
+ */
+function useMaxPoints() {
+  const [n, setN] = useState(60);
+  useEffect(() => {
+    const q = window.matchMedia('(max-width: 640px)');
+    const apply = () => setN(q.matches ? 14 : 60);
+    apply();
+    q.addEventListener('change', apply);
+    return () => q.removeEventListener('change', apply);
+  }, []);
+  return n;
+}
 
 // Activity over time. Bars are calculations, the line is a moving average so a
 // single quiet day doesn't read as a collapse, and the dashed line marks the
@@ -54,7 +75,10 @@ export default function TrendChart({ series }: { series: Series }) {
   const [grain, setGrain] = useState<Grain>('daily');
   const [hover, setHover] = useState<number | null>(null);
 
-  const points = series[grain] ?? [];
+  // Trim to the tail: the recent end is the part anyone reads.
+  const maxPoints = useMaxPoints();
+  const allPoints = series[grain] ?? [];
+  const points = allPoints.slice(-maxPoints);
   const maWindow = grain === 'daily' ? 7 : 3;
 
   const { bars, ma, max, avg } = useMemo(() => {
@@ -149,8 +173,8 @@ export default function TrendChart({ series }: { series: Series }) {
         ))}
       </div>
 
-      <div className="relative overflow-x-auto">
-        <svg viewBox={`0 0 ${W} ${H}`} className="w-full" style={{ minWidth: 520 }}>
+      <div className="relative">
+        <svg viewBox={`0 0 ${W} ${H}`} className="w-full">
           {/* gridlines */}
           {ticks.map((t) => (
             <g key={t.y}>

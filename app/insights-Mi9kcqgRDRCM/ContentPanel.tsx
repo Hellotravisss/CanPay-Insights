@@ -109,7 +109,7 @@ export default function ContentPanel() {
         ))}
       </div>
 
-      <div className="grid gap-8 md:grid-cols-2">
+      <div className="grid grid-cols-1 gap-8 md:grid-cols-2">
         <div>
           <h3 className="mb-1 text-sm font-bold text-slate-700">Most read</h3>
           <p className="mb-2 text-[11px] leading-4 text-slate-400">

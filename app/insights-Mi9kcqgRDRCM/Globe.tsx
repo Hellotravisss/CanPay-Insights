@@ -184,7 +184,7 @@ export default function Globe({
 
   return (
     <div className="flex flex-col items-center gap-4 md:flex-row md:items-start md:gap-8">
-      <div className="shrink-0">
+      <div className="w-full min-w-0 shrink-0 md:w-auto">
         {/* The interactive layer wraps ONLY the sphere — with the controls
             inside it, tapping "+" twice was a double-click and reset the
             zoom the user was in the middle of adjusting. */}
@@ -202,7 +202,7 @@ export default function Globe({
           onWheel={onWheel}
           onDoubleClick={() => setZoom(1)}
         >
-          <svg viewBox="0 0 340 340" className="h-[340px] w-[340px]">
+          <svg viewBox="0 0 340 340" className="aspect-square h-auto w-full max-w-[340px]">
           <defs>
             <radialGradient id="ocean" cx="34%" cy="28%" r="78%">
               <stop offset="0%" stopColor="#1e3a5f" />

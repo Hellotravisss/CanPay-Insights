@@ -42,42 +42,47 @@ function Delta({ now, prev }: { now: number; prev: number }) {
 function QueryTable({ rows, caption }: { rows: Q[]; caption: string }) {
   if (!rows?.length) return <p className="text-sm text-slate-400">No data yet.</p>;
   const max = Math.max(...rows.map((r) => r.impressions), 1);
+  // Two lines per row instead of four columns. As a table this needed ~520px
+  // to breathe: on a phone the query wrapped onto three lines, the position
+  // column fell off the card, and the panel grew a horizontal scrollbar. The
+  // label leads, the numbers sit under it — the same shape as "Most read",
+  // which is the one block on this page that already read well on a phone.
+  const isPage = /page/i.test(caption);
   return (
-    <div>
-      <table className="w-full table-auto text-left text-sm">
-        <caption className="sr-only">{caption}</caption>
-        <thead>
-          <tr className="border-b border-slate-200 text-xs uppercase tracking-wide text-slate-400">
-            <th className="py-1.5 pr-3 font-semibold">Query</th>
-            <th className="py-1.5 pr-3 text-right font-semibold">Clicks</th>
-            <th className="py-1.5 pr-3 font-semibold w-[38%]">Impressions</th>
-            <th className="py-1.5 text-right font-semibold">Position</th>
-          </tr>
-        </thead>
-        <tbody>
-          {rows.map((r) => (
-            <tr key={r.k} className="border-b border-slate-100">
-              <td className="py-2 pr-4 text-slate-700">{r.k}</td>
-              <td className="py-2 pr-3 text-right tabular-nums font-semibold text-slate-900">
-                {r.clicks}
-              </td>
-              <td className="py-2 pr-3">
-                <div className="flex items-center gap-2">
-                  <div className="h-1.5 w-full min-w-[3rem] max-w-[8rem] rounded-full bg-slate-100">
-                    <div
-                      className="h-1.5 rounded-full bg-sky-500"
-                      style={{ width: `${(r.impressions / max) * 100}%` }}
-                    />
-                  </div>
-                  <span className="tabular-nums text-xs text-slate-500">{r.impressions}</span>
-                </div>
-              </td>
-              <td className="py-2 text-right tabular-nums text-slate-500">{r.position}</td>
-            </tr>
-          ))}
-        </tbody>
-      </table>
-    </div>
+    <ul className="divide-y divide-slate-100">
+      {rows.map((r) => (
+        <li key={r.k} className="py-2.5">
+          <div className="flex items-baseline justify-between gap-3">
+            <span
+              className={`min-w-0 flex-1 text-sm text-slate-700 ${isPage ? 'break-all font-mono text-[13px]' : 'break-words'}`}
+              title={r.k}
+            >
+              {r.k}
+            </span>
+            <span className="shrink-0 text-sm font-semibold tabular-nums text-slate-900">
+              {r.clicks}
+              <span className="ml-1 text-xs font-normal text-slate-400">
+                {r.clicks === 1 ? 'click' : 'clicks'}
+              </span>
+            </span>
+          </div>
+          <div className="mt-1.5 flex items-center gap-2">
+            <div className="h-1.5 min-w-[2rem] flex-1 rounded-full bg-slate-100">
+              <div
+                className="h-1.5 rounded-full bg-sky-500"
+                style={{ width: `${(r.impressions / max) * 100}%` }}
+              />
+            </div>
+            <span className="shrink-0 text-xs tabular-nums text-slate-500">
+              {r.impressions.toLocaleString()} impr
+            </span>
+            <span className="shrink-0 text-xs tabular-nums text-slate-400">
+              pos {r.position}
+            </span>
+          </div>
+        </li>
+      ))}
+    </ul>
   );
 }
 
@@ -143,7 +148,7 @@ export default function SearchPanel() {
 
       {g.daily.length > 1 && (
         <div className="mb-6">
-          <svg viewBox={`0 0 ${W} ${H}`} className="w-full" style={{ minWidth: 480 }}>
+          <svg viewBox={`0 0 ${W} ${H}`} className="w-full">
             <polyline points={line('i', maxI)} fill="none" stroke="#7dd3fc" strokeWidth="2" />
             <polyline points={line('n', maxC)} fill="none" stroke="#dc2626" strokeWidth="2" />
             <text x={PAD} y={14} className="fill-slate-400 text-[10px]">
