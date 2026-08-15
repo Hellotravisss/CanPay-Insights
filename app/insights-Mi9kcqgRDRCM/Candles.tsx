@@ -32,10 +32,17 @@ export type CandleData = { levels: { lvl: number; label: string }[]; candles: Ca
 
 const THIN = 20; // below this many events a day is shown, but not asserted
 
-const UP = '#34d399';
-const DOWN = '#f87171';
-const FLAT = '#94a3b8';
-const colourOf = (c: Candle) => (c.dir === 'up' ? UP : c.dir === 'down' ? DOWN : FLAT);
+// Same palette as the bar chart above it: brand red for the mark, slate for
+// structure, on the white card every other panel uses. This began as a
+// near-black panel with green-up / red-down candles, which was wrong twice
+// over — it read as a foreign object dropped into a light dashboard, and
+// stock-market colours quietly assert that a day with more high earners is a
+// good day, which is not a claim this data can make. Direction stays legible
+// from where the median ticks sit.
+const BODY = '#dc2626';
+const BODY_HOVER = '#b91c1c';
+const WICK = '#94a3b8';
+const GRID = '#e2e8f0';
 
 export default function Candles({ data }: { data: CandleData | null }) {
   const [hover, setHover] = useState<Candle | null>(null);
@@ -72,7 +79,7 @@ export default function Candles({ data }: { data: CandleData | null }) {
 
   return (
     <div>
-      <div className="rounded-xl bg-[#0b1220] p-3">
+      <div className="rounded-xl border border-slate-200 bg-white p-3">
         <svg viewBox={`0 0 ${W} ${H}`} className="w-full" role="img"
              aria-label="Daily distribution of income brackets checked">
           <defs>
@@ -80,7 +87,7 @@ export default function Candles({ data }: { data: CandleData | null }) {
                 in the mark itself rather than only in a footnote. */}
             <pattern id="thin" width="5" height="5" patternTransform="rotate(45)"
                      patternUnits="userSpaceOnUse">
-              <line x1="0" y1="0" x2="0" y2="5" stroke="#334155" strokeWidth="2" />
+              <line x1="0" y1="0" x2="0" y2="5" stroke="#fca5a5" strokeWidth="2" />
             </pattern>
           </defs>
 
@@ -88,16 +95,17 @@ export default function Candles({ data }: { data: CandleData | null }) {
           {data.levels.map((l) => (
             <g key={l.lvl}>
               <line x1={padL} x2={padL + plotW} y1={y(l.lvl)} y2={y(l.lvl)}
-                    stroke="#1e293b" strokeWidth="1" />
+                    stroke={GRID} strokeWidth="1" />
               <text x={padL - 12} y={y(l.lvl) + 4} textAnchor="end"
-                    className="fill-slate-500" style={{ fontSize: 11, fontFamily: 'ui-monospace, monospace' }}>
+                    className="fill-slate-400" style={{ fontSize: 11, fontFamily: 'ui-monospace, monospace' }}>
                 {l.label}
               </text>
             </g>
           ))}
 
           {data.candles.map((c, i) => {
-            const col = colourOf(c);
+            const hot = hover?.d === c.d;
+            const col = hot ? BODY_HOVER : BODY;
             const thin = c.n < THIN;
             const top = y(Math.max(c.q1, c.q3));
             const bot = y(Math.min(c.q1, c.q3));
@@ -110,16 +118,16 @@ export default function Candles({ data }: { data: CandleData | null }) {
                 {/* generous hit area — the candle itself is a thin target */}
                 <rect x={x(i) - view.slot / 2} y={padT} width={view.slot} height={plotH} fill="transparent" />
                 <line x1={x(i)} x2={x(i)} y1={y(c.hi)} y2={y(c.lo)}
-                      stroke={col} strokeWidth="1.5" opacity={thin ? 0.4 : 0.85} />
+                      stroke={WICK} strokeWidth="1.5" opacity={thin ? 0.5 : 1} />
                 <rect x={x(i) - body / 2} y={top} width={body} height={h} rx="2"
                       fill={thin ? 'url(#thin)' : col}
-                      stroke={col} strokeWidth={thin ? 1 : 0}
-                      opacity={thin ? 0.75 : hover && hover.d !== c.d ? 0.45 : 1} />
+                      stroke={thin ? '#fca5a5' : 'none'} strokeWidth={thin ? 1 : 0}
+                      opacity={thin ? 1 : hover && !hot ? 0.5 : 1} />
                 {/* median tick */}
                 <line x1={x(i) - body / 2} x2={x(i) + body / 2} y1={y(c.med)} y2={y(c.med)}
-                      stroke="#0b1220" strokeWidth="2" opacity={thin ? 0.5 : 1} />
+                      stroke="#ffffff" strokeWidth="2" opacity={thin ? 0.9 : 1} />
                 <text x={x(i)} y={H - 12} textAnchor="middle"
-                      className={hover?.d === c.d ? 'fill-slate-200' : 'fill-slate-500'}
+                      className={hot ? 'fill-slate-700' : 'fill-slate-400'}
                       style={{ fontSize: 10, fontFamily: 'ui-monospace, monospace' }}>
                   {c.d.slice(5)}
                 </text>
@@ -145,8 +153,8 @@ export default function Candles({ data }: { data: CandleData | null }) {
       <p className="mt-2 text-xs leading-relaxed text-slate-400">
         Not a price chart. Exact incomes are never stored, so this plots the income
         <em> mix</em> of who checked their pay: the body is the middle half of that day&apos;s
-        visitors by bracket, the wick is the full range, and colour compares the day&apos;s
-        median with the day before. Hatched bodies are days under {THIN} calculations.
+        visitors by bracket, the wick is the full range, and the tick across the body is
+        the median. Hatched bodies are days under {THIN} calculations.
       </p>
     </div>
   );
