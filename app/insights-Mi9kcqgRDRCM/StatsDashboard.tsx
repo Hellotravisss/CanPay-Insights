@@ -7,6 +7,7 @@ import { countryName } from './countries';
 import TrendChart from './TrendChart';
 import Candles, { type CandleData } from './Candles';
 import CrossTab, { type CrossTabData } from './CrossTab';
+import Provenance, { type ProvenanceData } from './Provenance';
 import SearchPanel from './SearchPanel';
 import ContentPanel from './ContentPanel';
 
@@ -114,6 +115,7 @@ export default function StatsDashboard() {
   const [series, setSeries] = useState<any | null>(null);
   const [candles, setCandles] = useState<CandleData | null>(null);
   const [cross, setCross] = useState<CrossTabData | null>(null);
+  const [prov, setProv] = useState<ProvenanceData | null>(null);
   const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
@@ -125,6 +127,9 @@ export default function StatsDashboard() {
     });
     supabase.rpc('calc_crosstab').then(({ data }) => {
       if (data) setCross(data as CrossTabData);
+    });
+    supabase.rpc('calc_provenance').then(({ data }) => {
+      if (data) setProv(data as ProvenanceData);
     });
     supabase.rpc('calc_stats').then(({ data, error }) => {
       if (error) setError(error.message);
@@ -420,6 +425,19 @@ export default function StatsDashboard() {
           <div className="mt-6">
             <Card title="Income mix by day" hint="Who turned up to check their pay — never what anyone actually earns.">
               <Candles data={candles} />
+            </Card>
+          </div>
+        )}
+
+        {/* Why any of the above can be believed. Last, because it answers a
+            question the reader only has after seeing the numbers. */}
+        {prov && (
+          <div className="mt-6">
+            <Card
+              title="Provenance"
+              hint="Where these numbers come from, and how they are kept honest."
+            >
+              <Provenance data={prov} />
             </Card>
           </div>
         )}

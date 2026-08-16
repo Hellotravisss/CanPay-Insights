@@ -110,10 +110,46 @@ const DataPage: React.FC = () => {
             <div className="rounded-xl border border-slate-200 bg-slate-50 p-5 mb-6">
               <p className="text-sm leading-relaxed text-slate-700">
                 CanPay Insights, <em>Canadian Take-Home Pay &amp; Payroll Deductions 2026</em> (open dataset), Vancouver,
-                Canada. Licensed under{' '}
+                Canada. Version 2026-06-21 (2026 tax year). Licensed under{' '}
                 <a href="https://creativecommons.org/licenses/by/4.0/" target="_blank" rel="noopener noreferrer" className="text-red-600 underline hover:text-red-700">CC BY 4.0</a>.
                 Retrieved from canpayinsights.ca/data.
               </p>
+            </div>
+
+            {/* A citable dataset with no version and no stated update policy
+                cannot be cited responsibly — the reader has no way to say WHICH
+                figures they used. Both are real commitments here, not
+                aspirations: a scheduled quarterly job re-checks every rate
+                against the CRA and provincial sources, and the site's build
+                refuses to complete while any published figure disagrees with
+                the engine. */}
+            <div className="rounded-xl border border-slate-200 p-5 mb-6">
+              <h3 className="text-sm font-bold uppercase tracking-wider text-slate-500 mb-2">
+                Version and updates
+              </h3>
+              <ul className="space-y-1.5 text-sm leading-relaxed text-slate-600">
+                <li>
+                  <strong className="text-slate-800">Current version:</strong> 2026-06-21, covering the 2026
+                  tax year. Cite the version — figures change when rates do.
+                </li>
+                <li>
+                  <strong className="text-slate-800">Re-checked quarterly</strong> (January, April,
+                  July, November) against the CRA, Revenu Québec and each provincial government.
+                  January is when a new tax year&apos;s rates take effect, and a new version is
+                  published then.
+                </li>
+                <li>
+                  <strong className="text-slate-800">Every figure is machine-checked.</strong> A
+                  build of this site fails if any published number — in this dataset, in an article,
+                  or on any page — disagrees with the tax engine that computes it. Nothing stale can
+                  reach the site without the deployment breaking first.
+                </li>
+                <li>
+                  <strong className="text-slate-800">Corrections</strong> are made in place and the
+                  version date moves. Email info@canpayinsights.ca if you find one; superseded
+                  figures can be supplied on request.
+                </li>
+              </ul>
             </div>
             <p className="text-slate-600 leading-relaxed">
               You&apos;re free to share and adapt the data, including commercially, with attribution and a link to{' '}
