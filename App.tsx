@@ -721,6 +721,11 @@ const App: React.FC = () => {
                         ? timesheetInputs.hourlyWage
                         : null
                   }
+                  hours={{
+                    regular: results.regularHours,
+                    ot15: results.overtimeHours15,
+                    ot20: results.overtimeHours20,
+                  }}
                 />
                 {isAuthenticated && records.length > 0 && <PayCurve records={records} />}
                 <IntentPrompt

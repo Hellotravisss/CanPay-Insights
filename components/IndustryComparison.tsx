@@ -64,9 +64,9 @@ const DICT: Record<string, Record<string, string>> = {
     median: 'Industry median',
     low: 'Lower',
     high: 'Higher',
-    verdictTop: 'Your gross pay is in the top {pct}% of {industry} in Canada.',
-    verdictAbove: 'Your gross pay is above the median for {industry} in Canada.',
-    verdictBelow: 'Your gross pay is below the median for {industry} in Canada.',
+    verdictTop: 'Your base rate is in the top {pct}% of {industry} in Canada.',
+    verdictAbove: 'Your base rate is above the median for {industry} in Canada.',
+    verdictBelow: 'Your base rate is below the median for {industry} in Canada.',
     note: 'Approximate benchmarks based on Statistics Canada full-time wage data, Canada-wide.',
     'food-hospitality': 'Food service & hospitality',
     retail: 'Retail',
@@ -90,8 +90,8 @@ const DICT: Record<string, Record<string, string>> = {
     median: 'Médiane du secteur',
     low: 'Moins',
     high: 'Plus',
-    verdictTop: 'Votre salaire brut se situe dans le top {pct}% du secteur {industry} au Canada.',
-    verdictAbove: 'Votre salaire brut est au-dessus de la médiane du secteur {industry} au Canada.',
+    verdictTop: 'Votre taux horaire de base se situe dans le top {pct}% du secteur {industry} au Canada.',
+    verdictAbove: 'Votre taux de base est au-dessus de la médiane du secteur {industry} au Canada.',
     verdictBelow: 'Votre salaire brut est sous la médiane du secteur {industry} au Canada.',
     note: 'Repères approximatifs basés sur les données salariales de Statistique Canada (temps plein).',
     'food-hospitality': 'Restauration et hôtellerie',
@@ -116,9 +116,9 @@ const DICT: Record<string, Record<string, string>> = {
     median: '行业中位数',
     low: '较低',
     high: '较高',
-    verdictTop: '你的税前工资位于加拿大{industry}行业的前 {pct}%。',
-    verdictAbove: '你的税前工资高于加拿大{industry}行业的中位数。',
-    verdictBelow: '你的税前工资低于加拿大{industry}行业的中位数。',
+    verdictTop: '你的基础时薪位于加拿大{industry}行业的前 {pct}%。',
+    verdictAbove: '你的基础时薪高于加拿大{industry}行业的中位数。',
+    verdictBelow: '你的基础时薪低于加拿大{industry}行业的中位数。',
     note: '近似基准,基于加拿大统计局全职工资数据(全国范围)。',
     'food-hospitality': '餐饮与酒店',
     retail: '零售',
@@ -194,6 +194,7 @@ export default function IndustryComparison({
   lang: rawLang,
   employmentShape = null,
   hourlyWage = null,
+  hours = null,
 }: {
   mode: string;
   province: string;
@@ -204,6 +205,8 @@ export default function IndustryComparison({
   employmentShape?: string | null;
   /** The user's own hourly rate where the calculator knows it. */
   hourlyWage?: number | null;
+  /** Hours behind the gross, so overtime can be separated from rate. */
+  hours?: { regular: number; ot15: number; ot20: number } | null;
 }) {
   const lang: Lang =
     rawLang === 'fr' || rawLang === 'zh' ? rawLang
@@ -231,16 +234,27 @@ export default function IndustryComparison({
   const headline = useMemo(() => {
     const medianHourly = PROVINCIAL_WAGES['all-industries']?.[PROVINCE_CODE[province] ?? ''];
     if (!medianHourly) return null;
-    const partTime = employmentShape === 'part-time-hourly';
-    if (partTime && hourlyWage && hourlyWage > 0) {
+    // RATE vs RATE whenever the rate is known — not just for part-timers.
+    //
+    // Statistics Canada publishes a median HOURLY wage at standard full-time
+    // hours. Measuring a gross that contains overtime at time-and-a-half, a
+    // shift premium and bonuses against it conflates two different questions:
+    // "am I paid well" and "do I work a lot". A real result on this site read
+    // "92% above the median" for someone whose base rate is roughly 14-29%
+    // above it — the rest was overtime. Rate against rate answers the question
+    // people actually came with; the hours are reported separately below.
+    if (hourlyWage && hourlyWage > 0) {
+      const ot = (hours?.ot15 ?? 0) + (hours?.ot20 ?? 0);
       return {
         basis: 'hourly' as const,
         yours: hourlyWage,
         median: medianHourly,
         pct: Math.round(((hourlyWage - medianHourly) / medianHourly) * 100),
+        partTime: employmentShape === 'part-time-hourly',
+        otHours: ot,
       };
     }
-    if (partTime) return null; // part time, no hourly rate — no fair comparison
+    if (employmentShape === 'part-time-hourly') return null;
     if (!annualIncome || annualIncome <= 0) return null;
     const medianAnnual = annualFromHourly(medianHourly);
     // Annual mode knows no hours, so the shape derives to 'salaried' for
@@ -257,8 +271,10 @@ export default function IndustryComparison({
       yours: annualIncome,
       median: medianAnnual,
       pct: Math.round(((annualIncome - medianAnnual) / medianAnnual) * 100),
+      partTime: false,
+      otHours: 0,
     };
-  }, [province, annualIncome, employmentShape, hourlyWage]);
+  }, [province, annualIncome, employmentShape, hourlyWage, hours]);
 
   const baseBench = useMemo(() => BENCHMARKS.find((b) => b.slug === slug) ?? null, [slug]);
   const local = useMemo(
@@ -270,8 +286,17 @@ export default function IndustryComparison({
     [baseBench, local]
   );
   const pct = useMemo(
-    () => (bench && annualIncome > 0 ? estimatePercentile(annualIncome, bench.p) : null),
-    [bench, annualIncome]
+    // Position the marker by BASE RATE annualised, not by the gross. The
+    // benchmarks are full-time base wages, so a gross swollen by overtime
+    // slides the marker into a percentile the person's rate does not occupy —
+    // a real result read "top 9% of Manufacturing" on a base rate sitting far
+    // nearer the middle. Where no hourly rate is known the gross is all there
+    // is, and it is the right figure anyway.
+    () => {
+      const basis = hourlyWage && hourlyWage > 0 ? hourlyWage * 2080 : annualIncome;
+      return bench && basis > 0 ? estimatePercentile(basis, bench.p) : null;
+    },
+    [bench, annualIncome, hourlyWage]
   );
 
   if (!annualIncome || annualIncome <= 0) return null;
@@ -364,9 +389,19 @@ export default function IndustryComparison({
           </p>
           {headline.basis === 'hourly' && (
             <p className="mt-1.5 text-[11px] leading-4 text-slate-500">
-              Compared hourly, not annually: you are working part-time hours, and the official
-              figure covers full-time employees — an annual comparison would call fewer hours
-              underpayment.
+              {headline.partTime
+                ? 'Compared rate to rate: you are working part-time hours, and the official figure covers full-time employees — an annual comparison would read fewer hours as underpayment.'
+                : 'Compared rate to rate. The official figure is a base hourly wage at standard full-time hours, so measuring a gross that includes overtime against it would count hours worked as pay earned.'}
+            </p>
+          )}
+          {headline.otHours > 0 && (
+            <p className="mt-1.5 text-[11px] leading-4 text-slate-500">
+              Separately: your gross includes{' '}
+              <strong className="text-slate-700 tabular-nums">
+                {Math.round(headline.otHours)} overtime {headline.otHours === 1 ? 'hour' : 'hours'}
+              </strong>{' '}
+              this pay period. That raises what you take home without changing what your hour is
+              worth — two different questions, kept apart on purpose.
             </p>
           )}
           <p className="mt-1.5 text-[11px] leading-4 text-slate-400">
