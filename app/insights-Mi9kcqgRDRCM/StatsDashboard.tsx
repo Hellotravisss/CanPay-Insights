@@ -6,6 +6,7 @@ import Donut from './Donut';
 import { countryName } from './countries';
 import TrendChart from './TrendChart';
 import Candles, { type CandleData } from './Candles';
+import CrossTab, { type CrossTabData } from './CrossTab';
 import SearchPanel from './SearchPanel';
 import ContentPanel from './ContentPanel';
 
@@ -112,6 +113,7 @@ export default function StatsDashboard() {
   const [stats, setStats] = useState<Stats | null>(null);
   const [series, setSeries] = useState<any | null>(null);
   const [candles, setCandles] = useState<CandleData | null>(null);
+  const [cross, setCross] = useState<CrossTabData | null>(null);
   const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
@@ -120,6 +122,9 @@ export default function StatsDashboard() {
     });
     supabase.rpc('calc_candles').then(({ data }) => {
       if (data) setCandles(data as CandleData);
+    });
+    supabase.rpc('calc_crosstab').then(({ data }) => {
+      if (data) setCross(data as CrossTabData);
     });
     supabase.rpc('calc_stats').then(({ data, error }) => {
       if (error) setError(error.message);
@@ -395,6 +400,18 @@ export default function StatsDashboard() {
         {series && (
           <div className="mt-6">
             <TrendChart series={series} />
+          </div>
+        )}
+
+        {/* The crossing — and how far this sample sits from the national median */}
+        {cross && (
+          <div className="mt-6">
+            <Card
+              title="Income bracket by province and industry"
+              hint="The crossing single charts cannot show, measured against the Statistics Canada median."
+            >
+              <CrossTab data={cross} />
+            </Card>
           </div>
         )}
 
