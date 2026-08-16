@@ -197,7 +197,7 @@ const App: React.FC = () => {
   const router = useRouter();
 
   // Auth
-  const { user, isAuthenticated, signInWithOAuth, signInWithEmail, signInWithPassword, signUpWithPassword } = useAuth();
+  const { user, isAuthenticated, loading: authLoading, signInWithOAuth, signInWithEmail, signInWithPassword, signUpWithPassword } = useAuth();
   const { t, lang } = useT();
   const userId = user?.id || null;
 
@@ -376,6 +376,13 @@ const App: React.FC = () => {
   // merely opening the calculator doesn't skew the data toward the defaults.
   useEffect(() => {
     if (currentPage !== 'calculator') return;
+    // Wait for auth to resolve before recording anything. Sessions restore
+    // asynchronously, so the first render always has userId === null; the
+    // event went out marked anonymous, and when auth landed and this effect
+    // re-ran, the corrected event hit an identical dedupe key and was thrown
+    // away. Every registered user was therefore recorded as signed out —
+    // 0 of 448, while eleven accounts were actively saving calculations.
+    if (authLoading) return;
     const untouched =
       (mode === CalculationMode.SIMPLE && simpleInputs === DEFAULT_SIMPLE_INPUTS) ||
       (mode === CalculationMode.ANNUAL && annualInputs === DEFAULT_ANNUAL_INPUTS) ||
@@ -406,7 +413,7 @@ const App: React.FC = () => {
       behaviour: buildBehaviour(mode, simpleInputs, annualInputs, timesheetInputs, results),
       viewedReport: reportOpened,
     });
-  }, [currentPage, mode, simpleInputs, annualInputs, timesheetInputs, currentProvince, results, lang, reportOpened, userId]);
+  }, [currentPage, mode, simpleInputs, annualInputs, timesheetInputs, currentProvince, results, lang, reportOpened, userId, authLoading]);
 
   // Calculation History
   const { records, saveCalculation } = useCalculationHistory(userId);
