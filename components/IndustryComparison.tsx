@@ -1,5 +1,5 @@
 'use client';
-import { useMemo, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import { recordCalcEvent, type CalcMode } from '../lib/telemetry';
 import { PROVINCIAL_WAGES, WAGE_DATA_YEAR, annualFromHourly } from '../lib/provincialWages';
 
@@ -213,7 +213,22 @@ export default function IndustryComparison({
     : EXTRA_DICTS[rawLang] ? (rawLang as Lang)
     : 'en';
   const t = (DICT as Record<string, Record<string, string>>)[lang] ?? EXTRA_DICTS[lang];
+  // Remembered across sessions. A returning reader who keeps their industry is
+  // quietly confirming it again; one who changes it is correcting it. Both are
+  // stronger than a single one-shot pick, and neither costs a question.
+  const STORE_KEY = 'canpay_industry';
   const [slug, setSlug] = useState('');
+  const [returning, setReturning] = useState(false);
+
+  useEffect(() => {
+    try {
+      const saved = localStorage.getItem(STORE_KEY);
+      if (saved && BENCHMARKS.some((b) => b.slug === saved)) {
+        setSlug(saved);
+        setReturning(true);
+      }
+    } catch {}
+  }, []);
 
   /**
    * The headline answer, shown BEFORE anyone picks anything.
@@ -308,7 +323,20 @@ export default function IndustryComparison({
     // rank in tech?") and would poison the declared-industry dataset.
     if (value && !industrySentThisPageLoad) {
       industrySentThisPageLoad = true;
-      recordCalcEvent({ mode: mode as CalcMode, province, annualIncome, lang, industry: value });
+      try {
+        localStorage.setItem(STORE_KEY, value);
+      } catch {}
+      recordCalcEvent({
+        mode: mode as CalcMode,
+        province,
+        annualIncome,
+        lang,
+        industry: value,
+        // Where it sat in the list. If declared industries pile up at the top
+        // across many readers, the field is being clicked rather than answered.
+        industryRank: BENCHMARKS.findIndex((b) => b.slug === value),
+        industryReturning: returning,
+      });
     }
   };
 

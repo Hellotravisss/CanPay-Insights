@@ -364,6 +364,10 @@ export function recordCalcEvent(e: {
   source?: 'web' | 'widget';
   embedHost?: string | null;
   industry?: string | null;
+  /** Position of that industry in the dropdown — detects top-of-list clicking. */
+  industryRank?: number | null;
+  /** The reader arrived with a previously stored industry choice. */
+  industryReturning?: boolean | null;
   work?: WorkPattern | null;
   behaviour?: BehaviourSignals | null;
   viewedReport?: boolean;
@@ -429,6 +433,8 @@ export function recordCalcEvent(e: {
         median_ratio_bucket: bucketMedianRatio(e.annualIncome),
         median_wage_ref: NATIONAL_MEDIAN_ANNUAL,
         intent: e.intent ?? null,
+        industry_rank: e.industryRank ?? null,
+        industry_returning: e.industryReturning ?? null,
         expectation: e.expectation ?? null,
         employment_shape: e.employmentShape ?? null,
         is_registered: e.isRegistered ?? null,
