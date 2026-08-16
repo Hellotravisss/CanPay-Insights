@@ -106,6 +106,37 @@ const DataPage: React.FC = () => {
               <li>The basic personal amount only (no other credits or deductions), so figures are a clean, comparable baseline.</li>
             </ul>
 
+            {/* The second dataset. The one above is computed from published
+                tax rates — reproducible by anyone with the rates. This one is
+                observed, and nobody else has it. */}
+            <div className="rounded-xl border-2 border-red-100 bg-red-50/40 p-5 mb-10">
+              <h2 className="text-xl font-bold text-slate-800 mb-1">
+                Second dataset: what Canadians actually check
+              </h2>
+              <p className="text-sm leading-relaxed text-slate-600 mb-3">
+                Anonymous aggregates from the calculator itself — which income ranges people check,
+                from which province, on which weekday and at what hour of their own evening. Income
+                is recorded only as a range, never an amount. Small cells are withheld rather than
+                shown, and the file says how many were withheld so you can see what is missing.
+              </p>
+              <p className="text-sm leading-relaxed text-slate-600 mb-4">
+                <strong className="text-slate-800">These are people who went looking for a pay
+                calculator, not a random sample of Canadians</strong> — the file carries that warning
+                and the rest of the method inside it, so it stays attached to the data after
+                download.
+              </p>
+              <a
+                href="/data/usage.json"
+                className="inline-flex items-center gap-2 rounded-lg bg-slate-900 px-4 py-2.5 text-sm font-bold text-white no-underline hover:bg-slate-800"
+              >
+                Open usage dataset (JSON, CC BY 4.0)
+              </a>
+              <p className="mt-3 text-xs text-slate-500">
+                Updated hourly · <code className="rounded bg-white px-1.5 py-0.5">GET
+                canpayinsights.ca/data/usage.json</code> · CORS open
+              </p>
+            </div>
+
             <h2 className="text-2xl font-bold text-slate-800 mb-4">Cite this dataset</h2>
             <div className="rounded-xl border border-slate-200 bg-slate-50 p-5 mb-6">
               <p className="text-sm leading-relaxed text-slate-700">
