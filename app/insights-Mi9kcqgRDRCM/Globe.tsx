@@ -118,6 +118,8 @@ export default function Globe({
   // pointer rotates, two zoom around their spread. pointercancel must clear
   // state too — iOS fires it whenever it takes the gesture back.
   const pointers = useRef(new Map<number, { x: number; y: number }>());
+  // Drives the window-listener effect below; a ref would not re-run it.
+  const [dragging, setDragging] = useState(false);
   const pinch = useRef<{ dist: number; zoom: number } | null>(null);
 
   const pinchDist = () => {
@@ -127,6 +129,7 @@ export default function Globe({
 
   const onDown = (e: React.PointerEvent<HTMLDivElement>) => {
     pointers.current.set(e.pointerId, { x: e.clientX, y: e.clientY });
+    setDragging(true);
     setSpinning(false);
     if (pointers.current.size === 2) {
       pinch.current = { dist: pinchDist(), zoom };
@@ -142,7 +145,7 @@ export default function Globe({
       (e.currentTarget as Element).setPointerCapture?.(e.pointerId);
     } catch {}
   };
-  const onMove = (e: React.PointerEvent<HTMLDivElement>) => {
+  const onMoveRaw = (e: PointerEvent | React.PointerEvent<HTMLDivElement>) => {
     if (!pointers.current.has(e.pointerId)) return;
     pointers.current.set(e.pointerId, { x: e.clientX, y: e.clientY });
     if (pinch.current && pointers.current.size >= 2) {
@@ -163,7 +166,32 @@ export default function Globe({
     setLon0(drag.current.lon - dx * k);
     setLat0(Math.max(-80, Math.min(80, drag.current.lat + dy * k)));
   };
-  const onUp = (e: React.PointerEvent<HTMLDivElement>) => {
+  /**
+   * Once a finger is down, the rest of the gesture is tracked on WINDOW.
+   *
+   * Element handlers looked correct and failed on every phone: the first
+   * pointermove retargets from the wrapper to the SVG inside it, which fires
+   * pointerleave on the wrapper, which ended the drag before it moved. A mouse
+   * never does this — pointerleave only fires on actually leaving the box —
+   * so the bug was invisible on desktop. Window listeners cannot be retargeted
+   * away, and they also survive the re-render that setSpinning(false) causes,
+   * which can drop pointer capture.
+   */
+  useEffect(() => {
+    if (!dragging) return;
+    const move = (e: PointerEvent) => onMoveRaw(e);
+    const end = (e: PointerEvent) => onUpRaw(e);
+    window.addEventListener('pointermove', move, { passive: false });
+    window.addEventListener('pointerup', end);
+    window.addEventListener('pointercancel', end);
+    return () => {
+      window.removeEventListener('pointermove', move);
+      window.removeEventListener('pointerup', end);
+      window.removeEventListener('pointercancel', end);
+    };
+  });
+
+  const onUpRaw = (e: PointerEvent | React.PointerEvent<HTMLDivElement>) => {
     pointers.current.delete(e.pointerId);
     if (pointers.current.size < 2) pinch.current = null;
     if (pointers.current.size === 1) {
@@ -173,6 +201,7 @@ export default function Globe({
       drag.current = { x: p.x, y: p.y, lon: lon0, lat: lat0 };
     } else if (pointers.current.size === 0) {
       drag.current = null;
+      setDragging(false);
     }
   };
 
@@ -195,10 +224,9 @@ export default function Globe({
           // on a utility surviving a purge.
           style={{ touchAction: 'none' }}
           onPointerDown={onDown}
-          onPointerMove={onMove}
-          onPointerUp={onUp}
-          onPointerCancel={onUp}
-          onPointerLeave={onUp}
+          // No onPointerMove / onPointerUp / onPointerLeave here: the gesture
+          // is tracked on window from pointerdown onward. onPointerLeave in
+          // particular was ending every touch drag on its first move.
           onWheel={onWheel}
           onDoubleClick={() => setZoom(1)}
         >

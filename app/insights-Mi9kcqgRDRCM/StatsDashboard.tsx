@@ -116,6 +116,7 @@ export default function StatsDashboard() {
   const [candles, setCandles] = useState<CandleData | null>(null);
   const [cross, setCross] = useState<CrossTabData | null>(null);
   const [prov, setProv] = useState<ProvenanceData | null>(null);
+  const [geo, setGeo] = useState<{ city: string; lat: number; lon: number; n: number }[] | null>(null);
   const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
@@ -130,6 +131,11 @@ export default function StatsDashboard() {
     });
     supabase.rpc('calc_provenance').then(({ data }) => {
       if (data) setProv(data as ProvenanceData);
+    });
+    // Separate call: calc_stats drops any point whose city name the edge could
+    // not resolve, which hid Hong Kong and China from the globe entirely.
+    supabase.rpc('calc_cities_geo').then(({ data }) => {
+      if (data) setGeo(data as { city: string; lat: number; lon: number; n: number }[]);
     });
     supabase.rpc('calc_stats').then(({ data, error }) => {
       if (error) setError(error.message);
@@ -235,7 +241,7 @@ export default function StatsDashboard() {
             iOS app never pass through the web edge that resolves location, and the earliest events
             predate location collection entirely.
           </p>
-          <Globe cities={stats.cities_geo ?? []} countries={stats.by_country} />
+          <Globe cities={geo ?? stats.cities_geo ?? []} countries={stats.by_country} />
         </div>
 
         <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
