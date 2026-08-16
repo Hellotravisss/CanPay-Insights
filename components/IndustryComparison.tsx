@@ -243,6 +243,15 @@ export default function IndustryComparison({
     if (partTime) return null; // part time, no hourly rate — no fair comparison
     if (!annualIncome || annualIncome <= 0) return null;
     const medianAnnual = annualFromHourly(medianHourly);
+    // Annual mode knows no hours, so the shape derives to 'salaried' for
+    // everyone — which let this comparison through for someone typing $25,000
+    // and tell them they earn 65% below the median. They are far more likely
+    // to be part-time, seasonal, or partway through their first year than
+    // underpaid, and against a FULL-TIME median that sentence is not
+    // informative. Full-time minimum wage across the provinces lands near
+    // $34,000; below that, say nothing rather than something misleading.
+    const FULL_TIME_FLOOR = 34000;
+    if (annualIncome < FULL_TIME_FLOOR) return null;
     return {
       basis: 'annual' as const,
       yours: annualIncome,
