@@ -306,8 +306,16 @@ export default function Globe({
             const p = projectVisible(c.lat, c.lon);
             if (!p) return null;
             const r = 2.5 + (c.n / maxCity) * 5;
+            // Identify a dot by its POSITION, not its label. Points whose city
+            // name the edge could not resolve are labelled with their country,
+            // so several now share the string "CA" — and while the key was the
+            // label, React could not tell those dots apart. At twenty redraws a
+            // second it stopped reclaiming them and they piled up along the
+            // limb, which is the "dots accumulating at the edge" symptom.
+            // Coordinates are unique by construction.
+            const id = `${c.lat},${c.lon}`;
             return (
-              <g key={c.city}>
+              <g key={id}>
                 <circle cx={p[0]} cy={p[1]} r={r} fill="#f87171" opacity="0.35">
                   <animate attributeName="r" values={`${r};${r * 3};${r}`} dur="2.6s" repeatCount="indefinite" />
                   <animate attributeName="opacity" values="0.4;0;0.4" dur="2.6s" repeatCount="indefinite" />
@@ -319,17 +327,22 @@ export default function Globe({
                   cy={p[1]}
                   r={Math.max(r + 6, 9)}
                   fill="transparent"
-                  onMouseEnter={() => setHoverCity(c.city)}
-                  onMouseLeave={() => setHoverCity((v) => (v === c.city ? null : v))}
+                  onMouseEnter={() => setHoverCity(id)}
+                  onMouseLeave={() => setHoverCity((v) => (v === id ? null : v))}
                 />
-                {hoverCity === c.city && (
+                {hoverCity === id && (
                   <text
                     x={p[0] + r + 3}
                     y={p[1] + 3}
                     className="fill-white text-[9px] font-semibold"
                     style={{ paintOrder: 'stroke', stroke: '#0b1220', strokeWidth: 2.5 }}
                   >
-                    {c.city} · {c.n}
+                    {/* Unnamed points carry a country code as their label;
+                        show the country's name so a tooltip never reads "CA". */}
+                    {c.city.length === 2 && c.city === c.city.toUpperCase()
+                      ? countryName(c.city)
+                      : c.city}{' '}
+                    · {c.n}
                   </text>
                 )}
               </g>
