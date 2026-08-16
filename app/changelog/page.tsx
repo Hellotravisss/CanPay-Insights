@@ -18,6 +18,15 @@ export const metadata: Metadata = {
 // page is the product's history, not a publishing log.
 const ENTRIES: { date: string; title: string; points: string[] }[] = [
   {
+    date: '2026-08-16',
+    title: 'Tech wage benchmark updated in the pay-comparison chart',
+    points: [
+      'The technology industry benchmark in the wage-comparison chart was refreshed to reflect the latest Job Bank wage report — the typical full-time tech salary now shows as roughly $100,000, up from roughly $90,000.',
+      'Every other industry benchmark and all provincial wage figures were checked against the latest Statistics Canada release and found unchanged.',
+      'Figures throughout the calculator come from Statistics Canada and Job Bank, and are reviewed every six months.',
+    ],
+  },
+  {
     date: '2026-08-08',
     title: 'iOS app 1.1.0 — ten languages',
     points: [

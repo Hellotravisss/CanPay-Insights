@@ -33,11 +33,16 @@ let industrySentThisPageLoad = false;
 // checked / supplemented against Table 14-10-0204-01 (SEPH average weekly
 // earnings x 52) where 14-10-0064-01 only reports a blended NAICS grouping
 // or omits the sub-industry entirely. Percentile shape scaled from the prior
-// benchmarks by the ratio of new-to-old median. Semi-annual audit: 2026-H2.
-// Two manual corrections to the audit output: tech uses the Job Bank LFS
-// occupation median (NOC 21230, $89,982) instead of the SEPH payroll MEAN,
-// which runs high; retail uses the midpoint between the wholesale+retail
-// blended median and the retail-only SEPH mean, since the blend skews up.
+// benchmarks by the ratio of new-to-old median. Semi-annual audit: 2026-H2
+// (completed 2026-08-16; next due 2027-H1).
+// Two manual corrections to the audit output: tech uses the Job Bank
+// occupation median (NOC 21232, "Software developers and programmers";
+// $99,996 as of the Job Bank wage report updated 2025-11-19 — was $89,982
+// at the prior audit, a genuine +11% move, corrected the "21230" code typo
+// along the way) instead of the SEPH payroll MEAN, which runs high; retail
+// uses the midpoint between the wholesale+retail blended median and the
+// retail-only SEPH mean, since the blend skews up (unchanged this audit —
+// both source figures are flat at their 2025 values).
 // [p10, p25, p50, p75, p90]
 const BENCHMARKS: { slug: string; p: [number, number, number, number, number] }[] = [
   { slug: 'food-hospitality', p: [31000, 36000, 42000, 53000, 69000] },
@@ -51,7 +56,7 @@ const BENCHMARKS: { slug: string; p: [number, number, number, number, number] }[
   { slug: 'public-admin', p: [57000, 74000, 93000, 114000, 139000] },
   { slug: 'finance', p: [47000, 61000, 80000, 106000, 144000] },
   { slug: 'professional', p: [53000, 69000, 90000, 119000, 160000] },
-  { slug: 'tech', p: [53000, 68000, 90000, 116000, 153000] },
+  { slug: 'tech', p: [59000, 76000, 100000, 129000, 170000] },
   { slug: 'all-industries', p: [32000, 47000, 70000, 97000, 130000] },
 ];
 
