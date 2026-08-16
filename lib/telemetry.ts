@@ -145,6 +145,43 @@ export function buildPayChange(
 
 export type Intent = 'new-job' | 'raise' | 'moving' | 'budgeting' | 'tax-filing' | 'curious';
 
+/** Whether the number landed below, above, or near what the person expected. */
+export type Expectation = 'lower' | 'higher' | 'as-expected';
+
+/**
+ * How someone is employed, INFERRED from what they already entered — never
+ * asked. Fields that require a separate answer are effectively dead on this
+ * site (industry 3.6%, intent 0.4%) while fields derived from what the user
+ * had to type anyway run 67-88%, so this dimension is built from the
+ * calculator they chose, the hours they entered, and whether they declared
+ * tips or a shift premium.
+ *
+ * Order matters: tips are the most specific signal, and a tipped server on a
+ * night shift is more usefully counted as tipped-service than as shift-worker.
+ */
+export type EmploymentShape =
+  | 'salaried'
+  | 'full-time-hourly'
+  | 'part-time-hourly'
+  | 'shift-worker'
+  | 'tipped-service';
+
+export function deriveEmploymentShape(
+  mode: string,
+  work: WorkPattern | null,
+  behaviour: BehaviourSignals | null
+): EmploymentShape | null {
+  if (mode === 'annual') return 'salaried';
+  if (behaviour?.tipsPctBucket) return 'tipped-service';
+  if (behaviour?.shiftPremium) return 'shift-worker';
+  if (!work) return null;
+  const weekly = work.daysPerWeek * work.avgDailyHours;
+  if (!Number.isFinite(weekly) || weekly <= 0) return null;
+  // Statistics Canada treats under 30 hours a week as part time; matching that
+  // definition is what lets this column be compared with official figures.
+  return weekly < 30 ? 'part-time-hourly' : 'full-time-hourly';
+}
+
 export function bracketIncome(annual: number): string {
   if (annual < 30_000) return 'under-30k';
   if (annual < 50_000) return '30-50k';
@@ -331,6 +368,8 @@ export function recordCalcEvent(e: {
   behaviour?: BehaviourSignals | null;
   viewedReport?: boolean;
   intent?: Intent | null;
+  expectation?: Expectation | null;
+  employmentShape?: EmploymentShape | null;
   isRegistered?: boolean;
   payChange?: PayChange | null;
 }) {
@@ -349,7 +388,7 @@ export function recordCalcEvent(e: {
       ? `${w.shiftStartHour}-${w.shiftEndHour}-${w.unpaidBreakMin}-${w.daysPerWeek}`
       : '';
     const behaviourKey = b ? `${b.rrspPctBucket}-${b.otHoursBucket}-${b.tipsPctBucket ?? ''}-${b.shiftPremium}` : '';
-    const key = `${source}|${e.mode}|${e.province}|${bracket}|${lang}|${e.industry ?? ''}|${workKey}|${behaviourKey}|${e.intent ?? ''}|${e.payChange ? `${e.payChange.direction}-${e.payChange.pctBucket}` : ''}`;
+    const key = `${source}|${e.mode}|${e.province}|${bracket}|${lang}|${e.industry ?? ''}|${workKey}|${behaviourKey}|${e.intent ?? ''}|${e.expectation ?? ''}|${e.payChange ? `${e.payChange.direction}-${e.payChange.pctBucket}` : ''}`;
     if (sentThisPageLoad.has(key)) return;
     sentThisPageLoad.add(key);
 
@@ -390,6 +429,8 @@ export function recordCalcEvent(e: {
         median_ratio_bucket: bucketMedianRatio(e.annualIncome),
         median_wage_ref: NATIONAL_MEDIAN_ANNUAL,
         intent: e.intent ?? null,
+        expectation: e.expectation ?? null,
+        employment_shape: e.employmentShape ?? null,
         is_registered: e.isRegistered ?? null,
         from_history: e.payChange ? true : null,
         change_direction: e.payChange?.direction ?? null,

@@ -14,12 +14,14 @@ import {
   bucketOtHours,
   bucketTipsPct,
   buildPayChange,
+  deriveEmploymentShape,
   type WorkPattern,
   type BehaviourSignals,
   type PayChange,
 } from './lib/telemetry';
 import IndustryComparison from './components/IndustryComparison';
 import IntentPrompt from './components/IntentPrompt';
+import ExpectationPrompt from './components/ExpectationPrompt';
 import PayCurve from './components/PayCurve';
 import ResultsSection from './components/ResultsSection';
 import GeminiAdvisor from './components/GeminiAdvisor';
@@ -411,6 +413,11 @@ const App: React.FC = () => {
       isRegistered: !!userId,
       payChange,
       behaviour: buildBehaviour(mode, simpleInputs, annualInputs, timesheetInputs, results),
+      employmentShape: deriveEmploymentShape(
+        mode,
+        buildWorkPattern(mode, simpleInputs, timesheetInputs),
+        buildBehaviour(mode, simpleInputs, annualInputs, timesheetInputs, results)
+      ),
       viewedReport: reportOpened,
     });
   }, [currentPage, mode, simpleInputs, annualInputs, timesheetInputs, currentProvince, results, lang, reportOpened, userId, authLoading]);
@@ -689,11 +696,31 @@ const App: React.FC = () => {
                 </div>
                 
                 <ResultsSection results={results} provinceName={currentProvince} />
+                {/* Immediately under the figure: the reaction is the data, and
+                    it evaporates the moment the reader scrolls on. */}
+                <ExpectationPrompt
+                  mode={mode}
+                  province={currentProvince}
+                  annualIncome={results.grossPayAnnual}
+                  lang={lang}
+                />
                 <IndustryComparison
                   mode={mode}
                   province={currentProvince}
                   annualIncome={results.grossPayAnnual}
                   lang={lang}
+                  employmentShape={deriveEmploymentShape(
+                    mode,
+                    buildWorkPattern(mode, simpleInputs, timesheetInputs),
+                    buildBehaviour(mode, simpleInputs, annualInputs, timesheetInputs, results)
+                  )}
+                  hourlyWage={
+                    mode === CalculationMode.SIMPLE
+                      ? simpleInputs.hourlyWage
+                      : mode === CalculationMode.TIMESHEET
+                        ? timesheetInputs.hourlyWage
+                        : null
+                  }
                 />
                 {isAuthenticated && records.length > 0 && <PayCurve records={records} />}
                 <IntentPrompt

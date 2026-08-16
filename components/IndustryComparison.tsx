@@ -192,11 +192,18 @@ export default function IndustryComparison({
   province,
   annualIncome,
   lang: rawLang,
+  employmentShape = null,
+  hourlyWage = null,
 }: {
   mode: string;
   province: string;
   annualIncome: number;
   lang: string;
+  /** Derived, never asked. Decides whether the comparison is fair on an
+   *  annual basis or must be made hourly — see headline below. */
+  employmentShape?: string | null;
+  /** The user's own hourly rate where the calculator knows it. */
+  hourlyWage?: number | null;
 }) {
   const lang: Lang =
     rawLang === 'fr' || rawLang === 'zh' ? rawLang
@@ -204,6 +211,45 @@ export default function IndustryComparison({
     : 'en';
   const t = (DICT as Record<string, Record<string, string>>)[lang] ?? EXTRA_DICTS[lang];
   const [slug, setSlug] = useState('');
+
+  /**
+   * The headline answer, shown BEFORE anyone picks anything.
+   *
+   * This panel used to open with "Optional: pick your industry to see where
+   * your pay stands" and an empty dropdown — payment demanded before any
+   * value was delivered, which is why the industry field was answered 3.6% of
+   * the time while fields derived from what people already typed ran 67-88%.
+   * Now the province-wide answer is free, and choosing an industry sharpens an
+   * answer the reader already has rather than unlocking one they do not.
+   *
+   * FAIRNESS OF THE COMPARISON. Statistics Canada's figure is the median for
+   * FULL-TIME employees. Telling someone on twenty hours a week that they earn
+   * 65% below the median would be false — they are not underpaid, they are
+   * part time. So when the shape is part time and an hourly rate is known, the
+   * comparison is made hourly and says so.
+   */
+  const headline = useMemo(() => {
+    const medianHourly = PROVINCIAL_WAGES['all-industries']?.[PROVINCE_CODE[province] ?? ''];
+    if (!medianHourly) return null;
+    const partTime = employmentShape === 'part-time-hourly';
+    if (partTime && hourlyWage && hourlyWage > 0) {
+      return {
+        basis: 'hourly' as const,
+        yours: hourlyWage,
+        median: medianHourly,
+        pct: Math.round(((hourlyWage - medianHourly) / medianHourly) * 100),
+      };
+    }
+    if (partTime) return null; // part time, no hourly rate — no fair comparison
+    if (!annualIncome || annualIncome <= 0) return null;
+    const medianAnnual = annualFromHourly(medianHourly);
+    return {
+      basis: 'annual' as const,
+      yours: annualIncome,
+      median: medianAnnual,
+      pct: Math.round(((annualIncome - medianAnnual) / medianAnnual) * 100),
+    };
+  }, [province, annualIncome, employmentShape, hourlyWage]);
 
   const baseBench = useMemo(() => BENCHMARKS.find((b) => b.slug === slug) ?? null, [slug]);
   const local = useMemo(
@@ -281,7 +327,49 @@ export default function IndustryComparison({
 
   return (
     <div className="rounded-xl border border-slate-200 bg-white p-5 shadow-sm">
-      <p className="mb-3 text-sm font-medium text-slate-600">{t.prompt}</p>
+      {/* The answer first. Picking an industry sharpens it; it is no longer
+          the toll you pay to see anything at all. */}
+      {headline && (
+        <div className="mb-4 rounded-xl bg-slate-50 p-4">
+          <p className="text-sm leading-6 text-slate-700">
+            {headline.pct === 0 ? (
+              <>
+                You are <strong className="text-slate-900">right at</strong> the median
+              </>
+            ) : (
+              <>
+                You are{' '}
+                <strong className={headline.pct > 0 ? 'text-emerald-700' : 'text-red-700'}>
+                  {Math.abs(headline.pct)}% {headline.pct > 0 ? 'above' : 'below'}
+                </strong>{' '}
+                the median
+              </>
+            )}{' '}
+            {headline.basis === 'hourly' ? 'hourly wage' : 'full-time wage'} in {province} —{' '}
+            <span className="tabular-nums">
+              {headline.basis === 'hourly'
+                ? `$${headline.median.toFixed(2)}/h`
+                : `$${Math.round(headline.median).toLocaleString('en-CA')}`}
+            </span>
+            .
+          </p>
+          {headline.basis === 'hourly' && (
+            <p className="mt-1.5 text-[11px] leading-4 text-slate-500">
+              Compared hourly, not annually: you are working part-time hours, and the official
+              figure covers full-time employees — an annual comparison would call fewer hours
+              underpayment.
+            </p>
+          )}
+          <p className="mt-1.5 text-[11px] leading-4 text-slate-400">
+            Statistics Canada, Table 14-10-0064-01, {WAGE_DATA_YEAR} — median wage of full-time
+            employees, all industries. Refreshed semi-annually.
+          </p>
+        </div>
+      )}
+
+      <p className="mb-3 text-sm font-medium text-slate-600">
+        {headline ? 'Sharpen it — what do you do?' : t.prompt}
+      </p>
       <label className="mb-1 block text-[11px] font-semibold uppercase tracking-wide text-slate-500">
         {t.industry}
       </label>
