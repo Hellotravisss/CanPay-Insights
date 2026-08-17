@@ -1043,4 +1043,110 @@ These figures use the 2026 CPP earnings ceiling as an estimate for 2027; CanPay 
 Based on the Government of Canada's Spring Economic Update 2026 and the Department of Finance Canada announcement that Bill C-30 (the Spring Economic Update 2026 Implementation Act) received Royal Assent on June 18, 2026, cross-checked against contemporaneous news reporting on the rate cut and the Chief Actuary's May 28, 2026 report. Savings figures are calculated with the CanPay Insights tax engine, applying the new 2027 base rate to the current 2026 CPP earnings ceiling and exemption, since the official 2027 ceiling has not yet been published. This is general information, not tax or financial advice — confirm current CPP figures with the [Canada Revenue Agency](https://www.canada.ca/en/revenue-agency.html) or [Department of Finance Canada](https://www.canada.ca/en/department-finance.html).
 `,
   },
+  {
+    id: 'study-11',
+    slug: 'bc-tax-rate-increase-2026',
+    title: 'BC Tax Rate Jumps to 5.60%: Why Your Paycheque Shrank in July 2026',
+    subtitle:
+      "British Columbia's lowest income tax rate rose from 5.06% to 5.60% for 2026 — but the change wasn't finalized until payroll systems had already run six months at the old rate, so the CRA is now withholding at a prorated 6.14% through December to catch up.",
+    excerpt:
+      "BC's February 2026 budget raised the province's lowest tax rate from 5.06% to 5.60%. Because payroll tables didn't catch up until July, the CRA is withholding BC tax at a prorated 6.14% rate from July through December 2026 — which is why BC paycheques got smaller starting with the first July payday.",
+    metaTitle: 'BC Tax Rate Jumps to 5.60% in 2026: Paycheque Impact',
+    metaDescription:
+      "BC's lowest tax rate rose from 5.06% to 5.60% for 2026. Since payroll caught up late, the CRA is withholding at 6.14% through December. What it costs you.",
+    keywords: [
+      'bc tax rate increase 2026',
+      'why is my bc paycheque smaller',
+      'bc tax rate 5.60',
+      'bc payroll deductions july 2026',
+      'bc income tax change 2026',
+      'cra prorated tax rate bc',
+    ],
+    category: 'news',
+    tags: ['BC', 'Provincial Budget', 'CRA', 'Payroll Deductions', '2026'],
+    publishedAt: '2026-08-17',
+    readTime: 6,
+    imageUrl: '/blog/bc-tax-rate-increase-2026.svg',
+    directAnswer:
+      "British Columbia's lowest personal income tax rate rose from 5.06% to 5.60% for all of 2026, under a budget tabled February 17, 2026. Because payroll software had already withheld six months of pay at the old 5.06% rate before the change was finalized, the CRA's July 2026 payroll tables apply a prorated rate of 6.14% to BC's first tax bracket from July through December 2026, so the full year averages out to 5.60%. In practice, this made BC paycheques noticeably smaller starting with the first July payday, on top of the roughly $130–$165 a year the rate increase itself adds for anyone earning $40,000 or more.",
+    faq: [
+      {
+        question: 'Why did my BC paycheque get smaller in July 2026?',
+        answer:
+          "Because BC's 2026 budget (tabled February 17, 2026) raised the province's lowest income tax rate from 5.06% to 5.60%, but the change wasn't reflected in payroll software until the CRA's mid-year T4127 update took effect on July 1, 2026. Since employers had already withheld six months of pay at the old, lower rate, the CRA is now withholding BC tax at a prorated 6.14% rate from July through December to make up the shortfall so the full-year total comes out to the correct 5.60% average.",
+      },
+      {
+        question: "What is BC's new lowest tax rate for 2026?",
+        answer:
+          "5.60%, up from 5.06% in 2025 — a 0.54 percentage point increase. It applies to the first $50,363 of taxable income, BC's lowest tax bracket. The change is permanent, effective for the 2026 taxation year and beyond, not a one-time adjustment.",
+      },
+      {
+        question: 'What is the 6.14% rate I keep seeing mentioned?',
+        answer:
+          "6.14% is not BC's real tax rate — it's a temporary payroll-withholding correction. Because employers withheld at the old 5.06% rate for January through June 2026, the CRA's July payroll formulas apply 6.14% to BC's first tax bracket for July through December 2026 only, so total withholding for the year matches the true 5.60% annual rate. It reverts to a level rate once a full year has passed under the new law.",
+      },
+      {
+        question: 'How much more BC tax will I actually pay in 2026?',
+        answer:
+          "It depends on income. Comparing BC's 2025 and 2026 brackets and basic personal amounts directly: about $130 more for the year at a $40,000 salary, $165 more at $50,000 (the increase is largest right around this point, in the gap between the two years' bracket thresholds), and a stable roughly $157 more a year for salaries between about $60,000 and $95,000. These are CanPay Insights calculations from the official 2025 and 2026 BC brackets, using basic personal amounts only.",
+      },
+      {
+        question: 'Will my BC paycheque go back to normal in 2027?',
+        answer:
+          "The size of the mid-year catch-up (the extra bite from the 6.14% prorated rate) is specific to the second half of 2026 — it exists only because employers under-withheld in the first half. Assuming no further provincial rate changes, 2027 payroll tables should apply BC's 5.60% rate evenly across the whole year, so paycheques should be more stable, though the total annual BC tax will still be higher than it was in 2025.",
+      },
+      {
+        question: 'Does this rate change affect CPP or EI too?',
+        answer:
+          "No. This is a BC provincial income tax change only. CPP and EI rates and maximums were set at the start of 2026 and were not affected by BC's mid-year payroll update — see [how much CPP you pay in 2026](/blog/how-much-cpp-will-i-pay-2026) and [how much EI you pay in 2026](/blog/how-much-ei-will-i-pay-2026) for those figures.",
+      },
+    ],
+    content: `
+## Why BC take-home pay dropped starting in July
+
+If you work in British Columbia and noticed your paycheque was a little smaller starting with your first July 2026 payday — and nothing else about your job changed — this is almost certainly why: the province's lowest income tax rate went up, and payroll withholding only caught up to it halfway through the year.
+
+British Columbia's budget, tabled **February 17, 2026**, raised the **lowest personal income tax rate from 5.06% to 5.60%** for the 2026 taxation year and beyond — a 0.54 percentage point increase on the first **$50,363** of taxable income. The government also raised the **BC tax reduction credit**, which softens the impact for lower earners, from **$575 to $690** for 2026.
+
+The trouble is timing. The Canada Revenue Agency finalizes its annual **T4127 Payroll Deductions Formulas** guide before most provincial budgets are even tabled, so employers spent January through June 2026 withholding BC tax at the *old* 5.06% rate. Once BC's budget became law, the CRA had to correct course. Its July 2026 payroll update (the guide effective July 1, 2026) applies BC's lowest bracket at a **prorated 6.14% rate for July through December 2026** — higher than even the real 5.60% annual rate — so that six months of catch-up withholding brings the full year back in line with what BC residents actually owe.
+
+### The rate, in one table
+
+| Period | BC lowest-bracket rate | Why |
+| --- | --- | --- |
+| 2025 (all year) | 5.06% | Pre-budget rate |
+| Jan – Jun 2026 | 5.06% | Payroll hadn't updated for the new budget yet |
+| Jul – Dec 2026 | **6.14%** (prorated) | Catches up the shortfall from Jan–Jun |
+| 2026, full-year average | **5.60%** | The real, legislated 2026 rate |
+| 2027 onward (expected) | 5.60% | Applied evenly all year, assuming no further change |
+
+### What it costs you for the pay period
+
+The 6.14% figure only applies to income taxed in BC's first bracket, and only for July through December 2026 — it is a temporary correction, not BC's permanent rate. For someone earning $50,000 a year (fully inside the first bracket) paid biweekly, that works out to roughly **$21 more withheld per paycheque** from July through December compared with what a level 5.60% rate would have taken all year — because the second half of the year is carrying the whole correction on its own.
+
+### What it costs you for the full year
+
+Ignoring the mid-year withholding mechanics and just comparing BC's 2025 tax brackets and basic personal amounts against 2026's, here's what the rate increase is actually worth annually, using basic personal amounts only:
+
+| Annual salary | 2025 BC tax (5.06% bracket) | 2026 BC tax (5.60% bracket) | Extra BC tax |
+| --- | --- | --- | --- |
+| $40,000 | $1,370 | $1,500 | **+$130** |
+| $50,000 | $1,895 | $2,060 | **+$165** |
+| $60,000 | $2,665 | $2,822 | **+$157** |
+| $75,000 | $3,820 | $3,977 | **+$157** |
+| $90,000 | $5,410 | $5,567 | **+$157** |
+
+*Calculated by CanPay Insights from BC's published 2025 and 2026 tax brackets and basic personal amounts. The basic personal amount was $12,932 in 2025. It rose to $13,216 for 2026. The increase peaks around $50,000, in the narrow gap between the two years' bracket-one thresholds ($49,279 in 2025 vs. $50,363 in 2026), then settles to a flat roughly $157 a year for salaries between about $60,000 and $95,000. Figures exclude BC's income-tested tax reduction credit, which further lowers tax for net incomes under about $25,570.*
+
+### The bottom line
+
+BC's 2026 tax increase itself is modest — well under $200 a year for most workers. What actually surprised people was the *timing*: a mid-year jump in withholding that, on paper, looks bigger than the real annual change because it's cramming a full year's worth of extra tax into just six months of paycheques. By the time 2026 wraps up, total BC tax withheld should land close to the true 5.60%-rate amount; it's the last six months of the year carrying more than their fair share to get there.
+
+For your own exact 2026 take-home pay by paycheque, use the free [BC paycheck calculator](/bc-paycheck-calculator) or see how BC compares to other provinces with [compare provinces](/compare-provinces). For the fuller picture on BC take-home pay this year, see the [BC take-home pay guide 2026](/blog/bc-take-home-pay-guide-2026).
+
+## Sources & disclaimer
+
+Based on the Province of British Columbia's official [personal income tax rates page](https://www2.gov.bc.ca/gov/content/taxes/income-taxes/personal/tax-rates) and the Canada Revenue Agency's **T4127 Payroll Deductions Formulas — 123rd Edition, effective July 1, 2026**, cross-checked against professional tax-alert summaries of BC's February 17, 2026 budget from PwC Canada and Doane Grant Thornton. Annual comparison figures are calculated by CanPay Insights from the published 2025 and 2026 BC tax brackets and basic personal amounts; they are not themselves quoted from a government source and exclude the BC tax reduction credit. This is general information, not tax or financial advice — confirm your own payroll deductions with your employer or the [Canada Revenue Agency](https://www.canada.ca/en/revenue-agency.html).
+`,
+  },
 ];
