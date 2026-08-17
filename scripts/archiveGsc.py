@@ -125,6 +125,29 @@ def rows(result):
     return out
 
 
+def archived_days(since):
+    """Days already in the archive, so a run can fetch only what is absent.
+
+    Without this the job fetched a fixed window back from today. Three days
+    absorbs Google's late revisions and survives a weekend, but a laptop off
+    for a week loses everything beyond it — permanently, because Search
+    Console discards history after 16 months. macOS runs a missed calendar job
+    ONCE on wake, not once per day missed, so the catch-up never happened
+    either."""
+    req = urllib.request.Request(
+        f"{SUPABASE_URL}/rest/v1/rpc/gsc_archived_days",
+        data=json.dumps({"p_token": open(TOKEN_FILE).read().strip(),
+                         "p_since": str(since)}).encode(),
+        headers={
+            "apikey": SUPABASE_ANON,
+            "Authorization": f"Bearer {SUPABASE_ANON}",
+            "Content-Type": "application/json",
+        },
+    )
+    with urllib.request.urlopen(req, timeout=30) as r:
+        return {d[:10] for d in json.load(r)}
+
+
 def ingest(payload):
     token = open(TOKEN_FILE).read().strip()
     req = urllib.request.Request(
@@ -144,7 +167,10 @@ def ingest(payload):
 
 def main():
     ap = argparse.ArgumentParser()
-    ap.add_argument("--days", type=int, default=3, help="how many days back to fetch")
+    ap.add_argument("--days", type=int, default=3,
+                    help="always re-fetch this many recent days (Google revises them)")
+    ap.add_argument("--window", type=int, default=480,
+                    help="how far back to look for gaps; GSC keeps ~16 months")
     ap.add_argument("--dry-run", action="store_true")
     args = ap.parse_args()
 
@@ -152,10 +178,38 @@ def main():
     # GSC lags ~2 days; starting at today-2 avoids archiving empty days forever.
     end = datetime.date.today() - datetime.timedelta(days=2)
 
+    # Recent days are always re-fetched because Google keeps revising them.
+    # Everything older is fetched only if it is missing, which closes a gap of
+    # any length left by a machine that was off.
+    recent = {str(end - datetime.timedelta(days=i)) for i in range(args.days)}
+    try:
+        have = archived_days(end - datetime.timedelta(days=args.window))
+    except Exception as e:
+        # A failed gap check must not stop the day's archiving; fall back to
+        # the old fixed window and say so.
+        print(f"gap check failed ({e}); archiving recent days only")
+        have = None
+
+    if have is None:
+        targets = sorted(recent, reverse=True)
+    else:
+        # Only look for holes INSIDE the archived span. Scanning the whole
+        # 16-month window meant asking Google about hundreds of days from
+        # before the site existed, every single run — each one a request that
+        # can only ever answer "no data".
+        floor = min(have) if have else str(end)
+        gaps = {
+            str(end - datetime.timedelta(days=i))
+            for i in range(args.window)
+        } - have
+        gaps = {d for d in gaps if d >= floor}
+        targets = sorted(recent | gaps, reverse=True)
+        if gaps - recent:
+            print(f"filling {len(gaps - recent)} missing day(s) inside the archived span")
+
     total_clicks = 0
     written = 0
-    for i in range(args.days):
-        day = str(end - datetime.timedelta(days=i))
+    for day in targets:
         totals = gsc_query(token, day, [])
         trow = (totals.get("rows") or [{}])[0]
         if not trow:
@@ -189,6 +243,14 @@ def main():
         )
 
     print(f"\ndone: {written} days written, {total_clicks} clicks in range")
+    if have is not None and have:
+        floor = min(have)
+        still = {
+            str(end - datetime.timedelta(days=i)) for i in range(args.window)
+        } - have - set(targets)
+        still = {d for d in still if d >= floor}
+        if still:
+            print(f"note: {len(still)} day(s) inside the span still absent after this run")
 
 
 if __name__ == "__main__":
