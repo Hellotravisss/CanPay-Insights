@@ -1,0 +1,61 @@
+# Daily Search Console archive, running in the cloud rather than on Travis's Mac.
+#
+# The Mac copy (launchd) still works and stays as a backstop; both are safe to
+# run because every day is upserted by date. What this buys is independence
+# from one laptop being awake — Search Console only keeps 16 months, so a long
+# outage is the one loss that cannot be repaired later.
+#
+# Note what is deliberately NOT here: any change to archiveGsc.py. The script
+# reads its two secrets from fixed paths under $HOME, and a runner has a $HOME
+# too, so the secrets are simply written to those paths below. Teaching the
+# script to also read environment variables would create a second code path,
+# and the one that runs unattended is never the one you test.
+name: Archive Search Console
+
+on:
+  schedule:
+    # 13:20 UTC ≈ 06:20 Vancouver. Google finalises a day's data on its own
+    # clock; the script asks for the last few days every run regardless, so the
+    # exact minute does not matter — only that it happens daily.
+    - cron: '20 13 * * *'
+  workflow_dispatch:
+
+# No repository contents are read or written; the job talks to Google and
+# Supabase only.
+permissions: {}
+
+jobs:
+  archive:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      # The only third-party dependency, and only for signing the JWT.
+      - run: pip install cryptography
+
+      - name: Place credentials where the script expects them
+        env:
+          SERVICE_ACCOUNT: ${{ secrets.GSC_SERVICE_ACCOUNT }}
+          INGEST_TOKEN: ${{ secrets.GSC_INGEST_TOKEN }}
+        run: |
+          test -n "$SERVICE_ACCOUNT" || { echo "GSC_SERVICE_ACCOUNT secret is empty"; exit 1; }
+          test -n "$INGEST_TOKEN" || { echo "GSC_INGEST_TOKEN secret is empty"; exit 1; }
+          mkdir -p ~/.canpay-secrets
+          printf '%s' "$SERVICE_ACCOUNT" > ~/.canpay-secrets/gsc-service-account.json
+          printf '%s' "$INGEST_TOKEN" > ~/.canpay-secrets/gsc-ingest-token
+          chmod 600 ~/.canpay-secrets/*
+
+      # --window 480 lets the run notice and refill any day missing inside the
+      # archived span, so an outage of any length self-heals on the next run.
+      - run: python3 scripts/archiveGsc.py --days 3 --window 480
+
+      # There is no personal Google login on a runner, so a broken key cannot
+      # quietly fall back to it — the script dies and this job goes red. That
+      # is the intended behaviour: a silent archive is worse than a loud one.
+      - name: Wipe credentials
+        if: always()
+        run: rm -rf ~/.canpay-secrets
