@@ -24,6 +24,7 @@ GSC finalises a day's numbers a few days late, so recent days are re-fetched on
 every run and upserted; that is why re-running is always safe.
 """
 import argparse
+import base64
 import datetime
 import json
 import os
@@ -55,7 +56,59 @@ def die(msg):
     sys.exit(1)
 
 
+SERVICE_ACCOUNT = os.path.expanduser("~/.canpay-secrets/gsc-service-account.json")
+SCOPE = "https://www.googleapis.com/auth/webmasters.readonly"
+
+
+def service_account_token():
+    """Sign a JWT with the service-account key and swap it for a token.
+
+    Preferred over the personal Google login because it belongs to nobody's
+    session: it does not expire when Travis signs out, is not tied to one
+    laptop, and can be handed to a scheduled job somewhere else. The key file
+    is read straight from disk; no gcloud install is involved.
+
+    Deliberately no google-auth dependency — a signed JWT is three base64url
+    segments, and this script's whole point is running unattended for years
+    with as little to break as possible.
+    """
+    from cryptography.hazmat.primitives import hashes, serialization
+    from cryptography.hazmat.primitives.asymmetric import padding
+
+    d = json.load(open(SERVICE_ACCOUNT))
+    b64 = lambda x: base64.urlsafe_b64encode(x).rstrip(b"=")
+    now = int(time.time())
+    signing_input = (
+        b64(json.dumps({"alg": "RS256", "typ": "JWT"}).encode())
+        + b"."
+        + b64(json.dumps({
+            "iss": d["client_email"],
+            "scope": SCOPE,
+            "aud": "https://oauth2.googleapis.com/token",
+            "iat": now,
+            "exp": now + 3600,
+        }).encode())
+    )
+    key = serialization.load_pem_private_key(d["private_key"].encode(), password=None)
+    sig = b64(key.sign(signing_input, padding.PKCS1v15(), hashes.SHA256()))
+    body = urllib.parse.urlencode({
+        "grant_type": "urn:ietf:params:oauth:grant-type:jwt-bearer",
+        "assertion": (signing_input + b"." + sig).decode(),
+    }).encode()
+    return json.load(urllib.request.urlopen("https://oauth2.googleapis.com/token", body))[
+        "access_token"
+    ]
+
+
 def access_token():
+    # Service account first; the personal login stays as a fallback so an
+    # expired or missing key cannot silently stop the archive.
+    if os.path.exists(SERVICE_ACCOUNT):
+        try:
+            return service_account_token(), True
+        except Exception as e:
+            print(f"service account unusable ({e}); falling back to personal login")
+
     if not os.path.exists(ADC):
         die(
             "no Application Default Credentials. Run:\n"
@@ -74,10 +127,10 @@ def access_token():
     ).encode()
     return json.load(urllib.request.urlopen("https://oauth2.googleapis.com/token", body))[
         "access_token"
-    ]
+    ], False
 
 
-def gsc_query(token, day, dimensions, row_limit=1000):
+def gsc_query(token, day, dimensions, row_limit=1000, via_robot=False):
     url = (
         "https://searchconsole.googleapis.com/webmasters/v3/sites/"
         f"{urllib.parse.quote(SITE, safe='')}/searchAnalytics/query"
@@ -96,7 +149,11 @@ def gsc_query(token, day, dimensions, row_limit=1000):
         data=json.dumps(payload).encode(),
         headers={
             "Authorization": f"Bearer {token}",
-            "x-goog-user-project": QUOTA_PROJECT,
+            # Quota project ONLY for the personal login. A service account
+            # already bills its own project, and sending this header makes
+            # Google demand serviceusage.serviceUsageConsumer on top — a 403
+            # that reads like a Search Console permission problem but is not.
+            **({} if via_robot else {"x-goog-user-project": QUOTA_PROJECT}),
             "Content-Type": "application/json",
         },
     )
@@ -174,7 +231,8 @@ def main():
     ap.add_argument("--dry-run", action="store_true")
     args = ap.parse_args()
 
-    token = access_token()
+    token, via_robot = access_token()
+    print(f"auth: {'service account' if via_robot else 'personal Google login'}")
     # GSC lags ~2 days; starting at today-2 avoids archiving empty days forever.
     end = datetime.date.today() - datetime.timedelta(days=2)
 
@@ -210,7 +268,7 @@ def main():
     total_clicks = 0
     written = 0
     for day in targets:
-        totals = gsc_query(token, day, [])
+        totals = gsc_query(token, day, [], via_robot=via_robot)
         trow = (totals.get("rows") or [{}])[0]
         if not trow:
             print(f"{day}  (no data)")
@@ -223,8 +281,8 @@ def main():
                 "ctr": trow.get("ctr", 0),
                 "position": trow.get("position", 0),
             },
-            "queries": rows(gsc_query(token, day, ["query"])),
-            "pages": rows(gsc_query(token, day, ["page"])),
+            "queries": rows(gsc_query(token, day, ["query"], via_robot=via_robot)),
+            "pages": rows(gsc_query(token, day, ["page"], via_robot=via_robot)),
         }
         total_clicks += payload["totals"]["clicks"]
         if args.dry_run:
