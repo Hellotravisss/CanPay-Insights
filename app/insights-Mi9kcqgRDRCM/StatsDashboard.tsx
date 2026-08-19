@@ -8,6 +8,7 @@ import TrendChart from './TrendChart';
 import Candles, { type CandleData } from './Candles';
 import CrossTab, { type CrossTabData } from './CrossTab';
 import Provenance, { type ProvenanceData } from './Provenance';
+import HourChart from './HourChart';
 import SearchPanel from './SearchPanel';
 import ContentPanel from './ContentPanel';
 
@@ -484,18 +485,12 @@ export default function StatsDashboard() {
             title={T("Hour of day (user's local time)", '一天中的时刻(用户当地时间)')}
             hint={T('When Canadians check their pay.', '加拿大人什么时候查工资。')}
           >
-            <div className="flex h-32 items-end gap-1">
-              {hourRows.map((r) => (
-                <div key={r.k} className="flex flex-1 flex-col items-center gap-1">
-                  <div
-                    className="w-full rounded-t bg-red-600"
-                    style={{ height: `${(r.n / maxHour) * 100}%`, minHeight: r.n ? 3 : 0 }}
-                    title={`${r.k}:00 — ${r.n}`}
-                  />
-                  <span className="text-[9px] text-slate-400">{Number(r.k) % 6 === 0 ? r.k : ''}</span>
-                </div>
-              ))}
-            </div>
+            <HourChart
+              rows={hourRows}
+              peakLabel={(h, n) =>
+                zh ? `高峰在 ${h}:00 —— ${n} 次计算` : `Peak at ${h}:00 — ${n} calculations`
+              }
+            />
           </Card>
 
           <Card
@@ -506,18 +501,15 @@ export default function StatsDashboard() {
                 : `Shift start hours from ${shiftTotal} shift calculations. Every bar away from 9am is someone official statistics cannot see — night-shift Canada has no public dataset.`
             }
           >
-            <div className="flex h-32 items-end gap-1">
-              {shiftRows.map((r) => (
-                <div key={r.k} className="flex flex-1 flex-col items-center gap-1">
-                  <div
-                    className="w-full rounded-t bg-slate-700"
-                    style={{ height: `${(r.n / maxShift) * 100}%`, minHeight: r.n ? 3 : 0 }}
-                    title={`${r.k}:00 — ${r.n}`}
-                  />
-                  <span className="text-[9px] text-slate-400">{Number(r.k) % 6 === 0 ? r.k : ''}</span>
-                </div>
-              ))}
-            </div>
+            <HourChart
+              rows={shiftRows}
+              color="bg-slate-700"
+              peakLabel={(h, n) =>
+                zh
+                  ? `最常见的开班时刻是 ${h}:00(${n} 次);其余 ${shiftTotal - n} 次班次不在这个时刻开始`
+                  : `Most shifts start at ${h}:00 (${n}); the other ${shiftTotal - n} start somewhere else`
+              }
+            />
           </Card>
         </div>
 
