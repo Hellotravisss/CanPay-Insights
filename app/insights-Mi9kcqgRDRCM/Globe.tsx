@@ -27,10 +27,13 @@ const STARS = Array.from({ length: 90 }, (_, i) => {
 export default function Globe({
   cities,
   countries,
+  lang = 'en',
 }: {
   cities: City[];
   countries: { k: string | number; n: number }[];
+  lang?: 'en' | 'zh';
 }) {
+  const T = (en: string, zh: string) => (lang === 'zh' ? zh : en);
   const [lon0, setLon0] = useState(-96);
   const [lat0, setLat0] = useState(28);
   const [spinning, setSpinning] = useState(true);
@@ -340,7 +343,7 @@ export default function Globe({
                     {/* Unnamed points carry a country code as their label;
                         show the country's name so a tooltip never reads "CA". */}
                     {c.city.length === 2 && c.city === c.city.toUpperCase()
-                      ? countryName(c.city)
+                      ? countryName(c.city, lang)
                       : c.city}{' '}
                     · {c.n}
                   </text>
@@ -373,18 +376,20 @@ export default function Globe({
         </div>
         <p className="mt-1 text-center text-[10px] text-slate-400">
           {spinning ? (
-            'Drag to spin · scroll to zoom · double-click to reset'
+            T('Drag to spin · scroll to zoom · double-click to reset', '拖动旋转 · 滚轮缩放 · 双击复位')
           ) : (
             <button onClick={() => setSpinning(true)} className="underline hover:text-slate-600">
-              Resume rotation
+              {T('Resume rotation', '恢复旋转')}
             </button>
           )}
         </p>
       </div>
 
       <div className="w-full">
-        <h3 className="mb-3 text-sm font-bold text-slate-700">Where the calculations come from</h3>
-        <ul className="mb-5 space-y-1.5">
+        <h3 className="mb-3 text-sm font-bold text-slate-700">
+          {T('Top cities', '城市排行')}
+        </h3>
+        <ul className="mb-2 space-y-1.5">
           {cities.slice(0, 8).map((c) => (
             <li key={c.city} className="flex items-baseline justify-between border-b border-slate-100 pb-1.5 text-sm">
               <span className="text-slate-600">{c.city}</span>
@@ -392,11 +397,21 @@ export default function Globe({
             </li>
           ))}
         </ul>
-        <h3 className="mb-2 text-sm font-bold text-slate-700">By country</h3>
+        {/* The country list is not a summary of the city list — some visits
+            arrive with a country and no city at all, so a country can be
+            present here while appearing in no city row above. Saying so stops
+            the two lists reading as a contradiction. */}
+        <p className="mb-5 text-[11px] leading-4 text-slate-400">
+          {T(
+            'Cities only appear when the edge network resolves one. Some networks — mobile carriers and corporate VPNs especially — report a country and nothing finer, so those visits are counted below but named in no city row above.',
+            '只有边缘节点解析出城市时才会出现在这里。有些网络 —— 尤其是手机运营商和企业 VPN —— 只报到国家一级,所以那些访问会计入下面的国家,但不会出现在上面任何一行城市里。',
+          )}
+        </p>
+        <h3 className="mb-2 text-sm font-bold text-slate-700">{T('By country', '按国家')}</h3>
         <div className="flex flex-wrap gap-2">
           {countries.map((c) => (
             <span key={String(c.k)} className="rounded-full bg-slate-100 px-3 py-1 text-xs font-medium text-slate-700">
-              {countryName(String(c.k))} · {c.n}
+              {countryName(String(c.k), lang)} · {c.n}
             </span>
           ))}
         </div>

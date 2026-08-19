@@ -26,6 +26,39 @@ export const COUNTRY_NAMES: Record<string, string> = {
   KH: 'Cambodia', LA: 'Laos', MN: 'Mongolia', FJ: 'Fiji',
 };
 
-export function countryName(code: string): string {
-  return COUNTRY_NAMES[code?.toUpperCase()] ?? code;
+/**
+ * Every browser ships the complete ISO 3166 list, in every language, via
+ * Intl.DisplayNames. The hand-written table above is only a fallback for
+ * environments that lack it.
+ *
+ * This matters because the previous fallback was the raw code itself: an
+ * unlisted country printed as "MU" and stayed that way until someone noticed.
+ * A table maintained by hand is guaranteed to be missing whichever country
+ * shows up next, and the failure is silent — it looks like a design choice,
+ * not a gap.
+ */
+const displayNames: Record<string, Intl.DisplayNames | null> = {};
+
+function resolver(lang: string): Intl.DisplayNames | null {
+  if (!(lang in displayNames)) {
+    try {
+      displayNames[lang] = new Intl.DisplayNames([lang], { type: 'region' });
+    } catch {
+      displayNames[lang] = null;
+    }
+  }
+  return displayNames[lang];
+}
+
+export function countryName(code: string, lang: 'en' | 'zh' = 'en'): string {
+  const upper = code?.toUpperCase();
+  if (!upper) return code;
+  try {
+    const name = resolver(lang === 'zh' ? 'zh-Hans' : 'en')?.of(upper);
+    // Intl echoes the input back when it does not recognise the code.
+    if (name && name !== upper) return name;
+  } catch {
+    // Invalid code — fall through to the table.
+  }
+  return COUNTRY_NAMES[upper] ?? code;
 }

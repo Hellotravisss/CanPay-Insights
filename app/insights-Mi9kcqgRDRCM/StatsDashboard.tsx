@@ -355,7 +355,7 @@ export default function StatsDashboard() {
               ? `只用城市中心点 —— 访问来自哪个城市就标那个城市的中心,从不定位到人,也从不存 IP。点越大量越大;悬停可看城市名。基于 ${stats.geo_known}/${t} 条事件,其余不是丢了而是本来就无法定位:iOS App 的计算不经过解析位置的网页边缘节点,最早的事件则在位置采集上线之前。`
               : `City centroids only — the centre point of the city a visit came from, never a precise location and never an IP address. Dot size is volume; hover a dot to name it. Based on ${stats.geo_known} of ${t} events. The rest cannot be placed rather than failed to be: calculations from the iOS app never pass through the web edge that resolves location, and the earliest events predate location collection entirely.`}
           </p>
-          <Globe cities={geo ?? stats.cities_geo ?? []} countries={stats.by_country} />
+          <Globe cities={geo ?? stats.cities_geo ?? []} countries={stats.by_country} lang={zh ? 'zh' : 'en'} />
         </div>
 
         {/* ── The headline distribution: wage vs provincial median ────────── */}
