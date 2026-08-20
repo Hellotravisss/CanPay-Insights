@@ -379,6 +379,15 @@ function getGeo() {
  * (mode, province, bracket, lang) per page load — so live typing produces a
  * single event, not a keystroke stream.
  */
+// Neither of these can be derived, so both are asked — but only inside the
+// progressive prompt, one question at a time, after the answer the user came
+// for. Gender is deliberately NOT collected: no calculation uses it, an
+// unmotivated answer is indistinguishable from a real one, and gender × city ×
+// industry × bracket is a re-identification risk this dataset promised never
+// to carry.
+export type WorkArrangement = 'onsite' | 'remote' | 'hybrid';
+export type AgeBand = 'under-25' | '25-34' | '35-44' | '45-54' | '55-64' | '65-plus';
+
 export function recordCalcEvent(e: {
   mode: CalcMode;
   province: string;
@@ -399,6 +408,8 @@ export function recordCalcEvent(e: {
   employmentShape?: EmploymentShape | null;
   isRegistered?: boolean;
   payChange?: PayChange | null;
+  workArrangement?: WorkArrangement | null;
+  ageBand?: AgeBand | null;
 }) {
   if (!e.annualIncome || e.annualIncome <= 0 || !e.province) return;
   if (isLikelyBot() || isOptedOut()) return;
@@ -415,7 +426,7 @@ export function recordCalcEvent(e: {
       ? `${w.shiftStartHour}-${w.shiftEndHour}-${w.unpaidBreakMin}-${w.daysPerWeek}`
       : '';
     const behaviourKey = b ? `${b.rrspPctBucket}-${b.otHoursBucket}-${b.tipsPctBucket ?? ''}-${b.shiftPremium}` : '';
-    const key = `${source}|${e.mode}|${e.province}|${bracket}|${lang}|${e.industry ?? ''}|${workKey}|${behaviourKey}|${e.intent ?? ''}|${e.expectation ?? ''}|${e.payChange ? `${e.payChange.direction}-${e.payChange.pctBucket}` : ''}`;
+    const key = `${source}|${e.mode}|${e.province}|${bracket}|${lang}|${e.industry ?? ''}|${workKey}|${behaviourKey}|${e.intent ?? ''}|${e.expectation ?? ''}|${e.workArrangement ?? ''}|${e.ageBand ?? ''}|${e.payChange ? `${e.payChange.direction}-${e.payChange.pctBucket}` : ''}`;
     if (sentThisPageLoad.has(key)) return;
     sentThisPageLoad.add(key);
 
@@ -460,6 +471,8 @@ export function recordCalcEvent(e: {
         industry_rank: e.industryRank ?? null,
         industry_returning: e.industryReturning ?? null,
         expectation: e.expectation ?? null,
+        work_arrangement: e.workArrangement ?? null,
+        age_band: e.ageBand ?? null,
         employment_shape: e.employmentShape ?? null,
         is_registered: e.isRegistered ?? null,
         from_history: e.payChange ? true : null,

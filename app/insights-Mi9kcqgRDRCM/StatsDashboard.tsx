@@ -82,6 +82,8 @@ type Extra = {
   by_shift_start: Row[];
   by_entry: Row[];
   by_browser: Row[];
+  by_work_arrangement: Row[];
+  by_age: Row[];
   registered: { n: number; share: number | null } | null;
 };
 
@@ -661,6 +663,41 @@ export default function StatsDashboard() {
           </Card>
 
           {/* Why people checked */}
+          <Card
+            title={T('Where people work', '办公形式')}
+            hint={T(
+              'On-site, remote, or hybrid — asked one tap after the expectation question, hooked to the home-office deduction. Official remote-work statistics run years behind.',
+              '到岗 / 远程 / 混合 —— 在预期问题之后一键追问,挂在家庭办公抵扣这个真实关切上。官方的远程办公统计滞后好几年。',
+            )}
+          >
+            <Bars
+              rows={extra?.by_work_arrangement ?? []}
+              total={extra?.by_work_arrangement?.reduce((a, r) => a + r.n, 0) ?? 0}
+              label={(k) =>
+                ({ onsite: T('On-site', '到岗'), remote: T('Remote', '远程'), hybrid: T('Hybrid', '混合') } as Record<string, string>)[String(k)] ?? String(k)
+              }
+              empty={T('Port is live — collecting now.', '端口已上线 —— 正在采集。')}
+            />
+          </Card>
+
+          <Card
+            title={T('Age group', '年龄段')}
+            hint={T(
+              'Third and last question in the progressive prompt — whoever reaches it is engaged, not clicking through. Age × income bracket is a career-arc curve nobody else measures at the paycheque level.',
+              '渐进式提问的第三问,也是最后一问 —— 能答到这里的人是认真在答。年龄 × 收入档就是一条职业生涯曲线,没有人在工资单层面测过。',
+            )}
+          >
+            <Bars
+              rows={extra?.by_age ?? []}
+              total={extra?.by_age?.reduce((a, r) => a + r.n, 0) ?? 0}
+              label={(k) =>
+                ({ 'under-25': T('Under 25', '25 岁以下'), '25-34': '25–34', '35-44': '35–44',
+                   '45-54': '45–54', '55-64': '55–64', '65-plus': T('65+', '65 岁以上') } as Record<string, string>)[String(k)] ?? String(k)
+              }
+              empty={T('Port is live — collecting now.', '端口已上线 —— 正在采集。')}
+            />
+          </Card>
+
           <Card
             title={T('Why people checked', '为什么来算')}
             hint={T(
