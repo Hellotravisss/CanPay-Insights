@@ -1149,4 +1149,115 @@ For your own exact 2026 take-home pay by paycheque, use the free [BC paycheck ca
 Based on the Province of British Columbia's official [personal income tax rates page](https://www2.gov.bc.ca/gov/content/taxes/income-taxes/personal/tax-rates) and the Canada Revenue Agency's **T4127 Payroll Deductions Formulas — 123rd Edition, effective July 1, 2026**, cross-checked against professional tax-alert summaries of BC's February 17, 2026 budget from PwC Canada and Doane Grant Thornton. Annual comparison figures are calculated by CanPay Insights from the published 2025 and 2026 BC tax brackets and basic personal amounts; they are not themselves quoted from a government source and exclude the BC tax reduction credit. This is general information, not tax or financial advice — confirm your own payroll deductions with your employer or the [Canada Revenue Agency](https://www.canada.ca/en/revenue-agency.html).
 `,
   },
+  {
+    id: 'study-12',
+    slug: 'federal-tax-cut-2026',
+    title: 'The 14% Federal Tax Cut: 2026 Is the First Full Year — Up to $420 Back',
+    subtitle:
+      "Ottawa cut the lowest federal income tax rate from 15% to 14%, effective July 1, 2025. Because 2025 only got half a year at the new rate (a blended 14.5%), 2026 is the first full year at 14% — worth up to $420 per person, or $840 for a two-income couple.",
+    excerpt:
+      "The lowest federal tax rate dropped from 15% to 14%. 2025 was a blended 14.5% because the cut landed mid-year; 2026 is the first full year at 14%, so it delivers the full benefit — up to $420 per person. Here's what it adds to your take-home pay by salary.",
+    metaTitle: 'Federal Tax Cut 2026: 14% Rate Worth Up to $420',
+    metaDescription:
+      "Canada's lowest federal tax rate was cut from 15% to 14%. 2026 is the first full year, worth up to $420 per person. See the savings by salary and paycheque.",
+    keywords: [
+      'federal tax cut 2026',
+      '14 percent federal tax rate canada',
+      'middle class tax cut 2026',
+      'why is my paycheque bigger 2026',
+      'federal income tax rate 2026',
+      'how much is the federal tax cut worth',
+    ],
+    category: 'news',
+    tags: ['Federal Tax', 'CRA', '2026', 'Take-Home Pay', 'Tax Cut'],
+    publishedAt: '2026-08-20',
+    readTime: 6,
+    imageUrl: '/blog/federal-tax-cut-2026.svg',
+    directAnswer:
+      "The federal government reduced Canada's lowest personal income tax rate from 15% to 14%, effective July 1, 2025. Because the cut landed mid-year, the 2025 full-year rate was a blended 14.5%; 2026 is the first full calendar year at 14%, so it delivers the complete benefit. The maximum saving is $420 per person in 2026 (up to $840 for a two-income couple), reached once your taxable income passes the top of the first bracket ($58,523). Roughly 22 million Canadians benefit, which is why many workers' 2026 paycheques are slightly larger than their 2025 ones even with no raise.",
+    faq: [
+      {
+        question: 'What is the new federal tax rate for 2026?',
+        answer:
+          "Canada's lowest federal personal income tax rate is 14% for 2026, down from 15%. It applies to the first $58,523 of taxable income — the first federal bracket. The higher brackets (20.5%, 26%, 29% and 33%) are unchanged. The rate cut took effect July 1, 2025, so 2025's full-year rate was a blended 14.5%; 2026 is the first full year at the flat 14%.",
+      },
+      {
+        question: 'How much is the federal tax cut worth in 2026?',
+        answer:
+          "Up to $420 per person, and up to $840 for a two-income couple. The saving is the 1% rate cut applied to the income you have taxed in the first bracket above the basic personal amount — so it grows with income until you reach the top of that bracket, then flattens out. At a $30,000 salary it is about $135; at $50,000, about $335; and it maxes out at roughly $420 once taxable income passes $58,523.",
+      },
+      {
+        question: 'Why is my paycheque bigger in 2026 than in 2025?',
+        answer:
+          "Because 2026 is the first full year at the lower 14% rate. The cut only started July 1, 2025, so CRA blended the 2025 rate to 14.5% — you got the lower rate for just half of 2025. In 2026 the full 14% applies to every pay period from January onward, so slightly less federal tax is withheld each cheque even if your pay is unchanged. Use the free [Ontario paycheck calculator](/ontario-paycheck-calculator) or [salary after tax tool](/salary-after-tax-canada) to see your own figure.",
+      },
+      {
+        question: 'Does everyone get the full $420?',
+        answer:
+          "No. You only reach the maximum $420 if your taxable income is above the top of the first bracket ($58,523). Below that, the saving is smaller because the 1% rate cut only reduces tax on the first-bracket income you actually have above the basic personal amount ($16,452 federally in 2026). Someone earning $40,000 saves about $235; someone at or above roughly $59,000 saves the full ~$420. Higher earners get the same flat $420 — the cut only touches the first bracket.",
+      },
+      {
+        question: 'Is the middle-class tax cut permanent?',
+        answer:
+          "Yes. The rate reduction was made law by Bill C-4, the Making Life More Affordable for Canadians Act, which received Royal Assent on March 12, 2026. The 14% rate applies to the 2026 tax year and future years, not just as a one-time measure. The government estimates it delivers over $27 billion in tax relief over five years, starting in 2025-26.",
+      },
+      {
+        question: 'Does the rate cut change CPP, EI or provincial tax?',
+        answer:
+          "No. This is a federal income tax change only. Your CPP (5.95%), CPP2 (4%) and EI (1.63%) deductions are set separately and are unaffected — see [how much CPP you pay in 2026](/blog/how-much-cpp-will-i-pay-2026) and [how much EI you pay in 2026](/blog/how-much-ei-will-i-pay-2026). Provincial income tax is also separate; some provinces moved their own rates for 2026, such as [BC's rise to 5.60%](/blog/bc-tax-rate-increase-2026).",
+      },
+    ],
+    content: `
+## The federal rate is 14% now — and 2026 is the first full year of it
+
+If your 2026 paycheque looks slightly bigger than your 2025 one and you haven't had a raise, this is a big part of why. The federal government cut Canada's **lowest personal income tax rate from 15% to 14%**, and 2026 is the first full calendar year the lower rate applies from the very first pay period.
+
+The cut took effect **July 1, 2025**. Because it landed halfway through that year, the Canada Revenue Agency set the **2025 full-year rate at a blended 14.5%** — you got 15% for the first half and 14% for the second. In **2026 the flat 14% applies all year**, so the full benefit finally shows up. The change was made permanent by **Bill C-4, the Making Life More Affordable for Canadians Act, which received Royal Assent on March 12, 2026**.
+
+The 14% rate applies to the **first $58,523 of taxable income** — the first federal bracket. Everything above that is taxed at the unchanged higher rates (20.5%, 26%, 29% and 33%). Because the first bracket is the one every taxpayer passes through, **roughly 22 million Canadians** benefit, regardless of income.
+
+### The rate, in one table
+
+| Tax year | Lowest federal rate | Why |
+| --- | --- | --- |
+| 2024 and earlier | 15% | Pre-cut rate |
+| 2025 (full year) | **14.5%** (blended) | Cut took effect July 1, 2025 — only half a year at 14% |
+| 2026 (full year) | **14%** | First full year at the reduced rate |
+| 2027 onward | 14% | Permanent under Bill C-4 |
+
+## What the cut is worth to you
+
+The maximum saving is **$420 per person in 2026**, and **up to $840 for a two-income couple**. But not everyone reaches the maximum. The saving is essentially the **1% rate cut applied to the income you have taxed in the first bracket** above the basic personal amount ($16,452 federally in 2026) — so it climbs with income until you hit the top of the first bracket ($58,523), then flattens.
+
+| Annual salary | Approx. federal tax cut saving (2026) |
+| --- | --- |
+| $30,000 | ~$135 |
+| $40,000 | ~$235 |
+| $50,000 | ~$335 |
+| $60,000 | ~$420 (maximum) |
+| $75,000 | ~$420 (maximum) |
+| $90,000 | ~$420 (maximum) |
+| $120,000 | ~$420 (maximum) |
+
+*Calculated by CanPay Insights using the 2026 federal bracket ($58,523 at 14%) and basic personal amount ($16,452). The saving is the difference between federal tax at 15% and at 14% on first-bracket income, net of the small offset from valuing credits at 14% instead of 15%. This matches the government's stated maximum of $420 per person. Figures use basic personal amounts only and exclude provincial tax and other credits.*
+
+The maximum lands at about $420 once taxable income passes $58,523 — and it stays flat above that, because the cut only touches the first bracket. A worker earning $250,000 gets the same $420 from this measure as a worker earning $60,000.
+
+### On your actual paycheque
+
+Spread across the year, $420 is roughly **$16 more per biweekly cheque** (26 pay periods) for someone above the first-bracket threshold, or about **$35 a month**. Someone at $50,000 keeps about **$335 more for the year**, roughly **$13 a paycheque**. It is not dramatic on any single payday — but it is real money that shows up automatically, without filing anything, because employers' 2026 payroll tables already build in the 14% rate.
+
+## How it stacks with everything else in 2026
+
+The federal cut is one of several 2026 changes moving take-home pay in different directions. On its own it is a modest raise; some provincial moves partly offset it. For example, [British Columbia raised its lowest rate to 5.60%](/blog/bc-tax-rate-increase-2026) for 2026, and CPP/EI figures were reset at the start of the year. To see the combined, province-specific result on your own pay, use the free [salary after tax calculator](/salary-after-tax-canada), the [Ontario paycheck calculator](/ontario-paycheck-calculator), or [compare provinces](/compare-provinces) side by side.
+
+### The bottom line
+
+Canada's lowest federal income tax rate is **14% for 2026**, down from 15%, and 2026 is the **first full year** of it. It is automatic, permanent, and worth **up to $420 per person** ($840 per couple) — the reason many paycheques quietly grew in January 2026 with no raise attached. Check exactly what it means for your take-home with the [free take-home pay calculator](/).
+
+## Sources & disclaimer
+
+Based on the Government of Canada's announcement [Delivering a middle-class tax cut](https://www.canada.ca/en/department-finance/news/2025/05/delivering-a-middle-class-tax-cut.html) and the Prime Minister's office release [Canada's new government delivers middle-class tax cut](https://www.pm.gc.ca/en/news/news-releases/2025/06/30/canadas-new-government-delivers-middle-class-tax), cross-checked against professional summaries from Invesco Canada and BDO Canada and reporting by CBC News. The $420 maximum and the 15%-to-14% rate, July 1, 2025 effective date, 14.5% blended 2025 rate and 14% full-year 2026 rate are drawn from those government sources. Savings by salary are calculated by CanPay Insights from the published 2026 federal bracket and basic personal amount and are not themselves quoted from a government source. This is general information, not tax or financial advice — confirm current figures with the [Canada Revenue Agency](https://www.canada.ca/en/revenue-agency.html) or [Department of Finance Canada](https://www.canada.ca/en/department-finance.html).
+`,
+  },
 ];
