@@ -34,8 +34,9 @@ export default function Globe({
   lang?: 'en' | 'zh';
 }) {
   const T = (en: string, zh: string) => (lang === 'zh' ? zh : en);
+  const HOME_LAT = 28;
   const [lon0, setLon0] = useState(-96);
-  const [lat0, setLat0] = useState(28);
+  const [lat0, setLat0] = useState(HOME_LAT);
   const [spinning, setSpinning] = useState(true);
   const drag = useRef<{ x: number; y: number; lon: number; lat: number } | null>(null);
   const [hoverCity, setHoverCity] = useState<string | null>(null);
@@ -43,9 +44,15 @@ export default function Globe({
 
   useEffect(() => {
     if (!spinning) return;
-    const id = setInterval(() => setLon0((l) => (l + 0.22) % 360), 50);
+    const id = setInterval(() => {
+      setLon0((l) => (l + 0.22) % 360);
+      // Drift the tilt back to the home latitude while spinning, so a globe
+      // someone dragged toward a pole quietly levels itself out.
+      setLat0((la) => (Math.abs(la - HOME_LAT) < 0.3 ? HOME_LAT : la + (HOME_LAT - la) * 0.03));
+    }, 50);
     return () => clearInterval(id);
   }, [spinning]);
+
 
   const CX = 170;
   const CY = 170;
@@ -123,6 +130,16 @@ export default function Globe({
   const pointers = useRef(new Map<number, { x: number; y: number }>());
   // Drives the window-listener effect below; a ref would not re-run it.
   const [dragging, setDragging] = useState(false);
+
+  // Rotation resumes by itself five seconds after the last touch. The
+  // "Resume rotation" button used to be the only way back, which meant every
+  // phone visitor who tapped the globe once left it frozen forever.
+  useEffect(() => {
+    if (spinning) return;
+    if (dragging) return; // never restart under someone's finger
+    const id = setTimeout(() => setSpinning(true), 5000);
+    return () => clearTimeout(id);
+  }, [spinning, dragging, lon0, lat0, zoom]);
   const pinch = useRef<{ dist: number; zoom: number } | null>(null);
 
   const pinchDist = () => {

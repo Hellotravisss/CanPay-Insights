@@ -81,6 +81,7 @@ type Extra = {
   by_intent: Row[];
   by_shift_start: Row[];
   by_entry: Row[];
+  by_browser: Row[];
   registered: { n: number; share: number | null } | null;
 };
 
@@ -462,6 +463,26 @@ export default function StatsDashboard() {
 
           <Card title={T('Device', '设备')}>
             <Donut rows={stats.by_device} label={(k) => (k === '?' ? T('Unknown', '未知') : String(k))} />
+          </Card>
+
+          <Card
+            title={T('Browser', '浏览器')}
+            hint={T(
+              'Browser family only — never a version or the raw user-agent. A Safari-heavy audience is an iPhone audience; WeChat and in-app browsers explain their own engagement patterns.',
+              '只记浏览器家族 —— 不记版本号,更不记原始 user-agent。Safari 占比高说明 iPhone 用户多;微信和 App 内浏览器则解释各自的行为模式。',
+            )}
+          >
+            <Bars
+              rows={extra?.by_browser ?? []}
+              total={extra?.by_browser?.reduce((a, r) => a + r.n, 0) ?? 0}
+              label={(k) =>
+                ({ chrome: 'Chrome', safari: 'Safari', edge: 'Edge', firefox: 'Firefox',
+                   samsung: 'Samsung Internet', opera: 'Opera', wechat: zh ? '微信' : 'WeChat',
+                   'in-app': zh ? 'App 内浏览器' : 'In-app browser', other: zh ? '其他' : 'Other',
+                 } as Record<string, string>)[String(k)] ?? String(k)
+              }
+              empty={T('Port is live — collecting from the next calculation on.', '端口已上线 —— 从下一次计算开始采集。')}
+            />
           </Card>
 
           <Card

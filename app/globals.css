@@ -27,11 +27,15 @@ body {
   object-fit: contain;
 }
 @media (min-width: 768px) {
+  /* The featured card's image column is taller than 1200:630, and cover was
+     cropping both edges off every generated headline ("BC Tax Rate" lost its
+     B). These images are designed compositions, not photos — contain shows
+     the whole card and lets the frame's background absorb the letterbox. */
   .cover-frame-featured {
     aspect-ratio: auto;
     height: 100%;
   }
   .cover-frame-featured > img {
-    object-fit: cover;
+    object-fit: contain;
   }
 }

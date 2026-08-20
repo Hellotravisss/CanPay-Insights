@@ -330,6 +330,29 @@ function detectDevice(): 'mobile' | 'tablet' | 'desktop' {
   }
 }
 
+// Browser family only — never a version, never the raw user-agent string.
+// Family alone is 5-6 buckets and adds nothing to a fingerprint, but it is a
+// real product signal: an audience skewing Safari is an iPhone audience, and
+// an in-app browser (WeChat, Instagram) explains odd engagement patterns.
+// Order matters: every Chrome derivative also says "Chrome", Chrome also
+// says "Safari", so the most specific token is tested first.
+function detectBrowser(): string | null {
+  try {
+    const ua = navigator.userAgent;
+    if (/MicroMessenger/i.test(ua)) return 'wechat';
+    if (/Instagram|FBAN|FBAV/i.test(ua)) return 'in-app';
+    if (/SamsungBrowser/i.test(ua)) return 'samsung';
+    if (/Edg\//i.test(ua)) return 'edge';
+    if (/OPR\/|Opera/i.test(ua)) return 'opera';
+    if (/Firefox\//i.test(ua)) return 'firefox';
+    if (/Chrome\/|CriOS/i.test(ua)) return 'chrome';
+    if (/Safari\//i.test(ua)) return 'safari';
+    return 'other';
+  } catch {
+    return null;
+  }
+}
+
 // Coarse geo (country / region / city), resolved once per page load from our
 // own /api/geo endpoint (Vercel edge headers). IP is never stored — see route.
 type Geo = {
@@ -413,6 +436,7 @@ export function recordCalcEvent(e: {
         lat: geo.lat,
         lon: geo.lon,
         device: detectDevice(),
+        browser: detectBrowser(),
         industry: e.industry ?? null,
         shift_start_hour: w?.shiftStartHour ?? null,
         shift_end_hour: w?.shiftEndHour ?? null,
