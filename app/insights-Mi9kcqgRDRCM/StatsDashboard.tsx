@@ -64,6 +64,14 @@ type Stats = {
 // The dimensions that were being collected all along but never displayed —
 // median comparison, employment shape, expectation, raise detection, intent,
 // shift start hour, entry page, sign-in share.
+type Journeys = {
+  sessions: number;
+  multi: number;
+  depth: { one: number; two_four: number; five_plus: number; max: number };
+  varied: { income: number; overtime: number; rrsp: number; province: number; nothing: number };
+  income_moves: { up: number; down: number; same: number };
+};
+
 type Extra = {
   by_median: Row[];
   by_shape: Row[];
@@ -176,6 +184,7 @@ function Card({ title, hint, children }: { title: string; hint?: string; childre
 export default function StatsDashboard() {
   const [stats, setStats] = useState<Stats | null>(null);
   const [extra, setExtra] = useState<Extra | null>(null);
+  const [journeys, setJourneys] = useState<Journeys | null>(null);
   const [series, setSeries] = useState<any | null>(null);
   const [candles, setCandles] = useState<CandleData | null>(null);
   const [cross, setCross] = useState<CrossTabData | null>(null);
@@ -207,6 +216,9 @@ export default function StatsDashboard() {
     });
     supabase.rpc('calc_stats_extra').then(({ data }) => {
       if (data) setExtra(data as Extra);
+    });
+    supabase.rpc('calc_journeys').then(({ data }) => {
+      if (data) setJourneys(data as Journeys);
     });
     supabase.rpc('calc_stats').then(({ data, error }) => {
       if (error) setError(error.message);
@@ -617,6 +629,71 @@ export default function StatsDashboard() {
             />
           </Card>
         </div>
+
+        {/* What one visit looks like inside — scenario modelling, derived
+            entirely from events that already exist. 3.3 calcs/visit is not
+            loyalty; it is people test-driving a different income. */}
+        {journeys && journeys.multi > 0 && (
+          <div className="mt-6 rounded-2xl border-2 border-red-200 bg-white p-6 shadow-sm">
+            <h2 className="text-base font-bold text-slate-800">
+              {T('What one visit looks like inside', '一次访问的内部')}
+            </h2>
+            <p className="mb-4 mt-0.5 text-xs leading-5 text-slate-400">
+              {T(
+                'People do not check their pay once — they re-run the calculator with a different income, more overtime, or a bigger RRSP contribution. The wage they try out but do not yet earn is a measurement of aspiration, and no statistics agency collects it.',
+                '人们不是查一次就走 —— 他们会换一个收入、加几小时加班、调大 RRSP 供款再算一遍。那个「试算过但还没拿到」的工资是对愿望的测量,没有任何统计机构在采集它。',
+              )}
+            </p>
+            <div className="mb-5 grid grid-cols-2 gap-3 md:grid-cols-4">
+              {[
+                {
+                  n: `${Math.round((journeys.multi / Math.max(1, journeys.sessions)) * 100)}%`,
+                  l: T('of visits calculate more than once', '的访问算了不止一次'),
+                },
+                {
+                  n: `${Math.round((journeys.varied.income / Math.max(1, journeys.multi)) * 100)}%`,
+                  l: T('of those try a different income', '其中换收入试算'),
+                },
+                {
+                  n: `${Math.round((journeys.varied.overtime / Math.max(1, journeys.multi)) * 100)}%`,
+                  l: T('try a different overtime load', '换加班时长试算'),
+                },
+                {
+                  n: `${Math.round((journeys.varied.rrsp / Math.max(1, journeys.multi)) * 100)}%`,
+                  l: T('tune their RRSP contribution', '在调 RRSP 供款'),
+                },
+              ].map((x) => (
+                <div key={x.l} className="rounded-xl bg-slate-50 p-3">
+                  <div className="text-2xl font-bold tabular-nums text-slate-900">{x.n}</div>
+                  <div className="mt-0.5 text-xs text-slate-500">{x.l}</div>
+                </div>
+              ))}
+            </div>
+            {(() => {
+              const m = journeys.income_moves;
+              const moves = m.up + m.down;
+              if (!moves) return null;
+              return (
+                <div className="rounded-xl bg-red-50 p-4">
+                  <span className="text-3xl font-bold tabular-nums text-red-700">
+                    {Math.round((m.up / moves) * 100)}%
+                  </span>
+                  <span className="ml-2 text-sm text-slate-600">
+                    {T(
+                      'of within-visit income changes go UP — people are pricing the raise or the offer they hope for, not a pay cut they fear.',
+                      '的访问内收入改动是往上调 —— 人们在给期望中的涨薪或 offer 定价,而不是在预演降薪。',
+                    )}
+                  </span>
+                  <p className="mt-2 text-xs text-slate-400">
+                    {zh
+                      ? `连续两次计算之间收入档位的变化:上调 ${m.up} 次 · 下调 ${m.down} 次 · 未变 ${m.same} 次。访问深度:1 次 ${journeys.depth.one} · 2–4 次 ${journeys.depth.two_four} · 5 次以上 ${journeys.depth.five_plus},单次访问最多 ${journeys.depth.max} 次。`
+                      : `Income-bracket changes between consecutive calculations: up ${m.up} · down ${m.down} · unchanged ${m.same}. Visit depth: single ${journeys.depth.one} · 2–4 ${journeys.depth.two_four} · 5+ ${journeys.depth.five_plus}, deepest visit ${journeys.depth.max}.`}
+                  </p>
+                </div>
+              );
+            })()}
+          </div>
+        )}
 
         {/* Savings, premium pay, tips — signals nobody else collects */}
         <div className="mt-6 grid grid-cols-1 gap-6 md:grid-cols-2">
