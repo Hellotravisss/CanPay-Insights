@@ -482,6 +482,420 @@ const coreLandingPages: LandingPage[] = [
       { href: '/120000-after-tax-quebec', label: '$120,000 after tax Quebec' },
     ],
   },
+  {
+    slug: 'manitoba-paycheck-calculator',
+    title: 'Manitoba Paycheck Calculator 2026: See Your Exact Net Pay',
+    description:
+      'On $80,000 in Manitoba you keep about $57,940 in 2026. Free calculator for your exact take-home pay \u2014 federal tax, Manitoba tax, CPP, EI, hourly or salary. No signup.',
+    h1: 'Manitoba Paycheck Calculator',
+    kicker: 'Manitoba take-home pay',
+    primaryKeyword: 'Manitoba paycheck calculator',
+    intro:
+      'On an $80,000 salary in Manitoba in 2026, you take home about $57,940 a year \u2014 roughly $4,828 a month \u2014 after about $9,513 federal tax, $6,978 Manitoba tax, $4,446 CPP/CPP2, and $1,123 EI. Enter your own wage or salary below to estimate your Manitoba paycheque, useful for Winnipeg, Brandon, Steinbach, and across Manitoba.',
+    examples: ['$65,000 after tax Manitoba', '$25/hour after tax Manitoba', 'Winnipeg take-home pay calculator'],
+    sections: [
+      {
+        heading: 'Manitoba tax and payroll deductions',
+        body:
+          'Manitoba workers pay federal income tax, Manitoba provincial income tax, CPP contributions, and EI premiums. Manitoba provincial tax takes noticeably more than Ontario at the same salary — about $6,978 versus $4,173 at $80,000 — which is why identical offers feel different across the border.',
+      },
+      {
+        heading: 'For salary and hourly workers',
+        body:
+          'Use annual salary mode for a fixed salary or hourly mode for shift-based work. If your hours change weekly, timesheet mode gives a more realistic estimate.',
+      },
+      {
+        heading: 'Compare Manitoba with other provinces',
+        body:
+          'If you are weighing a move into or out of Manitoba, use the province comparison page to see how the same salary lands across all thirteen provinces and territories.',
+      },
+    ],
+    faq: [
+      {
+        question: 'How much tax is deducted from a Manitoba paycheque?',
+        answer:
+          'On an $80,000 salary in 2026, a Manitoba paycheque loses about $9,513 to federal tax, $6,978 to Manitoba provincial tax, $4,446 to CPP/CPP2, and $1,123 to EI over the year. Your exact deductions depend on your income, pay period, and credits; enter your numbers above for a precise breakdown.',
+      },
+      {
+        question: 'Can I use this as a Winnipeg paycheck calculator?',
+        answer:
+          'Yes. Winnipeg has no separate city income tax \u2014 paycheques there use exactly the same federal and Manitoba rates as the rest of the province, so this calculator works for Winnipeg, Brandon, Steinbach, and across Manitoba.',
+      },
+      {
+        question: 'Is Manitoba take-home pay lower than Ontario?',
+        answer:
+          'At $80,000 in 2026, Manitoba keeps about $57,940 versus about $60,744 in Ontario. The gap shifts with salary and with credits, so compare your own number with the province comparison tool.',
+      },
+    ],
+  },
+  {
+    slug: 'saskatchewan-paycheck-calculator',
+    title: 'Saskatchewan Paycheck Calculator 2026: See Your Exact Net Pay',
+    description:
+      'On $80,000 in Saskatchewan you keep about $58,733 in 2026. Free calculator for your exact take-home pay \u2014 federal tax, Saskatchewan tax, CPP, EI, hourly or salary. No signup.',
+    h1: 'Saskatchewan Paycheck Calculator',
+    kicker: 'Saskatchewan take-home pay',
+    primaryKeyword: 'Saskatchewan paycheck calculator',
+    intro:
+      'On an $80,000 salary in Saskatchewan in 2026, you take home about $58,733 a year \u2014 roughly $4,894 a month \u2014 after about $9,513 federal tax, $6,185 Saskatchewan tax, $4,446 CPP/CPP2, and $1,123 EI. Enter your own wage or salary below to estimate your Saskatchewan paycheque, useful for Saskatoon, Regina, Prince Albert, and across Saskatchewan.',
+    examples: ['$65,000 after tax Saskatchewan', '$25/hour after tax Saskatchewan', 'Saskatoon take-home pay calculator'],
+    sections: [
+      {
+        heading: 'Saskatchewan tax and payroll deductions',
+        body:
+          'Saskatchewan workers pay federal income tax, Saskatchewan provincial income tax, CPP contributions, and EI premiums. Saskatchewan sits between Alberta and Manitoba on provincial tax — about $6,185 at $80,000 — so moving either direction changes a paycheque less than most people expect.',
+      },
+      {
+        heading: 'For salary and hourly workers',
+        body:
+          'Use annual salary mode for a fixed salary or hourly mode for shift-based work. If your hours change weekly, timesheet mode gives a more realistic estimate.',
+      },
+      {
+        heading: 'Compare Saskatchewan with other provinces',
+        body:
+          'If you are weighing a move into or out of Saskatchewan, use the province comparison page to see how the same salary lands across all thirteen provinces and territories.',
+      },
+    ],
+    faq: [
+      {
+        question: 'How much tax is deducted from a Saskatchewan paycheque?',
+        answer:
+          'On an $80,000 salary in 2026, a Saskatchewan paycheque loses about $9,513 to federal tax, $6,185 to Saskatchewan provincial tax, $4,446 to CPP/CPP2, and $1,123 to EI over the year. Your exact deductions depend on your income, pay period, and credits; enter your numbers above for a precise breakdown.',
+      },
+      {
+        question: 'Can I use this as a Saskatoon paycheck calculator?',
+        answer:
+          'Yes. Saskatoon has no separate city income tax \u2014 paycheques there use exactly the same federal and Saskatchewan rates as the rest of the province, so this calculator works for Saskatoon, Regina, Prince Albert, and across Saskatchewan.',
+      },
+      {
+        question: 'Is Saskatchewan take-home pay lower than Ontario?',
+        answer:
+          'At $80,000 in 2026, Saskatchewan keeps about $58,733 versus about $60,744 in Ontario. The gap shifts with salary and with credits, so compare your own number with the province comparison tool.',
+      },
+    ],
+  },
+  {
+    slug: 'nova-scotia-paycheck-calculator',
+    title: 'Nova Scotia Paycheck Calculator 2026: See Your Exact Net Pay',
+    description:
+      'On $80,000 in Nova Scotia you keep about $56,095 in 2026. Free calculator for your exact take-home pay \u2014 federal tax, Nova Scotia tax, CPP, EI, hourly or salary. No signup.',
+    h1: 'Nova Scotia Paycheck Calculator',
+    kicker: 'Nova Scotia take-home pay',
+    primaryKeyword: 'Nova Scotia paycheck calculator',
+    intro:
+      'On an $80,000 salary in Nova Scotia in 2026, you take home about $56,095 a year \u2014 roughly $4,675 a month \u2014 after about $9,513 federal tax, $8,822 Nova Scotia tax, $4,446 CPP/CPP2, and $1,123 EI. Enter your own wage or salary below to estimate your Nova Scotia paycheque, useful for Halifax, Dartmouth, Sydney, and across Nova Scotia.',
+    examples: ['$65,000 after tax Nova Scotia', '$25/hour after tax Nova Scotia', 'Halifax take-home pay calculator'],
+    sections: [
+      {
+        heading: 'Nova Scotia tax and payroll deductions',
+        body:
+          'Nova Scotia workers pay federal income tax, Nova Scotia provincial income tax, CPP contributions, and EI premiums. Nova Scotia has the heaviest provincial income tax of any province at this salary — about $8,822 at $80,000, more than double Ontario\u2019s $4,173 — so gross-for-gross comparisons with other provinces are misleading.',
+      },
+      {
+        heading: 'For salary and hourly workers',
+        body:
+          'Use annual salary mode for a fixed salary or hourly mode for shift-based work. If your hours change weekly, timesheet mode gives a more realistic estimate.',
+      },
+      {
+        heading: 'Compare Nova Scotia with other provinces',
+        body:
+          'If you are weighing a move into or out of Nova Scotia, use the province comparison page to see how the same salary lands across all thirteen provinces and territories.',
+      },
+    ],
+    faq: [
+      {
+        question: 'How much tax is deducted from a Nova Scotia paycheque?',
+        answer:
+          'On an $80,000 salary in 2026, a Nova Scotia paycheque loses about $9,513 to federal tax, $8,822 to Nova Scotia provincial tax, $4,446 to CPP/CPP2, and $1,123 to EI over the year. Your exact deductions depend on your income, pay period, and credits; enter your numbers above for a precise breakdown.',
+      },
+      {
+        question: 'Can I use this as a Halifax paycheck calculator?',
+        answer:
+          'Yes. Halifax has no separate city income tax \u2014 paycheques there use exactly the same federal and Nova Scotia rates as the rest of the province, so this calculator works for Halifax, Dartmouth, Sydney, and across Nova Scotia.',
+      },
+      {
+        question: 'Is Nova Scotia take-home pay lower than Ontario?',
+        answer:
+          'At $80,000 in 2026, Nova Scotia keeps about $56,095 versus about $60,744 in Ontario. The gap shifts with salary and with credits, so compare your own number with the province comparison tool.',
+      },
+    ],
+  },
+  {
+    slug: 'new-brunswick-paycheck-calculator',
+    title: 'New Brunswick Paycheck Calculator 2026: See Your Exact Net Pay',
+    description:
+      'On $80,000 in New Brunswick you keep about $57,933 in 2026. Free calculator for your exact take-home pay \u2014 federal tax, New Brunswick tax, CPP, EI, hourly or salary. No signup.',
+    h1: 'New Brunswick Paycheck Calculator',
+    kicker: 'New Brunswick take-home pay',
+    primaryKeyword: 'New Brunswick paycheck calculator',
+    intro:
+      'On an $80,000 salary in New Brunswick in 2026, you take home about $57,933 a year \u2014 roughly $4,828 a month \u2014 after about $9,513 federal tax, $6,985 New Brunswick tax, $4,446 CPP/CPP2, and $1,123 EI. Enter your own wage or salary below to estimate your New Brunswick paycheque, useful for Moncton, Saint John, Fredericton, and across New Brunswick.',
+    examples: ['$65,000 after tax New Brunswick', '$25/hour after tax New Brunswick', 'Moncton take-home pay calculator'],
+    sections: [
+      {
+        heading: 'New Brunswick tax and payroll deductions',
+        body:
+          'New Brunswick workers pay federal income tax, New Brunswick provincial income tax, CPP contributions, and EI premiums. New Brunswick take-home is almost identical to Manitoba\u2019s at $80,000 — about $57,933 versus $57,940 — a coincidence of two very different bracket structures landing in the same place.',
+      },
+      {
+        heading: 'For salary and hourly workers',
+        body:
+          'Use annual salary mode for a fixed salary or hourly mode for shift-based work. If your hours change weekly, timesheet mode gives a more realistic estimate.',
+      },
+      {
+        heading: 'Compare New Brunswick with other provinces',
+        body:
+          'If you are weighing a move into or out of New Brunswick, use the province comparison page to see how the same salary lands across all thirteen provinces and territories.',
+      },
+    ],
+    faq: [
+      {
+        question: 'How much tax is deducted from a New Brunswick paycheque?',
+        answer:
+          'On an $80,000 salary in 2026, a New Brunswick paycheque loses about $9,513 to federal tax, $6,985 to New Brunswick provincial tax, $4,446 to CPP/CPP2, and $1,123 to EI over the year. Your exact deductions depend on your income, pay period, and credits; enter your numbers above for a precise breakdown.',
+      },
+      {
+        question: 'Can I use this as a Moncton paycheck calculator?',
+        answer:
+          'Yes. Moncton has no separate city income tax \u2014 paycheques there use exactly the same federal and New Brunswick rates as the rest of the province, so this calculator works for Moncton, Saint John, Fredericton, and across New Brunswick.',
+      },
+      {
+        question: 'Is New Brunswick take-home pay lower than Ontario?',
+        answer:
+          'At $80,000 in 2026, New Brunswick keeps about $57,933 versus about $60,744 in Ontario. The gap shifts with salary and with credits, so compare your own number with the province comparison tool.',
+      },
+    ],
+  },
+  {
+    slug: 'newfoundland-paycheck-calculator',
+    title: 'Newfoundland and Labrador Paycheck Calculator 2026: See Your Exact Net Pay',
+    description:
+      'On $80,000 in Newfoundland and Labrador you keep about $57,533 in 2026. Free calculator for your exact take-home pay \u2014 federal tax, Newfoundland and Labrador tax, CPP, EI, hourly or salary. No signup.',
+    h1: 'Newfoundland and Labrador Paycheck Calculator',
+    kicker: 'Newfoundland and Labrador take-home pay',
+    primaryKeyword: 'Newfoundland and Labrador paycheck calculator',
+    intro:
+      'On an $80,000 salary in Newfoundland and Labrador in 2026, you take home about $57,533 a year \u2014 roughly $4,794 a month \u2014 after about $9,513 federal tax, $7,385 Newfoundland and Labrador tax, $4,446 CPP/CPP2, and $1,123 EI. Enter your own wage or salary below to estimate your Newfoundland and Labrador paycheque, useful for St. John\u2019s, Mount Pearl, Corner Brook, and across Newfoundland and Labrador.',
+    examples: ['$65,000 after tax Newfoundland and Labrador', '$25/hour after tax Newfoundland and Labrador', 'St. John\u2019s take-home pay calculator'],
+    sections: [
+      {
+        heading: 'Newfoundland and Labrador tax and payroll deductions',
+        body:
+          'Newfoundland and Labrador workers pay federal income tax, Newfoundland and Labrador provincial income tax, CPP contributions, and EI premiums. Newfoundland and Labrador\u2019s provincial tax is about $7,385 at $80,000 — mid-pack among the Atlantic provinces, lighter than Nova Scotia but heavier than New Brunswick.',
+      },
+      {
+        heading: 'For salary and hourly workers',
+        body:
+          'Use annual salary mode for a fixed salary or hourly mode for shift-based work. If your hours change weekly, timesheet mode gives a more realistic estimate.',
+      },
+      {
+        heading: 'Compare Newfoundland and Labrador with other provinces',
+        body:
+          'If you are weighing a move into or out of Newfoundland and Labrador, use the province comparison page to see how the same salary lands across all thirteen provinces and territories.',
+      },
+    ],
+    faq: [
+      {
+        question: 'How much tax is deducted from a Newfoundland and Labrador paycheque?',
+        answer:
+          'On an $80,000 salary in 2026, a Newfoundland and Labrador paycheque loses about $9,513 to federal tax, $7,385 to Newfoundland and Labrador provincial tax, $4,446 to CPP/CPP2, and $1,123 to EI over the year. Your exact deductions depend on your income, pay period, and credits; enter your numbers above for a precise breakdown.',
+      },
+      {
+        question: 'Can I use this as a St. John\u2019s paycheck calculator?',
+        answer:
+          'Yes. St. John\u2019s has no separate city income tax \u2014 paycheques there use exactly the same federal and Newfoundland and Labrador rates as the rest of the province, so this calculator works for St. John\u2019s, Mount Pearl, Corner Brook, and across Newfoundland and Labrador.',
+      },
+      {
+        question: 'Is Newfoundland and Labrador take-home pay lower than Ontario?',
+        answer:
+          'At $80,000 in 2026, Newfoundland and Labrador keeps about $57,533 versus about $60,744 in Ontario. The gap shifts with salary and with credits, so compare your own number with the province comparison tool.',
+      },
+    ],
+  },
+  {
+    slug: 'pei-paycheck-calculator',
+    title: 'Prince Edward Island Paycheck Calculator 2026: See Your Exact Net Pay',
+    description:
+      'On $80,000 in Prince Edward Island you keep about $56,999 in 2026. Free calculator for your exact take-home pay \u2014 federal tax, Prince Edward Island tax, CPP, EI, hourly or salary. No signup.',
+    h1: 'Prince Edward Island Paycheck Calculator',
+    kicker: 'Prince Edward Island take-home pay',
+    primaryKeyword: 'Prince Edward Island paycheck calculator',
+    intro:
+      'On an $80,000 salary in Prince Edward Island in 2026, you take home about $56,999 a year \u2014 roughly $4,750 a month \u2014 after about $9,513 federal tax, $7,919 Prince Edward Island tax, $4,446 CPP/CPP2, and $1,123 EI. Enter your own wage or salary below to estimate your Prince Edward Island paycheque, useful for Charlottetown, Summerside, and across Prince Edward Island.',
+    examples: ['$65,000 after tax Prince Edward Island', '$25/hour after tax Prince Edward Island', 'Charlottetown take-home pay calculator'],
+    sections: [
+      {
+        heading: 'Prince Edward Island tax and payroll deductions',
+        body:
+          'Prince Edward Island workers pay federal income tax, Prince Edward Island provincial income tax, CPP contributions, and EI premiums. PEI\u2019s provincial tax is about $7,919 at $80,000 — second only to Nova Scotia — among the provinces, so an island paycheque keeps noticeably less than the same salary would out west.',
+      },
+      {
+        heading: 'For salary and hourly workers',
+        body:
+          'Use annual salary mode for a fixed salary or hourly mode for shift-based work. If your hours change weekly, timesheet mode gives a more realistic estimate.',
+      },
+      {
+        heading: 'Compare Prince Edward Island with other provinces',
+        body:
+          'If you are weighing a move into or out of Prince Edward Island, use the province comparison page to see how the same salary lands across all thirteen provinces and territories.',
+      },
+    ],
+    faq: [
+      {
+        question: 'How much tax is deducted from a Prince Edward Island paycheque?',
+        answer:
+          'On an $80,000 salary in 2026, a Prince Edward Island paycheque loses about $9,513 to federal tax, $7,919 to Prince Edward Island provincial tax, $4,446 to CPP/CPP2, and $1,123 to EI over the year. Your exact deductions depend on your income, pay period, and credits; enter your numbers above for a precise breakdown.',
+      },
+      {
+        question: 'Can I use this as a Charlottetown paycheck calculator?',
+        answer:
+          'Yes. Charlottetown has no separate city income tax \u2014 paycheques there use exactly the same federal and Prince Edward Island rates as the rest of the province, so this calculator works for Charlottetown, Summerside, and across Prince Edward Island.',
+      },
+      {
+        question: 'Is Prince Edward Island take-home pay lower than Ontario?',
+        answer:
+          'At $80,000 in 2026, Prince Edward Island keeps about $56,999 versus about $60,744 in Ontario. The gap shifts with salary and with credits, so compare your own number with the province comparison tool.',
+      },
+    ],
+  },
+  {
+    slug: 'yukon-paycheck-calculator',
+    title: 'Yukon Paycheck Calculator 2026: See Your Exact Net Pay',
+    description:
+      'On $80,000 in Yukon you keep about $60,648 in 2026. Free calculator for your exact take-home pay \u2014 federal tax, Yukon tax, CPP, EI, hourly or salary. No signup.',
+    h1: 'Yukon Paycheck Calculator',
+    kicker: 'Yukon take-home pay',
+    primaryKeyword: 'Yukon paycheck calculator',
+    intro:
+      'On an $80,000 salary in Yukon in 2026, you take home about $60,648 a year \u2014 roughly $5,054 a month \u2014 after about $9,513 federal tax, $4,269 Yukon tax, $4,446 CPP/CPP2, and $1,123 EI. Enter your own wage or salary below to estimate your Yukon paycheque, useful for Whitehorse, Dawson City, and across Yukon.',
+    examples: ['$65,000 after tax Yukon', '$25/hour after tax Yukon', 'Whitehorse take-home pay calculator'],
+    sections: [
+      {
+        heading: 'Yukon tax and payroll deductions',
+        body:
+          'Yukon workers pay federal income tax, Yukon territorial income tax, CPP contributions, and EI premiums. Yukon\u2019s territorial tax is light — about $4,269 at $80,000, close to Ontario — so northern paycheques often beat what people assume before northern allowances even enter the picture.',
+      },
+      {
+        heading: 'For salary and hourly workers',
+        body:
+          'Use annual salary mode for a fixed salary or hourly mode for shift-based work. If your hours change weekly, timesheet mode gives a more realistic estimate.',
+      },
+      {
+        heading: 'Compare Yukon with other provinces',
+        body:
+          'If you are weighing a move into or out of Yukon, use the province comparison page to see how the same salary lands across all thirteen provinces and territories.',
+      },
+    ],
+    faq: [
+      {
+        question: 'How much tax is deducted from a Yukon paycheque?',
+        answer:
+          'On an $80,000 salary in 2026, a Yukon paycheque loses about $9,513 to federal tax, $4,269 to Yukon territorial tax, $4,446 to CPP/CPP2, and $1,123 to EI over the year. Your exact deductions depend on your income, pay period, and credits; enter your numbers above for a precise breakdown.',
+      },
+      {
+        question: 'Can I use this as a Whitehorse paycheck calculator?',
+        answer:
+          'Yes. Whitehorse has no separate city income tax \u2014 paycheques there use exactly the same federal and Yukon rates as the rest of the territory, so this calculator works for Whitehorse, Dawson City, and across Yukon.',
+      },
+      {
+        question: 'Is Yukon take-home pay lower than Ontario?',
+        answer:
+          'At $80,000 in 2026, Yukon keeps about $60,648 versus about $60,744 in Ontario. The gap shifts with salary and with credits, so compare your own number with the province comparison tool.',
+      },
+    ],
+  },
+  {
+    slug: 'northwest-territories-paycheck-calculator',
+    title: 'Northwest Territories Paycheck Calculator 2026: See Your Exact Net Pay',
+    description:
+      'On $80,000 in Northwest Territories you keep about $60,871 in 2026. Free calculator for your exact take-home pay \u2014 federal tax, Northwest Territories tax, CPP, EI, hourly or salary. No signup.',
+    h1: 'Northwest Territories Paycheck Calculator',
+    kicker: 'Northwest Territories take-home pay',
+    primaryKeyword: 'Northwest Territories paycheck calculator',
+    intro:
+      'On an $80,000 salary in Northwest Territories in 2026, you take home about $60,871 a year \u2014 roughly $5,073 a month \u2014 after about $9,513 federal tax, $4,047 Northwest Territories tax, $4,446 CPP/CPP2, and $1,123 EI. Enter your own wage or salary below to estimate your Northwest Territories paycheque, useful for Yellowknife, Hay River, Inuvik, and across the Northwest Territories.',
+    examples: ['$65,000 after tax Northwest Territories', '$25/hour after tax Northwest Territories', 'Yellowknife take-home pay calculator'],
+    sections: [
+      {
+        heading: 'Northwest Territories tax and payroll deductions',
+        body:
+          'Northwest Territories workers pay federal income tax, Northwest Territories territorial income tax, CPP contributions, and EI premiums. The Northwest Territories takes about $4,047 of territorial tax at $80,000 — less than every province — before employer northern allowances are counted on top.',
+      },
+      {
+        heading: 'For salary and hourly workers',
+        body:
+          'Use annual salary mode for a fixed salary or hourly mode for shift-based work. If your hours change weekly, timesheet mode gives a more realistic estimate.',
+      },
+      {
+        heading: 'Compare Northwest Territories with other provinces',
+        body:
+          'If you are weighing a move into or out of Northwest Territories, use the province comparison page to see how the same salary lands across all thirteen provinces and territories.',
+      },
+    ],
+    faq: [
+      {
+        question: 'How much tax is deducted from a Northwest Territories paycheque?',
+        answer:
+          'On an $80,000 salary in 2026, a Northwest Territories paycheque loses about $9,513 to federal tax, $4,047 to Northwest Territories territorial tax, $4,446 to CPP/CPP2, and $1,123 to EI over the year. Your exact deductions depend on your income, pay period, and credits; enter your numbers above for a precise breakdown.',
+      },
+      {
+        question: 'Can I use this as a Yellowknife paycheck calculator?',
+        answer:
+          'Yes. Yellowknife has no separate city income tax \u2014 paycheques there use exactly the same federal and Northwest Territories rates as the rest of the territory, so this calculator works for Yellowknife, Hay River, Inuvik, and across the Northwest Territories.',
+      },
+      {
+        question: 'Is Northwest Territories take-home pay lower than Ontario?',
+        answer:
+          'At $80,000 in 2026, Northwest Territories keeps about $60,871 versus about $60,744 in Ontario. The gap shifts with salary and with credits, so compare your own number with the province comparison tool.',
+      },
+    ],
+  },
+  {
+    slug: 'nunavut-paycheck-calculator',
+    title: 'Nunavut Paycheck Calculator 2026: See Your Exact Net Pay',
+    description:
+      'On $80,000 in Nunavut you keep about $62,001 in 2026. Free calculator for your exact take-home pay \u2014 federal tax, Nunavut tax, CPP, EI, hourly or salary. No signup.',
+    h1: 'Nunavut Paycheck Calculator',
+    kicker: 'Nunavut take-home pay',
+    primaryKeyword: 'Nunavut paycheck calculator',
+    intro:
+      'On an $80,000 salary in Nunavut in 2026, you take home about $62,001 a year \u2014 roughly $5,167 a month \u2014 after about $9,513 federal tax, $2,917 Nunavut tax, $4,446 CPP/CPP2, and $1,123 EI. Enter your own wage or salary below to estimate your Nunavut paycheque, useful for Iqaluit, Rankin Inlet, Arviat, and across Nunavut.',
+    examples: ['$65,000 after tax Nunavut', '$25/hour after tax Nunavut', 'Iqaluit take-home pay calculator'],
+    sections: [
+      {
+        heading: 'Nunavut tax and payroll deductions',
+        body:
+          'Nunavut workers pay federal income tax, Nunavut territorial income tax, CPP contributions, and EI premiums. Nunavut has the lightest income tax in Canada — about $2,917 of territorial tax at $80,000, under a third of what Nova Scotia takes — the trade-off being the cost of living the allowances exist to offset.',
+      },
+      {
+        heading: 'For salary and hourly workers',
+        body:
+          'Use annual salary mode for a fixed salary or hourly mode for shift-based work. If your hours change weekly, timesheet mode gives a more realistic estimate.',
+      },
+      {
+        heading: 'Compare Nunavut with other provinces',
+        body:
+          'If you are weighing a move into or out of Nunavut, use the province comparison page to see how the same salary lands across all thirteen provinces and territories.',
+      },
+    ],
+    faq: [
+      {
+        question: 'How much tax is deducted from a Nunavut paycheque?',
+        answer:
+          'On an $80,000 salary in 2026, a Nunavut paycheque loses about $9,513 to federal tax, $2,917 to Nunavut territorial tax, $4,446 to CPP/CPP2, and $1,123 to EI over the year. Your exact deductions depend on your income, pay period, and credits; enter your numbers above for a precise breakdown.',
+      },
+      {
+        question: 'Can I use this as a Iqaluit paycheck calculator?',
+        answer:
+          'Yes. Iqaluit has no separate city income tax \u2014 paycheques there use exactly the same federal and Nunavut rates as the rest of the territory, so this calculator works for Iqaluit, Rankin Inlet, Arviat, and across Nunavut.',
+      },
+      {
+        question: 'Is Nunavut take-home pay lower than Ontario?',
+        answer:
+          'At $80,000 in 2026, Nunavut keeps about $62,001 versus about $60,744 in Ontario. The gap shifts with salary and with credits, so compare your own number with the province comparison tool.',
+      },
+    ],
+  },
 ];
 
 const salaryAmounts = [
