@@ -9,6 +9,7 @@ import Candles, { type CandleData } from './Candles';
 import CrossTab, { type CrossTabData } from './CrossTab';
 import Provenance, { type ProvenanceData } from './Provenance';
 import HourChart from './HourChart';
+import IndustryIncome, { type IndustryIncomeRow } from './IndustryIncome';
 import SearchPanel from './SearchPanel';
 import ContentPanel from './ContentPanel';
 
@@ -136,6 +137,20 @@ const INTENT_LABEL_ZH: Record<string, string> = {
   'job-offer': '在权衡 offer', 'raise': '刚涨了薪', 'moving': '考虑搬家',
   'budgeting': '做预算', 'curious': '只是好奇',
 };
+const INDUSTRY_NAME: Record<string, string> = {
+  'tech': 'Tech', 'healthcare': 'Healthcare', 'construction': 'Construction',
+  'manufacturing': 'Manufacturing', 'food-hospitality': 'Food & hospitality',
+  'retail': 'Retail', 'finance': 'Finance', 'education': 'Education',
+  'transportation': 'Transportation', 'public-admin': 'Public admin',
+  'all-industries': 'All industries',
+};
+const INDUSTRY_NAME_ZH: Record<string, string> = {
+  'tech': '科技', 'healthcare': '医疗', 'construction': '建筑',
+  'manufacturing': '制造', 'food-hospitality': '餐饮酒店',
+  'retail': '零售', 'finance': '金融', 'education': '教育',
+  'transportation': '运输', 'public-admin': '公共部门',
+  'all-industries': '全行业',
+};
 const PAYCHANGE_LABEL: Record<string, string> = { up: 'Raise', down: 'Pay cut', same: 'No change' };
 const PAYCHANGE_LABEL_ZH: Record<string, string> = { up: '涨薪', down: '降薪', same: '没变' };
 
@@ -185,6 +200,7 @@ export default function StatsDashboard() {
   const [stats, setStats] = useState<Stats | null>(null);
   const [extra, setExtra] = useState<Extra | null>(null);
   const [journeys, setJourneys] = useState<Journeys | null>(null);
+  const [indIncome, setIndIncome] = useState<IndustryIncomeRow[] | null>(null);
   const [series, setSeries] = useState<any | null>(null);
   const [candles, setCandles] = useState<CandleData | null>(null);
   const [cross, setCross] = useState<CrossTabData | null>(null);
@@ -219,6 +235,9 @@ export default function StatsDashboard() {
     });
     supabase.rpc('calc_journeys').then(({ data }) => {
       if (data) setJourneys(data as Journeys);
+    });
+    supabase.rpc('calc_industry_income').then(({ data }) => {
+      if (data) setIndIncome(data as IndustryIncomeRow[]);
     });
     supabase.rpc('calc_stats').then(({ data, error }) => {
       if (error) setError(error.message);
@@ -446,10 +465,17 @@ export default function StatsDashboard() {
           </Card>
 
           <Card
-            title={T('Declared industry', '申报的行业')}
-            hint={T('Voluntary — users pick it to see where their pay stands.', '自愿填写 —— 用户选行业是为了看自己的工资在行业里的位置。')}
+            title={T('Income bracket by declared industry', '各行业的收入区间')}
+            hint={T(
+              'Voluntary — users pick an industry to see where their pay stands. This is where each industry\u2019s users actually sit across the seven brackets.',
+              '自愿填写 —— 用户选行业是为了看自己工资在行业里的位置。这里是每个行业的用户实际落在七个收入档上的分布。',
+            )}
           >
-            <Bars rows={stats.by_industry} total={t} empty={noData} />
+            <IndustryIncome
+              rows={indIncome ?? []}
+              zh={zh}
+              label={(k) => (zh ? INDUSTRY_NAME_ZH : INDUSTRY_NAME)[k] ?? k}
+            />
           </Card>
 
           <Card
