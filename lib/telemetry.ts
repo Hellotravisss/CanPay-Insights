@@ -426,7 +426,7 @@ export function recordCalcEvent(e: {
       ? `${w.shiftStartHour}-${w.shiftEndHour}-${w.unpaidBreakMin}-${w.daysPerWeek}`
       : '';
     const behaviourKey = b ? `${b.rrspPctBucket}-${b.otHoursBucket}-${b.tipsPctBucket ?? ''}-${b.shiftPremium}` : '';
-    const key = `${source}|${e.mode}|${e.province}|${bracket}|${lang}|${e.industry ?? ''}|${workKey}|${behaviourKey}|${e.intent ?? ''}|${e.expectation ?? ''}|${e.workArrangement ?? ''}|${e.ageBand ?? ''}|${e.payChange ? `${e.payChange.direction}-${e.payChange.pctBucket}` : ''}`;
+    const key = `${source}|${e.mode}|${e.province}|${bracket}|${lang}|${e.industry ?? ''}|${workKey}|${behaviourKey}|${e.intent ?? ''}|${e.expectation ?? ''}|${e.workArrangement ?? ''}|${e.ageBand ?? ''}|${e.viewedReport ? 'r' : ''}|${e.payChange ? `${e.payChange.direction}-${e.payChange.pctBucket}` : ''}`;
     if (sentThisPageLoad.has(key)) return;
     sentThisPageLoad.add(key);
 
