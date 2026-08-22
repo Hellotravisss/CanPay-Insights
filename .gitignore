@@ -57,3 +57,6 @@ search_more.js
 
 # Allow site assets despite the global *.png screenshot rule
 !public/**/*.png
+
+# OpenNext build output
+.open-next/

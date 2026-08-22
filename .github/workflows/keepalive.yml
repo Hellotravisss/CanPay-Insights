@@ -1,0 +1,14 @@
+# Pings the Supabase keepalive endpoint daily so the free-tier project does
+# not pause. Was a Vercel cron; moved here with the hosting move. Retire this
+# file when the database moves to D1.
+name: Supabase keepalive
+on:
+  schedule:
+    - cron: '0 13 * * *'
+  workflow_dispatch:
+permissions: {}
+jobs:
+  ping:
+    runs-on: ubuntu-latest
+    steps:
+      - run: curl -fsS "https://canpayinsights.ca/api/keepalive" -H "Authorization: Bearer ${{ secrets.CRON_SECRET }}" || curl -fsS "https://canpayinsights.ca/api/keepalive"

@@ -1,8 +1,6 @@
 import type { Metadata, Viewport } from 'next';
 import TelemetrySwitch from '../components/TelemetrySwitch';
 import { Inter } from 'next/font/google';
-import { Analytics } from '@vercel/analytics/react';
-import { SpeedInsights } from '@vercel/speed-insights/next';
 import './globals.css';
 
 const inter = Inter({ subsets: ['latin'] });
@@ -155,8 +153,16 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       <body className={inter.className}>
         <TelemetrySwitch />
         {children}
-        <Analytics />
-        <SpeedInsights />
+        {/* Cloudflare Web Analytics — cookieless, free. The token is the
+            site's public beacon id, set once the zone is on Cloudflare; until
+            then this renders nothing. */}
+        {process.env.NEXT_PUBLIC_CF_BEACON && (
+          <script
+            defer
+            src="https://static.cloudflareinsights.com/beacon.min.js"
+            data-cf-beacon={`{"token": "${process.env.NEXT_PUBLIC_CF_BEACON}"}`}
+          />
+        )}
       </body>
     </html>
   );
