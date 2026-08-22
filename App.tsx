@@ -22,6 +22,7 @@ import {
 import IndustryComparison from './components/IndustryComparison';
 import IntentPrompt from './components/IntentPrompt';
 import ExpectationPrompt from './components/ExpectationPrompt';
+import FakeDoors from './components/FakeDoors';
 import PayCurve from './components/PayCurve';
 import ResultsSection from './components/ResultsSection';
 import GeminiAdvisor from './components/GeminiAdvisor';
@@ -726,6 +727,14 @@ const App: React.FC = () => {
                     ot15: results.overtimeHours15,
                     ot20: results.overtimeHours20,
                   }}
+                />
+                {/* Fake doors: three paid products that do not exist yet.
+                    Taps are the data; nothing is charged. */}
+                <FakeDoors
+                  mode={mode}
+                  province={currentProvince}
+                  annualIncome={results.grossPayAnnual}
+                  lang={lang}
                 />
                 {isAuthenticated && records.length > 0 && <PayCurve records={records} />}
                 <IntentPrompt

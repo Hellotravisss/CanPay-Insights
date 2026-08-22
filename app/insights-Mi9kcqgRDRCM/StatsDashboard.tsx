@@ -203,6 +203,7 @@ export default function StatsDashboard() {
   const [stats, setStats] = useState<Stats | null>(null);
   const [extra, setExtra] = useState<Extra | null>(null);
   const [journeys, setJourneys] = useState<Journeys | null>(null);
+  const [doors, setDoors] = useState<{ visits: number; clicks: Row[]; waitlist: Row[]; relocation_click_among_comparers: number } | null>(null);
   const [indIncome, setIndIncome] = useState<IndustryIncomeRow[] | null>(null);
   const [series, setSeries] = useState<any | null>(null);
   const [candles, setCandles] = useState<CandleData | null>(null);
@@ -238,6 +239,9 @@ export default function StatsDashboard() {
     });
     supabase.rpc('calc_journeys').then(({ data }) => {
       if (data) setJourneys(data as Journeys);
+    });
+    supabase.rpc('calc_fake_doors').then(({ data }) => {
+      if (data) setDoors(data as any);
     });
     supabase.rpc('calc_industry_income').then(({ data }) => {
       if (data) setIndIncome(data as IndustryIncomeRow[]);
@@ -663,6 +667,39 @@ export default function StatsDashboard() {
           </Card>
 
           {/* Why people checked */}
+          {/* Fake doors — the pricing experiment. Visits that tapped each
+              product; the decision about what to build is made here. */}
+          <Card
+            title={T('Fake doors: what would people pay for?', '假门测试:大家愿意为什么付钱?')}
+            hint={T(
+              'Three paid products that do not exist. Each number is VISITS that tapped the door (not taps), so one curious person clicking three times counts once per door. The most-opened door gets built first.',
+              '三个还不存在的付费产品。数字是点过那扇门的访问数(不是点击数),一个人点三次只算一次。开得最多的那扇门先做。',
+            )}
+          >
+            <Bars
+              rows={doors?.clicks ?? []}
+              total={doors?.visits ?? 0}
+              label={(k) =>
+                ({ relocation: T('Province move report $9', '省际搬迁报告 $9'), 'offer-compare': T('Offer comparison $9', 'Offer 对比 $9'), 'rrsp-season': T('RRSP season $19', '报税季 RRSP 精算 $19') } as Record<string, string>)[String(k)] ?? String(k)
+              }
+              empty={T('Doors are live — no taps yet.', '门已开 —— 还没人点。')}
+            />
+            {doors && (
+              <div className="mt-3 space-y-1 border-t border-slate-100 pt-3 text-xs text-slate-500">
+                <p>
+                  {zh
+                    ? `留邮箱:${doors.waitlist.map((w) => `${String(w.k)} ${w.n}`).join(' · ') || '0'}`
+                    : `Waitlist emails: ${doors.waitlist.map((w) => `${String(w.k)} ${w.n}`).join(' · ') || '0'}`}
+                </p>
+                <p>
+                  {zh
+                    ? `搬迁门的点击里,${doors.relocation_click_among_comparers} 次来自同一访问内比过两个省的人 —— 意图信号和点击对得上吗?`
+                    : `${doors.relocation_click_among_comparers} relocation taps came from visits that also compared two provinces — does the intent signal match the tap?`}
+                </p>
+              </div>
+            )}
+          </Card>
+
           <Card
             title={T('Where people work', '办公形式')}
             hint={T(

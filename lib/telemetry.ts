@@ -386,6 +386,8 @@ function getGeo() {
 // industry × bracket is a re-identification risk this dataset promised never
 // to carry.
 export type WorkArrangement = 'onsite' | 'remote' | 'hybrid';
+/** Fake-door products: which paid offer a visitor tapped. */
+export type ProductInterest = 'relocation' | 'offer-compare' | 'rrsp-season';
 export type AgeBand = 'under-25' | '25-34' | '35-44' | '45-54' | '55-64' | '65-plus';
 
 export function recordCalcEvent(e: {
@@ -410,6 +412,7 @@ export function recordCalcEvent(e: {
   payChange?: PayChange | null;
   workArrangement?: WorkArrangement | null;
   ageBand?: AgeBand | null;
+  productInterest?: ProductInterest | null;
 }) {
   if (!e.annualIncome || e.annualIncome <= 0 || !e.province) return;
   if (isLikelyBot() || isOptedOut()) return;
@@ -426,7 +429,7 @@ export function recordCalcEvent(e: {
       ? `${w.shiftStartHour}-${w.shiftEndHour}-${w.unpaidBreakMin}-${w.daysPerWeek}`
       : '';
     const behaviourKey = b ? `${b.rrspPctBucket}-${b.otHoursBucket}-${b.tipsPctBucket ?? ''}-${b.shiftPremium}` : '';
-    const key = `${source}|${e.mode}|${e.province}|${bracket}|${lang}|${e.industry ?? ''}|${workKey}|${behaviourKey}|${e.intent ?? ''}|${e.expectation ?? ''}|${e.workArrangement ?? ''}|${e.ageBand ?? ''}|${e.viewedReport ? 'r' : ''}|${e.payChange ? `${e.payChange.direction}-${e.payChange.pctBucket}` : ''}`;
+    const key = `${source}|${e.mode}|${e.province}|${bracket}|${lang}|${e.industry ?? ''}|${workKey}|${behaviourKey}|${e.intent ?? ''}|${e.expectation ?? ''}|${e.workArrangement ?? ''}|${e.ageBand ?? ''}|${e.viewedReport ? 'r' : ''}|${e.productInterest ?? ''}|${e.payChange ? `${e.payChange.direction}-${e.payChange.pctBucket}` : ''}`;
     if (sentThisPageLoad.has(key)) return;
     sentThisPageLoad.add(key);
 
@@ -473,6 +476,7 @@ export function recordCalcEvent(e: {
         expectation: e.expectation ?? null,
         work_arrangement: e.workArrangement ?? null,
         age_band: e.ageBand ?? null,
+        product_interest: e.productInterest ?? null,
         employment_shape: e.employmentShape ?? null,
         is_registered: e.isRegistered ?? null,
         from_history: e.payChange ? true : null,
