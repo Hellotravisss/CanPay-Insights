@@ -16,6 +16,14 @@ const nextConfig: NextConfig = {
   async redirects() {
     return [
       {
+        // www → apex. Vercel did this at the platform level; on Cloudflare the
+        // Worker serves both hosts, so the canonical host is enforced here.
+        source: '/:path*',
+        has: [{ type: 'host', value: 'www.canpayinsights.ca' }],
+        destination: 'https://canpayinsights.ca/:path*',
+        permanent: true,
+      },
+      {
         source: '/blog/bc-tax-guide-2025',
         destination: '/blog/bc-take-home-pay-guide-2026',
         permanent: true,
