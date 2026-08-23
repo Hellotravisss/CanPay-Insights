@@ -17,6 +17,17 @@ export const dynamic = 'force-dynamic';
  * Stripe collects the email on its own page; we never see a card.
  */
 export async function POST(request: Request) {
+  try {
+    return await handle(request);
+  } catch (e) {
+    // A thrown error (missing secret, Stripe outage) must still come back as
+    // JSON the button can show, never an empty 500.
+    console.error('checkout failed', (e as Error).message);
+    return NextResponse.json({ error: 'Payments are unavailable right now. Please try again in a few minutes.' }, { status: 503 });
+  }
+}
+
+async function handle(request: Request) {
   let body: Record<string, unknown>;
   try {
     body = await request.json();
