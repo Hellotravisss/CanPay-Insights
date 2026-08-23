@@ -60,7 +60,46 @@ export async function GET(request: Request, { params }: { params: Promise<{ name
         by_product: await by("select product k, count(*) n from purchases where refunded = 0 group by product order by n desc"),
         by_route: await by("select from_province || ' → ' || to_province k, count(*) n from purchases where refunded = 0 and from_province is not null group by k order by n desc limit 12"),
         by_bracket: await by("select income_bracket k, count(*) n from purchases where refunded = 0 and income_bracket is not null group by k order by n desc"),
+        by_month: await by("select substr(created_at,1,7) k, count(*) n, sum(amount_cents) revenue_cents from purchases where refunded = 0 group by k order by k"),
+        attached_to_account: (await d.prepare('select count(*) n from purchases where refunded = 0 and user_id is not null').first<{ n: number }>())!.n,
       }, noStore);
+    }
+    /**
+     * Intent signals. Three rungs, weakest to strongest:
+     *   1. within-session comparison (>=2 provinces = move-curious,
+     *      >=2 income brackets = salary-comparing) — anonymous, session-scoped;
+     *      we deliberately have NO cross-day anonymous id, so cross-day
+     *      frequency exists only for signed-in users (rung 2).
+     *   2. registered users' own calculation_history — aggregate
+     *      distributions only, never rows.
+     *   3. purchases — paid intent, the ground truth the funnel ends in.
+     */
+    case 'intent': {
+      const q = async (sql: string) => (await d.prepare(sql).all()).results;
+      const one = async <T,>(sql: string) => (await d.prepare(sql).first<T>())!;
+      const sess = await one<{ total: number; multi_prov: number; multi_bracket: number }>(
+        `select count(*) total,
+                sum(nprov >= 2) multi_prov,
+                sum(nbr >= 2) multi_bracket
+         from (select session_id, count(distinct province) nprov, count(distinct income_bracket) nbr
+               from events where session_id is not null and (excluded is null or excluded = 0)
+               group by session_id)`);
+      const funnel = await q(
+        `select e.k, e.taps, coalesce(p.n, 0) purchases from
+           (select product_interest k, count(*) taps from events where product_interest is not null group by product_interest) e
+           left join (select product k, count(*) n from purchases where refunded = 0 group by product) p
+           on p.k = e.k order by e.taps desc`);
+      // Signed-in checking cadence, last 30 days: how many distinct days did
+      // each active user run a calculation? Aggregated into bands.
+      const cadence = await q(
+        `select case when days_active >= 8 then '8+ days' when days_active >= 4 then '4-7 days'
+                     when days_active >= 2 then '2-3 days' else '1 day' end k, count(*) n
+         from (select user_id, count(distinct substr(created_at,1,10)) days_active
+               from calculation_history where created_at >= datetime('now','-30 days') group by user_id)
+         group by k order by n desc`);
+      const perUser = await one<{ users: number; calcs: number }>(
+        `select count(distinct user_id) users, count(*) calcs from calculation_history where created_at >= datetime('now','-30 days')`);
+      return NextResponse.json({ sessions: sess, funnel, cadence, active_users_30d: perUser.users, calcs_30d: perUser.calcs }, noStore);
     }
     default: return NextResponse.json({ error: 'unknown' }, { status: 404 });
   }

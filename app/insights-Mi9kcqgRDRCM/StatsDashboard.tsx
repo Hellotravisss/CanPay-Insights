@@ -204,6 +204,8 @@ export default function StatsDashboard() {
   const [extra, setExtra] = useState<Extra | null>(null);
   const [journeys, setJourneys] = useState<Journeys | null>(null);
   const [doors, setDoors] = useState<{ visits: number; clicks: Row[]; waitlist: Row[]; relocation_click_among_comparers: number } | null>(null);
+  const [sales, setSales] = useState<{ orders: number; revenue_cents: number; refunds: number; attached_to_account: number; by_product: Row[]; by_route: Row[]; by_bracket: Row[]; by_month: { k: string; n: number; revenue_cents: number }[] } | null>(null);
+  const [intent, setIntent] = useState<{ sessions: { total: number; multi_prov: number; multi_bracket: number }; funnel: { k: string; taps: number; purchases: number }[]; cadence: Row[]; active_users_30d: number; calcs_30d: number } | null>(null);
   const [indIncome, setIndIncome] = useState<IndustryIncomeRow[] | null>(null);
   const [series, setSeries] = useState<any | null>(null);
   const [candles, setCandles] = useState<CandleData | null>(null);
@@ -243,6 +245,8 @@ export default function StatsDashboard() {
     insights('fake_doors').then(({ data }) => {
       if (data) setDoors(data as any);
     });
+    insights('sales').then(({ data }) => { if (data) setSales(data as any); });
+    insights('intent').then(({ data }) => { if (data) setIntent(data as any); });
     insights('industry_income').then(({ data }) => {
       if (data) setIndIncome(data as IndustryIncomeRow[]);
     });
@@ -670,10 +674,10 @@ export default function StatsDashboard() {
           {/* Fake doors — the pricing experiment. Visits that tapped each
               product; the decision about what to build is made here. */}
           <Card
-            title={T('Fake doors: what would people pay for?', '假门测试:大家愿意为什么付钱?')}
+            title={T('Product doors: interest before purchase', '产品入口:付款前的兴趣')}
             hint={T(
-              'Three paid products that do not exist. Each number is VISITS that tapped the door (not taps), so one curious person clicking three times counts once per door. The most-opened door gets built first.',
-              '三个还不存在的付费产品。数字是点过那扇门的访问数(不是点击数),一个人点三次只算一次。开得最多的那扇门先做。',
+              'Both doors are REAL now (Stripe checkout). Each number is VISITS that tapped a door, so one curious person clicking three times counts once. Compare with the sales card: taps are curiosity, orders are truth.',
+              '两扇门现在都是真收款(Stripe)。数字是点过那扇门的访问数,一个人点三次只算一次。和销售卡对照看:点击是好奇,订单是真话。',
             )}
           >
             <Bars
@@ -698,6 +702,68 @@ export default function StatsDashboard() {
                 </p>
               </div>
             )}
+          </Card>
+
+          {/* Revenue — the strongest intent signal there is */}
+          <Card
+            title={T('Sales: paid intent', '销售:付了钱的意向')}
+            hint={T(
+              'A purchase is the one signal nobody fakes. Routes on the move report are revealed migration demand — each row is a household that paid $9 to think seriously about that exact move.',
+              '购买是唯一没人会伪装的信号。搬迁报告的路线就是真实的迁移需求 —— 每一行都是掏了 $9 认真考虑那条路线的家庭。',
+            )}
+          >
+            {sales ? (
+              <>
+                <div className="grid grid-cols-3 gap-3 text-center">
+                  <div><p className="text-2xl font-extrabold tabular-nums text-slate-900">{sales.orders}</p><p className="text-[11px] text-slate-500">{T('orders', '订单')}</p></div>
+                  <div><p className="text-2xl font-extrabold tabular-nums text-emerald-700">${(sales.revenue_cents / 100).toFixed(0)}</p><p className="text-[11px] text-slate-500">{T('revenue (CAD)', '收入 (CAD)')}</p></div>
+                  <div><p className="text-2xl font-extrabold tabular-nums text-slate-900">{sales.refunds}</p><p className="text-[11px] text-slate-500">{T('refunds', '退款')}</p></div>
+                </div>
+                <div className="mt-4">
+                  <Bars rows={sales.by_route} total={sales.orders} empty={T('No move-report routes yet.', '还没有搬迁路线。')} />
+                </div>
+                <div className="mt-3 space-y-1 border-t border-slate-100 pt-3 text-xs text-slate-500">
+                  <p>{zh ? `按产品:${sales.by_product.map((r) => `${String(r.k)} ${r.n}`).join(' · ') || '—'}` : `By product: ${sales.by_product.map((r) => `${String(r.k)} ${r.n}`).join(' · ') || '—'}`}</p>
+                  <p>{zh ? `买家收入档:${sales.by_bracket.map((r) => `${String(r.k)} ${r.n}`).join(' · ') || '—'}` : `Buyer brackets: ${sales.by_bracket.map((r) => `${String(r.k)} ${r.n}`).join(' · ') || '—'}`}</p>
+                  <p>{zh ? `挂到账号的订单:${sales.attached_to_account}/${sales.orders}` : `Orders attached to an account: ${sales.attached_to_account}/${sales.orders}`}</p>
+                </div>
+              </>
+            ) : <p className="text-sm text-slate-400">{noData}</p>}
+          </Card>
+
+          {/* Intent ladder — comparison behaviour and checking cadence */}
+          <Card
+            title={T('Intent signals: who is planning something?', '意向信号:谁在盘算什么?')}
+            hint={T(
+              'Three rungs, weakest to strongest: comparing inside one visit (two provinces = move-curious, two incomes = salary-comparing), signed-in users checking on several distinct days in a month, and finally a purchase. Anonymous visitors are NOT tracked across days — by design — so cross-day cadence exists only for signed-in users.',
+              '三级阶梯,由弱到强:同一次访问内的对比(比两个省 = 动了搬家念头,比两档收入 = 在比工资)、登录用户一个月内分多天回来查、最后是付款。匿名访客不做跨天追踪(有意为之),所以回访频率只统计登录用户。',
+            )}
+          >
+            {intent ? (
+              <>
+                <div className="grid grid-cols-2 gap-3 text-center">
+                  <div className="rounded-lg bg-slate-50 p-3">
+                    <p className="text-xl font-extrabold tabular-nums text-slate-900">{intent.sessions.total ? Math.round((100 * (intent.sessions.multi_prov ?? 0)) / intent.sessions.total) : 0}%</p>
+                    <p className="text-[11px] text-slate-500">{T('of sessions compare ≥2 provinces', '的会话比了 ≥2 个省')}</p>
+                  </div>
+                  <div className="rounded-lg bg-slate-50 p-3">
+                    <p className="text-xl font-extrabold tabular-nums text-slate-900">{intent.sessions.total ? Math.round((100 * (intent.sessions.multi_bracket ?? 0)) / intent.sessions.total) : 0}%</p>
+                    <p className="text-[11px] text-slate-500">{T('compare ≥2 income levels', '比了 ≥2 档收入')}</p>
+                  </div>
+                </div>
+                <div className="mt-4">
+                  <p className="mb-1 text-[11px] font-bold uppercase tracking-wide text-slate-400">{T('Door tap → purchase', '点入口 → 付款')}</p>
+                  {intent.funnel.length ? intent.funnel.map((f) => (
+                    <p key={f.k} className="flex justify-between text-sm text-slate-600"><span>{f.k}</span><span className="tabular-nums">{f.taps} → {f.purchases} ({f.taps ? ((100 * f.purchases) / f.taps).toFixed(1) : 0}%)</span></p>
+                  )) : <p className="text-sm text-slate-400">{noData}</p>}
+                </div>
+                <div className="mt-4">
+                  <p className="mb-1 text-[11px] font-bold uppercase tracking-wide text-slate-400">{T('Signed-in checking cadence, 30 days', '登录用户查询频率(30 天)')}</p>
+                  <Bars rows={intent.cadence} total={intent.active_users_30d} empty={T('No signed-in activity yet.', '还没有登录用户活动。')} />
+                  <p className="mt-2 text-xs text-slate-500">{zh ? `${intent.active_users_30d} 个活跃账号,共 ${intent.calcs_30d} 次计算。分多天回来的人,是在跟踪什么 —— 加薪、offer,或一次搬家。` : `${intent.active_users_30d} active accounts, ${intent.calcs_30d} calculations. People who return on several days are tracking something — a raise, an offer, or a move.`}</p>
+                </div>
+              </>
+            ) : <p className="text-sm text-slate-400">{noData}</p>}
           </Card>
 
           <Card
