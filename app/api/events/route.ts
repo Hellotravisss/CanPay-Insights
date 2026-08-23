@@ -21,6 +21,7 @@ const COLS = [
   'tips_pct_bucket', 'pay_frequency', 'viewed_report', 'entry_path', 'referrer_path', 'local_hour', 'local_dow',
   'session_id', 'seq', 'industry', 'industry_rank', 'industry_returning', 'intent', 'expectation',
   'work_arrangement', 'age_band', 'employment_shape', 'product_interest', 'is_registered', 'from_history',
+  'tenure_band', 'union_member', 'employer_size', 'vacation_band',
   'change_direction', 'change_pct_bucket', 'days_since_saved_bucket', 'province_changed',
   'median_ratio_bucket', 'median_wage_ref', 'schema_version',
 ] as const;

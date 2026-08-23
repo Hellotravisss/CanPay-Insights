@@ -362,6 +362,12 @@ export type WorkArrangement = 'onsite' | 'remote' | 'hybrid';
 export type ProductInterest = 'relocation' | 'offer-compare' | 'rrsp-season';
 export type AgeBand = 'under-25' | '25-34' | '35-44' | '45-54' | '55-64' | '65-plus';
 
+/** Q4 rotation pool — one of these per visitor, all optional. */
+export type TenureBand = 'under-1' | '1-3' | '3-5' | '5-10' | '10-plus';
+export type UnionMember = 'yes' | 'no' | 'not-sure';
+export type EmployerSize = 'solo' | '2-10' | '11-50' | '51-200' | '200-plus';
+export type VacationBand = '0-10' | '11-15' | '16-20' | '21-25' | '26-plus';
+
 export function recordCalcEvent(e: {
   mode: CalcMode;
   province: string;
@@ -385,6 +391,10 @@ export function recordCalcEvent(e: {
   workArrangement?: WorkArrangement | null;
   ageBand?: AgeBand | null;
   productInterest?: ProductInterest | null;
+  tenureBand?: TenureBand | null;
+  unionMember?: UnionMember | null;
+  employerSize?: EmployerSize | null;
+  vacationBand?: VacationBand | null;
 }) {
   if (!e.annualIncome || e.annualIncome <= 0 || !e.province) return;
   if (isLikelyBot() || isOptedOut()) return;
@@ -401,7 +411,7 @@ export function recordCalcEvent(e: {
       ? `${w.shiftStartHour}-${w.shiftEndHour}-${w.unpaidBreakMin}-${w.daysPerWeek}`
       : '';
     const behaviourKey = b ? `${b.rrspPctBucket}-${b.otHoursBucket}-${b.tipsPctBucket ?? ''}-${b.shiftPremium}` : '';
-    const key = `${source}|${e.mode}|${e.province}|${bracket}|${lang}|${e.industry ?? ''}|${workKey}|${behaviourKey}|${e.intent ?? ''}|${e.expectation ?? ''}|${e.workArrangement ?? ''}|${e.ageBand ?? ''}|${e.viewedReport ? 'r' : ''}|${e.productInterest ?? ''}|${e.payChange ? `${e.payChange.direction}-${e.payChange.pctBucket}` : ''}`;
+    const key = `${source}|${e.mode}|${e.province}|${bracket}|${lang}|${e.industry ?? ''}|${workKey}|${behaviourKey}|${e.intent ?? ''}|${e.expectation ?? ''}|${e.workArrangement ?? ''}|${e.ageBand ?? ''}|${e.viewedReport ? 'r' : ''}|${e.productInterest ?? ''}|${e.tenureBand ?? ''}${e.unionMember ?? ''}${e.employerSize ?? ''}${e.vacationBand ?? ''}|${e.payChange ? `${e.payChange.direction}-${e.payChange.pctBucket}` : ''}`;
     if (sentThisPageLoad.has(key)) return;
     sentThisPageLoad.add(key);
 
@@ -441,6 +451,10 @@ export function recordCalcEvent(e: {
         work_arrangement: e.workArrangement ?? null,
         age_band: e.ageBand ?? null,
         product_interest: e.productInterest ?? null,
+        tenure_band: e.tenureBand ?? null,
+        union_member: e.unionMember ?? null,
+        employer_size: e.employerSize ?? null,
+        vacation_band: e.vacationBand ?? null,
         employment_shape: e.employmentShape ?? null,
         is_registered: e.isRegistered ?? null,
         from_history: e.payChange ? true : null,

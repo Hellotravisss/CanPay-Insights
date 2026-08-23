@@ -116,6 +116,27 @@ export async function POST(request: Request) {
     }
   }
 
+  // Comp-structure dataset: every offer comparison carries bonus, RRSP match
+  // and vacation days for two real Canadian offers. Stored BUCKETED with day
+  // precision only, in a table with no purchase id, email, or user id — the
+  // aggregate is the asset, the buyer stays invisible.
+  if (m.product === 'offer-compare') {
+    try {
+      const a = parseOffer(JSON.parse(m.a ?? 'null'), 'A'); const b = parseOffer(JSON.parse(m.b ?? 'null'), 'B');
+      const day = new Date().toISOString().slice(0, 10);
+      const bonusBucket = (o: { salary: number; bonus: number }) => {
+        if (!o.bonus) return null;
+        const pct = (100 * o.bonus) / o.salary;
+        return pct < 5 ? 'under-5' : pct < 10 ? '5-10' : pct < 20 ? '10-20' : '20-plus';
+      };
+      for (const o of [a, b]) if (o) {
+        await (await db()).prepare(
+          'insert into offer_structures (created_day, province, salary_bracket, has_bonus, bonus_pct_bucket, match_pct, vacation_days) values (?,?,?,?,?,?,?)',
+        ).bind(day, o.province, bracketIncome(o.salary), o.bonus > 0 ? 1 : 0, bonusBucket(o), o.matchPct, o.vacationDays).run();
+      }
+    } catch (e) { console.error('offer structure record failed', (e as Error).message); }
+  }
+
   if (email && m.product === 'offer-compare') {
     try {
       const a = parseOffer(JSON.parse(m.a ?? 'null'), 'Offer A'); const b = parseOffer(JSON.parse(m.b ?? 'null'), 'Offer B');

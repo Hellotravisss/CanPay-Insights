@@ -101,6 +101,19 @@ export async function GET(request: Request, { params }: { params: Promise<{ name
         `select count(distinct user_id) users, count(*) calcs from calculation_history where created_at >= datetime('now','-30 days')`);
       return NextResponse.json({ sessions: sess, funnel, cadence, active_users_30d: perUser.users, calcs_30d: perUser.calcs }, noStore);
     }
+    /** Offer comp structures (bucketed, identity-severed) + the Q4 rotation fields. */
+    case 'comp_structure': {
+      const q = async (sql: string) => (await d.prepare(sql).all()).results;
+      const offers = (await d.prepare('select count(*) n, avg(match_pct) avg_match, avg(vacation_days) avg_vacation, avg(has_bonus) bonus_share from offer_structures').first())!;
+      return NextResponse.json({
+        offers,
+        offers_by_province: await q('select province k, count(*) n, round(avg(match_pct),1) avg_match, round(avg(vacation_days),1) avg_vacation from offer_structures group by k order by n desc'),
+        tenure: await q("select tenure_band k, count(*) n from events where tenure_band is not null group by k order by n desc"),
+        union_member: await q("select union_member k, count(*) n from events where union_member is not null group by k order by n desc"),
+        employer_size: await q("select employer_size k, count(*) n from events where employer_size is not null group by k order by n desc"),
+        vacation: await q("select vacation_band k, count(*) n from events where vacation_band is not null group by k order by n desc"),
+      }, noStore);
+    }
     default: return NextResponse.json({ error: 'unknown' }, { status: 404 });
   }
 }

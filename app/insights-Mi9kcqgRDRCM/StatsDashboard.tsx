@@ -205,6 +205,7 @@ export default function StatsDashboard() {
   const [journeys, setJourneys] = useState<Journeys | null>(null);
   const [doors, setDoors] = useState<{ visits: number; clicks: Row[]; waitlist: Row[]; relocation_click_among_comparers: number } | null>(null);
   const [sales, setSales] = useState<{ orders: number; revenue_cents: number; refunds: number; attached_to_account: number; by_product: Row[]; by_route: Row[]; by_bracket: Row[]; by_month: { k: string; n: number; revenue_cents: number }[] } | null>(null);
+  const [comp, setComp] = useState<{ offers: { n: number; avg_match: number; avg_vacation: number; bonus_share: number }; offers_by_province: any[]; tenure: Row[]; union_member: Row[]; employer_size: Row[]; vacation: Row[] } | null>(null);
   const [intent, setIntent] = useState<{ sessions: { total: number; multi_prov: number; multi_bracket: number }; funnel: { k: string; taps: number; purchases: number }[]; cadence: Row[]; active_users_30d: number; calcs_30d: number } | null>(null);
   const [indIncome, setIndIncome] = useState<IndustryIncomeRow[] | null>(null);
   const [series, setSeries] = useState<any | null>(null);
@@ -247,6 +248,7 @@ export default function StatsDashboard() {
     });
     insights('sales').then(({ data }) => { if (data) setSales(data as any); });
     insights('intent').then(({ data }) => { if (data) setIntent(data as any); });
+    insights('comp_structure').then(({ data }) => { if (data) setComp(data as any); });
     insights('industry_income').then(({ data }) => {
       if (data) setIndIncome(data as IndustryIncomeRow[]);
     });
@@ -762,6 +764,36 @@ export default function StatsDashboard() {
                   <Bars rows={intent.cadence} total={intent.active_users_30d} empty={T('No signed-in activity yet.', '还没有登录用户活动。')} />
                   <p className="mt-2 text-xs text-slate-500">{zh ? `${intent.active_users_30d} 个活跃账号,共 ${intent.calcs_30d} 次计算。分多天回来的人,是在跟踪什么 —— 加薪、offer,或一次搬家。` : `${intent.active_users_30d} active accounts, ${intent.calcs_30d} calculations. People who return on several days are tracking something — a raise, an offer, or a move.`}</p>
                 </div>
+              </>
+            ) : <p className="text-sm text-slate-400">{noData}</p>}
+          </Card>
+
+          {/* Comp structure — from paid offer comparisons + the Q4 rotation */}
+          <Card
+            title={T('Comp structure: what offers actually contain', '薪酬结构:offer 里到底有什么')}
+            hint={T(
+              'Two sources. Top: every paid offer comparison contributes two real Canadian offers — bonus, RRSP match, vacation — bucketed, dated to the day only, never linked to the buyer. Bottom: the rotating fourth question (tenure, union, employer size, vacation) — each visitor sees exactly one, so per-question samples grow 4x slower by design.',
+              '两个来源。上半:每笔付费 Offer 对比贡献两份真实加拿大 offer 的结构 —— 奖金、RRSP 配比、年假 —— 只存档位和日期,不关联买家。下半:轮换第四问(司龄/工会/雇主规模/年假),每个访客只见一题,单题样本速度慢 4 倍是有意的。',
+            )}
+          >
+            {comp ? (
+              <>
+                <div className="grid grid-cols-3 gap-3 text-center">
+                  <div><p className="text-xl font-extrabold tabular-nums text-slate-900">{comp.offers.n ?? 0}</p><p className="text-[11px] text-slate-500">{T('offers recorded', '已记录 offer')}</p></div>
+                  <div><p className="text-xl font-extrabold tabular-nums text-slate-900">{comp.offers.n ? `${Number(comp.offers.avg_match).toFixed(1)}%` : '—'}</p><p className="text-[11px] text-slate-500">{T('avg RRSP match', '平均 RRSP 配比')}</p></div>
+                  <div><p className="text-xl font-extrabold tabular-nums text-slate-900">{comp.offers.n ? Number(comp.offers.avg_vacation).toFixed(1) : '—'}</p><p className="text-[11px] text-slate-500">{T('avg vacation days', '平均年假天数')}</p></div>
+                </div>
+                {[
+                  [T('Tenure at current job', '当前工作司龄'), comp.tenure],
+                  [T('Union membership', '工会成员'), comp.union_member],
+                  [T('Employer size', '雇主规模'), comp.employer_size],
+                  [T('Actual vacation days', '实际年假'), comp.vacation],
+                ].map(([title, rows]) => (
+                  <div key={String(title)} className="mt-4">
+                    <p className="mb-1 text-[11px] font-bold uppercase tracking-wide text-slate-400">{title as string}</p>
+                    <Bars rows={(rows as Row[]) ?? []} total={((rows as Row[]) ?? []).reduce((a, r) => a + r.n, 0)} empty={T('Collecting — rotation slot is live.', '收集中 —— 轮换槽已上线。')} />
+                  </div>
+                ))}
               </>
             ) : <p className="text-sm text-slate-400">{noData}</p>}
           </Card>

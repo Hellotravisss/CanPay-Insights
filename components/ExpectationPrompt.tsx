@@ -5,6 +5,10 @@ import {
   type Expectation,
   type WorkArrangement,
   type AgeBand,
+  type TenureBand,
+  type UnionMember,
+  type EmployerSize,
+  type VacationBand,
 } from '../lib/telemetry';
 import type { CalculationMode as CalcMode } from '../types';
 
@@ -47,6 +51,15 @@ const DICT: Record<string, Record<string, string>> = {
     '45-54': '45–54',
     '55-64': '55–64',
     '65-plus': '65+',
+    q4tenure: 'How long have you been at this job?',
+    'under-1': 'Under a year', '1-3': '1–3 yrs', '3-5': '3–5 yrs', '5-10': '5–10 yrs', '10-plus': '10+ yrs',
+    q4union: 'Are you a union member?',
+    yes: 'Yes', no: 'No', 'not-sure': 'Not sure',
+    q4size: 'How big is your employer?',
+    solo: 'Just me', '2-10': '2–10', '11-50': '11–50', '51-200': '51–200', '200-plus': '200+',
+    q4vacation: 'How many paid vacation days do you actually get?',
+    '0-10': '0–10', '11-15': '11–15', '16-20': '16–20', '21-25': '21–25', '26-plus': '26+',
+    skip: 'Skip',
     thanks: 'Thanks — that helps.',
     hint: 'Anonymous. We publish only totals, never your figures.',
   },
@@ -66,6 +79,15 @@ const DICT: Record<string, Record<string, string>> = {
     '45-54': '45–54',
     '55-64': '55–64',
     '65-plus': '65 岁以上',
+    q4tenure: '这份工作干了多久了?',
+    'under-1': '不到一年', '1-3': '1–3 年', '3-5': '3–5 年', '5-10': '5–10 年', '10-plus': '10 年以上',
+    q4union: '你是工会成员吗?',
+    yes: '是', no: '不是', 'not-sure': '不确定',
+    q4size: '你的雇主有多少人?',
+    solo: '就我一个', '2-10': '2–10 人', '11-50': '11–50 人', '51-200': '51–200 人', '200-plus': '200 人以上',
+    q4vacation: '你实际有几天带薪年假?',
+    '0-10': '0–10 天', '11-15': '11–15 天', '16-20': '16–20 天', '21-25': '21–25 天', '26-plus': '26 天以上',
+    skip: '跳过',
     thanks: '谢谢,这很有帮助。',
     hint: '匿名统计,只发布汇总数字,绝不公开你的金额。',
   },
@@ -85,6 +107,15 @@ const DICT: Record<string, Record<string, string>> = {
     '45-54': '45–54',
     '55-64': '55–64',
     '65-plus': '65 et plus',
+    q4tenure: 'Depuis combien de temps occupez-vous cet emploi ?',
+    'under-1': 'Moins d’un an', '1-3': '1–3 ans', '3-5': '3–5 ans', '5-10': '5–10 ans', '10-plus': '10 ans et plus',
+    q4union: 'Êtes-vous syndiqué(e) ?',
+    yes: 'Oui', no: 'Non', 'not-sure': 'Pas certain',
+    q4size: 'Quelle est la taille de votre employeur ?',
+    solo: 'Moi seul', '2-10': '2–10', '11-50': '11–50', '51-200': '51–200', '200-plus': '200+',
+    q4vacation: 'Combien de jours de vacances payées avez-vous réellement ?',
+    '0-10': '0–10', '11-15': '11–15', '16-20': '16–20', '21-25': '21–25', '26-plus': '26+',
+    skip: 'Passer',
     thanks: 'Merci, cela nous aide.',
     hint: 'Anonyme. Nous publions uniquement des totaux.',
   },
@@ -102,6 +133,24 @@ const WORK_OPTIONS: { key: WorkArrangement; emoji: string }[] = [
 ];
 const AGE_OPTIONS: AgeBand[] = ['under-25', '25-34', '35-44', '45-54', '55-64', '65-plus'];
 
+/**
+ * Q4 is a ROTATING slot: each visitor sees exactly one of four questions
+ * (tenure, union, employer size, vacation days), picked at mount. Sample
+ * speed per question drops 4x; the answer rate of Q1-Q3 is untouched, and
+ * nobody ever faces a wall of questions. All four are skippable.
+ */
+type Q4 =
+  | { kind: 'tenure'; prompt: 'q4tenure'; options: TenureBand[] }
+  | { kind: 'union'; prompt: 'q4union'; options: UnionMember[] }
+  | { kind: 'size'; prompt: 'q4size'; options: EmployerSize[] }
+  | { kind: 'vacation'; prompt: 'q4vacation'; options: VacationBand[] };
+const Q4_POOL: Q4[] = [
+  { kind: 'tenure', prompt: 'q4tenure', options: ['under-1', '1-3', '3-5', '5-10', '10-plus'] },
+  { kind: 'union', prompt: 'q4union', options: ['yes', 'no', 'not-sure'] },
+  { kind: 'size', prompt: 'q4size', options: ['solo', '2-10', '11-50', '51-200', '200-plus'] },
+  { kind: 'vacation', prompt: 'q4vacation', options: ['0-10', '11-15', '16-20', '21-25', '26-plus'] },
+];
+
 export default function ExpectationPrompt({
   mode,
   province,
@@ -117,12 +166,14 @@ export default function ExpectationPrompt({
   const [expectation, setExpectation] = useState<Expectation | null>(null);
   const [workArrangement, setWorkArrangement] = useState<WorkArrangement | null>(null);
   const [ageBand, setAgeBand] = useState<AgeBand | null>(null);
+  const [q4] = useState<Q4>(() => Q4_POOL[Math.floor(Math.random() * Q4_POOL.length)]);
+  const [q4Done, setQ4Done] = useState(false);
 
   if (!annualIncome || annualIncome <= 0) return null;
 
   // Each answer records the cumulative state; the dedupe key inside
   // recordCalcEvent includes all three fields, so each step lands.
-  const send = (ex: Expectation, wa: WorkArrangement | null, ab: AgeBand | null) =>
+  const send = (ex: Expectation, wa: WorkArrangement | null, ab: AgeBand | null, q4v?: string) =>
     recordCalcEvent({
       mode: mode as CalcMode,
       province,
@@ -131,7 +182,16 @@ export default function ExpectationPrompt({
       expectation: ex,
       workArrangement: wa,
       ageBand: ab,
+      tenureBand: q4v && q4.kind === 'tenure' ? (q4v as TenureBand) : null,
+      unionMember: q4v && q4.kind === 'union' ? (q4v as UnionMember) : null,
+      employerSize: q4v && q4.kind === 'size' ? (q4v as EmployerSize) : null,
+      vacationBand: q4v && q4.kind === 'vacation' ? (q4v as VacationBand) : null,
     });
+
+  const answerQ4 = (v: string) => {
+    setQ4Done(true);
+    if (expectation) send(expectation, workArrangement, ageBand, v);
+  };
 
   const pill =
     'inline-flex min-h-10 items-center gap-1.5 rounded-full border border-slate-200 bg-white px-4 py-2 text-sm font-medium text-slate-700 transition-colors hover:border-red-300 hover:bg-red-50 hover:text-red-700';
@@ -181,6 +241,20 @@ export default function ExpectationPrompt({
                 {t[k]}
               </button>
             ))}
+          </div>
+        </>
+      ) : !q4Done ? (
+        <>
+          <p className="text-sm font-medium text-slate-700">{t[q4.prompt]}</p>
+          <div className="mt-3 flex flex-wrap gap-2">
+            {(q4.options as string[]).map((k) => (
+              <button key={k} onClick={() => answerQ4(k)} className={pill}>
+                {t[k]}
+              </button>
+            ))}
+            <button onClick={() => setQ4Done(true)} className="inline-flex min-h-10 items-center rounded-full px-3 py-2 text-sm text-slate-400 hover:text-slate-600">
+              {t.skip}
+            </button>
           </div>
         </>
       ) : (
