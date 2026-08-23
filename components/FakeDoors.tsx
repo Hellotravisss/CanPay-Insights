@@ -2,11 +2,12 @@
 import { useState } from 'react';
 import { supabase } from '../lib/supabase';
 import { recordCalcEvent, type ProductInterest } from '../lib/telemetry';
-import type { CalculationMode as CalcMode } from '../types';
+import { Province, type CalculationMode as CalcMode } from '../types';
 
 /**
- * Three paid products that do not exist yet. Each tap is counted; the tapper
- * sees "coming soon" and can leave an email. Nothing is charged.
+ * Three paid products. The relocation report is REAL (Stripe Checkout);
+ * the other two are still fake doors: each tap is counted and the tapper can
+ * leave an email, nothing is charged.
  *
  * Why a fake door instead of building one: the deep tax report is free and
  * was opened by 0.7% of visits. Pricing a thing nobody wanted for free is a
@@ -24,12 +25,16 @@ const DICT: Record<string, Record<string, string>> = {
   en: {
     kicker: 'Going further',
     relocation: 'Province move report',
-    relocationDesc: 'Your exact take-home in both provinces, the Dec 31 rule that can cost a full year of provincial tax, rent and cost-of-living from official sources.',
+    relocationDesc: 'Your exact take-home in both provinces, side by side. The Dec 31 residency rule priced on your salary, the moving-expense deduction, and the sales-tax gap at the till.',
     offer: 'Offer comparison',
     offerDesc: 'Two offers side by side, after tax: RRSP match, vacation and bonus valued at your marginal rate — plus what to ask HR before signing.',
     rrsp: 'RRSP season calculator',
     rrspDesc: 'How much each extra RRSP dollar saves you at your income and province, and where the sweet spot is before the March deadline.',
     once: 'one-time',
+    moveTo: 'Moving to',
+    buy: 'Get the report — $9',
+    buying: 'Opening secure checkout…',
+    secure: 'Paid through Stripe. Instant, printable, link works forever.',
     soon: 'Coming soon — want to hear when it launches?',
     email: 'Email',
     notify: 'Notify me',
@@ -39,12 +44,16 @@ const DICT: Record<string, Record<string, string>> = {
   zh: {
     kicker: '更进一步',
     relocation: '省际搬迁报告',
-    relocationDesc: '你的工资在两省的精确到手、可能让你多交整整一年省税的 12 月 31 日规则、官方来源的租金与生活成本。',
+    relocationDesc: '你的工资在两省的精确到手并排对比。按你的工资算出 12 月 31 日居住地规则值多少钱、搬家费用抵扣、两省消费税差。',
     offer: 'Offer 对比',
     offerDesc: '两份 offer 税后并排:RRSP 配比、年假、奖金按你的边际税率折算 —— 外加签字前该问 HR 的问题。',
     rrsp: '报税季 RRSP 精算',
     rrspDesc: '按你的收入和省份,每多供一块 RRSP 省多少税,3 月截止前供到哪一档最划算。',
     once: '一次性',
+    moveTo: '搬去',
+    buy: '获取报告 —— $9',
+    buying: '正在打开安全支付页…',
+    secure: '通过 Stripe 付款。即时生成、可打印、链接永久有效。',
     soon: '即将上线 —— 上线时通知你?',
     email: '邮箱',
     notify: '通知我',
@@ -54,12 +63,16 @@ const DICT: Record<string, Record<string, string>> = {
   fr: {
     kicker: 'Aller plus loin',
     relocation: 'Rapport de déménagement interprovincial',
-    relocationDesc: 'Votre salaire net exact dans les deux provinces, la règle du 31 décembre qui peut coûter une année entière d’impôt provincial, loyers et coût de la vie de sources officielles.',
+    relocationDesc: 'Votre salaire net exact dans les deux provinces, côte à côte. La règle du 31 décembre chiffrée sur votre salaire, la déduction des frais de déménagement et l’écart de taxes de vente.',
     offer: 'Comparaison d’offres',
     offerDesc: 'Deux offres côte à côte, après impôt : cotisation REER de l’employeur, vacances et prime évaluées à votre taux marginal — et quoi demander aux RH avant de signer.',
     rrsp: 'Calculateur REER saison d’impôt',
     rrspDesc: 'Combien chaque dollar de REER supplémentaire vous fait économiser selon votre revenu et province, et jusqu’où cotiser avant la date limite de mars.',
     once: 'paiement unique',
+    moveTo: 'Déménager vers',
+    buy: 'Obtenir le rapport — 9 $',
+    buying: 'Ouverture du paiement sécurisé…',
+    secure: 'Paiement via Stripe. Instantané, imprimable, lien permanent.',
     soon: 'Bientôt disponible — voulez-vous être averti ?',
     email: 'Courriel',
     notify: 'Prévenez-moi',
@@ -81,6 +94,31 @@ export default function FakeDoors({
   const [open, setOpen] = useState<ProductInterest | null>(null);
   const [email, setEmail] = useState('');
   const [joined, setJoined] = useState<ProductInterest | null>(null);
+  const [dest, setDest] = useState<string>('');
+  const [buying, setBuying] = useState(false);
+  const [buyError, setBuyError] = useState<string | null>(null);
+
+  // The relocation door is real: it opens Stripe Checkout. The other two are
+  // still fake doors until their tap counts earn them a build.
+  const buyRelocation = async () => {
+    if (!dest || dest === province) return;
+    setBuying(true);
+    setBuyError(null);
+    recordCalcEvent({ mode: mode as CalcMode, province, annualIncome, lang, productInterest: 'relocation' });
+    try {
+      const res = await fetch('/api/checkout', {
+        method: 'POST',
+        headers: { 'content-type': 'application/json' },
+        body: JSON.stringify({ product: 'relocation', from: province, to: dest, income: Math.round(annualIncome), lang }),
+      });
+      const data = await res.json();
+      if (!res.ok || !data.url) throw new Error(data.error || 'checkout failed');
+      window.location.href = data.url;
+    } catch (e) {
+      setBuyError((e as Error).message);
+      setBuying(false);
+    }
+  };
 
   if (!annualIncome || annualIncome <= 0) return null;
 
@@ -111,7 +149,32 @@ export default function FakeDoors({
             </div>
             <p className="mt-1.5 flex-1 text-xs leading-5 text-slate-500">{t[p.desc]}</p>
 
-            {open !== p.key ? (
+            {p.key === 'relocation' ? (
+              <div className="mt-3">
+                <label className="block text-[11px] font-semibold uppercase tracking-wide text-slate-500">{t.moveTo}</label>
+                <select
+                  value={dest}
+                  onChange={(e) => setDest(e.target.value)}
+                  className="mt-1 w-full rounded-md border border-slate-200 bg-white px-2 py-1.5 text-sm"
+                >
+                  <option value="">—</option>
+                  {Object.values(Province)
+                    .filter((pv) => pv !== province)
+                    .map((pv) => (
+                      <option key={pv} value={pv}>{pv}</option>
+                    ))}
+                </select>
+                <button
+                  onClick={buyRelocation}
+                  disabled={!dest || buying}
+                  className="mt-2 w-full rounded-md bg-red-600 px-3 py-2 text-xs font-semibold text-white hover:bg-red-700 disabled:bg-slate-300"
+                >
+                  {buying ? t.buying : t.buy}
+                </button>
+                {buyError && <p className="mt-1.5 text-[11px] text-red-600">{buyError}</p>}
+                <p className="mt-1.5 text-[10px] leading-4 text-slate-400">{t.secure}</p>
+              </div>
+            ) : open !== p.key ? (
               <button
                 onClick={() => tap(p.key)}
                 className="mt-3 rounded-md bg-slate-900 px-3 py-2 text-xs font-semibold text-white hover:bg-red-600"

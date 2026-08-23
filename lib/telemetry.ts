@@ -1,5 +1,6 @@
 'use client';
 import { supabase } from './supabase';
+import { bracketIncome } from './brackets';
 
 // Anonymous calculation telemetry — the "Speedtest" data asset.
 // Records WHAT Canadians are calculating (mode, province, income BRACKET, lang),
@@ -182,15 +183,7 @@ export function deriveEmploymentShape(
   return weekly < 30 ? 'part-time-hourly' : 'full-time-hourly';
 }
 
-export function bracketIncome(annual: number): string {
-  if (annual < 30_000) return 'under-30k';
-  if (annual < 50_000) return '30-50k';
-  if (annual < 70_000) return '50-70k';
-  if (annual < 90_000) return '70-90k';
-  if (annual < 120_000) return '90-120k';
-  if (annual < 160_000) return '120-160k';
-  return '160k-plus';
-}
+export { bracketIncome } from './brackets';
 
 // Bot guard. Crawlers mostly can't reach here anyway (events only fire after a
 // user edits an input), but headless/automation traffic would otherwise count
