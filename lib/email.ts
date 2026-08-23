@@ -1,8 +1,8 @@
 import { getCloudflareContext } from '@opennextjs/cloudflare';
 
 /**
- * Transactional email through Cloudflare Email Sending (the `EMAIL` binding
- * in wrangler.jsonc). From-address is info@canpayinsights.ca; the domain's
+ * Transactional email through Cloudflare Email Sending (REST API, with a
+ * token scoped to Email Sending only). From-address is info@canpayinsights.ca; the domain's
  * SPF/DKIM for Cloudflare were provisioned by `wrangler email sending enable`
  * and live on the cf-bounce subdomain, so Google Workspace mail is untouched.
  *
@@ -11,8 +11,6 @@ import { getCloudflareContext } from '@opennextjs/cloudflare';
  * binding takes raw RFC 5322 and there is no need for a library to do that.
  */
 export const FROM = 'CanPay Insights <info@canpayinsights.ca>';
-
-type SendEmailBinding = { send(message: unknown): Promise<void> };
 
 function b64(bytes: Uint8Array): string {
   let s = '';
@@ -33,8 +31,10 @@ export async function sendReportEmail(opts: {
   pdfName: string;
 }): Promise<void> {
   const { env } = await getCloudflareContext({ async: true });
-  const binding = (env as unknown as { EMAIL?: SendEmailBinding }).EMAIL;
-  if (!binding) throw new Error('EMAIL binding missing');
+  const e = env as unknown as Record<string, string | undefined>;
+  const token = e.CF_EMAIL_TOKEN;
+  const accountId = e.CF_ACCOUNT_ID;
+  if (!token || !accountId) throw new Error('CF_EMAIL_TOKEN / CF_ACCOUNT_ID missing');
 
   const boundary = `cp-${crypto.randomUUID()}`;
   const alt = `cpalt-${crypto.randomUUID()}`;
@@ -75,11 +75,13 @@ export async function sendReportEmail(opts: {
     '',
   ].join('\r\n');
 
-  // `cloudflare:email` is a runtime module; resolved dynamically so the Next
-  // build never tries to bundle it.
-  const mod = (await import(/* webpackIgnore: true */ 'cloudflare:email' as string)) as {
-    EmailMessage: new (from: string, to: string, raw: string) => unknown;
-  };
-  const message = new mod.EmailMessage('info@canpayinsights.ca', opts.to, raw);
-  await binding.send(message);
+  // Cloudflare's Email Sending REST API (the same call `wrangler email
+  // sending send-raw` makes). The Worker binding would be nicer, but its
+  // `cloudflare:email` runtime module cannot be bundled by OpenNext today.
+  const res = await fetch(`https://api.cloudflare.com/client/v4/accounts/${accountId}/email/sending/send_raw`, {
+    method: 'POST',
+    headers: { 'content-type': 'application/json', authorization: `Bearer ${token}` },
+    body: JSON.stringify({ from: 'info@canpayinsights.ca', recipients: [opts.to], mime_message: raw }),
+  });
+  if (!res.ok) throw new Error(`email send failed: ${res.status} ${(await res.text()).slice(0, 300)}`);
 }

@@ -1,5 +1,4 @@
 'use client';
-import { supabase } from './supabase';
 import { bracketIncome } from './brackets';
 
 // Anonymous calculation telemetry — the "Speedtest" data asset.
@@ -346,26 +345,6 @@ function detectBrowser(): string | null {
   }
 }
 
-// Coarse geo (country / region / city), resolved once per page load from our
-// own /api/geo endpoint (Vercel edge headers). IP is never stored — see route.
-type Geo = {
-  country: string | null;
-  region: string | null;
-  city: string | null;
-  lat: number | null;
-  lon: number | null;
-};
-const EMPTY_GEO: Geo = { country: null, region: null, city: null, lat: null, lon: null };
-let geoPromise: Promise<Geo> | null = null;
-function getGeo() {
-  if (!geoPromise) {
-    geoPromise = fetch('/api/geo', { cache: 'no-store' })
-      .then((r) => (r.ok ? r.json() : EMPTY_GEO))
-      .catch(() => EMPTY_GEO);
-  }
-  return geoPromise;
-}
-
 /**
  * Debounced + deduped, fire-and-forget. Call on every recalculation; it only
  * writes after the inputs have been stable for 3s, and only once per distinct
@@ -426,22 +405,14 @@ export function recordCalcEvent(e: {
     if (sentThisPageLoad.has(key)) return;
     sentThisPageLoad.add(key);
 
-    const geo = await getGeo();
     seqCounter += 1;
-    supabase
-      .from('anon_calc_events')
-      .insert({
+    const row = {
         mode: e.mode,
         province: e.province,
         income_bracket: bracket,
         lang,
         source,
         embed_host: e.embedHost ?? null,
-        country: geo.country,
-        region: geo.region,
-        city: geo.city,
-        lat: geo.lat,
-        lon: geo.lon,
         device: detectDevice(),
         browser: detectBrowser(),
         industry: e.industry ?? null,
@@ -485,10 +456,16 @@ export function recordCalcEvent(e: {
         referrer_path: getReferrerPath(),
         local_hour: new Date().getHours(),
         local_dow: new Date().getDay(),
-      })
-      .then(({ error }) => {
-        // Telemetry must never affect the user experience — swallow errors.
-        if (error) console.debug('telemetry skipped:', error.message);
-      });
+    };
+    // Our own route on Cloudflare attaches coarse geo server-side from
+    // request.cf and writes to D1; the browser never handles a location.
+    // keepalive lets the request survive a navigation right after a tap.
+    // Telemetry must never affect the user experience — errors are swallowed.
+    fetch('/api/events', {
+      method: 'POST',
+      headers: { 'content-type': 'application/json' },
+      body: JSON.stringify(row),
+      keepalive: true,
+    }).catch((e) => console.debug('telemetry skipped:', (e as Error).message));
   }, 3000);
 }

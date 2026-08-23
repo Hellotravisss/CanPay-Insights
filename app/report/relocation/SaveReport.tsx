@@ -32,8 +32,12 @@ export default function SaveReport({
       const { data } = await supabase.auth.getSession();
       if (!data.session || cancelled) return;
       setState('signedin');
-      const { data: ok } = await supabase.rpc('claim_purchase', { p_session: sessionId });
-      if (!cancelled && ok) setState('claimed');
+      const res = await fetch('/api/report/claim', {
+        method: 'POST',
+        headers: { 'content-type': 'application/json', authorization: `Bearer ${data.session.access_token}` },
+        body: JSON.stringify({ session_id: sessionId }),
+      }).then((r) => r.json()).catch(() => ({ claimed: false }));
+      if (!cancelled && res.claimed) setState('claimed');
     })();
     return () => { cancelled = true; };
   }, [sessionId]);

@@ -1,6 +1,6 @@
 'use client';
 import { useEffect, useState } from 'react';
-import { supabase } from '../../lib/supabase';
+import { insights } from './api';
 import Globe from './Globe';
 import Donut from './Donut';
 import { countryName } from './countries';
@@ -217,36 +217,36 @@ export default function StatsDashboard() {
 
   useEffect(() => {
     try { if (localStorage.getItem('dataroom_lang') === 'zh') setZh(true); } catch {}
-    supabase.rpc('calc_series').then(({ data }) => {
+    insights('series').then(({ data }) => {
       if (data) setSeries(data);
     });
-    supabase.rpc('calc_candles').then(({ data }) => {
+    insights('candles').then(({ data }) => {
       if (data) setCandles(data as CandleData);
     });
-    supabase.rpc('calc_crosstab').then(({ data }) => {
+    insights('crosstab').then(({ data }) => {
       if (data) setCross(data as CrossTabData);
     });
-    supabase.rpc('calc_provenance').then(({ data }) => {
+    insights('provenance').then(({ data }) => {
       if (data) setProv(data as ProvenanceData);
     });
     // Separate call: calc_stats drops any point whose city name the edge could
     // not resolve, which hid Hong Kong and China from the globe entirely.
-    supabase.rpc('calc_cities_geo').then(({ data }) => {
+    insights('cities_geo').then(({ data }) => {
       if (data) setGeo(data as { city: string; lat: number; lon: number; n: number }[]);
     });
-    supabase.rpc('calc_stats_extra').then(({ data }) => {
+    insights('stats_extra').then(({ data }) => {
       if (data) setExtra(data as Extra);
     });
-    supabase.rpc('calc_journeys').then(({ data }) => {
+    insights('journeys').then(({ data }) => {
       if (data) setJourneys(data as Journeys);
     });
-    supabase.rpc('calc_fake_doors').then(({ data }) => {
+    insights('fake_doors').then(({ data }) => {
       if (data) setDoors(data as any);
     });
-    supabase.rpc('calc_industry_income').then(({ data }) => {
+    insights('industry_income').then(({ data }) => {
       if (data) setIndIncome(data as IndustryIncomeRow[]);
     });
-    supabase.rpc('calc_stats').then(({ data, error }) => {
+    insights('stats').then(({ data, error }) => {
       if (error) setError(error.message);
       else setStats(data as Stats);
     });

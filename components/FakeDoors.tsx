@@ -1,6 +1,5 @@
 'use client';
 import { useMemo, useState } from 'react';
-import { supabase } from '../lib/supabase';
 import { recordCalcEvent, type ProductInterest } from '../lib/telemetry';
 import { Province, PayFrequency, type CalculationMode as CalcMode } from '../types';
 import { calculateFromAnnualSalary } from '../utils/taxEngine';
@@ -141,7 +140,7 @@ export default function FakeDoors({
     const e = email.trim();
     if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(e)) return;
     setJoined(true);
-    await supabase.from('product_waitlist').insert({ product: 'offer-compare', email: e, lang });
+    await fetch('/api/waitlist', { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ product: 'offer-compare', email: e, lang }) }).catch(() => {});
   };
 
   const Chips = ({ text }: { text: string }) => (

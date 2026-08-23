@@ -1,6 +1,6 @@
 'use client';
 import { useEffect, useState } from 'react';
-import { supabase } from '../../lib/supabase';
+import { insights } from './api';
 
 // What to write next.
 //
@@ -74,7 +74,7 @@ export default function ContentPanel() {
   const [s, setS] = useState<Stats | null>(null);
 
   useEffect(() => {
-    supabase.rpc('content_stats').then(({ data }) => {
+    insights('content').then(({ data }) => {
       if (data) setS(data as Stats);
     });
   }, []);

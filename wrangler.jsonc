@@ -9,12 +9,13 @@
   "compatibility_flags": ["nodejs_compat", "global_fetch_strictly_public"],
   "assets": { "directory": ".open-next/assets", "binding": "ASSETS" },
   "observability": { "enabled": true },
-  // Cloudflare Email Sending: report PDFs go out from info@canpayinsights.ca
-  "send_email": [{ "name": "EMAIL" }],
   // Static prerendered pages and the ISR cache live in R2 via OpenNext's
   // incremental cache; nothing user-related is stored here.
+  // All application data: events, Search Console archive, purchases.
+  "d1_databases": [{ "binding": "DB", "database_name": "canpay", "database_id": "06a4b962-a2cc-47b5-866e-c1549dd8d301" }],
   "r2_buckets": [{ "binding": "NEXT_INC_CACHE_R2_BUCKET", "bucket_name": "canpay-next-cache" }],
   "vars": {
+    "CF_ACCOUNT_ID": "57c07cd8dc7cb3f2feb1cbafb4c351b8",
     // Publishable key is public by design; the secret key and webhook secret
     // are `wrangler secret put` and never appear in this file.
     "NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY": "pk_live_51U7Uik8Y6mOYacTERpiqb0PSeoTDaGlwklhhNEc5e9E0dWEwWjVhnfWFDckgwXrG1mn3LsmBao2jnSRi4vD7fbGX00iq0e7qOQ",

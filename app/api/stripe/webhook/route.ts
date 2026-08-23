@@ -1,7 +1,7 @@
 import { NextResponse } from 'next/server';
 import type Stripe from 'stripe';
 import { stripeClient, webhookSecret, cryptoProvider } from '../../../../lib/stripe';
-import { getCloudflareContext } from '@opennextjs/cloudflare';
+import { db } from '../../../../lib/d1/db';
 import { bracketIncome } from '../../../../lib/brackets';
 import { buildRelocationReport, isProvince } from '../../../../lib/relocationReport';
 import { renderRelocationPdf } from '../../../../lib/reportPdf';
@@ -9,11 +9,6 @@ import { sendReportEmail } from '../../../../lib/email';
 import { siteOrigin } from '../../../../lib/stripe';
 
 export const dynamic = 'force-dynamic';
-
-const SUPABASE_URL = process.env.NEXT_PUBLIC_SUPABASE_URL || 'https://csvauvgygdjgljgllter.supabase.co';
-const SUPABASE_ANON =
-  process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY ||
-  'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImNzdmF1dmd5Z2RqZ2xqZ2xsdGVyIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzExOTE4MjYsImV4cCI6MjA4Njc2NzgyNn0.cx26CLjejb2ZuFEeG3riGPFqrZiKXlQFdGKELQ4rxYk';
 
 /**
  * Stripe → purchase ledger.
@@ -39,6 +34,14 @@ export async function POST(request: Request) {
     return NextResponse.json({ error: `bad signature: ${(e as Error).message}` }, { status: 400 });
   }
 
+  // Refunds flip the ledger row so the sales panel never counts money that
+  // went back. Matched on payment intent, which both events carry.
+  if (event.type === 'charge.refunded') {
+    const ch = event.data.object as Stripe.Charge;
+    const pi = typeof ch.payment_intent === 'string' ? ch.payment_intent : ch.payment_intent?.id;
+    if (pi) await (await db()).prepare('update purchases set refunded = 1 where stripe_payment_intent = ?').bind(pi).run();
+    return NextResponse.json({ received: true, refunded: !!pi });
+  }
   if (event.type !== 'checkout.session.completed') return NextResponse.json({ ignored: event.type });
 
   const s = event.data.object as Stripe.Checkout.Session;
@@ -46,29 +49,22 @@ export async function POST(request: Request) {
 
   const m = s.metadata ?? {};
   const income = Number(m.income);
-  const token = await ingestToken();
 
-  const res = await fetch(`${SUPABASE_URL}/rest/v1/rpc/record_purchase`, {
-    method: 'POST',
-    headers: { 'content-type': 'application/json', apikey: SUPABASE_ANON, Authorization: `Bearer ${SUPABASE_ANON}` },
-    body: JSON.stringify({
-      p_token: token,
-      p_session: s.id,
-      p_intent: typeof s.payment_intent === 'string' ? s.payment_intent : s.payment_intent?.id ?? null,
-      p_product: m.product ?? 'unknown',
-      p_amount: s.amount_total ?? 0,
-      p_currency: s.currency ?? 'cad',
-      p_email: s.customer_details?.email ?? s.customer_email ?? null,
-      p_lang: m.lang ?? null,
-      p_from: m.from || null,
-      p_to: m.to || null,
-      p_bracket: Number.isFinite(income) ? bracketIncome(income) : null,
-    }),
-  });
-
-  if (!res.ok) {
-    // 500 makes Stripe retry; the RPC is idempotent on session id.
-    return NextResponse.json({ error: `ledger write failed: ${res.status}` }, { status: 500 });
+  // Ledger row in D1. Idempotent on session id, so a Stripe retry (or a
+  // manual resend) never double-counts a sale.
+  try {
+    await (await db()).prepare(
+      'insert into purchases (stripe_session_id, stripe_payment_intent, product, amount_cents, currency, email, lang, from_province, to_province, income_bracket) values (?,?,?,?,?,?,?,?,?,?) on conflict(stripe_session_id) do nothing',
+    ).bind(
+      s.id,
+      typeof s.payment_intent === 'string' ? s.payment_intent : s.payment_intent?.id ?? null,
+      m.product ?? 'unknown', s.amount_total ?? 0, s.currency ?? 'cad',
+      s.customer_details?.email ?? s.customer_email ?? null, m.lang ?? null,
+      m.from || null, m.to || null, Number.isFinite(income) ? bracketIncome(income) : null,
+    ).run();
+  } catch (e) {
+    // 500 makes Stripe retry.
+    return NextResponse.json({ error: `ledger write failed: ${(e as Error).message}` }, { status: 500 });
   }
 
   // The PDF goes out from info@canpayinsights.ca with the permanent link.
@@ -120,17 +116,4 @@ export async function POST(request: Request) {
   }
 
   return NextResponse.json({ received: true });
-}
-
-async function ingestToken(): Promise<string> {
-  try {
-    const { env } = await getCloudflareContext({ async: true });
-    const t = (env as unknown as Record<string, string | undefined>).STRIPE_INGEST_TOKEN;
-    if (t) return t;
-  } catch {
-    /* local dev */
-  }
-  const t = process.env.STRIPE_INGEST_TOKEN;
-  if (!t) throw new Error('STRIPE_INGEST_TOKEN is not configured');
-  return t;
 }

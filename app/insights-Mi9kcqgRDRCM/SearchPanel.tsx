@@ -1,6 +1,6 @@
 'use client';
 import { useEffect, useState } from 'react';
-import { supabase } from '../../lib/supabase';
+import { insights } from './api';
 
 // Search Console, archived daily into our own database.
 //
@@ -90,7 +90,7 @@ export default function SearchPanel() {
   const [g, setG] = useState<Gsc | null>(null);
 
   useEffect(() => {
-    supabase.rpc('gsc_stats').then(({ data }) => {
+    insights('gsc').then(({ data }) => {
       if (data) setG(data as Gsc);
     });
   }, []);
