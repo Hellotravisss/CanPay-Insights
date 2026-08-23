@@ -85,3 +85,26 @@ export async function sendReportEmail(opts: {
   });
   if (!res.ok) throw new Error(`email send failed: ${res.status} ${(await res.text()).slice(0, 300)}`);
 }
+
+
+/** Plain transactional email (no attachment) from info@canpayinsights.ca. */
+export async function sendPlainEmail(opts: { to: string; subject: string; text: string; html: string }): Promise<void> {
+  const { env } = await getCloudflareContext({ async: true });
+  const e = env as unknown as Record<string, string | undefined>;
+  const token = e.CF_EMAIL_TOKEN; const accountId = e.CF_ACCOUNT_ID;
+  if (!token || !accountId) throw new Error('CF_EMAIL_TOKEN / CF_ACCOUNT_ID missing');
+  const alt = `cpalt-${crypto.randomUUID()}`;
+  const raw = [
+    `From: ${FROM}`, `To: ${opts.to}`, `Subject: ${opts.subject}`, `Date: ${new Date().toUTCString()}`,
+    `Message-ID: <${crypto.randomUUID()}@canpayinsights.ca>`, 'MIME-Version: 1.0',
+    `Content-Type: multipart/alternative; boundary="${alt}"`, '',
+    `--${alt}`, 'Content-Type: text/plain; charset=utf-8', 'Content-Transfer-Encoding: 8bit', '', opts.text, '',
+    `--${alt}`, 'Content-Type: text/html; charset=utf-8', 'Content-Transfer-Encoding: 8bit', '', opts.html, '',
+    `--${alt}--`, '',
+  ].join('\r\n');
+  const res = await fetch(`https://api.cloudflare.com/client/v4/accounts/${accountId}/email/sending/send_raw`, {
+    method: 'POST', headers: { 'content-type': 'application/json', authorization: `Bearer ${token}` },
+    body: JSON.stringify({ from: 'info@canpayinsights.ca', recipients: [opts.to], mime_message: raw }),
+  });
+  if (!res.ok) throw new Error(`email send failed: ${res.status} ${(await res.text()).slice(0, 300)}`);
+}

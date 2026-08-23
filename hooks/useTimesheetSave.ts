@@ -1,6 +1,6 @@
 'use client';
 import { useState, useEffect } from 'react';
-import { supabase } from '../lib/supabase';
+import { api } from '../lib/api';
 import { useAuth } from './useAuth';
 import { TimesheetEntry } from '../types';
 
@@ -16,11 +16,7 @@ export const useTimesheetSave = () => {
     }
 
     try {
-      const { data, error } = await supabase
-        .from('timesheet_entries')
-        .select('*')
-        .eq('user_id', user.id)
-        .order('date', { ascending: false });
+      const { data, error } = await api<any[]>('GET', '/api/me/timesheet');
 
       if (error) {
         console.error('Error loading timesheet entries:', error);
@@ -53,17 +49,14 @@ export const useTimesheetSave = () => {
 
     setIsSyncing(true);
     try {
-      const { error } = await supabase
-        .from('timesheet_entries')
-        .upsert({
-          id: entry.id,
-          user_id: user.id,
-          date: entry.date,
-          check_in: entry.checkIn,
-          check_out: entry.checkOut,
-          unpaid_break_minutes: entry.unpaidBreakMinutes,
-          notes: entry.notes || null,
-        });
+      const { error } = await api('POST', '/api/me/timesheet', {
+        id: entry.id,
+        date: entry.date,
+        check_in: entry.checkIn,
+        check_out: entry.checkOut,
+        unpaid_break_minutes: entry.unpaidBreakMinutes,
+        notes: entry.notes || null,
+      });
 
       if (error) {
         console.error('Error saving timesheet entry:', error);
@@ -87,11 +80,7 @@ export const useTimesheetSave = () => {
 
     setIsSyncing(true);
     try {
-      const { error } = await supabase
-        .from('timesheet_entries')
-        .delete()
-        .eq('id', id)
-        .eq('user_id', user.id);
+      const { error } = await api('DELETE', `/api/me/timesheet?id=${encodeURIComponent(id)}`);
 
       if (error) {
         console.error('Error deleting timesheet entry:', error);
@@ -119,7 +108,6 @@ export const useTimesheetSave = () => {
     try {
       const dbEntries = entriesToSync.map((entry) => ({
         id: entry.id,
-        user_id: user.id,
         date: entry.date,
         check_in: entry.checkIn,
         check_out: entry.checkOut,
@@ -127,7 +115,7 @@ export const useTimesheetSave = () => {
         notes: entry.notes || null,
       }));
 
-      const { error } = await supabase.from('timesheet_entries').upsert(dbEntries);
+      const { error } = await api('POST', '/api/me/timesheet', dbEntries);
 
       if (error) {
         console.error('Error syncing timesheet entries:', error);

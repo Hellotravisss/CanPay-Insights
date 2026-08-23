@@ -1,6 +1,6 @@
 'use client';
 import { useState } from 'react';
-import { supabase } from '../lib/supabase';
+import { api } from '../lib/api';
 import { useAuth } from './useAuth';
 import { CalculationResult, CalculationMode } from '../types';
 
@@ -20,16 +20,13 @@ export const useCalculationSave = () => {
 
     setIsSaving(true);
     try {
-      const { error } = await supabase
-        .from('calculation_history')
-        .insert({
-          user_id: user.id,
-          mode,
-          inputs,
-          results,
-          name: `${mode} — ${new Date().toLocaleDateString('en-CA')}`,
-          province: inputs.province || '',
-        });
+      const { error } = await api('POST', '/api/me/history', {
+        mode,
+        inputs,
+        results,
+        name: `${mode} — ${new Date().toLocaleDateString('en-CA')}`,
+        province: inputs.province || '',
+      });
 
       if (error) {
         console.error('Error saving calculation:', error);
@@ -50,12 +47,7 @@ export const useCalculationSave = () => {
     if (!isAuthenticated || !user) return [];
 
     try {
-      const { data, error } = await supabase
-        .from('calculation_history')
-        .select('*')
-        .eq('user_id', user.id)
-        .order('created_at', { ascending: false })
-        .range(offset, offset + limit - 1);
+      const { data, error } = await api<any[]>('GET', `/api/me/history?limit=${limit}&offset=${offset}`);
 
       if (error) {
         console.error('Error loading history:', error);
@@ -72,11 +64,7 @@ export const useCalculationSave = () => {
     if (!isAuthenticated || !user) return false;
 
     try {
-      const { error } = await supabase
-        .from('calculation_history')
-        .delete()
-        .eq('id', id)
-        .eq('user_id', user.id);
+      const { error } = await api('DELETE', `/api/me/history?id=${encodeURIComponent(id)}`);
 
       if (error) {
         console.error('Error deleting calculation:', error);

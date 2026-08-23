@@ -1,6 +1,5 @@
 'use client';
 import { useEffect, useState } from 'react';
-import { supabase } from '../../../lib/supabase';
 
 /**
  * The "keep this" block at the top of a paid report.
@@ -29,12 +28,12 @@ export default function SaveReport({
   useEffect(() => {
     let cancelled = false;
     (async () => {
-      const { data } = await supabase.auth.getSession();
-      if (!data.session || cancelled) return;
+      const me = await fetch('/api/auth/me', { credentials: 'same-origin', cache: 'no-store' }).then((r) => r.json()).catch(() => ({ user: null }));
+      if (!me.user || cancelled) return;
       setState('signedin');
       const res = await fetch('/api/report/claim', {
-        method: 'POST',
-        headers: { 'content-type': 'application/json', authorization: `Bearer ${data.session.access_token}` },
+        method: 'POST', credentials: 'same-origin',
+        headers: { 'content-type': 'application/json' },
         body: JSON.stringify({ session_id: sessionId }),
       }).then((r) => r.json()).catch(() => ({ claimed: false }));
       if (!cancelled && res.claimed) setState('claimed');
@@ -46,11 +45,11 @@ export default function SaveReport({
     const e = email.trim();
     if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(e)) { setErr('Please enter a valid email.'); return; }
     setState('sending'); setErr(null);
-    const { error } = await supabase.auth.signInWithOtp({
-      email: e,
-      options: { emailRedirectTo: permalink, shouldCreateUser: true },
+    const r = await fetch('/api/auth/magic', {
+      method: 'POST', headers: { 'content-type': 'application/json' },
+      body: JSON.stringify({ email: e, redirect: permalink }),
     });
-    if (error) { setErr(error.message); setState('error'); return; }
+    if (!r.ok) { setErr(((await r.json().catch(() => ({}))) as { error?: string }).error || 'Could not send the link.'); setState('error'); return; }
     setState('sent');
   };
 

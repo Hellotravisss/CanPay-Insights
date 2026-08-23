@@ -1,6 +1,6 @@
 'use client';
 import { useState, useEffect, useCallback, useRef } from 'react';
-import { supabase } from '../lib/supabase';
+import { api } from '../lib/api';
 import type { SalaryInputs, AnnualSalaryInputs, TimesheetInputs } from '../types';
 import { CalculationMode } from '../types';
 import { Province, PayFrequency } from '../types';
@@ -110,11 +110,7 @@ export const useUserSettings = (userId: string | null): UseUserSettingsReturn =>
         // 如果已登录，尝试从 Supabase 加载
         if (userId) {
           try {
-            const { data, error } = await supabase
-              .from('user_settings')
-              .select('*')
-              .eq('user_id', userId)
-              .single();
+            const { data, error } = await api<any>('GET', '/api/me/settings');
 
             if (data && !error) {
               // 合并 Supabase 数据和本地设置，并正确转换省份
@@ -192,20 +188,16 @@ export const useUserSettings = (userId: string | null): UseUserSettingsReturn =>
         setIsSaving(true);
         (async () => {
           try {
-            await supabase
-              .from('user_settings')
-              .upsert({
-                user_id: userId,
-                simple_inputs: newSettings.simple,
-                annual_inputs: newSettings.annual,
-                timesheet_inputs: {
-                  province: newSettings.timesheet.province,
-                  hourlyWage: newSettings.timesheet.hourlyWage,
-                  payFrequency: newSettings.timesheet.payFrequency
-                },
-                last_mode: newSettings.lastMode,
-                updated_at: new Date().toISOString()
-              }, { onConflict: 'user_id' });
+            await api('PUT', '/api/me/settings', {
+              simple_inputs: newSettings.simple,
+              annual_inputs: newSettings.annual,
+              timesheet_inputs: {
+                province: newSettings.timesheet.province,
+                hourlyWage: newSettings.timesheet.hourlyWage,
+                payFrequency: newSettings.timesheet.payFrequency
+              },
+              last_mode: newSettings.lastMode,
+            });
           } catch (e) {
             console.warn('Failed to save to Supabase');
           } finally {
@@ -228,13 +220,7 @@ export const useUserSettings = (userId: string | null): UseUserSettingsReturn =>
       if (userId) {
         (async () => {
           try {
-            await supabase
-              .from('user_settings')
-              .upsert({
-                user_id: userId,
-                last_mode: mode,
-                updated_at: new Date().toISOString()
-              }, { onConflict: 'user_id' });
+            await api('PUT', '/api/me/settings', { last_mode: mode });
           } catch (e) {
             // Ignore errors
           }

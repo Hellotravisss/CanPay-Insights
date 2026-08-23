@@ -1,26 +1,32 @@
 'use client';
 import { useEffect, useState, useCallback } from 'react';
-import { supabase } from '../lib/supabase';
-import type { User, Session, Provider } from '@supabase/supabase-js';
 
+/**
+ * Sign-in on CanPay's own auth (Cloudflare, lib/auth). Replaces Supabase
+ * Auth. The session is an httpOnly cookie set by /api/auth/*, so this hook
+ * never sees a token — it only asks /api/auth/me who the cookie belongs to.
+ *
+ * The `user` shape mirrors what the UI already read from Supabase
+ * (email, user_metadata.full_name / avatar_url) so no component changed.
+ *
+ * Passwords: there are none. "signInWithPassword" survives only for the
+ * App Review accounts (@canpayinsights.ca), which Apple needs to log in
+ * with; it is rejected for everyone else. "signUpWithPassword" just sends
+ * a magic link — creating an account IS signing in.
+ */
 export type OAuthProvider = 'google' | 'apple';
 
-// Parse hash params from URL
-const parseHashParams = (hash: string): Record<string, string> => {
-  const params: Record<string, string> = {};
-  const cleanHash = hash.startsWith('#') ? hash.slice(1) : hash;
-  cleanHash.split('&').forEach(pair => {
-    const [key, value] = pair.split('=');
-    if (key && value) {
-      params[decodeURIComponent(key)] = decodeURIComponent(value);
-    }
-  });
-  return params;
+export type AuthUser = {
+  id: string;
+  email: string;
+  user_metadata: { full_name: string | null; avatar_url: string | null; name?: string | null; picture?: string | null };
+  provider: string | null;
+  created_at: string;
 };
 
 export interface AuthState {
-  user: User | null;
-  session: Session | null;
+  user: AuthUser | null;
+  session: { user: AuthUser } | null;
   loading: boolean;
   isAuthenticated: boolean;
 }
@@ -34,157 +40,71 @@ export interface AuthActions {
   refreshSession: () => Promise<void>;
 }
 
+type ApiUser = { id: string; email: string; name: string | null; avatar_url: string | null; provider: string | null; created_at: string };
+const toUser = (u: ApiUser | null): AuthUser | null =>
+  u ? { id: u.id, email: u.email, user_metadata: { full_name: u.name, avatar_url: u.avatar_url }, provider: u.provider, created_at: u.created_at } : null;
+
+async function me(): Promise<AuthUser | null> {
+  try {
+    const r = await fetch('/api/auth/me', { cache: 'no-store', credentials: 'same-origin' });
+    if (!r.ok) return null;
+    return toUser(((await r.json()) as { user: ApiUser | null }).user);
+  } catch {
+    return null;
+  }
+}
+
 export const useAuth = (): AuthState & AuthActions => {
-  const [user, setUser] = useState<User | null>(null);
-  const [session, setSession] = useState<Session | null>(null);
+  const [user, setUser] = useState<AuthUser | null>(null);
   const [loading, setLoading] = useState(true);
 
-  // 获取当前会话（处理 OAuth 回调）
   useEffect(() => {
-    const getSession = async () => {
-      try {
-        // 检查 URL 中是否有 OAuth 回调的 token
-        const hash = window.location.hash;
-        if (hash && hash.includes('access_token')) {
-          console.log('Found OAuth callback in URL, extracting tokens...');
-          
-          const params = parseHashParams(hash);
-          const accessToken = params['access_token'];
-          const refreshToken = params['refresh_token'];
-          const tokenType = params['token_type'];
-          
-          console.log('Access token present:', !!accessToken);
-          console.log('Refresh token present:', !!refreshToken);
-          
-          if (accessToken) {
-            // 使用 setSession 手动设置 session
-            const { data: { session }, error: setSessionError } = await supabase.auth.setSession({
-              access_token: accessToken,
-              refresh_token: refreshToken || '',
-            });
-            
-            if (setSessionError) {
-              console.error('Error setting session:', setSessionError);
-            } else if (session) {
-              console.log('Session set successfully:', session.user?.email);
-              setSession(session);
-              setUser(session.user);
-              
-              // 清除 URL hash
-              window.history.replaceState(null, '', window.location.pathname);
-              setLoading(false);
-              return;
-            }
-          }
-        }
-        
-        // 正常获取 session
-        const { data: { session }, error } = await supabase.auth.getSession();
-        
-        if (error) {
-          console.error('Error getting session:', error);
-        } else {
-          console.log('Session loaded:', session?.user?.email || 'none');
-        }
-        
-        setSession(session);
-        setUser(session?.user ?? null);
-      } catch (e) {
-        console.error('Unexpected error in getSession:', e);
-      } finally {
-        setLoading(false);
-      }
-    };
-    
-    getSession();
-
-    // 监听认证状态变化
-    const { data: { subscription } } = supabase.auth.onAuthStateChange((event, session) => {
-      console.log('Auth event:', event, 'User:', session?.user?.email);
-      setSession(session);
-      setUser(session?.user ?? null);
-      setLoading(false);
-    });
-
-    return () => subscription.unsubscribe();
+    let alive = true;
+    me().then((u) => { if (alive) { setUser(u); setLoading(false); } });
+    // Another tab signing in/out shows up on focus.
+    const onFocus = () => me().then((u) => alive && setUser(u));
+    window.addEventListener('focus', onFocus);
+    return () => { alive = false; window.removeEventListener('focus', onFocus); };
   }, []);
 
-  // OAuth 登录 - 支持 Google, Facebook, Apple, GitHub
   const signInWithOAuth = useCallback(async (provider: OAuthProvider) => {
-    const redirectUrl = `${window.location.origin}/`;
-    console.log('OAuth redirect URL:', redirectUrl);
-
-    const { error } = await supabase.auth.signInWithOAuth({
-      provider: provider as Provider,
-      options: {
-        redirectTo: redirectUrl,
-        skipBrowserRedirect: false,
-      },
-    });
-    
-    if (error) {
-      console.error(`Error signing in with ${provider}:`, error);
-      throw error;
-    }
+    const redirect = window.location.pathname + window.location.search;
+    const path = provider === 'apple' ? '/api/auth/apple/start' : '/api/auth/google';
+    window.location.href = `${path}?redirect=${encodeURIComponent(redirect)}`;
   }, []);
 
-  // 邮箱 + 密码登录（WebView/iOS app 环境的可靠登录方式，也供 App Review 使用）
-  const signInWithPassword = useCallback(async (email: string, password: string) => {
-    const { error } = await supabase.auth.signInWithPassword({ email, password });
-    if (error) {
-      console.error('Error signing in with password:', error);
-      throw error;
-    }
-  }, []);
-
-  // 邮箱 + 密码注册
-  const signUpWithPassword = useCallback(async (email: string, password: string) => {
-    const redirectUrl = `${window.location.origin}/`;
-    const { error } = await supabase.auth.signUp({
-      email,
-      password,
-      options: { emailRedirectTo: redirectUrl },
-    });
-    if (error) {
-      console.error('Error signing up with password:', error);
-      throw error;
-    }
-  }, []);
-
-  // 邮箱 Magic Link 登录
   const signInWithEmail = useCallback(async (email: string) => {
-    const redirectUrl = `${window.location.origin}/`;
-    const { error } = await supabase.auth.signInWithOtp({
-      email,
-      options: { emailRedirectTo: redirectUrl },
+    const redirect = window.location.pathname + window.location.search;
+    const r = await fetch('/api/auth/magic', {
+      method: 'POST', headers: { 'content-type': 'application/json' },
+      body: JSON.stringify({ email, redirect }),
     });
-    if (error) {
-      console.error('Error signing in with email:', error);
-      throw error;
-    }
+    if (!r.ok) throw new Error(((await r.json().catch(() => ({}))) as { error?: string }).error || 'Could not send the sign-in link.');
   }, []);
 
-  // 登出
+  const signInWithPassword = useCallback(async (email: string, password: string) => {
+    const r = await fetch('/api/auth/password', {
+      method: 'POST', headers: { 'content-type': 'application/json' },
+      body: JSON.stringify({ email, password }),
+    });
+    if (!r.ok) throw new Error(((await r.json().catch(() => ({}))) as { error?: string }).error || 'Sign-in failed.');
+    setUser(await me());
+  }, []);
+
+  // There is no password to set up: an account is created by the first
+  // sign-in link. Same call, same result.
+  const signUpWithPassword = useCallback(async (email: string) => signInWithEmail(email), [signInWithEmail]);
+
   const signOut = useCallback(async () => {
-    const { error } = await supabase.auth.signOut();
-    if (error) {
-      console.error('Error signing out:', error);
-      throw error;
-    }
+    await fetch('/api/auth/logout', { method: 'POST', credentials: 'same-origin' });
     setUser(null);
-    setSession(null);
   }, []);
 
-  // 刷新会话
-  const refreshSession = useCallback(async () => {
-    const { data: { session } } = await supabase.auth.getSession();
-    setSession(session);
-    setUser(session?.user ?? null);
-  }, []);
+  const refreshSession = useCallback(async () => { setUser(await me()); }, []);
 
   return {
     user,
-    session,
+    session: user ? { user } : null,
     loading,
     isAuthenticated: !!user,
     signInWithOAuth,
@@ -199,9 +119,5 @@ export const useAuth = (): AuthState & AuthActions => {
 // 便捷 Hook - 只使用 Google 登录（向后兼容）
 export const useGoogleAuth = () => {
   const auth = useAuth();
-  
-  return {
-    ...auth,
-    signInWithGoogle: () => auth.signInWithOAuth('google'),
-  };
+  return { ...auth, signInWithGoogle: () => auth.signInWithOAuth('google') };
 };

@@ -1,6 +1,6 @@
 'use client';
 import { useState, useEffect, useCallback } from 'react';
-import { supabase } from '../lib/supabase';
+import { api } from '../lib/api';
 import { CalculationResult, CalculationMode } from '../types';
 
 export interface CalculationRecord {
@@ -29,12 +29,7 @@ export const useCalculationHistory = (userId: string | null) => {
       if (userId) {
         // Authenticated: load from Supabase with pagination
         const from = pageIndex * PAGE_SIZE;
-        const { data, error } = await supabase
-          .from('calculation_history')
-          .select('*')
-          .eq('user_id', userId)
-          .order('created_at', { ascending: false })
-          .range(from, from + PAGE_SIZE - 1);
+        const { data, error } = await api<any[]>('GET', `/api/me/history?limit=${PAGE_SIZE}&offset=${from}`);
 
         if (!error && data) {
           const formatted: CalculationRecord[] = data.map(row => ({
@@ -98,18 +93,15 @@ export const useCalculationHistory = (userId: string | null) => {
     if (userId) {
       // Authenticated: save to Supabase (single table: calculation_history)
       try {
-        const { error } = await supabase
-          .from('calculation_history')
-          .insert({
-            id: record.id,
-            user_id: userId,
-            mode: record.mode,
-            name: record.name,
-            province: record.province,
-            inputs: record.inputs,
-            results: record.results,
-            created_at: record.createdAt,
-          });
+        const { error } = await api('POST', '/api/me/history', {
+          id: record.id,
+          mode: record.mode,
+          name: record.name,
+          province: record.province,
+          inputs: record.inputs,
+          results: record.results,
+          created_at: record.createdAt,
+        });
         if (error) console.error('Failed to save to Supabase:', error);
       } catch (err) {
         console.error('Error saving calculation:', err);
@@ -127,11 +119,7 @@ export const useCalculationHistory = (userId: string | null) => {
 
     if (userId) {
       try {
-        await supabase
-          .from('calculation_history')
-          .delete()
-          .eq('id', id)
-          .eq('user_id', userId);
+        await api('DELETE', `/api/me/history?id=${encodeURIComponent(id)}`);
       } catch (err) {
         console.error('Error deleting record:', err);
       }
@@ -144,10 +132,7 @@ export const useCalculationHistory = (userId: string | null) => {
 
     if (userId) {
       try {
-        await supabase
-          .from('calculation_history')
-          .delete()
-          .eq('user_id', userId);
+        await api('DELETE', '/api/me/history?all=1');
       } catch (err) {
         console.error('Error clearing history:', err);
       }

@@ -15,12 +15,12 @@
   "d1_databases": [{ "binding": "DB", "database_name": "canpay", "database_id": "06a4b962-a2cc-47b5-866e-c1549dd8d301" }],
   "r2_buckets": [{ "binding": "NEXT_INC_CACHE_R2_BUCKET", "bucket_name": "canpay-next-cache" }],
   "vars": {
+    "GOOGLE_CLIENT_ID": "714865535253-3df2bakflfp0550n03mulokj3nlvala8.apps.googleusercontent.com",
+    "APPLE_BUNDLE_ID": "com.canpay.insights",
     "CF_ACCOUNT_ID": "57c07cd8dc7cb3f2feb1cbafb4c351b8",
     // Publishable key is public by design; the secret key and webhook secret
     // are `wrangler secret put` and never appear in this file.
     "NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY": "pk_live_51U7Uik8Y6mOYacTERpiqb0PSeoTDaGlwklhhNEc5e9E0dWEwWjVhnfWFDckgwXrG1mn3LsmBao2jnSRi4vD7fbGX00iq0e7qOQ",
-    "NEXT_PUBLIC_SUPABASE_URL": "https://csvauvgygdjgljgllter.supabase.co",
-    "NEXT_PUBLIC_SUPABASE_ANON_KEY": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImNzdmF1dmd5Z2RqZ2xqZ2xsdGVyIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzExOTE4MjYsImV4cCI6MjA4Njc2NzgyNn0.cx26CLjejb2ZuFEeG3riGPFqrZiKXlQFdGKELQ4rxYk"
   },
   "routes": [
     { "pattern": "canpayinsights.ca", "custom_domain": true },
