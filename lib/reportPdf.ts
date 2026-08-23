@@ -2,6 +2,7 @@ import { PDFDocument, StandardFonts, rgb, type PDFFont, type PDFPage } from 'pdf
 import { LOGO_PNG_BASE64 } from './logoBase64';
 import { SALES_TAX, type RelocationReport } from './relocationReport';
 import type { OfferReport } from './offerReport';
+import { FIRST_WEEKS, SPOUSE_JOB, SCHOOLS, WHO_HELPS } from './landingGuide';
 
 /**
  * The Province Move Report as a PDF, drawn with pdf-lib so it can be
@@ -223,6 +224,37 @@ export async function renderRelocationPdf(r: RelocationReport, permalink: string
     text(c, money(row.net), 0, 8.5, { right: PAPER_W - M, bold: isMine, color: isMine ? INK : MUTED });
     c.y -= 13;
   }
+
+  // ——— Landing guide: what to do after the move ———
+  newPage(c, kicker);
+  text(c, `Landing in ${r.to.province}`, M, 20, { bold: true });
+  c.y -= 16;
+  text(c, 'The move after the move: coverage, licence, the CRA, work, school, and who helps.', M, 9.5, { color: MUTED });
+  c.y -= 24;
+
+  section(c, 'The first weeks, in order', kicker);
+  for (const step of FIRST_WEEKS) {
+    ensure(c, 60, kicker);
+    text(c, step.title, M, 11, { bold: true });
+    c.y -= 14;
+    para(c, step.body(r.to.province), 9.5);
+    c.y -= 8;
+  }
+  c.y -= 6;
+
+  section(c, `If your partner is job-hunting in ${r.to.province}`, kicker);
+  for (const line of SPOUSE_JOB(r.to.province)) { para(c, `•  ${line}`, 9.5); c.y -= 3; }
+  c.y -= 12;
+
+  section(c, 'Schools, if you are moving with kids', kicker);
+  for (const line of SCHOOLS(r.to.province)) { para(c, `•  ${line}`, 9.5); c.y -= 3; }
+  c.y -= 12;
+
+  section(c, 'Who can help (free)', kicker);
+  for (const line of WHO_HELPS) { para(c, `•  ${line}`, 9.5); c.y -= 3; }
+  c.y -= 8;
+  para(c, 'Institution names above are the official bodies for ' + r.to.province + '. Deadlines and waiting periods change, so none are printed here — the named office is always the current source.', 8.5, MUTED);
+  c.y -= 4;
 
   footer(c, permalink);
   return doc.save();

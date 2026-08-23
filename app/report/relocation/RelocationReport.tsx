@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import { FIRST_WEEKS, SPOUSE_JOB, SCHOOLS, WHO_HELPS } from '../../../lib/landingGuide';
 import type { RelocationReport as R } from '../../../lib/relocationReport';
 import SaveReport from './SaveReport';
 
@@ -262,6 +263,44 @@ export default function RelocationReport({
       </section>
 
       {/* Honest scope */}
+      {/* Landing guide */}
+      <section className="mt-10">
+        <p className="text-xs font-bold uppercase tracking-[0.18em] text-red-600">The move after the move</p>
+        <h2 className="mt-1 text-lg font-bold text-slate-900">Landing in {r.to.province}</h2>
+
+        <ol className="mt-4 space-y-3">
+          {FIRST_WEEKS.map((step, i) => (
+            <li key={step.title} className="rounded-xl border border-slate-200 bg-white p-4">
+              <p className="text-sm font-bold text-slate-900"><span className="mr-2 inline-flex h-5 w-5 items-center justify-center rounded-full bg-red-600 text-[11px] font-bold text-white">{i + 1}</span>{step.title}</p>
+              <p className="mt-1.5 text-sm leading-6 text-slate-600">{step.body(r.to.province)}</p>
+            </li>
+          ))}
+        </ol>
+
+        <div className="mt-4 grid gap-3 md:grid-cols-2">
+          <div className="rounded-xl border border-slate-200 bg-white p-4">
+            <h3 className="text-sm font-bold text-slate-900">If your partner is job-hunting</h3>
+            <ul className="mt-2 list-disc space-y-1.5 pl-4 text-sm leading-6 text-slate-600">
+              {SPOUSE_JOB(r.to.province).map((l) => <li key={l}>{l}</li>)}
+            </ul>
+          </div>
+          <div className="rounded-xl border border-slate-200 bg-white p-4">
+            <h3 className="text-sm font-bold text-slate-900">Schools, if you are moving with kids</h3>
+            <ul className="mt-2 list-disc space-y-1.5 pl-4 text-sm leading-6 text-slate-600">
+              {SCHOOLS(r.to.province).map((l) => <li key={l}>{l}</li>)}
+            </ul>
+          </div>
+        </div>
+
+        <div className="mt-3 rounded-xl bg-slate-50 p-4">
+          <h3 className="text-sm font-bold text-slate-900">Who can help (free)</h3>
+          <ul className="mt-2 list-disc space-y-1.5 pl-4 text-sm leading-6 text-slate-600">
+            {WHO_HELPS.map((l) => <li key={l}>{l}</li>)}
+          </ul>
+          <p className="mt-2 text-xs text-slate-400">Institution names are the official bodies for {r.to.province}. Deadlines and waiting periods change, so none are printed here — the named office is always the current source.</p>
+        </div>
+      </section>
+
       <section className="mt-10 rounded-2xl bg-slate-50 p-6">
         <h2 className="text-base font-bold text-slate-900">What this report does not price</h2>
         <ul className="mt-2 list-disc space-y-1 pl-5 text-sm leading-6 text-slate-600">
