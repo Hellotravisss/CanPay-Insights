@@ -41,6 +41,18 @@ export default function SaveReport({
     return () => { cancelled = true; };
   }, [sessionId]);
 
+  // One click, two things: the browser starts the PDF download, and — if the
+  // buyer is not signed in and Stripe gave us their email — the same click
+  // quietly creates the account and sends the sign-in link. No extra tap.
+  const downloadAlsoRegisters = () => {
+    if (state !== 'idle' || !initialEmail) return;
+    setState('sending');
+    fetch('/api/auth/magic', {
+      method: 'POST', headers: { 'content-type': 'application/json' },
+      body: JSON.stringify({ email: initialEmail, redirect: permalink }),
+    }).then((r) => setState(r.ok ? 'sent' : 'idle')).catch(() => setState('idle'));
+  };
+
   const createAccount = async () => {
     const e = email.trim();
     if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(e)) { setErr('Please enter a valid email.'); return; }
@@ -70,7 +82,7 @@ export default function SaveReport({
           <>
             <p className="text-sm font-bold text-slate-900">Check your inbox</p>
             <p className="mt-1 text-sm text-slate-500">
-              We sent a sign-in link to <span className="font-medium text-slate-700">{email}</span>. Open it on any device and this report is saved to your account — no password to remember.
+              We sent a sign-in link to <span className="font-medium text-slate-700">{email || initialEmail}</span>. Open it on any device and this report is saved to your account — no password to remember.
             </p>
           </>
         ) : (
@@ -104,6 +116,7 @@ export default function SaveReport({
       {/* PDF */}
       <a
         href={`/api/report/pdf?session_id=${encodeURIComponent(sessionId)}`}
+        onClick={downloadAlsoRegisters}
         className="flex items-center justify-center gap-2 rounded-2xl border-2 border-slate-900 px-5 py-4 text-sm font-bold text-slate-900 hover:bg-slate-900 hover:text-white print:hidden"
       >
         <svg className="h-5 w-5" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">

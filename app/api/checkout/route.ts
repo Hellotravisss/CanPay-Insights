@@ -3,6 +3,7 @@ import { stripeClient, siteOrigin } from '../../../lib/stripe';
 import { PRODUCTS, isProductKey } from '../../../lib/products';
 import { parseOffer } from '../../../lib/offerReport';
 import { isProvince } from '../../../lib/relocationReport';
+import { currentUser } from '../../../lib/auth/core';
 
 export const dynamic = 'force-dynamic';
 
@@ -56,6 +57,11 @@ async function handle(request: Request) {
     description = `${a.province} $${Math.round(a.salary).toLocaleString('en-CA')} vs ${b.province} $${Math.round(b.salary).toLocaleString('en-CA')}`;
   }
 
+  // A signed-in buyer types nothing twice: their email prefills the Stripe
+  // page and their id rides in metadata, so the webhook attaches the
+  // purchase to the account with no claim step.
+  const user = await currentUser(request).catch(() => null);
+
   const p = PRODUCTS[product];
   const origin = await siteOrigin();
   const stripe = await stripeClient();
@@ -64,6 +70,7 @@ async function handle(request: Request) {
   const session = await stripe.checkout.sessions.create({
     mode: 'payment',
     locale,
+    ...(user?.email ? { customer_email: user.email } : {}),
     line_items: [
       {
         quantity: 1,
@@ -83,6 +90,7 @@ async function handle(request: Request) {
       to: String(to ?? ''),
       income: String(Math.round(annual)),
       lang: String(lang ?? 'en'),
+      ...(user ? { uid: user.id } : {}),
       ...offerMeta,
     },
     // Card statements show the account descriptor (CANPAY INSIGHTS) with a
