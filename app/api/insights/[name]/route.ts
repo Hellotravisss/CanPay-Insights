@@ -62,6 +62,8 @@ export async function GET(request: Request, { params }: { params: Promise<{ name
         by_bracket: await by("select income_bracket k, count(*) n from purchases where refunded = 0 and income_bracket is not null group by k order by n desc"),
         by_month: await by("select substr(created_at,1,7) k, count(*) n, sum(amount_cents) revenue_cents from purchases where refunded = 0 group by k order by k"),
         attached_to_account: (await d.prepare('select count(*) n from purchases where refunded = 0 and user_id is not null').first<{ n: number }>())!.n,
+        shares: (await d.prepare('select count(*) n from share_rewards').first<{ n: number }>())!.n,
+        shares_by_channel: await by('select channel k, count(*) n from share_rewards group by k order by n desc'),
       }, noStore);
     }
     /**

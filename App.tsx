@@ -23,6 +23,7 @@ import IndustryComparison from './components/IndustryComparison';
 import IntentPrompt from './components/IntentPrompt';
 import ExpectationPrompt from './components/ExpectationPrompt';
 import FakeDoors from './components/FakeDoors';
+import ShareReward from './components/ShareReward';
 import PayCurve from './components/PayCurve';
 import ResultsSection from './components/ResultsSection';
 import GeminiAdvisor from './components/GeminiAdvisor';
@@ -728,14 +729,17 @@ const App: React.FC = () => {
                     ot20: results.overtimeHours20,
                   }}
                 />
-                {/* Fake doors: three paid products that do not exist yet.
-                    Taps are the data; nothing is charged. */}
+                {/* Two REAL paid products, priced by the same engine as the
+                    free result above. */}
                 <FakeDoors
                   mode={mode}
                   province={currentProvince}
                   annualIncome={results.grossPayAnnual}
                   lang={lang}
                 />
+                {/* Share the calculator, get $3 off any report. Sits right
+                    after the paid cards so the reward has something to buy. */}
+                <ShareReward lang={lang} />
                 {isAuthenticated && records.length > 0 && <PayCurve records={records} />}
                 <IntentPrompt
                   mode={mode}

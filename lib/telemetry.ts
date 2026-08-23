@@ -298,6 +298,9 @@ let debounceTimer: ReturnType<typeof setTimeout> | null = null;
 // and surfaces comparison pairs (relocation intent). seq = order in session.
 let sessionId: string | null = null;
 let seqCounter = 0;
+export function currentSessionId(): string {
+  return getSessionId();
+}
 function getSessionId(): string {
   if (!sessionId) {
     sessionId =

@@ -204,7 +204,7 @@ export default function StatsDashboard() {
   const [extra, setExtra] = useState<Extra | null>(null);
   const [journeys, setJourneys] = useState<Journeys | null>(null);
   const [doors, setDoors] = useState<{ visits: number; clicks: Row[]; waitlist: Row[]; relocation_click_among_comparers: number } | null>(null);
-  const [sales, setSales] = useState<{ orders: number; revenue_cents: number; refunds: number; attached_to_account: number; by_product: Row[]; by_route: Row[]; by_bracket: Row[]; by_month: { k: string; n: number; revenue_cents: number }[] } | null>(null);
+  const [sales, setSales] = useState<{ orders: number; revenue_cents: number; refunds: number; attached_to_account: number; shares: number; shares_by_channel: Row[]; by_product: Row[]; by_route: Row[]; by_bracket: Row[]; by_month: { k: string; n: number; revenue_cents: number }[] } | null>(null);
   const [comp, setComp] = useState<{ offers: { n: number; avg_match: number; avg_vacation: number; bonus_share: number }; offers_by_province: any[]; tenure: Row[]; union_member: Row[]; employer_size: Row[]; vacation: Row[] } | null>(null);
   const [intent, setIntent] = useState<{ sessions: { total: number; multi_prov: number; multi_bracket: number }; funnel: { k: string; taps: number; purchases: number }[]; cadence: Row[]; active_users_30d: number; calcs_30d: number } | null>(null);
   const [indIncome, setIndIncome] = useState<IndustryIncomeRow[] | null>(null);
@@ -728,6 +728,11 @@ export default function StatsDashboard() {
                   <p>{zh ? `按产品:${sales.by_product.map((r) => `${String(r.k)} ${r.n}`).join(' · ') || '—'}` : `By product: ${sales.by_product.map((r) => `${String(r.k)} ${r.n}`).join(' · ') || '—'}`}</p>
                   <p>{zh ? `买家收入档:${sales.by_bracket.map((r) => `${String(r.k)} ${r.n}`).join(' · ') || '—'}` : `Buyer brackets: ${sales.by_bracket.map((r) => `${String(r.k)} ${r.n}`).join(' · ') || '—'}`}</p>
                   <p>{zh ? `挂到账号的订单:${sales.attached_to_account}/${sales.orders}` : `Orders attached to an account: ${sales.attached_to_account}/${sales.orders}`}</p>
+                  <p>
+                    {zh
+                      ? `分享领码:${sales.shares} 次(${sales.shares_by_channel.map((r) => `${String(r.k)} ${r.n}`).join(' · ') || '—'})—— 每个码单次有效、减 $3,只有真的换成订单才花这笔钱。`
+                      : `Share codes issued: ${sales.shares} (${sales.shares_by_channel.map((r) => `${String(r.k)} ${r.n}`).join(' · ') || '—'}) — each single-use, $3 off; the cost lands only if one converts.`}
+                  </p>
                 </div>
               </>
             ) : <p className="text-sm text-slate-400">{noData}</p>}
