@@ -55,13 +55,13 @@ export async function POST(request: Request) {
   // manual resend) never double-counts a sale.
   try {
     await (await db()).prepare(
-      'insert into purchases (stripe_session_id, stripe_payment_intent, product, amount_cents, currency, email, lang, from_province, to_province, income_bracket, user_id) values (?,?,?,?,?,?,?,?,?,?,?) on conflict(stripe_session_id) do nothing',
+      'insert into purchases (stripe_session_id, stripe_payment_intent, product, amount_cents, currency, email, lang, from_province, to_province, income_bracket, user_id, income) values (?,?,?,?,?,?,?,?,?,?,?,?) on conflict(stripe_session_id) do nothing',
     ).bind(
       s.id,
       typeof s.payment_intent === 'string' ? s.payment_intent : s.payment_intent?.id ?? null,
       m.product ?? 'unknown', s.amount_total ?? 0, s.currency ?? 'cad',
       s.customer_details?.email ?? s.customer_email ?? null, m.lang ?? null,
-      m.from || null, m.to || null, Number.isFinite(income) ? bracketIncome(income) : null, m.uid || null,
+      m.from || null, m.to || null, Number.isFinite(income) ? bracketIncome(income) : null, m.uid || null, Number.isFinite(income) ? Math.round(income) : null,
     ).run();
   } catch (e) {
     // 500 makes Stripe retry.

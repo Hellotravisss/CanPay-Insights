@@ -7,7 +7,7 @@ import Link from 'next/link';
  * Each row reopens the live report (rebuilt from the Stripe session) —
  * the link that "works forever" now has a home.
  */
-type Row = { created_at: string; product: string; from_province: string | null; to_province: string | null; stripe_session_id: string };
+type Row = { created_at: string; product: string; from_province: string | null; to_province: string | null; income: number | null; income_bracket: string | null; stripe_session_id: string };
 
 export default function MyReports() {
   const [rows, setRows] = useState<Row[] | null>(null);
@@ -62,7 +62,8 @@ export default function MyReports() {
                   <div>
                     <p className="text-sm font-bold text-slate-900">{isMove ? 'Province Move Report' : 'Offer Comparison'}</p>
                     <p className="mt-0.5 text-sm text-slate-500">
-                      {isMove && r.from_province && r.to_province ? `${r.from_province} → ${r.to_province} · ` : ''}{date}
+                      {isMove && r.from_province && r.to_province ? `${r.from_province} → ${r.to_province} · ` : ''}
+                      {r.income ? `$${r.income.toLocaleString('en-CA')} · ` : r.income_bracket ? `$${r.income_bracket} · ` : ''}{date}
                     </p>
                   </div>
                   <span className="shrink-0 text-sm font-semibold text-red-600">Open →</span>
