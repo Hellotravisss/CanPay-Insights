@@ -9,6 +9,8 @@
   "compatibility_flags": ["nodejs_compat", "global_fetch_strictly_public"],
   "assets": { "directory": ".open-next/assets", "binding": "ASSETS" },
   "observability": { "enabled": true },
+  // Cloudflare Email Sending: report PDFs go out from info@canpayinsights.ca
+  "send_email": [{ "name": "EMAIL" }],
   // Static prerendered pages and the ISR cache live in R2 via OpenNext's
   // incremental cache; nothing user-related is stored here.
   "r2_buckets": [{ "binding": "NEXT_INC_CACHE_R2_BUCKET", "bucket_name": "canpay-next-cache" }],

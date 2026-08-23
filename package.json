@@ -23,6 +23,7 @@
     "downloadjs": "1.4.7",
     "html-to-image": "1.11.11",
     "next": "^15.5.15",
+    "pdf-lib": "^1.17.1",
     "postcss": "^8.5.10",
     "react": "^19.2.0",
     "react-dom": "^19.2.0",

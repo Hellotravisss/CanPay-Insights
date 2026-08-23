@@ -1,38 +1,44 @@
 import Link from 'next/link';
 import type { RelocationReport as R } from '../../../lib/relocationReport';
+import SaveReport from './SaveReport';
 
-const money = (n: number) => `$${Math.abs(n).toLocaleString('en-CA')}`;
+const money = (n: number) => `$${Math.abs(Math.round(n)).toLocaleString('en-CA')}`;
 const signed = (n: number) => (n >= 0 ? '+' : '−') + money(n);
 
 /**
  * The Province Move Report. Every figure is computed; the prose only says
- * what the figures mean. Built to be printed and to be read a month later.
+ * what the figures mean. Built to be scanned in thirty seconds (tiles, one
+ * big number, colour for direction) and read properly a month later.
  */
 export default function RelocationReport({
   report: r,
   salesTax,
   email,
   permalink,
+  sessionId,
 }: {
   report: R;
   salesTax: { from: { gst: number; pst: number; label: string }; to: { gst: number; pst: number; label: string } };
   email: string | null;
   permalink: string;
+  sessionId: string;
 }) {
   const gain = r.netGapAnnual >= 0;
   const isQC = (p: string) => p === 'Quebec';
   const cppLabel = isQC(r.from.province) || isQC(r.to.province) ? 'CPP / QPP' : 'CPP';
   const eiLabel = isQC(r.from.province) || isQC(r.to.province) ? 'EI (+ QPIP in Quebec)' : 'EI';
-  const perTenK = Math.round(r.salesTaxGapPoints * 100); // $ difference per $10,000 taxable spend
+  const perTenK = Math.round(r.salesTaxGapPoints * 100);
+  const a = r.analysis;
+  const tone = gain ? 'text-emerald-700' : 'text-red-600';
+  const toneBg = gain ? 'bg-emerald-50 border-emerald-200' : 'bg-red-50 border-red-200';
 
-  const rows: [string, number, number][] = [
-    ['Gross salary', r.from.gross, r.to.gross],
-    ['Federal tax', r.from.federalTax, r.to.federalTax],
-    ['Provincial tax', r.from.provincialTax, r.to.provincialTax],
-    [cppLabel, r.from.cpp, r.to.cpp],
-    [eiLabel, r.from.ei, r.to.ei],
-    ['Total deductions', r.from.totalDeductions, r.to.totalDeductions],
+  const rows: [string, number, number, 'cost' | 'gain'][] = [
+    ['Federal tax', r.from.federalTax, r.to.federalTax, 'cost'],
+    ['Provincial tax', r.from.provincialTax, r.to.provincialTax, 'cost'],
+    [cppLabel, r.from.cpp, r.to.cpp, 'cost'],
+    [eiLabel, r.from.ei, r.to.ei, 'cost'],
   ];
+  const maxNet = a.ladder[0].net;
 
   return (
     <main className="mx-auto max-w-3xl px-5 py-10 font-sans text-slate-800 print:py-4">
@@ -55,116 +61,160 @@ export default function RelocationReport({
         </p>
       </header>
 
+      {/* Keep it: account + PDF */}
+      <SaveReport email={email} sessionId={sessionId} permalink={permalink} />
+
       {/* The number */}
-      <section className="mt-8 rounded-2xl border border-slate-200 bg-slate-50 p-6">
+      <section className={`mt-8 rounded-2xl border p-6 ${toneBg}`}>
         <p className="text-xs font-bold uppercase tracking-[0.18em] text-slate-500">Take-home pay after the move</p>
-        <div className="mt-2 flex flex-wrap items-baseline gap-x-4 gap-y-1">
-          <span className={`text-5xl font-extrabold tabular-nums ${gain ? 'text-emerald-700' : 'text-red-600'}`}>
-            {signed(r.netGapAnnual)}
-          </span>
-          <span className="text-lg text-slate-600">a year</span>
+        <p className="mt-2 flex flex-wrap items-baseline gap-x-3">
+          <span className={`text-5xl font-extrabold tabular-nums ${tone}`}>{signed(r.netGapAnnual)}</span>
+          <span className="text-lg text-slate-500">a year</span>
           <span className="text-lg text-slate-400">·</span>
-          <span className="text-lg tabular-nums text-slate-600">{signed(r.netGapMonthly)} a month</span>
-        </div>
-        <p className="mt-3 text-sm leading-6 text-slate-600">
-          {gain
-            ? `Same salary, ${money(r.netGapAnnual)} more in your account each year in ${r.to.province}. `
-            : `Same salary, ${money(r.netGapAnnual)} less in your account each year in ${r.to.province}. `}
-          {Math.abs(r.netGapAnnual) < 500
+          <span className="text-lg text-slate-500">{signed(r.netGapMonthly)} a month</span>
+        </p>
+        <p className="mt-3 max-w-xl text-sm leading-6 text-slate-700">
+          Same salary, {money(r.netGapAnnual)} {gain ? 'more' : 'less'} in your account each year in {r.to.province}.{' '}
+          {Math.abs(r.netGapAnnual) < r.income * 0.01
             ? 'At this income the two provinces are close enough that taxes should not decide the move — the sections below matter more.'
-            : 'This is payroll only; the December 31 rule and sales tax below can move the real answer further.'}
+            : `Over five years that is ${money(a.fiveYearGap)}.`}
         </p>
       </section>
 
-      {/* Side by side */}
-      <section className="mt-8">
+      {/* Stat tiles — the analysis */}
+      <section className="mt-4 grid gap-3 sm:grid-cols-3">
+        <Tile
+          label={`Same take-home in ${r.to.province} needs`}
+          value={money(a.matchingSalaryInTo)}
+          sub={`${signed(a.matchingSalaryInTo - r.income)} on your salary`}
+        />
+        <Tile
+          label="Your next $1,000 raise keeps"
+          value={`${money(a.keepPer1000To)}`}
+          sub={`in ${r.to.province} · ${money(a.keepPer1000From)} in ${r.from.province}`}
+        />
+        <Tile
+          label={`Take-home rank at ${money(r.income)}`}
+          value={`#${a.rankTo} of 13`}
+          sub={`${r.to.province} · ${r.from.province} is #${a.rankFrom}`}
+        />
+      </section>
+
+      {/* Breakdown */}
+      <section className="mt-10">
         <h2 className="text-lg font-bold text-slate-900">Where each dollar goes</h2>
         <div className="mt-3 overflow-x-auto">
           <table className="w-full text-sm">
             <thead>
-              <tr className="border-b border-slate-200 text-left text-xs uppercase tracking-wide text-slate-500">
-                <th className="py-2 pr-4 font-semibold">Annual</th>
-                <th className="py-2 px-3 text-right font-semibold">{r.from.province}</th>
-                <th className="py-2 px-3 text-right font-semibold">{r.to.province}</th>
-                <th className="py-2 pl-3 text-right font-semibold">Difference</th>
+              <tr className="text-left text-[11px] font-bold uppercase tracking-wider text-slate-400">
+                <th className="py-2 pr-4 font-bold">Annual</th>
+                <th className="py-2 text-right font-bold">{r.from.province}</th>
+                <th className="py-2 text-right font-bold">{r.to.province}</th>
+                <th className="py-2 text-right font-bold">Difference</th>
               </tr>
             </thead>
-            <tbody>
-              {rows.map(([label, a, b]) => (
-                <tr key={label} className="border-b border-slate-100">
-                  <td className="py-2 pr-4 text-slate-600">{label}</td>
-                  <td className="py-2 px-3 text-right tabular-nums">{money(a)}</td>
-                  <td className="py-2 px-3 text-right tabular-nums">{money(b)}</td>
-                  <td className={`py-2 pl-3 text-right tabular-nums ${b - a === 0 ? 'text-slate-400' : b - a > 0 ? 'text-red-600' : 'text-emerald-700'}`}>
-                    {b - a === 0 ? '—' : signed(b - a)}
-                  </td>
-                </tr>
-              ))}
-              <tr className="border-t-2 border-slate-300 font-bold">
-                <td className="py-2.5 pr-4">Take-home</td>
-                <td className="py-2.5 px-3 text-right tabular-nums">{money(r.from.net)}</td>
-                <td className="py-2.5 px-3 text-right tabular-nums">{money(r.to.net)}</td>
-                <td className={`py-2.5 pl-3 text-right tabular-nums ${gain ? 'text-emerald-700' : 'text-red-600'}`}>{signed(r.netGapAnnual)}</td>
+            <tbody className="tabular-nums">
+              <tr className="border-t border-slate-100">
+                <td className="py-2.5 pr-4 text-slate-600">Gross salary</td>
+                <td className="py-2.5 text-right">{money(r.from.gross)}</td>
+                <td className="py-2.5 text-right">{money(r.to.gross)}</td>
+                <td className="py-2.5 text-right text-slate-300">—</td>
               </tr>
-              <tr className="text-slate-500">
-                <td className="py-1.5 pr-4">Monthly take-home</td>
-                <td className="py-1.5 px-3 text-right tabular-nums">{money(r.from.netMonthly)}</td>
-                <td className="py-1.5 px-3 text-right tabular-nums">{money(r.to.netMonthly)}</td>
-                <td className="py-1.5 pl-3 text-right tabular-nums">{signed(r.to.netMonthly - r.from.netMonthly)}</td>
+              {rows.map(([label, x, y]) => {
+                const d = y - x;
+                return (
+                  <tr key={label} className="border-t border-slate-100">
+                    <td className="py-2.5 pr-4 text-slate-600">{label}</td>
+                    <td className="py-2.5 text-right">{money(x)}</td>
+                    <td className="py-2.5 text-right">{money(y)}</td>
+                    <td className={`py-2.5 text-right font-medium ${d === 0 ? 'text-slate-300' : d > 0 ? 'text-red-600' : 'text-emerald-700'}`}>
+                      {d === 0 ? '—' : signed(d)}
+                    </td>
+                  </tr>
+                );
+              })}
+              <tr className="border-t border-slate-200 bg-slate-50">
+                <td className="py-2.5 pr-4 font-semibold text-slate-700">Total deductions</td>
+                <td className="py-2.5 text-right font-semibold">{money(r.from.totalDeductions)}</td>
+                <td className="py-2.5 text-right font-semibold">{money(r.to.totalDeductions)}</td>
+                <td className={`py-2.5 text-right font-semibold ${r.to.totalDeductions - r.from.totalDeductions > 0 ? 'text-red-600' : 'text-emerald-700'}`}>
+                  {signed(r.to.totalDeductions - r.from.totalDeductions)}
+                </td>
               </tr>
-              <tr className="text-slate-500">
-                <td className="py-1.5 pr-4">Bi-weekly take-home</td>
-                <td className="py-1.5 px-3 text-right tabular-nums">{money(r.from.netBiweekly)}</td>
-                <td className="py-1.5 px-3 text-right tabular-nums">{money(r.to.netBiweekly)}</td>
-                <td className="py-1.5 pl-3 text-right tabular-nums">{signed(r.to.netBiweekly - r.from.netBiweekly)}</td>
+              <tr className={`border-t-2 border-slate-900 ${gain ? 'bg-emerald-50' : 'bg-red-50'}`}>
+                <td className="py-3 pr-4 text-base font-extrabold text-slate-900">Take-home</td>
+                <td className="py-3 text-right text-base font-extrabold text-slate-900">{money(r.from.net)}</td>
+                <td className="py-3 text-right text-base font-extrabold text-slate-900">{money(r.to.net)}</td>
+                <td className={`py-3 text-right text-base font-extrabold ${tone}`}>{signed(r.netGapAnnual)}</td>
               </tr>
-              <tr className="text-slate-500">
-                <td className="py-1.5 pr-4">Effective deduction rate</td>
-                <td className="py-1.5 px-3 text-right tabular-nums">{r.from.effectiveRate}%</td>
-                <td className="py-1.5 px-3 text-right tabular-nums">{r.to.effectiveRate}%</td>
-                <td className="py-1.5 pl-3 text-right tabular-nums">{(r.to.effectiveRate - r.from.effectiveRate).toFixed(1)} pts</td>
+              <tr className="border-t border-slate-100 text-slate-500">
+                <td className="py-2 pr-4">Monthly take-home</td>
+                <td className="py-2 text-right">{money(r.from.netMonthly)}</td>
+                <td className="py-2 text-right">{money(r.to.netMonthly)}</td>
+                <td className={`py-2 text-right ${tone}`}>{signed(r.to.netMonthly - r.from.netMonthly)}</td>
+              </tr>
+              <tr className="border-t border-slate-100 text-slate-500">
+                <td className="py-2 pr-4">Bi-weekly take-home</td>
+                <td className="py-2 text-right">{money(r.from.netBiweekly)}</td>
+                <td className="py-2 text-right">{money(r.to.netBiweekly)}</td>
+                <td className={`py-2 text-right ${tone}`}>{signed(r.to.netBiweekly - r.from.netBiweekly)}</td>
+              </tr>
+              <tr className="border-t border-slate-100 text-slate-500">
+                <td className="py-2 pr-4">Effective deduction rate</td>
+                <td className="py-2 text-right">{r.from.effectiveRate}%</td>
+                <td className="py-2 text-right">{r.to.effectiveRate}%</td>
+                <td className="py-2 text-right">{(r.to.effectiveRate - r.from.effectiveRate).toFixed(1)} pts</td>
               </tr>
             </tbody>
           </table>
         </div>
-        <p className="mt-2 text-xs text-slate-400">
-          In the Difference column, red means more is deducted in {r.to.province}; green means less.
-        </p>
+      </section>
+
+      {/* Ladder */}
+      <section className="mt-10">
+        <h2 className="text-lg font-bold text-slate-900">All 13 provinces at {money(r.income)}</h2>
+        <p className="mt-1 text-sm text-slate-500">Take-home pay on the same salary, everywhere in Canada. Yours are highlighted.</p>
+        <div className="mt-4 space-y-1.5">
+          {a.ladder.map((row, i) => {
+            const mine = row.province === r.from.province || row.province === r.to.province;
+            return (
+              <div key={row.province} className="grid grid-cols-[1.5rem_9rem_1fr_5rem] items-center gap-2 text-sm">
+                <span className="text-xs tabular-nums text-slate-400">{i + 1}</span>
+                <span className={`truncate ${mine ? 'font-bold text-slate-900' : 'text-slate-500'}`}>{row.province}</span>
+                <div className="h-3 rounded-full bg-slate-100">
+                  <div className={`h-3 rounded-full ${mine ? 'bg-red-600' : 'bg-slate-300'}`} style={{ width: `${(row.net / maxNet) * 100}%` }} />
+                </div>
+                <span className={`text-right tabular-nums ${mine ? 'font-bold text-slate-900' : 'text-slate-500'}`}>{money(row.net)}</span>
+              </div>
+            );
+          })}
+        </div>
       </section>
 
       {/* Dec 31 rule */}
-      <section className="mt-10 rounded-2xl border-2 border-red-200 p-6">
-        <p className="text-xs font-bold uppercase tracking-[0.18em] text-red-600">The rule most movers learn too late</p>
+      <section className="mt-10 rounded-2xl border-2 border-red-200 bg-white p-6">
+        <p className="text-xs font-bold uppercase tracking-[0.18em] text-red-600">The rule most people learn too late</p>
         <h2 className="mt-1 text-lg font-bold text-slate-900">Your December 31 address taxes the whole year</h2>
         <p className="mt-2 text-sm leading-6 text-slate-600">
-          The CRA charges provincial income tax for the entire year based on where you live on December 31 —
-          not on how many months you spent in each province. Move on December 20 and all twelve months are
-          taxed at {r.to.province} rates. Move on January 5 and the previous year stays at {r.from.province} rates.
+          The CRA applies the provincial rates of wherever you live on <strong>December 31</strong> to your <strong>entire year’s</strong> income. Move in November and the whole year is re-rated by {r.to.province}; move in January and last year stays with {r.from.province}.
         </p>
         <div className="mt-4 grid gap-3 sm:grid-cols-2">
           <div className="rounded-xl bg-slate-50 p-4">
-            <div className="text-xs text-slate-500">Resident in {r.from.province} on Dec 31</div>
-            <div className="mt-1 text-2xl font-bold tabular-nums text-slate-900">{money(r.dec31.ifResidentInFromOnDec31)}</div>
-            <div className="text-xs text-slate-500">provincial tax for the year</div>
+            <p className="text-xs font-semibold text-slate-500">Resident in {r.to.province} on Dec 31</p>
+            <p className="mt-1 text-2xl font-extrabold tabular-nums text-slate-900">{money(r.dec31.ifResidentInToOnDec31)}</p>
+            <p className="text-xs text-slate-500">provincial tax for the year</p>
           </div>
           <div className="rounded-xl bg-slate-50 p-4">
-            <div className="text-xs text-slate-500">Resident in {r.to.province} on Dec 31</div>
-            <div className="mt-1 text-2xl font-bold tabular-nums text-slate-900">{money(r.dec31.ifResidentInToOnDec31)}</div>
-            <div className="text-xs text-slate-500">provincial tax for the year</div>
+            <p className="text-xs font-semibold text-slate-500">Resident in {r.from.province} on Dec 31</p>
+            <p className="mt-1 text-2xl font-extrabold tabular-nums text-slate-900">{money(r.dec31.ifResidentInFromOnDec31)}</p>
+            <p className="text-xs text-slate-500">provincial tax for the year</p>
           </div>
         </div>
-        <p className="mt-4 text-sm leading-6 text-slate-700">
-          <strong>What the date is worth to you: {money(r.dec31.swing)} of provincial tax on this salary.</strong>{' '}
-          {r.dec31.swing < 0
-            ? `${r.to.province} is the lighter province, so being resident there by December 31 saves ${money(r.dec31.swing)} on the whole year — even if you arrived in December.`
-            : r.dec31.swing > 0
-              ? `${r.to.province} is the heavier province, so if the timing is yours to choose, arriving in early January keeps the previous year at ${r.from.province} rates and avoids ${money(r.dec31.swing)}.`
-              : 'The two provinces tax this salary identically, so the date does not matter for provincial tax.'}
+        <p className={`mt-4 rounded-xl px-4 py-3 text-sm font-semibold ${r.dec31.swing > 0 ? 'bg-red-50 text-red-700' : 'bg-emerald-50 text-emerald-700'}`}>
+          The swing a December 31 address makes: {signed(r.dec31.swing)} on this year’s provincial tax.
         </p>
         <p className="mt-3 text-xs leading-5 text-slate-500">
-          Your employer keeps withholding at the old province’s rates until you hand in a new TD1 for the new
-          province, so a mid-year move usually shows up as a refund or a balance owing at filing time — the
-          difference above is roughly that amount.
+          Your employer withholds at the rates of the province where you work, so a late-year move usually shows up as a balance owing or a refund when you file — not on the paycheque.
         </p>
       </section>
 
@@ -172,114 +222,72 @@ export default function RelocationReport({
       <section className="mt-10">
         <h2 className="text-lg font-bold text-slate-900">Moving expenses you can deduct (line 21900)</h2>
         <p className="mt-2 text-sm leading-6 text-slate-600">
-          If your new home is at least <strong>40 km closer</strong> to your new job, business, or full-time
-          post-secondary program than the old one was, the move itself is deductible against the income you earn
-          at the new location. Unused amounts carry forward to the next year.
+          If the new home is at least <strong>40 km closer</strong> to your new work or study location, eligible costs are deductible against income earned at the new location. Unused amounts carry forward.
         </p>
-        <ul className="mt-3 grid gap-1.5 text-sm text-slate-700 sm:grid-cols-2">
+        <ul className="mt-4 grid gap-2 text-sm sm:grid-cols-2">
           {[
-            'Movers, truck rental, packing, and storage in transit',
-            'Travel for you and your household (vehicle, flights, meals)',
-            'Up to 15 days of temporary lodging and meals near either home',
-            'Lease-cancellation costs on the old rental',
-            'Selling the old home: commission, legal fees, advertising',
-            'Buying the new home: legal fees and land-transfer tax (if you sold the old one)',
-            'Utility hookups and disconnections, address changes, document replacement',
-            'Up to $5,000 of carrying costs on a vacant old home you are trying to sell',
-          ].map((t) => (
-            <li key={t} className="flex gap-2">
-              <span className="text-red-600">•</span>
-              <span>{t}</span>
+            'Movers, truck rental, packing and storage',
+            'Travel and meals for you and your household en route',
+            'Up to 15 days of temporary lodging near either home',
+            'Cost of cancelling a lease on the old home',
+            'Selling costs on the old home (agent fees, legal)',
+            'Utility hook-ups, disconnections, address changes',
+          ].map((item) => (
+            <li key={item} className="flex gap-2 rounded-lg border border-slate-200 px-3 py-2 text-slate-700">
+              <span className="text-emerald-600">✓</span>
+              {item}
             </li>
           ))}
         </ul>
-        <p className="mt-3 text-xs leading-5 text-slate-500">
-          Keep every receipt. Claim on form T1-M with your return; the CRA asks for support on this line more
-          often than on most others.
-        </p>
+        <p className="mt-3 text-xs text-slate-500">Keep every receipt. The deduction is claimed on form T1-M with your return.</p>
       </section>
 
       {/* Sales tax */}
       <section className="mt-10">
         <h2 className="text-lg font-bold text-slate-900">Sales tax at the till</h2>
         <div className="mt-3 grid gap-3 sm:grid-cols-2">
-          {[
-            { p: r.from.province, s: salesTax.from, total: r.from.salesTaxTotal },
-            { p: r.to.province, s: salesTax.to, total: r.to.salesTaxTotal },
-          ].map(({ p, s, total }) => (
-            <div key={p} className="rounded-xl border border-slate-200 p-4">
-              <div className="text-xs text-slate-500">{p}</div>
-              <div className="mt-1 text-2xl font-bold tabular-nums text-slate-900">{total}%</div>
-              <div className="text-xs text-slate-500">
-                {s.label}
-                {s.pst > 0 && s.label.startsWith('GST') ? ` — ${s.gst}% federal + ${s.pst}% provincial` : ''}
-              </div>
+          {[[r.from.province, salesTax.from, r.from.salesTaxTotal], [r.to.province, salesTax.to, r.to.salesTaxTotal]].map(([p, st, total]) => (
+            <div key={String(p)} className="rounded-xl border border-slate-200 p-4">
+              <p className="text-xs font-semibold text-slate-500">{String(p)}</p>
+              <p className="mt-1 text-2xl font-extrabold tabular-nums text-slate-900">{String(total)}%</p>
+              <p className="text-xs text-slate-500">{(st as { label: string }).label}</p>
             </div>
           ))}
         </div>
-        <p className="mt-3 text-sm leading-6 text-slate-700">
-          {perTenK === 0
-            ? 'Both provinces charge the same rate at the till, so everyday spending is a wash.'
-            : `That is ${money(perTenK)} ${perTenK > 0 ? 'more' : 'less'} tax for every $10,000 of taxable spending in ${r.to.province}. On $20,000 a year of taxable purchases — furniture, electronics, restaurants, services — the gap is ${money(perTenK * 2)}.`}
-        </p>
-        <p className="mt-2 text-xs leading-5 text-slate-500">
-          Basic groceries, rent, and most prescription drugs are not taxed at the till in any province, which
-          is why the figure is shown per $10,000 of taxable spending rather than per dollar of income.
+        <p className="mt-3 text-sm leading-6 text-slate-600">
+          {r.salesTaxGapPoints === 0
+            ? 'No difference at the till.'
+            : `${Math.abs(r.salesTaxGapPoints)} percentage points ${r.salesTaxGapPoints > 0 ? 'more' : 'less'} on taxable spending — about ${money(Math.abs(perTenK))} per $10,000 of taxable purchases a year.`}
         </p>
       </section>
 
-      {/* What's not here */}
+      {/* Honest scope */}
       <section className="mt-10 rounded-2xl bg-slate-50 p-6">
         <h2 className="text-base font-bold text-slate-900">What this report does not price</h2>
-        <p className="mt-2 text-sm leading-6 text-slate-600">
-          Rent, home prices, auto insurance, and provincial health premiums differ between provinces and can
-          outweigh every number above. They are not in this report because they depend on the city and on
-          you, not on the tax tables — and we only print figures we can compute. The official sources:
-        </p>
-        <ul className="mt-3 space-y-1 text-sm">
-          <li>
-            <a className="text-red-700 underline" href="https://www.cmhc-schl.gc.ca/professionals/housing-markets-data-and-research/housing-data/data-tables/rental-market/rental-market-report-data-tables" rel="noopener" target="_blank">
-              CMHC Rental Market Report
-            </a>{' '}
-            <span className="text-slate-500">— average rents by city and bedroom count</span>
-          </li>
-          <li>
-            <a className="text-red-700 underline" href="https://www.canada.ca/en/revenue-agency/services/tax/individuals/topics/about-your-tax-return/tax-return/completing-a-tax-return/deductions-credits-expenses/line-21900-moving-expenses.html" rel="noopener" target="_blank">
-              CRA — Line 21900 moving expenses
-            </a>
-          </li>
-          <li>
-            <a className="text-red-700 underline" href="https://www.canada.ca/en/revenue-agency/services/tax/individuals/topics/about-your-tax-return/tax-return/completing-a-tax-return/provincial-territorial-tax-credits-individuals.html" rel="noopener" target="_blank">
-              CRA — which province’s tax you pay
-            </a>
-          </li>
+        <ul className="mt-2 list-disc space-y-1 pl-5 text-sm leading-6 text-slate-600">
+          <li>Rent and housing costs — they vary more by city than by province; check CMHC’s rental market data for your destination.</li>
+          <li>Car insurance, which differs sharply between public and private systems (BC, Saskatchewan, Manitoba, Quebec vs. the rest).</li>
+          <li>Provincial health premiums, child benefits, and credits tied to family situation.</li>
         </ul>
+        <p className="mt-3 text-xs text-slate-500">
+          Every figure above is computed by the same tax engine as the free calculator for {r.taxYear}, single filer, standard credits. This is a calculation, not tax advice.
+        </p>
       </section>
 
-      {/* Footer */}
-      <footer className="mt-10 border-t border-slate-200 pt-5 text-xs leading-5 text-slate-500">
-        <p>
-          <strong className="text-slate-700">How this was computed.</strong> Every dollar figure comes from the
-          same {r.taxYear} tax engine that powers the free CanPay Insights calculator — the one our build
-          pipeline audits against published CRA and provincial rates before anything goes live. Assumes a
-          single filer with basic personal amounts, standard CPP/QPP and EI/QPIP, no RRSP contributions, and
-          no other credits. Sales tax rates are the statutory rates in force for {r.taxYear}.
-        </p>
-        <p className="mt-2">
-          This is a calculation, not tax advice. For a move involving self-employment, a spouse, or
-          significant investment income, a CPA’s review is worth the fee.
-        </p>
-        <p className="mt-3">
-          <strong className="text-slate-700">Keep this link — it is your receipt’s twin and works forever:</strong>
-          <br />
-          <span className="break-all font-mono text-[11px]">{permalink}</span>
-          {email && <><br />A copy of the receipt went to {email}.</>}
-        </p>
-        <p className="mt-3 print:hidden">
-          <Link href="/" className="text-red-700 underline">Back to the calculator</Link> ·{' '}
-          <span className="text-slate-400">Press ⌘P / Ctrl+P to save as PDF.</span>
-        </p>
+      <footer className="mt-10 flex flex-wrap items-center justify-between gap-3 border-t border-slate-200 pt-5 text-xs text-slate-400 print:hidden">
+        <span>Permanent link: <span className="font-mono">{permalink.replace('https://', '')}</span></span>
+        <Link href="/" className="text-red-600 hover:underline">← Back to the calculator</Link>
       </footer>
     </main>
+  );
+}
+
+function Tile({ label, value, sub }: { label: string; value: string; sub: string }) {
+  return (
+    <div className="rounded-2xl border border-slate-200 bg-white p-4">
+      <p className="text-[11px] font-semibold uppercase tracking-wide text-slate-500">{label}</p>
+      <p className="mt-1 text-2xl font-extrabold tabular-nums text-slate-900">{value}</p>
+      <p className="mt-0.5 text-xs text-slate-500">{sub}</p>
+    </div>
   );
 }

@@ -3,6 +3,10 @@ import type Stripe from 'stripe';
 import { stripeClient, webhookSecret, cryptoProvider } from '../../../../lib/stripe';
 import { getCloudflareContext } from '@opennextjs/cloudflare';
 import { bracketIncome } from '../../../../lib/brackets';
+import { buildRelocationReport, isProvince } from '../../../../lib/relocationReport';
+import { renderRelocationPdf } from '../../../../lib/reportPdf';
+import { sendReportEmail } from '../../../../lib/email';
+import { siteOrigin } from '../../../../lib/stripe';
 
 export const dynamic = 'force-dynamic';
 
@@ -66,6 +70,55 @@ export async function POST(request: Request) {
     // 500 makes Stripe retry; the RPC is idempotent on session id.
     return NextResponse.json({ error: `ledger write failed: ${res.status}` }, { status: 500 });
   }
+
+  // The PDF goes out from info@canpayinsights.ca with the permanent link.
+  // Done inline, before responding: Cloudflare cancels work left running after
+  // the response, and Stripe waits long enough for a 17 KB PDF and one send.
+  // A failed send is logged, not retried — Stripe retrying the webhook would
+  // only re-send the same email, and the customer already has the page.
+  const email = s.customer_details?.email ?? s.customer_email ?? null;
+  if (email && m.product === 'relocation' && isProvince(m.from) && isProvince(m.to) && Number.isFinite(income)) {
+    try {
+      const report = buildRelocationReport(m.from, m.to, income);
+      const link = `${await siteOrigin()}/report/relocation?session_id=${s.id}`;
+      const pdf = await renderRelocationPdf(report, link);
+      const gap = report.netGapAnnual;
+      const gapText = `${gap >= 0 ? '+' : '-'}$${Math.abs(gap).toLocaleString('en-CA')} a year`;
+      await sendReportEmail({
+        to: email,
+        pdf,
+        subject: `Your Province Move Report: ${m.from} to ${m.to}`,
+        pdfName: `CanPay-Province-Move-${m.from.replace(/\s+/g, '')}-to-${m.to.replace(/\s+/g, '')}.pdf`,
+        text: [
+          `Your Province Move Report is attached as a PDF.`,
+          ``,
+          `${m.from} to ${m.to} on a $${income.toLocaleString('en-CA')} salary: ${gapText} in take-home pay.`,
+          ``,
+          `It is also online, permanently, at:`,
+          link,
+          ``,
+          `Every figure is computed by the same tax engine as the free calculator. This is a calculation, not tax advice.`,
+          ``,
+          `CanPay Insights · canpayinsights.ca`,
+        ].join('\n'),
+        html: `<div style="font-family:-apple-system,Helvetica,Arial,sans-serif;max-width:560px;margin:0 auto;color:#0f172a">
+  <p style="font-size:13px;letter-spacing:.15em;text-transform:uppercase;color:#dc2626;font-weight:700;margin:24px 0 6px">Province move report</p>
+  <h1 style="font-size:22px;margin:0 0 6px">${m.from} &rarr; ${m.to}</h1>
+  <p style="color:#64748b;margin:0 0 18px">On a $${income.toLocaleString('en-CA')} salary</p>
+  <div style="background:#fef2f2;border:1px solid #fecaca;border-radius:12px;padding:16px 18px;margin-bottom:18px">
+    <div style="font-size:12px;font-weight:700;letter-spacing:.12em;color:#64748b">TAKE-HOME PAY AFTER THE MOVE</div>
+    <div style="font-size:30px;font-weight:800;color:${gap >= 0 ? '#047857' : '#dc2626'};margin-top:4px">${gapText}</div>
+  </div>
+  <p>Your full report is attached as a PDF and lives permanently at<br><a href="${link}" style="color:#dc2626">${link}</a></p>
+  <p style="color:#64748b;font-size:13px">Every figure is computed by the same tax engine as the free calculator. This is a calculation, not tax advice.</p>
+  <p style="color:#94a3b8;font-size:12px;margin-top:28px">CanPay Insights · <a href="https://canpayinsights.ca" style="color:#94a3b8">canpayinsights.ca</a></p>
+</div>`,
+      });
+    } catch (e) {
+      console.error('report email failed', (e as Error).message);
+    }
+  }
+
   return NextResponse.json({ received: true });
 }
 

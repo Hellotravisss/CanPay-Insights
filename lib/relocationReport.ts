@@ -68,6 +68,21 @@ export type RelocationReport = {
     swing: number;                   // difference a Dec 31 address makes
   };
   salesTaxGapPoints: number; // to - from, percentage points at the till
+  /** Analysis — all engine-derived. */
+  analysis: {
+    /** Gross salary in `to` that lands the same take-home as `income` in `from`. */
+    matchingSalaryInTo: number;
+    /** What the next $1,000 of gross keeps, after all deductions, in each province. */
+    keepPer1000From: number;
+    keepPer1000To: number;
+    /** Cumulative take-home gap over five years at the same salary. */
+    fiveYearGap: number;
+    /** Take-home rank of each province among all 13 at this income (1 = most). */
+    rankFrom: number;
+    rankTo: number;
+    /** Every province's take-home at this income, for the bar chart. */
+    ladder: { province: string; net: number }[];
+  };
 };
 
 function figures(province: string, income: number): ProvinceFigures {
@@ -101,10 +116,39 @@ function figures(province: string, income: number): ProvinceFigures {
   };
 }
 
+function netOf(province: string, income: number): number {
+  return Math.round(
+    calculateFromAnnualSalary({ province, annualSalary: income, payFrequency: PayFrequency.MONTHLY }).netPayAnnual,
+  );
+}
+
+/** Gross in `province` whose take-home equals `targetNet` — bisection on the
+ *  engine itself, so the answer obeys every bracket and credit it knows. */
+function grossForNet(province: string, targetNet: number): number {
+  let lo = 0, hi = Math.max(targetNet * 3, 50_000);
+  for (let i = 0; i < 40; i++) {
+    const mid = (lo + hi) / 2;
+    if (netOf(province, mid) < targetNet) lo = mid; else hi = mid;
+  }
+  return Math.round(hi / 10) * 10;
+}
+
 export function buildRelocationReport(from: string, to: string, income: number): RelocationReport {
   const f = figures(from, income);
   const t = figures(to, income);
+  const ladder = PROVINCE_NAMES.map((province) => ({ province, net: netOf(province, income) }))
+    .sort((a, b) => b.net - a.net);
+  const rank = (p: string) => ladder.findIndex((x) => x.province === p) + 1;
   return {
+    analysis: {
+      matchingSalaryInTo: grossForNet(to, f.net),
+      keepPer1000From: netOf(from, income + 1000) - f.net,
+      keepPer1000To: netOf(to, income + 1000) - t.net,
+      fiveYearGap: (t.net - f.net) * 5,
+      rankFrom: rank(from),
+      rankTo: rank(to),
+      ladder,
+    },
     taxYear: TAX_YEAR,
     income,
     from: f,

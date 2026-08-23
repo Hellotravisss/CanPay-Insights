@@ -52,6 +52,7 @@ export default async function Page({
       salesTax={{ from: SALES_TAX[from], to: SALES_TAX[to] }}
       email={email}
       permalink={`https://canpayinsights.ca/report/relocation?session_id=${session_id}`}
+      sessionId={session_id}
     />
   );
 }
