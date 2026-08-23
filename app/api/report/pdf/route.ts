@@ -1,6 +1,7 @@
 import { stripeClient } from '../../../../lib/stripe';
 import { buildRelocationReport, isProvince } from '../../../../lib/relocationReport';
-import { renderRelocationPdf } from '../../../../lib/reportPdf';
+import { renderRelocationPdf, renderOfferPdf } from '../../../../lib/reportPdf';
+import { buildOfferReport, parseOffer } from '../../../../lib/offerReport';
 
 export const dynamic = 'force-dynamic';
 
@@ -19,14 +20,18 @@ export async function GET(request: Request) {
 
   const m = s.metadata ?? {};
   const income = Number(m.income);
-  if (m.product !== 'relocation' || !isProvince(m.from) || !isProvince(m.to) || !Number.isFinite(income)) {
-    return new Response('unknown product', { status: 404 });
-  }
-
   const origin = new URL(request.url).origin;
-  const report = buildRelocationReport(m.from, m.to, income);
-  const pdf = await renderRelocationPdf(report, `${origin}/report/relocation?session_id=${s.id}`);
-  const name = `CanPay-Province-Move-${m.from.replace(/\s+/g, '')}-to-${m.to.replace(/\s+/g, '')}.pdf`;
+  let pdf: Uint8Array; let name: string;
+  if (m.product === 'offer-compare') {
+    const a = parseOffer(JSON.parse(m.a ?? 'null'), 'Offer A'); const b = parseOffer(JSON.parse(m.b ?? 'null'), 'Offer B');
+    if (!a || !b) return new Response('bad offers', { status: 404 });
+    pdf = await renderOfferPdf(buildOfferReport(a, b), `${origin}/report/offer?session_id=${s.id}`);
+    name = `CanPay-Offer-Comparison.pdf`;
+  } else {
+    if (m.product !== 'relocation' || !isProvince(m.from) || !isProvince(m.to) || !Number.isFinite(income)) return new Response('unknown product', { status: 404 });
+    pdf = await renderRelocationPdf(buildRelocationReport(m.from, m.to, income), `${origin}/report/relocation?session_id=${s.id}`);
+    name = `CanPay-Province-Move-${m.from.replace(/\s+/g, '')}-to-${m.to.replace(/\s+/g, '')}.pdf`;
+  }
   return new Response(pdf as unknown as BodyInit, {
     headers: {
       'content-type': 'application/pdf',

@@ -6,7 +6,7 @@
  * Every product sells a DECISION, not more detail. Take-home pay itself is
  * free for everyone; that is the traffic and the dataset.
  */
-export type ProductKey = 'relocation';
+export type ProductKey = 'relocation' | 'offer-compare';
 
 export const PRODUCTS: Record<
   ProductKey,
@@ -16,6 +16,13 @@ export const PRODUCTS: Record<
     name: 'Province Move Report',
     description:
       'Your take-home pay in both provinces, the December 31 residency rule, moving-expense deduction, and sales-tax differences — computed from your own numbers.',
+    amountCents: 900,
+    currency: 'cad',
+  },
+  'offer-compare': {
+    name: 'Offer Comparison',
+    description:
+      'Two job offers side by side, after tax: cash, bonus at your marginal rate, employer RRSP match, vacation priced in — plus what to ask HR before signing.',
     amountCents: 900,
     currency: 'cad',
   },

@@ -1,6 +1,7 @@
 import { PDFDocument, StandardFonts, rgb, type PDFFont, type PDFPage } from 'pdf-lib';
 import { LOGO_PNG_BASE64 } from './logoBase64';
 import { SALES_TAX, type RelocationReport } from './relocationReport';
+import type { OfferReport } from './offerReport';
 
 /**
  * The Province Move Report as a PDF, drawn with pdf-lib so it can be
@@ -222,6 +223,95 @@ export async function renderRelocationPdf(r: RelocationReport, permalink: string
     text(c, money(row.net), 0, 8.5, { right: PAPER_W - M, bold: isMine, color: isMine ? INK : MUTED });
     c.y -= 13;
   }
+
+  footer(c, permalink);
+  return doc.save();
+}
+
+
+export async function renderOfferPdf(r: OfferReport, permalink: string): Promise<Uint8Array> {
+  const doc = await PDFDocument.create();
+  doc.setTitle(`Offer Comparison — ${r.a.province} vs ${r.b.province}`);
+  doc.setAuthor('CanPay Insights');
+  const font = await doc.embedFont(StandardFonts.Helvetica);
+  const bold = await doc.embedFont(StandardFonts.HelveticaBold);
+  const logo = await doc.embedPng(Uint8Array.from(atob(LOGO_PNG_BASE64), (ch) => ch.charCodeAt(0)));
+  const c: Ctx = { doc, page: doc.addPage([PAPER_W, PAPER_H]), y: 0, font, bold, logo };
+  const kicker = `Offer comparison · ${r.taxYear}`;
+  header(c, kicker);
+
+  text(c, `${money(r.a.salary)} in ${r.a.province}  vs  ${money(r.b.salary)} in ${r.b.province}`, M, 20, { bold: true });
+  c.y -= 18;
+  text(c, `${r.taxYear} federal and provincial rates · single filer, standard credits · bonus, RRSP match and vacation priced in`, M, 9, { color: MUTED });
+  c.y -= 28;
+
+  // Verdict block
+  const heroH = 84;
+  c.page.drawRectangle({ x: M, y: c.y - heroH + 14, width: PAPER_W - 2 * M, height: heroH, color: TINT, borderColor: LINE, borderWidth: 1 });
+  c.y -= 4;
+  text(c, 'TOTAL PACKAGE, AFTER TAX', M + 18, 8, { bold: true, color: MUTED });
+  c.y -= 32;
+  const W = r.winner === 'b' ? r.b : r.a;
+  if (r.winner === 'tie') text(c, 'Effectively a tie', M + 18, 24, { bold: true });
+  else {
+    text(c, signed(Math.abs(r.gap.total)), M + 18, 28, { bold: true, color: GREEN });
+    const w = bold.widthOfTextAtSize(signed(Math.abs(r.gap.total)), 28);
+    text(c, `a year for ${W.label}  ·  ${money(Math.abs(r.gap.monthly))} a month`, M + 18 + w + 10, 11, { color: MUTED });
+  }
+  c.y -= 20;
+  para(c, `Cash after tax ${signed(r.gap.netCash)} for Offer B; with the employer match counted, ${signed(r.gap.total)}. Per hour actually worked: ${money(r.b.perWorkingHour)} vs ${money(r.a.perWorkingHour)}.`, 9.5, INK, PAPER_W - 2 * M - 36);
+  c.y -= 20;
+
+  section(c, 'Line by line', kicker);
+  const col = { a: PAPER_W - M - 220, b: PAPER_W - M - 110, d: PAPER_W - M };
+  text(c, 'ANNUAL', M, 8, { bold: true, color: MUTED });
+  text(c, `A · ${r.a.province.toUpperCase()}`, 0, 8, { bold: true, color: MUTED, right: col.a });
+  text(c, `B · ${r.b.province.toUpperCase()}`, 0, 8, { bold: true, color: MUTED, right: col.b });
+  text(c, 'B - A', 0, 8, { bold: true, color: MUTED, right: col.d });
+  c.y -= 8; rule(c); c.y -= 16;
+  const lines: [string, number, number, boolean?][] = [
+    ['Salary', r.a.salary, r.b.salary], ['Cash bonus', r.a.bonus, r.b.bonus],
+    ['Federal tax', -r.a.federalTax, -r.b.federalTax], ['Provincial tax', -r.a.provincialTax, -r.b.provincialTax],
+    ['CPP / QPP', -r.a.cpp, -r.b.cpp], ['EI', -r.a.ei, -r.b.ei],
+    ['Cash after tax', r.a.netCash, r.b.netCash, true],
+    ['  of which bonus, after tax', r.a.bonusAfterTax, r.b.bonusAfterTax],
+    [`Employer RRSP match (${r.a.matchPct}% / ${r.b.matchPct}%)`, r.a.employerMatch, r.b.employerMatch],
+    ['Total package', r.a.total, r.b.total, true],
+    [`Paid vacation value (${r.a.vacationDays} / ${r.b.vacationDays} days)`, r.a.vacationValue, r.b.vacationValue],
+    ['Monthly cash', r.a.netMonthly, r.b.netMonthly],
+  ];
+  for (const [label, a, b, strong] of lines) {
+    ensure(c, 20, kicker);
+    const fmt = (n: number) => (n < 0 ? `-${money(n)}` : money(n));
+    text(c, label, M, 10, { bold: !!strong });
+    text(c, fmt(a), 0, 10, { right: col.a, bold: !!strong });
+    text(c, fmt(b), 0, 10, { right: col.b, bold: !!strong });
+    const d = b - a;
+    text(c, d === 0 ? '—' : signed(d), 0, 10, { right: col.d, bold: !!strong, color: d === 0 ? MUTED : d > 0 ? GREEN : RED });
+    c.y -= 6; rule(c, LINE, 0.5); c.y -= 14;
+  }
+  c.y -= 10;
+
+  section(c, 'What the numbers mean', kicker);
+  for (const b of [
+    `Offer B would need about ${money(r.breakEvenSalaryForB)} in salary to match Offer A's total package (${signed(r.breakEvenSalaryForB - r.b.salary)} against the offer as written).`,
+    `Per hour actually worked (after vacation), Offer A pays ${money(r.a.perWorkingHour)} and Offer B ${money(r.b.perWorkingHour)}.`,
+    `Of your next $1,000 raise you keep ${money(r.a.keepPer1000)} in ${r.a.province} and ${money(r.b.keepPer1000)} in ${r.b.province}.`,
+    'Vacation is shown as the pay attached to the days off, not added to the package; the RRSP match is counted at face value because it goes in pre-tax.',
+  ]) { para(c, `•  ${b}`, 10); c.y -= 3; }
+  c.y -= 14;
+
+  section(c, 'Eight questions to ask before you sign', kicker);
+  for (const q of [
+    'Is the bonus guaranteed, targeted, or discretionary, and when is it paid?',
+    'Does the RRSP match vest immediately, or after a cliff?',
+    'Is vacation accrued or front-loaded, and does unused time pay out?',
+    'What does the health and dental plan cost per pay, and who is covered?',
+    'Is there a pension (DB or DC) beyond the RRSP match?',
+    'When is the first salary review, and on what scale?',
+    'Remote or hybrid, and is there a home-office or commuting allowance?',
+    'Probation length, notice period, and non-compete terms.',
+  ]) { para(c, `?  ${q}`, 10); c.y -= 2; }
 
   footer(c, permalink);
   return doc.save();

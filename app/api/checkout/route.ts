@@ -1,6 +1,7 @@
 import { NextResponse } from 'next/server';
 import { stripeClient, siteOrigin } from '../../../lib/stripe';
 import { PRODUCTS, isProductKey } from '../../../lib/products';
+import { parseOffer } from '../../../lib/offerReport';
 import { isProvince } from '../../../lib/relocationReport';
 
 export const dynamic = 'force-dynamic';
@@ -38,13 +39,21 @@ async function handle(request: Request) {
   const { product, from, to, income, lang } = body;
   if (!isProductKey(product)) return NextResponse.json({ error: 'unknown product' }, { status: 400 });
 
-  const annual = Number(income);
-  if (!Number.isFinite(annual) || annual < 1000 || annual > 5_000_000) {
-    return NextResponse.json({ error: 'income out of range' }, { status: 400 });
-  }
+  let annual = Number(income);
+  let offerMeta: Record<string, string> = {};
+  let description = PRODUCTS[product].description;
   if (product === 'relocation') {
+    if (!Number.isFinite(annual) || annual < 1000 || annual > 5_000_000) return NextResponse.json({ error: 'income out of range' }, { status: 400 });
     if (!isProvince(from) || !isProvince(to)) return NextResponse.json({ error: 'bad province' }, { status: 400 });
     if (from === to) return NextResponse.json({ error: 'same province' }, { status: 400 });
+    description = `${from} → ${to}`;
+  } else if (product === 'offer-compare') {
+    const a = parseOffer(body.a, 'Offer A'); const b = parseOffer(body.b, 'Offer B');
+    if (!a || !b) return NextResponse.json({ error: 'both offers need a salary and a province' }, { status: 400 });
+    annual = a.salary;
+    // Stripe metadata values are capped at 500 chars; each offer is ~120.
+    offerMeta = { a: JSON.stringify(a), b: JSON.stringify(b) };
+    description = `${a.province} $${Math.round(a.salary).toLocaleString('en-CA')} vs ${b.province} $${Math.round(b.salary).toLocaleString('en-CA')}`;
   }
 
   const p = PRODUCTS[product];
@@ -63,7 +72,7 @@ async function handle(request: Request) {
           unit_amount: p.amountCents,
           product_data: {
             name: p.name,
-            description: product === 'relocation' ? `${from} → ${to}` : p.description,
+            description,
           },
         },
       },
@@ -74,11 +83,12 @@ async function handle(request: Request) {
       to: String(to ?? ''),
       income: String(Math.round(annual)),
       lang: String(lang ?? 'en'),
+      ...offerMeta,
     },
     // Card statements show the account descriptor (CANPAY INSIGHTS) with a
     // product suffix, so the charge is recognisable a month later.
-    payment_intent_data: { statement_descriptor_suffix: 'MOVE REPORT' },
-    success_url: `${origin}/report/${product}?session_id={CHECKOUT_SESSION_ID}`,
+    payment_intent_data: { statement_descriptor_suffix: product === 'relocation' ? 'MOVE REPORT' : 'OFFER REPORT' },
+    success_url: `${origin}/report/${product === 'relocation' ? 'relocation' : 'offer'}?session_id={CHECKOUT_SESSION_ID}`,
     cancel_url: `${origin}/?checkout=cancelled`,
     allow_promotion_codes: true,
   });

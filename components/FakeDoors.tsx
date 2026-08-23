@@ -5,9 +5,8 @@ import { Province, PayFrequency, type CalculationMode as CalcMode } from '../typ
 import { calculateFromAnnualSalary } from '../utils/taxEngine';
 
 /**
- * Paid products under the result. The Province Move Report is REAL (Stripe
- * Checkout). The offer comparison is still a fake door: taps are counted and
- * the tapper can leave an email; nothing is charged. The RRSP door was
+ * Paid products under the result. Both are REAL (Stripe Checkout): the
+ * Province Move Report and the Offer Comparison. The RRSP door was
  * retired — the free deep report already computes the RRSP optimum, and
  * charging for what is given away two scrolls up is the wrong kind of money.
  *
@@ -40,6 +39,15 @@ const DICT: Record<string, Record<string, string>> = {
     email: 'Email',
     notify: 'Notify me',
     thanks: 'Got it — one email when it ships.',
+    offerCta: 'Compare my offers — $9',
+    offerA: 'Offer A (this one)',
+    offerB: 'Offer B',
+    salary: 'Salary',
+    bonusL: 'Bonus',
+    matchL: 'RRSP match %',
+    vacL: 'Vacation days',
+    provinceL: 'Province',
+    offerStart: 'Set up the comparison →',
     secure: 'Paid through Stripe · link works forever',
   },
   zh: {
@@ -61,6 +69,15 @@ const DICT: Record<string, Record<string, string>> = {
     email: '邮箱',
     notify: '通知我',
     thanks: '收到,上线时发一封邮件。',
+    offerCta: '对比我的两份 offer —— $9',
+    offerA: 'Offer A(当前这份)',
+    offerB: 'Offer B',
+    salary: '年薪',
+    bonusL: '奖金',
+    matchL: 'RRSP 配比 %',
+    vacL: '年假天数',
+    provinceL: '省份',
+    offerStart: '填写两份 offer →',
     secure: '通过 Stripe 付款 · 链接永久有效',
   },
   fr: {
@@ -82,9 +99,41 @@ const DICT: Record<string, Record<string, string>> = {
     email: 'Courriel',
     notify: 'Prévenez-moi',
     thanks: 'Noté — un seul courriel au lancement.',
+    offerCta: 'Comparer mes offres — 9 $',
+    offerA: 'Offre A (celle-ci)',
+    offerB: 'Offre B',
+    salary: 'Salaire',
+    bonusL: 'Prime',
+    matchL: 'Cotisation REER %',
+    vacL: 'Jours de vacances',
+    provinceL: 'Province',
+    offerStart: 'Saisir les deux offres →',
     secure: 'Paiement via Stripe · lien permanent',
   },
 };
+
+
+type OfferDraft = { province: string; salary: string; bonus: string; matchPct: string; vacationDays: string };
+
+/** Defined OUTSIDE the page component: an inner component type would be
+ *  recreated on every keystroke and the focused input would blur. */
+function OfferFields({ o, set, title, t }: { o: OfferDraft; set: (v: OfferDraft) => void; title: string; t: Record<string, string> }) {
+  return (
+    <fieldset className="rounded-md border border-slate-200 p-2.5">
+      <legend className="px-1 text-[11px] font-bold uppercase tracking-wide text-slate-500">{title}</legend>
+      <div className="grid grid-cols-2 gap-1.5">
+        <select value={o.province} onChange={(e) => set({ ...o, province: e.target.value })} className="col-span-2 rounded border border-slate-200 bg-white px-1.5 py-1 text-xs">
+          <option value="">{t.provinceL} —</option>
+          {Object.values(Province).map((pv) => <option key={pv} value={pv}>{pv}</option>)}
+        </select>
+        <input inputMode="numeric" placeholder={t.salary} value={o.salary} onChange={(e) => set({ ...o, salary: e.target.value.replace(/[^0-9]/g, '') })} className="rounded border border-slate-200 px-1.5 py-1 text-xs" />
+        <input inputMode="numeric" placeholder={t.bonusL} value={o.bonus} onChange={(e) => set({ ...o, bonus: e.target.value.replace(/[^0-9]/g, '') })} className="rounded border border-slate-200 px-1.5 py-1 text-xs" />
+        <input inputMode="numeric" placeholder={t.matchL} value={o.matchPct} onChange={(e) => set({ ...o, matchPct: e.target.value.replace(/[^0-9.]/g, '') })} className="rounded border border-slate-200 px-1.5 py-1 text-xs" />
+        <input inputMode="numeric" placeholder={t.vacL} value={o.vacationDays} onChange={(e) => set({ ...o, vacationDays: e.target.value.replace(/[^0-9]/g, '') })} className="rounded border border-slate-200 px-1.5 py-1 text-xs" />
+      </div>
+    </fieldset>
+  );
+}
 
 const money = (n: number) => `$${Math.abs(Math.round(n)).toLocaleString('en-CA')}`;
 
@@ -96,8 +145,10 @@ export default function FakeDoors({
   const [buying, setBuying] = useState(false);
   const [buyError, setBuyError] = useState<string | null>(null);
   const [offerOpen, setOfferOpen] = useState(false);
-  const [email, setEmail] = useState('');
-  const [joined, setJoined] = useState(false);
+  const [offerBuying, setOfferBuying] = useState(false);
+  const [offerError, setOfferError] = useState<string | null>(null);
+  const [a, setA] = useState({ province: '', salary: '', bonus: '', matchPct: '', vacationDays: '' });
+  const [b, setB] = useState({ province: '', salary: '', bonus: '', matchPct: '', vacationDays: '' });
 
   // The free number: take-home gap, computed here with the calculator's engine.
   const gap = useMemo(() => {
@@ -134,13 +185,33 @@ export default function FakeDoors({
 
   const tapOffer = () => {
     setOfferOpen(true);
+    // Offer A defaults to what the calculator already shows.
+    setA((cur) => cur.salary ? cur : { ...cur, province, salary: String(Math.round(annualIncome)) });
     recordCalcEvent({ mode: mode as CalcMode, province, annualIncome, lang, productInterest: 'offer-compare' as ProductInterest });
   };
-  const joinOffer = async () => {
-    const e = email.trim();
-    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(e)) return;
-    setJoined(true);
-    await fetch('/api/waitlist', { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ product: 'offer-compare', email: e, lang }) }).catch(() => {});
+  const toOffer = (o: typeof a) => ({
+    province: o.province, salary: Number(o.salary),
+    bonus: Number(o.bonus) || 0, matchPct: Number(o.matchPct) || 0, vacationDays: Number(o.vacationDays) || 0,
+  });
+  const offerReady = a.province && b.province && Number(a.salary) >= 1000 && Number(b.salary) >= 1000;
+  const buyOffer = async () => {
+    if (!offerReady) return;
+    setOfferBuying(true);
+    setOfferError(null);
+    try {
+      const res = await fetch('/api/checkout', {
+        method: 'POST',
+        headers: { 'content-type': 'application/json' },
+        body: JSON.stringify({ product: 'offer-compare', a: toOffer(a), b: toOffer(b), lang }),
+      });
+      let data: { url?: string; error?: string } = {};
+      try { data = await res.json(); } catch { /* empty body */ }
+      if (!res.ok || !data.url) throw new Error(data.error || 'Payments are unavailable right now. Please try again in a few minutes.');
+      window.location.href = data.url;
+    } catch (e) {
+      setOfferError((e as Error).message);
+      setOfferBuying(false);
+    }
   };
 
   const Chips = ({ text }: { text: string }) => (
@@ -208,7 +279,7 @@ export default function FakeDoors({
           <p className="mt-1.5 text-[10px] text-slate-400">{t.secure}</p>
         </div>
 
-        {/* Offer comparison — fake door */}
+        {/* Offer comparison — real */}
         <div className="flex flex-col rounded-lg border border-slate-200 p-4">
           <div className="flex items-start justify-between gap-3">
             <div>
@@ -224,25 +295,21 @@ export default function FakeDoors({
                 onClick={tapOffer}
                 className="w-full rounded-md bg-slate-900 px-3 py-2.5 text-sm font-semibold text-white hover:bg-red-600"
               >
-                {t.offer} →
+                {t.offerStart}
               </button>
-            ) : joined ? (
-              <p className="text-sm font-medium text-emerald-700">✓ {t.thanks}</p>
             ) : (
-              <div>
-                <p className="text-xs font-medium text-slate-700">{t.soon}</p>
-                <div className="mt-2 flex gap-2">
-                  <input
-                    type="email"
-                    value={email}
-                    onChange={(ev) => setEmail(ev.target.value)}
-                    placeholder={t.email}
-                    className="min-w-0 flex-1 rounded-md border border-slate-200 px-2 py-1.5 text-xs"
-                  />
-                  <button onClick={joinOffer} className="rounded-md bg-red-600 px-3 py-1.5 text-xs font-semibold text-white">
-                    {t.notify}
-                  </button>
-                </div>
+              <div className="space-y-2">
+                <OfferFields o={a} set={setA} title={t.offerA} t={t} />
+                <OfferFields o={b} set={setB} title={t.offerB} t={t} />
+                <button
+                  onClick={buyOffer}
+                  disabled={!offerReady || offerBuying}
+                  className="w-full rounded-md bg-red-600 px-3 py-2.5 text-sm font-semibold text-white hover:bg-red-700 disabled:bg-slate-200 disabled:text-slate-400"
+                >
+                  {offerBuying ? t.buying : t.offerCta}
+                </button>
+                {offerError && <p className="text-[11px] text-red-600">{offerError}</p>}
+                <p className="text-[10px] text-slate-400">{t.secure}</p>
               </div>
             )}
           </div>
