@@ -43,12 +43,12 @@ QUOTA_PROJECT = "canpay-insights"
 # days — so anything reading the wrong property concludes the site is dead.
 SITE = "https://canpayinsights.ca/"
 
-SUPABASE_URL = "https://csvauvgygdjgljgllter.supabase.co"
-SUPABASE_ANON = (
-    "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9."
-    "eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImNzdmF1dmd5Z2RqZ2xqZ2xsdGVyIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzExOTE4MjYsImV4cCI6MjA4Njc2NzgyNn0."
-    "cx26CLjejb2ZuFEeG3riGPFqrZiKXlQFdGKELQ4rxYk"
-)
+# The archive lives in D1 behind our own routes (2026-08-23). The same
+# narrow token as before, now sent as a bearer token.
+API_BASE = os.environ.get("CANPAY_API_BASE", "https://canpayinsights.ca")
+# Cloudflare's bot protection blocks the bare Python user agent (error 1010);
+# this robot says who it is instead.
+UA = "canpay-archiver/1.0 (+https://canpayinsights.ca)"
 
 
 def die(msg):
@@ -191,15 +191,10 @@ def archived_days(since):
     Console discards history after 16 months. macOS runs a missed calendar job
     ONCE on wake, not once per day missed, so the catch-up never happened
     either."""
+    token = open(TOKEN_FILE).read().strip()
     req = urllib.request.Request(
-        f"{SUPABASE_URL}/rest/v1/rpc/gsc_archived_days",
-        data=json.dumps({"p_token": open(TOKEN_FILE).read().strip(),
-                         "p_since": str(since)}).encode(),
-        headers={
-            "apikey": SUPABASE_ANON,
-            "Authorization": f"Bearer {SUPABASE_ANON}",
-            "Content-Type": "application/json",
-        },
+        f"{API_BASE}/api/gsc/archived-days?since={since}",
+        headers={"Authorization": f"Bearer {token}", "User-Agent": UA},
     )
     with urllib.request.urlopen(req, timeout=30) as r:
         return {d[:10] for d in json.load(r)}
@@ -208,16 +203,12 @@ def archived_days(since):
 def ingest(payload):
     token = open(TOKEN_FILE).read().strip()
     req = urllib.request.Request(
-        f"{SUPABASE_URL}/rest/v1/rpc/gsc_ingest",
-        data=json.dumps({"p_token": token, "p_payload": payload}).encode(),
-        headers={
-            "apikey": SUPABASE_ANON,
-            "Authorization": f"Bearer {SUPABASE_ANON}",
-            "Content-Type": "application/json",
-        },
+        f"{API_BASE}/api/gsc/ingest",
+        data=json.dumps(payload).encode(),
+        headers={"Authorization": f"Bearer {token}", "Content-Type": "application/json", "User-Agent": UA},
     )
     try:
-        return json.load(urllib.request.urlopen(req))
+        return json.load(urllib.request.urlopen(req, timeout=120))
     except urllib.error.HTTPError as e:
         die(f"ingest failed: {e.code} {e.read().decode()[:200]}")
 

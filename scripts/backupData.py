@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-Copy every row out of Supabase into a git repository, one immutable file per day.
+Copy every row out of the database (D1, via our export routes) into a git repository, one immutable file per day.
 
 WHY THIS EXISTS
     The private data room reads from a single free-tier Postgres project. That
@@ -46,12 +46,8 @@ import urllib.request
 
 TOKEN_FILE = os.path.expanduser("~/.canpay-secrets/gsc-ingest-token")
 ARCHIVE_DIR = os.path.expanduser(os.environ.get("CANPAY_ARCHIVE_DIR", "~/canpay-data-archive"))
-SUPABASE_URL = "https://csvauvgygdjgljgllter.supabase.co"
-SUPABASE_ANON = (
-    "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9."
-    "eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImNzdmF1dmd5Z2RqZ2xqZ2xsdGVyIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzExOTE4MjYsImV4cCI6MjA4Njc2NzgyNn0."
-    "cx26CLjejb2ZuFEeG3riGPFqrZiKXlQFdGKELQ4rxYk"
-)
+API_BASE = os.environ.get("CANPAY_API_BASE", "https://canpayinsights.ca")
+UA = "canpay-archiver/1.0 (+https://canpayinsights.ca)"  # Cloudflare bot protection blocks bare Python (1010)
 # Search Console revises the last few days after first publishing them, so recent
 # files are rewritten on every run. Older files are treated as immutable.
 MUTABLE_DAYS = 5
@@ -63,20 +59,19 @@ def die(msg):
 
 
 def rpc(name, payload):
-    req = urllib.request.Request(
-        f"{SUPABASE_URL}/rest/v1/rpc/{name}",
-        data=json.dumps(payload).encode(),
-        headers={
-            "apikey": SUPABASE_ANON,
-            "Authorization": f"Bearer {SUPABASE_ANON}",
-            "Content-Type": "application/json",
-        },
-    )
+    """Reads from D1 through our own export routes (formerly Supabase RPCs)."""
+    token = payload.get("p_token", "")
+    if name == "export_day":
+        url = f"{API_BASE}/api/export/day?date={payload['p_date']}"
+    elif name == "export_manifest":
+        url = f"{API_BASE}/api/export/manifest"
+    else:
+        die(f"unknown export {name}")
+    req = urllib.request.Request(url, headers={"Authorization": f"Bearer {token}", "User-Agent": UA})
     try:
         return json.load(urllib.request.urlopen(req, timeout=120))
     except urllib.error.HTTPError as e:
         die(f"{name} failed: {e.code} {e.read().decode()[:300]}")
-
 
 def day_path(day):
     return os.path.join(ARCHIVE_DIR, "days", f"{day}.json")
