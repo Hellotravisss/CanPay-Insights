@@ -21,5 +21,6 @@ export async function POST(request: Request) {
     return NextResponse.json({ error: 'Incorrect password.' }, { status: 401 });
   }
   const { token } = await signInAs(await db(), email, 'email');
-  return NextResponse.json({ ok: true }, { headers: { 'Set-Cookie': sessionCookie(token) } });
+  // The token is returned too so the iOS app can keep it as a bearer.
+  return NextResponse.json({ ok: true, token }, { headers: { 'Set-Cookie': sessionCookie(token) } });
 }
