@@ -51,17 +51,20 @@ export async function GET(request: Request, { params }: { params: Promise<{ name
     }
     case 'gsc': return NextResponse.json(await gscStats(d), noStore);
     case 'content': return NextResponse.json(await contentStats(d, await ev()), noStore);
+    /** Sales. Purchases made by the owner's own accounts are flagged
+     *  `excluded` at webhook time and never counted — the revenue line has to
+     *  mean strangers paying, or it means nothing. */
     case 'sales': {
-      const one = (await d.prepare('select count(*) orders, coalesce(sum(amount_cents),0) revenue_cents, min(created_at) first_sale, max(created_at) last_sale from purchases where refunded = 0').first())!;
-      const refunds = (await d.prepare('select count(*) n from purchases where refunded = 1').first<{ n: number }>())!.n;
+      const one = (await d.prepare('select count(*) orders, coalesce(sum(amount_cents),0) revenue_cents, min(created_at) first_sale, max(created_at) last_sale from purchases where refunded = 0 and excluded = 0').first())!;
+      const refunds = (await d.prepare('select count(*) n from purchases where refunded = 1 and excluded = 0').first<{ n: number }>())!.n;
       const by = async (sql: string) => (await d.prepare(sql).all()).results;
       return NextResponse.json({
         ...one, refunds,
-        by_product: await by("select product k, count(*) n from purchases where refunded = 0 group by product order by n desc"),
-        by_route: await by("select from_province || ' → ' || to_province k, count(*) n from purchases where refunded = 0 and from_province is not null group by k order by n desc limit 12"),
-        by_bracket: await by("select income_bracket k, count(*) n from purchases where refunded = 0 and income_bracket is not null group by k order by n desc"),
-        by_month: await by("select substr(created_at,1,7) k, count(*) n, sum(amount_cents) revenue_cents from purchases where refunded = 0 group by k order by k"),
-        attached_to_account: (await d.prepare('select count(*) n from purchases where refunded = 0 and user_id is not null').first<{ n: number }>())!.n,
+        by_product: await by("select product k, count(*) n from purchases where refunded = 0 and excluded = 0 group by product order by n desc"),
+        by_route: await by("select from_province || ' → ' || to_province k, count(*) n from purchases where refunded = 0 and excluded = 0 and from_province is not null group by k order by n desc limit 12"),
+        by_bracket: await by("select income_bracket k, count(*) n from purchases where refunded = 0 and excluded = 0 and income_bracket is not null group by k order by n desc"),
+        by_month: await by("select substr(created_at,1,7) k, count(*) n, sum(amount_cents) revenue_cents from purchases where refunded = 0 and excluded = 0 group by k order by k"),
+        attached_to_account: (await d.prepare('select count(*) n from purchases where refunded = 0 and excluded = 0 and user_id is not null').first<{ n: number }>())!.n,
         shares: (await d.prepare('select count(*) n from share_rewards').first<{ n: number }>())!.n,
         shares_by_channel: await by('select channel k, count(*) n from share_rewards group by k order by n desc'),
       }, noStore);
@@ -89,7 +92,7 @@ export async function GET(request: Request, { params }: { params: Promise<{ name
       const funnel = await q(
         `select e.k, e.taps, coalesce(p.n, 0) purchases from
            (select product_interest k, count(*) taps from events where product_interest is not null group by product_interest) e
-           left join (select product k, count(*) n from purchases where refunded = 0 group by product) p
+           left join (select product k, count(*) n from purchases where refunded = 0 and excluded = 0 group by product) p
            on p.k = e.k order by e.taps desc`);
       // Signed-in checking cadence, last 30 days: how many distinct days did
       // each active user run a calculation? Aggregated into bands.
