@@ -1,5 +1,6 @@
 'use client';
 import { useEffect, useState } from 'react';
+import { TAX_YEAR } from '../constants';
 
 // Lightweight client-side i18n for the CALCULATOR TOOL UI only.
 // Articles/blog stay English. No provider needed — components call useT().
@@ -156,7 +157,7 @@ const en: Dict = {
   'res.totalTaxDed': 'Total Tax & Deductions',
   'res.netIncomePost': 'Net Income (Post-tax)',
   'res.qcTitle': 'Québec Special Tax Rules Applied',
-  'res.qcDesc': "This calculation includes Québec's unique system: QPP, QPIP, a lower EI rate, and the federal tax abatement. Results are estimates based on 2025 rates.",
+  'res.qcDesc': "This calculation includes Québec's unique system: QPP, QPIP, a lower EI rate, and the federal tax abatement. Results are estimates based on {year} rates.",
   'res.breakdown': 'Paycheck Breakdown',
   'res.earnings': 'Earnings',
   'res.regularPay': 'Regular Pay',
@@ -247,7 +248,7 @@ const en: Dict = {
   'opt.taxRefund': 'Tax Refund',
   'opt.refundRate': 'Refund Rate',
   'opt.tfsaTitle': 'TFSA - Tax-Free Savings Account',
-  'opt.tfsaRoom2025': '2025 Contribution Room',
+  'opt.tfsaRoom': '{year} Contribution Room',
   'opt.recommendedContribution': 'Recommended Contribution',
   'opt.lifetimeRoom': 'Lifetime Room Available',
   'opt.tfsaNote': 'TFSA earnings are tax-free. Great for emergency funds or short-term savings.',
@@ -255,7 +256,7 @@ const en: Dict = {
   'opt.annualLimit': 'Annual Limit',
   'opt.lifetimeLimit': 'Lifetime Limit',
   'opt.fhsaNote': 'FHSA offers tax deduction on contributions AND tax-free withdrawals for home purchase.',
-  'opt.disclaimer': 'Recommendations based on 2025 Canadian tax laws. Actual amounts may vary based on your specific situation. Consult a Registered Tax Preparer (RTP) or financial advisor for personalized advice.',
+  'opt.disclaimer': 'Recommendations based on {year} Canadian tax laws. Actual amounts may vary based on your specific situation. Consult a Registered Tax Preparer (RTP) or financial advisor for personalized advice.',
   'opt.perYr': '/yr',
   'rep.execSummary': 'Executive Summary',
   'rep.incomeAnalysis': 'Income & Tax Analysis',
@@ -466,7 +467,7 @@ const zh: Dict = {
   'res.totalTaxDed': '税款及扣除总额',
   'res.netIncomePost': '税后净收入',
   'res.qcTitle': '已应用魁北克特殊税规',
-  'res.qcDesc': '此计算包含魁北克独有的体系：QPP、QPIP、较低的 EI 费率及联邦税减免。结果为基于 2025 年税率的估算。',
+  'res.qcDesc': '此计算包含魁北克独有的体系：QPP、QPIP、较低的 EI 费率及联邦税减免。结果为基于 {year} 年税率的估算。',
   'res.breakdown': '工资明细',
   'res.earnings': '收入',
   'res.regularPay': '正常工资',
@@ -557,7 +558,7 @@ const zh: Dict = {
   'opt.taxRefund': '退税',
   'opt.refundRate': '退税率',
   'opt.tfsaTitle': 'TFSA - 免税储蓄账户',
-  'opt.tfsaRoom2025': '2025 供款额度',
+  'opt.tfsaRoom': '{year} 供款额度',
   'opt.recommendedContribution': '建议供款',
   'opt.lifetimeRoom': '终身可用额度',
   'opt.tfsaNote': 'TFSA 收益免税。适合应急基金或短期储蓄。',
@@ -565,7 +566,7 @@ const zh: Dict = {
   'opt.annualLimit': '年度上限',
   'opt.lifetimeLimit': '终身上限',
   'opt.fhsaNote': 'FHSA 供款可抵税，且购房提取免税。',
-  'opt.disclaimer': '建议基于 2025 年加拿大税法。实际金额因个人情况而异。请咨询注册报税员（RTP）或财务顾问获取个性化建议。',
+  'opt.disclaimer': '建议基于 {year} 年加拿大税法。实际金额因个人情况而异。请咨询注册报税员（RTP）或财务顾问获取个性化建议。',
   'opt.perYr': '/年',
   'rep.execSummary': '摘要总览',
   'rep.incomeAnalysis': '收入与税务分析',
@@ -776,7 +777,7 @@ const fr: Dict = {
   'res.totalTaxDed': 'Total impôts et retenues',
   'res.netIncomePost': 'Revenu net (après impôt)',
   'res.qcTitle': 'Règles fiscales du Québec appliquées',
-  'res.qcDesc': "Ce calcul inclut le système propre au Québec : RRQ, RQAP, un taux d'AE réduit et l'abattement d'impôt fédéral. Estimations basées sur les taux 2025.",
+  'res.qcDesc': "Ce calcul inclut le système propre au Québec : RRQ, RQAP, un taux d'AE réduit et l'abattement d'impôt fédéral. Estimations basées sur les taux {year}.",
   'res.breakdown': 'Détail de la paie',
   'res.earnings': 'Revenus',
   'res.regularPay': 'Paie régulière',
@@ -867,7 +868,7 @@ const fr: Dict = {
   'opt.taxRefund': 'Remboursement',
   'opt.refundRate': 'Taux de remb.',
   'opt.tfsaTitle': "CELI - Compte d'épargne libre d'impôt",
-  'opt.tfsaRoom2025': 'Plafond de cotisation 2025',
+  'opt.tfsaRoom': 'Plafond de cotisation {year}',
   'opt.recommendedContribution': 'Cotisation recommandée',
   'opt.lifetimeRoom': 'Plafond cumulatif disponible',
   'opt.tfsaNote': "Les revenus du CELI sont libres d'impôt. Idéal pour un fonds d'urgence ou l'épargne à court terme.",
@@ -875,7 +876,7 @@ const fr: Dict = {
   'opt.annualLimit': 'Plafond annuel',
   'opt.lifetimeLimit': 'Plafond à vie',
   'opt.fhsaNote': "Le CELIAPP offre une déduction fiscale sur les cotisations ET des retraits libres d'impôt pour l'achat d'une propriété.",
-  'opt.disclaimer': 'Recommandations basées sur les lois fiscales canadiennes 2025. Les montants réels varient selon votre situation. Consultez un préparateur fiscal agréé ou un conseiller financier.',
+  'opt.disclaimer': 'Recommandations basées sur les lois fiscales canadiennes {year}. Les montants réels varient selon votre situation. Consultez un préparateur fiscal agréé ou un conseiller financier.',
   'opt.perYr': '/an',
   'rep.execSummary': 'Résumé',
   'rep.incomeAnalysis': 'Analyse du revenu et de l\'impôt',
@@ -1014,7 +1015,10 @@ export function useT() {
     };
   }, []);
 
-  const t = (key: string) => dicts[lang][key] ?? en[key] ?? key;
+  // {year} is substituted with the engine's tax year, so a rate change is a
+  // one-constant edit instead of 30 hand-edited strings across 10 languages
+  // (they had drifted to 2025 while the engine was already computing 2026).
+  const t = (key: string) => (dicts[lang][key] ?? en[key] ?? key).replaceAll('{year}', String(TAX_YEAR));
   return { t, lang, setLang };
 }
 

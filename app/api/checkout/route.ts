@@ -1,7 +1,7 @@
 import { NextResponse } from 'next/server';
 import { stripeClient, siteOrigin } from '../../../lib/stripe';
 import { PRODUCTS, isProductKey } from '../../../lib/products';
-import { parseOffer } from '../../../lib/offerReport';
+import { validateOffer, offersAreIdentical } from '../../../lib/offerReport';
 import { isProvince } from '../../../lib/relocationReport';
 import { currentUser } from '../../../lib/auth/core';
 
@@ -49,8 +49,16 @@ async function handle(request: Request) {
     if (from === to) return NextResponse.json({ error: 'same province' }, { status: 400 });
     description = `${from} → ${to}`;
   } else if (product === 'offer-compare') {
-    const a = parseOffer(body.a, 'Offer A'); const b = parseOffer(body.b, 'Offer B');
-    if (!a || !b) return NextResponse.json({ error: 'both offers need a salary and a province' }, { status: 400 });
+    // Reject, never clamp: the buyer must fix the number before paying, not
+    // discover a substituted one inside the report afterwards.
+    const va = validateOffer(body.a, 'Offer A');
+    if ('error' in va) return NextResponse.json({ error: va.error }, { status: 400 });
+    const vb = validateOffer(body.b, 'Offer B');
+    if ('error' in vb) return NextResponse.json({ error: vb.error }, { status: 400 });
+    const a = va.offer, b = vb.offer;
+    if (offersAreIdentical(a, b)) {
+      return NextResponse.json({ error: 'The two offers are identical — change something before comparing them.' }, { status: 400 });
+    }
     annual = a.salary;
     // Stripe metadata values are capped at 500 chars; each offer is ~120.
     offerMeta = { a: JSON.stringify(a), b: JSON.stringify(b) };

@@ -1,5 +1,6 @@
 'use client';
 import React, { useState, useEffect, useRef, useMemo } from 'react';
+import { TAX_YEAR } from '../constants';
 import * as htmlToImage from 'html-to-image';
 import download from 'downloadjs';
 import type { CalculationResult } from '../types';
@@ -996,7 +997,7 @@ const GeminiAdvisor: React.FC<Props> = ({ results, inputs, onReportOpen }) => {
             </div>
             <div className="flex items-center gap-10">
               <div className="text-right">
-                <p className="text-xs text-slate-600 font-bold uppercase tracking-[0.4em] mb-2">Based on 2025 Tax Rules</p>
+                <p className="text-xs text-slate-600 font-bold uppercase tracking-[0.4em] mb-2">Based on {TAX_YEAR} Tax Rules</p>
                 <p className="text-sm text-slate-500 italic">For reference only. Consult a tax professional for personalized advice.</p>
               </div>
               <div className="w-32 h-32 p-1.5 bg-white rounded-2xl shadow-2xl border-4 border-slate-800 flex-shrink-0 flex items-center justify-center aspect-square">
@@ -1208,8 +1209,8 @@ const TaxOptimizationPanel: React.FC<TaxOptimizationPanelProps> = ({
           </h4>
           <div className="space-y-2 text-sm">
             <div className="flex justify-between">
-              <span className="text-slate-400">{t('opt.tfsaRoom2025')}</span>
-              <span className="text-white font-semibold">{formatCurrency(tfsa.contributionRoom2025)}</span>
+              <span className="text-slate-400">{t('opt.tfsaRoom')}</span>
+              <span className="text-white font-semibold">{formatCurrency(tfsa.annualLimit)}</span>
             </div>
             <div className="flex justify-between">
               <span className="text-slate-400">{t('opt.recommendedContribution')}</span>
@@ -1366,7 +1367,7 @@ You are a professional Canadian tax planner. Based on the following client's spe
 - Strategy Description: ${TIER_EN[rrsp.tierRecommendation] ?? rrsp.tierRecommendation}
 
 ### TFSA Recommendations
-- 2025 Contribution Room: $${tfsa.contributionRoom2025.toLocaleString()}
+- ${TAX_YEAR} Contribution Room: $${tfsa.annualLimit.toLocaleString()}
 - Recommended Contribution: $${tfsa.recommendedAmount.toLocaleString()}
 - Lifetime Available Room: $${tfsa.lifetimeRoom.toLocaleString()}
 

@@ -51,14 +51,81 @@ export type OfferReport = {
   breakEvenSalaryForB: number; // salary B would need for the same total as A
 };
 
+/** The accepted range for each field, in one place so the form, the API and
+ *  the error messages can never drift apart. */
+export const OFFER_LIMITS = {
+  salary: { min: 1000, max: 5_000_000 },
+  bonus: { min: 0, max: 5_000_000 },
+  matchPct: { min: 0, max: 20 },
+  vacationDays: { min: 0, max: 60 },
+} as const;
+
+/**
+ * Validate an offer the customer typed. Out-of-range values are REJECTED with
+ * a reason, never clamped.
+ *
+ * Clamping is the wrong behaviour for something people pay for: entering 50 in
+ * "RRSP match" (natural if your plan matches 50% of contributions) or 120 in
+ * "vacation days" (natural if you think in hours) used to be silently rewritten
+ * to 20 and 60 — and the buyer only discovered the substitution after paying,
+ * inside the report. Better to stop them at the form with a sentence they can act on.
+ */
+export function validateOffer(raw: unknown, label: string): { offer: Offer } | { error: string } {
+  if (!raw || typeof raw !== 'object') return { error: `${label}: nothing entered.` };
+  const o = raw as Record<string, unknown>;
+  if (!isProvince(o.province)) return { error: `${label}: choose a province.` };
+
+  const num = (v: unknown, name: string, lim: { min: number; max: number }, required: boolean):
+    { value: number } | { error: string } => {
+    if (v === undefined || v === null || v === '') {
+      if (required) return { error: `${label}: enter a ${name}.` };
+      return { value: 0 };
+    }
+    const x = Number(v);
+    if (!Number.isFinite(x)) return { error: `${label}: ${name} must be a number.` };
+    if (x < lim.min || x > lim.max) {
+      return { error: `${label}: ${name} must be between ${lim.min.toLocaleString('en-CA')} and ${lim.max.toLocaleString('en-CA')}.` };
+    }
+    return { value: x };
+  };
+
+  const salary = num(o.salary, 'salary', OFFER_LIMITS.salary, true);
+  if ('error' in salary) return salary;
+  const bonus = num(o.bonus, 'bonus', OFFER_LIMITS.bonus, false);
+  if ('error' in bonus) return bonus;
+  const matchPct = num(o.matchPct, 'RRSP match (% of salary)', OFFER_LIMITS.matchPct, false);
+  if ('error' in matchPct) return matchPct;
+  const vacationDays = num(o.vacationDays, 'vacation days per year', OFFER_LIMITS.vacationDays, false);
+  if ('error' in vacationDays) return vacationDays;
+
+  return { offer: { label, province: o.province, salary: salary.value, bonus: bonus.value, matchPct: matchPct.value, vacationDays: vacationDays.value } };
+}
+
+/** Two offers that are identical in every priced field produce a report that
+ *  says nothing. Refuse to sell it. */
+export function offersAreIdentical(a: Offer, b: Offer): boolean {
+  return a.province === b.province && a.salary === b.salary && a.bonus === b.bonus
+    && a.matchPct === b.matchPct && a.vacationDays === b.vacationDays;
+}
+
+/**
+ * Lenient re-parse, used ONLY to rebuild a report from a paid Stripe session.
+ * Those values already passed validateOffer at checkout, so this must not
+ * reject them — a customer must never lose access to a report they bought.
+ */
 export function parseOffer(raw: unknown, label: string): Offer | null {
   if (!raw || typeof raw !== 'object') return null;
   const o = raw as Record<string, unknown>;
   const n = (v: unknown, lo: number, hi: number) => { const x = Number(v); return Number.isFinite(x) ? Math.min(hi, Math.max(lo, x)) : 0; };
   if (!isProvince(o.province)) return null;
-  const salary = n(o.salary, 1000, 5_000_000);
-  if (salary < 1000) return null;
-  return { label, province: o.province, salary, bonus: n(o.bonus, 0, 5_000_000), matchPct: n(o.matchPct, 0, 20), vacationDays: n(o.vacationDays, 0, 60) };
+  const salary = n(o.salary, OFFER_LIMITS.salary.min, OFFER_LIMITS.salary.max);
+  if (salary < OFFER_LIMITS.salary.min) return null;
+  return {
+    label, province: o.province, salary,
+    bonus: n(o.bonus, OFFER_LIMITS.bonus.min, OFFER_LIMITS.bonus.max),
+    matchPct: n(o.matchPct, OFFER_LIMITS.matchPct.min, OFFER_LIMITS.matchPct.max),
+    vacationDays: n(o.vacationDays, OFFER_LIMITS.vacationDays.min, OFFER_LIMITS.vacationDays.max),
+  };
 }
 
 function net(province: string, gross: number) {

@@ -20,7 +20,7 @@ export interface TaxOptimizationResult {
   };
   // TFSA Recommendations
   tfsa: {
-    contributionRoom2025: number;
+    annualLimit: number;
     recommendedAmount: number;
     lifetimeRoom: number;
   };
@@ -56,7 +56,12 @@ const RRSP_MAX_CONTRIBUTION_2025 = 31950;
 const RRSP_MAX_CONTRIBUTION_2026 = 32370;
 
 // TFSA 2025 Limit
-const TFSA_LIMIT_2025 = 7000;
+// TFSA annual dollar limit. $7,000 for 2024, 2025 and 2026 (indexation has not
+// pushed it to the next $500 step). Cumulative room for someone eligible since
+// 2009 and never contributed: $109,000 as of 2026 ($102,000 through 2025 + $7,000).
+// Sources checked 2026-08-24: Fidelity Canada TFSA limit article; CRA TFSA pages.
+const TFSA_ANNUAL_LIMIT = 7000;
+const TFSA_LIFETIME_ROOM = 109_000;
 
 // FHSA Limits
 const FHSA_ANNUAL_LIMIT = 8000;
@@ -166,16 +171,16 @@ const calculateRRSPRecommendation = (
  */
 const calculateTFSARecommendation = (annualIncome: number) => {
   // Lifetime contribution room as of 2025
-  const lifetimeRoom = 102000;
+  const lifetimeRoom = TFSA_LIFETIME_ROOM;
 
-  let recommendedAmount = TFSA_LIMIT_2025;
+  let recommendedAmount = TFSA_ANNUAL_LIMIT;
   if (annualIncome < 50000) {
     // Low income: prioritize TFSA
-    recommendedAmount = Math.min(TFSA_LIMIT_2025, Math.floor(annualIncome * 0.1));
+    recommendedAmount = Math.min(TFSA_ANNUAL_LIMIT, Math.floor(annualIncome * 0.1));
   }
 
   return {
-    contributionRoom2025: TFSA_LIMIT_2025,
+    annualLimit: TFSA_ANNUAL_LIMIT,
     recommendedAmount,
     lifetimeRoom,
   };
