@@ -1260,4 +1260,107 @@ Canada's lowest federal income tax rate is **14% for 2026**, down from 15%, and 
 Based on the Government of Canada's announcement [Delivering a middle-class tax cut](https://www.canada.ca/en/department-finance/news/2025/05/delivering-a-middle-class-tax-cut.html) and the Prime Minister's office release [Canada's new government delivers middle-class tax cut](https://www.pm.gc.ca/en/news/news-releases/2025/06/30/canadas-new-government-delivers-middle-class-tax), cross-checked against professional summaries from Invesco Canada and BDO Canada and reporting by CBC News. The $420 maximum and the 15%-to-14% rate, July 1, 2025 effective date, 14.5% blended 2025 rate and 14% full-year 2026 rate are drawn from those government sources. Savings by salary are calculated by CanPay Insights from the published 2026 federal bracket and basic personal amount and are not themselves quoted from a government source. This is general information, not tax or financial advice — confirm current figures with the [Canada Revenue Agency](https://www.canada.ca/en/revenue-agency.html) or [Department of Finance Canada](https://www.canada.ca/en/department-finance.html).
 `,
   },
+  {
+    id: 'study-13',
+    slug: 'saskatchewan-minimum-wage-october-2026',
+    title: "Saskatchewan's Minimum Wage Rises to $15.70 on October 1, 2026",
+    subtitle:
+      "Saskatchewan raises its minimum wage from $15.35 to $15.70 an hour on October 1, 2026 — the province's indexation formula catching up while it remains Canada's second-lowest, ahead only of Alberta.",
+    excerpt:
+      "Saskatchewan's minimum wage rises from $15.35 to $15.70 on October 1, 2026, a 35-cent increase under the province's CPI-and-wages formula. A full-time worker gains about $508 more take-home pay a year — and Saskatchewan stays Canada's second-lowest minimum wage, just above Alberta's frozen $15.00.",
+    metaTitle: 'Saskatchewan Minimum Wage Rises to $15.70 in 2026',
+    metaDescription:
+      "Saskatchewan's minimum wage rises from $15.35 to $15.70 on Oct 1, 2026. See the after-tax gain, calculated with the CanPay tax engine.",
+    keywords: [
+      'saskatchewan minimum wage 2026',
+      'saskatchewan minimum wage october 2026',
+      'saskatchewan minimum wage increase',
+      'sk minimum wage $15.70',
+      'saskatchewan take-home pay 2026',
+      'lowest minimum wage canada 2026',
+    ],
+    category: 'news',
+    tags: ['Saskatchewan', 'Minimum Wage', '2026'],
+    publishedAt: '2026-08-24',
+    readTime: 5,
+    imageUrl: '/blog/saskatchewan-minimum-wage-october-2026.svg',
+    directAnswer:
+      "Saskatchewan's general minimum wage rises from $15.35 to $15.70 an hour on October 1, 2026, a 35-cent increase set under the province's indexation formula, which gives equal weight to changes in the Consumer Price Index and the average hourly wage in Saskatchewan. Running the new rate through the CanPay Insights tax engine, a full-time (2,080 hours/year) minimum wage worker in Saskatchewan gains about $508 more take-home pay a year — roughly $20 more per biweekly paycheque. Even after the increase, Saskatchewan keeps Canada's second-lowest minimum wage, ahead only of Alberta's $15.00, which has been frozen since 2018.",
+    faq: [
+      {
+        question: "What is Saskatchewan's new minimum wage for October 2026?",
+        answer:
+          "$15.70 an hour, up from $15.35, effective October 1, 2026. It's a 35-cent increase set under Saskatchewan's indexation formula, which averages the change in the Consumer Price Index and the change in the average hourly wage for the province over the previous year — not a one-off political decision.",
+      },
+      {
+        question: "Why wasn't Saskatchewan included when Ontario, Nova Scotia, PEI and Manitoba raised minimum wage on the same date?",
+        answer:
+          "Those four provinces confirmed their October 1, 2026 increases earlier in the year; Saskatchewan's own October 1 increase, confirmed by the provincial government on June 29, 2026, also lands on the same date. Five provinces — Ontario, Nova Scotia, Prince Edward Island, Manitoba, and Saskatchewan — all raise minimum wage on October 1, 2026, though each sets its rate independently.",
+      },
+      {
+        question: 'How much extra will a full-time Saskatchewan minimum wage worker take home?',
+        answer:
+          "For 2,080 hours a year (40 hours/week), the raise adds $728 in gross pay before deductions, but only about $508 survives federal tax, Saskatchewan provincial tax, CPP, and EI — roughly $20 more per biweekly paycheque, or about $42 a month. That's a CanPay Insights calculation using the 2026 tax engine, comparing $15.35/hour and $15.70/hour full-time pay in Saskatchewan.",
+      },
+      {
+        question: "Is Saskatchewan still the lowest minimum wage in Canada?",
+        answer:
+          "No — Alberta is lowest, at $15.00 an hour, unchanged since October 2018. After the October 1, 2026 increase, Saskatchewan's $15.70 remains Canada's second-lowest, below every other province and territory, including New Brunswick at $15.90 (as of April 2026).",
+      },
+      {
+        question: 'Does Saskatchewan review its minimum wage every year?',
+        answer:
+          "Yes. Saskatchewan has used the same CPI-plus-average-hourly-wage indexation formula since 2018, with increases typically taking effect each October 1. The formula is meant to keep pace with both inflation and overall wage growth in the province, rather than requiring a new law or budget announcement each time.",
+      },
+      {
+        question: 'Does the minimum wage increase affect CPP and EI deductions?',
+        answer:
+          "Yes, proportionally — CPP (5.95%) and EI (1.63%) apply to the extra gross pay just like income tax does, which is why the after-tax raise ($508) is smaller than the pre-tax raise ($728). See [how much CPP you pay in 2026](/blog/how-much-cpp-will-i-pay-2026) and [how much EI you pay in 2026](/blog/how-much-ei-will-i-pay-2026) for the full rates.",
+      },
+    ],
+    content: `
+## Saskatchewan's rate catches up on October 1
+
+Saskatchewan's general minimum wage rises from **$15.35 to $15.70 an hour on October 1, 2026** — a 35-cent increase set under the province's indexation formula, which gives equal weight to the change in the Consumer Price Index and the change in Saskatchewan's average hourly wage over the previous year. The province confirmed the new rate on **June 29, 2026**.
+
+That puts Saskatchewan on the same effective date as four other provinces already raising their minimum wage on October 1, 2026: [Ontario, Nova Scotia, Prince Edward Island, and Manitoba](/blog/minimum-wage-increases-october-2026). Five provinces move on the same day this fall, but each sets its own rate independently through its own formula or legislation.
+
+We ran Saskatchewan's new rate through the CanPay Insights tax engine (2026 federal and provincial brackets, CPP, and EI) to see exactly how much of the raise survives payroll deductions.
+
+### The rate, in one table
+
+| | Rate | Change | Effective |
+| --- | --- | --- | --- |
+| Old rate | $15.35/hr | — | Since October 2025 |
+| New rate | **$15.70/hr** | +$0.35 | October 1, 2026 |
+| Formula | CPI + average hourly wage, averaged | — | Annual review |
+
+### What it's actually worth after tax
+
+Full-time hours (40/week, 2,080/year), 2026 federal and Saskatchewan tax rates, CPP, EI, and basic personal amounts only:
+
+| Rate | Gross pay/year | Take-home pay/year | Take-home/biweekly | Extra vs. old rate | Extra/cheque |
+| --- | --- | --- | --- | --- | --- |
+| $15.35/hr (current) | $31,928 | $26,879 | $1,034 | — | — |
+| $15.70/hr (Oct 1) | **$32,656** | **$27,387** | **$1,053** | **+$508/yr** | **+$20** |
+
+*Calculated by CanPay Insights using the 2026 tax engine for a single Saskatchewan worker with no other income or credits, paid biweekly (26 pay periods).*
+
+### Why the after-tax gain is smaller than the raise looks
+
+A 35-cent raise sounds like $728 more a year (35 cents × 2,080 hours) — but only about **$508** of that survives payroll deductions, because the extra income is taxed and subject to CPP and EI exactly like the rest of the paycheque. In practice, a Saskatchewan minimum wage worker keeps roughly **70 cents of every extra dollar** from this raise; the rest goes to federal tax, Saskatchewan provincial tax, CPP, and EI.
+
+### Still Canada's second-lowest minimum wage
+
+Even at $15.70, Saskatchewan stays near the bottom of the national ranking. Alberta remains the only province paying less, at a flat **$15.00 an hour** — frozen since October 2018, with no increase announced for 2026. New Brunswick, which raised its own rate to $15.90 in April 2026, now pays 20 cents more per hour than Saskatchewan's new rate. For the full national picture across all 13 provinces and territories, see our [minimum wage take-home pay study](/blog/minimum-wage-take-home-pay-canada-2026).
+
+### See your own numbers
+
+These figures assume a single worker with no other income or credits. To check your own paycheque under the new rate, use the free [Saskatchewan paycheck calculator](/saskatchewan-paycheck-calculator), see the [Saskatchewan take-home pay guide](/blog/saskatchewan-take-home-pay-guide-2026), or compare it against every other province with [compare provinces](/compare-provinces).
+
+## Sources & disclaimer
+
+Rate and effective-date figures are based on the Government of Saskatchewan's June 29, 2026 announcement of its minimum wage increase and the province's published indexation formula, cross-checked against contemporaneous reporting by the Prince Albert Daily Herald and MBC Radio. Take-home figures are calculated with the CanPay Insights tax engine using 2026 federal and Saskatchewan provincial rates, full-time hours (2,080/year), a single worker, and basic personal amounts only — real paycheques vary with credits, benefits, and actual hours worked. This is general information, not tax advice.
+`,
+  },
 ];

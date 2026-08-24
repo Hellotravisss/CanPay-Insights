@@ -27,6 +27,7 @@ CanPay Insights is an independent project based in Vancouver, Canada. All figure
 - [CPP contribution rate cut 2027 — base rate falls from 9.9% to 9.5%, savings by salary](https://canpayinsights.ca/blog/cpp-contribution-rate-cut-2027)
 - [BC tax rate jumps to 5.60% in 2026 — why paycheques shrank in July](https://canpayinsights.ca/blog/bc-tax-rate-increase-2026)
 - [Federal tax cut — 14% lowest rate, first full year 2026, up to $420 back](https://canpayinsights.ca/blog/federal-tax-cut-2026)
+- [Saskatchewan minimum wage rises to $15.70, October 1, 2026 — take-home impact](https://canpayinsights.ca/blog/saskatchewan-minimum-wage-october-2026)
 
 ## Key 2026 facts
 - The federal lowest income-tax bracket is cut from 15% to 14% in 2026.
