@@ -19,7 +19,7 @@ npm run dev
 
 在浏览器地址栏输入：
 ```
-http://localhost:3000/favicon-generator.html
+(favicon-generator.html 已删除 —— 它是用手画的赝品 logo 生成图标的。图标已生成好,不要重做;规则见 public/README-LOGO.md)
 ```
 
 ### **3. 下载所有尺寸的图标**
@@ -96,7 +96,7 @@ http://localhost:3000/og-image-generator.html
   ├── apple-touch-icon.png         → 需要下载
   ├── android-chrome-192x192.png   → 需要下载
   ├── og-image.png                 → 需要截图
-  ├── favicon-generator.html        ✓ 已创建
+  ├── (favicon-generator.html 已于 2026-08-23 删除:用的是错误 logo)
   └── og-image-generator.html       ✓ 已创建
 ```
 

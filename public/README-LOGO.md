@@ -1,46 +1,28 @@
-# CanPay Insights Logo 文件说明
+# CanPay Insights — logo 规则
 
-## 📍 Logo 来源
+## 唯一真源
 
-**网页抬头的 logo 原本没有独立文件**，是直接写在 `App.tsx` 第 49-63 行的内联 SVG 组件 `InukshukIcon`。
+**`public/logo.png`** —— 这是唯一正确的 logo(红底 + 有厚度切面的 Inukshuk 石板)。
+PDF 里用的是同一张图,经 `lib/logoBase64.ts` 内嵌。
 
-现已提取到独立文件，方便统一使用和分享。
+## 🔴 铁律:永远不要手画这个 mark
 
----
+不要在 SVG / JSX 里用 `<path>`、`<rect>` 去「重画」Inukshuk。
 
-## 📂 Logo 文件列表
+历史上这么干过,后果是**错误 logo 反复上线**:曾经有人把当年抬头的内联 SVG
+提取成 `logo-inukshuk.svg` 和 `logo-full.svg` 并写进文档说这是「logo 文件」,
+于是后续每做一个新东西(文章封面、加载动画、favicon 生成器)都去拿那份**手画的赝品** ——
+细圆角条组成的简笔画,和真 logo 完全不是一个东西。那三个文件已于 2026-08-23 删除。
 
-| 文件 | 用途 | 说明 |
-|------|------|------|
-| **logo-inukshuk.svg** | 纯图标 | 抬头 logo 的原始设计，24x24 viewBox |
-| **favicon.svg** | 浏览器图标 | 红色背景 + 同上 Inukshuk，100x100 |
-| **logo-full.svg** | 完整 logo | 图标 + "CanPay Insights" 文字，发给朋友用 |
+## 怎么用
 
----
+| 场景 | 做法 |
+|------|------|
+| 网页 / JSX | `<img src="/logo.png" />` |
+| PDF(pdf-lib) | `LOGO_PNG_BASE64`(`lib/logoBase64.ts`) |
+| 邮件 HTML | `<img src="https://canpayinsights.ca/logo.png">` |
+| SVG 封面(必须自包含) | `<image href="data:image/png;base64,…">` 内嵌 96px 版本,**不要** `<path>` |
+| favicon / app icon | 已生成好,别再重做:`favicon-*.png`、`apple-touch-icon.png`、`android-chrome-*.png` |
 
-## 🎯 发给朋友用哪个？
-
-- **只要图标**：`logo-inukshuk.svg` 或 `favicon.svg`
-- **完整 logo（图标+文字）**：`logo-full.svg`
-
----
-
-## 📐 设计来源
-
-所有 logo 都来自 `App.tsx` 中的 `InukshukIcon`：
-
-```tsx
-// App.tsx 第 49-63 行
-const InukshukIcon = ({ className }) => (
-  <svg viewBox="0 0 24 24" fill="currentColor">
-    <rect x="10" y="2" width="4" height="3" rx="0.5" />
-    <path d="M4 6h16a1 1 0 0 1 1 1v2a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V7a1 1 0 0 1 1-1z" />
-    <rect x="9" y="10" width="6" height="4" rx="0.5" />
-    <path d="M5 14h14a1 1 0 0 1 1 1v2a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1v-2a1 1 0 0 1 1-1z" />
-    <rect x="7" y="18" width="3" height="4" rx="0.5" />
-    <rect x="14" y="18" width="3" height="4" rx="0.5" />
-  </svg>
-);
-```
-
-Inukshuk（因纽特石堆）是加拿大标志，代表指引和方向。
+SVG 被 `<img>` 加载时外部引用会被浏览器拦掉,所以封面 SVG 必须内嵌 base64,
+不能写 `href="/logo.png"`。96px 的 PNG 约 4.6 KB,够用且不占地方。
