@@ -511,7 +511,7 @@ const TimesheetInput: React.FC<Props> = ({ inputs, setInputs }) => {
             <div className="space-y-2">
               {getEntriesForDate(selectedDate).map(entry => (
                 <div key={entry.id} className="bg-white p-3 rounded-lg border border-slate-200 flex items-center justify-between">
-                  <div className="flex-1">
+                  <div className="min-w-0">
                     <div className="flex items-center gap-3 text-sm">
                       <span className="font-semibold text-slate-800">
                         {entry.checkIn} → {entry.checkOut}

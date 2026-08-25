@@ -80,6 +80,26 @@ input[type="date"]::-webkit-date-and-time-value,
 input[type="datetime-local"]::-webkit-date-and-time-value {
   text-align: left;
   margin: 0;
+  width: 100%;
+}
+
+/* 24-hour locales render through a different inner path than 12-hour ones
+   (verified on-device: the AM/PM layout was fixed by the rule above while a
+   24-hour iPhone still centred END TIME). Zero out the datetime-edit wrapper
+   and its fields so the value hugs the padding edge in both formats. */
+input[type="time"]::-webkit-datetime-edit,
+input[type="date"]::-webkit-datetime-edit,
+input[type="datetime-local"]::-webkit-datetime-edit {
+  display: inline-flex;
+  justify-content: flex-start;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  text-align: left;
+}
+input[type="time"]::-webkit-datetime-edit-fields-wrapper {
+  margin: 0;
+  padding: 0;
 }
 
 /* Safari also gives these inputs an intrinsic width that can push the value
@@ -87,5 +107,16 @@ input[type="datetime-local"]::-webkit-date-and-time-value {
 input[type="time"],
 input[type="date"],
 input[type="datetime-local"] {
+  min-width: 0;
+}
+
+/* The real culprit found by measuring on a 24-hour iPhone: a time input's
+   INTRINSIC width can exceed its grid column, and grid items default to
+   min-width auto — so the first input overflowed across the gap and the
+   second started further right than its visible box. Let any cell holding
+   one of these inputs shrink. */
+div:has(> input[type="time"]),
+div:has(> input[type="date"]),
+div:has(> input[type="datetime-local"]) {
   min-width: 0;
 }

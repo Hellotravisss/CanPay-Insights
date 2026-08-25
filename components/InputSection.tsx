@@ -113,7 +113,7 @@ const InputSection: React.FC<Props> = ({ inputs, setInputs }) => {
         {/* 改进的时间输入布局：增加间距和宽度 */}
         <div className="space-y-4">
           <div className="grid grid-cols-2 gap-4">
-            <div className="flex-1">
+            <div className="min-w-0">
               <label className="block text-xs font-bold text-slate-500 uppercase mb-1.5 ml-1">{t('hourly.startTime')}</label>
               <input 
                 type="time" 
@@ -122,7 +122,7 @@ const InputSection: React.FC<Props> = ({ inputs, setInputs }) => {
                 onChange={(e) => setInputs({...inputs, shift: { ...inputs.shift, startTime: e.target.value }})}
               />
             </div>
-            <div className="flex-1">
+            <div className="min-w-0">
               <label className="block text-xs font-bold text-slate-500 uppercase mb-1.5 ml-1">{t('hourly.endTime')}</label>
               <input 
                 type="time" 
