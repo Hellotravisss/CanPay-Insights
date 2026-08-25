@@ -1,5 +1,6 @@
 'use client';
 import React from 'react';
+import AnimatedAmount from './AnimatedAmount';
 import { CalculationResult, Province } from '../types';
 import { useT } from '../lib/i18n';
 
@@ -201,8 +202,11 @@ const ResultsSection: React.FC<Props> = ({ results, provinceName }) => {
                   <h3 className="text-red-100 text-xs font-bold uppercase tracking-widest mb-1">
                     {payPeriodLabel} · {t('res.netPay')}
                   </h3>
-                  <p className="text-4xl font-extrabold tracking-tight">
-                    {formatCurrency(hasCustomFrequency ? (results.netPayPerPeriod || results.netPayBiWeekly) : results.netPayBiWeekly)}
+                  <p className="text-4xl font-extrabold tracking-tight tabular-nums">
+                    <AnimatedAmount
+                      value={hasCustomFrequency ? (results.netPayPerPeriod || results.netPayBiWeekly) : results.netPayBiWeekly}
+                      format={formatCurrency}
+                    />
                   </p>
                </div>
                <div className="bg-white/20 px-3 py-1 rounded text-xs font-semibold backdrop-blur-sm">
