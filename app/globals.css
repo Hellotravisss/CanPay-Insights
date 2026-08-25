@@ -66,3 +66,26 @@ body {
   }
   :root { --dur-snappy: 0ms; --dur-smooth: 0ms; }
 }
+
+/* ── Time inputs on iOS ───────────────────────────────────────────────────
+   WebKit renders the value of a date/time input inside
+   ::-webkit-date-and-time-value and CENTRES it, so on iPhone "06:00" floated
+   toward the middle of the field while every neighbouring input (break
+   minutes, premium rate) sat left — the pair read as shifted right.
+
+   Targeting the inner pseudo-element fixes the alignment without
+   -webkit-appearance: none, which would also strip the native picker. */
+input[type="time"]::-webkit-date-and-time-value,
+input[type="date"]::-webkit-date-and-time-value,
+input[type="datetime-local"]::-webkit-date-and-time-value {
+  text-align: left;
+  margin: 0;
+}
+
+/* Safari also gives these inputs an intrinsic width that can push the value
+   around inside a flex/grid cell; let the box be sized by its container. */
+input[type="time"],
+input[type="date"],
+input[type="datetime-local"] {
+  min-width: 0;
+}
