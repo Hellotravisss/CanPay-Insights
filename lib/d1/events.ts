@@ -329,21 +329,34 @@ export function calcCrosstab(ev: Ev[]) {
 // ── calc_cities_geo ───────────────────────────────────────────────────────
 export function calcCitiesGeo(ev: Ev[]) {
   const named = new Map<string, { lat: number[]; lon: number[] }>();
-  const unnamed = new Map<string, { city: string; lat: number[]; lon: number[] }>();
+  const unnamed = new Map<string, { city: string; country: string; lat: number[]; lon: number[] }>();
   for (const r of ev) {
     if (r.lat === null || r.lon === null) continue;
     if (r.city) { const c = named.get(r.city as string) ?? { lat: [], lon: [] }; c.lat.push(r.lat as number); c.lon.push(r.lon as number); named.set(r.city as string, c); }
     else {
       const key = `${r.country ?? '?'}|${Math.round((r.lat as number) * 10) / 10}|${Math.round((r.lon as number) * 10) / 10}`;
-      const c = unnamed.get(key) ?? { city: (r.country as string) ?? '?', lat: [], lon: [] }; c.lat.push(r.lat as number); c.lon.push(r.lon as number); unnamed.set(key, c);
+      const c = unnamed.get(key) ?? { city: (r.country as string) ?? '?', country: (r.country as string) ?? '?', lat: [], lon: [] }; c.lat.push(r.lat as number); c.lon.push(r.lon as number); unnamed.set(key, c);
     }
   }
   const avg = (a: number[]) => Math.round((a.reduce((x, y) => x + y, 0) / a.length) * 1000) / 1000;
   const out = [
-    ...[...named.entries()].map(([city, c]) => ({ city, lat: avg(c.lat), lon: avg(c.lon), n: c.lat.length })),
-    ...[...unnamed.values()].map((c) => ({ city: c.city, lat: avg(c.lat), lon: avg(c.lon), n: c.lat.length })),
+    ...[...named.entries()].map(([city, c]) => ({ city, lat: avg(c.lat), lon: avg(c.lon), n: c.lat.length, intl: !inCanada(c.lat[0], c.lon[0]) })),
+    ...[...unnamed.values()].map((c) => ({ city: c.city, lat: avg(c.lat), lon: avg(c.lon), n: c.lat.length, intl: c.country !== 'CA' })),
   ];
-  return out.sort((a, b) => b.n - a.n).slice(0, 60);
+  // Keep EVERY point outside Canada, then fill the rest with the busiest
+  // Canadian ones. A plain top-60 sorted the globe by volume, so as Canadian
+  // cities accumulated they pushed the rare foreign visits off the map:
+  // Hong Kong (3 visits) fell out at the n=3 cutoff and looked like lost data.
+  // Reach is the point of this globe — one visit from Hong Kong says more than
+  // the sixtieth Canadian suburb.
+  const intl = out.filter((p) => p.intl).sort((a, b) => b.n - a.n);
+  const dom = out.filter((p) => !p.intl).sort((a, b) => b.n - a.n);
+  return [...intl, ...dom.slice(0, Math.max(20, 80 - intl.length))].map(({ intl: _i, ...p }) => p);
+}
+
+/** Rough Canada bounding box — good enough to tell a domestic dot from a foreign one. */
+function inCanada(lat: number, lon: number) {
+  return lat >= 41.5 && lat <= 83.5 && lon >= -141.5 && lon <= -52;
 }
 
 // ── calc_provenance (events part) ─────────────────────────────────────────
