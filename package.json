@@ -5,7 +5,7 @@
   "type": "module",
   "scripts": {
     "dev": "next dev",
-    "prebuild": "npm run audit:numbers:selftest && npm run audit:numbers",
+    "prebuild": "npm run audit:numbers:selftest && npm run audit:numbers && npm run audit:logo",
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
@@ -13,7 +13,8 @@
     "audit:numbers:selftest": "tsx scripts/auditNumbers.ts --selftest",
     "preview": "opennextjs-cloudflare build && opennextjs-cloudflare preview",
     "deploy": "opennextjs-cloudflare build && opennextjs-cloudflare deploy",
-    "cf-typegen": "wrangler types --env-interface CloudflareEnv cloudflare-env.d.ts"
+    "cf-typegen": "wrangler types --env-interface CloudflareEnv cloudflare-env.d.ts",
+    "audit:logo": "node scripts/auditLogo.mjs"
   },
   "dependencies": {
     "@google/genai": "^1.30.0",

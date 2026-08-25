@@ -26,3 +26,18 @@ PDF 里用的是同一张图,经 `lib/logoBase64.ts` 内嵌。
 
 SVG 被 `<img>` 加载时外部引用会被浏览器拦掉,所以封面 SVG 必须内嵌 base64,
 不能写 `href="/logo.png"`。96px 的 PNG 约 4.6 KB,够用且不占地方。
+
+## 文章封面:不要手写,调脚本
+
+```bash
+node scripts/coverLogo.mjs     # 输出可直接粘贴的 <!-- brand --> 组
+```
+
+`scripts/coverLogo.mjs` 是封面 logo 的**唯一出处**。别再「从现有封面照抄 brand 组」——
+正是这条捷径让赝品在三次事故里传播到八张封面上。
+
+## 构建关卡
+
+`npm run audit:logo`(已挂在 `prebuild` 上,和数字审计同级)。任何 `public/blog/*.svg`
+只要带手画 mark 或没内嵌真 logo,**构建直接失败**。散文规则拦不住,这个拦得住。
+自动发文机器人的提示词也已改成先跑这个关卡。
