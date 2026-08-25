@@ -24,6 +24,7 @@ import IntentPrompt from './components/IntentPrompt';
 import ExpectationPrompt from './components/ExpectationPrompt';
 import FakeDoors from './components/FakeDoors';
 import ShareReward from './components/ShareReward';
+import CapTimeline from './components/CapTimeline';
 import PayCurve from './components/PayCurve';
 import ResultsSection from './components/ResultsSection';
 import GeminiAdvisor from './components/GeminiAdvisor';
@@ -700,6 +701,13 @@ const App: React.FC = () => {
                 <ResultsSection results={results} provinceName={currentProvince} />
                 {/* Immediately under the figure: the reaction is the data, and
                     it evaporates the moment the reader scrolls on. */}
+                {/* Above the ceilings, real paycheques jump mid-year when
+                    CPP/EI max out — named month + exact size, engine-derived. */}
+                <CapTimeline
+                  annualIncome={results.grossPayAnnual}
+                  province={currentProvince}
+                  lang={lang}
+                />
                 <ExpectationPrompt
                   mode={mode}
                   province={currentProvince}
