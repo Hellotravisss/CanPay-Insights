@@ -10,7 +10,8 @@ import {
   type EmployerSize,
   type VacationBand,
 } from '../lib/telemetry';
-import type { CalculationMode as CalcMode } from '../types';
+import { PayFrequency, type CalculationMode as CalcMode } from '../types';
+import { calculateFromAnnualSalary } from '../utils/taxEngine';
 
 /**
  * A progressive prompt: one tap, one question, and the next question only
@@ -36,6 +37,11 @@ import type { CalculationMode as CalcMode } from '../types';
 
 const DICT: Record<string, Record<string, string>> = {
   en: {
+    payPeers: 'Of the {n} people who answered this, {pct} said the same as you.',
+    payRate: 'While you are here: your all-in deduction rate in {p} is {r} — that is federal tax, provincial tax, CPP and EI together.',
+    payVacation: '{d} paid days off is worth about {v} of your pay — that is what the time itself is paid at.',
+    oneMore: 'One more →',
+    noThanks: 'That is enough',
     prompt: 'Is that more or less than you expected?',
     lower: 'Less than I thought',
     higher: 'More than I thought',
@@ -64,6 +70,11 @@ const DICT: Record<string, Record<string, string>> = {
     hint: 'Anonymous. We publish only totals, never your figures.',
   },
   zh: {
+    payPeers: '回答过这题的 {n} 个人里,{pct} 和你选了一样的。',
+    payRate: '顺便告诉你:你在{p}的总扣除率是 {r} —— 联邦税、省税、CPP 和 EI 加起来。',
+    payVacation: '{d} 天带薪年假约合 {v} —— 这是那些休息日本身值的钱。',
+    oneMore: '再答一题 →',
+    noThanks: '够了',
     prompt: '这个数字比你预想的高还是低?',
     lower: '比我想的少',
     higher: '比我想的多',
@@ -92,6 +103,11 @@ const DICT: Record<string, Record<string, string>> = {
     hint: '匿名统计,只发布汇总数字,绝不公开你的金额。',
   },
   fr: {
+    payPeers: 'Sur les {n} personnes ayant répondu, {pct} ont dit la même chose que vous.',
+    payRate: 'Au passage : votre taux de retenue total en {p} est de {r} — impôt fédéral, provincial, RPC et AE réunis.',
+    payVacation: '{d} jours de congés payés valent environ {v} — c’est ce que vaut ce temps.',
+    oneMore: 'Une de plus →',
+    noThanks: 'Ça suffit',
     prompt: "Est-ce plus ou moins que ce que vous pensiez ?",
     lower: 'Moins que prévu',
     higher: 'Plus que prévu',
@@ -120,6 +136,11 @@ const DICT: Record<string, Record<string, string>> = {
     hint: 'Anonyme. Nous publions uniquement des totaux.',
   },
   es: {
+    payPeers: 'De las {n} personas que respondieron, {pct} dijo lo mismo que usted.',
+    payRate: 'De paso: su tasa total de retenciones en {p} es {r} — impuesto federal, provincial, CPP y EI juntos.',
+    payVacation: '{d} días de vacaciones pagadas valen unos {v} — eso vale ese tiempo.',
+    oneMore: 'Una más →',
+    noThanks: 'Es suficiente',
     prompt: '¿Es más o menos de lo que esperaba?',
     lower: 'Menos de lo que pensaba',
     higher: 'Más de lo que pensaba',
@@ -148,6 +169,11 @@ const DICT: Record<string, Record<string, string>> = {
     hint: 'Anónimo. Publicamos solo totales, nunca sus cifras.',
   },
   pa: {
+    payPeers: 'ਇਸ ਦਾ ਜਵਾਬ ਦੇਣ ਵਾਲੇ {n} ਲੋਕਾਂ ਵਿੱਚੋਂ {pct} ਨੇ ਤੁਹਾਡੇ ਵਾਂਗ ਕਿਹਾ।',
+    payRate: 'ਨਾਲੇ: {p} ਵਿੱਚ ਤੁਹਾਡੀ ਕੁੱਲ ਕਟੌਤੀ ਦਰ {r} ਹੈ — ਫ਼ੈਡਰਲ ਟੈਕਸ, ਸੂਬਾਈ ਟੈਕਸ, CPP ਤੇ EI ਮਿਲਾ ਕੇ।',
+    payVacation: '{d} ਤਨਖਾਹੀ ਛੁੱਟੀ ਦੇ ਦਿਨ ਲਗਭਗ {v} ਦੇ ਬਰਾਬਰ ਹਨ।',
+    oneMore: 'ਇੱਕ ਹੋਰ →',
+    noThanks: 'ਬਸ',
     prompt: 'ਕੀ ਇਹ ਤੁਹਾਡੀ ਉਮੀਦ ਤੋਂ ਵੱਧ ਹੈ ਜਾਂ ਘੱਟ?',
     lower: 'ਮੇਰੀ ਸੋਚ ਤੋਂ ਘੱਟ',
     higher: 'ਮੇਰੀ ਸੋਚ ਤੋਂ ਵੱਧ',
@@ -176,6 +202,11 @@ const DICT: Record<string, Record<string, string>> = {
     hint: 'ਗੁਪਤ। ਅਸੀਂ ਸਿਰਫ਼ ਕੁੱਲ ਅੰਕੜੇ ਛਾਪਦੇ ਹਾਂ, ਤੁਹਾਡੀ ਰਕਮ ਕਦੇ ਨਹੀਂ।',
   },
   hi: {
+    payPeers: 'इसका उत्तर देने वाले {n} लोगों में से {pct} ने आपके जैसा ही कहा।',
+    payRate: 'साथ ही: {p} में आपकी कुल कटौती दर {r} है — संघीय कर, प्रांतीय कर, CPP और EI मिलाकर।',
+    payVacation: '{d} सवेतन अवकाश दिन लगभग {v} के बराबर हैं।',
+    oneMore: 'एक और →',
+    noThanks: 'बस',
     prompt: 'क्या यह आपकी उम्मीद से ज़्यादा है या कम?',
     lower: 'मेरी सोच से कम',
     higher: 'मेरी सोच से ज़्यादा',
@@ -204,6 +235,11 @@ const DICT: Record<string, Record<string, string>> = {
     hint: 'गुमनाम। हम केवल कुल आँकड़े प्रकाशित करते हैं, आपकी राशि कभी नहीं।',
   },
   tl: {
+    payPeers: 'Sa {n} sumagot, {pct} ang katulad mo ang sinabi.',
+    payRate: 'Bilang dagdag: ang kabuuang bawas mo sa {p} ay {r} — federal, provincial, CPP at EI na pinagsama.',
+    payVacation: 'Ang {d} bayad na araw ng bakasyon ay nagkakahalaga ng humigit-kumulang {v}.',
+    oneMore: 'Isa pa →',
+    noThanks: 'Tama na',
     prompt: 'Mas mataas ba ito o mas mababa sa inaasahan mo?',
     lower: 'Mas mababa sa inakala ko',
     higher: 'Mas mataas sa inakala ko',
@@ -232,6 +268,11 @@ const DICT: Record<string, Record<string, string>> = {
     hint: 'Anonymous. Kabuuan lang ang inilalathala namin, hindi kailanman ang iyong halaga.',
   },
   uk: {
+    payPeers: 'Із {n} тих, хто відповів, {pct} сказали те саме, що й ви.',
+    payRate: 'До речі: ваша загальна ставка утримань у {p} — {r} (федеральний і провінційний податок, CPP та EI разом).',
+    payVacation: '{d} оплачуваних днів відпустки коштують близько {v}.',
+    oneMore: 'Ще одне →',
+    noThanks: 'Досить',
     prompt: 'Це більше чи менше, ніж ви очікували?',
     lower: 'Менше, ніж я думав',
     higher: 'Більше, ніж я думав',
@@ -260,6 +301,11 @@ const DICT: Record<string, Record<string, string>> = {
     hint: 'Анонімно. Ми публікуємо лише підсумки, ніколи ваші суми.',
   },
   ko: {
+    payPeers: '이 질문에 답한 {n}명 중 {pct}가 같은 선택을 했습니다.',
+    payRate: '참고로 {p}의 총 공제율은 {r}입니다 — 연방세, 주세, CPP, EI를 합친 값입니다.',
+    payVacation: '유급휴가 {d}일은 약 {v}의 가치가 있습니다.',
+    oneMore: '하나 더 →',
+    noThanks: '충분합니다',
     prompt: '예상보다 많나요, 적나요?',
     lower: '생각보다 적다',
     higher: '생각보다 많다',
@@ -288,6 +334,11 @@ const DICT: Record<string, Record<string, string>> = {
     hint: '익명입니다. 합계만 공개하며 개인 금액은 절대 공개하지 않습니다.',
   },
   vi: {
+    payPeers: 'Trong {n} người đã trả lời, {pct} chọn giống bạn.',
+    payRate: 'Nhân tiện: tổng tỷ lệ khấu trừ của bạn ở {p} là {r} — thuế liên bang, thuế tỉnh bang, CPP và EI cộng lại.',
+    payVacation: '{d} ngày phép có lương trị giá khoảng {v}.',
+    oneMore: 'Thêm một câu →',
+    noThanks: 'Vậy là đủ',
     prompt: 'Con số này cao hơn hay thấp hơn bạn nghĩ?',
     lower: 'Thấp hơn tôi nghĩ',
     higher: 'Cao hơn tôi nghĩ',
@@ -330,22 +381,28 @@ const WORK_OPTIONS: { key: WorkArrangement; emoji: string }[] = [
 const AGE_OPTIONS: AgeBand[] = ['under-25', '25-34', '35-44', '45-54', '55-64', '65-plus'];
 
 /**
- * Q4 is a ROTATING slot: each visitor sees exactly one of four questions
- * (tenure, union, employer size, vacation days), picked at mount. Sample
- * speed per question drops 4x; the answer rate of Q1-Q3 is untouched, and
- * nobody ever faces a wall of questions. All four are skippable.
+ * Every question the site can ask, in one pool. A visit gets ONE at random;
+ * answering unlocks the payoff and an optional next one. Order is not fixed,
+ * so no single question monopolises the only slot a visitor will ever see.
  */
-type Q4 =
-  | { kind: 'tenure'; prompt: 'q4tenure'; options: TenureBand[] }
-  | { kind: 'union'; prompt: 'q4union'; options: UnionMember[] }
-  | { kind: 'size'; prompt: 'q4size'; options: EmployerSize[] }
-  | { kind: 'vacation'; prompt: 'q4vacation'; options: VacationBand[] };
-const Q4_POOL: Q4[] = [
-  { kind: 'tenure', prompt: 'q4tenure', options: ['under-1', '1-3', '3-5', '5-10', '10-plus'] },
-  { kind: 'union', prompt: 'q4union', options: ['yes', 'no', 'not-sure'] },
-  { kind: 'size', prompt: 'q4size', options: ['solo', '2-10', '11-50', '51-200', '200-plus'] },
-  { kind: 'vacation', prompt: 'q4vacation', options: ['0-10', '11-15', '16-20', '21-25', '26-plus'] },
+type QKey =
+  | 'expectation' | 'work_arrangement' | 'age_band'
+  | 'tenure_band' | 'union_member' | 'employer_size' | 'vacation_band';
+
+const POOL: { key: QKey; prompt: string; options: string[] }[] = [
+  { key: 'expectation', prompt: 'prompt', options: ['lower', 'as-expected', 'higher'] },
+  { key: 'work_arrangement', prompt: 'workPrompt', options: ['onsite', 'remote', 'hybrid'] },
+  { key: 'age_band', prompt: 'agePrompt', options: ['under-25', '25-34', '35-44', '45-54', '55-64', '65-plus'] },
+  { key: 'tenure_band', prompt: 'q4tenure', options: ['under-1', '1-3', '3-5', '5-10', '10-plus'] },
+  { key: 'union_member', prompt: 'q4union', options: ['yes', 'no', 'not-sure'] },
+  { key: 'employer_size', prompt: 'q4size', options: ['solo', '2-10', '11-50', '51-200', '200-plus'] },
+  { key: 'vacation_band', prompt: 'q4vacation', options: ['0-10', '11-15', '16-20', '21-25', '26-plus'] },
 ];
+
+const EMOJI: Record<string, string> = {
+  lower: '😖', 'as-expected': '😐', higher: '🙂',
+  onsite: '🏢', remote: '🏠', hybrid: '🔀',
+};
 
 export default function ExpectationPrompt({
   mode,
@@ -359,102 +416,110 @@ export default function ExpectationPrompt({
   lang: string;
 }) {
   const t = DICT[lang] ?? DICT.en;
-  const [expectation, setExpectation] = useState<Expectation | null>(null);
-  const [workArrangement, setWorkArrangement] = useState<WorkArrangement | null>(null);
-  const [ageBand, setAgeBand] = useState<AgeBand | null>(null);
-  const [q4] = useState<Q4>(() => Q4_POOL[Math.floor(Math.random() * Q4_POOL.length)]);
-  const [q4Done, setQ4Done] = useState(false);
+
+  /**
+   * ONE question, then a payoff, then an optional next one.
+   *
+   * The old design chained four questions and thanked you at the end. Measured
+   * on this site: the one question that hands something back (industry: your
+   * pay vs the industry median) is answered 9.5% of the time; the chained ones
+   * sat at 1-3%. So the deal is now explicit — you answer, you immediately get
+   * a real number back.
+   *
+   * Where the peer distribution is too thin to quote (n < 30 server-side), the
+   * payoff is computed from the tax engine instead. Never a fabricated share.
+   */
+  const [asked, setAsked] = useState<QKey[]>([]);
+  const [current, setCurrent] = useState<QKey>(() => POOL[Math.floor(Math.random() * POOL.length)].key);
+  const [payoff, setPayoff] = useState<string | null>(null);
+  const [busy, setBusy] = useState(false);
+  const [done, setDone] = useState(false);
 
   if (!annualIncome || annualIncome <= 0) return null;
 
-  // Each answer records the cumulative state; the dedupe key inside
-  // recordCalcEvent includes all three fields, so each step lands.
-  const send = (ex: Expectation, wa: WorkArrangement | null, ab: AgeBand | null, q4v?: string) =>
-    recordCalcEvent({
-      mode: mode as CalcMode,
-      province,
-      annualIncome,
-      lang,
-      expectation: ex,
-      workArrangement: wa,
-      ageBand: ab,
-      tenureBand: q4v && q4.kind === 'tenure' ? (q4v as TenureBand) : null,
-      unionMember: q4v && q4.kind === 'union' ? (q4v as UnionMember) : null,
-      employerSize: q4v && q4.kind === 'size' ? (q4v as EmployerSize) : null,
-      vacationBand: q4v && q4.kind === 'vacation' ? (q4v as VacationBand) : null,
-    });
+  const q = POOL.find((x) => x.key === current)!;
 
-  const answerQ4 = (v: string) => {
-    setQ4Done(true);
-    if (expectation) send(expectation, workArrangement, ageBand, v);
+  const engineFallback = (key: QKey, value: string): string => {
+    const net = calculateFromAnnualSalary({ province, annualSalary: annualIncome, payFrequency: PayFrequency.MONTHLY });
+    const rate = Math.round((1 - net.netPayAnnual / annualIncome) * 1000) / 10;
+    if (key === 'vacation_band') {
+      // The pay attached to the days off — the same maths the offer report uses.
+      const days = { '0-10': 8, '11-15': 13, '16-20': 18, '21-25': 23, '26-plus': 28 }[value] ?? 15;
+      const worth = Math.round((days * annualIncome) / 260);
+      return t.payVacation.replace('{d}', String(days)).replace('{v}', `$${worth.toLocaleString('en-CA')}`);
+    }
+    return t.payRate.replace('{r}', `${rate}%`).replace('{p}', province);
+  };
+
+  const answer = async (value: string) => {
+    setBusy(true);
+    recordCalcEvent({
+      mode: mode as CalcMode, province, annualIncome, lang,
+      expectation: current === 'expectation' ? (value as Expectation) : null,
+      workArrangement: current === 'work_arrangement' ? (value as WorkArrangement) : null,
+      ageBand: current === 'age_band' ? (value as AgeBand) : null,
+      tenureBand: current === 'tenure_band' ? (value as TenureBand) : null,
+      unionMember: current === 'union_member' ? (value as UnionMember) : null,
+      employerSize: current === 'employer_size' ? (value as EmployerSize) : null,
+      vacationBand: current === 'vacation_band' ? (value as VacationBand) : null,
+    });
+    let line: string | null = null;
+    try {
+      const r = await fetch(`/api/peers?q=${current}`, { cache: 'no-store' });
+      const d = (await r.json()) as { ready?: boolean; n?: number; dist?: { k: string; pct: number }[] };
+      if (d.ready && d.dist) {
+        const mine = d.dist.find((x) => x.k === value);
+        if (mine) line = t.payPeers.replace('{pct}', `${mine.pct}%`).replace('{n}', String(d.n));
+      }
+    } catch { /* fall through to the engine payoff */ }
+    setPayoff(line ?? engineFallback(current, value));
+    setAsked((a) => [...a, current]);
+    setBusy(false);
+  };
+
+  const next = () => {
+    const left = POOL.filter((x) => x.key !== current && !asked.includes(x.key));
+    if (!left.length) { setDone(true); return; }
+    setCurrent(left[Math.floor(Math.random() * left.length)].key);
+    setPayoff(null);
   };
 
   const pill =
-    'inline-flex min-h-10 items-center gap-1.5 rounded-full border border-slate-200 bg-white px-4 py-2 text-sm font-medium text-slate-700 transition-colors hover:border-red-300 hover:bg-red-50 hover:text-red-700';
+    'inline-flex min-h-10 items-center gap-1.5 rounded-full border border-slate-200 bg-white px-4 py-2 text-sm font-medium text-slate-700 transition-colors hover:border-red-300 hover:bg-red-50 hover:text-red-700 disabled:opacity-50';
 
   return (
     <div className="rounded-xl border border-slate-200 bg-white px-5 py-4">
-      {!expectation ? (
+      {done ? (
+        <p className="text-sm font-medium text-emerald-700">✓ {t.thanks}</p>
+      ) : payoff ? (
         <>
-          <p className="text-sm font-medium text-slate-700">{t.prompt}</p>
-          <div className="mt-3 flex flex-wrap gap-2">
-            {EXPECT_OPTIONS.map((o) => (
-              <button key={o.key} onClick={() => { setExpectation(o.key); send(o.key, null, null); }} className={pill}>
-                <span aria-hidden="true">{o.emoji}</span>
-                {t[o.key]}
-              </button>
-            ))}
+          {/* The payoff. This is the whole point of asking. */}
+          <div className="rounded-lg bg-slate-50 px-4 py-3">
+            <p className="text-sm leading-6 text-slate-800">{payoff}</p>
           </div>
-          <p className="mt-2.5 text-[11px] leading-4 text-slate-400">{t.hint}</p>
-        </>
-      ) : !workArrangement ? (
-        <>
-          <p className="text-sm font-medium text-emerald-700">✓ {t.thanks}</p>
-          <p className="mt-2 text-sm font-medium text-slate-700">{t.workPrompt}</p>
-          <div className="mt-3 flex flex-wrap gap-2">
-            {WORK_OPTIONS.map((o) => (
-              <button
-                key={o.key}
-                onClick={() => { setWorkArrangement(o.key); send(expectation, o.key, null); }}
-                className={pill}
-              >
-                <span aria-hidden="true">{o.emoji}</span>
-                {t[o.key]}
-              </button>
-            ))}
-          </div>
-        </>
-      ) : !ageBand ? (
-        <>
-          <p className="text-sm font-medium text-slate-700">{t.agePrompt}</p>
-          <div className="mt-3 flex flex-wrap gap-2">
-            {AGE_OPTIONS.map((k) => (
-              <button
-                key={k}
-                onClick={() => { setAgeBand(k); send(expectation, workArrangement, k); }}
-                className={pill}
-              >
-                {t[k]}
-              </button>
-            ))}
-          </div>
-        </>
-      ) : !q4Done ? (
-        <>
-          <p className="text-sm font-medium text-slate-700">{t[q4.prompt]}</p>
-          <div className="mt-3 flex flex-wrap gap-2">
-            {(q4.options as string[]).map((k) => (
-              <button key={k} onClick={() => answerQ4(k)} className={pill}>
-                {t[k]}
-              </button>
-            ))}
-            <button onClick={() => setQ4Done(true)} className="inline-flex min-h-10 items-center rounded-full px-3 py-2 text-sm text-slate-400 hover:text-slate-600">
-              {t.skip}
+          <div className="mt-3 flex flex-wrap items-center gap-2">
+            <button onClick={next} className={pill}>{t.oneMore}</button>
+            <button onClick={() => setDone(true)} className="px-2 py-2 text-sm text-slate-400 hover:text-slate-600">
+              {t.noThanks}
             </button>
           </div>
         </>
       ) : (
-        <p className="text-sm font-medium text-emerald-700">✓ {t.thanks}</p>
+        <>
+          <p className="text-sm font-medium text-slate-700">{t[q.prompt]}</p>
+          <div className="mt-3 flex flex-wrap gap-2">
+            {q.options.map((o) => (
+              <button key={o} onClick={() => answer(o)} disabled={busy} className={pill}>
+                {EMOJI[o] && <span aria-hidden="true">{EMOJI[o]}</span>}
+                {t[o]}
+              </button>
+            ))}
+            <button onClick={() => setDone(true)} className="px-2 py-2 text-sm text-slate-400 hover:text-slate-600">
+              {t.skip}
+            </button>
+          </div>
+          <p className="mt-2.5 text-[11px] leading-4 text-slate-400">{t.hint}</p>
+        </>
       )}
     </div>
   );
