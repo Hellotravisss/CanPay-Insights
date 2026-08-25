@@ -1,4 +1,5 @@
 'use client';
+import { ThinkingOrb } from 'thinking-orbs';
 import React from 'react';
 
 interface LoadingOverlayProps {
@@ -15,22 +16,23 @@ const LoadingOverlay: React.FC<LoadingOverlayProps> = ({
   return (
     <div className="fixed inset-0 z-[200] flex items-center justify-center bg-white/80 backdrop-blur-sm transition-opacity duration-300">
       <div className="flex flex-col items-center gap-4">
-        {/* Animated Logo */}
-        <div className="relative">
-          {/* The REAL logo file. Never hand-draw the mark in SVG — that is how
-              the wrong logo kept shipping. Single source of truth: public/logo.png. */}
+        {/* The waiting animation. thinking-orbs (MIT, Jakub Antalik) — canvas
+            2D, pauses itself offscreen and in hidden tabs, and renders a single
+            static frame under prefers-reduced-motion. The brand mark sits
+            beside it rather than being animated: the logo is a fixed asset,
+            never something we redraw or distort. */}
+        <div className="flex items-center gap-4">
           <img
             src="/logo.png"
             alt=""
             aria-hidden="true"
-            className="h-16 w-16 rounded-2xl object-contain animate-pulse"
+            className="h-12 w-12 rounded-xl object-contain"
           />
-          {/* Spinning ring */}
-          <div className="absolute -inset-2 border-2 border-red-200 border-t-red-600 rounded-2xl animate-spin" />
+          <ThinkingOrb state="solving" size={64} theme="light" aria-label={message} />
         </div>
-        
+
         {/* Message */}
-        <p className="text-slate-600 font-medium animate-pulse">{message}</p>
+        <p className="text-slate-600 font-medium">{message}</p>
       </div>
     </div>
   );

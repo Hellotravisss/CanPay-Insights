@@ -1,4 +1,5 @@
 'use client';
+import { ThinkingOrb } from 'thinking-orbs';
 import { useMemo, useState } from 'react';
 import { recordCalcEvent, type ProductInterest } from '../lib/telemetry';
 import { OFFER_LIMITS } from '../lib/offerReport';
@@ -561,7 +562,7 @@ export default function FakeDoors({
             disabled={!dest || buying}
             className="mt-3 w-full rounded-md bg-red-600 px-3 py-2.5 text-sm font-semibold text-white hover:bg-red-700 disabled:bg-slate-200 disabled:text-slate-400"
           >
-            {buying ? t.buying : t.buy}
+            {buying ? (<span className="inline-flex items-center gap-2"><ThinkingOrb state="connecting" size={20} theme="dark" aria-label={t.buying} />{t.buying}</span>) : t.buy}
           </button>
           {buyError && <p className="mt-1.5 text-[11px] text-red-600">{buyError}</p>}
           <p className="mt-1.5 text-[10px] text-slate-400">{t.secure}</p>
@@ -594,7 +595,7 @@ export default function FakeDoors({
                   disabled={!offerReady || offerBuying}
                   className="w-full rounded-md bg-red-600 px-3 py-2.5 text-sm font-semibold text-white hover:bg-red-700 disabled:bg-slate-200 disabled:text-slate-400"
                 >
-                  {offerBuying ? t.buying : t.offerCta}
+                  {offerBuying ? (<span className="inline-flex items-center gap-2"><ThinkingOrb state="connecting" size={20} theme="dark" aria-label={t.buying} />{t.buying}</span>) : t.offerCta}
                 </button>
                 {(offerError || (offerProblem && (a.salary || b.salary))) && (
                   <p className="text-[11px] text-red-600">{offerError || offerProblem}</p>

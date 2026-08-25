@@ -1,4 +1,5 @@
 'use client';
+import { ThinkingOrb } from 'thinking-orbs';
 import { useEffect, useState } from 'react';
 
 /**
@@ -104,7 +105,9 @@ export default function SaveReport({
                 disabled={state === 'sending'}
                 className="rounded-lg bg-red-600 px-4 py-2 text-sm font-semibold text-white hover:bg-red-700 disabled:opacity-60"
               >
-                {state === 'sending' ? 'Sending link…' : 'Create free account'}
+                {state === 'sending'
+                  ? (<span className="inline-flex items-center gap-2"><ThinkingOrb state="connecting" size={20} theme="dark" aria-label="Sending link" />Sending link…</span>)
+                  : 'Create free account'}
               </button>
             </div>
             {err && <p className="mt-2 text-xs text-red-600">{err}</p>}

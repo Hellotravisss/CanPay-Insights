@@ -1,4 +1,5 @@
 'use client';
+import { ThinkingOrb } from 'thinking-orbs';
 import { useState } from 'react';
 import { currentSessionId } from '../lib/telemetry';
 
@@ -253,7 +254,12 @@ export default function ShareReward({ lang }: { lang: string }) {
         </button>
       </div>
 
-      {state === 'working' && <p className="mt-3 text-sm text-slate-400">{t.working}</p>}
+      {state === 'working' && (
+        <p className="mt-3 flex items-center gap-2 text-sm text-slate-400">
+          <ThinkingOrb state="weaving" size={20} theme="light" aria-label={t.working} />
+          {t.working}
+        </p>
+      )}
       {state === 'failed' && <p className="mt-3 text-sm text-slate-400">{t.failed}</p>}
       {code && (
         <div className="mt-4 rounded-lg border-2 border-dashed border-red-300 bg-red-50 px-4 py-3">

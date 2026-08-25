@@ -1,5 +1,6 @@
 'use client';
 import React, { useState, useEffect, useRef, useMemo } from 'react';
+import { ThinkingOrb } from 'thinking-orbs';
 import { TAX_YEAR } from '../constants';
 import * as htmlToImage from 'html-to-image';
 import download from 'downloadjs';
@@ -827,7 +828,10 @@ const GeminiAdvisor: React.FC<Props> = ({ results, inputs, onReportOpen }) => {
             >
               {exporting ? (
                 <>
-                  <div className="w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin" />
+                  {/* Rendering the report to an image runs htmlToImage twice
+                      and takes seconds — the one wait on this page long enough
+                      to deserve a real waiting animation. */}
+                  <ThinkingOrb state="composing" size={20} theme="dark" aria-label={t('opt.generating')} />
                   {t('opt.generating')}
                 </>
               ) : (
