@@ -19,6 +19,25 @@ const UserMenu: React.FC<UserMenuProps> = ({ onSwitchToTimesheet, onLoadCalculat
   const [isOpen, setIsOpen] = useState(false);
   const [showAuthModal, setShowAuthModal] = useState(false);
   const [showHistoryModal, setShowHistoryModal] = useState(false);
+
+  /**
+   * The signed-out Sign In button collapses to its icon once the reader
+   * scrolls away from the top on a phone.
+   *
+   * The header is sticky, so a full-width red CTA sat over the results the
+   * whole way down the page — the loudest thing on screen while someone is
+   * trying to read their own pay. At the top it is a reasonable call to
+   * action; past that it only needs to stay reachable. Nothing is removed:
+   * the icon still opens the same modal, and the page carries a dedicated
+   * "Save your calculation" card further down.
+   */
+  const [scrolled, setScrolled] = useState(false);
+  useEffect(() => {
+    const onScroll = () => setScrolled(window.scrollY > 120);
+    onScroll();
+    window.addEventListener('scroll', onScroll, { passive: true });
+    return () => window.removeEventListener('scroll', onScroll);
+  }, []);
   const [showDeleteConfirm, setShowDeleteConfirm] = useState<string | null>(null);
   const menuRef = useRef<HTMLDivElement>(null);
 
@@ -82,12 +101,15 @@ const UserMenu: React.FC<UserMenuProps> = ({ onSwitchToTimesheet, onLoadCalculat
       <>
         <button
           onClick={() => setShowAuthModal(true)}
-          className="flex items-center gap-2 px-4 py-2 bg-red-600 hover:bg-red-700 text-white rounded-lg transition-all text-sm font-medium shadow-sm hover:shadow-md"
+          aria-label={t('nav.signIn')}
+          className={`flex items-center justify-center gap-2 py-2 bg-red-600 hover:bg-red-700 text-white rounded-lg transition-all text-sm font-medium shadow-sm hover:shadow-md ${
+            scrolled ? 'px-2.5 sm:px-4' : 'px-4'
+          }`}
         >
-          <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <svg className="w-4 h-4 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
           </svg>
-          {t('nav.signIn')}
+          <span className={scrolled ? 'hidden sm:inline' : ''}>{t('nav.signIn')}</span>
         </button>
 
         <AuthModal
