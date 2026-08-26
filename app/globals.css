@@ -73,8 +73,14 @@ body {
    toward the middle of the field while every neighbouring input (break
    minutes, premium rate) sat left — the pair read as shifted right.
 
-   Targeting the inner pseudo-element fixes the alignment without
-   -webkit-appearance: none, which would also strip the native picker. */
+   Alignment is fixed on the inner pseudo-element. The OVERFLOW is a separate
+   problem with the same root: on iOS the control keeps a native intrinsic
+   width (wider still in 24-hour locales), which wins over width:100% and
+   min-width:0, so the second cell of the two-column row pushed past the
+   card's right padding. -webkit-appearance:none releases that intrinsic
+   size. It does NOT remove the picker — iOS still opens the native wheel on
+   tap; appearance only governs how the closed control is painted, and this
+   control is painted by our own border/background/padding anyway. */
 input[type="time"]::-webkit-date-and-time-value,
 input[type="date"]::-webkit-date-and-time-value,
 input[type="datetime-local"]::-webkit-date-and-time-value {
@@ -108,6 +114,10 @@ input[type="time"],
 input[type="date"],
 input[type="datetime-local"] {
   min-width: 0;
+  width: 100%;
+  /* Releases the iOS native intrinsic width. The picker still opens. */
+  -webkit-appearance: none;
+  appearance: none;
 }
 
 /* The real culprit found by measuring on a 24-hour iPhone: a time input's
