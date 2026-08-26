@@ -151,6 +151,8 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         />
       </head>
       <body className={inter.className}>
+        {/* Page-traffic tag on the shared multi-site worker (site=canpay). Calc telemetry stays in Supabase — this is additive, page views only. */}
+        <script defer src="https://avowd-analytics.qharbert.workers.dev/t.js" data-site="canpay" />
         <TelemetrySwitch />
         {children}
         {/* Cloudflare Web Analytics — cookieless, free. The token is the
