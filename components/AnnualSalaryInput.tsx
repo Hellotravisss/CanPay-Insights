@@ -50,7 +50,15 @@ const AnnualSalaryInput: React.FC<Props> = ({ inputs, setInputs }) => {
           <span className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-500 font-bold">$</span>
           <input
             type="number"
-            value={inputs.annualSalary}
+            /* `|| ''` and select-on-focus are BOTH needed, and every sibling
+               field in this app already has them — this one was the exception.
+               React compares a number input's DOM value LOOSELY
+               (`node.value != props.value`), so "065000" != 65000 is false and
+               React never writes the clean value back. The leading zero the
+               user typed after the placeholder 0 then sticks in the box while
+               the calculation quietly uses the right number. */
+            value={inputs.annualSalary || ''}
+            onFocus={(e) => e.target.select()}
             onChange={(e) => setInputs({ ...inputs, annualSalary: parseFloat(e.target.value) || 0 })}
             className="w-full pl-8 pr-4 py-3 border-2 border-slate-200 rounded-lg focus:border-red-500 focus:outline-none text-lg font-bold"
             placeholder="100,000"

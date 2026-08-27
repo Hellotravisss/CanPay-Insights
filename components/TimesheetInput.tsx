@@ -282,7 +282,8 @@ const TimesheetInput: React.FC<Props> = ({ inputs, setInputs }) => {
               <input
                 type="number"
                 step="0.01"
-                value={inputs.hourlyWage}
+                value={inputs.hourlyWage || ''}
+                onFocus={(e) => e.target.select()}
                 onChange={(e) => setInputs({ ...inputs, hourlyWage: parseFloat(e.target.value) || 0 })}
                 className="w-full pl-8 pr-4 py-2 border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-500"
               />
