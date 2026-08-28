@@ -113,6 +113,20 @@ export default function Globe({
   const step = zoom > 3 ? 1 : zoom > 1.5 ? 2 : 3;
 
   const maxCity = Math.max(1, ...cities.map((c) => c.n));
+
+  /**
+   * The globe's array is ordered for COVERAGE — every international point
+   * first, then the busiest Canadian ones — so that a single visit from Hong
+   * Kong cannot be pushed off the map by Canadian volume. Taking its first
+   * eight as a ranking showed Miami (11) above Toronto (248) and made it look
+   * as though Canadian cities were being filtered out. Rank by count here, and
+   * leave out the points whose only label is a country code: they are real
+   * dots on the globe but they are not cities.
+   */
+  const topCities = [...cities]
+    .filter((c) => (c as City & { named?: boolean }).named !== false)
+    .sort((a, b) => b.n - a.n)
+    .slice(0, 8);
   // No labels are drawn by default. Two earlier rules both failed for the same
   // reason: Canada's traffic clusters in southern Ontario, so any always-on
   // label set puts Toronto, Nepean and Brampton on top of each other. Hover is
@@ -407,7 +421,7 @@ export default function Globe({
           {T('Top cities', '城市排行')}
         </h3>
         <ul className="mb-2 space-y-1.5">
-          {cities.slice(0, 8).map((c) => (
+          {topCities.map((c) => (
             <li key={c.city} className="flex items-baseline justify-between border-b border-slate-100 pb-1.5 text-sm">
               <span className="text-slate-600">{c.city}</span>
               <span className="tabular-nums font-semibold text-slate-800">{c.n}</span>

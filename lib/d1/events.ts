@@ -340,8 +340,8 @@ export function calcCitiesGeo(ev: Ev[]) {
   }
   const avg = (a: number[]) => Math.round((a.reduce((x, y) => x + y, 0) / a.length) * 1000) / 1000;
   const out = [
-    ...[...named.entries()].map(([city, c]) => ({ city, lat: avg(c.lat), lon: avg(c.lon), n: c.lat.length, intl: !inCanada(c.lat[0], c.lon[0]) })),
-    ...[...unnamed.values()].map((c) => ({ city: c.city, lat: avg(c.lat), lon: avg(c.lon), n: c.lat.length, intl: c.country !== 'CA' })),
+    ...[...named.entries()].map(([city, c]) => ({ city, lat: avg(c.lat), lon: avg(c.lon), n: c.lat.length, intl: !inCanada(c.lat[0], c.lon[0]), named: true })),
+    ...[...unnamed.values()].map((c) => ({ city: c.city, lat: avg(c.lat), lon: avg(c.lon), n: c.lat.length, intl: c.country !== 'CA', named: false })),
   ];
   // Keep EVERY point outside Canada, then fill the rest with the busiest
   // Canadian ones. A plain top-60 sorted the globe by volume, so as Canadian
@@ -351,6 +351,8 @@ export function calcCitiesGeo(ev: Ev[]) {
   // the sixtieth Canadian suburb.
   const intl = out.filter((p) => p.intl).sort((a, b) => b.n - a.n);
   const dom = out.filter((p) => !p.intl).sort((a, b) => b.n - a.n);
+  // `named` survives: a point whose label is only a country code is a real
+  // dot on the globe but must not appear in a list titled 'Top cities'.
   return [...intl, ...dom.slice(0, Math.max(20, 80 - intl.length))].map(({ intl: _i, ...p }) => p);
 }
 
