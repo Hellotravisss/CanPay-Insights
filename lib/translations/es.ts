@@ -325,6 +325,17 @@ export const embed: Record<string, string> = {
 };
 
 export const industry: Record<string, string> = {
+  hlRightAt: "Está justo en el salario {basis} mediano de {prov} — {amt}.",
+  hlOff: "Está un {pct}% {dir} del salario {basis} mediano de {prov} — {amt}.",
+  dirAbove: "por encima",
+  dirBelow: "por debajo",
+  basisHourly: "por hora",
+  basisAnnual: "de tiempo completo",
+  noteFull: "Comparación tarifa contra tarifa. La cifra oficial es un salario por hora base a jornada completa estándar; medir contra ella un bruto que incluye horas extra contaría horas trabajadas como salario ganado.",
+  notePart: "Comparación tarifa contra tarifa: usted trabaja jornada parcial y la cifra oficial cubre empleados de tiempo completo — una comparación anual leería menos horas como pago insuficiente.",
+  otNote: "Aparte: su bruto incluye {n} horas extra en este período. Eso sube lo que recibe sin cambiar cuánto vale su hora.",
+  source: "Statistics Canada, tabla 14-10-0064-01, {year} — salario mediano de empleados de tiempo completo, todas las industrias. Actualizado semestralmente.",
+  sharpen: "Afínelo — ¿a qué se dedica?",
   prompt: 'Opcional: elige tu industria para ver dónde se ubica tu pago',
   industry: 'Tu industria',
   choose: 'Selecciona una industria…',

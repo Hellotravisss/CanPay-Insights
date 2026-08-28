@@ -325,6 +325,17 @@ export const embed: Record<string, string> = {
 };
 
 export const industry: Record<string, string> = {
+  hlRightAt: "귀하는 {prov}의 {basis} 중위값에 정확히 해당합니다 — {amt}.",
+  hlOff: "귀하는 {prov}의 {basis} 중위값보다 {pct}% {dir}입니다 — {amt}.",
+  dirAbove: "높음",
+  dirBelow: "낮음",
+  basisHourly: "시급",
+  basisAnnual: "정규직 급여",
+  noteFull: "요율 대 요율 비교입니다. 공식 수치는 표준 정규 근무시간 기준의 기본 시급이므로, 초과근무가 포함된 총급여와 비교하면 일한 시간을 번 돈으로 계산하게 됩니다.",
+  notePart: "요율 대 요율 비교입니다: 귀하는 시간제로 근무하지만 공식 수치는 정규직 직원 기준입니다 — 연간 비교는 적은 근무시간을 저임금으로 잘못 읽습니다.",
+  otNote: "별도로: 이번 급여 기간의 총급여에 초과근무 {n}시간이 포함되어 있습니다. 실수령액은 늘지만 시간당 가치는 변하지 않습니다.",
+  source: "Statistics Canada, 표 14-10-0064-01, {year} — 정규직 직원 중위 임금, 전 산업. 반기마다 갱신.",
+  sharpen: "더 정확히 — 어떤 일을 하십니까?",
   prompt: '선택 사항: 업종을 선택하면 급여 위치를 확인할 수 있어요',
   industry: '본인 업종',
   choose: '업종 선택…',

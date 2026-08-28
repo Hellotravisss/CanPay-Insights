@@ -325,6 +325,17 @@ export const embed: Record<string, string> = {
 };
 
 export const industry: Record<string, string> = {
+  hlRightAt: "Bạn đúng bằng mức {basis} trung vị ở {prov} — {amt}.",
+  hlOff: "Bạn {dir} {pct}% so với mức {basis} trung vị ở {prov} — {amt}.",
+  dirAbove: "cao hơn",
+  dirBelow: "thấp hơn",
+  basisHourly: "lương giờ",
+  basisAnnual: "lương toàn thời gian",
+  noteFull: "So sánh mức với mức. Con số chính thức là lương giờ cơ bản theo giờ làm toàn thời gian tiêu chuẩn, nên đem tổng thu nhập có tăng ca ra so sẽ tính giờ đã làm thành tiền đã kiếm.",
+  notePart: "So sánh mức với mức: bạn làm bán thời gian trong khi con số chính thức tính nhân viên toàn thời gian — so sánh theo năm sẽ hiểu nhầm ít giờ thành trả lương thấp.",
+  otNote: "Riêng ra: tổng thu nhập kỳ này của bạn gồm {n} giờ tăng ca. Điều đó làm tăng số tiền nhận về nhưng không thay đổi giá trị mỗi giờ của bạn.",
+  source: "Statistics Canada, Bảng 14-10-0064-01, {year} — lương trung vị của nhân viên toàn thời gian, mọi ngành. Cập nhật nửa năm một lần.",
+  sharpen: "Cụ thể hơn — bạn làm nghề gì?",
   prompt: 'Tùy chọn: chọn ngành của bạn để xem mức lương của bạn đang ở đâu',
   industry: 'Ngành của bạn',
   choose: 'Chọn một ngành…',

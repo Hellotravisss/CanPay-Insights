@@ -325,6 +325,17 @@ export const embed: Record<string, string> = {
 };
 
 export const industry: Record<string, string> = {
+  hlRightAt: "Ikaw ay nasa mismong median na {basis} sa {prov} — {amt}.",
+  hlOff: "Ikaw ay {pct}% {dir} sa median na {basis} sa {prov} — {amt}.",
+  dirAbove: "mas mataas",
+  dirBelow: "mas mababa",
+  basisHourly: "sahod kada oras",
+  basisAnnual: "sahod na full-time",
+  noteFull: "Rate laban sa rate ang paghahambing. Ang opisyal na bilang ay base na sahod kada oras sa karaniwang full-time na oras, kaya ang paghahambing ng gross na may overtime ay magbibilang ng oras na ginugol bilang kinita.",
+  notePart: "Rate laban sa rate: part-time ang iyong oras samantalang full-time na empleyado ang saklaw ng opisyal na bilang — ang taunang paghahambing ay magbabasa ng kulang na oras bilang kulang na bayad.",
+  otNote: "Bukod dito: ang iyong gross ay may {n} oras ng overtime ngayong panahon ng sahod. Tumataas ang uwing sahod pero hindi nagbabago ang halaga ng iyong oras.",
+  source: "Statistics Canada, Talahanayan 14-10-0064-01, {year} — median na sahod ng full-time na empleyado, lahat ng industriya. Ina-update dalawang beses sa isang taon.",
+  sharpen: "Tumpakin — ano ang trabaho mo?",
   prompt: 'Optional: piliin ang industriya mo para makita kung saan ka nakatayo sa sweldo',
   industry: 'Industriya mo',
   choose: 'Pumili ng industriya…',

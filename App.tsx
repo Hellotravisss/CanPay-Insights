@@ -507,6 +507,11 @@ const App: React.FC = () => {
             </button>
             
             <div className="flex items-center gap-2">
+              {/* The switcher lived only on the home screen, so anyone who
+                  started calculating was stuck in whatever language the browser
+                  had guessed for them. It belongs wherever the reader is. */}
+              <LanguageSwitcher />
+
               {/* User Menu / Sign In */}
               <UserMenu 
                 onSwitchToTimesheet={handleSwitchToTimesheet}
@@ -876,6 +881,13 @@ const App: React.FC = () => {
           </div>
           
           <p className="mt-4 opacity-75">Proudly Canadian 🇨🇦 Built for Workers.</p>
+
+          {/* A second switcher at the end of the page: someone who has read to
+              the bottom in the wrong language should not have to scroll back up
+              to change it. */}
+          <div className="mt-6 flex justify-center">
+            <LanguageSwitcher />
+          </div>
         </footer>
       )}
 

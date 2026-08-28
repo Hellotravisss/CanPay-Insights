@@ -24,7 +24,6 @@ const OPTIONS: { key: Intent; emoji: string }[] = [
 const DICT: Record<string, Record<string, string>> = {
   en: {
     prompt: 'Optional: what brings you here today?',
-    hint: 'Anonymous — it helps us publish better data on Canadian pay.',
     thanks: 'Thanks — that helps.',
     'new-job': 'New job offer',
     raise: 'A raise',
@@ -35,7 +34,6 @@ const DICT: Record<string, Record<string, string>> = {
   },
   fr: {
     prompt: 'Facultatif : qu’est-ce qui vous amène aujourd’hui ?',
-    hint: 'Anonyme — cela nous aide à publier de meilleures données sur les salaires.',
     thanks: 'Merci — c’est utile.',
     'new-job': 'Nouvelle offre d’emploi',
     raise: 'Une augmentation',
@@ -46,7 +44,6 @@ const DICT: Record<string, Record<string, string>> = {
   },
   zh: {
     prompt: '可选:你今天为什么来算工资?',
-    hint: '匿名 —— 这能帮我们发布更好的加拿大工资数据。',
     thanks: '谢谢,这很有帮助。',
     'new-job': '拿到新 offer',
     raise: '涨薪',
@@ -57,7 +54,6 @@ const DICT: Record<string, Record<string, string>> = {
   },
   pa: {
     prompt: 'ਵਿਕਲਪਿਕ: ਅੱਜ ਤੁਸੀਂ ਕਿਉਂ ਹਿਸਾਬ ਲਗਾ ਰਹੇ ਹੋ?',
-    hint: 'ਗੁਪਤ — ਇਹ ਸਾਨੂੰ ਬਿਹਤਰ ਡਾਟਾ ਪ੍ਰਕਾਸ਼ਿਤ ਕਰਨ ਵਿੱਚ ਮਦਦ ਕਰਦਾ ਹੈ।',
     thanks: 'ਧੰਨਵਾਦ।',
     'new-job': 'ਨਵੀਂ ਨੌਕਰੀ ਦੀ ਪੇਸ਼ਕਸ਼',
     raise: 'ਤਨਖਾਹ ਵਾਧਾ',
@@ -68,7 +64,6 @@ const DICT: Record<string, Record<string, string>> = {
   },
   tl: {
     prompt: 'Opsyonal: bakit ka nagkakalkula ngayon?',
-    hint: 'Anonymous — nakakatulong ito para makapaglathala kami ng mas magandang datos.',
     thanks: 'Salamat!',
     'new-job': 'Bagong job offer',
     raise: 'Taas ng sahod',
@@ -79,7 +74,6 @@ const DICT: Record<string, Record<string, string>> = {
   },
   hi: {
     prompt: 'वैकल्पिक: आज आप क्यों गणना कर रहे हैं?',
-    hint: 'गुमनाम — इससे हमें बेहतर डेटा प्रकाशित करने में मदद मिलती है।',
     thanks: 'धन्यवाद!',
     'new-job': 'नई नौकरी का ऑफ़र',
     raise: 'वेतन वृद्धि',
@@ -90,7 +84,6 @@ const DICT: Record<string, Record<string, string>> = {
   },
   es: {
     prompt: 'Opcional: ¿qué te trae por aquí hoy?',
-    hint: 'Anónimo — nos ayuda a publicar mejores datos sobre los salarios en Canadá.',
     thanks: '¡Gracias!',
     'new-job': 'Nueva oferta de trabajo',
     raise: 'Un aumento',
@@ -101,7 +94,6 @@ const DICT: Record<string, Record<string, string>> = {
   },
   uk: {
     prompt: 'Необов’язково: що привело вас сюди?',
-    hint: 'Анонімно — це допомагає нам публікувати кращі дані про зарплати.',
     thanks: 'Дякуємо!',
     'new-job': 'Нова пропозиція роботи',
     raise: 'Підвищення зарплати',
@@ -112,7 +104,6 @@ const DICT: Record<string, Record<string, string>> = {
   },
   ko: {
     prompt: '선택 사항: 오늘 왜 계산하시나요?',
-    hint: '익명입니다 — 더 나은 캐나다 급여 데이터를 공개하는 데 도움이 됩니다.',
     thanks: '감사합니다!',
     'new-job': '새 입사 제안',
     raise: '연봉 인상',
@@ -123,7 +114,6 @@ const DICT: Record<string, Record<string, string>> = {
   },
   vi: {
     prompt: 'Tùy chọn: hôm nay điều gì đưa bạn đến đây?',
-    hint: 'Ẩn danh — giúp chúng tôi công bố dữ liệu lương tốt hơn.',
     thanks: 'Cảm ơn bạn!',
     'new-job': 'Lời mời làm việc mới',
     raise: 'Tăng lương',
@@ -182,7 +172,6 @@ export default function IntentPrompt({
               </button>
             ))}
           </div>
-          <p className="mt-3 text-[11px] leading-4 text-slate-400">{t.hint}</p>
         </>
       )}
     </div>

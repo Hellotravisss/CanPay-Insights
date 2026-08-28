@@ -67,7 +67,6 @@ const DICT: Record<string, Record<string, string>> = {
     '0-10': '0–10', '11-15': '11–15', '16-20': '16–20', '21-25': '21–25', '26-plus': '26+',
     skip: 'Skip',
     thanks: 'Thanks — that helps.',
-    hint: 'Anonymous. We publish only totals, never your figures.',
   },
   zh: {
     payPeers: '回答过这题的 {n} 个人里,{pct} 和你选了一样的。',
@@ -100,7 +99,6 @@ const DICT: Record<string, Record<string, string>> = {
     '0-10': '0–10 天', '11-15': '11–15 天', '16-20': '16–20 天', '21-25': '21–25 天', '26-plus': '26 天以上',
     skip: '跳过',
     thanks: '谢谢,这很有帮助。',
-    hint: '匿名统计,只发布汇总数字,绝不公开你的金额。',
   },
   fr: {
     payPeers: 'Sur les {n} personnes ayant répondu, {pct} ont dit la même chose que vous.',
@@ -133,7 +131,6 @@ const DICT: Record<string, Record<string, string>> = {
     '0-10': '0–10', '11-15': '11–15', '16-20': '16–20', '21-25': '21–25', '26-plus': '26+',
     skip: 'Passer',
     thanks: 'Merci, cela nous aide.',
-    hint: 'Anonyme. Nous publions uniquement des totaux.',
   },
   es: {
     payPeers: 'De las {n} personas que respondieron, {pct} dijo lo mismo que usted.',
@@ -166,7 +163,6 @@ const DICT: Record<string, Record<string, string>> = {
     '0-10': '0–10', '11-15': '11–15', '16-20': '16–20', '21-25': '21–25', '26-plus': '26+',
     skip: 'Omitir',
     thanks: 'Gracias, nos ayuda.',
-    hint: 'Anónimo. Publicamos solo totales, nunca sus cifras.',
   },
   pa: {
     payPeers: 'ਇਸ ਦਾ ਜਵਾਬ ਦੇਣ ਵਾਲੇ {n} ਲੋਕਾਂ ਵਿੱਚੋਂ {pct} ਨੇ ਤੁਹਾਡੇ ਵਾਂਗ ਕਿਹਾ।',
@@ -199,7 +195,6 @@ const DICT: Record<string, Record<string, string>> = {
     '0-10': '0–10', '11-15': '11–15', '16-20': '16–20', '21-25': '21–25', '26-plus': '26+',
     skip: 'ਛੱਡੋ',
     thanks: 'ਧੰਨਵਾਦ — ਇਸ ਨਾਲ ਮਦਦ ਮਿਲਦੀ ਹੈ।',
-    hint: 'ਗੁਪਤ। ਅਸੀਂ ਸਿਰਫ਼ ਕੁੱਲ ਅੰਕੜੇ ਛਾਪਦੇ ਹਾਂ, ਤੁਹਾਡੀ ਰਕਮ ਕਦੇ ਨਹੀਂ।',
   },
   hi: {
     payPeers: 'इसका उत्तर देने वाले {n} लोगों में से {pct} ने आपके जैसा ही कहा।',
@@ -232,7 +227,6 @@ const DICT: Record<string, Record<string, string>> = {
     '0-10': '0–10', '11-15': '11–15', '16-20': '16–20', '21-25': '21–25', '26-plus': '26+',
     skip: 'छोड़ें',
     thanks: 'धन्यवाद — इससे मदद मिलती है।',
-    hint: 'गुमनाम। हम केवल कुल आँकड़े प्रकाशित करते हैं, आपकी राशि कभी नहीं।',
   },
   tl: {
     payPeers: 'Sa {n} sumagot, {pct} ang katulad mo ang sinabi.',
@@ -265,7 +259,6 @@ const DICT: Record<string, Record<string, string>> = {
     '0-10': '0–10', '11-15': '11–15', '16-20': '16–20', '21-25': '21–25', '26-plus': '26+',
     skip: 'Laktawan',
     thanks: 'Salamat — malaking tulong ito.',
-    hint: 'Anonymous. Kabuuan lang ang inilalathala namin, hindi kailanman ang iyong halaga.',
   },
   uk: {
     payPeers: 'Із {n} тих, хто відповів, {pct} сказали те саме, що й ви.',
@@ -298,7 +291,6 @@ const DICT: Record<string, Record<string, string>> = {
     '0-10': '0–10', '11-15': '11–15', '16-20': '16–20', '21-25': '21–25', '26-plus': '26+',
     skip: 'Пропустити',
     thanks: 'Дякуємо — це допомагає.',
-    hint: 'Анонімно. Ми публікуємо лише підсумки, ніколи ваші суми.',
   },
   ko: {
     payPeers: '이 질문에 답한 {n}명 중 {pct}가 같은 선택을 했습니다.',
@@ -331,7 +323,6 @@ const DICT: Record<string, Record<string, string>> = {
     '0-10': '0–10', '11-15': '11–15', '16-20': '16–20', '21-25': '21–25', '26-plus': '26일 이상',
     skip: '건너뛰기',
     thanks: '감사합니다 — 큰 도움이 됩니다.',
-    hint: '익명입니다. 합계만 공개하며 개인 금액은 절대 공개하지 않습니다.',
   },
   vi: {
     payPeers: 'Trong {n} người đã trả lời, {pct} chọn giống bạn.',
@@ -364,7 +355,6 @@ const DICT: Record<string, Record<string, string>> = {
     '0-10': '0–10', '11-15': '11–15', '16-20': '16–20', '21-25': '21–25', '26-plus': '26+',
     skip: 'Bỏ qua',
     thanks: 'Cảm ơn — điều này rất hữu ích.',
-    hint: 'Ẩn danh. Chúng tôi chỉ công bố số liệu tổng hợp, không bao giờ số tiền của bạn.',
   },
 };
 
@@ -518,7 +508,6 @@ export default function ExpectationPrompt({
               {t.skip}
             </button>
           </div>
-          <p className="mt-2.5 text-[11px] leading-4 text-slate-400">{t.hint}</p>
         </>
       )}
     </div>

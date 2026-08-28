@@ -60,8 +60,35 @@ const BENCHMARKS: { slug: string; p: [number, number, number, number, number] }[
   { slug: 'all-industries', p: [32000, 47000, 70000, 97000, 130000] },
 ];
 
+/** Renders one sentence with its leading clause emphasised. The dictionary
+ *  strings keep their own word order, so the emphasis is applied to the
+ *  percentage phrase wherever that language happens to put it. */
+function bold(text: string, cls: string) {
+  const m = text.match(/(\d+%[^\s]*\s*\S*|right at|exactement au|正好处在)/);
+  if (!m) return text;
+  const i = text.indexOf(m[0]);
+  return (
+    <>
+      {text.slice(0, i)}
+      <strong className={cls}>{m[0]}</strong>
+      {text.slice(i + m[0].length)}
+    </>
+  );
+}
+
 const DICT: Record<string, Record<string, string>> = {
   en: {
+    hlRightAt: "You are right at the median {basis} in {prov} — {amt}.",
+    hlOff: "You are {pct}% {dir} the median {basis} in {prov} — {amt}.",
+    dirAbove: "above",
+    dirBelow: "below",
+    basisHourly: "hourly wage",
+    basisAnnual: "full-time wage",
+    noteFull: "Compared rate to rate. The official figure is a base hourly wage at standard full-time hours, so measuring a gross that includes overtime against it would count hours worked as pay earned.",
+    notePart: "Compared rate to rate: you are working part-time hours, and the official figure covers full-time employees — an annual comparison would read fewer hours as underpayment.",
+    otNote: "Separately: your gross includes {n} overtime hours this pay period. That raises what you take home without changing what your hour is worth — two different questions, kept apart on purpose.",
+    source: "Statistics Canada, Table 14-10-0064-01, {year} — median wage of full-time employees, all industries. Refreshed semi-annually.",
+    sharpen: "Sharpen it — what do you do?",
     prompt: 'Optional: pick your industry to see where your pay stands',
     industry: 'Your industry',
     choose: 'Select an industry…',
@@ -88,6 +115,17 @@ const DICT: Record<string, Record<string, string>> = {
     'all-industries': 'All industries (Canada average)',
   },
   fr: {
+    hlRightAt: "Vous êtes exactement au salaire médian {basis} en {prov} — {amt}.",
+    hlOff: "Vous êtes {pct}% {dir} du salaire médian {basis} en {prov} — {amt}.",
+    dirAbove: "au-dessus",
+    dirBelow: "en dessous",
+    basisHourly: "horaire",
+    basisAnnual: "à temps plein",
+    noteFull: "Comparaison taux à taux. Le chiffre officiel est un taux horaire de base à temps plein ; comparer un brut incluant les heures supplémentaires reviendrait à compter des heures travaillées comme du salaire gagné.",
+    notePart: "Comparaison taux à taux : vous travaillez à temps partiel et le chiffre officiel couvre les employés à temps plein — une comparaison annuelle lirait moins d’heures comme un sous-paiement.",
+    otNote: "Par ailleurs : votre brut comprend {n} heures supplémentaires cette période. Cela augmente votre paie sans changer la valeur de votre heure — deux questions distinctes.",
+    source: "Statistique Canada, tableau 14-10-0064-01, {year} — salaire médian des employés à temps plein, toutes industries. Mis à jour deux fois par an.",
+    sharpen: "Précisez — quel est votre métier ?",
     prompt: 'Facultatif : choisissez votre secteur pour situer votre salaire',
     industry: 'Votre secteur',
     choose: 'Choisir un secteur…',
@@ -114,6 +152,17 @@ const DICT: Record<string, Record<string, string>> = {
     'all-industries': 'Tous les secteurs (moyenne canadienne)',
   },
   zh: {
+    hlRightAt: "你正好处在{prov}的{basis}中位数上 —— {amt}。",
+    hlOff: "你比{prov}的{basis}中位数{dir} {pct}% —— {amt}。",
+    dirAbove: "高",
+    dirBelow: "低",
+    basisHourly: "时薪",
+    basisAnnual: "全职工资",
+    noteFull: "这是费率对费率的比较。官方数字是标准全职工时下的基础时薪,如果拿含加班的总收入去比,等于把多干的工时算成了多挣的钱。",
+    notePart: "这是费率对费率的比较:你目前是兼职工时,而官方数字统计的是全职雇员 —— 用年收入去比,会把工时少误读成工资低。",
+    otNote: "另外:这个发薪周期你的总收入里含 {n} 小时加班。这会让到手变多,但不改变你每小时值多少 —— 两个不同的问题,刻意分开算。",
+    source: "加拿大统计局,表 14-10-0064-01,{year} —— 全职雇员工资中位数,全行业。每半年更新。",
+    sharpen: "再精确一点 —— 你做哪一行?",
     prompt: '可选:选择你的行业,看看你的工资在行业中的位置',
     industry: '你的行业',
     choose: '选择行业…',
@@ -398,54 +447,41 @@ export default function IndustryComparison({
           the toll you pay to see anything at all. */}
       {headline && (
         <div className="mb-4 rounded-xl bg-slate-50 p-4">
+          {/* Every string here comes from the dictionary. This block used to be
+              hardcoded English, so a reader on the Chinese or Punjabi site was
+              told their own pay was "29% below the median" in a language they
+              had just chosen not to read. */}
           <p className="text-sm leading-6 text-slate-700">
-            {headline.pct === 0 ? (
-              <>
-                You are <strong className="text-slate-900">right at</strong> the median
-              </>
-            ) : (
-              <>
-                You are{' '}
-                <strong className={headline.pct > 0 ? 'text-emerald-700' : 'text-red-700'}>
-                  {Math.abs(headline.pct)}% {headline.pct > 0 ? 'above' : 'below'}
-                </strong>{' '}
-                the median
-              </>
-            )}{' '}
-            {headline.basis === 'hourly' ? 'hourly wage' : 'full-time wage'} in {province} —{' '}
-            <span className="tabular-nums">
-              {headline.basis === 'hourly'
-                ? `$${headline.median.toFixed(2)}/h`
-                : `$${Math.round(headline.median).toLocaleString('en-CA')}`}
-            </span>
-            .
+            {bold(
+              (headline.pct === 0 ? t.hlRightAt : t.hlOff)
+                .replace('{pct}', String(Math.abs(headline.pct)))
+                .replace('{dir}', headline.pct > 0 ? t.dirAbove : t.dirBelow)
+                .replace('{basis}', headline.basis === 'hourly' ? t.basisHourly : t.basisAnnual)
+                .replace('{prov}', province)
+                .replace('{amt}', headline.basis === 'hourly'
+                  ? `$${headline.median.toFixed(2)}/h`
+                  : `$${Math.round(headline.median).toLocaleString('en-CA')}`),
+              headline.pct === 0 ? 'text-slate-900' : headline.pct > 0 ? 'text-emerald-700' : 'text-red-700',
+            )}
           </p>
           {headline.basis === 'hourly' && (
             <p className="mt-1.5 text-[11px] leading-4 text-slate-500">
-              {headline.partTime
-                ? 'Compared rate to rate: you are working part-time hours, and the official figure covers full-time employees — an annual comparison would read fewer hours as underpayment.'
-                : 'Compared rate to rate. The official figure is a base hourly wage at standard full-time hours, so measuring a gross that includes overtime against it would count hours worked as pay earned.'}
+              {headline.partTime ? t.notePart : t.noteFull}
             </p>
           )}
           {headline.otHours > 0 && (
             <p className="mt-1.5 text-[11px] leading-4 text-slate-500">
-              Separately: your gross includes{' '}
-              <strong className="text-slate-700 tabular-nums">
-                {Math.round(headline.otHours)} overtime {headline.otHours === 1 ? 'hour' : 'hours'}
-              </strong>{' '}
-              this pay period. That raises what you take home without changing what your hour is
-              worth — two different questions, kept apart on purpose.
+              {t.otNote.replace('{n}', String(Math.round(headline.otHours)))}
             </p>
           )}
           <p className="mt-1.5 text-[11px] leading-4 text-slate-400">
-            Statistics Canada, Table 14-10-0064-01, {WAGE_DATA_YEAR} — median wage of full-time
-            employees, all industries. Refreshed semi-annually.
+            {t.source.replace('{year}', String(WAGE_DATA_YEAR))}
           </p>
         </div>
       )}
 
       <p className="mb-3 text-sm font-medium text-slate-600">
-        {headline ? 'Sharpen it — what do you do?' : t.prompt}
+        {headline ? t.sharpen : t.prompt}
       </p>
       <label className="mb-1 block text-[11px] font-semibold uppercase tracking-wide text-slate-500">
         {t.industry}
