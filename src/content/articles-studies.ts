@@ -1363,4 +1363,118 @@ These figures assume a single worker with no other income or credits. To check y
 Rate and effective-date figures are based on the Government of Saskatchewan's June 29, 2026 announcement of its minimum wage increase and the province's published indexation formula, cross-checked against contemporaneous reporting by the Prince Albert Daily Herald and MBC Radio. Take-home figures are calculated with the CanPay Insights tax engine using 2026 federal and Saskatchewan provincial rates, full-time hours (2,080/year), a single worker, and basic personal amounts only — real paycheques vary with credits, benefits, and actual hours worked. This is general information, not tax advice.
 `,
   },
+  {
+    id: 'study-14',
+    slug: 'real-wage-growth-inflation-july-2026',
+    title: 'Wages Rose 2.8% in July 2026 — Inflation Hit 3.0%, So Real Pay Fell',
+    subtitle:
+      "Statistics Canada's July Labour Force Survey and Consumer Price Index, released three weeks apart, show average wages growing slower than prices. We ran the numbers through the CanPay Insights tax engine to see what that costs after tax, in every province.",
+    excerpt:
+      "Average hourly wages rose 2.8% year-over-year in July 2026, but the Consumer Price Index rose 3.0% — a negative real wage gap. Run through the CanPay Insights tax engine, that costs a full-time worker on the national average wage roughly $290 to $370 a year in after-tax purchasing power, depending on province.",
+    metaTitle: 'Wages Up 2.8%, Inflation 3.0%: Real Pay Fell in 2026',
+    metaDescription:
+      'StatCan: wages rose 2.8% in July 2026, inflation hit 3.0%. See the after-tax dollar gap in every province, from the CanPay Insights tax engine.',
+    keywords: [
+      'canada wage growth vs inflation 2026',
+      'real wage growth canada 2026',
+      'is my raise keeping up with inflation canada',
+      'statistics canada wages july 2026',
+      'canada inflation rate july 2026',
+      'average wage canada 2026',
+    ],
+    category: 'news',
+    tags: ['Wage Growth', 'Inflation', '2026', 'Data Study', 'All Provinces'],
+    publishedAt: '2026-08-28',
+    readTime: 7,
+    imageUrl: '/blog/real-wage-growth-inflation-july-2026.svg',
+    directAnswer:
+      "Statistics Canada's Labour Force Survey (released August 7, 2026) put average hourly wage growth at 2.8% year-over-year in July, while the Consumer Price Index (released August 17, 2026) showed inflation at 3.0% year-over-year the same month — a negative real wage gap of about 0.2 percentage points. Run through the CanPay Insights tax engine for a full-time worker earning the national average wage, that gap works out to roughly $290 to $370 a year in lost after-tax purchasing power, depending on province, with Prince Edward Island losing the most and British Columbia the least.",
+    faq: [
+      {
+        question: 'Did Canadian wages keep pace with inflation in July 2026?',
+        answer:
+          "No. Statistics Canada's Labour Force Survey reported average hourly wages up 2.8% year-over-year in July 2026 (reaching $37.17, up $1.01 from July 2025), while the Consumer Price Index rose 3.0% year-over-year the same month. Subtracting, real (inflation-adjusted) wage growth was roughly -0.2% — the typical paycheque grew, but slightly slower than the price of what it buys.",
+      },
+      {
+        question: "How much did inflation cost an Ontario worker's raise, after tax?",
+        answer:
+          'Running the national average hourly wage through the CanPay Insights tax engine for a full-time (2,080 hours/year) Ontario worker: take-home pay rose from about $57,531 in July 2025 to $58,941 in July 2026 — a $1,410 raise after tax. But matching 3.0% inflation would have required $59,257 after tax, a shortfall of about $316 a year, or roughly 15 cents an hour.',
+      },
+      {
+        question: 'Which province had the smallest and largest real pay gap?',
+        answer:
+          'Among the province and territory take-home figures we calculated, British Columbia had the smallest real (after-inflation) shortfall at about $292 a year for a full-time worker on the national average wage; Prince Edward Island had the largest, at about $367 a year. Every province and territory we checked showed a negative real gap in July 2026.',
+      },
+      {
+        question: 'Why did wage growth slow down while inflation sped up in July 2026?',
+        answer:
+          "StatCan's data shows wage growth cooling from 3.3% year-over-year in June to 2.8% in July, even as hiring stayed strong (75,000 net new jobs, unemployment down to 6.4%). Over the same month, CPI accelerated from 2.8% to 3.0%, driven mainly by a 25.7% year-over-year jump in gasoline prices; food-purchased-from-stores inflation actually eased, to 3.1% from 3.9%. Core inflation excluding gasoline held at 2.2% for a third straight month.",
+      },
+      {
+        question: 'Is national average wage growth the same as my own raise?',
+        answer:
+          "No. The 2.8% figure is StatCan's national average hourly wage across all employees — it describes the typical worker, not any one paycheque. Your own raise, tax bracket, province, and pay frequency all change the after-tax math. Use the free CanPay Insights [salary calculator](/salary-after-tax-canada) to see your own numbers, or [compare every province](/compare-provinces) side by side.",
+      },
+      {
+        question: 'Where do these figures come from?',
+        answer:
+          "Wage and employment figures are from Statistics Canada's Labour Force Survey, July 2026 (released August 7, 2026). Inflation figures are from Statistics Canada's Consumer Price Index, July 2026 (released August 17, 2026). Take-home pay figures are calculated with the CanPay Insights tax engine using 2026 federal and provincial tax rates, CPP/CPP2 (QPP/QPP2 and QPIP in Quebec), and EI, for a single full-time worker (2,080 hours/year) with basic personal amounts only.",
+      },
+    ],
+    content: `
+## Wages rose 2.8%. Prices rose faster.
+
+Two Statistics Canada releases, three weeks apart, tell a simple story about the summer of 2026: paycheques are growing, but not quite fast enough.
+
+- **August 7, 2026 — [Labour Force Survey, July 2026](https://www150.statcan.gc.ca/n1/daily-quotidien/260807/dq260807a-eng.htm):** average hourly wages rose **2.8%** year-over-year, reaching **$37.17** (up $1.01 from July 2025's $36.16). That's down from 3.3% growth in June.
+- **August 17, 2026 — [Consumer Price Index, July 2026](https://www150.statcan.gc.ca/n1/daily-quotidien/260817/dq260817a-eng.htm):** the CPI rose **3.0%** year-over-year, up from 2.8% in June — driven mainly by a 25.7% year-over-year jump in gasoline prices. Core inflation excluding gasoline held at 2.2% for a third straight month, and grocery inflation actually eased to 3.1% from 3.9%.
+
+Subtract one from the other and July 2026 posted a **negative real wage gap of about 0.2 percentage points** — the average Canadian paycheque grew, but slightly slower than the cost of living did. We ran the national average wage through the CanPay Insights tax engine to see exactly what that gap is worth after tax, in every province.
+
+### Key findings
+
+- **A full-time worker on the national average wage gained $2,101 in gross pay** year-over-year (2,080 hours × $1.01/hour) — but needed 3.0% more just to stand still against inflation.
+- **After tax, every province and territory came up short.** The real (inflation-adjusted) gap ranged from about **-$292 a year in British Columbia** to **-$367 a year in Prince Edward Island**.
+- **In Ontario**, take-home pay for that same worker rose from $57,531 to $58,941 — a $1,410 raise after tax, but about **$316 short** of matching inflation.
+- **Gasoline, not groceries, drove July's inflation.** Grocery price growth actually slowed for a fourth straight month, while pump prices did the damage.
+
+### What "real wage growth" costs, province by province
+
+Figures use Statistics Canada's national average hourly wage (July 2025: $36.16; July 2026: $37.17) at full-time hours (2,080/year), run through the CanPay Insights tax engine with 2026 federal and provincial rates, CPP/CPP2, and EI. "Needed to match inflation" is July 2025 take-home pay multiplied by 1.03, the same CPI figure StatCan reported for July 2026.
+
+| Province | Take-home July 2025 | Take-home July 2026 | Nominal after-tax gain | Needed to match 3.0% inflation | Real (after-inflation) gap |
+| --- | --- | --- | --- | --- | --- |
+| British Columbia | $57,755 | $59,196 | +$1,440 | $59,488 | -$292 |
+| Nunavut | $58,687 | $60,141 | +$1,454 | $60,448 | -$306 |
+| Northwest Territories | $57,630 | $59,052 | +$1,422 | $59,359 | -$307 |
+| Manitoba | $54,888 | $56,227 | +$1,339 | $56,535 | -$308 |
+| Yukon | $57,426 | $58,840 | +$1,414 | $59,149 | -$309 |
+| Ontario | $57,531 | $58,941 | +$1,410 | $59,257 | -$316 |
+| Alberta | $57,231 | $58,625 | +$1,395 | $58,948 | -$322 |
+| Saskatchewan | $55,670 | $57,014 | +$1,344 | $57,340 | -$326 |
+| New Brunswick | $54,944 | $56,255 | +$1,312 | $56,592 | -$337 |
+| Newfoundland and Labrador | $54,569 | $55,869 | +$1,301 | $56,206 | -$337 |
+| Nova Scotia | $53,235 | $54,491 | +$1,255 | $54,833 | -$342 |
+| Quebec | $54,182 | $55,453 | +$1,271 | $55,808 | -$355 |
+| Prince Edward Island | $54,134 | $55,391 | +$1,257 | $55,758 | -$367 |
+
+*"Needed to match 3.0% inflation" is illustrative: it assumes the whole household budget inflates at the headline CPI rate, which will not match every worker's actual spending. Provinces with higher after-tax pay (and therefore higher nominal dollar increases) tend to show a slightly larger real-dollar gap even at the same 3.0% shortfall, because 3% of a bigger number is a bigger number.*
+
+### Why the gap opened up
+
+Three things moved in opposite directions at once in July:
+
+1. **Hiring stayed strong, but raises cooled.** StatCan's Labour Force Survey showed 75,000 net new jobs in July and unemployment easing to 6.4% — a healthy jobs market — but wage growth slowed from 3.3% in June to 2.8% in July.
+2. **Gasoline did the damage on the price side.** Pump prices were up 25.7% year-over-year in July, accelerating from 20.5% in June, and pulled headline CPI up to 3.0% — matching the top of the Bank of Canada's target range.
+3. **Everything else was calmer.** Core inflation excluding gasoline held at 2.2%, and grocery price growth kept slowing (3.1% in July, down from 3.9% in June). The gap between wages and prices in July 2026 was mostly a gas-price story, not a broad cost-of-living surge.
+
+### What it means for your own paycheque
+
+The national average wage is exactly that — an average. Your own raise, tax bracket, province, and pay frequency will all move these numbers. If you got a raise this year, or are negotiating one, run your real numbers through the free [CanPay Insights salary calculator](/salary-after-tax-canada) to see what it's actually worth after federal tax, provincial tax, CPP, and EI, or use [compare provinces](/compare-provinces) to see how the same raise lands in a different province. CPP and EI deduction rates are covered in detail in [how much CPP you'll pay in 2026](/blog/how-much-cpp-will-i-pay-2026) and [how much EI you'll pay in 2026](/blog/how-much-ei-will-i-pay-2026).
+
+## Sources & disclaimer
+
+Wage and employment figures are from Statistics Canada's [Labour Force Survey, July 2026](https://www150.statcan.gc.ca/n1/daily-quotidien/260807/dq260807a-eng.htm), released August 7, 2026. Inflation figures are from Statistics Canada's [Consumer Price Index, July 2026](https://www150.statcan.gc.ca/n1/daily-quotidien/260817/dq260817a-eng.htm), released August 17, 2026. Take-home pay figures are calculated with the CanPay Insights tax engine using 2026 federal and provincial tax brackets, CPP/CPP2 (QPP/QPP2 and QPIP for Quebec), and EI premiums, for a single full-time worker (2,080 hours/year) with basic personal amounts only — real paycheques vary with credits, benefits, RRSP contributions, and actual hours worked. This is general information, not financial or tax advice.
+`,
+  },
 ];
