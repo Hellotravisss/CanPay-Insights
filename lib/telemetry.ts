@@ -371,6 +371,33 @@ export type UnionMember = 'yes' | 'no' | 'not-sure';
 export type EmployerSize = 'solo' | '2-10' | '11-50' | '51-200' | '200-plus';
 export type VacationBand = '0-10' | '11-15' | '16-20' | '21-25' | '26-plus';
 
+/**
+ * A language only counts once the reader has STAYED in it.
+ *
+ * The switcher lists ten languages in a row, so a mis-tap is easy and cycling
+ * through to find your own is normal. Both used to be recorded as real
+ * readership: `lang` sat in the dedupe key, so every tap minted another event
+ * for the same calculation, and a single curious click looked identical to a
+ * Punjabi speaker reading the page.
+ *
+ * So: a newly-chosen language is held for SETTLE_MS before it is attributed.
+ * Events fired inside that window carry the previous settled language, which
+ * is what the reader was actually reading when they got there.
+ */
+const SETTLE_MS = 20_000;
+let settledLang: string | null = null;
+let pendingLang: string | null = null;
+let pendingSince = 0;
+
+function settleLanguage(current: string): string {
+  const now = Date.now();
+  if (settledLang === null) { settledLang = current; return current; }   // first sight of the page
+  if (current === settledLang) { pendingLang = null; return current; }
+  if (pendingLang !== current) { pendingLang = current; pendingSince = now; return settledLang; }
+  if (now - pendingSince >= SETTLE_MS) { settledLang = current; pendingLang = null; return current; }
+  return settledLang;                                                    // still could be a mis-tap
+}
+
 export function recordCalcEvent(e: {
   mode: CalcMode;
   province: string;
@@ -406,7 +433,8 @@ export function recordCalcEvent(e: {
   debounceTimer = setTimeout(async () => {
     const bracket = bracketIncome(e.annualIncome);
     const KNOWN_LANGS = ['en', 'zh', 'fr', 'pa', 'tl', 'hi', 'es', 'uk', 'ko', 'vi'];
-    const lang = KNOWN_LANGS.includes(e.lang) ? e.lang : 'en';
+    const rawLang = KNOWN_LANGS.includes(e.lang) ? e.lang : 'en';
+    const lang = settleLanguage(rawLang);
     const source = e.source ?? 'web';
     const w = e.work ?? null;
     const b = e.behaviour ?? null;
@@ -414,7 +442,7 @@ export function recordCalcEvent(e: {
       ? `${w.shiftStartHour}-${w.shiftEndHour}-${w.unpaidBreakMin}-${w.daysPerWeek}`
       : '';
     const behaviourKey = b ? `${b.rrspPctBucket}-${b.otHoursBucket}-${b.tipsPctBucket ?? ''}-${b.shiftPremium}` : '';
-    const key = `${source}|${e.mode}|${e.province}|${bracket}|${lang}|${e.industry ?? ''}|${workKey}|${behaviourKey}|${e.intent ?? ''}|${e.expectation ?? ''}|${e.workArrangement ?? ''}|${e.ageBand ?? ''}|${e.viewedReport ? 'r' : ''}|${e.productInterest ?? ''}|${e.tenureBand ?? ''}${e.unionMember ?? ''}${e.employerSize ?? ''}${e.vacationBand ?? ''}|${e.payChange ? `${e.payChange.direction}-${e.payChange.pctBucket}` : ''}`;
+    const key = `${source}|${e.mode}|${e.province}|${bracket}|${e.industry ?? ''}|${workKey}|${behaviourKey}|${e.intent ?? ''}|${e.expectation ?? ''}|${e.workArrangement ?? ''}|${e.ageBand ?? ''}|${e.viewedReport ? 'r' : ''}|${e.productInterest ?? ''}|${e.tenureBand ?? ''}${e.unionMember ?? ''}${e.employerSize ?? ''}${e.vacationBand ?? ''}|${e.payChange ? `${e.payChange.direction}-${e.payChange.pctBucket}` : ''}`;
     if (sentThisPageLoad.has(key)) return;
     sentThisPageLoad.add(key);
 

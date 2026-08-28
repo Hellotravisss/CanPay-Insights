@@ -50,7 +50,7 @@ const DICT: Record<string, Record<string, string>> = {
     onsite: 'On-site',
     remote: 'Remote',
     hybrid: 'Hybrid',
-    agePrompt: 'Last one — your age group. CPP and some credits differ by age.',
+    agePrompt: 'Your age group. CPP and some credits differ by age.',
     'under-25': 'Under 25',
     '25-34': '25–34',
     '35-44': '35–44',
@@ -65,7 +65,6 @@ const DICT: Record<string, Record<string, string>> = {
     solo: 'Just me', '2-10': '2–10', '11-50': '11–50', '51-200': '51–200', '200-plus': '200+',
     q4vacation: 'How many paid vacation days do you actually get?',
     '0-10': '0–10', '11-15': '11–15', '16-20': '16–20', '21-25': '21–25', '26-plus': '26+',
-    skip: 'Skip',
     thanks: 'Thanks — that helps.',
   },
   zh: {
@@ -82,7 +81,7 @@ const DICT: Record<string, Record<string, string>> = {
     onsite: '到岗',
     remote: '远程',
     hybrid: '混合',
-    agePrompt: '最后一个 —— 年龄段。CPP 和部分税收抵免按年龄不同。',
+    agePrompt: '年龄段。CPP 和部分税收抵免按年龄不同。',
     'under-25': '25 岁以下',
     '25-34': '25–34',
     '35-44': '35–44',
@@ -97,7 +96,6 @@ const DICT: Record<string, Record<string, string>> = {
     solo: '就我一个', '2-10': '2–10 人', '11-50': '11–50 人', '51-200': '51–200 人', '200-plus': '200 人以上',
     q4vacation: '你实际有几天带薪年假?',
     '0-10': '0–10 天', '11-15': '11–15 天', '16-20': '16–20 天', '21-25': '21–25 天', '26-plus': '26 天以上',
-    skip: '跳过',
     thanks: '谢谢,这很有帮助。',
   },
   fr: {
@@ -114,7 +112,7 @@ const DICT: Record<string, Record<string, string>> = {
     onsite: 'Sur place',
     remote: 'À distance',
     hybrid: 'Hybride',
-    agePrompt: 'Dernière question — votre groupe d’âge. Le RPC et certains crédits varient selon l’âge.',
+    agePrompt: 'Votre groupe d’âge. Le RPC et certains crédits varient selon l’âge.',
     'under-25': 'Moins de 25 ans',
     '25-34': '25–34',
     '35-44': '35–44',
@@ -129,7 +127,6 @@ const DICT: Record<string, Record<string, string>> = {
     solo: 'Moi seul', '2-10': '2–10', '11-50': '11–50', '51-200': '51–200', '200-plus': '200+',
     q4vacation: 'Combien de jours de vacances payées avez-vous réellement ?',
     '0-10': '0–10', '11-15': '11–15', '16-20': '16–20', '21-25': '21–25', '26-plus': '26+',
-    skip: 'Passer',
     thanks: 'Merci, cela nous aide.',
   },
   es: {
@@ -146,7 +143,7 @@ const DICT: Record<string, Record<string, string>> = {
     onsite: 'Presencial',
     remote: 'A distancia',
     hybrid: 'Híbrido',
-    agePrompt: 'Última pregunta: su grupo de edad. El CPP y algunos créditos varían con la edad.',
+    agePrompt: 'Su grupo de edad. El CPP y algunos créditos varían con la edad.',
     'under-25': 'Menos de 25',
     '25-34': '25–34',
     '35-44': '35–44',
@@ -161,7 +158,6 @@ const DICT: Record<string, Record<string, string>> = {
     solo: 'Solo yo', '2-10': '2–10', '11-50': '11–50', '51-200': '51–200', '200-plus': '200+',
     q4vacation: '¿Cuántos días de vacaciones pagadas tiene realmente?',
     '0-10': '0–10', '11-15': '11–15', '16-20': '16–20', '21-25': '21–25', '26-plus': '26+',
-    skip: 'Omitir',
     thanks: 'Gracias, nos ayuda.',
   },
   pa: {
@@ -178,7 +174,7 @@ const DICT: Record<string, Record<string, string>> = {
     onsite: 'ਦਫ਼ਤਰ ਵਿੱਚ',
     remote: 'ਰਿਮੋਟ',
     hybrid: 'ਹਾਈਬ੍ਰਿਡ',
-    agePrompt: 'ਆਖਰੀ ਸਵਾਲ — ਤੁਹਾਡਾ ਉਮਰ ਵਰਗ। CPP ਤੇ ਕੁਝ ਛੋਟਾਂ ਉਮਰ ਨਾਲ ਬਦਲਦੀਆਂ ਹਨ।',
+    agePrompt: 'ਤੁਹਾਡਾ ਉਮਰ ਵਰਗ। CPP ਤੇ ਕੁਝ ਛੋਟਾਂ ਉਮਰ ਨਾਲ ਬਦਲਦੀਆਂ ਹਨ।',
     'under-25': '25 ਤੋਂ ਘੱਟ',
     '25-34': '25–34',
     '35-44': '35–44',
@@ -193,7 +189,6 @@ const DICT: Record<string, Record<string, string>> = {
     solo: 'ਸਿਰਫ਼ ਮੈਂ', '2-10': '2–10', '11-50': '11–50', '51-200': '51–200', '200-plus': '200+',
     q4vacation: 'ਤੁਹਾਨੂੰ ਅਸਲ ਵਿੱਚ ਕਿੰਨੇ ਤਨਖਾਹੀ ਛੁੱਟੀ ਦੇ ਦਿਨ ਮਿਲਦੇ ਹਨ?',
     '0-10': '0–10', '11-15': '11–15', '16-20': '16–20', '21-25': '21–25', '26-plus': '26+',
-    skip: 'ਛੱਡੋ',
     thanks: 'ਧੰਨਵਾਦ — ਇਸ ਨਾਲ ਮਦਦ ਮਿਲਦੀ ਹੈ।',
   },
   hi: {
@@ -210,7 +205,7 @@ const DICT: Record<string, Record<string, string>> = {
     onsite: 'ऑफ़िस में',
     remote: 'रिमोट',
     hybrid: 'हाइब्रिड',
-    agePrompt: 'आख़िरी सवाल — आपका आयु वर्ग। CPP और कुछ छूट उम्र के अनुसार बदलती हैं।',
+    agePrompt: 'आपका आयु वर्ग। CPP और कुछ छूट उम्र के अनुसार बदलती हैं।',
     'under-25': '25 से कम',
     '25-34': '25–34',
     '35-44': '35–44',
@@ -225,7 +220,6 @@ const DICT: Record<string, Record<string, string>> = {
     solo: 'सिर्फ़ मैं', '2-10': '2–10', '11-50': '11–50', '51-200': '51–200', '200-plus': '200+',
     q4vacation: 'आपको वास्तव में कितने सवेतन अवकाश दिन मिलते हैं?',
     '0-10': '0–10', '11-15': '11–15', '16-20': '16–20', '21-25': '21–25', '26-plus': '26+',
-    skip: 'छोड़ें',
     thanks: 'धन्यवाद — इससे मदद मिलती है।',
   },
   tl: {
@@ -242,7 +236,7 @@ const DICT: Record<string, Record<string, string>> = {
     onsite: 'Sa opisina',
     remote: 'Remote',
     hybrid: 'Hybrid',
-    agePrompt: 'Huling tanong — ang iyong pangkat ng edad. Nagbabago ang CPP at ilang credit ayon sa edad.',
+    agePrompt: 'Ang iyong pangkat ng edad. Nagbabago ang CPP at ilang credit ayon sa edad.',
     'under-25': 'Wala pang 25',
     '25-34': '25–34',
     '35-44': '35–44',
@@ -257,7 +251,6 @@ const DICT: Record<string, Record<string, string>> = {
     solo: 'Ako lang', '2-10': '2–10', '11-50': '11–50', '51-200': '51–200', '200-plus': '200+',
     q4vacation: 'Ilang bayad na araw ng bakasyon talaga ang nakukuha mo?',
     '0-10': '0–10', '11-15': '11–15', '16-20': '16–20', '21-25': '21–25', '26-plus': '26+',
-    skip: 'Laktawan',
     thanks: 'Salamat — malaking tulong ito.',
   },
   uk: {
@@ -274,7 +267,7 @@ const DICT: Record<string, Record<string, string>> = {
     onsite: 'В офісі',
     remote: 'Віддалено',
     hybrid: 'Гібридно',
-    agePrompt: 'Останнє питання — ваша вікова група. CPP і деякі кредити залежать від віку.',
+    agePrompt: 'Ваша вікова група. CPP і деякі кредити залежать від віку.',
     'under-25': 'До 25',
     '25-34': '25–34',
     '35-44': '35–44',
@@ -289,7 +282,6 @@ const DICT: Record<string, Record<string, string>> = {
     solo: 'Лише я', '2-10': '2–10', '11-50': '11–50', '51-200': '51–200', '200-plus': '200+',
     q4vacation: 'Скільки оплачуваних днів відпустки ви маєте насправді?',
     '0-10': '0–10', '11-15': '11–15', '16-20': '16–20', '21-25': '21–25', '26-plus': '26+',
-    skip: 'Пропустити',
     thanks: 'Дякуємо — це допомагає.',
   },
   ko: {
@@ -306,7 +298,7 @@ const DICT: Record<string, Record<string, string>> = {
     onsite: '출근',
     remote: '재택',
     hybrid: '하이브리드',
-    agePrompt: '마지막 질문 — 연령대입니다. CPP와 일부 세액공제는 나이에 따라 달라집니다.',
+    agePrompt: '연령대입니다. CPP와 일부 세액공제는 나이에 따라 달라집니다.',
     'under-25': '25세 미만',
     '25-34': '25–34',
     '35-44': '35–44',
@@ -321,7 +313,6 @@ const DICT: Record<string, Record<string, string>> = {
     solo: '혼자', '2-10': '2–10명', '11-50': '11–50명', '51-200': '51–200명', '200-plus': '200명 이상',
     q4vacation: '실제로 유급휴가를 며칠 받으시나요?',
     '0-10': '0–10', '11-15': '11–15', '16-20': '16–20', '21-25': '21–25', '26-plus': '26일 이상',
-    skip: '건너뛰기',
     thanks: '감사합니다 — 큰 도움이 됩니다.',
   },
   vi: {
@@ -338,7 +329,7 @@ const DICT: Record<string, Record<string, string>> = {
     onsite: 'Tại văn phòng',
     remote: 'Từ xa',
     hybrid: 'Kết hợp',
-    agePrompt: 'Câu cuối — nhóm tuổi của bạn. CPP và một số khoản khấu trừ thay đổi theo tuổi.',
+    agePrompt: 'Nhóm tuổi của bạn. CPP và một số khoản khấu trừ thay đổi theo tuổi.',
     'under-25': 'Dưới 25',
     '25-34': '25–34',
     '35-44': '35–44',
@@ -353,7 +344,6 @@ const DICT: Record<string, Record<string, string>> = {
     solo: 'Chỉ mình tôi', '2-10': '2–10', '11-50': '11–50', '51-200': '51–200', '200-plus': '200+',
     q4vacation: 'Thực tế bạn có bao nhiêu ngày phép có lương?',
     '0-10': '0–10', '11-15': '11–15', '16-20': '16–20', '21-25': '21–25', '26-plus': '26+',
-    skip: 'Bỏ qua',
     thanks: 'Cảm ơn — điều này rất hữu ích.',
   },
 };
@@ -504,9 +494,6 @@ export default function ExpectationPrompt({
                 {t[o]}
               </button>
             ))}
-            <button onClick={() => setDone(true)} className="px-2 py-2 text-sm text-slate-400 hover:text-slate-600">
-              {t.skip}
-            </button>
           </div>
         </>
       )}
