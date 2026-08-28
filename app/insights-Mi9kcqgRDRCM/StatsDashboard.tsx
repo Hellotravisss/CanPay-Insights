@@ -454,7 +454,21 @@ export default function StatsDashboard() {
           </Card>
 
           <Card title={T('Calculator used', '用的哪个计算器')}>
-            <Donut rows={stats.by_mode} />
+            {/* 'simple' is the enum value the hourly calculator has always
+                stored; showing it raw made the busiest mode on the site look
+                like an unnamed category. The stored value stays as it is —
+                renaming it would split every historical row from the new
+                ones — so only the label is translated here. */}
+            <Donut
+              rows={stats.by_mode}
+              label={(k) =>
+                ({
+                  simple: T('Hourly wage', '时薪'),
+                  annual: T('Annual salary', '年薪'),
+                  timesheet: T('Timesheet', '工时表'),
+                } as Record<string, string>)[String(k)] ?? String(k)
+              }
+            />
           </Card>
 
           {/* Derived employment shape — no question was ever asked */}
