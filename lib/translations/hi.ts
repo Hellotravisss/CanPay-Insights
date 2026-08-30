@@ -1,5 +1,9 @@
 // Hindi (हिन्दी) translations — auto-loaded by lib/i18n.tsx
 export const main: Record<string, string> = {
+  "ps.title": "Google से कहें कि यह स्रोत ज़्यादा दिखाए",
+  "ps.body": "Google आपको वे स्रोत चुनने देता है जिन्हें आप ज़्यादा देखना चाहते हैं। CanPay Insights चुनें और हमारे पेज आपके Top Stories तथा AI उत्तरों में “preferred” चिह्न के साथ दिखेंगे।",
+  "ps.honest": "यह केवल वही बदलता है जो आप देखते हैं — दूसरों के परिणामों में हमारी स्थिति नहीं। यह व्यक्तिगत पसंद है, रैंकिंग संकेत नहीं।",
+  "ps.cta": "CanPay Insights को अपने पसंदीदा स्रोतों में जोड़ें",
   "annual.equity": "शेयर / RSU",
   "annual.equityHint": "इस साल निहित होने वाले शेयर — वेतन की तरह कर लगता है",
   "annual.equityLabel": "इस साल का मूल्य (निहित तिथि के भाव पर)",

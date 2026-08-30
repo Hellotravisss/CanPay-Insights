@@ -1,5 +1,9 @@
 // Spanish (español) translations — auto-loaded by lib/i18n.tsx
 export const main: Record<string, string> = {
+  "ps.title": "Dile a Google que te muestre más de esto",
+  "ps.body": "Google te permite nombrar fuentes que quieres ver más. Elige CanPay Insights y nuestras páginas llevarán una marca «preferred» en tus Top Stories, resúmenes de IA y modo IA.",
+  "ps.honest": "Cambia lo que ves tú y nada más: no nuestra posición en los resultados de otras personas. Es una preferencia personal, no una señal de posicionamiento.",
+  "ps.cta": "Añadir CanPay Insights a tus fuentes preferidas",
   "annual.equity": "Acciones / RSU",
   "annual.equityHint": "Acciones que consolidan este año — tributan como salario",
   "annual.equityLabel": "Valor consolidado este año (al precio del día)",

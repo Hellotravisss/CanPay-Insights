@@ -1,4 +1,5 @@
 import { allArticles } from '../articles-data';
+import PreferredSource from '../../../components/PreferredSource';
 import type { Article } from '../types';
 
 const categories = [
@@ -216,6 +217,8 @@ export default function BlogList() {
           </a>
         </div>
       </section>
+
+      <PreferredSource />
     </main>
   );
 }

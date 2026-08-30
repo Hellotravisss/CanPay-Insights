@@ -1,5 +1,9 @@
 // Korean (한국어) translations — auto-loaded by lib/i18n.tsx
 export const main: Record<string, string> = {
+  "ps.title": "이 출처를 더 보여달라고 Google에 알리기",
+  "ps.body": "Google에서는 더 자주 보고 싶은 출처를 지정할 수 있습니다. CanPay Insights를 선택하면 내 Top Stories와 AI 답변에서 저희 페이지에 “preferred” 표시가 붙습니다.",
+  "ps.honest": "바뀌는 것은 귀하가 보는 화면뿐이며, 다른 사람의 검색 결과에서 저희 순위는 달라지지 않습니다. 개인 설정이지 순위 신호가 아닙니다.",
+  "ps.cta": "CanPay Insights를 선호 출처에 추가",
   "annual.equity": "주식 / RSU",
   "annual.equityHint": "올해 베스팅되는 주식 — 상여가 아니라 급여로 과세",
   "annual.equityLabel": "올해 베스팅 가치 (베스팅일 주가 기준)",

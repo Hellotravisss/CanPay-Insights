@@ -23,6 +23,10 @@ type Dict = Record<string, string>;
 
 // Translation dictionaries. Add keys here as more components are localized.
 const en: Dict = {
+  "ps.title": "Tell Google to show you more of this",
+  "ps.body": "Google lets you name sources you want to see more of. Choose CanPay Insights and our pages carry a “preferred” mark in your Top Stories, AI Overviews and AI Mode.",
+  "ps.honest": "It changes what you see and nothing else — not our position in anyone else's results. This is a personal preference, not a ranking signal.",
+  "ps.cta": "Add CanPay Insights to your preferred sources",
   "annual.equity": "Stock / RSUs",
   "annual.equityHint": "Shares vesting this year — taxed as salary, not a bonus",
   "annual.equityLabel": "Value vesting this year (at vest-date price)",
@@ -340,6 +344,10 @@ const en: Dict = {
 };
 
 const zh: Dict = {
+  "ps.title": "让 Google 多给你看这个来源",
+  "ps.body": "Google 允许你指定希望多看到的来源。选择 CanPay Insights 之后,我们的页面会在你的 Top Stories、AI 摘要和 AI 模式里带上「preferred」标记。",
+  "ps.honest": "它只改变你自己看到的内容,不改变我们在别人搜索结果里的位置。这是个人偏好设置,不是排名信号。",
+  "ps.cta": "把 CanPay Insights 加入你的偏好来源",
   "annual.equity": "股票 / RSU",
   "annual.equityHint": "今年归属的股票 —— 按工资计税,不是奖金",
   "annual.equityLabel": "今年归属的市值(按归属日股价)",
@@ -657,6 +665,10 @@ const zh: Dict = {
 };
 
 const fr: Dict = {
+  "ps.title": "Dites à Google de vous en montrer davantage",
+  "ps.body": "Google vous laisse nommer les sources que vous voulez voir plus souvent. Choisissez CanPay Insights et nos pages porteront la mention « preferred » dans vos Top Stories, aperçus IA et mode IA.",
+  "ps.honest": "Cela change ce que vous voyez, et rien d’autre — pas notre position dans les résultats des autres. C’est une préférence personnelle, pas un signal de classement.",
+  "ps.cta": "Ajouter CanPay Insights à vos sources préférées",
   "annual.equity": "Actions / UAR",
   "annual.equityHint": "Actions acquises cette année — imposées comme un salaire",
   "annual.equityLabel": "Valeur acquise cette année (au cours du jour d’acquisition)",

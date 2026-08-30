@@ -1,5 +1,9 @@
 // Tagalog (Filipino) translations — auto-loaded by lib/i18n.tsx
 export const main: Record<string, string> = {
+  "ps.title": "Sabihin sa Google na magpakita pa ng ganito",
+  "ps.body": "Pinapayagan ka ng Google na pumili ng mga pinagkukunan na gusto mong makitang mas madalas. Piliin ang CanPay Insights at may “preferred” na marka ang aming mga pahina sa iyong Top Stories at mga sagot ng AI.",
+  "ps.honest": "Binabago nito ang nakikita mo lamang — hindi ang posisyon namin sa resulta ng iba. Personal na kagustuhan ito, hindi senyales sa ranking.",
+  "ps.cta": "Idagdag ang CanPay Insights sa iyong mga preferred source",
   "annual.equity": "Stock / RSU",
   "annual.equityHint": "Mga share na mag-ve-vest ngayong taon — binubuwisan tulad ng sahod",
   "annual.equityLabel": "Halagang mag-ve-vest ngayong taon (sa presyo sa araw ng vest)",

@@ -1,5 +1,9 @@
 // Ukrainian (українська) translations — auto-loaded by lib/i18n.tsx
 export const main: Record<string, string> = {
+  "ps.title": "Скажіть Google показувати це джерело частіше",
+  "ps.body": "Google дозволяє вказати джерела, які ви хочете бачити частіше. Оберіть CanPay Insights — і наші сторінки матимуть позначку «preferred» у ваших Top Stories та відповідях ШІ.",
+  "ps.honest": "Це змінює лише те, що бачите ви — не нашу позицію в чужих результатах. Це особисте налаштування, а не сигнал ранжування.",
+  "ps.cta": "Додати CanPay Insights до улюблених джерел",
   "annual.equity": "Акції / RSU",
   "annual.equityHint": "Акції, що переходять цього року — оподатковуються як зарплата",
   "annual.equityLabel": "Вартість цього року (за ціною на дату переходу)",

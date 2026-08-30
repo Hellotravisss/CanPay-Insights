@@ -1,5 +1,9 @@
 // Punjabi (ਪੰਜਾਬੀ) translations — auto-loaded by lib/i18n.tsx
 export const main: Record<string, string> = {
+  "ps.title": "Google ਨੂੰ ਕਹੋ ਕਿ ਇਹ ਸਰੋਤ ਵੱਧ ਦਿਖਾਏ",
+  "ps.body": "Google ਤੁਹਾਨੂੰ ਉਹ ਸਰੋਤ ਚੁਣਨ ਦਿੰਦਾ ਹੈ ਜੋ ਤੁਸੀਂ ਵੱਧ ਦੇਖਣਾ ਚਾਹੁੰਦੇ ਹੋ। CanPay Insights ਚੁਣੋ ਤੇ ਸਾਡੇ ਪੰਨੇ ਤੁਹਾਡੇ Top Stories ਤੇ AI ਜਵਾਬਾਂ ਵਿੱਚ “preferred” ਨਿਸ਼ਾਨ ਨਾਲ ਆਉਣਗੇ।",
+  "ps.honest": "ਇਹ ਸਿਰਫ਼ ਉਹ ਬਦਲਦਾ ਹੈ ਜੋ ਤੁਸੀਂ ਦੇਖਦੇ ਹੋ — ਹੋਰਾਂ ਦੇ ਨਤੀਜਿਆਂ ਵਿੱਚ ਸਾਡੀ ਥਾਂ ਨਹੀਂ। ਇਹ ਨਿੱਜੀ ਪਸੰਦ ਹੈ, ਰੈਂਕਿੰਗ ਸਿਗਨਲ ਨਹੀਂ।",
+  "ps.cta": "CanPay Insights ਨੂੰ ਆਪਣੇ ਪਸੰਦੀਦਾ ਸਰੋਤਾਂ ਵਿੱਚ ਜੋੜੋ",
   "annual.equity": "ਸ਼ੇਅਰ / RSU",
   "annual.equityHint": "ਇਸ ਸਾਲ ਮਿਲਣ ਵਾਲੇ ਸ਼ੇਅਰ — ਤਨਖਾਹ ਵਾਂਗ ਟੈਕਸ ਲੱਗਦਾ ਹੈ",
   "annual.equityLabel": "ਇਸ ਸਾਲ ਦੀ ਕੀਮਤ (ਮਿਲਣ ਵਾਲੇ ਦਿਨ ਦੇ ਭਾਅ ’ਤੇ)",

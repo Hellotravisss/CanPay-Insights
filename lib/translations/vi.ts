@@ -1,5 +1,9 @@
 // Vietnamese (Tiếng Việt) translations — auto-loaded by lib/i18n.tsx
 export const main: Record<string, string> = {
+  "ps.title": "Bảo Google hiển thị nguồn này nhiều hơn",
+  "ps.body": "Google cho phép bạn chọn những nguồn muốn thấy nhiều hơn. Chọn CanPay Insights và các trang của chúng tôi sẽ mang dấu “preferred” trong Top Stories và câu trả lời AI của bạn.",
+  "ps.honest": "Nó chỉ thay đổi những gì bạn thấy — không thay đổi vị trí của chúng tôi trong kết quả của người khác. Đây là tuỳ chọn cá nhân, không phải tín hiệu xếp hạng.",
+  "ps.cta": "Thêm CanPay Insights vào nguồn ưa thích của bạn",
   "annual.equity": "Cổ phiếu / RSU",
   "annual.equityHint": "Cổ phiếu trao trong năm nay — bị đánh thuế như lương",
   "annual.equityLabel": "Giá trị trao trong năm nay (theo giá ngày trao)",
