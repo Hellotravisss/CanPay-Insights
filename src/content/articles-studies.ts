@@ -1477,4 +1477,134 @@ The national average wage is exactly that — an average. Your own raise, tax br
 Wage and employment figures are from Statistics Canada's [Labour Force Survey, July 2026](https://www150.statcan.gc.ca/n1/daily-quotidien/260807/dq260807a-eng.htm), released August 7, 2026. Inflation figures are from Statistics Canada's [Consumer Price Index, July 2026](https://www150.statcan.gc.ca/n1/daily-quotidien/260817/dq260817a-eng.htm), released August 17, 2026. Take-home pay figures are calculated with the CanPay Insights tax engine using 2026 federal and provincial tax brackets, CPP/CPP2 (QPP/QPP2 and QPIP for Quebec), and EI premiums, for a single full-time worker (2,080 hours/year) with basic personal amounts only — real paycheques vary with credits, benefits, RRSP contributions, and actual hours worked. This is general information, not financial or tax advice.
 `,
   },
+  {
+    id: 'study-15',
+    slug: 'rsu-take-home-pay-canada-2026',
+    title: 'Your $200,000 Offer Has $60,000 in Stock. Here Is What Lands.',
+    subtitle:
+      'RSUs are not taxed like investments. They are taxed like salary — at your highest bracket, on top of the salary that already used up the low ones. We ran a $140,000 base with $60,000 of vesting RSUs through the CanPay Insights tax engine for all 13 provinces.',
+    excerpt:
+      'A $60,000 RSU grant vesting in Ontario on a $140,000 salary leaves $32,617 after tax and CPP. Anyone budgeting it as a capital gain would expect $46,665 — a gap of $14,048. RSUs are employment income in full: no 50% deduction, taxed at the marginal rate.',
+    metaTitle: 'RSU Take-Home Pay Canada 2026: What $60,000 in Stock Is Worth',
+    metaDescription:
+      'RSUs are taxed as salary, not capital gains. A $60,000 vest on a $140,000 Ontario salary nets $32,617. All 13 provinces compared, 2026 rates.',
+    keywords: [
+      'RSU tax Canada',
+      'restricted stock units tax',
+      'equity compensation Canada',
+      'RSU take home pay',
+      'stock vesting tax Canada 2026',
+      'total compensation calculator Canada',
+    ],
+    category: 'news',
+    tags: ['RSU', 'equity', 'total compensation', 'tax'],
+    publishedAt: '2026-08-29',
+    readTime: 7,
+    imageUrl: '/blog/rsu-take-home-pay-canada-2026.svg',
+    directAnswer:
+      'RSUs are employment income in full at their vest-date value — there is no 50% deduction, and they are taxed at your marginal rate on top of your salary. On a $140,000 Ontario salary, a $60,000 RSU vest leaves $32,617 after tax and CPP; $27,383, or 45.6% of the grant, goes to deductions. The keep rate ranges from $37,979 in Nunavut to $31,059 in Quebec on identical numbers.',
+    faq: [
+      {
+        question: 'Are RSUs taxed as capital gains in Canada?',
+        answer:
+          'No. When RSUs vest, their full fair market value on the vest date is employment income and appears in box 14 of your T4, taxed at your marginal rate. Only the change in share price AFTER the vest date is a capital gain, and only when you sell. Treating the whole grant as a capital gain is the single most expensive misunderstanding in equity compensation: on a $60,000 vest at a $140,000 Ontario salary it overstates what you keep by $14,048.',
+      },
+      {
+        question: 'Do RSUs qualify for the 50% stock option deduction?',
+        answer:
+          'No. The deduction under paragraph 110(1)(d) of the Income Tax Act applies to qualifying stock options, not RSUs, and for options it is capped at $200,000 of underlying share value per year. RSUs have never qualified. The whole vest value is taxable.',
+      },
+      {
+        question: 'Do RSUs affect CPP and EI?',
+        answer:
+          'CPP yes, EI no. The CRA treats a taxable non-cash benefit as pensionable, so vesting RSUs raise your CPP contributions if your salary has not already reached the ceiling. The same benefit is generally not insurable, so it never raises EI premiums. On a $140,000 salary both are already fully paid for the year, so a vest changes neither.',
+      },
+      {
+        question: 'Is $200,000 of salary worth more than $140,000 salary plus $60,000 of RSUs?',
+        answer:
+          'On take-home pay, they are the same: both leave $131,575 in Ontario in 2026. RSUs are not taxed more harshly than salary. What differs is everything the tax does not measure — vesting schedules, share price risk, and the fact that you are paid in shares you may not be able to sell immediately.',
+      },
+      {
+        question: 'What does a $60,000 RSU vest leave in my province?',
+        answer:
+          'On a $140,000 salary in 2026: Nunavut $37,979, Yukon $36,951, Alberta $36,779, Northwest Territories $36,012, Saskatchewan $35,459, British Columbia $34,832, New Brunswick $34,028, Newfoundland and Labrador $33,554, Manitoba $33,403, Ontario $32,617, Prince Edward Island $32,474, Nova Scotia $31,843, Quebec $31,059. The spread between the top and bottom province is $6,920 on an identical grant.',
+      },
+    ],
+    content: `
+Recruiters quote a package. "One hundred and forty base, sixty in stock, two hundred all in." The number that sticks is two hundred thousand.
+
+The stock half does not arrive as two hundred thousand minus tax at some gentle investment rate. It arrives as **salary**, taxed at the top of your bracket, and on a $140,000 base in Ontario a $60,000 vest leaves **$32,617**.
+
+## The mistake that costs the most
+
+Ask someone what happens when their RSUs vest and a lot of them will say "it's stock, so it's a capital gain — half of it is taxable."
+
+That is true of shares you *bought*. It is not true of shares your employer *gave you*.
+
+When RSUs vest, their fair market value on the vest date is employment income in full. It goes in box 14 of your T4, next to your salary, and it is taxed at your marginal rate. There is no 50% inclusion and no 50% deduction — the deduction under paragraph 110(1)(d) is for qualifying stock options, and RSUs have never been eligible.
+
+The size of that misunderstanding, on the numbers above:
+
+| | On a $60,000 vest |
+| --- | --- |
+| What you keep | **$32,617** |
+| What you would keep if it were a capital gain | $46,665 |
+| The gap | **$14,048** |
+
+Fourteen thousand dollars is not a rounding error. It is the difference between a down payment being ready this year and not.
+
+## Stock is not taxed worse than salary — that is the other half of the story
+
+Here is the part that surprises people in the opposite direction. Compare two offers in Ontario, both worth $200,000:
+
+| Package | Take-home |
+| --- | --- |
+| $200,000, all salary | $131,575 |
+| $140,000 salary + $60,000 RSUs | $131,575 |
+
+Identical. RSUs are not punished by the tax system; they are simply treated as what they are — pay. The reason equity *feels* expensive is that it lands on top of a salary that has already spent the cheap brackets. The first $60,000 of anyone's income is taxed gently. Your $60,000 of stock is not the first $60,000 — it is the last, so it meets the highest rate you pay on anything.
+
+That is worth saying plainly, because it changes the decision: **do not discount a stock-heavy offer for tax reasons.** Discount it for the reasons that are real — vesting schedules, share price risk, and the fact that shares are not rent money until they are sold.
+
+## Where you live changes the answer by $6,920
+
+Same $140,000 salary, same $60,000 vest, thirteen different answers:
+
+| Province or territory | You keep | Lost to tax and CPP |
+| --- | --- | --- |
+| Nunavut | $37,979 | 36.7% |
+| Yukon | $36,951 | 38.4% |
+| Alberta | $36,779 | 38.7% |
+| Northwest Territories | $36,012 | 40% |
+| Saskatchewan | $35,459 | 40.9% |
+| British Columbia | $34,832 | 41.9% |
+| New Brunswick | $34,028 | 43.3% |
+| Newfoundland and Labrador | $33,554 | 44.1% |
+| Manitoba | $33,403 | 44.3% |
+| Ontario | $32,617 | 45.6% |
+| Prince Edward Island | $32,474 | 45.9% |
+| Nova Scotia | $31,843 | 46.9% |
+| Quebec | $31,059 | 48.2% |
+
+The same grant is worth **$6,920** more in Nunavut than in Quebec.
+
+## Two details that catch people out
+
+**CPP yes, EI no.** The CRA treats a taxable non-cash benefit as pensionable but generally not insurable. So a vest can raise your CPP contributions, but never your EI premiums. On a $140,000 salary both are already fully paid for the year, so a vest changes neither — but on a $45,000 salary with a $40,000 vest, CPP moves and EI does not.
+
+**Sell-to-cover is not tax planning.** Most employers sell a slice of the vesting shares to remit withholding. That covers the withholding estimate, not necessarily your actual bill. If the vest pushed you into a higher bracket than your employer assumed, the shortfall shows up next April.
+
+**After the vest, the rules change.** Your cost basis is the vest-date price you were already taxed on. From that moment the shares behave like any other investment: gains and losses are capital, half-taxable, and only when you sell. Hold them and go up 20%? That part *is* a capital gain. The vest itself never was.
+
+## Run your own numbers
+
+The figures above are one salary in one year. Yours are different — a different base, a different vesting amount, a different province, maybe an RRSP contribution that changes the bracket the vest lands in.
+
+The [CanPay Insights calculator](/) now takes vesting equity in the annual salary mode. Enter your base and the value vesting this year and it shows what actually reaches you, computed by the same engine that produced every number on this page.
+
+---
+
+Take-home figures are calculated with the CanPay Insights tax engine using 2026 federal and provincial tax brackets, CPP and CPP2 (QPP, QPP2 and QPIP for Quebec), and EI premiums, for a single filer with basic personal amounts only and no RRSP contribution. Equity is modelled as RSUs vesting in the year: employment income in full, pensionable for CPP, not insurable for EI. **Stock options are taxed differently** — the benefit is the spread at exercise, a 50% deduction may apply on up to $200,000 of underlying value a year, and CCPC rules differ again — and are not modelled here. Real outcomes vary with credits, benefits, other income, and your employer's withholding. This is general information, not financial or tax advice.
+`,
+  },
 ];
