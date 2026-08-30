@@ -1,5 +1,12 @@
 // Tagalog (Filipino) translations — auto-loaded by lib/i18n.tsx
 export const main: Record<string, string> = {
+  "annual.equity": "Stock / RSU",
+  "annual.equityHint": "Mga share na mag-ve-vest ngayong taon — binubuwisan tulad ng sahod",
+  "annual.equityLabel": "Halagang mag-ve-vest ngayong taon (sa presyo sa araw ng vest)",
+  "annual.equityKeepLabel": "Ang tunay mong natitira",
+  "annual.equityOf": "sa {v}",
+  "annual.equityLost": "{v} ang napupunta sa buwis at CPP — {p} ng grant.",
+  "annual.equityNote": "Ang RSU ay buong employment income sa presyo sa araw ng vest: walang 50% na bawas, binubuwisan sa iyong marginal rate bukod pa sa sahod. Kasama sa CPP, hindi sa EI. Iba ang stock options at hindi kasama rito.",
   'app.saveCalc': 'I-save sa aking pay history',
   'app.saved': 'Na-save sa iyong history',
   'curve.title': 'Ang iyong pay curve',

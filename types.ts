@@ -106,6 +106,17 @@ export interface AnnualSalaryInputs {
   rrspContributionPerPeriod?: number;
   additionalIncome?: AdditionalIncome;
   deductions?: Deductions;
+  /**
+   * RSU value vesting this year, in dollars, at fair market value on the vest
+   * date. Employment income in full — RSUs have never qualified for the
+   * paragraph 110(1)(d) 50% deduction, so the whole amount is taxed at the
+   * marginal rate (options are different and are NOT modelled here).
+   *
+   * Pensionable but not insurable: CRA treats a non-cash taxable benefit as
+   * pensionable for CPP, while "a taxable non-cash or near-cash benefit is
+   * generally not insurable" for EI.
+   */
+  equityVestingAnnual?: number;
 }
 
 // Timesheet 打卡条目

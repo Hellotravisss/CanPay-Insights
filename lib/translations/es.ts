@@ -1,5 +1,12 @@
 // Spanish (español) translations — auto-loaded by lib/i18n.tsx
 export const main: Record<string, string> = {
+  "annual.equity": "Acciones / RSU",
+  "annual.equityHint": "Acciones que consolidan este año — tributan como salario",
+  "annual.equityLabel": "Valor consolidado este año (al precio del día)",
+  "annual.equityKeepLabel": "Lo que realmente conserva",
+  "annual.equityOf": "de {v}",
+  "annual.equityLost": "{v} se va en impuestos y CPP — el {p} de la concesión.",
+  "annual.equityNote": "Las RSU son ingreso laboral completo al precio del día de consolidación: sin deducción del 50 %, gravadas a su tasa marginal además del salario. Cotizan al CPP, no al EI. Las opciones sobre acciones tributan de otra forma y no se modelan aquí.",
   'app.saveCalc': 'Guardar en mi historial salarial',
   'app.saved': 'Guardado en tu historial',
   'curve.title': 'Tu curva salarial',

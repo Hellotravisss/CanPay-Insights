@@ -1,5 +1,12 @@
 // Punjabi (ਪੰਜਾਬੀ) translations — auto-loaded by lib/i18n.tsx
 export const main: Record<string, string> = {
+  "annual.equity": "ਸ਼ੇਅਰ / RSU",
+  "annual.equityHint": "ਇਸ ਸਾਲ ਮਿਲਣ ਵਾਲੇ ਸ਼ੇਅਰ — ਤਨਖਾਹ ਵਾਂਗ ਟੈਕਸ ਲੱਗਦਾ ਹੈ",
+  "annual.equityLabel": "ਇਸ ਸਾਲ ਦੀ ਕੀਮਤ (ਮਿਲਣ ਵਾਲੇ ਦਿਨ ਦੇ ਭਾਅ ’ਤੇ)",
+  "annual.equityKeepLabel": "ਤੁਹਾਡੇ ਹੱਥ ਅਸਲ ਵਿੱਚ ਕੀ ਆਉਂਦਾ ਹੈ",
+  "annual.equityOf": "{v} ਵਿੱਚੋਂ",
+  "annual.equityLost": "{v} ਟੈਕਸ ਤੇ CPP ਵਿੱਚ ਜਾਂਦਾ ਹੈ — ਕੁੱਲ ਦਾ {p}।",
+  "annual.equityNote": "RSU ਪੂਰੀ ਤਰ੍ਹਾਂ ਰੁਜ਼ਗਾਰ ਆਮਦਨ ਹੈ: 50% ਛੋਟ ਨਹੀਂ, ਤਨਖਾਹ ਦੇ ਉੱਤੇ ਤੁਹਾਡੀ ਹਾਸ਼ੀਏ ਦਰ ’ਤੇ ਟੈਕਸ। CPP ਵਿੱਚ ਗਿਣਿਆ ਜਾਂਦਾ, EI ਵਿੱਚ ਨਹੀਂ। ਸਟਾਕ ਆਪਸ਼ਨ ਵੱਖਰੇ ਹਨ ਤੇ ਇੱਥੇ ਸ਼ਾਮਲ ਨਹੀਂ।",
   'app.saveCalc': 'ਮੇਰੇ ਤਨਖਾਹ ਰਿਕਾਰਡ ਵਿੱਚ ਸੇਵ ਕਰੋ',
   'app.saved': 'ਤੁਹਾਡੇ ਰਿਕਾਰਡ ਵਿੱਚ ਸੇਵ ਹੋ ਗਿਆ',
   'curve.title': 'ਤੁਹਾਡੀ ਤਨਖਾਹ ਦੀ ਰੇਖਾ',

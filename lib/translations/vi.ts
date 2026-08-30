@@ -1,5 +1,12 @@
 // Vietnamese (Tiếng Việt) translations — auto-loaded by lib/i18n.tsx
 export const main: Record<string, string> = {
+  "annual.equity": "Cổ phiếu / RSU",
+  "annual.equityHint": "Cổ phiếu trao trong năm nay — bị đánh thuế như lương",
+  "annual.equityLabel": "Giá trị trao trong năm nay (theo giá ngày trao)",
+  "annual.equityKeepLabel": "Số bạn thực sự giữ được",
+  "annual.equityOf": "trên {v}",
+  "annual.equityLost": "{v} mất vào thuế và CPP — {p} của khoản trao.",
+  "annual.equityNote": "RSU là thu nhập từ việc làm toàn phần theo giá ngày trao: không có khấu trừ 50%, bị đánh thuế theo thuế suất biên trên nền lương. Tính vào CPP, không tính vào EI. Quyền chọn cổ phiếu bị đánh thuế khác và không được mô hình hoá ở đây.",
   'app.saveCalc': 'Lưu vào hồ sơ lương của tôi',
   'app.saved': 'Đã lưu vào hồ sơ của bạn',
   'curve.title': 'Đường lương của bạn',

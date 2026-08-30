@@ -410,17 +410,33 @@ export const calculateFromAnnualSalary = (inputs: AnnualSalaryInputs): Calculati
   const taxableBenefitsPerPeriod = inputs.additionalIncome?.taxableBenefits ?? 0;
   const annualTaxableBenefits = taxableBenefitsPerPeriod * periodsPerYear;
 
-  const taxableIncome = Math.max(0, (annualGross + annualTaxableBenefits) - annualRRSP);
+  /**
+   * Vesting RSUs. Three things make equity different from every other line
+   * here, and getting any of them wrong changes the answer materially:
+   *
+   *  1. TAXED IN FULL. RSUs never qualified for the paragraph 110(1)(d) 50%
+   *     deduction — that is for qualifying options only. The vest-date fair
+   *     market value is employment income at the full marginal rate.
+   *  2. PENSIONABLE, NOT INSURABLE. CRA: a taxable non-cash benefit is
+   *     pensionable for CPP, but "generally not insurable" for EI. So equity
+   *     enters the CPP base and stays out of the EI base.
+   *  3. THE PERSON ACTUALLY RECEIVES IT. Unlike group life insurance, which
+   *     raises tax without paying anything out, vested shares are value in
+   *     hand — so equity joins the total the take-home is computed from.
+   */
+  const annualEquity = Math.max(0, inputs.equityVestingAnnual ?? 0);
+
+  const taxableIncome = Math.max(0, (annualGross + annualTaxableBenefits + annualEquity) - annualRRSP);
 
   // Calculate deductions
-  const cppResult = calculateCPP(annualGross + annualTaxableBenefits, isQuebec);
+  const cppResult = calculateCPP(annualGross + annualTaxableBenefits + annualEquity, isQuebec);
   const eiAnnual = calculateEI(annualGross + annualTaxableBenefits, isQuebec);
   const qpipAnnual = isQuebec ? calculateQPIP(annualGross + annualTaxableBenefits) : 0;
   const taxResult = calculateTotalTax(taxableIncome, cppResult.total, province);
 
   const totalTaxAnnual = taxResult.total;
   const totalDeductionsAnnual = totalTaxAnnual + cppResult.total + eiAnnual + qpipAnnual + annualRRSP + annualPostTax;
-  const netPayAnnual = annualGross - totalDeductionsAnnual;
+  const netPayAnnual = (annualGross + annualEquity) - totalDeductionsAnnual;
 
   const grossPayPerPeriod = annualGross / periodsPerYear;
   const netPayPerPeriod = netPayAnnual / periodsPerYear;

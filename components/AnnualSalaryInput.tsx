@@ -3,10 +3,48 @@ import React, { useState } from 'react';
 import { AnnualSalaryInputs, Province, PayFrequency, AdditionalIncome, Deductions } from '../types';
 import { PROVINCIAL_DATA } from '../constants';
 import { useT } from '../lib/i18n';
+import { calculateFromAnnualSalary } from '../utils/taxEngine';
 
 interface Props {
   inputs: AnnualSalaryInputs;
   setInputs: React.Dispatch<React.SetStateAction<AnnualSalaryInputs>>;
+}
+
+/**
+ * What the equity is actually worth after tax.
+ *
+ * This is the whole point of the feature. A grant is quoted as a headline
+ * number — "$60,000 in RSUs" — and the reader treats it like $60,000. It is
+ * not: RSUs are taxed as salary at the marginal rate, on top of a salary that
+ * has already used up the low brackets, so the last dollar of equity is taxed
+ * hardest. Computed by running the engine twice, with and without the equity,
+ * and taking the difference — the same technique the offer report uses for a
+ * bonus, so the two products can never disagree.
+ */
+function EquityPayoff({ inputs }: { inputs: AnnualSalaryInputs }) {
+  const { t } = useT();
+  const equity = inputs.equityVestingAnnual ?? 0;
+  if (!equity || !inputs.annualSalary) return null;
+
+  const withOut = calculateFromAnnualSalary({ ...inputs, equityVestingAnnual: 0 }).netPayAnnual;
+  const withIt = calculateFromAnnualSalary(inputs).netPayAnnual;
+  const kept = Math.max(0, withIt - withOut);
+  const lost = Math.max(0, equity - kept);
+  const pct = equity > 0 ? Math.round((lost / equity) * 1000) / 10 : 0;
+  const money = (n: number) => `$${Math.round(n).toLocaleString('en-CA')}`;
+
+  return (
+    <div className="rounded-lg bg-white border border-red-100 px-4 py-3">
+      <p className="text-[11px] font-bold uppercase tracking-wide text-slate-500">{t('annual.equityKeepLabel')}</p>
+      <p className="mt-1 flex flex-wrap items-baseline gap-x-2">
+        <span className="text-2xl font-extrabold tabular-nums text-slate-900">{money(kept)}</span>
+        <span className="text-sm text-slate-500">{t('annual.equityOf').replace('{v}', money(equity))}</span>
+      </p>
+      <p className="mt-1 text-xs text-red-700">
+        {t('annual.equityLost').replace('{v}', money(lost)).replace('{p}', `${pct}%`)}
+      </p>
+    </div>
+  );
 }
 
 const AnnualSalaryInput: React.FC<Props> = ({ inputs, setInputs }) => {
@@ -175,6 +213,50 @@ const AnnualSalaryInput: React.FC<Props> = ({ inputs, setInputs }) => {
       </div>
 
       <hr className="border-slate-100" />
+
+      {/* Equity (RSUs) — its own block, because it is not "additional income":
+          it is taxed in full, it is pensionable but not insurable, and the
+          person is paid in shares rather than cash. */}
+      <div className="bg-white rounded-xl shadow-sm border border-slate-100 p-6 mt-6">
+        <div className="flex items-center justify-between mb-4">
+          <div>
+            <label className="block text-sm font-bold text-slate-700">{t('annual.equity')}</label>
+            <p className="text-xs text-slate-500">{t('annual.equityHint')}</p>
+          </div>
+          <label className="relative inline-flex items-center cursor-pointer">
+            <input
+              type="checkbox"
+              className="sr-only peer"
+              checked={!!(inputs.equityVestingAnnual && inputs.equityVestingAnnual > 0)}
+              onChange={(e) => setInputs({ ...inputs, equityVestingAnnual: e.target.checked ? (inputs.equityVestingAnnual || 20000) : 0 })}
+            />
+            <div className="w-11 h-6 bg-slate-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-red-300 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-red-600"></div>
+          </label>
+        </div>
+
+        {!!(inputs.equityVestingAnnual && inputs.equityVestingAnnual > 0) && (
+          <div className="bg-red-50/50 p-4 rounded-xl border border-red-100/70 animate-fadeIn space-y-3">
+            <div>
+              <label className="block text-xs font-bold text-slate-600 mb-1.5">{t('annual.equityLabel')}</label>
+              <div className="relative">
+                <span className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-500 font-bold">$</span>
+                <input
+                  type="number"
+                  min="0"
+                  step="1000"
+                  value={inputs.equityVestingAnnual || ''}
+                  onFocus={(e) => e.target.select()}
+                  onChange={(e) => setInputs({ ...inputs, equityVestingAnnual: parseFloat(e.target.value) || 0 })}
+                  className="w-full pl-8 pr-4 py-2.5 border border-slate-200 rounded-lg focus:border-red-500 focus:outline-none font-bold"
+                  placeholder="20,000"
+                />
+              </div>
+            </div>
+            <EquityPayoff inputs={inputs} />
+            <p className="text-[11px] leading-4 text-slate-500">{t('annual.equityNote')}</p>
+          </div>
+        )}
+      </div>
 
       {/* RRSP Contribution */}
       <div className="bg-white rounded-xl shadow-sm border border-slate-100 p-6 mt-6">

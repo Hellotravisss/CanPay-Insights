@@ -1,5 +1,12 @@
 // Hindi (हिन्दी) translations — auto-loaded by lib/i18n.tsx
 export const main: Record<string, string> = {
+  "annual.equity": "शेयर / RSU",
+  "annual.equityHint": "इस साल निहित होने वाले शेयर — वेतन की तरह कर लगता है",
+  "annual.equityLabel": "इस साल का मूल्य (निहित तिथि के भाव पर)",
+  "annual.equityKeepLabel": "आपके हाथ में वास्तव में क्या आता है",
+  "annual.equityOf": "{v} में से",
+  "annual.equityLost": "{v} कर और CPP में जाता है — अनुदान का {p}।",
+  "annual.equityNote": "RSU पूरी तरह रोजगार आय है: 50% कटौती नहीं, वेतन के ऊपर आपकी सीमांत दर पर कर। CPP में गिना जाता है, EI में नहीं। स्टॉक ऑप्शन अलग हैं और यहाँ शामिल नहीं।",
   'app.saveCalc': 'मेरे वेतन रिकॉर्ड में सेव करें',
   'app.saved': 'आपके रिकॉर्ड में सेव हो गया',
   'curve.title': 'आपका वेतन वक्र',

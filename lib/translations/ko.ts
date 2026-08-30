@@ -1,5 +1,12 @@
 // Korean (한국어) translations — auto-loaded by lib/i18n.tsx
 export const main: Record<string, string> = {
+  "annual.equity": "주식 / RSU",
+  "annual.equityHint": "올해 베스팅되는 주식 — 상여가 아니라 급여로 과세",
+  "annual.equityLabel": "올해 베스팅 가치 (베스팅일 주가 기준)",
+  "annual.equityKeepLabel": "실제로 손에 남는 금액",
+  "annual.equityOf": "/ {v} 중",
+  "annual.equityLost": "{v}는 세금과 CPP로 나갑니다 — 부여액의 {p}.",
+  "annual.equityNote": "RSU는 베스팅일 주가 전액이 근로소득입니다: 50% 공제 없음, 급여에 더해 한계세율로 과세됩니다. CPP에는 포함되고 EI에는 포함되지 않습니다. 스톡옵션은 과세 방식이 달라 여기서는 다루지 않습니다.",
   'app.saveCalc': '내 급여 기록에 저장',
   'app.saved': '기록에 저장되었습니다',
   'curve.title': '나의 급여 곡선',

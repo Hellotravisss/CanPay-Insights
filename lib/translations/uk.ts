@@ -1,5 +1,12 @@
 // Ukrainian (українська) translations — auto-loaded by lib/i18n.tsx
 export const main: Record<string, string> = {
+  "annual.equity": "Акції / RSU",
+  "annual.equityHint": "Акції, що переходять цього року — оподатковуються як зарплата",
+  "annual.equityLabel": "Вартість цього року (за ціною на дату переходу)",
+  "annual.equityKeepLabel": "Що ви насправді залишаєте собі",
+  "annual.equityOf": "із {v}",
+  "annual.equityLost": "{v} йде на податок і CPP — {p} гранту.",
+  "annual.equityNote": "RSU — це повний трудовий дохід за ціною на дату переходу: без 50% відрахування, оподатковується за вашою граничною ставкою понад зарплату. Зараховується до CPP, не до EI. Опціони оподатковуються інакше і тут не враховані.",
   'app.saveCalc': 'Зберегти в мою історію зарплати',
   'app.saved': 'Збережено у вашій історії',
   'curve.title': 'Ваша крива зарплати',

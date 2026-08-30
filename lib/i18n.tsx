@@ -23,6 +23,13 @@ type Dict = Record<string, string>;
 
 // Translation dictionaries. Add keys here as more components are localized.
 const en: Dict = {
+  "annual.equity": "Stock / RSUs",
+  "annual.equityHint": "Shares vesting this year — taxed as salary, not a bonus",
+  "annual.equityLabel": "Value vesting this year (at vest-date price)",
+  "annual.equityKeepLabel": "What you actually keep",
+  "annual.equityOf": "of {v}",
+  "annual.equityLost": "{v} goes to tax and CPP — {p} of the grant.",
+  "annual.equityNote": "RSUs are employment income in full at the vest-date price: no 50% deduction, taxed at your marginal rate on top of your salary. Pensionable for CPP, not insurable for EI. Stock options are taxed differently and are not modelled here. Any gain after the vest date is a separate capital gain when you sell.",
   'app.saveCalc': 'Save to my pay history',
   'app.saved': 'Saved to your history',
   'curve.title': 'Your pay curve',
@@ -333,6 +340,13 @@ const en: Dict = {
 };
 
 const zh: Dict = {
+  "annual.equity": "股票 / RSU",
+  "annual.equityHint": "今年归属的股票 —— 按工资计税,不是奖金",
+  "annual.equityLabel": "今年归属的市值(按归属日股价)",
+  "annual.equityKeepLabel": "你实际拿到手的",
+  "annual.equityOf": "/ 名义 {v}",
+  "annual.equityLost": "{v} 交了税和 CPP —— 占授予额的 {p}。",
+  "annual.equityNote": "RSU 按归属日股价全额计入工资收入:没有 50% 扣除,在你工资之上按边际税率征税。计入 CPP,不计入 EI。股票期权的算法不同,这里不涵盖。归属之后股价的涨幅属于资本利得,卖出时另算。",
   'app.saveCalc': '存入我的工资档案',
   'app.saved': '已存入档案',
   'curve.title': '你的工资曲线',
@@ -643,6 +657,13 @@ const zh: Dict = {
 };
 
 const fr: Dict = {
+  "annual.equity": "Actions / UAR",
+  "annual.equityHint": "Actions acquises cette année — imposées comme un salaire",
+  "annual.equityLabel": "Valeur acquise cette année (au cours du jour d’acquisition)",
+  "annual.equityKeepLabel": "Ce qu’il vous reste vraiment",
+  "annual.equityOf": "sur {v}",
+  "annual.equityLost": "{v} part en impôt et RPC — {p} de l’attribution.",
+  "annual.equityNote": "Les UAR sont un revenu d’emploi intégral au cours du jour d’acquisition : aucune déduction de 50 %, imposées à votre taux marginal en plus du salaire. Ouvrant droit à pension pour le RPC, non assurables pour l’AE. Les options d’achat d’actions sont imposées autrement et ne sont pas modélisées ici.",
   'app.saveCalc': 'Enregistrer dans mon historique',
   'app.saved': 'Enregistré dans votre historique',
   'curve.title': 'Votre courbe salariale',
