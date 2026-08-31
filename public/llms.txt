@@ -30,6 +30,7 @@ CanPay Insights is an independent project based in Vancouver, Canada. All figure
 - [Saskatchewan minimum wage rises to $15.70, October 1, 2026 — take-home impact](https://canpayinsights.ca/blog/saskatchewan-minimum-wage-october-2026)
 - [Wages up 2.8%, inflation 3.0% — real take-home pay fell in every province, July 2026](https://canpayinsights.ca/blog/real-wage-growth-inflation-july-2026)
 - [RSUs are taxed as salary, not capital gains — a $60,000 vest leaves $32,617 in Ontario, all 13 provinces compared](https://canpayinsights.ca/blog/rsu-take-home-pay-canada-2026)
+- [OAS rises 1.4% on October 28, 2026 — new payment amounts by age, GIS & Allowance too](https://canpayinsights.ca/blog/oas-increase-october-2026)
 
 ## Key 2026 facts
 - The federal lowest income-tax bracket is cut from 15% to 14% in 2026.

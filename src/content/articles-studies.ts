@@ -1607,4 +1607,113 @@ The [CanPay Insights calculator](/) now takes vesting equity in the annual salar
 Take-home figures are calculated with the CanPay Insights tax engine using 2026 federal and provincial tax brackets, CPP and CPP2 (QPP, QPP2 and QPIP for Quebec), and EI premiums, for a single filer with basic personal amounts only and no RRSP contribution. Equity is modelled as RSUs vesting in the year: employment income in full, pensionable for CPP, not insurable for EI. **Stock options are taxed differently** — the benefit is the spread at exercise, a 50% deduction may apply on up to $200,000 of underlying value a year, and CCPC rules differ again — and are not modelled here. Real outcomes vary with credits, benefits, other income, and your employer's withholding. This is general information, not financial or tax advice.
 `,
   },
+  {
+    id: 'study-16',
+    slug: 'oas-increase-october-2026',
+    title: 'OAS Rises 1.4% on October 28, 2026 — What Every Age Group Actually Gets',
+    subtitle:
+      "Old Age Security climbs for the fourth time in 2026, and this is the biggest single jump since January — a confirmed 1.4% for the October–December quarter, on top of July's 1.2%. Here is what changes for OAS, the Guaranteed Income Supplement, and the Allowance, using Canada.ca's own confirmed rates.",
+    excerpt:
+      'OAS payments increase 1.4% for the October–December 2026 quarter, arriving with the October 28 deposit — pushing the maximum monthly pension to roughly $762.50 for ages 65–74 and $838.75 for 75-and-over. Combined with three earlier 2026 increases, that is a confirmed 3.0% rise over the past year. GIS and the Allowance rise by the same 1.4%.',
+    metaTitle: 'OAS Rises 1.4% on Oct 28, 2026: New Payment Amounts',
+    metaDescription:
+      'OAS increases 1.4% for Oct–Dec 2026, paid October 28 — about $762.50 (ages 65–74) and $838.75 (75+). New GIS and Allowance amounts too, from Canada.ca.',
+    keywords: [
+      'oas increase october 2026',
+      'oas payment dates 2026',
+      'old age security increase',
+      'gis payment increase 2026',
+      'when is the next oas payment',
+      'cpp oas payment october 28',
+    ],
+    category: 'news',
+    tags: ['OAS', 'Seniors', 'Government Benefits', '2026', 'Payment Dates'],
+    publishedAt: '2026-08-31',
+    readTime: 6,
+    imageUrl: '/blog/oas-increase-october-2026.svg',
+    directAnswer:
+      'Old Age Security payments increase 1.4% for the October–December 2026 quarter, effective with the October 28, 2026 payment — the fourth OAS indexation of 2026, following a 1.2% rise in July, for a combined 3.0% increase over the past 12 months. Applying that confirmed rate to the confirmed July–September 2026 maximums works out to roughly $762.50 a month for ages 65–74 (up from $751.97) and $838.75 for ages 75-and-over (up from $827.17). The Guaranteed Income Supplement and the Allowance rise by the same 1.4%.',
+    faq: [
+      {
+        question: 'How much is the OAS increase for October 2026?',
+        answer:
+          "Canada.ca confirms OAS benefits rise 1.4% for the October–December 2026 quarter, on top of a 1.2% increase already applied in July–September — a combined 3.0% increase over the 12 months from October 2025 to October 2026. It is the largest single quarterly bump of 2026 so far, after increases of just 0.3% in January and 0.1% in April.",
+      },
+      {
+        question: 'When does the new OAS amount arrive?',
+        answer:
+          'October 28, 2026, per the official Government of Canada benefits payment calendar — the same day CPP is deposited. It is the tenth of twelve scheduled 2026 payment dates. Direct deposit typically lands that day; mailed cheques can take 5 to 10 business days longer.',
+      },
+      {
+        question: 'What is the new maximum OAS payment?',
+        answer:
+          'Applying the confirmed 1.4% rate to the confirmed July–September 2026 maximums of $751.97 (ages 65–74) and $827.17 (ages 75+) works out to roughly $762.50 and $838.75 a month. Service Canada had not yet posted the rounded official October–December dollar figures on its quarterly rate card as of this writing — treat these as a close estimate, not the confirmed deposit amount.',
+      },
+      {
+        question: 'Does the Guaranteed Income Supplement (GIS) go up too?',
+        answer:
+          'Yes. GIS, the Allowance, and the Allowance for the Survivor are indexed to the same quarterly CPI measure as the OAS pension, so they rise by the same 1.4%. The current (July–September 2026) maximum GIS for a single senior with no other income is $1,123.17 a month; at the same rate that would rise to roughly $1,138.89.',
+      },
+      {
+        question: 'Why does OAS go up every quarter instead of once a year?',
+        answer:
+          'Unlike CPP, which is adjusted once a year every January, OAS is reviewed four times a year — January, April, July, and October — against the Consumer Price Index, so payments track inflation quarter by quarter rather than waiting a full year. The Old Age Security Act also guarantees benefits never fall: in a quarter where the CPI drops, OAS simply holds at the prior amount instead of decreasing.',
+      },
+      {
+        question: 'Is OAS taxable, and does it affect my paycheque?',
+        answer:
+          "OAS does not touch payroll deductions on employment income — it is a separate deposit, not a paycheque. But it is taxable and reported on a T4A(OAS) slip, so if you are still working past 65, both incomes are taxed together on the same return. Use the free CanPay Insights [salary calculator](/salary-after-tax-canada) or [CPP/EI calculator](/cpp-ei-calculator) to see what a part-time or full-time paycheque actually nets out to alongside your pension.",
+      },
+    ],
+    content: `
+## OAS goes up for the fourth time this year — and this is the biggest jump since January
+
+Every quarter, Old Age Security is indexed to inflation, and Canada.ca has now confirmed the rate for October, November, and December 2026: **1.4%**, arriving with the October 28, 2026 payment. It is the largest single quarterly increase since January, and it pushes the year-over-year climb to a confirmed **3.0%** — the fourth OAS indexation of 2026 alone.
+
+### Key facts
+
+- **1.4% increase, effective October 28, 2026** — Canada.ca's official OAS payment page confirms the rate for the October–December quarter.
+- **3.0% over the past 12 months** — from October 2025 to October 2026, per the same source.
+- **The biggest quarterly bump of 2026 so far**: January added 0.3%, April added just 0.1%, July added 1.2%, and October adds 1.4%.
+- **GIS and the Allowance rise by the same 1.4%** — they are indexed to the same CPI measure as the OAS pension.
+
+### What the October payment actually adds
+
+Service Canada had not yet published the rounded October–December dollar figures on its quarterly rate card as of this writing — only the 1.4% rate itself is confirmed. Applying that confirmed rate to the confirmed July–September 2026 maximums gives a close estimate of what lands on October 28:
+
+| Benefit | Jul–Sep 2026 (confirmed) | Oct–Dec 2026 (at +1.4%) | Monthly increase |
+| --- | --- | --- | --- |
+| OAS pension, ages 65–74 | $751.97 | ~$762.50 | +$10.53 |
+| OAS pension, ages 75+ | $827.17 | ~$838.75 | +$11.58 |
+| GIS, single senior, no other income | $1,123.17 | ~$1,138.89 | +$15.72 |
+| GIS, with spouse receiving full OAS | $676.09 | ~$685.55 | +$9.46 |
+| Allowance, ages 60–64 | $1,428.06 | ~$1,448.05 | +$19.99 |
+| Allowance for the Survivor | $1,702.34 | ~$1,726.17 | +$23.83 |
+
+*Oct–Dec figures are CanPay Insights' own calculation: the confirmed 1.4% indexation rate applied to the confirmed July–September 2026 maximums. Service Canada rounds its own published figures to the cent on the official quarterly rate card, which was not yet posted at the time of writing — treat these as a close estimate, not the final deposit amount.*
+
+### A year of small increases adding up
+
+Unlike CPP, which is adjusted once a year every January, OAS is reviewed four times a year against the Consumer Price Index, so it tracks inflation quarter by quarter instead of waiting twelve months:
+
+- **January 2026: +0.3%** (2.0% year-over-year)
+- **April 2026: +0.1%** (2.1% year-over-year)
+- **July 2026: +1.2%** (2.3% year-over-year)
+- **October 2026: +1.4%** (3.0% year-over-year)
+
+No quarter has ever reduced the payment. The Old Age Security Act guarantees benefits never fall even if the CPI drops — in a deflationary quarter, OAS simply holds at the prior amount instead of decreasing.
+
+### Does this affect your paycheque?
+
+OAS is not payroll income and does not touch anyone's employer deductions — it lands as its own deposit. But a lot of recipients are still working, part-time, consulting, or seasonal, and both incomes land on the same tax return. OAS is taxable and reported on a T4A(OAS) slip alongside any T4 from a job. If you are weighing how a part-time paycheque adds up next to your pension, the free [CanPay Insights salary calculator](/salary-after-tax-canada) and [CPP/EI calculator](/cpp-ei-calculator) use the same 2026 rates behind every number on this page to show what actually lands, after tax, CPP, and EI.
+
+### When it arrives
+
+October 28, 2026 is the tenth of twelve scheduled 2026 payment dates for both CPP and OAS — they are deposited the same day. Direct deposit typically lands that day; mailed cheques can take 5 to 10 business days longer, per Service Canada.
+
+## Sources & disclaimer
+
+OAS, GIS, and Allowance payment amounts and the confirmed October–December 2026 indexation rate are from the Government of Canada's [Old Age Security payment amounts](https://www.canada.ca/en/services/benefits/publicpensions/old-age-security/payments.html) page. The 2026 CPP/OAS payment calendar, including the October 28, 2026 date, is from the [Government of Canada benefits payment calendar](https://www.canada.ca/en/services/benefits/calendar.html). Historical January and April 2026 quarterly rates are corroborated by independent Canadian pension-news outlets. October–December dollar figures in the table above are CanPay Insights' own calculation (confirmed rate × confirmed prior amount) pending Service Canada's official published rate card, and may differ by a cent or two from the final rounded figures. This is general information, not financial or tax advice.
+`,
+  },
 ];
