@@ -1,5 +1,6 @@
 import type { Metadata } from 'next';
-import BlogList from '../../src/content/components/BlogList';
+import BlogList, { type BlogCard } from '../../src/content/components/BlogList';
+import { allArticles } from '../../src/content/articles-data';
 
 export const dynamic = 'force-static';
 
@@ -19,5 +20,12 @@ export const metadata: Metadata = {
 };
 
 export default function BlogPage() {
-  return <BlogList />;
+  // Trimmed on the server: BlogList needs eight fields per card, while the
+  // article modules are 232 KB of full markdown bodies this page never renders.
+  const cards: BlogCard[] = allArticles.map((a) => ({
+    id: a.id, slug: a.slug, title: a.title, excerpt: a.excerpt,
+    category: a.category, publishedAt: a.publishedAt, readTime: a.readTime,
+    imageUrl: a.imageUrl,
+  }));
+  return <BlogList articles={cards} />;
 }

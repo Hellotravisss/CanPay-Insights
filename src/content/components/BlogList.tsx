@@ -1,13 +1,25 @@
-import { allArticles } from '../articles-data';
+'use client';
+import { useT } from '../../../lib/i18n';
 import PreferredSource from '../../../components/PreferredSource';
-import type { Article } from '../types';
 
-const categories = [
-  { id: 'all', label: 'All Articles', color: 'bg-slate-600' },
-  { id: 'salary', label: 'Salary Insights', color: 'bg-blue-600' },
-  { id: 'province', label: 'Provincial Guides', color: 'bg-green-600' },
-  { id: 'tips', label: 'Money Tips', color: 'bg-amber-600' },
-  { id: 'tax', label: 'Tax Guides', color: 'bg-red-600' },
+/**
+ * Client component so the chrome follows the language switcher — but it is
+ * handed a TRIMMED list by the server. The article modules are 232 KB and
+ * carry full markdown bodies this page never renders; importing them here
+ * would ship every word of every article to every visitor in order to
+ * translate five headings. The server picks the eight fields the cards use.
+ */
+export type BlogCard = {
+  id: string; slug: string; title: string; excerpt: string;
+  category: string; publishedAt: string; readTime: number; imageUrl?: string;
+};
+
+const CATEGORY_KEYS = [
+  { id: 'all', key: 'blog.catAll', color: 'bg-slate-600' },
+  { id: 'salary', key: 'blog.catSalary', color: 'bg-blue-600' },
+  { id: 'province', key: 'blog.catProvince', color: 'bg-green-600' },
+  { id: 'tips', key: 'blog.catTips', color: 'bg-amber-600' },
+  { id: 'tax', key: 'blog.catTax', color: 'bg-red-600' },
 ];
 
 const formatDate = (dateString: string) => {
@@ -18,21 +30,22 @@ const formatDate = (dateString: string) => {
   });
 };
 
-const getCategoryLabel = (categoryId: string) => {
-  return categories.find((category) => category.id === categoryId)?.label || categoryId;
+const getCategoryLabel = (categoryId: string, t: (k: string) => string) => {
+  const c = CATEGORY_KEYS.find((x) => x.id === categoryId);
+  return c ? t(c.key) : categoryId;
 };
 
 const getCategoryColor = (categoryId: string) => {
-  return categories.find((category) => category.id === categoryId)?.color || 'bg-slate-600';
+  return CATEGORY_KEYS.find((x) => x.id === categoryId)?.color || 'bg-slate-600';
 };
 
-const getCategoryCount = (categoryId: string) => {
+const getCategoryCount = (articles: BlogCard[], categoryId: string) => {
   return categoryId === 'all'
-    ? allArticles.length
-    : allArticles.filter((article) => article.category === categoryId).length;
+    ? articles.length
+    : articles.filter((article) => article.category === categoryId).length;
 };
 
-const ArticleCard = ({ article }: { article: Article }) => {
+const ArticleCard = ({ article, t }: { article: BlogCard; t: (k: string) => string }) => {
   return (
     <a
       href={`/blog/${article.slug}`}
@@ -50,7 +63,7 @@ const ArticleCard = ({ article }: { article: Article }) => {
 
       <div className="p-5">
         <span className={`mb-3 inline-flex rounded-md px-2.5 py-1 ${getCategoryColor(article.category)} text-xs font-bold text-white`}>
-          {getCategoryLabel(article.category)}
+          {getCategoryLabel(article.category, t)}
         </span>
         <h3 className="mb-2 line-clamp-2 text-lg font-bold leading-snug text-slate-900 transition-colors group-hover:text-red-600">
           {article.title}
@@ -67,9 +80,10 @@ const ArticleCard = ({ article }: { article: Article }) => {
   );
 };
 
-export default function BlogList() {
-  const featuredArticle = allArticles[0];
-  const remainingArticles = allArticles.slice(1);
+export default function BlogList({ articles }: { articles: BlogCard[] }) {
+  const { t } = useT();
+  const featuredArticle = articles[0];
+  const remainingArticles = articles.slice(1);
 
   return (
     <main className="min-h-screen bg-slate-50">
@@ -90,9 +104,9 @@ export default function BlogList() {
 
           <div className="grid gap-6 py-8 md:grid-cols-[1fr_24rem] md:items-end md:py-10">
             <div>
-              <p className="mb-3 text-sm font-bold uppercase tracking-[0.16em] text-red-600">Insights Hub</p>
+              <p className="mb-3 text-sm font-bold uppercase tracking-[0.16em] text-red-600">{t('blog.kicker')}</p>
               <h1 className="max-w-3xl text-4xl font-bold leading-tight tracking-tight text-slate-950 md:text-5xl">
-                Canadian payroll, tax, and take-home pay guides &amp; news.
+                {t('blog.h1')}
               </h1>
               <p className="mt-4 max-w-2xl text-lg leading-8 text-slate-500">
                 Practical articles for comparing job offers, provinces, deductions, and salary decisions in
@@ -109,9 +123,9 @@ export default function BlogList() {
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
                 </svg>
               </span>
-              <h2 className="text-xl font-bold text-slate-950">Compare provinces</h2>
+              <h2 className="text-xl font-bold text-slate-950">{t('blog.compareTitle')}</h2>
               <p className="mt-2 text-sm font-medium leading-6 text-slate-600">
-                See take-home pay differences before moving or accepting an offer.
+                {t('blog.compareBody')}
               </p>
               <span className="mt-4 inline-flex text-sm font-bold text-blue-700 transition-transform group-hover:translate-x-1">
                 Open tool →
@@ -124,14 +138,14 @@ export default function BlogList() {
       <nav className="border-b border-slate-200 bg-white" aria-label="Blog categories">
         <div className="mx-auto max-w-6xl px-4 py-4">
           <div className="flex gap-2 overflow-x-auto pb-2">
-            {categories.map((category) => (
+            {CATEGORY_KEYS.map((category) => (
               <a
                 key={category.id}
                 href={category.id === 'all' ? '/blog' : `/blog#${category.id}`}
                 className="whitespace-nowrap rounded-full bg-slate-100 px-4 py-2 text-sm font-medium text-slate-600 no-underline hover:bg-slate-200"
               >
-                {category.label}
-                <span className="ml-2 opacity-70">{getCategoryCount(category.id)}</span>
+                {t(category.key)}
+                <span className="ml-2 opacity-70">{getCategoryCount(articles, category.id)}</span>
               </a>
             ))}
           </div>
@@ -141,8 +155,8 @@ export default function BlogList() {
       <div className="mx-auto max-w-6xl px-4 py-8">
         <div className="mb-5 flex items-end justify-between gap-4">
           <div>
-            <h2 className="text-2xl font-bold text-slate-950">Latest guides</h2>
-            <p className="mt-1 text-sm font-medium text-slate-500">{allArticles.length} articles available</p>
+            <h2 className="text-2xl font-bold text-slate-950">{t('blog.latest')}</h2>
+            <p className="mt-1 text-sm font-medium text-slate-500">{t('blog.count').replace('{n}', String(articles.length))}</p>
           </div>
         </div>
 
@@ -162,7 +176,7 @@ export default function BlogList() {
             )}
             <div className="flex flex-col justify-center p-6 md:p-8">
               <span className={`mb-4 inline-flex w-fit rounded-lg px-3 py-1.5 ${getCategoryColor(featuredArticle.category)} text-xs font-bold uppercase tracking-[0.08em] text-white`}>
-                Featured · {getCategoryLabel(featuredArticle.category)}
+                Featured · {getCategoryLabel(featuredArticle.category, t)}
               </span>
               <h2 className="text-2xl font-bold leading-tight text-slate-950 transition-colors group-hover:text-red-600 md:text-3xl">
                 {featuredArticle.title}
@@ -180,22 +194,22 @@ export default function BlogList() {
 
         <section className="grid grid-cols-1 gap-5 md:grid-cols-2 lg:grid-cols-3" aria-label="All articles">
           {remainingArticles.map((article) => (
-            <ArticleCard key={article.id} article={article} />
+            <ArticleCard key={article.id} article={article} t={t} />
           ))}
         </section>
 
-        {categories.filter((category) => category.id !== 'all').map((category) => {
-          const articles = allArticles.filter((article) => article.category === category.id);
-          if (articles.length === 0) {
+        {CATEGORY_KEYS.filter((category) => category.id !== 'all').map((category) => {
+          const inCategory = articles.filter((article) => article.category === category.id);
+          if (inCategory.length === 0) {
             return null;
           }
 
           return (
             <section key={category.id} id={category.id} className="mt-12 scroll-mt-20">
-              <h2 className="mb-5 text-2xl font-bold text-slate-950">{category.label}</h2>
+              <h2 className="mb-5 text-2xl font-bold text-slate-950">{t(category.key)}</h2>
               <div className="grid grid-cols-1 gap-5 md:grid-cols-2 lg:grid-cols-3">
-                {articles.map((article) => (
-                  <ArticleCard key={`${category.id}-${article.id}`} article={article} />
+                {inCategory.map((article) => (
+                  <ArticleCard key={`${category.id}-${article.id}`} article={article} t={t} />
                 ))}
               </div>
             </section>
@@ -205,15 +219,15 @@ export default function BlogList() {
 
       <section className="mt-8 border-t border-slate-200 bg-white py-12">
         <div className="mx-auto max-w-4xl px-4 text-center">
-          <h2 className="mb-4 text-2xl font-bold text-slate-950">Want More Precise Calculations?</h2>
+          <h2 className="mb-4 text-2xl font-bold text-slate-950">{t('blog.ctaTitle')}</h2>
           <p className="mb-6 text-slate-600">
-            Use the CanPay Insights calculator to get personalized tax analysis and salary projections based on your specific situation.
+            {t('blog.ctaBody')}
           </p>
           <a
             href="/"
             className="inline-flex items-center gap-2 rounded-xl bg-red-600 px-6 py-3 font-bold text-white no-underline shadow-sm transition-all hover:bg-red-700 hover:shadow-md"
           >
-            Calculate My Salary
+            {t('blog.ctaBtn')}
           </a>
         </div>
       </section>
