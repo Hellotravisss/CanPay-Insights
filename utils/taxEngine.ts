@@ -326,13 +326,14 @@ export const calculateSalary = (inputs: SalaryInputs): CalculationResult => {
   // Post-tax deductions (LTD, union dues, other) — do NOT reduce taxable income
   const ded = inputs.deductions;
   const postTaxDeductionsPerPeriod = ded
-    ? (ded.ltdPremium + ded.unionDues + ded.otherDeductions)
+    ? (ded.ltdPremium + ded.otherDeductions)
     : 0;
 
   const taxableBenefitsPerPeriod = inputs.additionalIncome?.taxableBenefits ?? 0;
   const annualTaxableBenefits = taxableBenefitsPerPeriod * 26;
 
-  const taxableIncome = Math.max(0, (annualGross + annualTaxableBenefits) - annualRRSP);
+  const annualUnionDuesBw = ded ? ded.unionDues * 26 : 0;
+  const taxableIncome = Math.max(0, (annualGross + annualTaxableBenefits) - annualRRSP - annualUnionDuesBw);
 
   // 6. Deductions
   const isQuebec = inputs.province === Province.QC;
@@ -343,7 +344,7 @@ export const calculateSalary = (inputs: SalaryInputs): CalculationResult => {
   
   const totalTaxAnnual = taxResult.total;
   const annualPostTaxDeductions = postTaxDeductionsPerPeriod * 26;
-  const totalDeductionsAnnual = totalTaxAnnual + cppResult.total + eiAnnual + qpipAnnual + annualRRSP + annualPostTaxDeductions;
+  const totalDeductionsAnnual = totalTaxAnnual + cppResult.total + eiAnnual + qpipAnnual + annualRRSP + annualPostTaxDeductions + annualUnionDuesBw;
   const netPayAnnual = annualGross - totalDeductionsAnnual;
 
   return {
@@ -404,8 +405,25 @@ export const calculateFromAnnualSalary = (inputs: AnnualSalaryInputs): Calculati
   const annualRRSP = rrspPerPeriod * periodsPerYear;
 
   const ded = inputs.deductions;
-  const postTaxPerPeriod = ded ? (ded.ltdPremium + ded.unionDues + ded.otherDeductions) : 0;
+  /**
+   * Union dues come OUT of the cheque but also come OFF taxable income.
+   *
+   * CRA line 21200 ("annual union, professional, or like dues"), reported in
+   * box 44 of the T4: dues are deducted in computing net income, exactly like
+   * an RRSP contribution. They were previously bucketed with LTD premiums and
+   * "other" as an after-tax deduction, which taxed income the member never had
+   * — it overstated the tax and understated the take-home of roughly a third
+   * of Canadian employees.
+   *
+   * LTD premiums genuinely ARE after-tax (that is what keeps the benefit
+   * tax-free if it is ever claimed), so only the dues move.
+   *
+   * Dues do not reduce pensionable or insurable earnings: CPP and EI are still
+   * computed on gross.
+   */
+  const postTaxPerPeriod = ded ? (ded.ltdPremium + ded.otherDeductions) : 0;
   const annualPostTax = postTaxPerPeriod * periodsPerYear;
+  const annualUnionDues = ded ? ded.unionDues * periodsPerYear : 0;
 
   const taxableBenefitsPerPeriod = inputs.additionalIncome?.taxableBenefits ?? 0;
   const annualTaxableBenefits = taxableBenefitsPerPeriod * periodsPerYear;
@@ -426,7 +444,7 @@ export const calculateFromAnnualSalary = (inputs: AnnualSalaryInputs): Calculati
    */
   const annualEquity = Math.max(0, inputs.equityVestingAnnual ?? 0);
 
-  const taxableIncome = Math.max(0, (annualGross + annualTaxableBenefits + annualEquity) - annualRRSP);
+  const taxableIncome = Math.max(0, (annualGross + annualTaxableBenefits + annualEquity) - annualRRSP - annualUnionDues);
 
   // Calculate deductions
   const cppResult = calculateCPP(annualGross + annualTaxableBenefits + annualEquity, isQuebec);
@@ -435,7 +453,7 @@ export const calculateFromAnnualSalary = (inputs: AnnualSalaryInputs): Calculati
   const taxResult = calculateTotalTax(taxableIncome, cppResult.total, province);
 
   const totalTaxAnnual = taxResult.total;
-  const totalDeductionsAnnual = totalTaxAnnual + cppResult.total + eiAnnual + qpipAnnual + annualRRSP + annualPostTax;
+  const totalDeductionsAnnual = totalTaxAnnual + cppResult.total + eiAnnual + qpipAnnual + annualRRSP + annualPostTax + annualUnionDues;
   const netPayAnnual = (annualGross + annualEquity) - totalDeductionsAnnual;
 
   const grossPayPerPeriod = annualGross / periodsPerYear;
@@ -553,13 +571,30 @@ export const calculateFromTimesheet = (inputs: TimesheetInputs): CalculationResu
   const annualRRSP = rrspPerPeriod * periodsPerYear;
 
   const ded = inputs.deductions;
-  const postTaxPerPeriod = ded ? (ded.ltdPremium + ded.unionDues + ded.otherDeductions) : 0;
+  /**
+   * Union dues come OUT of the cheque but also come OFF taxable income.
+   *
+   * CRA line 21200 ("annual union, professional, or like dues"), reported in
+   * box 44 of the T4: dues are deducted in computing net income, exactly like
+   * an RRSP contribution. They were previously bucketed with LTD premiums and
+   * "other" as an after-tax deduction, which taxed income the member never had
+   * — it overstated the tax and understated the take-home of roughly a third
+   * of Canadian employees.
+   *
+   * LTD premiums genuinely ARE after-tax (that is what keeps the benefit
+   * tax-free if it is ever claimed), so only the dues move.
+   *
+   * Dues do not reduce pensionable or insurable earnings: CPP and EI are still
+   * computed on gross.
+   */
+  const postTaxPerPeriod = ded ? (ded.ltdPremium + ded.otherDeductions) : 0;
   const annualPostTax = postTaxPerPeriod * periodsPerYear;
+  const annualUnionDues = ded ? ded.unionDues * periodsPerYear : 0;
 
   const taxableBenefitsPerPeriod = inputs.deductions ? 0 : (inputs as any).additionalIncome?.taxableBenefits ?? 0; // fallback safety
   const annualTaxableBenefits = taxableBenefitsPerPeriod * periodsPerYear;
 
-  const taxableIncome = Math.max(0, (annualGross + annualTaxableBenefits) - annualRRSP);
+  const taxableIncome = Math.max(0, (annualGross + annualTaxableBenefits) - annualRRSP - annualUnionDues);
 
   // Calculate deductions
   const isQuebec = province === Province.QC;
@@ -569,7 +604,7 @@ export const calculateFromTimesheet = (inputs: TimesheetInputs): CalculationResu
   const taxResult = calculateTotalTax(taxableIncome, cppResult.total, province);
 
   const totalTaxAnnual = taxResult.total;
-  const totalDeductionsAnnual = totalTaxAnnual + cppResult.total + eiAnnual + qpipAnnual + annualRRSP + annualPostTax;
+  const totalDeductionsAnnual = totalTaxAnnual + cppResult.total + eiAnnual + qpipAnnual + annualRRSP + annualPostTax + annualUnionDues;
   const netPayAnnual = annualGross - totalDeductionsAnnual;
 
   const grossPayPerPeriod = totalGross;
