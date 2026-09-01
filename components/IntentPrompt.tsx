@@ -23,7 +23,7 @@ const OPTIONS: { key: Intent; emoji: string }[] = [
 
 const DICT: Record<string, Record<string, string>> = {
   en: {
-    prompt: 'Optional: what brings you here today?',
+    prompt: 'What brings you here today?',
     thanks: 'Thanks — that helps.',
     'new-job': 'New job offer',
     raise: 'A raise',
@@ -33,7 +33,7 @@ const DICT: Record<string, Record<string, string>> = {
     curious: 'Just curious',
   },
   fr: {
-    prompt: 'Facultatif : qu’est-ce qui vous amène aujourd’hui ?',
+    prompt: 'Qu’est-ce qui vous amène aujourd’hui ?',
     thanks: 'Merci — c’est utile.',
     'new-job': 'Nouvelle offre d’emploi',
     raise: 'Une augmentation',
@@ -43,7 +43,7 @@ const DICT: Record<string, Record<string, string>> = {
     curious: 'Simple curiosité',
   },
   zh: {
-    prompt: '可选:你今天为什么来算工资?',
+    prompt: '你今天为什么来算工资?',
     thanks: '谢谢,这很有帮助。',
     'new-job': '拿到新 offer',
     raise: '涨薪',
@@ -53,7 +53,7 @@ const DICT: Record<string, Record<string, string>> = {
     curious: '就是好奇',
   },
   pa: {
-    prompt: 'ਵਿਕਲਪਿਕ: ਅੱਜ ਤੁਸੀਂ ਕਿਉਂ ਹਿਸਾਬ ਲਗਾ ਰਹੇ ਹੋ?',
+    prompt: 'ਅੱਜ ਤੁਸੀਂ ਕਿਉਂ ਹਿਸਾਬ ਲਗਾ ਰਹੇ ਹੋ?',
     thanks: 'ਧੰਨਵਾਦ।',
     'new-job': 'ਨਵੀਂ ਨੌਕਰੀ ਦੀ ਪੇਸ਼ਕਸ਼',
     raise: 'ਤਨਖਾਹ ਵਾਧਾ',
@@ -63,7 +63,7 @@ const DICT: Record<string, Record<string, string>> = {
     curious: 'ਬਸ ਉਤਸੁਕਤਾ',
   },
   tl: {
-    prompt: 'Opsyonal: bakit ka nagkakalkula ngayon?',
+    prompt: 'Bakit ka nagkakalkula ngayon?',
     thanks: 'Salamat!',
     'new-job': 'Bagong job offer',
     raise: 'Taas ng sahod',
@@ -73,7 +73,7 @@ const DICT: Record<string, Record<string, string>> = {
     curious: 'Curious lang',
   },
   hi: {
-    prompt: 'वैकल्पिक: आज आप क्यों गणना कर रहे हैं?',
+    prompt: 'आज आप क्यों गणना कर रहे हैं?',
     thanks: 'धन्यवाद!',
     'new-job': 'नई नौकरी का ऑफ़र',
     raise: 'वेतन वृद्धि',
@@ -83,7 +83,7 @@ const DICT: Record<string, Record<string, string>> = {
     curious: 'बस जिज्ञासा',
   },
   es: {
-    prompt: 'Opcional: ¿qué te trae por aquí hoy?',
+    prompt: '¿Qué te trae por aquí hoy?',
     thanks: '¡Gracias!',
     'new-job': 'Nueva oferta de trabajo',
     raise: 'Un aumento',
@@ -93,7 +93,7 @@ const DICT: Record<string, Record<string, string>> = {
     curious: 'Solo curiosidad',
   },
   uk: {
-    prompt: 'Необов’язково: що привело вас сюди?',
+    prompt: 'Що привело вас сюди?',
     thanks: 'Дякуємо!',
     'new-job': 'Нова пропозиція роботи',
     raise: 'Підвищення зарплати',
@@ -103,7 +103,7 @@ const DICT: Record<string, Record<string, string>> = {
     curious: 'Просто цікаво',
   },
   ko: {
-    prompt: '선택 사항: 오늘 왜 계산하시나요?',
+    prompt: '오늘 왜 계산하시나요?',
     thanks: '감사합니다!',
     'new-job': '새 입사 제안',
     raise: '연봉 인상',
@@ -113,7 +113,7 @@ const DICT: Record<string, Record<string, string>> = {
     curious: '그냥 궁금해서',
   },
   vi: {
-    prompt: 'Tùy chọn: hôm nay điều gì đưa bạn đến đây?',
+    prompt: 'Hôm nay điều gì đưa bạn đến đây?',
     thanks: 'Cảm ơn bạn!',
     'new-job': 'Lời mời làm việc mới',
     raise: 'Tăng lương',

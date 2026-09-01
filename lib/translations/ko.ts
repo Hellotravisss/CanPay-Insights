@@ -347,7 +347,7 @@ export const industry: Record<string, string> = {
   otNote: "별도로: 이번 급여 기간의 총급여에 초과근무 {n}시간이 포함되어 있습니다. 실수령액은 늘지만 시간당 가치는 변하지 않습니다.",
   source: "Statistics Canada, 표 14-10-0064-01, {year} — 정규직 직원 중위 임금, 전 산업. 반기마다 갱신.",
   sharpen: "더 정확히 — 어떤 일을 하십니까?",
-  prompt: '선택 사항: 업종을 선택하면 급여 위치를 확인할 수 있어요',
+  prompt: '업종을 선택하면 급여 위치를 확인할 수 있어요',
   industry: '본인 업종',
   choose: '업종 선택…',
   youAreHere: '나',

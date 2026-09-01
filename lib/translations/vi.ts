@@ -347,7 +347,7 @@ export const industry: Record<string, string> = {
   otNote: "Riêng ra: tổng thu nhập kỳ này của bạn gồm {n} giờ tăng ca. Điều đó làm tăng số tiền nhận về nhưng không thay đổi giá trị mỗi giờ của bạn.",
   source: "Statistics Canada, Bảng 14-10-0064-01, {year} — lương trung vị của nhân viên toàn thời gian, mọi ngành. Cập nhật nửa năm một lần.",
   sharpen: "Cụ thể hơn — bạn làm nghề gì?",
-  prompt: 'Tùy chọn: chọn ngành của bạn để xem mức lương của bạn đang ở đâu',
+  prompt: 'Chọn ngành của bạn để xem mức lương của bạn đang ở đâu',
   industry: 'Ngành của bạn',
   choose: 'Chọn một ngành…',
   youAreHere: 'Bạn',

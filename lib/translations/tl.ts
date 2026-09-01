@@ -347,7 +347,7 @@ export const industry: Record<string, string> = {
   otNote: "Bukod dito: ang iyong gross ay may {n} oras ng overtime ngayong panahon ng sahod. Tumataas ang uwing sahod pero hindi nagbabago ang halaga ng iyong oras.",
   source: "Statistics Canada, Talahanayan 14-10-0064-01, {year} — median na sahod ng full-time na empleyado, lahat ng industriya. Ina-update dalawang beses sa isang taon.",
   sharpen: "Tumpakin — ano ang trabaho mo?",
-  prompt: 'Optional: piliin ang industriya mo para makita kung saan ka nakatayo sa sweldo',
+  prompt: 'Piliin ang industriya mo para makita kung saan ka nakatayo sa sweldo',
   industry: 'Industriya mo',
   choose: 'Pumili ng industriya…',
   youAreHere: 'Ikaw',

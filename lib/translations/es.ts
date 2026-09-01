@@ -347,7 +347,7 @@ export const industry: Record<string, string> = {
   otNote: "Aparte: su bruto incluye {n} horas extra en este período. Eso sube lo que recibe sin cambiar cuánto vale su hora.",
   source: "Statistics Canada, tabla 14-10-0064-01, {year} — salario mediano de empleados de tiempo completo, todas las industrias. Actualizado semestralmente.",
   sharpen: "Afínelo — ¿a qué se dedica?",
-  prompt: 'Opcional: elige tu industria para ver dónde se ubica tu pago',
+  prompt: 'Elige tu industria para ver dónde se ubica tu pago',
   industry: 'Tu industria',
   choose: 'Selecciona una industria…',
   youAreHere: 'Tú',
