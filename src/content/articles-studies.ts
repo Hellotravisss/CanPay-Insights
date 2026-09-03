@@ -1716,4 +1716,118 @@ October 28, 2026 is the tenth of twelve scheduled 2026 payment dates for both CP
 OAS, GIS, and Allowance payment amounts and the confirmed October–December 2026 indexation rate are from the Government of Canada's [Old Age Security payment amounts](https://www.canada.ca/en/services/benefits/publicpensions/old-age-security/payments.html) page. The 2026 CPP/OAS payment calendar, including the October 28, 2026 date, is from the [Government of Canada benefits payment calendar](https://www.canada.ca/en/services/benefits/calendar.html). Historical January and April 2026 quarterly rates are corroborated by independent Canadian pension-news outlets. October–December dollar figures in the table above are CanPay Insights' own calculation (confirmed rate × confirmed prior amount) pending Service Canada's official published rate card, and may differ by a cent or two from the final rounded figures. This is general information, not financial or tax advice.
 `,
   },
+  {
+    id: 'study-17',
+    slug: 'canada-disability-benefit-changes-september-2026',
+    title: 'Canada Disability Benefit: $150 Payment and 5 Regulatory Changes, Effective September 1, 2026',
+    subtitle:
+      'A one-time $150 supplement, an early-application rule for 18-year-olds, and clawback protection all take legal effect the same day — alongside the confirmed $204.20 monthly maximum for the 2026–27 benefit year.',
+    excerpt:
+      'Five changes to the Canada Disability Benefit take legal effect September 1, 2026, led by a tax-free $150 lump-sum payment for anyone who has ever received the CDB — no application required. Here is every change, the current $204.20 monthly maximum, and how much you can earn from work before it is reduced.',
+    metaTitle: 'CDB $150 Payment & 5 Changes, Effective Sept 1, 2026',
+    metaDescription:
+      'The Canada Disability Benefit adds a $150 one-time payment and 5 regulatory changes on Sept 1, 2026. New $204.20 max, income exemptions, and dates.',
+    keywords: [
+      'canada disability benefit $150 payment',
+      'canada disability benefit september 2026',
+      'CDB changes 2026',
+      'canada disability benefit amount 2026',
+      'CDB working income exemption',
+      'canada disability benefit eligibility',
+    ],
+    category: 'news',
+    tags: ['CRA', 'Disability', 'Government Benefits', '2026', 'Payment Dates'],
+    publishedAt: '2026-09-03',
+    readTime: 6,
+    imageUrl: '/blog/canada-disability-benefit-changes-september-2026.svg',
+    directAnswer:
+      'Five regulatory changes to the Canada Disability Benefit (CDB) took legal effect September 1, 2026. The headline change is a one-time, tax-free $150 lump-sum payment for anyone who was approved for the Disability Tax Credit and has ever received a CDB payment — paid automatically, no application needed, to help cover the cost of getting a doctor to complete the DTC application. The other four changes let youth apply up to 6 months before turning 18, let Service Canada treat a recipient as single when their spouse cannot file taxes, stop interest from accruing on disputed overpayments during an appeal, and confirm CDB payments cannot be clawed back through other federal benefits like the Canada Child Benefit. Separately, the confirmed maximum regular CDB payment for the July 2026–June 2027 benefit year is $204.20 a month, up from $200.',
+    faq: [
+      {
+        question: 'What is the $150 Canada Disability Benefit payment?',
+        answer:
+          'A one-time, tax-free lump-sum supplement of $150, meant to help offset the out-of-pocket fees doctors and nurse practitioners often charge to complete Form T2201, the Disability Tax Credit (DTC) certificate. It is separate from — and on top of — your regular monthly CDB payment.',
+      },
+      {
+        question: 'Who qualifies for the $150 payment, and do I need to apply?',
+        answer:
+          'Anyone with an approved Disability Tax Credit certificate who received a Canada Disability Benefit payment before September 1, 2026 qualifies automatically, even if they are no longer currently receiving CDB payments. There is no application: the CRA and Service Canada pay it as a lump sum starting in September 2026.',
+      },
+      {
+        question: 'Is the $150 supplement taxable?',
+        answer:
+          'No. Following amendments to the Income Tax Act, Canada Disability Benefit payments — including this supplement — are excluded from the calculation of income, so they are tax-free and do not reduce other income-tested federal benefits like the Canada Child Benefit or the GST/HST credit.',
+      },
+      {
+        question: 'What is the maximum Canada Disability Benefit amount in 2026?',
+        answer:
+          'For the July 2026 to June 2027 benefit year, the confirmed maximum is $204.20 a month ($2,450.40 a year), up from $200 a month the year before. You receive the maximum if your adjusted family net income, after applicable working-income exemptions, is at or below the threshold for your household type.',
+      },
+      {
+        question: 'How much can I earn from a job before my Canada Disability Benefit is reduced?',
+        answer:
+          'A single recipient can earn up to $10,210 in working income before it counts toward the income test; for a couple, up to $14,294 of combined working income is exempt. Above the relevant income threshold ($23,000 for a single person, $32,500 for a couple), the benefit is reduced by 20 cents per dollar of extra income — or 10 cents per dollar for each spouse if both receive the CDB.',
+      },
+      {
+        question: 'What are the other four changes taking effect September 1, 2026?',
+        answer:
+          'Youth can now apply up to 6 months before turning 18, so payments can start right at their 18th birthday instead of after a processing delay. Service Canada can treat a recipient as single (rather than requiring a spouse’s tax return) when that spouse cannot file due to non-residency, forced separation, or family violence. No interest accrues on a disputed overpayment while a reconsideration, appeal, or judicial review is pending. And the definition of "adjusted income" was updated so CDB payments are formally excluded from triggering clawbacks of other federal benefits.',
+      },
+    ],
+    content: `
+## Five changes, one effective date
+
+The Canada Disability Benefit (CDB) — the federal income supplement for working-age Canadians with disabilities — picked up five regulatory changes that took **legal effect on September 1, 2026**. They were published as amendments to the Canada Disability Benefit Regulations in the Canada Gazette on July 1, 2026, and the biggest one puts new money in recipients' hands with no paperwork at all.
+
+### Key facts
+
+- **A $150 lump-sum payment**, tax-free, for anyone with an approved Disability Tax Credit (DTC) certificate who has ever received a CDB payment — automatic, no application.
+- **The regular CDB maximum is now $204.20 a month** ($2,450.40 a year) for the July 2026–June 2027 benefit year, up from $200.
+- **Youth can apply up to 6 months before turning 18**, so payments can start right at adulthood.
+- **CDB payments are formally shielded from clawing back other federal benefits**, like the Canada Child Benefit — though Alberta is currently the only province clawing the CDB back from a provincial disability program (AISH).
+
+## The $150 payment, in detail
+
+The supplement exists to offset a real barrier to the CDB itself: getting a doctor or nurse practitioner to sign Form T2201, the Disability Tax Credit application, which can cost real money out of pocket before a recipient ever sees a CDB deposit. The $150 is meant to cover that cost after the fact.
+
+| | Detail |
+| --- | --- |
+| Amount | $150, one time, lump sum |
+| Who qualifies | Approved for the DTC, and received a CDB payment before September 1, 2026 (current or former recipients both count) |
+| Application | None required — paid automatically |
+| Taxable? | No |
+| When it arrives | Starting September 2026 |
+
+## The current CDB amounts and income test
+
+Separately from the $150 supplement, the **regular monthly CDB** itself is indexed each July. For the **2026–27 benefit year (July 2026 to June 2027)**, based on your **2025 tax return**:
+
+| | Single | Couple (one or both receiving CDB) |
+| --- | --- | --- |
+| Maximum monthly payment | **$204.20** | $204.20 per eligible spouse |
+| Maximum annual payment | $2,450.40 | $2,450.40 per eligible spouse |
+| Income threshold for full amount | $23,000 (adjusted family net income) | $32,500 (adjusted family net income) |
+| Working-income exemption | up to $10,210 | up to $14,294 combined |
+| Reduction above the threshold | 20 cents per dollar | 20 cents per dollar (one spouse receiving) or 10 cents per dollar each (both receiving) |
+
+To be eligible at all, you must be 18 to 64, have an approved Disability Tax Credit certificate, be a Canadian resident for tax purposes, and have filed your 2025 income tax return (your spouse or common-law partner must file too, unless the new spousal waiver below applies).
+
+## Working and the CDB — how this touches your paycheque
+
+The CDB is not payroll income and is not affected directly by your employer's deductions. But if you also work, the **working-income exemption** is where it meets your pay: a single recipient can earn up to **$10,210** from a job before that income counts against the CDB test at all, and a couple can earn up to **$14,294** combined. Past that, the benefit is reduced by 20 cents per extra dollar of income (or 10 cents per dollar for each spouse, if both receive the CDB).
+
+One thing worth being precise about: the income figure used for that test is your **adjusted family net income** from your tax return, which is not the same number as your **take-home pay** after tax, CPP, and EI come off a cheque. If you are weighing a part-time job, more hours, or a raise against how it might affect your CDB, it helps to look at both numbers separately — use the free [CanPay Insights salary calculator](/salary-after-tax-canada) to see what actually lands in your bank account from work, and keep the CDB's net-income test as a separate calculation on top.
+
+## The other four changes
+
+- **Early application for youth.** Applicants can now submit up to **6 months before their 18th birthday**, so a first payment can start right when they turn 18 instead of after weeks of processing.
+- **A waiver when a spouse can't file taxes.** If a recipient's spouse or common-law partner cannot file an income tax return because of non-residency, forced separation, or family violence (as defined in the Divorce Act), Service Canada can now calculate the CDB as if the recipient were single.
+- **No interest during an appeal.** If Service Canada is reviewing a disputed overpayment through reconsideration, appeal, or judicial review, interest no longer accrues on the disputed amount while that process is underway.
+- **Clawback protection made explicit.** Earlier amendments to the Income Tax Act already excluded CDB payments from counting as income for other federal benefits; the CDB Regulations' own definition of "adjusted income" was updated to match, closing the gap. This is a federal protection only — Alberta remains the sole province currently reducing a provincial disability benefit (AISH) because a recipient also gets the CDB.
+
+## Sources & disclaimer
+
+The $150 supplement, the five regulatory changes, and their September 1, 2026 effective date are confirmed by Employment and Social Development Canada's [Canada Disability Benefit program page](https://www.canada.ca/en/employment-social-development/programs/disability-benefit.html) and the [Regulations Amending the Canada Disability Benefit Regulations](https://gazette.gc.ca/rp-pr/p2/2026/2026-07-01/html/sor-dors123-eng.html) in the Canada Gazette, Part II. The $204.20 monthly maximum, income thresholds, and working-income exemptions for the 2026–27 benefit year are from Canada.ca's [Canada Disability Benefit amount page](https://www.canada.ca/en/services/benefits/disability/canada-disability-benefit/amount.html), corroborated by the [Canada Disability Benefit calculator](https://www.canadadisabilitybenefit.ca/calculations). This is general information, not financial, legal, or tax advice — confirm your own eligibility and amount with [Service Canada](https://www.canada.ca/en/services/benefits/disability/canada-disability-benefit.html).
+`,
+  },
 ];
