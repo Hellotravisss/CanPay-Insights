@@ -72,6 +72,18 @@ export const QC_EI_MAX_CONTRIBUTION = 895.70; // 2026 max (1.30% × 68,900)
 // Quebec Abatement — 16.5% reduction on federal tax
 export const QUEBEC_ABATEMENT_RATE = 0.165;
 
+// Nova Scotia low-income tax reduction — form NS428 Part C, lines 71 / 80 / 82.
+// A NON-refundable reduction applied AFTER the non-refundable credits: $300 for
+// the filer, clawed back at 5% of adjusted family net income above $15,000, so it
+// is gone by $21,000. Figures are the 2025 form's (the 2026 NS428 is published
+// with the 2026 tax package); NS did not index this reduction historically, and
+// the spread is at most a few dollars either way. Family additions ($300 spouse,
+// $300 eligible dependant, $165 per child) are NOT modelled — this engine is a
+// single-filer, basic-credits model everywhere, and says so on every page.
+export const NS_LOW_INCOME_REDUCTION_BASE = 300;        // line 71, basic reduction
+export const NS_LOW_INCOME_REDUCTION_THRESHOLD = 15000; // line 80, base amount
+export const NS_LOW_INCOME_REDUCTION_RATE = 0.05;       // line 82, applicable rate
+
 // ============================================
 // SAVINGS-ROOM LIMITS (2026) — not used by the payroll engine, but the site
 // states them (llms.txt key facts, savings articles) and the number audit
@@ -193,7 +205,10 @@ export const PROVINCIAL_DATA: Record<string, ProvincialRule> = {
     dailyOtThreshold: null,
     weeklyOtThreshold: 48,
     otRate: 1.5,
-    basicPersonalAmount: 11932, // 2026 Nova Scotia BPA (base; NS also has an income-tested top-up not modelled here)
+    basicPersonalAmount: 11932, // 2026 Nova Scotia BPA — a single flat amount. The former $3,000
+    // income-tested supplement was ELIMINATED by the NS 2025 Budget (folded into a higher
+    // indexed BPA). Verified against CRA form TD1NS (26) line 1 and TaxTips NS 2026.
+    // An earlier comment here claimed an unmodelled top-up; that described pre-2025 rules.
     brackets: [
       { threshold: 30995,  rate: 0.0879 },
       { threshold: 61991,  rate: 0.1495 },

@@ -36,7 +36,10 @@ import {
   QPIP_MAX_INSURABLE_EARNINGS,
   QC_EI_RATE,
   QC_EI_MAX_CONTRIBUTION,
-  QUEBEC_ABATEMENT_RATE
+  QUEBEC_ABATEMENT_RATE,
+  NS_LOW_INCOME_REDUCTION_BASE,
+  NS_LOW_INCOME_REDUCTION_THRESHOLD,
+  NS_LOW_INCOME_REDUCTION_RATE
 } from '../constants';
 
 // ============================================
@@ -199,6 +202,17 @@ const calculateTotalTax = (
       surtax += (provincialTax - provinceRule.surtaxThreshold2) * (provinceRule.surtaxRate2 ?? 0);
     }
     provincialTax += surtax;
+  }
+
+  // Step 4b: Nova Scotia low-income tax reduction (NS428 Part C, line 84).
+  // Sits where the form puts it — after the non-refundable credits, before the
+  // final tax line — and, like the credits, cannot push tax below zero. Income
+  // base is net income (line 23600); in this model that equals taxable income,
+  // since RRSP is the only deduction and it reduces both.
+  if (province === Province.NS) {
+    const clawback = Math.max(0, annualGross - NS_LOW_INCOME_REDUCTION_THRESHOLD) * NS_LOW_INCOME_REDUCTION_RATE;
+    const reduction = Math.max(0, NS_LOW_INCOME_REDUCTION_BASE - clawback);
+    provincialTax = Math.max(0, provincialTax - reduction);
   }
 
   // Step 5: Apply Quebec Abatement (16.5% reduction on federal tax)
