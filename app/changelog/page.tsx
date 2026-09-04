@@ -18,6 +18,18 @@ export const metadata: Metadata = {
 // page is the product's history, not a publishing log.
 const ENTRIES: { date: string; title: string; points: string[] }[] = [
   {
+    date: '2026-09-02',
+    title: 'Ontario Health Premium added — Ontario take-home figures are now lower',
+    points: [
+      'Ontario paycheques have a health premium withheld alongside income tax, and this calculator was not deducting it. Ontario take-home figures were too high by $300 to $750 a year depending on income, and are now correct.',
+      'What changed for you: on a $50,000 Ontario salary the annual take-home shown drops from $40,535 to $39,935; on $85,000, from $64,100 to $63,350. Nothing about your actual pay has changed — only the estimate on this site, which now matches your pay stub.',
+      'Also added: the Ontario and British Columbia tax reductions, which cut provincial tax to zero at low incomes, and the federal basic personal amount phase-out that applies above $181,440 of income.',
+      'These come from the Canada Revenue Agency payroll formulas — the same rules your employer uses to decide what to withhold. Every province was rechecked against them; New Brunswick, Prince Edward Island and Newfoundland and Labrador needed no change.',
+      'One deliberate omission: Nova Scotia has a low-income tax reduction worth up to $300, but it is claimed when you file your return, not taken off your pay. Including it would make the paycheque figure wrong, so it stays out — you get it back at tax time.',
+      'Published figures across the site were rechecked and the affected minimum-wage article was recalculated.',
+    ],
+  },
+  {
     date: '2026-08-16',
     title: 'Tech wage benchmark updated in the pay-comparison chart',
     points: [
