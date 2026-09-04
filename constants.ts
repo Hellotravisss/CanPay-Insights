@@ -72,17 +72,23 @@ export const QC_EI_MAX_CONTRIBUTION = 895.70; // 2026 max (1.30% × 68,900)
 // Quebec Abatement — 16.5% reduction on federal tax
 export const QUEBEC_ABATEMENT_RATE = 0.165;
 
-// Nova Scotia low-income tax reduction — form NS428 Part C, lines 71 / 80 / 82.
-// A NON-refundable reduction applied AFTER the non-refundable credits: $300 for
-// the filer, clawed back at 5% of adjusted family net income above $15,000, so it
-// is gone by $21,000. Figures are the 2025 form's (the 2026 NS428 is published
-// with the 2026 tax package); NS did not index this reduction historically, and
-// the spread is at most a few dollars either way. Family additions ($300 spouse,
-// $300 eligible dependant, $165 per child) are NOT modelled — this engine is a
-// single-filer, basic-credits model everywhere, and says so on every page.
-export const NS_LOW_INCOME_REDUCTION_BASE = 300;        // line 71, basic reduction
-export const NS_LOW_INCOME_REDUCTION_THRESHOLD = 15000; // line 80, base amount
-export const NS_LOW_INCOME_REDUCTION_RATE = 0.05;       // line 82, applicable rate
+// Nova Scotia low-income tax reduction — form NS428 Part C. DELIBERATELY NOT
+// MODELLED. T4127 (122nd ed.) states the payroll tax reduction "only applies to
+// Ontario and British Columbia", so NS's $300 is claimed when the return is
+// filed, not withheld from pay. This calculator models what lands in the bank
+// each period, so including it would make the paycheque figure wrong in order
+// to make an annual figure right. Same test that put the Ontario Health Premium
+// IN: is it withheld at source?
+// (For reference, at filing: $300, clawed back at 5% of family net income above
+// $15,000, gone at $21,000 — NS428 lines 71/80/82.)
+
+// British Columbia tax reduction — T4127 factor S, 2026. WITHHELD at source.
+// S = lesser of BC tax or ($575 reduced by 3.56% of taxable income over $25,570),
+// reaching zero at $41,722. Rate confirmed against BC428 (25) line 77 (3.56%)
+// and by arithmetic: 575 / (41,722 - 25,570) = 3.56%.
+export const BC_TAX_REDUCTION_BASE = 575;
+export const BC_TAX_REDUCTION_THRESHOLD = 25570;
+export const BC_TAX_REDUCTION_RATE = 0.0356;
 
 // Federal BPA phase-out — CRA form TD1-WS (26), line 1.
 // BPA = BASE + MAX_TOPUP × (RANGE − (net income − THRESHOLD)) / RANGE, clamped.

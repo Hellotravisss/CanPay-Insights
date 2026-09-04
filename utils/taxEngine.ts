@@ -37,9 +37,9 @@ import {
   QC_EI_RATE,
   QC_EI_MAX_CONTRIBUTION,
   QUEBEC_ABATEMENT_RATE,
-  NS_LOW_INCOME_REDUCTION_BASE,
-  NS_LOW_INCOME_REDUCTION_THRESHOLD,
-  NS_LOW_INCOME_REDUCTION_RATE,
+  BC_TAX_REDUCTION_BASE,
+  BC_TAX_REDUCTION_THRESHOLD,
+  BC_TAX_REDUCTION_RATE,
   FEDERAL_BPA_BASE,
   FEDERAL_BPA_THRESHOLD,
   FEDERAL_BPA_RANGE,
@@ -232,14 +232,11 @@ const calculateTotalTax = (
     provincialTax += surtax;
   }
 
-  // Step 4b: Nova Scotia low-income tax reduction (NS428 Part C, line 84).
-  // Sits where the form puts it — after the non-refundable credits, before the
-  // final tax line — and, like the credits, cannot push tax below zero. Income
-  // base is net income (line 23600); in this model that equals taxable income,
-  // since RRSP is the only deduction and it reduces both.
-  if (province === Province.NS) {
-    const clawback = Math.max(0, annualGross - NS_LOW_INCOME_REDUCTION_THRESHOLD) * NS_LOW_INCOME_REDUCTION_RATE;
-    const reduction = Math.max(0, NS_LOW_INCOME_REDUCTION_BASE - clawback);
+  // Step 4b: British Columbia tax reduction (T4127 factor S). Withheld at
+  // source, unlike Nova Scotia's — see the note in constants.ts for why NS is
+  // deliberately absent here.
+  if (province === Province.BC) {
+    const reduction = Math.max(0, BC_TAX_REDUCTION_BASE - Math.max(0, annualGross - BC_TAX_REDUCTION_THRESHOLD) * BC_TAX_REDUCTION_RATE);
     provincialTax = Math.max(0, provincialTax - reduction);
   }
 
