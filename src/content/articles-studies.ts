@@ -29,12 +29,12 @@ export const studyArticles: Article[] = [
     readTime: 9,
     imageUrl: '/blog/minimum-wage-take-home-2026.png',
     directAnswer:
-      'As of June 2026, a full-time minimum wage worker takes home between $26,779 a year (Alberta, $15.00/hr) and $34,393 a year (Nunavut, $19.75/hr) after federal tax, provincial tax, CPP, and EI. In Ontario ($17.60/hr), full-time minimum wage works out to $30,516 a year or about $2,543 a month after deductions.',
+      'As of June 2026, a full-time minimum wage worker takes home between $26,779 a year (Alberta, $15.00/hr) and $34,393 a year (Nunavut, $19.75/hr) after federal tax, provincial tax, CPP, and EI. In Ontario ($17.60/hr), full-time minimum wage works out to $30,179 a year or about $2,515 a month after deductions.',
     faq: [
       {
         question: 'How much does a minimum wage worker take home in Ontario in 2026?',
         answer:
-          'At Ontario’s $17.60 minimum wage, a full-time worker (40 hours/week) grosses $36,608 a year and takes home approximately $30,516 after federal tax, provincial tax, CPP, and EI — about $2,543 per month, or a net hourly rate of $14.67. Ontario’s minimum wage rises to $17.95 on October 1, 2026.',
+          'At Ontario’s $17.60 minimum wage, a full-time worker (40 hours/week) grosses $36,608 a year and takes home approximately $30,179 after federal tax, provincial tax, CPP, EI, and the Ontario Health Premium — about $2,515 per month, or a net hourly rate of $14.51. Ontario’s minimum wage rises to $17.95 on October 1, 2026.',
       },
       {
         question: 'Which province has the highest minimum wage take-home pay in Canada?',
@@ -75,7 +75,7 @@ Figures assume full-time hours (40 hours/week, 2,080 hours/year), basic personal
 | Nunavut | $19.75 | $41,080 | **$34,393** | $2,866 | $16.54 | 16.3% |
 | Yukon | $18.51 | $38,501 | **$31,846** | $2,654 | $15.31 | 17.3% |
 | British Columbia | $18.25 | $37,960 | **$31,536** | $2,628 | $15.16 | 16.9% |
-| Ontario | $17.60 | $36,608 | **$30,516** | $2,543 | $14.67 | 16.6% |
+| Ontario | $17.60 | $36,608 | **$30,179** | $2,515 | $14.51 | 17.6% |
 | Northwest Territories | $16.95 | $35,256 | **$29,643** | $2,470 | $14.25 | 15.9% |
 | Prince Edward Island | $17.00 | $35,360 | **$28,831** | $2,403 | $13.86 | 18.5% |
 | Quebec | $16.60 | $34,528 | **$28,300** | $2,358 | $13.61 | 18.0% |

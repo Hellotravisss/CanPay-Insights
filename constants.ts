@@ -84,6 +84,33 @@ export const NS_LOW_INCOME_REDUCTION_BASE = 300;        // line 71, basic reduct
 export const NS_LOW_INCOME_REDUCTION_THRESHOLD = 15000; // line 80, base amount
 export const NS_LOW_INCOME_REDUCTION_RATE = 0.05;       // line 82, applicable rate
 
+// Federal BPA phase-out — CRA form TD1-WS (26), line 1.
+// BPA = BASE + MAX_TOPUP × (RANGE − (net income − THRESHOLD)) / RANGE, clamped.
+// At $181,440 the top-up is full ($14,829 + $1,623 = $16,452, the max above);
+// it is gone at $181,440 + $77,042 = $258,482.
+export const FEDERAL_BPA_BASE = 14829;        // TD1-WS line 1, base amount
+export const FEDERAL_BPA_THRESHOLD = 181440;  // TD1-WS line 3, income threshold
+export const FEDERAL_BPA_RANGE = 77042;       // TD1-WS lines 5-6, divisor
+export const FEDERAL_BPA_TOPUP = 1623;        // TD1-WS line 7, applicable amount
+
+// Ontario Health Premium — CRA T4127 (122nd ed., effective 2026-01-01), factor V2.
+// WITHHELD AT SOURCE, so it belongs in take-home pay. Each tier is "the lesser of
+// the cap or the base plus rate × income above the tier floor". Not indexed.
+// T4127 is explicit that the OHP is NOT reduced by the Ontario tax reduction.
+export const ON_HEALTH_PREMIUM_TIERS: { floor: number; base: number; rate: number; cap: number }[] = [
+  { floor: 20000,  base: 0,   rate: 0.06, cap: 300 },
+  { floor: 36000,  base: 300, rate: 0.06, cap: 450 },
+  { floor: 48000,  base: 450, rate: 0.25, cap: 600 },
+  { floor: 72000,  base: 600, rate: 0.25, cap: 750 },
+  { floor: 200000, base: 750, rate: 0.25, cap: 900 },
+];
+
+// Ontario tax reduction — T4127 factor S (2026 basic amount $300; the 2025 ON428
+// form shows $294 — it is indexed). S = lesser of (tax) or (2 × $300 − tax), so
+// Ontario tax is wiped below $300 and the reduction is gone at $600.
+// Dependant amounts ($544 each on ON428) are outside this single-filer model.
+export const ON_TAX_REDUCTION_BASE = 300;
+
 // ============================================
 // SAVINGS-ROOM LIMITS (2026) — not used by the payroll engine, but the site
 // states them (llms.txt key facts, savings articles) and the number audit

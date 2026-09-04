@@ -39,7 +39,13 @@ import {
   QUEBEC_ABATEMENT_RATE,
   NS_LOW_INCOME_REDUCTION_BASE,
   NS_LOW_INCOME_REDUCTION_THRESHOLD,
-  NS_LOW_INCOME_REDUCTION_RATE
+  NS_LOW_INCOME_REDUCTION_RATE,
+  FEDERAL_BPA_BASE,
+  FEDERAL_BPA_THRESHOLD,
+  FEDERAL_BPA_RANGE,
+  FEDERAL_BPA_TOPUP,
+  ON_HEALTH_PREMIUM_TIERS,
+  ON_TAX_REDUCTION_BASE
 } from '../constants';
 
 // ============================================
@@ -158,6 +164,22 @@ const calculateEI = (annualGross: number, isQuebec: boolean = false): number => 
  * - Quebec residents pay into QPIP
  * - Quebec EI rate is lower (1.27% vs 1.64%)
  */
+/**
+ * Ontario Health Premium — CRA T4127 factor V2. Withheld at source like tax, so
+ * it belongs in take-home pay; it is not a credit and not reduced by anything.
+ * Each tier pays the LESSER of its cap or (base + rate x income above the floor),
+ * which is why the amount plateaus between tiers rather than rising smoothly.
+ */
+const calculateOntarioHealthPremium = (annualGross: number): number => {
+  let premium = 0;
+  for (const t of ON_HEALTH_PREMIUM_TIERS) {
+    if (annualGross > t.floor) {
+      premium = Math.min(t.cap, t.base + (annualGross - t.floor) * t.rate);
+    }
+  }
+  return premium;
+};
+
 const calculateTotalTax = (
   annualGross: number,
   cppTotal: number,
@@ -174,7 +196,13 @@ const calculateTotalTax = (
   // Federal: lowest-bracket rate × BPA. Read from FEDERAL_BRACKETS rather than
   // a literal so a future bracket change cannot leave credits at the old rate.
   const lowestFederalRate = FEDERAL_BRACKETS[0].rate;
-  const federalBPACredit = FEDERAL_BASIC_PERSONAL_AMOUNT * lowestFederalRate;
+  // The BPA is the maximum only up to $181,440 of net income; above that it
+  // slides down to FEDERAL_BPA_BASE by $258,482 (TD1-WS (26), line 1).
+  const bpaTopUp = annualGross <= FEDERAL_BPA_THRESHOLD
+    ? FEDERAL_BPA_TOPUP
+    : FEDERAL_BPA_TOPUP * Math.max(0, FEDERAL_BPA_RANGE - (annualGross - FEDERAL_BPA_THRESHOLD)) / FEDERAL_BPA_RANGE;
+  const federalBPA = FEDERAL_BPA_BASE + bpaTopUp;
+  const federalBPACredit = federalBPA * lowestFederalRate;
 
   // Provincial: varies by province (lowest rate × BPA)
   const lowestProvincialRate = provinceRule.brackets[0]?.rate || 0.05;
@@ -213,6 +241,16 @@ const calculateTotalTax = (
     const clawback = Math.max(0, annualGross - NS_LOW_INCOME_REDUCTION_THRESHOLD) * NS_LOW_INCOME_REDUCTION_RATE;
     const reduction = Math.max(0, NS_LOW_INCOME_REDUCTION_BASE - clawback);
     provincialTax = Math.max(0, provincialTax - reduction);
+  }
+
+  // Step 4c: Ontario tax reduction (T4127 factor S) and Ontario Health Premium
+  // (factor V2). Order matters and follows the form: the reduction applies to the
+  // tax including surtax, and T4127 is explicit that the health premium is NOT
+  // reduced by it — so the premium is added after the reduction, never before.
+  if (province === Province.ON) {
+    const reduction = Math.min(provincialTax, Math.max(0, 2 * ON_TAX_REDUCTION_BASE - provincialTax));
+    provincialTax = Math.max(0, provincialTax - reduction);
+    provincialTax += calculateOntarioHealthPremium(annualGross);
   }
 
   // Step 5: Apply Quebec Abatement (16.5% reduction on federal tax)
