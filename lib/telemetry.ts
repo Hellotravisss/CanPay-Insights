@@ -337,6 +337,13 @@ function detectOsFamily(): string | null {
   try {
     const ua = navigator.userAgent;
     if (/iPhone|iPad|iPod/i.test(ua)) return 'ios';
+    // HarmonyOS must be tested BEFORE Android, in both directions. HarmonyOS 5
+    // (NEXT) dropped the Android runtime entirely and its user-agent says
+    // neither "Android" nor "Linux" — "Mozilla/5.0 (Phone; OpenHarmony 5.0)
+    // … ArkWeb/4.1.6.1 Mobile" — so it was falling through to 'other'.
+    // HarmonyOS 2 to 4 still carry the Android token and would otherwise be
+    // counted as Android, which hides the platform rather than naming it.
+    if (/OpenHarmony|HarmonyOS|ArkWeb/i.test(ua)) return 'harmonyos';
     if (/Android/i.test(ua)) return 'android';
     if (/Macintosh|Mac OS X/i.test(ua)) return 'macos';
     if (/Windows NT/i.test(ua)) return 'windows';
@@ -373,12 +380,21 @@ const BRAND_BY_MODEL: [RegExp, string][] = [
   [/^(ONEPLUS|[A-Z]{2}2\d{3})/i, 'oneplus'],
   [/^(Nokia|TA-\d+)/i, 'nokia'],
   [/^(LM-|LG-)/i, 'lg'],
-  [/^(ELS|ANA|VOG|LYA|MAR|JNY|NOH|TAS)-/i, 'huawei'],
+  [/^(ELS|ANA|VOG|LYA|MAR|JNY|NOH|TAS|BRQ|ALN|PGT|DCO|LIO|OCE|NAM)-/i, 'huawei'],
+  // Honor was spun out of Huawei in 2020 and ships Android, not HarmonyOS —
+  // a separate maker, counted separately.
+  [/^(BVL|ANY|RMO|FNE|PGT-N|LGE-N|ELI|VNE)-|^HONOR/i, 'honor'],
 ];
 
 async function detectBrand(): Promise<string | null> {
   try {
-    if (/iPhone|iPad|iPod/i.test(navigator.userAgent)) return 'apple';
+    const ua0 = navigator.userAgent;
+    if (/iPhone|iPad|iPod/i.test(ua0)) return 'apple';
+    // OpenHarmony is an open-source project, but in the hands of actual
+    // shoppers a HarmonyOS phone is a Huawei phone. Huawei's own browser and
+    // HMS Core also identify themselves, and those run on Huawei hardware
+    // whichever OS version is underneath.
+    if (/OpenHarmony|HarmonyOS|ArkWeb|HUAWEI|HuaweiBrowser|HMSCore/i.test(ua0)) return 'huawei';
     const uaData = (navigator as Navigator & {
       userAgentData?: { getHighEntropyValues?: (h: string[]) => Promise<{ model?: string }> };
     }).userAgentData;

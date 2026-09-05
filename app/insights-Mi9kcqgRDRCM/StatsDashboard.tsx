@@ -834,7 +834,7 @@ export default function StatsDashboard() {
                   <Bars
                     rows={devices.by_os}
                     total={devices.by_os.reduce((a, r) => a + r.n, 0)}
-                    label={(k) => ({ ios: 'iPhone / iPad', android: 'Android', macos: 'Mac', windows: 'Windows', linux: 'Linux' } as Record<string, string>)[String(k)] ?? String(k)}
+                    label={(k) => ({ ios: 'iPhone / iPad', android: 'Android', harmonyos: T('HarmonyOS (Huawei)', '鸿蒙 HarmonyOS(华为)'), macos: 'Mac', windows: 'Windows', linux: 'Linux' } as Record<string, string>)[String(k)] ?? String(k)}
                     empty={T('Collecting — starts with the next visits.', '收集中 —— 从下一批访问开始。')}
                   />
                 </div>
