@@ -205,6 +205,7 @@ export default function StatsDashboard() {
   const [journeys, setJourneys] = useState<Journeys | null>(null);
   const [doors, setDoors] = useState<{ visits: number; clicks: Row[]; waitlist: Row[]; relocation_click_among_comparers: number } | null>(null);
   const [sales, setSales] = useState<{ orders: number; revenue_cents: number; refunds: number; attached_to_account: number; shares: number; shares_by_channel: Row[]; by_product: Row[]; by_route: Row[]; by_bracket: Row[]; by_month: { k: string; n: number; revenue_cents: number }[] } | null>(null);
+  const [devices, setDevices] = useState<{ coverage: { total: number; with_os: number; with_brand: number }; by_os: Row[]; by_brand: Row[] } | null>(null);
   const [comp, setComp] = useState<{ offers: { n: number; avg_match: number; avg_vacation: number; bonus_share: number }; offers_by_province: any[]; tenure: Row[]; union_member: Row[]; employer_size: Row[]; vacation: Row[] } | null>(null);
   const [intent, setIntent] = useState<{ sessions: { total: number; multi_prov: number; multi_bracket: number }; funnel: { k: string; taps: number; purchases: number }[]; cadence: Row[]; active_users_30d: number; calcs_30d: number } | null>(null);
   const [indIncome, setIndIncome] = useState<IndustryIncomeRow[] | null>(null);
@@ -249,6 +250,7 @@ export default function StatsDashboard() {
     insights('sales').then(({ data }) => { if (data) setSales(data as any); });
     insights('intent').then(({ data }) => { if (data) setIntent(data as any); });
     insights('comp_structure').then(({ data }) => { if (data) setComp(data as any); });
+    insights('devices').then(({ data }) => { if (data) setDevices(data as any); });
     insights('industry_income').then(({ data }) => {
       if (data) setIndIncome(data as IndustryIncomeRow[]);
     });
@@ -813,6 +815,42 @@ export default function StatsDashboard() {
                     <Bars rows={(rows as Row[]) ?? []} total={((rows as Row[]) ?? []).reduce((a, r) => a + r.n, 0)} empty={T('Collecting — rotation slot is live.', '收集中 —— 轮换槽已上线。')} />
                   </div>
                 ))}
+              </>
+            ) : <p className="text-sm text-slate-400">{noData}</p>}
+          </Card>
+
+          {/* What is in the reader's hand */}
+          <Card
+            title={T('Phones and platforms', '手机与平台')}
+            hint={T(
+              'Platform comes from the same coarse user-agent read that already told us mobile from desktop — no new tracking. Handset maker is best-effort and openly incomplete: Chrome removed the device model from the user-agent, so only Chromium on Android will name the maker. Every iPhone answers; Firefox on Android never does. The model string is read, bucketed to a brand, and dropped — it is never stored.',
+              '平台来自本来就在读的那个粗粒度 user-agent(此前用它区分手机和电脑),没有新增追踪。手机品牌是尽力而为,而且明确地不完整:Chrome 已把机型从 user-agent 里抹掉,只有安卓上的 Chromium 会报。iPhone 一定有;安卓上的 Firefox 一定没有。机型字符串读完即归类为品牌丢弃,从不存储。',
+            )}
+          >
+            {devices ? (
+              <>
+                <div className="mb-4">
+                  <p className="mb-1 text-[11px] font-bold uppercase tracking-wide text-slate-400">{T('Platform', '平台')}</p>
+                  <Bars
+                    rows={devices.by_os}
+                    total={devices.by_os.reduce((a, r) => a + r.n, 0)}
+                    label={(k) => ({ ios: 'iPhone / iPad', android: 'Android', macos: 'Mac', windows: 'Windows', linux: 'Linux' } as Record<string, string>)[String(k)] ?? String(k)}
+                    empty={T('Collecting — starts with the next visits.', '收集中 —— 从下一批访问开始。')}
+                  />
+                </div>
+                <div>
+                  <p className="mb-1 text-[11px] font-bold uppercase tracking-wide text-slate-400">{T('Handset maker', '手机品牌')}</p>
+                  <Bars
+                    rows={devices.by_brand}
+                    total={devices.by_brand.reduce((a, r) => a + r.n, 0)}
+                    empty={T('Collecting — starts with the next visits.', '收集中 —— 从下一批访问开始。')}
+                  />
+                  <p className="mt-2 text-xs text-slate-500">
+                    {zh
+                      ? `${devices.coverage.with_brand} / ${devices.coverage.total} 次访问报出了品牌。没报的不是丢失,是那些浏览器不肯说 —— 按比例读这张图会高估会说话的那些品牌。`
+                      : `${devices.coverage.with_brand} of ${devices.coverage.total} visits named a maker. The rest are not missing data — those browsers decline to say, so reading this as a market share overstates the brands that do answer.`}
+                  </p>
+                </div>
               </>
             ) : <p className="text-sm text-slate-400">{noData}</p>}
           </Card>

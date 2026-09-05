@@ -119,6 +119,28 @@ export async function GET(request: Request, { params }: { params: Promise<{ name
         vacation: await q("select vacation_band k, count(*) n from events where vacation_band is not null group by k order by n desc"),
       }, noStore);
     }
+    /**
+     * What people hold in their hand. Platform is complete; brand is not, and
+     * the gap is reported rather than hidden: Chrome removed the device model
+     * from the user-agent, so only Chromium on Android will say who made the
+     * phone. Every iPhone answers, every Firefox-on-Android does not.
+     */
+    case 'devices': {
+      const q = async (sql: string) => (await d.prepare(sql).all()).results;
+      const one = async <T,>(sql: string) => (await d.prepare(sql).first<T>())!;
+      const cov = await one<{ total: number; with_os: number; with_brand: number }>(
+        `select count(*) total, sum(os_family is not null) with_os, sum(device_brand is not null) with_brand
+         from events where (excluded is null or excluded = 0)`);
+      return NextResponse.json({
+        coverage: cov,
+        by_os: await q("select os_family k, count(*) n from events where os_family is not null and (excluded is null or excluded = 0) group by k order by n desc"),
+        by_brand: await q("select device_brand k, count(*) n from events where device_brand is not null and (excluded is null or excluded = 0) group by k order by n desc"),
+        // The point of collecting it: does the phone in someone's hand track
+        // with what they earn? Only meaningful once each cell has real volume.
+        income_by_os: await q(`select os_family k, income_bracket b, count(*) n from events
+           where os_family is not null and (excluded is null or excluded = 0) group by k, b order by k, b`),
+      }, noStore);
+    }
     default: return NextResponse.json({ error: 'unknown' }, { status: 404 });
   }
 }

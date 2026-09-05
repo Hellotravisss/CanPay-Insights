@@ -325,6 +325,74 @@ function detectDevice(): 'mobile' | 'tablet' | 'desktop' {
   }
 }
 
+/**
+ * Platform family, from the same user-agent string detectDevice already reads.
+ *
+ * This is the one that answers a real product question: the iOS app exists and
+ * an Android app does not, so "how many of the people who come here could even
+ * install it" is worth knowing. Six buckets, no version, no model — it adds
+ * nothing to a fingerprint that detectDevice + detectBrowser did not already.
+ */
+function detectOsFamily(): string | null {
+  try {
+    const ua = navigator.userAgent;
+    if (/iPhone|iPad|iPod/i.test(ua)) return 'ios';
+    if (/Android/i.test(ua)) return 'android';
+    if (/Macintosh|Mac OS X/i.test(ua)) return 'macos';
+    if (/Windows NT/i.test(ua)) return 'windows';
+    if (/Linux/i.test(ua)) return 'linux';
+    return 'other';
+  } catch {
+    return null;
+  }
+}
+
+/**
+ * Handset maker, as a bucket — Apple, Samsung, Google, Xiaomi and so on.
+ *
+ * COVERAGE IS DELIBERATELY PARTIAL, and the gap is not a bug to be fixed by
+ * trying harder. Any iPhone is Apple and says so in its user-agent. Android is
+ * the hard half: Chrome froze the device model out of the user-agent (every
+ * phone now reports the literal model "K"), so the only way to read it is the
+ * Client Hints high-entropy API, which exists on Chromium and nowhere else.
+ * Firefox and Samsung Internet users on Android therefore come back null, and
+ * that is the honest answer rather than a guess.
+ *
+ * What is stored is the BRAND BUCKET ONLY. The model string this is derived
+ * from — "SM-S911B", "Pixel 8 Pro" — is read, mapped, and dropped. It never
+ * leaves the browser, because a model plus a city plus an income band starts
+ * to describe a person.
+ */
+const BRAND_BY_MODEL: [RegExp, string][] = [
+  [/^SM-|^GT-|^SGH-/i, 'samsung'],
+  [/^Pixel/i, 'google'],
+  [/^(Redmi|POCO|M20|M21|M22|2\d{5}|Mi )/i, 'xiaomi'],
+  [/^CPH|^PB|^PC[A-Z]/i, 'oppo'],
+  [/^V2\d{3}|^vivo/i, 'vivo'],
+  [/^(moto|XT\d{4})/i, 'motorola'],
+  [/^(ONEPLUS|[A-Z]{2}2\d{3})/i, 'oneplus'],
+  [/^(Nokia|TA-\d+)/i, 'nokia'],
+  [/^(LM-|LG-)/i, 'lg'],
+  [/^(ELS|ANA|VOG|LYA|MAR|JNY|NOH|TAS)-/i, 'huawei'],
+];
+
+async function detectBrand(): Promise<string | null> {
+  try {
+    if (/iPhone|iPad|iPod/i.test(navigator.userAgent)) return 'apple';
+    const uaData = (navigator as Navigator & {
+      userAgentData?: { getHighEntropyValues?: (h: string[]) => Promise<{ model?: string }> };
+    }).userAgentData;
+    if (!uaData?.getHighEntropyValues) return null;
+    const { model } = await uaData.getHighEntropyValues(['model']);
+    // "K" is Chrome's frozen placeholder — a phone that refused to say.
+    if (!model || model === 'K') return null;
+    for (const [re, brand] of BRAND_BY_MODEL) if (re.test(model)) return brand;
+    return 'other';
+  } catch {
+    return null;
+  }
+}
+
 // Browser family only — never a version, never the raw user-agent string.
 // Family alone is 5-6 buckets and adds nothing to a fingerprint, but it is a
 // real product signal: an audience skewing Safari is an iPhone audience, and
@@ -501,7 +569,14 @@ export function recordCalcEvent(e: {
         referrer_path: getReferrerPath(),
         local_hour: new Date().getHours(),
         local_dow: new Date().getDay(),
+        os_family: detectOsFamily(),
     };
+
+    // Awaited before the send because the brand hint is a promise on Chromium.
+    // A slow or absent answer must never hold up the event: null just means
+    // "this browser would not say", which is a legitimate value here.
+    try { (row as Record<string, unknown>).device_brand = await detectBrand(); }
+    catch { /* leave it unset */ }
     // Our own route on Cloudflare attaches coarse geo server-side from
     // request.cf and writes to D1; the browser never handles a location.
     // keepalive lets the request survive a navigation right after a tap.
