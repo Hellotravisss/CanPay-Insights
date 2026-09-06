@@ -7,17 +7,11 @@ const inter = Inter({ subsets: ['latin'] });
 
 export const metadata: Metadata = {
   metadataBase: new URL('https://canpayinsights.ca'),
+  // No hreflang here: metadata inherits, and a language set declared on the
+  // layout would be claimed by /privacy and every other page without its own.
+  // Pages that have real translations declare them themselves.
   alternates: {
     canonical: 'https://canpayinsights.ca',
-    // Only the variants that exist as real URLs of THIS page. The UI offers ten
-    // languages, but seven of them switch client-side on the same URL, and /fr
-    // redirects to a Quebec calculator rather than a French home page — claiming
-    // those here would point engines at pages that are not translations.
-    languages: {
-      en: 'https://canpayinsights.ca',
-      zh: 'https://canpayinsights.ca/zh',
-      'x-default': 'https://canpayinsights.ca',
-    },
   },
   title: {
     default: 'Canadian Take-Home Pay & Paycheck Calculator 2026 | CanPay Insights',

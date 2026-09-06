@@ -87,6 +87,13 @@ const coreLandingPages: LandingPage[] = [
         hrefLang: 'fr-CA',
         label: 'Français - calculateur Québec',
       },
+      // /zh already names this page as its English version; hreflang only
+      // counts when both sides say so.
+      {
+        href: '/zh',
+        hrefLang: 'zh-Hans',
+        label: '中文 - 加拿大税后工资计算器',
+      },
     ],
     relatedSalaryLinks: [
       { href: '/65000-after-tax-ontario', label: '$65,000 after tax Ontario' },
