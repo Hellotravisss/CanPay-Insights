@@ -9,6 +9,15 @@ export const metadata: Metadata = {
   metadataBase: new URL('https://canpayinsights.ca'),
   alternates: {
     canonical: 'https://canpayinsights.ca',
+    // Only the variants that exist as real URLs of THIS page. The UI offers ten
+    // languages, but seven of them switch client-side on the same URL, and /fr
+    // redirects to a Quebec calculator rather than a French home page — claiming
+    // those here would point engines at pages that are not translations.
+    languages: {
+      en: 'https://canpayinsights.ca',
+      zh: 'https://canpayinsights.ca/zh',
+      'x-default': 'https://canpayinsights.ca',
+    },
   },
   title: {
     default: 'Canadian Take-Home Pay & Paycheck Calculator 2026 | CanPay Insights',
@@ -70,11 +79,15 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
               '@type': 'Organization',
               '@id': 'https://canpayinsights.ca/#org',
               name: 'CanPay Insights',
-              url: 'https://canpayinsights.ca/',
+              url: 'https://canpayinsights.ca',
               logo: 'https://canpayinsights.ca/apple-touch-icon.png',
               email: 'info@canpayinsights.ca',
               sameAs: [
+                // Wikidata first: it is the one identifier that tells an engine
+                // this is not CanPay Software Inc. or the CanPay debit app.
+                'https://www.wikidata.org/wiki/Q140390122',
                 'https://apps.apple.com/app/canpayinsights/id6759822038',
+                'https://www.producthunt.com/products/canpay-insights',
                 'https://github.com/Hellotravisss/canpay-open-data',
               ],
               description:
@@ -86,7 +99,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
                 '@type': 'Person',
                 name: 'Travis Zhang',
                 alternateName: 'Qi Zhang',
-                sameAs: ['https://www.linkedin.com/in/travis-z'],
+                sameAs: ['https://www.wikidata.org/wiki/Q140366118', 'https://www.linkedin.com/in/travis-z'],
               },
               areaServed: 'CA',
               audience: {

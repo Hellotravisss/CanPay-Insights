@@ -22,7 +22,7 @@ const homeFaqJsonLd = {
     {
       '@type': 'Question',
       name: 'How much tax do I pay in Canada?',
-      acceptedAnswer: { '@type': 'Answer', text: 'In Canada, income tax is calculated at both federal and provincial levels. On a $65,000 salary in Ontario in 2026, you keep about $50,880 in take-home pay (roughly $4,240 a month) after federal tax, provincial tax, CPP, and EI. Use our free calculator to get exact numbers for your province and income.' },
+      acceptedAnswer: { '@type': 'Answer', text: 'In Canada, income tax is calculated at both federal and provincial levels. On a $65,000 salary in Ontario in 2026, you keep about $50,280 in take-home pay (roughly $4,190 a month) after federal tax, provincial tax, CPP, and EI. Use our free calculator to get exact numbers for your province and income.' },
     },
     {
       '@type': 'Question',
@@ -149,8 +149,8 @@ export default function HomePage() {
               </thead>
               <tbody className="text-slate-600">
                 <tr className="border-b border-slate-200"><td className="py-2 pr-4 font-medium text-slate-800">British Columbia</td><td className="py-2 pr-4">$61,038</td><td className="py-2 pr-4">$5,086</td><td className="py-2">$18,962</td></tr>
-                <tr className="border-b border-slate-200"><td className="py-2 pr-4 font-medium text-slate-800">Ontario</td><td className="py-2 pr-4">$60,744</td><td className="py-2 pr-4">$5,062</td><td className="py-2">$19,256</td></tr>
                 <tr className="border-b border-slate-200"><td className="py-2 pr-4 font-medium text-slate-800">Alberta</td><td className="py-2 pr-4">$60,409</td><td className="py-2 pr-4">$5,034</td><td className="py-2">$19,591</td></tr>
+                <tr className="border-b border-slate-200"><td className="py-2 pr-4 font-medium text-slate-800">Ontario</td><td className="py-2 pr-4">$59,994</td><td className="py-2 pr-4">$5,000</td><td className="py-2">$20,006</td></tr>
                 <tr className="border-b border-slate-200"><td className="py-2 pr-4 font-medium text-slate-800">Manitoba</td><td className="py-2 pr-4">$57,940</td><td className="py-2 pr-4">$4,828</td><td className="py-2">$22,060</td></tr>
                 <tr className="border-b border-slate-200"><td className="py-2 pr-4 font-medium text-slate-800">Quebec</td><td className="py-2 pr-4">$57,077</td><td className="py-2 pr-4">$4,756</td><td className="py-2">$22,923</td></tr>
                 <tr><td className="py-2 pr-4 font-medium text-slate-800">Nova Scotia</td><td className="py-2 pr-4">$56,095</td><td className="py-2 pr-4">$4,675</td><td className="py-2">$23,905</td></tr>
@@ -188,9 +188,9 @@ export default function HomePage() {
                 </tr>
               </thead>
               <tbody className="text-slate-600">
-                <tr className="border-b border-slate-200"><td className="py-2 pr-4 font-medium text-slate-800">$50,000</td><td className="py-2 pr-4">$40,543</td><td className="py-2 pr-4">$40,535</td><td className="py-2 pr-4">$40,331</td><td className="py-2">$38,857</td></tr>
-                <tr className="border-b border-slate-200"><td className="py-2 pr-4 font-medium text-slate-800">$75,000</td><td className="py-2 pr-4">$57,609</td><td className="py-2 pr-4">$57,389</td><td className="py-2 pr-4">$57,090</td><td className="py-2">$54,053</td></tr>
-                <tr><td className="py-2 pr-4 font-medium text-slate-800">$100,000</td><td className="py-2 pr-4">$75,236</td><td className="py-2 pr-4">$74,617</td><td className="py-2 pr-4">$74,153</td><td className="py-2">$69,619</td></tr>
+                <tr className="border-b border-slate-200"><td className="py-2 pr-4 font-medium text-slate-800">$50,000</td><td className="py-2 pr-4">$40,543</td><td className="py-2 pr-4">$39,935</td><td className="py-2 pr-4">$40,331</td><td className="py-2">$38,857</td></tr>
+                <tr className="border-b border-slate-200"><td className="py-2 pr-4 font-medium text-slate-800">$75,000</td><td className="py-2 pr-4">$57,609</td><td className="py-2 pr-4">$56,639</td><td className="py-2 pr-4">$57,090</td><td className="py-2">$54,053</td></tr>
+                <tr><td className="py-2 pr-4 font-medium text-slate-800">$100,000</td><td className="py-2 pr-4">$75,236</td><td className="py-2 pr-4">$73,867</td><td className="py-2 pr-4">$74,153</td><td className="py-2">$69,619</td></tr>
               </tbody>
             </table>
           </div>

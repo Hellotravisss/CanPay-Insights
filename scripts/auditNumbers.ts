@@ -211,7 +211,7 @@ const PERCENT = /\b([0-9]{1,3}(?:\.[0-9]{1,3})?)\s?%/g;
 
 /** Gains and gaps are computed between two scenarios, not read off a rate table. */
 const DESCRIBES_A_CHANGE =
-  /\b(gains?|more take-home|increase[sd]?|difference|extra|raise[sd]?|cut|reduced|lowered|dropped|rose|down from|up from|baisse|hausse|passe de)\b|降至|降到|升至|升到|由.{1,8}降|由.{1,8}升/i;
+  /\b(gains?|more take-home|increase[sd]?|difference|extra|raise[sd]?|cut|reduced|lowered|dropped|rose|down from|up from|baisse|hausse|passe de|shortfall|(?:more|less) (?:for the year|a year|a month|per|a paycheque))\b|降至|降到|升至|升到|由.{1,8}降|由.{1,8}升/i;
 
 /** Large figures are salaries being discussed unless the sentence calls them a limit. */
 const NAMES_A_LIMIT =
@@ -224,6 +224,18 @@ const NAMES_A_LIMIT =
  * effective rate at the salary named in the same sentence.
  */
 const DESCRIBES_A_COMPUTED_RATE = /\b(effective|average|marginal|combined|overall|take-home|keeps?)\b/i;
+
+/**
+ * The gap that let a stale take-home figure sit on a money page for three
+ * days: "$75,000 … takes home about $57,389 … after $8,516 federal tax" names
+ * no rate, maximum or contribution, so STATES_A_RULE never fired and the
+ * sentence was never judged — and even if it had been, every figure over
+ * $15,000 was waved through as "the income being discussed". A sentence that
+ * says what a salary LEAVES is quoting the engine and must be held to it.
+ */
+/** "on $80,000", "$50,000 salary", "earning $65,000": the figure is the income, not a result. */
+const NAMED_AS_INCOME = /\b(on|at|earning|earns?|of|what|make|making|your)\s+(an?\s+)?\$[\d,]+|\$[\d,]+\s*(salary|a year|per year|gross|income|means)/i;
+const QUOTES_TAKE_HOME = /\b(take-home|takes? home|keeps?|net pay|left over|in your pocket)\b/i;
 
 const num = (s: string) => parseFloat(s.replace(/,/g, ''));
 
@@ -316,8 +328,18 @@ function splitSentences(text: string): string[] {
     .filter(Boolean);
 }
 
-function auditText(slug: string, field: string, rawText: string, out: Finding[], stats: { checked: number }) {
+function auditText(
+  slug: string,
+  field: string,
+  rawText: string,
+  out: Finding[],
+  stats: { checked: number },
+  contextText: string = rawText,
+) {
   const text = normalizeFrenchNumbers(rawText);
+  // The salary an excerpt quotes a result for is usually stated in the body
+  // ("$19.75/hr"); derivation reads the whole article, judging stays per field.
+  const context = normalizeFrenchNumbers(contextText);
   const all = splitSentences(text);
 
   // An article works one example salary for pages at a time ("David earns
@@ -325,21 +347,32 @@ function auditText(slug: string, field: string, rawText: string, out: Finding[],
   // detection to the whole field; the figures themselves are still judged
   // sentence by sentence, which is what keeps unrelated numbers apart.
   const derivedMoney: number[] = [];
+  const salaries: number[] = [];
   const derivedRates: number[] = [];
-  for (const m of [...text.matchAll(MONEY)]) {
+  for (const m of [...context.matchAll(MONEY)]) {
     const v = num(m[1]);
     let salary = v >= 15000 && v <= 500000 ? v : 0;
     // "$17.60 minimum wage" or "$33.00/hr" is a salary too, stated hourly.
     if (!salary && v >= 10 && v <= 150) {
-      const after = text.slice(m.index + m[0].length, m.index + m[0].length + 20);
+      const after = context.slice(m.index + m[0].length, m.index + m[0].length + 20);
       if (/^\s*(an hour|per hour|\/\s?hr|\/\s?hour|hourly|minimum wage)/i.test(after)) salary = v * 2080;
     }
     if (salary) {
+      salaries.push(salary);
       const e = engineValuesFor(salary);
       derivedMoney.push(...e.money);
       derivedRates.push(...e.rates);
     }
   }
+  // An article that works two round incomes ("$140,000 salary + $60,000 RSUs
+  // = $200,000") quotes what the second one adds: net(200k) − net(140k), for
+  // each province. Round incomes only, so a stale printed result cannot pair.
+  const round = [...new Set(salaries.filter((v) => v % 1000 === 0))];
+  for (const a of round)
+    for (const b of round)
+      if (a < b)
+        for (const { slug: ps } of PROVINCE_SEO_CONFIGS)
+          derivedMoney.push(getSalaryFigures(b, ps).netAnnual - getSalaryFigures(a, ps).netAnnual);
 
   // A markdown table separates its words from its numbers: "Rate" and
   // "Maximum" live in the header row, the figures in the data rows below.
@@ -357,11 +390,21 @@ function auditText(slug: string, field: string, rawText: string, out: Finding[],
     const intro = top > 0 ? all[top - 1] : '';
     return [intro, top === i ? '' : all[top], line].filter(Boolean).join(' ');
   });
+  // The take-home test reads only the header and the row: a budget table
+  // that sits under "Monthly take-home: $3,361" is about rent, not tax.
+  const gateSelf = all.map((line, i) => {
+    if (!line.startsWith('|')) return line;
+    let top = i;
+    while (top > 0 && all[top - 1].startsWith('|')) top--;
+    return [top === i ? '' : all[top], line].filter(Boolean).join(' ');
+  });
 
   all.forEach((s, i) => {
     const g = gate[i];
     const topics = TOPICS.filter((t) => t.mentions.test(g) && (!t.requires || t.requires.test(g)));
-    if (!topics.length || !STATES_A_RULE.test(g)) return;
+    const quotesTakeHome = derivedMoney.length > 0 && QUOTES_TAKE_HOME.test(gateSelf[i]);
+    const statesARule = topics.length > 0 && STATES_A_RULE.test(g);
+    if (!quotesTakeHome && !statesARule) return;
     // Commission/bonus example tables stack one income on another and quote
     // the marginal outcome — arithmetic across two incomes at once, which the
     // per-salary engine derivation cannot reproduce. Documented blind spot.
@@ -374,6 +417,16 @@ function auditText(slug: string, field: string, rawText: string, out: Finding[],
     const acceptedRates = topics.flatMap((t) => t.rates);
     // Only a sentence that says it is reporting a computed rate may lean on one.
     if (DESCRIBES_A_COMPUTED_RATE.test(g)) acceptedRates.push(...derivedRates);
+    // A percentage that is the ratio of two dollar figures on the same line
+    // ("$37,979 of a $60,000 vest — 36.7% lost") is arithmetic on figures that
+    // are themselves judged, not a fresh claim about the tax system.
+    const lineMoney = [...g.matchAll(MONEY)].map((m) => num(m[1])).filter((v) => v > 0);
+    for (const a of lineMoney)
+      for (const b of lineMoney)
+        if (a !== b && a < b) {
+          acceptedRates.push((a / b) * 100, (1 - a / b) * 100);
+          acceptedAmounts.push(b - a);
+        }
 
     // A sentence dated to a different year — "in 2025", or "announced for
     // 2027" — is not making a claim about the engine's year, so it cannot be
@@ -399,19 +452,34 @@ function auditText(slug: string, field: string, rawText: string, out: Finding[],
         ) ||
         // In a wage table the hourly figures carry no per-hour marker of their
         // own — the header says it once for the whole column.
-        (m[0].startsWith('$') && num(m[1]) < 100 && /minimum wage|hourly|per hour|salaire minimum|时薪|最低工资/i.test(g)),
+        (m[0].startsWith('$') && num(m[1]) < 100 && /minimum wage|hourly|an hour|per hour|salaire minimum|时薪|最低工资/i.test(g)),
     }));
 
+    const dollars = figures.filter((f) => f.raw.startsWith('$')).map((f) => f.v);
+    const wages = figures.filter((f) => f.isWageInput && f.v < 150).map((f) => f.v * 2080);
+    const isGross = (v: number) =>
+      // "What is the take-home pay on $80,000?" names the income and nothing else.
+      (dollars.filter((d) => d >= 15000).length === 1 && NAMED_AS_INCOME.test(g)) ||
+      wages.some((w) => Math.abs(w - v) < 1) ||
+      engineValuesFor(v).money.some((m) => dollars.some((d) => d !== v && matchesAtPrintedPrecision(String(d), m)));
     for (const f of figures) {
       // A large figure is the income being discussed, not a claim about the tax
       // system — unless the sentence presents it as a limit. Judging every
       // example salary would bury the findings that matter.
       if (f.isWageInput) continue;
-      if (f.raw.startsWith('$') && f.v >= 15000 && !NAMES_A_LIMIT.test(g)) continue;
+      if (f.raw.startsWith('$') && f.v >= 15000) {
+        // In a take-home sentence the gross is still the input — the figure
+        // the engine turns into another figure on the same line. Anything
+        // else this large is a printed result, and is judged.
+        if (isGross(f.v)) continue;
+        if (!NAMES_A_LIMIT.test(g) && !quotesTakeHome) continue;
+      }
+      if (f.raw.endsWith('%') && !statesARule) continue;
       stats.checked++;
       const pool = f.raw.endsWith('%') ? acceptedRates : acceptedAmounts;
       if (pool.some((a) => matchesAtPrintedPrecision(f.printed, a))) continue;
       out.push({ slug, field, value: f.raw, sentence: s.slice(0, 160), historical });
+      if (process.env.AUDIT_VERBOSE) console.error(`  ${slug} ${field}: ${f.raw}  ← ${s.slice(0, 200)}`);
     }
   });
 }
@@ -554,14 +622,15 @@ const stats = { checked: 0 };
 const surfaceCount = auditSurfaces(findings, stats);
 
 for (const a of allArticles) {
-  auditText(a.slug, 'title', a.title, findings, stats);
-  auditText(a.slug, 'excerpt', a.excerpt, findings, stats);
-  auditText(a.slug, 'metaDescription', a.metaDescription || '', findings, stats);
-  auditText(a.slug, 'directAnswer', a.directAnswer || '', findings, stats);
+  const whole = [a.title, a.excerpt, a.metaDescription, a.directAnswer, ...(a.faq || []).map((f) => `${f.question}\n${f.answer}`), a.content].join('\n');
+  auditText(a.slug, 'title', a.title, findings, stats, whole);
+  auditText(a.slug, 'excerpt', a.excerpt, findings, stats, whole);
+  auditText(a.slug, 'metaDescription', a.metaDescription || '', findings, stats, whole);
+  auditText(a.slug, 'directAnswer', a.directAnswer || '', findings, stats, whole);
   // The question carries the salary the answer is about ("What is CPP on
   // $60,000?"), so it must be in scope or every FAQ answer looks unexplained.
-  (a.faq || []).forEach((f, i) => auditText(a.slug, `faq[${i}]`, `${f.question}\n${f.answer}`, findings, stats));
-  auditText(a.slug, 'content', a.content, findings, stats);
+  (a.faq || []).forEach((f, i) => auditText(a.slug, `faq[${i}]`, `${f.question}\n${f.answer}`, findings, stats, whole));
+  auditText(a.slug, 'content', a.content, findings, stats, whole);
 }
 
 const wrong = findings.filter((f) => !f.historical);

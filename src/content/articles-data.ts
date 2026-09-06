@@ -22,7 +22,7 @@ const article1: Article = {
   publishedAt: "2025-01-15",
   readTime: 12,
   imageUrl: "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=800&q=80",
-  directAnswer: "In Ontario for 2026, an average earner (e.g., $65,000) can expect an effective deduction rate of about 21.7%, resulting in a take-home pay of approximately $50,880 after federal and provincial taxes, CPP, and EI.",
+  directAnswer: "In Ontario for 2026, an average earner (e.g., $65,000) can expect an effective deduction rate of about 22.6%, resulting in a take-home pay of approximately $50,280 after federal and provincial taxes, CPP, and EI.",
   faq: [
     { question: "What are the Ontario provincial tax brackets for 2026?", answer: "Ontario has five provincial tax brackets in 2026, ranging from 5.05% on the first $53,891 to 13.16% on income over $220,000." },
     { question: "How much is the maximum CPP contribution in 2026?", answer: "The maximum CPP contribution for employees in 2026 is $4,230.45 for the first tier, plus an additional amount up to $416 for the CPP2 tier." },
@@ -139,10 +139,10 @@ Basic personal amount credits reduce the total tax by about $2,959.
 
 **Final numbers:**
 - Gross annual income: $65,000
-- Total tax paid: $9,401 (federal $6,557 + Ontario $2,844)
+- Total tax paid: $10,001 (federal $6,557 + Ontario $3,444, including the Ontario Health Premium)
 - CPP + EI: $4,719
-- **Net annual income: $50,880 (about $4,240/month)**
-- **Effective deduction rate: 21.7%**
+- **Net annual income: $50,280 (about $4,190/month)**
+- **Effective deduction rate: 22.6%**
 
 Sarah's reality: With $4,240 per month, she can afford a one-bedroom apartment outside downtown, occasional dining out, and even start building an emergency fund.
 
@@ -176,12 +176,12 @@ If you are considering a move, here is how $65,000 looks across Canada:
 
 | Province | Provincial Tax | Take-Home Annual Income | Difference from Ontario |
 |----------|---------------|------------------------|------------------------|
-| **Ontario** | $2,844 | $50,880 | Baseline |
-| **Alberta** | $3,077 | $50,647 | **-$233** |
-| **British Columbia** | $2,768 | $50,956 | **+$76** |
-| **Quebec** | $6,319 | $48,207 | **-$2,673** |
+| **Ontario** | $3,444 | $50,280 | Baseline |
+| **Alberta** | $3,077 | $50,647 | **+$367** |
+| **British Columbia** | $2,768 | $50,956 | **+$676** |
+| **Quebec** | $6,319 | $48,207 | **-$2,073** |
 
-At $65,000 the gap between Ontario, Alberta, and BC is small — within about $300. Quebec's higher provincial taxes fund more social services but leave you with roughly $2,700 less in your pocket.
+At $65,000 the gap between Ontario, Alberta, and BC is small — within about $700. Quebec's higher provincial taxes fund more social services but leave you with roughly $2,100 less in your pocket.
 
 Want to compare provinces with your specific salary? Try our [Province Comparison Tool](/compare-provinces) to see exact take-home pay differences.
 
@@ -934,22 +934,22 @@ const article5: Article = {
   title: "$50,000 Salary After Tax: Real Take-Home Pay Across Canada",
   subtitle: "See exactly what $50,000 means in your pocket in every province",
   excerpt: "A $50,000 salary sounds decent, but taxes vary dramatically by province. We calculate your exact take-home pay in Ontario, BC, Alberta, and every other province with real budgets.",
-  metaTitle: "$50,000 Salary After Tax 2025 - Provincial Comparison",
+  metaTitle: "$50,000 Salary After Tax 2026 - Provincial Comparison",
   metaDescription: "Calculate $50,000 salary after tax in every Canadian province. See exact take-home pay and monthly budgets.",
   keywords: ["50000 after tax", "50000 salary take home", "50000 income tax canada", "50k after tax ontario"],
   category: "tax",
-  tags: ["$50K", "Salary Analysis", "Provincial Comparison", "2025"],
+  tags: ["$50K", "Salary Analysis", "Provincial Comparison", "2026"],
   province: "Federal",
   publishedAt: "2025-01-19",
   readTime: 9,
   imageUrl: "https://images.unsplash.com/photo-1554224155-6726b3ff858f?w=800&q=80",
-  directAnswer: "A $50,000 salary in Canada for 2026 yields a take-home pay ranging from roughly $38,900 to $40,500 depending on the province, with British Columbia and Ontario typically offering the highest net pay.",
+  directAnswer: "A $50,000 salary in Canada in 2026 leaves between about $38,021 (Nova Scotia) and $41,153 (Nunavut) after federal tax, provincial tax, CPP and EI. Among the provinces, British Columbia keeps the most at $40,543; Ontario keeps $39,935 and Quebec $38,857.",
   faq: [
-    { question: "Which province has the lowest tax on a $50,000 salary?", answer: "Alberta generally offers the highest take-home pay for this bracket due to its higher basic personal amount and favorable provincial tax structure." },
-    { question: "How much is the take-home pay for $50k in Ontario?", answer: "In Ontario, a $50,000 salary nets approximately $39,200 after federal tax, provincial tax, CPP, and EI deductions." },
-    { question: "What is the effective tax rate on a $50,000 salary?", answer: "The effective tax rate (total tax divided by gross income) for $50k usually ranges from 19% to 23% depending on your province of residence." },
+    { question: "Which province has the lowest tax on a $50,000 salary?", answer: "Among the provinces, British Columbia keeps the most of a $50,000 salary in 2026 at about $40,543, with Alberta close behind at $40,331. Nunavut leads all jurisdictions at $41,153." },
+    { question: "How much is the take-home pay for $50k in Ontario?", answer: "In Ontario, a $50,000 salary nets approximately $39,935 in 2026 after federal tax, Ontario tax and health premium, CPP, and EI deductions." },
+    { question: "What is the effective tax rate on a $50,000 salary?", answer: "The effective tax rate (total tax divided by gross income) for $50k ranges from about 18% to 24% of gross in 2026 depending on your province of residence, once CPP and EI are counted." },
     { question: "Does $50,000 qualify for the GST/HST credit?", answer: "A single person earning $50,000 may be above the income threshold for full GST/HST credits, though eligibility depends on your specific family situation." },
-    { question: "How does Quebec's tax differ for a $50k salary?", answer: "Quebec has its own provincial tax system with higher rates, which often results in the lowest net take-home pay for $50k earners compared to other provinces." }
+    { question: "How does Quebec's tax differ for a $50k salary?", answer: "Quebec has its own provincial tax system with higher rates, so a $50,000 earner keeps about $38,857 in 2026 — the second-lowest after Nova Scotia, and roughly $1,700 less than in BC." }
   ],
   content: `
 ## $50,000 Salary After Tax: Real Take-Home Pay Across Canada
@@ -960,66 +960,68 @@ The answer depends heavily on where you live. Let's break down exactly what $50,
 
 ### The National Picture: $50,000 Across Canada
 
-Here's what $50,000 looks like after all deductions in every jurisdiction:
+Here's what $50,000 looks like after all deductions in every jurisdiction (2026 rates):
 
-| Province/Territory | Provincial Tax | Federal Tax | CPP | EI | Total Deductions | Annual Take-Home | Monthly Take-Home |
+| Province/Territory | Provincial Tax | Federal Tax | CPP/QPP | EI | Total Deductions | Annual Take-Home | Monthly Take-Home |
 |-------------------|----------------|-------------|-----|-----|------------------|------------------|-------------------|
-| **Alberta** | $2,000 | $5,250 | $2,766 | $820 | $10,836 | **$39,164** | **$3,264** |
-| **British Columbia** | $2,200 | $5,250 | $2,766 | $820 | $11,036 | **$38,964** | **$3,247** |
-| **Saskatchewan** | $2,400 | $5,250 | $2,766 | $820 | $11,236 | **$38,764** | **$3,230** |
-| **Manitoba** | $2,600 | $5,250 | $2,766 | $820 | $11,436 | **$38,564** | **$3,214** |
-| **Ontario** | $2,800 | $5,250 | $2,766 | $820 | $11,636 | **$38,364** | **$3,197** |
-| **Quebec** | $3,200 | $5,250 | $2,766 | $820 | $12,036 | **$37,964** | **$3,164** |
-| **New Brunswick** | $2,700 | $5,250 | $2,766 | $820 | $11,536 | **$38,464** | **$3,205** |
-| **Nova Scotia** | $2,900 | $5,250 | $2,766 | $820 | $11,736 | **$38,264** | **$3,189** |
-| **PEI** | $2,750 | $5,250 | $2,766 | $820 | $11,586 | **$38,414** | **$3,201** |
-| **Newfoundland** | $2,850 | $5,250 | $2,766 | $820 | $11,686 | **$38,314** | **$3,193** |
-| **Northwest Territories** | $1,800 | $5,250 | $2,766 | $820 | $10,636 | **$39,364** | **$3,280** |
-| **Nunavut** | $1,600 | $5,250 | $2,766 | $820 | $10,436 | **$39,564** | **$3,297** |
-| **Yukon** | $1,950 | $5,250 | $2,766 | $820 | $10,786 | **$39,214** | **$3,268** |
+| **Alberta** | $1,892 | $4,195 | $2,767 | $815 | $9,669 | **$40,331** | **$3,361** |
+| **British Columbia** | $1,680 | $4,195 | $2,767 | $815 | $9,457 | **$40,543** | **$3,379** |
+| **Saskatchewan** | $2,734 | $4,195 | $2,767 | $815 | $10,511 | **$39,489** | **$3,291** |
+| **Manitoba** | $3,367 | $4,195 | $2,767 | $815 | $11,144 | **$38,856** | **$3,238** |
+| **Ontario** | $2,288 | $4,195 | $2,767 | $815 | $10,065 | **$39,935** | **$3,328** |
+| **Quebec** | $3,846 | $3,503 | $3,145 | $650 | $11,143 | **$38,857** | **$3,238** |
+| **New Brunswick** | $3,079 | $4,195 | $2,767 | $815 | $10,856 | **$39,144** | **$3,262** |
+| **Nova Scotia** | $4,202 | $4,195 | $2,767 | $815 | $11,979 | **$38,021** | **$3,168** |
+| **PEI** | $3,623 | $4,195 | $2,767 | $815 | $11,400 | **$38,600** | **$3,217** |
+| **Newfoundland** | $3,208 | $4,195 | $2,767 | $815 | $10,985 | **$39,015** | **$3,251** |
+| **Northwest Territories** | $1,665 | $4,195 | $2,767 | $815 | $9,442 | **$40,558** | **$3,380** |
+| **Nunavut** | $1,070 | $4,195 | $2,767 | $815 | $8,847 | **$41,153** | **$3,429** |
+| **Yukon** | $1,918 | $4,195 | $2,767 | $815 | $9,695 | **$40,305** | **$3,359** |
 
-**Key Finding:** The difference between the lowest-tax jurisdiction (Nunavut) and highest (Quebec) is **$1,600 per year** or about **$133 per month**.
+*2026 payroll deductions for a single employee with no extra credits, from the CanPay Insights rules engine. Ontario includes the Ontario Health Premium; Quebec shows QPP and the reduced federal tax after the Quebec abatement.*
+
+**Key Finding:** The difference between the lowest-tax jurisdiction (Nunavut) and the highest (Nova Scotia) is **$3,132 per year** or about **$261 per month**.
 
 ### Provincial Deep Dive
 
 **Alberta: The Tax Winner**
 
-With a flat 10% tax rate, Alberta keeps more money in your pocket:
-- Annual take-home: $39,164
-- Monthly: $3,264
-- Effective tax rate: 21.7%
+An 8% bottom bracket and a high basic personal amount keep more money in your pocket:
+- Annual take-home: $40,331
+- Monthly: $3,361
+- Total deductions: 19.3% of gross
 
-Reality check: In Calgary, $3,264/month allows a one-bedroom apartment ($1,400-1,600) with room for savings.
+Reality check: In Calgary, $3,361/month allows a one-bedroom apartment ($1,400-1,600) with room for savings.
 
-**Quebec: Highest Taxes, Most Services**
+**Quebec: High Taxes, Most Services**
 
 Quebec's higher taxes fund more social programs:
-- Annual take-home: $37,964
-- Monthly: $3,164
-- Effective tax rate: 24.1%
+- Annual take-home: $38,857
+- Monthly: $3,238
+- Total deductions: 22.3% of gross
 - Plus: $7/day childcare (vs $60+ elsewhere), heavily subsidized education
 
 **Ontario: The Middle Ground**
 
-- Annual take-home: $38,364
-- Monthly: $3,197
-- Effective tax rate: 23.3%
+- Annual take-home: $39,935
+- Monthly: $3,328
+- Total deductions: 20.1% of gross
 
 Toronto is expensive, but smaller Ontario cities offer good value.
 
 **BC: Moderate Taxes, High Costs**
 
-- Annual take-home: $38,964
-- Monthly: $3,247
+- Annual take-home: $40,543
+- Monthly: $3,379
 - Vancouver rent will consume most of this
 
-### What $3,200/Month Actually Buys
+### What $3,300/Month Actually Buys
 
 Let's look at realistic budgets for someone earning $50,000 in different cities.
 
 **Scenario 1: Calgary, Alberta**
 
-Monthly take-home: $3,264
+Monthly take-home: $3,361
 
 | Expense | Cost | Notes |
 |---------|------|-------|
@@ -1031,13 +1033,13 @@ Monthly take-home: $3,264
 | Entertainment/Dining | $300 | Stampede, restaurants |
 | Misc/Clothing | $200 | Seasonal needs |
 | **Total Expenses** | **$2,675** | |
-| **Remaining for Savings** | **$589** | 18% savings rate! |
+| **Remaining for Savings** | **$686** | 20% savings rate! |
 
-Rebecca could afford a decent one-bedroom, enjoy Calgary's social scene, and still save nearly $600/month.
+Rebecca could afford a decent one-bedroom, enjoy Calgary's social scene, and still save nearly $700/month.
 
 **Scenario 2: Toronto, Ontario**
 
-Monthly take-home: $3,197
+Monthly take-home: $3,328
 
 | Expense | Cost | Notes |
 |---------|------|-------|
@@ -1049,13 +1051,13 @@ Monthly take-home: $3,197
 | Entertainment/Dining | $250 | Picking cheaper options |
 | Misc/Clothing | $150 | |
 | **Total Expenses** | **$3,291** | |
-| **Remaining for Savings** | **-$94** | Deficit! |
+| **Remaining for Savings** | **$37** | Nothing to spare |
 
 Toronto requires compromise. Rebecca would need a roommate, smaller apartment, or longer commute.
 
 **Scenario 3: Montreal, Quebec**
 
-Monthly take-home: $3,164
+Monthly take-home: $3,238
 
 | Expense | Cost | Notes |
 |---------|------|-------|
@@ -1067,7 +1069,7 @@ Monthly take-home: $3,164
 | Entertainment/Dining | $300 | Vibrant food scene |
 | Misc/Clothing | $200 | |
 | **Total Expenses** | **$2,524** | |
-| **Remaining for Savings** | **$640** | 20% savings rate! |
+| **Remaining for Savings** | **$714** | 22% savings rate! |
 
 Despite lower take-home pay, Montreal's lower cost of living means Rebecca saves more than in Toronto.
 
@@ -1128,7 +1130,7 @@ Each $10,000 increase significantly improves your financial position because tax
 A: It's slightly below the national median (~$56,000). It's livable for singles in most cities but tight for families.
 
 **Q: How much tax do I pay on $50,000?**
-A: Between $10,400 and $12,000 total, depending on province. Effective tax rate: 21-24%.
+A: Between $8,847 (Nunavut) and $11,979 (Nova Scotia) in total deductions, depending on province — 17.7% to 24.0% of gross.
 
 **Q: Can I buy a house on $50,000?**
 A: Extremely difficult without a partner's income. Maximum mortgage ~$200,000 (requires ~$50,000 down payment). Consider smaller markets or condos.
@@ -1137,7 +1139,7 @@ A: Extremely difficult without a partner's income. Maximum mortgage ~$200,000 (r
 A: Aim for 10-15% ($5,000-7,500/year). Start with emergency fund, then RRSP/TFSA.
 
 **Q: What's the best province for $50,000 earners?**
-A: Alberta (low taxes), Quebec (if you use social services), or smaller Ontario cities (balanced).
+A: BC or Alberta (low deductions), Quebec (if you use social services), or smaller Ontario cities (balanced).
 
 ### Calculate Your Exact Situation
 

@@ -50,7 +50,7 @@ const coreLandingPages: LandingPage[] = [
     kicker: 'Annual salary to net pay',
     primaryKeyword: 'salary after tax Canada',
     intro:
-      'A $75,000 salary in Canada takes home about $57,389 a year in Ontario in 2026 (roughly $4,782 a month) — after about $8,516 federal tax, $3,726 provincial tax, $4,246 CPP/CPP2, and $1,123 EI. Your exact net pay depends on your province; choose yours and enter your gross salary below to compare annual, monthly, and bi-weekly take-home pay for 2026.',
+      'A $75,000 salary in Canada takes home about $56,639 a year in Ontario in 2026 (roughly $4,720 a month) — after about $8,516 federal tax, $4,476 provincial tax and Ontario Health Premium, $4,246 CPP/CPP2, and $1,123 EI. Your exact net pay depends on your province; choose yours and enter your gross salary below to compare annual, monthly, and bi-weekly take-home pay for 2026.',
     examples: ['$50,000 salary after tax in Canada', '$65,000 after tax in Ontario', '$85,000 take-home pay Canada'],
     sections: [
       {
@@ -139,7 +139,7 @@ const coreLandingPages: LandingPage[] = [
     kicker: 'Hourly pay to take-home pay',
     primaryKeyword: 'hourly wage calculator Canada',
     intro:
-      'At $25 an hour working full-time (about $52,000 a year), you take home roughly $42,031 a year in Ontario in 2026 — about $20.21 of every $25 hour after federal tax, provincial tax, CPP/CPP2, and EI. Enter your hourly wage, weekly schedule, unpaid breaks, overtime, and province below for an exact estimate — useful for part-time, hourly, student, restaurant, and retail workers.',
+      'At $25 an hour working full-time (about $52,000 a year), you take home roughly $41,431 a year in Ontario in 2026 — about $19.92 of every $25 hour after federal tax, provincial tax, CPP/CPP2, and EI. Enter your hourly wage, weekly schedule, unpaid breaks, overtime, and province below for an exact estimate — useful for part-time, hourly, student, restaurant, and retail workers.',
     examples: ['$20 per hour after tax in Ontario', '$25/hour take-home pay Canada', 'Bi-weekly hourly wage calculator'],
     sections: [
       {
@@ -180,7 +180,7 @@ const coreLandingPages: LandingPage[] = [
     kicker: 'Annual salary calculator',
     primaryKeyword: 'Canadian salary calculator',
     intro:
-      'A $60,000 salary in Canada takes home about $47,670 a year in Ontario in 2026 — roughly $3,972 a month — after federal tax, provincial tax, CPP/CPP2, and EI. CanPay Insights breaks any gross salary down into monthly and bi-weekly net pay by province; choose yours and enter your salary below.',
+      'A $60,000 salary in Canada takes home about $47,070 a year in Ontario in 2026 — roughly $3,922 a month — after federal tax, provincial tax, CPP/CPP2, and EI. CanPay Insights breaks any gross salary down into monthly and bi-weekly net pay by province; choose yours and enter your salary below.',
     examples: ['$70,000 salary calculator Canada', 'Bi-weekly salary after tax', 'Monthly net pay calculator Canada'],
     sections: [
       {
@@ -298,12 +298,12 @@ const coreLandingPages: LandingPage[] = [
     slug: 'ontario-paycheck-calculator',
     title: 'Ontario Paycheck Calculator 2026: See Your Exact Net Pay',
     description:
-      'On $80,000 in Ontario you keep about $60,744 in 2026. Free calculator for your exact take-home pay — federal tax, Ontario tax, CPP, EI, hourly or salary. No signup.',
+      'On $80,000 in Ontario you keep about $59,994 in 2026. Free calculator for your exact take-home pay — federal tax, Ontario tax, CPP, EI, hourly or salary. No signup.',
     h1: 'Ontario Paycheck Calculator',
     kicker: 'Ontario take-home pay',
     primaryKeyword: 'Ontario paycheck calculator',
     intro:
-      'On an $80,000 salary in Ontario in 2026, you take home about $60,744 a year — roughly $5,062 a month — after about $9,513 federal tax, $4,173 Ontario tax, $4,446 CPP/CPP2, and $1,123 EI. Enter your own wage or salary below to estimate your Ontario paycheque, useful for Toronto, Ottawa, Mississauga, Brampton, Hamilton, and across Ontario.',
+      'On an $80,000 salary in Ontario in 2026, you take home about $59,994 a year — roughly $5,000 a month — after about $9,513 federal tax, $4,923 Ontario tax and health premium, $4,446 CPP/CPP2, and $1,123 EI. Enter your own wage or salary below to estimate your Ontario paycheque, useful for Toronto, Ottawa, Mississauga, Brampton, Hamilton, and across Ontario.',
     examples: ['$65,000 after tax Ontario', '$25/hour after tax Ontario', 'Toronto take-home pay calculator'],
     sections: [
       {
@@ -336,7 +336,7 @@ const coreLandingPages: LandingPage[] = [
       {
         question: 'Is Ontario take-home pay lower than Alberta?',
         answer:
-          'At $80,000 in 2026 they are very close: Ontario keeps about $60,744 versus about $60,409 in Alberta — Ontario is actually slightly ahead at this income. The gap shifts with salary, so compare your own number with the province comparison tool.',
+          'At $80,000 in 2026 they are close: Alberta keeps about $60,409 versus about $59,994 in Ontario — Alberta is slightly ahead at this income once the Ontario Health Premium is counted. The gap shifts with salary, so compare your own number with the province comparison tool.',
       },
     ],
   },
@@ -524,7 +524,7 @@ const coreLandingPages: LandingPage[] = [
       {
         question: 'Is Manitoba take-home pay lower than Ontario?',
         answer:
-          'At $80,000 in 2026, Manitoba keeps about $57,940 versus about $60,744 in Ontario. The gap shifts with salary and with credits, so compare your own number with the province comparison tool.',
+          'At $80,000 in 2026, Manitoba keeps about $57,940 versus about $59,994 in Ontario. The gap shifts with salary and with credits, so compare your own number with the province comparison tool.',
       },
     ],
   },
@@ -570,7 +570,7 @@ const coreLandingPages: LandingPage[] = [
       {
         question: 'Is Saskatchewan take-home pay lower than Ontario?',
         answer:
-          'At $80,000 in 2026, Saskatchewan keeps about $58,733 versus about $60,744 in Ontario. The gap shifts with salary and with credits, so compare your own number with the province comparison tool.',
+          'At $80,000 in 2026, Saskatchewan keeps about $58,733 versus about $59,994 in Ontario. The gap shifts with salary and with credits, so compare your own number with the province comparison tool.',
       },
     ],
   },
@@ -616,7 +616,7 @@ const coreLandingPages: LandingPage[] = [
       {
         question: 'Is Nova Scotia take-home pay lower than Ontario?',
         answer:
-          'At $80,000 in 2026, Nova Scotia keeps about $56,095 versus about $60,744 in Ontario. The gap shifts with salary and with credits, so compare your own number with the province comparison tool.',
+          'At $80,000 in 2026, Nova Scotia keeps about $56,095 versus about $59,994 in Ontario. The gap shifts with salary and with credits, so compare your own number with the province comparison tool.',
       },
     ],
   },
@@ -662,7 +662,7 @@ const coreLandingPages: LandingPage[] = [
       {
         question: 'Is New Brunswick take-home pay lower than Ontario?',
         answer:
-          'At $80,000 in 2026, New Brunswick keeps about $57,933 versus about $60,744 in Ontario. The gap shifts with salary and with credits, so compare your own number with the province comparison tool.',
+          'At $80,000 in 2026, New Brunswick keeps about $57,933 versus about $59,994 in Ontario. The gap shifts with salary and with credits, so compare your own number with the province comparison tool.',
       },
     ],
   },
@@ -708,7 +708,7 @@ const coreLandingPages: LandingPage[] = [
       {
         question: 'Is Newfoundland and Labrador take-home pay lower than Ontario?',
         answer:
-          'At $80,000 in 2026, Newfoundland and Labrador keeps about $57,533 versus about $60,744 in Ontario. The gap shifts with salary and with credits, so compare your own number with the province comparison tool.',
+          'At $80,000 in 2026, Newfoundland and Labrador keeps about $57,533 versus about $59,994 in Ontario. The gap shifts with salary and with credits, so compare your own number with the province comparison tool.',
       },
     ],
   },
@@ -754,7 +754,7 @@ const coreLandingPages: LandingPage[] = [
       {
         question: 'Is Prince Edward Island take-home pay lower than Ontario?',
         answer:
-          'At $80,000 in 2026, Prince Edward Island keeps about $56,999 versus about $60,744 in Ontario. The gap shifts with salary and with credits, so compare your own number with the province comparison tool.',
+          'At $80,000 in 2026, Prince Edward Island keeps about $56,999 versus about $59,994 in Ontario. The gap shifts with salary and with credits, so compare your own number with the province comparison tool.',
       },
     ],
   },
@@ -800,7 +800,7 @@ const coreLandingPages: LandingPage[] = [
       {
         question: 'Is Yukon take-home pay lower than Ontario?',
         answer:
-          'At $80,000 in 2026, Yukon keeps about $60,648 versus about $60,744 in Ontario. The gap shifts with salary and with credits, so compare your own number with the province comparison tool.',
+          'At $80,000 in 2026, Yukon keeps about $60,648 versus about $59,994 in Ontario. The gap shifts with salary and with credits, so compare your own number with the province comparison tool.',
       },
     ],
   },
@@ -846,7 +846,7 @@ const coreLandingPages: LandingPage[] = [
       {
         question: 'Is Northwest Territories take-home pay lower than Ontario?',
         answer:
-          'At $80,000 in 2026, Northwest Territories keeps about $60,871 versus about $60,744 in Ontario. The gap shifts with salary and with credits, so compare your own number with the province comparison tool.',
+          'At $80,000 in 2026, Northwest Territories keeps about $60,871 versus about $59,994 in Ontario. The gap shifts with salary and with credits, so compare your own number with the province comparison tool.',
       },
     ],
   },
@@ -892,7 +892,7 @@ const coreLandingPages: LandingPage[] = [
       {
         question: 'Is Nunavut take-home pay lower than Ontario?',
         answer:
-          'At $80,000 in 2026, Nunavut keeps about $62,001 versus about $60,744 in Ontario. The gap shifts with salary and with credits, so compare your own number with the province comparison tool.',
+          'At $80,000 in 2026, Nunavut keeps about $62,001 versus about $59,994 in Ontario. The gap shifts with salary and with credits, so compare your own number with the province comparison tool.',
       },
     ],
   },
