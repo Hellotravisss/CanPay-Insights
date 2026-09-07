@@ -1830,4 +1830,140 @@ One thing worth being precise about: the income figure used for that test is you
 The $150 supplement, the five regulatory changes, and their September 1, 2026 effective date are confirmed by Employment and Social Development Canada's [Canada Disability Benefit program page](https://www.canada.ca/en/employment-social-development/programs/disability-benefit.html) and the [Regulations Amending the Canada Disability Benefit Regulations](https://gazette.gc.ca/rp-pr/p2/2026/2026-07-01/html/sor-dors123-eng.html) in the Canada Gazette, Part II. The $204.20 monthly maximum, income thresholds, and working-income exemptions for the 2026–27 benefit year are from Canada.ca's [Canada Disability Benefit amount page](https://www.canada.ca/en/services/benefits/disability/canada-disability-benefit/amount.html), corroborated by the [Canada Disability Benefit calculator](https://www.canadadisabilitybenefit.ca/calculations). This is general information, not financial, legal, or tax advice — confirm your own eligibility and amount with [Service Canada](https://www.canada.ca/en/services/benefits/disability/canada-disability-benefit.html).
 `,
   },
+  {
+    id: 'study-18',
+    slug: 'wage-growth-slowdown-august-2026',
+    title: 'Wage Growth Falls to 2.0% in August 2026 — Slowest Since 2017, and Low-Wage Workers Fell Furthest Behind',
+    subtitle:
+      "Statistics Canada's August Labour Force Survey shows the sharpest wage slowdown since 2017 and 42,000 lost jobs. We ran the numbers through the CanPay Insights tax engine to see what it costs after tax — and why the lowest-paid quarter of workers took the biggest hit.",
+    excerpt:
+      "Average hourly wages grew just 2.0% year-over-year in August 2026 — the slowest pace since November 2017 outside the pandemic — as the economy shed 42,000 jobs. Against the most recent 3.0% inflation reading, that is a real wage gap of roughly $700 to $750 a year after tax for the average full-time worker, and the bottom 25% of earners, at $18.66/hour, got the smallest raise of all: just 1.1%.",
+    metaTitle: 'Wage Growth Falls to 2.0% in August 2026, Slowest Since 2017',
+    metaDescription:
+      'Canadian wages rose just 2.0% in August 2026, the slowest since 2017, while 42,000 jobs were lost. See the real, after-tax pay gap by province.',
+    keywords: [
+      'canada wage growth august 2026',
+      'statistics canada labour force survey august 2026',
+      'is my raise keeping up with inflation canada',
+      'canada jobs report august 2026',
+      'real wage growth canada 2026',
+      'minimum wage workers inflation canada',
+    ],
+    category: 'news',
+    tags: ['Wage Growth', 'Inflation', 'Jobs Report', '2026', 'Data Study', 'All Provinces'],
+    publishedAt: '2026-09-07',
+    readTime: 7,
+    imageUrl: '/blog/wage-growth-slowdown-august-2026.svg',
+    directAnswer:
+      "Canadian wages grew just 2.0% year-over-year in August 2026 — the slowest pace since November 2017, excluding the pandemic — as the economy shed 42,000 jobs and the unemployment rate held at 6.4%. Against the most recent inflation reading of 3.0% (July 2026, the latest available), that gap works out to roughly $700 to $750 a year in lost after-tax purchasing power for a full-time worker on the national average wage, more than double July's gap. The lowest-paid quarter of workers, earning $18.66 an hour, got the smallest raise of all four wage quartiles: just 1.1%.",
+    faq: [
+      {
+        question: 'How much did Canadian wages grow in August 2026?',
+        answer:
+          "Average hourly wages rose 2.0% year-over-year in August 2026, to $37.02 (up $0.71), according to Statistics Canada's Labour Force Survey released September 4, 2026. That is down sharply from 2.8% growth in July and 3.3% in June — and it is the slowest pace of wage growth since November 2017, when it was also 2.0%, excluding 2021's pandemic-distorted figures.",
+      },
+      {
+        question: "How does August's wage growth compare to inflation?",
+        answer:
+          "Statistics Canada's most recent inflation reading, the July 2026 Consumer Price Index, put headline inflation at 3.0% year-over-year; the August CPI is not due until mid-September 2026. If prices kept rising near that 3.0% pace through August, wages growing at only 2.0% would leave a real (inflation-adjusted) gap of roughly one percentage point — about double July's 0.2-point gap — worth roughly $700 to $750 a year in after-tax purchasing power for a full-time worker on the national average wage, depending on province.",
+      },
+      {
+        question: 'What happened to the job market in August 2026?',
+        answer:
+          'Employment fell by 42,000 (-0.2%), and the unemployment rate held at 6.4%. The employment rate — the share of people 15 and older who are working — slipped 0.1 points to 60.8%. It followed four strong months: employment had risen a cumulative 181,000 from April to July. Public-sector employment fell for a third straight month (-20,000 in August, -78,000 since May), while manufacturing added 22,000 jobs despite ongoing tariff pressure.',
+      },
+      {
+        question: 'Did all workers get the same size raise?',
+        answer:
+          "No — lower-paid workers got smaller raises. Average hourly wages for the bottom 25% of earners rose just 1.1% year-over-year, to $18.66; the second-lowest quarter grew 1.3%, to $26.61. The top two quarters did better, both growing 2.1%, to $37.99 and $65.15. Run through the CanPay Insights tax engine for a full-time Ontario worker, the bottom quartile's raise was worth about $309 a year after tax — about $633 short of matching 3% inflation — versus a $1,577 after-tax raise for the top quartile.",
+      },
+      {
+        question: 'Did youth employment get hit particularly hard?',
+        answer:
+          'Yes. Youth employment (ages 15 to 24) fell by 19,000 (-0.7%) in August, and the youth unemployment rate rose 0.3 percentage points to 12.9%, reversing part of a 1.7-point improvement seen between April and July.',
+      },
+      {
+        question: 'Where do these figures come from?',
+        answer:
+          "Wage and employment figures are from Statistics Canada's Labour Force Survey, August 2026, released September 4, 2026. The 3.0% inflation figure is from Statistics Canada's Consumer Price Index, July 2026 (the most recently available reading as of publication), released August 17, 2026. Take-home pay figures are calculated with the CanPay Insights tax engine using 2026 federal and provincial tax brackets, CPP/CPP2 (QPP/QPP2 and QPIP for Quebec), and EI premiums, for a single full-time worker (2,080 hours/year) with basic personal amounts only.",
+      },
+    ],
+    content: `
+## Wage growth just hit a wall
+
+Statistics Canada's [Labour Force Survey for August 2026](https://www150.statcan.gc.ca/n1/daily-quotidien/260904/dq260904a-eng.htm), released September 4, 2026, shows the sharpest deceleration in wage growth in years, alongside a surprise drop in employment.
+
+### Key facts
+
+- **Average hourly wages rose just 2.0% year-over-year** in August, to **$37.02** (up $0.71) — down from 2.8% growth in July and 3.3% in June.
+- **The slowest pace of wage growth since November 2017** (also 2.0%), excluding 2021's pandemic-distorted numbers, per Statistics Canada's own release.
+- **Employment fell by 42,000 (-0.2%)**, and the employment rate slipped 0.1 points to 60.8%. The unemployment rate held at 6.4%.
+- **Public-sector jobs fell for a third straight month** — down 20,000 in August and 78,000 (-1.7%) since May.
+- **Youth unemployment rose 0.3 points to 12.9%**, as youth employment fell 19,000 (-0.7%).
+- **Low-wage workers got the smallest raises.** The bottom 25% of earners saw wages rise just 1.1% (to $18.66/hour); the top 25% grew 2.1% (to $65.15/hour).
+
+### Wage growth by quartile — everyone got a raise, but not the same one
+
+| Wage quartile | Average hourly wage, Aug 2026 | Year-over-year growth |
+| --- | --- | --- |
+| Bottom 25% | $18.66 | +1.1% |
+| Second-lowest 25% | $26.61 | +1.3% |
+| Third 25% | $37.99 | +2.1% |
+| Top 25% | $65.15 | +2.1% |
+
+The lowest-paid quarter of Canadian workers — earning under roughly $19 an hour — got barely a third of the percentage raise the top quarter did, even as the most recent inflation reading sat at 3.0%. That is the group for whom a slow raise bites hardest: minimum-wage and near-minimum-wage workers spend a larger share of every paycheque on rent, groceries, and other necessities that inflation hits directly.
+
+## What the slowdown costs after tax
+
+Since August's Consumer Price Index will not be released until mid-September 2026, the most recent available inflation reading is July's **3.0%** year-over-year. Using that as a stand-in for August, we ran the national average hourly wage (August 2025: $36.31; August 2026: $37.02) through the CanPay Insights tax engine for a full-time worker (2,080 hours/year) in every province, using 2026 federal and provincial tax rates, CPP/CPP2, and EI throughout, to isolate the wage effect from any tax-rate change.
+
+| Province | Take-home Aug 2025 | Take-home Aug 2026 | Nominal after-tax gain | Needed to match 3.0% inflation | Real (after-inflation) gap |
+| --- | --- | --- | --- | --- | --- |
+| Nunavut | $58,903 | $59,925 | +$1,022 | $60,670 | -$745 |
+| British Columbia | $57,969 | $58,982 | +$1,013 | $59,708 | -$727 |
+| Northwest Territories | $57,841 | $58,841 | +$1,000 | $59,577 | -$736 |
+| Yukon | $57,636 | $58,630 | +$994 | $59,365 | -$735 |
+| Alberta | $57,438 | $58,418 | +$980 | $59,161 | -$743 |
+| Ontario | $56,991 | $57,982 | +$991 | $58,701 | -$719 |
+| Saskatchewan | $55,870 | $56,815 | +$945 | $57,546 | -$731 |
+| New Brunswick | $55,139 | $56,061 | +$922 | $56,793 | -$732 |
+| Manitoba | $55,087 | $56,028 | +$941 | $56,740 | -$711 |
+| Newfoundland and Labrador | $54,762 | $55,676 | +$914 | $56,405 | -$729 |
+| Quebec | $54,371 | $55,264 | +$893 | $56,002 | -$738 |
+| Prince Edward Island | $54,321 | $55,204 | +$884 | $55,950 | -$746 |
+| Nova Scotia | $53,422 | $54,304 | +$882 | $55,025 | -$720 |
+
+*If August inflation lands near July's 3.0%, the real gap for a full-time worker on the national average wage roughly doubles from July's $292–$367 shortfall to about $711–$746. This is illustrative: it assumes a full year's household budget inflates at the headline CPI rate, which will not match every worker's actual spending, and August's actual CPI print could land above or below 3.0%.*
+
+### The gap by wage level, not just by province
+
+The province table above uses the national average wage across all quartiles. Looking instead at the bottom and top wage quartiles specifically, for a full-time Ontario worker:
+
+| | Bottom 25% ($18.66/hr) | Top 25% ($65.15/hr) |
+| --- | --- | --- |
+| Take-home, Aug 2025 | $31,406 | $94,091 |
+| Take-home, Aug 2026 | $31,715 | $95,668 |
+| Nominal after-tax gain | +$309 | +$1,577 |
+| Needed to match 3.0% inflation | $32,348 | $96,914 |
+| Real (after-inflation) gap | -$633 | -$1,245 |
+
+In raw dollars the top quartile's shortfall looks bigger, but as a share of income it is the opposite: the bottom quartile's $633 gap is about 2% of their annual take-home pay, versus roughly 1.3% for the top quartile — before accounting for the fact that lower earners spend a larger share of every dollar on necessities that are typically hit hardest by inflation.
+
+## Why hiring and raises both cooled
+
+Three threads run through August's report:
+
+1. **A public sector pullback.** Public-sector employment has now fallen for three straight months, down 78,000 (-1.7%) since May — a meaningful drag after months of steady growth.
+2. **A pause after a hot stretch.** Employment had climbed a cumulative 181,000 from April through July before August's 42,000 drop, so some slowdown was arguably overdue; several economists characterized the report as confirming a broader Q3 growth slowdown rather than a one-month blip.
+3. **Manufacturing bucked the trend.** Despite ongoing tariff pressure, manufacturing added 22,000 jobs in August — a rare bright spot in an otherwise soft report.
+
+## What it means for your own paycheque
+
+The 2.0% figure is a national average across every wage level, industry, and province — it is not any one person's raise. If you got a raise this year, or are negotiating one, run the real numbers through the free [CanPay Insights salary calculator](/salary-after-tax-canada) to see what it is actually worth after federal tax, provincial tax, CPP, and EI, or use [compare provinces](/compare-provinces) to see how the same raise lands somewhere else. CPP and EI deduction rates for 2026 are covered in [how much CPP you'll pay in 2026](/blog/how-much-cpp-will-i-pay-2026) and [how much EI you'll pay in 2026](/blog/how-much-ei-will-i-pay-2026). The July 2026 edition of this real-wage series, with that month's province-by-province figures, is available [here](/blog/real-wage-growth-inflation-july-2026).
+
+## Sources & disclaimer
+
+Wage and employment figures, including the wage-quartile breakdown and the "slowest since November 2017" comparison, are from Statistics Canada's [Labour Force Survey, August 2026](https://www150.statcan.gc.ca/n1/daily-quotidien/260904/dq260904a-eng.htm), released September 4, 2026. The 3.0% inflation figure is from Statistics Canada's [Consumer Price Index, July 2026](https://www150.statcan.gc.ca/n1/daily-quotidien/260817/dq260817a-eng.htm), released August 17, 2026 — the most recent CPI reading available as of publication, since the August 2026 CPI is not due until mid-September. Take-home pay figures are calculated with the CanPay Insights tax engine using 2026 federal and provincial tax brackets, CPP/CPP2 (QPP/QPP2 and QPIP for Quebec), and EI premiums, for a single full-time worker (2,080 hours/year) with basic personal amounts only — real paycheques vary with credits, benefits, RRSP contributions, and actual hours worked. This is general information, not financial or tax advice.
+`,
+  },
 ];
