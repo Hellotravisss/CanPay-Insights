@@ -1,6 +1,7 @@
 'use client';
 import React from 'react';
 import { useRouter } from 'next/navigation';
+import AvowdCredit from './AvowdCredit';
 
 const AffiliateDisclosurePage: React.FC = () => {
   const router = useRouter();
@@ -84,6 +85,7 @@ const AffiliateDisclosurePage: React.FC = () => {
           <a href="/privacy" className="text-slate-400 hover:text-red-600 transition-colors">Privacy</a>
         </div>
         <p className="mt-4 opacity-75">Proudly Canadian 🇨🇦 Built for Workers.</p>
+        <p><AvowdCredit /></p>
       </footer>
     </div>
   );

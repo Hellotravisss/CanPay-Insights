@@ -8,6 +8,7 @@ import JobsAtThisSalary from '../../components/JobsAtThisSalary';
 import PartnerSlot from '../../components/PartnerSlot';
 import SisterSiteCard from '../../components/SisterSiteCard';
 import { getLandingPage, landingPages } from '../landing-page-data';
+import AvowdCredit from '../../components/AvowdCredit';
 
 const BASE_URL = 'https://canpayinsights.ca';
 
@@ -387,6 +388,10 @@ export default async function LandingPage({ params }: Props) {
           </aside>
         </div>
       </section>
+
+      <footer className="mx-auto max-w-5xl px-4 pb-10 text-center text-xs text-slate-400" role="contentinfo">
+        <p>© CanPay Insights · <AvowdCredit /></p>
+      </footer>
     </main>
   );
 }

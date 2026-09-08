@@ -1,6 +1,7 @@
 'use client';
 import React from 'react';
 import { useRouter } from 'next/navigation';
+import AvowdCredit from './AvowdCredit';
 
 interface PrivacyPolicyProps {
   onBackToHome?: () => void;
@@ -127,6 +128,7 @@ const PrivacyPolicy: React.FC<PrivacyPolicyProps> = ({ onBackToHome }) => {
           <span className="w-2 h-2 rounded-full bg-red-400 opacity-50"></span>
         </div>
         <p className="mt-4 opacity-75">Proudly Canadian 🇨🇦 Built for Workers.</p>
+        <p><AvowdCredit /></p>
       </footer>
     </div>
     </>

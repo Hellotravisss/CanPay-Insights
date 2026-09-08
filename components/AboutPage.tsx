@@ -1,6 +1,7 @@
 'use client';
 import React from 'react';
 import { useRouter } from 'next/navigation';
+import AvowdCredit from './AvowdCredit';
 
 const Badge = ({ n }: { n: number }) => (
   <span className="flex items-center justify-center w-8 h-8 bg-red-100 text-red-600 rounded-lg text-sm font-bold">{n}</span>
@@ -154,6 +155,7 @@ const AboutPage: React.FC = () => {
           <a href="/privacy" className="text-slate-400 hover:text-red-600 transition-colors">Privacy</a>
         </div>
         <p className="mt-4 opacity-75">Proudly Canadian 🇨🇦 Built for Workers.</p>
+        <p><AvowdCredit /></p>
       </footer>
     </div>
   );

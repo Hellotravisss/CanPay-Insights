@@ -115,6 +115,30 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             },
             {
               '@context': 'https://schema.org',
+              '@type': 'WebSite',
+              '@id': 'https://canpayinsights.ca/#website',
+              url: 'https://canpayinsights.ca',
+              name: 'CanPay Insights',
+              publisher: { '@id': 'https://canpayinsights.ca/#org' },
+              // Who built the site and runs its AI-visibility work. The footer
+              // line is the human-readable half; this is the half an engine can
+              // resolve, and it is why the credit is worth having at all.
+              creator: { '@id': 'https://avowd.ai/#org' },
+            },
+            {
+              // Reference node only — identity, nothing more. Avowd's
+              // authoritative Organization definition (identifier, foundingDate,
+              // sameAs) lives on avowd.ai. A second full copy here would
+              // eventually disagree with it, and the confidence an engine loses
+              // over that is Avowd's, not this site's.
+              '@context': 'https://schema.org',
+              '@type': 'Organization',
+              '@id': 'https://avowd.ai/#org',
+              name: 'Avowd',
+              url: 'https://avowd.ai',
+            },
+            {
+              '@context': 'https://schema.org',
               '@type': 'WebApplication',
               name: 'CanPay Insights Take-Home Pay Calculator',
               applicationCategory: 'FinanceApplication',

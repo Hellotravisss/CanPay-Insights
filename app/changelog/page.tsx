@@ -1,4 +1,5 @@
 import type { Metadata } from 'next';
+import AvowdCredit from '../../components/AvowdCredit';
 
 export const metadata: Metadata = {
   title: 'Changelog – What’s New at CanPay Insights',
@@ -153,6 +154,10 @@ export default function ChangelogPage() {
             </li>
           ))}
         </ol>
+
+      <footer className="mx-auto max-w-5xl px-4 pb-10 pt-6 text-center text-xs text-slate-400" role="contentinfo">
+        <p>© CanPay Insights · <AvowdCredit /></p>
+      </footer>
       </main>
     </div>
   );

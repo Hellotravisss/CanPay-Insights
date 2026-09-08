@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
 import SalaryBreakdownPanel from '../../components/SalaryBreakdownPanel';
 import { buildSalaryBreakdown } from '../../lib/salaryFigures';
+import AvowdCredit from '../../components/AvowdCredit';
 
 const BASE_URL = 'https://canpayinsights.ca';
 const PAGE_URL = `${BASE_URL}/zh`;
@@ -225,6 +226,10 @@ export default function ChineseHubPage() {
             </div>
           </aside>
         </div>
+
+        <footer className="mt-10 border-t border-slate-200 pt-6 text-center text-xs text-slate-400" role="contentinfo">
+          <p>© CanPay Insights · <AvowdCredit lang="zh" /></p>
+        </footer>
       </section>
     </main>
   );

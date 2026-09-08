@@ -37,6 +37,7 @@ import { calculateSalary, calculateFromAnnualSalary, calculateFromTimesheet } fr
 import { useAuth, type OAuthProvider } from './hooks/useAuth';
 import { useUserSettings } from './hooks/useUserSettings';
 import { useCalculationHistory, type CalculationRecord } from './hooks/useCalculationHistory';
+import AvowdCredit from './components/AvowdCredit';
 
 // Default State - 简易估算（时薪）
 // Derive the anonymous work-schedule PATTERN for telemetry: hour-of-day,
@@ -797,6 +798,9 @@ const App: React.FC = () => {
               Changelog
             </a>
           </div>
+          <p className="mt-3">
+            <AvowdCredit />
+          </p>
         </footer>
       )}
 
@@ -881,6 +885,10 @@ const App: React.FC = () => {
           </div>
           
           <p className="mt-4 opacity-75">Proudly Canadian 🇨🇦 Built for Workers.</p>
+
+          <p className="mt-3">
+            <AvowdCredit />
+          </p>
 
           {/* A second switcher at the end of the page: someone who has read to
               the bottom in the wrong language should not have to scroll back up

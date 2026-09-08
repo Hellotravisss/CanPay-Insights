@@ -1,4 +1,5 @@
 import React from 'react';
+import AvowdCredit from '../../components/AvowdCredit';
 
 // Shared header/footer for the wage pages so they look like part of the site
 // rather than bare data dumps. Server component — no interactivity needed.
@@ -48,6 +49,7 @@ export function WageFooter() {
           <a href="/privacy" className="text-slate-400 no-underline hover:text-red-600">Privacy</a>
         </div>
         <p>Proudly Canadian 🇨🇦 Built for workers.</p>
+        <p className="mt-3"><AvowdCredit /></p>
       </div>
     </footer>
   );

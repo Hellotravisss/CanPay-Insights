@@ -1,5 +1,6 @@
 import type { Metadata } from 'next';
 import CopyEmbedCode from './CopyEmbedCode';
+import AvowdCredit from '../../components/AvowdCredit';
 
 export const metadata: Metadata = {
   title: 'Free Embeddable Take-Home Pay Calculator Widget for Your Website',
@@ -116,6 +117,10 @@ export default function WidgetPage() {
           </div>
         </div>
       </div>
+
+      <footer className="mx-auto max-w-5xl px-4 pb-10 pt-6 text-center text-xs text-slate-400" role="contentinfo">
+        <p>© CanPay Insights · <AvowdCredit /></p>
+      </footer>
     </div>
   );
 }

@@ -1,5 +1,6 @@
 import type { Metadata } from 'next';
 import ProvinceComparisonClient from './ProvinceComparisonClient';
+import AvowdCredit from '../../components/AvowdCredit';
 
 export const metadata: Metadata = {
   title: 'Compare Canadian Provinces — Tax & Salary 2026',
@@ -122,6 +123,10 @@ export default function CompareProvincesPage() {
           </div>
         </div>
       </section>
+
+      <footer className="mx-auto max-w-5xl px-4 pb-10 pt-6 text-center text-xs text-slate-400" role="contentinfo">
+        <p>© CanPay Insights · <AvowdCredit /></p>
+      </footer>
     </>
   );
 }

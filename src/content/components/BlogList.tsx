@@ -1,6 +1,7 @@
 'use client';
 import { useT } from '../../../lib/i18n';
 import PreferredSource from '../../../components/PreferredSource';
+import AvowdCredit from '../../../components/AvowdCredit';
 
 /**
  * Client component so the chrome follows the language switcher — but it is
@@ -233,6 +234,10 @@ export default function BlogList({ articles }: { articles: BlogCard[] }) {
       </section>
 
       <PreferredSource />
+
+      <footer className="mx-auto max-w-5xl px-4 pb-10 pt-6 text-center text-xs text-slate-400" role="contentinfo">
+        <p>© CanPay Insights · <AvowdCredit /></p>
+      </footer>
     </main>
   );
 }

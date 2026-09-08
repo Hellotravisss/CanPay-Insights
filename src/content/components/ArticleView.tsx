@@ -2,6 +2,7 @@ import type { JSX } from 'react';
 import { allArticles, getArticleBySlug } from '../articles-data';
 import type { Article } from '../types';
 import ArticleShareButtons from './ArticleShareButtons';
+import AvowdCredit from '../../../components/AvowdCredit';
 
 interface ArticleViewProps {
   slug: string;
@@ -410,6 +411,10 @@ export default function ArticleView({ slug }: ArticleViewProps) {
             ← View All Articles
           </a>
         </div>
+
+        <footer className="mt-12 border-t border-slate-200 pt-6 text-center text-xs text-slate-400" role="contentinfo">
+          <p>© CanPay Insights · <AvowdCredit /></p>
+        </footer>
       </div>
     </main>
   );

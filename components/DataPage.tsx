@@ -1,6 +1,7 @@
 'use client';
 import React from 'react';
 import { useRouter } from 'next/navigation';
+import AvowdCredit from './AvowdCredit';
 
 // Illustrative slice of the full 455-row dataset (net take-home at $80,000, 2026).
 const PREVIEW = [
@@ -200,6 +201,7 @@ const DataPage: React.FC = () => {
           <a href="/privacy" className="text-slate-400 hover:text-red-600 transition-colors">Privacy</a>
         </div>
         <p className="mt-4 opacity-75">Proudly Canadian 🇨🇦 Built for Workers.</p>
+        <p><AvowdCredit /></p>
       </footer>
     </div>
   );
