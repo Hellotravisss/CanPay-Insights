@@ -98,9 +98,33 @@ const PrivacyPolicy: React.FC<PrivacyPolicyProps> = ({ onBackToHome }) => {
               </div>
             </section>
 
-            <section className="mb-6">
+            <section className="mb-10">
               <h2 className="text-2xl font-bold text-slate-800 mb-4 flex items-center gap-3">
                 <span className="flex items-center justify-center w-8 h-8 bg-red-100 text-red-600 rounded-lg text-sm font-bold">5</span>
+                Deleting Your Account
+              </h2>
+              <div className="pl-11">
+                <p className="text-slate-600 leading-relaxed mb-4">
+                  An account is optional — every calculator feature works without one. If you do create
+                  one, you can delete it yourself at any time: open the account menu on this site, or the
+                  history drawer in the iOS app, and choose <strong className="text-slate-800">Delete Account</strong>.
+                  You do not need to email us, and there is no waiting period.
+                </p>
+                <p className="text-slate-600 leading-relaxed">
+                  Deleting removes your account, your saved calculations, your timesheets and your
+                  settings immediately and permanently. Purchase records are kept, because tax and
+                  accounting rules require a seller to keep them — but your name and email are stripped
+                  from them, so what remains is a transaction with no person attached. The anonymous
+                  usage statistics described above are unaffected, and cannot be: they carry no account
+                  id, no IP address and no precise location, so there is no row in them that could be
+                  traced back to you in the first place.
+                </p>
+              </div>
+            </section>
+
+            <section className="mb-6">
+              <h2 className="text-2xl font-bold text-slate-800 mb-4 flex items-center gap-3">
+                <span className="flex items-center justify-center w-8 h-8 bg-red-100 text-red-600 rounded-lg text-sm font-bold">6</span>
                 Contact Us
               </h2>
               <div className="pl-11">

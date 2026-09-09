@@ -13,6 +13,23 @@ interface UserMenuProps {
 
 const UserMenu: React.FC<UserMenuProps> = ({ onSwitchToTimesheet, onLoadCalculation }) => {
   const { user, signOut, signInWithOAuth, signInWithEmail, signInWithPassword, signUpWithPassword, isAuthenticated, loading } = useAuth();
+  const [showDeleteAccount, setShowDeleteAccount] = useState(false);
+  const [deleting, setDeleting] = useState(false);
+  const [deleteError, setDeleteError] = useState<string | null>(null);
+
+  /** Guideline 5.1.1(v): deletion has to be reachable and final, not a support ticket. */
+  const handleDeleteAccount = async () => {
+    setDeleting(true);
+    setDeleteError(null);
+    try {
+      const r = await fetch('/api/me', { method: 'DELETE' });
+      if (!r.ok) throw new Error(String(r.status));
+      window.location.href = '/';
+    } catch {
+      setDeleteError(t('menu.deleteAccountFailed'));
+      setDeleting(false);
+    }
+  };
   const { t } = useT();
   const userId = user?.id || null;
   const { records, isLoading: isHistoryLoading, deleteRecord, clearHistory } = useCalculationHistory(userId);
@@ -283,10 +300,48 @@ const UserMenu: React.FC<UserMenuProps> = ({ onSwitchToTimesheet, onLoadCalculat
                 </svg>
                 <p className="text-sm font-medium">{t('menu.signOut')}</p>
               </button>
+
+              <button
+                onClick={() => setShowDeleteAccount(true)}
+                className="mt-1 w-full flex items-center gap-3 px-3 py-2 text-slate-500 hover:bg-red-50 hover:text-red-600 rounded-lg transition-colors text-left"
+              >
+                <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
+                </svg>
+                <p className="text-sm font-medium">{t('menu.deleteAccount')}</p>
+              </button>
             </div>
           </div>
         )}
       </div>
+
+      {/* Delete-account confirmation. A confirmation step is allowed — what is
+          not allowed is making someone email support to finish the job. */}
+      {showDeleteAccount && (
+        <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4">
+          <div className="bg-white rounded-xl shadow-2xl max-w-md w-full p-6">
+            <h2 className="text-xl font-bold text-slate-800">{t('menu.deleteAccount')}</h2>
+            <p className="mt-3 text-sm leading-6 text-slate-600">{t('menu.deleteAccountBody')}</p>
+            {deleteError && <p className="mt-3 text-sm font-medium text-red-600">{deleteError}</p>}
+            <div className="mt-6 flex justify-end gap-3">
+              <button
+                onClick={() => setShowDeleteAccount(false)}
+                disabled={deleting}
+                className="rounded-lg px-4 py-2 text-sm font-semibold text-slate-600 hover:bg-slate-100 disabled:opacity-50"
+              >
+                {t('common.cancel')}
+              </button>
+              <button
+                onClick={handleDeleteAccount}
+                disabled={deleting}
+                className="rounded-lg bg-red-600 px-4 py-2 text-sm font-bold text-white hover:bg-red-700 disabled:opacity-50"
+              >
+                {deleting ? t('menu.deleteAccountWorking') : t('menu.deleteAccountConfirm')}
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
 
       {/* History Modal */}
       {showHistoryModal && (
