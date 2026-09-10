@@ -93,8 +93,8 @@ On an $80,000 salary, Ontario ranks **#6 of 13** provinces and territories for t
 | Rank | Province | Take-home on $80,000 |
 | --- | --- | --- |
 | 1 | Nunavut | $62,001 |
-| 2 | British Columbia | $61,038 |
-| 3 | Northwest Territories | $60,871 |
+| 2 | Northwest Territories | $60,871 |
+| 3 | British Columbia | $60,867 |
 | 4 | Yukon | $60,648 |
 | 5 | Alberta | $60,409 |
 | 6 | Ontario ← | $59,994 |
@@ -120,7 +120,7 @@ Every figure above is a median or a computed example. Your own pay depends on yo
     subtitle: "What British Columbia workers actually earn by industry — and what lands in the bank after tax",
     excerpt: "The median full-time wage in British Columbia is $35.00 an hour. Here is what that, and every other salary level, leaves after 2026 tax — with Statistics Canada wage data for every industry.",
     metaTitle: "British Columbia Take-Home Pay Guide 2026 | Wages by Industry",
-    metaDescription: "British Columbia's median full-time wage is $35.00/hr. See take-home pay at every salary, wages for every industry, and how British Columbia ranks (#2 of 13) for 2026.",
+    metaDescription: "British Columbia's median full-time wage is $35.00/hr. See take-home pay at every salary, wages for every industry, and how British Columbia ranks (#3 of 13) for 2026.",
     keywords: ["British Columbia salary","British Columbia take home pay","British Columbia average salary 2026","British Columbia paycheck calculator","British Columbia income tax 2026","wages in British Columbia"],
     category: 'province',
     tags: ["British Columbia","take-home pay","wages","2026"],
@@ -128,7 +128,7 @@ Every figure above is a median or a computed example. Your own pay depends on yo
     publishedAt: '2026-08-08',
     readTime: 8,
     imageUrl: '/blog/bc-take-home-pay-guide-2026.png',
-    directAnswer: "The median full-time wage in British Columbia is $35.00 an hour, about $72,800 a year, which leaves roughly $56,130 after tax in 2026. On an $80,000 salary, British Columbia ranks #2 of 13 provinces and territories for take-home pay, keeping $61,038.",
+    directAnswer: "The median full-time wage in British Columbia is $35.00 an hour, about $72,800 a year, which leaves roughly $55,957 after tax in 2026. On an $80,000 salary, British Columbia ranks #3 of 13 provinces and territories for take-home pay, keeping $60,867.",
     faq: [
           {
                 "question": "What is the average salary in British Columbia?",
@@ -136,24 +136,24 @@ Every figure above is a median or a computed example. Your own pay depends on yo
           },
           {
                 "question": "What is the take-home pay on $80,000 in British Columbia?",
-                "answer": "About $61,038 a year, or $5,086 a month, after federal tax, British Columbia provincial tax, CPP/CPP2 and EI for the 2026 tax year, for a single employee with no additional credits."
+                "answer": "About $60,867 a year, or $5,072 a month, after federal tax, British Columbia provincial tax, CPP/CPP2 and EI for the 2026 tax year, for a single employee with no additional credits."
           },
           {
                 "question": "Does British Columbia have high taxes compared with other provinces?",
-                "answer": "On an $80,000 salary, British Columbia ranks #2 of 13 provinces and territories for take-home pay in 2026, keeping $61,038. That is $963 a year less than Nunavut, the highest."
+                "answer": "On an $80,000 salary, British Columbia ranks #3 of 13 provinces and territories for take-home pay in 2026, keeping $60,867. That is $1,134 a year less than Nunavut, the highest."
           },
           {
                 "question": "Which industry pays best in British Columbia?",
-                "answer": "Of the sectors Statistics Canada reports for British Columbia, utilities has the highest median full-time wage at $51.63 an hour — roughly $107,400 a year, or $80,362 after tax."
+                "answer": "Of the sectors Statistics Canada reports for British Columbia, utilities has the highest median full-time wage at $51.63 an hour — roughly $107,400 a year, or $80,193 after tax."
           },
           {
                 "question": "How much of my pay do I keep in British Columbia?",
-                "answer": "It depends on the salary. In British Columbia in 2026, someone earning $40,000 keeps about 82.8% of gross pay, while someone earning $150,000 keeps about 71.4%. The rest goes to federal tax, provincial tax, CPP/CPP2 and EI."
+                "answer": "It depends on the salary. In British Columbia in 2026, someone earning $40,000 keeps about 82.8% of gross pay, while someone earning $150,000 keeps about 71.3%. The rest goes to federal tax, provincial tax, CPP/CPP2 and EI."
           }
     ],
     content: `## The typical British Columbia paycheque
 
-Across all industries, the median full-time wage in British Columbia is $35.00 an hour — about $72,800 a year. After federal tax, British Columbia tax, CPP/CPP2 and EI, a single employee on that salary keeps roughly **$56,130 a year**, or $4,677 a month. That is 77.1% of gross pay.
+Across all industries, the median full-time wage in British Columbia is $35.00 an hour — about $72,800 a year. After federal tax, British Columbia tax, CPP/CPP2 and EI, a single employee on that salary keeps roughly **$55,957 a year**, or $4,663 a month. That is 76.9% of gross pay.
 
 ## Take-home pay in British Columbia at every salary level
 
@@ -161,13 +161,13 @@ Nobody is paid an "average". Here is what specific salaries actually leave in Br
 
 | Gross salary | Take-home (year) | Per month | Kept |
 | --- | --- | --- | --- |
-| $40,000 | **$33,124** | $2,760 | 82.8% |
-| $60,000 | **$47,673** | $3,973 | 79.5% |
-| $80,000 | **$61,038** | $5,086 | 76.3% |
-| $100,000 | **$75,236** | $6,270 | 75.2% |
-| $150,000 | **$107,098** | $8,925 | 71.4% |
+| $40,000 | **$33,109** | $2,759 | 82.8% |
+| $60,000 | **$47,496** | $3,958 | 79.2% |
+| $80,000 | **$60,867** | $5,072 | 76.1% |
+| $100,000 | **$75,066** | $6,256 | 75.1% |
+| $150,000 | **$106,929** | $8,911 | 71.3% |
 
-Notice how the share you keep falls as the salary rises: that is Canada's progressive tax system working as designed. At $40,000 you keep 82.8%; at $150,000 you keep 71.4%.
+Notice how the share you keep falls as the salary rises: that is Canada's progressive tax system working as designed. At $40,000 you keep 82.8%; at $150,000 you keep 71.3%.
 
 ## What each industry pays in British Columbia
 
@@ -175,39 +175,39 @@ Statistics Canada publishes the median wage of full-time employees by industry. 
 
 | Industry | Median wage | ≈ Annual | Take-home |
 | --- | --- | --- | --- |
-| Utilities | $51.63/hr | $107,400 | $80,362 |
-| Forestry, fishing, mining, oil & gas | $45.00/hr | $93,600 | $70,641 |
-| Public administration | $45.00/hr | $93,600 | $70,641 |
-| Professional, scientific & technical services | $43.78/hr | $91,100 | $68,846 |
-| Educational services | $40.00/hr | $83,200 | $63,232 |
-| Information, culture & recreation | $38.46/hr | $80,000 | $61,038 |
-| Finance, insurance & real estate | $38.00/hr | $79,000 | $60,352 |
-| Construction | $37.50/hr | $78,000 | $59,666 |
-| Manufacturing | $35.00/hr | $72,800 | $56,130 |
-| Transportation & warehousing | $34.00/hr | $70,700 | $54,723 |
-| Healthcare & social assistance | $33.33/hr | $69,300 | $53,785 |
-| Other services | $30.00/hr | $62,400 | $49,249 |
-| Business & support services | $27.50/hr | $57,200 | $45,748 |
-| Wholesale & retail trade | $26.44/hr | $55,000 | $44,161 |
-| Agriculture | $25.00/hr | $52,000 | $41,996 |
-| Food service & hospitality | $22.00/hr | $45,800 | $37,401 |
+| Utilities | $51.63/hr | $107,400 | $80,193 |
+| Forestry, fishing, mining, oil & gas | $45.00/hr | $93,600 | $70,471 |
+| Public administration | $45.00/hr | $93,600 | $70,471 |
+| Professional, scientific & technical services | $43.78/hr | $91,100 | $68,676 |
+| Educational services | $40.00/hr | $83,200 | $63,062 |
+| Information, culture & recreation | $38.46/hr | $80,000 | $60,867 |
+| Finance, insurance & real estate | $38.00/hr | $79,000 | $60,181 |
+| Construction | $37.50/hr | $78,000 | $59,495 |
+| Manufacturing | $35.00/hr | $72,800 | $55,957 |
+| Transportation & warehousing | $34.00/hr | $70,700 | $54,550 |
+| Healthcare & social assistance | $33.33/hr | $69,300 | $53,612 |
+| Other services | $30.00/hr | $62,400 | $49,073 |
+| Business & support services | $27.50/hr | $57,200 | $45,570 |
+| Wholesale & retail trade | $26.44/hr | $55,000 | $43,982 |
+| Agriculture | $25.00/hr | $52,000 | $41,815 |
+| Food service & hospitality | $22.00/hr | $45,800 | $37,243 |
 
 The best-paid sector reported here is utilities at $51.63 an hour; the lowest is food service & hospitality at $22.00. That gap — $29.63 an hour — works out to about $61,600 a year before tax.
 
 ## How British Columbia compares with the rest of Canada
 
-On an $80,000 salary, British Columbia ranks **#2 of 13** provinces and territories for take-home pay in 2026.
+On an $80,000 salary, British Columbia ranks **#3 of 13** provinces and territories for take-home pay in 2026.
 
 | Rank | Province | Take-home on $80,000 |
 | --- | --- | --- |
 | 1 | Nunavut | $62,001 |
-| 2 | British Columbia ← | $61,038 |
-| 3 | Northwest Territories | $60,871 |
+| 2 | Northwest Territories | $60,871 |
+| 3 | British Columbia ← | $60,867 |
 | 4 | Yukon | $60,648 |
 | 5 | Alberta | $60,409 |
 | 6 | Ontario | $59,994 |
 
-The difference between British Columbia and Nunavut, the highest, is $963 a year on the same $80,000 salary — about $80 a month.
+The difference between British Columbia and Nunavut, the highest, is $1,134 a year on the same $80,000 salary — about $94 a month.
 
 Take-home pay is only one side of a move, of course: rent, groceries and childcare vary as much as tax does. But it is the side most people guess at, and it is the side that can be calculated exactly.
 
@@ -309,8 +309,8 @@ On an $80,000 salary, Alberta ranks **#5 of 13** provinces and territories for t
 | Rank | Province | Take-home on $80,000 |
 | --- | --- | --- |
 | 1 | Nunavut | $62,001 |
-| 2 | British Columbia | $61,038 |
-| 3 | Northwest Territories | $60,871 |
+| 2 | Northwest Territories | $60,871 |
+| 3 | British Columbia | $60,867 |
 | 4 | Yukon | $60,648 |
 | 5 | Alberta ← | $60,409 |
 | 6 | Ontario | $59,994 |
@@ -417,8 +417,8 @@ On an $80,000 salary, Quebec ranks **#11 of 13** provinces and territories for t
 | Rank | Province | Take-home on $80,000 |
 | --- | --- | --- |
 | 1 | Nunavut | $62,001 |
-| 2 | British Columbia | $61,038 |
-| 3 | Northwest Territories | $60,871 |
+| 2 | Northwest Territories | $60,871 |
+| 3 | British Columbia | $60,867 |
 | 4 | Yukon | $60,648 |
 | 5 | Alberta | $60,409 |
 | 6 | Ontario | $59,994 |
@@ -525,8 +525,8 @@ On an $80,000 salary, Manitoba ranks **#8 of 13** provinces and territories for 
 | Rank | Province | Take-home on $80,000 |
 | --- | --- | --- |
 | 1 | Nunavut | $62,001 |
-| 2 | British Columbia | $61,038 |
-| 3 | Northwest Territories | $60,871 |
+| 2 | Northwest Territories | $60,871 |
+| 3 | British Columbia | $60,867 |
 | 4 | Yukon | $60,648 |
 | 5 | Alberta | $60,409 |
 | 6 | Ontario | $59,994 |
@@ -633,8 +633,8 @@ On an $80,000 salary, Saskatchewan ranks **#7 of 13** provinces and territories 
 | Rank | Province | Take-home on $80,000 |
 | --- | --- | --- |
 | 1 | Nunavut | $62,001 |
-| 2 | British Columbia | $61,038 |
-| 3 | Northwest Territories | $60,871 |
+| 2 | Northwest Territories | $60,871 |
+| 3 | British Columbia | $60,867 |
 | 4 | Yukon | $60,648 |
 | 5 | Alberta | $60,409 |
 | 6 | Ontario | $59,994 |
@@ -741,8 +741,8 @@ On an $80,000 salary, Nova Scotia ranks **#13 of 13** provinces and territories 
 | Rank | Province | Take-home on $80,000 |
 | --- | --- | --- |
 | 1 | Nunavut | $62,001 |
-| 2 | British Columbia | $61,038 |
-| 3 | Northwest Territories | $60,871 |
+| 2 | Northwest Territories | $60,871 |
+| 3 | British Columbia | $60,867 |
 | 4 | Yukon | $60,648 |
 | 5 | Alberta | $60,409 |
 | 6 | Ontario | $59,994 |
@@ -849,8 +849,8 @@ On an $80,000 salary, New Brunswick ranks **#9 of 13** provinces and territories
 | Rank | Province | Take-home on $80,000 |
 | --- | --- | --- |
 | 1 | Nunavut | $62,001 |
-| 2 | British Columbia | $61,038 |
-| 3 | Northwest Territories | $60,871 |
+| 2 | Northwest Territories | $60,871 |
+| 3 | British Columbia | $60,867 |
 | 4 | Yukon | $60,648 |
 | 5 | Alberta | $60,409 |
 | 6 | Ontario | $59,994 |
@@ -957,8 +957,8 @@ On an $80,000 salary, Newfoundland and Labrador ranks **#10 of 13** provinces an
 | Rank | Province | Take-home on $80,000 |
 | --- | --- | --- |
 | 1 | Nunavut | $62,001 |
-| 2 | British Columbia | $61,038 |
-| 3 | Northwest Territories | $60,871 |
+| 2 | Northwest Territories | $60,871 |
+| 3 | British Columbia | $60,867 |
 | 4 | Yukon | $60,648 |
 | 5 | Alberta | $60,409 |
 | 6 | Ontario | $59,994 |
@@ -1029,7 +1029,7 @@ Nobody is paid an "average". Here is what specific salaries actually leave in Pr
 | $60,000 | **$45,177** | $3,765 | 75.3% |
 | $80,000 | **$56,999** | $4,750 | 71.2% |
 | $100,000 | **$69,426** | $5,785 | 69.4% |
-| $150,000 | **$98,517** | $8,210 | 65.7% |
+| $150,000 | **$98,520** | $8,210 | 65.7% |
 
 Notice how the share you keep falls as the salary rises: that is Canada's progressive tax system working as designed. At $40,000 you keep 79.8%; at $150,000 you keep 65.7%.
 
@@ -1065,8 +1065,8 @@ On an $80,000 salary, Prince Edward Island ranks **#12 of 13** provinces and ter
 | Rank | Province | Take-home on $80,000 |
 | --- | --- | --- |
 | 1 | Nunavut | $62,001 |
-| 2 | British Columbia | $61,038 |
-| 3 | Northwest Territories | $60,871 |
+| 2 | Northwest Territories | $60,871 |
+| 3 | British Columbia | $60,867 |
 | 4 | Yukon | $60,648 |
 | 5 | Alberta | $60,409 |
 | 6 | Ontario | $59,994 |
@@ -1150,8 +1150,8 @@ On an $80,000 salary, Yukon ranks **#4 of 13** provinces and territories for tak
 | Rank | Province | Take-home on $80,000 |
 | --- | --- | --- |
 | 1 | Nunavut | $62,001 |
-| 2 | British Columbia | $61,038 |
-| 3 | Northwest Territories | $60,871 |
+| 2 | Northwest Territories | $60,871 |
+| 3 | British Columbia | $60,867 |
 | 4 | Yukon ← | $60,648 |
 | 5 | Alberta | $60,409 |
 | 6 | Ontario | $59,994 |
@@ -1177,7 +1177,7 @@ Every figure above is a median or a computed example. Your own pay depends on yo
     subtitle: "What Northwest Territories workers actually earn by industry — and what lands in the bank after tax",
     excerpt: "What salaries in Northwest Territories leave after federal and territorial tax, CPP and EI in 2026, and how the territory compares with the rest of Canada.",
     metaTitle: "Northwest Territories Take-Home Pay Guide 2026 | Wages by Industry",
-    metaDescription: "See take-home pay at every salary level in Northwest Territories for 2026, and how it ranks (#3 of 13) against every other province and territory.",
+    metaDescription: "See take-home pay at every salary level in Northwest Territories for 2026, and how it ranks (#2 of 13) against every other province and territory.",
     keywords: ["Northwest Territories salary","Northwest Territories take home pay","Northwest Territories average salary 2026","Northwest Territories paycheck calculator","Northwest Territories income tax 2026","wages in Northwest Territories"],
     category: 'province',
     tags: ["Northwest Territories","take-home pay","wages","2026"],
@@ -1185,7 +1185,7 @@ Every figure above is a median or a computed example. Your own pay depends on yo
     publishedAt: '2026-08-08',
     readTime: 6,
     imageUrl: '/blog/northwest-territories-take-home-pay-guide-2026.png',
-    directAnswer: "On an $80,000 salary, Northwest Territories ranks #3 of 13 provinces and territories for take-home pay in 2026, keeping $60,871 after federal tax, territorial tax, CPP and EI.",
+    directAnswer: "On an $80,000 salary, Northwest Territories ranks #2 of 13 provinces and territories for take-home pay in 2026, keeping $60,871 after federal tax, territorial tax, CPP and EI.",
     faq: [
           {
                 "question": "What is the average salary in Northwest Territories?",
@@ -1197,7 +1197,7 @@ Every figure above is a median or a computed example. Your own pay depends on yo
           },
           {
                 "question": "Does Northwest Territories have high taxes compared with other provinces?",
-                "answer": "On an $80,000 salary, Northwest Territories ranks #3 of 13 provinces and territories for take-home pay in 2026, keeping $60,871. That is $1,130 a year less than Nunavut, the highest."
+                "answer": "On an $80,000 salary, Northwest Territories ranks #2 of 13 provinces and territories for take-home pay in 2026, keeping $60,871. That is $1,130 a year less than Nunavut, the highest."
           },
           {
                 "question": "Which industry pays best in Northwest Territories?",
@@ -1230,13 +1230,13 @@ Statistics Canada does not publish median wages by industry for the territories 
 
 ## How Northwest Territories compares with the rest of Canada
 
-On an $80,000 salary, Northwest Territories ranks **#3 of 13** provinces and territories for take-home pay in 2026.
+On an $80,000 salary, Northwest Territories ranks **#2 of 13** provinces and territories for take-home pay in 2026.
 
 | Rank | Province | Take-home on $80,000 |
 | --- | --- | --- |
 | 1 | Nunavut | $62,001 |
-| 2 | British Columbia | $61,038 |
-| 3 | Northwest Territories ← | $60,871 |
+| 2 | Northwest Territories ← | $60,871 |
+| 3 | British Columbia | $60,867 |
 | 4 | Yukon | $60,648 |
 | 5 | Alberta | $60,409 |
 | 6 | Ontario | $59,994 |
@@ -1320,13 +1320,13 @@ On an $80,000 salary, Nunavut ranks **#1 of 13** provinces and territories for t
 | Rank | Province | Take-home on $80,000 |
 | --- | --- | --- |
 | 1 | Nunavut ← | $62,001 |
-| 2 | British Columbia | $61,038 |
-| 3 | Northwest Territories | $60,871 |
+| 2 | Northwest Territories | $60,871 |
+| 3 | British Columbia | $60,867 |
 | 4 | Yukon | $60,648 |
 | 5 | Alberta | $60,409 |
 | 6 | Ontario | $59,994 |
 
-Nunavut is the highest in the country on that salary. The next province keeps $61,038, a difference of $963 a year.
+Nunavut is the highest in the country on that salary. The next province keeps $60,871, a difference of $1,130 a year.
 
 Take-home pay is only one side of a move, of course: rent, groceries and childcare vary as much as tax does. But it is the side most people guess at, and it is the side that can be calculated exactly.
 

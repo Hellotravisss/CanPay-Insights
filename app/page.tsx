@@ -131,9 +131,9 @@ export default function HomePage() {
             </summary>
             <div className="pb-5">
           <p className="mb-6 leading-7 text-slate-600">
-            On an $80,000 salary in 2026, your take-home pay ranges from about $57,077 in Quebec to
-            about $61,038 in British Columbia — a gap of nearly $5,000 a year on the exact same gross
-            salary, simply because of where you live. The table below shows the annual take-home,
+            On an $80,000 salary in 2026, your take-home pay ranges from about $56,095 in Nova
+            Scotia to about $60,867 in British Columbia — a gap of nearly $4,800 a year on the exact
+            same gross salary, simply because of where you live. The table below shows the annual take-home,
             monthly pay, and total deductions (federal tax, provincial tax, CPP/CPP2, and EI) for a
             single employee in six provinces.
           </p>
@@ -148,7 +148,7 @@ export default function HomePage() {
                 </tr>
               </thead>
               <tbody className="text-slate-600">
-                <tr className="border-b border-slate-200"><td className="py-2 pr-4 font-medium text-slate-800">British Columbia</td><td className="py-2 pr-4">$61,038</td><td className="py-2 pr-4">$5,086</td><td className="py-2">$18,962</td></tr>
+                <tr className="border-b border-slate-200"><td className="py-2 pr-4 font-medium text-slate-800">British Columbia</td><td className="py-2 pr-4">$60,867</td><td className="py-2 pr-4">$5,072</td><td className="py-2">$19,133</td></tr>
                 <tr className="border-b border-slate-200"><td className="py-2 pr-4 font-medium text-slate-800">Alberta</td><td className="py-2 pr-4">$60,409</td><td className="py-2 pr-4">$5,034</td><td className="py-2">$19,591</td></tr>
                 <tr className="border-b border-slate-200"><td className="py-2 pr-4 font-medium text-slate-800">Ontario</td><td className="py-2 pr-4">$59,994</td><td className="py-2 pr-4">$5,000</td><td className="py-2">$20,006</td></tr>
                 <tr className="border-b border-slate-200"><td className="py-2 pr-4 font-medium text-slate-800">Manitoba</td><td className="py-2 pr-4">$57,940</td><td className="py-2 pr-4">$4,828</td><td className="py-2">$22,060</td></tr>
@@ -188,9 +188,9 @@ export default function HomePage() {
                 </tr>
               </thead>
               <tbody className="text-slate-600">
-                <tr className="border-b border-slate-200"><td className="py-2 pr-4 font-medium text-slate-800">$50,000</td><td className="py-2 pr-4">$40,543</td><td className="py-2 pr-4">$39,935</td><td className="py-2 pr-4">$40,331</td><td className="py-2">$38,857</td></tr>
-                <tr className="border-b border-slate-200"><td className="py-2 pr-4 font-medium text-slate-800">$75,000</td><td className="py-2 pr-4">$57,609</td><td className="py-2 pr-4">$56,639</td><td className="py-2 pr-4">$57,090</td><td className="py-2">$54,053</td></tr>
-                <tr><td className="py-2 pr-4 font-medium text-slate-800">$100,000</td><td className="py-2 pr-4">$75,236</td><td className="py-2 pr-4">$73,867</td><td className="py-2 pr-4">$74,153</td><td className="py-2">$69,619</td></tr>
+                <tr className="border-b border-slate-200"><td className="py-2 pr-4 font-medium text-slate-800">$50,000</td><td className="py-2 pr-4">$40,364</td><td className="py-2 pr-4">$39,935</td><td className="py-2 pr-4">$40,331</td><td className="py-2">$38,857</td></tr>
+                <tr className="border-b border-slate-200"><td className="py-2 pr-4 font-medium text-slate-800">$75,000</td><td className="py-2 pr-4">$57,438</td><td className="py-2 pr-4">$56,639</td><td className="py-2 pr-4">$57,090</td><td className="py-2">$54,053</td></tr>
+                <tr><td className="py-2 pr-4 font-medium text-slate-800">$100,000</td><td className="py-2 pr-4">$75,066</td><td className="py-2 pr-4">$73,867</td><td className="py-2 pr-4">$74,153</td><td className="py-2">$69,619</td></tr>
               </tbody>
             </table>
           </div>

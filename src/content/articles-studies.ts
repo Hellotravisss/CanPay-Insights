@@ -506,7 +506,7 @@ A salesperson earning **$50,000 base + $30,000 commission = $80,000** keeps a di
 
 | Province | Take-home on $80,000 |
 | --- | --- |
-| British Columbia | $61,038 |
+| British Columbia | $60,867 |
 | Alberta | $60,409 |
 | Ontario | $59,994 |
 | Quebec | $57,077 |
@@ -1132,11 +1132,11 @@ Ignoring the mid-year withholding mechanics and just comparing BC's 2025 tax bra
 | --- | --- | --- | --- |
 | $40,000 | $1,370 | $1,500 | **+$130** |
 | $50,000 | $1,895 | $2,060 | **+$165** |
-| $60,000 | $2,665 | $2,822 | **+$157** |
-| $75,000 | $3,820 | $3,977 | **+$157** |
-| $90,000 | $5,410 | $5,567 | **+$157** |
+| $60,000 | $2,665 | $2,822 | **+$158** |
+| $75,000 | $3,820 | $3,977 | **+$158** |
+| $90,000 | $4,975 | $5,132 | **+$158** |
 
-*Calculated by CanPay Insights from BC's published 2025 and 2026 tax brackets and basic personal amounts. The basic personal amount was $12,932 in 2025. It rose to $13,216 for 2026. The increase peaks around $50,000, in the narrow gap between the two years' bracket-one thresholds ($49,279 in 2025 vs. $50,363 in 2026), then settles to a flat roughly $157 a year for salaries between about $60,000 and $95,000. Figures exclude BC's income-tested tax reduction credit, which further lowers tax for net incomes under about $25,570.*
+*Calculated by CanPay Insights from BC's published 2025 and 2026 tax brackets and basic personal amounts. The basic personal amount was $12,932 in 2025. It rose to $13,216 for 2026. The increase peaks around $50,000, in the narrow gap between the two years' bracket-one thresholds ($49,279 in 2025 vs. $50,363 in 2026), then settles to a flat roughly $158 a year for salaries between about $60,000 and $95,000. Figures exclude BC's income-tested tax reduction credit, which further lowers tax for net incomes under about $25,570.*
 
 ### The bottom line
 
@@ -1398,12 +1398,12 @@ Rate and effective-date figures are based on the Government of Saskatchewan's Ju
       {
         question: "How much did inflation cost an Ontario worker's raise, after tax?",
         answer:
-          'Running the national average hourly wage through the CanPay Insights tax engine for a full-time (2,080 hours/year) Ontario worker: take-home pay rose from about $57,531 in July 2025 to $58,941 in July 2026 — a $1,410 raise after tax. But matching 3.0% inflation would have required $59,257 after tax, a shortfall of about $316 a year, or roughly 15 cents an hour.',
+          'Running the national average hourly wage through the CanPay Insights tax engine for a full-time (2,080 hours/year) Ontario worker: take-home pay rose from about $56,781 in July 2025 to $58,191 in July 2026 — a $1,410 raise after tax. But matching 3.0% inflation would have required $58,485 after tax, a shortfall of about $294 a year, or roughly 14 cents an hour.',
       },
       {
         question: 'Which province had the smallest and largest real pay gap?',
         answer:
-          'Among the province and territory take-home figures we calculated, British Columbia had the smallest real (after-inflation) shortfall at about $292 a year for a full-time worker on the national average wage; Prince Edward Island had the largest, at about $367 a year. Every province and territory we checked showed a negative real gap in July 2026.',
+          'Among the province and territory take-home figures we calculated, British Columbia had the smallest real (after-inflation) shortfall at about $287 a year for a full-time worker on the national average wage; Prince Edward Island had the largest, at about $367 a year. Every province and territory we checked showed a negative real gap in July 2026.',
       },
       {
         question: 'Why did wage growth slow down while inflation sped up in July 2026?',
@@ -1434,8 +1434,8 @@ Subtract one from the other and July 2026 posted a **negative real wage gap of a
 ### Key findings
 
 - **A full-time worker on the national average wage gained $2,101 in gross pay** year-over-year (2,080 hours × $1.01/hour) — but needed 3.0% more just to stand still against inflation.
-- **After tax, every province and territory came up short.** The real (inflation-adjusted) gap ranged from about **-$292 a year in British Columbia** to **-$367 a year in Prince Edward Island**.
-- **In Ontario**, take-home pay for that same worker rose from $57,531 to $58,941 — a $1,410 raise after tax, but about **$316 short** of matching inflation.
+- **After tax, every province and territory came up short.** The real (inflation-adjusted) gap ranged from about **-$287 a year in British Columbia** to **-$367 a year in Prince Edward Island**.
+- **In Ontario**, take-home pay for that same worker rose from $56,781 to $58,191 — a $1,410 raise after tax, but about **$294 short** of matching inflation.
 - **Gasoline, not groceries, drove July's inflation.** Grocery price growth actually slowed for a fourth straight month, while pump prices did the damage.
 
 ### What "real wage growth" costs, province by province
@@ -1444,12 +1444,12 @@ Figures use Statistics Canada's national average hourly wage (July 2025: $36.16;
 
 | Province | Take-home July 2025 | Take-home July 2026 | Nominal after-tax gain | Needed to match 3.0% inflation | Real (after-inflation) gap |
 | --- | --- | --- | --- | --- | --- |
-| British Columbia | $57,755 | $59,196 | +$1,440 | $59,488 | -$292 |
+| British Columbia | $57,584 | $59,025 | +$1,441 | $59,311 | -$287 |
 | Nunavut | $58,687 | $60,141 | +$1,454 | $60,448 | -$306 |
 | Northwest Territories | $57,630 | $59,052 | +$1,422 | $59,359 | -$307 |
 | Manitoba | $54,888 | $56,227 | +$1,339 | $56,535 | -$308 |
 | Yukon | $57,426 | $58,840 | +$1,414 | $59,149 | -$309 |
-| Ontario | $57,531 | $58,941 | +$1,410 | $59,257 | -$316 |
+| Ontario | $56,781 | $58,191 | +$1,410 | $58,485 | -$294 |
 | Alberta | $57,231 | $58,625 | +$1,395 | $58,948 | -$322 |
 | Saskatchewan | $55,670 | $57,014 | +$1,344 | $57,340 | -$326 |
 | New Brunswick | $54,944 | $56,255 | +$1,312 | $56,592 | -$337 |
@@ -1920,7 +1920,7 @@ Since August's Consumer Price Index will not be released until mid-September 202
 | Province | Take-home Aug 2025 | Take-home Aug 2026 | Nominal after-tax gain | Needed to match 3.0% inflation | Real (after-inflation) gap |
 | --- | --- | --- | --- | --- | --- |
 | Nunavut | $58,903 | $59,925 | +$1,022 | $60,670 | -$745 |
-| British Columbia | $57,969 | $58,982 | +$1,013 | $59,708 | -$727 |
+| British Columbia | $57,798 | $58,811 | +$1,013 | $59,532 | -$721 |
 | Northwest Territories | $57,841 | $58,841 | +$1,000 | $59,577 | -$736 |
 | Yukon | $57,636 | $58,630 | +$994 | $59,365 | -$735 |
 | Alberta | $57,438 | $58,418 | +$980 | $59,161 | -$743 |

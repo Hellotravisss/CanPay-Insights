@@ -235,7 +235,14 @@ const DESCRIBES_A_COMPUTED_RATE = /\b(effective|average|marginal|combined|overal
  */
 /** "on $80,000", "$50,000 salary", "earning $65,000": the figure is the income, not a result. */
 const NAMED_AS_INCOME = /\b(on|at|earning|earns?|of|what|make|making|your)\s+(an?\s+)?\$[\d,]+|\$[\d,]+\s*(salary|a year|per year|gross|income|means)/i;
-const QUOTES_TAKE_HOME = /\b(take-home|takes? home|keeps?|net pay|left over|in your pocket)\b/i;
+// "nets about $61,038" and "Net annual income" say exactly what "take-home"
+// says; a whole BC guide kept pre-budget figures because it happened to use
+// the other wording, so the test is the meaning, not the phrase.
+// Note what is NOT here: a bare "net income". "Adjusted family net income" is
+// the income test on a benefit, not what a cheque leaves, and matching it drags
+// benefit thresholds — which no payroll engine produces — into the judgement.
+const QUOTES_TAKE_HOME =
+  /\b(take-home|takes? home|keeps?|nets|net pay|net annual|left over|in your pocket)\b|net par an|laisse environ|reste environ/i;
 
 const num = (s: string) => parseFloat(s.replace(/,/g, ''));
 
@@ -425,7 +432,9 @@ function auditText(
       for (const b of lineMoney)
         if (a !== b && a < b) {
           acceptedRates.push((a / b) * 100, (1 - a / b) * 100);
-          acceptedAmounts.push(b - a);
+          // "a spread of $5,900 a year, or about $490 a month" is one claim
+          // stated twice; the second is the first divided by the pay periods.
+          acceptedAmounts.push(b - a, ...[12, 24, 26, 52].map((n) => (b - a) / n));
         }
 
     // A sentence dated to a different year — "in 2025", or "announced for
@@ -442,6 +451,7 @@ function auditText(
     const sf = s.replace(/\((?:était|was|previously|anciennement)[^)]*\)/gi, '');
     const figures = [...sf.matchAll(MONEY), ...sf.matchAll(PERCENT)].map((m) => ({
       raw: m[0].trim(),
+      at: m.index ?? 0,
       printed: m[1].replace(/,/g, ''),
       v: num(m[1]),
       // An hourly wage is an input like a salary, just a smaller number; a
@@ -457,7 +467,13 @@ function auditText(
 
     const dollars = figures.filter((f) => f.raw.startsWith('$')).map((f) => f.v);
     const wages = figures.filter((f) => f.isWageInput && f.v < 150).map((f) => f.v * 2080);
-    const isGross = (v: number) =>
+    // "on a $140,000 Ontario salary" says which figure is the income even when
+    // another large one shares the sentence; read the words touching it, not
+    // the sentence as a whole.
+    const namedAsIncomeAt = (at: number, raw: string) =>
+      NAMED_AS_INCOME.test(sf.slice(Math.max(0, at - 24), at + raw.length + 24));
+    const isGross = (v: number, at = -1, raw = '') =>
+      (at >= 0 && namedAsIncomeAt(at, raw)) ||
       // "What is the take-home pay on $80,000?" names the income and nothing else.
       (dollars.filter((d) => d >= 15000).length === 1 && NAMED_AS_INCOME.test(g)) ||
       wages.some((w) => Math.abs(w - v) < 1) ||
@@ -471,7 +487,7 @@ function auditText(
         // In a take-home sentence the gross is still the input — the figure
         // the engine turns into another figure on the same line. Anything
         // else this large is a printed result, and is judged.
-        if (isGross(f.v)) continue;
+        if (isGross(f.v, f.at, f.raw)) continue;
         if (!NAMES_A_LIMIT.test(g) && !quotesTakeHome) continue;
       }
       if (f.raw.endsWith('%') && !statesARule) continue;
@@ -498,10 +514,20 @@ const SURFACE_SOURCES = [
   'app/landing-page-data.ts',
   'components/DataPage.tsx',
   'components/AboutPage.tsx',
+  'app/compare-provinces/page.tsx',
 ];
 const SURFACE_TEXTS = ['public/llms.txt'];
 
-/** Pull every string literal out of a TS/TSX source file, minus interpolations. */
+/**
+ * Pull the prose out of a TS/TSX source file: quoted strings AND JSX text.
+ *
+ * JSX text was the hole. A figure written as markup — `<td>$61,038</td>`, or a
+ * heading that says which salary a table is for — is not a string literal, so
+ * for a long time none of it was read. That is how the homepage and the
+ * province-comparison table kept a stale British Columbia column, and how the
+ * open-data preview kept an Ontario number from before the health premium: the
+ * audit was not looking at the part of those files a reader actually sees.
+ */
 function stringLiteralsOf(source: string): string {
   const out: string[] = [];
   // No dotAll flag: the negated classes already cross newlines for template
@@ -510,6 +536,12 @@ function stringLiteralsOf(source: string): string {
   for (const m of source.matchAll(re)) {
     const lit = (m[1] ?? m[2] ?? m[3] ?? '').replace(/\$\{[^}]*\}/g, ' ');
     if (lit.length >= 8) out.push(lit);
+  }
+  // JSX text nodes: what sits between tags, minus anything with a `{`, which is
+  // an expression rather than text and would drag code into the prose.
+  for (const m of source.matchAll(/>([^<>{}]+)</g)) {
+    const text = m[1].replace(/\s+/g, ' ').trim();
+    if (text.length >= 2 && /[0-9]/.test(text)) out.push(text);
   }
   return out.join('\n');
 }

@@ -82,11 +82,18 @@ export const QUEBEC_ABATEMENT_RATE = 0.165;
 // (For reference, at filing: $300, clawed back at 5% of family net income above
 // $15,000, gone at $21,000 — NS428 lines 71/80/82.)
 
-// British Columbia tax reduction — T4127 factor S, 2026. WITHHELD at source.
-// S = lesser of BC tax or ($575 reduced by 3.56% of taxable income over $25,570),
-// reaching zero at $41,722. Rate confirmed against BC428 (25) line 77 (3.56%)
-// and by arithmetic: 575 / (41,722 - 25,570) = 3.56%.
-export const BC_TAX_REDUCTION_BASE = 575;
+// British Columbia tax reduction — T4127 factor S. WITHHELD at source.
+// S = lesser of BC tax or ($690 reduced by 3.56% of taxable income over $25,570),
+// reaching zero at $44,952 (690 / 0.0356 + 25,570).
+//
+// $690, not the $575 this used to say. BC's February 17, 2026 budget raised the
+// basic reduction from $562 to $690 retroactive to January 1; $575 was only the
+// indexed figure the January edition of T4127 carried before the budget landed.
+// Source: T4127 123rd ed., effective July 1 2026, British Columbia factor S.
+// The same page gives a prorated $805 for July–December — that is a six-month
+// catch-up for the half-year withheld at $575, and using it here would overshoot,
+// because this engine computes the year, not one cheque inside it.
+export const BC_TAX_REDUCTION_BASE = 690;
 export const BC_TAX_REDUCTION_THRESHOLD = 25570;
 export const BC_TAX_REDUCTION_RATE = 0.0356;
 
@@ -163,7 +170,10 @@ export const PROVINCIAL_DATA: Record<string, ProvincialRule> = {
     doubleTimeThreshold: 12,
     basicPersonalAmount: 13216, // 2026 BC BPA
     brackets: [
-      { threshold: 50363,  rate: 0.0506 },
+      // 5.60%, up from 5.06%, per BC's February 17 2026 budget, retroactive to
+      // January 1 (T4127 123rd ed.). The 6.14% in CRA's July table is the
+      // Jul–Dec catch-up rate, not the year's rate — see BC_TAX_REDUCTION_BASE.
+      { threshold: 50363,  rate: 0.056  },
       { threshold: 100728, rate: 0.077  },
       { threshold: 115648, rate: 0.105  },
       { threshold: 140430, rate: 0.1229 },
@@ -275,7 +285,7 @@ export const PROVINCIAL_DATA: Record<string, ProvincialRule> = {
       { threshold: 33928,  rate: 0.095  },
       { threshold: 65820,  rate: 0.1347 },
       { threshold: 106890, rate: 0.166  },
-      { threshold: 142250, rate: 0.1762 },
+      { threshold: 142520, rate: 0.1762 },
       { threshold: 200000, rate: 0.19   },
       { threshold: Infinity, rate: 0.20 }
     ]

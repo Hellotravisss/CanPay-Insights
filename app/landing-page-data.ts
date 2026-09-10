@@ -356,7 +356,7 @@ const coreLandingPages: LandingPage[] = [
     kicker: 'British Columbia take-home pay',
     primaryKeyword: 'BC paycheck calculator',
     intro:
-      'If you earn $80,000 in British Columbia in 2026, you pay roughly $9,513 federal tax, $3,880 BC provincial tax, $4,446 CPP/CPP2, and $1,123 EI — leaving about $61,038 take-home, or roughly $5,086 a month. Enter your own salary or hourly wage below for an exact BC paycheque, including Vancouver, Victoria, Surrey, Burnaby, and Kelowna.',
+      'If you earn $80,000 in British Columbia in 2026, you pay roughly $9,513 federal tax, $4,050 BC provincial tax, $4,446 CPP/CPP2, and $1,123 EI — leaving about $60,867 take-home, or roughly $5,072 a month. Enter your own salary or hourly wage below for an exact BC paycheque, including Vancouver, Victoria, Surrey, Burnaby, and Kelowna.',
     examples: ['$70,000 after tax BC', '$30/hour after tax Vancouver', 'British Columbia salary calculator'],
     sections: [
       {
@@ -379,17 +379,17 @@ const coreLandingPages: LandingPage[] = [
       {
         question: 'How much tax will I pay in BC in 2026?',
         answer:
-          'It depends on your income, because BC tax is progressive. On an $80,000 salary in 2026 you pay about $9,513 in federal tax and $3,880 in BC provincial tax, plus $4,446 CPP/CPP2 and $1,123 EI, leaving roughly $61,038 take-home. On $60,000 you keep about $47,673; on $100,000 about $75,236.',
+          'It depends on your income, because BC tax is progressive. On an $80,000 salary in 2026 you pay about $9,513 in federal tax and $4,050 in BC provincial tax, plus $4,446 CPP/CPP2 and $1,123 EI, leaving roughly $60,867 take-home. On $60,000 you keep about $47,496; on $100,000 about $75,066.',
       },
       {
         question: 'How much is $80,000 after tax in BC?',
         answer:
-          'About $61,038 a year, or roughly $5,086 per month, after federal tax (~$9,513), BC provincial tax (~$3,880), CPP/CPP2 (~$4,446), and EI (~$1,123) for 2026.',
+          'About $60,867 a year, or roughly $5,072 per month, after federal tax (~$9,513), BC provincial tax (~$4,050), CPP/CPP2 (~$4,446), and EI (~$1,123) for 2026.',
       },
       {
         question: 'Does BC have provincial income tax?',
         answer:
-          'Yes. BC has its own seven-bracket provincial tax system (5.06% up to 20.5% in 2026) on top of federal income tax, CPP, and EI.',
+          'Yes. BC has its own seven-bracket provincial tax system (5.60% up to 20.5% in 2026) on top of federal income tax, CPP, and EI.',
       },
       {
         question: 'Can I calculate Vancouver take-home pay?',

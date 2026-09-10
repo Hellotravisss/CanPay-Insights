@@ -15,8 +15,8 @@ export const metadata: Metadata = {
 // CanPay Insights rules engine. Sorted highest take-home first.
 const COMPARISON_2026 = [
   { prov: 'Nunavut', net: '$62,001', mo: '$5,167', ded: '$17,999', rate: '22.5%' },
-  { prov: 'British Columbia', net: '$61,038', mo: '$5,086', ded: '$18,962', rate: '23.7%' },
   { prov: 'Northwest Territories', net: '$60,871', mo: '$5,073', ded: '$19,129', rate: '23.9%' },
+  { prov: 'British Columbia', net: '$60,867', mo: '$5,072', ded: '$19,133', rate: '23.9%' },
   { prov: 'Yukon', net: '$60,648', mo: '$5,054', ded: '$19,352', rate: '24.2%' },
   { prov: 'Alberta', net: '$60,409', mo: '$5,034', ded: '$19,591', rate: '24.5%' },
   { prov: 'Ontario', net: '$59,994', mo: '$5,000', ded: '$20,006', rate: '25.0%' },
@@ -33,7 +33,7 @@ const compareFaq = [
   {
     question: 'Which Canadian province has the highest take-home pay in 2026?',
     answer:
-      'On an $80,000 salary in 2026, Nunavut has the highest take-home pay at about $62,001 a year, followed by British Columbia (about $61,038) and the Northwest Territories (about $60,871). The territories and BC keep the most because of lower provincial and territorial tax rates.',
+      'On an $80,000 salary in 2026, Nunavut has the highest take-home pay at about $62,001 a year, followed by the Northwest Territories (about $60,871) and British Columbia (about $60,867) — four dollars apart. The territories and BC keep the most because of lower provincial and territorial tax rates.',
   },
   {
     question: 'Which province has the lowest take-home pay?',

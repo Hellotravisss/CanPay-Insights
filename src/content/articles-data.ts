@@ -105,17 +105,17 @@ First, we calculate the basic personal amount tax credits (2026):
 
 Tax calculations:
 - Federal tax on $35,000: about $2,254 after credits
-- Ontario tax on $35,000: about $988 after credits
+- Ontario tax on $35,000: about $1,288 after credits, including the $300 Ontario Health Premium
 - CPP contribution: ($35,000 - $3,500) × 5.95% = $1,874
 - EI contribution: $35,000 × 1.63% = $571
 
 **Final numbers:**
 - Gross annual income: $35,000
-- Total deductions: $5,687
-- **Net annual income: $29,313 (about $2,443/month)**
-- **Effective deduction rate: 16.3%**
+- Total deductions: $5,987
+- **Net annual income: $29,013 (about $2,418/month)**
+- **Effective deduction rate: 17.1%**
 
-Jamie's reality: Living on $2,443 per month in Toronto means finding roommates, cooking at home, and careful budgeting—but it is doable.
+Jamie's reality: Living on $2,418 per month in Toronto means finding roommates, cooking at home, and careful budgeting—but it is doable.
 
 **Scenario 2: Sarah - Mid-Level Professional ($65,000/year)**
 
@@ -155,8 +155,8 @@ Federal tax (2026 — lowest bracket now 14%):
 - Federal tax after credits: about $17,848
 
 Ontario tax:
-- 5.05% / 9.15% / 11.16% across the 2026 brackets, plus the Ontario surtax
-- Ontario tax after credits: about $8,743
+- 5.05% / 9.15% / 11.16% across the 2026 brackets, plus the Ontario surtax and the Ontario Health Premium
+- Ontario tax after credits: about $9,493, including the $750 Ontario Health Premium
 
 CPP and EI (at maximum):
 - CPP: $4,230 (first tier) + $416 (CPP2) = $4,646
@@ -164,9 +164,9 @@ CPP and EI (at maximum):
 
 **Final numbers:**
 - Gross annual income: $120,000
-- Total deductions: about $32,360
-- **Net annual income: $87,640 (about $7,303/month)**
-- **Effective deduction rate: 27.0%**
+- Total deductions: about $33,110
+- **Net annual income: $86,890 (about $7,241/month)**
+- **Effective deduction rate: 27.6%**
 
 Michael's reality: While $7,303 per month sounds like a lot (and it is), he is also paying over $32,000 in taxes and contributions. This is why tax planning becomes crucial at higher income levels.
 
@@ -178,7 +178,7 @@ If you are considering a move, here is how $65,000 looks across Canada:
 |----------|---------------|------------------------|------------------------|
 | **Ontario** | $3,444 | $50,280 | Baseline |
 | **Alberta** | $3,077 | $50,647 | **+$367** |
-| **British Columbia** | $2,768 | $50,956 | **+$676** |
+| **British Columbia** | $2,943 | $50,781 | **+$501** |
 | **Quebec** | $6,319 | $48,207 | **-$2,073** |
 
 At $65,000 the gap between Ontario, Alberta, and BC is small — within about $700. Quebec's higher provincial taxes fund more social services but leave you with roughly $2,100 less in your pocket.
@@ -285,7 +285,7 @@ const article2: Article = {
   publishedAt: "2025-01-16",
   readTime: 11,
   imageUrl: "https://images.unsplash.com/photo-1559511260-66a654ae982a?w=800&q=80",
-  directAnswer: "British Columbia features a 7-tier progressive tax system in 2026; an $80,000 salary in Vancouver nets approximately $61,038 annually after all mandatory deductions, representing a 23.7% effective tax rate.",
+  directAnswer: "British Columbia features a 7-tier progressive tax system in 2026; an $80,000 salary in Vancouver nets approximately $60,867 annually after all mandatory deductions, representing a 23.9% total deduction rate.",
   faq: [
     { question: "How many tax brackets does BC have in 2025?", answer: "BC uses a unique 7-tier provincial tax system, with rates starting at 5.06% and reaching 20.5% for high earners." },
     { question: "Is BC tax lower than Ontario's?", answer: "For many middle-income earners, BC's provincial tax is slightly lower than Ontario's; at $80,000, you pay about $400 less in provincial tax in BC." },
@@ -330,7 +330,7 @@ Federal tax on $80,000 (2026):
 
 BC provincial tax on $80,000 (2026):
 - 5.06% to $50,363, then 7.7% on the rest to $80,000
-- BC tax after credits: about $3,880
+- BC tax after credits: about $4,050
 
 CPP and EI:
 - CPP: $4,230 (first tier, maxed) + $216 CPP2 = $4,446
@@ -340,15 +340,15 @@ Basic personal amounts reduce total tax by approximately $2,800.
 
 **Marcus's Final Numbers:**
 - Gross annual income: $80,000
-- Total federal + provincial tax: $13,393 (federal $9,513 + BC $3,880)
+- Total federal + provincial tax: $13,563 (federal $9,513 + BC $4,050)
 - CPP: $4,446
 - EI: $1,123
-- **Net annual income: $61,038 (about $5,086/month)**
+- **Net annual income: $60,867 (about $5,072/month)**
 - **Effective deduction rate: 23.7%**
 
 ### The Vancouver Cost Reality
 
-Now that Marcus knows he has $5,086 per month, let's see what Vancouver living actually costs.
+Now that Marcus knows he has $5,072 per month, let's see what Vancouver living actually costs.
 
 **Monthly Expenses Breakdown:**
 
@@ -383,11 +383,11 @@ At $80,000, who wins?
 | Tax Component | British Columbia | Ontario | Difference |
 |--------------|------------------|---------|------------|
 | Federal Tax | $9,513 | $9,513 | Same |
-| Provincial Tax | $3,880 | $4,173 | BC wins by $293 |
+| Provincial Tax | $4,050 | $4,923 | BC wins by $873 |
 | CPP | $4,446 | $4,446 | Same |
 | EI | $1,123 | $1,123 | Same |
-| **Total Tax + Deductions** | **$18,962** | **$19,256** | **BC wins by $294** |
-| **Net Annual Income** | **$61,038** | **$60,744** | **BC wins by $294** |
+| **Total Tax + Deductions** | **$19,133** | **$20,006** | **BC wins by $873** |
+| **Net Annual Income** | **$60,867** | **$59,994** | **BC wins by $873** |
 
 **Surprise finding:** BC's tax rate is actually slightly lower than Ontario's at this income level!
 
@@ -943,9 +943,9 @@ const article5: Article = {
   publishedAt: "2025-01-19",
   readTime: 9,
   imageUrl: "https://images.unsplash.com/photo-1554224155-6726b3ff858f?w=800&q=80",
-  directAnswer: "A $50,000 salary in Canada in 2026 leaves between about $38,021 (Nova Scotia) and $41,153 (Nunavut) after federal tax, provincial tax, CPP and EI. Among the provinces, British Columbia keeps the most at $40,543; Ontario keeps $39,935 and Quebec $38,857.",
+  directAnswer: "A $50,000 salary in Canada in 2026 leaves between about $38,021 (Nova Scotia) and $41,153 (Nunavut) after federal tax, provincial tax, CPP and EI. Among the provinces, British Columbia keeps the most at $40,364; Ontario keeps $39,935 and Quebec $38,857.",
   faq: [
-    { question: "Which province has the lowest tax on a $50,000 salary?", answer: "Among the provinces, British Columbia keeps the most of a $50,000 salary in 2026 at about $40,543, with Alberta close behind at $40,331. Nunavut leads all jurisdictions at $41,153." },
+    { question: "Which province has the lowest tax on a $50,000 salary?", answer: "Among the provinces, British Columbia keeps the most of a $50,000 salary in 2026 at about $40,364, with Alberta close behind at $40,331. Nunavut leads all jurisdictions at $41,153." },
     { question: "How much is the take-home pay for $50k in Ontario?", answer: "In Ontario, a $50,000 salary nets approximately $39,935 in 2026 after federal tax, Ontario tax and health premium, CPP, and EI deductions." },
     { question: "What is the effective tax rate on a $50,000 salary?", answer: "The effective tax rate (total tax divided by gross income) for $50k ranges from about 18% to 24% of gross in 2026 depending on your province of residence, once CPP and EI are counted." },
     { question: "Does $50,000 qualify for the GST/HST credit?", answer: "A single person earning $50,000 may be above the income threshold for full GST/HST credits, though eligibility depends on your specific family situation." },
@@ -965,7 +965,7 @@ Here's what $50,000 looks like after all deductions in every jurisdiction (2026 
 | Province/Territory | Provincial Tax | Federal Tax | CPP/QPP | EI | Total Deductions | Annual Take-Home | Monthly Take-Home |
 |-------------------|----------------|-------------|-----|-----|------------------|------------------|-------------------|
 | **Alberta** | $1,892 | $4,195 | $2,767 | $815 | $9,669 | **$40,331** | **$3,361** |
-| **British Columbia** | $1,680 | $4,195 | $2,767 | $815 | $9,457 | **$40,543** | **$3,379** |
+| **British Columbia** | $1,859 | $4,195 | $2,767 | $815 | $9,636 | **$40,364** | **$3,364** |
 | **Saskatchewan** | $2,734 | $4,195 | $2,767 | $815 | $10,511 | **$39,489** | **$3,291** |
 | **Manitoba** | $3,367 | $4,195 | $2,767 | $815 | $11,144 | **$38,856** | **$3,238** |
 | **Ontario** | $2,288 | $4,195 | $2,767 | $815 | $10,065 | **$39,935** | **$3,328** |
@@ -1011,8 +1011,8 @@ Toronto is expensive, but smaller Ontario cities offer good value.
 
 **BC: Moderate Taxes, High Costs**
 
-- Annual take-home: $40,543
-- Monthly: $3,379
+- Annual take-home: $40,364
+- Monthly: $3,364
 - Vancouver rent will consume most of this
 
 ### What $3,300/Month Actually Buys
