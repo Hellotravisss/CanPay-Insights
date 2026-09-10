@@ -1966,4 +1966,122 @@ The 2.0% figure is a national average across every wage level, industry, and pro
 Wage and employment figures, including the wage-quartile breakdown and the "slowest since November 2017" comparison, are from Statistics Canada's [Labour Force Survey, August 2026](https://www150.statcan.gc.ca/n1/daily-quotidien/260904/dq260904a-eng.htm), released September 4, 2026. The 3.0% inflation figure is from Statistics Canada's [Consumer Price Index, July 2026](https://www150.statcan.gc.ca/n1/daily-quotidien/260817/dq260817a-eng.htm), released August 17, 2026 — the most recent CPI reading available as of publication, since the August 2026 CPI is not due until mid-September. Take-home pay figures are calculated with the CanPay Insights tax engine using 2026 federal and provincial tax brackets, CPP/CPP2 (QPP/QPP2 and QPIP for Quebec), and EI premiums, for a single full-time worker (2,080 hours/year) with basic personal amounts only — real paycheques vary with credits, benefits, RRSP contributions, and actual hours worked. This is general information, not financial or tax advice.
 `,
   },
+  {
+    id: 'study-19',
+    slug: 'nunavut-nwt-minimum-wage-september-2026',
+    title: "Nunavut's Minimum Wage Hits $20.17 — First in Canada Above $20, Effective September 1, 2026",
+    subtitle:
+      'Nunavut and the Northwest Territories both raised their minimum wage on September 1, 2026. We ran the new rates through the CanPay Insights tax engine to see what they are actually worth after tax.',
+    excerpt:
+      "Nunavut's minimum wage rose to $20.17 an hour on September 1, 2026 — the first minimum wage in Canada to cross $20, and now more than $2 above the federal minimum wage. The Northwest Territories raised its own rate to $17.20 the same day. After federal tax, territorial tax, CPP, and EI, a full-time Nunavut worker gains about $662 a year; a full-time NWT worker gains about $385.",
+    metaTitle: "Nunavut's Minimum Wage Hits $20.17, First in Canada",
+    metaDescription:
+      "Nunavut's minimum wage rose to $20.17/hr on Sept 1, 2026, first in Canada above $20. NWT rose to $17.20. See the after-tax gain from the CanPay tax engine.",
+    keywords: [
+      'nunavut minimum wage 2026',
+      'nunavut minimum wage $20.17',
+      'northwest territories minimum wage 2026',
+      'highest minimum wage in canada',
+      'nwt minimum wage september 2026',
+      'nunavut take home pay 2026',
+    ],
+    category: 'news',
+    tags: ['Nunavut', 'Northwest Territories', 'Minimum Wage', '2026'],
+    publishedAt: '2026-09-10',
+    readTime: 6,
+    imageUrl: '/blog/nunavut-nwt-minimum-wage-september-2026.svg',
+    directAnswer:
+      "Nunavut's minimum wage rose from $19.75 to $20.17 an hour on September 1, 2026 — the first minimum wage in Canada to pass $20, and now more than $2.00 above the federal minimum wage of $18.15. The Northwest Territories raised its own minimum wage the same day, from $16.95 to $17.20 an hour. Run through the CanPay Insights tax engine, a full-time (2,080 hours/year) Nunavut minimum-wage worker gains about $662 a year in take-home pay from the raise, and a full-time NWT worker gains about $385.",
+    faq: [
+      {
+        question: "What is Nunavut's new minimum wage as of September 2026?",
+        answer:
+          "$20.17 an hour, up from $19.75, effective September 1, 2026 — a 42-cent increase of about 2.1%. It is set under Nunavut's annual indexation formula, which factors in the change in the Consumer Price Index for Iqaluit and Nunavut's average hourly wage over the previous year, and it makes Nunavut the first jurisdiction in Canada to pass $20 an hour in minimum wage.",
+      },
+      {
+        question: "What is the Northwest Territories' new minimum wage?",
+        answer:
+          "$17.20 an hour, up from $16.95, also effective September 1, 2026 — a 25-cent increase of about 1.5%. The GNWT has used the same CPI-and-average-hourly-wage indexation formula for four consecutive years running.",
+      },
+      {
+        question: 'Is Nunavut now the highest minimum wage in Canada?',
+        answer:
+          "Yes, by a wide margin. Nunavut's $20.17 is $1.66 above Yukon's $18.51 (the second-highest in Canada) and $1.92 above British Columbia's $18.25. It is also the first provincial or territorial minimum wage anywhere in Canada to cross the $20 mark.",
+      },
+      {
+        question: 'How much extra take-home pay does the raise actually mean?',
+        answer:
+          "Run through the CanPay Insights tax engine for a full-time worker (2,080 hours/year, single, basic personal amounts only): a Nunavut minimum-wage worker's take-home pay rises from about $34,393 to $35,055 a year — a gain of roughly $662, or about $25 more per biweekly paycheque. An NWT minimum-wage worker's take-home pay rises from about $29,643 to $30,028 — a gain of roughly $385 a year, or about $15 more per paycheque.",
+      },
+      {
+        question: 'How are Nunavut and NWT minimum wages set?',
+        answer:
+          "Both territories use an annual formula rather than a one-off political decision: Nunavut combines the change in the Consumer Price Index for Iqaluit and Nunavut with the change in the territory's average hourly wage; the Northwest Territories does the same with its own CPI and average hourly wage figures. Both reviews land on September 1 each year.",
+      },
+      {
+        question: 'Are other provinces raising their minimum wage this fall too?',
+        answer:
+          "Yes — five provinces raise minimum wage on October 1, 2026: [Ontario, Nova Scotia, Prince Edward Island, and Manitoba](/blog/minimum-wage-increases-october-2026), plus [Saskatchewan](/blog/saskatchewan-minimum-wage-october-2026). Combined with Nunavut and NWT's September 1 increases, seven of Canada's 13 provinces and territories will have raised their minimum wage within a single six-week window this fall.",
+      },
+    ],
+    content: `
+## Canada's first $20-an-hour minimum wage
+
+Nunavut's general minimum wage rose from **$19.75 to $20.17 an hour on September 1, 2026** — a 42-cent increase (about 2.1%) that makes it the first minimum wage anywhere in Canada to pass $20. The [Government of Nunavut announced the new rate on June 30, 2026](https://www.gov.nu.ca/en/newsroom/nunavuts-minimum-wage-increases-september-1-2017-hour-2026-06-30), calculated under the territory's annual formula, which combines the change in the Consumer Price Index for Iqaluit and Nunavut with the change in the territory's average hourly wage over the previous year.
+
+The Northwest Territories raised its own minimum wage the same day, from **$16.95 to $17.20 an hour** — a 25-cent increase (about 1.5%), confirmed by the [Government of the Northwest Territories](https://www.gov.nt.ca/en/newsroom/nwt-minimum-wage-set-increase-sept-1-2026) and reported by [CBC News](https://www.cbc.ca/news/canada/north/n-w-t-minimum-wage-to-increase-by-25-cents-on-sept-1-9.7293281). It is the fourth consecutive year the GNWT has used its current CPI-and-average-hourly-wage formula.
+
+We ran both new rates through the CanPay Insights tax engine (2026 federal and territorial brackets, CPP, and EI) to see exactly what they are worth after tax.
+
+### The rates, in one table
+
+| | Old rate | New rate (Sept 1, 2026) | Change | Formula basis |
+| --- | --- | --- | --- | --- |
+| Nunavut | $19.75/hr | **$20.17/hr** | +$0.42 (+2.1%) | Iqaluit/Nunavut CPI + average hourly wage |
+| Northwest Territories | $16.95/hr | **$17.20/hr** | +$0.25 (+1.5%) | NWT CPI + average hourly wage |
+
+### What it's actually worth after tax
+
+Full-time hours (40/week, 2,080/year), 2026 federal and territorial tax rates, CPP, EI, and basic personal amounts only:
+
+| Territory | Rate | Gross pay/year | Take-home pay/year | Take-home/month | Extra vs. old rate |
+| --- | --- | --- | --- | --- | --- |
+| Nunavut | $19.75/hr (old) | $41,080 | $34,393 | $2,866 | — |
+| Nunavut | **$20.17/hr (new)** | **$41,954** | **$35,055** | **$2,921** | **+$662/yr** |
+| NWT | $16.95/hr (old) | $35,256 | $29,643 | $2,470 | — |
+| NWT | **$17.20/hr (new)** | **$35,776** | **$30,028** | **$2,502** | **+$385/yr** |
+
+*Calculated by CanPay Insights using the 2026 tax engine for a single worker with no other income or credits, paid biweekly (26 pay periods).*
+
+A minimum-wage worker keeps roughly 76 cents of every extra dollar in Nunavut ($662 of the $874 gross raise) and about 74 cents on the dollar in NWT ($385 of the $520 gross raise) — the rest goes to federal tax, territorial tax, CPP, and EI.
+
+### Where Nunavut and NWT now rank nationally
+
+Nunavut was already Canada's highest minimum wage before this increase; it now pulls further ahead. NWT's raise doesn't change its rank, but it widens the gap behind it:
+
+| Rank | Province/territory | Minimum wage | Take-home/year |
+| --- | --- | --- | --- |
+| 1 | Nunavut | **$20.17** | $35,055 |
+| 2 | Yukon | $18.51 | $31,846 |
+| 3 | British Columbia | $18.25 | $31,536 |
+| 4 | Ontario | $17.60 | $30,179 |
+| 5 | Northwest Territories | **$17.20** | $30,028 |
+
+*Yukon, BC, and Ontario rates are unchanged as of this writing. Ontario rises to $17.95 on October 1, 2026. For the full 13-jurisdiction ranking, see our [minimum wage take-home pay study](/blog/minimum-wage-take-home-pay-canada-2026).*
+
+Nunavut's $20.17 is now $1.66 above Yukon's $18.51 (the next-highest in Canada), $1.92 above BC's $18.25, and more than $2.00 above the federal minimum wage of $18.15 that applies to federally regulated employers. NWT, at $17.20, has closed to within $151 a year of Ontario's take-home pay despite a wage rate 40 cents lower — a reminder that low territorial income tax, not just the hourly rate, drives take-home pay in the North.
+
+### A busy fall for minimum wage across Canada
+
+Nunavut and NWT's September 1 increases are the first of several this fall. Five more provinces raise their minimum wage on October 1, 2026: [Ontario, Nova Scotia, Prince Edward Island, and Manitoba](/blog/minimum-wage-increases-october-2026), plus [Saskatchewan](/blog/saskatchewan-minimum-wage-october-2026). Between September 1 and October 1, seven of Canada's 13 provinces and territories will have raised their minimum wage.
+
+### See your own numbers
+
+These figures assume a single worker with no other income or credits. Check your own paycheque with the free [Nunavut paycheck calculator](/nunavut-paycheck-calculator) or [Northwest Territories paycheck calculator](/northwest-territories-paycheck-calculator), read the [Nunavut take-home pay guide](/blog/nunavut-take-home-pay-guide-2026) or [Northwest Territories take-home pay guide](/blog/northwest-territories-take-home-pay-guide-2026), or compare either territory against every other province with [compare provinces](/compare-provinces).
+
+## Sources & disclaimer
+
+Rate and effective-date figures are based on the [Government of Nunavut's June 30, 2026 announcement](https://www.gov.nu.ca/en/newsroom/nunavuts-minimum-wage-increases-september-1-2017-hour-2026-06-30) and the [Government of the Northwest Territories' announcement](https://www.gov.nt.ca/en/newsroom/nwt-minimum-wage-set-increase-sept-1-2026), cross-checked against [CBC News](https://www.cbc.ca/news/canada/north/n-w-t-minimum-wage-to-increase-by-25-cents-on-sept-1-9.7293281) and Bloomberg Tax coverage of both increases. Take-home pay figures are calculated with the CanPay Insights tax engine using 2026 federal and territorial tax rates, full-time hours (2,080/year), a single worker, and basic personal amounts only — real paycheques vary with credits, benefits, and actual hours worked. This is general information, not tax advice.
+`,
+  },
 ];
