@@ -6,6 +6,7 @@ import Donut from './Donut';
 import { countryName } from './countries';
 import TrendChart from './TrendChart';
 import Candles, { type CandleData } from './Candles';
+import IncomeBarometer, { type BarometerData } from './IncomeBarometer';
 import CrossTab, { type CrossTabData } from './CrossTab';
 import Provenance, { type ProvenanceData } from './Provenance';
 import HourChart from './HourChart';
@@ -211,6 +212,7 @@ export default function StatsDashboard() {
   const [indIncome, setIndIncome] = useState<IndustryIncomeRow[] | null>(null);
   const [series, setSeries] = useState<any | null>(null);
   const [candles, setCandles] = useState<CandleData | null>(null);
+  const [barometer, setBarometer] = useState<BarometerData | null>(null);
   const [cross, setCross] = useState<CrossTabData | null>(null);
   const [prov, setProv] = useState<ProvenanceData | null>(null);
   const [geo, setGeo] = useState<{ city: string; lat: number; lon: number; n: number }[] | null>(null);
@@ -226,6 +228,9 @@ export default function StatsDashboard() {
     });
     insights('candles').then(({ data }) => {
       if (data) setCandles(data as CandleData);
+    });
+    insights('income_barometer').then(({ data }) => {
+      if (data) setBarometer(data as BarometerData);
     });
     insights('crosstab').then(({ data }) => {
       if (data) setCross(data as CrossTabData);
@@ -1087,6 +1092,23 @@ export default function StatsDashboard() {
               )}
             >
               <Candles data={candles} />
+            </Card>
+          </div>
+        )}
+
+        {/* The same people, rolled up: is the income of whoever comes here
+            drifting, month over month? A sideways read on wages — never a
+            national statistic, and the panel says so in its own footnote. */}
+        {barometer && barometer.month.length > 0 && (
+          <div className="mt-6">
+            <Card
+              title={T('Income barometer', '收入晴雨表')}
+              hint={T(
+                'What people said they earn, by month, quarter and year — the drift, not the level.',
+                '来算工资的人报的收入，按月、季、年汇总 —— 看漂移，不看绝对值。',
+              )}
+            >
+              <IncomeBarometer data={barometer} zh={zh} />
             </Card>
           </div>
         )}

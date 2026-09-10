@@ -472,3 +472,71 @@ export function monthlySnapshot(ev: Ev[], month: string /* YYYY-MM */) {
     comparison_sessions: sessionsComparing(rows),
   };
 }
+
+/**
+ * Income barometer — what the people who came here to calculate said they
+ * earn, rolled up by month, quarter and year, so the drift over time is
+ * visible.
+ *
+ * What it can and cannot claim, spelled out because the panel will be read as
+ * "national income":
+ *  - Exact income is never stored, only one of seven brackets, so the "mean" is
+ *    an estimate from bracket midpoints — and the top bracket is open, so it
+ *    is counted at MIDPOINT_TOP. The median bracket needs no assumption at all,
+ *    which is why it is shown beside the estimate rather than under it.
+ *  - `below_median_share` compares each person to StatCan's median wage for
+ *    THEIR province at the time they calculated (median_ratio_bucket), so it
+ *    is a ratio to the country, not a number invented here.
+ *  - This is a self-selected sample: people who check a pay calculator skew
+ *    lower-income than the country. A period with fewer than THIN events is
+ *    flagged; a quartile over a handful of visits is decoration.
+ */
+const MIDPOINTS: Record<string, number> = {
+  'under-30k': 15000, '30-50k': 40000, '50-70k': 60000, '70-90k': 80000,
+  '90-120k': 105000, '120-160k': 140000, '160k-plus': 180000,
+};
+const MIDPOINT_TOP = 180000;
+const BELOW_MEDIAN = new Set(['under-0.5', '0.5-0.75', '0.75-1']);
+const THIN = 30;
+
+export type BarometerRow = {
+  k: string; n: number; thin: boolean;
+  mean_est: number | null;          // bracket-midpoint estimate, CAD/yr
+  median_lvl: number | null;        // 1..7
+  median_label: string | null;
+  below_median_share: number | null; // % of those with a ratio, earning under their province's median
+  brackets: number[];               // counts per bracket, BRACKETS order
+};
+
+export function calcIncomeBarometer(ev: Ev[]) {
+  const q = (d: string) => `${d.slice(0, 4)}-Q${Math.floor((+d.slice(5, 7) - 1) / 3) + 1}`;
+  const keys: Record<'month' | 'quarter' | 'year', (d: string) => string> = {
+    month: (d) => d.slice(0, 7), quarter: q, year: (d) => d.slice(0, 4),
+  };
+  const roll = (keyOf: (d: string) => string): BarometerRow[] => {
+    const g = new Map<string, Ev[]>();
+    for (const r of ev) {
+      if (!r.income_bracket) continue;
+      const k = keyOf(localDate(r.created_at as string));
+      g.set(k, [...(g.get(k) ?? []), r]);
+    }
+    return [...g.entries()].sort(([a], [b]) => a.localeCompare(b)).map(([k, rows]) => {
+      const lvls = rows.map((r) => BRACKETS.indexOf(r.income_bracket as string) + 1).filter(Boolean);
+      const brackets = BRACKETS.map((b) => rows.filter((r) => r.income_bracket === b).length);
+      const mean = lvls.length ? Math.round(rows.reduce((s, r) => s + (MIDPOINTS[r.income_bracket as string] ?? 0), 0) / lvls.length) : null;
+      const med = percentile(lvls, 0.5);
+      const medLvl = med === null ? null : Math.round(med);
+      const rated = rows.filter((r) => r.median_ratio_bucket);
+      const below = rated.filter((r) => BELOW_MEDIAN.has(r.median_ratio_bucket as string)).length;
+      return {
+        k, n: rows.length, thin: rows.length < THIN,
+        mean_est: mean, median_lvl: medLvl, median_label: medLvl ? BRACKET_LABELS[medLvl - 1] : null,
+        below_median_share: pct1(below, rated.length), brackets,
+      };
+    });
+  };
+  return {
+    month: roll(keys.month), quarter: roll(keys.quarter), year: roll(keys.year),
+    labels: BRACKET_LABELS, midpoints: BRACKETS.map((b) => MIDPOINTS[b]), midpoint_top: MIDPOINT_TOP, thin: THIN,
+  };
+}
