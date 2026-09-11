@@ -614,7 +614,9 @@ const App: React.FC = () => {
               </section>
 
               {/* Sister site — U.S. edition, honest same-team recommendation */}
-              <div className="mt-6">
+              {/* Same width as the hero card above — at full container width it
+                  read as a banner from somewhere else rather than part of the page. */}
+              <div className="mx-auto mt-6 w-full max-w-xl md:max-w-5xl">
                 <SisterSiteCard />
               </div>
             </div>
