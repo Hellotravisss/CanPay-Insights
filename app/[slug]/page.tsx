@@ -6,6 +6,7 @@ import ShareLinks from '../../components/ShareLinks';
 import SalaryBreakdownPanel from '../../components/SalaryBreakdownPanel';
 import JobsAtThisSalary from '../../components/JobsAtThisSalary';
 import PartnerSlot from '../../components/PartnerSlot';
+import { getProvinceSeoConfig } from '../../lib/salaryFigures';
 import SisterSiteCard from '../../components/SisterSiteCard';
 import { getLandingPage, landingPages } from '../landing-page-data';
 import AvowdCredit from '../../components/AvowdCredit';
@@ -220,8 +221,13 @@ export default async function LandingPage({ params }: Props) {
                 <>
                   <SalaryContext amount={amount} provinceSlug={provinceSlug} />
                   <JobsAtThisSalary amount={amount} provinceName={provinceName} />
-                  {/* Tax-filing slot appears by itself in February and hides
-                      again after the April deadline. */}
+                  {/* The RRSP referral sits under the figures that just showed
+                      what an RRSP contribution saves. The tax-filing slot
+                      appears by itself in February and hides after April 30. */}
+                  <PartnerSlot
+                    id="wealthsimple-invest"
+                    track={{ mode: 'annual', province: getProvinceSeoConfig(provinceSlug).province, annualIncome: amount, lang: 'en' }}
+                  />
                   <PartnerSlot id="wealthsimple-tax" />
                 </>
               );

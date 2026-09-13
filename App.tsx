@@ -23,6 +23,7 @@ import IndustryComparison from './components/IndustryComparison';
 import IntentPrompt from './components/IntentPrompt';
 import ExpectationPrompt from './components/ExpectationPrompt';
 import FakeDoors from './components/FakeDoors';
+import PartnerSlot from './components/PartnerSlot';
 import ShareReward from './components/ShareReward';
 import CapTimeline from './components/CapTimeline';
 import PayCurve from './components/PayCurve';
@@ -707,6 +708,16 @@ const App: React.FC = () => {
                 </div>
                 
                 <ResultsSection results={results} provinceName={currentProvince} />
+                
+                {/* The RRSP referral, directly under the line that just said what an RRSP saves. */}
+                
+                <PartnerSlot
+                
+                  id="wealthsimple-invest"
+                
+                  track={{ mode, province: currentProvince, annualIncome: results.grossPayAnnual, lang }}
+                
+                />
                 {/* Immediately under the figure: the reaction is the data, and
                     it evaporates the moment the reader scrolls on. */}
                 {/* Above the ceilings, real paycheques jump mid-year when

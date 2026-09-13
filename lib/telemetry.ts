@@ -446,7 +446,7 @@ function detectBrowser(): string | null {
 // to carry.
 export type WorkArrangement = 'onsite' | 'remote' | 'hybrid';
 /** Fake-door products: which paid offer a visitor tapped. */
-export type ProductInterest = 'relocation' | 'offer-compare' | 'rrsp-season';
+export type ProductInterest = 'relocation' | 'offer-compare' | 'rrsp-season' | 'wealthsimple-invest';
 export type AgeBand = 'under-25' | '25-34' | '35-44' | '45-54' | '55-64' | '65-plus';
 
 /** Q4 rotation pool — one of these per visitor, all optional. */
