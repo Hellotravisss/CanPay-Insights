@@ -124,7 +124,9 @@ export default function Candles({ data }: { data: CandleData | null }) {
                     turned into one solid smear. Label only every `every`-th
                     day, always the first of a month, and always the hovered
                     one; everything else stays readable through the hover. */}
-                {(hover?.d === c.d || c.d.endsWith('-01') || i % every === 0) && (
+                {(hover?.d === c.d || c.d.endsWith('-01') ||
+                  // an interval label yields to a month-first within one step of it
+                  (i % every === 0 && !data.candles.some((o, j) => j !== i && Math.abs(j - i) < every && o.d.endsWith('-01')))) && (
                   <text x={x(i)} y={H - 12} textAnchor="middle"
                         className={hover?.d === c.d ? 'fill-slate-200' : 'fill-slate-500'}
                         style={{ fontSize: 10, fontFamily: 'ui-monospace, monospace' }}>
