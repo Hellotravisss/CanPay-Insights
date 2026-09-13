@@ -66,6 +66,8 @@ export default function Candles({ data }: { data: CandleData | null }) {
   }
 
   const { W, H, padL, padT, plotH, plotW, body, x, y } = view;
+  // A label needs ~36px of axis; below that, thin them out.
+  const every = Math.max(1, Math.ceil(36 / (plotW / Math.max(1, data.candles.length))));
   const shown = hover ?? data.candles[data.candles.length - 1];
   const labelOf = (lvl: number) =>
     data.levels.find((l) => l.lvl === Math.round(lvl))?.label ?? String(lvl);
@@ -118,11 +120,17 @@ export default function Candles({ data }: { data: CandleData | null }) {
                 {/* median tick */}
                 <line x1={x(i) - body / 2} x2={x(i) + body / 2} y1={y(c.med)} y2={y(c.med)}
                       stroke="#0b1220" strokeWidth="2" opacity={thin ? 0.5 : 1} />
-                <text x={x(i)} y={H - 12} textAnchor="middle"
-                      className={hover?.d === c.d ? 'fill-slate-200' : 'fill-slate-500'}
-                      style={{ fontSize: 10, fontFamily: 'ui-monospace, monospace' }}>
-                  {c.d.slice(5)}
-                </text>
+                {/* Sixty candles cannot each carry a date at 10px — the axis
+                    turned into one solid smear. Label only every `every`-th
+                    day, always the first of a month, and always the hovered
+                    one; everything else stays readable through the hover. */}
+                {(hover?.d === c.d || c.d.endsWith('-01') || i % every === 0) && (
+                  <text x={x(i)} y={H - 12} textAnchor="middle"
+                        className={hover?.d === c.d ? 'fill-slate-200' : 'fill-slate-500'}
+                        style={{ fontSize: 10, fontFamily: 'ui-monospace, monospace' }}>
+                    {c.d.slice(5)}
+                  </text>
+                )}
               </g>
             );
           })}
