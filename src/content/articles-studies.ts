@@ -2084,4 +2084,131 @@ These figures assume a single worker with no other income or credits. Check your
 Rate and effective-date figures are based on the [Government of Nunavut's June 30, 2026 announcement](https://www.gov.nu.ca/en/newsroom/nunavuts-minimum-wage-increases-september-1-2017-hour-2026-06-30) and the [Government of the Northwest Territories' announcement](https://www.gov.nt.ca/en/newsroom/nwt-minimum-wage-set-increase-sept-1-2026), cross-checked against [CBC News](https://www.cbc.ca/news/canada/north/n-w-t-minimum-wage-to-increase-by-25-cents-on-sept-1-9.7293281) and Bloomberg Tax coverage of both increases. Take-home pay figures are calculated with the CanPay Insights tax engine using 2026 federal and territorial tax rates, full-time hours (2,080/year), a single worker, and basic personal amounts only — real paycheques vary with credits, benefits, and actual hours worked. This is general information, not tax advice.
 `,
   },
+  {
+    id: 'study-20',
+    slug: 'ontario-trillium-benefit-2026',
+    title: 'Ontario Trillium Benefit Hits $378, $1,307 in 2026-27',
+    subtitle:
+      'The Ontario Sales Tax Credit, Ontario Energy and Property Tax Credit, and Northern Ontario Energy Credit all rose about 1.9% for the July 2026–June 2027 benefit year. Here is what actually landed with the September 10 payment.',
+    excerpt:
+      "The Ontario Trillium Benefit's three components all rose for the 2026-27 benefit year: the Ontario Sales Tax Credit maxes out at $378 per person (up from $371), the Ontario Energy and Property Tax Credit at $1,307 for adults under 65 (up from $1,283), and the Northern Ontario Energy Credit at $189 for singles (up from $185). The September 10, 2026 payment was the third of twelve under the new rates.",
+    metaTitle: 'Ontario Trillium Benefit Hits $378, $1,307 in 2026-27',
+    metaDescription:
+      'Ontario Trillium Benefit maximums rise to $378 (OSTC), $1,307 (OEPTC) and $189 (NOEC) for 2026-27. See phase-out thresholds and payment dates.',
+    keywords: [
+      'ontario trillium benefit 2026',
+      'ontario trillium benefit amount',
+      'ontario sales tax credit 2026',
+      'ontario energy and property tax credit 2026',
+      'ontario trillium benefit payment dates',
+      'northern ontario energy credit 2026',
+    ],
+    category: 'news',
+    tags: ['Ontario', 'CRA', 'Government Benefits', '2026', 'Payment Dates'],
+    publishedAt: '2026-09-14',
+    readTime: 7,
+    imageUrl: '/blog/ontario-trillium-benefit-2026.svg',
+    directAnswer:
+      'For the July 2026 to June 2027 benefit year (based on your 2025 tax return), the Ontario Trillium Benefit\'s three credits all rose about 1.9%: the Ontario Sales Tax Credit (OSTC) now maxes out at $378 per adult and per child (up from $371), the Ontario Energy and Property Tax Credit (OEPTC) at $1,307 a year for those 18-64 and $1,488 for seniors 65+ (up from $1,283 and $1,461), and the Northern Ontario Energy Credit (NOEC) at $189 for a single person with no children and $290 for a couple or single parent (up from $185 and $285). The CRA pays the combined total on the 10th of each month; the September 10, 2026 deposit was the third of twelve payments under the new rates, and most recipients see the same amount they got in July and August unless their eligibility changed.',
+    faq: [
+      {
+        question: 'How much is the Ontario Trillium Benefit in 2026?',
+        answer:
+          'It depends on your income, age, rent or property tax paid, family size, and whether you live in Northern Ontario, because the OTB is really three credits added together. For the July 2026-June 2027 benefit year, the maximums are $378 per adult and per child (Ontario Sales Tax Credit), up to $1,307 a year for the Ontario Energy and Property Tax Credit if you are 18-64 ($1,488 if you are 65 or older), and, in Northern Ontario only, up to $189 (single, no children) or $290 (couple or single parent) for the Northern Ontario Energy Credit. A childless single renter in Southern Ontario who qualifies for the full OSTC and OEPTC could get up to $1,685 a year, or about $140 a month.',
+      },
+      {
+        question: 'When is the Ontario Trillium Benefit paid in 2026?',
+        answer:
+          'Monthly, on the 10th of each month (or the closest business day) from July 2026 to June 2027, based on your 2025 income tax return. The September payment landed September 10, 2026 — the third of twelve payments for this benefit year. If your total annual entitlement is $500 or less, the CRA pays it all at once in July instead of spreading it over 12 months.',
+      },
+      {
+        question: 'Why did my Ontario Trillium Benefit go up this year?',
+        answer:
+          "All three OTB components are indexed for inflation each July. For the 2026-27 benefit year the maximums rose about 1.9% across the board: the Ontario Sales Tax Credit went from $371 to $378, the Ontario Energy and Property Tax Credit from $1,283 to $1,307 (non-seniors) and $1,461 to $1,488 (seniors), and the Northern Ontario Energy Credit from $185 to $189 (single) and $285 to $290 (couples/single parents). If your income and living costs didn't change much, your payment likely rose by a similar percentage.",
+      },
+      {
+        question: 'At what income does the Ontario Trillium Benefit stop?',
+        answer:
+          'The Ontario Energy and Property Tax Credit is reduced by 2% of adjusted family net income above $29,047 (single, no children) or $36,309 (single parents and couples); the Ontario Sales Tax Credit is reduced by 4% of income above those same thresholds. For a childless single person claiming only the $1,685 combined OSTC and OEPTC maximum, the two credits are fully phased out (reduced to zero) at an adjusted net income of roughly $57,100. Families with children, higher rent, or higher property tax bills can qualify at higher incomes because their maximum entitlement is larger to begin with.',
+      },
+      {
+        question: 'Do I need to apply for the Ontario Trillium Benefit?',
+        answer:
+          'No separate application — you claim it by completing the ON-BEN form with your annual income tax return. The CRA then calculates your OSTC, OEPTC, and (if you live in Northern Ontario) NOEC automatically from your reported income, rent or property tax paid, age, and family size, and combines them into one monthly OTB deposit.',
+      },
+      {
+        question: 'How does the Ontario Trillium Benefit relate to my paycheque?',
+        answer:
+          "The OTB is not payroll income — it doesn't appear on a pay stub and isn't affected by your employer's deductions. But because eligibility phases out based on your adjusted family net income, a raise or new job can gradually reduce it even as your take-home pay from work rises. If you're comparing a raise against a possible OTB reduction, it helps to check your net pay from work separately with the free [CanPay Insights salary calculator](/salary-after-tax-canada) or [Ontario paycheck calculator](/ontario-paycheck-calculator), since the OTB's income test uses net income from your tax return, not your after-tax paycheque.",
+      },
+    ],
+    content: `
+## Three credits, one deposit, all up about 1.9%
+
+The Ontario Trillium Benefit (OTB) — the combined monthly payment that folds together the Ontario Sales Tax Credit (OSTC), the Ontario Energy and Property Tax Credit (OEPTC), and, for Northern Ontario residents, the Northern Ontario Energy Credit (NOEC) — increased across all three components for the **July 2026 to June 2027 benefit year**, based on 2025 tax returns. The **September 10, 2026** deposit was the third payment issued under the new, higher maximums, following the first payment on July 10.
+
+We pulled the exact caps from the Canada Revenue Agency's own [OTB calculation sheets](https://www.canada.ca/en/revenue-agency/services/child-family-benefits/provincial-territorial-programs/ontario-energy-property-tax-credit-oeptc-calculation-sheets/2026-ontario-energy-property-tax-credit-calculation-sheets.html) to see exactly what changed.
+
+### The new maximums, in one table
+
+| Credit | 2025-26 maximum | 2026-27 maximum | Change |
+| --- | --- | --- | --- |
+| Ontario Sales Tax Credit (OSTC), per adult/child | $371 | **$378** | +$7 (+1.9%) |
+| Ontario Energy and Property Tax Credit (OEPTC), age 18-64 | $1,283 | **$1,307** | +$24 (+1.9%) |
+| Ontario Energy and Property Tax Credit (OEPTC), age 65+ | $1,461 | **$1,488** | +$27 (+1.8%) |
+| Northern Ontario Energy Credit (NOEC), single, no children | $185 | **$189** | +$4 (+2.2%) |
+| Northern Ontario Energy Credit (NOEC), couple/single parent | $285 | **$290** | +$5 (+1.8%) |
+
+*Figures for the OEPTC and NOEC are from the CRA's official 2026 calculation sheets; OSTC and prior-year figures corroborated against multiple independent tax-benefit trackers.*
+
+### What that adds up to for a real household
+
+The OTB pays out the sum of whichever credits you qualify for. Assuming you claim the full maximum of each (income and housing costs below the phase-out point):
+
+| Household | OSTC | OEPTC | NOEC (Northern only) | Max annual OTB | Max monthly |
+| --- | --- | --- | --- | --- | --- |
+| Single, no children, Southern Ontario | $378 | $1,307 | — | **$1,685** | $140 |
+| Single senior (65+), Southern Ontario | $378 | $1,488 | — | **$1,866** | $156 |
+| Single, no children, Northern Ontario | $378 | $1,307 | $189 | **$1,874** | $156 |
+| Family of 4 (2 adults, 2 kids), Southern Ontario | $1,512 | $1,307 | — | **$2,819** | $235 |
+| Family of 4 (2 adults, 2 kids), Northern Ontario | $1,512 | $1,307 | $290 | **$3,109** | $259 |
+
+The OSTC pays a flat $378 for every adult and every child in the household, which is why it scales directly with family size; the OEPTC and NOEC are capped per household regardless of how many people live there.
+
+### The income test: where it phases out
+
+None of this is a flat payment — all three credits shrink as income rises. Using the CRA's official calculation sheets:
+
+- **OEPTC** is reduced by **2%** of adjusted family net income above **$29,047** (single, no children) or **$36,309** (single parents and couples, with or without children).
+- **OSTC** is reduced by **4%** of adjusted family net income above those same thresholds.
+
+For a childless single person claiming only the OSTC and OEPTC (combined maximum $1,685, combined reduction rate 6% since both credits share the $29,047 threshold), the benefit is fully phased out around **$57,100** in adjusted net income. Higher-income families phase out at a higher dollar figure because their starting entitlement — more people, more rent or property tax — is larger to begin with.
+
+### Payment schedule for the rest of the 2026-27 benefit year
+
+The CRA pays the combined OTB on the 10th of each month (or the nearest business day) for twelve months, from July 2026 through June 2027:
+
+| Payment | Date |
+| --- | --- |
+| 1st | July 10, 2026 |
+| 2nd | August 10, 2026 |
+| 3rd | **September 10, 2026** |
+| 4th | October 2026 |
+| 5th | November 2026 |
+| 6th | December 2026 |
+| ... | continues monthly through June 2027 |
+
+If your total annual entitlement works out to **$500 or less**, the CRA pays the whole year's amount as one lump sum in July rather than spreading it over 12 months. You can also elect on your tax return to receive your entire annual entitlement as a single payment the following June instead of monthly instalments.
+
+### How this fits alongside your paycheque
+
+The OTB isn't payroll income — it never touches a pay stub, and it isn't taxed or affected by your employer's CPP, EI, or income tax withholding. But because it phases out with income, a raise at work can shrink your OTB even as your take-home pay grows, and the two numbers don't move at the same rate. If you're weighing a raise, more hours, or a new job against how it affects benefits like the OTB, keep the calculations separate: check what a raise actually nets you after tax with the free [CanPay Insights salary calculator](/salary-after-tax-canada) or the [Ontario paycheck calculator](/ontario-paycheck-calculator), and use your adjusted net income from your tax return — not your after-tax pay — for any benefit's income test.
+
+For other federal benefits also paying out or changing this fall, see our coverage of the [Canada Child Benefit increase](/blog/canada-child-benefit-increase-2026), the [Canada Workers Benefit](/blog/canada-workers-benefit-payments-2026), and the [Canada Groceries and Essentials Benefit](/blog/canada-groceries-essentials-benefit-2026). For Ontario's tax brackets and take-home pay more broadly, see the [Ontario](/ontario) page.
+
+## Sources & disclaimer
+
+2026-27 OEPTC and NOEC maximums, income thresholds, and phase-out rates are taken directly from the Canada Revenue Agency's official [2026 Ontario Energy and Property Tax Credit calculation sheets](https://www.canada.ca/en/revenue-agency/services/child-family-benefits/provincial-territorial-programs/ontario-energy-property-tax-credit-oeptc-calculation-sheets/2026-ontario-energy-property-tax-credit-calculation-sheets.html) (single, no children; single with sole care of a child; and single seniors versions) and the [2026 Northern Ontario Energy Credit calculation sheets](https://www.canada.ca/en/revenue-agency/services/child-family-benefits/provincial-territorial-programs/2026-northern-ontario-energy-credit-noec-calculation-sheets.html). The $378 OSTC maximum is confirmed on the CRA's [Ontario Trillium Benefit](https://www.canada.ca/en/revenue-agency/services/child-family-benefits/provincial-territorial-programs/ontario-trillium-benefit-questions-answers.html) program pages; 2025-26 prior-year figures ($371, $1,283, $1,461, $185, $285) are corroborated across independent tax-benefit trackers and are internally consistent with the confirmed 2026-27 indexation rate of roughly 1.9%. Combined household totals and phase-out breakeven points are CanPay Insights' own calculations from these official maximums and thresholds. This is general information, not tax advice — confirm your own entitlement with the CRA's [Ontario Trillium Benefit](https://www.canada.ca/en/revenue-agency/services/child-family-benefits/provincial-territorial-programs/ontario-trillium-benefit-questions-answers.html) page or a tax professional.
+`,
+  },
 ];
