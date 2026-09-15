@@ -1,0 +1,45 @@
+# Downloads CRA's official T4032 payroll deduction tables (bi-weekly, English)
+# for every province and territory, for the current tax year, and uploads them
+# as a build artifact. canada.ca is unreachable from the owner's Mac, so the
+# golden-test fixtures are extracted from what this runner fetches.
+name: Fetch T4032 tables
+on:
+  workflow_dispatch:
+jobs:
+  fetch:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Crawl the T4032 index and download bi-weekly PDFs
+        run: |
+          set -euo pipefail
+          mkdir -p t4032
+          UA="Mozilla/5.0 (X11; Linux x86_64) CanPayInsights-golden-tests"
+          BASE="https://www.canada.ca"
+          INDEX="$BASE/en/revenue-agency/services/forms-publications/payroll/t4032-payroll-deductions-tables.html"
+          curl -sSL -A "$UA" "$INDEX" -o index.html
+          grep -o 'href="[^"]*t4032[^"]*\.html"' index.html | sed 's/href="//;s/"$//' | sort -u > pages.txt || true
+          echo "index pages:"; cat pages.txt
+          : > pdfs.txt
+          while read -r p; do
+            case "$p" in http*) url="$p";; *) url="$BASE$p";; esac
+            curl -sSL -A "$UA" "$url" -o page.html || continue
+            grep -o 'href="[^"]*\.pdf"' page.html | sed 's/href="//;s/"$//' >> pdfs.txt || true
+            # one level deeper: province pages link to period-specific pages
+            grep -o 'href="[^"]*t4032[^"]*\.html"' page.html | sed 's/href="//;s/"$//' | while read -r q; do
+              case "$q" in http*) u2="$q";; *) u2="$BASE$q";; esac
+              curl -sSL -A "$UA" "$u2" -o p2.html || continue
+              grep -o 'href="[^"]*\.pdf"' p2.html | sed 's/href="//;s/"$//' >> pdfs.txt || true
+            done
+          done < pages.txt
+          sort -u pdfs.txt | grep -i '26' | grep -iv 'fra\|f\.pdf' > want.txt || true
+          echo "pdfs:"; cat want.txt
+          while read -r f; do
+            case "$f" in http*) url="$f";; *) url="$BASE$f";; esac
+            curl -sSL -A "$UA" "$url" -o "t4032/$(basename "$f")" || echo "failed $url"
+          done < want.txt
+          cp index.html pages.txt want.txt t4032/
+          ls -la t4032
+      - uses: actions/upload-artifact@v4
+        with:
+          name: t4032-2026
+          path: t4032
