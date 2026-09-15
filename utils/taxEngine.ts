@@ -33,6 +33,8 @@ import {
   QPP2_MAX_PENSIONABLE_EARNINGS,
   QPIP_RATE,
   CANADA_EMPLOYMENT_AMOUNT,
+  QC_WORKER_DEDUCTION_RATE,
+  QC_WORKER_DEDUCTION_MAX,
   CPP_BASE_RATE,
   QPP_BASE_RATE,
   QPIP_MAX_CONTRIBUTION,
@@ -206,7 +208,11 @@ const calculateTotalTax = (
   
   // Step 1: Calculate tax on full income
   const federalTaxBeforeCredits = calculateProgressiveTax(annualGross, FEDERAL_BRACKETS);
-  const provincialTaxBeforeCredits = calculateProgressiveTax(annualGross, provinceRule.brackets);
+  // Quebec taxes a smaller base: the deduction for workers comes off first.
+  const quebecIncome = isQuebec
+    ? Math.max(0, annualGross - Math.min(incomeBeforeCppDeduction * QC_WORKER_DEDUCTION_RATE, QC_WORKER_DEDUCTION_MAX))
+    : annualGross;
+  const provincialTaxBeforeCredits = calculateProgressiveTax(quebecIncome, provinceRule.brackets);
   
   // Step 2: Calculate BPA Tax Credits
   // Federal: lowest-bracket rate × BPA. Read from FEDERAL_BRACKETS rather than
@@ -222,7 +228,12 @@ const calculateTotalTax = (
 
   // Provincial: varies by province (lowest rate × BPA)
   const lowestProvincialRate = provinceRule.brackets[0]?.rate || 0.05;
-  const provincialBPACredit = provinceRule.basicPersonalAmount * lowestProvincialRate;
+  // Yukon's basic personal amount tracks the federal one INCLUDING its
+  // high-income phase-out (T4127: Yukon BPAYT uses the same formula as the
+  // federal BPAF). Found by the T4032 golden test on 2026-09-15: without it
+  // Yukon withholding was $4.00 a pay short above $181,440.
+  const provincialBPA = province === Province.YT ? federalBPA : provinceRule.basicPersonalAmount;
+  const provincialBPACredit = provincialBPA * lowestProvincialRate;
 
   // CPP/EI also generate tax credits at lowest rates
   const cppFederalCredit = cppTotal * lowestFederalRate;
@@ -240,7 +251,9 @@ const calculateTotalTax = (
 
   // Step 3: Apply tax credits (cannot reduce tax below zero)
   const totalFederalCredits = federalBPACredit + cppFederalCredit + eiFederalCredit + qpipFederalCredit + employmentFederalCredit;
-  const totalProvincialCredits = provincialBPACredit + cppProvincialCredit + eiProvincialCredit + employmentProvincialCredit;
+  const totalProvincialCredits = isQuebec
+    ? provincialBPACredit // TP-1015.F: personal credits only, no QPP/EI/QPIP credit
+    : provincialBPACredit + cppProvincialCredit + eiProvincialCredit + employmentProvincialCredit;
   
   let federalTax = Math.max(0, federalTaxBeforeCredits - totalFederalCredits);
   let provincialTax = Math.max(0, provincialTaxBeforeCredits - totalProvincialCredits);

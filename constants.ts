@@ -102,6 +102,13 @@ export const BC_TAX_REDUCTION_RATE = 0.0356;
 // T4127-JUL (123rd edition), 2026: 1,501.
 export const CANADA_EMPLOYMENT_AMOUNT = 1501;
 
+// Quebec deduction for workers — Revenu Québec TP-1015.F-V (2026-01), variable
+// H: 6% of employment income, up to $1,450 for 2026. Quebec's own income tax
+// grants NO credit for QPP, EI or QPIP contributions (formula step 2 has only
+// the personal credits E); the enhanced QPP slice is deducted (variable CSA).
+export const QC_WORKER_DEDUCTION_RATE = 0.06;
+export const QC_WORKER_DEDUCTION_MAX = 1450;
+
 // Enhanced CPP/QPP — T4127 factor F5. The "first additional" 1% slice of the
 // tier-1 contribution and the whole tier-2 (CPP2/QPP2) contribution are a
 // DEDUCTION from income; only the base slice earns the lowest-rate credit.

@@ -102,7 +102,7 @@ Au Québec, le **taux d'AE est réduit** parce que le RQAP couvre déjà le vole
 
 ## Exemple : 60 000 $ au Québec
 
-Sur un salaire de 60 000 $ au Québec, il reste environ **45 581 $ net par an** (≈ 3 798 $ par mois) une fois toutes les retenues appliquées. La répartition exacte dépend de vos crédits et de votre situation.
+Sur un salaire de 60 000 $ au Québec, il reste environ **45 329 $ net par an** (≈ 3 777 $ par mois) une fois toutes les retenues appliquées. La répartition exacte dépend de vos crédits et de votre situation.
 
 ## Calculez votre paie
 
@@ -116,9 +116,9 @@ Pour votre chiffre précis, essayez le [calculateur de salaire net Québec](/fr/
     slug: 'salaire-minimum-quebec-2026-apres-impot',
     title: 'Salaire minimum au Québec 2026 : combien vous reste-t-il après impôt ?',
     subtitle: 'À 16,60 $ l\'heure, voici ce qu\'un travailleur à temps plein garde vraiment.',
-    excerpt: 'Le salaire minimum au Québec est de 16,60 $ l\'heure. À temps plein, cela donne environ 34 528 $ brut — mais après impôt, RRQ, RQAP et AE, il reste environ 28 500 $ par an. Voici le détail.',
+    excerpt: 'Le salaire minimum au Québec est de 16,60 $ l\'heure. À temps plein, cela donne environ 34 528 $ brut — mais après impôt, RRQ, RQAP et AE, il reste environ 28 400 $ par an. Voici le détail.',
     metaTitle: 'Salaire minimum Québec 2026 après impôt : le net réel',
-    metaDescription: 'Salaire minimum 2026 au Québec (16,60 $/h) : environ 34 528 $ brut à temps plein et ≈ 28 500 $ net après impôt, RRQ, RQAP et AE. Détail complet.',
+    metaDescription: 'Salaire minimum 2026 au Québec (16,60 $/h) : environ 34 528 $ brut à temps plein et ≈ 28 400 $ net après impôt, RRQ, RQAP et AE. Détail complet.',
     keywords: ['salaire minimum Québec 2026', 'salaire minimum après impôt', '16,60 $ de l\'heure net', 'temps plein salaire minimum Québec', 'net salaire minimum'],
     category: 'salary',
     tags: ['Québec', '2026', 'Salaire minimum', 'Net'],
@@ -126,10 +126,10 @@ Pour votre chiffre précis, essayez le [calculateur de salaire net Québec](/fr/
     lang: 'fr',
     publishedAt: '2026-06-13',
     readTime: 5,
-    directAnswer: 'Au salaire minimum du Québec (16,60 $/h), un travailleur à temps plein (40 h/sem) gagne environ 34 528 $ brut par an et garde environ 28 500 $ net après l\'impôt fédéral et provincial, la RRQ, le RQAP et l\'assurance-emploi — soit à peu près 2 340 $ par mois.',
+    directAnswer: 'Au salaire minimum du Québec (16,60 $/h), un travailleur à temps plein (40 h/sem) gagne environ 34 528 $ brut par an et garde environ 28 400 $ net après l\'impôt fédéral et provincial, la RRQ, le RQAP et l\'assurance-emploi — soit à peu près 2 340 $ par mois.',
     faq: [
       { question: 'Quel est le salaire minimum au Québec en 2026 ?', answer: 'Le salaire minimum général est de 16,60 $ l\'heure au Québec. À temps plein (40 h/semaine), cela représente environ 34 528 $ par an avant déductions.' },
-      { question: 'Combien reste-t-il après impôt au salaire minimum ?', answer: 'Environ 28 500 $ net par an, soit près de 2 374 $ par mois, une fois l\'impôt, la RRQ, le RQAP et l\'AE déduits. Le montant exact varie selon vos crédits personnels.' },
+      { question: 'Combien reste-t-il après impôt au salaire minimum ?', answer: 'Environ 28 400 $ net par an, soit près de 2 367 $ par mois, une fois l\'impôt, la RRQ, le RQAP et l\'AE déduits. Le montant exact varie selon vos crédits personnels.' },
       { question: 'Le salaire minimum est-il imposable ?', answer: 'Oui, mais à ce niveau de revenu l\'impôt reste faible grâce au montant personnel de base. Les cotisations RRQ, RQAP et AE représentent une part importante des retenues.' },
     ],
     content: `
@@ -137,20 +137,20 @@ Pour votre chiffre précis, essayez le [calculateur de salaire net Québec](/fr/
 
 Le **salaire minimum au Québec est de 16,60 $ l'heure**. À temps plein (40 heures par semaine, 2 080 heures par an), cela représente environ **34 528 $ brut** par année.
 
-Mais le brut n'est pas ce que vous recevez. Après les retenues, il reste environ **28 500 $ net** — soit près de **2 374 $ par mois**.
+Mais le brut n'est pas ce que vous recevez. Après les retenues, il reste environ **28 400 $ net** — soit près de **2 367 $ par mois**.
 
 ## Où va l'argent ?
 
 | Élément | Montant annuel (estimé) |
 | --- | --- |
 | Salaire brut (temps plein) | 34 528 $ |
-| Impôt fédéral | ≈ 2 000 $ |
-| Impôt du Québec | ≈ 1 900 $ |
-| RRQ + RQAP | ≈ 2 160 $ |
-| Assurance-emploi | ≈ 440 $ |
-| **Salaire net** | **≈ 28 500 $** |
+| Impôt fédéral | ≈ 1 640 $ |
+| Impôt du Québec | ≈ 1 930 $ |
+| RRQ + RQAP | ≈ 2 100 $ |
+| Assurance-emploi | ≈ 450 $ |
+| **Salaire net** | **≈ 28 400 $** |
 
-Environ **19 %** du salaire brut part en retenues à ce niveau de revenu.
+Environ **18 %** du salaire brut part en retenues à ce niveau de revenu.
 
 ## Bon à savoir
 
@@ -224,9 +224,9 @@ Votre décision dépend de votre taux marginal. Calculez-le avec le [calculateur
     slug: 'salaire-net-quebec-2026-par-revenu',
     title: 'Salaire net au Québec 2026 : combien gagnez-vous vraiment ?',
     subtitle: 'Du salaire brut au net : le tableau complet par tranche de revenu pour 2026.',
-    excerpt: 'Un salaire de 50 000 $ au Québec laisse environ 39 057 $ net; 75 000 $ laisse environ 54 342 $. Voici le tableau complet du salaire net au Québec en 2026, de 40 000 $ à 100 000 $.',
+    excerpt: 'Un salaire de 50 000 $ au Québec laisse environ 38 824 $ net; 75 000 $ laisse environ 53 965 $. Voici le tableau complet du salaire net au Québec en 2026, de 40 000 $ à 100 000 $.',
     metaTitle: 'Salaire net au Québec 2026 par revenu : tableau complet',
-    metaDescription: 'Salaire net au Québec 2026 par tranche de revenu : 50 000 $ ≈ 39 057 $ net, 75 000 $ ≈ 54 342 $, 100 000 $ ≈ 69 963 $. Tableau brut-net détaillé.',
+    metaDescription: 'Salaire net au Québec 2026 par tranche de revenu : 50 000 $ ≈ 38 824 $ net, 75 000 $ ≈ 53 965 $, 100 000 $ ≈ 69 585 $. Tableau brut-net détaillé.',
     keywords: ['salaire net Québec 2026', 'calcul salaire net Québec', 'salaire après impôt Québec', '50000 net Québec', '75000 net Québec'],
     category: 'salary',
     tags: ['Québec', '2026', 'Salaire net', 'Revenu'],
@@ -234,10 +234,10 @@ Votre décision dépend de votre taux marginal. Calculez-le avec le [calculateur
     lang: 'fr',
     publishedAt: '2026-06-13',
     readTime: 6,
-    directAnswer: 'Au Québec en 2026, un salaire de 40 000 $ laisse environ 32 229 $ net; 50 000 $ ≈ 39 057 $; 60 000 $ ≈ 45 581 $; 75 000 $ ≈ 54 342 $; et 100 000 $ ≈ 69 963 $ net par an. Le net dépend de l\'impôt fédéral et québécois, de la RRQ, du RQAP et de l\'AE.',
+    directAnswer: 'Au Québec en 2026, un salaire de 40 000 $ laisse environ 32 088 $ net; 50 000 $ ≈ 38 824 $; 60 000 $ ≈ 45 329 $; 75 000 $ ≈ 53 965 $; et 100 000 $ ≈ 69 585 $ net par an. Le net dépend de l\'impôt fédéral et québécois, de la RRQ, du RQAP et de l\'AE.',
     faq: [
-      { question: 'Combien fait 50 000 $ net au Québec ?', answer: 'Environ 39 057 $ net par an, soit près de 3 255 $ par mois, après l\'impôt fédéral et provincial, la RRQ, le RQAP et l\'AE.' },
-      { question: 'Combien fait 75 000 $ net au Québec ?', answer: 'Environ 54 342 $ net par an (≈ 4 529 $ par mois) une fois toutes les retenues appliquées en 2026.' },
+      { question: 'Combien fait 50 000 $ net au Québec ?', answer: 'Environ 38 824 $ net par an, soit près de 3 235 $ par mois, après l\'impôt fédéral et provincial, la RRQ, le RQAP et l\'AE.' },
+      { question: 'Combien fait 75 000 $ net au Québec ?', answer: 'Environ 53 965 $ net par an (≈ 4 497 $ par mois) une fois toutes les retenues appliquées en 2026.' },
       { question: 'Pourquoi le net est-il plus bas au Québec ?', answer: 'Le Québec a ses propres paliers d\'impôt provincial et des cotisations distinctes (RRQ, RQAP). Même avec l\'abattement fédéral de 16,5 %, le total des retenues est souvent un peu plus élevé qu\'ailleurs au Canada.' },
     ],
     content: `
@@ -247,11 +247,11 @@ Votre salaire annoncé (le **brut**) n'est pas ce qui arrive dans votre compte. 
 
 | Salaire brut | Net annuel (estimé) | Net mensuel | Retenues |
 | --- | --- | --- | --- |
-| 40 000 $ | **32 229 $** | ≈ 2 686 $ | ≈ 20 % |
-| 50 000 $ | **39 057 $** | ≈ 3 255 $ | ≈ 22 % |
-| 60 000 $ | **45 581 $** | ≈ 3 798 $ | ≈ 24 % |
-| 75 000 $ | **54 342 $** | ≈ 4 529 $ | ≈ 28 % |
-| 100 000 $ | **69 963 $** | ≈ 5 830 $ | ≈ 30 % |
+| 40 000 $ | **32 088 $** | ≈ 2 674 $ | ≈ 20 % |
+| 50 000 $ | **38 824 $** | ≈ 3 235 $ | ≈ 22 % |
+| 60 000 $ | **45 329 $** | ≈ 3 777 $ | ≈ 24 % |
+| 75 000 $ | **53 965 $** | ≈ 4 497 $ | ≈ 28 % |
+| 100 000 $ | **69 585 $** | ≈ 5 799 $ | ≈ 30 % |
 
 ## Pourquoi le taux de retenue augmente-t-il ?
 

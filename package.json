@@ -5,7 +5,8 @@
   "type": "module",
   "scripts": {
     "dev": "next dev",
-    "prebuild": "npm run audit:numbers:selftest && npm run audit:numbers && npm run audit:logo",
+    "prebuild": "npm run audit:engine && npm run audit:numbers:selftest && npm run audit:numbers && npm run audit:logo",
+    "audit:engine": "tsx scripts/goldenT4032.ts",
     "build": "next build",
     "start": "next start",
     "lint": "next lint",

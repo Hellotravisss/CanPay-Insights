@@ -8,7 +8,7 @@ const PREVIEW = [
   { prov: 'British Columbia', net: '$61,157' },
   { prov: 'Alberta', net: '$60,698' },
   { prov: 'Ontario', net: '$60,303' },
-  { prov: 'Quebec', net: '$57,390' },
+  { prov: 'Quebec', net: '$57,012' },
 ];
 
 const DataPage: React.FC = () => {

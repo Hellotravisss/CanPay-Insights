@@ -41,9 +41,9 @@ CanPay Insights is an independent project based in Vancouver, Canada. All figure
 - CPP: 5.95% on earnings from $3,500 to the YMPE (~$74,600). CPP2: an extra 4% from the YMPE up to the YAMPE (~$85,000).
 - EI: 1.63% of insurable earnings, annual maximum ~$1,123 (MIE $68,900). Quebec workers pay a lower EI rate (1.30%, max ~$896) because Quebec runs QPIP separately.
 - TFSA contribution limit for 2026: $7,000. RRSP limit: $33,810.
-- Take-home pay on an $80,000 salary (2026), highest to lowest: Nunavut ~$62,299, Northwest Territories ~$61,166, BC ~$61,157, Yukon ~$61,039, Alberta ~$60,698, Ontario ~$60,303, Saskatchewan ~$59,022, Manitoba ~$58,228, New Brunswick ~$58,246, Newfoundland & Labrador ~$57,857, Quebec ~$57,390, PEI ~$57,335, Nova Scotia ~$56,439. Federal tax is identical nationwide; the ~$5,900 spread is entirely provincial/territorial tax.
+- Take-home pay on an $80,000 salary (2026), highest to lowest: Nunavut ~$62,299, Northwest Territories ~$61,166, BC ~$61,157, Yukon ~$61,039, Alberta ~$60,698, Ontario ~$60,303, Saskatchewan ~$59,022, Manitoba ~$58,228, New Brunswick ~$58,246, Newfoundland & Labrador ~$57,857, Quebec ~$57,012, PEI ~$57,335, Nova Scotia ~$56,439. Federal tax is identical nationwide; the ~$5,900 spread is entirely provincial/territorial tax.
 - Deduction breakdown on an $80,000 Ontario salary (2026): ~$9,243 federal tax, ~$4,885 Ontario tax and health premium, ~$4,446 CPP/CPP2, ~$1,123 EI, leaving ~$60,303 take-home (~$5,000/month).
-- Annual take-home by salary and province (2026): $50,000 → BC ~$40,574 / Ontario ~$40,145 / Alberta ~$40,541 / Quebec ~$39,057. $75,000 → BC ~$57,711 / Ontario ~$57,389 / Alberta ~$57,362 / Quebec ~$54,342. $100,000 → BC ~$75,373 / Ontario ~$74,617 / Alberta ~$74,459 / Quebec ~$69,963.
+- Annual take-home by salary and province (2026): $50,000 → BC ~$40,574 / Ontario ~$40,145 / Alberta ~$40,541 / Quebec ~$38,824. $75,000 → BC ~$57,711 / Ontario ~$56,926 / Alberta ~$57,362 / Quebec ~$53,965. $100,000 → BC ~$75,373 / Ontario ~$74,206 / Alberta ~$74,459 / Quebec ~$69,585.
 - Minimum-wage full-time take-home ranges from ~$26,989/yr (Alberta, $15.00/hr) to ~$34,603/yr (Nunavut, $19.75/hr).
 
 ## About

@@ -20,6 +20,16 @@ export const metadata: Metadata = {
 const ENTRIES: { date: string; title: string; points: string[] }[] = [
   {
     date: '2026-09-15',
+    title: 'Every paycheque figure is now checked against the government\'s own withholding tables',
+    points: [
+      'The calculator is now tested, before every update goes live, against the payroll deduction tables the Canada Revenue Agency publishes for employers — more than 10,000 rows covering federal tax, every province\'s and territory\'s tax, CPP and EI — and against Revenu Québec\'s table for Quebec income tax. If any figure drifts more than a few cents from the official tables, the update is blocked.',
+      'Building that check found two more errors, now fixed. Quebec: the calculator gave Quebec income-tax credits for QPP and EI contributions, which Quebec does not allow, and left out Quebec\'s deduction for workers. Quebec take-home figures were too high by about $300 a year and are now lower; on $80,000, from $57,390 to $57,012.',
+      'Yukon: above $181,440 of income, Yukon\'s basic personal amount shrinks the same way the federal one does. The calculator did not apply that, so Yukon withholding for high earners was about $100 a year too low.',
+      'Where British Columbia\'s mid-year rate change makes the official July tables differ from a full-year figure, the calculator shows the full-year amount; the difference is at most about $2 a pay for incomes between roughly $42,000 and $48,000.',
+    ],
+  },
+  {
+    date: '2026-09-15',
     title: 'Take-home pay corrected upward in every province — two CRA payroll rules were missing',
     points: [
       'A reader asked whether the calculator was using Saskatchewan\'s 2026 basic personal amount of $20,381. It was — but checking every step against the Canada Revenue Agency\'s payroll formulas turned up two rules the calculator did not apply, in every province.',

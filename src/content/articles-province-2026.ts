@@ -336,7 +336,7 @@ Every figure above is a median or a computed example. Your own pay depends on yo
     subtitle: "What Quebec workers actually earn by industry — and what lands in the bank after tax",
     excerpt: "The median full-time wage in Quebec is $33.00 an hour. Here is what that, and every other salary level, leaves after 2026 tax — with Statistics Canada wage data for every industry.",
     metaTitle: "Quebec Take-Home Pay Guide 2026 | Wages by Industry",
-    metaDescription: "Quebec's median full-time wage is $33.00/hr. See take-home pay at every salary, wages for every industry, and how Quebec ranks (#11 of 13) for 2026.",
+    metaDescription: "Quebec's median full-time wage is $33.00/hr. See take-home pay at every salary, wages for every industry, and how Quebec ranks (#12 of 13) for 2026.",
     keywords: ["Quebec salary","Quebec take home pay","Quebec average salary 2026","Quebec paycheck calculator","Quebec income tax 2026","wages in Quebec"],
     category: 'province',
     tags: ["Quebec","take-home pay","wages","2026"],
@@ -344,7 +344,7 @@ Every figure above is a median or a computed example. Your own pay depends on yo
     publishedAt: '2026-08-08',
     readTime: 8,
     imageUrl: '/blog/quebec-take-home-pay-guide-2026.png',
-    directAnswer: "The median full-time wage in Quebec is $33.00 an hour, about $68,600 a year, which leaves roughly $50,566 after tax in 2026. On an $80,000 salary, Quebec ranks #11 of 13 provinces and territories for take-home pay, keeping $57,390.",
+    directAnswer: "The median full-time wage in Quebec is $33.00 an hour, about $68,600 a year, which leaves roughly $50,234 after tax in 2026. On an $80,000 salary, Quebec ranks #12 of 13 provinces and territories for take-home pay, keeping $57,012.",
     faq: [
           {
                 "question": "What is the average salary in Quebec?",
@@ -352,24 +352,24 @@ Every figure above is a median or a computed example. Your own pay depends on yo
           },
           {
                 "question": "What is the take-home pay on $80,000 in Quebec?",
-                "answer": "About $57,390 a year, or $4,782 a month, after federal tax, Quebec provincial tax, CPP/CPP2 and EI for the 2026 tax year, for a single employee with no additional credits."
+                "answer": "About $57,012 a year, or $4,751 a month, after federal tax, Quebec provincial tax, CPP/CPP2 and EI for the 2026 tax year, for a single employee with no additional credits."
           },
           {
                 "question": "Does Quebec have high taxes compared with other provinces?",
-                "answer": "On an $80,000 salary, Quebec ranks #11 of 13 provinces and territories for take-home pay in 2026, keeping $57,390. That is $4,909 a year less than Nunavut, the highest."
+                "answer": "On an $80,000 salary, Quebec ranks #12 of 13 provinces and territories for take-home pay in 2026, keeping $57,012. That is $5,287 a year less than Nunavut, the highest."
           },
           {
                 "question": "Which industry pays best in Quebec?",
-                "answer": "Of the sectors Statistics Canada reports for Quebec, utilities has the highest median full-time wage at $53.11 an hour — roughly $110,500 a year, or $76,624 after tax."
+                "answer": "Of the sectors Statistics Canada reports for Quebec, utilities has the highest median full-time wage at $53.11 an hour — roughly $110,500 a year, or $76,281 after tax."
           },
           {
                 "question": "How much of my pay do I keep in Quebec?",
-                "answer": "It depends on the salary. In Quebec in 2026, someone earning $40,000 keeps about 80.6% of gross pay, while someone earning $150,000 keeps about 65.4%. The rest goes to federal tax, provincial tax, CPP/CPP2 and EI."
+                "answer": "It depends on the salary. In Quebec in 2026, someone earning $40,000 keeps about 80.2% of gross pay, while someone earning $150,000 keeps about 65.2%. The rest goes to federal tax, provincial tax, CPP/CPP2 and EI."
           }
     ],
     content: `## The typical Quebec paycheque
 
-Across all industries, the median full-time wage in Quebec is $33.00 an hour — about $68,600 a year. After federal tax, Quebec tax, CPP/CPP2 and EI, a single employee on that salary keeps roughly **$50,566 a year**, or $4,214 a month. That is 73.7% of gross pay.
+Across all industries, the median full-time wage in Quebec is $33.00 an hour — about $68,600 a year. After federal tax, Quebec tax, CPP/CPP2 and EI, a single employee on that salary keeps roughly **$50,234 a year**, or $4,186 a month. That is 73.2% of gross pay.
 
 ## Take-home pay in Quebec at every salary level
 
@@ -377,13 +377,13 @@ Nobody is paid an "average". Here is what specific salaries actually leave in Qu
 
 | Gross salary | Take-home (year) | Per month | Kept |
 | --- | --- | --- | --- |
-| $40,000 | **$32,229** | $2,686 | 80.6% |
-| $60,000 | **$45,581** | $3,798 | 76.0% |
-| $80,000 | **$57,390** | $4,782 | 71.7% |
-| $100,000 | **$69,963** | $5,830 | 70.0% |
-| $150,000 | **$98,130** | $8,178 | 65.4% |
+| $40,000 | **$32,088** | $2,674 | 80.2% |
+| $60,000 | **$45,329** | $3,777 | 75.5% |
+| $80,000 | **$57,012** | $4,751 | 71.3% |
+| $100,000 | **$69,585** | $5,799 | 69.6% |
+| $150,000 | **$97,850** | $8,154 | 65.2% |
 
-Notice how the share you keep falls as the salary rises: that is Canada's progressive tax system working as designed. At $40,000 you keep 80.6%; at $150,000 you keep 65.4%.
+Notice how the share you keep falls as the salary rises: that is Canada's progressive tax system working as designed. At $40,000 you keep 80.2%; at $150,000 you keep 65.2%.
 
 ## What each industry pays in Quebec
 
@@ -391,28 +391,28 @@ Statistics Canada publishes the median wage of full-time employees by industry. 
 
 | Industry | Median wage | ≈ Annual | Take-home |
 | --- | --- | --- | --- |
-| Utilities | $53.11/hr | $110,500 | $76,624 |
-| Educational services | $43.79/hr | $91,100 | $64,311 |
-| Public administration | $42.00/hr | $87,400 | $61,961 |
-| Forestry, fishing, mining, oil & gas | $40.00/hr | $83,200 | $59,340 |
-| Professional, scientific & technical services | $40.00/hr | $83,200 | $59,340 |
-| Finance, insurance & real estate | $38.46/hr | $80,000 | $57,390 |
-| Construction | $38.00/hr | $79,000 | $56,780 |
-| Information, culture & recreation | $35.00/hr | $72,800 | $53,038 |
-| Manufacturing | $31.61/hr | $65,700 | $48,885 |
-| Other services | $30.00/hr | $62,400 | $46,972 |
-| Healthcare & social assistance | $29.00/hr | $60,300 | $45,755 |
-| Transportation & warehousing | $29.00/hr | $60,300 | $45,755 |
-| Business & support services | $25.00/hr | $52,000 | $40,423 |
-| Wholesale & retail trade | $25.00/hr | $52,000 | $40,423 |
-| Agriculture | $24.00/hr | $49,900 | $38,989 |
-| Food service & hospitality | $21.00/hr | $43,700 | $34,755 |
+| Utilities | $53.11/hr | $110,500 | $76,281 |
+| Educational services | $43.79/hr | $91,100 | $63,933 |
+| Public administration | $42.00/hr | $87,400 | $61,584 |
+| Forestry, fishing, mining, oil & gas | $40.00/hr | $83,200 | $58,963 |
+| Professional, scientific & technical services | $40.00/hr | $83,200 | $58,963 |
+| Finance, insurance & real estate | $38.46/hr | $80,000 | $57,012 |
+| Construction | $38.00/hr | $79,000 | $56,403 |
+| Information, culture & recreation | $35.00/hr | $72,800 | $52,674 |
+| Manufacturing | $31.61/hr | $65,700 | $48,580 |
+| Other services | $30.00/hr | $62,400 | $46,697 |
+| Healthcare & social assistance | $29.00/hr | $60,300 | $45,500 |
+| Transportation & warehousing | $29.00/hr | $60,300 | $45,500 |
+| Business & support services | $25.00/hr | $52,000 | $40,171 |
+| Wholesale & retail trade | $25.00/hr | $52,000 | $40,171 |
+| Agriculture | $24.00/hr | $49,900 | $38,757 |
+| Food service & hospitality | $21.00/hr | $43,700 | $34,581 |
 
 The best-paid sector reported here is utilities at $53.11 an hour; the lowest is food service & hospitality at $21.00. That gap — $32.11 an hour — works out to about $66,800 a year before tax.
 
 ## How Quebec compares with the rest of Canada
 
-On an $80,000 salary, Quebec ranks **#11 of 13** provinces and territories for take-home pay in 2026.
+On an $80,000 salary, Quebec ranks **#12 of 13** provinces and territories for take-home pay in 2026.
 
 | Rank | Province | Take-home on $80,000 |
 | --- | --- | --- |
@@ -423,7 +423,7 @@ On an $80,000 salary, Quebec ranks **#11 of 13** provinces and territories for t
 | 5 | Alberta | $60,698 |
 | 6 | Ontario | $60,303 |
 
-The difference between Quebec and Nunavut, the highest, is $4,909 a year on the same $80,000 salary — about $409 a month.
+The difference between Quebec and Nunavut, the highest, is $5,287 a year on the same $80,000 salary — about $441 a month.
 
 Take-home pay is only one side of a move, of course: rent, groceries and childcare vary as much as tax does. But it is the side most people guess at, and it is the side that can be calculated exactly.
 
@@ -984,7 +984,7 @@ Every figure above is a median or a computed example. Your own pay depends on yo
     subtitle: "What Prince Edward Island workers actually earn by industry — and what lands in the bank after tax",
     excerpt: "The median full-time wage in Prince Edward Island is $28.21 an hour. Here is what that, and every other salary level, leaves after 2026 tax — with Statistics Canada wage data for every industry.",
     metaTitle: "Prince Edward Island Take-Home Pay Guide 2026 | Wages by Industry",
-    metaDescription: "Prince Edward Island's median full-time wage is $28.21/hr. See take-home pay at every salary, wages for every industry, and how Prince Edward Island ranks (#12 of 13) for 2026.",
+    metaDescription: "Prince Edward Island's median full-time wage is $28.21/hr. See take-home pay at every salary, wages for every industry, and how Prince Edward Island ranks (#11 of 13) for 2026.",
     keywords: ["Prince Edward Island salary","Prince Edward Island take home pay","Prince Edward Island average salary 2026","Prince Edward Island paycheck calculator","Prince Edward Island income tax 2026","wages in Prince Edward Island"],
     category: 'province',
     tags: ["Prince Edward Island","take-home pay","wages","2026"],
@@ -992,7 +992,7 @@ Every figure above is a median or a computed example. Your own pay depends on yo
     publishedAt: '2026-08-08',
     readTime: 8,
     imageUrl: '/blog/pei-take-home-pay-guide-2026.png',
-    directAnswer: "The median full-time wage in Prince Edward Island is $28.21 an hour, about $58,700 a year, which leaves roughly $44,638 after tax in 2026. On an $80,000 salary, Prince Edward Island ranks #12 of 13 provinces and territories for take-home pay, keeping $57,335.",
+    directAnswer: "The median full-time wage in Prince Edward Island is $28.21 an hour, about $58,700 a year, which leaves roughly $44,638 after tax in 2026. On an $80,000 salary, Prince Edward Island ranks #11 of 13 provinces and territories for take-home pay, keeping $57,335.",
     faq: [
           {
                 "question": "What is the average salary in Prince Edward Island?",
@@ -1004,7 +1004,7 @@ Every figure above is a median or a computed example. Your own pay depends on yo
           },
           {
                 "question": "Does Prince Edward Island have high taxes compared with other provinces?",
-                "answer": "On an $80,000 salary, Prince Edward Island ranks #12 of 13 provinces and territories for take-home pay in 2026, keeping $57,335. That is $4,964 a year less than Nunavut, the highest."
+                "answer": "On an $80,000 salary, Prince Edward Island ranks #11 of 13 provinces and territories for take-home pay in 2026, keeping $57,335. That is $4,964 a year less than Nunavut, the highest."
           },
           {
                 "question": "Which industry pays best in Prince Edward Island?",
@@ -1060,7 +1060,7 @@ The best-paid sector reported here is utilities at $43.27 an hour; the lowest is
 
 ## How Prince Edward Island compares with the rest of Canada
 
-On an $80,000 salary, Prince Edward Island ranks **#12 of 13** provinces and territories for take-home pay in 2026.
+On an $80,000 salary, Prince Edward Island ranks **#11 of 13** provinces and territories for take-home pay in 2026.
 
 | Rank | Province | Take-home on $80,000 |
 | --- | --- | --- |

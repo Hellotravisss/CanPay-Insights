@@ -448,7 +448,7 @@ const coreLandingPages: LandingPage[] = [
     kicker: 'Quebec take-home pay',
     primaryKeyword: 'Quebec paycheck calculator',
     intro:
-      'On an $80,000 salary in Quebec in 2026, you take home about $57,390 a year — roughly $4,782 a month — after about $7,675 federal tax (reduced by the Quebec abatement), $9,000 Quebec tax, $5,039 QPP and QPIP, and $896 EI. Quebec payroll differs from the rest of Canada, so a Quebec-specific estimate matters — enter your wage or salary below for Montreal, Quebec City, Laval, Gatineau, and across Quebec.',
+      'On an $80,000 salary in Quebec in 2026, you take home about $57,012 a year — roughly $4,751 a month — after about $7,675 federal tax (reduced by the Quebec abatement), $9,378 Quebec tax, $5,039 QPP and QPIP, and $896 EI. Quebec payroll differs from the rest of Canada, so a Quebec-specific estimate matters — enter your wage or salary below for Montreal, Quebec City, Laval, Gatineau, and across Quebec.',
     examples: ['$100,000 after tax Quebec', '$65,000 after tax Quebec', 'Montreal take-home pay calculator', 'Quebec salary calculator'],
     sections: [
       {

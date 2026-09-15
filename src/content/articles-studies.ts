@@ -63,7 +63,7 @@ We ran every provincial and territorial minimum wage (current as of June 12, 202
 
 - **The national gap is $7,614 a year.** A full-time minimum wage worker in Nunavut takes home $34,603; in Alberta, $26,989.
 - **Nova Scotia takes the biggest bite.** Deductions consume 18.6% of a minimum wage salary in Nova Scotia — the highest in Canada. Alberta takes the smallest share (13.5%), but its $15.00 wage is so low that Alberta workers still finish last in actual dollars.
-- **PEI's higher wage mostly evaporates.** PEI's $17.00 wage is 40 cents above Quebec's $16.60, but after deductions the difference shrinks to about $47 a month.
+- **PEI's higher wage mostly evaporates.** PEI's $17.00 wage is 40 cents above Quebec's $16.60, but after deductions the difference shrinks to about $54 a month.
 - **Saskatchewan nearly catches Manitoba.** Saskatchewan pays 65 cents less per hour than Manitoba, but its lower deductions close the annual net gap to just $415.
 
 ### Full results: minimum wage take-home pay by province (June 2026)
@@ -78,7 +78,7 @@ Figures assume full-time hours (40 hours/week, 2,080 hours/year), basic personal
 | Ontario | $17.60 | $36,608 | **$30,409** | $2,534 | $14.62 | 16.9% |
 | Northwest Territories | $16.95 | $35,256 | **$29,853** | $2,488 | $14.35 | 15.3% |
 | Prince Edward Island | $17.00 | $35,360 | **$29,054** | $2,421 | $13.97 | 17.8% |
-| Quebec | $16.60 | $34,528 | **$28,492** | $2,374 | $13.70 | 17.5% |
+| Quebec | $16.60 | $34,528 | **$28,402** | $2,367 | $13.66 | 17.7% |
 | Nova Scotia | $16.75 | $34,840 | **$28,366** | $2,364 | $13.64 | 18.6% |
 | Newfoundland and Labrador | $16.35 | $34,008 | **$28,109** | $2,342 | $13.51 | 17.3% |
 | Manitoba | $16.00 | $33,280 | **$27,504** | $2,292 | $13.22 | 17.4% |
@@ -94,7 +94,7 @@ Translating take-home pay back into an hourly figure shows how much of every adv
 
 - **Nunavut:** $19.75 advertised → **$16.64 in the bank**
 - **Ontario:** $17.60 advertised → **$14.62 in the bank**
-- **Quebec:** $16.60 advertised → **$13.70 in the bank**
+- **Quebec:** $16.60 advertised → **$13.66 in the bank**
 - **Alberta:** $15.00 advertised → **$12.98 in the bank**
 
 No Canadian jurisdiction lets a full-time minimum wage worker keep more than 87% of their gross pay.
@@ -509,7 +509,7 @@ A salesperson earning **$50,000 base + $30,000 commission = $80,000** keeps a di
 | British Columbia | $61,157 |
 | Alberta | $60,698 |
 | Ontario | $60,303 |
-| Quebec | $57,390 |
+| Quebec | $57,012 |
 | Nova Scotia | $56,439 |
 
 ## See your own number
@@ -1455,7 +1455,7 @@ Figures use Statistics Canada's national average hourly wage (July 2025: $36.16;
 | Newfoundland and Labrador | $54,869 | $56,180 | +$1,311 | $56,516 | -$335 |
 | New Brunswick | $55,236 | $56,557 | +$1,321 | $56,893 | -$336 |
 | Nova Scotia | $53,551 | $54,819 | +$1,267 | $55,158 | -$339 |
-| Quebec | $54,472 | $55,752 | +$1,280 | $56,106 | -$354 |
+| Quebec | $54,095 | $55,375 | +$1,280 | $55,717 | -$342 |
 | Prince Edward Island | $54,444 | $55,713 | +$1,269 | $56,078 | -$365 |
 
 *"Needed to match 3.0% inflation" is illustrative: it assumes the whole household budget inflates at the headline CPI rate, which will not match every worker's actual spending. Provinces with higher after-tax pay (and therefore higher nominal dollar increases) tend to show a slightly larger real-dollar gap even at the same 3.0% shortfall, because 3% of a bigger number is a bigger number.*
@@ -1929,7 +1929,7 @@ Since August's Consumer Price Index will not be released until mid-September 202
 | New Brunswick | $55,432 | $56,360 | +$929 | $57,095 | -$734 |
 | Manitoba | $55,360 | $56,307 | +$946 | $57,021 | -$714 |
 | Newfoundland and Labrador | $55,064 | $55,986 | +$922 | $56,716 | -$730 |
-| Quebec | $54,662 | $55,562 | +$900 | $56,302 | -$740 |
+| Quebec | $54,285 | $55,185 | +$900 | $55,913 | -$728 |
 | Prince Edward Island | $54,633 | $55,524 | +$892 | $56,272 | -$747 |
 | Nova Scotia | $53,740 | $54,630 | +$891 | $55,352 | -$721 |
 

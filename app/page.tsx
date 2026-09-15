@@ -152,7 +152,7 @@ export default function HomePage() {
                 <tr className="border-b border-slate-200"><td className="py-2 pr-4 font-medium text-slate-800">Alberta</td><td className="py-2 pr-4">$60,698</td><td className="py-2 pr-4">$5,058</td><td className="py-2">$19,302</td></tr>
                 <tr className="border-b border-slate-200"><td className="py-2 pr-4 font-medium text-slate-800">Ontario</td><td className="py-2 pr-4">$60,303</td><td className="py-2 pr-4">$5,025</td><td className="py-2">$19,697</td></tr>
                 <tr className="border-b border-slate-200"><td className="py-2 pr-4 font-medium text-slate-800">Manitoba</td><td className="py-2 pr-4">$58,228</td><td className="py-2 pr-4">$4,852</td><td className="py-2">$21,772</td></tr>
-                <tr className="border-b border-slate-200"><td className="py-2 pr-4 font-medium text-slate-800">Quebec</td><td className="py-2 pr-4">$57,390</td><td className="py-2 pr-4">$4,782</td><td className="py-2">$22,610</td></tr>
+                <tr className="border-b border-slate-200"><td className="py-2 pr-4 font-medium text-slate-800">Quebec</td><td className="py-2 pr-4">$57,012</td><td className="py-2 pr-4">$4,751</td><td className="py-2">$22,988</td></tr>
                 <tr><td className="py-2 pr-4 font-medium text-slate-800">Nova Scotia</td><td className="py-2 pr-4">$56,439</td><td className="py-2 pr-4">$4,703</td><td className="py-2">$23,561</td></tr>
               </tbody>
             </table>
@@ -188,9 +188,9 @@ export default function HomePage() {
                 </tr>
               </thead>
               <tbody className="text-slate-600">
-                <tr className="border-b border-slate-200"><td className="py-2 pr-4 font-medium text-slate-800">$50,000</td><td className="py-2 pr-4">$40,574</td><td className="py-2 pr-4">$40,145</td><td className="py-2 pr-4">$40,541</td><td className="py-2">$39,057</td></tr>
-                <tr className="border-b border-slate-200"><td className="py-2 pr-4 font-medium text-slate-800">$75,000</td><td className="py-2 pr-4">$57,711</td><td className="py-2 pr-4">$56,926</td><td className="py-2 pr-4">$57,362</td><td className="py-2">$54,342</td></tr>
-                <tr><td className="py-2 pr-4 font-medium text-slate-800">$100,000</td><td className="py-2 pr-4">$75,373</td><td className="py-2 pr-4">$74,206</td><td className="py-2 pr-4">$74,459</td><td className="py-2">$69,963</td></tr>
+                <tr className="border-b border-slate-200"><td className="py-2 pr-4 font-medium text-slate-800">$50,000</td><td className="py-2 pr-4">$40,574</td><td className="py-2 pr-4">$40,145</td><td className="py-2 pr-4">$40,541</td><td className="py-2">$38,824</td></tr>
+                <tr className="border-b border-slate-200"><td className="py-2 pr-4 font-medium text-slate-800">$75,000</td><td className="py-2 pr-4">$57,711</td><td className="py-2 pr-4">$56,926</td><td className="py-2 pr-4">$57,362</td><td className="py-2">$53,965</td></tr>
+                <tr><td className="py-2 pr-4 font-medium text-slate-800">$100,000</td><td className="py-2 pr-4">$75,373</td><td className="py-2 pr-4">$74,206</td><td className="py-2 pr-4">$74,459</td><td className="py-2">$69,585</td></tr>
               </tbody>
             </table>
           </div>

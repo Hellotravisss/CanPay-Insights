@@ -24,7 +24,7 @@ const COMPARISON_2026 = [
   { prov: 'New Brunswick', net: '$58,246', mo: '$4,854', ded: '$21,754', rate: '27.2%' },
   { prov: 'Manitoba', net: '$58,228', mo: '$4,852', ded: '$21,772', rate: '27.2%' },
   { prov: 'Newfoundland and Labrador', net: '$57,857', mo: '$4,821', ded: '$22,143', rate: '27.7%' },
-  { prov: 'Quebec', net: '$57,390', mo: '$4,782', ded: '$22,610', rate: '28.3%' },
+  { prov: 'Quebec', net: '$57,012', mo: '$4,751', ded: '$22,988', rate: '28.7%' },
   { prov: 'Prince Edward Island', net: '$57,335', mo: '$4,778', ded: '$22,665', rate: '28.3%' },
   { prov: 'Nova Scotia', net: '$56,439', mo: '$4,703', ded: '$23,561', rate: '29.5%' },
 ];
@@ -38,7 +38,7 @@ const compareFaq = [
   {
     question: 'Which province has the lowest take-home pay?',
     answer:
-      'On the same $80,000 salary, Nova Scotia has the lowest take-home pay at about $56,439 a year, with Prince Edward Island (about $57,335) and Quebec (about $57,390) close behind. The gap between the highest and lowest province is nearly $5,900 a year for the same gross salary.',
+      'On the same $80,000 salary, Nova Scotia has the lowest take-home pay at about $56,439 a year, with Prince Edward Island (about $57,335) and Quebec (about $57,012) close behind. The gap between the highest and lowest province is nearly $5,900 a year for the same gross salary.',
   },
   {
     question: 'How much does take-home pay vary between provinces?',
