@@ -20,6 +20,18 @@ export const metadata: Metadata = {
 const ENTRIES: { date: string; title: string; points: string[] }[] = [
   {
     date: '2026-09-15',
+    title: 'Where your pay sits in your neighbourhood; new privacy policy, terms and refund policy',
+    points: [
+      'Under every result you can now enter the first three characters of your postal code, or press "use my location", and see where that income sits among the people who file taxes in that exact area — from the Canada Revenue Agency\'s tax-filer statistics by postal area. Both are optional and off until you act.',
+      'What is kept, stated plainly: the three characters only (never a full postal code), and a shared location rounded to about 1 km on your device before it is sent — about 11 km in rural areas. The privacy policy now says this, says that the resulting neighbourhood statistics are published and may be licensed to researchers and real-estate or financial companies as counts for areas of thousands of households, and names the person in charge of privacy.',
+      'The privacy policy was rewritten in full and now exists in French as well. It also describes the one cookie the site uses (only if you sign in), local storage, and the page-view counters.',
+      'New pages: Terms of Service and Refund Policy — the two $9 reports are refunded on request within 14 days.',
+      'Every article cover that was a stock photo loaded from another company\'s server is now an image we made and host ourselves, so reading an article no longer contacts any third party.',
+      'The data room now shows calculations by postal area (with small groups withheld), a heartbeat per data source so a silent source is noticed within a week, and a list of known gaps in the data.',
+    ],
+  },
+  {
+    date: '2026-09-15',
     title: 'Alberta tax description corrected; location data made coarser',
     points: [
       'The province comparison said Alberta has a "flat 10%" tax rate. It has not since 2015, and since 2025 the first $61,200 is taxed at 8%. The text now states the brackets the calculator actually uses.',

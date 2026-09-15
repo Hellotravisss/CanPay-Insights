@@ -33,7 +33,7 @@ export const provinceArticles: Article[] = [
     province: 'Alberta',
     publishedAt: '2025-01-15',
     readTime: 13,
-    imageUrl: 'https://images.unsplash.com/photo-1542273917363-3b1817f69a2d?w=800&q=80',
+    imageUrl: '/blog/covers/alberta-salary-guide-2025.png',
     content: `<b>Understanding Alberta's Economic Landscape</b>
 
 Alberta's 2025 economy balances its oil and gas roots with growth in tech, agriculture, and manufacturing. Energy sector premiums continue to drive higher-than-average wages across most industries.
@@ -124,7 +124,7 @@ Economic diversification and technology adoption will continue to reshape labor 
     province: 'Ontario',
     publishedAt: '2025-01-18',
     readTime: 14,
-    imageUrl: 'https://images.unsplash.com/photo-1486325212027-8081e485255e?w=800&q=80',
+    imageUrl: '/blog/covers/ontario-toronto-ottawa-hamilton-salary-guide-2025.png',
     content: `<b>Ontario's Dominant Economic Position</b>
 
 Ontario remains Canada's economic engine, driven by finance in Toronto, government in Ottawa, and manufacturing in Hamilton. Salaries vary significantly based on industry and location across the province.
@@ -203,7 +203,7 @@ While Ottawa and Hamilton are more affordable, living costs are rising across th
     province: 'British Columbia',
     publishedAt: '2025-01-22',
     readTime: 13,
-    imageUrl: 'https://images.unsplash.com/photo-1559511260-66a654ae982a?w=800&q=80',
+    imageUrl: '/blog/covers/british-columbia-salary-guide-2025.png',
     content: `<b>British Columbia's Unique Economic Character</b>
 
 British Columbia features a dual economy: a tech-heavy coastal hub in Vancouver and a resource-driven interior. High housing costs remain the province's primary economic challenge, shaping all compensation trends.
@@ -276,7 +276,7 @@ Compare your potential after-tax income in BC versus other provinces using our P
     province: 'Quebec',
     publishedAt: '2025-01-25',
     readTime: 13,
-    imageUrl: 'https://images.unsplash.com/photo-1533050487297-09b450131914?w=800&q=80',
+    imageUrl: '/blog/covers/quebec-salary-guide-2025.png',
     content: `<b>Quebec's Distinctive Labor Market</b>
 
 Quebec's economy is defined by bilingualism, strong unions, and a robust social safety net. While nominal salaries may be lower than in Ontario, subsidized services like childcare provide significant indirect value.
@@ -357,7 +357,7 @@ As we move through 2025, Quebec's inflation has stabilized, but the cost of hous
     province: 'Atlantic Canada',
     publishedAt: '2025-01-28',
     readTime: 12,
-    imageUrl: 'https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=800&q=80',
+    imageUrl: '/blog/covers/atlantic-canada-salary-guide-2025.png',
     content: `<b>Atlantic Canada's Economic Evolution</b>
 
 Atlantic Canada is transitioning from resource dependence to a diversified economy focused on tech, services, and advanced manufacturing. Lower housing costs provide strong purchasing power despite lower nominal salaries.
@@ -442,7 +442,7 @@ Prince Edward Island may be Canada's smallest province, but it has carved out hi
     province: 'Prairies',
     publishedAt: '2025-02-01',
     readTime: 11,
-    imageUrl: 'https://images.unsplash.com/photo-1500382017468-9049fed747ef?w=800&q=80',
+    imageUrl: '/blog/covers/prairies-salary-guide-2025.png',
     content: `<b>The Prairie Economy Landscape</b>
 
 Saskatchewan and Manitoba share characteristics as Prairie provinces with agriculture-based economies that have diversified into mining, manufacturing, and services. Both provinces offer lower costs of living than major Canadian cities, with housing affordability that improves real purchasing power even when nominal salaries trail national averages. The Prairie provinces appeal to those prioritizing affordability and family-friendly environments.
@@ -515,7 +515,7 @@ Overall cost of living calculations consistently show Prairie provinces offering
     province: 'Northern Territories',
     publishedAt: '2025-02-05',
     readTime: 10,
-    imageUrl: 'https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?w=800&q=80',
+    imageUrl: '/blog/covers/northern-territories-salary-guide-2025.png',
     content: `<b>Working in Canada's North</b>
 
 Canada's three territories, Yukon, Northwest Territories, and Nunavut, present unique employment environments characterized by small populations, remote locations, extreme climates, and extraordinary costs of living. Compensation in the North reflects these conditions through substantial premiums, allowances, and benefits designed to attract and retain workers willing to accept the challenges of northern living. Understanding northern compensation requires appreciating both the financial incentives and the lifestyle trade-offs they seek to offset.
@@ -596,7 +596,7 @@ Quality of life factors including community connection, outdoor recreation, and 
     province: 'National',
     publishedAt: '2025-02-08',
     readTime: 11,
-    imageUrl: 'https://images.unsplash.com/photo-1449844908441-8829872d2607?w=800&q=80',
+    imageUrl: '/blog/covers/commuter-towns-ontario-bc-salary-guide-2025.png',
     content: `<b>The Commuter Town Phenomenon</b>
 
 Rising urban housing costs have pushed many workers to surrounding "commuter towns," where they trade longer travel times for affordability. Remote and hybrid work has further enabled this trend, allowing city-level salaries to go much further.
@@ -681,7 +681,7 @@ Beyond the dollars and cents, the move to a commuter town is often a lifestyle c
     province: 'National',
     publishedAt: '2025-02-10',
     readTime: 10,
-    imageUrl: 'https://images.unsplash.com/photo-1523580846011-d3a5bc25702b?w=800&q=80',
+    imageUrl: '/blog/covers/student-cities-canada-salary-guide-2025.png',
     content: `<b>Working While Studying</b>
 
 Canadian university students increasingly work during their studies to offset rising education costs and living expenses. The combination of tuition, housing, food, and other necessities creates financial pressure that employment helps address. Understanding earning opportunities and balancing work with academic demands has become essential for student financial planning.
@@ -764,7 +764,7 @@ Kingston, London, and smaller university cities offer more affordable student li
     province: 'National',
     publishedAt: '2025-02-12',
     readTime: 10,
-    imageUrl: 'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=800&q=80',
+    imageUrl: '/blog/covers/retirement-destinations-canada-salary-guide-2025.png',
     content: `<b>The New Retirement Reality</b>
 
 The traditional model of full retirement at age sixty-five has evolved as Canadians live longer, healthier lives and face changing economic realities. Many retirees choose to continue working in some capacity, whether for financial necessity, social connection, or personal fulfillment. Understanding income opportunities in retirement destinations helps Canadians plan for this evolving life stage.

@@ -9,6 +9,7 @@ import Candles, { type CandleData } from './Candles';
 import IncomeBarometer, { type BarometerData } from './IncomeBarometer';
 import CrossTab, { type CrossTabData } from './CrossTab';
 import Provenance, { type ProvenanceData } from './Provenance';
+import Neighbourhoods, { type NeighbourhoodData } from './Neighbourhoods';
 import HourChart from './HourChart';
 import IndustryIncome, { type IndustryIncomeRow } from './IndustryIncome';
 import SearchPanel from './SearchPanel';
@@ -215,6 +216,7 @@ export default function StatsDashboard() {
   const [barometer, setBarometer] = useState<BarometerData | null>(null);
   const [cross, setCross] = useState<CrossTabData | null>(null);
   const [prov, setProv] = useState<ProvenanceData | null>(null);
+  const [hoods, setHoods] = useState<NeighbourhoodData | null>(null);
   const [geo, setGeo] = useState<{ city: string; lat: number; lon: number; n: number }[] | null>(null);
   const [error, setError] = useState<string | null>(null);
   const [zh, setZh] = useState(false);
@@ -234,6 +236,9 @@ export default function StatsDashboard() {
     });
     insights('crosstab').then(({ data }) => {
       if (data) setCross(data as CrossTabData);
+    });
+    insights('neighbourhoods').then(({ data }) => {
+      if (data) setHoods(data as NeighbourhoodData);
     });
     insights('provenance').then(({ data }) => {
       if (data) setProv(data as ProvenanceData);
@@ -407,6 +412,18 @@ export default function StatsDashboard() {
               : `City centroids only — the centre point of the city a visit came from, never a precise location and never an IP address. Dot size is volume; hover a dot to name it. Based on ${stats.geo_known} of ${t} events. The rest cannot be placed rather than failed to be: calculations from the iOS app never pass through the web edge that resolves location, and the earliest events predate location collection entirely.`}
           </p>
           <Globe cities={geo ?? stats.cities_geo ?? []} countries={stats.by_country} lang={zh ? 'zh' : 'en'} />
+        </div>
+
+        {/* Neighbourhoods — the first location the visitor GAVE, and the
+            grain a real-estate or research buyer actually asks for. */}
+        <div className="mb-6 rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
+          <h2 className="text-base font-bold text-slate-800">{T('Neighbourhoods (postal-code prefix)', '社区(邮编前三位)')}</h2>
+          <p className="mb-4 mt-0.5 text-xs leading-5 text-slate-400">
+            {zh
+              ? '访客在结果下方自己输入的邮编前三位(FSA),或按下「使用我的位置」后在设备上取整、就近匹配到的 FSA。换来的是 CRA 报税人数据里「你的收入在本区排第几」。每格至少 20 人才显示收入档分布。'
+              : 'The postal-code prefix (FSA) a visitor typed under the result, or the nearest FSA to a location rounded on their own device after pressing "use my location". What they got for it: where that income sits among the CRA tax filers of that exact area. A bracket mix is shown only for cells of twenty or more.'}
+          </p>
+          <Neighbourhoods data={hoods} zh={zh} />
         </div>
 
         {/* ── The headline distribution: wage vs provincial median ────────── */}

@@ -126,3 +126,40 @@ answered separately from "which article gets read".
   lifetime as the visit id, never a cross-visit identifier.
 - Not backfillable. Rows written before this date have both fields null, and any
   "articles that convert" figure starts from this date, not from launch.
+
+### 2026-09-15 — neighbourhood, time zone, returning device
+
+Six fields added. None changes the meaning of an existing field, so the schema
+version stays at 1; rows written before this date have all six null.
+
+| Field | Meaning |
+| --- | --- |
+| `fsa` | First three characters of a Canadian postal code (a Forward Sortation Area, a few thousand households). Never a full postal code — six characters name about fifteen households |
+| `fsa_source` | `typed` — the visitor entered it under the result; `device` — the visitor pressed "use my location" and the browser position was mapped to the nearest FSA centroid **on the device**; `remembered` — an FSA this device gave earlier, carried on later calculations from localStorage |
+| `lat2` / `lon2` | Device position, present only when `fsa_source = device`. Rounded **before sending**: two decimals (~1 km) in urban FSAs, one decimal (~11 km) in rural FSAs (second character `0`) and where no FSA matched. The server re-applies the same rounding; the precise reading never exists outside the browser |
+| `tz` | The IANA zone name the browser reports (`America/Toronto`). A cross-check on the edge geography — a Toronto zone on a Vancouver connection is a VPN or a corporate egress — not a position |
+| `is_returning` | Whether this device had recorded a calculation before, from a single `1` flag in localStorage. A boolean, not an identifier; two returning devices are indistinguishable |
+
+- **Consent.** Both location paths are off until the visitor acts (typing, or
+  pressing the button and then accepting the browser prompt), and the consent
+  text beside them names the purpose: aggregated neighbourhood statistics that
+  are published and may be licensed to third parties, including real-estate and
+  financial companies. Quebec's s. 8.1 (functions that locate a person must be
+  deactivated by default) is met by construction.
+- **What the visitor gets.** Their income placed among the tax filers of that
+  FSA, from CRA's *Individual Tax Statistics by FSA* (Table 1b, 2021 tax year —
+  the newest published), shipped as `public/data/fsa-income.json`; percentile
+  interpolated inside the income class. Total income of all filers, not wages;
+  filers, not residents; 2021 dollars. The payoff says so.
+- **FSA centroids** for the device path come from Statistics Canada's 2021 FSA
+  boundary file (92-179-X), `public/data/fsa-centroids.json`, two decimals.
+  Nearest centroid within 30 km; farther than that, nothing is recorded.
+- **Suppression on the way out.** Any published or licensed figure by FSA needs
+  twenty calculations behind it (the threshold the federal government applied
+  to its own mobility data); a bare count needs five; smaller cells are folded
+  into one withheld total. The data-room panel prints these rules on itself.
+- The iOS app collects none of the six: no location permission is requested,
+  and the App Store's data-sharing rules (5.1.2) make licensed aggregates from
+  app data a review risk not worth 4% of the rows.
+- Not backfillable, and never inferred: an FSA is stored only when the visitor
+  supplied it or chose to be located. Rows without one stay at city level.

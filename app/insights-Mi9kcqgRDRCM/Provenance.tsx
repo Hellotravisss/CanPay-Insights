@@ -28,7 +28,24 @@ export type ProvenanceData = {
   gsc_pages: number;
   snapshots: { month: string; taken: string }[];
   excluded: number;
+  sources?: { source: string; last: string; n: number; silent_days: number }[];
 };
+
+/**
+ * Known gaps. A provenance panel that only counts what arrived would present
+ * a hole in the data as a quiet month; this list says what is missing and why,
+ * and whether it was ever filled in (it was not, and must not be).
+ */
+const INCIDENTS: { from: string; to: string; what: string }[] = [
+  {
+    from: '2026-08-27',
+    to: '2026-09-15',
+    what: 'iOS app events rejected by the server (a required field the app did not send). Roughly 120 app calculations were never stored. Not backfilled: the rows do not exist anywhere, and reconstructing them from account history would fabricate data.',
+  },
+];
+
+// A source that has not written in this many days is shown as an alarm.
+const SILENT_AFTER_DAYS = 7;
 
 const n = (v: number) => v.toLocaleString('en-CA');
 
@@ -61,8 +78,17 @@ export default function Provenance({ data }: { data: ProvenanceData | null }) {
     },
   ];
 
+  const sources = data.sources ?? [];
+  const quiet = sources.filter((s) => s.silent_days >= SILENT_AFTER_DAYS && s.source !== 'widget');
+
   return (
     <div>
+      {quiet.length > 0 && (
+        <div className="mb-4 rounded-xl border border-amber-200 bg-amber-50 px-4 py-3 text-xs leading-5 text-amber-900" role="alert">
+          <strong>Source silent:</strong>{' '}
+          {quiet.map((s) => `${s.source} last wrote ${s.last} (${s.silent_days} days ago)`).join('; ')}. A live source that stops writing is a bug until proven otherwise — the app went quiet for 19 days in August 2026 before anyone looked.
+        </div>
+      )}
       <dl className="grid gap-x-8 gap-y-4 sm:grid-cols-2">
         {rows.map((r) => (
           <div key={r.label}>
@@ -72,6 +98,32 @@ export default function Provenance({ data }: { data: ProvenanceData | null }) {
           </div>
         ))}
       </dl>
+
+      {sources.length > 0 && (
+        <div className="mt-6">
+          <p className="text-xs font-semibold uppercase tracking-wider text-slate-500">Heartbeat by source</p>
+          <ul className="mt-2 flex flex-wrap gap-x-6 gap-y-1 text-xs text-slate-600">
+            {sources.map((s) => (
+              <li key={s.source} className="tabular-nums">
+                <span className="font-mono font-semibold text-slate-800">{s.source}</span> · {n(s.n)} rows · last {s.last}
+                {s.silent_days >= SILENT_AFTER_DAYS && s.source !== 'widget' ? <span className="ml-1 font-semibold text-amber-700">({s.silent_days}d silent)</span> : null}
+                {s.source === 'widget' ? <span className="ml-1 text-slate-400">(rare by design)</span> : null}
+              </li>
+            ))}
+          </ul>
+        </div>
+      )}
+
+      <div className="mt-6">
+        <p className="text-xs font-semibold uppercase tracking-wider text-slate-500">Known gaps</p>
+        <ul className="mt-2 space-y-1.5 text-xs leading-5 text-slate-500">
+          {INCIDENTS.map((i) => (
+            <li key={i.from}>
+              <strong className="text-slate-700">{i.from} → {i.to}</strong> — {i.what}
+            </li>
+          ))}
+        </ul>
+      </div>
 
       <div className="mt-6 rounded-xl bg-slate-50 p-4">
         <p className="text-xs font-semibold uppercase tracking-wider text-slate-500">

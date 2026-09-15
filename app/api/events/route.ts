@@ -25,7 +25,40 @@ const COLS = [
   'os_family', 'device_brand',
   'change_direction', 'change_pct_bucket', 'days_since_saved_bucket', 'province_changed',
   'median_ratio_bucket', 'median_wage_ref', 'schema_version',
+  'fsa', 'fsa_source', 'lat2', 'lon2', 'tz', 'is_returning',
 ] as const;
+
+/**
+ * Neighbourhood fields are the only ones a visitor supplies about where they
+ * are, so they are checked here as well as in the browser. An FSA must look
+ * like one (three characters, never a full postal code); a device position is
+ * kept only at two decimals and only when the visitor's source really was the
+ * device; a zone name is a name, not a coordinate.
+ */
+const FSA_RE = /^[ABCEGHJ-NPRSTVXY]\d[ABCEGHJ-NPRSTV-Z]$/;
+const FSA_SOURCES = new Set(['typed', 'device', 'remembered']);
+function sanitiseNeighbourhood(body: Record<string, unknown>): void {
+  const fsa = typeof body.fsa === 'string' ? body.fsa.trim().toUpperCase() : '';
+  body.fsa = FSA_RE.test(fsa) ? fsa : null;
+  const src = typeof body.fsa_source === 'string' && FSA_SOURCES.has(body.fsa_source) ? body.fsa_source : null;
+  body.fsa_source = body.fsa || src === 'device' ? src : null;
+  const two = (v: unknown, lim: number) => {
+    const n = typeof v === 'number' ? v : parseFloat(String(v));
+    return Number.isFinite(n) && Math.abs(n) <= lim ? Math.round(n * 100) / 100 : null;
+  };
+  body.lat2 = body.fsa_source === 'device' ? two(body.lat2, 90) : null;
+  body.lon2 = body.fsa_source === 'device' ? two(body.lon2, 180) : null;
+  // Rural FSAs (second character 0) and positions that matched no FSA keep
+  // one decimal (~11 km): a 1 km cell outside a city can be a single house.
+  const rural = !body.fsa || (body.fsa as string)[1] === '0';
+  if (rural) {
+    body.lat2 = typeof body.lat2 === 'number' ? Math.round(body.lat2 * 10) / 10 : null;
+    body.lon2 = typeof body.lon2 === 'number' ? Math.round(body.lon2 * 10) / 10 : null;
+  }
+  const tz = typeof body.tz === 'string' ? body.tz : '';
+  body.tz = /^[A-Za-z_]+(\/[A-Za-z_+\-]+){0,2}$/.test(tz) ? tz.slice(0, 64) : null;
+  body.is_returning = body.is_returning === 1 || body.is_returning === true ? 1 : body.is_returning === 0 || body.is_returning === false ? 0 : null;
+}
 
 function norm(v: unknown): string | number | null {
   if (v === null || v === undefined) return null;
@@ -39,6 +72,7 @@ export async function POST(request: Request) {
   let body: Record<string, unknown>;
   try { body = await request.json(); } catch { return NextResponse.json({ error: 'bad json' }, { status: 400 }); }
   if (!body.mode || !body.province || !body.income_bracket || !body.lang) return NextResponse.json({ error: 'missing fields' }, { status: 400 });
+  sanitiseNeighbourhood(body);
 
   let cf: Record<string, unknown> = {};
   try { cf = ((await getCloudflareContext({ async: true })).cf ?? {}) as Record<string, unknown>; } catch { /* local dev */ }

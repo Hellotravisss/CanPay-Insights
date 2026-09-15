@@ -22,6 +22,7 @@ import {
 import IndustryComparison from './components/IndustryComparison';
 import IntentPrompt from './components/IntentPrompt';
 import ExpectationPrompt from './components/ExpectationPrompt';
+import NeighbourhoodPrompt from './components/NeighbourhoodPrompt';
 import FakeDoors from './components/FakeDoors';
 import PartnerSlot from './components/PartnerSlot';
 import ShareReward from './components/ShareReward';
@@ -733,6 +734,15 @@ const App: React.FC = () => {
                   annualIncome={results.grossPayAnnual}
                   lang={lang}
                 />
+                {/* The neighbourhood: typed postal prefix or an on-device
+                    rounded location, paid for with the CRA tax-roll placement
+                    of this exact income in that exact area. */}
+                <NeighbourhoodPrompt
+                  mode={mode}
+                  province={currentProvince}
+                  annualIncome={results.grossPayAnnual}
+                  lang={lang}
+                />
                 <IndustryComparison
                   mode={mode}
                   province={currentProvince}
@@ -797,6 +807,12 @@ const App: React.FC = () => {
             </a>
             <a href="/affiliate-disclosure" className="text-slate-400 no-underline transition-colors hover:text-red-600">
               Disclosure
+            </a>
+            <a href="/terms" className="text-slate-400 no-underline transition-colors hover:text-red-600">
+              Terms
+            </a>
+            <a href="/refunds" className="text-slate-400 no-underline transition-colors hover:text-red-600">
+              Refunds
             </a>
             <a href="/link-to-canpay" className="text-slate-400 no-underline transition-colors hover:text-red-600">
               Link to Us
@@ -897,6 +913,18 @@ const App: React.FC = () => {
               className="text-slate-400 hover:text-red-600 transition-colors"
             >
               Affiliate Disclosure
+            </a>
+            <a
+              href="/terms"
+              className="text-slate-400 hover:text-red-600 transition-colors"
+            >
+              Terms of Service
+            </a>
+            <a
+              href="/refunds"
+              className="text-slate-400 hover:text-red-600 transition-colors"
+            >
+              Refund Policy
             </a>
             <a
               href="/link-to-canpay"

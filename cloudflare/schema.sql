@@ -23,7 +23,16 @@ create table if not exists events (
   change_pct_bucket text, days_since_saved_bucket text, province_changed integer,
   median_ratio_bucket text, median_wage_ref integer,
   schema_version integer not null default 1,
-  excluded integer
+  excluded integer,
+  -- 2026-09-15: neighbourhood. `fsa` is the first three characters of a
+  -- Canadian postal code (typed, or the nearest FSA centroid to a device
+  -- location the visitor chose to share); `lat2`/`lon2` are that device
+  -- location rounded to two decimals ON THE DEVICE (~1 km) before it is sent;
+  -- `tz` is the browser's IANA zone; `is_returning` is a same-device counter
+  -- flag, never an identifier.
+  -- Added in production by ALTER during 2026-08/09 and mirrored here on 2026-09-15.
+  tenure_band text, union_member text, employer_size text, vacation_band text, os_family text, device_brand text,
+  fsa text, fsa_source text, lat2 real, lon2 real, tz text, is_returning integer
 );
 create index if not exists idx_events_created on events(created_at);
 create index if not exists idx_events_session on events(session_id);

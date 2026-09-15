@@ -21,7 +21,7 @@ const article1: Article = {
   province: "Ontario",
   publishedAt: "2025-01-15",
   readTime: 12,
-  imageUrl: "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=800&q=80",
+  imageUrl: "/blog/covers/ontario-tax-guide-2025.png",
   directAnswer: "In Ontario for 2026, an average earner (e.g., $65,000) can expect an effective deduction rate of about 22.6%, resulting in a take-home pay of approximately $50,280 after federal and provincial taxes, CPP, and EI.",
   faq: [
     { question: "What are the Ontario provincial tax brackets for 2026?", answer: "Ontario has five provincial tax brackets in 2026, ranging from 5.05% on the first $53,891 to 13.16% on income over $220,000." },
@@ -284,7 +284,7 @@ const article2: Article = {
   province: "British Columbia",
   publishedAt: "2025-01-16",
   readTime: 11,
-  imageUrl: "https://images.unsplash.com/photo-1559511260-66a654ae982a?w=800&q=80",
+  imageUrl: "/blog/covers/bc-tax-guide-2025.png",
   directAnswer: "British Columbia features a 7-tier progressive tax system in 2026; an $80,000 salary in Vancouver nets approximately $60,867 annually after all mandatory deductions, representing a 23.9% total deduction rate.",
   faq: [
     { question: "How many tax brackets does BC have in 2025?", answer: "BC uses a unique 7-tier provincial tax system, with rates starting at 5.06% and reaching 20.5% for high earners." },
@@ -509,7 +509,7 @@ const article3: Article = {
   publishedAt: "2025-01-17",
   updatedAt: "2026-08-11",
   readTime: 14,
-  imageUrl: "https://images.unsplash.com/photo-1436491865332-7a61a109cc05?w=800&q=80",
+  imageUrl: "/blog/covers/newcomer-tax-guide-canada-2025.png",
   directAnswer: "Newcomers to Canada in 2025 must file a tax return even with no income to access benefits like the GST/HST credit and Canada Child Benefit (CCB), which are based on family income.",
   faq: [
     { question: "Do I need to file taxes in my first year in Canada?", answer: "Yes, you should file a tax return for the year you arrive to establish your eligibility for various credits and benefits, even if you had no income." },
@@ -727,7 +727,7 @@ const article4: Article = {
   province: "Federal",
   publishedAt: "2025-01-18",
   readTime: 10,
-  imageUrl: "https://images.unsplash.com/photo-1579621970563-ebec7560ff3e?w=800&q=80",
+  imageUrl: "/blog/covers/cpp-ei-explained-2025.png",
   directAnswer: "CPP and EI are mandatory payroll deductions in Canada; for 2026, employees contribute 5.95% for CPP (up to $4,230.45) and 1.63% for EI (up to $1,123.07) to fund retirement and social safety nets.",
   faq: [
     { question: "What is the new CPP2 deduction?", answer: "Since 2024, an additional 4% CPP2 contribution applies to earnings between the first ceiling (YMPE, $74,600 in 2026) and the second ceiling (YAMPE, $85,000 in 2026) to further enhance the Canada Pension Plan." },
@@ -942,7 +942,7 @@ const article5: Article = {
   province: "Federal",
   publishedAt: "2025-01-19",
   readTime: 9,
-  imageUrl: "https://images.unsplash.com/photo-1554224155-6726b3ff858f?w=800&q=80",
+  imageUrl: "/blog/covers/50000-salary-after-tax-canada-2025.png",
   directAnswer: "A $50,000 salary in Canada in 2026 leaves between about $38,021 (Nova Scotia) and $41,153 (Nunavut) after federal tax, provincial tax, CPP and EI. Among the provinces, British Columbia keeps the most at $40,364; Ontario keeps $39,935 and Quebec $38,857.",
   faq: [
     { question: "Which province has the lowest tax on a $50,000 salary?", answer: "Among the provinces, British Columbia keeps the most of a $50,000 salary in 2026 at about $40,364, with Alberta close behind at $40,331. Nunavut leads all jurisdictions at $41,153." },
@@ -1172,7 +1172,7 @@ const article6: Article = {
   province: "Federal",
   publishedAt: "2025-01-20",
   readTime: 11,
-  imageUrl: "https://images.unsplash.com/photo-1521791136064-7986c2920216?w=800&q=80",
+  imageUrl: "/blog/covers/minimum-wage-canada-2025-comparison.png",
   directAnswer: "As of 2025, Canadian minimum wages range from $15.00 to over $19.00 per hour, with most provinces now indexing their rates to inflation to help low-income workers manage the cost of living.",
   faq: [
     { question: "Which province has the highest minimum wage in 2025?", answer: "Nunavut and Yukon typically have the highest rates ($16-$19+), while provinces like BC and Ontario are in the $17-$18 range." },
@@ -1423,7 +1423,7 @@ const article7: Article = {
   province: "Federal",
   publishedAt: "2025-01-21",
   readTime: 13,
-  imageUrl: "https://images.unsplash.com/photo-1579621970795-87facc2f976d?w=800&q=80",
+  imageUrl: "/blog/covers/rrsp-tax-savings-canada-2025.png",
   directAnswer: "For 2026, RRSP contributions can reduce your taxable income and trigger significant refunds; for example, a $10,000 contribution at a 30% marginal rate could result in a $3,000 tax saving.",
   faq: [
     { question: "What is the RRSP contribution limit for 2026?", answer: "The limit is 18% of your previous year's earned income, up to a maximum of $33,810 for the 2026 tax year." },
@@ -1701,7 +1701,7 @@ const article8: Article = {
   province: "Federal",
   publishedAt: "2025-01-22",
   readTime: 12,
-  imageUrl: "https://images.unsplash.com/photo-1554224154-26032ffc0d07?w=800&q=80",
+  imageUrl: "/blog/covers/tfsa-vs-rrsp-canada-2025.png",
   directAnswer: "Choosing between a TFSA and RRSP in 2025 depends on your income; generally, RRSPs are best for high-income earners seeking immediate tax relief, while TFSAs offer flexibility and tax-free growth for everyone.",
   faq: [
     { question: "What is the TFSA contribution limit for 2025?", answer: "The annual TFSA contribution limit for 2025 is $7,000, plus any unused room carried forward from previous years." },
@@ -1963,7 +1963,7 @@ const article9: Article = {
   publishedAt: "2025-01-23",
   updatedAt: "2026-08-11",
   readTime: 10,
-  imageUrl: "https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?w=800&q=80",
+  imageUrl: "/blog/covers/ontario-overtime-rules-2025.png",
   directAnswer: "In Ontario for 2025, most employees are entitled to overtime pay at 1.5 times their regular hourly rate for every hour worked in excess of 44 hours in a work week.",
   faq: [
     { question: "What is the overtime threshold in Ontario?", answer: "The standard overtime threshold in Ontario is 44 hours per week; any hours worked beyond this must be compensated at the overtime rate." },
@@ -2267,7 +2267,7 @@ const article10: Article = {
   province: "Federal",
   publishedAt: "2025-01-24",
   readTime: 12,
-  imageUrl: "https://images.unsplash.com/photo-1483921020237-2ff51e8e4b22?w=800&q=80",
+  imageUrl: "/blog/covers/alberta-vs-ontario-taxes-2025.png",
   directAnswer: "Alberta remains the most tax-friendly province for higher earners in 2026 due to its lower top marginal rates and lack of provincial sales tax (PST), while Ontario offers lower rates for the first $50,000 of income.",
   faq: [
     { question: "Does Alberta have a provincial sales tax?", answer: "No, Alberta is the only province in Canada with no provincial sales tax (PST), charging only the 5% federal GST on goods and services." },
@@ -2539,7 +2539,8 @@ Every situation is unique. Use our calculator to:
 
 
 // Export all articles (combine original tax articles + new articles)
-const rawArticles: Article[] = [
+// Exported for build scripts (cover generation) that must see pruned entries too.
+export const rawArticles: Article[] = [
   // Provincial guides, generated from StatCan wages + our 2026 engine
   ...provinceGuides2026,
   // Original Tax Guide Articles

@@ -116,9 +116,12 @@ const DataPage: React.FC = () => {
               </h2>
               <p className="text-sm leading-relaxed text-slate-600 mb-3">
                 Anonymous aggregates from the calculator itself — which income ranges people check,
-                from which province, on which weekday and at what hour of their own evening. Income
-                is recorded only as a range, never an amount. Small cells are withheld rather than
-                shown, and the file says how many were withheld so you can see what is missing.
+                from which province, on which weekday and at what hour of their own evening, and,
+                where a visitor chose to give it, from which postal-code area. Income is recorded
+                only as a range, never an amount; location is a city centre from the connection or a
+                postal-code prefix the visitor typed or a position rounded on their own device. Small
+                cells are withheld rather than shown (twenty people for any postal-area figure), and
+                the file says how many were withheld so you can see what is missing.
               </p>
               <p className="text-sm leading-relaxed text-slate-600 mb-4">
                 <strong className="text-slate-800">These are people who went looking for a pay

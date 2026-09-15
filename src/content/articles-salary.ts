@@ -33,7 +33,7 @@ export const salaryArticles: Article[] = [
     province: 'National',
     publishedAt: '2025-01-15',
     readTime: 12,
-    imageUrl: 'https://images.unsplash.com/photo-1519389950473-47ba0277781c?w=800&q=80',
+    imageUrl: '/blog/covers/canadian-tech-salaries-2025.png',
     content: `<b>The Landscape of Canadian Tech Compensation in 2025</b><br><br>
 As we move into 2025, the Canadian technology sector continues to be a cornerstone of the national economy, despite the global shifts in the tech industry over the past few years. The "Great Rebalancing" of 2023 and 2024 has led to a more mature and stable hiring environment in 2025. While the explosive salary growth of the pandemic era has normalized, tech professionals in Canada still command some of the highest salaries across all industries. In 2025, the focus has shifted from "growth at all costs" to "sustainable innovation," with significant premiums being paid for specialized skills in Artificial Intelligence (AI), Cybersecurity, and Cloud Infrastructure. Companies are no longer hiring based on potential alone; they are seeking proven expertise that can drive immediate ROI in an increasingly competitive global market. Furthermore, the integration of AI tools into the development workflow has created a new benchmark for productivity, where those who can leverage these tools are seeing faster career progression and higher starting offers.<br><br>
 
@@ -98,7 +98,7 @@ The outlook for Canadian tech salaries in late 2025 and 2026 remains positive. A
     province: 'National',
     publishedAt: '2025-01-18',
     readTime: 14,
-    imageUrl: 'https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?w=800&q=80',
+    imageUrl: '/blog/covers/healthcare-salaries-canada-2025.png',
     content: `<b>The State of Canadian Healthcare Compensation in 2025</b><br><br>
 The Canadian healthcare system in 2025 is undergoing a period of significant transformation. Facing an aging population and a persistent shortage of frontline workers, provincial governments have implemented aggressive recruitment and retention strategies, leading to notable salary increases across many healthcare professions. In 2025, healthcare remains one of the most stable and well-compensated sectors in Canada, with a high degree of job security and comprehensive benefit packages. The focus has moved from "crisis management" to "systemic sustainability," with massive investments in healthcare infrastructure and human capital. This transition is not only about raising wages but also about improving the quality of work life for those on the front lines, ensuring that the healthcare profession remains attractive to future generations.<br><br>
 
@@ -162,7 +162,7 @@ Despite the high salaries, the healthcare sector faces challenges related to bur
     province: 'National',
     publishedAt: '2025-01-20',
     readTime: 11,
-    imageUrl: 'https://images.unsplash.com/photo-1593642632559-0c6d3fc62b89?w=800&q=80',
+    imageUrl: '/blog/covers/remote-work-salaries-canada-2025.png',
     content: `<b>Remote Work Salaries: The 2025 Canadian Perspective</b><br><br>
 The landscape of work in Canada has been permanently altered. In 2025, "remote work" is no longer an experiment or a temporary measure; it is a standard employment model across dozens of industries. What began as a necessity in 2020 has evolved into a sophisticated ecosystem of distributed teams, digital nomads, and hybrid office arrangements. This shift has profound implications for how salaries are calculated, how benefits are structured, and how the Canadian tax system interacts with the modern worker. The "Office vs. Remote" debate has matured into a nuanced discussion about productivity, culture, and individual choice, with most Canadian workers now viewing flexibility as a core component of their compensation package.<br><br>
 
@@ -225,7 +225,7 @@ Looking ahead to 2026, the remote work market in Canada is expected to remain ro
     province: 'National',
     publishedAt: '2025-01-22',
     readTime: 10,
-    imageUrl: 'https://images.unsplash.com/photo-1523240795612-9a054b0db644?w=800&q=80',
+    imageUrl: '/blog/covers/entry-level-salaries-canada-2025.png',
     content: `<b>Starting Your Career: Entry-Level Salaries in Canada 2025</b><br><br>
 Entering the workforce in 2025 presents a unique set of opportunities and challenges for Canadian graduates. While the economy has faced headwinds, the demand for fresh talent in specialized fields remains high. Companies are increasingly looking for "career-ready" graduates who possess a mix of technical skills and emotional intelligence. In 2025, entry-level salaries have seen a modest increase of 3.2% compared to the previous year, reflecting the rising cost of living and the competitive nature of the talent market. The "New Grad" of 2025 is expected to be more adaptable and tech-literate than any previous generation, with a focus on long-term growth and continuous learning.<br><br>
 
@@ -287,7 +287,7 @@ The first three years of your career are the most critical for salary growth. In
     province: 'National',
     publishedAt: '2025-01-25',
     readTime: 12,
-    imageUrl: 'https://images.unsplash.com/photo-1504917595217-d4dc5ebe6122?w=800&q=80',
+    imageUrl: '/blog/covers/skilled-trades-salaries-canada-2025.png',
     content: `<b>Skilled Trades in Canada: 2025 Salary Guide and Career Outlook</b><br><br>
 In 2025, the skilled trades are no longer just a "plan B"—they are a premier career path in Canada. With a massive national infrastructure push, a housing crisis that requires millions of new homes, and a wave of retirements among the "Baby Boomer" generation, the demand for skilled tradespeople has never been higher. This surge in demand has translated into significant wage growth, with many trades now offering salaries that rival or exceed those in traditional corporate roles. The "Stigma of the Trades" has vanished as society recognizes these workers as essential high-tech professionals. The modern tradesperson is a master of both physical craft and digital technology, making this one of the most dynamic sectors in the Canadian economy.<br><br>
 
@@ -358,7 +358,7 @@ The outlook for the skilled trades through 2030 is exceptionally strong. Canada 
     province: 'National',
     publishedAt: '2025-01-28',
     readTime: 13,
-    imageUrl: 'https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?w=800&q=80',
+    imageUrl: '/blog/covers/finance-banking-salaries-canada-2025.png',
     content: `<b>Finance and Banking Salaries in Canada: 2025 Comprehensive Guide</b><br><br>
 The Canadian financial sector, centered in Toronto but with major hubs in Montreal, Calgary, and Vancouver, remains one of the most stable and high-paying industries in the country. In 2025, the sector is balancing traditional banking stability with the rapid innovation of fintech. While interest rate fluctuations have impacted some areas of the market, the overall compensation for finance professionals remains robust, driven by the need for risk management, digital transformation, and sustainable investing expertise. The "Big Five" banks continue to dominate the landscape, but independent investment firms, hedge funds, and global players are increasingly aggressive in their recruitment, pushing total compensation packages to new heights.<br><br>
 
@@ -432,7 +432,7 @@ The financial sector in 2026 will be defined by "AI-Augmented Finance." Professi
     province: 'National',
     publishedAt: '2025-02-01',
     readTime: 12,
-    imageUrl: 'https://images.unsplash.com/photo-1556761175-5973dc0f32e7?w=800&q=80',
+    imageUrl: '/blog/covers/public-vs-private-sector-pay-canada-2025.png',
     content: `<b>Public vs. Private Sector Pay in Canada: The 2025 Total Compensation Analysis</b><br><br>
 One of the most enduring debates for Canadian workers is whether to pursue a career in the public sector (government, crown corporations, education, healthcare) or the private sector (corporations, startups, small businesses). In 2025, this choice is more nuanced than ever. While the "base salary" often gets the most attention, a true comparison requires looking at the "Total Compensation" package—including pensions, benefits, job security, and work-life balance. With the 2025 economy showing mixed signals, the "Safety of the Public Sector" is weighing heavily against the "Growth of the Private Sector." This guide provides a deep dive into the real differences between the two worlds and how to choose the path that best fits your life goals.<br><br>
 
@@ -500,7 +500,7 @@ Looking toward 2026, we expect the gap between the two sectors to narrow as the 
     province: 'National',
     publishedAt: '2025-02-05',
     readTime: 10,
-    imageUrl: 'https://images.unsplash.com/photo-1554224155-6726b3ff858f?w=800&q=80',
+    imageUrl: '/blog/covers/minimum-wage-provincial-guide-canada-2025.png',
     content: `<b>Minimum Wage in Canada: 2025 Provincial and Territorial Guide</b><br><br>
 In 2025, the minimum wage remains a critical tool for addressing income inequality and the rising cost of living in Canada. With inflation impacting everything from rent to groceries, several provinces have implemented automatic adjustment mechanisms that tie the minimum wage to the Consumer Price Index (CPI). This guide provides the most up-to-date information on minimum wage rates across the country as of late 2025, along with insights into the "Living Wage" movement and what these rates mean for both workers and employers. The debate over the "Wage Floor" has become a central political issue in almost every province, as governments try to balance worker needs with business sustainability.<br><br>
 
@@ -573,7 +573,7 @@ The future of wage standards in Canada is moving toward "Sectoral Bargaining"—
     province: 'National',
     publishedAt: '2025-02-08',
     readTime: 6,
-    imageUrl: 'https://images.unsplash.com/photo-1560472354-b33ff0c44a43?w=800&q=80',
+    imageUrl: '/blog/covers/executive-compensation-canada-2025.png',
     content: `<b>Executive Compensation in Canada: 2025 Trends and Benchmarks</b><br><br>
 Executive compensation in Canada is a complex and often scrutinized topic. In 2025, the way CEOs and top leadership are rewarded has moved far beyond the simple "base salary." To align executive interests with those of shareholders and broader society, compensation packages now include a mix of short-term incentives, long-term equity awards, and increasingly, metrics related to Environmental, Social, and Governance (ESG) goals. This guide explores the 2025 benchmarks for C-suite leaders at both public and private Canadian firms. The "Executive Talent War" is in full swing, as Canadian firms compete with global giants for top-tier leadership in an increasingly complex and regulated corporate environment.<br><br>
 
@@ -637,7 +637,7 @@ As we look toward 2026, executive compensation will continue to evolve toward "S
     province: 'National',
     publishedAt: '2025-02-12',
     readTime: 6,
-    imageUrl: 'https://images.unsplash.com/photo-1522202176988-66273c2fd55f?w=800&q=80',
+    imageUrl: '/blog/covers/freelancer-rates-canada-2025.png',
     content: `<b>The Freelance Economy: 2025 Guide to Rates in Canada</b><br><br>
 The freelance economy in Canada is thriving in 2025. With companies looking for specialized skills on a project basis and workers seeking more autonomy, the "Gig Economy" has matured into a professional "Independent Contractor" market. Whether you are a writer, designer, developer, or consultant, setting the right rate is the difference between a struggling side-hustle and a lucrative career. This guide provides 2025 benchmarks and a framework for pricing your services in the Canadian market. As the "Liquid Workforce" grows, freelancers are increasingly seen as strategic partners rather than just temporary help, with many corporations now having dedicated "External Talent Management" teams.<br><br>
 

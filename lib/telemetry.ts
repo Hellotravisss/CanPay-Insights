@@ -184,6 +184,84 @@ export function deriveEmploymentShape(
 
 export { bracketIncome } from './brackets';
 
+/**
+ * Neighbourhood — the one field that turns "which city" into "which part of
+ * town", and the first field on this site the visitor hands over on purpose.
+ *
+ * `fsa` is the first three characters of a Canadian postal code (a Forward
+ * Sortation Area: a few thousand households, the unit real-estate and census
+ * reports already use). It arrives one of three ways:
+ *   - `typed`      — the visitor typed it to see where their pay sits locally;
+ *   - `device`     — the visitor pressed "use my location"; the browser's
+ *                    position is rounded to TWO decimals (~1 km) on the device
+ *                    and mapped to the nearest FSA centroid before anything is
+ *                    sent. The precise coordinate never leaves the browser;
+ *   - `remembered` — an FSA this device gave earlier, kept in localStorage so
+ *                    later calculations carry it without asking again.
+ * `lat2`/`lon2` exist only for the device path and only at two decimals.
+ *
+ * A full six-character postal code is never accepted: it names about fifteen
+ * households, and with an income bracket that is a person.
+ */
+export type FsaSource = 'typed' | 'device' | 'remembered';
+export interface Neighbourhood {
+  fsa: string | null;
+  source: FsaSource;
+  lat2?: number | null;
+  lon2?: number | null;
+}
+export const FSA_RE = /^[ABCEGHJ-NPRSTVXY]\d[ABCEGHJ-NPRSTV-Z]$/;
+const FSA_KEY = 'canpay_fsa';
+
+/** Normalises free text to an FSA, or null if it is not one. */
+export function parseFsa(raw: string): string | null {
+  const v = raw.trim().toUpperCase().replace(/\s+/g, '').slice(0, 3);
+  return FSA_RE.test(v) ? v : null;
+}
+export function rememberFsa(fsa: string | null): void {
+  try {
+    if (fsa) localStorage.setItem(FSA_KEY, fsa);
+    else localStorage.removeItem(FSA_KEY);
+  } catch { /* storage blocked */ }
+}
+export function rememberedFsa(): string | null {
+  try {
+    const v = localStorage.getItem(FSA_KEY);
+    return v && FSA_RE.test(v) ? v : null;
+  } catch {
+    return null;
+  }
+}
+
+/**
+ * Whether this device has recorded a calculation before. A flag, not an id:
+ * the only thing stored is the word "1", so two returning devices are
+ * indistinguishable from each other. Read once per page load, before the
+ * first event of the load sets it.
+ */
+const SEEN_KEY = 'canpay_seen';
+let returningThisLoad: 0 | 1 | null = null;
+function isReturning(): 0 | 1 | null {
+  if (returningThisLoad !== null) return returningThisLoad;
+  try {
+    returningThisLoad = localStorage.getItem(SEEN_KEY) === '1' ? 1 : 0;
+    localStorage.setItem(SEEN_KEY, '1');
+  } catch {
+    return null;
+  }
+  return returningThisLoad;
+}
+
+/** IANA zone name only ("America/Toronto") — a cross-check on the edge's geography, not a position. */
+function detectTimezone(): string | null {
+  try {
+    const z = Intl.DateTimeFormat().resolvedOptions().timeZone;
+    return z && /^[A-Za-z_]+(\/[A-Za-z_+\-]+){0,2}$/.test(z) ? z.slice(0, 64) : null;
+  } catch {
+    return null;
+  }
+}
+
 // Bot guard. Crawlers mostly can't reach here anyway (events only fire after a
 // user edits an input), but headless/automation traffic would otherwise count
 // as real people and poison a dataset whose whole value is being trustworthy.
@@ -509,6 +587,8 @@ export function recordCalcEvent(e: {
   unionMember?: UnionMember | null;
   employerSize?: EmployerSize | null;
   vacationBand?: VacationBand | null;
+  /** Explicit neighbourhood for this event; when absent, a remembered FSA rides along. */
+  neighbourhood?: Neighbourhood | null;
 }) {
   if (!e.annualIncome || e.annualIncome <= 0 || !e.province) return;
   if (isLikelyBot() || isOptedOut()) return;
@@ -520,13 +600,16 @@ export function recordCalcEvent(e: {
     const rawLang = KNOWN_LANGS.includes(e.lang) ? e.lang : 'en';
     const lang = settleLanguage(rawLang);
     const source = e.source ?? 'web';
+    const remembered = rememberedFsa();
+    const hood: Neighbourhood | null =
+      e.neighbourhood ?? (remembered ? { fsa: remembered, source: 'remembered' } : null);
     const w = e.work ?? null;
     const b = e.behaviour ?? null;
     const workKey = w
       ? `${w.shiftStartHour}-${w.shiftEndHour}-${w.unpaidBreakMin}-${w.daysPerWeek}`
       : '';
     const behaviourKey = b ? `${b.rrspPctBucket}-${b.otHoursBucket}-${b.tipsPctBucket ?? ''}-${b.shiftPremium}` : '';
-    const key = `${source}|${e.mode}|${e.province}|${bracket}|${e.industry ?? ''}|${workKey}|${behaviourKey}|${e.intent ?? ''}|${e.expectation ?? ''}|${e.workArrangement ?? ''}|${e.ageBand ?? ''}|${e.viewedReport ? 'r' : ''}|${e.productInterest ?? ''}|${e.tenureBand ?? ''}${e.unionMember ?? ''}${e.employerSize ?? ''}${e.vacationBand ?? ''}|${e.payChange ? `${e.payChange.direction}-${e.payChange.pctBucket}` : ''}`;
+    const key = `${source}|${e.mode}|${e.province}|${bracket}|${e.industry ?? ''}|${workKey}|${behaviourKey}|${e.intent ?? ''}|${e.expectation ?? ''}|${e.workArrangement ?? ''}|${e.ageBand ?? ''}|${e.viewedReport ? 'r' : ''}|${e.productInterest ?? ''}|${e.tenureBand ?? ''}${e.unionMember ?? ''}${e.employerSize ?? ''}${e.vacationBand ?? ''}|${e.payChange ? `${e.payChange.direction}-${e.payChange.pctBucket}` : ''}|${hood?.fsa ?? ''}${hood?.source ?? ''}`;
     if (sentThisPageLoad.has(key)) return;
     sentThisPageLoad.add(key);
 
@@ -586,6 +669,13 @@ export function recordCalcEvent(e: {
         local_hour: new Date().getHours(),
         local_dow: new Date().getDay(),
         os_family: detectOsFamily(),
+        fsa: hood?.fsa ?? null,
+        fsa_source: hood ? hood.source : null,
+        // Two decimals, and only when the visitor pressed the location button.
+        lat2: hood?.source === 'device' && typeof hood.lat2 === 'number' ? Math.round(hood.lat2 * 100) / 100 : null,
+        lon2: hood?.source === 'device' && typeof hood.lon2 === 'number' ? Math.round(hood.lon2 * 100) / 100 : null,
+        tz: detectTimezone(),
+        is_returning: isReturning(),
     };
 
     // Awaited before the send because the brand hint is a promise on Chromium.

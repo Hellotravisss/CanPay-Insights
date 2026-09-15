@@ -34,7 +34,7 @@ export const tipsArticles: Article[] = [
     province: 'National',
     publishedAt: '2025-01-15',
     readTime: 12,
-    imageUrl: 'https://images.unsplash.com/photo-1579621970795-87facc2f976d?w=800&q=80',
+    imageUrl: '/blog/covers/rrsp-vs-tfsa-canada-2025.png',
     content: `<b>Understanding Canada's Tax-Advantaged Accounts</b>
 
 Canada offers two primary vehicles for tax-advantaged savings: the Registered Retirement Savings Plan (RRSP) and Tax-Free Savings Account (TFSA). RRSP contributions provide immediate tax deductions, while investment growth in both is tax-sheltered.
@@ -115,7 +115,7 @@ For the 2025 tax year, the TFSA limit is $7,000. If you have been eligible since
     province: 'National',
     publishedAt: '2025-01-18',
     readTime: 10,
-    imageUrl: 'https://images.unsplash.com/photo-1579621970563-ebec7560ff3e?w=800&q=80',
+    imageUrl: '/blog/covers/emergency-fund-canada-2025.png',
     content: `<b>The Foundation of Financial Security</b>
 
 An emergency fund represents the essential foundation upon which all other financial planning is built. Before investing for retirement, saving for a home down payment, or pursuing other financial goals, establishing adequate emergency reserves protects against the inevitable financial shocks that life delivers. Without this protection, unexpected expenses can derail long-term plans, force debt accumulation, or create cascading financial problems.
@@ -190,7 +190,7 @@ As emergency funds grow beyond target levels due to accumulated interest or redu
     province: 'National',
     publishedAt: '2025-01-20',
     readTime: 12,
-    imageUrl: 'https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?w=800&q=80',
+    imageUrl: '/blog/covers/side-hustle-tax-canada-2025.png',
     content: `<b>The Rise of Side Hustles in Canada</b>
 
 Millions of Canadians now earn income through freelance work or gig platforms. The CRA requires reporting all worldwide income, regardless of the amount or whether it was received in cash.
@@ -279,7 +279,7 @@ Setting aside funds in a dedicated tax savings account ensures you have the mone
     province: 'National',
     publishedAt: '2025-01-22',
     readTime: 11,
-    imageUrl: 'https://images.unsplash.com/photo-1560518883-ce09059eeffa?w=800&q=80',
+    imageUrl: '/blog/covers/fhsa-first-home-savings-account-canada-2025.png',
     content: `<b>Introducing the First Home Savings Account</b>
 
 The First Home Savings Account (FHSA) provides first-time homebuyers with a powerful tool to accelerate down payment savings. It combines the tax-deductible contributions of an RRSP with the tax-free withdrawals of a TFSA.
@@ -346,7 +346,7 @@ When ready to buy, you must complete CRA forms and provide documentation of a qu
     province: 'National',
     publishedAt: '2025-01-25',
     readTime: 11,
-    imageUrl: 'https://images.unsplash.com/photo-1554224154-26032ffc0d07?w=800&q=80',
+    imageUrl: '/blog/covers/credit-score-canada-2025.png',
     content: `<b>Understanding Canadian Credit Scores</b>
 
 Your credit score serves as a financial reputation score that lenders, landlords, insurers, and even employers use to evaluate your reliability and responsibility. In Canada, credit scores range from three hundred to nine hundred, with scores above six hundred sixty generally considered good and scores above seven hundred fifty considered excellent. Understanding how these scores are calculated and what factors influence them empowers you to optimize your creditworthiness and access better financial opportunities.
@@ -429,7 +429,7 @@ Employment and rental applications increasingly include credit checks. Good cred
     province: 'National',
     publishedAt: '2025-01-28',
     readTime: 11,
-    imageUrl: 'https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?w=800&q=80',
+    imageUrl: '/blog/covers/inflation-proof-finances-canada-2025.png',
     content: `<b>Understanding Inflation's Impact</b>
 
 Inflation represents the gradual erosion of purchasing power as prices rise across the economy. For Canadian households, even moderate inflation significantly impacts budgets, savings, and long-term financial plans over time. Understanding how inflation affects different aspects of your finances enables development of comprehensive protection strategies that preserve and grow wealth despite rising prices.
@@ -514,7 +514,7 @@ Cash holdings beyond emergency needs suffer most during inflation. Excessive cas
     province: 'National',
     publishedAt: '2025-02-01',
     readTime: 10,
-    imageUrl: 'https://images.unsplash.com/photo-1556761175-5973dc0f32e7?w=800&q=80',
+    imageUrl: '/blog/covers/workplace-benefits-canada-2025.png',
     content: `<b>Understanding Your Total Compensation</b>
 
 Canadian employees often focus exclusively on base salary while underappreciating the substantial value provided through workplace benefits. A comprehensive benefits package can add twenty to forty percent to base salary value through insurance coverage, retirement contributions, paid time off, and various programs. Understanding and maximizing these benefits is essential for optimizing total compensation.
@@ -615,7 +615,7 @@ Negotiating benefits may be possible even when salary is fixed. Additional vacat
     province: 'National',
     publishedAt: '2025-02-05',
     readTime: 11,
-    imageUrl: 'https://images.unsplash.com/photo-1554224155-6726b3ff858f?w=800&q=80',
+    imageUrl: '/blog/covers/debt-payoff-strategy-canada-2025.png',
     content: `<b>The High Cost of Debt in Canada</b>
 
 Canadian household debt levels remain among the highest in the developed world, with many families allocating substantial portions of income to debt service. Credit card interest rates exceeding twenty percent, combined with rising mortgage costs and persistent consumer debt, create financial pressure that limits savings, increases stress, and reduces life options. Eliminating debt represents one of the highest-return financial activities available to most Canadians.
@@ -706,7 +706,7 @@ Regular financial reviews ensure continued progress and early identification of 
     province: 'National',
     publishedAt: '2025-02-08',
     readTime: 10,
-    imageUrl: 'https://images.unsplash.com/photo-1579621970795-87facc2f976d?w=800&q=80',
+    imageUrl: '/blog/covers/automated-savings-canada-2025.png',
     content: `<b>The Power of Financial Automation</b>
 
 Human willpower is a finite resource that becomes depleted by daily decisions and temptations. Relying on willpower for consistent saving and investing dooms most people to failure and financial stress. Automation removes the burden of repeated decisions, ensuring consistent progress toward financial goals without ongoing effort or discipline.
@@ -805,7 +805,7 @@ Emergency preparedness includes maintaining awareness of automated systems in ca
     province: 'National',
     publishedAt: '2025-02-10',
     readTime: 13,
-    imageUrl: 'https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=800&q=80',
+    imageUrl: '/blog/covers/fire-movement-canada-2025.png',
     content: `<b>Understanding the FIRE Movement</b>
 
 The Financial Independence, Retire Early (FIRE) movement aims to accumulate sufficient assets to live off investment returns, making work optional. Canadians must adapt these strategies to our unique tax and healthcare systems.
@@ -941,7 +941,7 @@ As Canada transitions from a 12% to a 60% AI adoption economy, staying informed 
     province: "National",
     publishedAt: "2026-06-05",
     readTime: 10,
-    imageUrl: "https://images.unsplash.com/photo-1542838132-92c53300491e?w=800&q=80",
+    imageUrl: "/blog/covers/cra-grocery-essentials-benefit-canada-2026.png",
     content: `<b>A Historic $3.1 Billion Relief Package Hits Bank Accounts</b>
 
 In a major fiscal move aimed at directly sheltering families from persistent inflation, the Canada Revenue Agency (CRA) has officially commenced the full rollout of the first wave of the newly enacted Grocery & Essentials Benefit. This massive $3.1 billion relief package, strongly pushed and legislated under the leadership of Prime Minister Mark Carney, represents a historic intervention designed to offset high grocery price indices and the escalating day-to-day cost of living. 
@@ -1022,7 +1022,7 @@ As we navigate through high living costs in 2026, taking full advantage of these
     province: "National",
     publishedAt: "2026-06-05",
     readTime: 11,
-    imageUrl: "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=800&q=80",
+    imageUrl: "/blog/covers/canada-employment-surge-may-2026.png",
     content: `<b>An Unprecedented Surge Defies Recession Fears</b>
 
 Canada’s labor market has delivered an absolute shockwave to the financial sector. Statistics Canada released its highly anticipated labor force survey, revealing that the economy added a staggering 88,000 net jobs. This massive, "hardcore" increase completely shattered the pessimistic expectations of Wall Street investment banks and Bay Street analysts, who had previously predicted a stalling job market and a potential technical recession.

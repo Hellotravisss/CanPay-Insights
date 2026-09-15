@@ -378,6 +378,22 @@ function inCanada(lat: number, lon: number) {
 export function provenanceEvents(all: Ev[]) {
   const dates = all.map((r) => (r.created_at as string).slice(0, 10));
   const sv = new Map<number, number>(); for (const r of all) sv.set(r.schema_version as number, (sv.get(r.schema_version as number) ?? 0) + 1);
+  // Per-source heartbeat. The iOS app went silent for nineteen days in
+  // August–September 2026 and nobody noticed, because every panel here sums
+  // sources together. A source that has not written for a week is now a
+  // visible fact rather than a quiet dip.
+  const bySource = new Map<string, { last: string; n: number }>();
+  for (const r of all) {
+    if (truthy(r.excluded)) continue;
+    const k = String(r.source ?? 'web');
+    const cur = bySource.get(k);
+    const at = r.created_at as string;
+    bySource.set(k, { last: cur && cur.last > at ? cur.last : at, n: (cur?.n ?? 0) + 1 });
+  }
+  const now = Date.now();
+  const sources = [...bySource.entries()]
+    .map(([source, v]) => ({ source, last: v.last.slice(0, 10), n: v.n, silent_days: Math.floor((now - new Date(v.last).getTime()) / 86_400_000) }))
+    .sort((a, b) => b.n - a.n);
   return {
     events: all.filter((r) => !truthy(r.excluded)).length,
     events_raw: all.length,
@@ -385,6 +401,58 @@ export function provenanceEvents(all: Ev[]) {
     last_event: dates.length ? dates.reduce((a, b) => (b > a ? b : a)) : null,
     schema_versions: [...sv.entries()].sort((a, b) => a[0] - b[0]).map(([v, n]) => ({ v, n })),
     excluded: all.filter((r) => truthy(r.excluded)).length,
+    sources,
+  };
+}
+
+// ── neighbourhoods ────────────────────────────────────────────────────────
+/**
+ * Calculations by FSA (postal-code prefix). MIN_CELL is the smallest group a
+ * bracket mix is shown for — twenty, the threshold the federal government
+ * applied to its own mobility data — because income × neighbourhood is the
+ * most sensitive pairing this dataset holds. Below it an FSA appears with a
+ * count only (from five), and below five it is folded into "withheld".
+ */
+export function calcNeighbourhoods(ev: Ev[]) {
+  const MIN_CELL = 20, MIN_COUNT = 5;
+  type Acc = { n: number; typed: number; device: number; remembered: number; brackets: Map<string, number>; provinces: Map<string, number> };
+  const m = new Map<string, Acc>();
+  let withFsa = 0, typed = 0, device = 0, remembered = 0, positioned = 0;
+  for (const r of ev) {
+    if (!r.fsa) continue;
+    withFsa++;
+    const src = String(r.fsa_source ?? '');
+    if (src === 'typed') typed++; else if (src === 'device') device++; else if (src === 'remembered') remembered++;
+    if (r.lat2 !== null && r.lat2 !== undefined) positioned++;
+    const f = String(r.fsa);
+    const a = m.get(f) ?? { n: 0, typed: 0, device: 0, remembered: 0, brackets: new Map(), provinces: new Map() };
+    a.n++;
+    if (src === 'typed') a.typed++; else if (src === 'device') a.device++; else a.remembered++;
+    a.brackets.set(String(r.income_bracket), (a.brackets.get(String(r.income_bracket)) ?? 0) + 1);
+    a.provinces.set(String(r.province), (a.provinces.get(String(r.province)) ?? 0) + 1);
+    m.set(f, a);
+  }
+  let withheldFsas = 0, withheldEvents = 0;
+  const rows: { fsa: string; n: number; device: number; province: string | null; brackets: { k: string; n: number }[] | null; high_share: number | null }[] = [];
+  for (const [fsa, a] of m) {
+    if (a.n < MIN_COUNT) { withheldFsas++; withheldEvents += a.n; continue; }
+    const full = a.n >= MIN_CELL;
+    const prov = [...a.provinces.entries()].sort((x, y) => y[1] - x[1])[0]?.[0] ?? null;
+    const brackets = full ? BRACKETS.map((k) => ({ k, n: a.brackets.get(k) ?? 0 })) : null;
+    const high = full ? ['90-120k', '120-160k', '160k-plus'].reduce((x, k) => x + (a.brackets.get(k) ?? 0), 0) : 0;
+    rows.push({ fsa, n: a.n, device: a.device, province: prov, brackets, high_share: full ? pct1(high, a.n) : null });
+  }
+  rows.sort((x, y) => y.n - x.n);
+  // Timezone is the edge geography's cross-check: a browser in
+  // America/Toronto whose connection resolved to Vancouver is a VPN or a
+  // corporate egress, and the map should not trust that dot.
+  const tz = countBy(ev, 'tz', { desc: true, limit: 12 });
+  const returning = { returning: ev.filter((r) => r.is_returning === 1).length, first_time: ev.filter((r) => r.is_returning === 0).length, unknown: ev.filter((r) => r.is_returning === null || r.is_returning === undefined).length };
+  return {
+    min_cell: MIN_CELL, min_count: MIN_COUNT,
+    events_with_fsa: withFsa, typed, device, remembered, positioned,
+    fsas: m.size, shown: rows.length, withheld_fsas: withheldFsas, withheld_events: withheldEvents,
+    rows, tz, returning, bracket_order: BRACKETS, bracket_labels: BRACKET_LABELS,
   };
 }
 

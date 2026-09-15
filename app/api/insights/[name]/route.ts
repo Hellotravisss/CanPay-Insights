@@ -2,8 +2,7 @@ import { NextResponse } from 'next/server';
 import { db } from '../../../../lib/d1/db';
 import {
   loadEvents, calcStats, calcStatsExtra, calcIndustryIncome, calcFakeDoors, calcAccounts,
-  calcJourneys, calcSeries, calcCandles, calcIncomeBarometer, calcCrosstab, calcCitiesGeo, provenanceEvents,
-} from '../../../../lib/d1/events';
+  calcJourneys, calcSeries, calcCandles, calcIncomeBarometer, calcCrosstab, calcCitiesGeo, provenanceEvents, calcNeighbourhoods } from '../../../../lib/d1/events';
 import { gscStats, contentStats } from '../../../../lib/d1/gsc';
 
 export const dynamic = 'force-dynamic';
@@ -43,6 +42,7 @@ export async function GET(request: Request, { params }: { params: Promise<{ name
     case 'income_barometer': return NextResponse.json(calcIncomeBarometer(await ev()), noStore);
     case 'crosstab': return NextResponse.json(calcCrosstab(await ev()), noStore);
     case 'cities_geo': return NextResponse.json(calcCitiesGeo(await ev()), noStore);
+    case 'neighbourhoods': return NextResponse.json(calcNeighbourhoods(await ev()), noStore);
     case 'provenance': {
       const all = await loadEvents(d, true, true);
       const g = (await d.prepare('select (select count(*) from gsc_daily) gsc_days, (select min(date) from gsc_daily) gsc_first, (select max(date) from gsc_daily) gsc_last, (select count(*) from gsc_queries) gsc_queries, (select count(*) from gsc_pages) gsc_pages').first())!;
