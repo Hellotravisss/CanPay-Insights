@@ -81,8 +81,21 @@ function sessionsComparing(rows: Ev[]): number {
 }
 
 // ── loaders ───────────────────────────────────────────────────────────────
-export async function loadEvents(d: D1, includeExcluded = false): Promise<Ev[]> {
-  const sql = includeExcluded ? 'select * from events' : 'select * from events where excluded is not 1';
+/**
+ * A row with product_interest set is a TAP on a fake door or a partner link,
+ * written through the same pipe as a calculation so it carries the same
+ * anonymous context. It is not a calculation: the calculation it sat under
+ * was already recorded. Counting it inflated every calc total by one per tap
+ * (and, on a salary landing page, invented an "annual" calculation the visitor
+ * never made). Only the fake-door panel wants those rows; everyone else gets
+ * calculations only.
+ */
+export async function loadEvents(d: D1, includeExcluded = false, includeInterest = false): Promise<Ev[]> {
+  const where = [
+    includeExcluded ? null : 'excluded is not 1',
+    includeInterest ? null : 'product_interest is null',
+  ].filter(Boolean);
+  const sql = 'select * from events' + (where.length ? ' where ' + where.join(' and ') : '');
   return (await d.prepare(sql).all<Ev>()).results;
 }
 

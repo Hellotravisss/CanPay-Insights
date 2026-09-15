@@ -42,17 +42,31 @@ export async function POST(request: Request) {
 
   let cf: Record<string, unknown> = {};
   try { cf = ((await getCloudflareContext({ async: true })).cf ?? {}) as Record<string, unknown>; } catch { /* local dev */ }
+  // One decimal place is ~11 km: enough to put a dot on a globe, not enough
+  // to find a street. The edge hands us five decimals; we never keep them.
+  const coarse = (v: unknown) => { const n = parseFloat(String(v)); return Number.isFinite(n) ? Math.round(n * 10) / 10 : null; };
   const geo = {
     country: (cf.country as string) ?? request.headers.get('cf-ipcountry') ?? null,
     region: (cf.regionCode as string) ?? (cf.region as string) ?? null,
     city: (cf.city as string) ?? null,
-    lat: cf.latitude ? parseFloat(String(cf.latitude)) || null : null,
-    lon: cf.longitude ? parseFloat(String(cf.longitude)) || null : null,
+    lat: cf.latitude ? coarse(cf.latitude) : null,
+    lon: cf.longitude ? coarse(cf.longitude) : null,
   };
 
+  // The iOS app never sends schema_version; the column is NOT NULL. Binding an
+  // explicit null bypasses the column default and the insert fails — which is
+  // how every app calculation from 2026-08-27 to 2026-09-15 was lost without a
+  // trace. An absent field takes the default; anything else is what was sent.
+  const vals = COLS.map((c) => (c === 'schema_version' && body[c] == null ? 1 : norm(body[c])));
   const cols = [...COLS, 'country', 'region', 'city', 'lat', 'lon', 'created_at'];
-  const vals = [...COLS.map((c) => norm(body[c])), geo.country, geo.region, geo.city, geo.lat, geo.lon, new Date().toISOString()];
+  vals.push(geo.country, geo.region, geo.city, geo.lat, geo.lon, new Date().toISOString());
   const d = await db();
-  await d.prepare(`insert into events (${cols.join(',')}) values (${cols.map(() => '?').join(',')})`).bind(...vals).run();
+  try {
+    await d.prepare(`insert into events (${cols.join(',')}) values (${cols.map(() => '?').join(',')})`).bind(...vals).run();
+  } catch (e) {
+    // A constraint failure is the client's problem to see, not a 500 to swallow.
+    const msg = (e as Error).message ?? String(e);
+    return NextResponse.json({ error: 'rejected', detail: msg.slice(0, 200) }, { status: 422, headers: { 'cache-control': 'no-store' } });
+  }
   return NextResponse.json({ ok: true }, { headers: { 'cache-control': 'no-store' } });
 }

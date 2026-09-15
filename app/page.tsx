@@ -4,7 +4,7 @@ import App from '../App';
 export const metadata: Metadata = {
   title: 'Canadian Take-Home Pay Calculator 2026 – Paycheck After Tax',
   description:
-    'Find out how much of your salary or hourly wage you actually keep. Free take-home pay calculator for Canadian employees — federal & provincial income tax, CPP, EI, by province, for 2026. No signup.',
+    'Free Canadian paycheck and payroll-deductions calculator: see what you keep from a salary or hourly wage after federal & provincial income tax, CPP and EI, by province, for 2026. No signup.',
   alternates: {
     canonical: 'https://canpayinsights.ca/',
   },

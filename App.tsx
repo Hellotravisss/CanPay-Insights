@@ -811,6 +811,21 @@ const App: React.FC = () => {
               Changelog
             </a>
           </div>
+          {/* Every calculator page, linked from the page Google crawls most.
+              On 2026-09-15 URL Inspection reported /bc-paycheck-calculator,
+              /cpp-ei-calculator and /timesheet-tracker as "unknown to Google"
+              after four months in the sitemap: nothing linked to them. */}
+          <nav aria-label="Calculators" className="mt-4 flex flex-wrap items-center justify-center gap-x-3 gap-y-1">
+            <span className="text-slate-500">Calculators:</span>
+            {[
+              ['/ontario-paycheck-calculator', 'Ontario'], ['/bc-paycheck-calculator', 'BC'], ['/alberta-paycheck-calculator', 'Alberta'],
+              ['/quebec-paycheck-calculator', 'Quebec'], ['/compare-provinces', 'All provinces'],
+              ['/hourly-wage-calculator', 'Hourly wage'], ['/salary-calculator', 'Salary'], ['/cpp-ei-calculator', 'CPP & EI'],
+              ['/timesheet-tracker', 'Timesheet'], ['/salary-after-tax-canada', 'Salary after tax'],
+            ].map(([href, label]) => (
+              <a key={href} href={href} className="text-slate-400 no-underline transition-colors hover:text-red-600">{label}</a>
+            ))}
+          </nav>
           <p className="mt-3">
             <AvowdCredit />
           </p>

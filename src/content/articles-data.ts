@@ -2285,12 +2285,12 @@ Alberta and Ontario represent Canada's two largest provincial economies, but the
 
 ### How do Alberta and Ontario tax systems differ?
 
-**Alberta's Flat Tax System:**
+**Alberta's Wide Brackets:**
 
-Alberta uses a single tax rate for most income:
-- 10% on all taxable income
-- Simple, predictable
-- No surprises as your income grows
+Alberta has fewer brackets than most provinces, and they are wide:
+- 8% on the first $61,200 of taxable income
+- 10% from $61,200 to $154,259
+- Higher rates only apply well into six figures
 
 **Ontario's Progressive System:**
 

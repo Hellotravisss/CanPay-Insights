@@ -34,7 +34,7 @@ export async function GET(request: Request, { params }: { params: Promise<{ name
     case 'industry_income': return NextResponse.json(calcIndustryIncome(await ev()), noStore);
     case 'fake_doors': {
       const wl = (await d.prepare('select product k, count(*) n from product_waitlist group by product order by n desc').all<{ k: string; n: number }>()).results;
-      return NextResponse.json(calcFakeDoors(await ev(), wl), noStore);
+      return NextResponse.json(calcFakeDoors(await loadEvents(d, false, true), wl), noStore);
     }
     case 'accounts': return NextResponse.json(calcAccounts(await ev()), noStore);
     case 'journeys': return NextResponse.json(calcJourneys(await ev()), noStore);
@@ -44,7 +44,7 @@ export async function GET(request: Request, { params }: { params: Promise<{ name
     case 'crosstab': return NextResponse.json(calcCrosstab(await ev()), noStore);
     case 'cities_geo': return NextResponse.json(calcCitiesGeo(await ev()), noStore);
     case 'provenance': {
-      const all = await loadEvents(d, true);
+      const all = await loadEvents(d, true, true);
       const g = (await d.prepare('select (select count(*) from gsc_daily) gsc_days, (select min(date) from gsc_daily) gsc_first, (select max(date) from gsc_daily) gsc_last, (select count(*) from gsc_queries) gsc_queries, (select count(*) from gsc_pages) gsc_pages').first())!;
       const snaps = (await d.prepare('select month, taken_at from monthly_snapshots order by month').all<{ month: string; taken_at: string }>()).results
         .map((s) => ({ month: s.month.slice(0, 7), taken: s.taken_at.slice(0, 10) }));

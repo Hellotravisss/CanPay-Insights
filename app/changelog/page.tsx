@@ -19,6 +19,16 @@ export const metadata: Metadata = {
 // page is the product's history, not a publishing log.
 const ENTRIES: { date: string; title: string; points: string[] }[] = [
   {
+    date: '2026-09-15',
+    title: 'Alberta tax description corrected; location data made coarser',
+    points: [
+      'The province comparison said Alberta has a "flat 10%" tax rate. It has not since 2015, and since 2025 the first $61,200 is taxed at 8%. The text now states the brackets the calculator actually uses.',
+      'Anonymous usage statistics now store a map position rounded to about 11 km instead of a city-centre point with street-level precision. Existing records were rounded the same way. No IP address was ever stored; this narrows what is kept even further, and the privacy policy now describes exactly what is recorded.',
+      'The iPhone app\'s anonymous usage statistics had been silently rejected since August 27 because of a missing field; the server now accepts them. Nothing changes for app users.',
+      'Page titles: the Ontario calculator now says "Salary & Hourly Take-Home" so people searching for a salary calculator can see it does that too.',
+    ],
+  },
+  {
     date: '2026-09-02',
     title: 'Ontario Health Premium added — Ontario take-home figures are now lower',
     points: [

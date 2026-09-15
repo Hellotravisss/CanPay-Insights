@@ -515,6 +515,9 @@ const SURFACE_SOURCES = [
   'components/DataPage.tsx',
   'components/AboutPage.tsx',
   'app/compare-provinces/page.tsx',
+  // The province comparison body lives in a content component, not a page —
+  // "Alberta's flat 10%" sat here unaudited for months.
+  'src/content/components/ProvinceComparison.tsx',
 ];
 const SURFACE_TEXTS = ['public/llms.txt'];
 

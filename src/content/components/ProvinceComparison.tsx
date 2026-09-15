@@ -372,9 +372,9 @@ const ProvinceComparison: React.FC<ProvinceComparisonProps> = ({ onBackToBlog })
             <p className="mb-4">
               Canada's federal tax system applies uniformly across all provinces, but each province 
               sets its own provincial income tax rates. This creates significant differences in 
-              take-home pay for the same salary. For example, Alberta's flat 10% tax rate benefits 
-              middle-to-high income earners, while British Columbia's progressive system with 7 tiers 
-              offers advantages at lower income levels.
+              take-home pay for the same salary. For example, Alberta taxes the first $61,200 at 8% and 
+              the next band at 10%, with fewer brackets than most provinces, while British Columbia's 
+              seven-bracket system starts lower at 5.60% but climbs faster.
             </p>
             <p className="mb-4">
               When considering a move between provinces, it's important to look beyond just income taxes. 
