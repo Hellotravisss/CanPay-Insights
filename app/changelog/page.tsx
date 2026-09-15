@@ -27,6 +27,7 @@ const ENTRIES: { date: string; title: string; points: string[] }[] = [
       'The privacy policy was rewritten in full and now exists in French as well. It also describes the one cookie the site uses (only if you sign in), local storage, and the page-view counters.',
       'New pages: Terms of Service and Refund Policy — the two $9 reports are refunded on request within 14 days.',
       'Every article cover that was a stock photo loaded from another company\'s server is now an image we made and host ourselves, so reading an article no longer contacts any third party.',
+      'The usage dataset (what people check, observed from the calculator) is now free for research, journalism and personal use under CC BY-NC-SA 4.0; commercial use needs a licence. The take-home pay dataset, computed from published tax rules, stays CC BY 4.0. Copies downloaded before today keep the licence they came with.',
       'The data room now shows calculations by postal area (with small groups withheld), a heartbeat per data source so a silent source is noticed within a week, and a list of known gaps in the data.',
     ],
   },

@@ -19,7 +19,7 @@ export async function GET() {
         'Access-Control-Allow-Origin': '*',
         'Cache-Control': 'public, max-age=3600, s-maxage=3600, stale-while-revalidate=86400',
         'Content-Disposition': 'inline; filename="canpay-usage.json"',
-        'X-License': 'CC-BY-4.0',
+        'X-License': 'CC-BY-NC-SA-4.0; commercial use by licence: info@canpayinsights.ca',
       },
     });
   } catch (e) {

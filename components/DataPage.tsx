@@ -133,12 +133,50 @@ const DataPage: React.FC = () => {
                 href="/data/usage.json"
                 className="inline-flex items-center gap-2 rounded-lg bg-slate-900 px-4 py-2.5 text-sm font-bold text-white no-underline hover:bg-slate-800"
               >
-                Open usage dataset (JSON, CC BY 4.0)
+                Open usage dataset (JSON, CC BY-NC-SA 4.0)
               </a>
               <p className="mt-3 text-xs text-slate-500">
                 Updated hourly · <code className="rounded bg-white px-1.5 py-0.5">GET
                 canpayinsights.ca/data/usage.json</code> · CORS open
               </p>
+              <p className="mt-2 text-xs leading-5 text-slate-500">
+                Free for research, journalism and personal use under{' '}
+                <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank" rel="noopener noreferrer" className="text-red-600 underline hover:text-red-700">CC BY-NC-SA 4.0</a>.
+                Commercial use needs a licence — see below.
+              </p>
+            </div>
+
+            {/* The paid tier. Ookla gives its measurements away as coarse open
+                tiles and sells the fine-grained version to carriers, cloud
+                companies and regulators; the free file is the proof that the
+                paid one exists. Same shape here. Only claims the data can
+                back today — no prices, no customer logos, no invented volume. */}
+            <div id="licensing" className="rounded-xl border border-slate-200 bg-white p-5 mb-10 scroll-mt-24">
+              <h2 className="text-xl font-bold text-slate-800 mb-1">Licensed data for organisations</h2>
+              <p className="text-sm leading-relaxed text-slate-600 mb-3">
+                The open file is the coarse view. Under licence we provide extracts that no public
+                statistic carries, because they come from what people do at the moment they check
+                their pay:
+              </p>
+              <ul className="list-disc pl-5 space-y-1.5 text-sm leading-relaxed text-slate-600 mb-3">
+                <li><strong className="text-slate-800">Neighbourhood demand</strong> — calculations by postal-code area (FSA) and income range, month by month.</li>
+                <li><strong className="text-slate-800">Relocation intent</strong> — which province pairs people compare in one visit, and at what income.</li>
+                <li><strong className="text-slate-800">Observed pay changes</strong> — direction and size of real raises and cuts, from people who reopen a saved calculation.</li>
+                <li><strong className="text-slate-800">Expectation gap</strong> — who finds their take-home lower than they thought, by province and income.</li>
+                <li><strong className="text-slate-800">Work patterns</strong> — shift hours, unpaid breaks, overtime and tips by province and sector.</li>
+              </ul>
+              <p className="text-xs leading-5 text-slate-500 mb-3">
+                Always aggregates, never individual records. Any figure for a postal-code area needs at
+                least twenty people behind it; smaller cells are withheld. The sample is people who used
+                the calculator, not a random sample of Canadians, and every extract says so. Licensees
+                agree not to attempt re-identification or resale.
+              </p>
+              <a
+                href="mailto:info@canpayinsights.ca?subject=Data%20licence"
+                className="inline-flex items-center gap-2 rounded-lg border border-slate-300 px-4 py-2 text-sm font-bold text-slate-800 no-underline hover:border-red-300 hover:text-red-700"
+              >
+                Ask about a licence
+              </a>
             </div>
 
             <h2 className="text-2xl font-bold text-slate-800 mb-4">Cite this dataset</h2>

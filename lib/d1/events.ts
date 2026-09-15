@@ -493,9 +493,16 @@ export function publicDataset(ev: Ev[]) {
     name: 'CanPay Insights — What Canadians check about their pay',
     publisher: 'CanPay Insights, Vancouver, Canada',
     url: 'https://canpayinsights.ca/data',
-    license: 'https://creativecommons.org/licenses/by/4.0/',
-    license_name: 'CC BY 4.0',
-    cite_as: `CanPay Insights, "What Canadians check about their pay" (open dataset), ${t}. CC BY 4.0. https://canpayinsights.ca/data`,
+    // The Ookla split: the computed take-home dataset (reproducible by anyone
+    // from published rates) stays CC BY; this OBSERVED dataset is the asset,
+    // so it is free for research, journalism and personal use and licensed
+    // for commercial use — exactly how Ookla's open tiles (CC BY-NC-SA) sit
+    // beside the paid Speedtest Intelligence product.
+    license: 'https://creativecommons.org/licenses/by-nc-sa/4.0/',
+    license_name: 'CC BY-NC-SA 4.0',
+    commercial_use: 'Commercial use — including by companies, and in products, reports or analyses sold to others — needs a licence. Finer extracts (postal-code area × income range, relocation pairs, observed pay changes) are available under licence only. Write to info@canpayinsights.ca with the subject "Data licence".',
+    press_and_research: 'Journalists and researchers may quote, chart and cite any figure in this file, with attribution, in news reporting and research.',
+    cite_as: `CanPay Insights, "What Canadians check about their pay" (open dataset), ${t}. CC BY-NC-SA 4.0. https://canpayinsights.ca/data`,
     generated: new Date().toISOString().replace(/\.\d{3}Z$/, 'Z'),
     schema_version: 1,
     what_this_counts: {

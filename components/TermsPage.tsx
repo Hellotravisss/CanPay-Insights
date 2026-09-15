@@ -81,7 +81,9 @@ const TermsPage: React.FC = () => {
         <p>
           The Service, its articles, design and code are ours or licensed to us. You may read, link to and
           quote short excerpts of our content with attribution. The datasets we publish under an open
-          licence (marked CC BY 4.0 on the <a href="/data">data page</a>) may be reused under that licence.
+          licence on the <a href="/data">data page</a> may be reused under the licence marked on each: the
+          computed take-home dataset under CC BY 4.0, and the observed usage dataset under CC BY-NC-SA 4.0,
+          which does not permit commercial use without a separate licence from us.
           The CanPay Insights name and logo may not be used to suggest endorsement. The tax engine’s
           methodology is described openly so that its results can be checked; that description is not a
           licence to copy the Service.
