@@ -32,6 +32,9 @@ import {
   QPP2_MAX_CONTRIBUTION,
   QPP2_MAX_PENSIONABLE_EARNINGS,
   QPIP_RATE,
+  CANADA_EMPLOYMENT_AMOUNT,
+  CPP_BASE_RATE,
+  QPP_BASE_RATE,
   QPIP_MAX_CONTRIBUTION,
   QPIP_MAX_INSURABLE_EARNINGS,
   QC_EI_RATE,
@@ -181,12 +184,25 @@ const calculateOntarioHealthPremium = (annualGross: number): number => {
 };
 
 const calculateTotalTax = (
-  annualGross: number,
-  cppTotal: number,
-  province: string
+  incomeBeforeCppDeduction: number,
+  cpp: { cpp1: number; cpp2: number },
+  province: string,
+  eiAnnual: number,
+  qpipAnnual: number = 0
 ): { federalTax: number; provincialTax: number; total: number } => {
   const isQuebec = province === Province.QC;
   const provinceRule = PROVINCIAL_DATA[province] || PROVINCIAL_DATA[Province.ON];
+
+  // T4127 factor F5: enhanced CPP/QPP comes off income before tax (factor A),
+  // and only the base slice of tier 1 is credited (factor K2). Until
+  // 2026-09-15 the engine credited the whole contribution at the lowest rate
+  // and deducted nothing — over-withholding every province above ~$30k.
+  const fullRate = isQuebec ? QPP_RATE : CPP_RATE;
+  const baseRate = isQuebec ? QPP_BASE_RATE : CPP_BASE_RATE;
+  const cppBase = cpp.cpp1 * (baseRate / fullRate);
+  const cppEnhanced = cpp.cpp1 - cppBase + cpp.cpp2;
+  const annualGross = Math.max(0, incomeBeforeCppDeduction - cppEnhanced);
+  const cppTotal = cppBase;
   
   // Step 1: Calculate tax on full income
   const federalTaxBeforeCredits = calculateProgressiveTax(annualGross, FEDERAL_BRACKETS);
@@ -212,13 +228,19 @@ const calculateTotalTax = (
   const cppFederalCredit = cppTotal * lowestFederalRate;
   const cppProvincialCredit = cppTotal * lowestProvincialRate;
 
-  const eiAnnual = calculateEI(annualGross, isQuebec);
   const eiFederalCredit = eiAnnual * lowestFederalRate;
   const eiProvincialCredit = eiAnnual * lowestProvincialRate;
-  
+  // QPIP premiums are part of the federal K2Q credit for Quebec employees.
+  const qpipFederalCredit = qpipAnnual * lowestFederalRate;
+
+  // T4127 K4 — Canada employment amount. Yukon mirrors it provincially (K4P).
+  const employmentAmount = Math.min(annualGross, CANADA_EMPLOYMENT_AMOUNT);
+  const employmentFederalCredit = employmentAmount * lowestFederalRate;
+  const employmentProvincialCredit = province === Province.YT ? employmentAmount * lowestProvincialRate : 0;
+
   // Step 3: Apply tax credits (cannot reduce tax below zero)
-  const totalFederalCredits = federalBPACredit + cppFederalCredit + eiFederalCredit;
-  const totalProvincialCredits = provincialBPACredit + cppProvincialCredit + eiProvincialCredit;
+  const totalFederalCredits = federalBPACredit + cppFederalCredit + eiFederalCredit + qpipFederalCredit + employmentFederalCredit;
+  const totalProvincialCredits = provincialBPACredit + cppProvincialCredit + eiProvincialCredit + employmentProvincialCredit;
   
   let federalTax = Math.max(0, federalTaxBeforeCredits - totalFederalCredits);
   let provincialTax = Math.max(0, provincialTaxBeforeCredits - totalProvincialCredits);
@@ -389,7 +411,7 @@ export const calculateSalary = (inputs: SalaryInputs): CalculationResult => {
   const cppResult = calculateCPP(annualGross + annualTaxableBenefits, isQuebec);
   const eiAnnual = calculateEI(annualGross + annualTaxableBenefits, isQuebec);
   const qpipAnnual = isQuebec ? calculateQPIP(annualGross + annualTaxableBenefits) : 0;
-  const taxResult = calculateTotalTax(taxableIncome, cppResult.total, inputs.province);
+  const taxResult = calculateTotalTax(taxableIncome, cppResult, inputs.province, eiAnnual, qpipAnnual);
   
   const totalTaxAnnual = taxResult.total;
   const annualPostTaxDeductions = postTaxDeductionsPerPeriod * 26;
@@ -499,7 +521,7 @@ export const calculateFromAnnualSalary = (inputs: AnnualSalaryInputs): Calculati
   const cppResult = calculateCPP(annualGross + annualTaxableBenefits + annualEquity, isQuebec);
   const eiAnnual = calculateEI(annualGross + annualTaxableBenefits, isQuebec);
   const qpipAnnual = isQuebec ? calculateQPIP(annualGross + annualTaxableBenefits) : 0;
-  const taxResult = calculateTotalTax(taxableIncome, cppResult.total, province);
+  const taxResult = calculateTotalTax(taxableIncome, cppResult, province, eiAnnual, qpipAnnual);
 
   const totalTaxAnnual = taxResult.total;
   const totalDeductionsAnnual = totalTaxAnnual + cppResult.total + eiAnnual + qpipAnnual + annualRRSP + annualPostTax + annualUnionDues;
@@ -650,7 +672,7 @@ export const calculateFromTimesheet = (inputs: TimesheetInputs): CalculationResu
   const cppResult = calculateCPP(annualGross + annualTaxableBenefits, isQuebec);
   const eiAnnual = calculateEI(annualGross + annualTaxableBenefits, isQuebec);
   const qpipAnnual = isQuebec ? calculateQPIP(annualGross + annualTaxableBenefits) : 0;
-  const taxResult = calculateTotalTax(taxableIncome, cppResult.total, province);
+  const taxResult = calculateTotalTax(taxableIncome, cppResult, province, eiAnnual, qpipAnnual);
 
   const totalTaxAnnual = taxResult.total;
   const totalDeductionsAnnual = totalTaxAnnual + cppResult.total + eiAnnual + qpipAnnual + annualRRSP + annualPostTax + annualUnionDues;

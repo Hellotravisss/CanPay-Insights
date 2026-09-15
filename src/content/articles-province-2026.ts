@@ -20,7 +20,7 @@ export const provinceGuides2026: Article[] = [
     publishedAt: '2026-08-08',
     readTime: 8,
     imageUrl: '/blog/ontario-take-home-pay-guide-2026.png',
-    directAnswer: "The median full-time wage in Ontario is $34.62 an hour, about $72,000 a year, which leaves roughly $54,816 after tax in 2026. On an $80,000 salary, Ontario ranks #6 of 13 provinces and territories for take-home pay, keeping $59,994.",
+    directAnswer: "The median full-time wage in Ontario is $34.62 an hour, about $72,000 a year, which leaves roughly $55,099 after tax in 2026. On an $80,000 salary, Ontario ranks #6 of 13 provinces and territories for take-home pay, keeping $60,303.",
     faq: [
           {
                 "question": "What is the average salary in Ontario?",
@@ -28,24 +28,24 @@ export const provinceGuides2026: Article[] = [
           },
           {
                 "question": "What is the take-home pay on $80,000 in Ontario?",
-                "answer": "About $59,994 a year, or $5,000 a month, after federal tax, Ontario provincial tax, CPP/CPP2 and EI for the 2026 tax year, for a single employee with no additional credits."
+                "answer": "About $60,303 a year, or $5,025 a month, after federal tax, Ontario provincial tax, CPP/CPP2 and EI for the 2026 tax year, for a single employee with no additional credits."
           },
           {
                 "question": "Does Ontario have high taxes compared with other provinces?",
-                "answer": "On an $80,000 salary, Ontario ranks #6 of 13 provinces and territories for take-home pay in 2026, keeping $59,994. That is $2,006 a year less than Nunavut, the highest."
+                "answer": "On an $80,000 salary, Ontario ranks #6 of 13 provinces and territories for take-home pay in 2026, keeping $60,303. That is $1,996 a year less than Nunavut, the highest."
           },
           {
                 "question": "Which industry pays best in Ontario?",
-                "answer": "Of the sectors Statistics Canada reports for Ontario, utilities has the highest median full-time wage at $56.00 an hour — roughly $116,500 a year, or $84,879 after tax."
+                "answer": "Of the sectors Statistics Canada reports for Ontario, utilities has the highest median full-time wage at $56.00 an hour — roughly $116,500 a year, or $85,270 after tax."
           },
           {
                 "question": "How much of my pay do I keep in Ontario?",
-                "answer": "It depends on the salary. In Ontario in 2026, someone earning $40,000 keeps about 81.5% of gross pay, while someone earning $150,000 keeps about 69.2%. The rest goes to federal tax, provincial tax, CPP/CPP2 and EI."
+                "answer": "It depends on the salary. In Ontario in 2026, someone earning $40,000 keeps about 82.0% of gross pay, while someone earning $150,000 keeps about 69.5%. The rest goes to federal tax, provincial tax, CPP/CPP2 and EI."
           }
     ],
     content: `## The typical Ontario paycheque
 
-Across all industries, the median full-time wage in Ontario is $34.62 an hour — about $72,000 a year. After federal tax, Ontario tax, CPP/CPP2 and EI, a single employee on that salary keeps roughly **$54,816 a year**, or $4,568 a month. That is 76.1% of gross pay.
+Across all industries, the median full-time wage in Ontario is $34.62 an hour — about $72,000 a year. After federal tax, Ontario tax, CPP/CPP2 and EI, a single employee on that salary keeps roughly **$55,099 a year**, or $4,592 a month. That is 76.5% of gross pay.
 
 ## Take-home pay in Ontario at every salary level
 
@@ -53,13 +53,13 @@ Nobody is paid an "average". Here is what specific salaries actually leave in On
 
 | Gross salary | Take-home (year) | Per month | Kept |
 | --- | --- | --- | --- |
-| $40,000 | **$32,603** | $2,717 | 81.5% |
-| $60,000 | **$47,070** | $3,922 | 78.4% |
-| $80,000 | **$59,994** | $5,000 | 75.0% |
-| $100,000 | **$73,867** | $6,156 | 73.9% |
-| $150,000 | **$103,867** | $8,656 | 69.2% |
+| $40,000 | **$32,814** | $2,734 | 82.0% |
+| $60,000 | **$47,340** | $3,945 | 78.9% |
+| $80,000 | **$60,303** | $5,025 | 75.4% |
+| $100,000 | **$74,206** | $6,184 | 74.2% |
+| $150,000 | **$104,320** | $8,693 | 69.5% |
 
-Notice how the share you keep falls as the salary rises: that is Canada's progressive tax system working as designed. At $40,000 you keep 81.5%; at $150,000 you keep 69.2%.
+Notice how the share you keep falls as the salary rises: that is Canada's progressive tax system working as designed. At $40,000 you keep 82.0%; at $150,000 you keep 69.5%.
 
 ## What each industry pays in Ontario
 
@@ -67,22 +67,22 @@ Statistics Canada publishes the median wage of full-time employees by industry. 
 
 | Industry | Median wage | ≈ Annual | Take-home |
 | --- | --- | --- | --- |
-| Utilities | $56.00/hr | $116,500 | $84,879 |
-| Public administration | $48.00/hr | $99,800 | $73,730 |
-| Professional, scientific & technical services | $46.15/hr | $96,000 | $71,088 |
-| Educational services | $44.18/hr | $91,900 | $68,204 |
-| Forestry, fishing, mining, oil & gas | $43.00/hr | $89,400 | $66,445 |
-| Finance, insurance & real estate | $41.03/hr | $85,300 | $63,561 |
-| Information, culture & recreation | $35.58/hr | $74,000 | $55,977 |
-| Construction | $35.19/hr | $73,200 | $55,453 |
-| Healthcare & social assistance | $32.91/hr | $68,500 | $52,528 |
-| Manufacturing | $30.00/hr | $62,400 | $48,611 |
-| Transportation & warehousing | $30.00/hr | $62,400 | $48,611 |
-| Other services | $28.00/hr | $58,200 | $45,893 |
-| Wholesale & retail trade | $25.64/hr | $53,300 | $42,404 |
-| Business & support services | $25.00/hr | $52,000 | $41,431 |
-| Agriculture | $23.00/hr | $47,800 | $38,439 |
-| Food service & hospitality | $20.00/hr | $41,600 | $33,800 |
+| Utilities | $56.00/hr | $116,500 | $85,270 |
+| Public administration | $48.00/hr | $99,800 | $74,069 |
+| Professional, scientific & technical services | $46.15/hr | $96,000 | $71,418 |
+| Educational services | $44.18/hr | $91,900 | $68,534 |
+| Forestry, fishing, mining, oil & gas | $43.00/hr | $89,400 | $66,775 |
+| Finance, insurance & real estate | $41.03/hr | $85,300 | $63,890 |
+| Information, culture & recreation | $35.58/hr | $74,000 | $56,262 |
+| Construction | $35.19/hr | $73,200 | $55,761 |
+| Healthcare & social assistance | $32.91/hr | $68,500 | $52,807 |
+| Manufacturing | $30.00/hr | $62,400 | $48,883 |
+| Transportation & warehousing | $30.00/hr | $62,400 | $48,883 |
+| Other services | $28.00/hr | $58,200 | $46,125 |
+| Wholesale & retail trade | $25.64/hr | $53,300 | $42,614 |
+| Business & support services | $25.00/hr | $52,000 | $41,641 |
+| Agriculture | $23.00/hr | $47,800 | $38,649 |
+| Food service & hospitality | $20.00/hr | $41,600 | $34,011 |
 
 The best-paid sector reported here is utilities at $56.00 an hour; the lowest is food service & hospitality at $20.00. That gap — $36.00 an hour — works out to about $74,900 a year before tax.
 
@@ -92,14 +92,14 @@ On an $80,000 salary, Ontario ranks **#6 of 13** provinces and territories for t
 
 | Rank | Province | Take-home on $80,000 |
 | --- | --- | --- |
-| 1 | Nunavut | $62,001 |
-| 2 | Northwest Territories | $60,871 |
-| 3 | British Columbia | $60,867 |
-| 4 | Yukon | $60,648 |
-| 5 | Alberta | $60,409 |
-| 6 | Ontario ← | $59,994 |
+| 1 | Nunavut | $62,299 |
+| 2 | Northwest Territories | $61,166 |
+| 3 | British Columbia | $61,157 |
+| 4 | Yukon | $61,039 |
+| 5 | Alberta | $60,698 |
+| 6 | Ontario ← | $60,303 |
 
-The difference between Ontario and Nunavut, the highest, is $2,006 a year on the same $80,000 salary — about $167 a month.
+The difference between Ontario and Nunavut, the highest, is $1,996 a year on the same $80,000 salary — about $166 a month.
 
 Take-home pay is only one side of a move, of course: rent, groceries and childcare vary as much as tax does. But it is the side most people guess at, and it is the side that can be calculated exactly.
 
@@ -128,7 +128,7 @@ Every figure above is a median or a computed example. Your own pay depends on yo
     publishedAt: '2026-08-08',
     readTime: 8,
     imageUrl: '/blog/bc-take-home-pay-guide-2026.png',
-    directAnswer: "The median full-time wage in British Columbia is $35.00 an hour, about $72,800 a year, which leaves roughly $55,957 after tax in 2026. On an $80,000 salary, British Columbia ranks #3 of 13 provinces and territories for take-home pay, keeping $60,867.",
+    directAnswer: "The median full-time wage in British Columbia is $35.00 an hour, about $72,800 a year, which leaves roughly $56,227 after tax in 2026. On an $80,000 salary, British Columbia ranks #3 of 13 provinces and territories for take-home pay, keeping $61,157.",
     faq: [
           {
                 "question": "What is the average salary in British Columbia?",
@@ -136,24 +136,24 @@ Every figure above is a median or a computed example. Your own pay depends on yo
           },
           {
                 "question": "What is the take-home pay on $80,000 in British Columbia?",
-                "answer": "About $60,867 a year, or $5,072 a month, after federal tax, British Columbia provincial tax, CPP/CPP2 and EI for the 2026 tax year, for a single employee with no additional credits."
+                "answer": "About $61,157 a year, or $5,096 a month, after federal tax, British Columbia provincial tax, CPP/CPP2 and EI for the 2026 tax year, for a single employee with no additional credits."
           },
           {
                 "question": "Does British Columbia have high taxes compared with other provinces?",
-                "answer": "On an $80,000 salary, British Columbia ranks #3 of 13 provinces and territories for take-home pay in 2026, keeping $60,867. That is $1,134 a year less than Nunavut, the highest."
+                "answer": "On an $80,000 salary, British Columbia ranks #3 of 13 provinces and territories for take-home pay in 2026, keeping $61,157. That is $1,142 a year less than Nunavut, the highest."
           },
           {
                 "question": "Which industry pays best in British Columbia?",
-                "answer": "Of the sectors Statistics Canada reports for British Columbia, utilities has the highest median full-time wage at $51.63 an hour — roughly $107,400 a year, or $80,193 after tax."
+                "answer": "Of the sectors Statistics Canada reports for British Columbia, utilities has the highest median full-time wage at $51.63 an hour — roughly $107,400 a year, or $80,531 after tax."
           },
           {
                 "question": "How much of my pay do I keep in British Columbia?",
-                "answer": "It depends on the salary. In British Columbia in 2026, someone earning $40,000 keeps about 82.8% of gross pay, while someone earning $150,000 keeps about 71.3%. The rest goes to federal tax, provincial tax, CPP/CPP2 and EI."
+                "answer": "It depends on the salary. In British Columbia in 2026, someone earning $40,000 keeps about 83.3% of gross pay, while someone earning $150,000 keeps about 71.6%. The rest goes to federal tax, provincial tax, CPP/CPP2 and EI."
           }
     ],
     content: `## The typical British Columbia paycheque
 
-Across all industries, the median full-time wage in British Columbia is $35.00 an hour — about $72,800 a year. After federal tax, British Columbia tax, CPP/CPP2 and EI, a single employee on that salary keeps roughly **$55,957 a year**, or $4,663 a month. That is 76.9% of gross pay.
+Across all industries, the median full-time wage in British Columbia is $35.00 an hour — about $72,800 a year. After federal tax, British Columbia tax, CPP/CPP2 and EI, a single employee on that salary keeps roughly **$56,227 a year**, or $4,686 a month. That is 77.2% of gross pay.
 
 ## Take-home pay in British Columbia at every salary level
 
@@ -161,13 +161,13 @@ Nobody is paid an "average". Here is what specific salaries actually leave in Br
 
 | Gross salary | Take-home (year) | Per month | Kept |
 | --- | --- | --- | --- |
-| $40,000 | **$33,109** | $2,759 | 82.8% |
-| $60,000 | **$47,496** | $3,958 | 79.2% |
-| $80,000 | **$60,867** | $5,072 | 76.1% |
-| $100,000 | **$75,066** | $6,256 | 75.1% |
-| $150,000 | **$106,929** | $8,911 | 71.3% |
+| $40,000 | **$33,333** | $2,778 | 83.3% |
+| $60,000 | **$47,755** | $3,980 | 79.6% |
+| $80,000 | **$61,157** | $5,096 | 76.4% |
+| $100,000 | **$75,373** | $6,281 | 75.4% |
+| $150,000 | **$107,377** | $8,948 | 71.6% |
 
-Notice how the share you keep falls as the salary rises: that is Canada's progressive tax system working as designed. At $40,000 you keep 82.8%; at $150,000 you keep 71.3%.
+Notice how the share you keep falls as the salary rises: that is Canada's progressive tax system working as designed. At $40,000 you keep 83.3%; at $150,000 you keep 71.6%.
 
 ## What each industry pays in British Columbia
 
@@ -175,22 +175,22 @@ Statistics Canada publishes the median wage of full-time employees by industry. 
 
 | Industry | Median wage | ≈ Annual | Take-home |
 | --- | --- | --- | --- |
-| Utilities | $51.63/hr | $107,400 | $80,193 |
-| Forestry, fishing, mining, oil & gas | $45.00/hr | $93,600 | $70,471 |
-| Public administration | $45.00/hr | $93,600 | $70,471 |
-| Professional, scientific & technical services | $43.78/hr | $91,100 | $68,676 |
-| Educational services | $40.00/hr | $83,200 | $63,062 |
-| Information, culture & recreation | $38.46/hr | $80,000 | $60,867 |
-| Finance, insurance & real estate | $38.00/hr | $79,000 | $60,181 |
-| Construction | $37.50/hr | $78,000 | $59,495 |
-| Manufacturing | $35.00/hr | $72,800 | $55,957 |
-| Transportation & warehousing | $34.00/hr | $70,700 | $54,550 |
-| Healthcare & social assistance | $33.33/hr | $69,300 | $53,612 |
-| Other services | $30.00/hr | $62,400 | $49,073 |
-| Business & support services | $27.50/hr | $57,200 | $45,570 |
-| Wholesale & retail trade | $26.44/hr | $55,000 | $43,982 |
-| Agriculture | $25.00/hr | $52,000 | $41,815 |
-| Food service & hospitality | $22.00/hr | $45,800 | $37,243 |
+| Utilities | $51.63/hr | $107,400 | $80,531 |
+| Forestry, fishing, mining, oil & gas | $45.00/hr | $93,600 | $70,778 |
+| Public administration | $45.00/hr | $93,600 | $70,778 |
+| Professional, scientific & technical services | $43.78/hr | $91,100 | $68,983 |
+| Educational services | $40.00/hr | $83,200 | $63,363 |
+| Information, culture & recreation | $38.46/hr | $80,000 | $61,157 |
+| Finance, insurance & real estate | $38.00/hr | $79,000 | $60,468 |
+| Construction | $37.50/hr | $78,000 | $59,778 |
+| Manufacturing | $35.00/hr | $72,800 | $56,227 |
+| Transportation & warehousing | $34.00/hr | $70,700 | $54,818 |
+| Healthcare & social assistance | $33.33/hr | $69,300 | $53,878 |
+| Other services | $30.00/hr | $62,400 | $49,334 |
+| Business & support services | $27.50/hr | $57,200 | $45,791 |
+| Wholesale & retail trade | $26.44/hr | $55,000 | $44,203 |
+| Agriculture | $25.00/hr | $52,000 | $42,036 |
+| Food service & hospitality | $22.00/hr | $45,800 | $37,453 |
 
 The best-paid sector reported here is utilities at $51.63 an hour; the lowest is food service & hospitality at $22.00. That gap — $29.63 an hour — works out to about $61,600 a year before tax.
 
@@ -200,14 +200,14 @@ On an $80,000 salary, British Columbia ranks **#3 of 13** provinces and territor
 
 | Rank | Province | Take-home on $80,000 |
 | --- | --- | --- |
-| 1 | Nunavut | $62,001 |
-| 2 | Northwest Territories | $60,871 |
-| 3 | British Columbia ← | $60,867 |
-| 4 | Yukon | $60,648 |
-| 5 | Alberta | $60,409 |
-| 6 | Ontario | $59,994 |
+| 1 | Nunavut | $62,299 |
+| 2 | Northwest Territories | $61,166 |
+| 3 | British Columbia ← | $61,157 |
+| 4 | Yukon | $61,039 |
+| 5 | Alberta | $60,698 |
+| 6 | Ontario | $60,303 |
 
-The difference between British Columbia and Nunavut, the highest, is $1,134 a year on the same $80,000 salary — about $94 a month.
+The difference between British Columbia and Nunavut, the highest, is $1,142 a year on the same $80,000 salary — about $95 a month.
 
 Take-home pay is only one side of a move, of course: rent, groceries and childcare vary as much as tax does. But it is the side most people guess at, and it is the side that can be calculated exactly.
 
@@ -236,7 +236,7 @@ Every figure above is a median or a computed example. Your own pay depends on yo
     publishedAt: '2026-08-08',
     readTime: 8,
     imageUrl: '/blog/alberta-take-home-pay-guide-2026.png',
-    directAnswer: "The median full-time wage in Alberta is $34.97 an hour, about $72,700 a year, which leaves roughly $55,592 after tax in 2026. On an $80,000 salary, Alberta ranks #5 of 13 provinces and territories for take-home pay, keeping $60,409.",
+    directAnswer: "The median full-time wage in Alberta is $34.97 an hour, about $72,700 a year, which leaves roughly $55,861 after tax in 2026. On an $80,000 salary, Alberta ranks #5 of 13 provinces and territories for take-home pay, keeping $60,698.",
     faq: [
           {
                 "question": "What is the average salary in Alberta?",
@@ -244,24 +244,24 @@ Every figure above is a median or a computed example. Your own pay depends on yo
           },
           {
                 "question": "What is the take-home pay on $80,000 in Alberta?",
-                "answer": "About $60,409 a year, or $5,034 a month, after federal tax, Alberta provincial tax, CPP/CPP2 and EI for the 2026 tax year, for a single employee with no additional credits."
+                "answer": "About $60,698 a year, or $5,058 a month, after federal tax, Alberta provincial tax, CPP/CPP2 and EI for the 2026 tax year, for a single employee with no additional credits."
           },
           {
                 "question": "Does Alberta have high taxes compared with other provinces?",
-                "answer": "On an $80,000 salary, Alberta ranks #5 of 13 provinces and territories for take-home pay in 2026, keeping $60,409. That is $1,592 a year less than Nunavut, the highest."
+                "answer": "On an $80,000 salary, Alberta ranks #5 of 13 provinces and territories for take-home pay in 2026, keeping $60,698. That is $1,601 a year less than Nunavut, the highest."
           },
           {
                 "question": "Which industry pays best in Alberta?",
-                "answer": "Of the sectors Statistics Canada reports for Alberta, utilities has the highest median full-time wage at $56.00 an hour — roughly $116,500 a year, or $85,620 after tax."
+                "answer": "Of the sectors Statistics Canada reports for Alberta, utilities has the highest median full-time wage at $56.00 an hour — roughly $116,500 a year, or $85,926 after tax."
           },
           {
                 "question": "How much of my pay do I keep in Alberta?",
-                "answer": "It depends on the salary. In Alberta in 2026, someone earning $40,000 keeps about 82.8% of gross pay, while someone earning $150,000 keeps about 71.4%. The rest goes to federal tax, provincial tax, CPP/CPP2 and EI."
+                "answer": "It depends on the salary. In Alberta in 2026, someone earning $40,000 keeps about 83.3% of gross pay, while someone earning $150,000 keeps about 71.6%. The rest goes to federal tax, provincial tax, CPP/CPP2 and EI."
           }
     ],
     content: `## The typical Alberta paycheque
 
-Across all industries, the median full-time wage in Alberta is $34.97 an hour — about $72,700 a year. After federal tax, Alberta tax, CPP/CPP2 and EI, a single employee on that salary keeps roughly **$55,592 a year**, or $4,633 a month. That is 76.5% of gross pay.
+Across all industries, the median full-time wage in Alberta is $34.97 an hour — about $72,700 a year. After federal tax, Alberta tax, CPP/CPP2 and EI, a single employee on that salary keeps roughly **$55,861 a year**, or $4,655 a month. That is 76.8% of gross pay.
 
 ## Take-home pay in Alberta at every salary level
 
@@ -269,13 +269,13 @@ Nobody is paid an "average". Here is what specific salaries actually leave in Al
 
 | Gross salary | Take-home (year) | Per month | Kept |
 | --- | --- | --- | --- |
-| $40,000 | **$33,122** | $2,760 | 82.8% |
-| $60,000 | **$47,444** | $3,954 | 79.1% |
-| $80,000 | **$60,409** | $5,034 | 75.5% |
-| $100,000 | **$74,153** | $6,179 | 74.2% |
-| $150,000 | **$107,090** | $8,924 | 71.4% |
+| $40,000 | **$33,332** | $2,778 | 83.3% |
+| $60,000 | **$47,691** | $3,974 | 79.5% |
+| $80,000 | **$60,698** | $5,058 | 75.9% |
+| $100,000 | **$74,459** | $6,205 | 74.5% |
+| $150,000 | **$107,458** | $8,955 | 71.6% |
 
-Notice how the share you keep falls as the salary rises: that is Canada's progressive tax system working as designed. At $40,000 you keep 82.8%; at $150,000 you keep 71.4%.
+Notice how the share you keep falls as the salary rises: that is Canada's progressive tax system working as designed. At $40,000 you keep 83.3%; at $150,000 you keep 71.6%.
 
 ## What each industry pays in Alberta
 
@@ -283,22 +283,22 @@ Statistics Canada publishes the median wage of full-time employees by industry. 
 
 | Industry | Median wage | ≈ Annual | Take-home |
 | --- | --- | --- | --- |
-| Utilities | $56.00/hr | $116,500 | $85,620 |
-| Forestry, fishing, mining, oil & gas | $52.88/hr | $110,000 | $81,103 |
-| Public administration | $45.67/hr | $95,000 | $70,678 |
-| Professional, scientific & technical services | $41.81/hr | $87,000 | $65,118 |
-| Educational services | $40.46/hr | $84,200 | $63,197 |
-| Finance, insurance & real estate | $38.15/hr | $79,400 | $60,010 |
-| Construction | $37.00/hr | $77,000 | $58,417 |
-| Transportation & warehousing | $34.20/hr | $71,100 | $54,554 |
-| Manufacturing | $32.00/hr | $66,600 | $51,665 |
-| Healthcare & social assistance | $30.00/hr | $62,400 | $48,994 |
-| Information, culture & recreation | $30.00/hr | $62,400 | $48,994 |
-| Agriculture | $29.10/hr | $60,500 | $47,772 |
-| Other services | $28.85/hr | $60,000 | $47,444 |
-| Wholesale & retail trade | $26.92/hr | $56,000 | $44,656 |
-| Business & support services | $25.26/hr | $52,500 | $42,133 |
-| Food service & hospitality | $18.00/hr | $37,400 | $31,248 |
+| Utilities | $56.00/hr | $116,500 | $85,926 |
+| Forestry, fishing, mining, oil & gas | $52.88/hr | $110,000 | $81,409 |
+| Public administration | $45.67/hr | $95,000 | $70,984 |
+| Professional, scientific & technical services | $41.81/hr | $87,000 | $65,424 |
+| Educational services | $40.46/hr | $84,200 | $63,500 |
+| Finance, insurance & real estate | $38.15/hr | $79,400 | $60,297 |
+| Construction | $37.00/hr | $77,000 | $58,696 |
+| Transportation & warehousing | $34.20/hr | $71,100 | $54,822 |
+| Manufacturing | $32.00/hr | $66,600 | $51,928 |
+| Healthcare & social assistance | $30.00/hr | $62,400 | $49,254 |
+| Information, culture & recreation | $30.00/hr | $62,400 | $49,254 |
+| Agriculture | $29.10/hr | $60,500 | $48,019 |
+| Other services | $28.85/hr | $60,000 | $47,691 |
+| Wholesale & retail trade | $26.92/hr | $56,000 | $44,866 |
+| Business & support services | $25.26/hr | $52,500 | $42,343 |
+| Food service & hospitality | $18.00/hr | $37,400 | $31,458 |
 
 The best-paid sector reported here is utilities at $56.00 an hour; the lowest is food service & hospitality at $18.00. That gap — $38.00 an hour — works out to about $79,000 a year before tax.
 
@@ -308,14 +308,14 @@ On an $80,000 salary, Alberta ranks **#5 of 13** provinces and territories for t
 
 | Rank | Province | Take-home on $80,000 |
 | --- | --- | --- |
-| 1 | Nunavut | $62,001 |
-| 2 | Northwest Territories | $60,871 |
-| 3 | British Columbia | $60,867 |
-| 4 | Yukon | $60,648 |
-| 5 | Alberta ← | $60,409 |
-| 6 | Ontario | $59,994 |
+| 1 | Nunavut | $62,299 |
+| 2 | Northwest Territories | $61,166 |
+| 3 | British Columbia | $61,157 |
+| 4 | Yukon | $61,039 |
+| 5 | Alberta ← | $60,698 |
+| 6 | Ontario | $60,303 |
 
-The difference between Alberta and Nunavut, the highest, is $1,592 a year on the same $80,000 salary — about $133 a month.
+The difference between Alberta and Nunavut, the highest, is $1,601 a year on the same $80,000 salary — about $133 a month.
 
 Take-home pay is only one side of a move, of course: rent, groceries and childcare vary as much as tax does. But it is the side most people guess at, and it is the side that can be calculated exactly.
 
@@ -344,7 +344,7 @@ Every figure above is a median or a computed example. Your own pay depends on yo
     publishedAt: '2026-08-08',
     readTime: 8,
     imageUrl: '/blog/quebec-take-home-pay-guide-2026.png',
-    directAnswer: "The median full-time wage in Quebec is $33.00 an hour, about $68,600 a year, which leaves roughly $50,288 after tax in 2026. On an $80,000 salary, Quebec ranks #11 of 13 provinces and territories for take-home pay, keeping $57,077.",
+    directAnswer: "The median full-time wage in Quebec is $33.00 an hour, about $68,600 a year, which leaves roughly $50,566 after tax in 2026. On an $80,000 salary, Quebec ranks #11 of 13 provinces and territories for take-home pay, keeping $57,390.",
     faq: [
           {
                 "question": "What is the average salary in Quebec?",
@@ -352,24 +352,24 @@ Every figure above is a median or a computed example. Your own pay depends on yo
           },
           {
                 "question": "What is the take-home pay on $80,000 in Quebec?",
-                "answer": "About $57,077 a year, or $4,756 a month, after federal tax, Quebec provincial tax, CPP/CPP2 and EI for the 2026 tax year, for a single employee with no additional credits."
+                "answer": "About $57,390 a year, or $4,782 a month, after federal tax, Quebec provincial tax, CPP/CPP2 and EI for the 2026 tax year, for a single employee with no additional credits."
           },
           {
                 "question": "Does Quebec have high taxes compared with other provinces?",
-                "answer": "On an $80,000 salary, Quebec ranks #11 of 13 provinces and territories for take-home pay in 2026, keeping $57,077. That is $4,923 a year less than Nunavut, the highest."
+                "answer": "On an $80,000 salary, Quebec ranks #11 of 13 provinces and territories for take-home pay in 2026, keeping $57,390. That is $4,909 a year less than Nunavut, the highest."
           },
           {
                 "question": "Which industry pays best in Quebec?",
-                "answer": "Of the sectors Statistics Canada reports for Quebec, utilities has the highest median full-time wage at $53.11 an hour — roughly $110,500 a year, or $76,223 after tax."
+                "answer": "Of the sectors Statistics Canada reports for Quebec, utilities has the highest median full-time wage at $53.11 an hour — roughly $110,500 a year, or $76,624 after tax."
           },
           {
                 "question": "How much of my pay do I keep in Quebec?",
-                "answer": "It depends on the salary. In Quebec in 2026, someone earning $40,000 keeps about 80.1% of gross pay, while someone earning $150,000 keeps about 65.1%. The rest goes to federal tax, provincial tax, CPP/CPP2 and EI."
+                "answer": "It depends on the salary. In Quebec in 2026, someone earning $40,000 keeps about 80.6% of gross pay, while someone earning $150,000 keeps about 65.4%. The rest goes to federal tax, provincial tax, CPP/CPP2 and EI."
           }
     ],
     content: `## The typical Quebec paycheque
 
-Across all industries, the median full-time wage in Quebec is $33.00 an hour — about $68,600 a year. After federal tax, Quebec tax, CPP/CPP2 and EI, a single employee on that salary keeps roughly **$50,288 a year**, or $4,191 a month. That is 73.3% of gross pay.
+Across all industries, the median full-time wage in Quebec is $33.00 an hour — about $68,600 a year. After federal tax, Quebec tax, CPP/CPP2 and EI, a single employee on that salary keeps roughly **$50,566 a year**, or $4,214 a month. That is 73.7% of gross pay.
 
 ## Take-home pay in Quebec at every salary level
 
@@ -377,13 +377,13 @@ Nobody is paid an "average". Here is what specific salaries actually leave in Qu
 
 | Gross salary | Take-home (year) | Per month | Kept |
 | --- | --- | --- | --- |
-| $40,000 | **$32,033** | $2,669 | 80.1% |
-| $60,000 | **$45,317** | $3,776 | 75.5% |
-| $80,000 | **$57,077** | $4,756 | 71.3% |
-| $100,000 | **$69,619** | $5,802 | 69.6% |
-| $150,000 | **$97,657** | $8,138 | 65.1% |
+| $40,000 | **$32,229** | $2,686 | 80.6% |
+| $60,000 | **$45,581** | $3,798 | 76.0% |
+| $80,000 | **$57,390** | $4,782 | 71.7% |
+| $100,000 | **$69,963** | $5,830 | 70.0% |
+| $150,000 | **$98,130** | $8,178 | 65.4% |
 
-Notice how the share you keep falls as the salary rises: that is Canada's progressive tax system working as designed. At $40,000 you keep 80.1%; at $150,000 you keep 65.1%.
+Notice how the share you keep falls as the salary rises: that is Canada's progressive tax system working as designed. At $40,000 you keep 80.6%; at $150,000 you keep 65.4%.
 
 ## What each industry pays in Quebec
 
@@ -391,22 +391,22 @@ Statistics Canada publishes the median wage of full-time employees by industry. 
 
 | Industry | Median wage | ≈ Annual | Take-home |
 | --- | --- | --- | --- |
-| Utilities | $53.11/hr | $110,500 | $76,223 |
-| Educational services | $43.79/hr | $91,100 | $63,972 |
-| Public administration | $42.00/hr | $87,400 | $61,624 |
-| Forestry, fishing, mining, oil & gas | $40.00/hr | $83,200 | $59,013 |
-| Professional, scientific & technical services | $40.00/hr | $83,200 | $59,013 |
-| Finance, insurance & real estate | $38.46/hr | $80,000 | $57,077 |
-| Construction | $38.00/hr | $79,000 | $56,473 |
-| Information, culture & recreation | $35.00/hr | $72,800 | $52,754 |
-| Manufacturing | $31.61/hr | $65,700 | $48,612 |
-| Other services | $30.00/hr | $62,400 | $46,704 |
-| Healthcare & social assistance | $29.00/hr | $60,300 | $45,490 |
-| Transportation & warehousing | $29.00/hr | $60,300 | $45,490 |
-| Business & support services | $25.00/hr | $52,000 | $40,221 |
-| Wholesale & retail trade | $25.00/hr | $52,000 | $40,221 |
-| Agriculture | $24.00/hr | $49,900 | $38,788 |
-| Food service & hospitality | $21.00/hr | $43,700 | $34,558 |
+| Utilities | $53.11/hr | $110,500 | $76,624 |
+| Educational services | $43.79/hr | $91,100 | $64,311 |
+| Public administration | $42.00/hr | $87,400 | $61,961 |
+| Forestry, fishing, mining, oil & gas | $40.00/hr | $83,200 | $59,340 |
+| Professional, scientific & technical services | $40.00/hr | $83,200 | $59,340 |
+| Finance, insurance & real estate | $38.46/hr | $80,000 | $57,390 |
+| Construction | $38.00/hr | $79,000 | $56,780 |
+| Information, culture & recreation | $35.00/hr | $72,800 | $53,038 |
+| Manufacturing | $31.61/hr | $65,700 | $48,885 |
+| Other services | $30.00/hr | $62,400 | $46,972 |
+| Healthcare & social assistance | $29.00/hr | $60,300 | $45,755 |
+| Transportation & warehousing | $29.00/hr | $60,300 | $45,755 |
+| Business & support services | $25.00/hr | $52,000 | $40,423 |
+| Wholesale & retail trade | $25.00/hr | $52,000 | $40,423 |
+| Agriculture | $24.00/hr | $49,900 | $38,989 |
+| Food service & hospitality | $21.00/hr | $43,700 | $34,755 |
 
 The best-paid sector reported here is utilities at $53.11 an hour; the lowest is food service & hospitality at $21.00. That gap — $32.11 an hour — works out to about $66,800 a year before tax.
 
@@ -416,14 +416,14 @@ On an $80,000 salary, Quebec ranks **#11 of 13** provinces and territories for t
 
 | Rank | Province | Take-home on $80,000 |
 | --- | --- | --- |
-| 1 | Nunavut | $62,001 |
-| 2 | Northwest Territories | $60,871 |
-| 3 | British Columbia | $60,867 |
-| 4 | Yukon | $60,648 |
-| 5 | Alberta | $60,409 |
-| 6 | Ontario | $59,994 |
+| 1 | Nunavut | $62,299 |
+| 2 | Northwest Territories | $61,166 |
+| 3 | British Columbia | $61,157 |
+| 4 | Yukon | $61,039 |
+| 5 | Alberta | $60,698 |
+| 6 | Ontario | $60,303 |
 
-The difference between Quebec and Nunavut, the highest, is $4,923 a year on the same $80,000 salary — about $410 a month.
+The difference between Quebec and Nunavut, the highest, is $4,909 a year on the same $80,000 salary — about $409 a month.
 
 Take-home pay is only one side of a move, of course: rent, groceries and childcare vary as much as tax does. But it is the side most people guess at, and it is the side that can be calculated exactly.
 
@@ -444,7 +444,7 @@ Every figure above is a median or a computed example. Your own pay depends on yo
     subtitle: "What Manitoba workers actually earn by industry — and what lands in the bank after tax",
     excerpt: "The median full-time wage in Manitoba is $28.74 an hour. Here is what that, and every other salary level, leaves after 2026 tax — with Statistics Canada wage data for every industry.",
     metaTitle: "Manitoba Take-Home Pay Guide 2026 | Wages by Industry",
-    metaDescription: "Manitoba's median full-time wage is $28.74/hr. See take-home pay at every salary, wages for every industry, and how Manitoba ranks (#8 of 13) for 2026.",
+    metaDescription: "Manitoba's median full-time wage is $28.74/hr. See take-home pay at every salary, wages for every industry, and how Manitoba ranks (#9 of 13) for 2026.",
     keywords: ["Manitoba salary","Manitoba take home pay","Manitoba average salary 2026","Manitoba paycheck calculator","Manitoba income tax 2026","wages in Manitoba"],
     category: 'province',
     tags: ["Manitoba","take-home pay","wages","2026"],
@@ -452,7 +452,7 @@ Every figure above is a median or a computed example. Your own pay depends on yo
     publishedAt: '2026-08-08',
     readTime: 8,
     imageUrl: '/blog/manitoba-take-home-pay-guide-2026.png',
-    directAnswer: "The median full-time wage in Manitoba is $28.74 an hour, about $59,800 a year, which leaves roughly $45,392 after tax in 2026. On an $80,000 salary, Manitoba ranks #8 of 13 provinces and territories for take-home pay, keeping $57,940.",
+    directAnswer: "The median full-time wage in Manitoba is $28.74 an hour, about $59,800 a year, which leaves roughly $45,650 after tax in 2026. On an $80,000 salary, Manitoba ranks #9 of 13 provinces and territories for take-home pay, keeping $58,228.",
     faq: [
           {
                 "question": "What is the average salary in Manitoba?",
@@ -460,24 +460,24 @@ Every figure above is a median or a computed example. Your own pay depends on yo
           },
           {
                 "question": "What is the take-home pay on $80,000 in Manitoba?",
-                "answer": "About $57,940 a year, or $4,828 a month, after federal tax, Manitoba provincial tax, CPP/CPP2 and EI for the 2026 tax year, for a single employee with no additional credits."
+                "answer": "About $58,228 a year, or $4,852 a month, after federal tax, Manitoba provincial tax, CPP/CPP2 and EI for the 2026 tax year, for a single employee with no additional credits."
           },
           {
                 "question": "Does Manitoba have high taxes compared with other provinces?",
-                "answer": "On an $80,000 salary, Manitoba ranks #8 of 13 provinces and territories for take-home pay in 2026, keeping $57,940. That is $4,061 a year less than Nunavut, the highest."
+                "answer": "On an $80,000 salary, Manitoba ranks #9 of 13 provinces and territories for take-home pay in 2026, keeping $58,228. That is $4,071 a year less than Nunavut, the highest."
           },
           {
                 "question": "Which industry pays best in Manitoba?",
-                "answer": "Of the sectors Statistics Canada reports for Manitoba, utilities has the highest median full-time wage at $46.15 an hour — roughly $96,000 a year, or $68,469 after tax."
+                "answer": "Of the sectors Statistics Canada reports for Manitoba, utilities has the highest median full-time wage at $46.15 an hour — roughly $96,000 a year, or $68,775 after tax."
           },
           {
                 "question": "How much of my pay do I keep in Manitoba?",
-                "answer": "It depends on the salary. In Manitoba in 2026, someone earning $40,000 keeps about 79.9% of gross pay, while someone earning $150,000 keeps about 66.9%. The rest goes to federal tax, provincial tax, CPP/CPP2 and EI."
+                "answer": "It depends on the salary. In Manitoba in 2026, someone earning $40,000 keeps about 80.4% of gross pay, while someone earning $150,000 keeps about 67.2%. The rest goes to federal tax, provincial tax, CPP/CPP2 and EI."
           }
     ],
     content: `## The typical Manitoba paycheque
 
-Across all industries, the median full-time wage in Manitoba is $28.74 an hour — about $59,800 a year. After federal tax, Manitoba tax, CPP/CPP2 and EI, a single employee on that salary keeps roughly **$45,392 a year**, or $3,783 a month. That is 75.9% of gross pay.
+Across all industries, the median full-time wage in Manitoba is $28.74 an hour — about $59,800 a year. After federal tax, Manitoba tax, CPP/CPP2 and EI, a single employee on that salary keeps roughly **$45,650 a year**, or $3,804 a month. That is 76.3% of gross pay.
 
 ## Take-home pay in Manitoba at every salary level
 
@@ -485,13 +485,13 @@ Nobody is paid an "average". Here is what specific salaries actually leave in Ma
 
 | Gross salary | Take-home (year) | Per month | Kept |
 | --- | --- | --- | --- |
-| $40,000 | **$31,964** | $2,664 | 79.9% |
-| $60,000 | **$45,515** | $3,793 | 75.9% |
-| $80,000 | **$57,940** | $4,828 | 72.4% |
-| $100,000 | **$71,139** | $5,928 | 71.1% |
-| $150,000 | **$100,377** | $8,365 | 66.9% |
+| $40,000 | **$32,174** | $2,681 | 80.4% |
+| $60,000 | **$45,772** | $3,814 | 76.3% |
+| $80,000 | **$58,228** | $4,852 | 72.8% |
+| $100,000 | **$71,445** | $5,954 | 71.4% |
+| $150,000 | **$100,797** | $8,400 | 67.2% |
 
-Notice how the share you keep falls as the salary rises: that is Canada's progressive tax system working as designed. At $40,000 you keep 79.9%; at $150,000 you keep 66.9%.
+Notice how the share you keep falls as the salary rises: that is Canada's progressive tax system working as designed. At $40,000 you keep 80.4%; at $150,000 you keep 67.2%.
 
 ## What each industry pays in Manitoba
 
@@ -499,39 +499,39 @@ Statistics Canada publishes the median wage of full-time employees by industry. 
 
 | Industry | Median wage | ≈ Annual | Take-home |
 | --- | --- | --- | --- |
-| Utilities | $46.15/hr | $96,000 | $68,469 |
-| Forestry, fishing, mining, oil & gas | $43.00/hr | $89,400 | $64,064 |
-| Public administration | $41.36/hr | $86,000 | $61,794 |
-| Educational services | $35.38/hr | $73,600 | $53,875 |
-| Professional, scientific & technical services | $35.00/hr | $72,800 | $53,377 |
-| Finance, insurance & real estate | $32.97/hr | $68,600 | $50,765 |
-| Construction | $30.00/hr | $62,400 | $46,980 |
-| Transportation & warehousing | $28.75/hr | $59,800 | $45,392 |
-| Information, culture & recreation | $27.97/hr | $58,200 | $44,395 |
-| Manufacturing | $27.00/hr | $56,200 | $43,044 |
-| Healthcare & social assistance | $27.00/hr | $56,200 | $43,044 |
-| Other services | $24.25/hr | $50,400 | $39,126 |
-| Agriculture | $24.00/hr | $49,900 | $38,788 |
-| Wholesale & retail trade | $24.00/hr | $49,900 | $38,788 |
-| Business & support services | $21.00/hr | $43,700 | $34,536 |
-| Food service & hospitality | $17.00/hr | $35,400 | $28,767 |
+| Utilities | $46.15/hr | $96,000 | $68,775 |
+| Forestry, fishing, mining, oil & gas | $43.00/hr | $89,400 | $64,369 |
+| Public administration | $41.36/hr | $86,000 | $62,100 |
+| Educational services | $35.38/hr | $73,600 | $54,144 |
+| Professional, scientific & technical services | $35.00/hr | $72,800 | $53,645 |
+| Finance, insurance & real estate | $32.97/hr | $68,600 | $51,030 |
+| Construction | $30.00/hr | $62,400 | $47,240 |
+| Transportation & warehousing | $28.75/hr | $59,800 | $45,650 |
+| Information, culture & recreation | $27.97/hr | $58,200 | $44,615 |
+| Manufacturing | $27.00/hr | $56,200 | $43,264 |
+| Healthcare & social assistance | $27.00/hr | $56,200 | $43,264 |
+| Other services | $24.25/hr | $50,400 | $39,345 |
+| Agriculture | $24.00/hr | $49,900 | $39,007 |
+| Wholesale & retail trade | $24.00/hr | $49,900 | $39,007 |
+| Business & support services | $21.00/hr | $43,700 | $34,746 |
+| Food service & hospitality | $17.00/hr | $35,400 | $28,977 |
 
 The best-paid sector reported here is utilities at $46.15 an hour; the lowest is food service & hospitality at $17.00. That gap — $29.15 an hour — works out to about $60,600 a year before tax.
 
 ## How Manitoba compares with the rest of Canada
 
-On an $80,000 salary, Manitoba ranks **#8 of 13** provinces and territories for take-home pay in 2026.
+On an $80,000 salary, Manitoba ranks **#9 of 13** provinces and territories for take-home pay in 2026.
 
 | Rank | Province | Take-home on $80,000 |
 | --- | --- | --- |
-| 1 | Nunavut | $62,001 |
-| 2 | Northwest Territories | $60,871 |
-| 3 | British Columbia | $60,867 |
-| 4 | Yukon | $60,648 |
-| 5 | Alberta | $60,409 |
-| 6 | Ontario | $59,994 |
+| 1 | Nunavut | $62,299 |
+| 2 | Northwest Territories | $61,166 |
+| 3 | British Columbia | $61,157 |
+| 4 | Yukon | $61,039 |
+| 5 | Alberta | $60,698 |
+| 6 | Ontario | $60,303 |
 
-The difference between Manitoba and Nunavut, the highest, is $4,061 a year on the same $80,000 salary — about $338 a month.
+The difference between Manitoba and Nunavut, the highest, is $4,071 a year on the same $80,000 salary — about $339 a month.
 
 Take-home pay is only one side of a move, of course: rent, groceries and childcare vary as much as tax does. But it is the side most people guess at, and it is the side that can be calculated exactly.
 
@@ -560,7 +560,7 @@ Every figure above is a median or a computed example. Your own pay depends on yo
     publishedAt: '2026-08-08',
     readTime: 8,
     imageUrl: '/blog/saskatchewan-take-home-pay-guide-2026.png',
-    directAnswer: "The median full-time wage in Saskatchewan is $31.25 an hour, about $65,000 a year, which leaves roughly $49,325 after tax in 2026. On an $80,000 salary, Saskatchewan ranks #7 of 13 provinces and territories for take-home pay, keeping $58,733.",
+    directAnswer: "The median full-time wage in Saskatchewan is $31.25 an hour, about $65,000 a year, which leaves roughly $49,588 after tax in 2026. On an $80,000 salary, Saskatchewan ranks #7 of 13 provinces and territories for take-home pay, keeping $59,022.",
     faq: [
           {
                 "question": "What is the average salary in Saskatchewan?",
@@ -568,24 +568,24 @@ Every figure above is a median or a computed example. Your own pay depends on yo
           },
           {
                 "question": "What is the take-home pay on $80,000 in Saskatchewan?",
-                "answer": "About $58,733 a year, or $4,894 a month, after federal tax, Saskatchewan provincial tax, CPP/CPP2 and EI for the 2026 tax year, for a single employee with no additional credits."
+                "answer": "About $59,022 a year, or $4,918 a month, after federal tax, Saskatchewan provincial tax, CPP/CPP2 and EI for the 2026 tax year, for a single employee with no additional credits."
           },
           {
                 "question": "Does Saskatchewan have high taxes compared with other provinces?",
-                "answer": "On an $80,000 salary, Saskatchewan ranks #7 of 13 provinces and territories for take-home pay in 2026, keeping $58,733. That is $3,268 a year less than Nunavut, the highest."
+                "answer": "On an $80,000 salary, Saskatchewan ranks #7 of 13 provinces and territories for take-home pay in 2026, keeping $59,022. That is $3,277 a year less than Nunavut, the highest."
           },
           {
                 "question": "Which industry pays best in Saskatchewan?",
-                "answer": "Of the sectors Statistics Canada reports for Saskatchewan, forestry, fishing, mining, oil & gas has the highest median full-time wage at $50.00 an hour — roughly $104,000 a year, or $74,662 after tax."
+                "answer": "Of the sectors Statistics Canada reports for Saskatchewan, forestry, fishing, mining, oil & gas has the highest median full-time wage at $50.00 an hour — roughly $104,000 a year, or $74,968 after tax."
           },
           {
                 "question": "How much of my pay do I keep in Saskatchewan?",
-                "answer": "It depends on the salary. In Saskatchewan in 2026, someone earning $40,000 keeps about 81.3% of gross pay, while someone earning $150,000 keeps about 69.1%. The rest goes to federal tax, provincial tax, CPP/CPP2 and EI."
+                "answer": "It depends on the salary. In Saskatchewan in 2026, someone earning $40,000 keeps about 81.8% of gross pay, while someone earning $150,000 keeps about 69.4%. The rest goes to federal tax, provincial tax, CPP/CPP2 and EI."
           }
     ],
     content: `## The typical Saskatchewan paycheque
 
-Across all industries, the median full-time wage in Saskatchewan is $31.25 an hour — about $65,000 a year. After federal tax, Saskatchewan tax, CPP/CPP2 and EI, a single employee on that salary keeps roughly **$49,325 a year**, or $4,110 a month. That is 75.9% of gross pay.
+Across all industries, the median full-time wage in Saskatchewan is $31.25 an hour — about $65,000 a year. After federal tax, Saskatchewan tax, CPP/CPP2 and EI, a single employee on that salary keeps roughly **$49,588 a year**, or $4,132 a month. That is 76.3% of gross pay.
 
 ## Take-home pay in Saskatchewan at every salary level
 
@@ -593,13 +593,13 @@ Nobody is paid an "average". Here is what specific salaries actually leave in Sa
 
 | Gross salary | Take-home (year) | Per month | Kept |
 | --- | --- | --- | --- |
-| $40,000 | **$32,511** | $2,709 | 81.3% |
-| $60,000 | **$46,261** | $3,855 | 77.1% |
-| $80,000 | **$58,733** | $4,894 | 73.4% |
-| $100,000 | **$71,982** | $5,998 | 72.0% |
-| $150,000 | **$103,669** | $8,639 | 69.1% |
+| $40,000 | **$32,721** | $2,727 | 81.8% |
+| $60,000 | **$46,520** | $3,877 | 77.5% |
+| $80,000 | **$59,022** | $4,918 | 73.8% |
+| $100,000 | **$72,288** | $6,024 | 72.3% |
+| $150,000 | **$104,037** | $8,670 | 69.4% |
 
-Notice how the share you keep falls as the salary rises: that is Canada's progressive tax system working as designed. At $40,000 you keep 81.3%; at $150,000 you keep 69.1%.
+Notice how the share you keep falls as the salary rises: that is Canada's progressive tax system working as designed. At $40,000 you keep 81.8%; at $150,000 you keep 69.4%.
 
 ## What each industry pays in Saskatchewan
 
@@ -607,22 +607,22 @@ Statistics Canada publishes the median wage of full-time employees by industry. 
 
 | Industry | Median wage | ≈ Annual | Take-home |
 | --- | --- | --- | --- |
-| Forestry, fishing, mining, oil & gas | $50.00/hr | $104,000 | $74,662 |
-| Utilities | $46.00/hr | $95,700 | $69,101 |
-| Public administration | $42.00/hr | $87,400 | $63,540 |
-| Educational services | $39.23/hr | $81,600 | $59,757 |
-| Professional, scientific & technical services | $38.46/hr | $80,000 | $58,733 |
-| Finance, insurance & real estate | $33.85/hr | $70,400 | $52,653 |
-| Manufacturing | $32.66/hr | $67,900 | $51,102 |
-| Construction | $32.00/hr | $66,600 | $50,306 |
-| Information, culture & recreation | $31.50/hr | $65,500 | $49,632 |
-| Transportation & warehousing | $30.00/hr | $62,400 | $47,732 |
-| Healthcare & social assistance | $28.05/hr | $58,300 | $45,205 |
-| Agriculture | $28.00/hr | $58,200 | $45,137 |
-| Other services | $27.50/hr | $57,200 | $44,460 |
-| Wholesale & retail trade | $24.61/hr | $51,200 | $40,326 |
-| Business & support services | $21.00/hr | $43,700 | $35,093 |
-| Food service & hospitality | $17.00/hr | $35,400 | $29,302 |
+| Forestry, fishing, mining, oil & gas | $50.00/hr | $104,000 | $74,968 |
+| Utilities | $46.00/hr | $95,700 | $69,407 |
+| Public administration | $42.00/hr | $87,400 | $63,846 |
+| Educational services | $39.23/hr | $81,600 | $60,051 |
+| Professional, scientific & technical services | $38.46/hr | $80,000 | $59,022 |
+| Finance, insurance & real estate | $33.85/hr | $70,400 | $52,920 |
+| Manufacturing | $32.66/hr | $67,900 | $51,367 |
+| Construction | $32.00/hr | $66,600 | $50,569 |
+| Information, culture & recreation | $31.50/hr | $65,500 | $49,894 |
+| Transportation & warehousing | $30.00/hr | $62,400 | $47,992 |
+| Healthcare & social assistance | $28.05/hr | $58,300 | $45,426 |
+| Agriculture | $28.00/hr | $58,200 | $45,359 |
+| Other services | $27.50/hr | $57,200 | $44,681 |
+| Wholesale & retail trade | $24.61/hr | $51,200 | $40,537 |
+| Business & support services | $21.00/hr | $43,700 | $35,303 |
+| Food service & hospitality | $17.00/hr | $35,400 | $29,512 |
 
 The best-paid sector reported here is forestry, fishing, mining, oil & gas at $50.00 an hour; the lowest is food service & hospitality at $17.00. That gap — $33.00 an hour — works out to about $68,600 a year before tax.
 
@@ -632,14 +632,14 @@ On an $80,000 salary, Saskatchewan ranks **#7 of 13** provinces and territories 
 
 | Rank | Province | Take-home on $80,000 |
 | --- | --- | --- |
-| 1 | Nunavut | $62,001 |
-| 2 | Northwest Territories | $60,871 |
-| 3 | British Columbia | $60,867 |
-| 4 | Yukon | $60,648 |
-| 5 | Alberta | $60,409 |
-| 6 | Ontario | $59,994 |
+| 1 | Nunavut | $62,299 |
+| 2 | Northwest Territories | $61,166 |
+| 3 | British Columbia | $61,157 |
+| 4 | Yukon | $61,039 |
+| 5 | Alberta | $60,698 |
+| 6 | Ontario | $60,303 |
 
-The difference between Saskatchewan and Nunavut, the highest, is $3,268 a year on the same $80,000 salary — about $272 a month.
+The difference between Saskatchewan and Nunavut, the highest, is $3,277 a year on the same $80,000 salary — about $273 a month.
 
 Take-home pay is only one side of a move, of course: rent, groceries and childcare vary as much as tax does. But it is the side most people guess at, and it is the side that can be calculated exactly.
 
@@ -668,7 +668,7 @@ Every figure above is a median or a computed example. Your own pay depends on yo
     publishedAt: '2026-08-08',
     readTime: 8,
     imageUrl: '/blog/nova-scotia-take-home-pay-guide-2026.png',
-    directAnswer: "The median full-time wage in Nova Scotia is $29.80 an hour, about $62,000 a year, which leaves roughly $45,618 after tax in 2026. On an $80,000 salary, Nova Scotia ranks #13 of 13 provinces and territories for take-home pay, keeping $56,095.",
+    directAnswer: "The median full-time wage in Nova Scotia is $29.80 an hour, about $62,000 a year, which leaves roughly $45,903 after tax in 2026. On an $80,000 salary, Nova Scotia ranks #13 of 13 provinces and territories for take-home pay, keeping $56,439.",
     faq: [
           {
                 "question": "What is the average salary in Nova Scotia?",
@@ -676,24 +676,24 @@ Every figure above is a median or a computed example. Your own pay depends on yo
           },
           {
                 "question": "What is the take-home pay on $80,000 in Nova Scotia?",
-                "answer": "About $56,095 a year, or $4,675 a month, after federal tax, Nova Scotia provincial tax, CPP/CPP2 and EI for the 2026 tax year, for a single employee with no additional credits."
+                "answer": "About $56,439 a year, or $4,703 a month, after federal tax, Nova Scotia provincial tax, CPP/CPP2 and EI for the 2026 tax year, for a single employee with no additional credits."
           },
           {
                 "question": "Does Nova Scotia have high taxes compared with other provinces?",
-                "answer": "On an $80,000 salary, Nova Scotia ranks #13 of 13 provinces and territories for take-home pay in 2026, keeping $56,095. That is $5,905 a year less than Nunavut, the highest."
+                "answer": "On an $80,000 salary, Nova Scotia ranks #13 of 13 provinces and territories for take-home pay in 2026, keeping $56,439. That is $5,860 a year less than Nunavut, the highest."
           },
           {
                 "question": "Which industry pays best in Nova Scotia?",
-                "answer": "Of the sectors Statistics Canada reports for Nova Scotia, utilities has the highest median full-time wage at $45.05 an hour — roughly $93,700 a year, or $64,549 after tax."
+                "answer": "Of the sectors Statistics Canada reports for Nova Scotia, utilities has the highest median full-time wage at $45.05 an hour — roughly $93,700 a year, or $64,921 after tax."
           },
           {
                 "question": "How much of my pay do I keep in Nova Scotia?",
-                "answer": "It depends on the salary. In Nova Scotia in 2026, someone earning $40,000 keeps about 78.8% of gross pay, while someone earning $150,000 keeps about 65.1%. The rest goes to federal tax, provincial tax, CPP/CPP2 and EI."
+                "answer": "It depends on the salary. In Nova Scotia in 2026, someone earning $40,000 keeps about 79.3% of gross pay, while someone earning $150,000 keeps about 65.4%. The rest goes to federal tax, provincial tax, CPP/CPP2 and EI."
           }
     ],
     content: `## The typical Nova Scotia paycheque
 
-Across all industries, the median full-time wage in Nova Scotia is $29.80 an hour — about $62,000 a year. After federal tax, Nova Scotia tax, CPP/CPP2 and EI, a single employee on that salary keeps roughly **$45,618 a year**, or $3,802 a month. That is 73.6% of gross pay.
+Across all industries, the median full-time wage in Nova Scotia is $29.80 an hour — about $62,000 a year. After federal tax, Nova Scotia tax, CPP/CPP2 and EI, a single employee on that salary keeps roughly **$45,903 a year**, or $3,825 a month. That is 74.0% of gross pay.
 
 ## Take-home pay in Nova Scotia at every salary level
 
@@ -701,13 +701,13 @@ Nobody is paid an "average". Here is what specific salaries actually leave in No
 
 | Gross salary | Take-home (year) | Per month | Kept |
 | --- | --- | --- | --- |
-| $40,000 | **$31,501** | $2,625 | 78.8% |
-| $60,000 | **$44,445** | $3,704 | 74.1% |
-| $80,000 | **$56,095** | $4,675 | 70.1% |
-| $100,000 | **$68,486** | $5,707 | 68.5% |
-| $150,000 | **$97,673** | $8,139 | 65.1% |
+| $40,000 | **$31,734** | $2,644 | 79.3% |
+| $60,000 | **$44,726** | $3,727 | 74.5% |
+| $80,000 | **$56,439** | $4,703 | 70.5% |
+| $100,000 | **$68,867** | $5,739 | 68.9% |
+| $150,000 | **$98,117** | $8,176 | 65.4% |
 
-Notice how the share you keep falls as the salary rises: that is Canada's progressive tax system working as designed. At $40,000 you keep 78.8%; at $150,000 you keep 65.1%.
+Notice how the share you keep falls as the salary rises: that is Canada's progressive tax system working as designed. At $40,000 you keep 79.3%; at $150,000 you keep 65.4%.
 
 ## What each industry pays in Nova Scotia
 
@@ -715,22 +715,22 @@ Statistics Canada publishes the median wage of full-time employees by industry. 
 
 | Industry | Median wage | ≈ Annual | Take-home |
 | --- | --- | --- | --- |
-| Utilities | $45.05/hr | $93,700 | $64,549 |
-| Public administration | $41.21/hr | $85,700 | $59,522 |
-| Educational services | $39.42/hr | $82,000 | $57,290 |
-| Professional, scientific & technical services | $38.46/hr | $80,000 | $56,095 |
-| Finance, insurance & real estate | $32.05/hr | $66,700 | $48,296 |
-| Healthcare & social assistance | $32.00/hr | $66,600 | $48,239 |
-| Information, culture & recreation | $29.00/hr | $60,300 | $44,621 |
-| Transportation & warehousing | $28.85/hr | $60,000 | $44,445 |
-| Construction | $28.21/hr | $58,700 | $43,682 |
-| Manufacturing | $28.00/hr | $58,200 | $43,367 |
-| Other services | $27.00/hr | $56,200 | $42,063 |
-| Forestry, fishing, mining, oil & gas | $25.00/hr | $52,000 | $39,325 |
-| Wholesale & retail trade | $22.00/hr | $45,800 | $35,283 |
-| Business & support services | $21.00/hr | $43,700 | $33,913 |
-| Agriculture | $20.00/hr | $41,600 | $32,544 |
-| Food service & hospitality | $18.00/hr | $37,400 | $29,806 |
+| Utilities | $45.05/hr | $93,700 | $64,921 |
+| Public administration | $41.21/hr | $85,700 | $59,895 |
+| Educational services | $39.42/hr | $82,000 | $57,645 |
+| Professional, scientific & technical services | $38.46/hr | $80,000 | $56,439 |
+| Finance, insurance & real estate | $32.05/hr | $66,700 | $48,597 |
+| Healthcare & social assistance | $32.00/hr | $66,600 | $48,540 |
+| Information, culture & recreation | $29.00/hr | $60,300 | $44,903 |
+| Transportation & warehousing | $28.85/hr | $60,000 | $44,726 |
+| Construction | $28.21/hr | $58,700 | $43,937 |
+| Manufacturing | $28.00/hr | $58,200 | $43,611 |
+| Other services | $27.00/hr | $56,200 | $42,306 |
+| Forestry, fishing, mining, oil & gas | $25.00/hr | $52,000 | $39,565 |
+| Wholesale & retail trade | $22.00/hr | $45,800 | $35,519 |
+| Business & support services | $21.00/hr | $43,700 | $34,148 |
+| Agriculture | $20.00/hr | $41,600 | $32,778 |
+| Food service & hospitality | $18.00/hr | $37,400 | $30,037 |
 
 The best-paid sector reported here is utilities at $45.05 an hour; the lowest is food service & hospitality at $18.00. That gap — $27.05 an hour — works out to about $56,300 a year before tax.
 
@@ -740,14 +740,14 @@ On an $80,000 salary, Nova Scotia ranks **#13 of 13** provinces and territories 
 
 | Rank | Province | Take-home on $80,000 |
 | --- | --- | --- |
-| 1 | Nunavut | $62,001 |
-| 2 | Northwest Territories | $60,871 |
-| 3 | British Columbia | $60,867 |
-| 4 | Yukon | $60,648 |
-| 5 | Alberta | $60,409 |
-| 6 | Ontario | $59,994 |
+| 1 | Nunavut | $62,299 |
+| 2 | Northwest Territories | $61,166 |
+| 3 | British Columbia | $61,157 |
+| 4 | Yukon | $61,039 |
+| 5 | Alberta | $60,698 |
+| 6 | Ontario | $60,303 |
 
-The difference between Nova Scotia and Nunavut, the highest, is $5,905 a year on the same $80,000 salary — about $492 a month.
+The difference between Nova Scotia and Nunavut, the highest, is $5,860 a year on the same $80,000 salary — about $488 a month.
 
 Take-home pay is only one side of a move, of course: rent, groceries and childcare vary as much as tax does. But it is the side most people guess at, and it is the side that can be calculated exactly.
 
@@ -768,7 +768,7 @@ Every figure above is a median or a computed example. Your own pay depends on yo
     subtitle: "What New Brunswick workers actually earn by industry — and what lands in the bank after tax",
     excerpt: "The median full-time wage in New Brunswick is $28.85 an hour. Here is what that, and every other salary level, leaves after 2026 tax — with Statistics Canada wage data for every industry.",
     metaTitle: "New Brunswick Take-Home Pay Guide 2026 | Wages by Industry",
-    metaDescription: "New Brunswick's median full-time wage is $28.85/hr. See take-home pay at every salary, wages for every industry, and how New Brunswick ranks (#9 of 13) for 2026.",
+    metaDescription: "New Brunswick's median full-time wage is $28.85/hr. See take-home pay at every salary, wages for every industry, and how New Brunswick ranks (#8 of 13) for 2026.",
     keywords: ["New Brunswick salary","New Brunswick take home pay","New Brunswick average salary 2026","New Brunswick paycheck calculator","New Brunswick income tax 2026","wages in New Brunswick"],
     category: 'province',
     tags: ["New Brunswick","take-home pay","wages","2026"],
@@ -776,7 +776,7 @@ Every figure above is a median or a computed example. Your own pay depends on yo
     publishedAt: '2026-08-08',
     readTime: 8,
     imageUrl: '/blog/new-brunswick-take-home-pay-guide-2026.png',
-    directAnswer: "The median full-time wage in New Brunswick is $28.85 an hour, about $60,000 a year, which leaves roughly $45,775 after tax in 2026. On an $80,000 salary, New Brunswick ranks #9 of 13 provinces and territories for take-home pay, keeping $57,933.",
+    directAnswer: "The median full-time wage in New Brunswick is $28.85 an hour, about $60,000 a year, which leaves roughly $46,048 after tax in 2026. On an $80,000 salary, New Brunswick ranks #8 of 13 provinces and territories for take-home pay, keeping $58,246.",
     faq: [
           {
                 "question": "What is the average salary in New Brunswick?",
@@ -784,24 +784,24 @@ Every figure above is a median or a computed example. Your own pay depends on yo
           },
           {
                 "question": "What is the take-home pay on $80,000 in New Brunswick?",
-                "answer": "About $57,933 a year, or $4,828 a month, after federal tax, New Brunswick provincial tax, CPP/CPP2 and EI for the 2026 tax year, for a single employee with no additional credits."
+                "answer": "About $58,246 a year, or $4,854 a month, after federal tax, New Brunswick provincial tax, CPP/CPP2 and EI for the 2026 tax year, for a single employee with no additional credits."
           },
           {
                 "question": "Does New Brunswick have high taxes compared with other provinces?",
-                "answer": "On an $80,000 salary, New Brunswick ranks #9 of 13 provinces and territories for take-home pay in 2026, keeping $57,933. That is $4,068 a year less than Nunavut, the highest."
+                "answer": "On an $80,000 salary, New Brunswick ranks #8 of 13 provinces and territories for take-home pay in 2026, keeping $58,246. That is $4,053 a year less than Nunavut, the highest."
           },
           {
                 "question": "Which industry pays best in New Brunswick?",
-                "answer": "Of the sectors Statistics Canada reports for New Brunswick, utilities has the highest median full-time wage at $46.15 an hour — roughly $96,000 a year, or $68,260 after tax."
+                "answer": "Of the sectors Statistics Canada reports for New Brunswick, utilities has the highest median full-time wage at $46.15 an hour — roughly $96,000 a year, or $68,595 after tax."
           },
           {
                 "question": "How much of my pay do I keep in New Brunswick?",
-                "answer": "It depends on the salary. In New Brunswick in 2026, someone earning $40,000 keeps about 80.2% of gross pay, while someone earning $150,000 keeps about 67.3%. The rest goes to federal tax, provincial tax, CPP/CPP2 and EI."
+                "answer": "It depends on the salary. In New Brunswick in 2026, someone earning $40,000 keeps about 80.7% of gross pay, while someone earning $150,000 keeps about 67.6%. The rest goes to federal tax, provincial tax, CPP/CPP2 and EI."
           }
     ],
     content: `## The typical New Brunswick paycheque
 
-Across all industries, the median full-time wage in New Brunswick is $28.85 an hour — about $60,000 a year. After federal tax, New Brunswick tax, CPP/CPP2 and EI, a single employee on that salary keeps roughly **$45,775 a year**, or $3,815 a month. That is 76.3% of gross pay.
+Across all industries, the median full-time wage in New Brunswick is $28.85 an hour — about $60,000 a year. After federal tax, New Brunswick tax, CPP/CPP2 and EI, a single employee on that salary keeps roughly **$46,048 a year**, or $3,837 a month. That is 76.7% of gross pay.
 
 ## Take-home pay in New Brunswick at every salary level
 
@@ -809,13 +809,13 @@ Nobody is paid an "average". Here is what specific salaries actually leave in Ne
 
 | Gross salary | Take-home (year) | Per month | Kept |
 | --- | --- | --- | --- |
-| $40,000 | **$32,065** | $2,672 | 80.2% |
-| $60,000 | **$45,775** | $3,815 | 76.3% |
-| $80,000 | **$57,933** | $4,828 | 72.4% |
-| $100,000 | **$70,880** | $5,907 | 70.9% |
-| $150,000 | **$100,910** | $8,409 | 67.3% |
+| $40,000 | **$32,275** | $2,690 | 80.7% |
+| $60,000 | **$46,048** | $3,837 | 76.7% |
+| $80,000 | **$58,246** | $4,854 | 72.8% |
+| $100,000 | **$71,215** | $5,935 | 71.2% |
+| $150,000 | **$101,330** | $8,444 | 67.6% |
 
-Notice how the share you keep falls as the salary rises: that is Canada's progressive tax system working as designed. At $40,000 you keep 80.2%; at $150,000 you keep 67.3%.
+Notice how the share you keep falls as the salary rises: that is Canada's progressive tax system working as designed. At $40,000 you keep 80.7%; at $150,000 you keep 67.6%.
 
 ## What each industry pays in New Brunswick
 
@@ -823,39 +823,39 @@ Statistics Canada publishes the median wage of full-time employees by industry. 
 
 | Industry | Median wage | ≈ Annual | Take-home |
 | --- | --- | --- | --- |
-| Utilities | $46.15/hr | $96,000 | $68,260 |
-| Public administration | $39.00/hr | $81,100 | $58,620 |
-| Professional, scientific & technical services | $34.00/hr | $70,700 | $52,184 |
-| Educational services | $33.65/hr | $70,000 | $51,758 |
-| Finance, insurance & real estate | $30.00/hr | $62,400 | $47,207 |
-| Information, culture & recreation | $29.00/hr | $60,300 | $45,954 |
-| Construction | $28.85/hr | $60,000 | $45,775 |
-| Forestry, fishing, mining, oil & gas | $28.46/hr | $59,200 | $45,297 |
-| Healthcare & social assistance | $28.41/hr | $59,100 | $45,238 |
-| Transportation & warehousing | $26.44/hr | $55,000 | $42,561 |
-| Manufacturing | $26.11/hr | $54,300 | $42,098 |
-| Other services | $26.00/hr | $54,100 | $41,965 |
-| Wholesale & retail trade | $22.50/hr | $46,800 | $36,879 |
-| Business & support services | $22.00/hr | $45,800 | $36,171 |
-| Agriculture | $21.00/hr | $43,700 | $34,684 |
-| Food service & hospitality | $18.00/hr | $37,400 | $30,224 |
+| Utilities | $46.15/hr | $96,000 | $68,595 |
+| Public administration | $39.00/hr | $81,100 | $58,937 |
+| Professional, scientific & technical services | $34.00/hr | $70,700 | $52,469 |
+| Educational services | $33.65/hr | $70,000 | $52,042 |
+| Finance, insurance & real estate | $30.00/hr | $62,400 | $47,483 |
+| Information, culture & recreation | $29.00/hr | $60,300 | $46,227 |
+| Construction | $28.85/hr | $60,000 | $46,048 |
+| Forestry, fishing, mining, oil & gas | $28.46/hr | $59,200 | $45,569 |
+| Healthcare & social assistance | $28.41/hr | $59,100 | $45,509 |
+| Transportation & warehousing | $26.44/hr | $55,000 | $42,795 |
+| Manufacturing | $26.11/hr | $54,300 | $42,331 |
+| Other services | $26.00/hr | $54,100 | $42,199 |
+| Wholesale & retail trade | $22.50/hr | $46,800 | $37,089 |
+| Business & support services | $22.00/hr | $45,800 | $36,381 |
+| Agriculture | $21.00/hr | $43,700 | $34,894 |
+| Food service & hospitality | $18.00/hr | $37,400 | $30,434 |
 
 The best-paid sector reported here is utilities at $46.15 an hour; the lowest is food service & hospitality at $18.00. That gap — $28.15 an hour — works out to about $58,600 a year before tax.
 
 ## How New Brunswick compares with the rest of Canada
 
-On an $80,000 salary, New Brunswick ranks **#9 of 13** provinces and territories for take-home pay in 2026.
+On an $80,000 salary, New Brunswick ranks **#8 of 13** provinces and territories for take-home pay in 2026.
 
 | Rank | Province | Take-home on $80,000 |
 | --- | --- | --- |
-| 1 | Nunavut | $62,001 |
-| 2 | Northwest Territories | $60,871 |
-| 3 | British Columbia | $60,867 |
-| 4 | Yukon | $60,648 |
-| 5 | Alberta | $60,409 |
-| 6 | Ontario | $59,994 |
+| 1 | Nunavut | $62,299 |
+| 2 | Northwest Territories | $61,166 |
+| 3 | British Columbia | $61,157 |
+| 4 | Yukon | $61,039 |
+| 5 | Alberta | $60,698 |
+| 6 | Ontario | $60,303 |
 
-The difference between New Brunswick and Nunavut, the highest, is $4,068 a year on the same $80,000 salary — about $339 a month.
+The difference between New Brunswick and Nunavut, the highest, is $4,053 a year on the same $80,000 salary — about $338 a month.
 
 Take-home pay is only one side of a move, of course: rent, groceries and childcare vary as much as tax does. But it is the side most people guess at, and it is the side that can be calculated exactly.
 
@@ -884,7 +884,7 @@ Every figure above is a median or a computed example. Your own pay depends on yo
     publishedAt: '2026-08-08',
     readTime: 8,
     imageUrl: '/blog/newfoundland-take-home-pay-guide-2026.png',
-    directAnswer: "The median full-time wage in Newfoundland and Labrador is $30.07 an hour, about $62,500 a year, which leaves roughly $46,962 after tax in 2026. On an $80,000 salary, Newfoundland and Labrador ranks #10 of 13 provinces and territories for take-home pay, keeping $57,533.",
+    directAnswer: "The median full-time wage in Newfoundland and Labrador is $30.07 an hour, about $62,500 a year, which leaves roughly $47,244 after tax in 2026. On an $80,000 salary, Newfoundland and Labrador ranks #10 of 13 provinces and territories for take-home pay, keeping $57,857.",
     faq: [
           {
                 "question": "What is the average salary in Newfoundland and Labrador?",
@@ -892,24 +892,24 @@ Every figure above is a median or a computed example. Your own pay depends on yo
           },
           {
                 "question": "What is the take-home pay on $80,000 in Newfoundland and Labrador?",
-                "answer": "About $57,533 a year, or $4,794 a month, after federal tax, Newfoundland and Labrador provincial tax, CPP/CPP2 and EI for the 2026 tax year, for a single employee with no additional credits."
+                "answer": "About $57,857 a year, or $4,821 a month, after federal tax, Newfoundland and Labrador provincial tax, CPP/CPP2 and EI for the 2026 tax year, for a single employee with no additional credits."
           },
           {
                 "question": "Does Newfoundland and Labrador have high taxes compared with other provinces?",
-                "answer": "On an $80,000 salary, Newfoundland and Labrador ranks #10 of 13 provinces and territories for take-home pay in 2026, keeping $57,533. That is $4,468 a year less than Nunavut, the highest."
+                "answer": "On an $80,000 salary, Newfoundland and Labrador ranks #10 of 13 provinces and territories for take-home pay in 2026, keeping $57,857. That is $4,442 a year less than Nunavut, the highest."
           },
           {
                 "question": "Which industry pays best in Newfoundland and Labrador?",
-                "answer": "Of the sectors Statistics Canada reports for Newfoundland and Labrador, utilities has the highest median full-time wage at $51.00 an hour — roughly $106,100 a year, or $74,125 after tax."
+                "answer": "Of the sectors Statistics Canada reports for Newfoundland and Labrador, utilities has the highest median full-time wage at $51.00 an hour — roughly $106,100 a year, or $74,489 after tax."
           },
           {
                 "question": "How much of my pay do I keep in Newfoundland and Labrador?",
-                "answer": "It depends on the salary. In Newfoundland and Labrador in 2026, someone earning $40,000 keeps about 80.4% of gross pay, while someone earning $150,000 keeps about 66.9%. The rest goes to federal tax, provincial tax, CPP/CPP2 and EI."
+                "answer": "It depends on the salary. In Newfoundland and Labrador in 2026, someone earning $40,000 keeps about 81.0% of gross pay, while someone earning $150,000 keeps about 67.1%. The rest goes to federal tax, provincial tax, CPP/CPP2 and EI."
           }
     ],
     content: `## The typical Newfoundland and Labrador paycheque
 
-Across all industries, the median full-time wage in Newfoundland and Labrador is $30.07 an hour — about $62,500 a year. After federal tax, Newfoundland and Labrador tax, CPP/CPP2 and EI, a single employee on that salary keeps roughly **$46,962 a year**, or $3,913 a month. That is 75.1% of gross pay.
+Across all industries, the median full-time wage in Newfoundland and Labrador is $30.07 an hour — about $62,500 a year. After federal tax, Newfoundland and Labrador tax, CPP/CPP2 and EI, a single employee on that salary keeps roughly **$47,244 a year**, or $3,937 a month. That is 75.6% of gross pay.
 
 ## Take-home pay in Newfoundland and Labrador at every salary level
 
@@ -917,13 +917,13 @@ Nobody is paid an "average". Here is what specific salaries actually leave in Ne
 
 | Gross salary | Take-home (year) | Per month | Kept |
 | --- | --- | --- | --- |
-| $40,000 | **$32,180** | $2,682 | 80.4% |
-| $60,000 | **$45,483** | $3,790 | 75.8% |
-| $80,000 | **$57,533** | $4,794 | 71.9% |
-| $100,000 | **$70,240** | $5,853 | 70.2% |
-| $150,000 | **$100,277** | $8,356 | 66.9% |
+| $40,000 | **$32,390** | $2,699 | 81.0% |
+| $60,000 | **$45,763** | $3,814 | 76.3% |
+| $80,000 | **$57,857** | $4,821 | 72.3% |
+| $100,000 | **$70,603** | $5,884 | 70.6% |
+| $150,000 | **$100,702** | $8,392 | 67.1% |
 
-Notice how the share you keep falls as the salary rises: that is Canada's progressive tax system working as designed. At $40,000 you keep 80.4%; at $150,000 you keep 66.9%.
+Notice how the share you keep falls as the salary rises: that is Canada's progressive tax system working as designed. At $40,000 you keep 81.0%; at $150,000 you keep 67.1%.
 
 ## What each industry pays in Newfoundland and Labrador
 
@@ -931,22 +931,22 @@ Statistics Canada publishes the median wage of full-time employees by industry. 
 
 | Industry | Median wage | ≈ Annual | Take-home |
 | --- | --- | --- | --- |
-| Utilities | $51.00/hr | $106,100 | $74,125 |
-| Forestry, fishing, mining, oil & gas | $50.00/hr | $104,000 | $72,788 |
-| Educational services | $40.87/hr | $85,000 | $60,628 |
-| Professional, scientific & technical services | $39.38/hr | $81,900 | $58,709 |
-| Public administration | $38.46/hr | $80,000 | $57,533 |
-| Finance, insurance & real estate | $30.77/hr | $64,000 | $47,849 |
-| Construction | $30.40/hr | $63,200 | $47,376 |
-| Transportation & warehousing | $30.00/hr | $62,400 | $46,903 |
-| Information, culture & recreation | $30.00/hr | $62,400 | $46,903 |
-| Healthcare & social assistance | $28.85/hr | $60,000 | $45,483 |
-| Manufacturing | $26.00/hr | $54,100 | $41,706 |
-| Other services | $25.00/hr | $52,000 | $40,328 |
-| Business & support services | $22.51/hr | $46,800 | $36,915 |
-| Wholesale & retail trade | $21.40/hr | $44,500 | $35,395 |
-| Agriculture | $21.37/hr | $44,400 | $35,323 |
-| Food service & hospitality | $17.75/hr | $36,900 | $29,965 |
+| Utilities | $51.00/hr | $106,100 | $74,489 |
+| Forestry, fishing, mining, oil & gas | $50.00/hr | $104,000 | $73,151 |
+| Educational services | $40.87/hr | $85,000 | $60,977 |
+| Professional, scientific & technical services | $39.38/hr | $81,900 | $59,042 |
+| Public administration | $38.46/hr | $80,000 | $57,857 |
+| Finance, insurance & real estate | $30.77/hr | $64,000 | $48,133 |
+| Construction | $30.40/hr | $63,200 | $47,659 |
+| Transportation & warehousing | $30.00/hr | $62,400 | $47,185 |
+| Information, culture & recreation | $30.00/hr | $62,400 | $47,185 |
+| Healthcare & social assistance | $28.85/hr | $60,000 | $45,763 |
+| Manufacturing | $26.00/hr | $54,100 | $41,946 |
+| Other services | $25.00/hr | $52,000 | $40,566 |
+| Business & support services | $22.51/hr | $46,800 | $37,150 |
+| Wholesale & retail trade | $21.40/hr | $44,500 | $35,605 |
+| Agriculture | $21.37/hr | $44,400 | $35,533 |
+| Food service & hospitality | $17.75/hr | $36,900 | $30,175 |
 
 The best-paid sector reported here is utilities at $51.00 an hour; the lowest is food service & hospitality at $17.75. That gap — $33.25 an hour — works out to about $69,200 a year before tax.
 
@@ -956,14 +956,14 @@ On an $80,000 salary, Newfoundland and Labrador ranks **#10 of 13** provinces an
 
 | Rank | Province | Take-home on $80,000 |
 | --- | --- | --- |
-| 1 | Nunavut | $62,001 |
-| 2 | Northwest Territories | $60,871 |
-| 3 | British Columbia | $60,867 |
-| 4 | Yukon | $60,648 |
-| 5 | Alberta | $60,409 |
-| 6 | Ontario | $59,994 |
+| 1 | Nunavut | $62,299 |
+| 2 | Northwest Territories | $61,166 |
+| 3 | British Columbia | $61,157 |
+| 4 | Yukon | $61,039 |
+| 5 | Alberta | $60,698 |
+| 6 | Ontario | $60,303 |
 
-The difference between Newfoundland and Labrador and Nunavut, the highest, is $4,468 a year on the same $80,000 salary — about $372 a month.
+The difference between Newfoundland and Labrador and Nunavut, the highest, is $4,442 a year on the same $80,000 salary — about $370 a month.
 
 Take-home pay is only one side of a move, of course: rent, groceries and childcare vary as much as tax does. But it is the side most people guess at, and it is the side that can be calculated exactly.
 
@@ -992,7 +992,7 @@ Every figure above is a median or a computed example. Your own pay depends on yo
     publishedAt: '2026-08-08',
     readTime: 8,
     imageUrl: '/blog/pei-take-home-pay-guide-2026.png',
-    directAnswer: "The median full-time wage in Prince Edward Island is $28.21 an hour, about $58,700 a year, which leaves roughly $44,394 after tax in 2026. On an $80,000 salary, Prince Edward Island ranks #12 of 13 provinces and territories for take-home pay, keeping $56,999.",
+    directAnswer: "The median full-time wage in Prince Edward Island is $28.21 an hour, about $58,700 a year, which leaves roughly $44,638 after tax in 2026. On an $80,000 salary, Prince Edward Island ranks #12 of 13 provinces and territories for take-home pay, keeping $57,335.",
     faq: [
           {
                 "question": "What is the average salary in Prince Edward Island?",
@@ -1000,24 +1000,24 @@ Every figure above is a median or a computed example. Your own pay depends on yo
           },
           {
                 "question": "What is the take-home pay on $80,000 in Prince Edward Island?",
-                "answer": "About $56,999 a year, or $4,750 a month, after federal tax, Prince Edward Island provincial tax, CPP/CPP2 and EI for the 2026 tax year, for a single employee with no additional credits."
+                "answer": "About $57,335 a year, or $4,778 a month, after federal tax, Prince Edward Island provincial tax, CPP/CPP2 and EI for the 2026 tax year, for a single employee with no additional credits."
           },
           {
                 "question": "Does Prince Edward Island have high taxes compared with other provinces?",
-                "answer": "On an $80,000 salary, Prince Edward Island ranks #12 of 13 provinces and territories for take-home pay in 2026, keeping $56,999. That is $5,002 a year less than Nunavut, the highest."
+                "answer": "On an $80,000 salary, Prince Edward Island ranks #12 of 13 provinces and territories for take-home pay in 2026, keeping $57,335. That is $4,964 a year less than Nunavut, the highest."
           },
           {
                 "question": "Which industry pays best in Prince Edward Island?",
-                "answer": "Of the sectors Statistics Canada reports for Prince Edward Island, utilities has the highest median full-time wage at $43.27 an hour — roughly $90,000 a year, or $63,136 after tax."
+                "answer": "Of the sectors Statistics Canada reports for Prince Edward Island, utilities has the highest median full-time wage at $43.27 an hour — roughly $90,000 a year, or $63,499 after tax."
           },
           {
                 "question": "How much of my pay do I keep in Prince Edward Island?",
-                "answer": "It depends on the salary. In Prince Edward Island in 2026, someone earning $40,000 keeps about 79.8% of gross pay, while someone earning $150,000 keeps about 65.7%. The rest goes to federal tax, provincial tax, CPP/CPP2 and EI."
+                "answer": "It depends on the salary. In Prince Edward Island in 2026, someone earning $40,000 keeps about 80.4% of gross pay, while someone earning $150,000 keeps about 66.0%. The rest goes to federal tax, provincial tax, CPP/CPP2 and EI."
           }
     ],
     content: `## The typical Prince Edward Island paycheque
 
-Across all industries, the median full-time wage in Prince Edward Island is $28.21 an hour — about $58,700 a year. After federal tax, Prince Edward Island tax, CPP/CPP2 and EI, a single employee on that salary keeps roughly **$44,394 a year**, or $3,700 a month. That is 75.6% of gross pay.
+Across all industries, the median full-time wage in Prince Edward Island is $28.21 an hour — about $58,700 a year. After federal tax, Prince Edward Island tax, CPP/CPP2 and EI, a single employee on that salary keeps roughly **$44,638 a year**, or $3,720 a month. That is 76.0% of gross pay.
 
 ## Take-home pay in Prince Edward Island at every salary level
 
@@ -1025,13 +1025,13 @@ Nobody is paid an "average". Here is what specific salaries actually leave in Pr
 
 | Gross salary | Take-home (year) | Per month | Kept |
 | --- | --- | --- | --- |
-| $40,000 | **$31,927** | $2,661 | 79.8% |
-| $60,000 | **$45,177** | $3,765 | 75.3% |
-| $80,000 | **$56,999** | $4,750 | 71.2% |
-| $100,000 | **$69,426** | $5,785 | 69.4% |
-| $150,000 | **$98,520** | $8,210 | 65.7% |
+| $40,000 | **$32,152** | $2,679 | 80.4% |
+| $60,000 | **$45,447** | $3,787 | 75.7% |
+| $80,000 | **$57,335** | $4,778 | 71.7% |
+| $100,000 | **$69,789** | $5,816 | 69.8% |
+| $150,000 | **$98,973** | $8,248 | 66.0% |
 
-Notice how the share you keep falls as the salary rises: that is Canada's progressive tax system working as designed. At $40,000 you keep 79.8%; at $150,000 you keep 65.7%.
+Notice how the share you keep falls as the salary rises: that is Canada's progressive tax system working as designed. At $40,000 you keep 80.4%; at $150,000 you keep 66.0%.
 
 ## What each industry pays in Prince Edward Island
 
@@ -1039,22 +1039,22 @@ Statistics Canada publishes the median wage of full-time employees by industry. 
 
 | Industry | Median wage | ≈ Annual | Take-home |
 | --- | --- | --- | --- |
-| Utilities | $43.27/hr | $90,000 | $63,136 |
-| Public administration | $39.49/hr | $82,100 | $58,255 |
-| Professional, scientific & technical services | $35.65/hr | $74,200 | $53,534 |
-| Educational services | $34.62/hr | $72,000 | $52,250 |
-| Healthcare & social assistance | $32.00/hr | $66,600 | $49,128 |
-| Finance, insurance & real estate | $29.47/hr | $61,300 | $45,960 |
-| Construction | $28.00/hr | $58,200 | $44,072 |
-| Transportation & warehousing | $26.00/hr | $54,100 | $41,336 |
-| Manufacturing | $24.00/hr | $49,900 | $38,533 |
-| Forestry, fishing, mining, oil & gas | $22.61/hr | $47,000 | $36,598 |
-| Information, culture & recreation | $22.00/hr | $45,800 | $35,797 |
-| Other services | $22.00/hr | $45,800 | $35,797 |
-| Wholesale & retail trade | $21.00/hr | $43,700 | $34,396 |
-| Business & support services | $20.00/hr | $41,600 | $32,995 |
-| Agriculture | $20.00/hr | $41,600 | $32,995 |
-| Food service & hospitality | $18.00/hr | $37,400 | $30,192 |
+| Utilities | $43.27/hr | $90,000 | $63,499 |
+| Public administration | $39.49/hr | $82,100 | $58,603 |
+| Professional, scientific & technical services | $35.65/hr | $74,200 | $53,840 |
+| Educational services | $34.62/hr | $72,000 | $52,554 |
+| Healthcare & social assistance | $32.00/hr | $66,600 | $49,424 |
+| Finance, insurance & real estate | $29.47/hr | $61,300 | $46,231 |
+| Construction | $28.00/hr | $58,200 | $44,304 |
+| Transportation & warehousing | $26.00/hr | $54,100 | $41,566 |
+| Manufacturing | $24.00/hr | $49,900 | $38,762 |
+| Forestry, fishing, mining, oil & gas | $22.61/hr | $47,000 | $36,826 |
+| Information, culture & recreation | $22.00/hr | $45,800 | $36,024 |
+| Other services | $22.00/hr | $45,800 | $36,024 |
+| Wholesale & retail trade | $21.00/hr | $43,700 | $34,622 |
+| Business & support services | $20.00/hr | $41,600 | $33,220 |
+| Agriculture | $20.00/hr | $41,600 | $33,220 |
+| Food service & hospitality | $18.00/hr | $37,400 | $30,416 |
 
 The best-paid sector reported here is utilities at $43.27 an hour; the lowest is food service & hospitality at $18.00. That gap — $25.27 an hour — works out to about $52,600 a year before tax.
 
@@ -1064,14 +1064,14 @@ On an $80,000 salary, Prince Edward Island ranks **#12 of 13** provinces and ter
 
 | Rank | Province | Take-home on $80,000 |
 | --- | --- | --- |
-| 1 | Nunavut | $62,001 |
-| 2 | Northwest Territories | $60,871 |
-| 3 | British Columbia | $60,867 |
-| 4 | Yukon | $60,648 |
-| 5 | Alberta | $60,409 |
-| 6 | Ontario | $59,994 |
+| 1 | Nunavut | $62,299 |
+| 2 | Northwest Territories | $61,166 |
+| 3 | British Columbia | $61,157 |
+| 4 | Yukon | $61,039 |
+| 5 | Alberta | $60,698 |
+| 6 | Ontario | $60,303 |
 
-The difference between Prince Edward Island and Nunavut, the highest, is $5,002 a year on the same $80,000 salary — about $417 a month.
+The difference between Prince Edward Island and Nunavut, the highest, is $4,964 a year on the same $80,000 salary — about $414 a month.
 
 Take-home pay is only one side of a move, of course: rent, groceries and childcare vary as much as tax does. But it is the side most people guess at, and it is the side that can be calculated exactly.
 
@@ -1100,7 +1100,7 @@ Every figure above is a median or a computed example. Your own pay depends on yo
     publishedAt: '2026-08-08',
     readTime: 6,
     imageUrl: '/blog/yukon-take-home-pay-guide-2026.png',
-    directAnswer: "On an $80,000 salary, Yukon ranks #4 of 13 provinces and territories for take-home pay in 2026, keeping $60,648 after federal tax, territorial tax, CPP and EI.",
+    directAnswer: "On an $80,000 salary, Yukon ranks #4 of 13 provinces and territories for take-home pay in 2026, keeping $61,039 after federal tax, territorial tax, CPP and EI.",
     faq: [
           {
                 "question": "What is the average salary in Yukon?",
@@ -1108,11 +1108,11 @@ Every figure above is a median or a computed example. Your own pay depends on yo
           },
           {
                 "question": "What is the take-home pay on $80,000 in Yukon?",
-                "answer": "About $60,648 a year, or $5,054 a month, after federal tax, Yukon provincial tax, CPP/CPP2 and EI for the 2026 tax year, for a single employee with no additional credits."
+                "answer": "About $61,039 a year, or $5,087 a month, after federal tax, Yukon provincial tax, CPP/CPP2 and EI for the 2026 tax year, for a single employee with no additional credits."
           },
           {
                 "question": "Does Yukon have high taxes compared with other provinces?",
-                "answer": "On an $80,000 salary, Yukon ranks #4 of 13 provinces and territories for take-home pay in 2026, keeping $60,648. That is $1,352 a year less than Nunavut, the highest."
+                "answer": "On an $80,000 salary, Yukon ranks #4 of 13 provinces and territories for take-home pay in 2026, keeping $61,039. That is $1,260 a year less than Nunavut, the highest."
           },
           {
                 "question": "Which industry pays best in Yukon?",
@@ -1120,7 +1120,7 @@ Every figure above is a median or a computed example. Your own pay depends on yo
           },
           {
                 "question": "How much of my pay do I keep in Yukon?",
-                "answer": "It depends on the salary. In Yukon in 2026, someone earning $40,000 keeps about 82.4% of gross pay, while someone earning $150,000 keeps about 71.6%. The rest goes to federal tax, provincial tax, CPP/CPP2 and EI."
+                "answer": "It depends on the salary. In Yukon in 2026, someone earning $40,000 keeps about 83.1% of gross pay, while someone earning $150,000 keeps about 71.9%. The rest goes to federal tax, provincial tax, CPP/CPP2 and EI."
           }
     ],
     content: `
@@ -1131,13 +1131,13 @@ Nobody is paid an "average". Here is what specific salaries actually leave in Yu
 
 | Gross salary | Take-home (year) | Per month | Kept |
 | --- | --- | --- | --- |
-| $40,000 | **$32,949** | $2,746 | 82.4% |
-| $60,000 | **$47,527** | $3,961 | 79.2% |
-| $80,000 | **$60,648** | $5,054 | 75.8% |
-| $100,000 | **$74,589** | $6,216 | 74.6% |
-| $150,000 | **$107,401** | $8,950 | 71.6% |
+| $40,000 | **$33,255** | $2,771 | 83.1% |
+| $60,000 | **$47,885** | $3,990 | 79.8% |
+| $80,000 | **$61,039** | $5,087 | 76.3% |
+| $100,000 | **$74,998** | $6,250 | 75.0% |
+| $150,000 | **$107,893** | $8,991 | 71.9% |
 
-Notice how the share you keep falls as the salary rises: that is Canada's progressive tax system working as designed. At $40,000 you keep 82.4%; at $150,000 you keep 71.6%.
+Notice how the share you keep falls as the salary rises: that is Canada's progressive tax system working as designed. At $40,000 you keep 83.1%; at $150,000 you keep 71.9%.
 
 ## Wage data for Yukon
 
@@ -1149,14 +1149,14 @@ On an $80,000 salary, Yukon ranks **#4 of 13** provinces and territories for tak
 
 | Rank | Province | Take-home on $80,000 |
 | --- | --- | --- |
-| 1 | Nunavut | $62,001 |
-| 2 | Northwest Territories | $60,871 |
-| 3 | British Columbia | $60,867 |
-| 4 | Yukon ← | $60,648 |
-| 5 | Alberta | $60,409 |
-| 6 | Ontario | $59,994 |
+| 1 | Nunavut | $62,299 |
+| 2 | Northwest Territories | $61,166 |
+| 3 | British Columbia | $61,157 |
+| 4 | Yukon ← | $61,039 |
+| 5 | Alberta | $60,698 |
+| 6 | Ontario | $60,303 |
 
-The difference between Yukon and Nunavut, the highest, is $1,352 a year on the same $80,000 salary — about $113 a month.
+The difference between Yukon and Nunavut, the highest, is $1,260 a year on the same $80,000 salary — about $105 a month.
 
 Take-home pay is only one side of a move, of course: rent, groceries and childcare vary as much as tax does. But it is the side most people guess at, and it is the side that can be calculated exactly.
 
@@ -1185,7 +1185,7 @@ Every figure above is a median or a computed example. Your own pay depends on yo
     publishedAt: '2026-08-08',
     readTime: 6,
     imageUrl: '/blog/northwest-territories-take-home-pay-guide-2026.png',
-    directAnswer: "On an $80,000 salary, Northwest Territories ranks #2 of 13 provinces and territories for take-home pay in 2026, keeping $60,871 after federal tax, territorial tax, CPP and EI.",
+    directAnswer: "On an $80,000 salary, Northwest Territories ranks #2 of 13 provinces and territories for take-home pay in 2026, keeping $61,166 after federal tax, territorial tax, CPP and EI.",
     faq: [
           {
                 "question": "What is the average salary in Northwest Territories?",
@@ -1193,11 +1193,11 @@ Every figure above is a median or a computed example. Your own pay depends on yo
           },
           {
                 "question": "What is the take-home pay on $80,000 in Northwest Territories?",
-                "answer": "About $60,871 a year, or $5,073 a month, after federal tax, Northwest Territories provincial tax, CPP/CPP2 and EI for the 2026 tax year, for a single employee with no additional credits."
+                "answer": "About $61,166 a year, or $5,097 a month, after federal tax, Northwest Territories provincial tax, CPP/CPP2 and EI for the 2026 tax year, for a single employee with no additional credits."
           },
           {
                 "question": "Does Northwest Territories have high taxes compared with other provinces?",
-                "answer": "On an $80,000 salary, Northwest Territories ranks #2 of 13 provinces and territories for take-home pay in 2026, keeping $60,871. That is $1,130 a year less than Nunavut, the highest."
+                "answer": "On an $80,000 salary, Northwest Territories ranks #2 of 13 provinces and territories for take-home pay in 2026, keeping $61,166. That is $1,133 a year less than Nunavut, the highest."
           },
           {
                 "question": "Which industry pays best in Northwest Territories?",
@@ -1205,7 +1205,7 @@ Every figure above is a median or a computed example. Your own pay depends on yo
           },
           {
                 "question": "How much of my pay do I keep in Northwest Territories?",
-                "answer": "It depends on the salary. In Northwest Territories in 2026, someone earning $40,000 keeps about 82.9% of gross pay, while someone earning $150,000 keeps about 71.3%. The rest goes to federal tax, provincial tax, CPP/CPP2 and EI."
+                "answer": "It depends on the salary. In Northwest Territories in 2026, someone earning $40,000 keeps about 83.4% of gross pay, while someone earning $150,000 keeps about 71.6%. The rest goes to federal tax, provincial tax, CPP/CPP2 and EI."
           }
     ],
     content: `
@@ -1216,13 +1216,13 @@ Nobody is paid an "average". Here is what specific salaries actually leave in No
 
 | Gross salary | Take-home (year) | Per month | Kept |
 | --- | --- | --- | --- |
-| $40,000 | **$33,155** | $2,763 | 82.9% |
-| $60,000 | **$47,676** | $3,973 | 79.5% |
-| $80,000 | **$60,871** | $5,073 | 76.1% |
-| $100,000 | **$74,891** | $6,241 | 74.9% |
-| $150,000 | **$106,944** | $8,912 | 71.3% |
+| $40,000 | **$33,365** | $2,780 | 83.4% |
+| $60,000 | **$47,938** | $3,995 | 79.9% |
+| $80,000 | **$61,166** | $5,097 | 76.5% |
+| $100,000 | **$75,204** | $6,267 | 75.2% |
+| $150,000 | **$107,361** | $8,947 | 71.6% |
 
-Notice how the share you keep falls as the salary rises: that is Canada's progressive tax system working as designed. At $40,000 you keep 82.9%; at $150,000 you keep 71.3%.
+Notice how the share you keep falls as the salary rises: that is Canada's progressive tax system working as designed. At $40,000 you keep 83.4%; at $150,000 you keep 71.6%.
 
 ## Wage data for Northwest Territories
 
@@ -1234,14 +1234,14 @@ On an $80,000 salary, Northwest Territories ranks **#2 of 13** provinces and ter
 
 | Rank | Province | Take-home on $80,000 |
 | --- | --- | --- |
-| 1 | Nunavut | $62,001 |
-| 2 | Northwest Territories ← | $60,871 |
-| 3 | British Columbia | $60,867 |
-| 4 | Yukon | $60,648 |
-| 5 | Alberta | $60,409 |
-| 6 | Ontario | $59,994 |
+| 1 | Nunavut | $62,299 |
+| 2 | Northwest Territories ← | $61,166 |
+| 3 | British Columbia | $61,157 |
+| 4 | Yukon | $61,039 |
+| 5 | Alberta | $60,698 |
+| 6 | Ontario | $60,303 |
 
-The difference between Northwest Territories and Nunavut, the highest, is $1,130 a year on the same $80,000 salary — about $94 a month.
+The difference between Northwest Territories and Nunavut, the highest, is $1,133 a year on the same $80,000 salary — about $94 a month.
 
 Take-home pay is only one side of a move, of course: rent, groceries and childcare vary as much as tax does. But it is the side most people guess at, and it is the side that can be calculated exactly.
 
@@ -1270,7 +1270,7 @@ Every figure above is a median or a computed example. Your own pay depends on yo
     publishedAt: '2026-08-08',
     readTime: 6,
     imageUrl: '/blog/nunavut-take-home-pay-guide-2026.png',
-    directAnswer: "On an $80,000 salary, Nunavut ranks #1 of 13 provinces and territories for take-home pay in 2026, keeping $62,001 after federal tax, territorial tax, CPP and EI.",
+    directAnswer: "On an $80,000 salary, Nunavut ranks #1 of 13 provinces and territories for take-home pay in 2026, keeping $62,299 after federal tax, territorial tax, CPP and EI.",
     faq: [
           {
                 "question": "What is the average salary in Nunavut?",
@@ -1278,11 +1278,11 @@ Every figure above is a median or a computed example. Your own pay depends on yo
           },
           {
                 "question": "What is the take-home pay on $80,000 in Nunavut?",
-                "answer": "About $62,001 a year, or $5,167 a month, after federal tax, Nunavut provincial tax, CPP/CPP2 and EI for the 2026 tax year, for a single employee with no additional credits."
+                "answer": "About $62,299 a year, or $5,192 a month, after federal tax, Nunavut provincial tax, CPP/CPP2 and EI for the 2026 tax year, for a single employee with no additional credits."
           },
           {
                 "question": "Does Nunavut have high taxes compared with other provinces?",
-                "answer": "On an $80,000 salary, Nunavut keeps the most take-home pay in the country in 2026 — $62,001 a year."
+                "answer": "On an $80,000 salary, Nunavut keeps the most take-home pay in the country in 2026 — $62,299 a year."
           },
           {
                 "question": "Which industry pays best in Nunavut?",
@@ -1290,7 +1290,7 @@ Every figure above is a median or a computed example. Your own pay depends on yo
           },
           {
                 "question": "How much of my pay do I keep in Nunavut?",
-                "answer": "It depends on the salary. In Nunavut in 2026, someone earning $40,000 keeps about 83.9% of gross pay, while someone earning $150,000 keeps about 73.3%. The rest goes to federal tax, provincial tax, CPP/CPP2 and EI."
+                "answer": "It depends on the salary. In Nunavut in 2026, someone earning $40,000 keeps about 84.5% of gross pay, while someone earning $150,000 keeps about 73.6%. The rest goes to federal tax, provincial tax, CPP/CPP2 and EI."
           }
     ],
     content: `
@@ -1301,13 +1301,13 @@ Nobody is paid an "average". Here is what specific salaries actually leave in Nu
 
 | Gross salary | Take-home (year) | Per month | Kept |
 | --- | --- | --- | --- |
-| $40,000 | **$33,574** | $2,798 | 83.9% |
-| $60,000 | **$48,509** | $4,042 | 80.8% |
-| $80,000 | **$62,001** | $5,167 | 77.5% |
-| $100,000 | **$76,337** | $6,361 | 76.3% |
-| $150,000 | **$110,006** | $9,167 | 73.3% |
+| $40,000 | **$33,784** | $2,815 | 84.5% |
+| $60,000 | **$48,773** | $4,064 | 81.3% |
+| $80,000 | **$62,299** | $5,192 | 77.9% |
+| $100,000 | **$76,654** | $6,388 | 76.7% |
+| $150,000 | **$110,408** | $9,201 | 73.6% |
 
-Notice how the share you keep falls as the salary rises: that is Canada's progressive tax system working as designed. At $40,000 you keep 83.9%; at $150,000 you keep 73.3%.
+Notice how the share you keep falls as the salary rises: that is Canada's progressive tax system working as designed. At $40,000 you keep 84.5%; at $150,000 you keep 73.6%.
 
 ## Wage data for Nunavut
 
@@ -1319,14 +1319,14 @@ On an $80,000 salary, Nunavut ranks **#1 of 13** provinces and territories for t
 
 | Rank | Province | Take-home on $80,000 |
 | --- | --- | --- |
-| 1 | Nunavut ← | $62,001 |
-| 2 | Northwest Territories | $60,871 |
-| 3 | British Columbia | $60,867 |
-| 4 | Yukon | $60,648 |
-| 5 | Alberta | $60,409 |
-| 6 | Ontario | $59,994 |
+| 1 | Nunavut ← | $62,299 |
+| 2 | Northwest Territories | $61,166 |
+| 3 | British Columbia | $61,157 |
+| 4 | Yukon | $61,039 |
+| 5 | Alberta | $60,698 |
+| 6 | Ontario | $60,303 |
 
-Nunavut is the highest in the country on that salary. The next province keeps $60,871, a difference of $1,130 a year.
+Nunavut is the highest in the country on that salary. The next province keeps $61,166, a difference of $1,133 a year.
 
 Take-home pay is only one side of a move, of course: rent, groceries and childcare vary as much as tax does. But it is the side most people guess at, and it is the side that can be calculated exactly.
 

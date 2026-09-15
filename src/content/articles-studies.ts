@@ -11,10 +11,10 @@ export const studyArticles: Article[] = [
     subtitle:
       'We calculated what a full-time minimum wage worker actually keeps after federal tax, provincial tax, CPP, and EI in all 13 provinces and territories',
     excerpt:
-      'Nunavut minimum wage workers take home $34,393 a year while Alberta workers keep $26,779 — a $7,614 gap. New 2026 data on what minimum wage is really worth after taxes in every province.',
+      'Nunavut minimum wage workers take home $34,603 a year while Alberta workers keep $26,989 — a $7,614 gap. New 2026 data on what minimum wage is really worth after taxes in every province.',
     metaTitle: 'Minimum Wage After Tax by Province: 2026 Canadian Data Study',
     metaDescription:
-      'Original 2026 data: full-time minimum wage take-home pay in all 13 Canadian provinces and territories. Nova Scotia workers lose 19.8% to deductions; Alberta workers lose 15.1%.',
+      'Original 2026 data: full-time minimum wage take-home pay in all 13 Canadian provinces and territories. Nova Scotia workers lose 18.6% to deductions; Alberta workers lose 13.5%.',
     keywords: [
       'minimum wage after tax canada',
       'minimum wage take home pay',
@@ -29,27 +29,27 @@ export const studyArticles: Article[] = [
     readTime: 9,
     imageUrl: '/blog/minimum-wage-take-home-2026.png',
     directAnswer:
-      'As of June 2026, a full-time minimum wage worker takes home between $26,779 a year (Alberta, $15.00/hr) and $34,393 a year (Nunavut, $19.75/hr) after federal tax, provincial tax, CPP, and EI. In Ontario ($17.60/hr), full-time minimum wage works out to $30,179 a year or about $2,515 a month after deductions.',
+      'As of June 2026, a full-time minimum wage worker takes home between $26,989 a year (Alberta, $15.00/hr) and $34,603 a year (Nunavut, $19.75/hr) after federal tax, provincial tax, CPP, and EI. In Ontario ($17.60/hr), full-time minimum wage works out to $30,409 a year or about $2,534 a month after deductions.',
     faq: [
       {
         question: 'How much does a minimum wage worker take home in Ontario in 2026?',
         answer:
-          'At Ontario’s $17.60 minimum wage, a full-time worker (40 hours/week) grosses $36,608 a year and takes home approximately $30,179 after federal tax, provincial tax, CPP, EI, and the Ontario Health Premium — about $2,515 per month, or a net hourly rate of $14.51. Ontario’s minimum wage rises to $17.95 on October 1, 2026.',
+          'At Ontario’s $17.60 minimum wage, a full-time worker (40 hours/week) grosses $36,608 a year and takes home approximately $30,409 after federal tax, provincial tax, CPP, EI, and the Ontario Health Premium — about $2,534 per month, or a net hourly rate of $14.62. Ontario’s minimum wage rises to $17.95 on October 1, 2026.',
       },
       {
         question: 'Which province has the highest minimum wage take-home pay in Canada?',
         answer:
-          'Nunavut, at $19.75/hr, produces the highest full-time take-home pay: about $34,393 a year. Among provinces (excluding territories), British Columbia leads at roughly $31,536 a year on its $18.25 minimum wage, followed by Ontario at $30,516.',
+          'Nunavut, at $19.75/hr, produces the highest full-time take-home pay: about $34,603 a year. Among provinces (excluding territories), British Columbia leads at roughly $31,889 a year on its $18.25 minimum wage, followed by Ontario at $30,409.',
       },
       {
         question: 'How much tax does a minimum wage worker pay in Canada?',
         answer:
-          'Combined deductions (income tax + CPP + EI) take between 14.2% (Alberta) and 19.2% (Nova Scotia) of a full-time minimum wage salary in 2026. Income tax alone is relatively small at these earnings levels; CPP and EI contributions make up a large share of the total deductions.',
+          'Combined deductions (income tax + CPP + EI) take between 13.5% (Alberta) and 18.6% (Nova Scotia) of a full-time minimum wage salary in 2026. Income tax alone is relatively small at these earnings levels; CPP and EI contributions make up a large share of the total deductions.',
       },
       {
         question: 'Is minimum wage in BC or Ontario worth more after tax?',
         answer:
-          'BC’s $18.25 minimum wage nets about $31,536 a year for full-time work versus $30,516 in Ontario at $17.60 — a difference of roughly $1,020 a year or $85 a month in BC’s favour, before considering cost-of-living differences.',
+          'BC’s $18.25 minimum wage nets about $31,889 a year for full-time work versus $30,409 in Ontario at $17.60 — a difference of roughly $1,480 a year or $123 a month in BC’s favour, before considering cost-of-living differences.',
       },
     ],
     content: `
@@ -61,9 +61,9 @@ We ran every provincial and territorial minimum wage (current as of June 12, 202
 
 ### Key findings
 
-- **The national gap is $7,614 a year.** A full-time minimum wage worker in Nunavut takes home $34,393; in Alberta, $26,779.
-- **Nova Scotia takes the biggest bite.** Deductions consume 19.2% of a minimum wage salary in Nova Scotia — the highest in Canada. Alberta takes the smallest share (14.2%), but its $15.00 wage is so low that Alberta workers still finish last in actual dollars.
-- **PEI's higher wage mostly evaporates.** PEI's $17.00 wage is 40 cents above Quebec's $16.60, but after deductions the difference shrinks to about $44 a month.
+- **The national gap is $7,614 a year.** A full-time minimum wage worker in Nunavut takes home $34,603; in Alberta, $26,989.
+- **Nova Scotia takes the biggest bite.** Deductions consume 18.6% of a minimum wage salary in Nova Scotia — the highest in Canada. Alberta takes the smallest share (13.5%), but its $15.00 wage is so low that Alberta workers still finish last in actual dollars.
+- **PEI's higher wage mostly evaporates.** PEI's $17.00 wage is 40 cents above Quebec's $16.60, but after deductions the difference shrinks to about $47 a month.
 - **Saskatchewan nearly catches Manitoba.** Saskatchewan pays 65 cents less per hour than Manitoba, but its lower deductions close the annual net gap to just $415.
 
 ### Full results: minimum wage take-home pay by province (June 2026)
@@ -72,19 +72,19 @@ Figures assume full-time hours (40 hours/week, 2,080 hours/year), basic personal
 
 | Province | Min. wage | Gross (full-time) | Take-home / year | Take-home / month | Net hourly | Deduction rate |
 | --- | --- | --- | --- | --- | --- | --- |
-| Nunavut | $19.75 | $41,080 | **$34,393** | $2,866 | $16.54 | 16.3% |
-| Yukon | $18.51 | $38,501 | **$31,846** | $2,654 | $15.31 | 17.3% |
-| British Columbia | $18.25 | $37,960 | **$31,536** | $2,628 | $15.16 | 16.9% |
-| Ontario | $17.60 | $36,608 | **$30,179** | $2,515 | $14.51 | 17.6% |
-| Northwest Territories | $16.95 | $35,256 | **$29,643** | $2,470 | $14.25 | 15.9% |
-| Prince Edward Island | $17.00 | $35,360 | **$28,831** | $2,403 | $13.86 | 18.5% |
-| Quebec | $16.60 | $34,528 | **$28,300** | $2,358 | $13.61 | 18.0% |
-| Nova Scotia | $16.75 | $34,840 | **$28,137** | $2,345 | $13.53 | 19.2% |
-| Newfoundland and Labrador | $16.35 | $34,008 | **$27,899** | $2,325 | $13.41 | 18.0% |
-| Manitoba | $16.00 | $33,280 | **$27,294** | $2,275 | $13.12 | 18.0% |
-| New Brunswick | $15.90 | $33,072 | **$27,160** | $2,263 | $13.06 | 17.9% |
-| Saskatchewan | $15.35 | $31,928 | **$26,879** | $2,240 | $12.92 | 15.8% |
-| Alberta | $15.00 | $31,200 | **$26,779** | $2,232 | $12.87 | 14.2% |
+| Nunavut | $19.75 | $41,080 | **$34,603** | $2,884 | $16.64 | 15.8% |
+| Yukon | $18.51 | $38,501 | **$32,152** | $2,679 | $15.46 | 16.5% |
+| British Columbia | $18.25 | $37,960 | **$31,889** | $2,657 | $15.33 | 16.0% |
+| Ontario | $17.60 | $36,608 | **$30,409** | $2,534 | $14.62 | 16.9% |
+| Northwest Territories | $16.95 | $35,256 | **$29,853** | $2,488 | $14.35 | 15.3% |
+| Prince Edward Island | $17.00 | $35,360 | **$29,054** | $2,421 | $13.97 | 17.8% |
+| Quebec | $16.60 | $34,528 | **$28,492** | $2,374 | $13.70 | 17.5% |
+| Nova Scotia | $16.75 | $34,840 | **$28,366** | $2,364 | $13.64 | 18.6% |
+| Newfoundland and Labrador | $16.35 | $34,008 | **$28,109** | $2,342 | $13.51 | 17.3% |
+| Manitoba | $16.00 | $33,280 | **$27,504** | $2,292 | $13.22 | 17.4% |
+| New Brunswick | $15.90 | $33,072 | **$27,370** | $2,281 | $13.16 | 17.2% |
+| Saskatchewan | $15.35 | $31,928 | **$27,089** | $2,257 | $13.02 | 15.2% |
+| Alberta | $15.00 | $31,200 | **$26,989** | $2,249 | $12.98 | 13.5% |
 
 *Deduction rate = (federal tax + provincial tax + CPP/QPP + EI, and QPIP in Quebec) as a share of gross pay.*
 
@@ -92,12 +92,12 @@ Figures assume full-time hours (40 hours/week, 2,080 hours/year), basic personal
 
 Translating take-home pay back into an hourly figure shows how much of every advertised minimum wage hour a worker actually keeps:
 
-- **Nunavut:** $19.75 advertised → **$16.54 in the bank**
-- **Ontario:** $17.60 advertised → **$14.67 in the bank**
-- **Quebec:** $16.60 advertised → **$13.61 in the bank**
-- **Alberta:** $15.00 advertised → **$12.87 in the bank**
+- **Nunavut:** $19.75 advertised → **$16.64 in the bank**
+- **Ontario:** $17.60 advertised → **$14.62 in the bank**
+- **Quebec:** $16.60 advertised → **$13.70 in the bank**
+- **Alberta:** $15.00 advertised → **$12.98 in the bank**
 
-No Canadian jurisdiction lets a full-time minimum wage worker keep more than 86% of their gross pay.
+No Canadian jurisdiction lets a full-time minimum wage worker keep more than 87% of their gross pay.
 
 ### Why the deduction rates differ so much
 
@@ -416,7 +416,7 @@ For your real take-home pay including income tax, CPP, and EI for your province,
       {
         question: 'How much of my commission do I actually keep?',
         answer:
-          'In Ontario, a salesperson on a $50,000 base keeps roughly 67-71% of each commission dollar after federal tax, provincial tax, CPP and EI — for example, about $20,200 of a $30,000 commission. The exact share depends on your total income and province.',
+          'In Ontario, a salesperson on a $50,000 base keeps roughly 67-72% of each commission dollar after federal tax, provincial tax, CPP and EI — for example, about $20,200 of a $30,000 commission. The exact share depends on your total income and province.',
       },
       {
         question: 'Do I pay CPP and EI on commission?',
@@ -449,9 +449,9 @@ Here is the real math for an **Ontario** salesperson on a **$50,000 base salary*
 
 | Commission earned | Total income | You keep (after tax) | Keep rate |
 | --- | --- | --- | --- |
-| $10,000 | $60,000 | $7,135 | 71% |
-| $30,000 | $80,000 | $20,209 | 67% |
-| $60,000 | $110,000 | $40,881 | 68% |
+| $10,000 | $60,000 | $7,195 | 72% |
+| $30,000 | $80,000 | $20,158 | 67% |
+| $60,000 | $110,000 | $40,887 | 68% |
 
 So a big commission year nets you roughly **two-thirds of the commission** — not the half-or-less that a lump-sum cheque's withholding makes it look like.
 
@@ -506,11 +506,11 @@ A salesperson earning **$50,000 base + $30,000 commission = $80,000** keeps a di
 
 | Province | Take-home on $80,000 |
 | --- | --- |
-| British Columbia | $60,867 |
-| Alberta | $60,409 |
-| Ontario | $59,994 |
-| Quebec | $57,077 |
-| Nova Scotia | $56,095 |
+| British Columbia | $61,157 |
+| Alberta | $60,698 |
+| Ontario | $60,303 |
+| Quebec | $57,390 |
+| Nova Scotia | $56,439 |
 
 ## See your own number
 
@@ -826,7 +826,7 @@ Based on CRA figures for the 2026–27 ACWB cycle and 2026 tax-year indexation a
     subtitle:
       'Ontario, Nova Scotia, Prince Edward Island, and Manitoba all raise their minimum wage on October 1, 2026 — we ran the new rates through the CanPay Insights tax engine to see what full-time workers actually gain.',
     excerpt:
-      'Four provinces raise minimum wage on October 1, 2026: Ontario to $17.95, Nova Scotia to $17.00, PEI to $17.30, and Manitoba to $16.40. A full-time Ontario worker gains about $545 a year after tax; a Manitoba worker gains about $578.',
+      'Four provinces raise minimum wage on October 1, 2026: Ontario to $17.95, Nova Scotia to $17.00, PEI to $17.30, and Manitoba to $16.40. A full-time Ontario worker gains about $501 a year after tax; a Manitoba worker gains about $578.',
     metaTitle: 'Minimum Wage Rises in 4 Provinces Oct 1, 2026',
     metaDescription:
       'Ontario, Nova Scotia, PEI & Manitoba raise minimum wage Oct 1, 2026. See the new hourly rates and exactly how much extra take-home pay each province gains.',
@@ -844,7 +844,7 @@ Based on CRA figures for the 2026–27 ACWB cycle and 2026 tax-year indexation a
     readTime: 6,
     imageUrl: '/blog/minimum-wage-increases-october-2026.svg',
     directAnswer:
-      'On October 1, 2026, four provinces raise their general minimum wage: Ontario from $17.60 to $17.95, Nova Scotia from $16.75 to $17.00, Prince Edward Island from $17.00 to $17.30, and Manitoba from $16.00 to $16.40. Running the new rates through the CanPay Insights tax engine, a full-time (2,080 hours/year) minimum wage worker gains about $545 more take-home pay a year in Ontario, $339 in Nova Scotia, $416 in PEI, and $578 in Manitoba, after federal tax, provincial tax, CPP, and EI.',
+      'On October 1, 2026, four provinces raise their general minimum wage: Ontario from $17.60 to $17.95, Nova Scotia from $16.75 to $17.00, Prince Edward Island from $17.00 to $17.30, and Manitoba from $16.00 to $16.40. Running the new rates through the CanPay Insights tax engine, a full-time (2,080 hours/year) minimum wage worker gains about $545 more take-home pay a year in Ontario, $339 in Nova Scotia, $417 in PEI, and $578 in Manitoba, after federal tax, provincial tax, CPP, and EI.',
     faq: [
       {
         question: 'Which provinces are raising minimum wage on October 1, 2026?',
@@ -859,7 +859,7 @@ Based on CRA figures for the 2026–27 ACWB cycle and 2026 tax-year indexation a
       {
         question: 'How much extra will a full-time minimum wage worker take home?',
         answer:
-          'For 2,080 hours a year (40 hours/week), the after-tax gain is about $545/year (~$45/month) in Ontario, $339/year (~$28/month) in Nova Scotia, $416/year (~$35/month) in PEI, and $578/year (~$48/month) in Manitoba. Manitoba and Ontario see the largest dollar gains because CPP and EI take a smaller bite out of the raise at their income levels.',
+          'For 2,080 hours a year (40 hours/week), the after-tax gain is about $501/year (~$42/month) in Ontario, $339/year (~$28/month) in Nova Scotia, $417/year (~$35/month) in PEI, and $578/year (~$48/month) in Manitoba. Manitoba and Ontario see the largest dollar gains because CPP and EI take a smaller bite out of the raise at their income levels.',
       },
       {
         question: 'Why is Nova Scotia raising its minimum wage twice in one year?',
@@ -874,7 +874,7 @@ Based on CRA figures for the 2026–27 ACWB cycle and 2026 tax-year indexation a
       {
         question: 'Does a higher minimum wage change CPP and EI deductions?',
         answer:
-          'Yes, proportionally — CPP (5.95%) and EI (1.63%) apply to the extra gross pay just like income tax does, which is why the after-tax raise is smaller than the pre-tax raise. On Ontario’s 35-cent increase, for example, the extra $728 in gross annual pay becomes about $545 in extra take-home pay.',
+          'Yes, proportionally — CPP (5.95%) and EI (1.63%) apply to the extra gross pay just like income tax does, which is why the after-tax raise is smaller than the pre-tax raise. On Ontario’s 35-cent increase, for example, the extra $728 in gross annual pay becomes about $501 in extra take-home pay.',
       },
     ],
     content: `
@@ -901,16 +901,16 @@ Full-time hours (40/week, 2,080/year), 2026 federal and provincial tax rates, ba
 
 | Province | New gross (full-time) | New take-home / year | New take-home / month | Extra vs. today | Extra / month |
 | --- | --- | --- | --- | --- | --- |
-| Manitoba | $34,112 | **$27,872** | $2,323 | +$578/yr | +$48 |
-| Ontario | $37,336 | **$31,060** | $2,588 | +$545/yr | +$45 |
-| Prince Edward Island | $35,984 | **$29,247** | $2,437 | +$416/yr | +$35 |
-| Nova Scotia | $35,360 | **$28,476** | $2,373 | +$339/yr | +$28 |
+| Manitoba | $34,112 | **$28,082** | $2,340 | +$578/yr | +$48 |
+| Ontario | $37,336 | **$30,911** | $2,576 | +$501/yr | +$42 |
+| Prince Edward Island | $35,984 | **$29,470** | $2,456 | +$417/yr | +$35 |
+| Nova Scotia | $35,360 | **$28,706** | $2,392 | +$339/yr | +$28 |
 
 *Extra take-home = new annual take-home minus current annual take-home for the same worker in the same province, after federal tax, provincial tax, CPP/CPP2, and EI.*
 
 ### Why the gain is smaller than the raise looks
 
-A 35-cent Ontario raise sounds like $728 more a year (35¢ × 2,080 hours) — but only about **$545** of that survives payroll deductions, because the extra income is taxed and subject to CPP and EI exactly like the rest of the paycheque. Ontario keeps the largest share of its raise (about 75 cents of every extra dollar); Nova Scotia keeps the smallest share (about 65 cents), since it already has the highest deduction rate on minimum-wage income in the country.
+A 35-cent Ontario raise sounds like $728 more a year (35¢ × 2,080 hours) — but only about **$501** of that survives payroll deductions, because the extra income is taxed and subject to CPP and EI exactly like the rest of the paycheque. Manitoba keeps the largest share of its raise (about 69.5 cents of every extra dollar, with Ontario close behind at about 69 cents); Nova Scotia keeps the smallest share (about 65 cents), since it already has the highest deduction rate on minimum-wage income in the country.
 
 ### How these rates compare nationally
 
@@ -1341,8 +1341,8 @@ Full-time hours (40/week, 2,080/year), 2026 federal and Saskatchewan tax rates, 
 
 | Rate | Gross pay/year | Take-home pay/year | Take-home/biweekly | Extra vs. old rate | Extra/cheque |
 | --- | --- | --- | --- | --- | --- |
-| $15.35/hr (current) | $31,928 | $26,879 | $1,034 | — | — |
-| $15.70/hr (Oct 1) | **$32,656** | **$27,387** | **$1,053** | **+$508/yr** | **+$20** |
+| $15.35/hr (current) | $31,928 | $27,089 | $1,042 | — | — |
+| $15.70/hr (Oct 1) | **$32,656** | **$27,597** | **$1,061** | **+$508/yr** | **+$20** |
 
 *Calculated by CanPay Insights using the 2026 tax engine for a single Saskatchewan worker with no other income or credits, paid biweekly (26 pay periods).*
 
@@ -1398,12 +1398,12 @@ Rate and effective-date figures are based on the Government of Saskatchewan's Ju
       {
         question: "How much did inflation cost an Ontario worker's raise, after tax?",
         answer:
-          'Running the national average hourly wage through the CanPay Insights tax engine for a full-time (2,080 hours/year) Ontario worker: take-home pay rose from about $56,781 in July 2025 to $58,191 in July 2026 — a $1,410 raise after tax. But matching 3.0% inflation would have required $58,485 after tax, a shortfall of about $294 a year, or roughly 14 cents an hour.',
+          'Running the national average hourly wage through the CanPay Insights tax engine for a full-time (2,080 hours/year) Ontario worker: take-home pay rose from about $57,070 in July 2025 to $58,488 in July 2026 — a $1,419 raise after tax. But matching 3.0% inflation would have required $58,782 after tax, a shortfall of about $293 a year, or roughly 14 cents an hour.',
       },
       {
         question: 'Which province had the smallest and largest real pay gap?',
         answer:
-          'Among the province and territory take-home figures we calculated, British Columbia had the smallest real (after-inflation) shortfall at about $287 a year for a full-time worker on the national average wage; Prince Edward Island had the largest, at about $367 a year. Every province and territory we checked showed a negative real gap in July 2026.',
+          'Among the province and territory take-home figures we calculated, British Columbia had the smallest real (after-inflation) shortfall at about $288 a year for a full-time worker on the national average wage; Prince Edward Island had the largest, at about $365 a year. Every province and territory we checked showed a negative real gap in July 2026.',
       },
       {
         question: 'Why did wage growth slow down while inflation sped up in July 2026?',
@@ -1434,8 +1434,8 @@ Subtract one from the other and July 2026 posted a **negative real wage gap of a
 ### Key findings
 
 - **A full-time worker on the national average wage gained $2,101 in gross pay** year-over-year (2,080 hours × $1.01/hour) — but needed 3.0% more just to stand still against inflation.
-- **After tax, every province and territory came up short.** The real (inflation-adjusted) gap ranged from about **-$287 a year in British Columbia** to **-$367 a year in Prince Edward Island**.
-- **In Ontario**, take-home pay for that same worker rose from $56,781 to $58,191 — a $1,410 raise after tax, but about **$294 short** of matching inflation.
+- **After tax, every province and territory came up short.** The real (inflation-adjusted) gap ranged from about **-$288 a year in British Columbia** to **-$365 a year in Prince Edward Island**.
+- **In Ontario**, take-home pay for that same worker rose from $57,070 to $58,488 — a $1,419 raise after tax, but about **$293 short** of matching inflation.
 - **Gasoline, not groceries, drove July's inflation.** Grocery price growth actually slowed for a fourth straight month, while pump prices did the damage.
 
 ### What "real wage growth" costs, province by province
@@ -1444,19 +1444,19 @@ Figures use Statistics Canada's national average hourly wage (July 2025: $36.16;
 
 | Province | Take-home July 2025 | Take-home July 2026 | Nominal after-tax gain | Needed to match 3.0% inflation | Real (after-inflation) gap |
 | --- | --- | --- | --- | --- | --- |
-| British Columbia | $57,584 | $59,025 | +$1,441 | $59,311 | -$287 |
-| Nunavut | $58,687 | $60,141 | +$1,454 | $60,448 | -$306 |
-| Northwest Territories | $57,630 | $59,052 | +$1,422 | $59,359 | -$307 |
-| Manitoba | $54,888 | $56,227 | +$1,339 | $56,535 | -$308 |
-| Yukon | $57,426 | $58,840 | +$1,414 | $59,149 | -$309 |
-| Ontario | $56,781 | $58,191 | +$1,410 | $58,485 | -$294 |
-| Alberta | $57,231 | $58,625 | +$1,395 | $58,948 | -$322 |
-| Saskatchewan | $55,670 | $57,014 | +$1,344 | $57,340 | -$326 |
-| New Brunswick | $54,944 | $56,255 | +$1,312 | $56,592 | -$337 |
-| Newfoundland and Labrador | $54,569 | $55,869 | +$1,301 | $56,206 | -$337 |
-| Nova Scotia | $53,235 | $54,491 | +$1,255 | $54,833 | -$342 |
-| Quebec | $54,182 | $55,453 | +$1,271 | $55,808 | -$355 |
-| Prince Edward Island | $54,134 | $55,391 | +$1,257 | $55,758 | -$367 |
+| British Columbia | $57,857 | $59,305 | +$1,448 | $59,593 | -$288 |
+| Ontario | $57,070 | $58,488 | +$1,419 | $58,782 | -$293 |
+| Nunavut | $58,967 | $60,429 | +$1,462 | $60,736 | -$307 |
+| Northwest Territories | $57,908 | $59,338 | +$1,430 | $59,645 | -$307 |
+| Manitoba | $55,161 | $56,507 | +$1,346 | $56,815 | -$309 |
+| Yukon | $57,799 | $59,221 | +$1,422 | $59,533 | -$312 |
+| Alberta | $57,503 | $58,905 | +$1,402 | $59,229 | -$323 |
+| Saskatchewan | $55,943 | $57,294 | +$1,351 | $57,621 | -$327 |
+| Newfoundland and Labrador | $54,869 | $56,180 | +$1,311 | $56,516 | -$335 |
+| New Brunswick | $55,236 | $56,557 | +$1,321 | $56,893 | -$336 |
+| Nova Scotia | $53,551 | $54,819 | +$1,267 | $55,158 | -$339 |
+| Quebec | $54,472 | $55,752 | +$1,280 | $56,106 | -$354 |
+| Prince Edward Island | $54,444 | $55,713 | +$1,269 | $56,078 | -$365 |
 
 *"Needed to match 3.0% inflation" is illustrative: it assumes the whole household budget inflates at the headline CPI rate, which will not match every worker's actual spending. Provinces with higher after-tax pay (and therefore higher nominal dollar increases) tend to show a slightly larger real-dollar gap even at the same 3.0% shortfall, because 3% of a bigger number is a bigger number.*
 
@@ -1484,10 +1484,10 @@ Wage and employment figures are from Statistics Canada's [Labour Force Survey, J
     subtitle:
       'RSUs are not taxed like investments. They are taxed like salary — at your highest bracket, on top of the salary that already used up the low ones. We ran a $140,000 base with $60,000 of vesting RSUs through the CanPay Insights tax engine for all 13 provinces.',
     excerpt:
-      'A $60,000 RSU grant vesting in Ontario on a $140,000 salary leaves $32,563 after tax and CPP. Anyone budgeting it as a capital gain would expect $46,665 — a gap of $14,102. RSUs are employment income in full: no 50% deduction, taxed at the marginal rate.',
+      'A $60,000 RSU grant vesting in Ontario on a $140,000 salary leaves $32,617 after tax and CPP. Anyone budgeting it as a capital gain would expect $46,683 — a gap of $14,066. RSUs are employment income in full: no 50% deduction, taxed at the marginal rate.',
     metaTitle: 'RSU Take-Home Pay Canada 2026: What $60,000 in Stock Is Worth',
     metaDescription:
-      'RSUs are taxed as salary, not capital gains. A $60,000 vest on a $140,000 Ontario salary nets $32,563. All 13 provinces compared, 2026 rates.',
+      'RSUs are taxed as salary, not capital gains. A $60,000 vest on a $140,000 Ontario salary nets $32,617. All 13 provinces compared, 2026 rates.',
     keywords: [
       'RSU tax Canada',
       'restricted stock units tax',
@@ -1502,12 +1502,12 @@ Wage and employment figures are from Statistics Canada's [Labour Force Survey, J
     readTime: 7,
     imageUrl: '/blog/rsu-take-home-pay-canada-2026.svg',
     directAnswer:
-      'RSUs are employment income in full at their vest-date value — there is no 50% deduction, and they are taxed at your marginal rate on top of your salary. On a $140,000 Ontario salary, a $60,000 RSU vest leaves $32,563 after tax and CPP; $27,437, or 45.7% of the grant, goes to deductions. The keep rate ranges from $37,924 in Nunavut to $31,013 in Quebec on identical numbers.',
+      'RSUs are employment income in full at their vest-date value — there is no 50% deduction, and they are taxed at your marginal rate on top of your salary. On a $140,000 Ontario salary, a $60,000 RSU vest leaves $32,617 after tax and CPP; $27,383, or 45.6% of the grant, goes to deductions. The keep rate ranges from $37,990 in Nunavut to $31,044 in Quebec on identical numbers.',
     faq: [
       {
         question: 'Are RSUs taxed as capital gains in Canada?',
         answer:
-          'No. When RSUs vest, their full fair market value on the vest date is employment income and appears in box 14 of your T4, taxed at your marginal rate. Only the change in share price AFTER the vest date is a capital gain, and only when you sell. Treating the whole grant as a capital gain is the single most expensive misunderstanding in equity compensation: on a $60,000 vest at a $140,000 Ontario salary it overstates what you keep by $14,102.',
+          'No. When RSUs vest, their full fair market value on the vest date is employment income and appears in box 14 of your T4, taxed at your marginal rate. Only the change in share price AFTER the vest date is a capital gain, and only when you sell. Treating the whole grant as a capital gain is the single most expensive misunderstanding in equity compensation: on a $60,000 vest at a $140,000 Ontario salary it overstates what you keep by $14,066.',
       },
       {
         question: 'Do RSUs qualify for the 50% stock option deduction?',
@@ -1522,18 +1522,18 @@ Wage and employment figures are from Statistics Canada's [Labour Force Survey, J
       {
         question: 'Is $200,000 of salary worth more than $140,000 salary plus $60,000 of RSUs?',
         answer:
-          'On take-home pay, they are the same: both leave $130,771 in Ontario in 2026. RSUs are not taxed more harshly than salary. What differs is everything the tax does not measure — vesting schedules, share price risk, and the fact that you are paid in shares you may not be able to sell immediately.',
+          'On take-home pay, they are the same: both leave $131,278 in Ontario in 2026. RSUs are not taxed more harshly than salary. What differs is everything the tax does not measure — vesting schedules, share price risk, and the fact that you are paid in shares you may not be able to sell immediately.',
       },
       {
         question: 'What does a $60,000 RSU vest leave in my province?',
         answer:
-          'On a $140,000 salary in 2026: Nunavut $37,924, Yukon $36,896, Alberta $36,725, Northwest Territories $35,957, Saskatchewan $35,405, British Columbia $34,777, New Brunswick $33,974, Newfoundland and Labrador $33,499, Manitoba $33,348, Ontario $32,563, Prince Edward Island $32,420, Nova Scotia $31,788, Quebec $31,013. The spread between the top and bottom province is $6,911 on an identical grant.',
+          'On a $140,000 salary in 2026: Nunavut $37,990, Yukon $36,954, Alberta $36,796, Northwest Territories $36,015, Saskatchewan $35,464, British Columbia $34,865, New Brunswick $34,050, Newfoundland and Labrador $33,559, Manitoba $33,386, Ontario $32,617, Prince Edward Island $32,476, Nova Scotia $31,864, Quebec $31,044. The spread between the top and bottom province is $6,946 on an identical grant.',
       },
     ],
     content: `
 Recruiters quote a package. "One hundred and forty base, sixty in stock, two hundred all in." The number that sticks is two hundred thousand.
 
-The stock half does not arrive as two hundred thousand minus tax at some gentle investment rate. It arrives as **salary**, taxed at the top of your bracket, and on a $140,000 base in Ontario a $60,000 vest leaves **$32,563**.
+The stock half does not arrive as two hundred thousand minus tax at some gentle investment rate. It arrives as **salary**, taxed at the top of your bracket, and on a $140,000 base in Ontario a $60,000 vest leaves **$32,617**.
 
 ## The mistake that costs the most
 
@@ -1547,9 +1547,9 @@ The size of that misunderstanding, on the numbers above:
 
 | | On a $60,000 vest |
 | --- | --- |
-| What you keep | **$32,563** |
-| What you would keep if it were a capital gain | $46,665 |
-| The gap | **$14,102** |
+| What you keep | **$32,617** |
+| What you would keep if it were a capital gain | $46,683 |
+| The gap | **$14,066** |
 
 Fourteen thousand dollars is not a rounding error. It is the difference between a down payment being ready this year and not.
 
@@ -1559,34 +1559,34 @@ Here is the part that surprises people in the opposite direction. Compare two of
 
 | Package | Take-home |
 | --- | --- |
-| $200,000, all salary | $130,771 |
-| $140,000 salary + $60,000 RSUs | $130,771 |
+| $200,000, all salary | $131,278 |
+| $140,000 salary + $60,000 RSUs | $131,278 |
 
 Identical. RSUs are not punished by the tax system; they are simply treated as what they are — pay. The reason equity *feels* expensive is that it lands on top of a salary that has already spent the cheap brackets. The first $60,000 of anyone's income is taxed gently. Your $60,000 of stock is not the first $60,000 — it is the last, so it meets the highest rate you pay on anything.
 
 That is worth saying plainly, because it changes the decision: **do not discount a stock-heavy offer for tax reasons.** Discount it for the reasons that are real — vesting schedules, share price risk, and the fact that shares are not rent money until they are sold.
 
-## Where you live changes the answer by $6,911
+## Where you live changes the answer by $6,946
 
 Same $140,000 salary, same $60,000 vest, thirteen different answers:
 
 | Province or territory | You keep | Lost to tax and CPP |
 | --- | --- | --- |
-| Nunavut | $37,924 | 36.8% |
-| Yukon | $36,896 | 38.5% |
-| Alberta | $36,725 | 38.8% |
-| Northwest Territories | $35,957 | 40.1% |
-| Saskatchewan | $35,405 | 41.0% |
-| British Columbia | $34,777 | 42.0% |
-| New Brunswick | $33,974 | 43.4% |
-| Newfoundland and Labrador | $33,499 | 44.2% |
-| Manitoba | $33,348 | 44.4% |
-| Ontario | $32,563 | 45.7% |
-| Prince Edward Island | $32,420 | 46.0% |
-| Nova Scotia | $31,788 | 47.0% |
-| Quebec | $31,013 | 48.3% |
+| Nunavut | $37,990 | 36.7% |
+| Yukon | $36,954 | 38.4% |
+| Alberta | $36,796 | 38.7% |
+| Northwest Territories | $36,015 | 40.0% |
+| Saskatchewan | $35,464 | 40.9% |
+| British Columbia | $34,865 | 41.9% |
+| New Brunswick | $34,050 | 43.2% |
+| Newfoundland and Labrador | $33,559 | 44.1% |
+| Manitoba | $33,386 | 44.4% |
+| Ontario | $32,617 | 45.6% |
+| Prince Edward Island | $32,476 | 45.9% |
+| Nova Scotia | $31,864 | 46.9% |
+| Quebec | $31,044 | 48.3% |
 
-The same grant is worth **$6,911** more in Nunavut than in Quebec.
+The same grant is worth **$6,946** more in Nunavut than in Quebec.
 
 ## Two details that catch people out
 
@@ -1875,7 +1875,7 @@ The $150 supplement, the five regulatory changes, and their September 1, 2026 ef
       {
         question: 'Did all workers get the same size raise?',
         answer:
-          "No — lower-paid workers got smaller raises. Average hourly wages for the bottom 25% of earners rose just 1.1% year-over-year, to $18.66; the second-lowest quarter grew 1.3%, to $26.61. The top two quarters did better, both growing 2.1%, to $37.99 and $65.15. Run through the CanPay Insights tax engine for a full-time Ontario worker, the bottom quartile's raise was worth about $309 a year after tax — about $633 short of matching 3% inflation — versus a $1,577 after-tax raise for the top quartile.",
+          "No — lower-paid workers got smaller raises. Average hourly wages for the bottom 25% of earners rose just 1.1% year-over-year, to $18.66; the second-lowest quarter grew 1.3%, to $26.61. The top two quarters did better, both growing 2.1%, to $37.99 and $65.15. Run through the CanPay Insights tax engine for a full-time Ontario worker, the bottom quartile's raise was worth about $291 a year after tax — about $658 short of matching 3% inflation — versus a $1,577 after-tax raise for the top quartile.",
       },
       {
         question: 'Did youth employment get hit particularly hard?',
@@ -1919,21 +1919,21 @@ Since August's Consumer Price Index will not be released until mid-September 202
 
 | Province | Take-home Aug 2025 | Take-home Aug 2026 | Nominal after-tax gain | Needed to match 3.0% inflation | Real (after-inflation) gap |
 | --- | --- | --- | --- | --- | --- |
-| Nunavut | $58,903 | $59,925 | +$1,022 | $60,670 | -$745 |
-| British Columbia | $57,798 | $58,811 | +$1,013 | $59,532 | -$721 |
-| Northwest Territories | $57,841 | $58,841 | +$1,000 | $59,577 | -$736 |
-| Yukon | $57,636 | $58,630 | +$994 | $59,365 | -$735 |
-| Alberta | $57,438 | $58,418 | +$980 | $59,161 | -$743 |
-| Ontario | $56,991 | $57,982 | +$991 | $58,701 | -$719 |
-| Saskatchewan | $55,870 | $56,815 | +$945 | $57,546 | -$731 |
-| New Brunswick | $55,139 | $56,061 | +$922 | $56,793 | -$732 |
-| Manitoba | $55,087 | $56,028 | +$941 | $56,740 | -$711 |
-| Newfoundland and Labrador | $54,762 | $55,676 | +$914 | $56,405 | -$729 |
-| Quebec | $54,371 | $55,264 | +$893 | $56,002 | -$738 |
-| Prince Edward Island | $54,321 | $55,204 | +$884 | $55,950 | -$746 |
-| Nova Scotia | $53,422 | $54,304 | +$882 | $55,025 | -$720 |
+| Nunavut | $59,184 | $60,212 | +$1,028 | $60,960 | -$748 |
+| British Columbia | $58,072 | $59,090 | +$1,018 | $59,814 | -$724 |
+| Northwest Territories | $58,120 | $59,125 | +$1,005 | $59,864 | -$738 |
+| Yukon | $58,010 | $59,010 | +$999 | $59,751 | -$741 |
+| Alberta | $57,712 | $58,697 | +$985 | $59,443 | -$746 |
+| Ontario | $57,280 | $58,278 | +$997 | $58,999 | -$721 |
+| Saskatchewan | $56,143 | $57,093 | +$950 | $57,828 | -$734 |
+| New Brunswick | $55,432 | $56,360 | +$929 | $57,095 | -$734 |
+| Manitoba | $55,360 | $56,307 | +$946 | $57,021 | -$714 |
+| Newfoundland and Labrador | $55,064 | $55,986 | +$922 | $56,716 | -$730 |
+| Quebec | $54,662 | $55,562 | +$900 | $56,302 | -$740 |
+| Prince Edward Island | $54,633 | $55,524 | +$892 | $56,272 | -$747 |
+| Nova Scotia | $53,740 | $54,630 | +$891 | $55,352 | -$721 |
 
-*If August inflation lands near July's 3.0%, the real gap for a full-time worker on the national average wage roughly doubles from July's $292–$367 shortfall to about $711–$746. This is illustrative: it assumes a full year's household budget inflates at the headline CPI rate, which will not match every worker's actual spending, and August's actual CPI print could land above or below 3.0%.*
+*If August inflation lands near July's 3.0%, the real gap for a full-time worker on the national average wage roughly doubles from July's $288–$365 shortfall to about $714–$748. This is illustrative: it assumes a full year's household budget inflates at the headline CPI rate, which will not match every worker's actual spending, and August's actual CPI print could land above or below 3.0%.*
 
 ### The gap by wage level, not just by province
 
@@ -1941,13 +1941,13 @@ The province table above uses the national average wage across all quartiles. Lo
 
 | | Bottom 25% ($18.66/hr) | Top 25% ($65.15/hr) |
 | --- | --- | --- |
-| Take-home, Aug 2025 | $31,406 | $94,091 |
-| Take-home, Aug 2026 | $31,715 | $95,668 |
-| Nominal after-tax gain | +$309 | +$1,577 |
-| Needed to match 3.0% inflation | $32,348 | $96,914 |
-| Real (after-inflation) gap | -$633 | -$1,245 |
+| Take-home, Aug 2025 | $31,637 | $94,544 |
+| Take-home, Aug 2026 | $31,928 | $96,121 |
+| Nominal after-tax gain | +$291 | +$1,577 |
+| Needed to match 3.0% inflation | $32,586 | $97,380 |
+| Real (after-inflation) gap | -$658 | -$1,259 |
 
-In raw dollars the top quartile's shortfall looks bigger, but as a share of income it is the opposite: the bottom quartile's $633 gap is about 2% of their annual take-home pay, versus roughly 1.3% for the top quartile — before accounting for the fact that lower earners spend a larger share of every dollar on necessities that are typically hit hardest by inflation.
+In raw dollars the top quartile's shortfall looks bigger, but as a share of income it is the opposite: the bottom quartile's $658 gap is about 2% of their annual take-home pay, versus roughly 1.3% for the top quartile — before accounting for the fact that lower earners spend a larger share of every dollar on necessities that are typically hit hardest by inflation.
 
 ## Why hiring and raises both cooled
 
@@ -2011,7 +2011,7 @@ Wage and employment figures, including the wage-quartile breakdown and the "slow
       {
         question: 'How much extra take-home pay does the raise actually mean?',
         answer:
-          "Run through the CanPay Insights tax engine for a full-time worker (2,080 hours/year, single, basic personal amounts only): a Nunavut minimum-wage worker's take-home pay rises from about $34,393 to $35,055 a year — a gain of roughly $662, or about $25 more per biweekly paycheque. An NWT minimum-wage worker's take-home pay rises from about $29,643 to $30,028 — a gain of roughly $385 a year, or about $15 more per paycheque.",
+          "Run through the CanPay Insights tax engine for a full-time worker (2,080 hours/year, single, basic personal amounts only): a Nunavut minimum-wage worker's take-home pay rises from about $34,603 to $35,265 a year — a gain of roughly $662, or about $25 more per biweekly paycheque. An NWT minimum-wage worker's take-home pay rises from about $29,853 to $30,238 — a gain of roughly $385 a year, or about $15 more per paycheque.",
       },
       {
         question: 'How are Nunavut and NWT minimum wages set?',
@@ -2046,10 +2046,10 @@ Full-time hours (40/week, 2,080/year), 2026 federal and territorial tax rates, C
 
 | Territory | Rate | Gross pay/year | Take-home pay/year | Take-home/month | Extra vs. old rate |
 | --- | --- | --- | --- | --- | --- |
-| Nunavut | $19.75/hr (old) | $41,080 | $34,393 | $2,866 | — |
-| Nunavut | **$20.17/hr (new)** | **$41,954** | **$35,055** | **$2,921** | **+$662/yr** |
-| NWT | $16.95/hr (old) | $35,256 | $29,643 | $2,470 | — |
-| NWT | **$17.20/hr (new)** | **$35,776** | **$30,028** | **$2,502** | **+$385/yr** |
+| Nunavut | $19.75/hr (old) | $41,080 | $34,603 | $2,884 | — |
+| Nunavut | **$20.17/hr (new)** | **$41,954** | **$35,265** | **$2,939** | **+$662/yr** |
+| NWT | $16.95/hr (old) | $35,256 | $29,853 | $2,488 | — |
+| NWT | **$17.20/hr (new)** | **$35,776** | **$30,238** | **$2,520** | **+$385/yr** |
 
 *Calculated by CanPay Insights using the 2026 tax engine for a single worker with no other income or credits, paid biweekly (26 pay periods).*
 
@@ -2061,15 +2061,15 @@ Nunavut was already Canada's highest minimum wage before this increase; it now p
 
 | Rank | Province/territory | Minimum wage | Take-home/year |
 | --- | --- | --- | --- |
-| 1 | Nunavut | **$20.17** | $35,055 |
-| 2 | Yukon | $18.51 | $31,846 |
-| 3 | British Columbia | $18.25 | $31,536 |
-| 4 | Ontario | $17.60 | $30,179 |
-| 5 | Northwest Territories | **$17.20** | $30,028 |
+| 1 | Nunavut | **$20.17** | $35,265 |
+| 2 | Yukon | $18.51 | $32,152 |
+| 3 | British Columbia | $18.25 | $31,889 |
+| 4 | Ontario | $17.60 | $30,409 |
+| 5 | Northwest Territories | **$17.20** | $30,238 |
 
 *Yukon, BC, and Ontario rates are unchanged as of this writing. Ontario rises to $17.95 on October 1, 2026. For the full 13-jurisdiction ranking, see our [minimum wage take-home pay study](/blog/minimum-wage-take-home-pay-canada-2026).*
 
-Nunavut's $20.17 is now $1.66 above Yukon's $18.51 (the next-highest in Canada), $1.92 above BC's $18.25, and more than $2.00 above the federal minimum wage of $18.15 that applies to federally regulated employers. NWT, at $17.20, has closed to within $151 a year of Ontario's take-home pay despite a wage rate 40 cents lower — a reminder that low territorial income tax, not just the hourly rate, drives take-home pay in the North.
+Nunavut's $20.17 is now $1.66 above Yukon's $18.51 (the next-highest in Canada), $1.92 above BC's $18.25, and more than $2.00 above the federal minimum wage of $18.15 that applies to federally regulated employers. NWT, at $17.20, takes home $30,238 a year — within $171 of Ontario's $30,409 at $17.60 an hour, despite a wage rate 40 cents lower — a reminder that low territorial income tax, not just the hourly rate, drives take-home pay in the North.
 
 ### A busy fall for minimum wage across Canada
 

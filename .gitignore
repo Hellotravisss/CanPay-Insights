@@ -61,3 +61,4 @@ search_more.js
 # OpenNext build output
 .open-next/
 __pycache__/
+.wrangler/

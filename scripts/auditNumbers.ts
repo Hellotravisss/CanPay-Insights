@@ -183,12 +183,19 @@ const TOPICS: Topic[] = [
     mentions:
       /basic personal amount|montant personnel de base|\bBPA\b|provincial tax|provincial.{0,16}(bracket|rate)|paliers? (?:d'imposition )?(?:provinciaux|qu[ée]b[ée]cois)|imp[oô]t du Qu[ée]bec|省税/i,
     rates: Object.values(C.PROVINCIAL_DATA).flatMap((p) => p.brackets.map((b) => b.rate * 100)),
-    amounts: Object.values(C.PROVINCIAL_DATA).flatMap((p) => [
+    amounts: [
+      // "Federal basic personal amount: $16,452 × 14% = $2,303" names the BPA
+      // without a federal tax word nearby, so this topic claims it; accept the
+      // federal amount and credit here too. (Until 2026-09-15 this passed by a
+      // coincidental match with an old engine output.)
+      C.FEDERAL_BASIC_PERSONAL_AMOUNT,
+      FEDERAL_BPA_CREDIT,
+    ].concat(Object.values(C.PROVINCIAL_DATA).flatMap((p) => [
       p.basicPersonalAmount,
       ...p.brackets.filter((b) => isFinite(b.threshold)).flatMap((b) => [b.threshold, b.threshold + 1]),
       p.basicPersonalAmount * p.brackets[0].rate,
       p.basicPersonalAmount * p.brackets[0].rate + FEDERAL_BPA_CREDIT,
-    ]),
+    ])),
   },
 ];
 

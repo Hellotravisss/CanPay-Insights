@@ -20,6 +20,17 @@ export const metadata: Metadata = {
 const ENTRIES: { date: string; title: string; points: string[] }[] = [
   {
     date: '2026-09-15',
+    title: 'Take-home pay corrected upward in every province — two CRA payroll rules were missing',
+    points: [
+      'A reader asked whether the calculator was using Saskatchewan\'s 2026 basic personal amount of $20,381. It was — but checking every step against the Canada Revenue Agency\'s payroll formulas turned up two rules the calculator did not apply, in every province.',
+      'The Canada employment amount: every employee gets a federal credit on the first $1,501 of employment income, worth about $210 a year. It was not being given.',
+      'Enhanced CPP: since 2019 the "enhanced" part of your CPP contribution (and all of CPP2) is deducted from your income before tax, which is worth your marginal tax rate, instead of a credit at the lowest rate. The calculator treated all of it as a credit.',
+      'What changed for you: most take-home figures rise by about $200 to $500 a year. On a $60,000 Saskatchewan salary, total deductions drop from $13,739 to $13,480; on $80,000 in Ontario, take-home rises from $59,994 to $60,303. Your actual pay has not changed — the estimate now matches what your employer withholds.',
+      'Every published figure on the site — province guides, comparisons, studies and French articles — was recalculated with the corrected rules, and the iPhone app gets the same fix in its next update.',
+    ],
+  },
+  {
+    date: '2026-09-15',
     title: 'Where your pay sits in your neighbourhood; new privacy policy, terms and refund policy',
     points: [
       'Under every result you can now enter the first three characters of your postal code, or press "use my location", and see where that income sits among the people who file taxes in that exact area — from the Canada Revenue Agency\'s tax-filer statistics by postal area. Both are optional and off until you act.',

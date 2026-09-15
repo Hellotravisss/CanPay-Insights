@@ -97,6 +97,17 @@ export const BC_TAX_REDUCTION_BASE = 690;
 export const BC_TAX_REDUCTION_THRESHOLD = 25570;
 export const BC_TAX_REDUCTION_RATE = 0.0356;
 
+// Canada employment amount — T4127 factor K4 (federal) and, in Yukon only,
+// K4P. A credit at the lowest rate on the lesser of income and this amount.
+// T4127-JUL (123rd edition), 2026: 1,501.
+export const CANADA_EMPLOYMENT_AMOUNT = 1501;
+
+// Enhanced CPP/QPP — T4127 factor F5. The "first additional" 1% slice of the
+// tier-1 contribution and the whole tier-2 (CPP2/QPP2) contribution are a
+// DEDUCTION from income; only the base slice earns the lowest-rate credit.
+export const CPP_BASE_RATE = 0.0495; // of CPP_RATE 5.95%
+export const QPP_BASE_RATE = 0.053;  // of QPP_RATE 6.3%
+
 // Federal BPA phase-out — CRA form TD1-WS (26), line 1.
 // BPA = BASE + MAX_TOPUP × (RANGE − (net income − THRESHOLD)) / RANGE, clamped.
 // At $181,440 the top-up is full ($14,829 + $1,623 = $16,452, the max above);

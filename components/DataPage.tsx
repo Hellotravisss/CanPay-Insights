@@ -5,10 +5,10 @@ import AvowdCredit from './AvowdCredit';
 
 // Illustrative slice of the full 455-row dataset (net take-home at $80,000, 2026).
 const PREVIEW = [
-  { prov: 'British Columbia', net: '$60,867' },
-  { prov: 'Alberta', net: '$60,409' },
-  { prov: 'Ontario', net: '$59,994' },
-  { prov: 'Quebec', net: '$57,077' },
+  { prov: 'British Columbia', net: '$61,157' },
+  { prov: 'Alberta', net: '$60,698' },
+  { prov: 'Ontario', net: '$60,303' },
+  { prov: 'Quebec', net: '$57,390' },
 ];
 
 const DataPage: React.FC = () => {
