@@ -39,7 +39,6 @@ export default function Globe({
   const [lat0, setLat0] = useState(HOME_LAT);
   const [spinning, setSpinning] = useState(true);
   const drag = useRef<{ x: number; y: number; lon: number; lat: number } | null>(null);
-  const [hoverCity, setHoverCity] = useState<string | null>(null);
   const [zoom, setZoom] = useState(1);
 
   useEffect(() => {
@@ -239,6 +238,74 @@ export default function Globe({
     }
   };
 
+  const canvasRef = useRef<HTMLCanvasElement | null>(null);
+  const [hoverLabel, setHoverLabel] = useState<{ x: number; y: number; text: string } | null>(null);
+
+  /**
+   * Draw every city dot on the canvas. Runs on each change of rotation, zoom
+   * or data — the canvas is cleared first, so nothing from the previous frame
+   * can survive. Sized to the device pixel ratio so the dots are not soft.
+   */
+  useEffect(() => {
+    const cv = canvasRef.current;
+    if (!cv) return;
+    const box = cv.getBoundingClientRect();
+    if (!box.width) return;
+    const dpr = Math.min(3, window.devicePixelRatio || 1);
+    const px = Math.round(box.width * dpr);
+    if (cv.width !== px || cv.height !== px) { cv.width = px; cv.height = px; }
+    const ctx = cv.getContext('2d');
+    if (!ctx) return;
+    ctx.setTransform(1, 0, 0, 1, 0, 0);
+    ctx.clearRect(0, 0, cv.width, cv.height);
+    const k = px / 340; // canvas pixels per SVG unit
+    ctx.scale(k, k);
+    for (const c of cities) {
+      const p = projectVisible(c.lat, c.lon);
+      if (!p) continue;
+      const r = 2.5 + (c.n / maxCity) * 5;
+      ctx.beginPath();
+      ctx.arc(p[0], p[1], r * 1.9, 0, Math.PI * 2);
+      ctx.fillStyle = 'rgba(248,113,113,0.22)';
+      ctx.fill();
+      ctx.beginPath();
+      ctx.arc(p[0], p[1], r, 0, Math.PI * 2);
+      ctx.fillStyle = '#ef4444';
+      ctx.fill();
+      ctx.lineWidth = 0.9;
+      ctx.strokeStyle = '#ffffff';
+      ctx.stroke();
+    }
+  }, [cities, maxCity, projectVisible, zoom, lon0, lat0]);
+
+  /** Nearest visible dot to the pointer, in SVG units; null when none is close. */
+  const hitTest = (sx: number, sy: number) => {
+    let best: { d: number; c: (typeof cities)[number]; p: [number, number] } | null = null;
+    for (const c of cities) {
+      const p = projectVisible(c.lat, c.lon);
+      if (!p) continue;
+      const d = Math.hypot(p[0] - sx, p[1] - sy);
+      const r = Math.max(2.5 + (c.n / maxCity) * 5 + 6, 9);
+      if (d <= r && (!best || d < best.d)) best = { d, c, p };
+    }
+    return best;
+  };
+
+  const onHoverMove = (e: React.PointerEvent<HTMLDivElement>) => {
+    if (drag.current) { if (hoverLabel) setHoverLabel(null); return; }
+    const box = (e.currentTarget.querySelector('svg') as SVGSVGElement | null)?.getBoundingClientRect();
+    if (!box) return;
+    const sx = ((e.clientX - box.left) / box.width) * 340;
+    const sy = ((e.clientY - box.top) / box.height) * 340;
+    const hit = hitTest(sx, sy);
+    if (!hit) { if (hoverLabel) setHoverLabel(null); return; }
+    const name = hit.c.city.length === 2 && hit.c.city === hit.c.city.toUpperCase() ? countryName(hit.c.city, lang) : hit.c.city;
+    const text = `${name} · ${hit.c.n}`;
+    if (!hoverLabel || hoverLabel.text !== text || Math.abs(hoverLabel.x - hit.p[0]) > 0.5) {
+      setHoverLabel({ x: hit.p[0], y: hit.p[1], text });
+    }
+  };
+
   const clampZoom = (z: number) => Math.min(MAX_ZOOM, Math.max(MIN_ZOOM, z));
   const onWheel = (e: React.WheelEvent<HTMLDivElement>) => {
     e.preventDefault();
@@ -258,13 +325,16 @@ export default function Globe({
           // on a utility surviving a purge.
           style={{ touchAction: 'none' }}
           onPointerDown={onDown}
+          onPointerMove={onHoverMove}
+          onPointerLeave={() => setHoverLabel(null)}
           // No onPointerMove / onPointerUp / onPointerLeave here: the gesture
           // is tracked on window from pointerdown onward. onPointerLeave in
           // particular was ending every touch drag on its first move.
           onWheel={onWheel}
           onDoubleClick={() => setZoom(1)}
         >
-          <svg viewBox="0 0 340 340" className="aspect-square h-auto w-full max-w-[340px]">
+          <div className="relative w-[340px] max-w-full">
+          <svg viewBox="0 0 340 340" className="aspect-square h-auto w-full">
           <defs>
             <radialGradient id="ocean" cx="34%" cy="28%" r="78%">
               <stop offset="0%" stopColor="#1e3a5f" />
@@ -336,56 +406,27 @@ export default function Globe({
             <circle cx={CX} cy={CY} r={R} fill="url(#shade)" />
           </g>
 
-          {cities.map((c) => {
-            const p = projectVisible(c.lat, c.lon);
-            if (!p) return null;
-            const r = 2.5 + (c.n / maxCity) * 5;
-            // Identify a dot by its POSITION, not its label. Points whose city
-            // name the edge could not resolve are labelled with their country,
-            // so several now share the string "CA" — and while the key was the
-            // label, React could not tell those dots apart. At twenty redraws a
-            // second it stopped reclaiming them and they piled up along the
-            // limb, which is the "dots accumulating at the edge" symptom.
-            // Coordinates are unique by construction.
-            const id = `${c.lat},${c.lon}`;
-            return (
-              // Position the whole dot with ONE transform on the group, and
-              // animate nothing. The pulse ring was first a SMIL <animate>,
-              // then a CSS animation; with the dot moving twenty times a
-              // second as the globe turns, Chrome failed to repaint the old
-              // position either way and every dot smeared a trail of ghosts
-              // along its path (seen twice on 2026-09-15). Static dots do not.
-              <g key={id} transform={`translate(${p[0]} ${p[1]})`}>
-                {/* Static halo. No animation of any kind on a dot that moves:
-                    both SMIL and CSS animations left ghost trails in Chrome. */}
-                <circle r={r * 1.9} fill="#f87171" opacity="0.22" />
-                <circle r={r} fill="#ef4444" stroke="#ffffff" strokeWidth="0.9" />
-                {/* generous invisible hit area — the dots are only a few px */}
-                <circle
-                  r={Math.max(r + 6, 9)}
-                  fill="transparent"
-                  onMouseEnter={() => setHoverCity(id)}
-                  onMouseLeave={() => setHoverCity((v) => (v === id ? null : v))}
-                />
-                {hoverCity === id && (
-                  <text
-                    x={r + 3}
-                    y={3}
-                    className="fill-white text-[9px] font-semibold"
-                    style={{ paintOrder: 'stroke', stroke: '#0b1220', strokeWidth: 2.5 }}
-                  >
-                    {/* Unnamed points carry a country code as their label;
-                        show the country's name so a tooltip never reads "CA". */}
-                    {c.city.length === 2 && c.city === c.city.toUpperCase()
-                      ? countryName(c.city, lang)
-                      : c.city}{' '}
-                    · {c.n}
-                  </text>
-                )}
-              </g>
-            );
-          })}
+          {/* Dots are drawn on a canvas, not in this SVG. Chrome does not
+              reliably clear the pixels of an SVG element that is removed or
+              moved — and a dot is removed every time it crosses the horizon,
+              so the rim slowly filled with ghosts that survived five attempts
+              to fix them by changing how the dot was animated. A canvas is
+              cleared in full on every frame, so a stale dot cannot exist. */}
         </svg>
+          <canvas
+            ref={canvasRef}
+            className="pointer-events-none absolute inset-0 h-full w-full"
+            onMouseMove={undefined}
+          />
+          {hoverLabel && (
+            <div
+              className="pointer-events-none absolute rounded bg-slate-900/90 px-1.5 py-0.5 text-[10px] font-semibold text-white"
+              style={{ left: `${(hoverLabel.x / 340) * 100}%`, top: `${(hoverLabel.y / 340) * 100}%`, transform: 'translate(8px, -50%)' }}
+            >
+              {hoverLabel.text}
+            </div>
+          )}
+          </div>
         </div>
         <div className="mt-1 flex items-center justify-center gap-2">
           <button
