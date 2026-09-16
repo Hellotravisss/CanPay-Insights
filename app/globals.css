@@ -130,17 +130,3 @@ div:has(> input[type="date"]),
 div:has(> input[type="datetime-local"]) {
   min-width: 0;
 }
-
-/* Data-room globe: the pulse ring around each city dot. CSS, not SMIL — see
-   Globe.tsx for why. transform-box makes the scale grow from the circle's own
-   centre rather than the SVG origin. */
-.globe-pulse {
-  transform-box: fill-box;
-  transform-origin: center;
-  animation: globe-pulse 2.6s ease-in-out infinite;
-}
-@keyframes globe-pulse {
-  0% { transform: scale(1); opacity: 0.4; }
-  50% { transform: scale(3); opacity: 0; }
-  100% { transform: scale(1); opacity: 0.4; }
-}

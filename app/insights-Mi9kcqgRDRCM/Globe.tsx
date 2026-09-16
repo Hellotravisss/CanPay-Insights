@@ -349,15 +349,16 @@ export default function Globe({
             // Coordinates are unique by construction.
             const id = `${c.lat},${c.lon}`;
             return (
-              // Position the whole dot with ONE transform on the group. The
-              // pulse used to be a SMIL <animate> on a circle whose cx/cy also
-              // changed twenty times a second as the globe turned; Chrome does
-              // not reliably repaint the old position of a SMIL-animated
-              // element, so every dot left a trail of ghosts along its path
-              // (the "smeared globe" seen on 2026-09-15). A CSS animation on a
-              // child whose position never changes has no such problem.
+              // Position the whole dot with ONE transform on the group, and
+              // animate nothing. The pulse ring was first a SMIL <animate>,
+              // then a CSS animation; with the dot moving twenty times a
+              // second as the globe turns, Chrome failed to repaint the old
+              // position either way and every dot smeared a trail of ghosts
+              // along its path (seen twice on 2026-09-15). Static dots do not.
               <g key={id} transform={`translate(${p[0]} ${p[1]})`}>
-                <circle r={r} fill="#f87171" className="globe-pulse" />
+                {/* Static halo. No animation of any kind on a dot that moves:
+                    both SMIL and CSS animations left ghost trails in Chrome. */}
+                <circle r={r * 1.9} fill="#f87171" opacity="0.22" />
                 <circle r={r} fill="#ef4444" stroke="#ffffff" strokeWidth="0.9" />
                 {/* generous invisible hit area — the dots are only a few px */}
                 <circle
