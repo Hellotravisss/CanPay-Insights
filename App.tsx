@@ -25,6 +25,7 @@ import ExpectationPrompt from './components/ExpectationPrompt';
 import NeighbourhoodPrompt from './components/NeighbourhoodPrompt';
 import FakeDoors from './components/FakeDoors';
 import PartnerSlot from './components/PartnerSlot';
+import AppSlot from './components/AppSlot';
 import ShareReward from './components/ShareReward';
 import CapTimeline from './components/CapTimeline';
 import PayCurve from './components/PayCurve';
@@ -738,6 +739,14 @@ const App: React.FC = () => {
                     rounded location, paid for with the CRA tax-roll placement
                     of this exact income in that exact area. */}
                 <NeighbourhoodPrompt
+                  mode={mode}
+                  province={currentProvince}
+                  annualIncome={results.grossPayAnnual}
+                  lang={lang}
+                />
+                {/* iPhone only: the app, offered to the visitors who could
+                    install it, at the moment they have a number worth keeping. */}
+                <AppSlot
                   mode={mode}
                   province={currentProvince}
                   annualIncome={results.grossPayAnnual}

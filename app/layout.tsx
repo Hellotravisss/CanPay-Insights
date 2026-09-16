@@ -51,6 +51,12 @@ export const metadata: Metadata = {
     apple: '/apple-touch-icon.png',
   },
   manifest: '/manifest.json',
+  // Safari on iPhone renders this as a native App Store banner above the page.
+  // It costs nothing on every other device, and it is the only free placement
+  // that reaches the visitors most likely to install: on 2026-09-16, iOS was
+  // 47% of recent calculations (583 of 1,244 with a known platform) while the
+  // app saw about 200 downloads a month.
+  other: { 'apple-itunes-app': 'app-id=6759822038' },
 };
 
 export const viewport: Viewport = {
