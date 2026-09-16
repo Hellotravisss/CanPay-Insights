@@ -349,16 +349,18 @@ export default function Globe({
             // Coordinates are unique by construction.
             const id = `${c.lat},${c.lon}`;
             return (
-              <g key={id}>
-                <circle cx={p[0]} cy={p[1]} r={r} fill="#f87171" opacity="0.35">
-                  <animate attributeName="r" values={`${r};${r * 3};${r}`} dur="2.6s" repeatCount="indefinite" />
-                  <animate attributeName="opacity" values="0.4;0;0.4" dur="2.6s" repeatCount="indefinite" />
-                </circle>
-                <circle cx={p[0]} cy={p[1]} r={r} fill="#ef4444" stroke="#ffffff" strokeWidth="0.9" />
+              // Position the whole dot with ONE transform on the group. The
+              // pulse used to be a SMIL <animate> on a circle whose cx/cy also
+              // changed twenty times a second as the globe turned; Chrome does
+              // not reliably repaint the old position of a SMIL-animated
+              // element, so every dot left a trail of ghosts along its path
+              // (the "smeared globe" seen on 2026-09-15). A CSS animation on a
+              // child whose position never changes has no such problem.
+              <g key={id} transform={`translate(${p[0]} ${p[1]})`}>
+                <circle r={r} fill="#f87171" className="globe-pulse" />
+                <circle r={r} fill="#ef4444" stroke="#ffffff" strokeWidth="0.9" />
                 {/* generous invisible hit area — the dots are only a few px */}
                 <circle
-                  cx={p[0]}
-                  cy={p[1]}
                   r={Math.max(r + 6, 9)}
                   fill="transparent"
                   onMouseEnter={() => setHoverCity(id)}
@@ -366,8 +368,8 @@ export default function Globe({
                 />
                 {hoverCity === id && (
                   <text
-                    x={p[0] + r + 3}
-                    y={p[1] + 3}
+                    x={r + 3}
+                    y={3}
                     className="fill-white text-[9px] font-semibold"
                     style={{ paintOrder: 'stroke', stroke: '#0b1220', strokeWidth: 2.5 }}
                   >
