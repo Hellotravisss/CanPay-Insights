@@ -2211,4 +2211,134 @@ For other federal benefits also paying out or changing this fall, see our covera
 2026-27 OEPTC and NOEC maximums, income thresholds, and phase-out rates are taken directly from the Canada Revenue Agency's official [2026 Ontario Energy and Property Tax Credit calculation sheets](https://www.canada.ca/en/revenue-agency/services/child-family-benefits/provincial-territorial-programs/ontario-energy-property-tax-credit-oeptc-calculation-sheets/2026-ontario-energy-property-tax-credit-calculation-sheets.html) (single, no children; single with sole care of a child; and single seniors versions) and the [2026 Northern Ontario Energy Credit calculation sheets](https://www.canada.ca/en/revenue-agency/services/child-family-benefits/provincial-territorial-programs/2026-northern-ontario-energy-credit-noec-calculation-sheets.html). The $378 OSTC maximum is confirmed on the CRA's [Ontario Trillium Benefit](https://www.canada.ca/en/revenue-agency/services/child-family-benefits/provincial-territorial-programs/ontario-trillium-benefit-questions-answers.html) program pages; 2025-26 prior-year figures ($371, $1,283, $1,461, $185, $285) are corroborated across independent tax-benefit trackers and are internally consistent with the confirmed 2026-27 indexation rate of roughly 1.9%. Combined household totals and phase-out breakeven points are CanPay Insights' own calculations from these official maximums and thresholds. This is general information, not tax advice — confirm your own entitlement with the CRA's [Ontario Trillium Benefit](https://www.canada.ca/en/revenue-agency/services/child-family-benefits/provincial-territorial-programs/ontario-trillium-benefit-questions-answers.html) page or a tax professional.
 `,
   },
+  {
+    id: 'study-21',
+    slug: 'alberta-energy-rebate-2026',
+    title: "Alberta's $100 Energy Rebate: Apply by September 30, 2026 or Miss Out",
+    subtitle:
+      'A one-time, tax-free $100 payment — $200 for a married or common-law couple — is available to about 3.4 million Albertans, but you have to apply for it yourself unless you already get certain provincial benefits. The window closes September 30, 2026.',
+    excerpt:
+      "Alberta's one-time Energy Rebate pays $100 per eligible adult (up to $200 for a couple) to residents 18+ who filed a 2025 tax return and have household income of $225,000 or less. Applications close September 30, 2026. Because the rebate is non-taxable, we ran it through the CanPay Insights tax engine: at most Alberta income levels, it takes a $139 to $156 pre-tax raise to net the same $100 after federal tax, provincial tax, CPP, and EI.",
+    metaTitle: "Alberta's $100 Rebate Deadline: September 30, 2026",
+    metaDescription:
+      "Alberta's $100 Energy Rebate ($200 per couple) closes September 30, 2026. See eligibility, automatic enrollment, and what $100 tax-free is worth after tax.",
+    keywords: [
+      'alberta energy rebate 2026',
+      'alberta $100 rebate',
+      'alberta energy rebate deadline',
+      'alberta energy rebate eligibility',
+      'alberta affordability payment 2026',
+      'alberta energy rebate how to apply',
+    ],
+    category: 'news',
+    tags: ['Alberta', 'Government Benefits', '2026', 'Payment Dates'],
+    publishedAt: '2026-09-17',
+    readTime: 7,
+    imageUrl: '/blog/alberta-energy-rebate-2026.svg',
+    directAnswer:
+      "The Alberta Energy Rebate pays $100 to each eligible adult — up to $200 for a married or common-law couple who both qualify — and applications close September 30, 2026. To qualify you must be 18 or older as of July 1, 2026, an Alberta resident, have filed a 2025 tax return, and have total household income of $225,000 or less. Most people have to apply themselves at alberta.ca/alberta-energy-rebate; only Albertans already receiving the Alberta Seniors Benefit, AISH/ADAP, or Income Support are automatically enrolled. Payments arrive by e-transfer within 14 days of applying and are non-taxable. Because it isn't taxed, the CanPay Insights tax engine shows the $100 is worth more than a $100 raise would be — at most Alberta income levels it would take a $139 to $156 pre-tax raise to net the same amount after payroll deductions.",
+    faq: [
+      {
+        question: 'How much is the Alberta Energy Rebate and who qualifies?',
+        answer:
+          "It pays $100 per eligible adult. A married or common-law couple where both partners qualify gets $200 combined, since each applies separately. To qualify you must be 18 or older as of July 1, 2026, an Alberta resident, have filed a 2025 income tax return, and have total household income of $225,000 or less (the combined income of you and your spouse or common-law partner, if applicable). The province estimates about 3.4 million Albertans are eligible.",
+      },
+      {
+        question: 'When is the deadline to apply for the Alberta Energy Rebate?',
+        answer:
+          'September 30, 2026. Applications opened July 1, 2026 through the online portal at alberta.ca/alberta-energy-rebate. There is no indication the province will extend the window or reopen it after that date, so anyone who has not yet applied and is not automatically enrolled should not wait.',
+      },
+      {
+        question: 'Do I need to apply, or is it automatic?',
+        answer:
+          "Most eligible Albertans need to apply themselves through the online portal, using a verified Alberta.ca account, your Social Insurance Number, and (if applicable) your spouse or common-law partner's SIN, date of birth, and legal name as reported on your 2025 tax return. Only Albertans already receiving the Alberta Seniors Benefit, Assured Income for the Severely Handicapped (AISH) or the Alberta Disability Assistance Program (ADAP), or Income Support are automatically enrolled with no application required. New clients who join those programs after July 1, 2026 still need to apply.",
+      },
+      {
+        question: 'Is the $100 rebate taxable, and does it affect other benefits?',
+        answer:
+          "No. The Alberta government says the rebate is non-taxable and will not affect your eligibility for, or the amount of, other government benefits. You do not report it on your tax return, and it does not appear as income for programs like the Canada Child Benefit, GST/HST credit (now the Canada Groceries and Essentials Benefit), or Old Age Security.",
+      },
+      {
+        question: "What is the Alberta Energy Rebate replacing, and how much does it cost the province?",
+        answer:
+          "It replaces a planned Fuel Tax Relief Program that would have taken effect July 1, 2026; the province says the flat $100 payment provides about 50% more savings per person than three months of fuel tax relief would have, while letting people spend it on whatever they choose — groceries, rent, or fuel. Alberta's government has put the total cost of the program at roughly $350 million.",
+      },
+      {
+        question: 'How does a $100 tax-free rebate compare to $100 of extra pay?',
+        answer:
+          "It's worth more, because none of it is lost to tax, CPP, or EI. Running the numbers through the CanPay Insights tax engine for a single Alberta worker in 2026, it would take a pre-tax raise of roughly $139 (at $40,000 salary) to $156 (at $150,000 salary) to net an extra $100 in take-home pay after payroll deductions — the rebate skips that entirely. For a full-time worker on Alberta's $15.00 minimum wage, whose net pay works out to about $12.98 an hour, $100 is worth roughly 7.7 hours of after-tax minimum-wage earnings.",
+      },
+    ],
+    content: `
+## A flat $100, but you have to ask for it — and the window is closing
+
+Alberta's one-time **Energy Rebate** pays **$100 to each eligible adult**, delivered by e-transfer, with applications closing **September 30, 2026**. Unlike most of the benefits we cover, this one is not automatic for the vast majority of recipients — you have to apply through an online portal, and roughly 3.4 million eligible Albertans have had since July 1 to do it. With two weeks left, we pulled the exact terms from the Government of Alberta's own [program fact sheet](https://www.alberta.ca/alberta-energy-rebate) to make sure nothing is missed before the deadline.
+
+### The basics
+
+| | Detail |
+| --- | --- |
+| Amount | **$100** per eligible adult (**$200** for a married/common-law couple who both qualify) |
+| Application window | July 1, 2026 – **September 30, 2026** |
+| Age requirement | 18 or older as of July 1, 2026 |
+| Residency | Alberta resident |
+| Tax filing | Must have filed a 2025 income tax return |
+| Household income limit | $225,000 or less (combined, if you have a spouse or common-law partner) |
+| Payment method | E-transfer, within 14 days of applying |
+| Taxable? | No — non-taxable and does not affect other benefits |
+| Estimated reach | About 3.4 million Albertans, ~$350 million total |
+
+A "household," for this program, is a single adult or a married/common-law couple — not everyone living at the same address. Roommates, adult children over 18, and other adult family members in the same home all count as separate households and must each apply on their own.
+
+### Who gets it automatically, and who has to act
+
+Most eligible Albertans are **not** enrolled automatically. You need to log into a verified Alberta.ca account, provide your Social Insurance Number (and your spouse's, if applicable), and submit an application at [alberta.ca/alberta-energy-rebate](https://www.alberta.ca/alberta-energy-rebate).
+
+The exceptions — enrolled automatically, no application needed — are Albertans already receiving:
+
+- The **Alberta Seniors Benefit**
+- **Assured Income for the Severely Handicapped (AISH)**, including clients transitioned to the **Alberta Disability Assistance Program (ADAP)**
+- **Income Support**
+
+Anyone who joined one of those three programs after July 1, 2026 still needs to apply through the portal.
+
+### Why this program exists
+
+The rebate replaces a **Fuel Tax Relief Program** that had been scheduled to start July 1, 2026. The province says the flat $100 payment works out to about **50% more savings per person** than three months of fuel tax relief would have delivered, while giving households the flexibility to spend it on groceries, rent, or utilities rather than only fuel. It was announced in June 2026, alongside a provincial budget projecting a $9.4 billion deficit for 2026-27 — a notably smaller program than past Alberta rebate schemes like the "Ralph Bucks" payments, which cost about $1.4 billion during a surplus year.
+
+## What $100, tax-free, is actually worth
+
+The rebate's biggest practical advantage over a raise at work is that it skips payroll deductions entirely. To see exactly what that means, we ran the CanPay Insights tax engine for a single full-time worker in Alberta at several salary levels, using 2026 federal and provincial tax brackets, CPP/CPP2, and EI, and solved for the pre-tax raise it would take to net the same $100 after deductions:
+
+| Alberta salary | Approx. net pay | Pre-tax raise needed to net $100 | Marginal deduction rate |
+| --- | --- | --- | --- |
+| $40,000 | $33,332 | **$138.72** | 27.9% |
+| $60,000 | $47,691 | **$152.32** | 34.3% |
+| $80,000 | $60,698 | **$149.88** | 33.3% |
+| $100,000 | $74,459 | **$143.88** | 30.5% |
+| $150,000 | $107,458 | **$156.25** | 36.0% |
+
+At every income level shown, it takes a raise of roughly **$139 to $156** before tax to put an extra $100 in your pocket — the $100 rebate arrives with none of that friction. For a full-time worker earning Alberta's $15.00 minimum wage, whose take-home pay works out to about $26,989 a year (about $12.98 an hour after tax), the $100 rebate is worth roughly **7.7 hours** of after-tax minimum-wage work.
+
+*Figures assume a single filer with no other income, credits, or deductions beyond the basic personal amount; your own marginal rate will vary with your actual income, credits, and pay frequency.*
+
+### How to apply before the deadline
+
+1. Log into (or create) a **verified Alberta.ca account**.
+2. Make sure the mailing address on your Alberta driver's licence or ID matches your Alberta.ca account.
+3. Go to [alberta.ca/alberta-energy-rebate](https://www.alberta.ca/alberta-energy-rebate) and provide your SIN (and your spouse or common-law partner's SIN, date of birth, and legal name, if applicable, as reported on your 2025 return).
+4. Set up e-transfer as your payment method.
+5. Submit — you cannot edit the application after submitting, and the province says to allow up to 14 days for review.
+
+Albertans without reliable computer access can get help at an Alberta Supports centre, or call the rebate line at 780-401-4014 (toll-free 1-844-401-4014).
+
+### This is a rebate, not a raise
+
+The Alberta Energy Rebate doesn't touch payroll — it won't show up on a pay stub, and it isn't affected by your employer's CPP, EI, or income tax withholding. If you're trying to figure out what an actual raise, bonus, or new job offer is worth after tax in Alberta, that's a separate calculation: use the free [CanPay Insights salary calculator](/salary-after-tax-canada) or the [Alberta paycheck calculator](/alberta-paycheck-calculator), or see the [Alberta take-home pay guide](/blog/alberta-take-home-pay-guide-2026) for the province's full 2026 tax picture. For how Alberta's take-home pay compares to other provinces, see [compare provinces](/compare-provinces).
+
+## Sources & disclaimer
+
+Program terms — the $100/$200 payment amounts, eligibility criteria, application window, automatic-enrollment groups, and payment timing — are taken directly from the Government of Alberta's official [Alberta Energy Rebate](https://www.alberta.ca/alberta-energy-rebate) page and its published [program fact sheet](https://www.alberta.ca/system/files/tbf-alberta-energy-rebate-factsheet.pdf) (Treasury Board and Finance, July 1, 2026). The 3.4 million eligible Albertans and roughly $350 million total program cost are corroborated by contemporaneous CBC News and Global News reporting citing Alberta's government. Take-home pay and "raise needed to net $100" figures are CanPay Insights' own calculations, run through our tax engine using 2026 federal and provincial tax brackets, CPP/CPP2, and EI for a single full-time worker with basic personal amounts only — real paycheques vary with credits, benefits, and actual pay frequency. This is general information, not tax or financial advice; confirm your own eligibility at [alberta.ca/alberta-energy-rebate](https://www.alberta.ca/alberta-energy-rebate).
+`,
+  },
 ];
