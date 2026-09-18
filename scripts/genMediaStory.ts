@@ -2,23 +2,36 @@
  * Media story generator — the numbers come from the data room's own API at
  * run time, never typed in. Run it the day the event count crosses 5,000:
  *
- *   npx tsx scripts/genMediaStory.ts
+ *   npx tsx scripts/genMediaStory.ts            # drafts only
+ *   npx tsx scripts/genMediaStory.ts --publish  # + the public snapshot
  *
- * Writes drafts/media/story.md (article body with the figures filled in),
- * drafts/media/pitch.md (the email, figures filled in) and three SVG charts.
- * Nothing here is served — drafts/ is not public. Publishing is a separate,
- * deliberate step: move the body into src/content, the SVGs into public/blog.
+ * Writes drafts/media/pitch.md (the email, figures filled in) and three SVG
+ * charts — none of it served. With --publish it ALSO writes the dated snapshot
+ * the public page renders (content/research/pay-behaviour.json) and copies the
+ * charts into public/research/. The public page reads only that snapshot: a
+ * journalist sees the figures as of a stated day, never the live data room,
+ * and never anything finer than a national share.
  *
- * Every figure is a share of a self-selected sample and is labelled as such.
- * The story is what the calculator can see and Statistics Canada cannot:
- * behaviour, not income levels.
+ * Two traps this script was rewritten around on 2026-09-18:
+ *  - The form opens on a 09:00–17:00 shift. "Share of shifts not starting at
+ *    9" over all rows counts untouched defaults as nine-to-fives, so it is
+ *    published only as a lower bound, next to the cut over edited schedules.
+ *  - "Moves up" counted per step lets one visitor trying twenty figures cast
+ *    twenty votes. The headline gives each session one vote (end vs start);
+ *    the per-step and first-step-dropped counts are published beside it.
+ *
+ * Every figure is a share of a self-selected sample and is labelled as such —
+ * "people who used the calculator", never "Canadians".
  */
-import { writeFileSync, mkdirSync } from 'node:fs';
+import { writeFileSync, mkdirSync, copyFileSync } from 'node:fs';
 
 const BASE = process.env.CANPAY_BASE ?? 'https://canpayinsights.ca';
 const KEY = process.env.CANPAY_ROOM_KEY ?? 'Mi9kcqgRDRCM';
 const OUT = 'drafts/media';
+const PUBLISH = process.argv.includes('--publish');
+const PAGE = 'https://canpayinsights.ca/research/pay-calculator-behaviour';
 const pct = (n: number, d: number) => Math.round((100 * n) / d);
+const fmt = (n: number) => n.toLocaleString('en-CA');
 
 async function api<T>(name: string): Promise<T> {
   const r = await fetch(`${BASE}/api/insights/${name}`, { headers: { 'x-room-key': KEY } });
@@ -26,112 +39,102 @@ async function api<T>(name: string): Promise<T> {
   return r.json() as Promise<T>;
 }
 
-type Row = { k: string | number; n: number };
-const [stats, j, intent, extra] = await Promise.all([
-  api<{ total: number; first_event?: string; collected_since?: string }>('stats'),
-  api<{ sessions: number; multi: number; varied: { income: number }; income_moves: { up: number; down: number; same: number } }>('journeys'),
+type Row = { k: string | number | null; n: number };
+type UpDown = { up: number; down: number };
+const [stats, j, intent, extra, baro] = await Promise.all([
+  api<{ total: number; first_event: string; excluded_rows: number }>('stats'),
+  api<{ sessions: number; multi: number; varied: { income: number }; income_moves: UpDown; income_moves_later: UpDown; income_moves_net: UpDown }>('journeys'),
   api<{ sessions: { total: number; multi_prov: number } }>('intent'),
-  api<{ by_shift_start: Row[] }>('stats_extra'),
+  api<{ by_shift_start: Row[]; by_shift_start_edited: Row[] }>('stats_extra'),
+  api<{ year: { below_median_share: number }[] }>('income_barometer'),
 ]);
+if (!j.income_moves_net || !extra.by_shift_start_edited) throw new Error('data room API is older than this script — deploy first');
 
-// ── Angle 1: pricing the raise ────────────────────────────────────────────
+// ── 1. Pricing the raise ──────────────────────────────────────────────────
+const share = (m: UpDown) => ({ up: m.up, down: m.down, n: m.up + m.down, upShare: pct(m.up, m.up + m.down) });
+const net = share(j.income_moves_net);      // headline: one vote per session
+const steps = share(j.income_moves);        // every step
+const later = share(j.income_moves_later);  // first step of each session dropped
 const multiShare = pct(j.multi, j.sessions);
 const variedIncomeShare = pct(j.varied.income, j.multi);
-const moves = j.income_moves.up + j.income_moves.down;
-const upShare = pct(j.income_moves.up, moves);
 
-// ── Angle 2: night-shift Canada ───────────────────────────────────────────
-const shifts = extra.by_shift_start.filter((r) => r.k !== null);
-const shiftTotal = shifts.reduce((s, r) => s + r.n, 0);
-const nine = shifts.find((r) => Number(r.k) === 9)?.n ?? 0;
-const notNine = shiftTotal - nine;
-const notNineShare = pct(notNine, shiftTotal);
-const night = shifts.filter((r) => Number(r.k) >= 18 || Number(r.k) < 6).reduce((s, r) => s + r.n, 0);
-const nightShare = pct(night, shiftTotal);
+// ── 2. When shifts start ──────────────────────────────────────────────────
+const hoursOf = (rows: Row[]) => Array.from({ length: 24 }, (_, h) => rows.find((r) => r.k !== null && Number(r.k) === h)?.n ?? 0);
+const sum = (xs: number[]) => xs.reduce((s, x) => s + x, 0);
+const nightOf = (h: number[]) => sum(h.filter((_, i) => i >= 18 || i < 6));
+const all = hoursOf(extra.by_shift_start), edited = hoursOf(extra.by_shift_start_edited);
+const allTotal = sum(all), editedTotal = sum(edited);
+const notNineFloor = pct(allTotal - all[9], allTotal);           // lower bound
+const editedBefore7 = pct(sum(edited.slice(0, 7)), editedTotal); // starts 00:00–06:59
+const editedNight = pct(nightOf(edited), editedTotal);
+const nightFloor = pct(nightOf(all), allTotal);
 
-// ── Angle 3: who is weighing a move ───────────────────────────────────────
+// ── 3. Weighing a move ────────────────────────────────────────────────────
 const moveShare = pct(intent.sessions.multi_prov, intent.sessions.total);
 
+const belowMedianShare = Math.round(baro.year[baro.year.length - 1].below_median_share);
 const N = stats.total;
 const today = new Date().toISOString().slice(0, 10);
 mkdirSync(OUT, { recursive: true });
 
-// ── Charts (brand: red-600 on slate, same as blog covers) ─────────────────
-const svgHead = (title: string) => `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630" width="1200" height="630" role="img" aria-label="${title}"><rect width="1200" height="630" fill="#0f172a"/>`;
-const foot = `<text x="60" y="590" font-family="Helvetica,Arial,sans-serif" font-size="20" fill="#94a3b8">Source: CanPay Insights anonymous calculator data · n=${N.toLocaleString('en-CA')} · ${today} · CC BY 4.0</text></svg>`;
+// ── Charts ────────────────────────────────────────────────────────────────
+const F = 'font-family="Helvetica,Arial,sans-serif"';
+const head = (title: string) => `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630" width="1200" height="630" role="img" aria-label="${title}"><rect width="1200" height="630" fill="#0f172a"/>`;
+const foot = `<text x="60" y="590" ${F} font-size="20" fill="#94a3b8">Source: CanPay Insights, anonymous calculator use · ${fmt(N)} calculations to ${today} · self-selected sample · CC BY 4.0</text></svg>`;
 
-writeFileSync(`${OUT}/pricing-the-raise.svg`, svgHead('Pricing the raise') +
-  `<text x="60" y="140" font-family="Helvetica,Arial,sans-serif" font-size="44" fill="#e2e8f0">When Canadians re-run a pay calculator with a new income,</text>` +
-  `<text x="60" y="330" font-family="Helvetica,Arial,sans-serif" font-size="200" font-weight="700" fill="#dc2626">${upShare}%</text>` +
-  `<text x="60" y="420" font-family="Helvetica,Arial,sans-serif" font-size="44" fill="#e2e8f0">try a higher number, not a lower one.</text>` +
-  `<text x="60" y="490" font-family="Helvetica,Arial,sans-serif" font-size="26" fill="#94a3b8">${multiShare}% of visits calculate more than once; ${variedIncomeShare}% of those change the income.</text>` + foot);
+writeFileSync(`${OUT}/pricing-the-raise.svg`, head('Pricing the raise') +
+  `<text x="60" y="95" ${F} font-size="40" fill="#e2e8f0">Of visitors who changed the income</text>` +
+  `<text x="60" y="145" ${F} font-size="40" fill="#e2e8f0">on a Canadian pay calculator,</text>` +
+  `<text x="60" y="345" ${F} font-size="200" font-weight="700" fill="#dc2626">${net.upShare}%</text>` +
+  `<text x="60" y="430" ${F} font-size="40" fill="#e2e8f0">ended on a higher figure than they started with.</text>` +
+  `<text x="60" y="495" ${F} font-size="24" fill="#94a3b8">${fmt(net.n)} visits · ${steps.upShare}% counting every change · ${later.upShare}% ignoring each visit's first change</text>` + foot);
 
-const hours = Array.from({ length: 24 }, (_, h) => shifts.find((r) => Number(r.k) === h)?.n ?? 0);
-const maxH = Math.max(...hours, 1);
-const bars = hours.map((n, h) => { const x = 60 + h * 45, hgt = Math.round((n / maxH) * 300); return `<rect x="${x}" y="${470 - hgt}" width="34" height="${hgt}" fill="${h === 9 ? '#94a3b8' : '#dc2626'}"/><text x="${x + 17}" y="500" font-family="Helvetica,Arial,sans-serif" font-size="16" fill="#94a3b8" text-anchor="middle">${h}</text>`; }).join('');
-writeFileSync(`${OUT}/night-shift-canada.svg`, svgHead('When shifts start') +
-  `<text x="60" y="90" font-family="Helvetica,Arial,sans-serif" font-size="40" fill="#e2e8f0">${notNineShare}% of shifts entered do not start at 9 a.m.</text>` +
-  `<text x="60" y="135" font-family="Helvetica,Arial,sans-serif" font-size="26" fill="#94a3b8">${nightShare}% start between 6 p.m. and 6 a.m. · grey bar = 9 a.m. · ${shiftTotal.toLocaleString('en-CA')} shift calculations</text>` + bars + foot);
+const maxH = Math.max(...edited, 1);
+const bars = edited.map((n, h) => { const x = 60 + h * 45, hgt = Math.round((n / maxH) * 270); return `<rect x="${x}" y="${470 - hgt}" width="34" height="${hgt}" fill="${h >= 18 || h < 6 ? '#dc2626' : '#64748b'}"/><text x="${x + 17}" y="500" ${F} font-size="16" fill="#94a3b8" text-anchor="middle">${h}</text>`; }).join('');
+writeFileSync(`${OUT}/night-shift-canada.svg`, head('When shifts start') +
+  `<text x="60" y="90" ${F} font-size="40" fill="#e2e8f0">${editedBefore7}% of the shifts people typed in start before 7 a.m.</text>` +
+  `<text x="60" y="130" ${F} font-size="24" fill="#94a3b8">${editedNight}% start between 6 p.m. and 6 a.m. (red).</text>` +
+  `<text x="60" y="162" ${F} font-size="24" fill="#94a3b8">Start hour of ${fmt(editedTotal)} schedules that visitors changed from the form's 9-to-5 default.</text>` + bars + foot);
 
-writeFileSync(`${OUT}/weighing-a-move.svg`, svgHead('Weighing a move') +
-  `<text x="60" y="140" font-family="Helvetica,Arial,sans-serif" font-size="44" fill="#e2e8f0">In one sitting,</text>` +
-  `<text x="60" y="330" font-family="Helvetica,Arial,sans-serif" font-size="200" font-weight="700" fill="#dc2626">${moveShare}%</text>` +
-  `<text x="60" y="420" font-family="Helvetica,Arial,sans-serif" font-size="44" fill="#e2e8f0">of visits compare their pay in two or more provinces.</text>` + foot);
-
-// ── Article body ──────────────────────────────────────────────────────────
-writeFileSync(`${OUT}/story.md`, `# ${upShare}% of Canadians who re-run a pay calculator are pricing a raise, not a pay cut
-
-*Generated ${today} from ${N.toLocaleString('en-CA')} anonymous calculations. Every figure below is a share of this sample; none is a claim about the Canadian population. Free to cite or republish with a link (CC BY 4.0).*
-
-## What this is, and what it is not
-
-CanPay Insights is a free take-home-pay calculator. Nobody's exact income is stored — only which of seven brackets it falls in — and no IP address, account or device fingerprint is kept. What the calculator can see, and Statistics Canada cannot, is **behaviour**: how people use a pay number once they have it.
-
-The sample is self-selected. People who go looking for a pay calculator skew lower-income than the country (${'{'}see the methodology note${'}'}), so nothing here should be read as "Canadians earn X". Read it as "this is what people do with a pay figure".
-
-## 1. Pricing the raise
-
-${multiShare}% of visits calculate more than once. Of those, ${variedIncomeShare}% change the income between runs — and when they do, **${upShare}% move it up**. People are not modelling a pay cut they fear; they are pricing the raise or the offer they hope for.
-
-![](pricing-the-raise.svg)
-
-## 2. Night-shift Canada
-
-Of ${shiftTotal.toLocaleString('en-CA')} shift calculations, **${notNineShare}% start somewhere other than 9 a.m.**, and ${nightShare}% start between 6 p.m. and 6 a.m. There is no public dataset of when Canadian shifts actually begin; this is the closest thing to one.
-
-![](night-shift-canada.svg)
-
-## 3. Weighing a move
-
-**${moveShare}% of visits compare the same pay in two or more provinces in one sitting.** Interprovincial migration shows up in official statistics a year after the move; this is what it looks like while someone is still deciding.
-
-![](weighing-a-move.svg)
-
-## Methodology
-
-- Source: anonymous, aggregate events from canpayinsights.ca and the CanPay Insights iPhone app, ${N.toLocaleString('en-CA')} calculations to ${today}. Owner and test traffic excluded.
-- Income is recorded as one of seven brackets, never an amount. Location is a city centroid from the edge network, never an IP address.
-- Self-selection: 64% of calculations sit below the Statistics Canada median wage for the chosen province. This sample is not Canada; the behaviour patterns are what is reported.
-- Full definitions and live figures: https://canpayinsights.ca/data · Contact: info@canpayinsights.ca
-`);
+writeFileSync(`${OUT}/weighing-a-move.svg`, head('Weighing a move') +
+  `<text x="60" y="140" ${F} font-size="44" fill="#e2e8f0">In one sitting,</text>` +
+  `<text x="60" y="330" ${F} font-size="200" font-weight="700" fill="#dc2626">${moveShare}%</text>` +
+  `<text x="60" y="420" ${F} font-size="44" fill="#e2e8f0">of visits price the same pay in two or more provinces.</text>` +
+  `<text x="60" y="490" ${F} font-size="26" fill="#94a3b8">${fmt(intent.sessions.total)} visits</text>` + foot);
 
 // ── Pitch ─────────────────────────────────────────────────────────────────
-writeFileSync(`${OUT}/pitch.md`, `Subject: New Canadian pay data — ${upShare}% re-run the calculator with a HIGHER income
+writeFileSync(`${OUT}/pitch.md`, `Subject: pay calculator data — ${net.upShare}% end on a higher income
 
 Hi [Name],
 
-I read your piece on [specific article — one line on why it was good]. I run CanPay Insights, a free Canadian take-home-pay calculator, and I just published original data from ${N.toLocaleString('en-CA')} anonymous calculations that I think fits your beat:
+I read your piece on [specific article — one line on why it was good]. I run CanPay Insights, a free Canadian take-home-pay calculator, and I've published what ${fmt(N)} anonymous calculations show about how people use a pay number:
 
-- When people re-run the calculator with a different income, ${upShare}% try a higher number — they are pricing a raise, not a pay cut.
-- ${notNineShare}% of shifts entered do not start at 9 a.m. (${nightShare}% start between 6 p.m. and 6 a.m.). No public dataset records when Canadian shifts begin.
-- ${moveShare}% of visits compare their pay in two or more provinces in one sitting.
+- Of visitors who changed the income they'd entered, ${net.upShare}% ended on a higher figure than they started with. They're pricing a raise or an offer, not bracing for a cut.
+- ${editedBefore7}% of the shifts people typed in start before 7 a.m., and ${editedNight}% start between 6 p.m. and 6 a.m. I don't know of a public dataset of when Canadian shifts begin.
+- ${moveShare}% of visits price the same pay in two or more provinces in one sitting — interprovincial moves while they're still being weighed.
 
-It is behavioural data — what people do with a pay number — not a claim about what Canadians earn; the methodology and the self-selection caveat are on the page. Free to cite or republish with a link: https://canpayinsights.ca/blog/[slug]
+It's behaviour, not earnings: the sample is people who went looking for a pay calculator (${belowMedianShare}% of calculations are below their province's median wage), and the page says so, with the count behind every figure and how each was tested:
+${PAGE}
 
-Happy to pull a custom cut for [their angle — e.g. Ontario only, or minimum-wage workers] if useful.
+Free to cite, charts included. If a cut by province or income range would help your angle, I can pull one.
 
-— Travis Zhang, CanPay Insights (canpayinsights.ca)
+Travis Zhang
+CanPay Insights · info@canpayinsights.ca
 `);
 
-console.log(`n=${N} · raise-up ${upShare}% · not-9am ${notNineShare}% (night ${nightShare}%) · multi-prov ${moveShare}%`);
-console.log(`→ ${OUT}/story.md, pitch.md, 3 svg`);
+const snapshot = {
+  generated: today, since: stats.first_event.slice(0, 10), n: N, sessions: j.sessions, excluded: stats.excluded_rows,
+  raise: { multiShare, multiSessions: j.multi, variedIncomeShare, net, steps, later },
+  shifts: { allTotal, editedTotal, defaultRows: allTotal - editedTotal, notNineFloor, nightFloor, editedBefore7, editedNight, edited },
+  move: { share: moveShare, sessions: intent.sessions.total, multiProv: intent.sessions.multi_prov },
+  belowMedianShare,
+};
+console.log(JSON.stringify({ ...snapshot, shifts: { ...snapshot.shifts, edited: '…' } }, null, 1));
+
+if (PUBLISH) {
+  mkdirSync('content/research', { recursive: true });
+  mkdirSync('public/research', { recursive: true });
+  for (const f of ['pricing-the-raise', 'night-shift-canada', 'weighing-a-move']) copyFileSync(`${OUT}/${f}.svg`, `public/research/${f}.svg`);
+  writeFileSync('content/research/pay-behaviour.json', JSON.stringify(snapshot, null, 2) + '\n');
+  console.log('→ PUBLISHED SNAPSHOT: content/research/pay-behaviour.json + public/research/*.svg');
+}

@@ -1,15 +1,17 @@
-Subject: New Canadian pay data — 60% re-run the calculator with a HIGHER income
+Subject: pay calculator data — 62% end on a higher income
 
 Hi [Name],
 
-I read your piece on [specific article — one line on why it was good]. I run CanPay Insights, a free Canadian take-home-pay calculator, and I just published original data from 3,155 anonymous calculations that I think fits your beat:
+I read your piece on [specific article — one line on why it was good]. I run CanPay Insights, a free Canadian take-home-pay calculator, and I've published what 4,317 anonymous calculations show about how people use a pay number:
 
-- When people re-run the calculator with a different income, 60% try a higher number — they are pricing a raise, not a pay cut.
-- 50% of shifts entered do not start at 9 a.m. (6% start between 6 p.m. and 6 a.m.). No public dataset records when Canadian shifts begin.
-- 11% of visits compare their pay in two or more provinces in one sitting.
+- Of visitors who changed the income they'd entered, 62% ended on a higher figure than they started with. They're pricing a raise or an offer, not bracing for a cut.
+- 13% of the shifts people typed in start before 7 a.m., and 8% start between 6 p.m. and 6 a.m. I don't know of a public dataset of when Canadian shifts begin.
+- 11% of visits price the same pay in two or more provinces in one sitting — interprovincial moves while they're still being weighed.
 
-It is behavioural data — what people do with a pay number — not a claim about what Canadians earn; the methodology and the self-selection caveat are on the page. Free to cite or republish with a link: https://canpayinsights.ca/blog/[slug]
+It's behaviour, not earnings: the sample is people who went looking for a pay calculator (66% of calculations are below their province's median wage), and the page says so, with the count behind every figure and how each was tested:
+https://canpayinsights.ca/research/pay-calculator-behaviour
 
-Happy to pull a custom cut for [their angle — e.g. Ontario only, or minimum-wage workers] if useful.
+Free to cite, charts included. If a cut by province or income range would help your angle, I can pull one.
 
-— Travis Zhang, CanPay Insights (canpayinsights.ca)
+Travis Zhang
+CanPay Insights · info@canpayinsights.ca

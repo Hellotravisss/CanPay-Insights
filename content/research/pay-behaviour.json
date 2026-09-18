@@ -1,0 +1,71 @@
+{
+  "generated": "2026-09-18",
+  "since": "2026-08-07",
+  "n": 4317,
+  "sessions": 1218,
+  "excluded": 19,
+  "raise": {
+    "multiShare": 76,
+    "multiSessions": 923,
+    "variedIncomeShare": 71,
+    "net": {
+      "up": 323,
+      "down": 198,
+      "n": 521,
+      "upShare": 62
+    },
+    "steps": {
+      "up": 837,
+      "down": 596,
+      "n": 1433,
+      "upShare": 58
+    },
+    "later": {
+      "up": 532,
+      "down": 417,
+      "n": 949,
+      "upShare": 56
+    }
+  },
+  "shifts": {
+    "allTotal": 3163,
+    "editedTotal": 2065,
+    "defaultRows": 1098,
+    "notNineFloor": 46,
+    "nightFloor": 5,
+    "editedBefore7": 13,
+    "editedNight": 8,
+    "edited": [
+      15,
+      1,
+      11,
+      4,
+      17,
+      42,
+      169,
+      344,
+      322,
+      596,
+      136,
+      59,
+      54,
+      20,
+      56,
+      7,
+      50,
+      81,
+      18,
+      15,
+      5,
+      6,
+      11,
+      26
+    ]
+  },
+  "move": {
+    "share": 11,
+    "sessions": 1219,
+    "multiProv": 132
+  },
+  "belowMedianShare": 66
+}
