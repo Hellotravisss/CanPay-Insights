@@ -178,6 +178,13 @@ export function calcStatsExtra(ev: Ev[]) {
     by_paychange: countBy(ev, 'change_direction'),
     by_intent: countBy(ev, 'intent'),
     by_shift_start: countBy(ev, 'shift_start_hour', { desc: false }),
+    // The form opens on 09:00–17:00 with a 30-minute break. A row carrying
+    // exactly that may be a real nine-to-five or a schedule nobody touched —
+    // the two cannot be told apart, so any share of "9 a.m. starts" over all
+    // rows is inflated. This cut keeps only schedules somebody edited.
+    by_shift_start_edited: countBy(
+      ev.filter((r) => r.shift_start_hour !== null && !(Number(r.shift_start_hour) === 9 && Number(r.shift_end_hour) === 17 && Number(r.unpaid_break_min) === 30)),
+      'shift_start_hour', { desc: false }),
     by_entry: countBy(ev, 'entry_path', { limit: 12 }),
     by_browser: countBy(ev, 'browser'),
     by_work_arrangement: countBy(ev, 'work_arrangement', { order: ['onsite', 'remote', 'hybrid'] }),
@@ -255,8 +262,16 @@ export function calcJourneys(ev: Ev[]) {
   }
   const v = [...s.values()];
   let up = 0, down = 0, same = 0;
+  // Two stricter counts of the same thing, so the headline can be checked
+  // against them: `later` drops each session's first step (someone who picks
+  // a province before typing a wage records the form's default wage first),
+  // and `net` gives every session one vote — where it ended against where it
+  // began — so a visitor who tries twenty figures counts once.
+  const later = { up: 0, down: 0 }, net = { up: 0, down: 0 };
   for (const x of v) {
     const seq = [...x.seq].sort((a, b) => a.t.localeCompare(b.t));
+    for (let i = 2; i < seq.length; i++) { if (seq[i].rank > seq[i - 1].rank) later.up++; else if (seq[i].rank < seq[i - 1].rank) later.down++; }
+    if (seq.length > 1) { const d = seq[seq.length - 1].rank - seq[0].rank; if (d > 0) net.up++; else if (d < 0) net.down++; }
     for (let i = 1; i < seq.length; i++) { if (seq[i].rank > seq[i - 1].rank) up++; else if (seq[i].rank < seq[i - 1].rank) down++; else same++; }
   }
   const multi = v.filter((x) => x.n > 1);
@@ -272,6 +287,8 @@ export function calcJourneys(ev: Ev[]) {
       nothing: multi.filter((x) => x.prov.size === 1 && x.br.size === 1 && x.rr.size === 1 && x.ot.size === 1).length,
     },
     income_moves: { up, down, same },
+    income_moves_later: later,
+    income_moves_net: net,
   };
 }
 
