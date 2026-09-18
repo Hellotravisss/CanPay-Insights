@@ -5,7 +5,7 @@ import AvowdCredit from '../../components/AvowdCredit';
 export const metadata: Metadata = {
   title: 'Free Embeddable Take-Home Pay Calculator Widget for Your Website',
   description:
-    'Add a free Canadian take-home pay calculator to your job board, blog, or website with one line of HTML. All provinces, 2026 tax rates, English/French/Chinese. No signup required.',
+    'Add a free Canadian take-home pay calculator to your job board, blog, or website with one line of HTML. All provinces, 2026 tax rates, ten languages, checked against the CRA payroll deduction tables. No signup required.',
   alternates: { canonical: 'https://canpayinsights.ca/widget' },
 };
 
@@ -27,7 +27,7 @@ const widgetFaq = [
   {
     question: 'Are the numbers accurate?',
     answer:
-      'The widget runs the exact same open calculation engine as canpayinsights.ca: 2026 federal and provincial income tax, CPP/CPP2 (QPP/QPIP in Quebec), and EI for all 13 provinces and territories.',
+      'The widget runs the exact same calculation engine as canpayinsights.ca: 2026 federal and provincial income tax, CPP/CPP2 (QPP/QPIP in Quebec), and EI for all 13 provinces and territories. Before every release the engine is compared with the CRA payroll deduction tables (T4032) and the Revenu Québec source deduction table — more than 10,000 rows — and a release that disagrees with them does not ship.',
   },
   {
     question: 'Can I set a default province or language?',
@@ -68,7 +68,8 @@ export default function WidgetPage() {
         </h1>
         <p className="mb-10 max-w-2xl leading-7 text-slate-600">
           One line of HTML gives your visitors an accurate Canadian salary-after-tax calculator —
-          2026 rates for every province, in English, French, and Chinese. Perfect for job boards,
+          2026 rates for every province and territory, in ten languages, checked line by line against the
+          payroll deduction tables the CRA publishes for employers. Perfect for job boards,
           immigration and newcomer resources, HR pages, and personal-finance blogs.
         </p>
 

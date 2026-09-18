@@ -165,6 +165,15 @@ const DataPage: React.FC = () => {
                 <li><strong className="text-slate-800">Expectation gap</strong> — who finds their take-home lower than they thought, by province and income.</li>
                 <li><strong className="text-slate-800">Work patterns</strong> — shift hours, unpaid breaks, overtime and tips by province and sector.</li>
               </ul>
+              <p className="text-sm leading-relaxed text-slate-600 mb-3">
+                Who asks for which: <strong className="text-slate-800">recruiters and compensation-data teams</strong> use
+                the pay ranges people actually test and the expectation gap;{' '}
+                <strong className="text-slate-800">lenders and mortgage teams</strong>, neighbourhood demand by income;{' '}
+                <strong className="text-slate-800">real-estate and relocation firms</strong>, the province pairs people
+                compare; <strong className="text-slate-800">immigration consultants and settlement agencies</strong>,
+                demand by interface language and province;{' '}
+                <strong className="text-slate-800">payroll and scheduling software</strong>, work patterns by sector.
+              </p>
               <p className="text-xs leading-5 text-slate-500 mb-3">
                 Always aggregates, never individual records. Any figure for a postal-code area needs at
                 least twenty people behind it; smaller cells are withheld. The sample is people who used
