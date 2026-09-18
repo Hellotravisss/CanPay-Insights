@@ -1,5 +1,19 @@
 # App Store 本地化文案 · CanPayInsights (6759822038)
 
+> **2026-09-16 更正与状态。** 本文件初稿建议加简体中文、旁遮普语等 10 种语言,那是错的。
+> 苹果官方表格(App Store Connect → App Store localizations)写明:**加拿大区只用
+> 英语(加拿大)和法语(加拿大)两种语言做搜索索引**。中文、旁遮普语的文案不会让在加拿大
+> App Store 搜索的人找到这个 App。
+>
+> **已经通过 App Store Connect API 写入 1.2.3 版本(待提交):**
+> - en-CA 名称 `CanPay Insights: Paycheck` · 副标题 `Take-Home Pay & Tax 2026` · 新关键词 · 宣传语 · 更新说明
+> - fr-CA 名称 `CanPay Insights : paie nette` · 副标题 `Salaire net et impôt 2026` · 关键词 · 描述 · 宣传语 · 更新说明 · 法语隐私政策链接
+> - 宣传语同时写进了已上架的 1.2.2(此字段免审核,即时生效)
+>
+> 写入用的文案源在 scratchpad `asc/copy.py`;下面保留初稿内容仅供参考,**以 App Store Connect 里的实际值为准**。
+
+---
+
 为什么做这件事：App Store 的搜索**只用你提交的本地化文案**。现在语言栏只有 English，
 所以在 App Store 里用法语搜 “calculateur de paie net”、用中文搜「加拿大工资计算器」的人
 搜不到我们——尽管 App 本身支持 10 种语言。网页端最近的计算里 iOS 占 47%，

@@ -7,11 +7,11 @@ export const studyArticles: Article[] = [
   {
     id: 'study-1',
     slug: 'minimum-wage-take-home-pay-canada-2026',
-    title: 'Minimum Wage Take-Home Pay in Every Canadian Province (June 2026 Data)',
+    title: 'Minimum Wage Take-Home Pay in Every Canadian Province (2026 Data)',
     subtitle:
       'We calculated what a full-time minimum wage worker actually keeps after federal tax, provincial tax, CPP, and EI in all 13 provinces and territories',
     excerpt:
-      'Nunavut minimum wage workers take home $34,603 a year while Alberta workers keep $26,989 — a $7,614 gap. New 2026 data on what minimum wage is really worth after taxes in every province.',
+      'Nunavut minimum wage workers take home $35,265 a year while Alberta workers keep $26,989 — an $8,276 gap. Current 2026 data on what minimum wage is really worth after taxes in every province.',
     metaTitle: 'Minimum Wage After Tax by Province: 2026 Canadian Data Study',
     metaDescription:
       'Original 2026 data: full-time minimum wage take-home pay in all 13 Canadian provinces and territories. Nova Scotia workers lose 18.6% to deductions; Alberta workers lose 13.5%.',
@@ -26,10 +26,11 @@ export const studyArticles: Article[] = [
     category: 'salary',
     tags: ['Minimum Wage', '2026', 'Data Study', 'All Provinces'],
     publishedAt: '2026-06-12',
+    updatedAt: '2026-09-17',
     readTime: 9,
     imageUrl: '/blog/minimum-wage-take-home-2026.png',
     directAnswer:
-      'As of June 2026, a full-time minimum wage worker takes home between $26,989 a year (Alberta, $15.00/hr) and $34,603 a year (Nunavut, $19.75/hr) after federal tax, provincial tax, CPP, and EI. In Ontario ($17.60/hr), full-time minimum wage works out to $30,409 a year or about $2,534 a month after deductions.',
+      'As of September 2026, a full-time minimum wage worker takes home between $26,989 a year (Alberta, $15.00/hr) and $35,265 a year (Nunavut, $20.17/hr) after federal tax, provincial tax, CPP, and EI. In Ontario ($17.60/hr), full-time minimum wage works out to $30,409 a year or about $2,534 a month after deductions.',
     faq: [
       {
         question: 'How much does a minimum wage worker take home in Ontario in 2026?',
@@ -39,7 +40,7 @@ export const studyArticles: Article[] = [
       {
         question: 'Which province has the highest minimum wage take-home pay in Canada?',
         answer:
-          'Nunavut, at $19.75/hr, produces the highest full-time take-home pay: about $34,603 a year. Among provinces (excluding territories), British Columbia leads at roughly $31,889 a year on its $18.25 minimum wage, followed by Ontario at $30,409.',
+          'Nunavut, at $20.17/hr, produces the highest full-time take-home pay: about $35,265 a year. Among provinces (excluding territories), British Columbia leads at roughly $31,889 a year on its $18.25 minimum wage, followed by Ontario at $30,409.',
       },
       {
         question: 'How much tax does a minimum wage worker pay in Canada?',
@@ -61,22 +62,22 @@ We ran every provincial and territorial minimum wage (current as of June 12, 202
 
 ### Key findings
 
-- **The national gap is $7,614 a year.** A full-time minimum wage worker in Nunavut takes home $34,603; in Alberta, $26,989.
+- **The national gap is $8,276 a year.** A full-time minimum wage worker in Nunavut takes home $35,265; in Alberta, $26,989.
 - **Nova Scotia takes the biggest bite.** Deductions consume 18.6% of a minimum wage salary in Nova Scotia — the highest in Canada. Alberta takes the smallest share (13.5%), but its $15.00 wage is so low that Alberta workers still finish last in actual dollars.
 - **PEI's higher wage mostly evaporates.** PEI's $17.00 wage is 40 cents above Quebec's $16.60, but after deductions the difference shrinks to about $54 a month.
 - **Saskatchewan nearly catches Manitoba.** Saskatchewan pays 65 cents less per hour than Manitoba, but its lower deductions close the annual net gap to just $415.
 
-### Full results: minimum wage take-home pay by province (June 2026)
+### Full results: minimum wage take-home pay by province (rates in force September 2026)
 
 Figures assume full-time hours (40 hours/week, 2,080 hours/year), basic personal amounts only, and 2026 tax rates.
 
 | Province | Min. wage | Gross (full-time) | Take-home / year | Take-home / month | Net hourly | Deduction rate |
 | --- | --- | --- | --- | --- | --- | --- |
-| Nunavut | $19.75 | $41,080 | **$34,603** | $2,884 | $16.64 | 15.8% |
+| Nunavut | $20.17 | $41,954 | **$35,265** | $2,939 | $16.95 | 15.9% |
 | Yukon | $18.51 | $38,501 | **$32,152** | $2,679 | $15.46 | 16.5% |
 | British Columbia | $18.25 | $37,960 | **$31,889** | $2,657 | $15.33 | 16.0% |
 | Ontario | $17.60 | $36,608 | **$30,409** | $2,534 | $14.62 | 16.9% |
-| Northwest Territories | $16.95 | $35,256 | **$29,853** | $2,488 | $14.35 | 15.3% |
+| Northwest Territories | $17.20 | $35,776 | **$30,238** | $2,520 | $14.54 | 15.5% |
 | Prince Edward Island | $17.00 | $35,360 | **$29,054** | $2,421 | $13.97 | 17.8% |
 | Quebec | $16.60 | $34,528 | **$28,402** | $2,367 | $13.66 | 17.7% |
 | Nova Scotia | $16.75 | $34,840 | **$28,366** | $2,364 | $13.64 | 18.6% |
@@ -92,12 +93,12 @@ Figures assume full-time hours (40 hours/week, 2,080 hours/year), basic personal
 
 Translating take-home pay back into an hourly figure shows how much of every advertised minimum wage hour a worker actually keeps:
 
-- **Nunavut:** $19.75 advertised → **$16.64 in the bank**
+- **Nunavut:** $20.17 advertised → **$16.95 in the bank**
 - **Ontario:** $17.60 advertised → **$14.62 in the bank**
 - **Quebec:** $16.60 advertised → **$13.66 in the bank**
 - **Alberta:** $15.00 advertised → **$12.98 in the bank**
 
-No Canadian jurisdiction lets a full-time minimum wage worker keep more than 87% of their gross pay.
+No Canadian jurisdiction lets a full-time minimum wage worker keep more than 87% of their gross pay — Alberta, the lightest, keeps 86.5%.
 
 ### Why the deduction rates differ so much
 

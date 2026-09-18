@@ -5,6 +5,11 @@ import { PayFrequency, Province } from '../types';
 
 const HOURS_PER_YEAR = 2080; // 40 hrs/week x 52 weeks
 
+// General adult rates, each verified on the jurisdiction's own site 2026-09-17.
+// Scheduled next steps: ON $17.95, SK $15.70, MB $16.40, NS $17.00, PE $17.30 —
+// all on 2026-10-01. Update this table that morning, rerun, and regenerate the
+// study; nothing here should ever be edited from a news summary.
+
 const MIN_WAGES: Array<{ province: Province; label: string; wage: number }> = [
   { province: Province.AB, label: 'Alberta', wage: 15.0 },
   { province: Province.SK, label: 'Saskatchewan', wage: 15.35 },
@@ -13,12 +18,12 @@ const MIN_WAGES: Array<{ province: Province; label: string; wage: number }> = [
   { province: Province.NL, label: 'Newfoundland and Labrador', wage: 16.35 },
   { province: Province.QC, label: 'Quebec', wage: 16.6 },
   { province: Province.NS, label: 'Nova Scotia', wage: 16.75 },
-  { province: Province.NT, label: 'Northwest Territories', wage: 16.95 },
+  { province: Province.NT, label: 'Northwest Territories', wage: 17.2 }, // ↑ 2026-09-01, ece.gov.nt.ca
   { province: Province.PE, label: 'Prince Edward Island', wage: 17.0 },
   { province: Province.ON, label: 'Ontario', wage: 17.6 },
   { province: Province.BC, label: 'British Columbia', wage: 18.25 },
   { province: Province.YT, label: 'Yukon', wage: 18.51 },
-  { province: Province.NU, label: 'Nunavut', wage: 19.75 },
+  { province: Province.NU, label: 'Nunavut', wage: 20.17 }, // ↑ 2026-09-01, gov.nu.ca
 ];
 
 const money = (n: number) => `$${Math.round(n).toLocaleString('en-CA')}`;
