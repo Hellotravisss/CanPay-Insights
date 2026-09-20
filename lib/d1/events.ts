@@ -28,6 +28,14 @@ const BRACKET_LABELS = ['Under $30k', '$30–50k', '$50–70k', '$70–90k', '$9
 // same. The key carries region and country; the label drops them again.
 const placeKey = (r: Ev) => `${r.city}|${r.region ?? ''}|${r.country ?? ''}`;
 const placeName = (key: string) => key.split('|')[0];
+// For lists that print a city as text: the bare name, unless two different
+// places share it — then "Richmond, BC" and "Richmond, ON" get a row each.
+function withPlaceLabels(rows: Ev[]): Ev[] {
+  const keys = new Map<string, Set<string>>();
+  for (const r of rows) if (r.city) keys.set(r.city as string, (keys.get(r.city as string) ?? new Set()).add(placeKey(r)));
+  return rows.map((r) => (r.city && keys.get(r.city as string)!.size > 1
+    ? { ...r, city: `${r.city}, ${r.region ?? r.country ?? '?'}` } : r));
+}
 const fmtDate = new Intl.DateTimeFormat('en-CA', { timeZone: TZ, year: 'numeric', month: '2-digit', day: '2-digit' });
 /** ISO timestamp → YYYY-MM-DD in Vancouver (Postgres: created_at at time zone 'America/Vancouver')::date */
 export function localDate(iso: string): string {
@@ -135,7 +143,7 @@ export function calcStats(all: Ev[], excludedCount: number) {
     by_bracket: countBy(ev, 'income_bracket', { order: BRACKETS }),
     by_lang: countBy(ev, 'lang'),
     by_country: countBy(ev, 'country', { limit: 15 }),
-    by_city: countBy(ev, 'city', { limit: 15 }),
+    by_city: countBy(withPlaceLabels(ev), 'city', { limit: 15 }),
     cities_geo: [...cities.entries()].map(([key, c]) => ({
       city: placeName(key), lat: Math.round((c.lat.reduce((a, b) => a + b, 0) / c.n) * 1000) / 1000,
       lon: Math.round((c.lon.reduce((a, b) => a + b, 0) / c.n) * 1000) / 1000, n: c.n,
@@ -569,7 +577,8 @@ export function monthlySnapshot(ev: Ev[], month: string /* YYYY-MM */) {
     month, schema_version: 1, methodology: 'docs/telemetry-methodology.md',
     events: rows.length, visits: distinct(rows, 'session_id'),
     by_province: obj('province'), by_bracket: obj('income_bracket'), by_median_ratio: obj('median_ratio_bucket'),
-    by_lang: obj('lang'), by_country: obj('country'), by_city: obj('city', 3), by_device: obj('device'),
+    by_lang: obj('lang'), by_country: obj('country'),
+    by_city: Object.fromEntries(countBy(withPlaceLabels(rows), 'city').filter((r) => r.n >= 3).map((r) => [String(r.k), r.n])), by_device: obj('device'),
     by_source: obj('source'), by_mode: obj('mode'), by_industry: obj('industry'), by_intent: obj('intent'),
     by_hour: obj('local_hour'), by_dow: obj('local_dow'),
     work: {
