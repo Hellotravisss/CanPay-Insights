@@ -22,6 +22,12 @@ const BRACKETS = ['under-30k', '30-50k', '50-70k', '70-90k', '90-120k', '120-160
 const BRACKET_LABELS = ['Under $30k', '$30–50k', '$50–70k', '$70–90k', '$90–120k', '$120–160k', '$160k+'];
 
 // ── helpers ───────────────────────────────────────────────────────────────
+// A city name is not a place. Grouping dots by name alone averaged Sydney,
+// Nova Scotia (32 visits) with Sydney, Australia (2) and drew one dot in the
+// middle of the North Atlantic; London, Victoria and Richmond would do the
+// same. The key carries region and country; the label drops them again.
+const placeKey = (r: Ev) => `${r.city}|${r.region ?? ''}|${r.country ?? ''}`;
+const placeName = (key: string) => key.split('|')[0];
 const fmtDate = new Intl.DateTimeFormat('en-CA', { timeZone: TZ, year: 'numeric', month: '2-digit', day: '2-digit' });
 /** ISO timestamp → YYYY-MM-DD in Vancouver (Postgres: created_at at time zone 'America/Vancouver')::date */
 export function localDate(iso: string): string {
@@ -112,8 +118,8 @@ export function calcStats(all: Ev[], excludedCount: number) {
   for (const r of ev) { const d = localDate(r.created_at as string); if (d > thirty) daily.set(d, (daily.get(d) ?? 0) + 1); }
   const cities = new Map<string, { lat: number[]; lon: number[]; n: number }>();
   for (const r of ev) if (r.city && r.lat !== null && r.lon !== null) {
-    const c = cities.get(r.city as string) ?? { lat: [], lon: [], n: 0 };
-    c.lat.push(r.lat as number); c.lon.push(r.lon as number); c.n++; cities.set(r.city as string, c);
+    const c = cities.get(placeKey(r)) ?? { lat: [], lon: [], n: 0 };
+    c.lat.push(r.lat as number); c.lon.push(r.lon as number); c.n++; cities.set(placeKey(r), c);
   }
   const perSession = new Map<string, number>();
   for (const r of ev) if (r.session_id) perSession.set(r.session_id as string, (perSession.get(r.session_id as string) ?? 0) + 1);
@@ -130,8 +136,8 @@ export function calcStats(all: Ev[], excludedCount: number) {
     by_lang: countBy(ev, 'lang'),
     by_country: countBy(ev, 'country', { limit: 15 }),
     by_city: countBy(ev, 'city', { limit: 15 }),
-    cities_geo: [...cities.entries()].map(([city, c]) => ({
-      city, lat: Math.round((c.lat.reduce((a, b) => a + b, 0) / c.n) * 1000) / 1000,
+    cities_geo: [...cities.entries()].map(([key, c]) => ({
+      city: placeName(key), lat: Math.round((c.lat.reduce((a, b) => a + b, 0) / c.n) * 1000) / 1000,
       lon: Math.round((c.lon.reduce((a, b) => a + b, 0) / c.n) * 1000) / 1000, n: c.n,
     })).sort((a, b) => b.n - a.n).slice(0, 40),
     by_device: countBy(ev, 'device'),
@@ -362,7 +368,7 @@ export function calcCitiesGeo(ev: Ev[]) {
   const unnamed = new Map<string, { city: string; country: string; lat: number[]; lon: number[] }>();
   for (const r of ev) {
     if (r.lat === null || r.lon === null) continue;
-    if (r.city) { const c = named.get(r.city as string) ?? { lat: [], lon: [] }; c.lat.push(r.lat as number); c.lon.push(r.lon as number); named.set(r.city as string, c); }
+    if (r.city) { const c = named.get(placeKey(r)) ?? { lat: [], lon: [] }; c.lat.push(r.lat as number); c.lon.push(r.lon as number); named.set(placeKey(r), c); }
     else {
       const key = `${r.country ?? '?'}|${Math.round((r.lat as number) * 10) / 10}|${Math.round((r.lon as number) * 10) / 10}`;
       const c = unnamed.get(key) ?? { city: (r.country as string) ?? '?', country: (r.country as string) ?? '?', lat: [], lon: [] }; c.lat.push(r.lat as number); c.lon.push(r.lon as number); unnamed.set(key, c);
@@ -370,7 +376,7 @@ export function calcCitiesGeo(ev: Ev[]) {
   }
   const avg = (a: number[]) => Math.round((a.reduce((x, y) => x + y, 0) / a.length) * 1000) / 1000;
   const out = [
-    ...[...named.entries()].map(([city, c]) => ({ city, lat: avg(c.lat), lon: avg(c.lon), n: c.lat.length, intl: !inCanada(c.lat[0], c.lon[0]), named: true })),
+    ...[...named.entries()].map(([key, c]) => ({ city: placeName(key), lat: avg(c.lat), lon: avg(c.lon), n: c.lat.length, intl: !inCanada(c.lat[0], c.lon[0]), named: true })),
     ...[...unnamed.values()].map((c) => ({ city: c.city, lat: avg(c.lat), lon: avg(c.lon), n: c.lat.length, intl: c.country !== 'CA', named: false })),
   ];
   // Keep EVERY point outside Canada, then fill the rest with the busiest
