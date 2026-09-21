@@ -1,36 +1,36 @@
 {
-  "generated": "2026-09-18",
+  "generated": "2026-09-21",
   "since": "2026-08-07",
-  "n": 4317,
-  "sessions": 1218,
+  "n": 4623,
+  "sessions": 1312,
   "excluded": 19,
   "raise": {
     "multiShare": 76,
-    "multiSessions": 923,
-    "variedIncomeShare": 71,
+    "multiSessions": 991,
+    "variedIncomeShare": 70,
     "net": {
-      "up": 323,
-      "down": 198,
-      "n": 521,
-      "upShare": 62
+      "up": 349,
+      "down": 208,
+      "n": 557,
+      "upShare": 63
     },
     "steps": {
-      "up": 837,
-      "down": 596,
-      "n": 1433,
+      "up": 900,
+      "down": 641,
+      "n": 1541,
       "upShare": 58
     },
     "later": {
-      "up": 532,
-      "down": 417,
-      "n": 949,
+      "up": 573,
+      "down": 449,
+      "n": 1022,
       "upShare": 56
     }
   },
   "shifts": {
-    "allTotal": 3163,
-    "editedTotal": 2065,
-    "defaultRows": 1098,
+    "allTotal": 3383,
+    "editedTotal": 2213,
+    "defaultRows": 1170,
     "notNineFloor": 46,
     "nightFloor": 5,
     "editedBefore7": 13,
@@ -41,19 +41,19 @@
       11,
       4,
       17,
-      42,
-      169,
-      344,
-      322,
-      596,
-      136,
-      59,
+      55,
+      194,
+      357,
+      347,
+      640,
+      149,
+      61,
       54,
       20,
       56,
       7,
-      50,
-      81,
+      51,
+      93,
       18,
       15,
       5,
@@ -64,8 +64,8 @@
   },
   "move": {
     "share": 11,
-    "sessions": 1219,
-    "multiProv": 132
+    "sessions": 1313,
+    "multiProv": 146
   },
   "belowMedianShare": 66
 }
