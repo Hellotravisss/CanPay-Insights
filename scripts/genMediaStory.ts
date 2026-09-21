@@ -174,7 +174,7 @@ CanPay Insights · info@canpayinsights.ca
 
 ---
 
-## Variant for CBC Radio "Cost of Living" (costofliving@cbc.ca)
+## Variant for a radio show (address is in the vault target list)
 
 Replace the closing two lines with this — a radio show needs a person who can
 say it out loud, not a page to cite:
