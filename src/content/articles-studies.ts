@@ -2342,4 +2342,124 @@ The Alberta Energy Rebate doesn't touch payroll — it won't show up on a pay st
 Program terms — the $100/$200 payment amounts, eligibility criteria, application window, automatic-enrollment groups, and payment timing — are taken directly from the Government of Alberta's official [Alberta Energy Rebate](https://www.alberta.ca/alberta-energy-rebate) page and its published [program fact sheet](https://www.alberta.ca/system/files/tbf-alberta-energy-rebate-factsheet.pdf) (Treasury Board and Finance, July 1, 2026). The 3.4 million eligible Albertans and roughly $350 million total program cost are corroborated by contemporaneous CBC News and Global News reporting citing Alberta's government. Take-home pay and "raise needed to net $100" figures are CanPay Insights' own calculations, run through our tax engine using 2026 federal and provincial tax brackets, CPP/CPP2, and EI for a single full-time worker with basic personal amounts only — real paycheques vary with credits, benefits, and actual pay frequency. This is general information, not tax or financial advice; confirm your own eligibility at [alberta.ca/alberta-energy-rebate](https://www.alberta.ca/alberta-energy-rebate).
 `,
   },
+  {
+    id: 'study-22',
+    slug: 'nova-scotia-overtime-44-hours-2027',
+    title: "Nova Scotia's Overtime Threshold Drops to 44 Hours: What the Extra Hours Are Worth",
+    subtitle:
+      'Bill 256, tabled September 8, 2026, cuts the weekly overtime threshold from 48 hours to 44, extends overtime to voluntary extra hours, and bans employers from keeping tips — changes that take effect April 1, 2027.',
+    excerpt:
+      "Nova Scotia has tabled Bill 256, cutting the overtime threshold from 48 hours a week to 44 and giving legal protection to tips for the first time. The overtime and tips changes take effect April 1, 2027. We ran the math: a worker earning the province's $17.00 minimum wage who regularly works 48-hour weeks would earn about $1,768 more a year once those four hours switch from straight time to time-and-a-half.",
+    metaTitle: "NS Overtime Threshold Falls to 44 Hours in 2027",
+    metaDescription:
+      "Nova Scotia's Bill 256 cuts the overtime threshold from 48 to 44 hours a week, effective April 1, 2027, and protects tips. See what the extra hours are worth in real dollars.",
+    keywords: [
+      'nova scotia overtime threshold',
+      'nova scotia overtime 44 hours',
+      'bill 256 nova scotia',
+      'nova scotia labour standards code 2026',
+      'nova scotia overtime pay 2027',
+      'nova scotia tips law',
+    ],
+    category: 'news',
+    tags: ['Nova Scotia', 'Overtime', 'Labour Law', '2026'],
+    publishedAt: '2026-09-21',
+    readTime: 6,
+    imageUrl: '/blog/nova-scotia-overtime-44-hours-2027.svg',
+    directAnswer:
+      "Nova Scotia's Bill 256, tabled September 8, 2026, lowers the weekly overtime threshold from 48 hours to 44 hours, extends overtime eligibility to extra hours worked voluntarily (not just when required by an employer), and bans employers from keeping workers' tips and gratuities. The overtime and tips provisions take effect April 1, 2027; wage-recovery measures follow once regulations are developed. Construction and agriculture workers are excluded. For a worker earning Nova Scotia's $17.00 minimum wage (effective October 1, 2026) who regularly works 48 hours a week, the change is worth about $34 more a week, or roughly $1,768 more a year, once hours 45 through 48 switch from straight time to time-and-a-half.",
+    faq: [
+      {
+        question: "What is Nova Scotia's Bill 256?",
+        answer:
+          "Bill 256 is a set of amendments to Nova Scotia's Labour Standards Code, tabled in the provincial legislature on September 8, 2026. It lowers the weekly overtime threshold from 48 hours to 44 hours, extends overtime pay to extra hours an employee works voluntarily (previously overtime applied only when an employer required the extra hours), bans employers from keeping any part of a worker's tips or gratuities, and gives the province new tools to help recover unpaid wages from employers. As of mid-September 2026 the bill was still before the Legislature's Public Bills Committee and had not received royal assent.",
+      },
+      {
+        question: "When do Nova Scotia's new overtime rules take effect?",
+        answer:
+          "The overtime-threshold and tips provisions take effect April 1, 2027. The wage-recovery measures will come into force later, after the province consults stakeholders and develops the supporting regulations — no date has been set for that part.",
+      },
+      {
+        question: "How much more will a Nova Scotia worker earn under the new 44-hour threshold?",
+        answer:
+          "It depends on the hourly wage and how many hours are worked. At Nova Scotia's $17.00 minimum wage (effective October 1, 2026), a worker who works a steady 48-hour week currently earns $816.00 with no overtime (48 x $17.00). Under the new 44-hour threshold, the same week pays 44 hours at $17.00 plus 4 hours at time-and-a-half ($25.50): 44 x $17.00 = $748.00, plus 4 x $25.50 = $102.00, for a total of $850.00 — $34.00 more per week, or about $1,768 more over a 52-week year. The gain scales with wage: it works out to roughly 2 x the hourly wage in extra pay per 48-hour week (4 hours x half-time premium).",
+      },
+      {
+        question: "Does the new rule cover overtime hours an employee chooses to work?",
+        answer:
+          "Yes — this is a separate change from the lower threshold. Under the current Labour Standards Code, some workers only qualify for overtime pay when an employer requires the extra hours. Bill 256 extends overtime eligibility to extra hours an employee works voluntarily and the employer permits, not only hours the employer specifically requires.",
+      },
+      {
+        question: "What does Nova Scotia's new tips law do?",
+        answer:
+          "It adds tip and gratuity protections to the Labour Standards Code for the first time, banning employers from keeping any portion of tips or gratuities that belong to the workers who earned them. Previously, tips were not directly addressed in the Code.",
+      },
+      {
+        question: "Who is excluded from the new overtime and tips protections?",
+        answer:
+          "The Government of Nova Scotia says the new protections will not apply to workers in the construction and agriculture sectors. Managers, supervisors, and certain other categories already fall under separate overtime rules (typically time-and-a-half based on the minimum wage rather than the employee's regular wage) under the existing Labour Standards Code.",
+      },
+    ],
+    content: `
+## Overtime kicks in four hours sooner, starting in 2027
+
+Nova Scotia has tabled **Bill 256**, a package of amendments to the province's **Labour Standards Code**, introduced in the Legislature on **September 8, 2026**. The headline change for anyone paid by the hour: the weekly **overtime threshold drops from 48 hours to 44 hours**. Two more changes travel with it — overtime pay for extra hours worked *voluntarily*, not just when an employer requires them, and a first-time legal ban on employers keeping any part of workers' **tips and gratuities**.
+
+"At a time when affordability matters more than ever, this legislation is about putting more money in workers' pockets," Nova Scotia's Minister of Labour, Skills and Immigration, Nolan Young, said when the bill was tabled.
+
+### What changes, and when
+
+| Change | Detail | Effective date |
+| --- | --- | --- |
+| Overtime threshold | Falls from 48 hours/week to **44 hours/week** | April 1, 2027 |
+| Overtime eligibility | Extends to extra hours worked **voluntarily** and permitted by the employer, not only hours the employer required | April 1, 2027 |
+| Tips and gratuities | Employers **banned** from keeping any part of a worker's tips | April 1, 2027 |
+| Wage recovery | New tools to help recover unpaid wages owed by employers | To be set, after stakeholder consultation and regulations |
+| Excluded sectors | Construction and agriculture workers are **not** covered by the new overtime and tips provisions | — |
+
+As of this writing the bill remains before the Legislature's Public Bills Committee and has not yet received royal assent — it is proposed legislation, not yet law, though the government has committed to the April 1, 2027 effective date for the overtime and tips changes.
+
+## What four extra overtime hours are actually worth
+
+Nova Scotia's overtime rate for most employees is **1.5 times the regular wage** once the weekly threshold is crossed. Dropping the threshold from 48 to 44 hours means a worker who regularly works a 48-hour week gets **4 hours a week reclassified from straight time to time-and-a-half** — real money, not a rate change.
+
+Using Nova Scotia's minimum wage of **$17.00/hour** (effective October 1, 2026) as an example, for someone working a steady 48-hour week:
+
+| | Today (OT after 48 hrs) | Starting April 2027 (OT after 44 hrs) |
+| --- | --- | --- |
+| Regular hours | 48 x $17.00 = $816.00 | 44 x $17.00 = $748.00 |
+| Overtime hours | — | 4 x $25.50 (1.5x) = $102.00 |
+| **Weekly total** | **$816.00** | **$850.00** |
+| Extra per week | — | **+$34.00** |
+| Extra per year (52 weeks) | — | **+$1,768** |
+
+That gain scales directly with wage — it works out to roughly **2 times the hourly wage in extra weekly pay**, for anyone regularly working a 48-hour week once the threshold falls:
+
+| Hourly wage | Extra per 48-hour week | Extra per year (52 weeks) |
+| --- | --- | --- |
+| $17.00 (NS minimum wage, Oct. 2026) | +$34.00 | +$1,768 |
+| $20.00 | +$40.00 | +$2,080 |
+| $22.00 | +$44.00 | +$2,288 |
+| $25.00 | +$50.00 | +$2,600 |
+| $30.00 | +$60.00 | +$3,120 |
+
+*Figures assume the employee's regular hourly wage (not the special minimum-wage-based overtime rate that applies to managers and a few other categories) and a consistent 48-hour work week; actual pay varies with hours worked, wage, and role. These are gross figures before payroll deductions — see the [Nova Scotia paycheck calculator](/nova-scotia-paycheck-calculator) for what any given paycheque nets after tax, CPP, and EI.*
+
+## The other two changes, in plain terms
+
+**Voluntary overtime now counts.** Under the current Code, some employees only earn overtime when an employer *requires* the extra hours — an employee who stays late by choice, with the employer's permission, might not have a clear right to time-and-a-half. Bill 256 closes that gap: permitted voluntary hours would qualify for overtime pay the same as required ones.
+
+**Tips belong to the worker who earned them.** Nova Scotia's Labour Standards Code has not, until now, said anything specific about tips. Bill 256 would make it illegal for an employer to keep any part of a tip or gratuity intended for staff — a protection several other provinces, including Ontario, already have in some form.
+
+**Not everyone is covered.** The province has said the new overtime and tips provisions will not extend to workers in the **construction** and **agriculture** sectors, which have long had separate overtime rules under the Code.
+
+## Why this is a 2027 story worth knowing about now
+
+Because the effective date is more than a year out, it's easy to file this under "not yet relevant." But the threshold and rate a worker will be paid under starting April 1, 2027 is locked in as proposed legislation today, which matters for anyone comparing a Nova Scotia job offer, negotiating scheduled hours, or budgeting around regularly working past 44 hours a week. If you want to see what any wage — minimum, current, or a raise you're negotiating — actually nets after Nova Scotia's federal and provincial deductions, CPP, and EI, run it through the [Nova Scotia paycheck calculator](/nova-scotia-paycheck-calculator) or the [free salary calculator](/salary-after-tax-canada). For how Nova Scotia's take-home pay compares with the rest of the country, see [minimum wage take-home pay by province](/blog/minimum-wage-take-home-pay-canada-2026) and [compare provinces](/compare-provinces).
+
+## Sources & disclaimer
+
+Bill 256's provisions — the 44-hour overtime threshold, voluntary-overtime eligibility, the tips and gratuities ban, wage-recovery tools, the April 1, 2027 effective date, and the construction/agriculture exclusion — are taken from the Government of Nova Scotia's official [news release](https://news.novascotia.ca/en/2026/09/08/changes-labour-standards-code-will-strengthen-protections-workers) of September 8, 2026, and corroborated by [CBC News](https://www.cbc.ca/news/canada/nova-scotia/labour-standards-code-amendments-legislation-9.7343106) and [Canadian HR Reporter](https://www.hrreporter.com/focus-areas/payroll/province-moves-to-lower-overtime-threshold-protect-tips/394870) coverage of the same bill. Nova Scotia's current overtime rule (1.5x the regular wage after 48 hours/week) is from the province's own [overtime pay guidance](https://novascotia.ca/lae/employmentrights/overtime.asp). The $17.00 minimum wage is Nova Scotia's rate effective October 1, 2026, as previously reported by CanPay Insights. Dollar comparisons are CanPay Insights' own arithmetic based on those published rates; they are gross wages before income tax, CPP, and EI, and assume a consistent 48-hour work week — real pay varies by hours actually worked, employer, and role. Bill 256 had not received royal assent as of publication and remains subject to change as it moves through the Legislature. This is general information, not legal or tax advice; confirm current status at the [Nova Scotia Legislature](https://nslegislature.ca/).
+`,
+  },
 ];
