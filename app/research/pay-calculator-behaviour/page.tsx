@@ -14,10 +14,10 @@ const URL = 'https://canpayinsights.ca/research/pay-calculator-behaviour';
 const n = (x: number) => x.toLocaleString('en-CA');
 const day = new Date(`${snap.generated}T12:00:00Z`).toLocaleDateString('en-CA', { year: 'numeric', month: 'long', day: 'numeric', timeZone: 'UTC' });
 const since = new Date(`${snap.since}T12:00:00Z`).toLocaleDateString('en-CA', { year: 'numeric', month: 'long', day: 'numeric', timeZone: 'UTC' });
-const { raise, shifts, move } = snap;
+const { raise, shifts, move, lang, weekend } = snap;
 
 const title = `${raise.net.upShare}% of people who change the income on a Canadian pay calculator end on a higher figure`;
-const description = `What ${n(snap.n)} anonymous calculations show about how people use a pay number: pricing raises, shifts that start before 7 a.m., and comparing provinces. Counts, tests and limits for every figure. Free to cite.`;
+const description = `What ${n(snap.n)} anonymous calculations show about how people use a pay number: pricing raises, shifts that start before 7 a.m., comparing provinces, and the languages it is done in. Counts, tests and limits for every figure. Free to cite.`;
 
 export const metadata: Metadata = {
   title: `How People Use a Pay Number — ${n(snap.n)} Calculations`,
@@ -40,7 +40,7 @@ const jsonLd = {
   isAccessibleForFree: true,
 };
 
-function Finding({ k, figure, claim, children, img, alt }: { k: string; figure: string; claim: string; children: React.ReactNode; img: string; alt: string }) {
+function Finding({ k, figure, claim, children, img, alt }: { k: string; figure: string; claim: string; children: React.ReactNode; img?: string; alt?: string }) {
   return (
     <section className="border-t border-slate-200 py-12">
       <p className="mb-4 text-xs font-bold uppercase tracking-[0.2em] text-red-600">{k}</p>
@@ -49,6 +49,7 @@ function Finding({ k, figure, claim, children, img, alt }: { k: string; figure: 
         <h2 className="text-2xl font-bold leading-snug text-slate-900">{claim}</h2>
       </div>
       <div className="mt-6 max-w-2xl space-y-4 text-[15px] leading-7 text-slate-700">{children}</div>
+      {img ? (
       <figure className="mt-8">
         <img src={`/research/${img}.svg`} alt={alt} width={1200} height={630} className="w-full rounded-xl border border-slate-200" loading="lazy" />
         <figcaption className="mt-2 text-xs text-slate-500">
@@ -56,6 +57,7 @@ function Finding({ k, figure, claim, children, img, alt }: { k: string; figure: 
           <a href={`/research/${img}.svg`} download className="font-semibold text-red-600 hover:underline">Download SVG</a>
         </figcaption>
       </figure>
+      ) : null}
     </section>
   );
 }
@@ -158,6 +160,49 @@ export default function Page() {
               A visit counts when two or more different provinces appear in its calculations. Some of those
               visitors are curious rather than moving, and some are correcting a wrong first choice, so
               this is an upper reading of intent to relocate, not a count of movers.
+            </Test>
+          </Finding>
+          <Finding
+            k="4 · In which language"
+            figure={`${lang.nonEnglishShare}%`}
+            claim="worked out their Canadian pay in a language other than English."
+            img="in-which-language"
+            alt={`Interface language of ${n(lang.total)} calculations`}
+          >
+            <p>
+              {lang.zhShare}% of all the calculations were done in Chinese — about one in six. The
+              calculator offers ten languages, and the rest of the traffic spreads thinly across
+              French, Korean, Spanish, Punjabi, Hindi, Tagalog, Ukrainian and Vietnamese. Working out
+              what a job pays after tax is one of the first things anyone does on arriving in Canada,
+              and a good deal of it is not happening in English or French.
+            </p>
+            <Test>
+              This is the language the page was displayed in: either one the visitor chose from the
+              menu, or the language their phone or computer is set to. Unlike the shift and income
+              figures it involves no form default — a device language is a real setting either way.
+              It is not a measure of what anyone speaks at home or how well they read English; a
+              bilingual person may simply prefer their own language for a page full of numbers.
+              Thinly-served languages will also be understated, because a language nobody knows the
+              calculator offers is a language nobody arrives in.
+            </Test>
+          </Finding>
+
+          <Finding
+            k="5 · The weekend"
+            figure={`${weekend.share}%`}
+            claim="of the work schedules people typed in include a Saturday or a Sunday."
+          >
+            <p>
+              Of {n(weekend.n)} schedules entered by hourly workers, {weekend.share}% cover at least
+              one weekend day. Taken with the start times above, the picture is of a calculator being
+              used mostly by people whose week is not the standard one.
+            </p>
+            <Test>
+              The form opens on Monday to Friday with both weekend days switched off, so a weekend
+              day is only ever present because somebody switched it on. That makes this figure a
+              floor and never an inflated one — the opposite of the trap in finding 2, where the
+              default worked the other way. Anyone who works weekends but left the days alone is
+              counted here as not working them.
             </Test>
           </Finding>
         </div>

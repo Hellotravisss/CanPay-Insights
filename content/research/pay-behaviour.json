@@ -1,5 +1,5 @@
 {
-  "generated": "2026-09-21",
+  "generated": "2026-09-20",
   "since": "2026-08-07",
   "n": 4623,
   "sessions": 1312,
@@ -66,6 +66,41 @@
     "share": 11,
     "sessions": 1313,
     "multiProv": 146
+  },
+  "lang": {
+    "total": 4623,
+    "nonEnglishShare": 19,
+    "zhShare": 17,
+    "bars": [
+      {
+        "name": "Chinese",
+        "n": 770
+      },
+      {
+        "name": "French",
+        "n": 73
+      },
+      {
+        "name": "Korean",
+        "n": 8
+      },
+      {
+        "name": "Spanish",
+        "n": 6
+      },
+      {
+        "name": "Punjabi",
+        "n": 1
+      },
+      {
+        "name": "Vietnamese",
+        "n": 1
+      }
+    ]
+  },
+  "weekend": {
+    "share": 28,
+    "n": 3383
   },
   "belowMedianShare": 66
 }

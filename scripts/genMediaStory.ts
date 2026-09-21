@@ -42,7 +42,7 @@ async function api<T>(name: string): Promise<T> {
 type Row = { k: string | number | null; n: number };
 type UpDown = { up: number; down: number };
 const [stats, j, intent, extra, baro] = await Promise.all([
-  api<{ total: number; first_event: string; excluded_rows: number }>('stats'),
+  api<{ total: number; first_event: string; excluded_rows: number; by_lang: Row[]; work: { n: number; weekend_share: number } }>('stats'),
   api<{ sessions: number; multi: number; varied: { income: number }; income_moves: UpDown; income_moves_later: UpDown; income_moves_net: UpDown }>('journeys'),
   api<{ sessions: { total: number; multi_prov: number } }>('intent'),
   api<{ by_shift_start: Row[]; by_shift_start_edited: Row[] }>('stats_extra'),
@@ -72,15 +72,36 @@ const nightFloor = pct(nightOf(all), allTotal);
 // ── 3. Weighing a move ────────────────────────────────────────────────────
 const moveShare = pct(intent.sessions.multi_prov, intent.sessions.total);
 
+// ── 4. In which language ──────────────────────────────────────────────────
+// The interface language is either one the visitor picked or the one their
+// device is set to. Either way it is a real setting, not a form default — so
+// unlike the shift and income figures this needs no exclusion.
+const langRows = stats.by_lang.filter((r) => r.k !== null);
+const langTotal = langRows.reduce((a, r) => a + r.n, 0);
+const langOf = (k: string) => langRows.find((r) => r.k === k)?.n ?? 0;
+const nonEnglishShare = pct(langTotal - langOf('en'), langTotal);
+const zhShare = pct(langOf('zh'), langTotal);
+const langNamed: [string, string][] = [['zh', 'Chinese'], ['fr', 'French'], ['ko', 'Korean'], ['es', 'Spanish'], ['pa', 'Punjabi'], ['hi', 'Hindi'], ['tl', 'Tagalog'], ['uk', 'Ukrainian'], ['vi', 'Vietnamese']];
+const langBars = langNamed.map(([k, name]) => ({ name, n: langOf(k) })).filter((x) => x.n > 0).sort((a, b) => b.n - a.n);
+
+// ── 5. Weekends ───────────────────────────────────────────────────────────
+// The form opens on Monday-to-Friday, so a weekend day is only ever there
+// because somebody put it there. This one is a floor, never inflated.
+const weekendShare = Math.round(stats.work.weekend_share);
+const weekendN = stats.work.n;
+
 const belowMedianShare = Math.round(baro.year[baro.year.length - 1].below_median_share);
 const N = stats.total;
-const today = new Date().toISOString().slice(0, 10);
+// Vancouver's date, not UTC's. Stamping UTC put "September 21" on the page
+// while it was still the 20th here — on a page whose whole promise is a date
+// a reader can check.
+const today = new Date().toLocaleDateString('en-CA', { timeZone: 'America/Vancouver' });
 mkdirSync(OUT, { recursive: true });
 
 // ── Charts ────────────────────────────────────────────────────────────────
 const F = 'font-family="Helvetica,Arial,sans-serif"';
 const head = (title: string) => `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630" width="1200" height="630" role="img" aria-label="${title}"><rect width="1200" height="630" fill="#0f172a"/>`;
-const foot = `<text x="60" y="590" ${F} font-size="20" fill="#94a3b8">Source: CanPay Insights, anonymous calculator use · ${fmt(N)} calculations to ${today} · self-selected sample · CC BY 4.0</text></svg>`;
+const foot = `<text x="60" y="590" ${F} font-size="20" fill="#94a3b8">CanPay Insights · ${fmt(N)} calculations to ${today} · self-selected sample · CC BY 4.0</text></svg>`;
 
 writeFileSync(`${OUT}/pricing-the-raise.svg`, head('Pricing the raise') +
   `<text x="60" y="95" ${F} font-size="40" fill="#e2e8f0">Of visitors who changed the income</text>` +
@@ -95,6 +116,15 @@ writeFileSync(`${OUT}/night-shift-canada.svg`, head('When shifts start') +
   `<text x="60" y="90" ${F} font-size="40" fill="#e2e8f0">${editedBefore7}% of the shifts people typed in start before 7 a.m.</text>` +
   `<text x="60" y="130" ${F} font-size="24" fill="#94a3b8">${editedNight}% start between 6 p.m. and 6 a.m. (red).</text>` +
   `<text x="60" y="162" ${F} font-size="24" fill="#94a3b8">Start hour of ${fmt(editedTotal)} schedules that visitors changed from the form's 9-to-5 default.</text>` + bars + foot);
+
+const restLangs = langBars.slice(1).map((x) => `${x.name} ${fmt(x.n)}`).join(' · ');
+writeFileSync(`${OUT}/in-which-language.svg`, head('In which language') +
+  `<text x="60" y="95" ${F} font-size="40" fill="#e2e8f0">Of the calculations done in a language</text>` +
+  `<text x="60" y="145" ${F} font-size="40" fill="#e2e8f0">other than English —</text>` +
+  `<text x="60" y="355" ${F} font-size="200" font-weight="700" fill="#dc2626">${zhShare}%</text>` +
+  `<text x="60" y="435" ${F} font-size="40" fill="#e2e8f0">of everything was done in Chinese.</text>` +
+  `<text x="60" y="488" ${F} font-size="24" fill="#94a3b8">${nonEnglishShare}% were not in English at all.</text>` +
+  `<text x="60" y="524" ${F} font-size="22" fill="#94a3b8">Of ten languages offered, the rest: ${restLangs}.</text>` + foot);
 
 writeFileSync(`${OUT}/weighing-a-move.svg`, head('Weighing a move') +
   `<text x="60" y="140" ${F} font-size="44" fill="#e2e8f0">In one sitting,</text>` +
@@ -112,6 +142,8 @@ I read your piece on [specific article — one line on why it was good]. I run C
 - Of visitors who changed the income they'd entered, ${net.upShare}% ended on a higher figure than they started with. They're pricing a raise or an offer, not bracing for a cut.
 - ${editedBefore7}% of the shifts people typed in start before 7 a.m., and ${editedNight}% start between 6 p.m. and 6 a.m. I don't know of a public dataset of when Canadian shifts begin.
 - ${moveShare}% of visits price the same pay in two or more provinces in one sitting — interprovincial moves while they're still being weighed.
+- ${nonEnglishShare}% of the calculations were done in a language other than English, ${zhShare}% of them in Chinese.
+- ${weekendShare}% of the work schedules people typed in include a Saturday or a Sunday. The form opens on Monday-to-Friday, so every one of those is somebody correcting it.
 
 It's behaviour, not earnings: the sample is people who went looking for a pay calculator (${belowMedianShare}% of calculations are below their province's median wage), and the page says so, with the count behind every figure and how each was tested:
 ${PAGE}
@@ -139,6 +171,8 @@ const snapshot = {
   raise: { multiShare, multiSessions: j.multi, variedIncomeShare, net, steps, later },
   shifts: { allTotal, editedTotal, defaultRows: allTotal - editedTotal, notNineFloor, nightFloor, editedBefore7, editedNight, edited },
   move: { share: moveShare, sessions: intent.sessions.total, multiProv: intent.sessions.multi_prov },
+  lang: { total: langTotal, nonEnglishShare, zhShare, bars: langBars },
+  weekend: { share: weekendShare, n: weekendN },
   belowMedianShare,
 };
 console.log(JSON.stringify({ ...snapshot, shifts: { ...snapshot.shifts, edited: '…' } }, null, 1));
@@ -146,7 +180,7 @@ console.log(JSON.stringify({ ...snapshot, shifts: { ...snapshot.shifts, edited: 
 if (PUBLISH) {
   mkdirSync('content/research', { recursive: true });
   mkdirSync('public/research', { recursive: true });
-  for (const f of ['pricing-the-raise', 'night-shift-canada', 'weighing-a-move']) copyFileSync(`${OUT}/${f}.svg`, `public/research/${f}.svg`);
+  for (const f of ['pricing-the-raise', 'night-shift-canada', 'weighing-a-move', 'in-which-language']) copyFileSync(`${OUT}/${f}.svg`, `public/research/${f}.svg`);
   writeFileSync('content/research/pay-behaviour.json', JSON.stringify(snapshot, null, 2) + '\n');
   console.log('→ PUBLISHED SNAPSHOT: content/research/pay-behaviour.json + public/research/*.svg');
 }
