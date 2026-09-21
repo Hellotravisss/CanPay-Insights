@@ -56,8 +56,10 @@
 
 ## 补充渠道（不靠署名，成功率比冷邮件高）
 
-- **Featured.com / Qwoted** —— 记者在这里主动发需求找数据源。每天扫 Canada personal finance / cost of living / labour 类请求，几小时内回。
-  **对我们这种没人认识的小数据源，这是最现实的一条路**，优先级应排在冷邮件之上。
+- **Featured.com / Qwoted** —— 记者在这里主动发需求找数据源。**对我们这种没人认识的小数据源，这是最现实的一条路**，
+  优先级应排在冷邮件之上，而且**不需要邮寄地址就能开工**。
+  两个平台的专家资料、Qwoted 账号恢复邮件、每天怎么用，全在 `source-profile.md`。
+  状态（2026-09-20）：Qwoted 账号存在但被系统自动停用，待发信恢复；Featured 尚未注册（免费档确认可用）。
 - **Reddit r/PersonalFinanceCanada** —— 先答题，用真数字，链接只作来源；连续两周每天一条，再谈发数据帖。
 - **Daily Hive 自由投稿** —— `write@dailyhive.com`（masthead 上公开）。如果你想署自己的名发一篇，而不只是当消息源，走这个。
 - **法语线：La Presse / Le Devoir 经济版** —— 魁北克角度是所有竞品都忽略的。署名待抓取。
