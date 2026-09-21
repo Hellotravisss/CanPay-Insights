@@ -2,7 +2,7 @@ Subject: pay calculator data — 63% end on a higher income
 
 Hi [Name],
 
-I read your piece on [specific article — one line on why it was good]. I run CanPay Insights, a free Canadian take-home-pay calculator, and I've published what 4,623 anonymous calculations show about how people use a pay number:
+I read your piece on [specific article — one line on why it was good]. I run CanPay Insights, a free Canadian take-home-pay calculator, and I've published what 4,624 anonymous calculations show about how people use a pay number:
 
 - Of visitors who changed the income they'd entered, 63% ended on a higher figure than they started with. They're pricing a raise or an offer, not bracing for a cut.
 - 13% of the shifts people typed in start before 7 a.m., and 8% start between 6 p.m. and 6 a.m. I don't know of a public dataset of when Canadian shifts begin.

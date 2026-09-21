@@ -14,7 +14,7 @@ const URL = 'https://canpayinsights.ca/research/pay-calculator-behaviour';
 const n = (x: number) => x.toLocaleString('en-CA');
 const day = new Date(`${snap.generated}T12:00:00Z`).toLocaleDateString('en-CA', { year: 'numeric', month: 'long', day: 'numeric', timeZone: 'UTC' });
 const since = new Date(`${snap.since}T12:00:00Z`).toLocaleDateString('en-CA', { year: 'numeric', month: 'long', day: 'numeric', timeZone: 'UTC' });
-const { raise, shifts, move, lang, weekend } = snap;
+const { raise, shifts, move, lang, weekend, sample, history } = snap;
 
 const title = `${raise.net.upShare}% of people who change the income on a Canadian pay calculator end on a higher figure`;
 const description = `What ${n(snap.n)} anonymous calculations show about how people use a pay number: pricing raises, shifts that start before 7 a.m., comparing provinces, and the languages it is done in. Counts, tests and limits for every figure. Free to cite.`;
@@ -206,6 +206,78 @@ export default function Page() {
             </Test>
           </Finding>
         </div>
+
+        {/* A journalist's first doubt is not the arithmetic — it is whether
+            there is a real, continuous stream of Canadians behind the figures,
+            and whether they were picked on a flattering day. This section
+            answers both with evidence rather than assurance, and hands over
+            the file so nobody has to take our word for the sums. */}
+        <section className="border-t border-slate-200 py-12">
+          <p className="mb-4 text-xs font-bold uppercase tracking-[0.2em] text-red-600">Checking this</p>
+          <h2 className="mb-5 text-2xl font-bold text-slate-900">Where the numbers come from, and whether they hold</h2>
+
+          <div className="max-w-2xl space-y-4 text-[15px] leading-7 text-slate-700">
+            <p>
+              The {n(snap.n)} calculations arrived across {sample.days} days without a gap, from{' '}
+              {since} onward — between a few dozen and {n(sample.busiest)} a day.{' '}
+              <strong className="text-slate-900">{sample.caShare}% came from inside Canada.</strong>{' '}
+              The busiest provinces are{' '}
+              {sample.provinces.slice(0, 4).map((p) => `${p.k} (${n(p.n)})`).join(', ')}.
+            </p>
+          </div>
+
+          <figure className="mt-8">
+            <img src="/research/the-sample.svg" alt={`Daily calculations across ${sample.days} days`} width={1200} height={630} className="w-full rounded-xl border border-slate-200" loading="lazy" />
+            <figcaption className="mt-2 text-xs text-slate-500">
+              Free to reuse with credit to CanPay Insights ·{' '}
+              <a href="/research/the-sample.svg" download className="font-semibold text-red-600 hover:underline">Download SVG</a>
+            </figcaption>
+          </figure>
+
+          <h3 className="mb-3 mt-10 text-lg font-bold text-slate-900">Have the figures moved as the sample grew?</h3>
+          <p className="mb-4 max-w-2xl text-[15px] leading-7 text-slate-700">
+            Every time this page is reissued the previous figures stay on the record. A number that
+            barely moves while the sample grows was not a lucky week.
+          </p>
+          <div className="max-w-2xl overflow-x-auto">
+            <table className="w-full border-collapse text-sm">
+              <thead>
+                <tr className="border-b border-slate-300 text-left text-slate-500">
+                  <th className="py-2 pr-4 font-semibold">Figures as of</th>
+                  <th className="py-2 pr-4 font-semibold">Calculations</th>
+                  <th className="py-2 pr-4 font-semibold">Ended higher</th>
+                  <th className="py-2 pr-4 font-semibold">Start before 7 a.m.</th>
+                  <th className="py-2 font-semibold">Two provinces</th>
+                </tr>
+              </thead>
+              <tbody>
+                {history.map((h) => (
+                  <tr key={h.date} className="border-b border-slate-200 text-slate-700">
+                    <td className="py-2 pr-4">{h.date}</td>
+                    <td className="py-2 pr-4 tabular-nums">{n(h.n)}</td>
+                    <td className="py-2 pr-4 tabular-nums">{h.raise}%</td>
+                    <td className="py-2 pr-4 tabular-nums">{h.before7}%</td>
+                    <td className="py-2 tabular-nums">{h.move}%</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+
+          <h3 className="mb-3 mt-10 text-lg font-bold text-slate-900">Every number on this page, as a file</h3>
+          <p className="max-w-2xl text-[15px] leading-7 text-slate-700">
+            The page is rendered from one file, and that file is public. It holds the counts behind
+            every percentage — including the ones that were left out and why — so the arithmetic can
+            be checked without asking us for anything.
+          </p>
+          <a
+            href="/research/pay-behaviour.json"
+            download
+            className="mt-4 inline-flex items-center gap-2 rounded-lg border border-slate-300 px-4 py-2 text-sm font-bold text-slate-800 no-underline hover:border-red-300 hover:text-red-700"
+          >
+            Download the figures (JSON)
+          </a>
+        </section>
 
         <section className="border-t border-slate-200 py-12">
           <h2 className="mb-5 text-2xl font-bold text-slate-900">Method</h2>
