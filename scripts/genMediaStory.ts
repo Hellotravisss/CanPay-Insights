@@ -120,6 +120,18 @@ Free to cite, charts included. If a cut by province or income range would help y
 
 Travis Zhang
 CanPay Insights · info@canpayinsights.ca
+
+---
+
+## Variant for CBC Radio "Cost of Living" (costofliving@cbc.ca)
+
+Replace the closing two lines with this — a radio show needs a person who can
+say it out loud, not a page to cite:
+
+> I can talk through any of this on tape, including what the data cannot say.
+> The sample is people who came looking for a pay calculator, not a sample of
+> Canadians, and I would rather say that on air than have it become the
+> correction afterwards.
 `);
 
 const snapshot = {
