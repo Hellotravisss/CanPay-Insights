@@ -62,3 +62,10 @@ search_more.js
 .open-next/
 __pycache__/
 .wrangler/
+
+# Outreach lists and email templates: this repository is PUBLIC.
+# They hold third-party contacts and a mailing address. Vault only.
+drafts/widget-outreach/
+drafts/media/targets.md
+drafts/media/source-profile.md
+drafts/media/pitch.md

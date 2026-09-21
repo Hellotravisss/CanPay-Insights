@@ -29,6 +29,14 @@ government's own page whenever you audit.
 Follow `REPUBLISH` in the insights-kit repo: regenerate generated surfaces, never hand-edit them;
 replace old→new figures line by line with context, never as a blind value sweep.
 
+## This repository is PUBLIC
+
+Anything committed here is world-readable, including everything under `drafts/`.
+Outreach lists, email templates, third-party contacts and any postal address live in the
+vault instead: `~/Obsidian/TravisVault/03 领域/经营/CanPay 外联/` (local git, no remote).
+They were published here by mistake for three days in September 2026 — do not put them back.
+`scripts/genMediaStory.ts` still writes its drafts to `drafts/media/`; that path is gitignored.
+
 ## Never
 
 - Draw the logo. `public/logo.png` is the only source.
