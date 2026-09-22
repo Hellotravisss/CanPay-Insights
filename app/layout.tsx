@@ -1,4 +1,5 @@
 import type { Metadata, Viewport } from 'next';
+import PageTag, { CfBeacon } from '../components/PageTag';
 import TelemetrySwitch from '../components/TelemetrySwitch';
 import { Inter } from 'next/font/google';
 import './globals.css';
@@ -188,20 +189,18 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         />
       </head>
       <body className={inter.className}>
-        {/* Page-traffic tag on the shared multi-site worker (site=canpay). Calc telemetry stays in Supabase — this is additive, page views only. */}
-        <script defer src="https://avowd-analytics.qharbert.workers.dev/t.js" data-site="canpay" />
+        {/* Page-traffic tag on the shared multi-site worker (site=canpay). Calc
+            telemetry is separate — this is page views only, and PageTag keeps
+            it off /embed, which renders inside other people's sites. */}
+        <PageTag />
         <TelemetrySwitch />
         {children}
         {/* Cloudflare Web Analytics — cookieless, free. The token is the
             site's public beacon id, set once the zone is on Cloudflare; until
             then this renders nothing. */}
-        {process.env.NEXT_PUBLIC_CF_BEACON && (
-          <script
-            defer
-            src="https://static.cloudflareinsights.com/beacon.min.js"
-            data-cf-beacon={`{"token": "${process.env.NEXT_PUBLIC_CF_BEACON}"}`}
-          />
-        )}
+        {/* Cloudflare's beacon would be a second third-party script inside a
+            publisher's page, so it is excluded from /embed for the same reason. */}
+        {process.env.NEXT_PUBLIC_CF_BEACON && <CfBeacon token={process.env.NEXT_PUBLIC_CF_BEACON} />}
       </body>
     </html>
   );
