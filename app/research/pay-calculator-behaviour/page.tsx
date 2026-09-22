@@ -1,44 +1,56 @@
 import type { Metadata } from 'next';
-import snap from '../../../content/research/pay-behaviour.json';
+import { payBehaviour } from '../../../lib/payBehaviour';
 import AvowdCredit from '../../../components/AvowdCredit';
 
+/** Recomputed from D1 at most once an hour — no one has to remember to refresh it. */
+export const revalidate = 3600;
+
 /**
- * The public face of the usage data: three findings, the count behind each,
- * and how each was tested. It renders ONLY the dated snapshot written by
- * `scripts/genMediaStory.ts --publish` — never the live data room — so a
- * citation made today still matches the page next month, and nothing finer
- * than a national share can leak through it. To refresh: re-run the script,
- * commit the snapshot.
+ * The public face of the usage data: five findings, the count behind each, and
+ * how each was tested. Figures are computed from D1 on render (hourly), so the
+ * page keeps itself current.
+ *
+ * What makes that safe, and must stay that way:
+ *  - Nothing here is finer than a national share. The postal-code detail that
+ *    the data room shows, and that licensees pay for, never reaches this file.
+ *  - No sentence may encode a reading of a number that would stop being true if
+ *    the number moved. "17% — about one in six" was removed for this reason.
+ *  - Every chart is drawn from the same object as the prose (researchCharts.ts).
+ *  - `research_daily` keeps one dated row a day, rendered as a table. That is
+ *    what replaces snapshot-freezing as the citation guarantee: a figure quoted
+ *    on a given day stays visible on the page for ever.
  */
 const URL = 'https://canpayinsights.ca/research/pay-calculator-behaviour';
 const n = (x: number) => x.toLocaleString('en-CA');
-const day = new Date(`${snap.generated}T12:00:00Z`).toLocaleDateString('en-CA', { year: 'numeric', month: 'long', day: 'numeric', timeZone: 'UTC' });
-const since = new Date(`${snap.since}T12:00:00Z`).toLocaleDateString('en-CA', { year: 'numeric', month: 'long', day: 'numeric', timeZone: 'UTC' });
-const { raise, shifts, move, lang, weekend, sample, history } = snap;
+const longDate = (d: string) => new Date(`${d}T12:00:00Z`).toLocaleDateString('en-CA', { year: 'numeric', month: 'long', day: 'numeric', timeZone: 'UTC' });
+const description = 'What hundreds of thousands of anonymous calculations show about how people use a pay number: pricing raises, shifts that start before 7 a.m., comparing provinces, and the languages it is done in. Counts, tests and limits for every figure. Free to cite.';
 
-const title = `${raise.net.upShare}% of people who change the income on a Canadian pay calculator end on a higher figure`;
-const description = `What ${n(snap.n)} anonymous calculations show about how people use a pay number: pricing raises, shifts that start before 7 a.m., comparing provinces, and the languages it is done in. Counts, tests and limits for every figure. Free to cite.`;
-
+// Static, because metadata is not the place to put a number that moves hourly —
+// a title that changed under a shared link would make the page look unstable.
 export const metadata: Metadata = {
-  title: `How People Use a Pay Number — ${n(snap.n)} Calculations`,
+  title: 'How People Use a Pay Number — CanPay Insights Research',
   description,
   alternates: { canonical: URL },
-  openGraph: { title, description, url: URL, type: 'article', images: [{ url: 'https://canpayinsights.ca/research/pricing-the-raise.svg' }] },
+  openGraph: {
+    title: 'What people do with a pay number',
+    description, url: URL, type: 'article',
+    images: [{ url: 'https://canpayinsights.ca/research/pricing-the-raise.svg' }],
+  },
 };
 
-const jsonLd = {
+const jsonLdFor = (generated: string) => ({
   '@context': 'https://schema.org',
   '@type': 'Report',
-  headline: title,
+  headline: 'What people do with a pay number',
   description,
   url: URL,
-  datePublished: snap.generated,
-  dateModified: snap.generated,
+  datePublished: '2026-09-18',
+  dateModified: generated,
   author: { '@type': 'Person', name: 'Travis Zhang' },
   publisher: { '@type': 'Organization', name: 'CanPay Insights', url: 'https://canpayinsights.ca' },
   license: 'https://creativecommons.org/licenses/by/4.0/',
   isAccessibleForFree: true,
-};
+});
 
 function Finding({ k, figure, claim, children, img, alt }: { k: string; figure: string; claim: string; children: React.ReactNode; img?: string; alt?: string }) {
   return (
@@ -68,10 +80,14 @@ const Test = ({ children }: { children: React.ReactNode }) => (
   </p>
 );
 
-export default function Page() {
+export default async function Page() {
+  const snap = await payBehaviour();
+  const { raise, shifts, move, lang, weekend, sample, history } = snap;
+  const day = longDate(snap.generated);
+  const since = longDate(snap.since);
   return (
     <div className="min-h-screen bg-slate-50">
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLdFor(snap.generated)) }} />
       <article className="mx-auto max-w-4xl px-4 py-12">
         <a href="/" className="mb-10 inline-flex items-center gap-2 text-sm font-semibold text-red-600 hover:underline">← CanPay Insights</a>
 
@@ -170,7 +186,7 @@ export default function Page() {
             alt={`Interface language of ${n(lang.total)} calculations`}
           >
             <p>
-              {lang.zhShare}% of all the calculations were done in Chinese — about one in six. The
+              {lang.zhShare}% of all the calculations were done in Chinese. The
               calculator offers ten languages, and the rest of the traffic spreads thinly across
               French, Korean, Spanish, Punjabi, Hindi, Tagalog, Ukrainian and Vietnamese. Working out
               what a job pays after tax is one of the first things anyone does on arriving in Canada,
@@ -218,7 +234,7 @@ export default function Page() {
 
           <div className="max-w-2xl space-y-4 text-[15px] leading-7 text-slate-700">
             <p>
-              The {n(snap.n)} calculations arrived across {sample.days} days without a gap, from{' '}
+              The {n(snap.n)} calculations arrived across {sample.days} {sample.days === 1 ? 'day' : 'days'} without a gap, from{' '}
               {since} onward — between a few dozen and {n(sample.busiest)} a day.{' '}
               <strong className="text-slate-900">{sample.caShare}% came from inside Canada.</strong>{' '}
               The busiest provinces are{' '}
@@ -236,14 +252,15 @@ export default function Page() {
 
           <h3 className="mb-3 mt-10 text-lg font-bold text-slate-900">Have the figures moved as the sample grew?</h3>
           <p className="mb-4 max-w-2xl text-[15px] leading-7 text-slate-700">
-            Every time this page is reissued the previous figures stay on the record. A number that
-            barely moves while the sample grows was not a lucky week.
+            The page writes down what it said each day and never edits those rows. A figure that
+            stays put while the sample grows was not a lucky week — and if you quoted this page on a
+            particular day, that day's row is still here.
           </p>
           <div className="max-w-2xl overflow-x-auto">
             <table className="w-full border-collapse text-sm">
               <thead>
                 <tr className="border-b border-slate-300 text-left text-slate-500">
-                  <th className="py-2 pr-4 font-semibold">Figures as of</th>
+                  <th className="py-2 pr-4 font-semibold">Date</th>
                   <th className="py-2 pr-4 font-semibold">Calculations</th>
                   <th className="py-2 pr-4 font-semibold">Ended higher</th>
                   <th className="py-2 pr-4 font-semibold">Start before 7 a.m.</th>
@@ -252,8 +269,8 @@ export default function Page() {
               </thead>
               <tbody>
                 {history.map((h) => (
-                  <tr key={h.date} className="border-b border-slate-200 text-slate-700">
-                    <td className="py-2 pr-4">{h.date}</td>
+                  <tr key={h.day} className="border-b border-slate-200 text-slate-700">
+                    <td className="py-2 pr-4">{h.day}</td>
                     <td className="py-2 pr-4 tabular-nums">{n(h.n)}</td>
                     <td className="py-2 pr-4 tabular-nums">{h.raise}%</td>
                     <td className="py-2 pr-4 tabular-nums">{h.before7}%</td>
@@ -266,9 +283,9 @@ export default function Page() {
 
           <h3 className="mb-3 mt-10 text-lg font-bold text-slate-900">Every number on this page, as a file</h3>
           <p className="max-w-2xl text-[15px] leading-7 text-slate-700">
-            The page is rendered from one file, and that file is public. It holds the counts behind
-            every percentage — including the ones that were left out and why — so the arithmetic can
-            be checked without asking us for anything.
+            The page and its charts are rendered from one object, and that object is served as JSON
+            at the link below. It holds the counts behind every percentage — including the rows that
+            were left out and why — so the arithmetic can be checked without asking us for anything.
           </p>
           <a
             href="/research/pay-behaviour.json"
@@ -282,10 +299,10 @@ export default function Page() {
         <section className="border-t border-slate-200 py-12">
           <h2 className="mb-5 text-2xl font-bold text-slate-900">Method</h2>
           <ul className="max-w-2xl list-disc space-y-3 pl-5 text-[15px] leading-7 text-slate-700">
-            <li><strong className="text-slate-900">Source.</strong> Calculations made on canpayinsights.ca and in the CanPay Insights iPhone app, {since} to {day}. {n(snap.excluded)} calculations made by the site&rsquo;s owner or in testing are excluded.</li>
+            <li><strong className="text-slate-900">Source.</strong> Calculations made on canpayinsights.ca and in the CanPay Insights iPhone app, {since} to {day}. Calculations made by the site&rsquo;s owner or in testing are excluded.</li>
             <li><strong className="text-slate-900">What is recorded.</strong> The province, one of seven income ranges, the kind of calculation and, for hourly workers, the shift. No name, account, exact income, IP address or device fingerprint. A &ldquo;visit&rdquo; is a random identifier held in the page&rsquo;s memory and gone when the page is closed or reloaded; it cannot link one day to the next, or one device to another. Details are in the <a href="/privacy" className="font-semibold text-red-600 hover:underline">privacy policy</a>.</li>
             <li><strong className="text-slate-900">What is not recorded.</strong> A calculator opened and left on its default values sends nothing, so the defaults do not count as calculations.</li>
-            <li><strong className="text-slate-900">This page is a snapshot.</strong> The figures are fixed as of {day} and do not change until the page is reissued with a new date, so a citation stays checkable.</li>
+            <li><strong className="text-slate-900">This page keeps itself current.</strong> The figures are recomputed from the record at most once an hour, so they move as the sample grows. What each figure was on any given day stays in the table above, which is where a citation should point.</li>
             <li><strong className="text-slate-900">The tax engine behind the calculator</strong> is compared with the CRA&rsquo;s payroll deduction tables before every release. That concerns the pay figures visitors see, not the usage figures on this page.</li>
           </ul>
         </section>

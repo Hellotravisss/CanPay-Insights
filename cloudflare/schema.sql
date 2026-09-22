@@ -74,3 +74,15 @@ create table if not exists monthly_snapshots (
 create table if not exists excluded_users (
   user_id text primary key, reason text, added_at text not null default (strftime('%Y-%m-%dT%H:%M:%fZ','now'))
 );
+
+-- The public research note's own record of what it said, one row a day,
+-- written the first time the page renders each day and never updated after.
+-- It is what makes a live page citable: the figure a journalist quoted on a
+-- given day stays on the page for ever, even as the headline moves.
+create table if not exists research_daily (
+  day        text primary key,   -- Vancouver date, YYYY-MM-DD
+  n          integer not null,   -- calculations behind that day's figures
+  raise_up   integer not null,   -- % of visits that ended on a higher income
+  before7    integer not null,   -- % of edited shifts starting before 7am
+  move_share integer not null    -- % of visits pricing two or more provinces
+);
