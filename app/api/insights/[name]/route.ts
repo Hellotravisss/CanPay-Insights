@@ -4,6 +4,7 @@ import {
   loadEvents, calcStats, calcStatsExtra, calcIndustryIncome, calcFakeDoors, calcAccounts,
   calcJourneys, calcSeries, calcCandles, calcIncomeBarometer, calcCrosstab, calcCitiesGeo, provenanceEvents, calcNeighbourhoods } from '../../../../lib/d1/events';
 import { gscStats, contentStats } from '../../../../lib/d1/gsc';
+import { calcUsers } from '../../../../lib/d1/users';
 
 export const dynamic = 'force-dynamic';
 
@@ -36,6 +37,7 @@ export async function GET(request: Request, { params }: { params: Promise<{ name
       return NextResponse.json(calcFakeDoors(await loadEvents(d, false, true), wl), noStore);
     }
     case 'accounts': return NextResponse.json(calcAccounts(await ev()), noStore);
+    case 'users': return NextResponse.json(await calcUsers(d), noStore);
     case 'journeys': return NextResponse.json(calcJourneys(await ev()), noStore);
     case 'series': return NextResponse.json(calcSeries(await ev()), noStore);
     case 'candles': return NextResponse.json(calcCandles(await ev()), noStore);

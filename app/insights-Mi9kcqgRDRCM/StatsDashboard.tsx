@@ -218,6 +218,7 @@ export default function StatsDashboard() {
   const [prov, setProv] = useState<ProvenanceData | null>(null);
   const [hoods, setHoods] = useState<NeighbourhoodData | null>(null);
   const [geo, setGeo] = useState<{ city: string; lat: number; lon: number; n: number }[] | null>(null);
+  const [users, setUsers] = useState<{ total: number; new_7d: number; new_30d: number; activated: number; repeat: number; excluded: number; by_provider: Row[]; by_saves: Row[]; by_signup_day: Row[] } | null>(null);
   const [error, setError] = useState<string | null>(null);
   const [zh, setZh] = useState(false);
   // Bilingual helper — every visible string on this page goes through it.
@@ -242,6 +243,9 @@ export default function StatsDashboard() {
     });
     insights('provenance').then(({ data }) => {
       if (data) setProv(data as ProvenanceData);
+    });
+    insights('users').then(({ data }) => {
+      if (data) setUsers(data as typeof users);
     });
     // Separate call: calc_stats drops any point whose city name the edge could
     // not resolve, which hid Hong Kong and China from the globe entirely.
@@ -685,6 +689,53 @@ export default function StatsDashboard() {
               label={(k) => (zh ? EXPECT_LABEL_ZH : EXPECT_LABEL)[String(k)] ?? String(k)}
               empty={T('Port is live — collecting now.', '端口已上线 —— 正在采集。')}
             />
+          </Card>
+
+          {/* Registered accounts. Counted from the users table — every other
+              figure in this room comes from calculation events, which can only
+              say what SHARE of calculations were signed in, never how many
+              people hold an account. */}
+          <Card
+            title={T('Registered accounts', '注册账号')}
+            hint={T(
+              'People who created an account, counted from the accounts table itself. Owner and test accounts are excluded, as everywhere else here. "Came back" counts accounts that saved a calculation on two or more different days — NOT last_login, which only moves when someone actually signs in again and so understates returns badly (it said 2 when the real figure was 10).',
+              '创建了账号的人,直接数账号表。和本页其他数字一样,已排除 owner 和测试账号。「回来过」的口径是「在 2 个以上不同日期保存过计算」,不是 last_login —— 会话长期有效,回访的人不需要重新登录,那个字段严重低报(它显示 2,实际是 10)。',
+            )}
+          >
+            {users ? (
+              <>
+                <div className="grid grid-cols-2 gap-3 sm:grid-cols-4">
+                  {[
+                    { k: T('Accounts', '账号总数'), v: users.total },
+                    { k: T('New, 30 days', '30 天新增'), v: users.new_30d },
+                    { k: T('Saved something', '存过计算'), v: users.activated },
+                    { k: T('Came back', '回来过'), v: users.repeat },
+                  ].map((x) => (
+                    <div key={x.k} className="rounded-lg border border-slate-200 bg-white px-3 py-2">
+                      <p className="text-[11px] font-semibold uppercase tracking-wide text-slate-500">{x.k}</p>
+                      <p className="text-2xl font-extrabold tabular-nums text-slate-900">{x.v}</p>
+                    </div>
+                  ))}
+                </div>
+                <p className="mt-3 text-xs leading-5 text-slate-500">
+                  {zh
+                    ? `${users.new_7d} 个是最近 7 天注册的。${users.excluded} 个 owner/测试账号未计入。到手的纵向数据,分母是「回来过」那一格,不是账号总数。`
+                    : `${users.new_7d} of them signed up in the last 7 days. ${users.excluded} owner and test accounts are not counted. The denominator for longitudinal data is the "came back" box, not the account total.`}
+                </p>
+                <div className="mt-4 grid gap-4 sm:grid-cols-2">
+                  <div>
+                    <p className="mb-1 text-xs font-bold text-slate-600">{T('How they signed up', '注册方式')}</p>
+                    <Bars rows={users.by_provider} total={users.total} />
+                  </div>
+                  <div>
+                    <p className="mb-1 text-xs font-bold text-slate-600">{T('Calculations saved per account', '每个账号存了几次')}</p>
+                    <Bars rows={users.by_saves} total={users.total} />
+                  </div>
+                </div>
+              </>
+            ) : (
+              <p className="text-sm text-slate-400">{T('Loading…', '加载中…')}</p>
+            )}
           </Card>
 
           {/* Raise detection — the Ookla-style moat, port open, waiting for data */}
