@@ -5,7 +5,7 @@
   "type": "module",
   "scripts": {
     "dev": "next dev",
-    "prebuild": "npm run audit:engine && npm run audit:marginal && npm run audit:consistency && npm run audit:advisor && npm run audit:numbers:selftest && npm run audit:numbers && npm run audit:logo",
+    "prebuild": "npm run audit:engine && npm run audit:marginal && npm run audit:consistency && npm run audit:advisor && npm run audit:dbroutes && npm run audit:numbers:selftest && npm run audit:numbers && npm run audit:logo",
     "audit:engine": "tsx scripts/goldenT4032.ts",
     "build": "next build",
     "start": "next start",
@@ -18,7 +18,8 @@
     "audit:logo": "node scripts/auditLogo.mjs",
     "audit:marginal": "tsx scripts/auditMarginal.ts",
     "audit:consistency": "tsx scripts/auditConsistency.ts",
-    "audit:advisor": "tsx scripts/auditAdvisor.ts"
+    "audit:advisor": "tsx scripts/auditAdvisor.ts",
+    "audit:dbroutes": "tsx scripts/auditDbRoutes.ts"
   },
   "dependencies": {
     "@google/genai": "^1.30.0",

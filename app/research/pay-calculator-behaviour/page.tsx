@@ -2,8 +2,15 @@ import type { Metadata } from 'next';
 import { payBehaviour } from '../../../lib/payBehaviour';
 import AvowdCredit from '../../../components/AvowdCredit';
 
-/** Recomputed from D1 at most once an hour — no one has to remember to refresh it. */
-export const revalidate = 3600;
+/**
+ * Rendered from D1 on every request. It was `revalidate = 3600`, which let the
+ * build prerender the page against the build machine's empty local database —
+ * so from 2026-09-22 the live page said "4 calculations across 0 visits" and
+ * every share was 0%, while its own JSON and charts said 4,944. Every other
+ * page and route that reads D1 is force-dynamic; this one now is too, and
+ * scripts/auditDbRoutes.ts fails the build if one ever isn't.
+ */
+export const dynamic = 'force-dynamic';
 
 /**
  * The public face of the usage data: five findings, the count behind each, and
@@ -252,9 +259,10 @@ export default async function Page() {
 
           <h3 className="mb-3 mt-10 text-lg font-bold text-slate-900">Have the figures moved as the sample grew?</h3>
           <p className="mb-4 max-w-2xl text-[15px] leading-7 text-slate-700">
-            The page writes down what it said each day and never edits those rows. A figure that
-            stays put while the sample grows was not a lucky week — and if you quoted this page on a
-            particular day, that day's row is still here.
+            The page writes down what it said the first time it was opened each day, and never edits
+            those rows; the figures at the top are live. A figure that stays put while the sample grows
+            was not a lucky week — and if you quoted this page on a particular day, that day's row is
+            here from the next day on.
           </p>
           <div className="max-w-2xl overflow-x-auto">
             <table className="w-full border-collapse text-sm">
@@ -268,7 +276,7 @@ export default async function Page() {
                 </tr>
               </thead>
               <tbody>
-                {history.map((h) => (
+                {history.filter((h) => h.day < snap.generated).map((h) => (
                   <tr key={h.day} className="border-b border-slate-200 text-slate-700">
                     <td className="py-2 pr-4">{h.day}</td>
                     <td className="py-2 pr-4 tabular-nums">{n(h.n)}</td>

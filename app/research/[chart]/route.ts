@@ -6,7 +6,7 @@ import { chart } from '../../../lib/researchCharts';
  * to occupy, so anything already linking to them keeps working. The static page
  * segment (`pay-calculator-behaviour`) takes precedence over this dynamic one.
  */
-export const revalidate = 3600;
+export const dynamic = 'force-dynamic'; // see the page: never prerender against the build's empty database
 
 export async function GET(_req: Request, { params }: { params: Promise<{ chart: string }> }) {
   const { chart: file } = await params;
