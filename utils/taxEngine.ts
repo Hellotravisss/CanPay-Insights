@@ -306,25 +306,84 @@ const timeToMinutes = (time: string): number => {
   return hours * 60 + minutes;
 };
 
+/**
+ * Minutes a shift overlaps a premium window, either of which may cross
+ * midnight. The window repeats every day, so it is tested in yesterday's,
+ * today's and tomorrow's position. Testing only today's position — as this did
+ * until 2026-09-22 — found no overlap at all for a shift that starts after
+ * midnight: 00:00–08:00 against a 22:00–06:00 night premium paid nothing
+ * instead of six hours.
+ */
 const getOverlapMinutes = (
-  start1: number, end1: number, 
+  start1: number, end1: number,
   start2: number, end2: number
 ): number => {
-  let e1 = end1 < start1 ? end1 + 1440 : end1;
-  let e2 = end2 < start2 ? end2 + 1440 : end2;
-  
-  const start = Math.max(start1, start2);
-  const end = Math.min(e1, e2);
-  
-  if (start < end) return end - start;
-  return 0;
+  const e1 = end1 < start1 ? end1 + 1440 : end1;
+  const e2 = end2 < start2 ? end2 + 1440 : end2;
+  let total = 0;
+  for (const offset of [-1440, 0, 1440]) {
+    const start = Math.max(start1, start2 + offset);
+    const end = Math.min(e1, e2 + offset);
+    if (start < end) total += end - start;
+  }
+  return total;
 };
 
 // ============================================
 // MAIN CALCULATION FUNCTIONS
 // ============================================
 
+/**
+ * Hourly / shift pay for one pay period.
+ *
+ * Stat-holiday pay, sick pay, a bonus and "other income" entered here are paid
+ * THIS period — the form says so ("added to gross this period", "one-time or
+ * recurring bonus"). Until 2026-09-22 they were added to the period's gross and
+ * the whole period was then multiplied by 26, so a one-time $1,000 bonus on
+ * $25/h became $26,000 a year: annual gross $78,000 instead of $53,000.
+ *
+ * Now they are treated the way the CRA's bonus method treats a non-periodic
+ * payment: regular pay is computed on its own, and the one-off amount's tax,
+ * CPP/QPP, QPIP and EI are the difference between the year with it and the
+ * year without it — charged in full to this period, not spread over 26.
+ */
 export const calculateSalary = (inputs: SalaryInputs): CalculationResult => {
+  const a = inputs.additionalIncome;
+  const once = a ? (a.statHolidayPay || 0) + (a.sickPay || 0) + (a.bonus || 0) + (a.otherIncome || 0) : 0;
+  if (!a || once <= 0) return calculateSalaryRecurring(inputs);
+
+  const without = { ...a, statHolidayPay: 0, sickPay: 0, bonus: 0, otherIncome: 0 };
+  const base = calculateSalaryRecurring({ ...inputs, additionalIncome: without });
+  // The same year with the one-off amount added once: spreading it as once/26
+  // per period makes the annual gross exactly base + once.
+  const year = calculateSalaryRecurring({ ...inputs, additionalIncome: { ...without, otherIncome: once / 26 } });
+
+  const inc = (f: (r: CalculationResult) => number) => (f(year) - f(base)) * 26;
+  const dFed = inc((r) => r.federalTax);
+  const dProv = inc((r) => r.provincialTax);
+  const dCpp = inc((r) => r.cppDeduction);
+  const dQpip = inc((r) => r.qpipDeduction ?? 0);
+  const dEi = inc((r) => r.eiDeduction);
+  const dRrsp = inc((r) => r.rrspDeduction ?? 0);
+
+  return {
+    ...base,
+    grossPayBiWeekly: base.grossPayBiWeekly + once,
+    federalTax: base.federalTax + dFed,
+    provincialTax: base.provincialTax + dProv,
+    cppDeduction: base.cppDeduction + dCpp,
+    qpipDeduction: (base.qpipDeduction ?? 0) + dQpip,
+    eiDeduction: base.eiDeduction + dEi,
+    rrspDeduction: (base.rrspDeduction ?? 0) + dRrsp,
+    netPayBiWeekly: base.netPayBiWeekly + once - (dFed + dProv + dCpp + dEi + dRrsp),
+    grossPayAnnual: year.grossPayAnnual,
+    netPayAnnual: year.netPayAnnual,
+    totalDeductionsAnnual: year.totalDeductionsAnnual,
+    annual: year.annual,
+  };
+};
+
+const calculateSalaryRecurring = (inputs: SalaryInputs): CalculationResult => {
   const provinceRule = PROVINCIAL_DATA[inputs.province] || PROVINCIAL_DATA[Province.ON];
   
   // 1. Calculate Daily Hours & Shift Premium
@@ -448,7 +507,8 @@ export const calculateSalary = (inputs: SalaryInputs): CalculationResult => {
 
     grossPayAnnual: annualGross,
     netPayAnnual,
-    totalDeductionsAnnual
+    totalDeductionsAnnual,
+    annual: { federalTax: taxResult.federalTax, provincialTax: taxResult.provincialTax, cpp: cppResult.total + qpipAnnual, qpip: qpipAnnual, ei: eiAnnual, rrsp: annualRRSP },
   };
 };
 
@@ -562,6 +622,7 @@ export const calculateFromAnnualSalary = (inputs: AnnualSalaryInputs): Calculati
     grossPayAnnual: annualGross,
     netPayAnnual,
     totalDeductionsAnnual,
+    annual: { federalTax: taxResult.federalTax, provincialTax: taxResult.provincialTax, cpp: cppResult.total + qpipAnnual, qpip: qpipAnnual, ei: eiAnnual, rrsp: annualRRSP },
     
     grossPayPerPeriod,
     netPayPerPeriod,
@@ -714,6 +775,7 @@ export const calculateFromTimesheet = (inputs: TimesheetInputs): CalculationResu
     grossPayAnnual: annualGross,
     netPayAnnual,
     totalDeductionsAnnual,
+    annual: { federalTax: taxResult.federalTax, provincialTax: taxResult.provincialTax, cpp: cppResult.total + qpipAnnual, qpip: qpipAnnual, ei: eiAnnual, rrsp: annualRRSP },
     
     grossPayPerPeriod,
     netPayPerPeriod,
@@ -721,18 +783,25 @@ export const calculateFromTimesheet = (inputs: TimesheetInputs): CalculationResu
   };
 };
 
+/**
+ * ISO week (Monday to Sunday) of a 'YYYY-MM-DD' calendar date.
+ *
+ * The date is read as a calendar date and every step is done in UTC. It used
+ * to be `new Date(dateStr)` — which JavaScript reads as UTC midnight — followed
+ * by LOCAL getDay()/getDate(). Everywhere in Canada is west of UTC, so UTC
+ * midnight on a Monday is still Sunday locally, and every Monday was counted
+ * in the previous week: six 8-hour days Monday to Saturday in Ontario came out
+ * as 48 regular hours and no overtime instead of 44 + 4 (found 2026-09-22).
+ * The year also came from the date rather than from the week's Thursday, which
+ * mislabelled late-December days.
+ */
 const getWeekKey = (dateStr: string): string => {
-  const date = new Date(dateStr);
-  const year = date.getFullYear();
-  
+  const [y, m, d] = dateStr.split('-').map(Number);
+  const date = new Date(Date.UTC(y, (m || 1) - 1, d || 1));
   const thursday = new Date(date);
-  thursday.setDate(date.getDate() + (4 - (date.getDay() || 7)));
-  
-  const yearStart = new Date(thursday.getFullYear(), 0, 1);
-  const firstThursday = new Date(yearStart);
-  firstThursday.setDate(yearStart.getDate() + ((4 - yearStart.getDay() + 7) % 7));
-  
-  const weekNumber = Math.ceil((((thursday.getTime() - firstThursday.getTime()) / 86400000) + 1) / 7);
-  
-  return `${year}-W${String(weekNumber).padStart(2, '0')}`;
+  thursday.setUTCDate(date.getUTCDate() + (4 - (date.getUTCDay() || 7)));
+  const isoYear = thursday.getUTCFullYear();
+  const yearStart = Date.UTC(isoYear, 0, 1);
+  const weekNumber = Math.ceil(((thursday.getTime() - yearStart) / 86400000 + 1) / 7);
+  return `${isoYear}-W${String(weekNumber).padStart(2, '0')}`;
 };

@@ -247,7 +247,7 @@ const GeminiAdvisor: React.FC<Props> = ({ results, inputs, onReportOpen }) => {
   }, [(inputs as any).payFrequency]);
 
   const annualRRSPActual = useMemo(() => {
-    return (results.rrspDeduction || 0) * periodsPerYear;
+    return results.annual?.rrsp ?? (results.rrspDeduction || 0) * periodsPerYear;
   }, [results.rrspDeduction, periodsPerYear]);
 
   const annualEmployerMatchActual = useMemo(() => {
@@ -276,9 +276,11 @@ const GeminiAdvisor: React.FC<Props> = ({ results, inputs, onReportOpen }) => {
     const annualIncome = results.grossPayAnnual || 0;
     const netIncome = results.netPayAnnual || 0;
     const totalDeductions = results.totalDeductionsAnnual || 0;
-    const annualCPP = (results.cppDeduction || 0) * periodsPerYear;
-    const annualEI = (results.eiDeduction || 0) * periodsPerYear;
-    const annualTax = (results.federalTax + results.provincialTax) * periodsPerYear;
+    // The year's own figures from the engine. "Per period × periods" charged a
+    // bonus paid this period 26 times over.
+    const annualCPP = results.annual?.cpp ?? (results.cppDeduction || 0) * periodsPerYear;
+    const annualEI = results.annual?.ei ?? (results.eiDeduction || 0) * periodsPerYear;
+    const annualTax = results.annual ? results.annual.federalTax + results.annual.provincialTax : (results.federalTax + results.provincialTax) * periodsPerYear;
     const effectiveRate = annualIncome > 0 ? ((annualTax / annualIncome) * 100).toFixed(1) : '0.0';
 
     const remainingRRSPOptimum = Math.max(0, taxOptimization.rrsp.recommendedAmount - annualRRSPActual);

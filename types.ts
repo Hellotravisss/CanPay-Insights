@@ -167,6 +167,13 @@ export interface CalculationResult {
   grossPayAnnual: number;
   netPayAnnual: number;
   totalDeductionsAnnual: number;
+  /**
+   * The year's deductions by kind. Use these for annual figures — never
+   * "per-period × periods": after a one-off payment (a bonus paid this period)
+   * the period's tax includes the whole bonus's tax, so multiplying it out
+   * would charge that tax 26 times.
+   */
+  annual?: { federalTax: number; provincialTax: number; cpp: number; qpip: number; ei: number; rrsp: number };
   
   grossPayPerPeriod?: number;
   netPayPerPeriod?: number;
