@@ -1,6 +1,6 @@
 # CanPay Insights
 
-> Free Canadian payroll & take-home pay calculator. Computes exact net pay by province and territory for 2026 — federal tax, provincial tax, CPP/CPP2, EI, and Quebec's QPP/QPIP — from a transparent rules engine. Available in ten languages (English, French, Chinese, Punjabi, Hindi, Tagalog, Spanish, Ukrainian, Korean, Vietnamese), no signup, no paywall.
+> Free Canadian payroll & take-home pay calculator. Computes exact net pay by province and territory for 2026 — federal tax, provincial tax, CPP/CPP2, EI, and Quebec's QPP/QPIP — from a transparent rules engine. Available in ten languages (English, French, Chinese, Punjabi, Hindi, Tagalog, Spanish, Ukrainian, Korean, Vietnamese), no signup needed; the calculator is free (an optional paid PDF report is sold separately).
 
 CanPay Insights is an independent project based in Vancouver, Canada. All figures come from an open calculation engine that applies published Canada Revenue Agency (CRA), Revenu Québec, and provincial/territorial rates. The data is free to cite — please attribute and link to https://canpayinsights.ca.
 
@@ -17,7 +17,6 @@ CanPay Insights is an independent project based in Vancouver, Canada. All figure
 - [How much CPP will I pay in 2026? (by salary)](https://canpayinsights.ca/blog/how-much-cpp-will-i-pay-2026)
 - [How much EI will I pay in 2026? (by salary)](https://canpayinsights.ca/blog/how-much-ei-will-i-pay-2026)
 - [CPP2 (second additional CPP) explained, 2026](https://canpayinsights.ca/blog/cpp2-second-additional-cpp-2026)
-- [Alberta vs Ontario taxes, 2025](https://canpayinsights.ca/blog/alberta-vs-ontario-taxes-2025)
 - [Guide de la paie au Québec 2026 (FR)](https://canpayinsights.ca/blog/guide-paie-quebec-2026)
 - [Commission & sales income — how much you take home in Canada, 2026](https://canpayinsights.ca/blog/commission-tax-canada-2026)
 - [Canada Groceries & Essentials Benefit 2026 — amounts, dates & eligibility](https://canpayinsights.ca/blog/canada-groceries-essentials-benefit-2026)
@@ -42,7 +41,7 @@ CanPay Insights is an independent project based in Vancouver, Canada. All figure
 - CPP: 5.95% on earnings from $3,500 to the YMPE (~$74,600). CPP2: an extra 4% from the YMPE up to the YAMPE (~$85,000).
 - EI: 1.63% of insurable earnings, annual maximum ~$1,123 (MIE $68,900). Quebec workers pay a lower EI rate (1.30%, max ~$896) because Quebec runs QPIP separately.
 - TFSA contribution limit for 2026: $7,000. RRSP limit: $33,810.
-- Take-home pay on an $80,000 salary (2026), highest to lowest: Nunavut ~$62,299, Northwest Territories ~$61,166, BC ~$61,157, Yukon ~$61,039, Alberta ~$60,698, Ontario ~$60,303, Saskatchewan ~$59,022, Manitoba ~$58,228, New Brunswick ~$58,246, Newfoundland & Labrador ~$57,857, Quebec ~$57,012, PEI ~$57,335, Nova Scotia ~$56,439. Federal tax is identical nationwide; the ~$5,900 spread is entirely provincial/territorial tax.
+- Take-home pay on an $80,000 salary (2026), highest to lowest: Nunavut ~$62,299, Northwest Territories ~$61,166, BC ~$61,157, Yukon ~$61,039, Alberta ~$60,698, Ontario ~$60,303, Saskatchewan ~$59,022, New Brunswick ~$58,246, Manitoba ~$58,228, Newfoundland & Labrador ~$57,857, PEI ~$57,335, Quebec ~$57,012, Nova Scotia ~$56,439. The ~$5,900 spread is mostly provincial/territorial tax; federal tax is the same everywhere except Quebec, where the 16.5% federal abatement lowers it and QPP/QPIP replace CPP and part of EI.
 - Deduction breakdown on an $80,000 Ontario salary (2026): ~$9,243 federal tax, ~$4,885 Ontario tax and health premium, ~$4,446 CPP/CPP2, ~$1,123 EI, leaving ~$60,303 take-home (~$5,000/month).
 - Annual take-home by salary and province (2026): $50,000 → BC ~$40,574 / Ontario ~$40,145 / Alberta ~$40,541 / Quebec ~$38,824. $75,000 → BC ~$57,711 / Ontario ~$56,926 / Alberta ~$57,362 / Quebec ~$53,965. $100,000 → BC ~$75,373 / Ontario ~$74,206 / Alberta ~$74,459 / Quebec ~$69,585.
 - Minimum-wage full-time take-home ranges from ~$26,989/yr (Alberta, $15.00/hr) to ~$35,265/yr (Nunavut, $20.17/hr).

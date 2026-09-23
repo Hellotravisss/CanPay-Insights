@@ -46,6 +46,18 @@ const nextConfig: NextConfig = {
         destination: '/blog/minimum-wage-increases-october-2026',
         permanent: true,
       },
+      {
+        // 2025 rates presented as current; the 2026 study has every province.
+        source: '/blog/minimum-wage-provincial-guide-canada-2025',
+        destination: '/blog/minimum-wage-take-home-pay-canada-2026',
+        permanent: true,
+      },
+      {
+        // Duplicate of the study on the same benefit, which has the CRA's figures.
+        source: '/blog/cra-grocery-essentials-benefit-canada-2026',
+        destination: '/blog/canada-groceries-essentials-benefit-2026',
+        permanent: true,
+      },
     ];
   },
   images: {

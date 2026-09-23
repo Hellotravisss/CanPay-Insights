@@ -45,7 +45,7 @@ The choice between them often depends on your current marginal tax rate versus y
 
 RRSPs allow you to deduct contributions from your taxable income, receiving immediate tax savings at your marginal rate. Funds grow tax-free until withdrawal, at which point they are taxed as ordinary income.
 
-For 2025, the maximum RRSP contribution is $31,560, or 18% of your previous year's earned income. Unused room carries forward indefinitely, allowing for catch-up contributions during high-income years.
+For 2025, the maximum RRSP contribution is $32,490 ($33,810 for 2026), or 18% of your previous year's earned income. Unused room carries forward indefinitely, allowing for catch-up contributions during high-income years.
 
 Withdrawals are subject to withholding taxes: 10% for up to $5,000, 20% for $5,000–$15,000, and 30% for amounts above $15,000. These rates may not match your actual tax liability, requiring reconciliation at tax time.
 
@@ -91,10 +91,10 @@ The RRSP isn't just for retirement; it can also be used to fund further educatio
 
 <b>2025 Limits and Cumulative Math</b>
 
-For the 2025 tax year, the TFSA limit is $7,000. If you have been eligible since the TFSA's inception in 2009 and have never contributed, your total cumulative room is now $102,000. For the RRSP, the 2025 maximum is $31,560, but remember that your individual limit is based on 18% of your 2024 earned income. Keeping track of these limits via your CRA My Account is crucial. Over-contributing to either account results in a 1% per month penalty on the excess amount, which can quickly wipe out any tax benefits. In 2025, many Canadians are using automated "set and forget" contributions to stay within these limits while building long-term wealth.`,
+For the 2025 tax year, the TFSA limit is $7,000. If you have been eligible since the TFSA's inception in 2009 and have never contributed, your total cumulative room is now $102,000. For the RRSP, the 2025 maximum is $32,490, but remember that your individual limit is based on 18% of your 2024 earned income. Keeping track of these limits via your CRA My Account is crucial. Over-contributing to either account results in a 1% per month penalty on the excess amount, which can quickly wipe out any tax benefits. In 2025, many Canadians are using automated "set and forget" contributions to stay within these limits while building long-term wealth.`,
     faq: [
       { question: 'What is the TFSA contribution limit for 2025?', answer: 'The TFSA contribution limit for 2025 is $7,000, bringing the cumulative lifetime limit to $102,000 for Canadians who were 18 or older in 2009.' },
-      { question: 'What is the maximum RRSP contribution for 2025?', answer: 'The maximum RRSP contribution limit for 2025 is $31,560, or 18% of your earned income from 2024, whichever is less.' },
+      { question: 'What is the maximum RRSP contribution for 2025?', answer: 'The maximum RRSP contribution limit for 2025 is $32,490, or 18% of your earned income from 2024, whichever is less.' },
       { question: 'Can I withdraw from my TFSA without penalty?', answer: 'Yes, withdrawals from a TFSA are tax-free and the amount withdrawn is added back to your contribution room on January 1st of the following year.' },
       { question: 'When does my RRSP need to be converted to a RRIF?', answer: 'You must close your RRSP by December 31st of the year you turn 71, usually by converting it to a Registered Retirement Income Fund (RRIF) or purchasing an annuity.' },
       { question: 'Is it better to prioritize TFSA or RRSP if I earn under $50,000?', answer: 'Generally, the TFSA is better for lower-income earners as the tax deduction from RRSP contributions is less valuable and future RRSP withdrawals could claw back government benefits.' }
@@ -929,82 +929,62 @@ As Canada transitions from a 12% to a 60% AI adoption economy, staying informed 
   {
     id: 'tips-012',
     slug: 'cra-grocery-essentials-benefit-canada-2026',
-    title: "CRA Grocery & Essentials Benefit 2026: Who Qualifies and Payment Dates",
-    subtitle: "Everything you need to know about the new $3.1B relief package landing in Canadian bank accounts",
-    excerpt: "The Canada Revenue Agency (CRA) has officially rolled out the new Grocery & Essentials Benefit to 12 million families. Learn about the eligibility thresholds, payment amounts, and dates.",
-    directAnswer: "The new $3.1B Grocery & Essentials Benefit offers eligible low-to-moderate-income Canadian households a 25% increase in quarterly credits, paid automatically via the CRA based on family net income.",
-    metaTitle: "CRA Grocery & Essentials Benefit 2026 | Eligibility & Dates",
-    metaDescription: "Learn about the new $3.1B CRA Grocery & Essentials Benefit for 12 million families in 2026. Check eligibility, payment amounts, and scheduled dates.",
-    keywords: ["CRA grocery rebate 2026", "grocery essentials benefit canada", "CRA payment dates 2026", "government cash relief canada", "tax free benefit canada"],
+    title: "Canada Groceries and Essentials Benefit 2026: Amounts, Eligibility and Payment Dates",
+    subtitle: "The GST/HST credit was renamed in July 2026 and raised 25% for five years. Here is what the CRA actually pays.",
+    excerpt: "The GST/HST credit became the Canada Groceries and Essentials Benefit (CGEB) in July 2026, with a 25% increase that lasts until 2031. For July 2026 to June 2027 the maximum is $679 for a single person, $890 for a couple, plus $234 per child.",
+    directAnswer: "The Canada Groceries and Essentials Benefit (CGEB) is the renamed GST/HST credit. From July 2026 it pays up to $679 a year for a single person, $890 for a couple, and $234 for each child under 19 (July 2026 to June 2027, based on your 2025 return), in four quarterly payments. The amounts were raised 25% for five years, 2026 to 2031. A couple with two children can get up to $1,358 a year.",
+    metaTitle: "Canada Groceries and Essentials Benefit 2026 | Amounts & Dates",
+    metaDescription: "The GST/HST credit is now the Canada Groceries and Essentials Benefit: up to $679 single, $890 couple, $234 per child for July 2026 to June 2027. Dates, eligibility, CRA sources.",
+    keywords: ["canada groceries and essentials benefit", "CGEB 2026", "CRA grocery rebate 2026", "GST credit renamed", "CGEB payment dates"],
     category: "tips",
     tags: ["CRA Benefits", "Government Relief", "Tax Free Credits", "Inflation Relief"],
     province: "National",
     publishedAt: "2026-06-05",
-    readTime: 10,
+    readTime: 6,
     imageUrl: "/blog/covers/cra-grocery-essentials-benefit-canada-2026.png",
-    content: `<b>A Historic $3.1 Billion Relief Package Hits Bank Accounts</b>
+    content: `<b>What changed in July 2026</b>
 
-In a major fiscal move aimed at directly sheltering families from persistent inflation, the Canada Revenue Agency (CRA) has officially commenced the full rollout of the first wave of the newly enacted Grocery & Essentials Benefit. This massive $3.1 billion relief package, strongly pushed and legislated under the leadership of Prime Minister Mark Carney, represents a historic intervention designed to offset high grocery price indices and the escalating day-to-day cost of living. 
+The GST/HST credit no longer exists under that name. In July 2026 the CRA renamed it the **Canada Groceries and Essentials Benefit (CGEB)**. The CRA says the eligibility, the way it is calculated and the payment structure are the same as before; what changed is the amount. The CRA page says there was "a 25% increase to the benefit amount which will remain for 5 years from 2026 to 2031".
 
-Unlike previous one-off rebate schemes, this program acts as a systematic, quarterly 25% increase to long-term government assistance payments. Today marks the official first date of "physical arrival" for these cash transfers, directly landing via direct deposit and paper checks into the bank accounts of over 12 million eligible low-to-moderate-income Canadian households.
+It is one increase that lasts five years, not a new increase every year, and it is not paid on top of the GST/HST credit: it *is* the GST/HST credit, under a new name.
 
-If you are trying to understand how this cash injection impacts your household budget, this guide details exactly who qualifies, how much you will receive, the scheduled payment dates, and the crucial tax implications of this brand-new benefit.
+Before the change, the CRA also issued a **one-time top-up on June 5, 2026**, generally equal to 50% of your July 2025 to June 2026 GST/HST credit, to people who were entitled to the credit in January 2026.
 
-<b>Eligibility Thresholds: Who Qualifies for the Benefit?</b>
+<b>How much you can get (July 2026 to June 2027)</b>
 
-The Grocery & Essentials Benefit is targeted primarily at low-to-moderate-income families and individuals who are hardest hit by inflation. The CRA automatically calculates your eligibility based on your family net income reported on your last tax return (Form T1).
+Your 2025 tax return sets your amount for the payment period from July 2026 to June 2027. The CRA's maximums:
 
-To qualify for the full quarterly credit, your household net income must fall within the following brackets:
-- **Single Individuals:** Net income under $42,000 CAD.
-- **Families (Married/Common-Law with 1-2 Children):** Combined family net income under $68,000 CAD.
-- **Single Parents (with up to 2 Children):** Net income under $55,000 CAD.
+| Who | Maximum per year |
+|-----|------------------|
+| Single individual | **$679** |
+| Married or common-law couple | **$890** |
+| Each eligible child under 19 | **+$234** |
 
-For households with incomes slightly above these thresholds, the benefit does not disappear entirely. Instead, the CRA applies a gradual phase-out rate of 5% on every dollar earned over the limit, ensuring that moderate-income middle-class families still receive partial financial support during this economic transition.
+So a couple with two children can get up to **$890 + $234 + $234 = $1,358** a year. A single parent's first child counts as a spouse would ($445) under the CRA's payment table.
 
-<b>How Much Cash Will Your Family Receive?</b>
+The single maximum of $679 is $445 plus a $234 supplement that phases in once your income passes $11,564. Above an adjusted family net income of **$46,432**, the benefit shrinks by 5% of the income over that threshold, so it fades out gradually rather than stopping at a line.
 
-Because this benefit represents a 25% permanent increase to quarterly family supports, the payouts are substantial. The exact amount of money you receive depends on your marital status, your income, and the number of dependent children in your household.
+The payment can also include provincial or territorial programs the CRA pays alongside it, so your deposit may be higher than these federal amounts.
 
-The maximum quarterly and annual payouts under the 2026 framework are broken down in the table below:
+<b>Payment dates</b>
 
-| Household Type | Maximum Quarterly Payout | Maximum Annual Payout |
-|----------------|--------------------------|-----------------------|
-| **Single Individual** | $145 CAD | $580 CAD |
-| **Married/Common-Law Couple (No Kids)** | $225 CAD | $900 CAD |
-| **Family with 1 Child** | $310 CAD | $1,240 CAD |
-| **Family with 2 Children** | $390 CAD | $1,560 CAD |
-| **Each Additional Child** | +$45 CAD | +$180 CAD |
+The benefit is paid quarterly. The CRA's published dates for the current period are **July 3, 2026** and **October 5, 2026**, with January and April payments to follow. If your annual amount is small the CRA may pay it in one lump sum in July.
 
-These funds are distributed on top of any standard GST/HST credits, the Canada Child Benefit (CCB), or provincial carbon tax rebates you already receive. For a family of four earning a modest income, this adds an extra $1,560 in tax-free cash per year to help pay for groceries and household essentials.
+<b>Tax and who qualifies</b>
 
-<b>Scheduled Payment Dates for 2026</b>
+- **Not taxable.** You do not report CGEB payments on your tax return.
+- **No application.** You are considered for it when you file your return, even if you had no income. Filing every year is what keeps it coming.
+- **Who is eligible:** the same rules as the old GST/HST credit: a Canadian resident for tax purposes, generally 19 or older, or with a spouse or child.
 
-To ensure households can reliably plan their finances, the CRA has scheduled the Grocery & Essentials Benefit payouts alongside the existing quarterly GST/HST credit cycle.
+<b>Sources</b>
 
-Mark these dates on your calendar for the 2026 tax year:
-1. **First Payment:** Today, June 5, 2026 (Now fully deposited and shipped!).
-2. **Second Payment:** September 4, 2026.
-3. **Third Payment:** December 4, 2026.
-4. **Fourth Payment:** March 5, 2027.
-
-If you have signed up for CRA Direct Deposit, you should see the transfer in your bank account today listed under "FED PROV/ALL" or "CRA CWB". If you receive paper checks, please allow 5 to 10 business days for Canada Post to deliver them to your residential address.
-
-<b>Crucial Tax Implications of the New Benefit</b>
-
-One of the best features of the Grocery & Essentials Benefit is its tax status. **This benefit is 100% tax-free.**
-
-This has three critical implications for your financial planning:
-1. **No Income Reporting:** You do not need to report these payments as taxable income on your next tax return, meaning it will not push you into a higher federal or provincial tax bracket.
-2. **No Benefit Clawbacks:** Receiving this cash will not reduce your eligibility or claw back other income-tested government benefits, such as the Canada Child Benefit (CCB) or the Guaranteed Income Supplement (GIS) for seniors.
-3. **Filing Taxes is Mandatory:** The only catch is that **you must file your tax return annually to receive these payments**, even if you had zero income to report. The CRA uses your tax return data to calculate your family net income and automate these direct deposits.
-
-As we navigate through high living costs in 2026, taking full advantage of these automated government credits, while strategically planning your personal deductions and savings, is the ultimate key to maximizing your real household take-home pay.`,
+All figures come from the CRA's own pages: [Canada Groceries and Essentials Benefit](https://www.canada.ca/en/revenue-agency/services/child-family-benefits/canada-groceries-essentials-benefit.html), [How much you can get](https://www.canada.ca/en/revenue-agency/services/child-family-benefits/canada-groceries-essentials-benefit/how-much.html), [Payment amounts table](https://www.canada.ca/en/revenue-agency/services/child-family-benefits/canada-groceries-essentials-benefit/how-much/payment-amounts.html), [Benefit payment dates](https://www.canada.ca/en/revenue-agency/services/child-family-benefits/benefit-payment-dates.html) and [One-time GST/HST credit top-up](https://www.canada.ca/en/revenue-agency/services/child-family-benefits/gst-hst-credit/one-time-top-up.html). Checked September 22, 2026. An earlier version of this article, written before the CRA published the final rules, gave income thresholds, amounts and dates that turned out to be wrong; they have been replaced.`,
     faq: [
-      { question: "What is the new CRA Grocery & Essentials Benefit?", answer: "It is a new $3.1 billion federal relief package providing a quarterly 25% increase in cash supports to 12 million low-to-moderate-income Canadian households to offset grocery inflation." },
-      { question: "Do I need to apply for the Grocery & Essentials Benefit?", answer: "No, there is no separate application required. The CRA automatically calculates your eligibility and issues payments based on the net income reported on your tax return." },
-      { question: "How much can a family of four receive under this benefit?", answer: "An eligible family of four (married/common-law with 2 children) can receive a maximum of $390 CAD quarterly, totaling $1,560 CAD tax-free per year." },
-      { question: "When are the scheduled payment dates for 2026?", answer: "Payments are scheduled for June 5, 2026, September 4, 2026, December 4, 2026, and March 5, 2027." },
-      { question: "Is the new Grocery & Essentials Benefit taxable?", answer: "No, the benefit is 100% tax-free and will not affect other income-tested government benefits or tax brackets." }
+      { question: "What is the Canada Groceries and Essentials Benefit?", answer: "It is the new name, from July 2026, for the GST/HST credit: a tax-free quarterly payment for people with low and modest incomes. The amounts were raised 25% for five years, 2026 to 2031." },
+      { question: "Do I need to apply?", answer: "No. The CRA considers you when you file your tax return, even if you had no income. You must file every year to keep receiving it." },
+      { question: "How much can a family of four receive?", answer: "A couple with two children under 19 can get up to $1,358 a year from July 2026 to June 2027 ($890 for the couple plus $234 per child), reduced by 5% of adjusted family net income above $46,432." },
+      { question: "When are the payment dates?", answer: "The CRA lists July 3, 2026 and October 5, 2026 for the current period, followed by January and April payments. There was also a one-time top-up on June 5, 2026." },
+      { question: "Is it taxable?", answer: "No. The CRA says the payments are not taxable and you do not report them on your tax return." }
     ]
   },
   {

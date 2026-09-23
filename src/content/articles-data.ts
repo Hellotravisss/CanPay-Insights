@@ -540,7 +540,7 @@ You become a Canadian tax resident when you establish significant residential ti
 **Deadline:** April 30, 2027 (for 2026 income)
 
 **Documents to Gather:**
-- T4 slip from employer (arrives by end of February 2026)
+- T4 slip from employer (arrives by end of February 2027)
 - Social Insurance Number (SIN)
 - Record of landing date
 - Income earned before arriving (for CRA records)
@@ -548,30 +548,30 @@ You become a Canadian tax resident when you establish significant residential ti
 
 **Prorated Personal Amount:**
 
-Elena arrived on March 15th, meaning she was a resident for 290 days of the year (March 15 to December 31). Her federal basic personal amount is prorated:
+Elena arrived on March 15th, meaning she was a resident for 292 days of the year (March 15 to December 31, counting both days). Her federal basic personal amount is prorated:
 
-$16,452 × (290 ÷ 365) = $13,071
+$16,452 × (292 ÷ 365) = $13,162
 
-This means she can earn about $12,816 tax-free federally.
+This means she can earn about $13,162 before owing any federal income tax.
 
 ### Benefits You Can Claim Immediately
 
-**1. GST/HST Credit**
+**1. Canada Groceries and Essentials Benefit (formerly the GST/HST credit)**
 
-This quarterly payment helps offset sales tax:
-- Single adult: Up to $345/year
-- Married/common-law: Up to $690/year
-- Plus $181 per child under 19
-- **You can apply as soon as you have a SIN**
+This tax-free quarterly payment replaced the GST/HST credit in July 2026. For July 2026 to June 2027:
+- Single adult: Up to $679/year
+- Married/common-law: Up to $890/year
+- Plus $234 per child under 19
+- **Newcomers apply with form RC151** once they have a SIN
 
-Elena's family (2 adults, 2 children) could receive up to $1,052 per year.
+Elena's family (2 adults, 2 children) could receive up to $1,358 per year.
 
 **2. Canada Child Benefit (CCB)**
 
 Monthly payments for children under 18:
-- Up to $7,787 per year for children under 6
-- Up to $6,570 per year for children 6-17
-- Income-tested (phases out above $34,863 family income)
+- Up to $8,157 per year for children under 6 (July 2026 to June 2027)
+- Up to $6,883 per year for children 6-17
+- Income-tested (starts to decrease above $38,237 adjusted family net income)
 
 With Elena's $75,000 income, her family would receive partial CCB:
 - Estimated monthly: $300-400 for two children
@@ -1452,7 +1452,7 @@ Think of it as a time machine for your taxes—paying less now and potentially l
 
 **Contribution Limit:**
 - 18% of your previous year's earned income
-- Maximum: $31,560 (for 2025, based on 2024 income)
+- Maximum: $32,490 for 2025 ($33,810 for 2026)
 - Plus unused room from previous years
 
 **Deadlines:**
@@ -1743,7 +1743,7 @@ Think of it this way:
 
 **RRSP:**
 - 18% of previous year's earned income
-- Maximum: $31,560
+- Maximum: $32,490 for 2025 ($33,810 for 2026)
 - Room accumulates if unused
 - Withdrawals don't restore room (except HBP/LLP)
 
@@ -1955,16 +1955,16 @@ const article9: Article = {
   subtitle: "Everything Ontario workers need to know about overtime pay, exemptions, and calculations",
   excerpt: "Are you getting paid correctly for overtime? Ontario has specific rules about overtime thresholds, rates, and exemptions. Learn your rights as an employee.",
   metaTitle: "Ontario Overtime Rules 2026 - Employee Rights Guide",
-  metaDescription: "Complete guide to Ontario overtime rules 2025. Learn about overtime pay rates, exemptions, and how to calculate what you're owed.",
+  metaDescription: "Complete guide to Ontario overtime rules 2026. Learn about overtime pay rates, exemptions, and how to calculate what you're owed.",
   keywords: ["ontario overtime rules", "overtime pay ontario", "ontario employment standards", "overtime exemption ontario"],
   category: "tax",
-  tags: ["Ontario", "Overtime", "Employment Law", "2025"],
+  tags: ["Ontario", "Overtime", "Employment Law", "2026"],
   province: "Ontario",
   publishedAt: "2025-01-23",
   updatedAt: "2026-08-11",
   readTime: 10,
   imageUrl: "/blog/covers/ontario-overtime-rules-2025.png",
-  directAnswer: "In Ontario for 2025, most employees are entitled to overtime pay at 1.5 times their regular hourly rate for every hour worked in excess of 44 hours in a work week.",
+  directAnswer: "In Ontario in 2026, most employees are entitled to overtime pay at 1.5 times their regular hourly rate for every hour worked in excess of 44 hours in a work week.",
   faq: [
     { question: "What is the overtime threshold in Ontario?", answer: "The standard overtime threshold in Ontario is 44 hours per week; any hours worked beyond this must be compensated at the overtime rate." },
     { question: "Are managers exempt from overtime in Ontario?", answer: "Yes, managers and supervisors are generally exempt from overtime pay if their work is primarily managerial and they perform non-managerial tasks only on an irregular basis." },
@@ -2078,9 +2078,9 @@ If you're called a "manager" but don't actually manage, you may still qualify fo
 - Nurses often have collective agreements with different rules
 
 **Construction:**
-- Daily overtime after 10 hours
-- Special rules for road building
-- Seasonal work considerations
+- Ontario has no daily overtime rule, in construction or anywhere else
+- Some construction work has a higher weekly threshold under O. Reg. 285/01 (for example, road building)
+- Check the Ministry of Labour's industry-specific guide for your trade
 
 **Agriculture:**
 - Some workers exempt (harvesting, primary production)
@@ -2091,10 +2091,10 @@ If you're called a "manager" but don't actually manage, you may still qualify fo
 Employers and employees can agree to **average hours over periods longer than one week**:
 
 **How It Works:**
-- Written agreement required
-- Can average over 2, 3, or 4 weeks
-- Must specify start and end dates
-- Employee must get a copy
+- Written or electronic agreement required
+- Can average over 2, 3, or 4 weeks (never more than 4)
+- Must have an expiry date no more than two years out (non-union)
+- Neither side can cancel it early unless both agree
 
 **Example:**
 4-week averaging agreement:
@@ -2134,17 +2134,17 @@ Employers and employees can agree to **average hours over periods longer than on
 Instead of overtime pay, you can agree to **banked time**:
 
 **Rules:**
-- Must be written agreement
-- 1.5 hours banked for each overtime hour
-- Must be taken within 3 months
-- If not taken, must be paid out at overtime rate
+- Must be agreed in writing or electronically
+- 1.5 hours of paid time off for each overtime hour
+- Must be taken within 3 months of the week it was earned, or within 12 months if you agree in writing
+- If your job ends before you take it, you must be paid overtime pay for those hours
 
 **Example:**
 - Work 4 hours overtime
 - Bank 6 hours (4 × 1.5)
 - Take paid day off later (6 hours at regular rate)
 
-**Warning:** Some employers pressure employees into banking time. Know that you have the right to refuse and demand cash payment.
+**Warning:** Some employers pressure employees into banking time. You do not have to agree to it; without your written or electronic agreement, overtime must be paid in cash.
 
 ### Common Employer Violations
 
@@ -2154,7 +2154,7 @@ False. Salaried employees are entitled to overtime unless exempt. Your salary co
 
 **2. "We don't pay overtime, we offer time off instead"**
 
-Illegal unless you agree in writing. Even then, you can demand cash.
+Not allowed unless you agree in writing or electronically. You can decline, and then overtime must be paid.
 
 **3. "You're a manager" (when you're not)**
 
@@ -2166,7 +2166,7 @@ If you're non-exempt, you must be paid for all hours worked, including overtime.
 
 **5. "We average your hours over the year"**
 
-Only valid with a written averaging agreement, and maximum 4 weeks.
+Only valid with a written or electronic averaging agreement of two to four weeks, which expires after at most two years.
 
 ### What To Do If You're Not Paid Correctly
 
@@ -2581,6 +2581,8 @@ const PRUNED_SLUGS = new Set<string>([
   'bc-tax-guide-2025',
   'alberta-vs-ontario-taxes-2025',
   'minimum-wage-canada-2025-comparison',
+  // Retired 2026-09-22: 2025 rates presented as current (audit found wrong figures).
+  'minimum-wage-provincial-guide-canada-2025',
 
   // Province salary guides (speculative ranges, dated 2025, ~0-1 visits each)
   'british-columbia-salary-guide-2025',

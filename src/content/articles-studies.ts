@@ -104,7 +104,7 @@ No Canadian jurisdiction lets a full-time minimum wage worker keep more than 87%
 
 At minimum wage income levels ($31,000–$41,000 a year), three things drive the differences:
 
-1. **Provincial basic personal amounts.** Provinces with low basic personal amounts — Nova Scotia ($11,932) and Ontario ($12,989) are among the lowest — start taxing income much earlier than Alberta ($22,769) or the territories, and Nova Scotia pairs that with the highest bottom-bracket rate in the country (8.79%).
+1. **Provincial basic personal amounts.** Provinces with low basic personal amounts — Nova Scotia ($11,932) and Ontario ($12,989) are among the lowest — start taxing income much earlier than Alberta ($22,769) or the territories, and Nova Scotia pairs that with a first-bracket rate of 8.79%, well above Ontario (5.05%) or BC (5.60%).
 2. **Quebec's separate system.** Quebec layers QPP (at a higher rate than CPP) and QPIP on top of income tax, partly offset by the federal Quebec abatement.
 3. **CPP and EI are flat at this level.** CPP (5.95%) and EI (1.63%) apply almost uniformly, so they hit low earners proportionally harder than higher earners who exceed the contribution ceilings.
 
@@ -525,12 +525,12 @@ Add your **base + expected commission** together and drop the total into the [fr
     id: 'study-6',
     slug: 'canada-groceries-essentials-benefit-2026',
     title: 'Canada Groceries and Essentials Benefit 2026: Who Gets How Much (and When)',
-    subtitle: 'The GST/HST credit becomes the Groceries and Essentials Benefit on July 3, 2026 — with maximum payments rising 25% a year for five years.',
+    subtitle: 'The GST/HST credit becomes the Groceries and Essentials Benefit on July 3, 2026 — with maximum payments raised 25%, an increase that stays in place for five years.',
     excerpt:
       'Ottawa is replacing the GST/HST credit with the Canada Groceries and Essentials Benefit starting July 3, 2026. Here is what changes, how much you can get, the one-time June top-up, and the 2026 payment dates.',
     metaTitle: 'Canada Groceries and Essentials Benefit 2026: Amounts, Dates & Eligibility',
     metaDescription:
-      'The Canada Groceries and Essentials Benefit replaces the GST/HST credit on July 3, 2026, with maximums up 25% a year for five years. Amounts, the June top-up, payment dates, and who qualifies.',
+      'The Canada Groceries and Essentials Benefit replaces the GST/HST credit on July 3, 2026, with maximums raised 25% for five years. Amounts, the June top-up, payment dates, and who qualifies.',
     keywords: [
       'canada groceries and essentials benefit',
       'groceries and essentials benefit 2026',
@@ -545,7 +545,7 @@ Add your **base + expected commission** together and drop the total into the [fr
     readTime: 5,
     imageUrl: '/blog/groceries-essentials-benefit-2026.svg',
     directAnswer:
-      'The Canada Groceries and Essentials Benefit (CGEB) replaces the GST/HST credit starting with the July 3, 2026 payment. It keeps the same eligibility and quarterly schedule, but maximum amounts rise 25% per year for five years — so a couple with two children could receive up to about $1,890 in 2026, versus roughly $1,066 under the old GST/HST credit. Most people get it automatically once they have filed their taxes, and there is also a one-time top-up landing by June 2026 equal to 50% of your 2025–26 GST/HST credit.',
+      'The Canada Groceries and Essentials Benefit (CGEB) replaces the GST/HST credit starting with the July 3, 2026 payment. It keeps the same eligibility and quarterly schedule, but maximum amounts are 25% higher, an increase that lasts five years (2026 to 2031) — so a couple with two children can receive up to $1,358 from July 2026 to June 2027, versus $1,066 under the old GST/HST credit. Most people get it automatically once they have filed their taxes, and there is also a one-time top-up landing by June 2026 equal to 50% of your 2025–26 GST/HST credit.',
     faq: [
       {
         question: 'When does the Canada Groceries and Essentials Benefit start?',
@@ -555,7 +555,7 @@ Add your **base + expected commission** together and drop the total into the [fr
       {
         question: 'How much is the Groceries and Essentials Benefit?',
         answer:
-          'It depends on your income and family size. Maximums rise 25% per year for five years from July 2026 — for example, a couple with two children could receive up to about $1,890 in 2026, versus roughly $1,066 under the old GST/HST credit.',
+          'It depends on your income and family size. Maximums were raised 25% from July 2026, and the increase lasts five years — for example, a couple with two children can receive up to $1,358 from July 2026 to June 2027, versus $1,066 under the old GST/HST credit.',
       },
       {
         question: 'Do I need to apply for the Groceries and Essentials Benefit?',
@@ -570,7 +570,7 @@ Add your **base + expected commission** together and drop the total into the [fr
       {
         question: 'What is the one-time top-up in June 2026?',
         answer:
-          'Before the switch, the CRA is sending a one-time payment no later than June 2026 equal to 50% of your 2025–26 GST/HST credit — reported as up to about $267 for a single adult and up to about $717 for a family of four.',
+          'Before the switch, the CRA is sending a one-time payment no later than June 2026 equal to 50% of your 2025–26 GST/HST credit — the CRA lists up to $267 for a single adult with no children and up to $533 for a couple with two children.',
       },
       {
         question: 'Does the benefit change my take-home pay?',
@@ -583,23 +583,25 @@ Add your **base + expected commission** together and drop the total into the [fr
 
 The **Canada Groceries and Essentials Benefit (CGEB)** is the federal government's new, larger version of the **GST/HST credit**. It starts with the **July 3, 2026** quarterly payment and is meant to help offset the cost of groceries and everyday essentials.
 
-The parts you already know stay the same: it is **tax-free**, paid **quarterly**, and you do **not** apply for it — the Canada Revenue Agency (CRA) works out your amount from your tax return. What changes is the size: **maximum payments rise 25% per year for five years**, beginning July 2026.
+The parts you already know stay the same: it is **tax-free**, paid **quarterly**, and you do **not** apply for it — the Canada Revenue Agency (CRA) works out your amount from your tax return. What changes is the size: **maximum payments are 25% higher**, an increase the CRA says will remain for five years, 2026 to 2031. It is one increase, not 25% more each year.
 
 ## How much can you get?
 
-Your amount depends on your **income, marital status, and number of children**, exactly like the old GST/HST credit. The headline change is how much bigger the maximums get. Using the government's own illustration:
+Your amount depends on your **income, marital status, and number of children**, exactly like the old GST/HST credit. The CRA's maximums:
 
-| Household | Old GST/HST credit (max) | Groceries & Essentials Benefit, 2026 (max) |
+| Household | Old GST/HST credit, July 2025–June 2026 (max) | Groceries & Essentials Benefit, July 2026–June 2027 (max) |
 | --- | --- | --- |
-| Couple with two children | ~$1,066 | up to ~$1,890 |
+| Single, no children | $533 | $679 |
+| Couple, no children | $698 | $890 |
+| Couple with two children | $1,066 | $1,358 |
 
-That is roughly an **$824 increase** for that family — and because the maximum keeps growing 25% a year through 2030, the gap widens every year.
+That is a **$292 increase** for a couple with two children. Part of it is the 25% boost and part is the usual yearly inflation indexing.
 
 Your own amount depends on your income and family size: lower-income households get the full amount, and it phases out as income rises, the same way the GST/HST credit always has.
 
 ## The one-time top-up landing by June 2026
 
-Ahead of the switch, the CRA is sending a **one-time top-up** no later than **June 2026**, equal to **50% of the annual value of your 2025–26 GST/HST credit**. Reported figures put this at up to about **$267 for a single adult** and up to about **$717 for a family of four** — a bonus on top of your regular payment. You don't need to do anything; if you qualified for the GST/HST credit, it arrives automatically.
+Ahead of the switch, the CRA is sending a **one-time top-up** no later than **June 2026**, equal to **50% of the annual value of your 2025–26 GST/HST credit**. The CRA lists up to **$267 for a single adult with no children** and up to **$533 for a couple with two children** (up to $717 with four or more children) — a bonus on top of your regular payment. You don't need to do anything; if you qualified for the GST/HST credit, it arrives automatically.
 
 ## 2026 payment dates
 
@@ -621,7 +623,7 @@ The CGEB is money **on top of** your paycheque, not a payroll deduction — so i
 
 ## Sources & disclaimer
 
-Based on Government of Canada / CRA announcements and reporting on the Canada Groceries and Essentials Benefit (2026). Amounts and dates are as announced and can change; your exact payment depends on your income and family situation. This is general information, not tax or financial advice — confirm current figures with the [CRA](https://www.canada.ca/en/revenue-agency.html).
+Amounts and dates are from the CRA's own pages: [how much you can get](https://www.canada.ca/en/revenue-agency/services/child-family-benefits/canada-groceries-essentials-benefit/how-much.html), the [payment amounts table](https://www.canada.ca/en/revenue-agency/services/child-family-benefits/canada-groceries-essentials-benefit/how-much/payment-amounts.html), [benefit payment dates](https://www.canada.ca/en/revenue-agency/services/child-family-benefits/benefit-payment-dates.html) and the [one-time top-up](https://www.canada.ca/en/revenue-agency/services/child-family-benefits/gst-hst-credit/one-time-top-up.html), checked September 22, 2026. An earlier version said the maximum would rise 25% every year; the CRA describes a single increase that lasts five years. Figures can change; your exact payment depends on your income and family situation. This is general information, not tax or financial advice — confirm current figures with the [CRA](https://www.canada.ca/en/revenue-agency.html).
 `,
   },
   {
@@ -743,7 +745,7 @@ Based on CRA indexation figures for the 2026–27 benefit year as reported in Ju
     readTime: 5,
     imageUrl: '/blog/canada-workers-benefit-2026.svg',
     directAnswer:
-      'The Canada Workers Benefit (CWB) is a refundable tax credit for low- and modest-income workers. Advance payments (ACWB) for the 2026–27 cycle are paid in three instalments — July 10, 2026, October 2026, and January 2027 — worth up to about $272 per instalment for a single worker and about $469 for a family, based on your 2025 tax return. For the 2026 tax year itself, the maximum basic CWB rises to $1,665 for singles and $2,869 for families, plus a disability supplement of up to $843. It is automatic: if you qualified on your 2025 return, the CRA pays you without any application.',
+      'The Canada Workers Benefit (CWB) is a refundable tax credit for low- and modest-income workers. Advance payments (ACWB) for the 2026–27 cycle are paid in three instalments — July 10, 2026, October 2026, and January 2027 — worth up to about $272 per instalment for a single worker and about $469 for a family, based on your 2025 tax return. For the 2026 tax year itself, the maximum basic CWB rises to $1,665 for singles and $2,869 for families, plus a disability supplement of up to $860. It is automatic: if you qualified on your 2025 return, the CRA pays you without any application.',
     faq: [
       {
         question: 'What is the Canada Workers Benefit?',
@@ -763,7 +765,7 @@ Based on CRA indexation figures for the 2026–27 benefit year as reported in Ju
       {
         question: 'How much is the CWB for 2026?',
         answer:
-          'For the 2026 tax year, the maximum basic amount rises to $1,665 for single workers and $2,869 for families, plus a disability supplement of up to $843. Amounts phase down as income rises past your province&apos;s threshold.',
+          'For the 2026 tax year, the maximum basic amount rises to $1,665 for single workers and $2,869 for families, plus a disability supplement of up to $860. Amounts phase down as income rises past your province&apos;s threshold.',
       },
       {
         question: 'Do I need to apply for the Canada Workers Benefit?',
@@ -786,7 +788,7 @@ The CRA paid the **first Advanced Canada Workers Benefit (ACWB) instalment** of 
 The **CWB** is a **refundable tax credit** for people who **work** but earn a low or modest income. Refundable means you get the money even if you owe no tax. There are two parts:
 
 - a **basic amount**, and
-- a **disability supplement** (up to **$843**) if you qualify for the disability tax credit.
+- a **disability supplement** (up to **$860** for 2026) if you qualify for the disability tax credit.
 
 ## The numbers for 2026
 
