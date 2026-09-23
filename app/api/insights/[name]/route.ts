@@ -1,5 +1,5 @@
 import { NextResponse } from 'next/server';
-import { db } from '../../../../lib/d1/db';
+import { db, secret } from '../../../../lib/d1/db';
 import {
   loadEvents, calcStats, calcStatsExtra, calcIndustryIncome, calcFakeDoors, calcAccounts,
   calcJourneys, calcSeries, calcCandles, calcIncomeBarometer, calcCrosstab, calcCitiesGeo, provenanceEvents, calcNeighbourhoods } from '../../../../lib/d1/events';
@@ -7,6 +7,14 @@ import { gscStats, contentStats } from '../../../../lib/d1/gsc';
 import { calcUsers } from '../../../../lib/d1/users';
 
 export const dynamic = 'force-dynamic';
+
+/** Compare without leaking, through timing, how much of a guessed key was right. */
+function sameKey(a: string, b: string): boolean {
+  if (a.length !== b.length) return false;
+  let diff = 0;
+  for (let i = 0; i < a.length; i++) diff |= a.charCodeAt(i) ^ b.charCodeAt(i);
+  return diff === 0;
+}
 
 /**
  * The private data room's read API — one route per former Supabase RPC,
@@ -17,8 +25,14 @@ export const dynamic = 'force-dynamic';
  */
 export async function GET(request: Request, { params }: { params: Promise<{ name: string }> }) {
   const { name } = await params;
-  const key = request.headers.get('x-room-key');
-  if (key !== 'Mi9kcqgRDRCM') return NextResponse.json({ error: 'forbidden' }, { status: 403 });
+  // The room key is a Worker secret (ROOM_KEY), never in the code. Until
+  // 2026-09-22 it was a string literal here AND in the page's client bundle, in
+  // a public repository — so the "private" room, with postal-code cells as
+  // small as five people, was readable by anyone who looked. Fail closed: no
+  // secret configured means no access, not open access.
+  const expected = (await secret('ROOM_KEY'))?.trim();
+  const given = request.headers.get('x-room-key')?.trim() ?? '';
+  if (!expected || !sameKey(given, expected)) return NextResponse.json({ error: 'forbidden' }, { status: 403 });
 
   const d = await db();
   const noStore = { headers: { 'cache-control': 'private, no-store' } };

@@ -1,5 +1,6 @@
 import type { Metadata } from 'next';
 import StatsDashboard from './StatsDashboard';
+import KeyGate from './KeyGate';
 
 // PRIVATE dashboard — unlisted URL, noindex, never in the sitemap and never
 // linked from anywhere on the site. Reads aggregates only, through the
@@ -10,5 +11,9 @@ export const metadata: Metadata = {
 };
 
 export default function PrivateStatsPage() {
-  return <StatsDashboard />;
+  return (
+    <KeyGate>
+      <StatsDashboard />
+    </KeyGate>
+  );
 }
