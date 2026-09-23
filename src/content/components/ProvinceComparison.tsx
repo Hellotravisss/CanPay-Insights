@@ -315,20 +315,21 @@ const ProvinceComparison: React.FC<ProvinceComparisonProps> = ({ onBackToBlog })
           </p>
           <div className="flex flex-wrap gap-2">
             {selectedProvinces.map(code => {
+              // One 2026 take-home guide per province (the 2025 salary guides were deleted).
               const slugMap: Record<string, string> = {
-                'AB': 'alberta-salary-guide-2025',
-                'BC': 'british-columbia-salary-guide-2025',
-                'ON': 'ontario-toronto-ottawa-hamilton-salary-guide-2025',
-                'QC': 'quebec-salary-guide-2025',
-                'NS': 'atlantic-canada-salary-guide-2025',
-                'NB': 'atlantic-canada-salary-guide-2025',
-                'PE': 'atlantic-canada-salary-guide-2025',
-                'NL': 'atlantic-canada-salary-guide-2025',
-                'MB': 'prairies-salary-guide-2025',
-                'SK': 'prairies-salary-guide-2025',
-                'YT': 'northern-territories-salary-guide-2025',
-                'NT': 'northern-territories-salary-guide-2025',
-                'NU': 'northern-territories-salary-guide-2025',
+                'AB': 'alberta-take-home-pay-guide-2026',
+                'BC': 'bc-take-home-pay-guide-2026',
+                'ON': 'ontario-take-home-pay-guide-2026',
+                'QC': 'quebec-take-home-pay-guide-2026',
+                'NS': 'nova-scotia-take-home-pay-guide-2026',
+                'NB': 'new-brunswick-take-home-pay-guide-2026',
+                'PE': 'pei-take-home-pay-guide-2026',
+                'NL': 'newfoundland-take-home-pay-guide-2026',
+                'MB': 'manitoba-take-home-pay-guide-2026',
+                'SK': 'saskatchewan-take-home-pay-guide-2026',
+                'YT': 'yukon-take-home-pay-guide-2026',
+                'NT': 'northwest-territories-take-home-pay-guide-2026',
+                'NU': 'nunavut-take-home-pay-guide-2026',
               };
               const slug = slugMap[code];
               if (!slug) return null;

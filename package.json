@@ -5,7 +5,7 @@
   "type": "module",
   "scripts": {
     "dev": "next dev",
-    "prebuild": "npm run audit:engine && npm run audit:enginecases && npm run audit:marginal && npm run audit:consistency && npm run audit:advisor && npm run audit:dbroutes && npm run audit:sitemap && npm run audit:numbers:selftest && npm run audit:numbers && npm run audit:logo",
+    "prebuild": "npm run audit:engine && npm run audit:enginecases && npm run audit:marginal && npm run audit:consistency && npm run audit:advisor && npm run audit:dbroutes && npm run audit:sitemap && npm run audit:links && npm run audit:numbers:selftest && npm run audit:numbers && npm run audit:logo",
     "audit:engine": "tsx scripts/goldenT4032.ts",
     "build": "next build",
     "start": "next start",
@@ -21,6 +21,7 @@
     "audit:advisor": "tsx scripts/auditAdvisor.ts",
     "audit:dbroutes": "tsx scripts/auditDbRoutes.ts",
     "audit:sitemap": "tsx scripts/auditSitemap.ts",
+    "audit:links": "tsx scripts/auditLinks.ts",
     "audit:live": "node scripts/livePromises.mjs",
     "audit:enginecases": "TZ=America/Vancouver tsx scripts/auditEngineCases.ts && TZ=America/St_Johns tsx scripts/auditEngineCases.ts"
   },

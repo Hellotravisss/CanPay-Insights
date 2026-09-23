@@ -1065,14 +1065,14 @@ const formatFrenchMoney = (amount: number) =>
   `${Math.round(amount).toLocaleString('fr-CA')} $`;
 
 const provinceGuideLinks: Record<string, { href: string; label: string }> = {
-  ontario: { href: '/blog/ontario-tax-guide-2025', label: 'Ontario tax guide' },
-  bc: { href: '/blog/bc-tax-guide-2025', label: 'BC tax guide' },
-  alberta: { href: '/blog/alberta-vs-ontario-taxes-2025', label: 'Alberta vs Ontario taxes' },
-  quebec: { href: '/blog/minimum-wage-take-home-pay-canada-2026', label: 'Take-home pay by province' },
-  'nova-scotia': { href: '/blog/minimum-wage-take-home-pay-canada-2026', label: 'Take-home pay by province' },
-  'new-brunswick': { href: '/blog/minimum-wage-take-home-pay-canada-2026', label: 'Take-home pay by province' },
-  newfoundland: { href: '/blog/minimum-wage-take-home-pay-canada-2026', label: 'Take-home pay by province' },
-  pei: { href: '/blog/minimum-wage-take-home-pay-canada-2026', label: 'Take-home pay by province' },
+  ontario: { href: '/blog/ontario-take-home-pay-guide-2026', label: 'Ontario take-home pay guide 2026' },
+  bc: { href: '/blog/bc-take-home-pay-guide-2026', label: 'BC take-home pay guide 2026' },
+  alberta: { href: '/blog/alberta-take-home-pay-guide-2026', label: 'Alberta take-home pay guide 2026' },
+  quebec: { href: '/blog/quebec-take-home-pay-guide-2026', label: 'Quebec take-home pay guide 2026' },
+  'nova-scotia': { href: '/blog/nova-scotia-take-home-pay-guide-2026', label: 'Nova Scotia take-home pay guide 2026' },
+  'new-brunswick': { href: '/blog/new-brunswick-take-home-pay-guide-2026', label: 'New Brunswick take-home pay guide 2026' },
+  newfoundland: { href: '/blog/newfoundland-take-home-pay-guide-2026', label: 'Newfoundland take-home pay guide 2026' },
+  pei: { href: '/blog/pei-take-home-pay-guide-2026', label: 'PEI take-home pay guide 2026' },
 };
 
 const getSalaryBand = (amount: number) => {
