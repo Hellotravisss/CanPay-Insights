@@ -5,7 +5,7 @@
   "type": "module",
   "scripts": {
     "dev": "next dev",
-    "prebuild": "npm run audit:engine && npm run audit:enginecases && npm run audit:marginal && npm run audit:consistency && npm run audit:advisor && npm run audit:dbroutes && npm run audit:numbers:selftest && npm run audit:numbers && npm run audit:logo",
+    "prebuild": "npm run audit:engine && npm run audit:enginecases && npm run audit:marginal && npm run audit:consistency && npm run audit:advisor && npm run audit:dbroutes && npm run audit:sitemap && npm run audit:numbers:selftest && npm run audit:numbers && npm run audit:logo",
     "audit:engine": "tsx scripts/goldenT4032.ts",
     "build": "next build",
     "start": "next start",
@@ -20,6 +20,8 @@
     "audit:consistency": "tsx scripts/auditConsistency.ts",
     "audit:advisor": "tsx scripts/auditAdvisor.ts",
     "audit:dbroutes": "tsx scripts/auditDbRoutes.ts",
+    "audit:sitemap": "tsx scripts/auditSitemap.ts",
+    "audit:live": "node scripts/livePromises.mjs",
     "audit:enginecases": "TZ=America/Vancouver tsx scripts/auditEngineCases.ts && TZ=America/St_Johns tsx scripts/auditEngineCases.ts"
   },
   "dependencies": {
@@ -42,6 +44,7 @@
     "@types/node": "^22.14.0",
     "@types/react": "19.2.14",
     "@vitejs/plugin-react": "^5.0.0",
+    "playwright": "^1.63.0",
     "tsx": "^4.20.3",
     "typescript": "~5.8.2",
     "vite": "^6.2.0",

@@ -32,3 +32,10 @@ jobs:
         env:
           CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+      # Load the live pages the way a visitor does and check every promise we
+      # make in writing (widget: no third-party requests, cookies or storage;
+      # research page agrees with its JSON; data room refuses without a key;
+      # sitemap lists no noindex page). Source gates cannot see edge injection
+      # or stale caches; this can. A failure here means production is wrong now.
+      - run: npx playwright install --with-deps chromium
+      - run: sleep 30 && npm run audit:live

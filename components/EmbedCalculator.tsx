@@ -2,6 +2,7 @@
 import { useEffect, useMemo, useState } from 'react';
 import { getSalaryFigures, PROVINCE_SEO_CONFIGS } from '../lib/salaryFigures';
 import { recordCalcEvent } from '../lib/telemetry';
+import { provinceLabel } from '../lib/provinceNames';
 
 // Compact take-home pay calculator designed to live inside an <iframe> on
 // third-party sites (job boards, immigration services, finance blogs).
@@ -107,6 +108,8 @@ export default function EmbedCalculator({
   const [embedHost, setEmbedHost] = useState<string | null>(null);
   const [touched, setTouched] = useState(false);
 
+  useEffect(() => { document.title = t.title; }, [t.title]);
+
   useEffect(() => {
     // Which site embedded us — the publisher's hostname, never user data.
     try {
@@ -166,7 +169,7 @@ export default function EmbedCalculator({
         className="mb-3 w-full rounded-lg border border-slate-300 bg-white px-3 py-2 text-sm text-slate-800"
       >
         {PROVINCE_SEO_CONFIGS.map((c) => (
-          <option key={c.slug} value={c.slug}>{c.name}</option>
+          <option key={c.slug} value={c.slug}>{provinceLabel(c.slug, lang, c.name)}</option>
         ))}
       </select>
 

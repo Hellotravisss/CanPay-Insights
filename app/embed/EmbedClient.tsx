@@ -10,10 +10,11 @@ export default function EmbedClient() {
 
   useEffect(() => {
     const q = new URLSearchParams(window.location.search);
-    setParams({
-      province: q.get('province') ?? undefined,
-      lang: q.get('lang') ?? undefined,
-    });
+    const lang = q.get('lang') ?? undefined;
+    setParams({ province: q.get('province') ?? undefined, lang });
+    // The root layout says lang="en"; screen readers and translators need the
+    // widget's real language.
+    if (lang && /^(en|fr|zh|pa|tl|hi|es|uk|ko|vi)$/.test(lang)) document.documentElement.lang = lang;
   }, []);
 
   if (!params) return null;

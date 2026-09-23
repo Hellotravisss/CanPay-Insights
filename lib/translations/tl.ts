@@ -323,7 +323,7 @@ export const main: Record<string, string> = {
 };
 
 export const embed: Record<string, string> = {
-  title: 'Take-Home Pay Calculator',
+  title: 'Calculator ng Take-Home Pay',
   province: 'Probinsya',
   salary: 'Sweldo',
   perYear: '/taon',
@@ -331,8 +331,8 @@ export const embed: Record<string, string> = {
   net: 'Take-home pay',
   monthly: 'Buwanan',
   biweekly: 'Bi-weekly',
-  fed: 'Federal tax',
-  prov: 'Provincial tax',
+  fed: 'Buwis pederal',
+  prov: 'Buwis panlalawigan',
   cpp: 'CPP/QPP',
   ei: 'EI',
   poweredBy: 'Powered by',

@@ -12,6 +12,11 @@ const ENTRY_KEY = 'canpay_entry_path';
 
 export default function TelemetrySwitch() {
   useEffect(() => {
+    // The widget promises third-party sites that it writes nothing to the
+    // visitor's browser. This component sits in the root layout, so it ran
+    // inside the widget too and broke that promise (found by audit:live).
+    // The widget's own opt-out is read from the URL on every load instead.
+    if (window.location.pathname.startsWith('/embed')) return;
     try {
       const param = new URLSearchParams(window.location.search).get('notelemetry');
       if (param === '1') {
