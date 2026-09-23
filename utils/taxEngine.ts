@@ -481,7 +481,12 @@ const calculateSalaryRecurring = (inputs: SalaryInputs): CalculationResult => {
   // 6. Deductions
   const isQuebec = inputs.province === Province.QC;
   const cppResult = calculateCPP(annualGross + annualTaxableBenefits, isQuebec);
-  const eiAnnual = calculateEI(annualGross + annualTaxableBenefits, isQuebec);
+  // Taxable benefits here are NON-CASH (types.ts: "e.g. group life insurance").
+  // CRA T4130: "A taxable non-cash or near-cash benefit is generally not
+  // insurable. Do not deduct EI premiums." They stay in the CPP base above —
+  // "when a non-cash … benefit is taxable, it is also pensionable". Charged EI
+  // until 2026-09-22.
+  const eiAnnual = calculateEI(annualGross, isQuebec);
   const qpipAnnual = isQuebec ? calculateQPIP(annualGross + annualTaxableBenefits) : 0;
   const taxResult = calculateTotalTax(taxableIncome, cppResult, inputs.province, eiAnnual, qpipAnnual);
   
@@ -518,7 +523,11 @@ const calculateSalaryRecurring = (inputs: SalaryInputs): CalculationResult => {
 
 const getPeriodsPerYear = (frequency: PayFrequency): number => {
   switch (frequency) {
-    case PayFrequency.DAILY: return 365;
+    // 240, the CRA's own count for daily pay (T4127, table 6.1: "Daily (240)",
+    // CPP basic exemption 14.58 = 3,500 / 240). It was 365, which treated a
+    // daily-paid worker as paid every day of the year: $200 a day became
+    // $73,000 instead of $48,000, withholding about 24% too much.
+    case PayFrequency.DAILY: return 240;
     case PayFrequency.WEEKLY: return 52;
     case PayFrequency.BI_WEEKLY: return 26;
     case PayFrequency.SEMI_MONTHLY: return 24;
@@ -593,7 +602,12 @@ export const calculateFromAnnualSalary = (inputs: AnnualSalaryInputs): Calculati
 
   // Calculate deductions
   const cppResult = calculateCPP(annualGross + annualTaxableBenefits + annualEquity, isQuebec);
-  const eiAnnual = calculateEI(annualGross + annualTaxableBenefits, isQuebec);
+  // Taxable benefits here are NON-CASH (types.ts: "e.g. group life insurance").
+  // CRA T4130: "A taxable non-cash or near-cash benefit is generally not
+  // insurable. Do not deduct EI premiums." They stay in the CPP base above —
+  // "when a non-cash … benefit is taxable, it is also pensionable". Charged EI
+  // until 2026-09-22.
+  const eiAnnual = calculateEI(annualGross, isQuebec);
   const qpipAnnual = isQuebec ? calculateQPIP(annualGross + annualTaxableBenefits) : 0;
   const taxResult = calculateTotalTax(taxableIncome, cppResult, province, eiAnnual, qpipAnnual);
 
@@ -746,7 +760,12 @@ export const calculateFromTimesheet = (inputs: TimesheetInputs): CalculationResu
   // Calculate deductions
   const isQuebec = province === Province.QC;
   const cppResult = calculateCPP(annualGross + annualTaxableBenefits, isQuebec);
-  const eiAnnual = calculateEI(annualGross + annualTaxableBenefits, isQuebec);
+  // Taxable benefits here are NON-CASH (types.ts: "e.g. group life insurance").
+  // CRA T4130: "A taxable non-cash or near-cash benefit is generally not
+  // insurable. Do not deduct EI premiums." They stay in the CPP base above —
+  // "when a non-cash … benefit is taxable, it is also pensionable". Charged EI
+  // until 2026-09-22.
+  const eiAnnual = calculateEI(annualGross, isQuebec);
   const qpipAnnual = isQuebec ? calculateQPIP(annualGross + annualTaxableBenefits) : 0;
   const taxResult = calculateTotalTax(taxableIncome, cppResult, province, eiAnnual, qpipAnnual);
 

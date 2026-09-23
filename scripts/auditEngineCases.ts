@@ -70,9 +70,26 @@ for (const p of Object.values(Province) as string[]) {
     (b1.annual?.federalTax ?? 0) + (b1.annual?.provincialTax ?? 0), b1.grossPayAnnual - b1.netPayAnnual - (b1.annual?.cpp ?? 0) - (b1.annual?.ei ?? 0) - (b1.annual?.rrsp ?? 0), 0.5);
 }
 
+// 4. Non-cash taxable benefits: pensionable, NOT insurable (CRA T4130)
+for (const p of Object.values(Province) as string[]) {
+  const base = { province: p, annualSalary: 60000, payFrequency: PayFrequency.BI_WEEKLY } as AnnualSalaryInputs;
+  const a0 = calculateFromAnnualSalary(base);
+  const a1 = calculateFromAnnualSalary({ ...base, additionalIncome: { statHolidayPay: 0, sickPay: 0, bonus: 0, otherIncome: 0, taxableBenefits: 50 } } as AnnualSalaryInputs);
+  expect(`${p} non-cash benefit leaves EI unchanged`, a1.annual?.ei ?? -1, a0.annual?.ei ?? -2);
+  checks++;
+  if (!((a1.annual?.cpp ?? 0) > (a0.annual?.cpp ?? 0))) failures.push(`${p} non-cash benefit should raise CPP/QPP`);
+}
+
+// 5. Daily pay: the CRA's 240 days a year (T4127 table 6.1), not 365
+const daily = calculateFromTimesheet({
+  province: Province.ON, hourlyWage: 25, payFrequency: PayFrequency.DAILY,
+  entries: [{ date: '2026-03-02', checkIn: '09:00', checkOut: '17:00', unpaidBreakMinutes: 0 }],
+} as never);
+expect('one $200 day annualised', daily.grossPayAnnual, 48000);
+
 if (failures.length) {
   console.log(failures.map((f) => '  ✗ ' + f).join('\n'));
   console.log(`\nENGINE CASES AUDIT FAIL (${tz}) — ${failures.length} of ${checks}.`);
   process.exit(1);
 }
-console.log(`ENGINE CASES AUDIT PASS (${tz}) — ${checks} checks: timesheet weeks, night premium, one-time pay.`);
+console.log(`ENGINE CASES AUDIT PASS (${tz}) — ${checks} checks: timesheet weeks, night premium, one-time pay, non-cash benefits, daily pay.`);
