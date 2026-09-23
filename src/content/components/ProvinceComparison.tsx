@@ -331,7 +331,9 @@ const ProvinceComparison: React.FC<ProvinceComparisonProps> = ({ onBackToBlog })
                 'NT': 'northwest-territories-take-home-pay-guide-2026',
                 'NU': 'nunavut-take-home-pay-guide-2026',
               };
-              const slug = slugMap[code];
+              // `code` is the full name (PROVINCIAL_DATA's key); the map is by 2-letter id.
+              // Keying it by `code` left this section empty for every province.
+              const slug = slugMap[PROVINCIAL_DATA[code]?.id ?? ''];
               if (!slug) return null;
               return (
                 <a
