@@ -20,6 +20,14 @@ jobs:
       - run: npm ci
       # opennextjs-cloudflare build triggers `prebuild` (audit) via next build
       - run: npx opennextjs-cloudflare build
+        env:
+          # Cloudflare Web Analytics site token. Public by design — it is in the
+          # HTML of every page. Rendered by components/PageTag.tsx, which keeps
+          # it off /embed and honours ?notelemetry=1. Cloudflare's own edge
+          # auto-injection is switched OFF for this site (2026-09-22) because it
+          # could do neither: a publisher found the beacon inside the widget
+          # they were being asked to embed, still firing after opting out.
+          NEXT_PUBLIC_CF_BEACON: f82037766e6345e3be1d2b72079ff765
       - run: npx wrangler deploy
         env:
           CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
