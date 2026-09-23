@@ -85,7 +85,9 @@ export async function computePayBehaviour(d: D1, ev: Ev[]) {
         const all = LANG_NAMES.map(([k, name]) => ({ name, n: langOf(k) })).filter((x) => x.n > 0);
         const big = all.filter((x) => x.n >= 20).sort((a, b) => b.n - a.n);
         const small = all.filter((x) => x.n < 20).reduce((t, x) => t + x.n, 0);
-        return small > 0 ? [...big, { name: 'other languages', n: small }] : big;
+        // The folded bar is a published figure too: shown only if it reaches
+        // twenty itself (it was 16 when first folded — still under the floor).
+        return small >= 20 ? [...big, { name: 'other languages', n: small }] : big;
       })(),
     },
     weekend: { share: Math.round(stats.work.weekend_share), n: stats.work.n },
