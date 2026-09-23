@@ -39,7 +39,10 @@ function optedOut(): boolean {
 function useScript(src: string, attrs: Record<string, string>) {
   const pathname = usePathname();
   useEffect(() => {
-    if (pathname?.startsWith('/embed') || optedOut()) return;
+    // /report/* carries Stripe's session id in its address, and that address
+    // is the only key to a page showing the buyer's email and exact salary.
+    // The page-view tag sends the full address, so it must never run there.
+    if (pathname?.startsWith('/embed') || pathname?.startsWith('/report') || optedOut()) return;
     if (document.querySelector(`script[src="${src}"]`)) return; // once per page
     const el = document.createElement('script');
     el.src = src;

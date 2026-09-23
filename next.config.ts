@@ -13,6 +13,12 @@ const nextConfig: NextConfig = {
    * so a permanent redirect passes on whatever equity the old URL earned. A
    * deletion would throw that away and leave a 404 for anyone holding the link.
    */
+  // Report pages are opened with Stripe's session id in the address, and that
+  // address is the only key to the buyer's report (email, exact salary). No
+  // referrer may carry it to any link the page contains.
+  async headers() {
+    return [{ source: '/report/:path*', headers: [{ key: 'Referrer-Policy', value: 'no-referrer' }] }];
+  },
   async redirects() {
     return [
       {

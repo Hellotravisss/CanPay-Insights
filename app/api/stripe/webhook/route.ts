@@ -74,7 +74,12 @@ export async function POST(request: Request) {
       typeof s.payment_intent === 'string' ? s.payment_intent : s.payment_intent?.id ?? null,
       m.product ?? 'unknown', s.amount_total ?? 0, s.currency ?? 'cad',
       buyerEmail, m.lang ?? null,
-      m.from || null, m.to || null, Number.isFinite(income) ? bracketIncome(income) : null, m.uid || null, Number.isFinite(income) ? Math.round(income) : null,
+      m.from || null, m.to || null, Number.isFinite(income) ? bracketIncome(income) : null, m.uid || null,
+      // Never the exact income. The privacy policy promises "the province and
+      // income range the report was about", and nothing reads this column —
+      // the report takes the figure from Stripe's session metadata. It was
+      // storing the exact amount until 2026-09-22.
+      null,
       isOwn ? 1 : 0,
     ).run();
   } catch (e) {

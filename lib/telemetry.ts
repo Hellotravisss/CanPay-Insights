@@ -241,7 +241,19 @@ export function rememberedFsa(): string | null {
  */
 const SEEN_KEY = 'canpay_seen';
 let returningThisLoad: 0 | 1 | null = null;
+
+/**
+ * The embeddable widget runs inside other companies' pages, so it writes
+ * nothing to the browser: no "seen before" flag, no entry path, no opt-out
+ * flag. A publisher auditing it (2026-09-22) would otherwise find our storage
+ * keys inside their site. What the widget needs it reads from its own URL.
+ */
+function inWidget(): boolean {
+  try { return typeof window !== 'undefined' && window.location.pathname.startsWith('/embed'); } catch { return false; }
+}
+
 function isReturning(): 0 | 1 | null {
+  if (inWidget()) return null;
   if (returningThisLoad !== null) return returningThisLoad;
   try {
     returningThisLoad = localStorage.getItem(SEEN_KEY) === '1' ? 1 : 0;
@@ -297,6 +309,7 @@ const OPTOUT_KEY = 'canpay_no_telemetry';
 function applyOptOutParam(): void {
   try {
     if (typeof window === 'undefined') return; // prerender
+    if (inWidget()) return; // the widget reads its URL on every event instead of storing a flag
     const param = new URLSearchParams(window.location.search).get('notelemetry');
     if (param === '1') {
       localStorage.setItem(OPTOUT_KEY, '1');
@@ -312,7 +325,22 @@ function applyOptOutParam(): void {
 
 applyOptOutParam();
 
+/** ?notelemetry=1 / =0 in this page's own address, or null if absent. */
+function urlOptOut(): boolean | null {
+  try {
+    const p = new URLSearchParams(window.location.search).get('notelemetry');
+    return p === '1' ? true : p === '0' ? false : null;
+  } catch {
+    return null;
+  }
+}
+
 function isOptedOut(): boolean {
+  // The address first: it must work even where storage is blocked. Until
+  // 2026-09-22 a blocked localStorage threw, the catch said "not opted out",
+  // and the record was sent — with ?notelemetry=1 right there in the URL.
+  const fromUrl = urlOptOut();
+  if (fromUrl !== null) return fromUrl;
   try {
     applyOptOutParam();
     return localStorage.getItem(OPTOUT_KEY) === '1';
@@ -347,6 +375,7 @@ function samePath(url: string): string | null {
 }
 
 function getEntryPath(): string | null {
+  if (inWidget()) return '/embed';
   try {
     const stored = sessionStorage.getItem(ENTRY_KEY);
     if (stored) return stored;
@@ -600,7 +629,7 @@ export function recordCalcEvent(e: {
     const rawLang = KNOWN_LANGS.includes(e.lang) ? e.lang : 'en';
     const lang = settleLanguage(rawLang);
     const source = e.source ?? 'web';
-    const remembered = rememberedFsa();
+    const remembered = source === 'widget' ? null : rememberedFsa();
     const hood: Neighbourhood | null =
       e.neighbourhood ?? (remembered ? { fsa: remembered, source: 'remembered' } : null);
     const w = e.work ?? null;
