@@ -333,6 +333,10 @@ export const embed: Record<string, string> = {
   ei: 'EI',
   poweredBy: 'Được cung cấp bởi',
   fullCalc: 'Máy tính đầy đủ →',
+  qpp: 'QPP',
+  qpip: 'QPIP',
+  rates: 'Thuế suất năm 2026',
+  hours: 'Lương giờ × 2.080 giờ mỗi năm (40 × 52)',
 };
 
 export const industry: Record<string, string> = {

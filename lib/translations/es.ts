@@ -333,6 +333,10 @@ export const embed: Record<string, string> = {
   ei: 'EI',
   poweredBy: 'Desarrollado por',
   fullCalc: 'Calculadora completa →',
+  qpp: 'QPP',
+  qpip: 'QPIP',
+  rates: 'Tasas de impuestos 2026',
+  hours: 'Tarifa por hora × 2.080 horas al año (40 × 52)',
 };
 
 export const industry: Record<string, string> = {

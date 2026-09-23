@@ -333,6 +333,10 @@ export const embed: Record<string, string> = {
   ei: 'EI',
   poweredBy: '제공',
   fullCalc: '전체 계산기 →',
+  qpp: 'QPP',
+  qpip: 'QPIP',
+  rates: '2026년 세율',
+  hours: '시급 × 연간 2,080시간 (40 × 52)',
 };
 
 export const industry: Record<string, string> = {

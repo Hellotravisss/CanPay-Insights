@@ -153,7 +153,13 @@ export interface CalculationResult {
   grossPayBiWeekly: number;
   federalTax: number;
   provincialTax: number;
-  cppDeduction: number;
+  cppDeduction: number;        // CPP+CPP2, or in Quebec QPP+QPP2 AND QPIP combined
+  /**
+   * The QPIP part of cppDeduction, per period (0 outside Quebec). Reported so a
+   * display can show QPP and QPIP on separate lines; it is NOT an extra
+   * deduction — cppDeduction already includes it.
+   */
+  qpipDeduction?: number;
   eiDeduction: number;
   rrspDeduction: number;       // RRSP per period (0 if not used)
   netPayBiWeekly: number;

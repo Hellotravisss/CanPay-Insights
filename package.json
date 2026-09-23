@@ -5,7 +5,7 @@
   "type": "module",
   "scripts": {
     "dev": "next dev",
-    "prebuild": "npm run audit:engine && npm run audit:numbers:selftest && npm run audit:numbers && npm run audit:logo",
+    "prebuild": "npm run audit:engine && npm run audit:marginal && npm run audit:numbers:selftest && npm run audit:numbers && npm run audit:logo",
     "audit:engine": "tsx scripts/goldenT4032.ts",
     "build": "next build",
     "start": "next start",
@@ -15,7 +15,8 @@
     "preview": "opennextjs-cloudflare build && opennextjs-cloudflare preview",
     "deploy": "opennextjs-cloudflare build && opennextjs-cloudflare deploy",
     "cf-typegen": "wrangler types --env-interface CloudflareEnv cloudflare-env.d.ts",
-    "audit:logo": "node scripts/auditLogo.mjs"
+    "audit:logo": "node scripts/auditLogo.mjs",
+    "audit:marginal": "tsx scripts/auditMarginal.ts"
   },
   "dependencies": {
     "@google/genai": "^1.30.0",

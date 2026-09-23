@@ -333,6 +333,10 @@ export const embed: Record<string, string> = {
   ei: 'EI',
   poweredBy: 'На основі',
   fullCalc: 'Повний калькулятор →',
+  qpp: 'QPP',
+  qpip: 'QPIP',
+  rates: 'Податкові ставки 2026',
+  hours: 'Погодинна ставка × 2 080 годин на рік (40 × 52)',
 };
 
 export const industry: Record<string, string> = {

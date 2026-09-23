@@ -1,4 +1,5 @@
-import { Province } from '../types';
+import { Province, PayFrequency, type AnnualSalaryInputs } from '../types';
+import { calculateFromAnnualSalary } from './taxEngine';
 import { 
   FEDERAL_BRACKETS, 
   PROVINCIAL_DATA,
@@ -68,41 +69,44 @@ const FHSA_ANNUAL_LIMIT = 8000;
 const FHSA_LIFETIME_LIMIT = 40000;
 
 /**
- * Calculate marginal tax rate
+ * Marginal income-tax rate at an income: federal and provincial tax on one
+ * more dollar, measured by running the engine itself.
+ *
+ * This used to walk FEDERAL_BRACKETS and PROVINCIAL_DATA by hand, and was wrong
+ * twice over. The tables store each bracket's UPPER limit ("14% on the first
+ * $58,523") while the loop read it as a lower bound, so it always returned the
+ * rate of the bracket below — Ontario at $100,000 came out at 19.05% instead of
+ * the statutory 29.65%. And it never applied Ontario's or PEI's surtax, the
+ * Ontario Health Premium or the federal basic-amount phase-out, so even with
+ * the bracket fixed it would have understated. The true figure at $100,000 in
+ * Ontario is 31.5%. An outside reviewer found this by comparing the displayed
+ * rate with the change in take-home between $100,000 and $101,000 (2026-09-22).
+ *
+ * It had escaped the golden test because the golden test checks the engine,
+ * and this was a second formula beside the engine. Deriving it FROM the engine
+ * means there is one source of truth; `scripts/auditMarginal.ts` fails the
+ * build if a hand-written rate ever comes back.
+ *
+ * Tax only — CPP, EI and QPIP are left out on purpose. The callers use this to
+ * value RRSP and FHSA deductions, which lower income tax but not payroll
+ * contributions. A centred $1,000 step keeps a bracket edge from being read as
+ * the next bracket's rate.
  */
 export const calculateMarginalRate = (
   annualIncome: number,
   province: string
 ): { federal: number; provincial: number; combined: number } => {
-  // Federal marginal tax rate
-  let federalRate = 0.15;
-  for (const bracket of FEDERAL_BRACKETS) {
-    if (annualIncome > bracket.threshold) {
-      federalRate = bracket.rate;
-    } else {
-      break;
-    }
-  }
-
-  // Provincial marginal tax rate
-  const provData = PROVINCIAL_DATA[province as keyof typeof PROVINCIAL_DATA];
-  let provincialRate = provData?.brackets[0]?.rate || 0.1;
-  
-  if (provData) {
-    for (const bracket of provData.brackets) {
-      if (annualIncome > bracket.threshold) {
-        provincialRate = bracket.rate;
-      } else {
-        break;
-      }
-    }
-  }
-
-  return {
-    federal: federalRate,
-    provincial: provincialRate,
-    combined: federalRate + provincialRate,
+  const step = 500;
+  const lo = Math.max(0, annualIncome - step);
+  const hi = lo + 2 * step;
+  const taxAt = (income: number) => {
+    const r = calculateFromAnnualSalary({ province, annualSalary: income, payFrequency: PayFrequency.BI_WEEKLY } as AnnualSalaryInputs);
+    return { fed: r.federalTax * 26, prov: r.provincialTax * 26 };
   };
+  const a = taxAt(lo), b = taxAt(hi);
+  const federal = Math.max(0, (b.fed - a.fed) / (hi - lo));
+  const provincial = Math.max(0, (b.prov - a.prov) / (hi - lo));
+  return { federal, provincial, combined: federal + provincial };
 };
 
 /**

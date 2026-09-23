@@ -333,6 +333,10 @@ export const embed: Record<string, string> = {
   ei: 'EI',
   poweredBy: 'ਵੱਲੋਂ ਸੰਚਾਲਿਤ',
   fullCalc: 'ਪੂਰਾ ਕੈਲਕੁਲੇਟਰ →',
+  qpp: 'QPP',
+  qpip: 'QPIP',
+  rates: '2026 ਟੈਕਸ ਦਰਾਂ',
+  hours: 'ਘੰਟਾ ਦਰ × ਸਾਲ ਦੇ 2,080 ਘੰਟੇ (40 × 52)',
 };
 
 export const industry: Record<string, string> = {

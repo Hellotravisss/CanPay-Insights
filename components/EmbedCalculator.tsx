@@ -34,6 +34,10 @@ const DICT: Record<string, Record<string, string>> = {
     ei: 'EI',
     poweredBy: 'Powered by',
     fullCalc: 'Full calculator →',
+    qpp: 'QPP',
+    qpip: 'QPIP',
+    rates: '2026 tax rates',
+    hours: 'Hourly pay × 2,080 hours a year (40 × 52)',
   },
   fr: {
     title: 'Calculateur de paie nette',
@@ -50,6 +54,10 @@ const DICT: Record<string, Record<string, string>> = {
     ei: 'AE',
     poweredBy: 'Propulsé par',
     fullCalc: 'Calculateur complet →',
+    qpp: 'RRQ',
+    qpip: 'RQAP',
+    rates: 'Taux d’imposition 2026',
+    hours: 'Taux horaire × 2 080 heures par an (40 × 52)',
   },
   zh: {
     title: '税后工资计算器',
@@ -66,6 +74,10 @@ const DICT: Record<string, Record<string, string>> = {
     ei: 'EI',
     poweredBy: '技术支持',
     fullCalc: '完整计算器 →',
+    qpp: 'QPP',
+    qpip: 'QPIP',
+    rates: '2026 年税率',
+    hours: '时薪 × 每年 2,080 小时（40 × 52）',
   },
 };
 
@@ -193,9 +205,22 @@ export default function EmbedCalculator({
           <div className="grid grid-cols-2 gap-x-4 gap-y-1 text-xs text-slate-600">
             <span>{t.fed}: <strong className="text-slate-800">-{money(fig.federalTax)}</strong></span>
             <span>{t.prov}: <strong className="text-slate-800">-{money(fig.provincialTax)}</strong></span>
-            <span>{t.cpp}: <strong className="text-slate-800">-{money(fig.pensionContribution)}</strong></span>
+            {/* Quebec: QPP and QPIP are different programmes, so they get a line
+                each. pensionContribution includes QPIP; subtract it for QPP. */}
+            {fig.qpip > 0 ? (
+              <>
+                <span>{t.qpp}: <strong className="text-slate-800">-{money(fig.pensionContribution - fig.qpip)}</strong></span>
+                <span>{t.qpip}: <strong className="text-slate-800">-{money(fig.qpip)}</strong></span>
+              </>
+            ) : (
+              <span>{t.cpp}: <strong className="text-slate-800">-{money(fig.pensionContribution)}</strong></span>
+            )}
             <span>{t.ei}: <strong className="text-slate-800">-{money(fig.eiPremium)}</strong></span>
           </div>
+          {/* State the assumptions a reader would otherwise have to guess. */}
+          <p className="mt-2 text-[10px] leading-4 text-slate-400">
+            {t.rates}{unit === 'hour' ? ` · ${t.hours}` : ''}
+          </p>
         </>
       )}
 

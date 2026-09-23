@@ -333,6 +333,10 @@ export const embed: Record<string, string> = {
   ei: 'EI',
   poweredBy: 'Powered by',
   fullCalc: 'Buong calculator →',
+  qpp: 'QPP',
+  qpip: 'QPIP',
+  rates: 'Mga rate ng buwis sa 2026',
+  hours: 'Kada oras × 2,080 oras bawat taon (40 × 52)',
 };
 
 export const industry: Record<string, string> = {

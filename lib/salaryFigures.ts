@@ -12,6 +12,7 @@ export interface SalaryFigures {
   federalTax: number;
   provincialTax: number;
   pensionContribution: number; // CPP/QPP (includes QPIP for Quebec)
+  qpip: number; // the QPIP part of pensionContribution — 0 outside Quebec; shown on its own line
   eiPremium: number;
   totalDeductions: number;
   averageTaxRate: number; // (federal + provincial tax) / gross
@@ -66,6 +67,7 @@ const computeAnnualDeductions = (amount: number, province: Province) => {
     federalTax: result.federalTax * BI_WEEKLY_PERIODS,
     provincialTax: result.provincialTax * BI_WEEKLY_PERIODS,
     pensionContribution: result.cppDeduction * BI_WEEKLY_PERIODS,
+    qpip: (result.qpipDeduction ?? 0) * BI_WEEKLY_PERIODS,
     eiPremium: result.eiDeduction * BI_WEEKLY_PERIODS,
     netAnnual: result.netPayAnnual,
     totalDeductions: result.totalDeductionsAnnual,
@@ -94,6 +96,7 @@ export const getSalaryFigures = (amount: number, provinceSlug: string): SalaryFi
     federalTax: current.federalTax,
     provincialTax: current.provincialTax,
     pensionContribution: current.pensionContribution,
+    qpip: current.qpip,
     eiPremium: current.eiPremium,
     totalDeductions: current.totalDeductions,
     averageTaxRate: (current.federalTax + current.provincialTax) / amount,
