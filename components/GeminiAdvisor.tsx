@@ -1,7 +1,7 @@
 'use client';
 import React, { useState, useEffect, useRef, useMemo } from 'react';
 import { ThinkingOrb } from 'thinking-orbs';
-import { TAX_YEAR } from '../constants';
+import { TAX_YEAR, FEDERAL_BRACKETS } from '../constants';
 import * as htmlToImage from 'html-to-image';
 import download from 'downloadjs';
 import type { CalculationResult } from '../types';
@@ -11,6 +11,7 @@ import {
   generateTaxOptimization, 
   calculateRRSPScenarios,
   calculateMarginalRate,
+  taxSavedByDeduction,
   TaxOptimizationResult,
   TIER_EN,
 } from '../utils/taxOptimizer';
@@ -282,14 +283,23 @@ const GeminiAdvisor: React.FC<Props> = ({ results, inputs, onReportOpen }) => {
 
     const remainingRRSPOptimum = Math.max(0, taxOptimization.rrsp.recommendedAmount - annualRRSPActual);
     const biweeklyTopUp = Math.round(remainingRRSPOptimum / periodsPerYear);
-    const extraRefund = Math.floor(remainingRRSPOptimum * marginalRate.combined);
+    // Measured by the engine from where the visitor already is (income less the
+    // RRSP they already make), not "amount × top rate", which overstates a
+    // top-up that reaches into a lower bracket.
+    const extraRefund = taxSavedByDeduction(annualIncome - annualRRSPActual, inputs.province, remainingRRSPOptimum);
 
+    // Read from FEDERAL_BRACKETS, the table the engine uses. This used to be a
+    // hand-typed copy of the 2025 brackets (15% to $57,375 …), so every visitor
+    // was told a 15% bracket that no longer exists (found 2026-09-22). Note that
+    // each entry's `threshold` is the bracket's UPPER limit.
     const getTaxBracketInfo = (income: number) => {
-      if (income <= 57375) return { current: '15%', next: '20.5%', nextThreshold: 57375 };
-      if (income <= 114750) return { current: '20.5%', next: '26%', nextThreshold: 114750 };
-      if (income <= 177722) return { current: '26%', next: '29%', nextThreshold: 177722 };
-      if (income <= 253865) return { current: '29%', next: '33%', nextThreshold: 253865 };
-      return { current: '33%', next: 'Max', nextThreshold: Infinity };
+      const pct = (r: number) => `${+(r * 100).toFixed(2)}%`;
+      const i = FEDERAL_BRACKETS.findIndex((b) => income <= b.threshold);
+      const idx = i === -1 ? FEDERAL_BRACKETS.length - 1 : i;
+      const cur = FEDERAL_BRACKETS[idx], nxt = FEDERAL_BRACKETS[idx + 1];
+      return nxt
+        ? { current: pct(cur.rate), next: pct(nxt.rate), nextThreshold: cur.threshold }
+        : { current: pct(cur.rate), next: 'Max', nextThreshold: Infinity };
     };
     const bracketInfo = getTaxBracketInfo(annualIncome);
 
@@ -789,6 +799,8 @@ const GeminiAdvisor: React.FC<Props> = ({ results, inputs, onReportOpen }) => {
         onToggleScenarios={() => setShowRRSPScenarios(!showRRSPScenarios)}
         annualRRSPActual={annualRRSPActual}
         annualEmployerMatchActual={annualEmployerMatchActual}
+        annualIncome={results.grossPayAnnual || 0}
+        province={inputs.province}
       />
 
       <div className="mt-6 pt-6 border-t border-slate-700">
@@ -1036,6 +1048,9 @@ interface TaxOptimizationPanelProps {
   onToggleScenarios: () => void;
   annualRRSPActual?: number;
   annualEmployerMatchActual?: number;
+  /** Needed to measure a top-up's saving with the engine rather than × top rate. */
+  annualIncome: number;
+  province: string;
 }
 
 const TaxOptimizationPanel: React.FC<TaxOptimizationPanelProps> = ({
@@ -1046,6 +1061,8 @@ const TaxOptimizationPanel: React.FC<TaxOptimizationPanelProps> = ({
   onToggleScenarios,
   annualRRSPActual = 0,
   annualEmployerMatchActual = 0,
+  annualIncome,
+  province,
 }) => {
   const { rrsp, tfsa, fhsa, otherStrategies, summary } = optimization;
 
@@ -1059,7 +1076,7 @@ const TaxOptimizationPanel: React.FC<TaxOptimizationPanelProps> = ({
   const { t } = useT();
   const hasActualRRSP = annualRRSPActual > 0;
   const remainingRRSPOptimum = Math.max(0, rrsp.recommendedAmount - annualRRSPActual);
-  const potentialExtraRefund = Math.floor(remainingRRSPOptimum * marginalRate.combined);
+  const potentialExtraRefund = taxSavedByDeduction(annualIncome - annualRRSPActual, province, remainingRRSPOptimum);
 
   return (
     <div className="space-y-6">

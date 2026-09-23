@@ -5,7 +5,8 @@ import {
   PROVINCIAL_DATA,
   CPP_MAX_CONTRIBUTION,
   CPP2_MAX_CONTRIBUTION,
-  FEDERAL_BASIC_PERSONAL_AMOUNT
+  FEDERAL_BASIC_PERSONAL_AMOUNT,
+  RRSP_DOLLAR_LIMIT,
 } from '../constants';
 
 export interface TaxOptimizationResult {
@@ -52,9 +53,10 @@ export interface TaxStrategy {
   actionItems: string[];
 }
 
-// 2025 RRSP Limits
-const RRSP_MAX_CONTRIBUTION_2025 = 31950;
-const RRSP_MAX_CONTRIBUTION_2026 = 32370;
+// The RRSP dollar limit comes from constants.ts (RRSP_DOLLAR_LIMIT) — the same
+// figure the FAQ, llms.txt and articles quote. This file used to carry its own
+// copy, $31,950, so the advisor told high earners they had $1,860 less room
+// than every other page on the site said (found 2026-09-22).
 
 // TFSA 2025 Limit
 // TFSA annual dollar limit. $7,000 for 2024, 2025 and 2026 (indexation has not
@@ -92,6 +94,42 @@ const FHSA_LIFETIME_LIMIT = 40000;
  * contributions. A centred $1,000 step keeps a bracket edge from being read as
  * the next bracket's rate.
  */
+/** Federal + provincial income tax for a year, from the engine. */
+export const incomeTaxAt = (annualIncome: number, province: string): number => {
+  const r = calculateFromAnnualSalary({ province, annualSalary: Math.max(0, annualIncome), payFrequency: PayFrequency.BI_WEEKLY } as AnnualSalaryInputs);
+  return (r.federalTax + r.provincialTax) * 26;
+};
+
+/**
+ * Tax a deduction (RRSP, FHSA) actually saves: tax at the income minus tax at
+ * the income less the deduction, both from the engine.
+ *
+ * Multiplying the whole amount by the marginal rate — what this file did until
+ * 2026-09-22 — assumes every dollar is saved at the top rate. A large
+ * contribution reaches down into lower brackets, so that overstated the
+ * saving: Ontario, $120,000, a $17,280 RRSP was shown saving $7,501 when it
+ * saves $6,007. The marginal rate is right only for the next dollar.
+ */
+export const taxSavedByDeduction = (annualIncome: number, province: string, amount: number): number =>
+  Math.max(0, Math.floor(incomeTaxAt(annualIncome, province) - incomeTaxAt(annualIncome - Math.max(0, amount), province)));
+
+/**
+ * The nearest income below this one at which the combined marginal rate
+ * actually drops by at least a point, searched no further than `maxDown`.
+ * Null if there is none in reach. Used so that "contribute enough to drop into
+ * a lower bracket" is only ever said when it is true — the advisor used to aim
+ * at a hard-coded $90,000, which is not a bracket boundary anywhere in Canada.
+ */
+export const nextRateDrop = (annualIncome: number, province: string, maxDown: number): number | null => {
+  const step = 250;
+  const rateAt = (x: number) => (incomeTaxAt(x, province) - incomeTaxAt(x - step, province)) / step;
+  const top = rateAt(annualIncome);
+  for (let x = annualIncome - step; x >= Math.max(step, annualIncome - maxDown); x -= step) {
+    if (top - rateAt(x) >= 0.01) return x;
+  }
+  return null;
+};
+
 export const calculateMarginalRate = (
   annualIncome: number,
   province: string
@@ -102,7 +140,7 @@ export const calculateMarginalRate = (
   const taxAt = (income: number) => {
     const r = calculateFromAnnualSalary({ province, annualSalary: income, payFrequency: PayFrequency.BI_WEEKLY } as AnnualSalaryInputs);
     return { fed: r.federalTax * 26, prov: r.provincialTax * 26 };
-  };
+  };  // split federal/provincial here; incomeTaxAt gives the combined figure
   const a = taxAt(lo), b = taxAt(hi);
   const federal = Math.max(0, (b.fed - a.fed) / (hi - lo));
   const provincial = Math.max(0, (b.prov - a.prov) / (hi - lo));
@@ -122,7 +160,7 @@ const calculateRRSPRecommendation = (
   // Calculate maximum deductible amount (18% of income, capped)
   const maxDeductible = Math.min(
     Math.floor(annualIncome * 0.18),
-    RRSP_MAX_CONTRIBUTION_2025
+    RRSP_DOLLAR_LIMIT
   );
 
   // Recommendations based on income tier
@@ -134,13 +172,16 @@ const calculateRRSPRecommendation = (
     recommendedAmount = Math.min(5000, maxDeductible);
     tierRecommendation = 'tier.emergency';
   } else if (annualIncome <= 100000) {
-    // Medium income: contribute to drop to lower tax bracket
-    const targetIncome = 90000;
-    recommendedAmount = Math.min(
-      Math.max(0, annualIncome - targetIncome),
-      maxDeductible
-    );
-    tierRecommendation = 'tier.bracket';
+    // Medium income: contribute down to where the marginal rate really drops,
+    // if that point is within reach; otherwise don't promise a bracket change.
+    const drop = nextRateDrop(annualIncome, province, maxDeductible);
+    if (drop !== null) {
+      recommendedAmount = Math.min(annualIncome - drop, maxDeductible);
+      tierRecommendation = 'tier.bracket';
+    } else {
+      recommendedAmount = Math.min(5000, maxDeductible);
+      tierRecommendation = 'tier.maximize';
+    }
   } else if (annualIncome <= 150000) {
     // Upper medium income: contribute near maximum limit
     recommendedAmount = Math.min(
@@ -154,8 +195,8 @@ const calculateRRSPRecommendation = (
     tierRecommendation = 'tier.maxAll';
   }
 
-  // Calculate tax savings
-  const taxSavings = Math.floor(recommendedAmount * combinedRate);
+  // Tax saved, measured by the engine across the whole contribution
+  const taxSavings = taxSavedByDeduction(annualIncome, province, recommendedAmount);
   const effectiveCost = recommendedAmount - taxSavings;
   const refundAmount = taxSavings;
 
@@ -199,7 +240,7 @@ const calculateFHSARecommendation = (
 ) => {
   const marginalRate = calculateMarginalRate(annualIncome, province);
   const recommendedAmount = Math.min(FHSA_ANNUAL_LIMIT, Math.floor(annualIncome * 0.1));
-  const taxSavings = Math.floor(recommendedAmount * marginalRate.combined);
+  const taxSavings = taxSavedByDeduction(annualIncome, province, recommendedAmount);
 
   return {
     annualLimit: FHSA_ANNUAL_LIMIT,
@@ -412,7 +453,7 @@ export const calculateRRSPScenarios = (
   const marginalRate = calculateMarginalRate(annualIncome, province);
   const maxDeductible = Math.min(
     Math.floor(annualIncome * 0.18),
-    RRSP_MAX_CONTRIBUTION_2025
+    RRSP_DOLLAR_LIMIT
   );
 
   const scenarios = [
@@ -425,12 +466,13 @@ export const calculateRRSPScenarios = (
   ].filter((v, i, a) => a.indexOf(v) === i);
 
   return scenarios.map((amount) => {
-    const taxSavings = Math.floor(amount * marginalRate.combined);
+    const taxSavings = taxSavedByDeduction(annualIncome, province, amount);
     return {
       amount,
       taxSavings,
       effectiveCost: amount - taxSavings,
-      refundRate: marginalRate.combined * 100,
+      // The rate this contribution actually earns back, not the top rate.
+      refundRate: amount > 0 ? (taxSavings / amount) * 100 : 0,
     };
   });
 };
