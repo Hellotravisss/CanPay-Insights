@@ -58,6 +58,30 @@ const nextConfig: NextConfig = {
         destination: '/blog/canada-groceries-essentials-benefit-2026',
         permanent: true,
       },
+      {
+        // Retired page with search impressions: 150 impressions (GSC, to 2026-08-17). Speculative 2025 ranges; /wages has StatCan medians by industry and province, with take-home.
+        source: '/blog/canadian-tech-salaries-2025',
+        destination: '/wages',
+        permanent: true,
+      },
+      {
+        // Retired page with search impressions: 55 impressions. Same reason; /wages covers finance, insurance & real estate.
+        source: '/blog/finance-banking-salaries-canada-2025',
+        destination: '/wages',
+        permanent: true,
+      },
+      {
+        // Retired page with search impressions: 268 impressions on the www property (Apr-May 2026). /wages covers public administration.
+        source: '/blog/public-vs-private-sector-pay-canada-2025',
+        destination: '/wages',
+        permanent: true,
+      },
+      {
+        // Retired page with search impressions: 19 impressions. Same question, answered by the live TFSA vs RRSP article.
+        source: '/blog/rrsp-vs-tfsa-canada-2025',
+        destination: '/blog/tfsa-vs-rrsp-canada-2025',
+        permanent: true,
+      },
     ];
   },
   images: {
