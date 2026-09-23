@@ -502,7 +502,11 @@ export function blogEntries(ev: Ev[]) {
 
 // ── public_usage_dataset ──────────────────────────────────────────────────
 export function publicDataset(ev: Ev[]) {
-  const min_cell = 5, min_city = 20, min_month = 100;
+  // 20, the same floor the privacy policy promises for everything published
+  // or licensed. It was 5 for categories until 2026-09-22, which put a
+  // 14-calculation territory in a public file under a "at least twenty"
+  // promise.
+  const min_cell = 20, min_city = 20, min_month = 100;
   const dates = ev.map((r) => localDate(r.created_at as string));
   const months = new Map<string, number>(); for (const d of dates) months.set(d.slice(0, 7), (months.get(d.slice(0, 7)) ?? 0) + 1);
   const dim = (name: string, key: string) => {

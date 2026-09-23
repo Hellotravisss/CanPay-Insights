@@ -15,7 +15,7 @@ const PrivacyPolicyFr: React.FC = () => {
       backLabel="Retour à l’accueil"
       footnote="Les calculs sont des estimations fondées sur les tranches d’imposition 2026 et les normes du travail provinciales."
       title="Politique de confidentialité de CanPay Insights"
-      effective="En vigueur le 15 septembre 2026 (remplace la version du 1er mars 2026)"
+      effective="En vigueur le 22 septembre 2026 (remplace la version du 15 septembre 2026)"
       links={[
         { href: '/privacy', label: 'English version' },
         { href: '/terms', label: 'Conditions d’utilisation (anglais)' },
@@ -50,14 +50,17 @@ const PrivacyPolicyFr: React.FC = () => {
         </p>
         <ul className="list-disc space-y-1.5 pl-5">
           <li>le calculateur utilisé, la province choisie et votre revenu brut sous forme de <strong className="text-slate-800">tranche</strong> (par exemple « 50 k$–70 k$ ») — jamais le montant ;</li>
-          <li>la langue de l’interface, votre type d’appareil (téléphone, tablette ou ordinateur), la famille de navigateur, la famille de système d’exploitation et, sur certains téléphones, le fabricant — jamais la signature complète du navigateur, les dimensions d’écran ni une empreinte d’appareil ;</li>
+          <li>la langue de l’interface, votre type d’appareil (téléphone, tablette ou ordinateur), la famille de navigateur, la famille de système d’exploitation et, sur certains téléphones, le fabricant — jamais la signature complète du navigateur ni une empreinte d’appareil ;</li>
+          <li>la fréquence de paie choisie, une catégorie de travail déduite de vos saisies (horaire à temps plein ou partiel, salarié, à pourboires, par quarts) — déduite, jamais demandée — et la position de votre paie par rapport à la médiane de Statistique Canada pour votre province, sous forme de fourchette, avec la médiane utilisée ;</li>
+          <li>si vous avez ouvert le détail du calcul et, si vous touchez un rapport payant, lequel — jamais rien sur un achat ;</li>
           <li>la page de notre propre site où vous étiez avant de calculer (le chemin seulement — jamais un lien d’un autre site, jamais ce qui suit un « ? ») ;</li>
-          <li>les réponses facultatives que vous choisissez de donner : le secteur auquel vous vous comparez, la raison du calcul, si le résultat correspondait à vos attentes, votre mode de travail (sur place, à distance, hybride), votre groupe d’âge, votre ancienneté, votre appartenance syndicale, la taille de votre employeur et vos jours de vacances ;</li>
+          <li>les réponses facultatives que vous choisissez de donner : le secteur auquel vous vous comparez (avec sa position dans la liste et si ce navigateur l’avait déjà choisi), la raison du calcul, si le résultat correspondait à vos attentes, votre mode de travail (sur place, à distance, hybride), votre groupe d’âge, votre ancienneté, votre appartenance syndicale, la taille de votre employeur et vos jours de vacances ;</li>
           <li>votre horaire type lorsque vous utilisez les calculateurs de quarts ou de feuilles de temps (heures habituelles de début et de fin, jours par semaine, durée moyenne d’un quart, pause non payée) — jamais les dates réellement travaillées ;</li>
           <li>des fourchettes larges pour vos saisies (cotisation REER en part de la paie, prime de quart, heures supplémentaires, pourboires en part de la paie) — toujours des fourchettes ;</li>
           <li>si vous étiez connecté (oui/non — jamais quel compte) et, si vous rouvrez un calcul enregistré et le modifiez, le sens et l’ordre de grandeur du changement ainsi que l’ancienneté de l’original — jamais les montants ;</li>
           <li>l’heure et le jour de la semaine selon votre propre horloge, et le nom du fuseau horaire que déclare votre navigateur (par exemple « America/Toronto »), qui sert à vérifier la carte, non à vous situer ;</li>
           <li>si cet appareil a déjà enregistré un calcul — un simple indicateur oui/non stocké sur l’appareil, pas un identifiant ;</li>
+          <li>sur le calculateur que d’autres sites intègrent (notre « widget ») : le domaine du site qui l’intègre — jamais la page, jamais l’adresse du visiteur. Le widget ne stocke rien dans le navigateur ; il n’enregistre donc aucun indicateur « déjà venu » ;</li>
           <li>votre position approximative, décrite à la section 3.</li>
         </ul>
         <p>
@@ -67,8 +70,11 @@ const PrivacyPolicyFr: React.FC = () => {
         </p>
         <p>
           <strong className="text-slate-800">Refuser.</strong> Ouvrez n’importe quelle page du site avec <code>?notelemetry=1</code>{' '}
-          ajouté à l’adresse et ce navigateur n’enregistrera plus rien (<code>?notelemetry=0</code> réactive).
-          Le calculateur fonctionne exactement de la même façon.
+          ajouté à l’adresse et ce navigateur n’enregistrera plus rien — ni fiche de calcul, ni comptage des pages vues
+          (<code>?notelemetry=0</code> réactive). Le calculateur fonctionne exactement de la même façon. Ce choix est gardé dans
+          ce navigateur pour ce site : il ne vous suit ni dans d’autres navigateurs ni dans notre calculateur intégré à un autre
+          site ; un site qui l’intègre peut couper l’enregistrement pour tous ses visiteurs en ajoutant{' '}
+          <code>&amp;notelemetry=1</code> à l’adresse du widget. L’application iPhone n’a pas encore d’interrupteur (section 6).
         </p>
       </Section>
 
@@ -126,23 +132,34 @@ const PrivacyPolicyFr: React.FC = () => {
 
       <Section n={4} id="cookies" title="Témoins, stockage local et mesure d’audience">
         <p>
-          <strong className="text-slate-800">Un seul témoin, et seulement si vous vous connectez.</strong> La connexion dépose un
-          témoin nommé <code>cp_session</code> qui vous garde connecté pendant 30 jours. Il est essentiel à
-          cette fonction, ne sert ni au pistage ni à la publicité, et n’est pas déposé si vous ne vous
-          connectez pas. Nous n’utilisons aucun témoin publicitaire ni de pistage tiers ; c’est pourquoi ce
+          <strong className="text-slate-800">Des témoins seulement si vous vous connectez.</strong> La connexion dépose un
+          témoin nommé <code>cp_session</code> qui vous garde connecté pendant 30 jours. Pendant une connexion par
+          Google ou Apple, un second témoin (<code>cp_oauth</code> ou <code>cp_apple</code>) porte la demande de
+          connexion pendant dix minutes au plus, puis est supprimé. Ils sont essentiels à cette fonction, ne
+          servent ni au pistage ni à la publicité, et ne sont pas déposés si vous ne vous connectez pas. Nous n’utilisons aucun témoin publicitaire ni de pistage tiers ; c’est pourquoi ce
           site n’a pas de bandeau de témoins.
         </p>
         <p>
           <strong className="text-slate-800">Le stockage local de votre appareil</strong> contient votre langue, vos réglages de
           calculateur hors connexion, l’indicateur de refus de télémétrie, le préfixe postal mémorisé et
-          l’indicateur « a déjà calculé ». Rien de cela ne nous est transmis comme identifiant, et effacer
-          les données de site de votre navigateur supprime le tout.
+          l’indicateur « a déjà calculé », ainsi que trois entrées pour le comptage des pages vues (ci-dessous) :
+          un numéro de session pour l’onglet (<code>_av_sid</code>), un indicateur « déjà venu »
+          (<code>_av_seen</code>) et un interrupteur (<code>_av_off</code>). Rien de cela ne vous identifie, et
+          effacer les données de site de votre navigateur supprime le tout. Le calculateur intégré à d’autres
+          sites ne stocke rien.
         </p>
         <p>
-          <strong className="text-slate-800">Comptage des pages vues.</strong> Un petit script que nous exploitons nous-mêmes sur
-          Cloudflare enregistre le chemin de la page et le domaine du site référent — sans témoin, sans
-          conservation d’adresse IP. Nous pouvons aussi activer Cloudflare Web Analytics, le compteur sans
-          témoin de notre hébergeur. Nous n’utilisons ni Google Analytics ni aucun réseau publicitaire.
+          <strong className="text-slate-800">Comptage des pages vues.</strong> Deux compteurs sans témoin fonctionnent sur ce site.
+          Le premier est le nôtre, servi depuis <code>avowd-analytics.qharbert.workers.dev</code> — un Worker
+          Cloudflare de notre propre compte, partagé avec notre site apparenté Avowd. Pour chaque page, il
+          enregistre l’adresse (y compris ce qui suit un « ? »), l’adresse de la page qui y menait, la taille et
+          la langue de la fenêtre du navigateur, jusqu’où vous avez fait défiler et, si vous cliquez un lien vers
+          un autre site, une adresse courriel ou un numéro de téléphone, sa destination et son texte ; il regroupe
+          les pages d’un onglet par un numéro de session aléatoire et note si ce navigateur est déjà venu. Le
+          second est Cloudflare Web Analytics, le compteur de pages de notre hébergeur. Aucun des deux ne dépose
+          de témoin ni ne conserve d’adresse IP. Aucun des deux ne fonctionne si vous avez refusé, dans le
+          calculateur intégré à d’autres sites, ni sur les pages de rapport — dont l’adresse contient la clé de
+          votre rapport. Nous n’utilisons ni Google Analytics ni aucun réseau publicitaire.
         </p>
         <p>
           <strong className="text-slate-800">Hébergement.</strong> Le site fonctionne sur Cloudflare, qui traite chaque requête pour
@@ -153,9 +170,10 @@ const PrivacyPolicyFr: React.FC = () => {
 
       <Section n={5} id="accounts" title="Comptes et achats">
         <p>
-          Le compte est facultatif ; toutes les fonctions du calculateur marchent sans. Si vous vous connectez
-          avec Google ou Apple, nous recevons le nom, l’adresse courriel et la photo de profil que ce
-          fournisseur partage, et nous conservons vos calculs enregistrés, vos feuilles de temps et vos
+          Le compte est facultatif ; toutes les fonctions du calculateur marchent sans. Vous pouvez vous connecter
+          avec Google, avec Apple ou par un lien à usage unique envoyé par courriel. Avec Google ou Apple, nous
+          recevons le nom, l’adresse courriel et la photo de profil que ce fournisseur partage ; avec un lien
+          par courriel, seulement votre adresse courriel. Nous conservons vos calculs enregistrés, vos feuilles de temps et vos
           réglages pour qu’ils vous suivent d’un appareil à l’autre.
         </p>
         <p>
@@ -181,12 +199,14 @@ const PrivacyPolicyFr: React.FC = () => {
           enregistrez l’image d’un rapport. Elle enregistre les mêmes statistiques anonymes que le site
           (section 2), situées au niveau de la ville d’après la connexion (section 3, niveau 1) ; les options
           de code postal et de position de l’appareil de la section 3 n’existent que sur le site Web.
+          L’application n’a pas encore d’interrupteur pour couper ces statistiques ; d’ici là, si vous ne
+          voulez pas qu’elles soient enregistrées, utilisez le site Web avec le refus décrit à la section 2.
         </p>
       </Section>
 
       <Section n={7} id="sharing" title="Qui reçoit des données">
         <ul className="list-disc space-y-1.5 pl-5">
-          <li><strong className="text-slate-800">Des fournisseurs de services</strong> qui traitent des données pour notre compte : Cloudflare (hébergement, base de données, envoi de courriels), Stripe (paiements), Google et Apple (connexion). Chacun agit selon ses propres engagements de confidentialité et ne reçoit que ce que sa fonction exige.</li>
+          <li><strong className="text-slate-800">Des fournisseurs de services</strong> qui traitent des données pour notre compte : Cloudflare (hébergement, base de données, envoi de courriels et les deux compteurs de pages vues), Stripe (paiements), Google et Apple (connexion). Chacun agit selon ses propres engagements de confidentialité et ne reçoit que ce que sa fonction exige.</li>
           <li><strong className="text-slate-800">Des licenciés de statistiques agrégées</strong>, comme décrit à la section 3 — des statistiques seulement, jamais des fiches, sous des ententes interdisant la réidentification et la revente.</li>
           <li><strong className="text-slate-800">Le public</strong>, par les jeux de données ouverts de notre <a href="/data">page de données</a>, qui contiennent les mêmes statistiques agrégées avec les petits groupes retenus.</li>
           <li><strong className="text-slate-800">Les autorités</strong>, lorsque la loi l’exige.</li>

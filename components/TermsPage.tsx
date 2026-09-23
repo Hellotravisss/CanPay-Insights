@@ -45,7 +45,7 @@ const TermsPage: React.FC = () => {
       <Section n={2} id="accounts" title="Accounts">
         <p>
           An account is optional. If you create one, keep your sign-in credentials with the provider you
-          chose (Google or Apple) secure, and tell us if you believe your account has been used without
+          chose (Google, Apple, or the email address we send sign-in links to) secure, and tell us if you believe your account has been used without
           permission. You may delete your account at any time from the account menu; deletion is immediate
           and permanent. We may suspend an account that is used to abuse the Service.
         </p>

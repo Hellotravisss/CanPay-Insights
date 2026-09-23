@@ -78,7 +78,15 @@ export async function computePayBehaviour(d: D1, ev: Ev[]) {
       total: langTotal,
       nonEnglishShare: pct(langTotal - langOf('en'), langTotal),
       zhShare: pct(langOf('zh'), langTotal),
-      bars: LANG_NAMES.map(([k, name]) => ({ name, n: langOf(k) })).filter((x) => x.n > 0).sort((a, b) => b.n - a.n),
+      // Languages under twenty calculations are folded into one "other" bar:
+      // the page promises that any figure it publishes has at least twenty
+      // behind it, and it was publishing Punjabi 1 and Vietnamese 1.
+      bars: (() => {
+        const all = LANG_NAMES.map(([k, name]) => ({ name, n: langOf(k) })).filter((x) => x.n > 0);
+        const big = all.filter((x) => x.n >= 20).sort((a, b) => b.n - a.n);
+        const small = all.filter((x) => x.n < 20).reduce((t, x) => t + x.n, 0);
+        return small > 0 ? [...big, { name: 'other languages', n: small }] : big;
+      })(),
     },
     weekend: { share: Math.round(stats.work.weekend_share), n: stats.work.n },
     belowMedianShare: Math.round(baro.year[baro.year.length - 1]?.below_median_share ?? 0),

@@ -37,7 +37,7 @@ const widgetFaq = [
   {
     question: 'Does the widget track my visitors?',
     answer:
-      'No personal data is collected — no cookies, no fingerprints, no IP storage. The widget records only anonymous, aggregated usage statistics (province and a broad income range) as described in our privacy policy.',
+      'It sets no cookies, stores nothing in your visitors\' browsers and loads nothing from any domain but canpayinsights.ca. For each completed calculation it records one anonymous line: the province, the income as one of seven ranges (never the figure), annual or hourly, the interface language, device class, browser and operating-system family, the hour and weekday on the reader\'s clock, the time-zone name, a random ID that lasts one page load, and your site\'s domain. No name, account, IP address or fingerprint. To record nothing at all, add &notelemetry=1 to the iframe src. Details: canpayinsights.ca/privacy.',
   },
 ];
 
