@@ -97,9 +97,25 @@ expect('one $200 day annualised', daily.grossPayAnnual, 48000);
   expect('employer match $3,000: gross unchanged (the match is not paid to the employee)', eq.grossPayAnnual, none.grossPayAnnual);
 }
 
+// 7. Tips (CRA "Tips and gratuities"): controlled carry CPP and EI; direct carry neither
+{
+  const shiftDays = ['2026-03-02', '2026-03-03', '2026-03-04'];
+  const mk = (tipsPaid?: 'payroll' | 'direct', tips = 0) => calculateFromTimesheet({
+    province: Province.ON, hourlyWage: 20, payFrequency: PayFrequency.WEEKLY, tipsPaid,
+    entries: shiftDays.map((date) => ({ date, checkIn: '09:00', checkOut: '17:00', unpaidBreakMinutes: 0, tips })),
+  } as never);
+  const none = mk(undefined, 0), payroll = mk('payroll', 100), direct = mk('direct', 100);
+  expect('controlled tips: CPP rises by 5.95% of the $300', payroll.cppDeduction - none.cppDeduction, 300 * 0.0595, 0.02);
+  expect('direct tips: CPP unchanged', direct.cppDeduction, none.cppDeduction);
+  expect('direct tips: EI unchanged', direct.eiDeduction, none.eiDeduction);
+  checks++;
+  if (!(direct.federalTax > none.federalTax)) failures.push('direct tips must still be taxed (owed at filing)');
+  expect('default is payroll (unchanged behaviour)', mk(undefined, 100).netPayPerPeriod ?? 0, payroll.netPayPerPeriod ?? 0);
+}
+
 if (failures.length) {
   console.log(failures.map((f) => '  ✗ ' + f).join('\n'));
   console.log(`\nENGINE CASES AUDIT FAIL (${tz}) — ${failures.length} of ${checks}.`);
   process.exit(1);
 }
-console.log(`ENGINE CASES AUDIT PASS (${tz}) — ${checks} checks: timesheet weeks, night premium, one-time pay, non-cash benefits, daily pay, employer match.`);
+console.log(`ENGINE CASES AUDIT PASS (${tz}) — ${checks} checks: timesheet weeks, night premium, one-time pay, non-cash benefits, daily pay, employer match, tips.`);

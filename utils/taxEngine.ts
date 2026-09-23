@@ -755,6 +755,10 @@ export const calculateFromTimesheet = (inputs: TimesheetInputs): CalculationResu
   const rrspPerPeriod = getRRSPPerPeriod(inputs, totalGross);
   const annualRRSP = rrspPerPeriod * periodsPerYear;
   const annualMatch = getEmployerMatchPerPeriod(inputs, totalGross) * periodsPerYear;
+  // Direct tips: CRA "Do not withhold" CPP or EI (the worker may elect CPP on
+  // Form CPT20). Controlled tips stay in both. Income tax is kept either way —
+  // direct tips are taxable, just not withheld — so take-home is not overstated.
+  const annualDirectTips = inputs.tipsPaid === 'direct' ? totalTips * periodsPerYear : 0;
 
   const ded = inputs.deductions;
   /**
@@ -784,13 +788,13 @@ export const calculateFromTimesheet = (inputs: TimesheetInputs): CalculationResu
 
   // Calculate deductions
   const isQuebec = province === Province.QC;
-  const cppResult = calculateCPP(annualGross + annualTaxableBenefits + annualMatch, isQuebec);
+  const cppResult = calculateCPP(annualGross + annualTaxableBenefits + annualMatch - annualDirectTips, isQuebec);
   // Taxable benefits here are NON-CASH (types.ts: "e.g. group life insurance").
   // CRA T4130: "A taxable non-cash or near-cash benefit is generally not
   // insurable. Do not deduct EI premiums." They stay in the CPP base above —
   // "when a non-cash … benefit is taxable, it is also pensionable". Charged EI
   // until 2026-09-22.
-  const eiAnnual = calculateEI(annualGross + annualMatch, isQuebec);
+  const eiAnnual = calculateEI(annualGross + annualMatch - annualDirectTips, isQuebec);
   const qpipAnnual = isQuebec ? calculateQPIP(annualGross + annualTaxableBenefits) : 0;
   const taxResult = calculateTotalTax(taxableIncome, cppResult, province, eiAnnual, qpipAnnual);
 

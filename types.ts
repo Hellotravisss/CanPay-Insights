@@ -136,6 +136,14 @@ export interface TimesheetInputs {
   hourlyWage: number;
   payFrequency: PayFrequency;
   entries: TimesheetEntry[];
+  /**
+   * How tips reach the worker (CRA, "Tips and gratuities"):
+   * 'payroll' — controlled tips (tip pool, card tips the employer allocates):
+   *   income tax, CPP and EI are withheld. The default, and the old behaviour.
+   * 'direct'  — handed over by the customer: nothing is withheld; they are
+   *   still taxable, so income tax on them is shown as owed at filing.
+   */
+  tipsPaid?: 'payroll' | 'direct';
   rrspType?: 'amount' | 'percent';
   rrspPercentage?: number;
   rrspMatchPolicy?: 'equal' | 'half' | 'none' | 'custom';

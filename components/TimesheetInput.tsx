@@ -600,7 +600,26 @@ const TimesheetInput: React.FC<Props> = ({ inputs, setInputs }) => {
                       className="w-full pl-8 pr-4 py-2 border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-500"
                     />
                   </div>
-                  <p className="text-xs text-slate-500 mt-1">{t('ts.tipsHint')}</p>
+                  {/* How tips are paid decides what is withheld (CRA "Tips and
+                      gratuities"): controlled tips carry CPP and EI, direct
+                      tips carry neither. One setting for the whole timesheet. */}
+                  <div className="mt-2 flex rounded-lg bg-slate-100 p-0.5" role="group" aria-label={t('ts.tipsHow')}>
+                    {(['payroll', 'direct'] as const).map((k) => (
+                      <button
+                        key={k}
+                        type="button"
+                        onClick={() => setInputs({ ...inputs, tipsPaid: k })}
+                        className={`flex-1 rounded-md py-1 text-xs font-semibold transition-all ${
+                          (inputs.tipsPaid ?? 'payroll') === k ? 'bg-white text-slate-800 shadow-sm' : 'text-slate-500 hover:text-slate-800'
+                        }`}
+                      >
+                        {t(k === 'payroll' ? 'ts.tipsPayroll' : 'ts.tipsDirect')}
+                      </button>
+                    ))}
+                  </div>
+                  <p className="text-xs text-slate-500 mt-1">
+                    {t((inputs.tipsPaid ?? 'payroll') === 'direct' ? 'ts.tipsHintDirect' : 'ts.tipsHint')}
+                  </p>
                 </div>
 
                 {/* Notes */}
