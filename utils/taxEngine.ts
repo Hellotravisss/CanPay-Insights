@@ -81,6 +81,28 @@ const calculateProgressiveTax = (income: number, brackets: TaxBracket[]): number
 /**
  * Calculate RRSP contribution amount for the period based on Type (Amount or Percentage)
  */
+/**
+ * The employer's RRSP match for one pay period: gross × rrspEmployerMatch% when
+ * the employee contributes a percentage and a match policy is set. The form
+ * stores the match as a percent of pay whatever the policy ("100%" equals the
+ * employee's rate, "50%" half of it, "custom" what was typed).
+ *
+ * CRA T4130: employer contributions to a group RRSP "are generally paid in cash
+ * and are pensionable and insurable. Deduct CPP contributions and EI premiums."
+ * They are a taxable benefit, but "you do not have to deduct income tax at
+ * source … if you have reasonable grounds to believe that the employee can
+ * deduct the contribution" — so the match adds CPP and EI and leaves income
+ * tax where it was. Until 2026-09-22 the engine ignored the match entirely
+ * while the form offered it. Assumes a group RRSP the employee can withdraw
+ * from; a locked-in plan is not insurable (same guide).
+ */
+export const getEmployerMatchPerPeriod = (inputs: any, grossPayPerPeriod: number): number => {
+  if (inputs.rrspType !== 'percent') return 0;
+  if ((inputs.rrspMatchPolicy ?? 'equal') === 'none') return 0;
+  const pct = Number(inputs.rrspEmployerMatch) || 0;
+  return pct > 0 ? grossPayPerPeriod * pct / 100 : 0;
+};
+
 export const getRRSPPerPeriod = (inputs: any, grossPayPerPeriod: number): number => {
   if (inputs.rrspType === 'percent') {
     return grossPayPerPeriod * (inputs.rrspPercentage ?? 0) / 100;
@@ -465,6 +487,7 @@ const calculateSalaryRecurring = (inputs: SalaryInputs): CalculationResult => {
   const annualGross = grossPayBiWeekly * 26;
   const rrspPerPeriod = getRRSPPerPeriod(inputs, grossPayBiWeekly);
   const annualRRSP = rrspPerPeriod * 26;
+  const annualMatch = getEmployerMatchPerPeriod(inputs, grossPayBiWeekly) * 26;
 
   // Post-tax deductions (LTD, union dues, other) — do NOT reduce taxable income
   const ded = inputs.deductions;
@@ -480,13 +503,13 @@ const calculateSalaryRecurring = (inputs: SalaryInputs): CalculationResult => {
 
   // 6. Deductions
   const isQuebec = inputs.province === Province.QC;
-  const cppResult = calculateCPP(annualGross + annualTaxableBenefits, isQuebec);
+  const cppResult = calculateCPP(annualGross + annualTaxableBenefits + annualMatch, isQuebec);
   // Taxable benefits here are NON-CASH (types.ts: "e.g. group life insurance").
   // CRA T4130: "A taxable non-cash or near-cash benefit is generally not
   // insurable. Do not deduct EI premiums." They stay in the CPP base above —
   // "when a non-cash … benefit is taxable, it is also pensionable". Charged EI
   // until 2026-09-22.
-  const eiAnnual = calculateEI(annualGross, isQuebec);
+  const eiAnnual = calculateEI(annualGross + annualMatch, isQuebec);
   const qpipAnnual = isQuebec ? calculateQPIP(annualGross + annualTaxableBenefits) : 0;
   const taxResult = calculateTotalTax(taxableIncome, cppResult, inputs.province, eiAnnual, qpipAnnual);
   
@@ -557,6 +580,7 @@ export const calculateFromAnnualSalary = (inputs: AnnualSalaryInputs): Calculati
 
   const rrspPerPeriod = getRRSPPerPeriod(inputs, annualGross / periodsPerYear);
   const annualRRSP = rrspPerPeriod * periodsPerYear;
+  const annualMatch = getEmployerMatchPerPeriod(inputs, annualGross / periodsPerYear) * periodsPerYear;
 
   const ded = inputs.deductions;
   /**
@@ -601,13 +625,13 @@ export const calculateFromAnnualSalary = (inputs: AnnualSalaryInputs): Calculati
   const taxableIncome = Math.max(0, (annualGross + annualTaxableBenefits + annualEquity) - annualRRSP - annualUnionDues);
 
   // Calculate deductions
-  const cppResult = calculateCPP(annualGross + annualTaxableBenefits + annualEquity, isQuebec);
+  const cppResult = calculateCPP(annualGross + annualTaxableBenefits + annualEquity + annualMatch, isQuebec);
   // Taxable benefits here are NON-CASH (types.ts: "e.g. group life insurance").
   // CRA T4130: "A taxable non-cash or near-cash benefit is generally not
   // insurable. Do not deduct EI premiums." They stay in the CPP base above —
   // "when a non-cash … benefit is taxable, it is also pensionable". Charged EI
   // until 2026-09-22.
-  const eiAnnual = calculateEI(annualGross, isQuebec);
+  const eiAnnual = calculateEI(annualGross + annualMatch, isQuebec);
   const qpipAnnual = isQuebec ? calculateQPIP(annualGross + annualTaxableBenefits) : 0;
   const taxResult = calculateTotalTax(taxableIncome, cppResult, province, eiAnnual, qpipAnnual);
 
@@ -730,6 +754,7 @@ export const calculateFromTimesheet = (inputs: TimesheetInputs): CalculationResu
   const annualGross = totalGross * periodsPerYear;
   const rrspPerPeriod = getRRSPPerPeriod(inputs, totalGross);
   const annualRRSP = rrspPerPeriod * periodsPerYear;
+  const annualMatch = getEmployerMatchPerPeriod(inputs, totalGross) * periodsPerYear;
 
   const ded = inputs.deductions;
   /**
@@ -759,13 +784,13 @@ export const calculateFromTimesheet = (inputs: TimesheetInputs): CalculationResu
 
   // Calculate deductions
   const isQuebec = province === Province.QC;
-  const cppResult = calculateCPP(annualGross + annualTaxableBenefits, isQuebec);
+  const cppResult = calculateCPP(annualGross + annualTaxableBenefits + annualMatch, isQuebec);
   // Taxable benefits here are NON-CASH (types.ts: "e.g. group life insurance").
   // CRA T4130: "A taxable non-cash or near-cash benefit is generally not
   // insurable. Do not deduct EI premiums." They stay in the CPP base above —
   // "when a non-cash … benefit is taxable, it is also pensionable". Charged EI
   // until 2026-09-22.
-  const eiAnnual = calculateEI(annualGross, isQuebec);
+  const eiAnnual = calculateEI(annualGross + annualMatch, isQuebec);
   const qpipAnnual = isQuebec ? calculateQPIP(annualGross + annualTaxableBenefits) : 0;
   const taxResult = calculateTotalTax(taxableIncome, cppResult, province, eiAnnual, qpipAnnual);
 

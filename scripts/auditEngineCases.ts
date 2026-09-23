@@ -87,9 +87,19 @@ const daily = calculateFromTimesheet({
 } as never);
 expect('one $200 day annualised', daily.grossPayAnnual, 48000);
 
+// 6. Employer RRSP match: pensionable and insurable (CRA T4130), no longer ignored
+{
+  const base = { province: Province.ON, annualSalary: 60000, payFrequency: PayFrequency.BI_WEEKLY, rrspType: 'percent', rrspPercentage: 5 } as unknown as AnnualSalaryInputs;
+  const none = calculateFromAnnualSalary({ ...base, rrspMatchPolicy: 'none', rrspEmployerMatch: 0 } as AnnualSalaryInputs);
+  const eq = calculateFromAnnualSalary({ ...base, rrspMatchPolicy: 'equal', rrspEmployerMatch: 5 } as AnnualSalaryInputs);
+  expect('employer match $3,000: CPP up 5.95%', (eq.annual?.cpp ?? 0) - (none.annual?.cpp ?? 0), 178.5);
+  expect('employer match $3,000: EI up 1.63%', (eq.annual?.ei ?? 0) - (none.annual?.ei ?? 0), 48.9);
+  expect('employer match $3,000: gross unchanged (the match is not paid to the employee)', eq.grossPayAnnual, none.grossPayAnnual);
+}
+
 if (failures.length) {
   console.log(failures.map((f) => '  ✗ ' + f).join('\n'));
   console.log(`\nENGINE CASES AUDIT FAIL (${tz}) — ${failures.length} of ${checks}.`);
   process.exit(1);
 }
-console.log(`ENGINE CASES AUDIT PASS (${tz}) — ${checks} checks: timesheet weeks, night premium, one-time pay, non-cash benefits, daily pay.`);
+console.log(`ENGINE CASES AUDIT PASS (${tz}) — ${checks} checks: timesheet weeks, night premium, one-time pay, non-cash benefits, daily pay, employer match.`);
