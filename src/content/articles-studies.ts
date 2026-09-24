@@ -2348,4 +2348,126 @@ The Alberta Energy Rebate doesn't touch payroll — it won't show up on a pay st
 Program terms — the $100/$200 payment amounts, eligibility criteria, application window, automatic-enrollment groups, and payment timing — are taken directly from the Government of Alberta's official [Alberta Energy Rebate](https://www.alberta.ca/alberta-energy-rebate) page and its published [program fact sheet](https://www.alberta.ca/system/files/tbf-alberta-energy-rebate-factsheet.pdf) (Treasury Board and Finance, July 1, 2026). The 3.4 million eligible Albertans and roughly $350 million total program cost are corroborated by contemporaneous CBC News and Global News reporting citing Alberta's government. Take-home pay and "raise needed to net $100" figures are CanPay Insights' own calculations, run through our tax engine using 2026 federal and provincial tax brackets, CPP/CPP2, and EI for a single full-time worker with basic personal amounts only — real paycheques vary with credits, benefits, and actual pay frequency. This is general information, not tax or financial advice; confirm your own eligibility at [alberta.ca/alberta-energy-rebate](https://www.alberta.ca/alberta-energy-rebate).
 `,
   },
+  {
+    id: 'study-22',
+    slug: 'ei-premium-rate-2027',
+    title: 'EI Premium Rate for 2027 Confirmed: Maximum Insurable Earnings Jumps to $70,800',
+    subtitle:
+      'The Canada Employment Insurance Commission confirmed the 2027 EI rate on September 14, 2026 — the rate itself ticks up only a hair, but a higher earnings ceiling pushes the maximum annual premium up $38.05.',
+    excerpt:
+      'The 2027 EI premium rate is confirmed at $1.64 per $100 of insurable earnings, and the earnings ceiling rises to $70,800 from $68,900. The maximum employee premium climbs $38.05, to $1,161.12; most workers below the old ceiling see a smaller $4–$7 increase. Quebec\'s reduced rate actually falls slightly, to 1.29%.',
+    metaTitle: '2027 EI Rate Confirmed: Up to $38 More a Year',
+    metaDescription:
+      "Canada's 2027 EI premium rate is $1.64 per $100, and max insurable earnings rise to $70,800. See exactly how much more comes off your paycheque by salary.",
+    keywords: [
+      'ei premium rate 2027',
+      'ei rate 2027 canada',
+      'maximum insurable earnings 2027',
+      'ei max 2027',
+      'how much ei will i pay 2027',
+      'employment insurance 2027',
+    ],
+    category: 'news',
+    tags: ['EI', 'CRA', 'Payroll Deductions', '2027'],
+    publishedAt: '2026-09-24',
+    readTime: 6,
+    imageUrl: '/blog/ei-premium-rate-2027.svg',
+    directAnswer:
+      'The Canada Employment Insurance Commission confirmed on September 14, 2026 that the 2027 EI premium rate rises to $1.64 per $100 of insurable earnings (up from $1.63 in 2026), while the maximum insurable earnings climbs to $70,800 from $68,900. Together, those two changes push the maximum annual employee EI premium up $38.05, to $1,161.12, and the maximum employer premium up $53.27, to $1,625.57 per employee — both effective January 1, 2027. Workers earning under the 2026 ceiling see a much smaller increase of $4 to $7 a year; Quebec\'s reduced EI rate actually ticks down slightly, to 1.29%, though its own maximum still rises because of the higher earnings ceiling.',
+    faq: [
+      {
+        question: 'What is the EI premium rate for 2027?',
+        answer:
+          'The Canada Employment Insurance Commission (CEIC) confirmed on September 14, 2026 that the 2027 employee EI premium rate is $1.64 per $100 of insurable earnings (1.64%), effective January 1, 2027. Employers pay 1.4 times the employee rate, or $2.30 per $100 (2.30%). This is a small increase from the 2026 employee rate of $1.63 per $100, and equal to the rate Canadians paid in 2025.',
+      },
+      {
+        question: 'How much extra EI will I pay in 2027?',
+        answer:
+          'It depends on your income. Below the 2026 earnings ceiling of $68,900, the increase is modest: about $4 more a year at a $40,000 salary, $5 more at $50,000, and $6 more at $60,000. Anyone earning $70,800 or more in 2027 pays the new maximum of $1,161.12, up $38.05 from the 2026 maximum of $1,123.07 — the biggest single-dollar increase comes from the higher earnings ceiling, not the rate itself.',
+      },
+      {
+        question: 'What is the maximum insurable earnings for 2027?',
+        answer:
+          "In 2027, the maximum insurable earnings rises to $70,800. That's up $1,900 from 2026's $68,900 ceiling. This is the income level at which EI premiums stop being deducted for the rest of the year — it typically rises each year in step with growth in Canada's average industrial wage.",
+      },
+      {
+        question: 'Why is EI going up when the CPP rate is being cut in 2027?',
+        answer:
+          "They're set independently, by different rules. The base CPP rate is falling from 9.9% to 9.5% in 2027 under Bill C-30, a legislated federal budget decision. The EI premium rate is set every year by the CEIC under the Employment Insurance Act's seven-year break-even mechanism, based on the EI Operating Account's balance and forecast — it moves up or down independently of CPP. See our separate coverage of the [CPP rate cut](/blog/cpp-contribution-rate-cut-2027) for that change.",
+      },
+      {
+        question: 'Does the EI change affect Quebec workers the same way?',
+        answer:
+          "Not quite. Because Quebec runs its own parental insurance plan (QPIP), Quebec workers pay a separately calculated, reduced federal EI rate. In 2027, that rate actually falls slightly to 1.29%. It was 1.30% in 2026, so a Quebec worker earning under the ceiling pays a few dollars less EI next year. But because the earnings ceiling still rises to $70,800 in 2027, the maximum a Quebec worker can pay still increases, from $895.70 to $913.32 — an increase of $17.62, less than half the $38.05 increase outside Quebec.",
+      },
+      {
+        question: 'How much more will employers pay in EI premiums for 2027?',
+        answer:
+          "The maximum employer EI premium rises from $1,572.30 to $1,625.57 per employee outside Quebec, an increase of $53.27 (employers pay 1.4 times the employee rate, so they absorb more of the increase in dollar terms). The federal government says its EI Premium Reduction Program — which lowers premiums for employers who offer a qualifying short-term disability plan — will return about $1.7 billion to registered employers and employees in 2027.",
+      },
+    ],
+    content: `
+## Confirmed: EI premiums rise again in 2027, mostly because the ceiling moved
+
+The **Canada Employment Insurance Commission (CEIC)** confirmed the 2027 EI premium rate on **September 14, 2026**. In 2027, the employee rate rises to **1.64%** of insurable earnings and the **maximum insurable earnings (MIE)** climbs to **$70,800**, both effective January 1, 2027. That's a small rate increase but a $1,900 jump in the ceiling from 2026's $68,900 and 1.63%. Combined, those two changes push the **maximum annual employee EI premium up $38.05** in 2027, from $1,123.07 to **$1,161.12**.
+
+We ran the confirmed 2027 numbers through the same math the CanPay Insights tax engine uses for EI, to see exactly what it costs at different salaries — and why the story is different if you're in Quebec.
+
+### What's changing
+
+| | 2026 (current) | 2027 (confirmed) | Change |
+| --- | --- | --- | --- |
+| Employee EI rate | 1.63% | **1.64%** (2027) | +0.01 pp |
+| Employer EI rate | 2.28% | **2.30%** (2027) | +0.02 pp |
+| Maximum insurable earnings | $68,900 | **$70,800** (2027) | +$1,900 |
+| Maximum employee premium | $1,123.07 | **$1,161.12** (2027) | +$38.05 |
+| Maximum employer premium (per employee) | $1,572.30 | **$1,625.57** (2027) | +$53.27 |
+
+The 2027 rate isn't a new high — it matches what Canadians paid in 2025. 2026 was actually a one-year dip, down to 1.63% from 1.64%, before the rate returned to 1.64% for 2027.
+
+### What it costs by salary
+
+Because EI is a flat rate up to the ceiling, most of the 2027 increase is small unless you earn near or above the old $68,900 ceiling:
+
+| Annual salary | 2026 EI premium | 2027 EI premium | Change |
+| --- | --- | --- | --- |
+| $40,000 | $652.00 | $656.00 | +$4.00 |
+| $50,000 | $815.00 | $820.00 | +$5.00 |
+| $60,000 | $978.00 | $984.00 | +$6.00 |
+| $68,900 (2026 ceiling) | $1,123.07 (max) | $1,129.96 | +$6.89 |
+| $70,800+ (2027 ceiling) | $1,123.07 (max) | $1,161.12 (max) | **+$38.05** |
+
+*Figures are the employee share only, calculated as insurable earnings × the 2026 or 2027 rate, capped at that year's maximum insurable earnings.*
+
+The pattern is the same one we saw with the [2027 CPP rate cut](/blog/cpp-contribution-rate-cut-2027), just in reverse: the people who feel the full change are the ones earning at or above the ceiling, not the median earner.
+
+### Quebec: the rate falls, but the ceiling still costs more
+
+Quebec runs its own parental insurance plan (**QPIP**), so Quebec workers pay a separately calculated, reduced federal EI rate. For 2027, that reduced rate actually **falls**, from 1.30% to 1.29% — a rare EI decrease. But because the same $70,800 ceiling applies in Quebec too in 2027, the maximum a Quebec worker can pay still rises:
+
+| Annual salary | 2026 EI (Quebec) | 2027 EI (Quebec) | Change |
+| --- | --- | --- | --- |
+| $40,000 | $520.00 | $516.00 | **−$4.00** |
+| $50,000 | $650.00 | $645.00 | **−$5.00** |
+| $60,000 | $780.00 | $774.00 | **−$6.00** |
+| $68,900 | $895.70 (max) | $888.81 | **−$6.89** |
+| $70,800+ (2027 ceiling) | $895.70 (max) | $913.32 (max) | **+$17.62** |
+
+So a Quebec worker earning under $68,900 actually pays a few dollars *less* EI in 2027 — but a Quebec worker at or above the new ceiling still pays $17.62 more, less than half the $38.05 increase everyone else sees at the ceiling.
+
+### Why EI moves independently of CPP
+
+If you followed our earlier coverage of the [2027 CPP rate cut](/blog/cpp-contribution-rate-cut-2027), it's worth being clear these are two unrelated decisions. The base CPP rate is falling from 9.9% to 9.5% in 2027 because Bill C-30, a federal budget bill, legislated the cut. The EI rate isn't legislated year to year the same way — the *Employment Insurance Act* requires the CEIC to set a rate each September that keeps the EI Operating Account roughly break-even over a seven-year horizon, based on projected claims and forecast insurable earnings. That mechanism pushed the rate down slightly for 2026 and back up for 2027; it has nothing to do with the CPP fund, which is managed separately by the CPP Investment Board.
+
+The federal government also points out that its **EI Premium Reduction Program**, which lowers premiums for employers offering a qualifying short-term disability plan, is expected to return about **$1.7 billion** to registered employers and employees in 2027.
+
+### None of this shows up until your first 2027 paycheque
+
+Nothing changes on your paycheque for the rest of 2026 — the new rate and ceiling take effect January 1, 2027. For your exact current EI premium, see [how much EI you pay by salary](/blog/how-much-ei-will-i-pay-2026), or use the [CPP & EI calculator](/cpp-ei-calculator) to see your full 2026 deduction breakdown. Quebec workers can see the QPIP side of the calculation with the [Quebec paycheck calculator](/quebec-paycheck-calculator).
+
+## Sources & disclaimer
+
+The 2027 EI premium rate, maximum insurable earnings, and maximum contribution figures are taken directly from the Government of Canada's official announcement, [Canada Employment Insurance Commission confirms 2027 Employment Insurance premium rate](https://www.canada.ca/en/employment-social-development/news/2026/09/canada-employment-insurance-commission-confirms-2027-employment-insurance-premium-rate.html) (Employment and Social Development Canada, September 14, 2026), cross-checked against contemporaneous reporting from Insurance Business Canada. The 2026 comparison figures (rate, ceiling, and maximums) match the constants used in the CanPay Insights tax engine. Salary-by-salary premium figures are CanPay Insights' own calculations — insurable earnings multiplied by each year's confirmed rate, capped at that year's maximum insurable earnings — and assume a single employee with no other insurable income. This is general information, not tax or financial advice; confirm your own EI deductions with the [Canada Revenue Agency](https://www.canada.ca/en/revenue-agency/services/tax/businesses/topics/payroll/payroll-deductions-contributions/employment-insurance-ei/ei-premium-rates-maximums.html).
+`,
+  },
 ];
