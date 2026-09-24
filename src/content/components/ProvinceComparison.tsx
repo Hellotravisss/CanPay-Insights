@@ -4,6 +4,7 @@ import { PROVINCIAL_DATA } from '../../../constants';
 import { calculateFromAnnualSalary } from '../../../utils/taxEngine';
 import { PayFrequency } from '../../../types';
 import SEO from '../../../components/SEO';
+import CompareMoveOffer from '../../../components/CompareMoveOffer';
 
 interface ProvinceComparisonProps {
   onBackToBlog: () => void;
@@ -305,6 +306,10 @@ const ProvinceComparison: React.FC<ProvinceComparisonProps> = ({ onBackToBlog })
               </div>
             </div>
           </>
+        )}
+
+        {isComparing && selectedProvinces.length >= 2 && (
+          <CompareMoveOffer key={selectedProvinces.join('|')} provinces={selectedProvinces} annualSalary={annualSalary} />
         )}
 
         {/* Provincial Guides Links */}
