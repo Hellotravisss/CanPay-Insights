@@ -25,7 +25,7 @@ I read your piece on [specific article — one line on why it was good]. I run C
 
 - Of visitors who changed the income they'd entered, ${s.raise.net.upShare}% ended on a higher figure than they started with. They're pricing a raise or an offer, not bracing for a cut.
 - ${s.shifts.editedBefore7}% of the shifts people typed in start before 7 a.m., and ${s.shifts.editedNight}% start between 6 p.m. and 6 a.m. I don't know of a public dataset of when Canadian shifts begin.
-- ${s.lang.nonEnglishShare}% of the calculations were done in a language other than English, ${s.lang.zhShare}% of them in Chinese.
+- ${s.lang.nonEnglishShare}% of the calculations were done in a language other than English; Chinese alone was ${s.lang.zhShare}% of all calculations.
 - ${s.move.share}% of visits price the same pay in two or more provinces in one sitting.
 
 It's behaviour, not earnings: the sample is people who went looking for a pay calculator (${s.belowMedianShare}% of calculations are below their province's median wage), and the page says so, with the count behind every figure and how each was tested. The page keeps itself current and records what it said each day, so a figure you quote stays checkable:
