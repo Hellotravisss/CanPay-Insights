@@ -382,30 +382,86 @@ export default function StatsDashboard() {
           </p>
         </div>
 
-        {/* Media-readiness gauge: how close the dataset is to being pitchable */}
-        <div className="mb-10 rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
-          <div className="mb-2 flex items-baseline justify-between">
-            <h2 className="text-base font-bold text-slate-800">{T('Media-readiness', '媒体可用度')}</h2>
-            <span className="text-xs text-slate-400">
-              {T('target: 5,000 events for a citable data story', '目标:5,000 条事件,够写一篇可引用的数据报道')}
-            </span>
-          </div>
-          <div className="h-3 w-full rounded-full bg-slate-100">
-            <div
-              className="h-3 rounded-full bg-gradient-to-r from-red-400 to-red-600"
-              style={{ width: `${Math.min(100, (t / 5000) * 100)}%` }}
-            />
-          </div>
-          <p className="mt-2 text-xs text-slate-500">
-            {t.toLocaleString()} / 5,000 ({Math.min(100, Math.round((t / 5000) * 100))}%)
-            {/* Rate over the whole collection window, not last_7d/7 — with only
-                a few days of history the 7-day divisor understates badly. */}
-            {t < 5000 &&
-              (zh
-                ? ` —— 目前约 ${(t / days).toFixed(1)} 条/天,离目标还要约 ${Math.ceil((5000 - t) / Math.max(0.5, t / days))} 天。`
-                : ` — ~${(t / days).toFixed(1)}/day so far, about ${Math.ceil((5000 - t) / Math.max(0.5, t / days))} days to target.`)}
-          </p>
-        </div>
+        {/* Pace + the current goal. The first goal (5,000 calculations, enough
+            for a citable story) was reached 2026-09-23 and is kept as one line.
+            The next one is local: a journalist in Halifax or Montreal wants
+            their own province's numbers, and every published cell must clear
+            the 20-calculation floor. 200 per province is what lets a province
+            be split ~7 ways (income range, shift pattern) and still publish. */}
+        {(() => {
+          const LOCAL_GOAL = 200;
+          const PROVINCES = ['Ontario', 'Alberta', 'British Columbia', 'Quebec', 'Manitoba', 'Saskatchewan',
+            'Nova Scotia', 'New Brunswick', 'Newfoundland and Labrador', 'Prince Edward Island'];
+          const ZH: Record<string, string> = { Ontario: '安大略', Alberta: '阿尔伯塔', 'British Columbia': 'BC',
+            Quebec: '魁北克', Manitoba: '曼尼托巴', Saskatchewan: '萨斯喀彻温', 'Nova Scotia': '新斯科舍',
+            'New Brunswick': '新不伦瑞克', 'Newfoundland and Labrador': '纽芬兰', 'Prince Edward Island': '爱德华王子岛' };
+          // Completed days only: today is still filling up and would drag every average down.
+          const todayKey = new Date().toLocaleDateString('en-CA', { timeZone: 'America/Vancouver' });
+          const done = stats.by_daily.filter((r) => String(r.k) < todayKey).map((r) => r.n);
+          const avg = (xs: number[]) => (xs.length ? Math.round(xs.reduce((a, b) => a + b, 0) / xs.length) : 0);
+          const last = done.length ? done[done.length - 1] : 0;
+          const avg7 = avg(done.slice(-7));
+          const avg30 = avg(done.slice(-30));
+          const rows = PROVINCES.map((name) => {
+            const n = Number(stats.by_province.find((r) => r.k === name)?.n ?? 0);
+            const perDay = n / days;
+            const eta = n >= LOCAL_GOAL ? 0 : perDay > 0 ? Math.ceil((LOCAL_GOAL - n) / perDay) : null;
+            return { name, n, eta };
+          }).sort((x, y) => y.n - x.n);
+          const reached = rows.filter((r) => r.n >= LOCAL_GOAL).length;
+          return (
+            <>
+              <div className="mb-4 grid grid-cols-3 gap-3">
+                {[
+                  [T('Yesterday', '昨天'), last],
+                  [T('Per day, last 7 days', '近 7 天日均'), avg7],
+                  [T('Per day, last 30 days', '近 30 天日均'), avg30],
+                ].map(([label, v]) => (
+                  <div key={String(label)} className="rounded-2xl border border-slate-200 bg-white p-4 shadow-sm">
+                    <p className="text-2xl font-extrabold tabular-nums text-slate-900">{Number(v).toLocaleString()}</p>
+                    <p className="mt-0.5 text-xs text-slate-500">{label}</p>
+                  </div>
+                ))}
+              </div>
+              <p className="mb-3 text-[11px] text-slate-400">
+                {T('Calculations per day (not page visits), completed days in Vancouver time.',
+                  '每天的计算次数(不是网页访问量),只算已经过完的日子,按温哥华时间。')}
+              </p>
+
+              <div className="mb-10 rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
+                <div className="mb-1 flex items-baseline justify-between gap-4">
+                  <h2 className="text-base font-bold text-slate-800">
+                    {T('Next goal: a local story in every province', '下一个目标:每个省都能讲本地故事')}
+                  </h2>
+                  <span className="shrink-0 text-sm font-bold tabular-nums text-slate-700">{reached} / 10</span>
+                </div>
+                <p className="mb-4 text-xs leading-5 text-slate-500">
+                  {T(`${LOCAL_GOAL} calculations in a province lets its numbers be split by income range or shift pattern with every cell above the 20-calculation publishing floor, so a reporter there gets figures about their own province. Days left use each province's own pace so far.`,
+                    `一个省有 ${LOCAL_GOAL} 次计算,就能按收入区间或班次拆开,每一格仍高于 20 次的发布下限 —— 当地记者就能拿到本省自己的数字。剩余天数按各省到目前为止的速度估算。`)}
+                </p>
+                <div className="space-y-2">
+                  {rows.map((r) => (
+                    <div key={r.name} className="grid grid-cols-[8.5rem_1fr_6.5rem] items-center gap-3 text-xs">
+                      <span className="truncate text-slate-600">{zh ? ZH[r.name] : r.name}</span>
+                      <div className="h-2 rounded-full bg-slate-100">
+                        <div className={`h-2 rounded-full ${r.n >= LOCAL_GOAL ? 'bg-emerald-600' : 'bg-red-500'}`}
+                          style={{ width: `${Math.min(100, (r.n / LOCAL_GOAL) * 100)}%` }} />
+                      </div>
+                      <span className="text-right tabular-nums text-slate-500">
+                        {r.n >= LOCAL_GOAL ? `${r.n.toLocaleString()} ✓`
+                          : `${r.n} · ${r.eta === null ? '—' : r.eta > 365 ? T('>1 yr', '>1 年') : T(`~${r.eta}d`, `约 ${r.eta} 天`)}`}
+                      </span>
+                    </div>
+                  ))}
+                </div>
+                <p className="mt-4 text-[11px] text-slate-400">
+                  {T(`Previous goal reached: 5,000 calculations for a citable national story (${t.toLocaleString()} now, since September 23, 2026). Territories are left out: their populations are too small for this to be a sensible target.`,
+                    `上一个目标已完成:5,000 次计算,够写一篇可引用的全国报道(现在 ${t.toLocaleString()},2026 年 9 月 23 日达成)。三个地区没有列入:人口太少,这个目标对它们不合理。`)}
+                </p>
+              </div>
+            </>
+          );
+        })()}
 
         {/* Globe — where in the world people are calculating Canadian pay */}
         <div className="mb-6 rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
