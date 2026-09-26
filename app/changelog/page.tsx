@@ -24,6 +24,7 @@ const ENTRIES: { date: string; title: string; points: string[] }[] = [
     points: [
       'In the annual-salary calculator, enter the take-home you want each month or year and it finds the salary that leaves exactly that, to the dollar, for your province, pay frequency, RRSP and extras. The answer comes from the same engine that is checked against the CRA tables, and every release now also checks that it lands on the exact dollar for every province.',
       'If you use it, the anonymous record of that calculation includes the monthly take-home you asked for as a range, never the amount. The privacy policy lists it.',
+      'The yearly summary now says how many of the year\'s 260 working days\' pay go to income tax, and separately how many go into CPP/QPP and EI, which come back as a pension and insurance rather than being spent by government.',
     ],
   },
   {

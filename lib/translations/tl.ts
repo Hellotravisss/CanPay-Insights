@@ -156,6 +156,7 @@ export const main: Record<string, string> = {
   'res.grossIncomePre': 'Gross Income (Bago ang Buwis)',
   'res.totalTaxDed': 'Kabuuang Buwis at Deductions',
   'res.netIncomePost': 'Net Income (Pagkatapos ng Buwis)',
+  'res.taxDays': 'Sa 260 araw ng trabaho sa isang taon, mga {tax} araw ng sahod ang napupunta sa income tax, at {contrib} araw sa CPP/QPP at EI, na bumabalik sa iyo bilang pensiyon at insurance.',
   'res.qcTitle': 'Ipinatupad ang Espesyal na Tax Rules ng Québec',
   'res.qcDesc': "Kasama sa kalkulasyong ito ang natatanging sistema ng Québec: QPP, QPIP, mas mababang EI rate, at ang federal tax abatement. Ang mga resulta ay estimate base sa {year} rates.",
   'res.breakdown': 'Paycheck Breakdown',

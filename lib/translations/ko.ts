@@ -156,6 +156,7 @@ export const main: Record<string, string> = {
   'res.grossIncomePre': '세전 총소득',
   'res.totalTaxDed': '총 세금 및 공제액',
   'res.netIncomePost': '세후 순소득',
+  'res.taxDays': '1년 근무일 260일 중 약 {tax}일치 급여가 소득세로, {contrib}일치가 CPP/QPP와 EI로 나갑니다. 이 둘은 연금과 보험으로 돌아옵니다.',
   'res.qcTitle': '퀘벡 특별 세금 규정 적용됨',
   'res.qcDesc': '이 계산에는 퀘벡의 고유 제도가 반영됩니다: QPP, QPIP, 낮은 EI 요율, 그리고 연방세 공제. 결과는 {year}년 세율 기준 추정치입니다.',
   'res.breakdown': '급여 명세',

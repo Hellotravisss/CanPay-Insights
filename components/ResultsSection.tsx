@@ -1,4 +1,5 @@
 'use client';
+import { taxDays } from '../utils/taxDays';
 import React from 'react';
 import AnimatedAmount from './AnimatedAmount';
 import { CalculationResult, Province } from '../types';
@@ -173,6 +174,7 @@ const ResultsSection: React.FC<Props> = ({ results, provinceName }) => {
   };
 
   const netPayLabel = t('res.netPay');
+  const days = taxDays(results);
   // 是否是年薪或打卡模式（有 payFrequency 字段）
   const hasCustomFrequency = !!results.payFrequency;
   const payPeriodLabel = hasCustomFrequency ? getPayFrequencyLabel(results.payFrequency) : t('res.biweekly');
@@ -246,6 +248,11 @@ const ResultsSection: React.FC<Props> = ({ results, provinceName }) => {
                  <span className="text-slate-700 font-bold text-sm">{t('res.netIncomePost')}</span>
                  <span className="text-2xl font-extrabold text-red-600">{formatCurrency(results.netPayAnnual)}</span>
               </div>
+              {days && (
+                <p className="text-xs leading-5 text-slate-600">
+                  {t('res.taxDays').replace('{tax}', String(days.tax)).replace('{contrib}', String(days.contributions))}
+                </p>
+              )}
            </div>
            <InukshukWatermark className="absolute top-4 right-4 w-16 h-16 -rotate-12 opacity-10" />
         </div>
