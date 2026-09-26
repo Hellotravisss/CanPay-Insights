@@ -1,8 +1,9 @@
 import React from 'react';
 
 /**
- * Cross-recommendation to Take-Home Almanac (takehomealmanac.com), our U.S.
- * sister site. The almanac links back to CanPay the same way — a deliberate,
+ * Cross-recommendation to USAPay Insights (usapayinsights.com, called
+ * Take-Home Almanac until 2026-09-25), our U.S. sister site — the second site
+ * in the <Country>Pay Insights family. It links back to CanPay the same way — a deliberate,
  * honest "same team" pair of links, not a faked third-party endorsement:
  * the shared authorship IS the reason the recommendation can be trusted, and
  * same-author cross-links are a real entity signal for search and AI engines.
@@ -14,11 +15,11 @@ import React from 'react';
  * guessed "Old Glory blue and red" — it looked like a different product.
  * If the almanac's brand changes, change it there first and copy here.
  *
- * The utm pair mirrors the almanac's link back (utm_source=takehomealmanac);
+ * The utm pair mirrors the US site's link back (utm_source=usapayinsights);
  * both sides can measure exactly how many people the channel moves.
  */
 const ALMANAC_URL =
-  'https://takehomealmanac.com/?utm_source=canpayinsights&utm_medium=sister-site';
+  'https://usapayinsights.com/?utm_source=canpayinsights&utm_medium=sister-site';
 
 const SisterSiteCard: React.FC<{ className?: string }> = ({ className = '' }) => (
   <a
@@ -46,14 +47,14 @@ const SisterSiteCard: React.FC<{ className?: string }> = ({ className = '' }) =>
           Same team · U.S. edition
         </p>
         <h2 className="mb-1 text-xl font-extrabold tracking-tight text-white sm:text-2xl">
-          Take-Home <span className="font-light text-[#95fc02]">Almanac</span>
+          USAPay <span className="font-light text-[#95fc02]">Insights</span>
         </h2>
         <p className="mb-4 max-w-xl text-sm leading-relaxed text-[#c9bfe0]">
           Working in the U.S. instead? Our American sister site is the same calculator, rebuilt for
           U.S. taxes: federal and state brackets for all 50 states and D.C., FICA, and filing status.
         </p>
         <span className="inline-flex min-h-10 items-center gap-2 rounded-full bg-[#95fc02] px-5 py-2 text-sm font-bold text-[#33015b] shadow-sm transition-colors group-hover:bg-[#bbfa4e]">
-          takehomealmanac.com
+          usapayinsights.com
           <svg className="h-4 w-4 transition-transform group-hover:translate-x-0.5" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
             <path fillRule="evenodd" d="M3 10a1 1 0 011-1h9.586L10.293 5.707a1 1 0 111.414-1.414l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L13.586 11H4a1 1 0 01-1-1z" clipRule="evenodd" />
           </svg>
