@@ -493,42 +493,42 @@
    "page": "/privacy",
    "text": "There are three levels, and only the first happens without you doing anything.",
    "backing": "manual",
-   "note": "Location handling as implemented and reviewed for the 2026-09-15 privacy impact assessment (lib/telemetry.ts rounding, FSA input). Not re-read on 2026-09-25.",
+   "note": "Re-read on 2026-09-25: connection point rounded to one decimal in app/api/events (request.cf, IP never read); FSA input capped at 3 characters and validated again server-side (FSA_RE); device position rounded to 2 decimals (1 if rural) in components/NeighbourhoodPrompt.tsx before recordCalcEvent, nearest FSA matched on the device, sent only on the button press; server rounds again.",
    "reviewed": "2026-09-25"
   },
   {
    "page": "/privacy",
-   "text": "We keep that centre point rounded to about 11 km.",
+   "text": "We keep that point rounded to about 11 km.",
    "backing": "manual",
-   "note": "Location handling as implemented and reviewed for the 2026-09-15 privacy impact assessment (lib/telemetry.ts rounding, FSA input). Not re-read on 2026-09-25.",
+   "note": "Re-read on 2026-09-25: connection point rounded to one decimal in app/api/events (request.cf, IP never read); FSA input capped at 3 characters and validated again server-side (FSA_RE); device position rounded to 2 decimals (1 if rural) in components/NeighbourhoodPrompt.tsx before recordCalcEvent, nearest FSA matched on the device, sent only on the button press; server rounds again.",
    "reviewed": "2026-09-25"
   },
   {
    "page": "/privacy",
    "text": "This is city-level and it is the same whether or not you answer anything below.",
    "backing": "manual",
-   "note": "Location handling as implemented and reviewed for the 2026-09-15 privacy impact assessment (lib/telemetry.ts rounding, FSA input). Not re-read on 2026-09-25.",
+   "note": "Re-read on 2026-09-25: connection point rounded to one decimal in app/api/events (request.cf, IP never read); FSA input capped at 3 characters and validated again server-side (FSA_RE); device position rounded to 2 decimals (1 if rural) in components/NeighbourhoodPrompt.tsx before recordCalcEvent, nearest FSA matched on the device, sent only on the button press; server rounds again.",
    "reviewed": "2026-09-25"
   },
   {
    "page": "/privacy",
    "text": "We keep the three characters only.",
    "backing": "manual",
-   "note": "Location handling as implemented and reviewed for the 2026-09-15 privacy impact assessment (lib/telemetry.ts rounding, FSA input). Not re-read on 2026-09-25.",
+   "note": "Re-read on 2026-09-25: connection point rounded to one decimal in app/api/events (request.cf, IP never read); FSA input capped at 3 characters and validated again server-side (FSA_RE); device position rounded to 2 decimals (1 if rural) in components/NeighbourhoodPrompt.tsx before recordCalcEvent, nearest FSA matched on the device, sent only on the button press; server rounds again.",
    "reviewed": "2026-09-25"
   },
   {
    "page": "/privacy",
    "text": "A full six-character postal code, which identifies about fifteen households, is never accepted.",
    "backing": "manual",
-   "note": "Location handling as implemented and reviewed for the 2026-09-15 privacy impact assessment (lib/telemetry.ts rounding, FSA input). Not re-read on 2026-09-25.",
+   "note": "Re-read on 2026-09-25: connection point rounded to one decimal in app/api/events (request.cf, IP never read); FSA input capped at 3 characters and validated again server-side (FSA_RE); device position rounded to 2 decimals (1 if rural) in components/NeighbourhoodPrompt.tsx before recordCalcEvent, nearest FSA matched on the device, sent only on the button press; server rounds again.",
    "reviewed": "2026-09-25"
   },
   {
    "page": "/privacy",
    "text": "What reaches us is that rounded point and that prefix — never the precise reading, and never more than once per calculation.",
    "backing": "manual",
-   "note": "Location handling as implemented and reviewed for the 2026-09-15 privacy impact assessment (lib/telemetry.ts rounding, FSA input). Not re-read on 2026-09-25.",
+   "note": "Re-read on 2026-09-25: connection point rounded to one decimal in app/api/events (request.cf, IP never read); FSA input capped at 3 characters and validated again server-side (FSA_RE); device position rounded to 2 decimals (1 if rural) in components/NeighbourhoodPrompt.tsx before recordCalcEvent, nearest FSA matched on the device, sent only on the button press; server rounds again.",
    "reviewed": "2026-09-25"
   },
   {
@@ -859,35 +859,35 @@
    "page": "/fr/confidentialite",
    "text": "Nous conservons ce point arrondi à environ 11 km.",
    "backing": "manual",
-   "note": "Location handling as implemented and reviewed for the 2026-09-15 privacy impact assessment (lib/telemetry.ts rounding, FSA input). Not re-read on 2026-09-25.",
+   "note": "Re-read on 2026-09-25: connection point rounded to one decimal in app/api/events (request.cf, IP never read); FSA input capped at 3 characters and validated again server-side (FSA_RE); device position rounded to 2 decimals (1 if rural) in components/NeighbourhoodPrompt.tsx before recordCalcEvent, nearest FSA matched on the device, sent only on the button press; server rounds again.",
    "reviewed": "2026-09-25"
   },
   {
    "page": "/fr/confidentialite",
    "text": "Nous ne gardons que les trois caractères.",
    "backing": "manual",
-   "note": "Location handling as implemented and reviewed for the 2026-09-15 privacy impact assessment (lib/telemetry.ts rounding, FSA input). Not re-read on 2026-09-25.",
+   "note": "Re-read on 2026-09-25: connection point rounded to one decimal in app/api/events (request.cf, IP never read); FSA input capped at 3 characters and validated again server-side (FSA_RE); device position rounded to 2 decimals (1 if rural) in components/NeighbourhoodPrompt.tsx before recordCalcEvent, nearest FSA matched on the device, sent only on the button press; server rounds again.",
    "reviewed": "2026-09-25"
   },
   {
    "page": "/fr/confidentialite",
    "text": "Un code postal complet de six caractères, qui désigne une quinzaine de ménages, n’est jamais accepté.",
    "backing": "manual",
-   "note": "Location handling as implemented and reviewed for the 2026-09-15 privacy impact assessment (lib/telemetry.ts rounding, FSA input). Not re-read on 2026-09-25.",
+   "note": "Re-read on 2026-09-25: connection point rounded to one decimal in app/api/events (request.cf, IP never read); FSA input capped at 3 characters and validated again server-side (FSA_RE); device position rounded to 2 decimals (1 if rural) in components/NeighbourhoodPrompt.tsx before recordCalcEvent, nearest FSA matched on the device, sent only on the button press; server rounds again.",
    "reviewed": "2026-09-25"
   },
   {
    "page": "/fr/confidentialite",
    "text": "Ce qui nous parvient, c’est ce point arrondi et ce préfixe — jamais la lecture précise, et jamais plus d’une fois par calcul.",
    "backing": "manual",
-   "note": "Location handling as implemented and reviewed for the 2026-09-15 privacy impact assessment (lib/telemetry.ts rounding, FSA input). Not re-read on 2026-09-25.",
+   "note": "Re-read on 2026-09-25: connection point rounded to one decimal in app/api/events (request.cf, IP never read); FSA input capped at 3 characters and validated again server-side (FSA_RE); device position rounded to 2 decimals (1 if rural) in components/NeighbourhoodPrompt.tsx before recordCalcEvent, nearest FSA matched on the device, sent only on the button press; server rounds again.",
    "reviewed": "2026-09-25"
   },
   {
    "page": "/fr/confidentialite",
    "text": "Refuser ne change rien au calculateur, et la saisie du préfixe reste toujours possible.",
    "backing": "manual",
-   "note": "Location handling as implemented and reviewed for the 2026-09-15 privacy impact assessment (lib/telemetry.ts rounding, FSA input). Not re-read on 2026-09-25.",
+   "note": "Re-read on 2026-09-25: connection point rounded to one decimal in app/api/events (request.cf, IP never read); FSA input capped at 3 characters and validated again server-side (FSA_RE); device position rounded to 2 decimals (1 if rural) in components/NeighbourhoodPrompt.tsx before recordCalcEvent, nearest FSA matched on the device, sent only on the button press; server rounds again.",
    "reviewed": "2026-09-25"
   },
   {

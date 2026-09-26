@@ -7,8 +7,10 @@ export const dynamic = 'force-dynamic';
 /**
  * Anonymous calculation events → D1. Replaces the browser's direct Supabase
  * insert. Two things improve in the move:
- *   - geo is attached HERE from request.cf (country, region, city centroid),
- *     so the browser never fetches or sends a location at all;
+ *   - connection geo is attached HERE from request.cf (country, region, city,
+ *     approximate point rounded to one decimal); the only location the
+ *     browser sends is what the visitor chose to give (FSA, or a device
+ *     position rounded on the device), checked again in sanitiseNeighbourhood;
  *   - the column list is a whitelist — a client cannot add a field the
  *     schema does not know, and anything outside the bucket vocabulary is
  *     dropped rather than stored.

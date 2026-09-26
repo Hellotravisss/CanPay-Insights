@@ -100,8 +100,8 @@ const PrivacyPolicy: React.FC<PrivacyPolicyProps> = () => {
         <ol className="list-decimal space-y-3 pl-5">
           <li>
             <strong className="text-slate-800">From your connection.</strong> Our hosting provider tells our server the
-            country, region and city your connection appears to come from, and the centre point of that
-            city. We keep that centre point rounded to about 11 km. <strong className="text-slate-800">Your IP address is
+            country, region and city your connection appears to come from, and an approximate point for
+            that connection, which is usually somewhere in that city. We keep that point rounded to about 11 km. <strong className="text-slate-800">Your IP address is
             not stored</strong> — not in these records, not in logs we keep. This is city-level and it is the
             same whether or not you answer anything below.
           </li>
@@ -111,8 +111,9 @@ const PrivacyPolicy: React.FC<PrivacyPolicyProps> = () => {
             thousand households). In return you see where that income sits among the people who file
             taxes in that area, from Canada Revenue Agency statistics. We keep the three characters only.
             A full six-character postal code, which identifies about fifteen households, is never accepted.
-            The prefix is remembered on your device so you are not asked again; press “Change” to replace
-            it, or clear your browser’s site data to remove it.
+            The prefix is remembered on your device so you are not asked again, and it is then included with
+            each later calculation you make in this browser; press “Change” to replace it, or clear your
+            browser’s site data to remove it and stop that.
           </li>
           <li>
             <strong className="text-slate-800">Your device location, if you press “Use my location”.</strong> This is off until

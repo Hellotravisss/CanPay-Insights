@@ -97,8 +97,8 @@ const PrivacyPolicyFr: React.FC = () => {
         <ol className="list-decimal space-y-3 pl-5">
           <li>
             <strong className="text-slate-800">À partir de votre connexion.</strong> Notre hébergeur indique à notre serveur le
-            pays, la région et la ville d’où semble provenir votre connexion, ainsi que le point central de
-            cette ville. Nous conservons ce point arrondi à environ 11 km. <strong className="text-slate-800">Votre adresse IP
+            pays, la région et la ville d’où semble provenir votre connexion, ainsi qu’un point approximatif pour
+            cette connexion, situé en général dans cette ville. Nous conservons ce point arrondi à environ 11 km. <strong className="text-slate-800">Votre adresse IP
             n’est pas conservée</strong> — ni dans ces fiches, ni dans des journaux que nous garderions. C’est
             au niveau de la ville, et c’est identique que vous répondiez ou non à ce qui suit.
           </li>
@@ -109,8 +109,9 @@ const PrivacyPolicyFr: React.FC = () => {
             parmi les personnes qui produisent une déclaration dans cette zone, d’après les statistiques de
             l’Agence du revenu du Canada. Nous ne gardons que les trois caractères. Un code postal complet de
             six caractères, qui désigne une quinzaine de ménages, n’est jamais accepté. Le préfixe est
-            mémorisé sur votre appareil pour ne pas vous le redemander ; appuyez sur « Modifier » pour le
-            remplacer, ou effacez les données de site de votre navigateur pour le supprimer.
+            mémorisé sur votre appareil pour ne pas vous le redemander, puis joint à chacun de vos calculs
+            suivants dans ce navigateur ; appuyez sur « Modifier » pour le remplacer, ou effacez les données
+            de site de votre navigateur pour le supprimer et arrêter cela.
           </li>
           <li>
             <strong className="text-slate-800">La position de votre appareil, si vous appuyez sur « Utiliser ma position ».</strong>{' '}
