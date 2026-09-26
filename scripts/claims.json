@@ -1857,6 +1857,20 @@
    "backing": "manual",
    "reviewed": "2026-09-26",
    "note": "Checked on 2026-09-26: components/ReverseSalary.tsx sends reverseTargetMonthly; lib/telemetry.ts reverseTargetBucket turns it into one of eight labels; app/api/events accepts only those labels (REVERSE_BUCKETS). audit:reverse checks the solver."
+  },
+  {
+   "page": "/privacy",
+   "text": "whether you ticked “I support a spouse or common-law partner” (yes or no) — never your spouse’s income;",
+   "backing": "manual",
+   "reviewed": "2026-09-27",
+   "note": "Checked on 2026-09-27: App.tsx sends spouseClaim as a boolean (spouseNetIncome != null); lib/telemetry.ts writes spouse_claim 1/0; app/api/events coerces anything else to null. The spouse income stays in the form and is never sent."
+  },
+  {
+   "page": "/fr/confidentialite",
+   "text": "si vous avez coché « Je subviens aux besoins d’un époux ou conjoint de fait » (oui ou non) — jamais le revenu de votre époux ou conjoint;",
+   "backing": "manual",
+   "reviewed": "2026-09-27",
+   "note": "Checked on 2026-09-27: App.tsx sends spouseClaim as a boolean (spouseNetIncome != null); lib/telemetry.ts writes spouse_claim 1/0; app/api/events coerces anything else to null. The spouse income stays in the form and is never sent."
   }
  ]
 }
