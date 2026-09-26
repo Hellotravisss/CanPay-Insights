@@ -48,8 +48,11 @@ const AboutPage: React.FC = () => {
             <p className="text-slate-600 text-lg leading-relaxed mb-8">
               CanPay Insights is a free payroll and take-home pay calculator built for people who work in Canada.
               Enter an hourly wage, annual salary, or timesheet and instantly see what you actually keep after
-              federal tax, provincial tax, CPP/CPP2, and EI — for any province or territory, in English, French,
-              or Chinese. There is no signup, no paywall, and no data leaves your device.
+              federal tax, provincial tax, CPP/CPP2, and EI — for any province or territory, in ten languages. No signup is needed. The calculation runs on
+              your device and the exact amounts you type are never sent to us; we record anonymous
+              statistics about each calculation (income as a range, never the figure), which you can switch
+              off. What is recorded, and how to stop it, is set out in our{" "}
+              <a href="/privacy" className="text-red-600 hover:text-red-700 font-medium underline underline-offset-2">privacy policy</a>.
             </p>
 
             <section className="mb-10">
@@ -100,7 +103,8 @@ const AboutPage: React.FC = () => {
                   independent developer based in Vancouver, British Columbia, who wrote the open rules engine
                   behind the calculator. It is a small, self-funded project — not a bank, payroll company, or
                   financial institution. That independence is the point: the tool exists to give workers a
-                  straight answer. We have no product of our own to sell, and the calculator stays free. We
+                  straight answer. The calculator stays free. We sell two optional paid reports (a province-move report and a
+                  job-offer comparison, $9 each) that use the same engine as the free calculator. We
                   sometimes include a clearly labelled referral link (such as Wealthsimple) and may earn a
                   sign-up bonus, but it never affects our numbers or what we recommend — see our{" "}
                   <a href="/affiliate-disclosure" className="text-red-600 hover:text-red-700 font-medium underline underline-offset-2 transition-colors">affiliate disclosure</a>. Connect on{" "}

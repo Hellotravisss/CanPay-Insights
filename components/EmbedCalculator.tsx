@@ -150,6 +150,15 @@ export default function EmbedCalculator({
   }, [touched, annual, provinceName, lang, unit, embedHost]);
 
   const locale = lang === 'fr' ? 'fr-CA' : 'en-CA';
+  const [announce, setAnnounce] = useState('');
+  useEffect(() => {
+    if (!touched || !fig) return;
+    const id = setTimeout(() => {
+      const m = (n: number) => n.toLocaleString(locale, { style: 'currency', currency: 'CAD', maximumFractionDigits: 0 });
+      setAnnounce(`${t.net}: ${m(fig.netAnnual)}${t.perYear}, ${t.monthly}: ${m(fig.netMonthly)}`);
+    }, 900);
+    return () => clearTimeout(id);
+  }, [touched, fig, locale, t]);
   const money = (n: number) =>
     n.toLocaleString(locale, { style: 'currency', currency: 'CAD', maximumFractionDigits: 0 });
 
@@ -160,10 +169,11 @@ export default function EmbedCalculator({
         <span className="text-sm font-bold text-slate-800">{t.title}</span>
       </div>
 
-      <label className="mb-1 text-[11px] font-semibold uppercase tracking-wide text-slate-500">
+      <label htmlFor="cp-province" className="mb-1 text-[11px] font-semibold uppercase tracking-wide text-slate-500">
         {t.province}
       </label>
       <select
+        id="cp-province"
         value={slug}
         onChange={(e) => { setSlug(e.target.value); setTouched(true); }}
         className="mb-3 w-full rounded-lg border border-slate-300 bg-white px-3 py-2 text-sm text-slate-800"
@@ -173,11 +183,12 @@ export default function EmbedCalculator({
         ))}
       </select>
 
-      <label className="mb-1 text-[11px] font-semibold uppercase tracking-wide text-slate-500">
+      <label htmlFor="cp-amount" className="mb-1 text-[11px] font-semibold uppercase tracking-wide text-slate-500">
         {t.salary}
       </label>
       <div className="mb-4 flex gap-2">
         <input
+          id="cp-amount"
           type="number"
           inputMode="decimal"
           value={amount}
@@ -185,6 +196,7 @@ export default function EmbedCalculator({
           className="w-full rounded-lg border border-slate-300 px-3 py-2 text-sm text-slate-800"
         />
         <select
+          aria-label={`${t.salary}: ${t.perYear} / ${t.perHour}`}
           value={unit}
           onChange={(e) => { setUnit(e.target.value as 'year' | 'hour'); setTouched(true); }}
           className="rounded-lg border border-slate-300 bg-white px-2 py-2 text-sm text-slate-700"
@@ -221,11 +233,14 @@ export default function EmbedCalculator({
             <span>{t.ei}: <strong className="text-slate-800">-{money(fig.eiPremium)}</strong></span>
           </div>
           {/* State the assumptions a reader would otherwise have to guess. */}
-          <p className="mt-2 text-[10px] leading-4 text-slate-400">
+          <p className="mt-2 text-xs leading-5 text-slate-600">
             {t.rates}{unit === 'hour' ? ` · ${t.hours}` : ''}
           </p>
         </>
       )}
+
+      {/* One quiet announcement once typing pauses, not one per keystroke. */}
+      <p role="status" aria-live="polite" className="sr-only">{announce}</p>
 
       <div className="mt-auto flex items-center justify-between border-t border-slate-100 pt-3 text-[11px] text-slate-400">
         <span>

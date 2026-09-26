@@ -21,7 +21,7 @@ const PrivacyPolicy: React.FC<PrivacyPolicyProps> = () => {
   return (
     <LegalChrome
       title="Privacy Policy for CanPay Insights"
-      effective="Effective date: September 22, 2026 (replaces the version of September 15, 2026)"
+      effective="Effective date: September 25, 2026 (replaces the version of September 22, 2026)"
       links={[
         { href: '/fr/confidentialite', label: 'Version française' },
         { href: '/terms', label: 'Terms of Service' },
@@ -29,20 +29,32 @@ const PrivacyPolicy: React.FC<PrivacyPolicyProps> = () => {
       ]}
       intro={
         <p>
-          CanPay Insights (“we”, “our”, “us”) is a free Canadian take-home pay calculator, published at
+          CanPay Insights (“we”, “our”, “us”) is a free Canadian take-home pay calculator, with two optional paid reports, published at
           canpayinsights.ca and as the CanPay Insights app for iPhone (together, the “Service”). It is
           operated by Qi (Travis) Zhang, doing business as Avowd, in Vancouver, British Columbia. This
           policy explains what we collect, why, who it goes to, and how to say no. It is written to be read.
         </p>
       }
     >
-      <Section n={1} id="local" title="Your calculations stay on your device">
+      <Section n={1} id="local" title="What stays on your device, and what does not">
         <p>
           Every payroll and tax calculation runs <strong className="text-slate-800">entirely in your browser or on your phone</strong>.
-          The exact figures you type — hourly wage, salary, hours, tips, RRSP amounts — are not sent to us
-          and are not stored by us. The one exception is your choice: if you create an account and press
-          “save”, that calculation is stored so you can reopen it on another device, and you can delete it
-          at any time.
+          The exact money amounts you type — hourly wage, salary, tips, RRSP amounts — are never sent to us.
+          If you save a calculation to an account, that one calculation is stored so you can reopen it on
+          another device, and you can delete it at any time.
+        </p>
+        <p>
+          What <strong className="text-slate-800">is</strong> sent is an anonymous record of each calculation, listed in full in section 2.
+          Money appears in it only as ranges. Your work pattern is the one thing sent as plain numbers: when you
+          use the shift or timesheet calculator, the usual start and end hour, days per week, average shift
+          length and unpaid break. You can switch all of it off (section 2).
+        </p>
+        <p>
+          <strong className="text-slate-800">The calculator other websites embed (our “widget”) sends less:</strong> the province,
+          income as a range, annual or hourly, language, device and browser family, the hour and weekday, the
+          time-zone name, a temporary visit identifier and the domain it is embedded on. It sends no work
+          pattern, stores nothing in the browser, and loads nothing from any other website. A website that
+          embeds it with <code>&amp;notelemetry=1</code> turns even that off: the widget then sends nothing at all.
         </p>
       </Section>
 

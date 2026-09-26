@@ -15,7 +15,7 @@ const PrivacyPolicyFr: React.FC = () => {
       backLabel="Retour à l’accueil"
       footnote="Les calculs sont des estimations fondées sur les tranches d’imposition 2026 et les normes du travail provinciales."
       title="Politique de confidentialité de CanPay Insights"
-      effective="En vigueur le 22 septembre 2026 (remplace la version du 15 septembre 2026)"
+      effective="En vigueur le 25 septembre 2026 (remplace la version du 22 septembre 2026)"
       links={[
         { href: '/privacy', label: 'English version' },
         { href: '/terms', label: 'Conditions d’utilisation (anglais)' },
@@ -23,7 +23,7 @@ const PrivacyPolicyFr: React.FC = () => {
       ]}
       intro={
         <p>
-          CanPay Insights (« nous ») est un calculateur gratuit de salaire net canadien, publié à
+          CanPay Insights (« nous ») est un calculateur gratuit de salaire net canadien, avec deux rapports payants facultatifs, publié à
           canpayinsights.ca et sous forme d’application CanPay Insights pour iPhone (ensemble, le
           « Service »). Il est exploité par Qi (Travis) Zhang, faisant affaire sous le nom Avowd, à
           Vancouver (Colombie-Britannique). Cette politique explique ce que nous recueillons, pourquoi, à
@@ -31,14 +31,28 @@ const PrivacyPolicyFr: React.FC = () => {
         </p>
       }
     >
-      <Section n={1} id="local" title="Vos calculs restent sur votre appareil">
+      <Section n={1} id="local" title="Ce qui reste sur votre appareil, et ce qui n’y reste pas">
         <p>
           Chaque calcul de paie et d’impôt s’exécute <strong className="text-slate-800">entièrement dans votre navigateur ou sur
-          votre téléphone</strong>. Les chiffres exacts que vous saisissez — taux horaire, salaire, heures,
-          pourboires, cotisations REER — ne nous sont pas transmis et ne sont pas conservés par nous. La seule
-          exception relève de votre choix : si vous créez un compte et appuyez sur « enregistrer », ce calcul
-          est conservé pour que vous puissiez le rouvrir sur un autre appareil, et vous pouvez le supprimer à
-          tout moment.
+          votre téléphone</strong>. Les montants exacts que vous saisissez — taux horaire, salaire, pourboires,
+          cotisations REER — ne nous sont jamais transmis. Si vous enregistrez un calcul dans un compte, ce seul
+          calcul est conservé pour que vous puissiez le rouvrir sur un autre appareil, et vous pouvez le
+          supprimer à tout moment.
+        </p>
+        <p>
+          Ce qui <strong className="text-slate-800">est</strong> transmis, c’est un enregistrement anonyme de chaque calcul, décrit en entier à
+          la section 2. Les montants n’y figurent que sous forme de tranches. Votre horaire de travail est la
+          seule chose transmise en chiffres exacts : lorsque vous utilisez le calculateur par quart ou par
+          feuille de temps, l’heure habituelle de début et de fin, le nombre de jours par semaine, la durée
+          moyenne d’un quart et la pause non payée. Vous pouvez tout désactiver (section 2).
+        </p>
+        <p>
+          <strong className="text-slate-800">Le calculateur que d’autres sites intègrent (notre « widget ») transmet moins :</strong> la
+          province, le revenu sous forme de tranche, annuel ou horaire, la langue, le type d’appareil et la
+          famille de navigateur, l’heure et le jour de la semaine, le nom du fuseau horaire, un identifiant de
+          visite temporaire et le domaine où il est intégré. Il ne transmet aucun horaire de travail, ne
+          conserve rien dans le navigateur et ne charge rien depuis un autre site. Un site qui l’intègre avec{' '}
+          <code>&amp;notelemetry=1</code> désactive même cela : le widget ne transmet alors plus rien.
         </p>
       </Section>
 
