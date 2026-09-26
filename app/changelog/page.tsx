@@ -25,6 +25,7 @@ const ENTRIES: { date: string; title: string; points: string[] }[] = [
       'Every calculator now has a box for "I support a spouse or common-law partner", with their estimated net income. It adds the federal and provincial spouse amounts from the 2026 TD1 forms, which lowers the tax withheld once your employer has a TD1 claiming it. For a spouse with no income that is about $2,300 a year federally, plus a provincial amount.',
       'To check it, the tax engine is now tested against every claim-code column of the CRA\'s payroll tables, not only the basic one: 76,032 figures across 13 provinces and territories, each within ten cents.',
       'If you tick it, the anonymous record notes yes or no, never your spouse\'s income. The privacy policy lists it.',
+      'The privacy policy now also says that our page-view counter records the approximate location of your connection (city level, rounded to about 11 km) and your device, browser and operating-system family. It always did; the policy did not say so.',
     ],
   },
   {

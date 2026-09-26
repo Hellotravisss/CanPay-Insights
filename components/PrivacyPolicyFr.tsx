@@ -15,7 +15,7 @@ const PrivacyPolicyFr: React.FC = () => {
       backLabel="Retour à l’accueil"
       footnote="Les calculs sont des estimations fondées sur les tranches d’imposition 2026 et les normes du travail provinciales."
       title="Politique de confidentialité de CanPay Insights"
-      effective="En vigueur le 25 septembre 2026 (remplace la version du 22 septembre 2026)"
+      effective="En vigueur le 27 septembre 2026 (remplace la version du 25 septembre 2026)"
       links={[
         { href: '/privacy', label: 'English version' },
         { href: '/terms', label: 'Conditions d’utilisation (anglais)' },
@@ -175,7 +175,11 @@ const PrivacyPolicyFr: React.FC = () => {
           enregistre l’adresse (y compris ce qui suit un « ? »), l’adresse de la page qui y menait, la taille et
           la langue de la fenêtre du navigateur, jusqu’où vous avez fait défiler et, si vous cliquez un lien vers
           un autre site, une adresse courriel ou un numéro de téléphone, sa destination et son texte ; il regroupe
-          les pages d’un onglet par un numéro de session aléatoire et note si ce navigateur est déjà venu. Le
+          les pages d’un onglet par un numéro de session aléatoire et note si ce navigateur est déjà venu. Il
+          enregistre aussi l’emplacement approximatif de votre connexion tel que notre hébergeur l’indique
+          (pays, région, ville, fuseau horaire et un point arrondi à environ 11 km) ainsi que le type d’appareil
+          et les familles de navigateur et de système d’exploitation — jamais la signature complète du
+          navigateur. Le
           second est Cloudflare Web Analytics, le compteur de pages de notre hébergeur. Aucun des deux ne dépose
           de témoin ni ne conserve d’adresse IP. Aucun des deux ne fonctionne si vous avez refusé, dans le
           calculateur intégré à d’autres sites, ni sur les pages de rapport — dont l’adresse contient la clé de

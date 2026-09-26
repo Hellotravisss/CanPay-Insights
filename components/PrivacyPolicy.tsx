@@ -21,7 +21,7 @@ const PrivacyPolicy: React.FC<PrivacyPolicyProps> = () => {
   return (
     <LegalChrome
       title="Privacy Policy for CanPay Insights"
-      effective="Effective date: September 25, 2026 (replaces the version of September 22, 2026)"
+      effective="Effective date: September 27, 2026 (replaces the version of September 25, 2026)"
       links={[
         { href: '/fr/confidentialite', label: 'Version française' },
         { href: '/terms', label: 'Terms of Service' },
@@ -172,7 +172,10 @@ const PrivacyPolicy: React.FC<PrivacyPolicyProps> = () => {
           after a “?”), the address of the page that linked here, your browser window’s size and language, how
           far down you scrolled, and, when you click a link to another website, an email address or a phone
           number, where that link goes and its text; it groups one tab’s pages by a random session number and
-          notes whether this browser has visited before. The second is Cloudflare Web Analytics, our hosting
+          notes whether this browser has visited before. It also records the approximate location of your
+          connection as our host reports it (country, region, city, time zone and a point rounded to about
+          11 km) and your device type, browser and operating-system family — never the full browser
+          signature. The second is Cloudflare Web Analytics, our hosting
           provider’s page-view counter. Neither sets a cookie or stores an IP address. Neither runs when you
           have opted out, on the calculator other websites embed, or on report pages — whose address carries
           the key to your report. We do not use Google Analytics or any advertising network.
