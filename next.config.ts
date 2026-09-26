@@ -17,7 +17,13 @@ const nextConfig: NextConfig = {
   // address is the only key to the buyer's report (email, exact salary). No
   // referrer may carry it to any link the page contains.
   async headers() {
-    return [{ source: '/report/:path*', headers: [{ key: 'Referrer-Policy', value: 'no-referrer' }] }];
+    return [
+      { source: '/report/:path*', headers: [{ key: 'Referrer-Policy', value: 'no-referrer' }] },
+      // Fonts are public files. Allowing any origin lets the widget keep its
+      // font inside the strictest iframe sandbox (no allow-same-origin), where
+      // the page's origin is "null" and the font request is otherwise refused.
+      { source: '/_next/static/media/:path*', headers: [{ key: 'Access-Control-Allow-Origin', value: '*' }] },
+    ];
   },
   async redirects() {
     return [
