@@ -23,6 +23,7 @@ const ENTRIES: { date: string; title: string; points: string[] }[] = [
     title: 'Clearer privacy policy, a more accessible site, and a widget that works in a strict sandbox',
     points: [
       'The privacy policy now opens with exactly what stays on your device and what is sent. The previous version said hours were never sent, while a later section listed the work pattern the shift and timesheet calculators send; both now say the same thing. It also lists every item the site keeps in your browser. The About page no longer says that no data leaves your device.',
+      'It also now says plainly that buying a report is the one case where the salary you enter reaches us: the report is built from it, and Stripe keeps it with the payment so the report can be reopened. Our own records keep only the income range.',
       'Text across the site was too faint for some readers. Every public page now meets the WCAG 2.1 AA contrast standard, and this is checked automatically after every update.',
       'The embeddable calculator now labels its fields for screen readers and announces the result once you stop typing, and it works inside the strictest iframe sandbox a publishing site can set.',
       'The open take-home dataset now carries the date its figures last changed (September 15, 2026), which updates automatically whenever a correction changes them.',

@@ -49,7 +49,7 @@ const AboutPage: React.FC = () => {
               CanPay Insights is a free payroll and take-home pay calculator built for people who work in Canada.
               Enter an hourly wage, annual salary, or timesheet and instantly see what you actually keep after
               federal tax, provincial tax, CPP/CPP2, and EI — for any province or territory, in ten languages. No signup is needed. The calculation runs on
-              your device and the exact amounts you type are never sent to us; we record anonymous
+              your device and the exact amounts you type are never sent to us (unless you buy a report, which is built from them); we record anonymous
               statistics about each calculation (income as a range, never the figure), which you can switch
               off. What is recorded, and how to stop it, is set out in our{" "}
               <a href="/privacy" className="text-red-600 hover:text-red-700 font-medium underline underline-offset-2">privacy policy</a>.

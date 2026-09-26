@@ -35,7 +35,7 @@ const PrivacyPolicyFr: React.FC = () => {
         <p>
           Chaque calcul de paie et d’impôt s’exécute <strong className="text-slate-800">entièrement dans votre navigateur ou sur
           votre téléphone</strong>. Les montants exacts que vous saisissez — taux horaire, salaire, pourboires,
-          cotisations REER — ne nous sont jamais transmis. Si vous enregistrez un calcul dans un compte, ce seul
+          cotisations REER — ne nous sont jamais transmis, sauf dans un cas que vous choisissez : l’achat d’un rapport, construit à partir du salaire que vous saisissez pour lui (section 5). Si vous enregistrez un calcul dans un compte, ce seul
           calcul est conservé pour que vous puissiez le rouvrir sur un autre appareil, et vous pouvez le
           supprimer à tout moment.
         </p>
@@ -197,7 +197,11 @@ const PrivacyPolicyFr: React.FC = () => {
           Si vous achetez un rapport, le paiement est encaissé par Stripe sur la page de Stripe ; nous ne
           voyons jamais votre numéro de carte. Nous gardons le dossier d’achat (produit, montant, date,
           courriel transmis par Stripe, province et tranche de revenu visées par le rapport) parce que la loi
-          fiscale impose au vendeur de conserver ses registres de vente — actuellement six ans. Voir la{' '}
+          fiscale impose au vendeur de conserver ses registres de vente — actuellement six ans. Le rapport
+          lui-même est construit à partir de ce que vous saisissez pour lui — votre salaire et les deux
+          provinces, ou les deux offres d’emploi — qui nous est transmis pour créer le paiement et que Stripe
+          conserve avec ce paiement, afin que le rapport puisse être reconstruit chaque fois que vous ouvrez
+          son lien. Nos propres registres ne gardent que la tranche de revenu. Voir la{' '}
           <a href="/refunds">politique de remboursement</a>.
         </p>
         <p>

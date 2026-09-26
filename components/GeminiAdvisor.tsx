@@ -572,7 +572,10 @@ const GeminiAdvisor: React.FC<Props> = ({ results, inputs, onReportOpen }) => {
     let isMounted = true;
     const bakeQrCode = async () => {
       try {
-        const url = `https://api.qrserver.com/v1/create-qr-code/?size=300x300&data=${encodeURIComponent(APP_URL)}`;
+        // A fixed QR code for APP_URL, generated once and served from our own
+        // site: fetching it from a QR service on every result sent each
+        // visitor's IP to a third party the privacy policy does not name.
+        const url = '/qr-canpay.png';
         const response = await fetch(url);
         const blob = await response.blob();
         

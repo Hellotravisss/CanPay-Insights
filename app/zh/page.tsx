@@ -9,7 +9,7 @@ const PAGE_URL = `${BASE_URL}/zh`;
 export const metadata: Metadata = {
   title: '加拿大工资税后计算器 2026 | 税后工资怎么算 - CanPay Insights',
   description:
-    '免费加拿大工资税后计算器：按省计算联邦税、省税、CPP/CPP2、EI（魁省 QPP/QPIP）后的到手工资，数据基于 2026 年 CRA 与各省税率。支持中文、英文、法语，无需注册。',
+    '免费加拿大工资税后计算器：按省计算联邦税、省税、CPP/CPP2、EI（魁省 QPP/QPIP）后的到手工资，数据基于 2026 年 CRA 与各省税率。支持中文、英文、法语等十种语言，无需注册。',
   keywords: [
     '加拿大工资税后怎么算',
     '加拿大税后工资计算器',
@@ -30,7 +30,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: '加拿大工资税后计算器 2026 | 税后工资怎么算',
     description:
-      '免费按省计算加拿大税后到手工资（联邦税、省税、CPP、EI）。2026 年最新税率，支持中英法三语。',
+      '免费按省计算加拿大税后到手工资（联邦税、省税、CPP、EI）。2026 年最新税率，支持中英法等十种语言。',
     url: PAGE_URL,
     type: 'website',
     locale: 'zh_CN',
@@ -58,7 +58,7 @@ export default function ChineseHubPage() {
     },
     {
       q: '哪个加拿大工资税后计算器好用？',
-      a: 'CanPay Insights 的特点：① 透明的规则引擎，逐项列出联邦税、省税、CPP/CPP2、EI；② 覆盖全部 13 个省与地区，可一键对比；③ 中文、英文、法语三语；④ 完全免费、无需注册、无广告墙；⑤ 数据按 CRA 与各省 2026 年最新税率更新。',
+      a: 'CanPay Insights 的特点：① 透明的规则引擎，逐项列出联邦税、省税、CPP/CPP2、EI；② 覆盖全部 13 个省与地区，可一键对比；③ 中文、英文、法语等十种语言；④ 完全免费、无需注册、无广告墙；⑤ 数据按 CRA 与各省 2026 年最新税率更新。',
     },
     {
       q: '魁北克省的算法和其他省一样吗？',
@@ -123,7 +123,7 @@ export default function ChineseHubPage() {
     },
     {
       h: '哪个加拿大税后计算器好用？',
-      b: 'CanPay Insights 用一个透明的规则引擎，把联邦税、省税、CPP/CPP2、EI 逐项算给你看，而不是只给一个总数。它覆盖全部 13 个省与地区、支持中英法三语、完全免费且无需注册——很适合在比较 offer、规划搬去哪个省、或核对工资单时使用。',
+      b: 'CanPay Insights 用一个透明的规则引擎，把联邦税、省税、CPP/CPP2、EI 逐项算给你看，而不是只给一个总数。它覆盖全部 13 个省与地区、支持中英法等十种语言、完全免费且无需注册——很适合在比较 offer、规划搬去哪个省、或核对工资单时使用。',
     },
   ];
 
@@ -143,7 +143,7 @@ export default function ChineseHubPage() {
           </h1>
           <p className="text-lg leading-8 text-slate-600 max-w-3xl">
             CanPay Insights 是一个<strong>免费的加拿大工资税后计算器</strong>，按省计算联邦税、省税、CPP/CPP2、EI
-            （魁省为 QPP/QPP2/QPIP）后的到手工资，数据基于 2026 年 CRA 与各省最新税率。支持中文、英文、法语，无需注册、无广告墙。
+            （魁省为 QPP/QPP2/QPIP）后的到手工资，数据基于 2026 年 CRA 与各省最新税率。支持中文、英文、法语等十种语言，无需注册、无广告墙。
           </p>
           <p className="text-lg leading-8 text-slate-700 max-w-3xl mt-4">
             简单说：<strong>税后到手 = 税前工资 − 联邦税 − 省税 − CPP − EI</strong>。以安大略省年薪 $60,000 为例，

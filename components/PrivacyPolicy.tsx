@@ -39,8 +39,9 @@ const PrivacyPolicy: React.FC<PrivacyPolicyProps> = () => {
       <Section n={1} id="local" title="What stays on your device, and what does not">
         <p>
           Every payroll and tax calculation runs <strong className="text-slate-800">entirely in your browser or on your phone</strong>.
-          The exact money amounts you type — hourly wage, salary, tips, RRSP amounts — are never sent to us.
-          If you save a calculation to an account, that one calculation is stored so you can reopen it on
+          The exact money amounts you type — hourly wage, salary, tips, RRSP amounts — are never sent to us,
+          with one exception you choose: buying a report, which is built from the salary you enter for it
+          (section 5). If you save a calculation to an account, that one calculation is stored so you can reopen it on
           another device, and you can delete it at any time.
         </p>
         <p>
@@ -192,7 +193,10 @@ const PrivacyPolicy: React.FC<PrivacyPolicyProps> = () => {
           If you buy a report, payment is taken by Stripe on Stripe’s page; we never see your card number.
           We keep the purchase record (product, amount, date, the email Stripe gives us, and the province
           and income range the report was about) because tax law requires a seller to keep sales records —
-          currently for six years. See the <a href="/refunds">Refund Policy</a>.
+          currently for six years. The report itself is built from what you entered for it — your salary and
+          the two provinces, or the two job offers — which is sent to us to create the payment and is held
+          by Stripe with that payment, so the report can be rebuilt whenever you open its link. Our own
+          records keep only the income range. See the <a href="/refunds">Refund Policy</a>.
         </p>
         <p>
           <strong className="text-slate-800">Deleting your account.</strong> Open the account menu on this site, or the history

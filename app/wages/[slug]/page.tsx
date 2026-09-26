@@ -161,13 +161,13 @@ export default async function IndustryProvincePage({ params }: Props) {
         <div className="mt-8 grid grid-cols-2 gap-3 md:grid-cols-4">
           {[
             { l: 'Gross salary', v: money(annual), tone: 'bg-slate-900 text-white' },
-            { l: 'Take-home', v: money(figures.netAnnual), tone: 'bg-emerald-600 text-white' },
-            { l: 'Total deductions', v: money(annual - figures.netAnnual), tone: 'bg-red-600 text-white' },
+            { l: 'Take-home', v: money(figures.netAnnual), tone: 'bg-emerald-700 text-white' },
+            { l: 'Total deductions', v: money(annual - figures.netAnnual), tone: 'bg-red-700 text-white' },
             { l: 'Per month', v: money(figures.netMonthly), tone: 'bg-white text-slate-900 ring-1 ring-slate-200' },
           ].map((s) => (
             <div key={s.l} className={`rounded-2xl p-4 shadow-sm ${s.tone}`}>
               <div className="text-xl font-bold tabular-nums md:text-2xl">{s.v}</div>
-              <div className="mt-1 text-xs opacity-80">{s.l}</div>
+              <div className="mt-1 text-xs">{s.l}</div>
             </div>
           ))}
         </div>
