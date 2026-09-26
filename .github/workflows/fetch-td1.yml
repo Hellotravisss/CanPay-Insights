@@ -1,0 +1,30 @@
+# Downloads CRA's 2026 TD1 personal tax credits returns (federal + every
+# province and territory, English). The spouse / common-law partner amount and
+# its reduction rule are read from these forms. canada.ca is unreachable from
+# the owner's Mac, so the runner fetches them and uploads an artifact.
+name: Fetch TD1 forms
+on:
+  workflow_dispatch:
+    inputs:
+      year:
+        description: Two-digit tax year
+        default: '26'
+jobs:
+  fetch:
+    runs-on: ubuntu-latest
+    steps:
+      - run: |
+          set -uo pipefail
+          mkdir -p td1
+          UA="Mozilla/5.0 (X11; Linux x86_64) CanPayInsights-golden-tests"
+          Y="${{ github.event.inputs.year }}"
+          for f in td1 td1on td1bc td1ab td1sk td1mb td1ns td1nb td1pe td1nl td1yt td1nt td1nu td1-ws; do
+            curl -sSL -A "$UA" -o "td1/$f-${Y}e.pdf" "https://www.canada.ca/content/dam/cra-arc/formspubs/pbg/$f/$f-${Y}e.pdf" || echo "failed $f"
+          done
+          # Quebec's TP-1015.3 is from Revenu Québec and reachable from the Mac; not fetched here.
+          ls -la td1
+          file td1/*.pdf
+      - uses: actions/upload-artifact@v4
+        with:
+          name: td1-20${{ github.event.inputs.year }}
+          path: td1
