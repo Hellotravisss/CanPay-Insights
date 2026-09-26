@@ -45,6 +45,7 @@ type Stats = {
   by_hour: Row[];
   by_dow: Row[];
   by_daily: Row[];
+  by_daily_visits?: Row[];
   work: {
     n: number;
     unpaid_break_share: number | null;
@@ -402,6 +403,10 @@ export default function StatsDashboard() {
           const last = done.length ? done[done.length - 1] : 0;
           const avg7 = avg(done.slice(-7));
           const avg30 = avg(done.slice(-30));
+          const vdone = (stats.by_daily_visits ?? []).filter((r) => String(r.k) < todayKey).map((r) => r.n);
+          const vLast = vdone.length ? vdone[vdone.length - 1] : 0;
+          const vAvg7 = avg(vdone.slice(-7));
+          const vAvg30 = avg(vdone.slice(-30));
           const rows = PROVINCES.map((name) => {
             const n = Number(stats.by_province.find((r) => r.k === name)?.n ?? 0);
             const perDay = n / days;
@@ -411,21 +416,28 @@ export default function StatsDashboard() {
           const reached = rows.filter((r) => r.n >= LOCAL_GOAL).length;
           return (
             <>
-              <div className="mb-4 grid grid-cols-3 gap-3">
-                {[
-                  [T('Yesterday', '昨天'), last],
-                  [T('Per day, last 7 days', '近 7 天日均'), avg7],
-                  [T('Per day, last 30 days', '近 30 天日均'), avg30],
-                ].map(([label, v]) => (
-                  <div key={String(label)} className="rounded-2xl border border-slate-200 bg-white p-4 shadow-sm">
-                    <p className="text-2xl font-extrabold tabular-nums text-slate-900">{Number(v).toLocaleString()}</p>
-                    <p className="mt-0.5 text-xs text-slate-500">{label}</p>
-                  </div>
-                ))}
+              <div className="mb-2 grid grid-cols-[5.5rem_1fr_1fr_1fr] items-end gap-3 text-[11px] font-semibold uppercase tracking-wide text-slate-500">
+                <span />
+                <span>{T('Yesterday', '昨天')}</span>
+                <span>{T('Per day, last 7 days', '近 7 天日均')}</span>
+                <span>{T('Per day, last 30 days', '近 30 天日均')}</span>
               </div>
-              <p className="mb-3 text-[11px] text-slate-400">
-                {T('Calculations per day (not page visits), completed days in Vancouver time.',
-                  '每天的计算次数(不是网页访问量),只算已经过完的日子,按温哥华时间。')}
+              {[
+                [T('Visits', '访问'), vLast, vAvg7, vAvg30],
+                [T('Calculations', '计算'), last, avg7, avg30],
+              ].map(([rowLabel, a1, a2, a3]) => (
+                <div key={String(rowLabel)} className="mb-3 grid grid-cols-[5.5rem_1fr_1fr_1fr] items-center gap-3">
+                  <span className="text-sm font-bold text-slate-700">{rowLabel}</span>
+                  {[a1, a2, a3].map((v, i) => (
+                    <div key={i} className="rounded-2xl border border-slate-200 bg-white p-4 shadow-sm">
+                      <p className="text-2xl font-extrabold tabular-nums text-slate-900">{Number(v).toLocaleString()}</p>
+                    </div>
+                  ))}
+                </div>
+              ))}
+              <p className="mb-3 text-[11px] text-slate-500">
+                {T('Visits are distinct visit ids that made at least one calculation; an id lasts one page load, so a person who reloads counts twice and this is a rough count of people, not an exact one. Completed days only, Vancouver time.',
+                  '访问 = 当天至少算过一次的不同访问编号;编号只在一次页面加载里有效,同一个人刷新会算两次,所以这是「人数」的粗略估计,不是精确值。只算已经过完的日子,按温哥华时间。')}
               </p>
 
               <div className="mb-10 rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">

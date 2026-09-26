@@ -124,6 +124,14 @@ export function calcStats(all: Ev[], excludedCount: number) {
   const thirty = addDays(today(), -30);
   const daily = new Map<string, number>();
   for (const r of ev) { const d = localDate(r.created_at as string); if (d > thirty) daily.set(d, (daily.get(d) ?? 0) + 1); }
+  // Visits per day: distinct visit ids. An id lives for one page load, so this is a floor on people.
+  const dailyVisits = new Map<string, Set<string>>();
+  for (const r of ev) {
+    if (!r.session_id) continue;
+    const d = localDate(r.created_at as string);
+    if (d <= thirty) continue;
+    (dailyVisits.get(d) ?? dailyVisits.set(d, new Set()).get(d)!).add(r.session_id as string);
+  }
   const cities = new Map<string, { lat: number[]; lon: number[]; n: number }>();
   for (const r of ev) if (r.city && r.lat !== null && r.lon !== null) {
     const c = cities.get(placeKey(r)) ?? { lat: [], lon: [], n: 0 };
@@ -155,6 +163,7 @@ export function calcStats(all: Ev[], excludedCount: number) {
     by_hour: countBy(ev, 'local_hour', { desc: false }),
     by_dow: countBy(ev, 'local_dow', { desc: false }),
     by_daily: [...daily.entries()].sort().map(([k, n]) => ({ k, n })),
+    by_daily_visits: [...dailyVisits.entries()].sort().map(([k, v]) => ({ k, n: v.size })),
     work: {
       n: work.length,
       unpaid_break_share: pct1(work.filter((r) => (r.unpaid_break_min as number) > 0).length, work.length),
