@@ -1843,6 +1843,20 @@
    "backing": "manual",
    "reviewed": "2026-09-25",
    "note": "Re-read on 2026-09-25: rememberFsa stores canpay_fsa (check:storage-disclosed covers the key); lib/telemetry.ts attaches it as source \"remembered\" to each later event from this browser, never in the widget."
+  },
+  {
+   "page": "/privacy",
+   "text": "if you use “find the salary” to work back from a take-home amount, the monthly take-home you asked for, as a range (such as “$4k–$5k”) — never the amount;",
+   "backing": "manual",
+   "reviewed": "2026-09-26",
+   "note": "Checked on 2026-09-26: components/ReverseSalary.tsx sends reverseTargetMonthly; lib/telemetry.ts reverseTargetBucket turns it into one of eight labels; app/api/events accepts only those labels (REVERSE_BUCKETS). audit:reverse checks the solver."
+  },
+  {
+   "page": "/fr/confidentialite",
+   "text": "si vous utilisez « trouver le salaire » pour partir d’un montant net, le montant net mensuel demandé, sous forme de tranche (par exemple « 4 k$–5 k$ ») — jamais le montant;",
+   "backing": "manual",
+   "reviewed": "2026-09-26",
+   "note": "Checked on 2026-09-26: components/ReverseSalary.tsx sends reverseTargetMonthly; lib/telemetry.ts reverseTargetBucket turns it into one of eight labels; app/api/events accepts only those labels (REVERSE_BUCKETS). audit:reverse checks the solver."
   }
  ]
 }
