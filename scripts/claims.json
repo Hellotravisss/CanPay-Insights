@@ -1871,6 +1871,20 @@
    "backing": "manual",
    "reviewed": "2026-09-27",
    "note": "Checked on 2026-09-27: App.tsx sends spouseClaim as a boolean (spouseNetIncome != null); lib/telemetry.ts writes spouse_claim 1/0; app/api/events coerces anything else to null. The spouse income stays in the form and is never sent."
+  },
+  {
+   "page": "/privacy",
+   "text": "It also records the approximate location of your connection as our host reports it (country, region, city, time zone and a point rounded to about 11 km) and your device type, browser and operating-system family — never the full browser signature.",
+   "backing": "manual",
+   "reviewed": "2026-09-27",
+   "note": "Checked on 2026-09-27 against GEO/analytics-worker/src/index.js and schema.sql: the sessions insert stores cf.country/city/region/timezone and coarse() lat/lon (one decimal) and device/browser/os from parseUA; no IP column, raw User-Agent not stored."
+  },
+  {
+   "page": "/fr/confidentialite",
+   "text": "Il enregistre aussi l’emplacement approximatif de votre connexion tel que notre hébergeur l’indique (pays, région, ville, fuseau horaire et un point arrondi à environ 11 km) ainsi que le type d’appareil et les familles de navigateur et de système d’exploitation — jamais la signature complète du navigateur.",
+   "backing": "manual",
+   "reviewed": "2026-09-27",
+   "note": "Checked on 2026-09-27 against GEO/analytics-worker/src/index.js and schema.sql: the sessions insert stores cf.country/city/region/timezone and coarse() lat/lon (one decimal) and device/browser/os from parseUA; no IP column, raw User-Agent not stored."
   }
  ]
 }
