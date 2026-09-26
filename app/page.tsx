@@ -2,14 +2,18 @@ import type { Metadata } from 'next';
 import App from '../App';
 
 export const metadata: Metadata = {
-  title: 'Canadian Take-Home Pay Calculator 2026 – Paycheck After Tax',
+  title: 'Canadian Payroll & Take-Home Pay Calculator 2026 – Paycheck After Tax',
   description:
-    'Free Canadian paycheck and payroll-deductions calculator: see what you keep from a salary or hourly wage after federal & provincial income tax, CPP and EI, by province, for 2026. No signup.',
+    // 2026-09-26: "payroll calculator" had ~10,500 impressions a fortnight at
+    // position ~8 but a 0.2% click rate. Searchers are often employers working
+    // out deductions, so the snippet now speaks to them too. Review the click
+    // rate for that query on 2026-10-10 against the GSC archive.
+    'Free Canadian payroll calculator: CPP, EI and federal & provincial income tax deductions per pay period for any province, and the take-home pay that is left. 2026 rates, salary or hourly. No signup.',
   alternates: {
     canonical: 'https://canpayinsights.ca/',
   },
   openGraph: {
-    title: 'Canadian Take-Home Pay Calculator 2026 – Paycheck After Tax',
+    title: 'Canadian Payroll & Take-Home Pay Calculator 2026 – Paycheck After Tax',
     description: 'How much do you really keep from your paycheck? Free Canadian take-home pay & income tax calculator for employees — CPP, EI, provincial tax, salary or hourly.',
     url: 'https://canpayinsights.ca/',
   },
