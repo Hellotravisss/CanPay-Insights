@@ -1,0 +1,6 @@
+# Cloudflare Workers static-asset headers (these files never pass through Next,
+# so next.config.ts headers() cannot reach them).
+# Fonts are public: any origin may load them, so the embeddable widget keeps
+# its font inside the strictest iframe sandbox, where its origin is "null".
+/_next/static/media/*
+  Access-Control-Allow-Origin: *

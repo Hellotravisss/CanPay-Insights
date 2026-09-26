@@ -19,10 +19,7 @@ const nextConfig: NextConfig = {
   async headers() {
     return [
       { source: '/report/:path*', headers: [{ key: 'Referrer-Policy', value: 'no-referrer' }] },
-      // Fonts are public files. Allowing any origin lets the widget keep its
-      // font inside the strictest iframe sandbox (no allow-same-origin), where
-      // the page's origin is "null" and the font request is otherwise refused.
-      { source: '/_next/static/media/:path*', headers: [{ key: 'Access-Control-Allow-Origin', value: '*' }] },
+      // Static files (fonts etc.) get their headers from public/_headers.
     ];
   },
   async redirects() {
