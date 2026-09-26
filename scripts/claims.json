@@ -42,11 +42,6 @@
   },
   {
    "page": "/privacy",
-   "text": "The prefix is remembered on your device so you are not asked again; press “Change” to replace it, or clear your browser’s site data to remove it.",
-   "backing": "check:storage-disclosed"
-  },
-  {
-   "page": "/privacy",
    "text": "Every figure we publish or license is a count for an area of thousands of households and is withheld unless at least twenty people are behind it.",
    "backing": "check:publish-floor-20"
   },
@@ -149,11 +144,6 @@
    "page": "/fr/confidentialite",
    "text": "Votre adresse IP n’est pas conservée — ni dans ces fiches, ni dans des journaux que nous garderions.",
    "backing": "check:no-ip-column"
-  },
-  {
-   "page": "/fr/confidentialite",
-   "text": "Le préfixe est mémorisé sur votre appareil pour ne pas vous le redemander; appuyez sur « Modifier » pour le remplacer, ou effacez les données de site de votre navigateur pour le supprimer.",
-   "backing": "check:storage-disclosed"
   },
   {
    "page": "/fr/confidentialite",
@@ -1839,6 +1829,20 @@
    "backing": "manual",
    "note": "Checked on 2026-09-25: app/api/checkout sends the report inputs to Stripe as session metadata; app/report/* rebuilds from it; the webhook stores income_bracket and binds income as null.",
    "reviewed": "2026-09-25"
+  },
+  {
+   "page": "/privacy",
+   "text": "The prefix is remembered on your device so you are not asked again, and it is then included with each later calculation you make in this browser; press “Change” to replace it, or clear your browser’s site data to remove it and stop that.",
+   "backing": "manual",
+   "reviewed": "2026-09-25",
+   "note": "Re-read on 2026-09-25: rememberFsa stores canpay_fsa (check:storage-disclosed covers the key); lib/telemetry.ts attaches it as source \"remembered\" to each later event from this browser, never in the widget."
+  },
+  {
+   "page": "/fr/confidentialite",
+   "text": "Le préfixe est mémorisé sur votre appareil pour ne pas vous le redemander, puis joint à chacun de vos calculs suivants dans ce navigateur; appuyez sur « Modifier » pour le remplacer, ou effacez les données de site de votre navigateur pour le supprimer et arrêter cela.",
+   "backing": "manual",
+   "reviewed": "2026-09-25",
+   "note": "Re-read on 2026-09-25: rememberFsa stores canpay_fsa (check:storage-disclosed covers the key); lib/telemetry.ts attaches it as source \"remembered\" to each later event from this browser, never in the widget."
   }
  ]
 }
