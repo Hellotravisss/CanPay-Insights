@@ -4,6 +4,7 @@ import { AnnualSalaryInputs, Province, PayFrequency, AdditionalIncome, Deduction
 import { PROVINCIAL_DATA } from '../constants';
 import { useT } from '../lib/i18n';
 import { calculateFromAnnualSalary } from '../utils/taxEngine';
+import ReverseSalary from './ReverseSalary';
 
 interface Props {
   inputs: AnnualSalaryInputs;
@@ -107,6 +108,7 @@ const AnnualSalaryInput: React.FC<Props> = ({ inputs, setInputs }) => {
         <p className="text-xs text-slate-500 mt-1">
           📊 {t('annual.salaryLabel')}: {formatCurrency(inputs.annualSalary)}
         </p>
+        <ReverseSalary inputs={inputs} setInputs={setInputs} />
       </div>
 
       {/* Province Selection */}

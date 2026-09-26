@@ -28,6 +28,7 @@ const COLS = [
   'change_direction', 'change_pct_bucket', 'days_since_saved_bucket', 'province_changed',
   'median_ratio_bucket', 'median_wage_ref', 'schema_version',
   'fsa', 'fsa_source', 'lat2', 'lon2', 'tz', 'is_returning',
+  'reverse_target_bucket',
 ] as const;
 
 /**
@@ -37,6 +38,7 @@ const COLS = [
  * kept only at two decimals and only when the visitor's source really was the
  * device; a zone name is a name, not a coordinate.
  */
+const REVERSE_BUCKETS = new Set(['under-2k', '2-3k', '3-4k', '4-5k', '5-6k', '6-8k', '8-10k', '10k-plus']);
 const FSA_RE = /^[ABCEGHJ-NPRSTVXY]\d[ABCEGHJ-NPRSTV-Z]$/;
 const FSA_SOURCES = new Set(['typed', 'device', 'remembered']);
 function sanitiseNeighbourhood(body: Record<string, unknown>): void {
@@ -75,6 +77,8 @@ export async function POST(request: Request) {
   try { body = await request.json(); } catch { return NextResponse.json({ error: 'bad json' }, { status: 400 }); }
   if (!body.mode || !body.province || !body.income_bracket || !body.lang) return NextResponse.json({ error: 'missing fields' }, { status: 400 });
   sanitiseNeighbourhood(body);
+  // A range label from a fixed list, or nothing: never a number.
+  if (!REVERSE_BUCKETS.has(String(body.reverse_target_bucket))) body.reverse_target_bucket = null;
 
   let cf: Record<string, unknown> = {};
   try { cf = ((await getCloudflareContext({ async: true })).cf ?? {}) as Record<string, unknown>; } catch { /* local dev */ }

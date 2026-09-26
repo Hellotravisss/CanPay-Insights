@@ -32,7 +32,10 @@ create table if not exists events (
   -- flag, never an identifier.
   -- Added in production by ALTER during 2026-08/09 and mirrored here on 2026-09-15.
   tenure_band text, union_member text, employer_size text, vacation_band text, os_family text, device_brand text,
-  fsa text, fsa_source text, lat2 real, lon2 real, tz text, is_returning integer
+  fsa text, fsa_source text, lat2 real, lon2 real, tz text, is_returning integer,
+  -- Net → gross calculator: the monthly take-home asked for, as a range label only.
+  -- Added in production by ALTER on 2026-09-26.
+  reverse_target_bucket text
 );
 create index if not exists idx_events_created on events(created_at);
 create index if not exists idx_events_session on events(session_id);

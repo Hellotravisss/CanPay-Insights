@@ -19,6 +19,14 @@ export const metadata: Metadata = {
 // page is the product's history, not a publishing log.
 const ENTRIES: { date: string; title: string; points: string[] }[] = [
   {
+    date: '2026-09-26',
+    title: 'Work backwards from the take-home you want',
+    points: [
+      'In the annual-salary calculator, enter the take-home you want each month or year and it finds the salary that leaves exactly that, to the dollar, for your province, pay frequency, RRSP and extras. The answer comes from the same engine that is checked against the CRA tables, and every release now also checks that it lands on the exact dollar for every province.',
+      'If you use it, the anonymous record of that calculation includes the monthly take-home you asked for as a range, never the amount. The privacy policy lists it.',
+    ],
+  },
+  {
     date: '2026-09-25',
     title: 'Clearer privacy policy, a more accessible site, and a widget that works in a strict sandbox',
     points: [

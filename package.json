@@ -5,7 +5,7 @@
   "type": "module",
   "scripts": {
     "dev": "next dev",
-    "prebuild": "npm run audit:engine && npm run audit:enginecases && npm run audit:marginal && npm run audit:consistency && npm run audit:advisor && npm run audit:dbroutes && npm run audit:sitemap && npm run audit:links && npm run audit:dataset && npm run audit:numbers:selftest && npm run audit:numbers && npm run audit:logo",
+    "prebuild": "npm run audit:engine && npm run audit:enginecases && npm run audit:marginal && npm run audit:reverse && npm run audit:consistency && npm run audit:advisor && npm run audit:dbroutes && npm run audit:sitemap && npm run audit:links && npm run audit:dataset && npm run audit:numbers:selftest && npm run audit:numbers && npm run audit:logo",
     "audit:engine": "tsx scripts/goldenT4032.ts",
     "build": "next build",
     "start": "next start",
@@ -26,7 +26,8 @@
     "audit:enginecases": "TZ=America/Vancouver tsx scripts/auditEngineCases.ts && TZ=America/St_Johns tsx scripts/auditEngineCases.ts",
     "audit:a11y": "node scripts/liveA11y.mjs",
     "audit:dataset": "tsx scripts/generate-dataset.ts --check",
-    "audit:claims": "node scripts/liveClaims.mjs"
+    "audit:claims": "node scripts/liveClaims.mjs",
+    "audit:reverse": "tsx scripts/auditReverse.ts"
   },
   "dependencies": {
     "@google/genai": "^1.30.0",

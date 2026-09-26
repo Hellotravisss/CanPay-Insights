@@ -185,6 +185,24 @@ export function deriveEmploymentShape(
 export { bracketIncome } from './brackets';
 
 /**
+ * Monthly take-home a visitor asked the net → gross calculator for, as a
+ * range: what people aim to keep, which no wage survey records. Never the
+ * figure itself. The server accepts only these labels.
+ */
+export const REVERSE_TARGET_BUCKETS = ['under-2k', '2-3k', '3-4k', '4-5k', '5-6k', '6-8k', '8-10k', '10k-plus'] as const;
+export function reverseTargetBucket(monthly: number | null | undefined): string | null {
+  if (!monthly || !Number.isFinite(monthly) || monthly <= 0) return null;
+  if (monthly < 2000) return 'under-2k';
+  if (monthly < 3000) return '2-3k';
+  if (monthly < 4000) return '3-4k';
+  if (monthly < 5000) return '4-5k';
+  if (monthly < 6000) return '5-6k';
+  if (monthly < 8000) return '6-8k';
+  if (monthly < 10000) return '8-10k';
+  return '10k-plus';
+}
+
+/**
  * Neighbourhood — the one field that turns "which city" into "which part of
  * town", and the first field on this site the visitor hands over on purpose.
  *
@@ -618,6 +636,8 @@ export function recordCalcEvent(e: {
   vacationBand?: VacationBand | null;
   /** Explicit neighbourhood for this event; when absent, a remembered FSA rides along. */
   neighbourhood?: Neighbourhood | null;
+  /** Net → gross calculator: the monthly take-home the visitor asked for. Sent only as a range. */
+  reverseTargetMonthly?: number | null;
 }) {
   if (!e.annualIncome || e.annualIncome <= 0 || !e.province) return;
   if (isLikelyBot() || isOptedOut()) return;
@@ -638,7 +658,7 @@ export function recordCalcEvent(e: {
       ? `${w.shiftStartHour}-${w.shiftEndHour}-${w.unpaidBreakMin}-${w.daysPerWeek}`
       : '';
     const behaviourKey = b ? `${b.rrspPctBucket}-${b.otHoursBucket}-${b.tipsPctBucket ?? ''}-${b.shiftPremium}` : '';
-    const key = `${source}|${e.mode}|${e.province}|${bracket}|${e.industry ?? ''}|${workKey}|${behaviourKey}|${e.intent ?? ''}|${e.expectation ?? ''}|${e.workArrangement ?? ''}|${e.ageBand ?? ''}|${e.viewedReport ? 'r' : ''}|${e.productInterest ?? ''}|${e.tenureBand ?? ''}${e.unionMember ?? ''}${e.employerSize ?? ''}${e.vacationBand ?? ''}|${e.payChange ? `${e.payChange.direction}-${e.payChange.pctBucket}` : ''}|${hood?.fsa ?? ''}${hood?.source ?? ''}`;
+    const key = `${source}|${e.mode}|${e.province}|${bracket}|${e.industry ?? ''}|${workKey}|${behaviourKey}|${e.intent ?? ''}|${e.expectation ?? ''}|${e.workArrangement ?? ''}|${e.ageBand ?? ''}|${e.viewedReport ? 'r' : ''}|${e.productInterest ?? ''}|${e.tenureBand ?? ''}${e.unionMember ?? ''}${e.employerSize ?? ''}${e.vacationBand ?? ''}|${e.payChange ? `${e.payChange.direction}-${e.payChange.pctBucket}` : ''}|${hood?.fsa ?? ''}${hood?.source ?? ''}|${reverseTargetBucket(e.reverseTargetMonthly)}`;
     if (sentThisPageLoad.has(key)) return;
     sentThisPageLoad.add(key);
 
@@ -705,6 +725,7 @@ export function recordCalcEvent(e: {
         lon2: hood?.source === 'device' && typeof hood.lon2 === 'number' ? Math.round(hood.lon2 * 100) / 100 : null,
         tz: detectTimezone(),
         is_returning: isReturning(),
+        reverse_target_bucket: reverseTargetBucket(e.reverseTargetMonthly),
     };
 
     // Awaited before the send because the brand hint is a promise on Chromium.
