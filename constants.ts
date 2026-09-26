@@ -170,6 +170,7 @@ export const PROVINCIAL_DATA: Record<string, ProvincialRule> = {
     weeklyOtThreshold: 44,
     otRate: 1.5,
     basicPersonalAmount: 22769, // 2026 Alberta BPA
+    spouseAmount: 'bpa', // TD1AB (26) line 5: line 1 minus spouse's net income
     brackets: [
       { threshold: 61200,  rate: 0.08 },  // 8% bracket (introduced 2025)
       { threshold: 154259, rate: 0.10 },
@@ -187,6 +188,7 @@ export const PROVINCIAL_DATA: Record<string, ProvincialRule> = {
     otRate: 1.5,
     doubleTimeThreshold: 12,
     basicPersonalAmount: 13216, // 2026 BC BPA
+    spouseAmount: { max: 11317, zeroAt: 12449 }, // TD1BC (26) line 6
     brackets: [
       // 5.60%, up from 5.06%, per BC's February 17 2026 budget, retroactive to
       // January 1 (T4127 123rd ed.). The 6.14% in CRA's July table is the
@@ -207,6 +209,7 @@ export const PROVINCIAL_DATA: Record<string, ProvincialRule> = {
     weeklyOtThreshold: 44,
     otRate: 1.5,
     basicPersonalAmount: 12989, // 2026 Ontario BPA
+    spouseAmount: { max: 11029, zeroAt: 12132 }, // TD1ON (26) line 5
     // Ontario surtax (2026): 20% on ON tax > $5,818; +36% on ON tax > $7,446
     surtaxThreshold1: 5818,
     surtaxRate1: 0.20,
@@ -227,6 +230,7 @@ export const PROVINCIAL_DATA: Record<string, ProvincialRule> = {
     weeklyOtThreshold: 40,
     otRate: 1.5,
     basicPersonalAmount: 18952, // 2026 Quebec BPA
+    spouseAmount: { max: 18952, zeroAt: 18952 }, // TP-1015.3-V (2026-01) line 2: $18,952 minus spouse's taxable income
     brackets: [
       { threshold: 54345,  rate: 0.14 },
       { threshold: 108680, rate: 0.19 },
@@ -241,6 +245,7 @@ export const PROVINCIAL_DATA: Record<string, ProvincialRule> = {
     weeklyOtThreshold: 40,
     otRate: 1.5,
     basicPersonalAmount: 15780, // 2026 Manitoba BPA
+    spouseAmount: { max: 9134, zeroAt: 9134 }, // TD1MB (26) line 6: $9,134 minus spouse's net income
     brackets: [
       { threshold: 47000,   rate: 0.108  },
       { threshold: 100000,  rate: 0.1275 },
@@ -254,6 +259,7 @@ export const PROVINCIAL_DATA: Record<string, ProvincialRule> = {
     weeklyOtThreshold: 40,
     otRate: 1.5,
     basicPersonalAmount: 20381, // 2026 Saskatchewan BPA
+    spouseAmount: { max: 20381, zeroAt: 22419 }, // TD1SK (26) line 6
     brackets: [
       { threshold: 54532,  rate: 0.105 },
       { threshold: 155805, rate: 0.125 },
@@ -267,6 +273,7 @@ export const PROVINCIAL_DATA: Record<string, ProvincialRule> = {
     weeklyOtThreshold: 48,
     otRate: 1.5,
     basicPersonalAmount: 11932, // 2026 Nova Scotia BPA — a single flat amount. The former $3,000
+    spouseAmount: { max: 11932, zeroAt: 12820 }, // TD1NS (26) line 6
     // income-tested supplement was ELIMINATED by the NS 2025 Budget (folded into a higher
     // indexed BPA). Verified against CRA form TD1NS (26) line 1 and TaxTips NS 2026.
     // An earlier comment here claimed an unmodelled top-up; that described pre-2025 rules.
@@ -285,6 +292,7 @@ export const PROVINCIAL_DATA: Record<string, ProvincialRule> = {
     weeklyOtThreshold: 44,
     otRate: 1.5,
     basicPersonalAmount: 13664, // 2026 New Brunswick BPA
+    spouseAmount: { max: 10709, zeroAt: 11781 }, // TD1NB (26) line 6
     brackets: [
       { threshold: 52333,  rate: 0.094 },
       { threshold: 104666, rate: 0.14  },
@@ -299,6 +307,7 @@ export const PROVINCIAL_DATA: Record<string, ProvincialRule> = {
     weeklyOtThreshold: 48,
     otRate: 1.5,
     basicPersonalAmount: 15000, // 2026 PEI BPA
+    spouseAmount: { max: 12740, zeroAt: 14014 }, // TD1PE (26) line 6
     brackets: [
       { threshold: 33928,  rate: 0.095  },
       { threshold: 65820,  rate: 0.1347 },
@@ -315,6 +324,7 @@ export const PROVINCIAL_DATA: Record<string, ProvincialRule> = {
     weeklyOtThreshold: 40,
     otRate: 1.5,
     basicPersonalAmount: 13094, // 2026 Newfoundland & Labrador BPA
+    spouseAmount: { max: 9142, zeroAt: 10057 }, // TD1NL (26) line 6
     brackets: [
       { threshold: 44678,    rate: 0.087  },
       { threshold: 89354,    rate: 0.145  },
@@ -333,6 +343,7 @@ export const PROVINCIAL_DATA: Record<string, ProvincialRule> = {
     weeklyOtThreshold: 40,
     otRate: 1.5,
     basicPersonalAmount: 16452, // 2026 Yukon BPA (tracks federal max)
+    spouseAmount: 'bpa', // TD1YT (26) line 7: line 1 minus spouse's net income
     brackets: [
       { threshold: 58523,   rate: 0.064 },
       { threshold: 117045,  rate: 0.09  },
@@ -348,6 +359,7 @@ export const PROVINCIAL_DATA: Record<string, ProvincialRule> = {
     weeklyOtThreshold: 40,
     otRate: 1.5,
     basicPersonalAmount: 18198, // 2026 NWT BPA
+    spouseAmount: 'bpa', // TD1NT (26) line 6: line 1 minus spouse's net income
     brackets: [
       { threshold: 53003,  rate: 0.059  },
       { threshold: 106009, rate: 0.086  },
@@ -362,6 +374,7 @@ export const PROVINCIAL_DATA: Record<string, ProvincialRule> = {
     weeklyOtThreshold: 40,
     otRate: 1.5,
     basicPersonalAmount: 19659, // 2026 Nunavut BPA
+    spouseAmount: 'bpa', // TD1NU (26) line 6: line 1 minus spouse's net income
     brackets: [
       { threshold: 55801,  rate: 0.04  },
       { threshold: 111602, rate: 0.07  },

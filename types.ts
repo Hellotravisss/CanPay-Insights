@@ -45,6 +45,14 @@ export interface ProvincialRule {
   doubleTimeThreshold?: number;
   brackets: TaxBracket[];
   basicPersonalAmount: number;
+  /**
+   * Spouse or common-law partner amount on the provincial TD1 (2026 forms).
+   * { max, zeroAt }: the full amount while the spouse's net income is at or
+   * below zeroAt − max, then reduced dollar for dollar to nothing at zeroAt.
+   * 'bpa': the claimant's own provincial basic personal amount minus the
+   * spouse's net income (Alberta, Yukon, NWT, Nunavut).
+   */
+  spouseAmount: { max: number; zeroAt: number } | 'bpa';
   // Ontario surtax (optional)
   surtaxThreshold1?: number;
   surtaxRate1?: number;
@@ -81,6 +89,18 @@ export interface Deductions {
 }
 
 export interface SalaryInputs {
+  /**
+   * Supporting a spouse or common-law partner: their estimated net income for
+   * the year. null/undefined = not claimed. Drives the TD1 spouse amount,
+   * federal and provincial, which lowers withholding.
+   */
+  spouseNetIncome?: number | null;
+  /**
+   * TD1 total claim amounts, used INSTEAD of basic personal amount + spouse
+   * amount. For the golden test: CRA computes T4032 claim codes 2–10 at the
+   * midpoint of each code's total-claim range, whatever the income.
+   */
+  totalClaims?: { federal?: number; provincial?: number };
   province: string;
   hourlyWage: number;
   shift: ShiftDetails;
@@ -96,6 +116,18 @@ export interface SalaryInputs {
 
 // 年薪输入（新增）
 export interface AnnualSalaryInputs {
+  /**
+   * Supporting a spouse or common-law partner: their estimated net income for
+   * the year. null/undefined = not claimed. Drives the TD1 spouse amount,
+   * federal and provincial, which lowers withholding.
+   */
+  spouseNetIncome?: number | null;
+  /**
+   * TD1 total claim amounts, used INSTEAD of basic personal amount + spouse
+   * amount. For the golden test: CRA computes T4032 claim codes 2–10 at the
+   * midpoint of each code's total-claim range, whatever the income.
+   */
+  totalClaims?: { federal?: number; provincial?: number };
   province: string;
   annualSalary: number;
   payFrequency: PayFrequency;
@@ -132,6 +164,18 @@ export interface TimesheetEntry {
 
 // Timesheet 输入
 export interface TimesheetInputs {
+  /**
+   * Supporting a spouse or common-law partner: their estimated net income for
+   * the year. null/undefined = not claimed. Drives the TD1 spouse amount,
+   * federal and provincial, which lowers withholding.
+   */
+  spouseNetIncome?: number | null;
+  /**
+   * TD1 total claim amounts, used INSTEAD of basic personal amount + spouse
+   * amount. For the golden test: CRA computes T4032 claim codes 2–10 at the
+   * midpoint of each code's total-claim range, whatever the income.
+   */
+  totalClaims?: { federal?: number; provincial?: number };
   province: string;
   hourlyWage: number;
   payFrequency: PayFrequency;

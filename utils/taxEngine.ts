@@ -212,7 +212,8 @@ const calculateTotalTax = (
   cpp: { cpp1: number; cpp2: number },
   province: string,
   eiAnnual: number,
-  qpipAnnual: number = 0
+  qpipAnnual: number = 0,
+  claims: { spouseNetIncome?: number | null; totalClaims?: { federal?: number; provincial?: number } } = {}
 ): { federalTax: number; provincialTax: number; total: number } => {
   const isQuebec = province === Province.QC;
   const provinceRule = PROVINCIAL_DATA[province] || PROVINCIAL_DATA[Province.ON];
@@ -246,7 +247,19 @@ const calculateTotalTax = (
     ? FEDERAL_BPA_TOPUP
     : FEDERAL_BPA_TOPUP * Math.max(0, FEDERAL_BPA_RANGE - (annualGross - FEDERAL_BPA_THRESHOLD)) / FEDERAL_BPA_RANGE;
   const federalBPA = FEDERAL_BPA_BASE + bpaTopUp;
-  const federalBPACredit = federalBPA * lowestFederalRate;
+  // TD1 (26) line 7: spouse amount = the claimant's own line-1 amount minus
+  // the spouse's net income. totalClaims replaces the whole claim (golden test
+  // for T4032 claim codes 2–10, computed at each range's midpoint).
+  const spouseIncome = claims.spouseNetIncome ?? null;
+  const federalSpouse = spouseIncome === null ? 0 : Math.max(0, federalBPA - Math.max(0, spouseIncome));
+  // T4032 federal claim codes are charted "using maximum BPA": above $181,440
+  // the BPA part of the charted amount is replaced by the reduced BPA
+  // (measured 2026-09-26: without this, 606 cells a province off by up to $8.76).
+  const bpaReduction = FEDERAL_BPA_BASE + FEDERAL_BPA_TOPUP - federalBPA;
+  const federalClaim = claims.totalClaims?.federal !== undefined
+    ? claims.totalClaims.federal - bpaReduction
+    : federalBPA + federalSpouse;
+  const federalBPACredit = federalClaim * lowestFederalRate;
 
   // Provincial: varies by province (lowest rate × BPA)
   const lowestProvincialRate = provinceRule.brackets[0]?.rate || 0.05;
@@ -255,7 +268,16 @@ const calculateTotalTax = (
   // federal BPAF). Found by the T4032 golden test on 2026-09-15: without it
   // Yukon withholding was $4.00 a pay short above $181,440.
   const provincialBPA = province === Province.YT ? federalBPA : provinceRule.basicPersonalAmount;
-  const provincialBPACredit = provincialBPA * lowestProvincialRate;
+  // Provincial TD1 spouse amount (see ProvincialRule.spouseAmount for sources).
+  const rule = provinceRule.spouseAmount;
+  const provincialSpouse = spouseIncome === null ? 0
+    : rule === 'bpa' ? Math.max(0, provincialBPA - Math.max(0, spouseIncome))
+    : Math.max(0, Math.min(rule.max, rule.zeroAt - Math.max(0, spouseIncome)));
+  // Yukon's BPA follows the federal one, so its chart carries the same adjustment.
+  const provincialClaim = claims.totalClaims?.provincial !== undefined
+    ? claims.totalClaims.provincial - (province === Province.YT ? bpaReduction : 0)
+    : provincialBPA + provincialSpouse;
+  const provincialBPACredit = provincialClaim * lowestProvincialRate;
 
   // CPP/EI also generate tax credits at lowest rates
   const cppFederalCredit = cppTotal * lowestFederalRate;
@@ -511,7 +533,7 @@ const calculateSalaryRecurring = (inputs: SalaryInputs): CalculationResult => {
   // until 2026-09-22.
   const eiAnnual = calculateEI(annualGross + annualMatch, isQuebec);
   const qpipAnnual = isQuebec ? calculateQPIP(annualGross + annualTaxableBenefits) : 0;
-  const taxResult = calculateTotalTax(taxableIncome, cppResult, inputs.province, eiAnnual, qpipAnnual);
+  const taxResult = calculateTotalTax(taxableIncome, cppResult, inputs.province, eiAnnual, qpipAnnual, { spouseNetIncome: inputs.spouseNetIncome, totalClaims: inputs.totalClaims });
   
   const totalTaxAnnual = taxResult.total;
   const annualPostTaxDeductions = postTaxDeductionsPerPeriod * 26;
@@ -633,7 +655,7 @@ export const calculateFromAnnualSalary = (inputs: AnnualSalaryInputs): Calculati
   // until 2026-09-22.
   const eiAnnual = calculateEI(annualGross + annualMatch, isQuebec);
   const qpipAnnual = isQuebec ? calculateQPIP(annualGross + annualTaxableBenefits) : 0;
-  const taxResult = calculateTotalTax(taxableIncome, cppResult, province, eiAnnual, qpipAnnual);
+  const taxResult = calculateTotalTax(taxableIncome, cppResult, province, eiAnnual, qpipAnnual, { spouseNetIncome: inputs.spouseNetIncome, totalClaims: inputs.totalClaims });
 
   const totalTaxAnnual = taxResult.total;
   const totalDeductionsAnnual = totalTaxAnnual + cppResult.total + eiAnnual + qpipAnnual + annualRRSP + annualPostTax + annualUnionDues;
@@ -796,7 +818,7 @@ export const calculateFromTimesheet = (inputs: TimesheetInputs): CalculationResu
   // until 2026-09-22.
   const eiAnnual = calculateEI(annualGross + annualMatch - annualDirectTips, isQuebec);
   const qpipAnnual = isQuebec ? calculateQPIP(annualGross + annualTaxableBenefits) : 0;
-  const taxResult = calculateTotalTax(taxableIncome, cppResult, province, eiAnnual, qpipAnnual);
+  const taxResult = calculateTotalTax(taxableIncome, cppResult, province, eiAnnual, qpipAnnual, { spouseNetIncome: inputs.spouseNetIncome, totalClaims: inputs.totalClaims });
 
   const totalTaxAnnual = taxResult.total;
   const totalDeductionsAnnual = totalTaxAnnual + cppResult.total + eiAnnual + qpipAnnual + annualRRSP + annualPostTax + annualUnionDues;
