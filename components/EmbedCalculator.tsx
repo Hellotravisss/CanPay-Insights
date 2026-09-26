@@ -196,7 +196,7 @@ export default function EmbedCalculator({
           className="w-full rounded-lg border border-slate-300 px-3 py-2 text-sm text-slate-800"
         />
         <select
-          aria-label={`${t.salary}: ${t.perYear} / ${t.perHour}`}
+          aria-label={`${t.salary} (${t.perYear.replace('/', '').trim()} / ${t.perHour.replace('/', '').trim()})`}
           value={unit}
           onChange={(e) => { setUnit(e.target.value as 'year' | 'hour'); setTouched(true); }}
           className="rounded-lg border border-slate-300 bg-white px-2 py-2 text-sm text-slate-700"
