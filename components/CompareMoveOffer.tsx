@@ -73,7 +73,7 @@ export default function CompareMoveOffer({ provinces, annualSalary }: { province
 
       <div className="mt-3 rounded-lg bg-slate-50 px-4 py-3">
         {gap === null ? (
-          <p className="text-sm text-slate-400">Pick two different provinces.</p>
+          <p className="text-sm text-slate-500">Pick two different provinces.</p>
         ) : (
           <p className="flex items-baseline gap-2">
             <span className={`text-3xl font-extrabold tabular-nums ${gap >= 0 ? 'text-emerald-700' : 'text-red-600'}`}>
@@ -92,7 +92,7 @@ export default function CompareMoveOffer({ provinces, annualSalary }: { province
         {buying ? 'Opening secure checkout…' : 'Get the full report: $9'}
       </button>
       {error && <p className="mt-1.5 text-xs text-red-600">{error}</p>}
-      <p className="mt-1.5 text-[11px] text-slate-400">Paid through Stripe · link works forever</p>
+      <p className="mt-1.5 text-[11px] text-slate-500">Paid through Stripe · link works forever</p>
     </div>
   );
 }

@@ -208,7 +208,7 @@ export default function EmbedCalculator({
 
       {fig && (
         <>
-          <div className="mb-3 rounded-xl bg-red-600 px-4 py-3 text-white">
+          <div className="mb-3 rounded-xl bg-red-700 px-4 py-3 text-white">
             <div className="text-[11px] font-semibold uppercase tracking-wide opacity-80">{t.net}</div>
             <div className="text-2xl font-extrabold">{money(fig.netAnnual)}<span className="text-sm font-medium opacity-80">{t.perYear}</span></div>
             <div className="mt-1 flex gap-4 text-xs opacity-90">
@@ -242,7 +242,7 @@ export default function EmbedCalculator({
       {/* One quiet announcement once typing pauses, not one per keystroke. */}
       <p role="status" aria-live="polite" className="sr-only">{announce}</p>
 
-      <div className="mt-auto flex items-center justify-between border-t border-slate-100 pt-3 text-[11px] text-slate-400">
+      <div className="mt-auto flex items-center justify-between border-t border-slate-100 pt-3 text-[11px] text-slate-500">
         <span>
           {t.poweredBy}{' '}
           <a

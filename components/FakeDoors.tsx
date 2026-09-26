@@ -504,11 +504,11 @@ export default function FakeDoors({
   };
 
   const Chips = ({ text }: { text: string }) => (
-    <p className="mt-2 text-[11px] tracking-wide text-slate-400">{text}</p>
+    <p className="mt-2 text-[11px] tracking-wide text-slate-500">{text}</p>
   );
   const Price = () => (
     <span className="shrink-0 rounded-full bg-slate-100 px-2.5 py-1 text-xs font-bold tabular-nums text-slate-700">
-      {t.price9} <span className="font-medium text-slate-400">{t.once}</span>
+      {t.price9} <span className="font-medium text-slate-500">{t.once}</span>
     </span>
   );
 
@@ -545,7 +545,7 @@ export default function FakeDoors({
           {/* The live number */}
           <div className="mt-3 rounded-lg bg-slate-50 px-4 py-3">
             {gap === null ? (
-              <p className="text-sm text-slate-400">{t.pick}</p>
+              <p className="text-sm text-slate-500">{t.pick}</p>
             ) : (
               <p className="flex items-baseline gap-2">
                 <span className={`text-3xl font-extrabold tabular-nums ${gap >= 0 ? 'text-emerald-700' : 'text-red-600'}`}>
@@ -565,7 +565,7 @@ export default function FakeDoors({
             {buying ? (<span className="inline-flex items-center gap-2"><ThinkingOrb state="connecting" size={20} theme="dark" aria-label={t.buying} />{t.buying}</span>) : t.buy}
           </button>
           {buyError && <p className="mt-1.5 text-[11px] text-red-600">{buyError}</p>}
-          <p className="mt-1.5 text-[10px] text-slate-400">{t.secure}</p>
+          <p className="mt-1.5 text-[10px] text-slate-500">{t.secure}</p>
         </div>
 
         {/* Offer comparison — real */}
@@ -600,7 +600,7 @@ export default function FakeDoors({
                 {(offerError || (offerProblem && (a.salary || b.salary))) && (
                   <p className="text-[11px] text-red-600">{offerError || offerProblem}</p>
                 )}
-                <p className="text-[10px] text-slate-400">{t.secure}</p>
+                <p className="text-[10px] text-slate-500">{t.secure}</p>
               </div>
             )}
           </div>

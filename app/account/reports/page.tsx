@@ -74,7 +74,7 @@ export default function MyReports() {
         </ul>
       )}
 
-      {authed === null && <p className="mt-10 text-center text-sm text-slate-400">Loading…</p>}
+      {authed === null && <p className="mt-10 text-center text-sm text-slate-500">Loading…</p>}
     </main>
   );
 }

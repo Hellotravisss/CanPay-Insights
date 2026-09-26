@@ -787,7 +787,7 @@ const GeminiAdvisor: React.FC<Props> = ({ results, inputs, onReportOpen }) => {
           </div>
           <div>
             <h3 className="text-lg font-bold">{t('opt.title')}</h3>
-            <p className="text-xs text-slate-400">{t('opt.subtitle')}</p>
+            <p className="text-xs text-slate-500">{t('opt.subtitle')}</p>
           </div>
         </div>
       </div>
@@ -869,7 +869,7 @@ const GeminiAdvisor: React.FC<Props> = ({ results, inputs, onReportOpen }) => {
           <div className="max-w-md w-full">
             <div className="flex justify-between items-center mb-4 text-white">
               <span className="text-lg font-bold">Save Report</span>
-              <button onClick={() => { setShowSaveOptions(false); setPreviewImage(null); }} className="p-2 text-slate-400 hover:text-white bg-slate-800 rounded-full">
+              <button onClick={() => { setShowSaveOptions(false); setPreviewImage(null); }} className="p-2 text-slate-500 hover:text-white bg-slate-800 rounded-full">
                 <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M6 18L18 6M6 6l12 12" />
                 </svg>
@@ -900,7 +900,7 @@ const GeminiAdvisor: React.FC<Props> = ({ results, inputs, onReportOpen }) => {
               {/* Save to Photos */}
               <button
                 onClick={saveToPhotos}
-                className="w-full py-4 bg-green-600 hover:bg-green-700 text-white rounded-xl font-bold flex items-center justify-center gap-3 transition-all"
+                className="w-full py-4 bg-green-700 hover:bg-green-800 text-white rounded-xl font-bold flex items-center justify-center gap-3 transition-all"
               >
                 <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 20 20">
                   <path fillRule="evenodd" d="M4 3a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V5a2 2 0 00-2-2H4zm12 12H4l4-8 3 6 2-4 3 6z" clipRule="evenodd" />
@@ -924,7 +924,7 @@ const GeminiAdvisor: React.FC<Props> = ({ results, inputs, onReportOpen }) => {
               <div className="bg-slate-800 p-4 rounded-xl text-sm text-slate-300">
                 <p className="font-semibold mb-2">💡 Tip:</p>
                 <p>If the buttons don't work:</p>
-                <ol className="list-decimal list-inside mt-1 space-y-1 text-slate-400">
+                <ol className="list-decimal list-inside mt-1 space-y-1 text-slate-500">
                   <li>Long press the image above</li>
                   <li>Select "Save Image" or "Copy"</li>
                   <li>Or take a screenshot</li>
@@ -951,7 +951,7 @@ const GeminiAdvisor: React.FC<Props> = ({ results, inputs, onReportOpen }) => {
                   CanPay <span className="text-red-500">Insights</span>
                 </h1>
               </div>
-              <p className="text-slate-400 text-2xl font-medium">2026 Tax Report</p>
+              <p className="text-slate-500 text-2xl font-medium">2026 Tax Report</p>
             </div>
             <div className="flex gap-12 text-right">
               <div>
@@ -971,12 +971,12 @@ const GeminiAdvisor: React.FC<Props> = ({ results, inputs, onReportOpen }) => {
             <div className="bg-slate-800 p-6 rounded-xl mb-6">
               <div className="grid grid-cols-2 gap-8">
                 <div>
-                  <p className="text-slate-400 text-sm mb-1">Recommended RRSP Contribution</p>
+                  <p className="text-slate-500 text-sm mb-1">Recommended RRSP Contribution</p>
                   <p className="text-3xl font-bold text-green-400">{formatCurrency(taxOptimization.rrsp.recommendedAmount)}</p>
                   <p className="text-slate-500 text-sm mt-1">Estimated Refund: {formatCurrency(taxOptimization.rrsp.refundAmount)}</p>
                 </div>
                 <div>
-                  <p className="text-slate-400 text-sm mb-1">Total Tax Savings Potential</p>
+                  <p className="text-slate-500 text-sm mb-1">Total Tax Savings Potential</p>
                   <p className="text-3xl font-bold text-red-400">{formatCurrency(taxOptimization.summary.totalPotentialSavings + annualEmployerMatchActual)}</p>
                   <p className="text-slate-500 text-sm mt-1">Marginal Rate: {(taxOptimization.rrsp.marginalRate * 100).toFixed(1)}%</p>
                 </div>
@@ -1134,11 +1134,11 @@ const TaxOptimizationPanel: React.FC<TaxOptimizationPanelProps> = ({
           {/* Visual Progress Bar and Matching stats if they have actual RRSP */}
           {hasActualRRSP && (
             <div className="mb-5 p-4 rounded-xl bg-slate-800/60 border border-slate-700/50 space-y-3">
-              <h5 className="text-xs font-bold text-slate-400 uppercase tracking-wider">{t('opt.rrspStatus')}</h5>
+              <h5 className="text-xs font-bold text-slate-500 uppercase tracking-wider">{t('opt.rrspStatus')}</h5>
               
               <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 text-sm">
                 <div>
-                  <span className="text-slate-400 block text-xs">{t('opt.myPayroll')}</span>
+                  <span className="text-slate-500 block text-xs">{t('opt.myPayroll')}</span>
                   <span className="font-semibold text-white">{formatCurrency(annualRRSPActual)}{t('opt.perYr')}</span>
                 </div>
                 {annualEmployerMatchActual > 0 && (
@@ -1151,7 +1151,7 @@ const TaxOptimizationPanel: React.FC<TaxOptimizationPanelProps> = ({
                   </div>
                 )}
                 <div>
-                  <span className="text-slate-400 block text-xs">{t('opt.optimumSpace')}</span>
+                  <span className="text-slate-500 block text-xs">{t('opt.optimumSpace')}</span>
                   <span className="font-semibold text-red-400">{formatCurrency(remainingRRSPOptimum)} {t('opt.left')}</span>
                 </div>
               </div>
@@ -1172,7 +1172,7 @@ const TaxOptimizationPanel: React.FC<TaxOptimizationPanelProps> = ({
                 )}
               </div>
               
-              <p className="text-[11px] text-slate-400 italic">
+              <p className="text-[11px] text-slate-500 italic">
                 {annualEmployerMatchActual > 0
                   ? t('opt.matchNote')
                   : t('opt.noMatchNote')
@@ -1212,7 +1212,7 @@ const TaxOptimizationPanel: React.FC<TaxOptimizationPanelProps> = ({
                         )}
                       </td>
                       <td className="py-2 text-right text-green-400">{formatCurrency(scenario.taxSavings)}</td>
-                      <td className="py-2 text-right text-slate-400">{formatCurrency(scenario.effectiveCost)}</td>
+                      <td className="py-2 text-right text-slate-500">{formatCurrency(scenario.effectiveCost)}</td>
                       <td className="py-2 text-right text-slate-500">{scenario.refundRate.toFixed(1)}%</td>
                     </tr>
                   ))}
@@ -1232,15 +1232,15 @@ const TaxOptimizationPanel: React.FC<TaxOptimizationPanelProps> = ({
           </h4>
           <div className="space-y-2 text-sm">
             <div className="flex justify-between">
-              <span className="text-slate-400">{t('opt.tfsaRoom')}</span>
+              <span className="text-slate-500">{t('opt.tfsaRoom')}</span>
               <span className="text-white font-semibold">{formatCurrency(tfsa.annualLimit)}</span>
             </div>
             <div className="flex justify-between">
-              <span className="text-slate-400">{t('opt.recommendedContribution')}</span>
+              <span className="text-slate-500">{t('opt.recommendedContribution')}</span>
               <span className="text-blue-400 font-semibold">{formatCurrency(tfsa.recommendedAmount)}</span>
             </div>
             <div className="flex justify-between">
-              <span className="text-slate-400">{t('opt.lifetimeRoom')}</span>
+              <span className="text-slate-500">{t('opt.lifetimeRoom')}</span>
               <span className="text-slate-300">{formatCurrency(tfsa.lifetimeRoom)}</span>
             </div>
           </div>
@@ -1251,20 +1251,20 @@ const TaxOptimizationPanel: React.FC<TaxOptimizationPanelProps> = ({
 
         <div className="bg-slate-900/60 p-5 rounded-xl border border-slate-700/50">
           <h4 className="text-md font-bold text-white mb-3 flex items-center gap-2">
-            <span className="w-6 h-6 rounded bg-green-600 flex items-center justify-center text-xs">3</span>
+            <span className="w-6 h-6 rounded bg-green-700 flex items-center justify-center text-xs">3</span>
             {t('opt.fhsaTitle')}
           </h4>
           <div className="space-y-2 text-sm">
             <div className="flex justify-between">
-              <span className="text-slate-400">{t('opt.annualLimit')}</span>
+              <span className="text-slate-500">{t('opt.annualLimit')}</span>
               <span className="text-white font-semibold">{formatCurrency(fhsa.annualLimit)}</span>
             </div>
             <div className="flex justify-between">
-              <span className="text-slate-400">{t('opt.recommendedContribution')}</span>
+              <span className="text-slate-500">{t('opt.recommendedContribution')}</span>
               <span className="text-green-400 font-semibold">{formatCurrency(fhsa.recommendedAmount)}</span>
             </div>
             <div className="flex justify-between">
-              <span className="text-slate-400">{t('opt.lifetimeLimit')}</span>
+              <span className="text-slate-500">{t('opt.lifetimeLimit')}</span>
               <span className="text-slate-300">{formatCurrency(fhsa.lifetimeLimit)}</span>
             </div>
           </div>
@@ -1291,7 +1291,7 @@ const TaxCard: React.FC<{
   accent?: 'green' | 'red';
 }> = ({ title, amount, subtitle, highlight, isPercentage, accent }) => (
   <div className={`p-4 rounded-xl ${highlight ? 'bg-red-600' : 'bg-slate-900/60 border border-slate-700/50'}`}>
-    <p className={`text-xs mb-1 ${highlight ? 'text-red-100' : 'text-slate-400'}`}>{title}</p>
+    <p className={`text-xs mb-1 ${highlight ? 'text-red-100' : 'text-slate-500'}`}>{title}</p>
     <p className={`text-2xl font-bold ${accent === 'green' ? 'text-green-400' : highlight ? 'text-white' : 'text-slate-100'}`}>
       {isPercentage ? `${amount.toFixed(1)}%` : formatCurrency(amount)}
     </p>
@@ -1322,7 +1322,7 @@ const StrategyItem: React.FC<{ strategy: import('../utils/taxOptimizer').TaxStra
         {strategy.effort === 'low' ? 'Easy' : strategy.effort === 'medium' ? 'Moderate' : 'Complex'}
       </span>
     </div>
-    <p className="text-xs text-slate-400 mb-2">{strategy.description}</p>
+    <p className="text-xs text-slate-500 mb-2">{strategy.description}</p>
     <div className="flex items-center gap-4 text-xs">
       <span className="text-green-400">Est. Savings: {formatCurrency(strategy.estimatedSavings)}</span>
       <span className="text-slate-500">Max: {formatCurrency(strategy.maxBenefit)}</span>

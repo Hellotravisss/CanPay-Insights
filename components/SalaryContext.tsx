@@ -92,7 +92,7 @@ export default function SalaryContext({
             aria-hidden="true"
           />
         </div>
-        <div className="mt-1.5 flex justify-between text-[11px] text-slate-400">
+        <div className="mt-1.5 flex justify-between text-[11px] text-slate-500">
           <span>lower</span>
           <span>{province} median · {money(medianAnnual)}</span>
           <span>2× median</span>
@@ -130,7 +130,7 @@ export default function SalaryContext({
         </table>
       </div>
 
-      <p className="mt-3 text-xs leading-5 text-slate-400">
+      <p className="mt-3 text-xs leading-5 text-slate-500">
         Wage figures: Statistics Canada, Table 14-10-0064-01, median hourly wage of full-time
         employees, {WAGE_DATA_YEAR}. Take-home figures on this page are computed with the CanPay
         Insights 2026 tax engine.

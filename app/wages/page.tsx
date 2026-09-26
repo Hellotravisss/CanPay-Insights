@@ -99,7 +99,7 @@ export default function WagesIndex() {
           ))}
         </div>
 
-        <p className="mt-10 text-xs leading-5 text-slate-400">
+        <p className="mt-10 text-xs leading-5 text-slate-500">
           Source: Statistics Canada, Table 14-10-0064-01, “Employee wages by industry, annual”, median
           hourly wage of full-time employees, {WAGE_DATA_YEAR}. Annualised at 2,080 hours. Take-home
           figures on each page are computed with the CanPay Insights 2026 tax engine. The three

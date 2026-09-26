@@ -77,7 +77,7 @@ export default function PayDonut({
             <span className="h-3 w-3 shrink-0 rounded-sm" style={{ background: s.color }} />
             <span className="text-slate-700">{s.label}</span>
             <span className="ml-auto font-semibold tabular-nums text-slate-900">{money(s.value)}</span>
-            <span className="w-10 shrink-0 text-right text-xs tabular-nums text-slate-400">{s.pct}%</span>
+            <span className="w-10 shrink-0 text-right text-xs tabular-nums text-slate-500">{s.pct}%</span>
           </li>
         ))}
       </ul>

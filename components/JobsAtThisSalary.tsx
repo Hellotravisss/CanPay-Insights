@@ -41,7 +41,7 @@ export default function JobsAtThisSalary({
           </a>
         ))}
       </div>
-      <p className="mt-3 text-[11px] text-slate-400">
+      <p className="mt-3 text-[11px] text-slate-500">
         {anyPaid
           ? 'Some job links are paid placements. They never affect our tax figures or rankings.'
           : 'Plain links to third-party job sites. We earn nothing from them and have no relationship with either site.'}

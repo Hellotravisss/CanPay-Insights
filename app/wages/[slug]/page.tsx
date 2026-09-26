@@ -275,14 +275,14 @@ export default async function IndustryProvincePage({ params }: Props) {
             <details key={f.q} className={`group border-t border-slate-200 ${i === faq.length - 1 ? 'border-b' : ''}`}>
               <summary className="flex cursor-pointer list-none items-center justify-between py-4 text-base font-bold text-slate-800 marker:content-none [&::-webkit-details-marker]:hidden">
                 {f.q}
-                <span className="ml-3 text-slate-400 transition-transform group-open:rotate-90">›</span>
+                <span className="ml-3 text-slate-500 transition-transform group-open:rotate-90">›</span>
               </summary>
               <p className="pb-5 leading-7 text-slate-600">{f.a}</p>
             </details>
           ))}
         </div>
 
-        <p className="mt-8 text-xs leading-5 text-slate-400">
+        <p className="mt-8 text-xs leading-5 text-slate-500">
           Wage figures: Statistics Canada, Table 14-10-0064-01, “Employee wages by industry, annual”,
           median hourly wage of full-time employees, {WAGE_DATA_YEAR}. Annualised at 2,080 hours.
           Take-home figures computed with the CanPay Insights 2026 tax engine (federal and provincial

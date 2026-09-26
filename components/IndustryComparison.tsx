@@ -474,7 +474,7 @@ export default function IndustryComparison({
               {t.otNote.replace('{n}', String(Math.round(headline.otHours)))}
             </p>
           )}
-          <p className="mt-1.5 text-[11px] leading-4 text-slate-400">
+          <p className="mt-1.5 text-[11px] leading-4 text-slate-500">
             {t.source.replace('{year}', String(WAGE_DATA_YEAR))}
           </p>
         </div>
@@ -524,7 +524,7 @@ export default function IndustryComparison({
               {t.youAreHere}: {money(annualIncome)}
             </div>
           </div>
-          <div className="mb-3 flex justify-between text-[10px] text-slate-400">
+          <div className="mb-3 flex justify-between text-[10px] text-slate-500">
             <span>← {t.low}</span>
             <span>{t.high} →</span>
           </div>
@@ -539,7 +539,7 @@ export default function IndustryComparison({
               before tax. Source: Statistics Canada, Table 14-10-0064-01, {WAGE_DATA_YEAR}.
             </p>
           ) : (
-            <p className="mt-2 text-[11px] leading-4 text-slate-400">{t.note}</p>
+            <p className="mt-2 text-[11px] leading-4 text-slate-500">{t.note}</p>
           )}
         </div>
       )}

@@ -4,7 +4,7 @@ import { useRouter } from 'next/navigation';
 import AvowdCredit from './AvowdCredit';
 
 const Badge = ({ n }: { n: number }) => (
-  <span className="flex items-center justify-center w-8 h-8 bg-red-100 text-red-600 rounded-lg text-sm font-bold">{n}</span>
+  <span className="flex items-center justify-center w-8 h-8 bg-red-100 text-red-700 rounded-lg text-sm font-bold">{n}</span>
 );
 
 const AboutPage: React.FC = () => {
@@ -151,12 +151,12 @@ const AboutPage: React.FC = () => {
       </main>
 
       {/* Footer */}
-      <footer className="text-center text-slate-400 text-xs py-8 space-y-4" role="contentinfo">
+      <footer className="text-center text-slate-500 text-xs py-8 space-y-4" role="contentinfo">
         <p>Calculations are estimates based on 2026 tax brackets and provincial employment standards.</p>
         <div className="flex flex-wrap items-center justify-center gap-x-4 gap-y-2">
-          <a href="/about" className="text-slate-400 hover:text-red-600 transition-colors">About</a>
-          <a href="/contact" className="text-slate-400 hover:text-red-600 transition-colors">Contact</a>
-          <a href="/privacy" className="text-slate-400 hover:text-red-600 transition-colors">Privacy</a>
+          <a href="/about" className="text-slate-500 hover:text-red-600 transition-colors">About</a>
+          <a href="/contact" className="text-slate-500 hover:text-red-600 transition-colors">Contact</a>
+          <a href="/privacy" className="text-slate-500 hover:text-red-600 transition-colors">Privacy</a>
         </div>
         <p className="mt-4 opacity-75">Proudly Canadian 🇨🇦 Built for Workers.</p>
         <p><AvowdCredit /></p>

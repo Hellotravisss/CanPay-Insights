@@ -119,12 +119,13 @@ const ProvinceComparison: React.FC<ProvinceComparisonProps> = ({ onBackToBlog })
         <div className="max-w-6xl mx-auto px-4 py-6">
           {/* Salary Input */}
           <div className="mb-6">
-            <label className="block text-sm font-bold text-slate-700 mb-2">
+            <label htmlFor="compare-salary" className="block text-sm font-bold text-slate-700 mb-2">
               Annual Salary
             </label>
             <div className="relative max-w-xs">
               <span className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-500 font-bold">$</span>
               <input
+                id="compare-salary"
                 type="number"
                 value={annualSalary}
                 onChange={(e) => setAnnualSalary(Number(e.target.value) || 0)}
@@ -161,7 +162,7 @@ const ProvinceComparison: React.FC<ProvinceComparisonProps> = ({ onBackToBlog })
             <p className="text-xs text-slate-500 mt-2">
               Selected: {selectedProvinces.length} province{selectedProvinces.length !== 1 ? 's' : ''}
               {selectedProvinces.length > 0 && (
-                <span className="ml-2 text-slate-400">
+                <span className="ml-2 text-slate-500">
                   ({selectedProvinces.map(code => provinces.find(p => p.code === code)?.name).join(', ')})
                 </span>
               )}
@@ -216,7 +217,7 @@ const ProvinceComparison: React.FC<ProvinceComparisonProps> = ({ onBackToBlog })
                 : 'Everything is ready! Click the red button above to see the comparison results.'
               }
             </p>
-            <p className="text-sm text-slate-400">
+            <p className="text-sm text-slate-500">
               💡 Tip: Select 2-6 provinces to compare their tax differences
             </p>
             {selectedProvinces.length > 0 && (
@@ -387,12 +388,12 @@ const ProvinceComparison: React.FC<ProvinceComparisonProps> = ({ onBackToBlog })
             <p className="mb-4">
               When considering a move between provinces, it's important to look beyond just income taxes. 
               Cost of living, particularly housing prices, can have a much larger impact on your 
-              disposable income than tax differences. Use our <a href="/" className="text-red-600 hover:underline">detailed calculator</a> to 
+              disposable income than tax differences. Use our <a href="/" className="text-red-700 underline">detailed calculator</a> to 
               factor in all aspects of your financial situation.
             </p>
             <p>
               For comprehensive guides on living in each province, including housing costs, job markets, 
-              and lifestyle factors, explore our <a href="/blog" className="text-red-600 hover:underline">provincial guides</a>.
+              and lifestyle factors, explore our <a href="/blog" className="text-red-700 underline">provincial guides</a>.
             </p>
           </div>
         </div>

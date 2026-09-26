@@ -50,7 +50,7 @@ export default function RelocationReport({
           <span className="text-lg font-bold">
             CanPay <span className="font-normal text-red-600">Insights</span>
           </span>
-          <span className="ml-auto text-xs font-bold uppercase tracking-[0.2em] text-slate-400">
+          <span className="ml-auto text-xs font-bold uppercase tracking-[0.2em] text-slate-500">
             Province Move Report · {r.taxYear}
           </span>
         </div>
@@ -71,7 +71,7 @@ export default function RelocationReport({
         <p className="mt-2 flex flex-wrap items-baseline gap-x-3">
           <span className={`text-5xl font-extrabold tabular-nums ${tone}`}>{signed(r.netGapAnnual)}</span>
           <span className="text-lg text-slate-500">a year</span>
-          <span className="text-lg text-slate-400">·</span>
+          <span className="text-lg text-slate-500">·</span>
           <span className="text-lg text-slate-500">{signed(r.netGapMonthly)} a month</span>
         </p>
         <p className="mt-3 max-w-xl text-sm leading-6 text-slate-700">
@@ -107,7 +107,7 @@ export default function RelocationReport({
         <div className="mt-3 overflow-x-auto">
           <table className="w-full text-sm">
             <thead>
-              <tr className="text-left text-[11px] font-bold uppercase tracking-wider text-slate-400">
+              <tr className="text-left text-[11px] font-bold uppercase tracking-wider text-slate-500">
                 <th className="py-2 pr-4 font-bold">Annual</th>
                 <th className="py-2 text-right font-bold">{r.from.province}</th>
                 <th className="py-2 text-right font-bold">{r.to.province}</th>
@@ -180,7 +180,7 @@ export default function RelocationReport({
             const mine = row.province === r.from.province || row.province === r.to.province;
             return (
               <div key={row.province} className="grid grid-cols-[1.5rem_9rem_1fr_5rem] items-center gap-2 text-sm">
-                <span className="text-xs tabular-nums text-slate-400">{i + 1}</span>
+                <span className="text-xs tabular-nums text-slate-500">{i + 1}</span>
                 <span className={`truncate ${mine ? 'font-bold text-slate-900' : 'text-slate-500'}`}>{row.province}</span>
                 <div className="h-3 rounded-full bg-slate-100">
                   <div className={`h-3 rounded-full ${mine ? 'bg-red-600' : 'bg-slate-300'}`} style={{ width: `${(row.net / maxNet) * 100}%` }} />
@@ -297,7 +297,7 @@ export default function RelocationReport({
           <ul className="mt-2 list-disc space-y-1.5 pl-4 text-sm leading-6 text-slate-600">
             {WHO_HELPS.map((l) => <li key={l}>{l}</li>)}
           </ul>
-          <p className="mt-2 text-xs text-slate-400">Institution names are the official bodies for {r.to.province}. Deadlines and waiting periods change, so none are printed here — the named office is always the current source.</p>
+          <p className="mt-2 text-xs text-slate-500">Institution names are the official bodies for {r.to.province}. Deadlines and waiting periods change, so none are printed here — the named office is always the current source.</p>
         </div>
       </section>
 
@@ -313,7 +313,7 @@ export default function RelocationReport({
         </p>
       </section>
 
-      <footer className="mt-10 flex flex-wrap items-center justify-between gap-3 border-t border-slate-200 pt-5 text-xs text-slate-400 print:hidden">
+      <footer className="mt-10 flex flex-wrap items-center justify-between gap-3 border-t border-slate-200 pt-5 text-xs text-slate-500 print:hidden">
         <span>Permanent link: <span className="font-mono">{permalink.replace('https://', '')}</span></span>
         <Link href="/" className="text-red-600 hover:underline">← Back to the calculator</Link>
       </footer>

@@ -40,13 +40,13 @@ export function WageHeader() {
 export function WageFooter() {
   return (
     <footer className="mt-16 border-t border-slate-200 bg-white">
-      <div className="mx-auto max-w-4xl px-4 py-8 text-center text-xs text-slate-400">
+      <div className="mx-auto max-w-4xl px-4 py-8 text-center text-xs text-slate-500">
         <div className="mb-3 flex flex-wrap items-center justify-center gap-x-4 gap-y-2">
           <span>© CanPay Insights</span>
-          <a href="/about" className="text-slate-400 no-underline hover:text-red-600">About</a>
-          <a href="/data" className="text-slate-400 no-underline hover:text-red-600">Open data</a>
-          <a href="/widget" className="text-slate-400 no-underline hover:text-red-600">Embed this calculator</a>
-          <a href="/privacy" className="text-slate-400 no-underline hover:text-red-600">Privacy</a>
+          <a href="/about" className="text-slate-500 no-underline hover:text-red-600">About</a>
+          <a href="/data" className="text-slate-500 no-underline hover:text-red-600">Open data</a>
+          <a href="/widget" className="text-slate-500 no-underline hover:text-red-600">Embed this calculator</a>
+          <a href="/privacy" className="text-slate-500 no-underline hover:text-red-600">Privacy</a>
         </div>
         <p>Proudly Canadian 🇨🇦 Built for workers.</p>
         <p className="mt-3"><AvowdCredit /></p>

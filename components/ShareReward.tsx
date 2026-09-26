@@ -255,12 +255,12 @@ export default function ShareReward({ lang }: { lang: string }) {
       </div>
 
       {state === 'working' && (
-        <p className="mt-3 flex items-center gap-2 text-sm text-slate-400">
+        <p className="mt-3 flex items-center gap-2 text-sm text-slate-500">
           <ThinkingOrb state="weaving" size={20} theme="light" aria-label={t.working} />
           {t.working}
         </p>
       )}
-      {state === 'failed' && <p className="mt-3 text-sm text-slate-400">{t.failed}</p>}
+      {state === 'failed' && <p className="mt-3 text-sm text-slate-500">{t.failed}</p>}
       {code && (
         <div className="mt-4 rounded-lg border-2 border-dashed border-red-300 bg-red-50 px-4 py-3">
           <p className="text-[11px] font-bold uppercase tracking-wide text-red-600">{t.unlocked}</p>

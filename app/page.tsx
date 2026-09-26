@@ -82,7 +82,7 @@ export default function HomePage() {
           <details className="group border-t border-slate-200">
             <summary className="cursor-pointer list-none py-4 text-base font-bold text-slate-800 marker:content-none [&::-webkit-details-marker]:hidden flex items-center justify-between">
               How CPP deductions work in 2026
-              <span className="ml-3 text-slate-400 transition-transform group-open:rotate-90">›</span>
+              <span className="ml-3 text-slate-500 transition-transform group-open:rotate-90">›</span>
             </summary>
             <p className="pb-5 leading-7 text-slate-600">
               The Canada Pension Plan (CPP) takes 5.95% of your earnings between the $3,500 basic
@@ -96,7 +96,7 @@ export default function HomePage() {
           <details className="group border-t border-slate-200">
             <summary className="cursor-pointer list-none py-4 text-base font-bold text-slate-800 marker:content-none [&::-webkit-details-marker]:hidden flex items-center justify-between">
               EI premiums and rates across Canada
-              <span className="ml-3 text-slate-400 transition-transform group-open:rotate-90">›</span>
+              <span className="ml-3 text-slate-500 transition-transform group-open:rotate-90">›</span>
             </summary>
             <p className="pb-5 leading-7 text-slate-600">
               Employment Insurance (EI) is deducted at 1.63% of insurable earnings in 2026, up to a
@@ -109,7 +109,7 @@ export default function HomePage() {
           <details className="group border-t border-b border-slate-200">
             <summary className="cursor-pointer list-none py-4 text-base font-bold text-slate-800 marker:content-none [&::-webkit-details-marker]:hidden flex items-center justify-between">
               How provincial tax changes your take-home pay
-              <span className="ml-3 text-slate-400 transition-transform group-open:rotate-90">›</span>
+              <span className="ml-3 text-slate-500 transition-transform group-open:rotate-90">›</span>
             </summary>
             <p className="pb-5 leading-7 text-slate-600">
               Your net pay depends heavily on where you live. The same $65,000 salary keeps a different
@@ -127,7 +127,7 @@ export default function HomePage() {
           <details className="group border-t border-slate-200">
             <summary className="cursor-pointer list-none py-4 text-base font-bold text-slate-800 marker:content-none [&::-webkit-details-marker]:hidden flex items-center justify-between">
               2026 take-home pay by province: an $80,000 salary compared
-              <span className="ml-3 text-slate-400 transition-transform group-open:rotate-90">›</span>
+              <span className="ml-3 text-slate-500 transition-transform group-open:rotate-90">›</span>
             </summary>
             <div className="pb-5">
           <p className="mb-6 leading-7 text-slate-600">
@@ -157,7 +157,7 @@ export default function HomePage() {
               </tbody>
             </table>
           </div>
-          <p className="mt-3 text-xs leading-5 text-slate-400">
+          <p className="mt-3 text-xs leading-5 text-slate-500">
             2026 estimates for employment income, single with no additional credits, from the CanPay
             Insights rules engine using CRA and provincial rates. Your own result will vary with RRSP
             contributions, dependants, and other credits.
@@ -168,7 +168,7 @@ export default function HomePage() {
           <details className="group border-t border-slate-200">
             <summary className="cursor-pointer list-none py-4 text-base font-bold text-slate-800 marker:content-none [&::-webkit-details-marker]:hidden flex items-center justify-between">
               How take-home pay changes as your salary rises
-              <span className="ml-3 text-slate-400 transition-transform group-open:rotate-90">›</span>
+              <span className="ml-3 text-slate-500 transition-transform group-open:rotate-90">›</span>
             </summary>
             <div className="pb-5">
           <p className="mb-6 leading-7 text-slate-600">
@@ -205,7 +205,7 @@ export default function HomePage() {
               <details key={item.name} className={`group border-t border-slate-200 ${i === homeFaqJsonLd.mainEntity.length - 1 ? 'border-b' : ''}`}>
                 <summary className="cursor-pointer list-none py-4 text-base font-bold text-slate-800 marker:content-none [&::-webkit-details-marker]:hidden flex items-center justify-between">
                   {item.name}
-                  <span className="ml-3 text-slate-400 transition-transform group-open:rotate-90">›</span>
+                  <span className="ml-3 text-slate-500 transition-transform group-open:rotate-90">›</span>
                 </summary>
                 <p className="pb-5 leading-7 text-slate-600">{item.acceptedAnswer.text}</p>
               </details>

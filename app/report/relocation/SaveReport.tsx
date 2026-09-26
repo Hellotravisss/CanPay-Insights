@@ -111,7 +111,7 @@ export default function SaveReport({
               </button>
             </div>
             {err && <p className="mt-2 text-xs text-red-600">{err}</p>}
-            <p className="mt-2 text-[11px] text-slate-400">One sign-in link by email. No password, no newsletter.</p>
+            <p className="mt-2 text-[11px] text-slate-500">One sign-in link by email. No password, no newsletter.</p>
           </>
         )}
       </div>

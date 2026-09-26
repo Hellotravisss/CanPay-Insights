@@ -235,7 +235,7 @@ const WealthsimpleCTA = () => {
       >
         See Wealthsimple
       </a>
-      <p className="mt-3 text-xs text-slate-400">
+      <p className="mt-3 text-xs text-slate-500">
         Paid referral link — we may earn a bonus if you sign up, at no extra cost to you.{' '}
         <a href="/affiliate-disclosure" className="underline hover:text-slate-600">Learn more</a>.
       </p>
@@ -315,7 +315,7 @@ export default function ArticleView({ slug }: ArticleViewProps) {
             <span>By <a href="/about" className="font-medium text-slate-700 underline-offset-2 hover:text-red-600 hover:underline">Travis Zhang</a></span>
             <time dateTime={article.publishedAt}>{formatDate(article.publishedAt)}</time>
             {article.updatedAt && (
-              <span className="text-slate-400">
+              <span className="text-slate-500">
                 {' · '}Updated{' '}
                 <time dateTime={article.updatedAt}>{formatDate(article.updatedAt)}</time>
               </span>
@@ -357,7 +357,7 @@ export default function ArticleView({ slug }: ArticleViewProps) {
                   <details key={index} className="group overflow-hidden rounded-xl border border-slate-200 bg-slate-50">
                     <summary className="flex cursor-pointer list-none items-center justify-between p-5 font-semibold text-slate-800 transition-colors hover:bg-slate-100">
                       <span>{item.question}</span>
-                      <span className="ml-3 flex-shrink-0 text-slate-400 group-open:rotate-180">⌄</span>
+                      <span className="ml-3 flex-shrink-0 text-slate-500 group-open:rotate-180">⌄</span>
                     </summary>
                     <div className="px-5 pb-5 text-sm leading-relaxed text-slate-600">
                       {item.answer}
@@ -412,7 +412,7 @@ export default function ArticleView({ slug }: ArticleViewProps) {
           </a>
         </div>
 
-        <footer className="mt-12 border-t border-slate-200 pt-6 text-center text-xs text-slate-400" role="contentinfo">
+        <footer className="mt-12 border-t border-slate-200 pt-6 text-center text-xs text-slate-500" role="contentinfo">
           <p>© CanPay Insights · <AvowdCredit /></p>
         </footer>
       </div>

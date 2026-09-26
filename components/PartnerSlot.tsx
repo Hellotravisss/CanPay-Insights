@@ -40,7 +40,7 @@ export default function PartnerSlot({ id, track }: { id: string; track?: Partner
         {p.label} →
       </a>
       {p.paid && (
-        <p className="mt-2 text-[11px] text-slate-400">
+        <p className="mt-2 text-[11px] text-slate-500">
           Paid referral link — we may earn a commission at no cost to you. It never affects our
           numbers. <a href="/affiliate-disclosure" className="underline">How this works</a>.
         </p>

@@ -121,7 +121,7 @@ const PaycheckDonutChart = ({
           ))}
         </svg>
         <div className="pointer-events-none absolute inset-0 flex flex-col items-center justify-center text-center">
-          <span className="text-xs font-bold uppercase text-slate-400">{netPayLabel}</span>
+          <span className="text-xs font-bold uppercase text-slate-500">{netPayLabel}</span>
           <p className="text-2xl font-bold text-slate-800">{netPayPercent}%</p>
         </div>
       </div>
@@ -287,7 +287,7 @@ const ResultsSection: React.FC<Props> = ({ results, provinceName }) => {
           <div className="w-full md:w-1/2 text-sm space-y-4">
              {/* Earnings */}
              <div>
-               <h4 className="text-xs font-bold text-slate-400 uppercase mb-2">{t('res.earnings')}</h4>
+               <h4 className="text-xs font-bold text-slate-500 uppercase mb-2">{t('res.earnings')}</h4>
                <div className="space-y-2">
                  <div className="flex justify-between text-slate-700">
                    <span>{t('res.regularPay')} ({results.regularHours.toFixed(1)}h)</span>
@@ -324,7 +324,7 @@ const ResultsSection: React.FC<Props> = ({ results, provinceName }) => {
 
              {/* Deductions */}
              <div>
-               <h4 className="text-xs font-bold text-slate-400 uppercase mb-2">{t('res.deductions')}</h4>
+               <h4 className="text-xs font-bold text-slate-500 uppercase mb-2">{t('res.deductions')}</h4>
                <div className="space-y-2">
                  <div className="flex justify-between text-slate-600">
                    <span>{t('res.federalTax')}</span>

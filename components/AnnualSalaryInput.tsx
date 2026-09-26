@@ -143,7 +143,7 @@ const AnnualSalaryInput: React.FC<Props> = ({ inputs, setInputs }) => {
             {(inputs.additionalIncome && Object.values(inputs.additionalIncome).some(v => v > 0)) && (
               <span className="text-xs bg-red-100 text-red-700 font-semibold px-2 py-0.5 rounded-full">{t('common.active')}</span>
             )}
-            <svg className={`w-5 h-5 text-slate-400 transition-transform ${showAdditional ? 'rotate-180' : ''}`} fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" /></svg>
+            <svg className={`w-5 h-5 text-slate-500 transition-transform ${showAdditional ? 'rotate-180' : ''}`} fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" /></svg>
           </div>
         </button>
         {showAdditional && (
@@ -185,7 +185,7 @@ const AnnualSalaryInput: React.FC<Props> = ({ inputs, setInputs }) => {
             {(inputs.deductions && Object.values(inputs.deductions).some(v => v > 0)) && (
               <span className="text-xs bg-red-100 text-red-700 font-semibold px-2 py-0.5 rounded-full">{t('common.active')}</span>
             )}
-            <svg className={`w-5 h-5 text-slate-400 transition-transform ${showDeductions ? 'rotate-180' : ''}`} fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" /></svg>
+            <svg className={`w-5 h-5 text-slate-500 transition-transform ${showDeductions ? 'rotate-180' : ''}`} fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" /></svg>
           </div>
         </button>
         {showDeductions && (
@@ -198,7 +198,7 @@ const AnnualSalaryInput: React.FC<Props> = ({ inputs, setInputs }) => {
               <div key={key}>
                 <label className="block text-xs font-bold text-slate-700 mb-1">{label}</label>
                 <div className="relative">
-                  <span className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 font-bold">$</span>
+                  <span className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-500 font-bold">$</span>
                   <input type="number" min="0" step="1" placeholder="0"
                     className="w-full pl-8 pr-4 py-2.5 border border-slate-300 rounded-lg bg-white focus:outline-none focus:ring-2 focus:ring-red-500"
                     value={inputs.deductions?.[key] || ''}

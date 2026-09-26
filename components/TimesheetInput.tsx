@@ -589,7 +589,7 @@ const TimesheetInput: React.FC<Props> = ({ inputs, setInputs }) => {
                 <div>
                   <label className="block text-sm font-semibold text-slate-700 mb-2">{t('ts.tipsDeclared')} <span className="font-normal text-slate-500">{t('ts.optionalTaxable')}</span></label>
                   <div className="relative">
-                    <span className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 font-bold">$</span>
+                    <span className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-500 font-bold">$</span>
                     <input
                       type="number"
                       min="0"

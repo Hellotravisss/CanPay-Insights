@@ -409,14 +409,14 @@ export default function NeighbourhoodPrompt({
             <p className="text-sm font-medium text-slate-700">
               <span aria-hidden="true">📍</span> {fsa}
             </p>
-            <button type="button" onClick={() => { setEditing(true); setText(''); }} className="text-xs text-slate-400 hover:text-slate-600">
+            <button type="button" onClick={() => { setEditing(true); setText(''); }} className="text-xs text-slate-500 hover:text-slate-600">
               {t.change}
             </button>
           </div>
           {payoff && (
             <div className="mt-3 rounded-lg bg-slate-50 px-4 py-3" aria-live="polite">
               <p className="text-sm leading-6 text-slate-800">{payoff.line}</p>
-              {payoff.basis && <p className="mt-1 text-xs leading-5 text-slate-400">{payoff.basis}</p>}
+              {payoff.basis && <p className="mt-1 text-xs leading-5 text-slate-500">{payoff.basis}</p>}
             </div>
           )}
         </>
@@ -447,7 +447,7 @@ export default function NeighbourhoodPrompt({
             </button>
           </form>
           {note && <p className="mt-2 text-xs text-red-600" role="status">{note}</p>}
-          <p className="mt-3 text-[11px] leading-4 text-slate-400">
+          <p className="mt-3 text-[11px] leading-4 text-slate-500">
             {t.consent}{' '}
             <a href="/privacy#location" className="underline decoration-slate-300 underline-offset-2 hover:text-slate-600">{t.privacy}</a>
           </p>

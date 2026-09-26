@@ -16,13 +16,13 @@ export default function CopyEmbedCode({ code }: { code: string }) {
 
   return (
     <div className="relative">
-      <pre className="overflow-x-auto rounded-xl border border-slate-200 bg-slate-900 p-4 text-xs leading-6 text-slate-100">
+      <pre tabIndex={0} aria-label="Embed code" className="overflow-x-auto rounded-xl border border-slate-200 bg-slate-900 p-4 text-xs leading-6 text-slate-100">
         <code>{code}</code>
       </pre>
       <button
         onClick={copy}
         className={`absolute right-3 top-3 rounded-lg px-3 py-1.5 text-xs font-bold transition-colors ${
-          copied ? 'bg-green-600 text-white' : 'bg-red-600 text-white hover:bg-red-700'
+          copied ? 'bg-green-700 text-white' : 'bg-red-600 text-white hover:bg-red-700'
         }`}
       >
         {copied ? 'Copied!' : 'Copy'}

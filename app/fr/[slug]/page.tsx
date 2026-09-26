@@ -361,7 +361,7 @@ export default async function FrenchLandingPage({ params }: Props) {
         </div>
       </section>
 
-      <footer className="mx-auto max-w-5xl px-4 pb-10 text-center text-xs text-slate-400" role="contentinfo">
+      <footer className="mx-auto max-w-5xl px-4 pb-10 text-center text-xs text-slate-500" role="contentinfo">
         <p>© CanPay Insights · <AvowdCredit lang="fr" /></p>
       </footer>
     </main>

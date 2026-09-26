@@ -9,7 +9,7 @@ import AvowdCredit from './AvowdCredit';
  * use, so a fourth copy of that markup does not have to be kept in step.
  */
 export const Badge = ({ n }: { n: number | string }) => (
-  <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-red-100 text-sm font-bold text-red-600">{n}</span>
+  <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-red-100 text-sm font-bold text-red-700">{n}</span>
 );
 
 export function Section({ n, id, title, children }: { n: number | string; id?: string; title: string; children: React.ReactNode }) {
@@ -89,7 +89,7 @@ export default function LegalChrome({
         </div>
       </main>
 
-      <footer className="space-y-4 py-8 text-center text-xs text-slate-400" role="contentinfo">
+      <footer className="space-y-4 py-8 text-center text-xs text-slate-500" role="contentinfo">
         <p>{footnote}</p>
         <div className="mt-2 flex justify-center gap-2" aria-hidden="true">
           <span className="h-2 w-2 rounded-full bg-red-400 opacity-50"></span>

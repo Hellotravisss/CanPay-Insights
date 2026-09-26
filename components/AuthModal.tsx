@@ -124,7 +124,7 @@ const AuthModal: React.FC<Props> = ({
         {/* Close button */}
         <button
           onClick={onClose}
-          className="absolute top-4 right-4 text-slate-400 hover:text-slate-600 transition-colors"
+          className="absolute top-4 right-4 text-slate-500 hover:text-slate-600 transition-colors"
           aria-label="Close"
         >
           <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -224,7 +224,7 @@ const AuthModal: React.FC<Props> = ({
                     <div className="w-full border-t border-slate-200"></div>
                   </div>
                   <div className="relative flex justify-center text-xs uppercase">
-                    <span className="bg-white px-2 text-slate-400">{t('auth.or')}</span>
+                    <span className="bg-white px-2 text-slate-500">{t('auth.or')}</span>
                   </div>
                 </div>
               </>
@@ -299,7 +299,7 @@ const AuthModal: React.FC<Props> = ({
         </button>
 
         {/* Privacy note */}
-        <p className="text-xs text-slate-400 text-center mt-4">
+        <p className="text-xs text-slate-500 text-center mt-4">
           {t('auth.privacy')}
         </p>
       </div>

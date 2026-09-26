@@ -479,7 +479,7 @@ export default function ExpectationPrompt({
           </div>
           <div className="mt-3 flex flex-wrap items-center gap-2">
             <button onClick={next} className={pill}>{t.oneMore}</button>
-            <button onClick={() => setDone(true)} className="px-2 py-2 text-sm text-slate-400 hover:text-slate-600">
+            <button onClick={() => setDone(true)} className="px-2 py-2 text-sm text-slate-500 hover:text-slate-600">
               {t.noThanks}
             </button>
           </div>

@@ -18,8 +18,8 @@ export type BlogCard = {
 const CATEGORY_KEYS = [
   { id: 'all', key: 'blog.catAll', color: 'bg-slate-600' },
   { id: 'salary', key: 'blog.catSalary', color: 'bg-blue-600' },
-  { id: 'province', key: 'blog.catProvince', color: 'bg-green-600' },
-  { id: 'tips', key: 'blog.catTips', color: 'bg-amber-600' },
+  { id: 'province', key: 'blog.catProvince', color: 'bg-green-700' },
+  { id: 'tips', key: 'blog.catTips', color: 'bg-amber-700' },
   { id: 'tax', key: 'blog.catTax', color: 'bg-red-600' },
 ];
 
@@ -72,7 +72,7 @@ const ArticleCard = ({ article, t }: { article: BlogCard; t: (k: string) => stri
         <p className="mb-5 line-clamp-2 text-sm leading-6 text-slate-600">
           {article.excerpt}
         </p>
-        <div className="flex items-center justify-between text-xs font-medium text-slate-400">
+        <div className="flex items-center justify-between text-xs font-medium text-slate-500">
           <span>{formatDate(article.publishedAt)}</span>
           <span>{article.readTime} min read</span>
         </div>
@@ -146,7 +146,7 @@ export default function BlogList({ articles }: { articles: BlogCard[] }) {
                 className="whitespace-nowrap rounded-full bg-slate-100 px-4 py-2 text-sm font-medium text-slate-600 no-underline hover:bg-slate-200"
               >
                 {t(category.key)}
-                <span className="ml-2 opacity-70">{getCategoryCount(articles, category.id)}</span>
+                <span className="ml-2">{getCategoryCount(articles, category.id)}</span>
               </a>
             ))}
           </div>
@@ -185,7 +185,7 @@ export default function BlogList({ articles }: { articles: BlogCard[] }) {
               <p className="mt-4 line-clamp-3 text-base leading-7 text-slate-600">
                 {featuredArticle.excerpt}
               </p>
-              <div className="mt-6 flex items-center justify-between text-sm font-medium text-slate-400">
+              <div className="mt-6 flex items-center justify-between text-sm font-medium text-slate-500">
                 <span>{formatDate(featuredArticle.publishedAt)}</span>
                 <span>{featuredArticle.readTime} min read</span>
               </div>
@@ -235,7 +235,7 @@ export default function BlogList({ articles }: { articles: BlogCard[] }) {
 
       <PreferredSource />
 
-      <footer className="mx-auto max-w-5xl px-4 pb-10 pt-6 text-center text-xs text-slate-400" role="contentinfo">
+      <footer className="mx-auto max-w-5xl px-4 pb-10 pt-6 text-center text-xs text-slate-500" role="contentinfo">
         <p>© CanPay Insights · <AvowdCredit /></p>
       </footer>
     </main>

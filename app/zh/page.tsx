@@ -227,7 +227,7 @@ export default function ChineseHubPage() {
           </aside>
         </div>
 
-        <footer className="mt-10 border-t border-slate-200 pt-6 text-center text-xs text-slate-400" role="contentinfo">
+        <footer className="mt-10 border-t border-slate-200 pt-6 text-center text-xs text-slate-500" role="contentinfo">
           <p>© CanPay Insights · <AvowdCredit lang="zh" /></p>
         </footer>
       </section>

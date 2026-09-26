@@ -17,7 +17,7 @@ export default function AvowdCredit({ lang = 'en' }: { lang?: 'en' | 'zh' | 'fr'
     <a
       href="https://avowd.ai/?utm_source=canpayinsights.ca&utm_medium=credit"
       rel="noopener"
-      className="text-slate-400 underline decoration-slate-300 underline-offset-4 transition-colors hover:text-red-600"
+      className="text-slate-500 underline decoration-slate-300 underline-offset-4 transition-colors hover:text-red-600"
     >
       {lang === 'zh' ? 'Avowd 青眼出品' : lang === 'fr' ? 'Un projet Avowd' : 'An Avowd project'}
     </a>

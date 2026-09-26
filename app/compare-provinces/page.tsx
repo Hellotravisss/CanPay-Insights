@@ -104,7 +104,7 @@ export default function CompareProvincesPage() {
               </tbody>
             </table>
           </div>
-          <p className="mt-3 text-xs leading-5 text-slate-400">
+          <p className="mt-3 text-xs leading-5 text-slate-500">
             2026 estimates for employment income, single with no additional credits, from the CanPay
             Insights rules engine using CRA and provincial/territorial rates. Use the interactive tool
             above to compare your own salary across provinces.
@@ -124,7 +124,7 @@ export default function CompareProvincesPage() {
         </div>
       </section>
 
-      <footer className="mx-auto max-w-5xl px-4 pb-10 pt-6 text-center text-xs text-slate-400" role="contentinfo">
+      <footer className="mx-auto max-w-5xl px-4 pb-10 pt-6 text-center text-xs text-slate-500" role="contentinfo">
         <p>© CanPay Insights · <AvowdCredit /></p>
       </footer>
     </>

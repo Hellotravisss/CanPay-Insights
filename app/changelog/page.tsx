@@ -186,7 +186,7 @@ export default function ChangelogPage() {
           {ENTRIES.map((e) => (
             <li key={e.date + e.title} className="relative">
               <span className="absolute -left-[31px] top-1.5 h-3 w-3 rounded-full border-2 border-white bg-red-600" />
-              <time dateTime={e.date} className="text-xs font-semibold uppercase tracking-wide text-slate-400">
+              <time dateTime={e.date} className="text-xs font-semibold uppercase tracking-wide text-slate-500">
                 {e.date}
               </time>
               <h2 className="mt-1 text-lg font-bold text-slate-800">{e.title}</h2>
@@ -199,7 +199,7 @@ export default function ChangelogPage() {
           ))}
         </ol>
 
-      <footer className="mx-auto max-w-5xl px-4 pb-10 pt-6 text-center text-xs text-slate-400" role="contentinfo">
+      <footer className="mx-auto max-w-5xl px-4 pb-10 pt-6 text-center text-xs text-slate-500" role="contentinfo">
         <p>© CanPay Insights · <AvowdCredit /></p>
       </footer>
       </main>

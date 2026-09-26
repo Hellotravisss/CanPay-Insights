@@ -27,7 +27,7 @@ export default function OfferReport({ report: r, email, sessionId, permalink }: 
         <div className="flex items-center gap-3">
           <img src="/logo.png" alt="" className="h-9 w-9 rounded-lg" />
           <span className="text-lg font-bold">CanPay <span className="font-normal text-red-600">Insights</span></span>
-          <span className="ml-auto text-xs font-bold uppercase tracking-[0.2em] text-slate-400">Offer Comparison · {r.taxYear}</span>
+          <span className="ml-auto text-xs font-bold uppercase tracking-[0.2em] text-slate-500">Offer Comparison · {r.taxYear}</span>
         </div>
         <h1 className="mt-6 text-3xl font-extrabold tracking-tight text-slate-900 sm:text-4xl">
           {money(r.a.salary)} in {r.a.province} <span className="text-red-600">vs</span> {money(r.b.salary)} in {r.b.province}
@@ -65,7 +65,7 @@ export default function OfferReport({ report: r, email, sessionId, permalink }: 
         <h2 className="text-lg font-bold text-slate-900">Line by line</h2>
         <div className="mt-3 overflow-x-auto">
           <table className="w-full text-sm">
-            <thead><tr className="text-left text-[11px] font-bold uppercase tracking-wider text-slate-400">
+            <thead><tr className="text-left text-[11px] font-bold uppercase tracking-wider text-slate-500">
               <th className="py-2 pr-4">Annual</th><th className="py-2 text-right">{r.a.label} · {r.a.province}</th><th className="py-2 text-right">{r.b.label} · {r.b.province}</th><th className="py-2 text-right">B − A</th>
             </tr></thead>
             <tbody className="tabular-nums">
@@ -118,7 +118,7 @@ export default function OfferReport({ report: r, email, sessionId, permalink }: 
         <p className="mt-3 text-xs text-slate-500">Every figure is computed by the same tax engine as the free calculator for {r.taxYear}, single filer, standard credits. This is a calculation, not advice.</p>
       </section>
 
-      <footer className="mt-10 flex flex-wrap items-center justify-between gap-3 border-t border-slate-200 pt-5 text-xs text-slate-400 print:hidden">
+      <footer className="mt-10 flex flex-wrap items-center justify-between gap-3 border-t border-slate-200 pt-5 text-xs text-slate-500 print:hidden">
         <span>Permanent link: <span className="font-mono">{permalink.replace('https://', '')}</span></span>
         <Link href="/" className="text-red-600 hover:underline">← Back to the calculator</Link>
       </footer>

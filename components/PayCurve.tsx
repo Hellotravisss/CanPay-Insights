@@ -45,7 +45,7 @@ export default function PayCurve({ records }: { records: CalculationRecord[] }) 
         <p className="mt-1 text-sm leading-6 text-slate-500">{t('curve.firstSaved')}</p>
         <div className="mt-3 flex items-baseline gap-2">
           <span className="text-2xl font-bold tabular-nums text-slate-900">{money(first.gross)}</span>
-          <span className="text-xs text-slate-400">
+          <span className="text-xs text-slate-500">
             {first.date.toLocaleDateString(undefined, { year: 'numeric', month: 'short', day: 'numeric' })}
           </span>
         </div>
@@ -84,7 +84,7 @@ export default function PayCurve({ records }: { records: CalculationRecord[] }) 
     <div className="rounded-xl border border-slate-200 bg-white p-5 shadow-sm">
       <div className="mb-3 flex flex-wrap items-baseline justify-between gap-2">
         <h3 className="text-sm font-bold text-slate-800">{t('curve.title')}</h3>
-        <span className="text-xs text-slate-400">
+        <span className="text-xs text-slate-500">
           {points.length} {t('curve.savedCount')}
         </span>
       </div>
@@ -103,7 +103,7 @@ export default function PayCurve({ records }: { records: CalculationRecord[] }) 
         <div className="text-xs text-slate-500">
           {money(first.gross)} → <strong className="text-slate-800">{money(last.gross)}</strong>
           {spanDays >= 60 && (
-            <span className="text-slate-400">
+            <span className="text-slate-500">
               {' '}
               · {Math.round(spanDays / 30)} {t('curve.months')}
             </span>
@@ -158,7 +158,7 @@ export default function PayCurve({ records }: { records: CalculationRecord[] }) 
         ))}
       </svg>
 
-      <p className="mt-2 text-[11px] leading-4 text-slate-400">{t('curve.note')}</p>
+      <p className="mt-2 text-[11px] leading-4 text-slate-500">{t('curve.note')}</p>
     </div>
   );
 }

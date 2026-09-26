@@ -69,7 +69,7 @@ const InputSection: React.FC<Props> = ({ inputs, setInputs }) => {
         <div>
           <label className="block text-sm font-bold text-slate-700 mb-2">{t('hourly.wage')}</label>
           <div className="relative">
-            <span className="absolute left-4 top-3.5 text-slate-400 font-bold">$</span>
+            <span className="absolute left-4 top-3.5 text-slate-500 font-bold">$</span>
             <input 
               type="number" 
               inputMode="decimal"
@@ -142,7 +142,7 @@ const InputSection: React.FC<Props> = ({ inputs, setInputs }) => {
                 onFocus={(e) => e.target.select()}
                 onChange={(e) => setInputs({...inputs, shift: { ...inputs.shift, unpaidBreakMinutes: parseInt(e.target.value) || 0 }})}
               />
-              <span className="absolute right-4 top-3 text-slate-400 text-sm">min</span>
+              <span className="absolute right-4 top-3 text-slate-500 text-sm">min</span>
             </div>
           </div>
         </div>
@@ -224,7 +224,7 @@ const InputSection: React.FC<Props> = ({ inputs, setInputs }) => {
             {(inputs.additionalIncome && Object.values(inputs.additionalIncome).some(v => v > 0)) && (
               <span className="text-xs bg-red-100 text-red-700 font-semibold px-2 py-0.5 rounded-full">{t('common.active')}</span>
             )}
-            <svg className={`w-5 h-5 text-slate-400 transition-transform ${showAdditional ? 'rotate-180' : ''}`} fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" /></svg>
+            <svg className={`w-5 h-5 text-slate-500 transition-transform ${showAdditional ? 'rotate-180' : ''}`} fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" /></svg>
           </div>
         </button>
         <p className="text-xs text-slate-500 mt-1 mb-3">{t('hourly.addIncomeHint')}</p>
@@ -277,7 +277,7 @@ const InputSection: React.FC<Props> = ({ inputs, setInputs }) => {
             {(inputs.deductions && Object.values(inputs.deductions).some(v => v > 0)) && (
               <span className="text-xs bg-red-100 text-red-700 font-semibold px-2 py-0.5 rounded-full">{t('common.active')}</span>
             )}
-            <svg className={`w-5 h-5 text-slate-400 transition-transform ${showDeductions ? 'rotate-180' : ''}`} fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" /></svg>
+            <svg className={`w-5 h-5 text-slate-500 transition-transform ${showDeductions ? 'rotate-180' : ''}`} fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" /></svg>
           </div>
         </button>
         <p className="text-xs text-slate-500 mt-1 mb-3">{t('hourly.dedHint')}</p>
@@ -292,7 +292,7 @@ const InputSection: React.FC<Props> = ({ inputs, setInputs }) => {
               <div key={key}>
                 <label className="block text-xs font-bold text-slate-700 mb-1">{label}</label>
                 <div className="relative">
-                  <span className="absolute left-3 top-2.5 text-slate-400 text-sm">$</span>
+                  <span className="absolute left-3 top-2.5 text-slate-500 text-sm">$</span>
                   <input
                     type="number"
                     min="0"

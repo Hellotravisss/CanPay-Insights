@@ -334,7 +334,7 @@ export default async function Page() {
           </p>
         </section>
       </article>
-      <footer className="mx-auto max-w-5xl px-4 pb-10 pt-6 text-center text-xs text-slate-400" role="contentinfo">
+      <footer className="mx-auto max-w-5xl px-4 pb-10 pt-6 text-center text-xs text-slate-500" role="contentinfo">
         <p>© CanPay Insights · <AvowdCredit /></p>
       </footer>
     </div>
