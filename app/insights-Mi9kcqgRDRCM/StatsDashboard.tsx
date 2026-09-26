@@ -440,10 +440,36 @@ export default function StatsDashboard() {
                   '访问 = 当天至少算过一次的不同访问编号;编号只在一次页面加载里有效,同一个人刷新会算两次,所以这是「人数」的粗略估计,不是精确值。只算已经过完的日子,按温哥华时间。')}
               </p>
 
+              {(() => {
+                // Main goal: people, not data. At ~37 visits a day no paid
+                // product, partnership or licence has enough people behind it
+                // (4,720 calculations produced zero report taps). Measured on
+                // the 7-day average so one quiet Sunday does not move it.
+                const GOAL = 100;
+                const early = avg(vdone.slice(0, 7));
+                return (
+                  <div className="mb-6 rounded-2xl border-2 border-slate-800 bg-white p-6 shadow-sm">
+                    <div className="mb-1 flex items-baseline justify-between gap-4">
+                      <h2 className="text-lg font-extrabold text-slate-900">
+                        {T(`Main goal: ${GOAL} visits a day`, `主目标:每天 ${GOAL} 次访问`)}
+                      </h2>
+                      <span className="shrink-0 text-lg font-extrabold tabular-nums text-slate-900">{vAvg7} / {GOAL}</span>
+                    </div>
+                    <div className="my-3 h-3 w-full rounded-full bg-slate-100">
+                      <div className="h-3 rounded-full bg-red-600" style={{ width: `${Math.min(100, (vAvg7 / GOAL) * 100)}%` }} />
+                    </div>
+                    <p className="text-xs leading-5 text-slate-500">
+                      {T(`Visits that made at least one calculation, averaged over the last 7 completed days. Four weeks ago the same average was ${early}/day. Below about ${GOAL} a day, paid reports, partnerships and data licences have too few people behind them to test: 4,720 calculations produced no report taps.`,
+                        `至少算过一次的访问,取最近 7 个完整日的平均。四周前同样的平均是每天 ${early} 次。每天不到约 ${GOAL} 次,付费报告、合作、数据授权背后的人都太少,连测试都做不了:4,720 次计算,付费报告卡片零点击。`)}
+                    </p>
+                  </div>
+                );
+              })()}
+
               <div className="mb-10 rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
                 <div className="mb-1 flex items-baseline justify-between gap-4">
                   <h2 className="text-base font-bold text-slate-800">
-                    {T('Next goal: a local story in every province', '下一个目标:每个省都能讲本地故事')}
+                    {T('Second goal: a local story in every province', '第二目标:每个省都能讲本地故事')}
                   </h2>
                   <span className="shrink-0 text-sm font-bold tabular-nums text-slate-700">{reached} / 10</span>
                 </div>
