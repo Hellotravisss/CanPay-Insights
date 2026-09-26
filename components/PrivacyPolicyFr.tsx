@@ -72,6 +72,7 @@ const PrivacyPolicyFr: React.FC = () => {
           <li>votre horaire type lorsque vous utilisez les calculateurs de quarts ou de feuilles de temps (heures habituelles de début et de fin, jours par semaine, durée moyenne d’un quart, pause non payée) — jamais les dates réellement travaillées ;</li>
           <li>des fourchettes larges pour vos saisies (cotisation REER en part de la paie, prime de quart, heures supplémentaires, pourboires en part de la paie) — toujours des fourchettes ;</li>
           <li>si vous utilisez « trouver le salaire » pour partir d’un montant net, le montant net mensuel demandé, sous forme de tranche (par exemple « 4 k$–5 k$ ») — jamais le montant ;</li>
+          <li>si vous avez coché « Je subviens aux besoins d’un époux ou conjoint de fait » (oui ou non) — jamais le revenu de votre époux ou conjoint ;</li>
           <li>si vous étiez connecté (oui/non — jamais quel compte) et, si vous rouvrez un calcul enregistré et le modifiez, le sens et l’ordre de grandeur du changement ainsi que l’ancienneté de l’original — jamais les montants ;</li>
           <li>l’heure et le jour de la semaine selon votre propre horloge, et le nom du fuseau horaire que déclare votre navigateur (par exemple « America/Toronto »), qui sert à vérifier la carte, non à vous situer ;</li>
           <li>si cet appareil a déjà enregistré un calcul — un simple indicateur oui/non stocké sur l’appareil, pas un identifiant ;</li>

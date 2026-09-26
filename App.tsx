@@ -426,6 +426,7 @@ const App: React.FC = () => {
         buildBehaviour(mode, simpleInputs, annualInputs, timesheetInputs, results)
       ),
       viewedReport: reportOpened,
+      spouseClaim: (mode === CalculationMode.SIMPLE ? simpleInputs : mode === CalculationMode.ANNUAL ? annualInputs : timesheetInputs).spouseNetIncome != null,
     });
   }, [currentPage, mode, simpleInputs, annualInputs, timesheetInputs, currentProvince, results, lang, reportOpened, userId, authLoading]);
 

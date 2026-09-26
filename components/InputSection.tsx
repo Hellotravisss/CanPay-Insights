@@ -2,6 +2,7 @@
 
 import React, { useState } from 'react';
 import { SalaryInputs, Province, AdditionalIncome, Deductions } from '../types';
+import SpouseClaim from './SpouseClaim';
 import { PROVINCIAL_DATA, DAYS_OF_WEEK } from '../constants';
 import { useT } from '../lib/i18n';
 
@@ -65,6 +66,7 @@ const InputSection: React.FC<Props> = ({ inputs, setInputs }) => {
               <option key={key} value={key} className="text-slate-900">{data.name}</option>
             ))}
           </select>
+          <SpouseClaim value={inputs.spouseNetIncome} onChange={(v) => setInputs({ ...inputs, spouseNetIncome: v })} />
         </div>
         <div>
           <label className="block text-sm font-bold text-slate-700 mb-2">{t('hourly.wage')}</label>

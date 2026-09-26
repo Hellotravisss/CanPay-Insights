@@ -35,7 +35,10 @@ create table if not exists events (
   fsa text, fsa_source text, lat2 real, lon2 real, tz text, is_returning integer,
   -- Net → gross calculator: the monthly take-home asked for, as a range label only.
   -- Added in production by ALTER on 2026-09-26.
-  reverse_target_bucket text
+  reverse_target_bucket text,
+  -- 1 when the visitor ticked "I support a spouse or common-law partner" (TD1 spouse
+  -- amount), 0 when not. Never the spouse's income. Added in production by ALTER on 2026-09-26.
+  spouse_claim integer
 );
 create index if not exists idx_events_created on events(created_at);
 create index if not exists idx_events_session on events(session_id);

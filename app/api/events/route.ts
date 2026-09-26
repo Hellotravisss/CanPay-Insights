@@ -28,7 +28,7 @@ const COLS = [
   'change_direction', 'change_pct_bucket', 'days_since_saved_bucket', 'province_changed',
   'median_ratio_bucket', 'median_wage_ref', 'schema_version',
   'fsa', 'fsa_source', 'lat2', 'lon2', 'tz', 'is_returning',
-  'reverse_target_bucket',
+  'reverse_target_bucket', 'spouse_claim',
 ] as const;
 
 /**
@@ -79,6 +79,7 @@ export async function POST(request: Request) {
   sanitiseNeighbourhood(body);
   // A range label from a fixed list, or nothing: never a number.
   if (!REVERSE_BUCKETS.has(String(body.reverse_target_bucket))) body.reverse_target_bucket = null;
+  body.spouse_claim = body.spouse_claim === 1 || body.spouse_claim === true ? 1 : body.spouse_claim === 0 || body.spouse_claim === false ? 0 : null;
 
   let cf: Record<string, unknown> = {};
   try { cf = ((await getCloudflareContext({ async: true })).cf ?? {}) as Record<string, unknown>; } catch { /* local dev */ }

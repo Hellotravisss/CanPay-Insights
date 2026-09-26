@@ -75,6 +75,7 @@ const PrivacyPolicy: React.FC<PrivacyPolicyProps> = () => {
           <li>your typical work pattern when you use the shift or timesheet calculators (usual start and end hour, days per week, average shift length, unpaid break) — never the calendar dates you worked;</li>
           <li>broad ranges for entries you make (RRSP contribution as a share of pay, shift premium, overtime hours, tips as a share of pay) — always ranges;</li>
           <li>if you use “find the salary” to work back from a take-home amount, the monthly take-home you asked for, as a range (such as “$4k–$5k”) — never the amount;</li>
+          <li>whether you ticked “I support a spouse or common-law partner” (yes or no) — never your spouse’s income;</li>
           <li>whether you were signed in (yes/no — never which account), and if you reopen a saved calculation and change it, the direction and rough size of the change and how long ago the original was saved — never the amounts;</li>
           <li>the hour and weekday on your own clock, and the time-zone name your browser reports (such as “America/Toronto”), which we use to check the map, not to place you;</li>
           <li>whether this device has recorded a calculation before — a single yes/no flag stored on the device, not an identifier;</li>

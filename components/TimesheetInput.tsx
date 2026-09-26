@@ -1,6 +1,7 @@
 'use client';
 import React, { useState, useEffect } from 'react';
 import { TimesheetInputs, TimesheetEntry, Province, PayFrequency } from '../types';
+import SpouseClaim from './SpouseClaim';
 import { PROVINCIAL_DATA } from '../constants';
 import { useAnonymousTimesheet } from '../hooks/useAnonymousTimesheet';
 import Toast from './Toast';
@@ -272,6 +273,7 @@ const TimesheetInput: React.FC<Props> = ({ inputs, setInputs }) => {
                 <option key={key} value={key}>{data.name}</option>
               ))}
             </select>
+            <SpouseClaim value={inputs.spouseNetIncome} onChange={(v) => setInputs({ ...inputs, spouseNetIncome: v })} />
           </div>
 
           {/* Hourly Wage */}
