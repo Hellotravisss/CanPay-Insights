@@ -40,3 +40,7 @@ jobs:
       - run: npx playwright install --with-deps chromium
       - run: sleep 30 && npm run audit:live
       - run: npm run audit:a11y
+      # Every sentence in which the site describes itself must be registered
+      # in scripts/claims.json with what backs it; new or reworded text fails
+      # here until someone classifies it (node scripts/liveClaims.mjs --unregistered).
+      - run: npm run audit:claims

@@ -24,6 +24,17 @@ No gate covers INPUT rates that are not tax rates. The 13 minimum wages in
 `scripts/minwage-takehome.ts` went stale once (2026-09-01, NU and NWT): check them against each
 government's own page whenever you audit.
 
+## After every deploy (live gates, in `.github/workflows/deploy.yml`)
+
+`audit:live` (written promises: widget, research page, data room) → `audit:a11y` (axe, WCAG 2.1 AA,
+19 pages) → `audit:claims`. The last one checks every sentence in which the site describes itself
+(privacy, about, terms, refunds, widget, research, data, /zh, llms.txt…) against `scripts/claims.json`.
+Changing such a sentence fails the deploy check until it is classified:
+`node scripts/liveClaims.mjs --unregistered`, then add each sentence with its backing
+(`check:` / `gate:` / `manual` + note + reviewed date / `not-a-claim`). Never mark a sentence
+`manual` without re-reading the code it describes. `audit:dataset` (in prebuild) keeps the open
+dataset equal to the engine and dates it automatically.
+
 ## After an engine change
 
 Follow `REPUBLISH` in the insights-kit repo: regenerate generated surfaces, never hand-edit them;

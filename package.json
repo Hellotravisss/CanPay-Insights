@@ -25,7 +25,8 @@
     "audit:live": "node scripts/livePromises.mjs",
     "audit:enginecases": "TZ=America/Vancouver tsx scripts/auditEngineCases.ts && TZ=America/St_Johns tsx scripts/auditEngineCases.ts",
     "audit:a11y": "node scripts/liveA11y.mjs",
-    "audit:dataset": "tsx scripts/generate-dataset.ts --check"
+    "audit:dataset": "tsx scripts/generate-dataset.ts --check",
+    "audit:claims": "node scripts/liveClaims.mjs"
   },
   "dependencies": {
     "@google/genai": "^1.30.0",

@@ -1,0 +1,1844 @@
+{
+ "claims": [
+  {
+   "page": "/privacy",
+   "text": "CanPay Insights (“we”, “our”, “us”) is a free Canadian take-home pay calculator, with two optional paid reports, published at canpayinsights.ca and as the CanPay Insights app for iPhone (together, the “Service”).",
+   "backing": "check:products-two"
+  },
+  {
+   "page": "/privacy",
+   "text": "It sends no work pattern, stores nothing in the browser, and loads nothing from any other website.",
+   "backing": "check:storage-disclosed"
+  },
+  {
+   "page": "/privacy",
+   "text": "A website that embeds it with &notelemetry=1 turns even that off: the widget then sends nothing at all.",
+   "backing": "check:optout-silences-site"
+  },
+  {
+   "page": "/privacy",
+   "text": "The widget stores nothing in the browser, so it records no “before” flag;",
+   "backing": "check:storage-disclosed"
+  },
+  {
+   "page": "/privacy",
+   "text": "These records contain no names, no account identifiers, no IP addresses and no device fingerprints, and are not linked back to you.",
+   "backing": "check:no-ip-column"
+  },
+  {
+   "page": "/privacy",
+   "text": "Open any page of this site with?notelemetry=1 added to the address and this browser will record nothing from then on — no calculation records and no page-view counting (?notelemetry=0 turns it back on).",
+   "backing": "check:optout-silences-site"
+  },
+  {
+   "page": "/privacy",
+   "text": "The choice is stored in this browser for this site, so it does not follow you to other browsers or into our calculator where another website embeds it; a website that embeds it can switch recording off for all its visitors by adding &notelemetry=1 to the widget’s address.",
+   "backing": "check:optout-silences-site"
+  },
+  {
+   "page": "/privacy",
+   "text": "Your IP address is not stored — not in these records, not in logs we keep.",
+   "backing": "check:no-ip-column"
+  },
+  {
+   "page": "/privacy",
+   "text": "The prefix is remembered on your device so you are not asked again; press “Change” to replace it, or clear your browser’s site data to remove it.",
+   "backing": "check:storage-disclosed"
+  },
+  {
+   "page": "/privacy",
+   "text": "Every figure we publish or license is a count for an area of thousands of households and is withheld unless at least twenty people are behind it.",
+   "backing": "check:publish-floor-20"
+  },
+  {
+   "page": "/privacy",
+   "text": "4 Cookies, local storage and analytics",
+   "backing": "check:no-anon-cookies"
+  },
+  {
+   "page": "/privacy",
+   "text": "Cookies only if you sign in.",
+   "backing": "check:no-anon-cookies"
+  },
+  {
+   "page": "/privacy",
+   "text": "Signing in sets a cookie named cp_session that keeps you signed in for 30 days.",
+   "backing": "check:session-30-days"
+  },
+  {
+   "page": "/privacy",
+   "text": "While you sign in with Google or Apple, a second cookie ( cp_oauth or cp_apple ) carries the sign-in request for up to ten minutes and is then removed.",
+   "backing": "check:no-anon-cookies"
+  },
+  {
+   "page": "/privacy",
+   "text": "We use no advertising or third-party tracking cookies, which is why this site has no cookie banner.",
+   "backing": "check:no-anon-cookies"
+  },
+  {
+   "page": "/privacy",
+   "text": "Local storage on your device holds your language choice, your calculator settings when signed out, the calculations and timesheet entries you save while signed out, the industry you last compared against, the telemetry opt-out flag, the remembered postal-code prefix and the “has calculated before” flag, plus three entries for page-view counting (below): a session number for the tab ( _av_sid ), a “visited before” flag ( _av_seen ) and an off switch ( _av_off ).",
+   "backing": "check:optout-silences-site"
+  },
+  {
+   "page": "/privacy",
+   "text": "Two cookieless counters run on this site.",
+   "backing": "check:no-anon-cookies"
+  },
+  {
+   "page": "/privacy",
+   "text": "Neither sets a cookie or stores an IP address.",
+   "backing": "check:no-ip-column"
+  },
+  {
+   "page": "/privacy",
+   "text": "We do not use Google Analytics or any advertising network.",
+   "backing": "check:hosts-disclosed"
+  },
+  {
+   "page": "/privacy",
+   "text": "Our own database never receives your IP address.",
+   "backing": "check:no-ip-column"
+  },
+  {
+   "page": "/privacy",
+   "text": "The app does not yet have a switch to turn these statistics off; until it does, if you do not want them recorded, use the website with the opt-out in section 2.",
+   "backing": "check:optout-silences-site"
+  },
+  {
+   "page": "/privacy",
+   "text": "Because the statistical records carry no identity, requests about them cannot be matched to a person — but the opt-out in section 2 stops any further recording from your browser, and “Change” or clearing site data removes a stored postal-code prefix.",
+   "backing": "check:optout-silences-site"
+  },
+  {
+   "page": "/privacy",
+   "text": "We answer within 30 days.",
+   "backing": "check:session-30-days"
+  },
+  {
+   "page": "/fr/confidentialite",
+   "text": "CanPay Insights (« nous ») est un calculateur gratuit de salaire net canadien, avec deux rapports payants facultatifs, publié à canpayinsights.ca et sous forme d’application CanPay Insights pour iPhone (ensemble, le « Service »).",
+   "backing": "check:products-two"
+  },
+  {
+   "page": "/fr/confidentialite",
+   "text": "Il ne transmet aucun horaire de travail, ne conserve rien dans le navigateur et ne charge rien depuis un autre site.",
+   "backing": "check:storage-disclosed"
+  },
+  {
+   "page": "/fr/confidentialite",
+   "text": "Un site qui l’intègre avec &notelemetry=1 désactive même cela: le widget ne transmet alors plus rien.",
+   "backing": "check:optout-silences-site"
+  },
+  {
+   "page": "/fr/confidentialite",
+   "text": "Ces fiches ne contiennent ni nom, ni identifiant de compte, ni adresse IP, ni empreinte d’appareil, et ne sont pas reliées à vous.",
+   "backing": "check:no-ip-column"
+  },
+  {
+   "page": "/fr/confidentialite",
+   "text": "Ouvrez n’importe quelle page du site avec?notelemetry=1 ajouté à l’adresse et ce navigateur n’enregistrera plus rien — ni fiche de calcul, ni comptage des pages vues (?notelemetry=0 réactive).",
+   "backing": "check:optout-silences-site"
+  },
+  {
+   "page": "/fr/confidentialite",
+   "text": "Ce choix est gardé dans ce navigateur pour ce site: il ne vous suit ni dans d’autres navigateurs ni dans notre calculateur intégré à un autre site; un site qui l’intègre peut couper l’enregistrement pour tous ses visiteurs en ajoutant &notelemetry=1 à l’adresse du widget.",
+   "backing": "check:optout-silences-site"
+  },
+  {
+   "page": "/fr/confidentialite",
+   "text": "Votre adresse IP n’est pas conservée — ni dans ces fiches, ni dans des journaux que nous garderions.",
+   "backing": "check:no-ip-column"
+  },
+  {
+   "page": "/fr/confidentialite",
+   "text": "Le préfixe est mémorisé sur votre appareil pour ne pas vous le redemander; appuyez sur « Modifier » pour le remplacer, ou effacez les données de site de votre navigateur pour le supprimer.",
+   "backing": "check:storage-disclosed"
+  },
+  {
+   "page": "/fr/confidentialite",
+   "text": "4 Témoins, stockage local et mesure d’audience",
+   "backing": "check:no-anon-cookies"
+  },
+  {
+   "page": "/fr/confidentialite",
+   "text": "Des témoins seulement si vous vous connectez.",
+   "backing": "check:no-anon-cookies"
+  },
+  {
+   "page": "/fr/confidentialite",
+   "text": "La connexion dépose un témoin nommé cp_session qui vous garde connecté pendant 30 jours.",
+   "backing": "check:session-30-days"
+  },
+  {
+   "page": "/fr/confidentialite",
+   "text": "Pendant une connexion par Google ou Apple, un second témoin ( cp_oauth ou cp_apple ) porte la demande de connexion pendant dix minutes au plus, puis est supprimé.",
+   "backing": "check:no-anon-cookies"
+  },
+  {
+   "page": "/fr/confidentialite",
+   "text": "Nous n’utilisons aucun témoin publicitaire ni de pistage tiers; c’est pourquoi ce site n’a pas de bandeau de témoins.",
+   "backing": "check:no-anon-cookies"
+  },
+  {
+   "page": "/fr/confidentialite",
+   "text": "Le stockage de session de l’onglet conserve aussi la page où votre visite a commencé; il est vidé à la fermeture de l’onglet.",
+   "backing": "check:storage-disclosed"
+  },
+  {
+   "page": "/fr/confidentialite",
+   "text": "Deux compteurs sans témoin fonctionnent sur ce site.",
+   "backing": "check:no-anon-cookies"
+  },
+  {
+   "page": "/fr/confidentialite",
+   "text": "Aucun des deux ne dépose de témoin ni ne conserve d’adresse IP.",
+   "backing": "check:no-ip-column"
+  },
+  {
+   "page": "/fr/confidentialite",
+   "text": "Nous n’utilisons ni Google Analytics ni aucun réseau publicitaire.",
+   "backing": "check:hosts-disclosed"
+  },
+  {
+   "page": "/fr/confidentialite",
+   "text": "Notre propre base de données ne reçoit jamais votre adresse IP.",
+   "backing": "check:no-ip-column"
+  },
+  {
+   "page": "/fr/confidentialite",
+   "text": "Nous répondons dans les 30 jours.",
+   "backing": "check:session-30-days"
+  },
+  {
+   "page": "/about",
+   "text": "Enter an hourly wage, annual salary, or timesheet and instantly see what you actually keep after federal tax, provincial tax, CPP/CPP2, and EI — for any province or territory, in ten languages.",
+   "backing": "check:ten-languages"
+  },
+  {
+   "page": "/about",
+   "text": "We sell two optional paid reports (a province-move report and a job-offer comparison, $9 each) that use the same engine as the free calculator.",
+   "backing": "check:report-price-9"
+  },
+  {
+   "page": "/about",
+   "text": "Our 2026 take-home pay figures — net pay, federal and provincial tax, CPP/CPP2, EI and Quebec QPP/QPIP for every province and territory across $30k–$200k — are published as an open dataset under a CC BY 4.0 licence.",
+   "backing": "gate:audit:dataset"
+  },
+  {
+   "page": "/terms",
+   "text": "We sell two digital reports (currently the Province Move Report and the Offer Comparison), each priced in Canadian dollars at the price shown at checkout, plus any applicable tax.",
+   "backing": "check:products-two"
+  },
+  {
+   "page": "/refunds",
+   "text": "Everything on CanPay Insights is free except two digital reports — the Province Move Report and the Offer Comparison — sold for a one-time price in Canadian dollars through Stripe.",
+   "backing": "check:products-two"
+  },
+  {
+   "page": "/refunds",
+   "text": "A report is generated from your own numbers and delivered instantly, so it cannot be “returned”, but in practice we refund these requests too — we would rather learn why the report fell short than keep nine dollars.",
+   "backing": "check:report-price-9"
+  },
+  {
+   "page": "/widget",
+   "text": "One line of HTML gives your visitors an accurate Canadian salary-after-tax calculator — 2026 rates for every province and territory, in ten languages, checked line by line against the payroll deduction tables the CRA publishes for employers.",
+   "backing": "check:ten-languages"
+  },
+  {
+   "page": "/widget",
+   "text": "Before every release the engine is compared with the CRA payroll deduction tables (T4032) and the Revenu Québec source deduction table — more than 10,000 rows — and a release that disagrees with them does not ship.",
+   "backing": "gate:audit:engine"
+  },
+  {
+   "page": "/widget",
+   "text": "Yes — add URL parameters to the iframe src:?province=BC (two-letter code) and &lang= with one of ten languages: en, fr, zh, pa (Punjabi), hi (Hindi), tl (Tagalog), es (Spanish), uk (Ukrainian), ko (Korean), or vi (Vietnamese).",
+   "backing": "check:ten-languages"
+  },
+  {
+   "page": "/widget",
+   "text": "It sets no cookies, stores nothing in your visitors' browsers and loads nothing from any domain but canpayinsights.ca.",
+   "backing": "check:no-anon-cookies"
+  },
+  {
+   "page": "/widget",
+   "text": "No name, account, IP address or fingerprint.",
+   "backing": "check:no-ip-column"
+  },
+  {
+   "page": "/widget",
+   "text": "To record nothing at all, add &notelemetry=1 to the iframe src.",
+   "backing": "check:optout-silences-site"
+  },
+  {
+   "page": "/research/pay-calculator-behaviour",
+   "text": "Between August 7, 2026 and September 25, 2026 it recorded 5,315 anonymous calculations across 1,502 visits.",
+   "backing": "gate:audit:live",
+   "note": "research figures are rendered live from the same JSON; audit:live checks page n = JSON n"
+  },
+  {
+   "page": "/research/pay-calculator-behaviour",
+   "text": "These are people who went looking for a pay calculator, not a sample of Canadians: 65 % of the calculations sit below the median wage for the province chosen.",
+   "backing": "gate:audit:live",
+   "note": "research figures are rendered live from the same JSON; audit:live checks page n = JSON n"
+  },
+  {
+   "page": "/research/pay-calculator-behaviour",
+   "text": "One visitor trying twenty figures should not count twenty times, so the headline gives each visit a single vote: where it ended against where it began.",
+   "backing": "check:publish-floor-20"
+  },
+  {
+   "page": "/research/pay-calculator-behaviour",
+   "text": "Counting every individual change instead gives 59 % ( 1,049 up, 727 down).",
+   "backing": "gate:audit:live",
+   "note": "research figures are rendered live from the same JSON; audit:live checks page n = JSON n"
+  },
+  {
+   "page": "/research/pay-calculator-behaviour",
+   "text": "Keeping every row instead gives a floor: at least 47 % of all shift calculations do not start at 9 a.m., and at least 6 % start between 6 p.m.",
+   "backing": "gate:audit:live",
+   "note": "research figures are rendered live from the same JSON; audit:live checks page n = JSON n"
+  },
+  {
+   "page": "/research/pay-calculator-behaviour",
+   "text": "The calculator offers ten languages, and the rest of the traffic spreads thinly across French, Korean, Spanish, Punjabi, Hindi, Tagalog, Ukrainian and Vietnamese.",
+   "backing": "check:ten-languages"
+  },
+  {
+   "page": "/research/pay-calculator-behaviour",
+   "text": "Of 3,885 schedules entered by hourly workers, 29 % cover at least one weekend day.",
+   "backing": "gate:audit:live",
+   "note": "research figures are rendered live from the same JSON; audit:live checks page n = JSON n"
+  },
+  {
+   "page": "/research/pay-calculator-behaviour",
+   "text": "No name, account, exact income, IP address or device fingerprint.",
+   "backing": "check:no-ip-column"
+  },
+  {
+   "page": "/research/pay-calculator-behaviour",
+   "text": "The tax engine behind the calculator is compared with the CRA’s payroll deduction tables before every release.",
+   "backing": "gate:audit:engine"
+  },
+  {
+   "page": "/research/pay-calculator-behaviour",
+   "text": "CanPay Insights, What people do with a pay number, 5,315 anonymous calculations, figures as of September 25, 2026.",
+   "backing": "gate:audit:live",
+   "note": "research figures are rendered live from the same JSON; audit:live checks page n = JSON n"
+  },
+  {
+   "page": "/research/pay-calculator-behaviour",
+   "text": "Any figure we send has at least twenty visits behind it.",
+   "backing": "check:publish-floor-20"
+  },
+  {
+   "page": "/data",
+   "text": "Every figure is machine-checked.",
+   "backing": "gate:audit:dataset"
+  },
+  {
+   "page": "/llms.txt",
+   "text": "Available in ten languages (English, French, Chinese, Punjabi, Hindi, Tagalog, Spanish, Ukrainian, Korean, Vietnamese), no signup needed; the calculator is free (two optional paid reports, a province-move report and a job-offer comparison, are sold separately).",
+   "backing": "check:ten-languages"
+  },
+  {
+   "page": "/",
+   "text": "No signup, no spreadsheet, just a quick take-home pay estimate.",
+   "backing": "manual",
+   "note": "The calculator and widget have no paywall or sign-up gate; the only paid items are the two reports (check:products-two).",
+   "reviewed": "2026-09-25"
+  },
+  {
+   "page": "/privacy",
+   "text": "Version française Terms of Service Refund Policy",
+   "backing": "not-a-claim"
+  },
+  {
+   "page": "/privacy",
+   "text": "1 What stays on your device, and what does not",
+   "backing": "not-a-claim"
+  },
+  {
+   "page": "/privacy",
+   "text": "If you save a calculation to an account, that one calculation is stored so you can reopen it on another device, and you can delete it at any time.",
+   "backing": "manual",
+   "note": "Checked on 2026-09-25: app/api/me deletes the account and strips user_id and email from purchases; Stripe hosts checkout; purchases table holds the listed fields.",
+   "reviewed": "2026-09-25"
+  },
+  {
+   "page": "/privacy",
+   "text": "What is sent is an anonymous record of each calculation, listed in full in section 2.",
+   "backing": "manual",
+   "note": "Checked on 2026-09-25 against the payload built in lib/telemetry.ts recordCalcEvent (fields sent, ranges not amounts, work pattern numbers); automated browsers never send, so no live test is possible.",
+   "reviewed": "2026-09-25"
+  },
+  {
+   "page": "/privacy",
+   "text": "Money appears in it only as ranges.",
+   "backing": "manual",
+   "note": "Checked on 2026-09-25 against the payload built in lib/telemetry.ts recordCalcEvent (fields sent, ranges not amounts, work pattern numbers); automated browsers never send, so no live test is possible.",
+   "reviewed": "2026-09-25"
+  },
+  {
+   "page": "/privacy",
+   "text": "Your work pattern is the one thing sent as plain numbers: when you use the shift or timesheet calculator, the usual start and end hour, days per week, average shift length and unpaid break.",
+   "backing": "manual",
+   "note": "Checked on 2026-09-25 against the payload built in lib/telemetry.ts recordCalcEvent (fields sent, ranges not amounts, work pattern numbers); automated browsers never send, so no live test is possible.",
+   "reviewed": "2026-09-25"
+  },
+  {
+   "page": "/privacy",
+   "text": "2 Anonymous usage statistics",
+   "backing": "not-a-claim"
+  },
+  {
+   "page": "/privacy",
+   "text": "To understand how the calculator is used and to publish research such as “which income ranges Canadians calculate most, by province”, we record one anonymous record per settled calculation.",
+   "backing": "manual",
+   "note": "Checked on 2026-09-25 against the payload built in lib/telemetry.ts recordCalcEvent (fields sent, ranges not amounts, work pattern numbers); automated browsers never send, so no live test is possible.",
+   "reviewed": "2026-09-25"
+  },
+  {
+   "page": "/privacy",
+   "text": "the calculator used, the province selected, and your gross income as a range (such as “$50k–$70k”) — never the amount;",
+   "backing": "manual",
+   "note": "Checked on 2026-09-25 against the payload built in lib/telemetry.ts recordCalcEvent (fields sent, ranges not amounts, work pattern numbers); automated browsers never send, so no live test is possible.",
+   "reviewed": "2026-09-25"
+  },
+  {
+   "page": "/privacy",
+   "text": "the interface language, your device type (phone, tablet or computer), browser family, operating-system family and, on some phones, the handset maker — never the full browser signature or a device fingerprint;",
+   "backing": "manual",
+   "note": "Checked on 2026-09-25 against the payload built in lib/telemetry.ts recordCalcEvent (fields sent, ranges not amounts, work pattern numbers); automated browsers never send, so no live test is possible.",
+   "reviewed": "2026-09-25"
+  },
+  {
+   "page": "/privacy",
+   "text": "the pay frequency you chose, a work-type label worked out from what you entered (full-time or part-time hourly, salaried, tipped, shift) — worked out, never asked — and where your pay sits against Statistics Canada’s median for your province, as a range, together with the median we compared it with;",
+   "backing": "manual",
+   "note": "Checked on 2026-09-25 against the payload built in lib/telemetry.ts recordCalcEvent (fields sent, ranges not amounts, work pattern numbers); automated browsers never send, so no live test is possible.",
+   "reviewed": "2026-09-25"
+  },
+  {
+   "page": "/privacy",
+   "text": "whether you opened the detailed breakdown, and, if you tap a paid report, which one — never anything about a purchase;",
+   "backing": "manual",
+   "note": "Checked on 2026-09-25 against the payload built in lib/telemetry.ts recordCalcEvent (fields sent, ranges not amounts, work pattern numbers); automated browsers never send, so no live test is possible.",
+   "reviewed": "2026-09-25"
+  },
+  {
+   "page": "/privacy",
+   "text": "which page of our own site you were on before calculating (the path only — never a link from another site and never anything after a “?”);",
+   "backing": "manual",
+   "note": "Checked on 2026-09-25 against the payload built in lib/telemetry.ts recordCalcEvent (fields sent, ranges not amounts, work pattern numbers); automated browsers never send, so no live test is possible.",
+   "reviewed": "2026-09-25"
+  },
+  {
+   "page": "/privacy",
+   "text": "optional answers you choose to give: the industry you compare against (and its position in the list, and whether this browser had chosen it before), why you are calculating, whether the result matched your expectation, where you work (on-site, remote, hybrid), your age group, tenure, union membership, employer size and vacation days;",
+   "backing": "manual",
+   "note": "Checked on 2026-09-25 against the payload built in lib/telemetry.ts recordCalcEvent (fields sent, ranges not amounts, work pattern numbers); automated browsers never send, so no live test is possible.",
+   "reviewed": "2026-09-25"
+  },
+  {
+   "page": "/privacy",
+   "text": "your typical work pattern when you use the shift or timesheet calculators (usual start and end hour, days per week, average shift length, unpaid break) — never the calendar dates you worked;",
+   "backing": "manual",
+   "note": "Checked on 2026-09-25 against the payload built in lib/telemetry.ts recordCalcEvent (fields sent, ranges not amounts, work pattern numbers); automated browsers never send, so no live test is possible.",
+   "reviewed": "2026-09-25"
+  },
+  {
+   "page": "/privacy",
+   "text": "whether you were signed in (yes/no — never which account), and if you reopen a saved calculation and change it, the direction and rough size of the change and how long ago the original was saved — never the amounts;",
+   "backing": "manual",
+   "note": "Checked on 2026-09-25 against the payload built in lib/telemetry.ts recordCalcEvent (fields sent, ranges not amounts, work pattern numbers); automated browsers never send, so no live test is possible.",
+   "reviewed": "2026-09-25"
+  },
+  {
+   "page": "/privacy",
+   "text": "the hour and weekday on your own clock, and the time-zone name your browser reports (such as “America/Toronto”), which we use to check the map, not to place you;",
+   "backing": "manual",
+   "note": "Checked on 2026-09-25 against the payload built in lib/telemetry.ts recordCalcEvent (fields sent, ranges not amounts, work pattern numbers); automated browsers never send, so no live test is possible.",
+   "reviewed": "2026-09-25"
+  },
+  {
+   "page": "/privacy",
+   "text": "whether this device has recorded a calculation before — a single yes/no flag stored on the device, not an identifier;",
+   "backing": "manual",
+   "note": "Checked on 2026-09-25 against the payload built in lib/telemetry.ts recordCalcEvent (fields sent, ranges not amounts, work pattern numbers); automated browsers never send, so no live test is possible.",
+   "reviewed": "2026-09-25"
+  },
+  {
+   "page": "/privacy",
+   "text": "on the calculator other websites embed (our “widget”): the domain of the website it is embedded on — never the page, and never the visitor’s own address.",
+   "backing": "manual",
+   "note": "Checked on 2026-09-25 against the payload built in lib/telemetry.ts recordCalcEvent (fields sent, ranges not amounts, work pattern numbers); automated browsers never send, so no live test is possible.",
+   "reviewed": "2026-09-25"
+  },
+  {
+   "page": "/privacy",
+   "text": "Records from one visit are grouped by a random temporary identifier that is discarded when you leave and is never reused.",
+   "backing": "manual",
+   "note": "Checked on 2026-09-25 against the payload built in lib/telemetry.ts recordCalcEvent (fields sent, ranges not amounts, work pattern numbers); automated browsers never send, so no live test is possible.",
+   "reviewed": "2026-09-25"
+  },
+  {
+   "page": "/privacy",
+   "text": "The iPhone app has no switch yet (section 6).",
+   "backing": "manual",
+   "note": "Checked on 2026-09-25 against CanPayApp/app.json (photo-library permissions only). The app opt-out switch ships in the next release; update these sentences then.",
+   "reviewed": "2026-09-25"
+  },
+  {
+   "page": "/privacy",
+   "text": "There are three levels, and only the first happens without you doing anything.",
+   "backing": "manual",
+   "note": "Location handling as implemented and reviewed for the 2026-09-15 privacy impact assessment (lib/telemetry.ts rounding, FSA input). Not re-read on 2026-09-25.",
+   "reviewed": "2026-09-25"
+  },
+  {
+   "page": "/privacy",
+   "text": "We keep that centre point rounded to about 11 km.",
+   "backing": "manual",
+   "note": "Location handling as implemented and reviewed for the 2026-09-15 privacy impact assessment (lib/telemetry.ts rounding, FSA input). Not re-read on 2026-09-25.",
+   "reviewed": "2026-09-25"
+  },
+  {
+   "page": "/privacy",
+   "text": "This is city-level and it is the same whether or not you answer anything below.",
+   "backing": "manual",
+   "note": "Location handling as implemented and reviewed for the 2026-09-15 privacy impact assessment (lib/telemetry.ts rounding, FSA input). Not re-read on 2026-09-25.",
+   "reviewed": "2026-09-25"
+  },
+  {
+   "page": "/privacy",
+   "text": "We keep the three characters only.",
+   "backing": "manual",
+   "note": "Location handling as implemented and reviewed for the 2026-09-15 privacy impact assessment (lib/telemetry.ts rounding, FSA input). Not re-read on 2026-09-25.",
+   "reviewed": "2026-09-25"
+  },
+  {
+   "page": "/privacy",
+   "text": "A full six-character postal code, which identifies about fifteen households, is never accepted.",
+   "backing": "manual",
+   "note": "Location handling as implemented and reviewed for the 2026-09-15 privacy impact assessment (lib/telemetry.ts rounding, FSA input). Not re-read on 2026-09-25.",
+   "reviewed": "2026-09-25"
+  },
+  {
+   "page": "/privacy",
+   "text": "What reaches us is that rounded point and that prefix — never the precise reading, and never more than once per calculation.",
+   "backing": "manual",
+   "note": "Location handling as implemented and reviewed for the 2026-09-15 privacy impact assessment (lib/telemetry.ts rounding, FSA input). Not re-read on 2026-09-25.",
+   "reviewed": "2026-09-25"
+  },
+  {
+   "page": "/privacy",
+   "text": "Neighbourhood-level answers let us publish and license aggregated statistics — for example, how many people in a given postal-code area calculated pay in a given income range this quarter — to organisations that have a use for them, including researchers, journalists, and real-estate or financial companies.",
+   "backing": "manual",
+   "note": "Licence terms are a commitment for future licence agreements; no licensee exists yet (2026-09-25). Published files carry the licence named here.",
+   "reviewed": "2026-09-25"
+  },
+  {
+   "page": "/privacy",
+   "text": "Licensees receive statistics, never records; their agreements prohibit attempting to identify anyone and prohibit reselling the data.",
+   "backing": "manual",
+   "note": "Licence terms are a commitment for future licence agreements; no licensee exists yet (2026-09-25). Published files carry the licence named here.",
+   "reviewed": "2026-09-25"
+  },
+  {
+   "page": "/privacy",
+   "text": "We do not sell, rent or share personal information.",
+   "backing": "manual",
+   "note": "Legal or policy statement, not a behaviour a script can observe.",
+   "reviewed": "2026-09-25"
+  },
+  {
+   "page": "/privacy",
+   "text": "The location function is deactivated by default and activated only by your action, as the Act respecting the protection of personal information in the private sector requires; the paragraph above is the notice that Act calls for.",
+   "backing": "manual",
+   "note": "Legal or policy statement, not a behaviour a script can observe.",
+   "reviewed": "2026-09-25"
+  },
+  {
+   "page": "/privacy",
+   "text": "They are essential to that feature, are not used for tracking or advertising, and are not set unless you sign in.",
+   "backing": "check:no-anon-cookies"
+  },
+  {
+   "page": "/privacy",
+   "text": "None of it identifies you, it stays on your device, and clearing your browser’s site data removes all of it.",
+   "backing": "check:storage-disclosed"
+  },
+  {
+   "page": "/privacy",
+   "text": "Neither runs when you have opted out, on the calculator other websites embed, or on report pages — whose address carries the key to your report.",
+   "backing": "check:optout-silences-site"
+  },
+  {
+   "page": "/privacy",
+   "text": "The site runs on Cloudflare, which processes every request to deliver it and protect it from abuse; Cloudflare may keep short-lived connection logs under its own privacy policy.",
+   "backing": "manual",
+   "note": "Legal or policy statement, not a behaviour a script can observe.",
+   "reviewed": "2026-09-25"
+  },
+  {
+   "page": "/privacy",
+   "text": "An account is optional; every calculator feature works without one.",
+   "backing": "manual",
+   "note": "Checked on 2026-09-25: app/api/me deletes the account and strips user_id and email from purchases; Stripe hosts checkout; purchases table holds the listed fields.",
+   "reviewed": "2026-09-25"
+  },
+  {
+   "page": "/privacy",
+   "text": "With Google or Apple we receive the name, email address and profile picture that provider shares; with an emailed link, only your email address.",
+   "backing": "manual",
+   "note": "Checked on 2026-09-25: app/api/me deletes the account and strips user_id and email from purchases; Stripe hosts checkout; purchases table holds the listed fields.",
+   "reviewed": "2026-09-25"
+  },
+  {
+   "page": "/privacy",
+   "text": "We store your saved calculations, timesheets and settings so they follow you across devices.",
+   "backing": "manual",
+   "note": "Checked on 2026-09-25: app/api/me deletes the account and strips user_id and email from purchases; Stripe hosts checkout; purchases table holds the listed fields.",
+   "reviewed": "2026-09-25"
+  },
+  {
+   "page": "/privacy",
+   "text": "If you buy a report, payment is taken by Stripe on Stripe’s page; we never see your card number.",
+   "backing": "manual",
+   "note": "Checked on 2026-09-25: app/api/me deletes the account and strips user_id and email from purchases; Stripe hosts checkout; purchases table holds the listed fields.",
+   "reviewed": "2026-09-25"
+  },
+  {
+   "page": "/privacy",
+   "text": "We keep the purchase record (product, amount, date, the email Stripe gives us, and the province and income range the report was about) because tax law requires a seller to keep sales records — currently for six years.",
+   "backing": "manual",
+   "note": "Checked on 2026-09-25: app/api/me deletes the account and strips user_id and email from purchases; Stripe hosts checkout; purchases table holds the listed fields.",
+   "reviewed": "2026-09-25"
+  },
+  {
+   "page": "/privacy",
+   "text": "Open the account menu on this site, or the history drawer in the app, and choose “Delete Account”.",
+   "backing": "manual",
+   "note": "Checked on 2026-09-25: app/api/me deletes the account and strips user_id and email from purchases; Stripe hosts checkout; purchases table holds the listed fields.",
+   "reviewed": "2026-09-25"
+  },
+  {
+   "page": "/privacy",
+   "text": "The anonymous statistics in sections 2 and 3 are unaffected — they carry nothing that could be traced to you in the first place.",
+   "backing": "manual",
+   "note": "Checked on 2026-09-25: app/api/me deletes the account and strips user_id and email from purchases; Stripe hosts checkout; purchases table holds the listed fields.",
+   "reviewed": "2026-09-25"
+  },
+  {
+   "page": "/privacy",
+   "text": "The CanPay Insights app asks for no location permission and no contacts, camera or microphone access.",
+   "backing": "manual",
+   "note": "Checked on 2026-09-25 against CanPayApp/app.json (photo-library permissions only). The app opt-out switch ships in the next release; update these sentences then.",
+   "reviewed": "2026-09-25"
+  },
+  {
+   "page": "/privacy",
+   "text": "It asks for photo-library access only when you save a report image.",
+   "backing": "manual",
+   "note": "Checked on 2026-09-25 against CanPayApp/app.json (photo-library permissions only). The app opt-out switch ships in the next release; update these sentences then.",
+   "reviewed": "2026-09-25"
+  },
+  {
+   "page": "/privacy",
+   "text": "It records the same anonymous statistics as the website (section 2), placed at city level from the connection (section 3, level 1); the postal-code and device-location options in section 3 exist on the website only.",
+   "backing": "manual",
+   "note": "Checked on 2026-09-25 against CanPayApp/app.json (photo-library permissions only). The app opt-out switch ships in the next release; update these sentences then.",
+   "reviewed": "2026-09-25"
+  },
+  {
+   "page": "/privacy",
+   "text": "Each acts under its own privacy commitments and receives only what its function needs.",
+   "backing": "manual",
+   "note": "Legal or policy statement, not a behaviour a script can observe.",
+   "reviewed": "2026-09-25"
+  },
+  {
+   "page": "/privacy",
+   "text": "Licensees of aggregated statistics, as described in section 3 — statistics only, never records, under agreements that prohibit re-identification and resale.",
+   "backing": "manual",
+   "note": "Licence terms are a commitment for future licence agreements; no licensee exists yet (2026-09-25). Published files carry the licence named here.",
+   "reviewed": "2026-09-25"
+  },
+  {
+   "page": "/privacy",
+   "text": "8 How long we keep things",
+   "backing": "not-a-claim"
+  },
+  {
+   "page": "/privacy",
+   "text": "Anonymous calculation records: kept indefinitely, because they are the dataset and contain nothing that identifies you.",
+   "backing": "manual",
+   "note": "Retention commitment; purchase deletion after six years is a manual task (first due 2033).",
+   "reviewed": "2026-09-25"
+  },
+  {
+   "page": "/privacy",
+   "text": "Account data: until you delete the account.",
+   "backing": "manual",
+   "note": "Checked on 2026-09-25: app/api/me deletes the account and strips user_id and email from purchases; Stripe hosts checkout; purchases table holds the listed fields.",
+   "reviewed": "2026-09-25"
+  },
+  {
+   "page": "/privacy",
+   "text": "Purchase records: six years after the tax year of the sale, then deleted.",
+   "backing": "manual",
+   "note": "Retention commitment; purchase deletion after six years is a manual task (first due 2033).",
+   "reviewed": "2026-09-25"
+  },
+  {
+   "page": "/privacy",
+   "text": "Emails you send us: as long as needed to answer, then archived or deleted.",
+   "backing": "manual",
+   "note": "Retention commitment; purchase deletion after six years is a manual task (first due 2033).",
+   "reviewed": "2026-09-25"
+  },
+  {
+   "page": "/privacy",
+   "text": "You may ask what personal information we hold about you, ask us to correct it, withdraw consent, or ask for deletion.",
+   "backing": "manual",
+   "note": "Checked on 2026-09-25: app/api/me deletes the account and strips user_id and email from purchases; Stripe hosts checkout; purchases table holds the listed fields.",
+   "reviewed": "2026-09-25"
+  },
+  {
+   "page": "/privacy",
+   "text": "If you are not satisfied, you may complain to the Office of the Privacy Commissioner of Canada (priv.gc.ca) or, in Quebec, to the Commission d’accès à l’information (cai.gouv.qc.ca).",
+   "backing": "manual",
+   "note": "Legal or policy statement, not a behaviour a script can observe.",
+   "reviewed": "2026-09-25"
+  },
+  {
+   "page": "/privacy",
+   "text": "The Service is not directed at children under 13, and we do not knowingly collect their information.",
+   "backing": "manual",
+   "note": "Legal or policy statement, not a behaviour a script can observe.",
+   "reviewed": "2026-09-25"
+  },
+  {
+   "page": "/privacy",
+   "text": "We change this page when what we collect changes, and we say so on the changelog.",
+   "backing": "manual",
+   "note": "Changelog entry for 2026-09-25 exists (app/changelog/page.tsx).",
+   "reviewed": "2026-09-25"
+  },
+  {
+   "page": "/privacy",
+   "text": "It rewrites section 1 so that it no longer contradicts section 2 about the work pattern, describes what the embedded widget sends, and completes the list of what is kept in your browser (section 4).",
+   "backing": "manual",
+   "note": "Changelog entry for 2026-09-25 exists (app/changelog/page.tsx).",
+   "reviewed": "2026-09-25"
+  },
+  {
+   "page": "/fr/confidentialite",
+   "text": "Si vous enregistrez un calcul dans un compte, ce seul calcul est conservé pour que vous puissiez le rouvrir sur un autre appareil, et vous pouvez le supprimer à tout moment.",
+   "backing": "manual",
+   "note": "Checked on 2026-09-25: app/api/me deletes the account and strips user_id and email from purchases; Stripe hosts checkout; purchases table holds the listed fields.",
+   "reviewed": "2026-09-25"
+  },
+  {
+   "page": "/fr/confidentialite",
+   "text": "Ce qui est transmis, c’est un enregistrement anonyme de chaque calcul, décrit en entier à la section 2.",
+   "backing": "manual",
+   "note": "Checked on 2026-09-25 against the payload built in lib/telemetry.ts recordCalcEvent (fields sent, ranges not amounts, work pattern numbers); automated browsers never send, so no live test is possible.",
+   "reviewed": "2026-09-25"
+  },
+  {
+   "page": "/fr/confidentialite",
+   "text": "Votre horaire de travail est la seule chose transmise en chiffres exacts: lorsque vous utilisez le calculateur par quart ou par feuille de temps, l’heure habituelle de début et de fin, le nombre de jours par semaine, la durée moyenne d’un quart et la pause non payée.",
+   "backing": "manual",
+   "note": "Checked on 2026-09-25 against the payload built in lib/telemetry.ts recordCalcEvent (fields sent, ranges not amounts, work pattern numbers); automated browsers never send, so no live test is possible.",
+   "reviewed": "2026-09-25"
+  },
+  {
+   "page": "/fr/confidentialite",
+   "text": "Le calculateur que d’autres sites intègrent (notre « widget ») transmet moins: la province, le revenu sous forme de tranche, annuel ou horaire, la langue, le type d’appareil et la famille de navigateur, l’heure et le jour de la semaine, le nom du fuseau horaire, un identifiant de visite temporaire et le domaine où il est intégré.",
+   "backing": "manual",
+   "note": "Checked on 2026-09-25 against the payload built in lib/telemetry.ts recordCalcEvent (fields sent, ranges not amounts, work pattern numbers); automated browsers never send, so no live test is possible.",
+   "reviewed": "2026-09-25"
+  },
+  {
+   "page": "/fr/confidentialite",
+   "text": "2 Statistiques d’utilisation anonymes",
+   "backing": "not-a-claim"
+  },
+  {
+   "page": "/fr/confidentialite",
+   "text": "Pour comprendre l’usage du calculateur et publier des travaux tels que « quelles tranches de revenu les Canadiens calculent le plus, par province », nous enregistrons une fiche anonyme par calcul stabilisé.",
+   "backing": "manual",
+   "note": "Checked on 2026-09-25 against the payload built in lib/telemetry.ts recordCalcEvent (fields sent, ranges not amounts, work pattern numbers); automated browsers never send, so no live test is possible.",
+   "reviewed": "2026-09-25"
+  },
+  {
+   "page": "/fr/confidentialite",
+   "text": "le calculateur utilisé, la province choisie et votre revenu brut sous forme de tranche (par exemple « 50 k$–70 k$ ») — jamais le montant;",
+   "backing": "manual",
+   "note": "Checked on 2026-09-25 against the payload built in lib/telemetry.ts recordCalcEvent (fields sent, ranges not amounts, work pattern numbers); automated browsers never send, so no live test is possible.",
+   "reviewed": "2026-09-25"
+  },
+  {
+   "page": "/fr/confidentialite",
+   "text": "la langue de l’interface, votre type d’appareil (téléphone, tablette ou ordinateur), la famille de navigateur, la famille de système d’exploitation et, sur certains téléphones, le fabricant — jamais la signature complète du navigateur ni une empreinte d’appareil;",
+   "backing": "manual",
+   "note": "Checked on 2026-09-25 against the payload built in lib/telemetry.ts recordCalcEvent (fields sent, ranges not amounts, work pattern numbers); automated browsers never send, so no live test is possible.",
+   "reviewed": "2026-09-25"
+  },
+  {
+   "page": "/fr/confidentialite",
+   "text": "la fréquence de paie choisie, une catégorie de travail déduite de vos saisies (horaire à temps plein ou partiel, salarié, à pourboires, par quarts) — déduite, jamais demandée — et la position de votre paie par rapport à la médiane de Statistique Canada pour votre province, sous forme de fourchette, avec la médiane utilisée;",
+   "backing": "manual",
+   "note": "Checked on 2026-09-25 against the payload built in lib/telemetry.ts recordCalcEvent (fields sent, ranges not amounts, work pattern numbers); automated browsers never send, so no live test is possible.",
+   "reviewed": "2026-09-25"
+  },
+  {
+   "page": "/fr/confidentialite",
+   "text": "si vous avez ouvert le détail du calcul et, si vous touchez un rapport payant, lequel — jamais rien sur un achat;",
+   "backing": "manual",
+   "note": "Checked on 2026-09-25 against the payload built in lib/telemetry.ts recordCalcEvent (fields sent, ranges not amounts, work pattern numbers); automated browsers never send, so no live test is possible.",
+   "reviewed": "2026-09-25"
+  },
+  {
+   "page": "/fr/confidentialite",
+   "text": "la page de notre propre site où vous étiez avant de calculer (le chemin seulement — jamais un lien d’un autre site, jamais ce qui suit un «?",
+   "backing": "manual",
+   "note": "Checked on 2026-09-25 against the payload built in lib/telemetry.ts recordCalcEvent (fields sent, ranges not amounts, work pattern numbers); automated browsers never send, so no live test is possible.",
+   "reviewed": "2026-09-25"
+  },
+  {
+   "page": "/fr/confidentialite",
+   "text": "les réponses facultatives que vous choisissez de donner: le secteur auquel vous vous comparez (avec sa position dans la liste et si ce navigateur l’avait déjà choisi), la raison du calcul, si le résultat correspondait à vos attentes, votre mode de travail (sur place, à distance, hybride), votre groupe d’âge, votre ancienneté, votre appartenance syndicale, la taille de votre employeur et vos jours de vacances;",
+   "backing": "manual",
+   "note": "Checked on 2026-09-25 against the payload built in lib/telemetry.ts recordCalcEvent (fields sent, ranges not amounts, work pattern numbers); automated browsers never send, so no live test is possible.",
+   "reviewed": "2026-09-25"
+  },
+  {
+   "page": "/fr/confidentialite",
+   "text": "votre horaire type lorsque vous utilisez les calculateurs de quarts ou de feuilles de temps (heures habituelles de début et de fin, jours par semaine, durée moyenne d’un quart, pause non payée) — jamais les dates réellement travaillées;",
+   "backing": "manual",
+   "note": "Checked on 2026-09-25 against the payload built in lib/telemetry.ts recordCalcEvent (fields sent, ranges not amounts, work pattern numbers); automated browsers never send, so no live test is possible.",
+   "reviewed": "2026-09-25"
+  },
+  {
+   "page": "/fr/confidentialite",
+   "text": "si vous étiez connecté (oui/non — jamais quel compte) et, si vous rouvrez un calcul enregistré et le modifiez, le sens et l’ordre de grandeur du changement ainsi que l’ancienneté de l’original — jamais les montants;",
+   "backing": "manual",
+   "note": "Checked on 2026-09-25 against the payload built in lib/telemetry.ts recordCalcEvent (fields sent, ranges not amounts, work pattern numbers); automated browsers never send, so no live test is possible.",
+   "reviewed": "2026-09-25"
+  },
+  {
+   "page": "/fr/confidentialite",
+   "text": "l’heure et le jour de la semaine selon votre propre horloge, et le nom du fuseau horaire que déclare votre navigateur (par exemple « America/Toronto »), qui sert à vérifier la carte, non à vous situer;",
+   "backing": "manual",
+   "note": "Checked on 2026-09-25 against the payload built in lib/telemetry.ts recordCalcEvent (fields sent, ranges not amounts, work pattern numbers); automated browsers never send, so no live test is possible.",
+   "reviewed": "2026-09-25"
+  },
+  {
+   "page": "/fr/confidentialite",
+   "text": "sur le calculateur que d’autres sites intègrent (notre « widget »): le domaine du site qui l’intègre — jamais la page, jamais l’adresse du visiteur.",
+   "backing": "manual",
+   "note": "Checked on 2026-09-25 against the payload built in lib/telemetry.ts recordCalcEvent (fields sent, ranges not amounts, work pattern numbers); automated browsers never send, so no live test is possible.",
+   "reviewed": "2026-09-25"
+  },
+  {
+   "page": "/fr/confidentialite",
+   "text": "Le widget ne stocke rien dans le navigateur; il n’enregistre donc aucun indicateur « déjà venu »;",
+   "backing": "gate:audit:live"
+  },
+  {
+   "page": "/fr/confidentialite",
+   "text": "Les fiches d’une même visite sont regroupées par un identifiant temporaire aléatoire, supprimé à votre départ et jamais réutilisé.",
+   "backing": "manual",
+   "note": "Checked on 2026-09-25 against the payload built in lib/telemetry.ts recordCalcEvent (fields sent, ranges not amounts, work pattern numbers); automated browsers never send, so no live test is possible.",
+   "reviewed": "2026-09-25"
+  },
+  {
+   "page": "/fr/confidentialite",
+   "text": "Nous conservons ce point arrondi à environ 11 km.",
+   "backing": "manual",
+   "note": "Location handling as implemented and reviewed for the 2026-09-15 privacy impact assessment (lib/telemetry.ts rounding, FSA input). Not re-read on 2026-09-25.",
+   "reviewed": "2026-09-25"
+  },
+  {
+   "page": "/fr/confidentialite",
+   "text": "Nous ne gardons que les trois caractères.",
+   "backing": "manual",
+   "note": "Location handling as implemented and reviewed for the 2026-09-15 privacy impact assessment (lib/telemetry.ts rounding, FSA input). Not re-read on 2026-09-25.",
+   "reviewed": "2026-09-25"
+  },
+  {
+   "page": "/fr/confidentialite",
+   "text": "Un code postal complet de six caractères, qui désigne une quinzaine de ménages, n’est jamais accepté.",
+   "backing": "manual",
+   "note": "Location handling as implemented and reviewed for the 2026-09-15 privacy impact assessment (lib/telemetry.ts rounding, FSA input). Not re-read on 2026-09-25.",
+   "reviewed": "2026-09-25"
+  },
+  {
+   "page": "/fr/confidentialite",
+   "text": "Ce qui nous parvient, c’est ce point arrondi et ce préfixe — jamais la lecture précise, et jamais plus d’une fois par calcul.",
+   "backing": "manual",
+   "note": "Location handling as implemented and reviewed for the 2026-09-15 privacy impact assessment (lib/telemetry.ts rounding, FSA input). Not re-read on 2026-09-25.",
+   "reviewed": "2026-09-25"
+  },
+  {
+   "page": "/fr/confidentialite",
+   "text": "Refuser ne change rien au calculateur, et la saisie du préfixe reste toujours possible.",
+   "backing": "manual",
+   "note": "Location handling as implemented and reviewed for the 2026-09-15 privacy impact assessment (lib/telemetry.ts rounding, FSA input). Not re-read on 2026-09-25.",
+   "reviewed": "2026-09-25"
+  },
+  {
+   "page": "/fr/confidentialite",
+   "text": "Les réponses au niveau du quartier nous permettent de publier et de concéder sous licence des statistiques agrégées — par exemple, combien de personnes d’une zone postale donnée ont calculé une paie dans une tranche de revenu donnée ce trimestre — à des organisations qui en ont l’usage, y compris des chercheurs, des journalistes et des entreprises immobilières ou financières.",
+   "backing": "manual",
+   "note": "Licence terms are a commitment for future licence agreements; no licensee exists yet (2026-09-25). Published files carry the licence named here.",
+   "reviewed": "2026-09-25"
+  },
+  {
+   "page": "/fr/confidentialite",
+   "text": "Les licenciés reçoivent des statistiques, jamais des fiches; leurs ententes interdisent toute tentative d’identification et toute revente.",
+   "backing": "manual",
+   "note": "Licence terms are a commitment for future licence agreements; no licensee exists yet (2026-09-25). Published files carry the licence named here.",
+   "reviewed": "2026-09-25"
+  },
+  {
+   "page": "/fr/confidentialite",
+   "text": "Nous ne vendons, ne louons ni ne partageons de renseignements personnels.",
+   "backing": "manual",
+   "note": "Legal or policy statement, not a behaviour a script can observe.",
+   "reviewed": "2026-09-25"
+  },
+  {
+   "page": "/fr/confidentialite",
+   "text": "Ils sont essentiels à cette fonction, ne servent ni au pistage ni à la publicité, et ne sont pas déposés si vous ne vous connectez pas.",
+   "backing": "check:no-anon-cookies"
+  },
+  {
+   "page": "/fr/confidentialite",
+   "text": "Rien de cela ne vous identifie, tout reste sur votre appareil, et effacer les données de site de votre navigateur supprime le tout.",
+   "backing": "check:storage-disclosed"
+  },
+  {
+   "page": "/fr/confidentialite",
+   "text": "Le calculateur intégré à d’autres sites ne stocke rien.",
+   "backing": "gate:audit:live"
+  },
+  {
+   "page": "/fr/confidentialite",
+   "text": "Aucun des deux ne fonctionne si vous avez refusé, dans le calculateur intégré à d’autres sites, ni sur les pages de rapport — dont l’adresse contient la clé de votre rapport.",
+   "backing": "check:optout-silences-site"
+  },
+  {
+   "page": "/fr/confidentialite",
+   "text": "Le site fonctionne sur Cloudflare, qui traite chaque requête pour la servir et la protéger des abus; Cloudflare peut conserver de courts journaux de connexion selon sa propre politique.",
+   "backing": "manual",
+   "note": "Legal or policy statement, not a behaviour a script can observe.",
+   "reviewed": "2026-09-25"
+  },
+  {
+   "page": "/fr/confidentialite",
+   "text": "Avec Google ou Apple, nous recevons le nom, l’adresse courriel et la photo de profil que ce fournisseur partage; avec un lien par courriel, seulement votre adresse courriel.",
+   "backing": "manual",
+   "note": "Checked on 2026-09-25: app/api/me deletes the account and strips user_id and email from purchases; Stripe hosts checkout; purchases table holds the listed fields.",
+   "reviewed": "2026-09-25"
+  },
+  {
+   "page": "/fr/confidentialite",
+   "text": "Nous conservons vos calculs enregistrés, vos feuilles de temps et vos réglages pour qu’ils vous suivent d’un appareil à l’autre.",
+   "backing": "manual",
+   "note": "Checked on 2026-09-25: app/api/me deletes the account and strips user_id and email from purchases; Stripe hosts checkout; purchases table holds the listed fields.",
+   "reviewed": "2026-09-25"
+  },
+  {
+   "page": "/fr/confidentialite",
+   "text": "Si vous achetez un rapport, le paiement est encaissé par Stripe sur la page de Stripe; nous ne voyons jamais votre numéro de carte.",
+   "backing": "manual",
+   "note": "Checked on 2026-09-25: app/api/me deletes the account and strips user_id and email from purchases; Stripe hosts checkout; purchases table holds the listed fields.",
+   "reviewed": "2026-09-25"
+  },
+  {
+   "page": "/fr/confidentialite",
+   "text": "Nous gardons le dossier d’achat (produit, montant, date, courriel transmis par Stripe, province et tranche de revenu visées par le rapport) parce que la loi fiscale impose au vendeur de conserver ses registres de vente — actuellement six ans.",
+   "backing": "manual",
+   "note": "Checked on 2026-09-25: app/api/me deletes the account and strips user_id and email from purchases; Stripe hosts checkout; purchases table holds the listed fields.",
+   "reviewed": "2026-09-25"
+  },
+  {
+   "page": "/fr/confidentialite",
+   "text": "Les dossiers d’achat sont conservés sans votre nom ni votre courriel.",
+   "backing": "manual",
+   "note": "Checked on 2026-09-25: app/api/me deletes the account and strips user_id and email from purchases; Stripe hosts checkout; purchases table holds the listed fields.",
+   "reviewed": "2026-09-25"
+  },
+  {
+   "page": "/fr/confidentialite",
+   "text": "Les statistiques anonymes des sections 2 et 3 ne sont pas touchées — elles ne contiennent rien qui puisse remonter à vous.",
+   "backing": "manual",
+   "note": "Checked on 2026-09-25: app/api/me deletes the account and strips user_id and email from purchases; Stripe hosts checkout; purchases table holds the listed fields.",
+   "reviewed": "2026-09-25"
+  },
+  {
+   "page": "/fr/confidentialite",
+   "text": "L’application CanPay Insights ne demande aucune permission de localisation ni d’accès aux contacts, à la caméra ou au microphone.",
+   "backing": "manual",
+   "note": "Checked on 2026-09-25 against CanPayApp/app.json (photo-library permissions only). The app opt-out switch ships in the next release; update these sentences then.",
+   "reviewed": "2026-09-25"
+  },
+  {
+   "page": "/fr/confidentialite",
+   "text": "Elle enregistre les mêmes statistiques anonymes que le site (section 2), situées au niveau de la ville d’après la connexion (section 3, niveau 1); les options de code postal et de position de l’appareil de la section 3 n’existent que sur le site Web.",
+   "backing": "manual",
+   "note": "Checked on 2026-09-25 against CanPayApp/app.json (photo-library permissions only). The app opt-out switch ships in the next release; update these sentences then.",
+   "reviewed": "2026-09-25"
+  },
+  {
+   "page": "/fr/confidentialite",
+   "text": "L’application n’a pas encore d’interrupteur pour couper ces statistiques; d’ici là, si vous ne voulez pas qu’elles soient enregistrées, utilisez le site Web avec le refus décrit à la section 2.",
+   "backing": "manual",
+   "note": "Checked on 2026-09-25 against CanPayApp/app.json (photo-library permissions only). The app opt-out switch ships in the next release; update these sentences then.",
+   "reviewed": "2026-09-25"
+  },
+  {
+   "page": "/fr/confidentialite",
+   "text": "Chacun agit selon ses propres engagements de confidentialité et ne reçoit que ce que sa fonction exige.",
+   "backing": "manual",
+   "note": "Legal or policy statement, not a behaviour a script can observe.",
+   "reviewed": "2026-09-25"
+  },
+  {
+   "page": "/fr/confidentialite",
+   "text": "Des licenciés de statistiques agrégées, comme décrit à la section 3 — des statistiques seulement, jamais des fiches, sous des ententes interdisant la réidentification et la revente.",
+   "backing": "manual",
+   "note": "Licence terms are a commitment for future licence agreements; no licensee exists yet (2026-09-25). Published files carry the licence named here.",
+   "reviewed": "2026-09-25"
+  },
+  {
+   "page": "/fr/confidentialite",
+   "text": "Fiches de calcul anonymes: conservées indéfiniment, parce qu’elles constituent le jeu de données et ne contiennent rien qui vous identifie.",
+   "backing": "manual",
+   "note": "Retention commitment; purchase deletion after six years is a manual task (first due 2033).",
+   "reviewed": "2026-09-25"
+  },
+  {
+   "page": "/fr/confidentialite",
+   "text": "Comme les fiches statistiques ne portent aucune identité, une demande à leur sujet ne peut être rattachée à une personne — mais le refus de la section 2 arrête tout enregistrement ultérieur depuis votre navigateur, et « Modifier » ou l’effacement des données de site retire un préfixe postal mémorisé.",
+   "backing": "manual",
+   "note": "Retention commitment; purchase deletion after six years is a manual task (first due 2033).",
+   "reviewed": "2026-09-25"
+  },
+  {
+   "page": "/fr/confidentialite",
+   "text": "Le Service ne s’adresse pas aux enfants de moins de 13 ans et nous ne recueillons pas sciemment leurs renseignements.",
+   "backing": "manual",
+   "note": "Legal or policy statement, not a behaviour a script can observe.",
+   "reviewed": "2026-09-25"
+  },
+  {
+   "page": "/fr/confidentialite",
+   "text": "Cette version (25 septembre 2026) ne recueille rien de nouveau.",
+   "backing": "manual",
+   "note": "Changelog entry for 2026-09-25 exists (app/changelog/page.tsx).",
+   "reviewed": "2026-09-25"
+  },
+  {
+   "page": "/fr/confidentialite",
+   "text": "Elle réécrit la section 1 pour qu’elle ne contredise plus la section 2 au sujet de l’horaire de travail, décrit ce que transmet le widget intégré et complète la liste de ce qui est conservé dans votre navigateur (section 4).",
+   "backing": "manual",
+   "note": "Changelog entry for 2026-09-25 exists (app/changelog/page.tsx).",
+   "reviewed": "2026-09-25"
+  },
+  {
+   "page": "/about",
+   "text": "A free, independent Canadian take-home pay calculator.",
+   "backing": "manual",
+   "note": "The calculator and widget have no paywall or sign-up gate; the only paid items are the two reports (check:products-two).",
+   "reviewed": "2026-09-25"
+  },
+  {
+   "page": "/about",
+   "text": "CanPay Insights is a free payroll and take-home pay calculator built for people who work in Canada.",
+   "backing": "manual",
+   "note": "The calculator and widget have no paywall or sign-up gate; the only paid items are the two reports (check:products-two).",
+   "reviewed": "2026-09-25"
+  },
+  {
+   "page": "/about",
+   "text": "Most Canadians find out their real take-home pay only after their first paycheque — when a chunk of their gross salary has already disappeared into deductions.",
+   "backing": "not-a-claim"
+  },
+  {
+   "page": "/about",
+   "text": "Comparing two job offers, two provinces, or the impact of a raise should not require a spreadsheet or a meeting with an accountant.",
+   "backing": "not-a-claim"
+  },
+  {
+   "page": "/about",
+   "text": "We built CanPay Insights so anyone can get an accurate, transparent answer in seconds, for free.",
+   "backing": "manual",
+   "note": "The calculator and widget have no paywall or sign-up gate; the only paid items are the two reports (check:products-two).",
+   "reviewed": "2026-09-25"
+  },
+  {
+   "page": "/about",
+   "text": "Every result comes from a transparent calculation engine that applies the current rules, not a rough estimate.",
+   "backing": "gate:audit:engine"
+  },
+  {
+   "page": "/about",
+   "text": "We update the engine when new rates are announced.",
+   "backing": "manual",
+   "note": "Maintenance statement; the quarterly and new-year engine checks are scheduled routines.",
+   "reviewed": "2026-09-25"
+  },
+  {
+   "page": "/about",
+   "text": "It is a small, self-funded project — not a bank, payroll company, or financial institution.",
+   "backing": "manual",
+   "note": "Maintenance statement; the quarterly and new-year engine checks are scheduled routines.",
+   "reviewed": "2026-09-25"
+  },
+  {
+   "page": "/about",
+   "text": "The calculator stays free.",
+   "backing": "manual",
+   "note": "The calculator and widget have no paywall or sign-up gate; the only paid items are the two reports (check:products-two).",
+   "reviewed": "2026-09-25"
+  },
+  {
+   "page": "/about",
+   "text": "We sometimes include a clearly labelled referral link (such as Wealthsimple) and may earn a sign-up bonus, but it never affects our numbers or what we recommend — see our affiliate disclosure.",
+   "backing": "manual",
+   "note": "The engine takes no referral input; referral links are rendered separately from results (components/PartnerSlot.tsx).",
+   "reviewed": "2026-09-25"
+  },
+  {
+   "page": "/about",
+   "text": "4 Open data — free to cite",
+   "backing": "not-a-claim"
+  },
+  {
+   "page": "/about",
+   "text": "CanPay Insights provides estimates for general information only and is not tax, legal, or financial advice.",
+   "backing": "manual",
+   "note": "Legal or policy statement, not a behaviour a script can observe.",
+   "reviewed": "2026-09-25"
+  },
+  {
+   "page": "/terms",
+   "text": "Privacy Policy Refund Policy Affiliate Disclosure",
+   "backing": "not-a-claim"
+  },
+  {
+   "page": "/terms",
+   "text": "If you do not, please do not use the Service.",
+   "backing": "manual",
+   "note": "Legal or policy statement, not a behaviour a script can observe.",
+   "reviewed": "2026-09-25"
+  },
+  {
+   "page": "/terms",
+   "text": "The results are estimates for information only.",
+   "backing": "manual",
+   "note": "Legal or policy statement, not a behaviour a script can observe.",
+   "reviewed": "2026-09-25"
+  },
+  {
+   "page": "/terms",
+   "text": "They are not tax, legal, accounting or financial advice, they do not account for every credit, deduction or employer practice, and your actual pay is determined by your employer and the CRA.",
+   "backing": "manual",
+   "note": "Legal or policy statement, not a behaviour a script can observe.",
+   "reviewed": "2026-09-25"
+  },
+  {
+   "page": "/terms",
+   "text": "Check important decisions against your pay statement, your employer’s payroll department or a licensed professional.",
+   "backing": "manual",
+   "note": "Legal or policy statement, not a behaviour a script can observe.",
+   "reviewed": "2026-09-25"
+  },
+  {
+   "page": "/terms",
+   "text": "If you create one, keep your sign-in credentials with the provider you chose (Google, Apple, or the email address we send sign-in links to) secure, and tell us if you believe your account has been used without permission.",
+   "backing": "manual",
+   "note": "Legal or policy statement, not a behaviour a script can observe.",
+   "reviewed": "2026-09-25"
+  },
+  {
+   "page": "/terms",
+   "text": "You may delete your account at any time from the account menu; deletion is immediate and permanent.",
+   "backing": "manual",
+   "note": "Checked on 2026-09-25: app/api/me deletes the account and strips user_id and email from purchases; Stripe hosts checkout; purchases table holds the listed fields.",
+   "reviewed": "2026-09-25"
+  },
+  {
+   "page": "/terms",
+   "text": "Our Refund Policy sets out when and how we refund a purchase.",
+   "backing": "manual",
+   "note": "Legal or policy statement, not a behaviour a script can observe.",
+   "reviewed": "2026-09-25"
+  },
+  {
+   "page": "/terms",
+   "text": "Prices and product contents may change; a change does not affect a purchase already made.",
+   "backing": "manual",
+   "note": "Legal or policy statement, not a behaviour a script can observe.",
+   "reviewed": "2026-09-25"
+  },
+  {
+   "page": "/terms",
+   "text": "attempt to identify any person from the anonymous statistics we publish or license;",
+   "backing": "manual",
+   "note": "Legal or policy statement, not a behaviour a script can observe.",
+   "reviewed": "2026-09-25"
+  },
+  {
+   "page": "/terms",
+   "text": "embed the widget in a way that misrepresents the results or removes the attribution it carries.",
+   "backing": "manual",
+   "note": "Legal or policy statement, not a behaviour a script can observe.",
+   "reviewed": "2026-09-25"
+  },
+  {
+   "page": "/terms",
+   "text": "The Service, its articles, design and code are ours or licensed to us.",
+   "backing": "manual",
+   "note": "Legal or policy statement, not a behaviour a script can observe.",
+   "reviewed": "2026-09-25"
+  },
+  {
+   "page": "/terms",
+   "text": "You may read, link to and quote short excerpts of our content with attribution.",
+   "backing": "manual",
+   "note": "Legal or policy statement, not a behaviour a script can observe.",
+   "reviewed": "2026-09-25"
+  },
+  {
+   "page": "/terms",
+   "text": "The datasets we publish under an open licence on the data page may be reused under the licence marked on each: the computed take-home dataset under CC BY 4.0, and the observed usage dataset under CC BY-NC-SA 4.0, which does not permit commercial use without a separate licence from us.",
+   "backing": "manual",
+   "note": "Licence terms are a commitment for future licence agreements; no licensee exists yet (2026-09-25). Published files carry the licence named here.",
+   "reviewed": "2026-09-25"
+  },
+  {
+   "page": "/terms",
+   "text": "The CanPay Insights name and logo may not be used to suggest endorsement.",
+   "backing": "manual",
+   "note": "Legal or policy statement, not a behaviour a script can observe.",
+   "reviewed": "2026-09-25"
+  },
+  {
+   "page": "/terms",
+   "text": "The tax engine’s methodology is described openly so that its results can be checked; that description is not a licence to copy the Service.",
+   "backing": "manual",
+   "note": "Legal or policy statement, not a behaviour a script can observe.",
+   "reviewed": "2026-09-25"
+  },
+  {
+   "page": "/terms",
+   "text": "How we handle information — including the anonymous usage statistics, the optional neighbourhood data and the aggregated statistics we publish and license — is set out in the Privacy Policy, which forms part of these terms.",
+   "backing": "manual",
+   "note": "Legal or policy statement, not a behaviour a script can observe.",
+   "reviewed": "2026-09-25"
+  },
+  {
+   "page": "/terms",
+   "text": "7 Third-party links and referrals",
+   "backing": "not-a-claim"
+  },
+  {
+   "page": "/terms",
+   "text": "We are not responsible for other sites’ content or terms.",
+   "backing": "manual",
+   "note": "Legal or policy statement, not a behaviour a script can observe.",
+   "reviewed": "2026-09-25"
+  },
+  {
+   "page": "/terms",
+   "text": "To the fullest extent permitted by law, we make no warranty that it is error-free or uninterrupted, and we are not liable for any loss arising from reliance on a calculation, article or report, or from the unavailability of the Service.",
+   "backing": "manual",
+   "note": "Legal or policy statement, not a behaviour a script can observe.",
+   "reviewed": "2026-09-25"
+  },
+  {
+   "page": "/refunds",
+   "text": "This page says when we refund them, and how.",
+   "backing": "manual",
+   "note": "Refund process commitment handled by hand in Stripe.",
+   "reviewed": "2026-09-25"
+  },
+  {
+   "page": "/refunds",
+   "text": "We refund in full, no questions asked, if:",
+   "backing": "manual",
+   "note": "Refund process commitment handled by hand in Stripe.",
+   "reviewed": "2026-09-25"
+  },
+  {
+   "page": "/refunds",
+   "text": "the report failed to generate, or the link you were sent does not open;",
+   "backing": "manual",
+   "note": "Refund process commitment handled by hand in Stripe.",
+   "reviewed": "2026-09-25"
+  },
+  {
+   "page": "/refunds",
+   "text": "If you are unhappy for any other reason, write to us within 14 days of purchase and tell us what went wrong.",
+   "backing": "manual",
+   "note": "Refund process commitment handled by hand in Stripe.",
+   "reviewed": "2026-09-25"
+  },
+  {
+   "page": "/refunds",
+   "text": "We answer within two business days.",
+   "backing": "manual",
+   "note": "Refund process commitment handled by hand in Stripe.",
+   "reviewed": "2026-09-25"
+  },
+  {
+   "page": "/refunds",
+   "text": "Refunds are issued through Stripe to the original payment method.",
+   "backing": "manual",
+   "note": "Refund process commitment handled by hand in Stripe.",
+   "reviewed": "2026-09-25"
+  },
+  {
+   "page": "/refunds",
+   "text": "Stripe sends them immediately; card issuers usually show the credit within 5–10 business days.",
+   "backing": "manual",
+   "note": "Refund process commitment handled by hand in Stripe.",
+   "reviewed": "2026-09-25"
+  },
+  {
+   "page": "/refunds",
+   "text": "We cannot refund to a different card or by e-transfer.",
+   "backing": "manual",
+   "note": "Refund process commitment handled by hand in Stripe.",
+   "reviewed": "2026-09-25"
+  },
+  {
+   "page": "/refunds",
+   "text": "Voluntary donations made through Buy Me a Coffee are processed by that platform under its own terms and are not refundable through us.",
+   "backing": "manual",
+   "note": "Refund process commitment handled by hand in Stripe.",
+   "reviewed": "2026-09-25"
+  },
+  {
+   "page": "/widget",
+   "text": "Free Embeddable Take-Home Pay Calculator Widget for Your Website | CanPay Insights",
+   "backing": "not-a-claim"
+  },
+  {
+   "page": "/widget",
+   "text": "← CanPay Insights Add a free take-home pay calculator to your website",
+   "backing": "not-a-claim"
+  },
+  {
+   "page": "/widget",
+   "text": "Is the widget really free?",
+   "backing": "not-a-claim"
+  },
+  {
+   "page": "/widget",
+   "text": "The embeddable calculator is completely free for any website — job boards, immigration services, finance blogs, HR resources.",
+   "backing": "manual",
+   "note": "The calculator and widget have no paywall or sign-up gate; the only paid items are the two reports (check:products-two).",
+   "reviewed": "2026-09-25"
+  },
+  {
+   "page": "/widget",
+   "text": "The only requirement is the small \"Powered by CanPay Insights\" line inside the widget.",
+   "backing": "manual",
+   "note": "The calculator and widget have no paywall or sign-up gate; the only paid items are the two reports (check:products-two).",
+   "reviewed": "2026-09-25"
+  },
+  {
+   "page": "/widget",
+   "text": "The one-line text link under it in the embed code is appreciated but optional.",
+   "backing": "manual",
+   "note": "The calculator and widget have no paywall or sign-up gate; the only paid items are the two reports (check:products-two).",
+   "reviewed": "2026-09-25"
+  },
+  {
+   "page": "/widget",
+   "text": "You can remove the widget at any time, with no commitment.",
+   "backing": "manual",
+   "note": "The calculator and widget have no paywall or sign-up gate; the only paid items are the two reports (check:products-two).",
+   "reviewed": "2026-09-25"
+  },
+  {
+   "page": "/widget",
+   "text": "For each completed calculation it records one anonymous line: the province, the income as one of seven ranges (never the figure), annual or hourly, the interface language, device class, browser and operating-system family, the hour and weekday on the reader's clock, the time-zone name, a random ID that lasts one page load, and your site's domain.",
+   "backing": "manual",
+   "note": "Checked on 2026-09-25 against the payload built in lib/telemetry.ts recordCalcEvent (fields sent, ranges not amounts, work pattern numbers); automated browsers never send, so no live test is possible.",
+   "reviewed": "2026-09-25"
+  },
+  {
+   "page": "/research/pay-calculator-behaviour",
+   "text": "CanPay Insights is a free Canadian take-home pay calculator.",
+   "backing": "manual",
+   "note": "The calculator and widget have no paywall or sign-up gate; the only paid items are the two reports (check:products-two).",
+   "reviewed": "2026-09-25"
+  },
+  {
+   "page": "/research/pay-calculator-behaviour",
+   "text": "It never learns what anyone earns — income is kept only as one of seven ranges — but it does see something no wage survey records: how people use a pay figure once they have one.",
+   "backing": "manual",
+   "note": "Checked on 2026-09-25 against the payload built in lib/telemetry.ts recordCalcEvent (fields sent, ranges not amounts, work pattern numbers); automated browsers never send, so no live test is possible.",
+   "reviewed": "2026-09-25"
+  },
+  {
+   "page": "/research/pay-calculator-behaviour",
+   "text": "Every figure on this page is a share of calculator use.",
+   "backing": "gate:audit:live"
+  },
+  {
+   "page": "/research/pay-calculator-behaviour",
+   "text": "People are mostly not modelling a pay cut.",
+   "backing": "not-a-claim"
+  },
+  {
+   "page": "/research/pay-calculator-behaviour",
+   "text": "Income is stored in seven ranges, so a change that stays inside one range is invisible here.",
+   "backing": "manual",
+   "note": "Checked on 2026-09-25 against the payload built in lib/telemetry.ts recordCalcEvent (fields sent, ranges not amounts, work pattern numbers); automated browsers never send, so no live test is possible.",
+   "reviewed": "2026-09-25"
+  },
+  {
+   "page": "/research/pay-calculator-behaviour",
+   "text": "Free to reuse with credit to CanPay Insights · Download SVG 2 · When shifts start",
+   "backing": "not-a-claim"
+  },
+  {
+   "page": "/research/pay-calculator-behaviour",
+   "text": "Statistics Canada reports how many hours people work; we know of no public Canadian dataset of the hour a shift begins.",
+   "backing": "manual",
+   "note": "Legal or policy statement, not a behaviour a script can observe.",
+   "reviewed": "2026-09-25"
+  },
+  {
+   "page": "/research/pay-calculator-behaviour",
+   "text": "Free to reuse with credit to CanPay Insights · Download SVG 3 · Weighing a move",
+   "backing": "not-a-claim"
+  },
+  {
+   "page": "/research/pay-calculator-behaviour",
+   "text": "Some of those visitors are curious rather than moving, and some are correcting a wrong first choice, so this is an upper reading of intent to relocate, not a count of movers.",
+   "backing": "not-a-claim"
+  },
+  {
+   "page": "/research/pay-calculator-behaviour",
+   "text": "Free to reuse with credit to CanPay Insights · Download SVG 4 · In which language",
+   "backing": "not-a-claim"
+  },
+  {
+   "page": "/research/pay-calculator-behaviour",
+   "text": "Working out what a job pays after tax is one of the first things anyone does on arriving in Canada, and a good deal of it is not happening in English or French.",
+   "backing": "not-a-claim"
+  },
+  {
+   "page": "/research/pay-calculator-behaviour",
+   "text": "Unlike the shift and income figures it involves no form default — a device language is a real setting either way.",
+   "backing": "not-a-claim"
+  },
+  {
+   "page": "/research/pay-calculator-behaviour",
+   "text": "It is not a measure of what anyone speaks at home or how well they read English; a bilingual person may simply prefer their own language for a page full of numbers.",
+   "backing": "not-a-claim"
+  },
+  {
+   "page": "/research/pay-calculator-behaviour",
+   "text": "Thinly-served languages will also be understated, because a language nobody knows the calculator offers is a language nobody arrives in.",
+   "backing": "not-a-claim"
+  },
+  {
+   "page": "/research/pay-calculator-behaviour",
+   "text": "Free to reuse with credit to CanPay Insights · Download SVG 5 · The weekend",
+   "backing": "not-a-claim"
+  },
+  {
+   "page": "/research/pay-calculator-behaviour",
+   "text": "Taken with the start times above, the picture is of a calculator being used mostly by people whose week is not the standard one.",
+   "backing": "not-a-claim"
+  },
+  {
+   "page": "/research/pay-calculator-behaviour",
+   "text": "The form opens on Monday to Friday with both weekend days switched off, so a weekend day is only ever present because somebody switched it on.",
+   "backing": "gate:audit:live"
+  },
+  {
+   "page": "/research/pay-calculator-behaviour",
+   "text": "That makes this figure a floor and never an inflated one — the opposite of the trap in finding 2, where the default worked the other way.",
+   "backing": "gate:audit:live"
+  },
+  {
+   "page": "/research/pay-calculator-behaviour",
+   "text": "Anyone who works weekends but left the days alone is counted here as not working them.",
+   "backing": "gate:audit:live"
+  },
+  {
+   "page": "/research/pay-calculator-behaviour",
+   "text": "The 5,315 calculations arrived across 50 days without a gap, from August 7, 2026 onward — between a few dozen and 190 a day.",
+   "backing": "gate:audit:live"
+  },
+  {
+   "page": "/research/pay-calculator-behaviour",
+   "text": "Free to reuse with credit to CanPay Insights · Download SVG Have the figures moved as the sample grew?",
+   "backing": "not-a-claim"
+  },
+  {
+   "page": "/research/pay-calculator-behaviour",
+   "text": "The page writes down what it said the first time it was opened each day, and never edits those rows; the figures at the top are live.",
+   "backing": "gate:audit:live"
+  },
+  {
+   "page": "/research/pay-calculator-behaviour",
+   "text": "A figure that stays put while the sample grows was not a lucky week — and if you quoted this page on a particular day, that day's row is here from the next day on.",
+   "backing": "gate:audit:live"
+  },
+  {
+   "page": "/research/pay-calculator-behaviour",
+   "text": "Every number on this page, as a file",
+   "backing": "not-a-claim"
+  },
+  {
+   "page": "/research/pay-calculator-behaviour",
+   "text": "It holds the counts behind every percentage — including the rows that were left out and why — so the arithmetic can be checked without asking us for anything.",
+   "backing": "gate:audit:live"
+  },
+  {
+   "page": "/research/pay-calculator-behaviour",
+   "text": "A “visit” is a random identifier held in the page’s memory and gone when the page is closed or reloaded; it cannot link one day to the next, or one device to another.",
+   "backing": "manual",
+   "note": "Checked on 2026-09-25 against the payload built in lib/telemetry.ts recordCalcEvent (fields sent, ranges not amounts, work pattern numbers); automated browsers never send, so no live test is possible.",
+   "reviewed": "2026-09-25"
+  },
+  {
+   "page": "/research/pay-calculator-behaviour",
+   "text": "A calculator opened and left on its default values sends nothing, so the defaults do not count as calculations.",
+   "backing": "manual",
+   "note": "Checked on 2026-09-25 against the payload built in lib/telemetry.ts recordCalcEvent (fields sent, ranges not amounts, work pattern numbers); automated browsers never send, so no live test is possible.",
+   "reviewed": "2026-09-25"
+  },
+  {
+   "page": "/research/pay-calculator-behaviour",
+   "text": "What each figure was on any given day stays in the table above, which is where a citation should point.",
+   "backing": "not-a-claim"
+  },
+  {
+   "page": "/research/pay-calculator-behaviour",
+   "text": "That concerns the pay figures visitors see, not the usage figures on this page.",
+   "backing": "gate:audit:live"
+  },
+  {
+   "page": "/research/pay-calculator-behaviour",
+   "text": "The text, figures and charts on this page are free to quote and republish with credit ( CC BY 4.0 ).",
+   "backing": "gate:audit:live"
+  },
+  {
+   "page": "/affiliate-disclosure",
+   "text": "How CanPay Insights stays free, and what we earn.",
+   "backing": "manual",
+   "note": "The calculator and widget have no paywall or sign-up gate; the only paid items are the two reports (check:products-two).",
+   "reviewed": "2026-09-25"
+  },
+  {
+   "page": "/affiliate-disclosure",
+   "text": "CanPay Insights is free to use.",
+   "backing": "manual",
+   "note": "The calculator and widget have no paywall or sign-up gate; the only paid items are the two reports (check:products-two).",
+   "reviewed": "2026-09-25"
+  },
+  {
+   "page": "/affiliate-disclosure",
+   "text": "When you click one of these clearly labelled links and then open an account, CanPay Insights may receive a sign-up bonus or referral fee, at no additional cost to you.",
+   "backing": "manual",
+   "note": "The engine takes no referral input; referral links are rendered separately from results (components/PartnerSlot.tsx).",
+   "reviewed": "2026-09-25"
+  },
+  {
+   "page": "/affiliate-disclosure",
+   "text": "It never affects our numbers",
+   "backing": "manual",
+   "note": "The engine takes no referral input; referral links are rendered separately from results (components/PartnerSlot.tsx).",
+   "reviewed": "2026-09-25"
+  },
+  {
+   "page": "/affiliate-disclosure",
+   "text": "Referral compensation never influences our calculator, our tax figures, our rankings, or what we recommend.",
+   "backing": "manual",
+   "note": "The engine takes no referral input; referral links are rendered separately from results (components/PartnerSlot.tsx).",
+   "reviewed": "2026-09-25"
+  },
+  {
+   "page": "/affiliate-disclosure",
+   "text": "The numbers come from a transparent calculation engine built on published Canada Revenue Agency, Revenu Québec, and provincial rates — not from anyone who pays us.",
+   "backing": "gate:audit:engine"
+  },
+  {
+   "page": "/affiliate-disclosure",
+   "text": "If we mention a tool, it is because we believe it is a reasonable option, not because of a referral.",
+   "backing": "manual",
+   "note": "The engine takes no referral input; referral links are rendered separately from results (components/PartnerSlot.tsx).",
+   "reviewed": "2026-09-25"
+  },
+  {
+   "page": "/affiliate-disclosure",
+   "text": "The calculator is, and remains, free.",
+   "backing": "manual",
+   "note": "The calculator and widget have no paywall or sign-up gate; the only paid items are the two reports (check:products-two).",
+   "reviewed": "2026-09-25"
+  },
+  {
+   "page": "/data",
+   "text": "Net pay, federal & provincial tax, CPP/CPP2, and EI for every province and territory — free to download and cite under CC BY 4.0.",
+   "backing": "manual",
+   "note": "Licence terms are a commitment for future licence agreements; no licensee exists yet (2026-09-25). Published files carry the licence named here.",
+   "reviewed": "2026-09-25"
+  },
+  {
+   "page": "/data",
+   "text": "Figures are verified against published 2026 rates from the Canada Revenue Agency (CRA), Revenu Québec, and each provincial government, and apply:",
+   "backing": "gate:audit:engine"
+  },
+  {
+   "page": "/data",
+   "text": "The basic personal amount only (no other credits or deductions), so figures are a clean, comparable baseline.",
+   "backing": "gate:audit:dataset"
+  },
+  {
+   "page": "/data",
+   "text": "Anonymous aggregates from the calculator itself — which income ranges people check, from which province, on which weekday and at what hour of their own evening, and, where a visitor chose to give it, from which postal-code area.",
+   "backing": "manual",
+   "note": "Checked on 2026-09-25 against the payload built in lib/telemetry.ts recordCalcEvent (fields sent, ranges not amounts, work pattern numbers); automated browsers never send, so no live test is possible.",
+   "reviewed": "2026-09-25"
+  },
+  {
+   "page": "/data",
+   "text": "Income is recorded only as a range, never an amount; location is a city centre from the connection or a postal-code prefix the visitor typed or a position rounded on their own device.",
+   "backing": "manual",
+   "note": "Checked on 2026-09-25 against the payload built in lib/telemetry.ts recordCalcEvent (fields sent, ranges not amounts, work pattern numbers); automated browsers never send, so no live test is possible.",
+   "reviewed": "2026-09-25"
+  },
+  {
+   "page": "/data",
+   "text": "These are people who went looking for a pay calculator, not a random sample of Canadians — the file carries that warning and the rest of the method inside it, so it stays attached to the data after download.",
+   "backing": "gate:audit:dataset"
+  },
+  {
+   "page": "/data",
+   "text": "Free for research, journalism and personal use under CC BY-NC-SA 4.0.",
+   "backing": "manual",
+   "note": "Licence terms are a commitment for future licence agreements; no licensee exists yet (2026-09-25). Published files carry the licence named here.",
+   "reviewed": "2026-09-25"
+  },
+  {
+   "page": "/data",
+   "text": "Commercial use needs a licence — see below.",
+   "backing": "manual",
+   "note": "Licence terms are a commitment for future licence agreements; no licensee exists yet (2026-09-25). Published files carry the licence named here.",
+   "reviewed": "2026-09-25"
+  },
+  {
+   "page": "/data",
+   "text": "Licensed data for organisations",
+   "backing": "not-a-claim"
+  },
+  {
+   "page": "/data",
+   "text": "Under licence we provide extracts that no public statistic carries, because they come from what people do at the moment they check their pay:",
+   "backing": "manual",
+   "note": "Licence terms are a commitment for future licence agreements; no licensee exists yet (2026-09-25). Published files carry the licence named here.",
+   "reviewed": "2026-09-25"
+  },
+  {
+   "page": "/data",
+   "text": "Always aggregates, never individual records.",
+   "backing": "manual",
+   "note": "Checked on 2026-09-25 against the payload built in lib/telemetry.ts recordCalcEvent (fields sent, ranges not amounts, work pattern numbers); automated browsers never send, so no live test is possible.",
+   "reviewed": "2026-09-25"
+  },
+  {
+   "page": "/data",
+   "text": "The sample is people who used the calculator, not a random sample of Canadians, and every extract says so.",
+   "backing": "manual",
+   "note": "Licence terms are a commitment for future licence agreements; no licensee exists yet (2026-09-25). Published files carry the licence named here.",
+   "reviewed": "2026-09-25"
+  },
+  {
+   "page": "/data",
+   "text": "Licensees agree not to attempt re-identification or resale.",
+   "backing": "manual",
+   "note": "Licence terms are a commitment for future licence agreements; no licensee exists yet (2026-09-25). Published files carry the licence named here.",
+   "reviewed": "2026-09-25"
+  },
+  {
+   "page": "/data",
+   "text": "Licensed under CC BY 4.0.",
+   "backing": "manual",
+   "note": "Licence terms are a commitment for future licence agreements; no licensee exists yet (2026-09-25). Published files carry the licence named here.",
+   "reviewed": "2026-09-25"
+  },
+  {
+   "page": "/data",
+   "text": "Re-checked quarterly (January, April, July, November) against the CRA, Revenu Québec and each provincial government, and regenerated whenever the engine is corrected in between.",
+   "backing": "gate:audit:dataset"
+  },
+  {
+   "page": "/data",
+   "text": "You're free to share and adapt the data, including commercially, with attribution and a link to canpayinsights.ca.",
+   "backing": "manual",
+   "note": "Licence terms are a commitment for future licence agreements; no licensee exists yet (2026-09-25). Published files carry the licence named here.",
+   "reviewed": "2026-09-25"
+  },
+  {
+   "page": "/link-to-canpay",
+   "text": "Link to a Free Canadian Payroll Calculator",
+   "backing": "not-a-claim"
+  },
+  {
+   "page": "/link-to-canpay",
+   "text": "CanPay Insights is a free Canadian payroll calculator that estimates take-home pay by province, including federal tax, provincial tax, CPP, EI, hourly wage, annual salary, overtime, and timesheet tools.",
+   "backing": "manual",
+   "note": "The calculator and widget have no paywall or sign-up gate; the only paid items are the two reports (check:products-two).",
+   "reviewed": "2026-09-25"
+  },
+  {
+   "page": "/link-to-canpay",
+   "text": "<a href=\"https://canpayinsights.ca/\">Free Canadian Payroll Calculator</a>",
+   "backing": "not-a-claim"
+  },
+  {
+   "page": "/link-to-canpay",
+   "text": "Free Canadian Payroll Calculator Salary After Tax Canada CPP and EI Calculator Compare Provinces",
+   "backing": "not-a-claim"
+  },
+  {
+   "page": "/link-to-canpay",
+   "text": "Share this free calculator",
+   "backing": "not-a-claim"
+  },
+  {
+   "page": "/contact",
+   "text": "We read every message and aim to reply within a few business days.",
+   "backing": "manual",
+   "note": "Service commitment.",
+   "reviewed": "2026-09-25"
+  },
+  {
+   "page": "/contact",
+   "text": "Please note that CanPay Insights provides general information only and cannot give personalized tax, legal, or financial advice.",
+   "backing": "manual",
+   "note": "Legal or policy statement, not a behaviour a script can observe.",
+   "reviewed": "2026-09-25"
+  },
+  {
+   "page": "/llms.txt",
+   "text": "> Free Canadian payroll & take-home pay calculator.",
+   "backing": "manual",
+   "note": "The calculator and widget have no paywall or sign-up gate; the only paid items are the two reports (check:products-two).",
+   "reviewed": "2026-09-25"
+  },
+  {
+   "page": "/llms.txt",
+   "text": "The data is free to cite — please attribute and link to https://canpayinsights.ca.",
+   "backing": "manual",
+   "note": "The calculator and widget have no paywall or sign-up gate; the only paid items are the two reports (check:products-two).",
+   "reviewed": "2026-09-25"
+  },
+  {
+   "page": "/privacy",
+   "text": "This policy explains what we collect, why, who it goes to, and how to say no.",
+   "backing": "manual",
+   "note": "Legal or policy statement, not a behaviour a script can observe.",
+   "reviewed": "2026-09-25"
+  },
+  {
+   "page": "/privacy",
+   "text": "Every payroll and tax calculation runs entirely in your browser or on your phone.",
+   "backing": "manual",
+   "note": "Checked on 2026-09-25: utils/taxEngine.ts runs in client components; no calculation API exists on the server.",
+   "reviewed": "2026-09-25"
+  },
+  {
+   "page": "/about",
+   "text": "Free to use, republish, or cite — please attribute and link to canpayinsights.ca.",
+   "backing": "manual",
+   "note": "Licence terms are a commitment for future licence agreements; no licensee exists yet (2026-09-25). Published files carry the licence named here.",
+   "reviewed": "2026-09-25"
+  },
+  {
+   "page": "/zh",
+   "text": "加拿大工资税后怎么算？2026 免费税后工资计算器",
+   "backing": "manual",
+   "note": "The calculator has no paywall or sign-up gate; the only paid items are the two reports (check:products-two).",
+   "reviewed": "2026-09-25"
+  },
+  {
+   "page": "/zh",
+   "text": "CanPay Insights 是一个 免费的加拿大工资税后计算器 ，按省计算联邦税、省税、CPP/CPP2、EI （魁省为 QPP/QPP2/QPIP）后的到手工资，数据基于 2026 年 CRA 与各省最新税率。支持中文、英文、法语等十种语言，无需注册、无广告墙。",
+   "backing": "check:ten-languages"
+  },
+  {
+   "page": "/zh",
+   "text": "估算采用 2026 年联邦与各省税率，仅计基本个人免税额。福利、RRSP 供款、工会会费等会改变你的实际工资——用上方免费计算器算你的具体数字。",
+   "backing": "manual",
+   "note": "Methodology note; the figures on /zh come from the engine (audit:numbers).",
+   "reviewed": "2026-09-25"
+  },
+  {
+   "page": "/zh",
+   "text": "CanPay Insights 用一个透明的规则引擎，把联邦税、省税、CPP/CPP2、EI 逐项算给你看，而不是只给一个总数。它覆盖全部 13 个省与地区、支持中英法等十种语言、完全免费且无需注册——很适合在比较 offer、规划搬去哪个省、或核对工资单时使用。",
+   "backing": "check:ten-languages"
+  },
+  {
+   "page": "/zh",
+   "text": "CanPay Insights 的特点：① 透明的规则引擎，逐项列出联邦税、省税、CPP/CPP2、EI；② 覆盖全部 13 个省与地区，可一键对比；③ 中文、英文、法语等十种语言；④ 完全免费、无需注册、无广告墙；⑤ 数据按 CRA 与各省 2026 年最新税率更新。",
+   "backing": "check:ten-languages"
+  },
+  {
+   "page": "/privacy",
+   "text": "The exact money amounts you type — hourly wage, salary, tips, RRSP amounts — are never sent to us, with one exception you choose: buying a report, which is built from the salary you enter for it (section 5).",
+   "backing": "manual",
+   "note": "Checked on 2026-09-25: app/api/checkout sends the report inputs to Stripe as session metadata; app/report/* rebuilds from it; the webhook stores income_bracket and binds income as null.",
+   "reviewed": "2026-09-25"
+  },
+  {
+   "page": "/privacy",
+   "text": "Our own records keep only the income range.",
+   "backing": "manual",
+   "note": "Checked on 2026-09-25: app/api/checkout sends the report inputs to Stripe as session metadata; app/report/* rebuilds from it; the webhook stores income_bracket and binds income as null.",
+   "reviewed": "2026-09-25"
+  },
+  {
+   "page": "/fr/confidentialite",
+   "text": "Les montants exacts que vous saisissez — taux horaire, salaire, pourboires, cotisations REER — ne nous sont jamais transmis, sauf dans un cas que vous choisissez: l’achat d’un rapport, construit à partir du salaire que vous saisissez pour lui (section 5).",
+   "backing": "manual",
+   "note": "Checked on 2026-09-25: app/api/checkout sends the report inputs to Stripe as session metadata; app/report/* rebuilds from it; the webhook stores income_bracket and binds income as null.",
+   "reviewed": "2026-09-25"
+  },
+  {
+   "page": "/fr/confidentialite",
+   "text": "Le rapport lui-même est construit à partir de ce que vous saisissez pour lui — votre salaire et les deux provinces, ou les deux offres d’emploi — qui nous est transmis pour créer le paiement et que Stripe conserve avec ce paiement, afin que le rapport puisse être reconstruit chaque fois que vous ouvrez son lien.",
+   "backing": "manual",
+   "note": "Checked on 2026-09-25: app/api/checkout sends the report inputs to Stripe as session metadata; app/report/* rebuilds from it; the webhook stores income_bracket and binds income as null.",
+   "reviewed": "2026-09-25"
+  },
+  {
+   "page": "/fr/confidentialite",
+   "text": "Nos propres registres ne gardent que la tranche de revenu.",
+   "backing": "manual",
+   "note": "Checked on 2026-09-25: app/api/checkout sends the report inputs to Stripe as session metadata; app/report/* rebuilds from it; the webhook stores income_bracket and binds income as null.",
+   "reviewed": "2026-09-25"
+  },
+  {
+   "page": "/about",
+   "text": "The calculation runs on your device and the exact amounts you type are never sent to us (unless you buy a report, which is built from them); we record anonymous statistics about each calculation (income as a range, never the figure), which you can switch off.",
+   "backing": "manual",
+   "note": "Checked on 2026-09-25: app/api/checkout sends the report inputs to Stripe as session metadata; app/report/* rebuilds from it; the webhook stores income_bracket and binds income as null.",
+   "reviewed": "2026-09-25"
+  }
+ ]
+}

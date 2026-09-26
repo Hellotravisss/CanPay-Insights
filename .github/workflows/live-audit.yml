@@ -17,3 +17,5 @@ jobs:
       - run: npm ci
       - run: npx playwright install --with-deps chromium
       - run: npm run audit:live
+      # Hosts, storage and cookies can change without a deploy.
+      - run: npm run audit:claims
