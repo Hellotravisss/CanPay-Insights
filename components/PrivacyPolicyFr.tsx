@@ -155,11 +155,14 @@ const PrivacyPolicyFr: React.FC = () => {
         </p>
         <p>
           <strong className="text-slate-800">Le stockage local de votre appareil</strong> contient votre langue, vos réglages de
-          calculateur hors connexion, l’indicateur de refus de télémétrie, le préfixe postal mémorisé et
+          calculateur hors connexion, les calculs et entrées de feuille de temps enregistrés hors connexion,
+          le secteur auquel vous vous êtes comparé en dernier, l’indicateur de refus de télémétrie, le préfixe postal mémorisé et
           l’indicateur « a déjà calculé », ainsi que trois entrées pour le comptage des pages vues (ci-dessous) :
           un numéro de session pour l’onglet (<code>_av_sid</code>), un indicateur « déjà venu »
-          (<code>_av_seen</code>) et un interrupteur (<code>_av_off</code>). Rien de cela ne vous identifie, et
-          effacer les données de site de votre navigateur supprime le tout. Le calculateur intégré à d’autres
+          (<code>_av_seen</code>) et un interrupteur (<code>_av_off</code>). Le stockage de session de l’onglet
+          conserve aussi la page où votre visite a commencé; il est vidé à la fermeture de l’onglet. Rien de cela
+          ne vous identifie, tout reste sur votre appareil, et effacer les données de site de votre navigateur
+          supprime le tout. Le calculateur intégré à d’autres
           sites ne stocke rien.
         </p>
         <p>
@@ -259,9 +262,10 @@ const PrivacyPolicyFr: React.FC = () => {
       <Section n={10} id="changes" title="Modifications de cette politique">
         <p>
           Nous modifions cette page lorsque ce que nous recueillons change, et nous l’indiquons sur le{' '}
-          <a href="/changelog">journal des modifications</a>. Cette version ajoute les options de préfixe
-          postal et de position arrondie sur l’appareil (section 3), la finalité de licence, le détail des
-          témoins et de la mesure d’audience (section 4) et les coordonnées de la responsable.
+          <a href="/changelog">journal des modifications</a>. Cette version (25 septembre 2026) ne recueille
+          rien de nouveau. Elle réécrit la section 1 pour qu’elle ne contredise plus la section 2 au sujet de
+          l’horaire de travail, décrit ce que transmet le widget intégré et complète la liste de ce qui est
+          conservé dans votre navigateur (section 4).
         </p>
       </Section>
 

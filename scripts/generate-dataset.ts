@@ -1,13 +1,18 @@
 /**
  * Generates the downloadable CanPay open dataset (CSV + JSON) from the live 2026
  * tax engine, so the Dataset schema's `distribution` points at a real, citable file.
- * Run:  npx tsx scripts/generate-dataset.ts
+ * Run:  npx tsx scripts/generate-dataset.ts          (rewrite the files)
+ *       npx tsx scripts/generate-dataset.ts --check  (build gate: fail if stale)
+ *
+ * The version date is automatic: it moves to today only when the rows change.
+ * It used to be a constant marked "bump when regenerated" and stayed at
+ * 2026-06-21 through three engine corrections, while /data promised that the
+ * version date moves with every correction.
  */
-import { writeFileSync, mkdirSync } from 'fs';
+import { writeFileSync, mkdirSync, readFileSync, existsSync } from 'fs';
 import { getSalaryFigures, PROVINCE_SEO_CONFIGS } from '../lib/salaryFigures';
 
 const YEAR = 2026;
-const GENERATED = '2026-06-21'; // bump when regenerated
 
 const incomes: number[] = [];
 for (let g = 30000; g <= 200000; g += 5000) incomes.push(g);
@@ -36,6 +41,26 @@ for (const p of PROVINCE_SEO_CONFIGS) {
   }
 }
 
+const JSON_PATH = 'public/data/canpay-take-home-2026.json';
+const previous = existsSync(JSON_PATH) ? JSON.parse(readFileSync(JSON_PATH, 'utf8')) : null;
+const changed = !previous || JSON.stringify(previous.rows) !== JSON.stringify(rows);
+if (process.argv.includes('--check')) {
+  if (changed) {
+    console.error('DATASET AUDIT FAIL — public/data/canpay-take-home-2026.* no longer matches the engine. Run: npx tsx scripts/generate-dataset.ts');
+    process.exit(1);
+  }
+  const v = readFileSync('lib/datasetVersion.ts', 'utf8').match(/'([\d-]+)'/)?.[1];
+  if (v !== previous.generated) {
+    console.error(`DATASET AUDIT FAIL — lib/datasetVersion.ts says ${v}, the dataset says ${previous.generated}. Run: npx tsx scripts/generate-dataset.ts`);
+    process.exit(1);
+  }
+  console.log(`DATASET AUDIT PASS — ${rows.length} open-dataset rows match the engine (version ${previous.generated}).`);
+  process.exit(0);
+}
+const GENERATED = changed
+  ? new Date().toLocaleDateString('en-CA', { timeZone: 'America/Vancouver' })
+  : previous.generated;
+
 mkdirSync('public/data', { recursive: true });
 
 const headers = [
@@ -49,7 +74,7 @@ const csv = [headers.join(',')]
 writeFileSync('public/data/canpay-take-home-2026.csv', csv + '\n');
 
 writeFileSync(
-  'public/data/canpay-take-home-2026.json',
+  JSON_PATH,
   JSON.stringify(
     {
       name: 'Canadian Take-Home Pay & Payroll Deductions 2026',
@@ -66,5 +91,8 @@ writeFileSync(
     2
   ) + '\n'
 );
+
+writeFileSync('lib/datasetVersion.ts',
+  `// Written by scripts/generate-dataset.ts. Do not edit: the date moves when the dataset's rows change.\nexport const DATASET_VERSION = '${GENERATED}';\n`);
 
 console.log(`Wrote ${rows.length} rows (${incomes.length} incomes × ${PROVINCE_SEO_CONFIGS.length} jurisdictions) → public/data/canpay-take-home-2026.{csv,json}`);

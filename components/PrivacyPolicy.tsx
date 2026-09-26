@@ -153,11 +153,13 @@ const PrivacyPolicy: React.FC<PrivacyPolicyProps> = () => {
         </p>
         <p>
           <strong className="text-slate-800">Local storage on your device</strong> holds your language choice, your calculator
-          settings when signed out, the telemetry opt-out flag, the remembered postal-code prefix and the
+          settings when signed out, the calculations and timesheet entries you save while signed out, the
+          industry you last compared against, the telemetry opt-out flag, the remembered postal-code prefix and the
           “has calculated before” flag, plus three entries for page-view counting (below): a session number
           for the tab (<code>_av_sid</code>), a “visited before” flag (<code>_av_seen</code>) and an off switch
-          (<code>_av_off</code>). None of it identifies you, and clearing your browser’s site data removes all
-          of it. The calculator other websites embed stores nothing.
+          (<code>_av_off</code>). The tab’s session storage also holds the page your visit started on, and is
+          cleared when you close the tab. None of it identifies you, it stays on your device, and clearing your
+          browser’s site data removes all of it. The calculator other websites embed stores nothing.
         </p>
         <p>
           <strong className="text-slate-800">Page-view counting.</strong> Two cookieless counters run on this site. The first is
@@ -252,9 +254,9 @@ const PrivacyPolicy: React.FC<PrivacyPolicyProps> = () => {
       <Section n={10} id="changes" title="Changes to this policy">
         <p>
           We change this page when what we collect changes, and we say so on the{' '}
-          <a href="/changelog">changelog</a>. This version adds the postal-code prefix and on-device
-          location options (section 3), the licensing purpose, the cookie and analytics detail (section 4),
-          and the privacy officer contact.
+          <a href="/changelog">changelog</a>. This version (September 25, 2026) collects nothing new.
+          It rewrites section 1 so that it no longer contradicts section 2 about the work pattern, describes
+          what the embedded widget sends, and completes the list of what is kept in your browser (section 4).
         </p>
       </Section>
 

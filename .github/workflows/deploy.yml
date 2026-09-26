@@ -39,3 +39,4 @@ jobs:
       # or stale caches; this can. A failure here means production is wrong now.
       - run: npx playwright install --with-deps chromium
       - run: sleep 30 && npm run audit:live
+      - run: npm run audit:a11y

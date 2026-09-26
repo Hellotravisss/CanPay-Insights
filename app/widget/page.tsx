@@ -22,7 +22,7 @@ const widgetFaq = [
   {
     question: 'Is the widget really free?',
     answer:
-      'Yes. The embeddable calculator is completely free for any website — job boards, immigration services, finance blogs, HR resources. We only ask that you keep the small attribution link under the widget.',
+      'Yes. The embeddable calculator is completely free for any website — job boards, immigration services, finance blogs, HR resources. The only requirement is the small "Powered by CanPay Insights" line inside the widget. The one-line text link under it in the embed code is appreciated but optional. You can remove the widget at any time, with no commitment.',
   },
   {
     question: 'Are the numbers accurate?',

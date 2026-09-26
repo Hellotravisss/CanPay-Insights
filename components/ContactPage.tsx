@@ -82,7 +82,7 @@ const ContactPage: React.FC = () => {
           <a href="/contact" className="text-slate-500 hover:text-red-600 transition-colors">Contact</a>
           <a href="/privacy" className="text-slate-500 hover:text-red-600 transition-colors">Privacy</a>
         </div>
-        <p className="mt-4 opacity-75">Proudly Canadian 🇨🇦 Built for Workers.</p>
+        <p className="mt-4">Proudly Canadian 🇨🇦 Built for Workers.</p>
         <p><AvowdCredit /></p>
       </footer>
     </div>

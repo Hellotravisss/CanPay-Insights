@@ -19,6 +19,29 @@ export const metadata: Metadata = {
 // page is the product's history, not a publishing log.
 const ENTRIES: { date: string; title: string; points: string[] }[] = [
   {
+    date: '2026-09-25',
+    title: 'Clearer privacy policy, a more accessible site, and a widget that works in a strict sandbox',
+    points: [
+      'The privacy policy now opens with exactly what stays on your device and what is sent. The previous version said hours were never sent, while a later section listed the work pattern the shift and timesheet calculators send; both now say the same thing. It also lists every item the site keeps in your browser. The About page no longer says that no data leaves your device.',
+      'Text across the site was too faint for some readers. Every public page now meets the WCAG 2.1 AA contrast standard, and this is checked automatically after every update.',
+      'The embeddable calculator now labels its fields for screen readers and announces the result once you stop typing, and it works inside the strictest iframe sandbox a publishing site can set.',
+      'The open take-home dataset now carries the date its figures last changed (September 15, 2026), which updates automatically whenever a correction changes them.',
+    ],
+  },
+  {
+    date: '2026-09-22',
+    title: 'Six withholding rules corrected against the CRA\'s own guides',
+    points: [
+      'Timesheets: overtime is now counted by calendar week wherever you are in Canada; near midnight the week could previously be split in the wrong place.',
+      'A one-off payment such as a bonus, entered in the hourly calculator, is now taxed the way employers are told to withhold it (the CRA\'s bonus method) rather than as if it were earned every pay.',
+      'Taxable benefits that are not paid in cash no longer attract EI premiums, which the CRA does not charge on them.',
+      'Daily pay is now treated as 240 pay periods a year, as the CRA\'s tables do.',
+      'An employer\'s matching contribution to a group RRSP now adds to CPP and EI, as the CRA requires.',
+      'The timesheet asks how your tips are paid. Tips a customer hands you directly have no CPP or EI withheld; they are still taxable.',
+      'The tax tips panel now takes its marginal rate and RRSP savings from the same engine as the calculator. Its own formula had shown some rates too low (19.05% instead of 31.48% at $100,000 in Ontario).',
+    ],
+  },
+  {
     date: '2026-09-15',
     title: 'Every paycheque figure is now checked against the government\'s own withholding tables',
     points: [

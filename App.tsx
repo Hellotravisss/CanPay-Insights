@@ -802,37 +802,37 @@ const App: React.FC = () => {
 
       {/* Footer */}
       {currentPage === 'home' && (
-        <footer className="pb-8 text-center text-xs text-slate-400" role="contentinfo">
+        <footer className="pb-8 text-center text-xs text-slate-500" role="contentinfo">
           <div className="flex flex-wrap items-center justify-center gap-x-4 gap-y-2">
             <span>© CanPay Insights</span>
-            <a href="/about" className="text-slate-400 no-underline transition-colors hover:text-red-600">
+            <a href="/about" className="text-slate-500 no-underline transition-colors hover:text-red-600">
               About
             </a>
-            <a href="/contact" className="text-slate-400 no-underline transition-colors hover:text-red-600">
+            <a href="/contact" className="text-slate-500 no-underline transition-colors hover:text-red-600">
               Contact
             </a>
-            <a href="/privacy" className="text-slate-400 no-underline transition-colors hover:text-red-600">
+            <a href="/privacy" className="text-slate-500 no-underline transition-colors hover:text-red-600">
               Privacy
             </a>
-            <a href="/affiliate-disclosure" className="text-slate-400 no-underline transition-colors hover:text-red-600">
+            <a href="/affiliate-disclosure" className="text-slate-500 no-underline transition-colors hover:text-red-600">
               Disclosure
             </a>
-            <a href="/terms" className="text-slate-400 no-underline transition-colors hover:text-red-600">
+            <a href="/terms" className="text-slate-500 no-underline transition-colors hover:text-red-600">
               Terms
             </a>
-            <a href="/refunds" className="text-slate-400 no-underline transition-colors hover:text-red-600">
+            <a href="/refunds" className="text-slate-500 no-underline transition-colors hover:text-red-600">
               Refunds
             </a>
-            <a href="/link-to-canpay" className="text-slate-400 no-underline transition-colors hover:text-red-600">
+            <a href="/link-to-canpay" className="text-slate-500 no-underline transition-colors hover:text-red-600">
               Link to Us
             </a>
-            <a href="/wages" className="text-slate-400 no-underline transition-colors hover:text-red-600">
+            <a href="/wages" className="text-slate-500 no-underline transition-colors hover:text-red-600">
               Wages by industry
             </a>
-            <a href="/widget" className="text-slate-400 no-underline transition-colors hover:text-red-600">
+            <a href="/widget" className="text-slate-500 no-underline transition-colors hover:text-red-600">
               Embed this calculator
             </a>
-            <a href="/changelog" className="text-slate-400 no-underline transition-colors hover:text-red-600">
+            <a href="/changelog" className="text-slate-500 no-underline transition-colors hover:text-red-600">
               Changelog
             </a>
           </div>
@@ -848,7 +848,7 @@ const App: React.FC = () => {
               ['/hourly-wage-calculator', 'Hourly wage'], ['/salary-calculator', 'Salary'], ['/cpp-ei-calculator', 'CPP & EI'],
               ['/timesheet-tracker', 'Timesheet'], ['/salary-after-tax-canada', 'Salary after tax'],
             ].map(([href, label]) => (
-              <a key={href} href={href} className="text-slate-400 no-underline transition-colors hover:text-red-600">{label}</a>
+              <a key={href} href={href} className="text-slate-500 no-underline transition-colors hover:text-red-600">{label}</a>
             ))}
           </nav>
           <p className="mt-3">
@@ -858,7 +858,7 @@ const App: React.FC = () => {
       )}
 
       {currentPage === 'calculator' && (
-        <footer className="text-center text-slate-400 text-xs py-8 space-y-4" role="contentinfo">
+        <footer className="text-center text-slate-500 text-xs py-8 space-y-4" role="contentinfo">
           <p>Calculations are estimates based on 2025/2026 tax brackets and provincial employment standards.</p>
           
           {/* Buy Me a Coffee + App Store */}
@@ -889,55 +889,55 @@ const App: React.FC = () => {
           <div className="flex flex-wrap justify-center items-center gap-x-6 gap-y-2 mt-4">
             <a
               href="/blog"
-              className="text-slate-400 hover:text-red-600 transition-colors"
+              className="text-slate-500 hover:text-red-600 transition-colors"
             >
               Insights Hub
             </a>
             <a
               href="/compare-provinces"
-              className="text-slate-400 hover:text-red-600 transition-colors"
+              className="text-slate-500 hover:text-red-600 transition-colors"
             >
               Compare Provinces
             </a>
             <a
               href="/about"
-              className="text-slate-400 hover:text-red-600 transition-colors"
+              className="text-slate-500 hover:text-red-600 transition-colors"
             >
               About
             </a>
             <a
               href="/contact"
-              className="text-slate-400 hover:text-red-600 transition-colors"
+              className="text-slate-500 hover:text-red-600 transition-colors"
             >
               Contact
             </a>
             <a
               href="/privacy"
-              className="text-slate-400 hover:text-red-600 transition-colors"
+              className="text-slate-500 hover:text-red-600 transition-colors"
             >
               Privacy Policy
             </a>
             <a
               href="/affiliate-disclosure"
-              className="text-slate-400 hover:text-red-600 transition-colors"
+              className="text-slate-500 hover:text-red-600 transition-colors"
             >
               Affiliate Disclosure
             </a>
             <a
               href="/terms"
-              className="text-slate-400 hover:text-red-600 transition-colors"
+              className="text-slate-500 hover:text-red-600 transition-colors"
             >
               Terms of Service
             </a>
             <a
               href="/refunds"
-              className="text-slate-400 hover:text-red-600 transition-colors"
+              className="text-slate-500 hover:text-red-600 transition-colors"
             >
               Refund Policy
             </a>
             <a
               href="/link-to-canpay"
-              className="text-slate-400 hover:text-red-600 transition-colors"
+              className="text-slate-500 hover:text-red-600 transition-colors"
             >
               Link to Us
             </a>
@@ -949,7 +949,7 @@ const App: React.FC = () => {
             <span className="w-2 h-2 rounded-full bg-red-400 opacity-50"></span>
           </div>
           
-          <p className="mt-4 opacity-75">Proudly Canadian 🇨🇦 Built for Workers.</p>
+          <p className="mt-4">Proudly Canadian 🇨🇦 Built for Workers.</p>
 
           <p className="mt-3">
             <AvowdCredit />

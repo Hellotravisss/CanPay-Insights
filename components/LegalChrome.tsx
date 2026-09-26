@@ -96,7 +96,7 @@ export default function LegalChrome({
           <span className="h-2 w-2 rounded-full bg-red-400 opacity-50"></span>
           <span className="h-2 w-2 rounded-full bg-red-400 opacity-50"></span>
         </div>
-        <p className="mt-4 opacity-75">Proudly Canadian 🇨🇦 Built for Workers.</p>
+        <p className="mt-4">Proudly Canadian 🇨🇦 Built for Workers.</p>
         <p><AvowdCredit /></p>
       </footer>
     </div>

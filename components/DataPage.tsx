@@ -2,6 +2,7 @@
 import React from 'react';
 import { useRouter } from 'next/navigation';
 import AvowdCredit from './AvowdCredit';
+import { DATASET_VERSION } from '../lib/datasetVersion';
 
 // Illustrative slice of the full 455-row dataset (net take-home at $80,000, 2026).
 const PREVIEW = [
@@ -192,7 +193,7 @@ const DataPage: React.FC = () => {
             <div className="rounded-xl border border-slate-200 bg-slate-50 p-5 mb-6">
               <p className="text-sm leading-relaxed text-slate-700">
                 CanPay Insights, <em>Canadian Take-Home Pay &amp; Payroll Deductions 2026</em> (open dataset), Vancouver,
-                Canada. Version 2026-06-21 (2026 tax year). Licensed under{' '}
+                Canada. Version {DATASET_VERSION} (2026 tax year). Licensed under{' '}
                 <a href="https://creativecommons.org/licenses/by/4.0/" target="_blank" rel="noopener noreferrer" className="text-red-600 underline hover:text-red-700">CC BY 4.0</a>.
                 Retrieved from canpayinsights.ca/data.
               </p>
@@ -211,14 +212,14 @@ const DataPage: React.FC = () => {
               </h3>
               <ul className="space-y-1.5 text-sm leading-relaxed text-slate-600">
                 <li>
-                  <strong className="text-slate-800">Current version:</strong> 2026-06-21, covering the 2026
+                  <strong className="text-slate-800">Current version:</strong> {DATASET_VERSION}, covering the 2026
                   tax year. Cite the version — figures change when rates do.
                 </li>
                 <li>
                   <strong className="text-slate-800">Re-checked quarterly</strong> (January, April,
-                  July, November) against the CRA, Revenu Québec and each provincial government.
-                  January is when a new tax year&apos;s rates take effect, and a new version is
-                  published then.
+                  July, November) against the CRA, Revenu Québec and each provincial government,
+                  and regenerated whenever the engine is corrected in between. January is when a
+                  new tax year&apos;s rates take effect, and a new version is published then.
                 </li>
                 <li>
                   <strong className="text-slate-800">Every figure is machine-checked.</strong> A
@@ -250,7 +251,7 @@ const DataPage: React.FC = () => {
           <a href="/contact" className="text-slate-500 hover:text-red-600 transition-colors">Contact</a>
           <a href="/privacy" className="text-slate-500 hover:text-red-600 transition-colors">Privacy</a>
         </div>
-        <p className="mt-4 opacity-75">Proudly Canadian 🇨🇦 Built for Workers.</p>
+        <p className="mt-4">Proudly Canadian 🇨🇦 Built for Workers.</p>
         <p><AvowdCredit /></p>
       </footer>
     </div>
