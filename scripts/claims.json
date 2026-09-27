@@ -544,13 +544,6 @@
   },
   {
    "page": "/privacy",
-   "text": "The location function is deactivated by default and activated only by your action, as the Act respecting the protection of personal information in the private sector requires; the paragraph above is the notice that Act calls for.",
-   "backing": "manual",
-   "note": "Legal or policy statement, not a behaviour a script can observe.",
-   "reviewed": "2026-09-25"
-  },
-  {
-   "page": "/privacy",
    "text": "They are essential to that feature, are not used for tracking or advertising, and are not set unless you sign in.",
    "backing": "check:no-anon-cookies"
   },
@@ -1885,6 +1878,34 @@
    "backing": "manual",
    "reviewed": "2026-09-27",
    "note": "Checked on 2026-09-27 against GEO/analytics-worker/src/index.js and schema.sql: the sessions insert stores cf.country/city/region/timezone and coarse() lat/lon (one decimal) and device/browser/os from parseUA; no IP column, raw User-Agent not stored."
+  },
+  {
+   "page": "/privacy",
+   "text": "The postal-code and device-location options in levels 2 and 3 are off until you turn them on.",
+   "backing": "manual",
+   "reviewed": "2026-09-27",
+   "note": "Checked on 2026-09-27: NeighbourhoodPrompt sends FSA/device position only after the visitor types or presses the button; app/api/events always attaches cf country/region/city and coarse() lat/lon (one decimal) with no IP or account id. Travis decided on 2026-09-27 to keep level 1 on for everyone; the paragraph states that fact without claiming compliance."
+  },
+  {
+   "page": "/privacy",
+   "text": "The connection-based location in level 1 is always on: it is city-level, rounded to about 11 km, and stored with no name, account, IP address or other identifier.",
+   "backing": "manual",
+   "reviewed": "2026-09-27",
+   "note": "Checked on 2026-09-27: NeighbourhoodPrompt sends FSA/device position only after the visitor types or presses the button; app/api/events always attaches cf country/region/city and coarse() lat/lon (one decimal) with no IP or account id. Travis decided on 2026-09-27 to keep level 1 on for everyone; the paragraph states that fact without claiming compliance."
+  },
+  {
+   "page": "/fr/confidentialite",
+   "text": "Les options du préfixe postal et de la position de l’appareil (niveaux 2 et 3) restent désactivées tant que vous ne les activez pas.",
+   "backing": "manual",
+   "reviewed": "2026-09-27",
+   "note": "Checked on 2026-09-27: NeighbourhoodPrompt sends FSA/device position only after the visitor types or presses the button; app/api/events always attaches cf country/region/city and coarse() lat/lon (one decimal) with no IP or account id. Travis decided on 2026-09-27 to keep level 1 on for everyone; the paragraph states that fact without claiming compliance."
+  },
+  {
+   "page": "/fr/confidentialite",
+   "text": "La localisation d’après la connexion (niveau 1) est toujours active: elle est au niveau de la ville, arrondie à environ 11 km, et conservée sans nom, compte, adresse IP ni autre identifiant.",
+   "backing": "manual",
+   "reviewed": "2026-09-27",
+   "note": "Checked on 2026-09-27: NeighbourhoodPrompt sends FSA/device position only after the visitor types or presses the button; app/api/events always attaches cf country/region/city and coarse() lat/lon (one decimal) with no IP or account id. Travis decided on 2026-09-27 to keep level 1 on for everyone; the paragraph states that fact without claiming compliance."
   }
  ]
 }
