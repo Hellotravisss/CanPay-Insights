@@ -139,9 +139,10 @@ const PrivacyPolicy: React.FC<PrivacyPolicyProps> = () => {
           data. We do not sell, rent or share personal information.
         </p>
         <p>
-          <strong className="text-slate-800">Quebec residents.</strong> The location function is deactivated by default and
-          activated only by your action, as the Act respecting the protection of personal information in
-          the private sector requires; the paragraph above is the notice that Act calls for. A French
+          <strong className="text-slate-800">Quebec residents.</strong> The postal-code and device-location options in levels 2
+          and 3 are off until you turn them on. The connection-based location in level 1 is always on: it is
+          city-level, rounded to about 11 km, and stored with no name, account, IP address or other
+          identifier. This section is our notice about the location functions. A French
           version of this policy is at <a href="/fr/confidentialite">/fr/confidentialite</a>.
         </p>
       </Section>

@@ -139,10 +139,11 @@ const PrivacyPolicyFr: React.FC = () => {
           toute revente. Nous ne vendons, ne louons ni ne partageons de renseignements personnels.
         </p>
         <p>
-          <strong className="text-slate-800">Résidents du Québec.</strong> La fonction de localisation est désactivée par défaut et
-          n’est activée que par votre geste, comme l’exige la Loi sur la protection des renseignements
-          personnels dans le secteur privé ; le paragraphe ci-dessus constitue l’information que cette loi
-          prévoit (art. 8.1). La responsable de la protection des renseignements personnels est nommée à
+          <strong className="text-slate-800">Résidents du Québec.</strong> Les options du préfixe postal et de la position de
+          l’appareil (niveaux 2 et 3) restent désactivées tant que vous ne les activez pas. La localisation
+          d’après la connexion (niveau 1) est toujours active : elle est au niveau de la ville, arrondie à
+          environ 11 km, et conservée sans nom, compte, adresse IP ni autre identifiant. Cette section
+          constitue notre information sur les fonctions de localisation. La responsable de la protection des renseignements personnels est nommée à
           la section 9.
         </p>
       </Section>
