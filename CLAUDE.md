@@ -54,4 +54,4 @@ They were published here by mistake for three days in September 2026 — do not 
 - Present the calculator's self-selected sample as national statistics.
 - Store IP addresses, full user agents, exact income, or a full postal code.
 - Publish or link the private data room.
-- Push to main from a scheduled routine — open a pull request.
+- Push to main from a scheduled routine — open a pull request on a `news-*` branch. `pr-check.yml` runs every prebuild gate and auto-merges + deploys only if all pass and only content files (src/content, public/blog, public/llms.txt) changed; anything else waits for a human.

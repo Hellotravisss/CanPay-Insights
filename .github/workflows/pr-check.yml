@@ -1,0 +1,32 @@
+name: PR check (auto-merge routine articles)
+on:
+  pull_request:
+    branches: [main]
+permissions:
+  contents: write
+  pull-requests: write
+  actions: write
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with: { fetch-depth: 0 }
+      - uses: actions/setup-node@v4
+        with: { node-version: 22, cache: npm }
+      - run: npm ci
+      - name: All prebuild gates
+        run: npm run prebuild
+      - name: Only content files changed?
+        id: scope
+        run: |
+          files=$(git diff --name-only origin/main...HEAD)
+          echo "$files"
+          bad=$(echo "$files" | grep -vE '^(src/content/|public/blog/|public/llms\.txt$)' || true)
+          if [ -z "$bad" ] && [[ "${{ github.head_ref }}" == news-* ]]; then echo "ok=1" >> $GITHUB_OUTPUT; else echo "ok=0" >> $GITHUB_OUTPUT; echo "Not auto-merged: $bad"; fi
+      - name: Merge and deploy
+        if: steps.scope.outputs.ok == '1'
+        env: { GH_TOKEN: "${{ github.token }}" }
+        run: |
+          gh pr merge ${{ github.event.pull_request.number }} --squash --delete-branch
+          gh workflow run deploy.yml --ref main
