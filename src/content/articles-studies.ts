@@ -2590,4 +2590,132 @@ Nothing changes on your paycheque for the rest of 2026 — the new rate and ceil
 The 2027 EI premium rate, maximum insurable earnings, and maximum contribution figures are taken directly from the Government of Canada's official announcement, [Canada Employment Insurance Commission confirms 2027 Employment Insurance premium rate](https://www.canada.ca/en/employment-social-development/news/2026/09/canada-employment-insurance-commission-confirms-2027-employment-insurance-premium-rate.html) (Employment and Social Development Canada, September 14, 2026), cross-checked against contemporaneous reporting from Insurance Business Canada. The 2026 comparison figures (rate, ceiling, and maximums) match the constants used in the CanPay Insights tax engine. Salary-by-salary premium figures are CanPay Insights' own calculations — insurable earnings multiplied by each year's confirmed rate, capped at that year's maximum insurable earnings — and assume a single employee with no other insurable income. This is general information, not tax or financial advice; confirm your own EI deductions with the [Canada Revenue Agency](https://www.canada.ca/en/revenue-agency/services/tax/businesses/topics/payroll/payroll-deductions-contributions/employment-insurance-ei/ei-premium-rates-maximums.html).
 `,
   },
+  {
+    id: 'study-24',
+    slug: 'tfsa-rrsp-limits-2027',
+    title: 'TFSA Room Set to Hit $7,500 in 2027 — RRSP Limit Confirmed at $35,390',
+    subtitle:
+      "The CRA has already confirmed the 2027 RRSP dollar limit. The TFSA increase isn't official until November, but the indexation math already points to $7,500 — we ran both through the tax engine to see what the extra room is actually worth.",
+    excerpt:
+      "The Canada Revenue Agency confirmed on October 30, 2025 that the 2027 RRSP dollar limit rises to $35,390, up $1,580 from $33,810. The 2027 TFSA limit isn't official yet, but the CPI-based indexing formula already points to $7,500, up from $7,000. Run through the CanPay Insights tax engine, the extra $1,580 of RRSP room is worth $284 to $457 in tax savings at a $90,000 salary, depending on province.",
+    metaTitle: '2027 TFSA Limit Hits $7,500, RRSP Jumps to $35,390',
+    metaDescription:
+      'TFSA room is on track to rise to $7,500 in 2027, and the RRSP dollar limit is confirmed at $35,390. See what the extra room actually saves you by province.',
+    keywords: [
+      'tfsa limit 2027',
+      'tfsa contribution limit 2027',
+      'rrsp limit 2027',
+      'rrsp contribution limit 2027',
+      '2027 tfsa rrsp limits canada',
+      'tfsa 7500 2027',
+    ],
+    category: 'news',
+    tags: ['TFSA', 'RRSP', 'CRA', '2027'],
+    publishedAt: '2026-09-28',
+    readTime: 7,
+    imageUrl: '/blog/tfsa-rrsp-limits-2027.svg',
+    directAnswer:
+      "The Canada Revenue Agency confirmed on October 30, 2025 that the 2027 RRSP dollar limit is $35,390, up from $33,810 in 2026 by $1,580. The 2027 TFSA limit is not official yet — the CRA typically confirms it in November — but the CPI-based indexing formula that sets it already points to $7,500, up from $7,000 in 2026, since the unrounded 2027 figure (about $7,300–$7,400 on current inflation data) clears the $7,250 threshold needed to round up to the next $500 increment. Run through the CanPay Insights tax engine, the extra $1,580 of 2027 RRSP room is worth $284 (Nunavut) to $457 (Nova Scotia) in immediate tax savings at a $90,000 salary, depending on province — the TFSA increase saves no tax today, since TFSA contributions are never deductible, but it is $500 more you can move from your take-home pay into an account that is never taxed again.",
+    faq: [
+      {
+        question: 'What is the RRSP contribution limit for 2027?',
+        answer:
+          'The Canada Revenue Agency confirmed on October 30, 2025 that the 2027 RRSP dollar limit is $35,390, up from the 2026 limit of $33,810 by $1,580. Your own personal limit is 18% of your 2026 earned income up to that dollar cap, plus any unused room carried forward, minus any pension adjustment — you would need about $196,611 of 2026 earned income to reach the full $35,390 in new room for 2027.',
+      },
+      {
+        question: 'What is the TFSA contribution limit for 2027?',
+        answer:
+          "It isn't official yet — the CRA confirmed the 2026 TFSA limit ($7,000) on December 1, 2025, and typically confirms the following year's limit around the same time each November. But the formula is public: the CRA compares the average Consumer Price Index for the 12 months ending September 30 against the same period a year earlier, applies that percentage increase to the prior unrounded figure, then rounds to the nearest $500. On the inflation trend through August 2026 (CPI up 3.0% year over year), the unrounded 2027 figure clears the roughly $7,250 threshold needed to round up from $7,000 to $7,500, making a $7,500 limit very likely barring an unexpected drop in inflation before the September 30 cutoff.",
+      },
+      {
+        question: 'How much is the extra $1,580 of RRSP room actually worth?',
+        answer:
+          "It depends on your province and your marginal tax rate. At a $90,000 salary, contributing the full extra $1,580 rather than stopping at the 2026 limit saves $457.41 in tax in Nova Scotia (a 29.0% effective rate on that contribution), $450.30 in Newfoundland and Labrador, $442.40 in New Brunswick, $434.03 in PEI, $422.65 in Manitoba, $405.90 in Quebec, $397.72 in Saskatchewan, $357.08 in the Northwest Territories, $349.04 in Ontario, $347.60 in Alberta, $342.86 in British Columbia, $322.32 in Yukon, and $284.40 in Nunavut (18.0%, the lowest because Nunavut's tax brackets are the least steep at this income). Higher earners in higher tax brackets keep an even larger share of their RRSP contribution back as tax savings.",
+      },
+      {
+        question: 'Does the TFSA increase save me any tax right now?',
+        answer:
+          "No. Unlike an RRSP contribution, a TFSA contribution is never tax-deductible — it doesn't lower your taxable income or your withholding this year. The entire benefit is that growth and withdrawals inside the account are never taxed. So the extra $500 of 2027 TFSA room doesn't change this year's paycheque at all; it just means $500 more of your existing take-home pay that you're allowed to shelter permanently from tax once you contribute it.",
+      },
+      {
+        question: 'What is the cumulative TFSA contribution room by 2027?',
+        answer:
+          "For anyone who was a Canadian resident and at least 18 years old in 2009, when the TFSA began, cumulative room reached $109,000 by the end of 2026. If the 2027 limit is confirmed at $7,500 as expected, cumulative room would rise to $109,500 for that same person — assuming no withdrawals or missed years, since unused room carries forward indefinitely.",
+      },
+      {
+        question: "Why isn't the FHSA annual limit rising for 2027 too?",
+        answer:
+          "Because it isn't indexed. The First Home Savings Account's $8,000 annual limit and $40,000 lifetime limit are fixed dollar amounts written directly into the Income Tax Act, unlike the RRSP and TFSA limits, which move with inflation or wage growth under their own indexing formulas. So the FHSA limit stays at $8,000 a year in 2027 even as the TFSA and RRSP limits rise.",
+      },
+    ],
+    content: `
+## One limit is already confirmed. The other is basically decided, five weeks early.
+
+Two of the accounts most Canadians use to shelter take-home pay from tax get more room in 2027 — but they got there through very different processes, and only one is official yet.
+
+The **Canada Revenue Agency confirmed on October 30, 2025** that the **2027 RRSP dollar limit is $35,390** — up from $33,810 in 2026, a **$1,580** increase. That's not a forecast: the RRSP limit is calculated from a legislated formula tied to growth in the average wage, and the CRA publishes it more than a year ahead on its ["What's new" registered-plans page](https://www.canada.ca/en/revenue-agency/services/tax/registered-plans-administrators/whats-new.html).
+
+The **2027 TFSA limit is not confirmed yet**. The CRA typically announces next year's TFSA limit in November — it confirmed the 2026 limit ($7,000) on December 1, 2025 — so the 2027 number won't be official until roughly two months from now. But the formula behind it is public, and the input data (inflation through September 2026) is close to locked in. Multiple financial outlets, including [The Globe and Mail](https://www.theglobeandmail.com/investing/globe-advisor/advisor-news/article-why-the-2027-tfsa-contribution-limit-will-rise-to-7500/), have run the calculation and arrived at the same number: **$7,500**, up from $7,000.
+
+We ran both figures through the CanPay Insights tax engine to see what the extra room is actually worth — because an RRSP dollar and a TFSA dollar of "room" are not worth the same thing.
+
+### What's changing
+
+| Account | 2026 limit | 2027 limit | Change | Status |
+| --- | --- | --- | --- | --- |
+| RRSP | $33,810 | **$35,390** | +$1,580 | Confirmed by CRA, October 30, 2025 |
+| TFSA | $7,000 | **$7,500** (expected) | +$500 | Not yet official for 2027 — CRA confirms in November |
+| FHSA | $8,000/yr | $8,000/yr | No change | Fixed by legislation, not indexed |
+
+### Why the TFSA number isn't official yet, but is close to certain
+
+The TFSA limit is indexed to inflation, but it only moves in **$500 increments** — the CRA compares the average Consumer Price Index for the 12 months ending September 30 against the same 12-month period a year earlier, applies that percentage change to the prior year's unrounded dollar figure, and rounds to the nearest $500. For 2026, that calculation used an average CPI of about 163.3 (October 2024–September 2025) against 160.1 the year before, for a 2.0% indexing rate.
+
+Because August 2026 inflation already came in at **3.0% year over year** — reported by Statistics Canada on September 14, 2026 — the running 12-month average feeding the 2027 formula is comfortably past the roughly $7,250 threshold an unrounded figure needs to clear before it rounds up to the next $500 increment. Barring an unusual drop in the September 2026 inflation reading (which won't be published until mid-October), $7,500 is close to locked in — several independent trackers have reached the same conclusion. We're reporting it as "expected," not confirmed, because the CRA has not yet said so.
+
+### What the extra RRSP room is actually worth, by province
+
+An RRSP contribution reduces taxable income, so it doesn't cost you a dollar of take-home pay for every dollar you put in — part of it is money you'd have paid in tax anyway. We compared take-home pay at a $90,000 salary contributing to the current RRSP limit ($33,810) versus the confirmed 2027 limit ($35,390), using this year's federal and provincial tax brackets in the CanPay Insights tax engine:
+
+| Province/territory | Tax saved on the extra $1,580 | Effective rate on that room |
+| --- | --- | --- |
+| Nova Scotia | **$457.41** | 29.0% |
+| Newfoundland and Labrador | $450.30 | 28.5% |
+| New Brunswick | $442.40 | 28.0% |
+| Prince Edward Island | $434.03 | 27.5% |
+| Manitoba | $422.65 | 26.8% |
+| Quebec | $405.90 | 25.7% |
+| Saskatchewan | $397.72 | 25.2% |
+| Northwest Territories | $357.08 | 22.6% |
+| Ontario | $349.04 | 22.1% |
+| Alberta | $347.60 | 22.0% |
+| British Columbia | $342.86 | 21.7% |
+| Yukon | $322.32 | 20.4% |
+| Nunavut | $284.40 | 18.0% |
+
+*Calculated by comparing net annual pay at a $90,000 salary contributing $33,810 (this year's limit) versus $35,390 (the confirmed 2027 limit), both as a lump-sum annual contribution, using this year's federal and provincial tax brackets and basic personal amounts only. "Effective rate" is the share of the extra $1,580 that came back as reduced tax rather than reduced take-home cash.*
+
+Nova Scotia tops the table because it combines a relatively steep provincial bracket at this income with the province's own surtax structure; Nunavut sits lowest because its territorial brackets are the shallowest in the country at $90,000. Earn more, and the value climbs further — at $150,000 in Ontario, for example, the same $1,580 of extra RRSP room is worth **$581.80** (a 36.8% effective rate), because that income sits in a higher federal bracket.
+
+### At the very top of the room, in 2027 the cost is a little higher too
+
+Someone earning enough to hit the full dollar limit every year — roughly $196,611 or more in 2026 earned income — sees the opposite side of the same math. The 2026 maximum contribution is $33,810. The 2027 maximum is $35,390. At a $200,000 salary, that extra $1,580 of 2027 room costs about $870 of extra take-home pay given up in Ontario, $937 in BC, $979 in Alberta, and $830 in Quebec, this year alone — the flip side of the same tax saving, since money that leaves the paycheque now comes back untaxed decades from now.
+
+### The TFSA math is simpler, and it isn't about this year's tax bill
+
+A TFSA contribution is never tax-deductible, so more TFSA room changes nothing about this year's paycheque or refund. The entire value is that whatever you put in — and whatever it earns — is never taxed again, on withdrawal or otherwise. So the extra $500 of expected 2027 room is best read plainly: it's $500 more of your existing take-home pay you'll be allowed to move into a permanently tax-free account, on top of whatever room you're already carrying forward. For anyone who has been a Canadian resident and at least 18 since the TFSA started in 2009, cumulative room reached $109,000 through 2026; a confirmed $7,500 for 2027 would take that to $109,500.
+
+### The FHSA isn't part of this story
+
+If you're also using a First Home Savings Account, its $8,000 annual and $40,000 lifetime limits are fixed dollar figures written into the Income Tax Act — they don't move with inflation the way the RRSP and TFSA limits do, so the FHSA stays at $8,000 a year in 2027 regardless of what happens with CPI.
+
+### See it against your own paycheque
+
+These figures use a single worker with no other income or credits. To see what an RRSP contribution is worth against your own salary and province, use the [free take-home pay calculator](/) with the RRSP field filled in, or go straight to your [provincial paycheck calculator](/salary-after-tax-canada). For the payroll deductions these room changes sit alongside, see the [CPP & EI calculator](/cpp-ei-calculator) or our coverage of the [2027 CPP rate cut](/blog/cpp-contribution-rate-cut-2027) and the [2027 EI premium rate](/blog/ei-premium-rate-2027).
+
+## Sources & disclaimer
+
+The confirmed 2026 and 2027 RRSP dollar limits ($33,810 and $35,390) and the confirmed 2026 TFSA limit ($7,000) are taken directly from the Canada Revenue Agency's ["What's new" registered plans administrators page](https://www.canada.ca/en/revenue-agency/services/tax/registered-plans-administrators/whats-new.html), which dates the RRSP 2027 announcement to October 30, 2025 and the TFSA 2026 announcement to December 1, 2025. The expected 2027 TFSA limit of $7,500 is not yet confirmed by the CRA; it is reported here as a well-supported projection, based on the published CPI-indexing methodology and cross-checked against independent calculations from [The Globe and Mail](https://www.theglobeandmail.com/investing/globe-advisor/advisor-news/article-why-the-2027-tfsa-contribution-limit-will-rise-to-7500/) and RBC Wealth Management's Morsky Group. The August 2026 CPI figure (3.0% year over year) is from Statistics Canada's [Consumer Price Index, August 2026](https://www150.statcan.gc.ca/n1/daily-quotidien/260914/dq260914a-eng.htm), released September 14, 2026. The FHSA's fixed, non-indexed $8,000 annual and $40,000 lifetime limits are confirmed on the CRA's own FHSA guidance pages. Provincial tax-savings figures are CanPay Insights' own calculations, using the CanPay Insights tax engine with 2026 federal and provincial brackets, a single worker with no other income or credits, and an annual lump-sum RRSP contribution — real tax savings vary with actual income, credits, and the year the contribution is claimed. This is general information, not tax or financial advice; confirm current and future contribution limits with the [Canada Revenue Agency](https://www.canada.ca/en/revenue-agency/services/tax/registered-plans-administrators/whats-new.html) before contributing.
+`,
+  },
 ];
