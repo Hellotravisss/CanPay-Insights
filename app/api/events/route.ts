@@ -28,7 +28,7 @@ const COLS = [
   'change_direction', 'change_pct_bucket', 'days_since_saved_bucket', 'province_changed',
   'median_ratio_bucket', 'median_wage_ref', 'schema_version',
   'fsa', 'fsa_source', 'lat2', 'lon2', 'tz', 'is_returning',
-  'reverse_target_bucket', 'spouse_claim',
+  'reverse_target_bucket', 'spouse_claim', 'time_to_result_bucket', 'edits_bucket',
 ] as const;
 
 /**
@@ -38,6 +38,9 @@ const COLS = [
  * kept only at two decimals and only when the visitor's source really was the
  * device; a zone name is a name, not a coordinate.
  */
+// Same fixed labels as lib/telemetry.ts; anything else is dropped.
+const TIME_BUCKETS = new Set(['under-10s', '10-30s', '30-90s', '90s-plus']);
+const EDIT_BUCKETS = new Set(['1-3', '4-10', '11-30', '31-plus']);
 const REVERSE_BUCKETS = new Set(['under-2k', '2-3k', '3-4k', '4-5k', '5-6k', '6-8k', '8-10k', '10k-plus']);
 const FSA_RE = /^[ABCEGHJ-NPRSTVXY]\d[ABCEGHJ-NPRSTV-Z]$/;
 const FSA_SOURCES = new Set(['typed', 'device', 'remembered']);
@@ -79,6 +82,8 @@ export async function POST(request: Request) {
   sanitiseNeighbourhood(body);
   // A range label from a fixed list, or nothing: never a number.
   if (!REVERSE_BUCKETS.has(String(body.reverse_target_bucket))) body.reverse_target_bucket = null;
+  if (!TIME_BUCKETS.has(String(body.time_to_result_bucket))) body.time_to_result_bucket = null;
+  if (!EDIT_BUCKETS.has(String(body.edits_bucket))) body.edits_bucket = null;
   body.spouse_claim = body.spouse_claim === 1 || body.spouse_claim === true ? 1 : body.spouse_claim === 0 || body.spouse_claim === false ? 0 : null;
 
   let cf: Record<string, unknown> = {};

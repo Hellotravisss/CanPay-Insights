@@ -19,6 +19,14 @@ export const metadata: Metadata = {
 // page is the product's history, not a publishing log.
 const ENTRIES: { date: string; title: string; points: string[] }[] = [
   {
+    date: '2026-09-28',
+    title: 'Two new anonymous ranges: time to first result, and form changes',
+    points: [
+      'The anonymous counter now records how long it took to reach your first result and how many times you changed the form, each as a range only — never timestamps, keystrokes or clicks. Opting out stops both, like everything else.',
+      'The privacy policy (English and French) lists both.',
+    ],
+  },
+  {
     date: '2026-09-27',
     title: 'Supporting a spouse: the TD1 spouse amount',
     points: [

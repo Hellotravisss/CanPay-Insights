@@ -15,7 +15,7 @@ const PrivacyPolicyFr: React.FC = () => {
       backLabel="Retour à l’accueil"
       footnote="Les calculs sont des estimations fondées sur les tranches d’imposition 2026 et les normes du travail provinciales."
       title="Politique de confidentialité de CanPay Insights"
-      effective="En vigueur le 27 septembre 2026 (remplace la version du 25 septembre 2026)"
+      effective="En vigueur le 28 septembre 2026 (remplace la version du 27 septembre 2026)"
       links={[
         { href: '/privacy', label: 'English version' },
         { href: '/terms', label: 'Conditions d’utilisation (anglais)' },
@@ -73,6 +73,7 @@ const PrivacyPolicyFr: React.FC = () => {
           <li>des fourchettes larges pour vos saisies (cotisation REER en part de la paie, prime de quart, heures supplémentaires, pourboires en part de la paie) — toujours des fourchettes ;</li>
           <li>si vous utilisez « trouver le salaire » pour partir d’un montant net, le montant net mensuel demandé, sous forme de tranche (par exemple « 4 k$–5 k$ ») — jamais le montant ;</li>
           <li>si vous avez coché « Je subviens aux besoins d’un époux ou conjoint de fait » (oui ou non) — jamais le revenu de votre époux ou conjoint ;</li>
+          <li>le temps écoulé entre l’ouverture de la page et votre premier résultat, sous forme de tranche (moins de 10 secondes, 10 à 30, 30 à 90, plus de 90), et le nombre de fois où vous avez modifié le formulaire avant un résultat, sous forme de tranche (1 à 3, 4 à 10, 11 à 30, plus de 30) — jamais d’horodatage, de frappes ni d’endroits cliqués ;</li>
           <li>si vous étiez connecté (oui/non — jamais quel compte) et, si vous rouvrez un calcul enregistré et le modifiez, le sens et l’ordre de grandeur du changement ainsi que l’ancienneté de l’original — jamais les montants ;</li>
           <li>l’heure et le jour de la semaine selon votre propre horloge, et le nom du fuseau horaire que déclare votre navigateur (par exemple « America/Toronto »), qui sert à vérifier la carte, non à vous situer ;</li>
           <li>si cet appareil a déjà enregistré un calcul — un simple indicateur oui/non stocké sur l’appareil, pas un identifiant ;</li>

@@ -15,6 +15,7 @@ import {
   bucketTipsPct,
   buildPayChange,
   deriveEmploymentShape,
+  noteInputEdit,
   type WorkPattern,
   type BehaviourSignals,
   type PayChange,
@@ -429,6 +430,12 @@ const App: React.FC = () => {
       spouseClaim: (mode === CalculationMode.SIMPLE ? simpleInputs : mode === CalculationMode.ANNUAL ? annualInputs : timesheetInputs).spouseNetIncome != null,
     });
   }, [currentPage, mode, simpleInputs, annualInputs, timesheetInputs, currentProvince, results, lang, reportOpened, userId, authLoading]);
+
+  // Count form changes on this page load (only the bucket is ever sent).
+  useEffect(() => {
+    if (simpleInputs === DEFAULT_SIMPLE_INPUTS && annualInputs === DEFAULT_ANNUAL_INPUTS && timesheetInputs === DEFAULT_TIMESHEET_INPUTS) return;
+    noteInputEdit();
+  }, [simpleInputs, annualInputs, timesheetInputs]);
 
   // Calculation History
   const { records, saveCalculation } = useCalculationHistory(userId);

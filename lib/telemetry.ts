@@ -423,6 +423,29 @@ let debounceTimer: ReturnType<typeof setTimeout> | null = null;
 // and surfaces comparison pairs (relocation intent). seq = order in session.
 let sessionId: string | null = null;
 let seqCounter = 0;
+
+/**
+ * Effort before a result, the two fields added 2026-09-28. Both leave the
+ * browser as a range label only: never a timestamp, never a click trail.
+ * - time_to_result_bucket: seconds from this page load to the FIRST result
+ *   recorded on it (sent on seq 1 only; later events carry null).
+ * - edits_bucket: how many times the form's inputs changed on this page load
+ *   before this result (App.tsx calls noteInputEdit on each change).
+ */
+const pageLoadedAt = typeof performance !== 'undefined' ? performance.now() : 0;
+let inputEdits = 0;
+export function noteInputEdit(): void { inputEdits += 1; }
+export const TIME_TO_RESULT_BUCKETS = ['under-10s', '10-30s', '30-90s', '90s-plus'] as const;
+export function bucketTimeToResult(ms: number): string | null {
+  if (!Number.isFinite(ms) || ms < 0) return null;
+  const s = ms / 1000;
+  return s < 10 ? 'under-10s' : s < 30 ? '10-30s' : s < 90 ? '30-90s' : '90s-plus';
+}
+export const EDITS_BUCKETS = ['1-3', '4-10', '11-30', '31-plus'] as const;
+export function bucketEdits(n: number): string | null {
+  if (!Number.isFinite(n) || n < 1) return null;
+  return n <= 3 ? '1-3' : n <= 10 ? '4-10' : n <= 30 ? '11-30' : '31-plus';
+}
 export function currentSessionId(): string {
   return getSessionId();
 }
@@ -729,6 +752,8 @@ export function recordCalcEvent(e: {
         is_returning: isReturning(),
         reverse_target_bucket: reverseTargetBucket(e.reverseTargetMonthly),
         spouse_claim: e.spouseClaim == null ? null : e.spouseClaim ? 1 : 0,
+        time_to_result_bucket: seqCounter === 1 ? bucketTimeToResult(performance.now() - pageLoadedAt) : null,
+        edits_bucket: bucketEdits(inputEdits),
     };
 
     // Awaited before the send because the brand hint is a promise on Chromium.
