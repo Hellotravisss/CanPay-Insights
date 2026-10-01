@@ -93,6 +93,30 @@ const nextConfig: NextConfig = {
         destination: '/blog/tfsa-vs-rrsp-canada-2025',
         permanent: true,
       },
+      {
+        // Retired 2026-10-02 (GEO audit): 2025 figures, 66 impressions and 0 clicks since May. Same question, current numbers.
+        source: '/blog/ontario-tax-guide-2025',
+        destination: '/ontario-paycheck-calculator',
+        permanent: true,
+      },
+      {
+        // Retired 2026-10-02 (GEO audit): 2025 figures, 179 impressions and 0 clicks since May. Same question, current numbers.
+        source: '/blog/cpp-ei-explained-2025',
+        destination: '/blog/how-much-cpp-will-i-pay-2026',
+        permanent: true,
+      },
+      {
+        // Retired 2026-10-02 (GEO audit): 2025 figures, 24 impressions and 0 clicks since May. Same question, current numbers.
+        source: '/blog/50000-salary-after-tax-canada-2025',
+        destination: '/salary-after-tax-canada',
+        permanent: true,
+      },
+      {
+        // Retired 2026-10-02 (GEO audit): 2025 figures, 55 impressions and 0 clicks since May. Same question, current numbers.
+        source: '/blog/rrsp-tax-savings-canada-2025',
+        destination: '/blog/tfsa-rrsp-limits-2027',
+        permanent: true,
+      },
     ];
   },
   images: {
