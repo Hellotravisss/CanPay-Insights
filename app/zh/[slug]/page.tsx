@@ -54,7 +54,7 @@ function build(slug: string): Page | null {
       sections: [
         {
           h: '扣掉的是哪几项？',
-          b: `以安大略省为例：联邦税约 ${money(on.federalTax)}，省税约 ${money(on.provincialTax)}（含安省健康保费），CPP/CPP2 约 ${money(on.pensionContribution)}，EI 约 ${money(on.eiPremium)}。联邦税、CPP、EI 各省一样，差别主要在省税。`,
+          b: `以安大略省为例：联邦税约 ${money(on.federalTax)}，省税约 ${money(on.provincialTax)}（含安省健康保费），CPP/CPP2 约 ${money(on.pensionContribution)}，EI 约 ${money(on.eiPremium)}。除魁北克外，联邦税、CPP、EI 各省一样，差别主要在省税；魁北克交 QPP 和 QPIP，联邦税另有减免，算法不同。`,
         },
         {
           h: '为什么实际到手可能更少？',
@@ -172,7 +172,7 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   if (!p) return { title: 'Page Not Found' };
   const url = `${BASE_URL}/zh/${slug}`;
   return {
-    title: `${p.title} | CanPay Insights`,
+    title: p.title,
     description: p.description,
     alternates: { canonical: url, languages: { 'zh-Hans': url } },
     openGraph: { title: p.title, description: p.description, url, type: 'article', locale: 'zh_CN', images: [{ url: '/og-image.png', width: 1200, height: 630 }] },
