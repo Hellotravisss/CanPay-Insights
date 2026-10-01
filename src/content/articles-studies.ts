@@ -14,7 +14,7 @@ export const studyArticles: Article[] = [
       'Nunavut minimum wage workers take home $35,265 a year while Alberta workers keep $26,989 — an $8,276 gap. Current 2026 data on what minimum wage is really worth after taxes in every province.',
     metaTitle: 'Minimum Wage After Tax by Province: 2026 Canadian Data Study',
     metaDescription:
-      'Original 2026 data: full-time minimum wage take-home pay in all 13 Canadian provinces and territories. Nova Scotia workers lose 18.6% to deductions; Alberta workers lose 13.5%.',
+      'Original 2026 data: full-time minimum wage take-home pay in all 13 Canadian provinces and territories. Nova Scotia workers lose 18.8% to deductions; Alberta workers lose 13.5%.',
     keywords: [
       'minimum wage after tax canada',
       'minimum wage take home pay',
@@ -26,31 +26,31 @@ export const studyArticles: Article[] = [
     category: 'salary',
     tags: ['Minimum Wage', '2026', 'Data Study', 'All Provinces'],
     publishedAt: '2026-06-12',
-    updatedAt: '2026-09-17',
+    updatedAt: '2026-10-01',
     readTime: 9,
     imageUrl: '/blog/minimum-wage-take-home-2026.png',
     directAnswer:
-      'As of September 2026, a full-time minimum wage worker takes home between $26,989 a year (Alberta, $15.00/hr) and $35,265 a year (Nunavut, $20.17/hr) after federal tax, provincial tax, CPP, and EI. In Ontario ($17.60/hr), full-time minimum wage works out to $30,409 a year or about $2,534 a month after deductions.',
+      'As of October 2026, a full-time minimum wage worker takes home between $26,989 a year (Alberta, $15.00/hr) and $35,265 a year (Nunavut, $20.17/hr) after federal tax, provincial tax, CPP, and EI. In Ontario ($17.95/hr), full-time minimum wage works out to $30,911 a year or about $2,576 a month after deductions.',
     faq: [
       {
         question: 'How much does a minimum wage worker take home in Ontario in 2026?',
         answer:
-          'At Ontario’s $17.60 minimum wage, a full-time worker (40 hours/week) grosses $36,608 a year and takes home approximately $30,409 after federal tax, provincial tax, CPP, EI, and the Ontario Health Premium — about $2,534 per month, or a net hourly rate of $14.62. Ontario’s minimum wage rises to $17.95 on October 1, 2026.',
+          'At Ontario’s $17.95 minimum wage (in force since October 1, 2026), a full-time worker (40 hours/week) grosses $37,336 a year and takes home approximately $30,911 after federal tax, provincial tax, CPP, EI, and the Ontario Health Premium — about $2,576 per month, or a net hourly rate of $14.86.',
       },
       {
         question: 'Which province has the highest minimum wage take-home pay in Canada?',
         answer:
-          'Nunavut, at $20.17/hr, produces the highest full-time take-home pay: about $35,265 a year. Among provinces (excluding territories), British Columbia leads at roughly $31,889 a year on its $18.25 minimum wage, followed by Ontario at $30,409.',
+          'Nunavut, at $20.17/hr, produces the highest full-time take-home pay: about $35,265 a year. Among provinces (excluding territories), British Columbia leads at roughly $31,889 a year on its $18.25 minimum wage, followed by Ontario at $30,911.',
       },
       {
         question: 'How much tax does a minimum wage worker pay in Canada?',
         answer:
-          'Combined deductions (income tax + CPP + EI) take between 13.5% (Alberta) and 18.6% (Nova Scotia) of a full-time minimum wage salary in 2026. Income tax alone is relatively small at these earnings levels; CPP and EI contributions make up a large share of the total deductions.',
+          'Combined deductions (income tax + CPP + EI) take between 13.5% (Alberta) and 18.8% (Nova Scotia) of a full-time minimum wage salary in 2026. Income tax alone is relatively small at these earnings levels; CPP and EI contributions make up a large share of the total deductions.',
       },
       {
         question: 'Is minimum wage in BC or Ontario worth more after tax?',
         answer:
-          'BC’s $18.25 minimum wage nets about $31,889 a year for full-time work versus $30,409 in Ontario at $17.60 — a difference of roughly $1,480 a year or $123 a month in BC’s favour, before considering cost-of-living differences.',
+          'BC’s $18.25 minimum wage nets about $31,889 a year for full-time work versus $30,911 in Ontario at $17.95 — a difference of roughly $978 a year or $81 a month in BC’s favour, before considering cost-of-living differences.',
       },
     ],
     content: `
@@ -58,16 +58,16 @@ export const studyArticles: Article[] = [
 
 Minimum wage headlines always quote the hourly rate. But a $17.00 wage in one province and a $16.60 wage in another can leave a worker with almost the same money in the bank, because provincial taxes and payroll deductions differ sharply across Canada.
 
-We ran every provincial and territorial minimum wage (current as of September 17, 2026, when each rate was checked on the government's own site) through the CanPay Insights tax engine to answer one question: **what does a full-time minimum wage worker actually keep?**
+We ran every provincial and territorial minimum wage (current as of October 1, 2026, re-verified that morning on each government's own site; Prince Edward Island's page could not be reached due to an automated-access block, so its rate is confirmed via the province's April 2026 announcement and corroborating news coverage) through the CanPay Insights tax engine to answer one question: **what does a full-time minimum wage worker actually keep?**
 
 ### Key findings
 
 - **The national gap is $8,276 a year.** A full-time minimum wage worker in Nunavut takes home $35,265; in Alberta, $26,989.
-- **Nova Scotia takes the biggest bite.** Deductions consume 18.6% of a minimum wage salary in Nova Scotia — the highest in Canada. Alberta takes the smallest share (13.5%), but its $15.00 wage is so low that Alberta workers still finish last in actual dollars.
-- **PEI's higher wage mostly evaporates.** PEI's $17.00 wage is 40 cents above Quebec's $16.60, but after deductions the difference shrinks to about $54 a month.
-- **Saskatchewan nearly catches Manitoba.** Saskatchewan pays 65 cents less per hour than Manitoba, but its lower deductions close the annual net gap to just $415.
+- **Nova Scotia takes the biggest bite.** Deductions consume 18.8% of a minimum wage salary in Nova Scotia — the highest in Canada. Alberta takes the smallest share (13.5%), but its $15.00 wage is so low that Alberta workers still finish last in actual dollars.
+- **PEI's higher wage mostly evaporates.** PEI's $17.30 wage is 70 cents above Quebec's $16.60, but after deductions the difference shrinks to about $89 a month.
+- **Saskatchewan nearly catches Manitoba.** Saskatchewan pays 70 cents less per hour than Manitoba, but its lower deductions close the annual net gap to just $485.
 
-### Full results: minimum wage take-home pay by province (rates in force September 2026)
+### Full results: minimum wage take-home pay by province (rates in force October 1, 2026)
 
 Figures assume full-time hours (40 hours/week, 2,080 hours/year), basic personal amounts only, and 2026 tax rates.
 
@@ -76,15 +76,15 @@ Figures assume full-time hours (40 hours/week, 2,080 hours/year), basic personal
 | Nunavut | $20.17 | $41,954 | **$35,265** | $2,939 | $16.95 | 15.9% |
 | Yukon | $18.51 | $38,501 | **$32,152** | $2,679 | $15.46 | 16.5% |
 | British Columbia | $18.25 | $37,960 | **$31,889** | $2,657 | $15.33 | 16.0% |
-| Ontario | $17.60 | $36,608 | **$30,409** | $2,534 | $14.62 | 16.9% |
+| Ontario | $17.95 | $37,336 | **$30,911** | $2,576 | $14.86 | 17.2% |
 | Northwest Territories | $17.20 | $35,776 | **$30,238** | $2,520 | $14.54 | 15.5% |
-| Prince Edward Island | $17.00 | $35,360 | **$29,054** | $2,421 | $13.97 | 17.8% |
+| Prince Edward Island | $17.30 | $35,984 | **$29,470** | $2,456 | $14.17 | 18.1% |
+| Nova Scotia | $17.00 | $35,360 | **$28,706** | $2,392 | $13.80 | 18.8% |
 | Quebec | $16.60 | $34,528 | **$28,402** | $2,367 | $13.66 | 17.7% |
-| Nova Scotia | $16.75 | $34,840 | **$28,366** | $2,364 | $13.64 | 18.6% |
 | Newfoundland and Labrador | $16.35 | $34,008 | **$28,109** | $2,342 | $13.51 | 17.3% |
-| Manitoba | $16.00 | $33,280 | **$27,504** | $2,292 | $13.22 | 17.4% |
+| Manitoba | $16.40 | $34,112 | **$28,082** | $2,340 | $13.50 | 17.7% |
+| Saskatchewan | $15.70 | $32,656 | **$27,597** | $2,300 | $13.27 | 15.5% |
 | New Brunswick | $15.90 | $33,072 | **$27,370** | $2,281 | $13.16 | 17.2% |
-| Saskatchewan | $15.35 | $31,928 | **$27,089** | $2,257 | $13.02 | 15.2% |
 | Alberta | $15.00 | $31,200 | **$26,989** | $2,249 | $12.98 | 13.5% |
 
 *Deduction rate = (federal tax + provincial tax + CPP/QPP + EI, and QPIP in Quebec) as a share of gross pay.*
@@ -94,7 +94,7 @@ Figures assume full-time hours (40 hours/week, 2,080 hours/year), basic personal
 Translating take-home pay back into an hourly figure shows how much of every advertised minimum wage hour a worker actually keeps:
 
 - **Nunavut:** $20.17 advertised → **$16.95 in the bank**
-- **Ontario:** $17.60 advertised → **$14.62 in the bank**
+- **Ontario:** $17.95 advertised → **$14.86 in the bank**
 - **Quebec:** $16.60 advertised → **$13.66 in the bank**
 - **Alberta:** $15.00 advertised → **$12.98 in the bank**
 
@@ -108,9 +108,9 @@ At minimum wage income levels ($31,000–$41,000 a year), three things drive the
 2. **Quebec's separate system.** Quebec layers QPP (at a higher rate than CPP) and QPIP on top of income tax, partly offset by the federal Quebec abatement.
 3. **CPP and EI are flat at this level.** CPP (5.95%) and EI (1.63%) apply almost uniformly, so they hit low earners proportionally harder than higher earners who exceed the contribution ceilings.
 
-### Wage increases already scheduled for late 2026
+### Wage increases that took effect October 1, 2026
 
-Five provinces have announced October 1, 2026 increases that will shift these numbers:
+Five jurisdictions raised their minimum wage today, and the table above already reflects the new rates:
 
 - Ontario: $17.60 → $17.95
 - Saskatchewan: $15.35 → $15.70
@@ -118,11 +118,9 @@ Five provinces have announced October 1, 2026 increases that will shift these nu
 - Prince Edward Island: $17.00 → $17.30
 - Nova Scotia: $16.75 → $17.00
 
-We will update this study when the new rates take effect.
-
 ### Methodology
 
-Calculations use the CanPay Insights tax engine with 2026 federal and provincial tax brackets, CPP/CPP2 (QPP/QPP2 and QPIP for Quebec), and EI premiums. We assume a single worker, full-time hours (2,080 hours/year), no RRSP contributions, no benefits, and basic personal amounts only. Real paycheques will vary with credits, benefits, and actual hours. Minimum wage rates are current as of June 12, 2026, sourced from the [Government of Canada minimum wage database](https://minwage-salairemin.service.canada.ca/en/general.html) and provincial announcements.
+Calculations use the CanPay Insights tax engine with 2026 federal and provincial tax brackets, CPP/CPP2 (QPP/QPP2 and QPIP for Quebec), and EI premiums. We assume a single worker, full-time hours (2,080 hours/year), no RRSP contributions, no benefits, and basic personal amounts only. Real paycheques will vary with credits, benefits, and actual hours. Minimum wage rates are current as of October 1, 2026, sourced from the [Government of Canada minimum wage database](https://minwage-salairemin.service.canada.ca/en/general.html) and provincial announcements; Prince Edward Island's rate was confirmed via the province's official April 2026 announcement and corroborating news coverage, since its government page blocks automated access.
 
 You can verify any figure with our [free payroll calculator](/) or the province pages, for example the [Ontario paycheck calculator](/ontario-paycheck-calculator) and the [hourly wage calculator](/hourly-wage-calculator).
 
@@ -826,14 +824,14 @@ Based on CRA figures for the 2026–27 ACWB cycle and 2026 tax-year indexation a
   {
     id: 'study-9',
     slug: 'minimum-wage-increases-october-2026',
-    title: 'Minimum Wage Rises in 5 Provinces on October 1, 2026: What It Means for Your Paycheque',
+    title: 'Minimum Wage Rose in 5 Provinces on October 1, 2026: What It Means for Your Paycheque',
     subtitle:
-      'Ontario, Saskatchewan, Nova Scotia, Prince Edward Island, and Manitoba all raise their minimum wage on October 1, 2026 — we ran the new rates through the CanPay Insights tax engine to see what full-time workers actually gain.',
+      'Ontario, Saskatchewan, Nova Scotia, Prince Edward Island, and Manitoba all raised their minimum wage on October 1, 2026 — we ran the new rates through the CanPay Insights tax engine to see what full-time workers actually gained.',
     excerpt:
-      'Five provinces raise minimum wage on October 1, 2026: Ontario to $17.95, Saskatchewan to $15.70, Nova Scotia to $17.00, PEI to $17.30, and Manitoba to $16.40. A full-time Ontario worker gains about $501 a year after tax; a Manitoba worker gains about $578.',
-    metaTitle: 'Minimum Wage Rises in 5 Provinces Oct 1, 2026',
+      'Five provinces raised minimum wage on October 1, 2026: Ontario to $17.95, Saskatchewan to $15.70, Nova Scotia to $17.00, PEI to $17.30, and Manitoba to $16.40. A full-time Ontario worker gained about $501 a year after tax; a Manitoba worker gained about $578.',
+    metaTitle: 'Minimum Wage Rose in 5 Provinces Oct 1, 2026',
     metaDescription:
-      'Ontario, Saskatchewan, Nova Scotia, PEI & Manitoba raise minimum wage Oct 1, 2026. See the new hourly rates and exactly how much extra take-home pay each province gains.',
+      'Ontario, Saskatchewan, Nova Scotia, PEI & Manitoba raised minimum wage Oct 1, 2026. See the new hourly rates and exactly how much extra take-home pay each province gained.',
     keywords: [
       'minimum wage increase october 2026',
       'ontario minimum wage october 2026',
@@ -849,32 +847,32 @@ Based on CRA figures for the 2026–27 ACWB cycle and 2026 tax-year indexation a
     readTime: 6,
     imageUrl: '/blog/minimum-wage-increases-october-2026.svg',
     directAnswer:
-      'On October 1, 2026, five provinces raise their general minimum wage: Ontario from $17.60 to $17.95, Saskatchewan from $15.35 to $15.70, Nova Scotia from $16.75 to $17.00, Prince Edward Island from $17.00 to $17.30, and Manitoba from $16.00 to $16.40. Running the new rates through the CanPay Insights tax engine, a full-time (2,080 hours/year) minimum wage worker gains about $501 more take-home pay a year in Ontario, $508 in Saskatchewan, $339 in Nova Scotia, $417 in PEI, and $578 in Manitoba, after federal tax, provincial tax, CPP, and EI.',
+      'On October 1, 2026, five provinces raised their general minimum wage: Ontario from $17.60 to $17.95, Saskatchewan from $15.35 to $15.70, Nova Scotia from $16.75 to $17.00, Prince Edward Island from $17.00 to $17.30, and Manitoba from $16.00 to $16.40. Running the new rates through the CanPay Insights tax engine, a full-time (2,080 hours/year) minimum wage worker gained about $501 more take-home pay a year in Ontario, $508 in Saskatchewan, $339 in Nova Scotia, $417 in PEI, and $578 in Manitoba, after federal tax, provincial tax, CPP, and EI.',
     faq: [
       {
-        question: 'Which provinces are raising minimum wage on October 1, 2026?',
+        question: 'Which provinces raised minimum wage on October 1, 2026?',
         answer:
-          'Ontario, Saskatchewan, Nova Scotia, Prince Edward Island, and Manitoba. All five increases take effect October 1, 2026, and all five come from provincial indexing formulas (tied to inflation, and in some provinces to wages as well) rather than one-off political decisions.',
+          'Ontario, Saskatchewan, Nova Scotia, Prince Edward Island, and Manitoba. All five increases took effect October 1, 2026, and all five came from provincial indexing formulas (tied to inflation, and in some provinces to wages as well) rather than one-off political decisions.',
       },
       {
         question: 'What is Ontario’s new minimum wage?',
         answer:
-          'Ontario’s general minimum wage rises from $17.60 to $17.95 per hour on October 1, 2026, a 35-cent increase tied to Ontario’s 1.9% Consumer Price Index change, as required under the Employment Standards Act, 2000. The province says the increase affects more than 700,000 workers. The student minimum wage rises to $16.90 and the homeworker rate to $19.70.',
+          'Ontario’s general minimum wage rose from $17.60 to $17.95 per hour on October 1, 2026, a 35-cent increase tied to Ontario’s 1.9% Consumer Price Index change, as required under the Employment Standards Act, 2000. The province says the increase affects more than 700,000 workers. The student minimum wage rose to $16.90 and the homeworker rate to $19.70.',
       },
       {
-        question: 'How much extra will a full-time minimum wage worker take home?',
+        question: 'How much extra did a full-time minimum wage worker take home?',
         answer:
-          'For 2,080 hours a year (40 hours/week), the after-tax gain is about $578/year (~$48/month) in Manitoba, $508/year (~$42/month) in Saskatchewan, $501/year (~$42/month) in Ontario, $417/year (~$35/month) in PEI, and $339/year (~$28/month) in Nova Scotia. Manitoba gains most because its raise is the largest, at 40 cents an hour.',
+          'For 2,080 hours a year (40 hours/week), the after-tax gain was about $578/year (~$48/month) in Manitoba, $508/year (~$42/month) in Saskatchewan, $501/year (~$42/month) in Ontario, $417/year (~$35/month) in PEI, and $339/year (~$28/month) in Nova Scotia. Manitoba gained the most because its raise was the largest, at 40 cents an hour.',
       },
       {
-        question: 'Why is Nova Scotia raising its minimum wage twice in one year?',
+        question: 'Why did Nova Scotia raise its minimum wage twice in one year?',
         answer:
-          'Nova Scotia raised its minimum wage on April 1, 2026 (to $16.75) and raises it again on October 1, 2026 (to $17.00), as recommended by its Minimum Wage Review Committee under a CPI-plus-1% formula. Prince Edward Island is on a similar path, aiming for $17.60 by April 2027.',
+          'Nova Scotia raised its minimum wage on April 1, 2026 (to $16.75) and raised it again on October 1, 2026 (to $17.00), as recommended by its Minimum Wage Review Committee under a CPI-plus-1% formula. Prince Edward Island is on a similar path, aiming for $17.60 by April 2027.',
       },
       {
         question: 'What is the minimum wage in the rest of Canada after October 1, 2026?',
         answer:
-          'The other eight provinces and territories are not changing their minimum wage on October 1 — most adjust on a different date (commonly April 1 or annually in the fall). See our full province-by-province minimum wage take-home pay study for every current rate.',
+          'The other eight provinces and territories did not change their minimum wage on October 1 — most adjust on a different date (commonly April 1 or annually in the fall). See our full province-by-province minimum wage take-home pay study for every current rate.',
       },
       {
         question: 'Does a higher minimum wage change CPP and EI deductions?',
@@ -885,7 +883,7 @@ Based on CRA figures for the 2026–27 ACWB cycle and 2026 tax-year indexation a
     content: `
 ## Five provinces, one date: October 1, 2026
 
-Minimum wage rarely moves on a single national date, but this fall five provinces line up: **Ontario, Saskatchewan, Nova Scotia, Prince Edward Island, and Manitoba** all raise their general minimum wage on **October 1, 2026**. Each increase comes from a provincial indexing formula, not a one-off announcement, so the raises are modest — but they still change what full-time workers take home.
+Minimum wage rarely moves on a single national date, but this fall five provinces lined up: **Ontario, Saskatchewan, Nova Scotia, Prince Edward Island, and Manitoba** all raised their general minimum wage on **October 1, 2026**. Each increase came from a provincial indexing formula, not a one-off announcement, so the raises were modest — but they still changed what full-time workers take home.
 
 We ran the new rates through the CanPay Insights tax engine (2026 federal and provincial brackets, CPP/CPP2, and EI) to see exactly how much of each raise survives payroll deductions.
 
@@ -899,7 +897,7 @@ We ran the new rates through the CanPay Insights tax engine (2026 federal and pr
 | Prince Edward Island | $17.00 | **$17.30** | +$0.30 | CPI + 1% formula |
 | Nova Scotia | $16.75 | **$17.00** | +$0.25 | CPI + 1% formula (second increase of 2026) |
 
-Manitoba's increase is the largest in cents (40); Ontario's affects the most workers — the province says **more than 700,000 workers** will see a bigger paycheque. Nova Scotia's move is its second of 2026: the province already raised its minimum wage from $16.50 to $16.75 on April 1.
+Manitoba's increase is the largest in cents (40); Ontario's affects the most workers — the province says **more than 700,000 workers** saw a bigger paycheque. Nova Scotia's move was its second of 2026: the province had already raised its minimum wage from $16.50 to $16.75 on April 1.
 
 ### What it's actually worth after tax
 
@@ -921,7 +919,7 @@ A 35-cent Ontario raise sounds like $728 more a year (35¢ × 2,080 hours) — b
 
 ### How these rates compare nationally
 
-Even after October 1, Ontario's $17.95 and PEI's $17.30 remain below British Columbia ($18.25), Yukon ($18.51) and Nunavut ($20.17, the highest in the country since September 1). Manitoba's $16.40 and Nova Scotia's $17.00 stay in the middle of the pack, and Saskatchewan's $15.70 remains among the lowest. None of the other eight provinces and territories change their minimum wage on October 1 — for the full current picture across all 13 jurisdictions, see our [minimum wage take-home pay study](/blog/minimum-wage-take-home-pay-canada-2026).
+Even after October 1, Ontario's $17.95 and PEI's $17.30 remain below British Columbia ($18.25), Yukon ($18.51) and Nunavut ($20.17, the highest in the country since September 1). Manitoba's $16.40 and Nova Scotia's $17.00 stay in the middle of the pack, and Saskatchewan's $15.70 remains among the lowest. None of the other eight provinces and territories changed their minimum wage on October 1 — for the full current picture across all 13 jurisdictions, see our [minimum wage take-home pay study](/blog/minimum-wage-take-home-pay-canada-2026).
 
 ### See your own numbers
 
@@ -1270,14 +1268,14 @@ Based on the Government of Canada's announcement [Delivering a middle-class tax 
   {
     id: 'study-13',
     slug: 'saskatchewan-minimum-wage-october-2026',
-    title: "Saskatchewan's Minimum Wage Rises to $15.70 on October 1, 2026",
+    title: "Saskatchewan's Minimum Wage Rose to $15.70 on October 1, 2026",
     subtitle:
-      "Saskatchewan raises its minimum wage from $15.35 to $15.70 an hour on October 1, 2026 — the province's indexation formula catching up while it remains Canada's second-lowest, ahead only of Alberta.",
+      "Saskatchewan raised its minimum wage from $15.35 to $15.70 an hour on October 1, 2026 — the province's indexation formula catching up while it remains Canada's second-lowest, ahead only of Alberta.",
     excerpt:
-      "Saskatchewan's minimum wage rises from $15.35 to $15.70 on October 1, 2026, a 35-cent increase under the province's CPI-and-wages formula. A full-time worker gains about $508 more take-home pay a year — and Saskatchewan stays Canada's second-lowest minimum wage, just above Alberta's frozen $15.00.",
-    metaTitle: 'Saskatchewan Minimum Wage Rises to $15.70 in 2026',
+      "Saskatchewan's minimum wage rose from $15.35 to $15.70 on October 1, 2026, a 35-cent increase under the province's CPI-and-wages formula. A full-time worker gained about $508 more take-home pay a year — and Saskatchewan stays Canada's second-lowest minimum wage, just above Alberta's frozen $15.00.",
+    metaTitle: 'Saskatchewan Minimum Wage Rose to $15.70 in 2026',
     metaDescription:
-      "Saskatchewan's minimum wage rises from $15.35 to $15.70 on Oct 1, 2026. See the after-tax gain, calculated with the CanPay tax engine.",
+      "Saskatchewan's minimum wage rose from $15.35 to $15.70 on Oct 1, 2026. See the after-tax gain, calculated with the CanPay tax engine.",
     keywords: [
       'saskatchewan minimum wage 2026',
       'saskatchewan minimum wage october 2026',
@@ -1292,7 +1290,7 @@ Based on the Government of Canada's announcement [Delivering a middle-class tax 
     readTime: 5,
     imageUrl: '/blog/saskatchewan-minimum-wage-october-2026.svg',
     directAnswer:
-      "Saskatchewan's general minimum wage rises from $15.35 to $15.70 an hour on October 1, 2026, a 35-cent increase set under the province's indexation formula, which gives equal weight to changes in the Consumer Price Index and the average hourly wage in Saskatchewan. Running the new rate through the CanPay Insights tax engine, a full-time (2,080 hours/year) minimum wage worker in Saskatchewan gains about $508 more take-home pay a year — roughly $20 more per biweekly paycheque. Even after the increase, Saskatchewan keeps Canada's second-lowest minimum wage, ahead only of Alberta's $15.00, which has been frozen since 2018.",
+      "Saskatchewan's general minimum wage rose from $15.35 to $15.70 an hour on October 1, 2026, a 35-cent increase set under the province's indexation formula, which gives equal weight to changes in the Consumer Price Index and the average hourly wage in Saskatchewan. Running the new rate through the CanPay Insights tax engine, a full-time (2,080 hours/year) minimum wage worker in Saskatchewan gained about $508 more take-home pay a year — roughly $20 more per biweekly paycheque. Even after the increase, Saskatchewan keeps Canada's second-lowest minimum wage, ahead only of Alberta's $15.00, which has been frozen since 2018.",
     faq: [
       {
         question: "What is Saskatchewan's new minimum wage for October 2026?",
@@ -1302,12 +1300,12 @@ Based on the Government of Canada's announcement [Delivering a middle-class tax 
       {
         question: "Why wasn't Saskatchewan included when Ontario, Nova Scotia, PEI and Manitoba raised minimum wage on the same date?",
         answer:
-          "Those four provinces confirmed their October 1, 2026 increases earlier in the year; Saskatchewan's own October 1 increase, confirmed by the provincial government on June 29, 2026, also lands on the same date. Five provinces — Ontario, Nova Scotia, Prince Edward Island, Manitoba, and Saskatchewan — all raise minimum wage on October 1, 2026, though each sets its rate independently.",
+          "Those four provinces confirmed their October 1, 2026 increases earlier in the year; Saskatchewan's own October 1 increase, confirmed by the provincial government on June 29, 2026, also landed on the same date. Five provinces — Ontario, Nova Scotia, Prince Edward Island, Manitoba, and Saskatchewan — all raised minimum wage on October 1, 2026, though each sets its rate independently.",
       },
       {
-        question: 'How much extra will a full-time Saskatchewan minimum wage worker take home?',
+        question: 'How much extra did a full-time Saskatchewan minimum wage worker take home?',
         answer:
-          "For 2,080 hours a year (40 hours/week), the raise adds $728 in gross pay before deductions, but only about $508 survives federal tax, Saskatchewan provincial tax, CPP, and EI — roughly $20 more per biweekly paycheque, or about $42 a month. That's a CanPay Insights calculation using the 2026 tax engine, comparing $15.35/hour and $15.70/hour full-time pay in Saskatchewan.",
+          "For 2,080 hours a year (40 hours/week), the raise added $728 in gross pay before deductions, but only about $508 survived federal tax, Saskatchewan provincial tax, CPP, and EI — roughly $20 more per biweekly paycheque, or about $42 a month. That's a CanPay Insights calculation using the 2026 tax engine, comparing $15.35/hour and $15.70/hour full-time pay in Saskatchewan.",
       },
       {
         question: "Is Saskatchewan still the lowest minimum wage in Canada?",
@@ -1326,11 +1324,11 @@ Based on the Government of Canada's announcement [Delivering a middle-class tax 
       },
     ],
     content: `
-## Saskatchewan's rate catches up on October 1
+## Saskatchewan's rate caught up on October 1
 
-Saskatchewan's general minimum wage rises from **$15.35 to $15.70 an hour on October 1, 2026** — a 35-cent increase set under the province's indexation formula, which gives equal weight to the change in the Consumer Price Index and the change in Saskatchewan's average hourly wage over the previous year. The province confirmed the new rate on **June 29, 2026**.
+Saskatchewan's general minimum wage rose from **$15.35 to $15.70 an hour on October 1, 2026** — a 35-cent increase set under the province's indexation formula, which gives equal weight to the change in the Consumer Price Index and the change in Saskatchewan's average hourly wage over the previous year. The province confirmed the new rate on **June 29, 2026**.
 
-That puts Saskatchewan on the same effective date as four other provinces already raising their minimum wage on October 1, 2026: [Ontario, Nova Scotia, Prince Edward Island, and Manitoba](/blog/minimum-wage-increases-october-2026). Five provinces move on the same day this fall, but each sets its own rate independently through its own formula or legislation.
+That put Saskatchewan on the same effective date as four other provinces also raising their minimum wage on October 1, 2026: [Ontario, Nova Scotia, Prince Edward Island, and Manitoba](/blog/minimum-wage-increases-october-2026). Five provinces moved on the same day this fall, but each sets its own rate independently through its own formula or legislation.
 
 We ran Saskatchewan's new rate through the CanPay Insights tax engine (2026 federal and provincial brackets, CPP, and EI) to see exactly how much of the raise survives payroll deductions.
 
@@ -1338,8 +1336,8 @@ We ran Saskatchewan's new rate through the CanPay Insights tax engine (2026 fede
 
 | | Rate | Change | Effective |
 | --- | --- | --- | --- |
-| Old rate | $15.35/hr | — | Since October 2025 |
-| New rate | **$15.70/hr** | +$0.35 | October 1, 2026 |
+| Old rate | $15.35/hr | — | October 2025 – September 2026 |
+| New rate | **$15.70/hr** | +$0.35 | Since October 1, 2026 |
 | Formula | CPI + average hourly wage, averaged | — | Annual review |
 
 ### What it's actually worth after tax
@@ -1348,18 +1346,18 @@ Full-time hours (40/week, 2,080/year), 2026 federal and Saskatchewan tax rates, 
 
 | Rate | Gross pay/year | Take-home pay/year | Take-home/biweekly | Extra vs. old rate | Extra/cheque |
 | --- | --- | --- | --- | --- | --- |
-| $15.35/hr (current) | $31,928 | $27,089 | $1,042 | — | — |
-| $15.70/hr (Oct 1) | **$32,656** | **$27,597** | **$1,061** | **+$508/yr** | **+$20** |
+| $15.35/hr (old) | $31,928 | $27,089 | $1,042 | — | — |
+| $15.70/hr (since Oct 1) | **$32,656** | **$27,597** | **$1,061** | **+$508/yr** | **+$20** |
 
 *Calculated by CanPay Insights using the 2026 tax engine for a single Saskatchewan worker with no other income or credits, paid biweekly (26 pay periods).*
 
-### Why the after-tax gain is smaller than the raise looks
+### Why the after-tax gain is smaller than the raise looked
 
-A 35-cent raise sounds like $728 more a year (35 cents × 2,080 hours) — but only about **$508** of that survives payroll deductions, because the extra income is taxed and subject to CPP and EI exactly like the rest of the paycheque. In practice, a Saskatchewan minimum wage worker keeps roughly **70 cents of every extra dollar** from this raise; the rest goes to federal tax, Saskatchewan provincial tax, CPP, and EI.
+A 35-cent raise sounds like $728 more a year (35 cents × 2,080 hours) — but only about **$508** of that survived payroll deductions, because the extra income is taxed and subject to CPP and EI exactly like the rest of the paycheque. In practice, a Saskatchewan minimum wage worker keeps roughly **70 cents of every extra dollar** from this raise; the rest goes to federal tax, Saskatchewan provincial tax, CPP, and EI.
 
 ### Still Canada's second-lowest minimum wage
 
-Even at $15.70, Saskatchewan stays near the bottom of the national ranking. Alberta remains the only province paying less, at a flat **$15.00 an hour** — frozen since October 2018, with no increase announced for 2026. New Brunswick, which raised its own rate to $15.90 in April 2026, now pays 20 cents more per hour than Saskatchewan's new rate. For the full national picture across all 13 provinces and territories, see our [minimum wage take-home pay study](/blog/minimum-wage-take-home-pay-canada-2026).
+Even at $15.70, Saskatchewan stays near the bottom of the national ranking. Alberta remains the only province paying less, at a flat **$15.00 an hour** — frozen since October 2018, with no increase announced for 2026. New Brunswick, which raised its own rate to $15.90 in April 2026, now pays 20 cents more per hour than Saskatchewan's rate. For the full national picture across all 13 provinces and territories, see our [minimum wage take-home pay study](/blog/minimum-wage-take-home-pay-canada-2026).
 
 ### See your own numbers
 
@@ -2026,9 +2024,9 @@ Wage and employment figures, including the wage-quartile breakdown and the "slow
           "Both territories use an annual formula rather than a one-off political decision: Nunavut combines the change in the Consumer Price Index for Iqaluit and Nunavut with the change in the territory's average hourly wage; the Northwest Territories does the same with its own CPI and average hourly wage figures. Both reviews land on September 1 each year.",
       },
       {
-        question: 'Are other provinces raising their minimum wage this fall too?',
+        question: 'Did other provinces raise their minimum wage this fall too?',
         answer:
-          "Yes — five provinces raise minimum wage on October 1, 2026: [Ontario, Nova Scotia, Prince Edward Island, and Manitoba](/blog/minimum-wage-increases-october-2026), plus [Saskatchewan](/blog/saskatchewan-minimum-wage-october-2026). Combined with Nunavut and NWT's September 1 increases, seven of Canada's 13 provinces and territories will have raised their minimum wage within a single six-week window this fall.",
+          "Yes — five provinces raised minimum wage on October 1, 2026: [Ontario, Nova Scotia, Prince Edward Island, and Manitoba](/blog/minimum-wage-increases-october-2026), plus [Saskatchewan](/blog/saskatchewan-minimum-wage-october-2026). Combined with Nunavut and NWT's September 1 increases, seven of Canada's 13 provinces and territories raised their minimum wage within a single six-week window this fall.",
       },
     ],
     content: `
@@ -2071,16 +2069,16 @@ Nunavut was already Canada's highest minimum wage before this increase; it now p
 | 1 | Nunavut | **$20.17** | $35,265 |
 | 2 | Yukon | $18.51 | $32,152 |
 | 3 | British Columbia | $18.25 | $31,889 |
-| 4 | Ontario | $17.60 | $30,409 |
+| 4 | Ontario | $17.95 | $30,911 |
 | 5 | Northwest Territories | **$17.20** | $30,238 |
 
-*Yukon, BC, and Ontario rates are unchanged as of this writing. Ontario rises to $17.95 on October 1, 2026. For the full 13-jurisdiction ranking, see our [minimum wage take-home pay study](/blog/minimum-wage-take-home-pay-canada-2026).*
+*Yukon and BC's rates are unchanged as of this writing. Ontario rose to $17.95 on October 1, 2026. For the full 13-jurisdiction ranking, see our [minimum wage take-home pay study](/blog/minimum-wage-take-home-pay-canada-2026).*
 
-Nunavut's $20.17 is now $1.66 above Yukon's $18.51 (the next-highest in Canada), $1.92 above BC's $18.25, and more than $2.00 above the federal minimum wage of $18.15 that applies to federally regulated employers. NWT, at $17.20, takes home $30,238 a year — within $171 of Ontario's $30,409 at $17.60 an hour, despite a wage rate 40 cents lower — a reminder that low territorial income tax, not just the hourly rate, drives take-home pay in the North.
+Nunavut's $20.17 is now $1.66 above Yukon's $18.51 (the next-highest in Canada), $1.92 above BC's $18.25, and more than $2.00 above the federal minimum wage of $18.15 that applies to federally regulated employers. NWT, at $17.20, takes home $30,238 a year — within $673 of Ontario's $30,911 at $17.95 an hour, despite a wage rate 75 cents lower — a reminder that low territorial income tax, not just the hourly rate, drives take-home pay in the North.
 
 ### A busy fall for minimum wage across Canada
 
-Nunavut and NWT's September 1 increases are the first of several this fall. Five more provinces raise their minimum wage on October 1, 2026: [Ontario, Nova Scotia, Prince Edward Island, and Manitoba](/blog/minimum-wage-increases-october-2026), plus [Saskatchewan](/blog/saskatchewan-minimum-wage-october-2026). Between September 1 and October 1, seven of Canada's 13 provinces and territories will have raised their minimum wage.
+Nunavut and NWT's September 1 increases were the first of several this fall. Five more provinces raised their minimum wage on October 1, 2026: [Ontario, Nova Scotia, Prince Edward Island, and Manitoba](/blog/minimum-wage-increases-october-2026), plus [Saskatchewan](/blog/saskatchewan-minimum-wage-october-2026). Between September 1 and October 1, seven of Canada's 13 provinces and territories raised their minimum wage.
 
 ### See your own numbers
 
