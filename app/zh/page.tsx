@@ -7,7 +7,7 @@ const BASE_URL = 'https://canpayinsights.ca';
 const PAGE_URL = `${BASE_URL}/zh`;
 
 export const metadata: Metadata = {
-  title: '加拿大工资税后计算器 2026 | 税后工资怎么算 - CanPay Insights',
+  title: '加拿大工资税后计算器 2026 | 税后工资怎么算',
   description:
     '免费加拿大工资税后计算器：按省计算联邦税、省税、CPP/CPP2、EI（魁省 QPP/QPIP）后的到手工资，数据基于 2026 年 CRA 与各省税率。支持中文、英文、法语等十种语言，无需注册。',
   keywords: [
