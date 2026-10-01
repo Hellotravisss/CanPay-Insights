@@ -25,6 +25,14 @@ const nextConfig: NextConfig = {
   async redirects() {
     return [
       {
+        // The catch-all below sent www's bare root to the literal "/:path*"
+        // (an empty path is not substituted), so the root gets its own rule.
+        source: '/',
+        has: [{ type: 'host', value: 'www.canpayinsights.ca' }],
+        destination: 'https://canpayinsights.ca/',
+        permanent: true,
+      },
+      {
         // www → apex. Vercel did this at the platform level; on Cloudflare the
         // Worker serves both hosts, so the canonical host is enforced here.
         source: '/:path*',
