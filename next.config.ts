@@ -19,11 +19,36 @@ const nextConfig: NextConfig = {
   async headers() {
     return [
       { source: '/report/:path*', headers: [{ key: 'Referrer-Policy', value: 'no-referrer' }] },
+      // HTTPS only from here on. No includeSubDomains: other subdomains are
+      // not ours to commit to.
+      { source: '/:path*', headers: [{ key: 'Strict-Transport-Security', value: 'max-age=31536000' }] },
       // Static files (fonts etc.) get their headers from public/_headers.
     ];
   },
   async redirects() {
     return [
+      {
+        source: '/',
+        has: [{ type: 'header', key: 'x-forwarded-proto', value: 'http' }],
+        destination: 'https://canpayinsights.ca/',
+        permanent: true,
+      },
+      {
+        // http → https. Cloudflare passes the visitor's scheme as
+        // x-forwarded-proto; plain http used to get a 200 copy of every page.
+        source: '/:path*',
+        has: [{ type: 'header', key: 'x-forwarded-proto', value: 'http' }],
+        destination: 'https://canpayinsights.ca/:path*',
+        permanent: true,
+      },
+      {
+        // The catch-all below sent www's bare root to the literal
+        // "/:path*" (an empty path is not substituted), so the root gets its own rule.
+        source: '/',
+        has: [{ type: 'host', value: 'www.canpayinsights.ca' }],
+        destination: 'https://canpayinsights.ca/',
+        permanent: true,
+      },
       {
         // www → apex. Vercel did this at the platform level; on Cloudflare the
         // Worker serves both hosts, so the canonical host is enforced here.
