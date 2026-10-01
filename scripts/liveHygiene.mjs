@@ -58,7 +58,10 @@ export function checkSitemapDates(dates, today) {
 
 // ── live run ───────────────────────────────────────────────────────────────
 async function get(url, redirect = 'follow') {
-  const r = await fetch(url, { redirect, headers: { 'User-Agent': UA, Accept: 'text/html' } });
+  // One retry: a single dropped connection from the CI runner is not a site fault.
+  let r;
+  try { r = await fetch(url, { redirect, headers: { 'User-Agent': UA, Accept: 'text/html' } }); }
+  catch { await new Promise((ok) => setTimeout(ok, 2000)); r = await fetch(url, { redirect, headers: { 'User-Agent': UA, Accept: 'text/html' } }); }
   return { status: r.status, location: r.headers.get('location'), headers: r.headers, text: redirect === 'follow' ? await r.text() : '' };
 }
 
