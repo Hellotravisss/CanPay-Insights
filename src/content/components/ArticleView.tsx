@@ -217,7 +217,7 @@ const CalculatorCTA = () => {
 // Uses the personal invite link for now; swap WEALTHSIMPLE_REFERRAL_URL for a
 // formal affiliate link if/when the Wealthsimple affiliate program is approved.
 const WEALTHSIMPLE_REFERRAL_URL = 'https://www.wealthsimple.com/invite/KGAAWL';
-const WEALTHSIMPLE_ARTICLE_SLUGS = ['tfsa-vs-rrsp-canada-2025', 'rrsp-tax-savings-canada-2025'];
+const WEALTHSIMPLE_ARTICLE_SLUGS = ['tfsa-vs-rrsp-2026', 'rrsp-tax-savings-canada-2025'];
 
 const WealthsimpleCTA = () => {
   return (

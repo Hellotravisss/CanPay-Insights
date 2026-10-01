@@ -2718,4 +2718,71 @@ These figures use a single worker with no other income or credits. To see what a
 The confirmed 2026 and 2027 RRSP dollar limits ($33,810 and $35,390) and the confirmed 2026 TFSA limit ($7,000) are taken directly from the Canada Revenue Agency's ["What's new" registered plans administrators page](https://www.canada.ca/en/revenue-agency/services/tax/registered-plans-administrators/whats-new.html), which dates the RRSP 2027 announcement to October 30, 2025 and the TFSA 2026 announcement to December 1, 2025. The expected 2027 TFSA limit of $7,500 is not yet confirmed by the CRA; it is reported here as a well-supported projection, based on the published CPI-indexing methodology and cross-checked against independent calculations from [The Globe and Mail](https://www.theglobeandmail.com/investing/globe-advisor/advisor-news/article-why-the-2027-tfsa-contribution-limit-will-rise-to-7500/) and RBC Wealth Management's Morsky Group. The August 2026 CPI figure (3.0% year over year) is from Statistics Canada's [Consumer Price Index, August 2026](https://www150.statcan.gc.ca/n1/daily-quotidien/260914/dq260914a-eng.htm), released September 14, 2026. The FHSA's fixed, non-indexed $8,000 annual and $40,000 lifetime limits are confirmed on the CRA's own FHSA guidance pages. Provincial tax-savings figures are CanPay Insights' own calculations, using the CanPay Insights tax engine with 2026 federal and provincial brackets, a single worker with no other income or credits, and an annual lump-sum RRSP contribution — real tax savings vary with actual income, credits, and the year the contribution is claimed. This is general information, not tax or financial advice; confirm current and future contribution limits with the [Canada Revenue Agency](https://www.canada.ca/en/revenue-agency/services/tax/registered-plans-administrators/whats-new.html) before contributing.
 `,
   },
+  {
+    id: 'study-25',
+    slug: 'tfsa-vs-rrsp-2026',
+    title: 'TFSA vs RRSP in 2026: What $5,000 Saves You, Province by Province',
+    subtitle: 'The RRSP wins when your tax rate today is higher than it will be when you withdraw. Here is what that rate actually is at four salaries.',
+    excerpt:
+      'Putting $5,000 into an RRSP in 2026 cuts income tax by $880 to $2,140 depending on salary and province. A TFSA saves nothing now but nothing is taxed later. The 2026 limits are $7,000 (TFSA) and $33,810 (RRSP).',
+    metaTitle: 'TFSA vs RRSP 2026: Tax Saved on $5,000 by Province',
+    metaDescription:
+      'TFSA or RRSP in 2026? A $5,000 RRSP contribution saves $880 to $2,140 in tax depending on salary and province. 2026 limits: TFSA $7,000, RRSP $33,810.',
+    keywords: ['tfsa vs rrsp', 'tfsa vs rrsp 2026', 'rrsp or tfsa', 'rrsp tax savings 2026', 'tfsa limit 2026', 'rrsp limit 2026'],
+    category: 'tax',
+    tags: ['TFSA', 'RRSP', 'Comparison', '2026'],
+    publishedAt: '2026-10-01',
+    readTime: 6,
+    imageUrl: '/blog/tfsa-rrsp-limits-2027.svg',
+    directAnswer:
+      'An RRSP lowers your tax now and taxes the money when you withdraw it; a TFSA gives no deduction now and never taxes the money. In 2026 a $5,000 RRSP contribution saves about $1,423 in Ontario at an $80,000 salary but about $880 at $45,000, so the RRSP pays off most for higher earners who expect a lower income in retirement. The 2026 limits are $7,000 for a TFSA and $33,810 for an RRSP.',
+    faq: [
+      {
+        question: 'What are the TFSA and RRSP limits for 2026?',
+        answer: 'The 2026 TFSA limit is $7,000; someone who has been eligible since 2009 and never contributed has $109,000 of room. The 2026 RRSP dollar limit is $33,810, and your own limit is 18% of your 2025 earned income up to that amount, plus unused room. Both are confirmed by the Canada Revenue Agency.',
+      },
+      {
+        question: 'How much tax does a $5,000 RRSP contribution save in 2026?',
+        answer: 'It depends on your salary and province. On our 2026 calculations: $880 in Ontario at $45,000, $1,423 at $80,000 and $1,995 at $120,000; in Alberta $1,017, $1,464 and $1,626; in British Columbia $1,082, $1,354 and $1,708; in Quebec $1,231, $1,731 and $2,140.',
+      },
+      {
+        question: 'Should I choose a TFSA or an RRSP?',
+        answer: 'If your tax rate now is higher than you expect it to be when you withdraw, the RRSP usually comes out ahead. If it is lower, or you may need the money before retirement, the TFSA usually does. TFSA withdrawals are not taxed and do not count as income for benefits such as the GIS; RRSP withdrawals are taxed as income.',
+      },
+    ],
+    content: `
+## The short answer
+
+An RRSP gives you a tax deduction now and taxes the money when it comes out. A TFSA gives no deduction now and never taxes the money. So the question is when your tax rate is higher: today, or the year you withdraw.
+
+The 2026 limits are **$7,000** for a TFSA and **$33,810** for an RRSP (or 18% of your 2025 earned income, whichever is lower, plus any unused room).
+
+## What $5,000 in an RRSP saves you in 2026
+
+Income tax saved by a $5,000 RRSP contribution, single worker, no other income or credits:
+
+| Salary | Ontario | British Columbia | Alberta | Quebec |
+|---|---|---|---|---|
+| $45,000 | $880 | $1,082 | $1,017 | $1,231 |
+| $60,000 | $1,143 | $1,069 | $1,076 | $1,462 |
+| $80,000 | $1,423 | $1,354 | $1,464 | $1,731 |
+| $120,000 | $1,995 | $1,708 | $1,626 | $2,140 |
+
+Put the same $5,000 in a TFSA and the saving today is $0. The difference shows up later: everything that comes out of the TFSA is tax-free, while every dollar out of the RRSP is taxed at whatever your rate is then.
+
+## When each one wins
+
+- **RRSP first** if you earn more now than you expect to in retirement. At $120,000 in Ontario, $5,000 in an RRSP saves almost $2,000 this year.
+- **TFSA first** if your income is modest now, if you might need the money before retirement, or if you expect income-tested benefits later: TFSA withdrawals don't count as income for the Guaranteed Income Supplement or Old Age Security; RRSP withdrawals do.
+- **Both** if you can: many people take the RRSP refund and put it into the TFSA.
+
+## Flexibility
+
+TFSA money can come out at any time, and the amount withdrawn is added back to your room on January 1 of the next year. RRSP withdrawals before retirement are taxed and the room is lost for good, except through the Home Buyers' Plan and the Lifelong Learning Plan.
+
+## How we calculated
+
+The tax savings above are CanPay Insights' own calculations: the 2026 federal and provincial income tax on the salary, minus the tax on the salary less $5,000, using the same tax engine that is checked against the CRA's payroll deduction tables before every release. Ontario includes the Ontario Health Premium, which an RRSP deduction also lowers. Your real saving depends on your other income and credits, and arrives as a smaller withholding or a refund when you file. The 2026 limits are from the Canada Revenue Agency's [registered plans "What's new" page](https://www.canada.ca/en/revenue-agency/services/tax/registered-plans-administrators/whats-new.html). This is general information, not financial advice. To see your own take-home pay with an RRSP contribution, use the [calculator](/).
+`,
+  },
 ];

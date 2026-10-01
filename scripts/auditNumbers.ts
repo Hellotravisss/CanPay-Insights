@@ -388,6 +388,21 @@ function auditText(
         for (const { slug: ps } of PROVINCE_SEO_CONFIGS)
           derivedMoney.push(getSalaryFigures(b, ps).netAnnual - getSalaryFigures(a, ps).netAnnual);
 
+  // "A $5,000 RRSP contribution saves $1,423 at $80,000": the tax on the
+  // salary minus the tax on the salary less the deduction, per province. Only
+  // when the field talks about an RRSP and names the deduction amount, so a
+  // stray figure cannot pair with an arbitrary difference.
+  if (/RRSP|REER/i.test(context)) {
+    const deductions = [...context.matchAll(MONEY)].map((m) => num(m[1])).filter((v) => v >= 1000 && v <= 40000 && v % 500 === 0);
+    for (const a of round)
+      for (const d of new Set(deductions))
+        if (d < a)
+          for (const { slug: ps } of PROVINCE_SEO_CONFIGS) {
+            const hi = getSalaryFigures(a, ps), lo = getSalaryFigures(a - d, ps);
+            derivedMoney.push(hi.federalTax + hi.provincialTax - (lo.federalTax + lo.provincialTax));
+          }
+  }
+
   // A markdown table separates its words from its numbers: "Rate" and
   // "Maximum" live in the header row, the figures in the data rows below.
   // Judged line by line, every data row looks like it states no rule and is

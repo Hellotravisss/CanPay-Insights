@@ -90,7 +90,7 @@ const nextConfig: NextConfig = {
       {
         // Retired page with search impressions: 19 impressions. Same question, answered by the live TFSA vs RRSP article.
         source: '/blog/rrsp-vs-tfsa-canada-2025',
-        destination: '/blog/tfsa-vs-rrsp-canada-2025',
+        destination: '/blog/tfsa-vs-rrsp-2026',
         permanent: true,
       },
       {
@@ -112,9 +112,15 @@ const nextConfig: NextConfig = {
         permanent: true,
       },
       {
+        // Retired 2026-10-01: replaced by a 2026 rewrite with engine-computed savings.
+        source: '/blog/tfsa-vs-rrsp-canada-2025',
+        destination: '/blog/tfsa-vs-rrsp-2026',
+        permanent: true,
+      },
+      {
         // Retired 2026-10-02 (GEO audit): 2025 figures, 55 impressions and 0 clicks since May. Same question, current numbers.
         source: '/blog/rrsp-tax-savings-canada-2025',
-        destination: '/blog/tfsa-rrsp-limits-2027',
+        destination: '/blog/tfsa-vs-rrsp-2026',
         permanent: true,
       },
     ];
