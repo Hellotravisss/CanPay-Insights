@@ -11,6 +11,10 @@ CanPay Insights is an independent project based in Vancouver, Canada. All figure
 - [Quebec paycheck calculator](https://canpayinsights.ca/quebec-paycheck-calculator)
 - [CPP & EI calculator](https://canpayinsights.ca/cpp-ei-calculator)
 - [Salary after tax in Canada](https://canpayinsights.ca/salary-after-tax-canada)
+- [Gross to net salary calculator](https://canpayinsights.ca/gross-to-net-salary-calculator): gross salary to net pay, any province, 2026.
+- [Bi-weekly paycheque calculator](https://canpayinsights.ca/biweekly-paycheque-calculator): net pay per cheque, 26 pay periods.
+- [Marginal vs average tax rate](https://canpayinsights.ca/marginal-vs-average-tax-rate): what a raise is worth versus what you pay overall.
+- [Is overtime taxed more?](https://canpayinsights.ca/is-overtime-taxed-more): why overtime cheques look smaller, and why it evens out at filing.
 
 ## Open data and research
 - [Open dataset: 2026 take-home pay, 13 provinces & territories](https://canpayinsights.ca/data): 455 rows, CSV + JSON, CC BY 4.0; engine checked against the CRA T4032 tables (10,260 rows) before every release.
@@ -18,6 +22,7 @@ CanPay Insights is an independent project based in Vancouver, Canada. All figure
 - [Wages by occupation and province](https://canpayinsights.ca/wages): take-home pay for common jobs.
 - [Free embeddable calculator](https://canpayinsights.ca/widget): one line of HTML, ten languages.
 - [加拿大税后工资计算器(中文)](https://canpayinsights.ca/zh): Chinese-language calculator and guide.
+
 
 ## Original, citable data articles
 - [Minimum-wage take-home pay — all 13 provinces & territories, 2026](https://canpayinsights.ca/blog/minimum-wage-take-home-pay-canada-2026)

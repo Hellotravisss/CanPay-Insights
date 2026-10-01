@@ -42,6 +42,134 @@ export type LandingPage = {
 
 const coreLandingPages: LandingPage[] = [
   {
+    slug: 'gross-to-net-salary-calculator',
+    title: 'Gross to Net Salary Calculator Canada 2026',
+    description:
+      'Turn a gross salary into net pay for any province in 2026. On $80,000 in Ontario, net pay is about $60,303 after federal tax, Ontario tax, CPP/CPP2 and EI.',
+    h1: 'Gross to Net Salary Calculator',
+    kicker: 'Gross pay in, net pay out',
+    primaryKeyword: 'gross to net salary calculator Canada',
+    intro:
+      'Gross is the salary your employer quotes; net is what reaches your account. On an $80,000 salary in Ontario in 2026, net pay is about $60,303 a year: $9,243 federal tax, $4,885 Ontario tax (including the Health Premium), $4,446 CPP/CPP2 and $1,123 EI come off first. Enter your salary and province below.',
+    examples: ['gross to net salary Canada', 'gross to net pay calculator Canada 2026', 'convert gross salary to net Canada'],
+    sections: [
+      {
+        heading: 'How gross becomes net',
+        body: 'Net pay = gross pay − federal income tax − provincial income tax − CPP (QPP in Quebec) − EI (plus QPIP in Quebec). Optional deductions such as a group RRSP or union dues come off too, and lower the tax on what is left.',
+      },
+      {
+        heading: 'The same $80,000 in three provinces',
+        body: 'On $80,000 in 2026, net pay is about $61,157 in British Columbia, $60,698 in Alberta and $60,303 in Ontario. Federal tax, CPP and EI are the same in all three; the provincial tax is what changes.',
+      },
+    ],
+    faq: [
+      {
+        question: 'What is $80,000 gross in net pay in Ontario?',
+        answer: 'About $60,303 a year in 2026, or $5,025 a month and $2,319 every two weeks, for a single person with the basic TD1 claim.',
+      },
+      {
+        question: 'Why is my net pay lower than this?',
+        answer: 'Workplace deductions such as benefits premiums, a pension plan, union dues or extra tax requested on your TD1 come off your cheque as well. The calculator shows the statutory deductions only.',
+      },
+    ],
+  },
+  {
+    slug: 'biweekly-paycheque-calculator',
+    title: 'Bi-Weekly Paycheque Calculator Canada 2026',
+    description:
+      'Net pay per bi-weekly cheque for any salary and province, 2026. On $80,000 in Ontario, each of the 26 cheques is about $2,319 after tax, CPP and EI.',
+    h1: 'Bi-Weekly Paycheque Calculator',
+    kicker: '26 pay periods a year',
+    primaryKeyword: 'biweekly paycheque calculator Canada',
+    intro:
+      'Paid every two weeks? On an $80,000 salary in Ontario in 2026, each bi-weekly cheque is about $2,319 after tax, CPP and EI; in British Columbia it is about $2,352 and in Alberta about $2,335. Enter your salary, province and pay frequency below.',
+    examples: ['bi-weekly pay calculator Canada', 'biweekly paycheck calculator Ontario 2026', 'net pay every two weeks'],
+    sections: [
+      {
+        heading: 'How a bi-weekly cheque is worked out',
+        body: 'Payroll divides your yearly salary into 26 cheques and withholds tax on each as if every cheque were the same all year. CPP and EI stop once you reach the yearly maximum, so cheques late in the year can be larger for higher earners.',
+      },
+      {
+        heading: 'Some years have 27 pay days',
+        body: 'Fifty-two weeks plus one or two extra days means a bi-weekly schedule occasionally fits 27 pay days into a calendar year. If your employer keeps the same cheque size, that year pays one extra cheque.',
+      },
+    ],
+    faq: [
+      {
+        question: 'How much is a bi-weekly cheque on $60,000 in Ontario?',
+        answer: 'About $1,821 after tax, CPP and EI in 2026, for a single person with the basic TD1 claim.',
+      },
+      {
+        question: 'Is bi-weekly the same as semi-monthly?',
+        answer: 'No. Bi-weekly is every two weeks, 26 cheques a year; semi-monthly is twice a month, 24 slightly larger cheques. The yearly total is the same.',
+      },
+    ],
+  },
+  {
+    slug: 'marginal-vs-average-tax-rate',
+    title: 'Marginal vs Average Tax Rate in Canada, 2026',
+    description:
+      'Your marginal rate is what you lose on the next dollar; your average rate is your tax divided by your income. At $80,000 in Ontario they are 32.46% and 17.66%.',
+    h1: 'Marginal vs Average Tax Rate',
+    kicker: 'Two rates, two different questions',
+    primaryKeyword: 'marginal vs average tax rate Canada',
+    intro:
+      'At an $80,000 salary in Ontario in 2026, your average income tax rate is 17.66% (federal and Ontario tax divided by your salary), but of the next $1,000 you earn, 32.46% goes to tax, CPP and EI. The average rate tells you what you pay; the marginal rate tells you what a raise is worth. A raise never lowers your take-home pay.',
+    examples: ['marginal tax rate Canada 2026', 'average tax rate vs marginal Canada', 'how much of a raise do I keep'],
+    sections: [
+      {
+        heading: 'Average rate: what you pay overall',
+        body: 'Average rate = (federal tax + provincial tax) ÷ gross income. At $80,000 it is 17.66% in Ontario, 16.59% in British Columbia and 17.17% in Alberta.',
+      },
+      {
+        heading: 'Marginal rate: what the next dollar costs',
+        body: 'Brackets apply only to the income inside them, so moving into a higher bracket raises the rate on the dollars above the line, not on everything. Our marginal rate also counts CPP and EI, because they come off the same raise until you pass their yearly maximums.',
+      },
+    ],
+    faq: [
+      {
+        question: 'Can a raise put me in a higher bracket and lower my pay?',
+        answer: 'No. Only the income above the bracket line is taxed at the higher rate, so you always keep part of a raise. At $80,000 in Ontario you keep about two-thirds of the next dollar.',
+      },
+      {
+        question: 'Which rate should I use to value an RRSP contribution?',
+        answer: 'The marginal rate: an RRSP deduction comes off the top of your income, so it saves tax at the rate of your highest dollars.',
+      },
+    ],
+  },
+  {
+    slug: 'is-overtime-taxed-more',
+    title: 'Is Overtime Taxed More in Canada? (2026)',
+    description:
+      'Overtime is taxed like any other pay. A cheque with overtime has more withheld because payroll treats each cheque as if you earned it all year; filing settles the difference.',
+    h1: 'Is Overtime Taxed More in Canada?',
+    kicker: 'Why the overtime cheque looks smaller',
+    primaryKeyword: 'is overtime taxed more Canada',
+    intro:
+      'No. Overtime is ordinary employment income, taxed at the same rates as the rest of your pay. A cheque with a lot of overtime has more withheld because payroll treats each cheque as if you earned that amount every pay period, which can push it into a higher bracket for that cheque only. When you file, tax is worked out on your real income for the year, and anything over-withheld comes back as a refund.',
+    examples: ['overtime tax rate Canada', 'why is my overtime cheque taxed so much', 'overtime withholding Canada 2026'],
+    sections: [
+      {
+        heading: 'An example',
+        body: 'At $30 an hour, 40 hours a week, a worker in Ontario earns $62,400 a year and keeps about $48,883 after tax, CPP and EI in 2026. A cheque with 20 hours of overtime at time and a half is withheld as though that cheque were normal, so it is taxed at the bracket that pace of earning would reach, even if the rest of the year is regular hours.',
+      },
+      {
+        heading: 'When it evens out',
+        body: 'Withholding is an estimate made one cheque at a time. Your tax return uses your actual income for the year, so extra tax withheld on overtime cheques is refunded, and too little is collected.',
+      },
+    ],
+    faq: [
+      {
+        question: 'Does overtime count toward CPP and EI?',
+        answer: 'Yes. Overtime is pensionable and insurable like regular pay until you reach the yearly CPP and EI maximums.',
+      },
+      {
+        question: 'When is overtime paid at time and a half?',
+        answer: 'That is set by provincial employment standards: after 44 hours a week in Ontario, after 8 hours a day or 40 a week in British Columbia, and after 8 hours a day or 44 a week in Alberta. Federally regulated workplaces follow the Canada Labour Code.',
+      },
+    ],
+  },
+  {
     slug: 'salary-after-tax-canada',
     title: 'Salary After Tax Canada 2026 - Take-Home Pay Calculator',
     description:
