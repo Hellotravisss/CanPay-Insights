@@ -1,20 +1,28 @@
-<div align="center">
-<img width="1200" height="475" alt="GHBanner" src="https://github.com/user-attachments/assets/0aa67016-6eaf-458a-adb2-6e31a0763ed6" />
-</div>
+# CanPay Insights
 
-# Run and deploy your AI Studio app
+Source of [canpayinsights.ca](https://canpayinsights.ca), a free take-home pay calculator for people who work in Canada: net pay after federal and provincial income tax, CPP/CPP2 (QPP and QPIP in Quebec) and EI, for all 13 provinces and territories, 2026 rates.
 
-This contains everything you need to run your app locally.
+It is not a payroll service or a payment processor; it only estimates.
 
-View your app in AI Studio: https://ai.studio/apps/drive/1hdu63_eb3i9gBSVS7H0i33HBj5sSneaB
+## Why the numbers can be trusted
 
-## Run Locally
+Every build runs the engine against the CRA's published payroll deduction tables (T4032, claim code 1, bi-weekly, 13 jurisdictions) and Revenu Québec's source-deduction table: 10,260 rows. A build that disagrees with them does not deploy.
 
-**Prerequisites:**  Node.js
+```bash
+npm ci
+npm run audit:engine   # T4032 golden test
+npm run prebuild       # every pre-build gate
+```
 
+## Layout
 
-1. Install dependencies:
-   `npm install`
-2. Set the `GEMINI_API_KEY` in [.env.local](.env.local) to your Gemini API key
-3. Run the app:
-   `npm run dev`
+- `utils/taxEngine.ts`: the calculation engine
+- `tests/golden/`: fixtures built from the official tables (never edited by hand)
+- `scripts/`: the audit gates
+- `app/`: Next.js pages, deployed to Cloudflare Workers
+
+## Open data
+
+The take-home dataset (455 rows, CSV and JSON, CC BY 4.0) is at [canpayinsights.ca/data](https://canpayinsights.ca/data), mirrored in [canpay-open-data](https://github.com/Hellotravisss/canpay-open-data).
+
+Contact: info@canpayinsights.ca

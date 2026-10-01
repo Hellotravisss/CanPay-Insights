@@ -3,44 +3,49 @@ import { isIndexable } from '../lib/indexableSalaryPages';
 import allArticles from '../src/content/articles-data';
 import { frenchLandingPages, landingPages } from './landing-page-data';
 import { PROVINCIAL_WAGES } from '../lib/provincialWages';
+import { DATASET_VERSION } from '../lib/datasetVersion';
 
 const BASE_URL = 'https://canpayinsights.ca';
+// Computed pages change when the engine's output changes, and DATASET_VERSION
+// moves exactly then (scripts/generate-dataset.ts). A build date on every URL
+// told crawlers nothing.
+const ENGINE_DATE = new Date(DATASET_VERSION);
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const staticPages: MetadataRoute.Sitemap = [
     {
       url: BASE_URL,
-      lastModified: new Date(),
+      lastModified: ENGINE_DATE,
       changeFrequency: 'weekly',
       priority: 1.0,
     },
     {
       url: `${BASE_URL}/blog`,
-      lastModified: new Date(),
+      lastModified: ENGINE_DATE,
       changeFrequency: 'weekly',
       priority: 0.9,
     },
     {
       url: `${BASE_URL}/data`,
-      lastModified: new Date(),
+      lastModified: ENGINE_DATE,
       changeFrequency: 'monthly',
       priority: 0.8,
     },
     {
       url: `${BASE_URL}/research/pay-calculator-behaviour`,
-      lastModified: new Date(),
+      lastModified: ENGINE_DATE,
       changeFrequency: 'monthly',
       priority: 0.8,
     },
     {
       url: `${BASE_URL}/widget`,
-      lastModified: new Date(),
+      lastModified: ENGINE_DATE,
       changeFrequency: 'monthly',
       priority: 0.8,
     },
     {
       url: `${BASE_URL}/wages`,
-      lastModified: new Date(),
+      lastModified: ENGINE_DATE,
       changeFrequency: 'monthly',
       priority: 0.8,
     },
@@ -53,50 +58,50 @@ export default function sitemap(): MetadataRoute.Sitemap {
         .filter(([code]) => PROVINCIAL_WAGES[industry]?.[code])
         .map(([, provinceSlug]) => ({
           url: `${BASE_URL}/wages/${industry}-wages-${provinceSlug}`,
-          lastModified: new Date(),
+          lastModified: ENGINE_DATE,
           changeFrequency: 'monthly' as const,
           priority: 0.6,
         }))
     ),
     {
       url: `${BASE_URL}/changelog`,
-      lastModified: new Date(),
+      lastModified: ENGINE_DATE,
       changeFrequency: 'weekly',
       priority: 0.5,
     },
     {
       url: `${BASE_URL}/about`,
-      lastModified: new Date(),
+      lastModified: ENGINE_DATE,
       changeFrequency: 'monthly',
       priority: 0.7,
     },
     {
       url: `${BASE_URL}/contact`,
-      lastModified: new Date(),
+      lastModified: ENGINE_DATE,
       changeFrequency: 'monthly',
       priority: 0.6,
     },
     {
       url: `${BASE_URL}/compare-provinces`,
-      lastModified: new Date(),
+      lastModified: ENGINE_DATE,
       changeFrequency: 'monthly',
       priority: 0.7,
     },
     {
       url: `${BASE_URL}/link-to-canpay`,
-      lastModified: new Date(),
+      lastModified: ENGINE_DATE,
       changeFrequency: 'monthly',
       priority: 0.6,
     },
     {
       url: `${BASE_URL}/zh`,
-      lastModified: new Date(),
+      lastModified: ENGINE_DATE,
       changeFrequency: 'monthly',
       priority: 0.8,
     },
     {
       url: `${BASE_URL}/affiliate-disclosure`,
-      lastModified: new Date(),
+      lastModified: ENGINE_DATE,
       changeFrequency: 'yearly',
       priority: 0.3,
     },
@@ -104,7 +109,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
 
   const articlePages: MetadataRoute.Sitemap = allArticles.map((article) => ({
     url: `${BASE_URL}/blog/${article.slug}`,
-    lastModified: new Date(article.publishedAt),
+    lastModified: new Date(article.updatedAt || article.publishedAt),
     changeFrequency: 'monthly' as const,
     priority: 0.8,
   }));
@@ -118,7 +123,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     .filter((page) => isHub(page.slug))
     .map((page) => ({
       url: `${BASE_URL}/${page.slug}`,
-      lastModified: new Date(),
+      lastModified: ENGINE_DATE,
       changeFrequency: 'monthly' as const,
       priority: 0.85,
     }));
@@ -127,7 +132,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     .filter((page) => isHub(page.slug))
     .map((page) => ({
       url: `${BASE_URL}/fr/${page.slug}`,
-      lastModified: new Date(),
+      lastModified: ENGINE_DATE,
       changeFrequency: 'monthly' as const,
       priority: 0.75,
     }));
