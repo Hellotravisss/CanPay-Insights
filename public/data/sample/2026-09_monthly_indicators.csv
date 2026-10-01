@@ -1,0 +1,10 @@
+month,province,calculations,sessions,raise_pricing_share_pct,multi_province_session_share_pct,shift_start_before_7_share_pct,non_english_share_pct
+2026-09,All Canada,3591,981,60,12,14,17
+2026-09,Ontario,2210,722,59,,15,10
+2026-09,Alberta,463,138,77,,15,26
+2026-09,British Columbia,377,106,52,,5,21
+2026-09,Quebec,124,40,,,26,28
+2026-09,Manitoba,115,31,,,13,31
+2026-09,Nova Scotia,84,26,,,12,45
+2026-09,Saskatchewan,66,23,,,50,30
+2026-09,Prince Edward Island,50,26,,,0,86

@@ -1,0 +1,54 @@
+month,province,pay_type,calculations,sessions
+2026-09,Alberta,hourly,380,99
+2026-09,Alberta,salary,71,37
+2026-09,Alberta,timesheet/shift,<20,<20
+2026-09,British Columbia,hourly,246,67
+2026-09,British Columbia,salary,67,35
+2026-09,British Columbia,timesheet/shift,64,<20
+2026-09,Manitoba,hourly,92,20
+2026-09,Manitoba,salary,<20,<20
+2026-09,Manitoba,timesheet/shift,<20,<20
+2026-09,New Brunswick,hourly,<20,<20
+2026-09,New Brunswick,salary,<20,<20
+2026-09,Newfoundland and Labrador,hourly,65,<20
+2026-09,Newfoundland and Labrador,salary,<20,<20
+2026-09,Northwest Territories,salary,<20,<20
+2026-09,Nova Scotia,hourly,72,<20
+2026-09,Nova Scotia,salary,<20,<20
+2026-09,Nunavut,hourly,<20,<20
+2026-09,Nunavut,salary,<20,<20
+2026-09,Ontario,hourly,1564,425
+2026-09,Ontario,salary,503,269
+2026-09,Ontario,timesheet/shift,143,37
+2026-09,Prince Edward Island,hourly,37,<20
+2026-09,Prince Edward Island,salary,<20,<20
+2026-09,Quebec,hourly,88,23
+2026-09,Quebec,salary,30,<20
+2026-09,Quebec,timesheet/shift,<20,<20
+2026-09,Saskatchewan,hourly,53,<20
+2026-09,Saskatchewan,salary,<20,<20
+2026-09,Yukon,hourly,<20,<20
+2026-09,Yukon,salary,<20,<20
+
+month,area,income_range,pay_type,calculations,sessions
+2026-09,All Canada,under-30k,hourly,487,188
+2026-09,All Canada,under-30k,timesheet/shift,94,33
+2026-09,All Canada,under-30k,salary,38,36
+2026-09,All Canada,30-50k,hourly,856,429
+2026-09,All Canada,30-50k,timesheet/shift,37,<20
+2026-09,All Canada,30-50k,salary,41,29
+2026-09,All Canada,50-70k,hourly,587,294
+2026-09,All Canada,50-70k,salary,142,90
+2026-09,All Canada,50-70k,timesheet/shift,27,<20
+2026-09,All Canada,70-90k,salary,151,92
+2026-09,All Canada,70-90k,hourly,269,159
+2026-09,All Canada,70-90k,timesheet/shift,46,23
+2026-09,All Canada,90-120k,hourly,194,111
+2026-09,All Canada,90-120k,salary,172,89
+2026-09,All Canada,90-120k,timesheet/shift,<20,<20
+2026-09,All Canada,120-160k,hourly,115,60
+2026-09,All Canada,120-160k,salary,119,65
+2026-09,All Canada,120-160k,timesheet/shift,<20,<20
+2026-09,All Canada,160k-plus,hourly,103,49
+2026-09,All Canada,160k-plus,salary,82,52
+2026-09,All Canada,160k-plus,timesheet/shift,<20,<20

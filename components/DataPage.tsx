@@ -181,6 +181,16 @@ const DataPage: React.FC = () => {
                 the calculator, not a random sample of Canadians, and every extract says so. Licensees
                 agree not to attempt re-identification or resale.
               </p>
+              <p className="text-sm leading-relaxed text-slate-600 mb-1">
+                <strong className="text-slate-800">Free sample, September 2026:</strong>{' '}
+                <a href="/data/sample/2026-09_volume_by_province_income_paytype.csv">volume</a> ·{' '}
+                <a href="/data/sample/2026-09_province_language.csv">language</a> ·{' '}
+                <a href="/data/sample/2026-09_monthly_indicators.csv">monthly indicators</a> ·{' '}
+                <a href="/data/sample/README.txt">field guide</a>
+              </p>
+              <p className="text-sm leading-relaxed text-slate-600 mb-3">
+                <strong className="text-slate-800">Prices from:</strong> monthly feed CA$250/month · one custom extract CA$750 · annual research licence CA$2,400.
+              </p>
               <a
                 href="mailto:info@canpayinsights.ca?subject=Data%20licence"
                 className="inline-flex items-center gap-2 rounded-lg border border-slate-300 px-4 py-2 text-sm font-bold text-slate-800 no-underline hover:border-red-300 hover:text-red-700"
