@@ -1920,6 +1920,20 @@
    "backing": "manual",
    "note": "Re-read lib/telemetry.ts (bucketTimeToResult, bucketEdits, sent only as labels; time bucket on seq 1 only) and app/api/events/route.ts (TIME_BUCKETS/EDIT_BUCKETS whitelist, anything else nulled). App.tsx noteInputEdit only increments a counter; no timestamps or click positions leave the browser.",
    "reviewed": "2026-09-28"
+  },
+  {
+   "page": "/data",
+   "text": "Free sample, September 2026: volume · language · monthly indicators · field guide",
+   "backing": "manual",
+   "note": "Links to public/data/sample/*.csv + README.txt, built from September 2026 events with the research-page calc functions (lib/d1/events calcJourneys, calcStatsExtra); every cell under 20 printed as <20. Checked each link returns 200.",
+   "reviewed": "2026-10-02"
+  },
+  {
+   "page": "/data",
+   "text": "Prices from: monthly feed CA$250/month · one custom extract CA$750 · annual research licence CA$2,400.",
+   "backing": "manual",
+   "note": "Starting prices set by Travis/Claude on 2026-10-02; a price statement, backed by what we will quote. No checkout exists; enquiries go to the mailto link.",
+   "reviewed": "2026-10-02"
   }
  ]
 }
