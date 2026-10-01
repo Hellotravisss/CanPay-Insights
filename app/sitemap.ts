@@ -100,6 +100,24 @@ export default function sitemap(): MetadataRoute.Sitemap {
       priority: 0.8,
     },
     {
+      url: `${BASE_URL}/zh/100k-after-tax`,
+      lastModified: ENGINE_DATE,
+      changeFrequency: 'monthly',
+      priority: 0.7,
+    },
+    {
+      url: `${BASE_URL}/zh/bc-payroll-tax`,
+      lastModified: ENGINE_DATE,
+      changeFrequency: 'monthly',
+      priority: 0.7,
+    },
+    {
+      url: `${BASE_URL}/zh/newcomer-tax`,
+      lastModified: ENGINE_DATE,
+      changeFrequency: 'monthly',
+      priority: 0.7,
+    },
+    {
       url: `${BASE_URL}/affiliate-disclosure`,
       lastModified: ENGINE_DATE,
       changeFrequency: 'yearly',

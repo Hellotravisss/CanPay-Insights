@@ -181,6 +181,14 @@ export default function ChineseHubPage() {
               </section>
             ))}
 
+            <nav className="bg-white border border-slate-200 rounded-xl p-5 shadow-sm" aria-label="常见问题页面">
+              <h2 className="text-lg font-bold text-slate-900 mb-3">大家常问</h2>
+              <div className="flex flex-wrap gap-2">
+                <a href="/zh/100k-after-tax" className="rounded-md border border-slate-200 px-3 py-2 text-sm font-semibold no-underline">年薪十万到手多少</a>
+                <a href="/zh/bc-payroll-tax" className="rounded-md border border-slate-200 px-3 py-2 text-sm font-semibold no-underline">BC 省工资扣税多少</a>
+                <a href="/zh/newcomer-tax" className="rounded-md border border-slate-200 px-3 py-2 text-sm font-semibold no-underline">新移民工资扣多少税</a>
+              </div>
+            </nav>
             <nav className="bg-white border border-slate-200 rounded-xl p-5 shadow-sm" aria-label="其他语言">
               <h2 className="text-lg font-bold text-slate-900 mb-3">其他语言版本</h2>
               <div className="flex flex-wrap gap-2">

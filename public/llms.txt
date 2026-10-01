@@ -22,6 +22,9 @@ CanPay Insights is an independent project based in Vancouver, Canada. All figure
 - [Wages by occupation and province](https://canpayinsights.ca/wages): take-home pay for common jobs.
 - [Free embeddable calculator](https://canpayinsights.ca/widget): one line of HTML, ten languages.
 - [加拿大税后工资计算器(中文)](https://canpayinsights.ca/zh): Chinese-language calculator and guide.
+- [加拿大年薪十万到手多少](https://canpayinsights.ca/zh/100k-after-tax): $100,000 after tax in all 13 provinces and territories, in Chinese.
+- [BC 省工资扣税多少](https://canpayinsights.ca/zh/bc-payroll-tax): BC deductions by salary, in Chinese.
+- [新移民工资扣多少税](https://canpayinsights.ca/zh/newcomer-tax): how newcomers are taxed, first-year rules, in Chinese.
 
 
 ## Original, citable data articles
