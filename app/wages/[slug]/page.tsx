@@ -64,7 +64,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const hourly = PROVINCIAL_WAGES[combo.industry][combo.province];
   const annual = annualFromHourly(hourly);
   return {
-    title: `${industry} Salary in ${province} ${WAGE_DATA_YEAR}: $${hourly.toFixed(2)}/hr Take-Home`,
+    title: `${industry} Salary in ${province} (${WAGE_DATA_YEAR} data): $${hourly.toFixed(2)}/hr, 2026 Take-Home`,
     description: `The median full-time ${industry.toLowerCase()} wage in ${province} is $${hourly.toFixed(
       2
     )} an hour — about $${annual.toLocaleString('en-CA')} a year. See exactly what that leaves after federal tax, provincial tax, CPP and EI.`,

@@ -22,9 +22,9 @@ const AboutPage: React.FC = () => {
               onClick={handleBack}
               className="w-10 h-10 rounded-lg object-contain shadow-lg shadow-red-200 hover:scale-105 transition-transform cursor-pointer"
             />
-            <h1 className="text-xl font-bold text-slate-800 tracking-tight cursor-pointer" onClick={handleBack}>
+            <p className="text-xl font-bold text-slate-800 tracking-tight cursor-pointer" onClick={handleBack}>
               CanPay <span className="text-red-600 font-light">Insights</span>
-            </h1>
+            </p>
           </div>
           <button
             onClick={handleBack}

@@ -3,6 +3,7 @@ import PageTag, { CfBeacon } from '../components/PageTag';
 import TelemetrySwitch from '../components/TelemetrySwitch';
 import { Inter } from 'next/font/google';
 import './globals.css';
+import { DATASET_VERSION } from '../lib/datasetVersion';
 
 const inter = Inter({ subsets: ['latin'] });
 
@@ -98,6 +99,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
               slogan: 'Know your real take-home pay',
               founder: {
                 '@type': 'Person',
+                '@id': 'https://canpayinsights.ca/#founder',
                 name: 'Travis Zhang',
                 alternateName: 'Qi Zhang',
                 sameAs: ['https://www.wikidata.org/wiki/Q140366118', 'https://www.linkedin.com/in/travis-z'],
@@ -161,13 +163,16 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             {
               '@context': 'https://schema.org',
               '@type': 'Dataset',
+              '@id': 'https://canpayinsights.ca/data#dataset',
               name: 'Canadian Take-Home Pay & Payroll Deductions 2026',
+              version: DATASET_VERSION,
+              dateModified: DATASET_VERSION,
               description:
                 "Net pay, federal and provincial income tax, CPP/CPP2, EI, and Quebec QPP/QPIP by province/territory and income level ($30k–$200k) for 2026. Computed from CanPay Insights' open rules engine using CRA and Revenu Québec 2026 rates.",
               creator: { '@id': 'https://canpayinsights.ca/#org' },
               license: 'https://creativecommons.org/licenses/by/4.0/',
               isAccessibleForFree: true,
-              url: 'https://canpayinsights.ca/about',
+              url: 'https://canpayinsights.ca/data',
               spatialCoverage: 'Canada',
               temporalCoverage: '2026',
               keywords: ['Canada payroll', 'take-home pay', 'net pay', 'CPP', 'CPP2', 'EI', 'income tax', 'provincial tax', '2026 tax'],

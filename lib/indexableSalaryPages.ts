@@ -18,7 +18,9 @@
  *   was left (905 of 1,720). Several already rank on page one despite the block
  *   — 75000-after-tax-new-brunswick at 4.2, 90000-after-tax-pei at 4.3.
  *
- *   Cumulative: 132 pages, 94% of measured impressions. The remaining 129 pages
+ *   Batch 3 (2026-10-02): 17 pages, see the comment in the set below.
+ *
+ *   Cumulative after batch 2: 132 pages, 94% of measured impressions. The remaining 129 pages
  *   averaged under 11 impressions each in 77 days and stay blocked; releasing
  *   them would add pages without adding demand, which is exactly the pattern
  *   that got the set flagged in the first place.
@@ -40,6 +42,27 @@
  *   few weeks — a slow ramp is what keeps this from reading as bulk generation.
  */
 export const INDEXABLE_SALARY_PAGES = new Set<string>([
+  // Batch 3 (2026-10-02): >= 10 impressions from 2026-08-09 to 2026-09-28 while
+  // still noindexed (13 pages), plus the four round salaries an AI-visibility
+  // audit tested as prompts (80k/100k in BC and Alberta). Those four earn few
+  // impressions BECAUSE they are blocked, so impressions alone undercount them.
+  '40000-after-tax-bc',
+  '45000-after-tax-nova-scotia',
+  '35000-after-tax-ontario',
+  '150000-after-tax-manitoba',
+  '95000-after-tax-saskatchewan',
+  '150000-after-tax-saskatchewan',
+  '90000-after-tax-nunavut',
+  '90000-after-tax-manitoba',
+  '80000-after-tax-pei',
+  '52000-after-tax-new-brunswick',
+  '52000-after-tax-manitoba',
+  '150000-after-tax-new-brunswick',
+  '75000-after-tax-yukon',
+  '80000-after-tax-bc',
+  '100000-after-tax-bc',
+  '80000-after-tax-alberta',
+  '100000-after-tax-alberta',
   '65000-after-tax-ontario', // 1365 impr, pos 9.5
   '52000-after-tax-ontario', // 876 impr, pos 7.5
   '70000-after-tax-alberta', // 433 impr, pos 8.3

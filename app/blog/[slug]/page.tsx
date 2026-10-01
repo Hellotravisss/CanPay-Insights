@@ -66,6 +66,7 @@ export default async function ArticlePage({ params }: Props) {
       dateModified: article.updatedAt || article.publishedAt,
       author: {
         '@type': 'Person',
+        '@id': 'https://canpayinsights.ca/#founder',
         name: 'Travis Zhang',
         alternateName: 'Qi Zhang',
         url: 'https://canpayinsights.ca/about',

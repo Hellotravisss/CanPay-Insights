@@ -134,7 +134,7 @@ export default async function FrenchLandingPage({ params }: Props) {
   ];
 
   return (
-    <main className="min-h-screen bg-slate-50 text-slate-900">
+    <main lang="fr-CA" className="min-h-screen bg-slate-50 text-slate-900">
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}

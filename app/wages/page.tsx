@@ -9,7 +9,7 @@ import {
 import { WageHeader, WageFooter } from './WageChrome';
 
 export const metadata: Metadata = {
-  title: `Canadian Wages by Industry and Province ${WAGE_DATA_YEAR} — With Take-Home Pay`,
+  title: `Canadian Wages by Industry and Province (${WAGE_DATA_YEAR} data) — Take-Home Pay at 2026 Rates`,
   description: `Median full-time wages for 17 industries across every Canadian province, from Statistics Canada — plus what each one leaves after federal tax, provincial tax, CPP and EI.`,
   alternates: { canonical: 'https://canpayinsights.ca/wages' },
 };

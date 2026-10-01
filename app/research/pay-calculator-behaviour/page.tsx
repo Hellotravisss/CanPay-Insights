@@ -30,7 +30,7 @@ export const dynamic = 'force-dynamic';
 const URL = 'https://canpayinsights.ca/research/pay-calculator-behaviour';
 const n = (x: number) => x.toLocaleString('en-CA');
 const longDate = (d: string) => new Date(`${d}T12:00:00Z`).toLocaleDateString('en-CA', { year: 'numeric', month: 'long', day: 'numeric', timeZone: 'UTC' });
-const description = 'What hundreds of thousands of anonymous calculations show about how people use a pay number: pricing raises, shifts that start before 7 a.m., comparing provinces, and the languages it is done in. Counts, tests and limits for every figure. Free to cite.';
+const description = 'What thousands of anonymous calculations show about how people use a pay number: pricing raises, shifts that start before 7 a.m., comparing provinces, and the languages it is done in. Counts, tests and limits for every figure. Free to cite.';
 
 // Static, because metadata is not the place to put a number that moves hourly —
 // a title that changed under a shared link would make the page look unstable.
@@ -53,7 +53,7 @@ const jsonLdFor = (generated: string) => ({
   url: URL,
   datePublished: '2026-09-18',
   dateModified: generated,
-  author: { '@type': 'Person', name: 'Travis Zhang' },
+  author: { '@type': 'Person', '@id': 'https://canpayinsights.ca/#founder', name: 'Travis Zhang' },
   publisher: { '@type': 'Organization', name: 'CanPay Insights', url: 'https://canpayinsights.ca' },
   license: 'https://creativecommons.org/licenses/by/4.0/',
   isAccessibleForFree: true,

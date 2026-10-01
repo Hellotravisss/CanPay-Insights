@@ -333,7 +333,7 @@ const coreLandingPages: LandingPage[] = [
       {
         question: 'How much tax is deducted from an Ontario paycheque?',
         answer:
-          'On an $80,000 salary in 2026, an Ontario paycheque loses about $9,243 to federal tax, $4,173 to Ontario tax, $4,446 to CPP/CPP2, and $1,123 to EI over the year — about 24% of gross in total. Your exact deductions depend on your income, pay period, and credits; enter your numbers above for a precise breakdown.',
+          'On an $80,000 salary in 2026, an Ontario paycheque loses about $9,243 to federal tax, $4,885 to Ontario (income tax plus the Ontario Health Premium), $4,446 to CPP/CPP2, and $1,123 to EI over the year — about 25% of gross in total. Your exact deductions depend on your income, pay period, and credits; enter your numbers above for a precise breakdown.',
       },
       {
         question: 'Can I use this as a Toronto paycheck calculator?',
@@ -430,7 +430,7 @@ const coreLandingPages: LandingPage[] = [
       {
         question: 'Is Alberta take-home pay higher than Ontario?',
         answer:
-          'It can be higher for many salaries, but the exact difference depends on income, pay frequency, and deductions.',
+          'At $80,000 a year in 2026, take-home is about $60,698 in Alberta and $60,303 in Ontario, so about $395 more in Alberta. Ontario\'s income tax alone is lower at that salary; the Ontario Health Premium is what tips it. The gap changes with income, so check your own figure above.',
       },
       {
         question: 'Does Alberta have no income tax?',
