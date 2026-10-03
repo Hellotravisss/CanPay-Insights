@@ -2,7 +2,7 @@ import type { Metadata } from 'next';
 import AvowdCredit from '../../components/AvowdCredit';
 
 export const metadata: Metadata = {
-  title: 'Changelog – What’s New at CanPay Insights',
+  title: 'Changelog – What’s New',
   description:
     'Every meaningful update to the CanPay Insights take-home pay calculator: new languages, new features, tax-engine updates, and data releases.',
   alternates: { canonical: 'https://canpayinsights.ca/changelog' },

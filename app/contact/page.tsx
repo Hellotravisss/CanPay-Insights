@@ -2,7 +2,7 @@ import type { Metadata } from 'next';
 import ContactPage from '../../components/ContactPage';
 
 export const metadata: Metadata = {
-  title: 'Contact CanPay Insights',
+  title: 'Contact Us',
   description:
     'Contact CanPay Insights — questions, corrections, custom data requests, and media enquiries. Email info@canpayinsights.ca. Built by an independent developer in Vancouver, Canada.',
   alternates: { canonical: 'https://canpayinsights.ca/contact' },
