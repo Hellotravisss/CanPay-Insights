@@ -1,6 +1,7 @@
 name: PR check (auto-merge routine articles)
 on:
   pull_request:
+    types: [opened, synchronize, reopened, ready_for_review]
     branches: [main]
 permissions:
   contents: write
@@ -17,16 +18,20 @@ jobs:
       - run: npm ci
       - name: All prebuild gates
         run: npm run prebuild
-      - name: Only content files changed?
+      - name: Safe to auto-merge?
         id: scope
         run: |
           files=$(git diff --name-only origin/main...HEAD)
           echo "$files"
-          bad=$(echo "$files" | grep -vE '^(src/content/|public/blog/|public/llms\.txt$)' || true)
-          if [ -z "$bad" ] && [[ "${{ github.head_ref }}" == news-* ]]; then echo "ok=1" >> $GITHUB_OUTPUT; else echo "ok=0" >> $GITHUB_OUTPUT; echo "Not auto-merged: $bad"; fi
+          # Everything a routine may change ships once every gate above passes.
+          # These are held for the daily review task instead: a wrong edit here
+          # breaks every figure at once, or switches a gate off.
+          held=$(echo "$files" | grep -E '^(utils/taxEngine\.ts|constants\.ts|types\.ts|tests/|\.github/|scripts/(audit|live|golden|claims|build|generate-dataset)|package(-lock)?\.json$|next\.config\.ts$|wrangler|cloudflare/)' || true)
+          if [ -z "$held" ] && [[ "${{ github.head_ref }}" == news-* ]]; then echo "ok=1" >> $GITHUB_OUTPUT; else echo "ok=0" >> $GITHUB_OUTPUT; echo "Held for review: $held"; fi
       - name: Merge and deploy
         if: steps.scope.outputs.ok == '1'
         env: { GH_TOKEN: "${{ github.token }}" }
         run: |
+          gh pr ready ${{ github.event.pull_request.number }} || true
           gh pr merge ${{ github.event.pull_request.number }} --squash --delete-branch
           gh workflow run deploy.yml --ref main
