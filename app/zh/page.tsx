@@ -185,7 +185,15 @@ export default function ChineseHubPage() {
               <h2 className="text-lg font-bold text-slate-900 mb-3">大家常问</h2>
               <div className="flex flex-wrap gap-2">
                 <a href="/zh/100k-after-tax" className="rounded-md border border-slate-200 px-3 py-2 text-sm font-semibold no-underline">年薪十万到手多少</a>
+                <a href="/zh/ontario-60k-after-tax" className="rounded-md border border-slate-200 px-3 py-2 text-sm font-semibold no-underline">安省年薪 6 万到手多少</a>
+                <a href="/zh/ontario-80k-after-tax" className="rounded-md border border-slate-200 px-3 py-2 text-sm font-semibold no-underline">安省年薪 8 万到手多少</a>
+                <a href="/zh/hourly-20" className="rounded-md border border-slate-200 px-3 py-2 text-sm font-semibold no-underline">时薪 $20 一年到手多少</a>
+                <a href="/zh/hourly-25" className="rounded-md border border-slate-200 px-3 py-2 text-sm font-semibold no-underline">时薪 $25 一年到手多少</a>
+                <a href="/zh/hourly-30" className="rounded-md border border-slate-200 px-3 py-2 text-sm font-semibold no-underline">时薪 $30 一年到手多少</a>
                 <a href="/zh/bc-payroll-tax" className="rounded-md border border-slate-200 px-3 py-2 text-sm font-semibold no-underline">BC 省工资扣税多少</a>
+                <a href="/zh/alberta-vs-bc" className="rounded-md border border-slate-200 px-3 py-2 text-sm font-semibold no-underline">阿省和 BC 哪个到手多</a>
+                <a href="/zh/spouse-amount" className="rounded-md border border-slate-200 px-3 py-2 text-sm font-semibold no-underline">配偶抵免能省多少</a>
+                <a href="/zh/overtime-tax" className="rounded-md border border-slate-200 px-3 py-2 text-sm font-semibold no-underline">加班是不是扣税更多</a>
                 <a href="/zh/newcomer-tax" className="rounded-md border border-slate-200 px-3 py-2 text-sm font-semibold no-underline">新移民工资扣多少税</a>
               </div>
             </nav>
