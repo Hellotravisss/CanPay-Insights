@@ -2887,4 +2887,112 @@ This is a single, deliberately plain scenario — one income, no RRSP contributi
 Every figure above comes from CanPay Insights' own 2026 tax engine — the same engine whose output is checked, row by row, against the CRA's T4032 payroll deduction tables (claim code 1, bi-weekly) for all 13 jurisdictions, plus the CRA's CPP/EI tables and Revenu Québec's source deduction tables, before any release. Figures are rounded to the nearest dollar. To see your own numbers with your actual salary, deductions, and pay frequency, use the [free take-home pay calculator](/), or jump straight to your own province: [Ontario](/ontario), [British Columbia](/bc), [Alberta](/alberta), [Quebec](/quebec), [Manitoba](/manitoba), [Saskatchewan](/saskatchewan), [Nova Scotia](/nova-scotia), [New Brunswick](/new-brunswick), [Newfoundland and Labrador](/newfoundland), [Prince Edward Island](/pei), [Yukon](/yukon), [Northwest Territories](/northwest-territories), or [Nunavut](/nunavut). For a breakdown of CPP and EI specifically, see the [CPP/EI calculator](/cpp-ei-calculator) and [EI Premium Rate for 2027](/blog/ei-premium-rate-2027). This is general information, not financial advice.
 `,
   },
+  {
+    id: 'study-27',
+    slug: 'ei-temporary-measures-extended-2027',
+    title: 'EI Relief for Laid-Off Workers Extended to 2027: What It Is Actually Worth',
+    subtitle:
+      'On August 25, 2026, Ottawa extended three temporary EI relief measures inside a $7.5 billion tariff-support package, and added a fourth. Here is what each one is worth in dollars if you lose your job.',
+    excerpt:
+      'Three temporary EI measures that were due to expire October 10, 2026 were quietly extended into 2027 as part of an August 25 tariff-support package — the waived one-week wait is worth up to $729, and the extra 20 weeks for long-tenured workers up to $14,580.',
+    metaTitle: 'EI Relief Extended to 2027: Worth Up To $14,580',
+    metaDescription:
+      'Ottawa extended EI tariff relief into 2027 in a $7.5B package (Aug 25, 2026). See what the waived wait and extra weeks are worth, by salary.',
+    keywords: [
+      'ei temporary measures 2027',
+      'ei waiting period waiver 2027',
+      'ei extended october 2027',
+      'ei severance rules canada',
+      'ei long-tenured workers extra weeks',
+      'ei tariff support package',
+    ],
+    category: 'news',
+    tags: ['EI', 'Employment Insurance', '2027', 'Tariffs'],
+    publishedAt: '2026-10-05',
+    readTime: 7,
+    imageUrl: '/blog/ei-temporary-measures-extended-2027.svg',
+    directAnswer:
+      'On August 25, 2026, the federal government extended three temporary EI relief measures that were due to expire October 10, 2026, as part of a $7.5 billion tariff-support package. The one-week EI waiting-period waiver and the rule that stops severance and vacation pay from delaying benefits are both extended by one year, to October 10, 2027. The extra 20 weeks of regular benefits for long-tenured workers (raising the maximum from 45 to 65 weeks) is extended by eight months, to May 10, 2027. A new, separate measure also removes the EI penalty for one year for workers who voluntarily left a job, as long as their most recent job loss was through no fault of their own. The waived waiting week alone is worth up to $729 — the 2026 maximum weekly EI benefit — and the extra 20 weeks can be worth up to $14,580 to a long-tenured worker at the earnings ceiling.',
+    faq: [
+      {
+        question: 'Did the EI tariff relief measures expire on October 10, 2026?',
+        answer:
+          "No. Three temporary EI measures were originally scheduled to expire October 10, 2026, but the federal government extended them on August 25, 2026, as part of a $7.5 billion support package for workers and businesses affected by U.S. tariffs. The one-week waiting-period waiver and the separation-earnings rule now run to October 10, 2027; the extra 20 weeks for long-tenured workers runs to May 10, 2027. Some older articles and even the Government of Canada's own general EI temporary-measures page (last updated September 24, 2026) still show the original October 10, 2026 date for these three measures, which has not yet been updated to reflect the extension.",
+      },
+      {
+        question: 'How much is the waived one-week EI waiting period worth?',
+        answer:
+          'Exactly one week of your EI benefit — 55% of your average insurable earnings, up to the 2026 weekly maximum of $729. At a $40,000 salary that is $423; at a $60,000 salary, $635; at $68,900 or more (the 2026 maximum insurable earnings), the full $729. Normally, EI claimants wait one unpaid week before payments start; this measure pays that first week too.',
+      },
+      {
+        question: 'What are the extra 20 weeks for long-tenured workers worth?',
+        answer:
+          'Up to $14,580 for a worker at the 2026 maximum insurable earnings ($68,900), since the extension raises the maximum regular-benefit period from 45 weeks to 65 weeks — 20 extra weeks at the $729 weekly maximum. At a $50,000 salary, the 20 extra weeks are worth $10,580. To qualify as "long-tenured," you need to have received fewer than 36 weeks of regular or fishing benefits in the previous three years and to have paid at least 30% of the maximum annual EI premium in at least 7 of the previous 10 years.',
+      },
+      {
+        question: 'How does severance pay normally affect EI, and what changed?',
+        answer:
+          'Normally, severance pay, pay in lieu of notice, and vacation pay owed on termination ("separation earnings") are allocated against your EI claim starting from your last day of work, which can delay your first payment by weeks or months depending on how large the payout is. The temporary measure, now extended to October 10, 2027, stops separation earnings from being deducted from EI benefits at all for claims that start before that date, so benefits can begin right away regardless of any severance payout.',
+      },
+      {
+        question: 'What is the new rule for workers who quit a job?',
+        answer:
+          'Announced August 25, 2026 as a new, one-year measure, it removes the usual EI penalty for having voluntarily left a job, as long as your most recent job loss was through no fault of your own. In practice: if you quit one job and were then laid off from the next one, you are no longer disqualified from EI because of the earlier voluntary departure.',
+      },
+      {
+        question: 'Do these measures apply in Quebec?',
+        answer:
+          "Yes. All four measures are part of the federal EI regular-benefits program, which covers Quebec workers the same way it covers the rest of Canada (Quebec's own QPIP program only replaces the maternity and parental portion of EI, not regular unemployment benefits).",
+      },
+    ],
+    content: `
+## The EI relief measures were not allowed to lapse — they were extended into 2027
+
+Three temporary EI measures, introduced in 2025 to cushion the impact of U.S. tariffs on Canadian workers, were scheduled to expire on **October 10, 2026**. That deadline has been in enough headlines and calculator sites that it is easy to find articles — and even an official federal benefits page not yet updated to match — stating the measures are ending this month.
+
+They are not. On **August 25, 2026**, the federal government extended all three measures, and added a fourth, as part of a **$7.5 billion** support package for workers and businesses responding to the Canada–U.S. tariff dispute (announced alongside roughly $27.6 billion in Canadian counter-tariffs).
+
+### What actually changed on August 25, 2026
+
+| Measure | Original end date | New end date | Extension |
+| --- | --- | --- | --- |
+| One-week EI waiting period waived | October 10, 2026 | **October 10, 2027** | +1 year |
+| Severance/vacation pay no longer delays EI | October 10, 2026 | **October 10, 2027** | +1 year |
+| Extra 20 weeks for long-tenured workers (45 → 65 weeks max) | October 10, 2026 | **May 10, 2027** | +8 months |
+| Voluntary-leave penalty removed (new) | — | about 1 year from Aug. 25, 2026 | new measure |
+
+### What the waived waiting week is actually worth
+
+Normally, every EI claimant serves one unpaid week before payments start. Waiving it is worth exactly one week of your EI benefit — 55% of your average insurable earnings, capped at the 2026 maximum insurable earnings of $68,900:
+
+| Annual salary | Weekly EI benefit (55%, capped) | Value of the waived waiting week | Value of 20 extra weeks (long-tenured) |
+| --- | --- | --- | --- |
+| $40,000 | $423 | $423 | $8,460 |
+| $50,000 | $529 | $529 | $10,580 |
+| $60,000 | $635 | $635 | $12,700 |
+| $68,900+ (2026 ceiling) | **$729** (max) | $729 | **$14,580** |
+
+The extra 20 weeks only apply to "long-tenured workers" — those with fewer than 36 weeks of regular or fishing benefits in the previous three years, who paid at least 30% of the maximum annual EI premium in at least 7 of the previous 10 years. For someone who qualifies and is laid off near the earnings ceiling, that extension alone is worth more than $14,000.
+
+### Severance no longer starts the clock
+
+Under the normal rules, a severance package, pay in lieu of notice, or an accumulated vacation payout is treated as earnings and allocated against your claim starting from your last day of work — which can push your first EI payment back by weeks or months, depending on the size of the payout. The extended measure, now running to October 10, 2027, stops that allocation entirely for qualifying claims, so benefits can start as soon as the (also-waived) waiting period clears, regardless of any lump sum from your employer.
+
+### New: quitting one job no longer disqualifies you from EI at the next one
+
+The fourth measure, introduced fresh on August 25, 2026, is not an extension — it is new. For about a year, workers who voluntarily left a job are no longer penalized when applying for EI, as long as their most recent job loss was through no fault of their own. In plain terms: quit Job 1, take Job 2, get laid off from Job 2 — the voluntary departure from Job 1 no longer blocks your EI claim.
+
+### Why the confusion about the October 10, 2026 date
+
+The Government of Canada's own general page on these measures, last checked on October 5, 2026 and showing it was updated September 24, 2026, still lists the original October 10, 2026 end date for all three original measures — it has not yet been revised to show the August 25 extension. Several news and calculator sites copied that page's dates and reported the measures "ending October 10, 2026." The extension is confirmed in the Department of Finance's own August 25, 2026 release and corroborated by independent employment-law coverage of the announcement.
+
+### What this doesn't change
+
+None of this affects regular payroll deductions or your take-home pay while you're working — EI premiums are unchanged by this announcement. It only affects what you'd receive, and when, if you make an EI claim. For how much EI is deducted from your paycheque today, see [how much EI you pay in 2026](/blog/how-much-ei-will-i-pay-2026) and the confirmed [2027 EI premium rate](/blog/ei-premium-rate-2027), or check your full deduction breakdown with the [CPP/EI calculator](/cpp-ei-calculator).
+
+## Sources & disclaimer
+
+The $7.5 billion support package and the extension of the three temporary EI measures were confirmed in the Department of Finance Canada news release of August 25, 2026, [Canada announces targeted countermeasures and substantive support for workers and businesses in response to U.S. tariffs](https://www.canada.ca/en/department-finance/news/2026/08/canada-announces-targeted-countermeasures-and-substantive-support-for-workers-and-businesses-in-response-to-us-tariffs.html), cross-checked against independent employment-law analysis of the same announcement. The original October 10, 2026 and June 15, 2025 dates, the long-tenured-worker qualifying criteria, and the 2026 maximum insurable earnings ($68,900) and maximum weekly benefit ($729) are from the Government of Canada's [temporary EI measures](https://www.canada.ca/en/services/benefits/ei/temporary-measures-for-major-economic-conditions.html) and [EI regular benefits](https://www.canada.ca/en/services/benefits/ei/ei-regular-benefit/benefit-amount.html) pages. Dollar values for the waived waiting week and extra weeks are CanPay Insights' own calculations (55% of insurable earnings, capped at $68,900, rounded to the nearest dollar) and assume a single claimant with no other insurable income. This is general information, not legal or financial advice — confirm your own situation with [Service Canada](https://www.canada.ca/en/services/benefits/ei.html).
+`,
+  },
 ];
