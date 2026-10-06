@@ -544,7 +544,7 @@ const App: React.FC = () => {
               className="flex items-center gap-3 hover:opacity-80 transition-opacity"
             >
               <img src="/logo.png" alt="CanPay" className="w-10 h-10 rounded-lg object-contain shadow-lg" />
-              <h1 className="text-xl font-bold text-slate-800 tracking-tight hidden sm:block">CanPay <span className="text-red-600 font-light">Insights</span></h1>
+              <p className="text-xl font-bold text-slate-800 tracking-tight hidden sm:block">CanPay <span className="text-red-600 font-light">Insights</span></p>
             </button>
             
             <div className="flex items-center gap-2">
