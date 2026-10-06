@@ -22,7 +22,6 @@ import {
   type PayChange,
 } from './lib/telemetry';
 import IndustryComparison from './components/IndustryComparison';
-import IntentPrompt from './components/IntentPrompt';
 import ExpectationPrompt from './components/ExpectationPrompt';
 import NeighbourhoodPrompt from './components/NeighbourhoodPrompt';
 import FakeDoors from './components/FakeDoors';
@@ -824,12 +823,6 @@ const App: React.FC = () => {
                     after the paid cards so the reward has something to buy. */}
                 <ShareReward lang={lang} />
                 {isAuthenticated && records.length > 0 && <PayCurve records={records} />}
-                <IntentPrompt
-                  mode={mode}
-                  province={currentProvince}
-                  annualIncome={results.grossPayAnnual}
-                  lang={lang}
-                />
                 <GeminiAdvisor onReportOpen={() => setReportOpened(true)} results={results} inputs={currentInputs as SalaryInputs} />
               </div>
               

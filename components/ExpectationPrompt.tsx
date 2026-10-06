@@ -9,9 +9,11 @@ import {
   type UnionMember,
   type EmployerSize,
   type VacationBand,
+  type Intent,
 } from '../lib/telemetry';
 import { PayFrequency, type CalculationMode as CalcMode } from '../types';
 import { calculateFromAnnualSalary } from '../utils/taxEngine';
+import { INTENT_DICT } from './IntentPrompt';
 
 /**
  * A progressive prompt: one tap, one question, and the next question only
@@ -367,7 +369,7 @@ const AGE_OPTIONS: AgeBand[] = ['under-25', '25-34', '35-44', '45-54', '55-64', 
  */
 type QKey =
   | 'expectation' | 'work_arrangement' | 'age_band'
-  | 'tenure_band' | 'union_member' | 'employer_size' | 'vacation_band';
+  | 'tenure_band' | 'union_member' | 'employer_size' | 'vacation_band' | 'intent';
 
 const POOL: { key: QKey; prompt: string; options: string[] }[] = [
   { key: 'expectation', prompt: 'prompt', options: ['lower', 'as-expected', 'higher'] },
@@ -377,11 +379,16 @@ const POOL: { key: QKey; prompt: string; options: string[] }[] = [
   { key: 'union_member', prompt: 'q4union', options: ['yes', 'no', 'not-sure'] },
   { key: 'employer_size', prompt: 'q4size', options: ['solo', '2-10', '11-50', '51-200', '200-plus'] },
   { key: 'vacation_band', prompt: 'q4vacation', options: ['0-10', '11-15', '16-20', '21-25', '26-plus'] },
+  // Joined the rotation 2026-10-06. Asked alone at the foot of the results it
+  // drew 22 answers in two months; questions in this slot are answered by about
+  // one in five people who see them.
+  { key: 'intent', prompt: 'prompt', options: ['new-job', 'raise', 'moving', 'budgeting', 'tax-filing', 'curious'] },
 ];
 
 const EMOJI: Record<string, string> = {
   lower: '😖', 'as-expected': '😐', higher: '🙂',
   onsite: '🏢', remote: '🏠', hybrid: '🔀',
+  'new-job': '💼', raise: '📈', moving: '📦', budgeting: '🧾', 'tax-filing': '🗂️', curious: '🤔',
 };
 
 export default function ExpectationPrompt({
@@ -396,6 +403,7 @@ export default function ExpectationPrompt({
   lang: string;
 }) {
   const t = DICT[lang] ?? DICT.en;
+  const ti = INTENT_DICT[lang] ?? INTENT_DICT.en;
 
   /**
    * ONE question, then a payoff, then an optional next one.
@@ -442,6 +450,7 @@ export default function ExpectationPrompt({
       unionMember: current === 'union_member' ? (value as UnionMember) : null,
       employerSize: current === 'employer_size' ? (value as EmployerSize) : null,
       vacationBand: current === 'vacation_band' ? (value as VacationBand) : null,
+      intent: current === 'intent' ? (value as Intent) : null,
     });
     let line: string | null = null;
     try {
@@ -486,12 +495,12 @@ export default function ExpectationPrompt({
         </>
       ) : (
         <>
-          <p className="text-sm font-medium text-slate-700">{t[q.prompt]}</p>
+          <p className="text-sm font-medium text-slate-700">{q.key === 'intent' ? ti.prompt : t[q.prompt]}</p>
           <div className="mt-3 flex flex-wrap gap-2">
             {q.options.map((o) => (
               <button key={o} onClick={() => answer(o)} disabled={busy} className={pill}>
                 {EMOJI[o] && <span aria-hidden="true">{EMOJI[o]}</span>}
-                {t[o]}
+                {q.key === 'intent' ? ti[o] : t[o]}
               </button>
             ))}
           </div>

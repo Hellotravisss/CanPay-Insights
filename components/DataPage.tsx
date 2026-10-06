@@ -163,7 +163,7 @@ const DataPage: React.FC = () => {
                 <li><strong className="text-slate-800">Neighbourhood demand</strong> — calculations by postal-code area (FSA) and income range, month by month.</li>
                 <li><strong className="text-slate-800">Relocation intent</strong> — which province pairs people compare in one visit, and at what income.</li>
                 <li><strong className="text-slate-800">Observed pay changes</strong> — direction and size of real raises and cuts, from people who reopen a saved calculation.</li>
-                <li><strong className="text-slate-800">Expectation gap</strong> — who finds their take-home lower than they thought, by province and income.</li>
+                <li><strong className="text-slate-800">Expectation gap</strong> (still building; not yet large enough to license) — who finds their take-home lower than they thought, by province and income.</li>
                 <li><strong className="text-slate-800">Work patterns</strong> — shift hours, unpaid breaks, overtime and tips by province and sector.</li>
               </ul>
               <p className="text-sm leading-relaxed text-slate-600 mb-3">
