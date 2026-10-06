@@ -160,10 +160,10 @@ const AnnualSalaryInput: React.FC<Props> = ({ inputs, setInputs }) => {
               { key: 'taxableBenefits', label: t('annual.taxBenefits'), hint: t('annual.taxBenefitsHint') },
             ] as { key: keyof AdditionalIncome; label: string; hint: string }[]).map(({ key, label, hint }) => (
               <div key={key}>
-                <label className="block text-xs font-bold text-red-800 mb-1">{label} <span className="font-normal text-red-600">({hint})</span></label>
+                <label htmlFor={`annual-add-${key}`} className="block text-xs font-bold text-red-800 mb-1">{label} <span className="font-normal text-red-600">({hint})</span></label>
                 <div className="relative">
                   <span className="absolute left-3 top-1/2 -translate-y-1/2 text-red-400 font-bold">$</span>
-                  <input type="number" min="0" step="1" placeholder="0"
+                  <input id={`annual-add-${key}`} type="number" min="0" step="1" placeholder="0"
                     className="w-full pl-8 pr-4 py-2.5 border border-red-200 rounded-lg bg-white focus:outline-none focus:ring-2 focus:ring-red-500"
                     value={inputs.additionalIncome?.[key] || ''}
                     onFocus={(e) => e.target.select()}
@@ -200,10 +200,10 @@ const AnnualSalaryInput: React.FC<Props> = ({ inputs, setInputs }) => {
               { key: 'otherDeductions', label: t('annual.otherDedItem') },
             ] as { key: keyof Deductions; label: string }[]).map(({ key, label }) => (
               <div key={key}>
-                <label className="block text-xs font-bold text-slate-700 mb-1">{label}</label>
+                <label htmlFor={`annual-ded-${key}`} className="block text-xs font-bold text-slate-700 mb-1">{label}</label>
                 <div className="relative">
                   <span className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-500 font-bold">$</span>
-                  <input type="number" min="0" step="1" placeholder="0"
+                  <input id={`annual-ded-${key}`} type="number" min="0" step="1" placeholder="0"
                     className="w-full pl-8 pr-4 py-2.5 border border-slate-300 rounded-lg bg-white focus:outline-none focus:ring-2 focus:ring-red-500"
                     value={inputs.deductions?.[key] || ''}
                     onFocus={(e) => e.target.select()}
