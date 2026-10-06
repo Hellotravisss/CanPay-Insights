@@ -1996,6 +1996,13 @@
    "backing": "manual",
    "note": "Re-read src/content/components/ProvinceComparison.tsx handleStartComparison and lib/telemetry.ts: only the selected province names (sorted, | joined) and the income bracket are sent; app/api/events/route.ts keeps 2-6 valid province names, else null.",
    "reviewed": "2026-10-06"
+  },
+  {
+   "page": "/data",
+   "text": "Expectation gap (still building; not yet large enough to license) — who finds their take-home lower than they thought, by province and income.",
+   "backing": "manual",
+   "note": "Counted 2026-10-06: 24 expectation answers in total (events.expectation not null), too few for any licensed cut at the k>=20 floor once split by province and income. The sentence says it is still building.",
+   "reviewed": "2026-10-06"
   }
  ]
 }
