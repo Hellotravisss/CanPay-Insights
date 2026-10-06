@@ -1934,6 +1934,20 @@
    "backing": "manual",
    "note": "Starting prices set by Travis/Claude on 2026-10-02; a price statement, backed by what we will quote. No checkout exists; enquiries go to the mailto link.",
    "reviewed": "2026-10-02"
+  },
+  {
+   "page": "/privacy",
+   "text": "broad ranges for entries you make (RRSP contribution as a share of pay, shift premium, overtime hours, tips as a share of pay, union dues, other deductions, bonus, commission or other income, and restricted stock units as a share of pay), whether you entered a disability-insurance premium, holiday or sick pay, or a taxable benefit (yes or no), how your employer matches RRSP contributions, and whether your tips are paid through payroll — always ranges or yes/no, never the amounts;",
+   "backing": "manual",
+   "note": "Re-read App.tsx stubExtras/buildBehaviour and lib/telemetry.ts: union dues, other deductions, bonus, other income (share of period gross) and RSUs (share of annual gross) leave only as range labels; LTD, stat/sick pay, taxable benefits as 1/0; match policy and tips_paid as fixed labels. app/api/events/route.ts nulls anything outside those labels. No amount is sent.",
+   "reviewed": "2026-10-06"
+  },
+  {
+   "page": "/fr/confidentialite",
+   "text": "des fourchettes larges pour vos saisies (cotisation REER en part de la paie, prime de quart, heures supplémentaires, pourboires en part de la paie, cotisations syndicales, autres retenues, prime, commissions ou autres revenus, et unités d’actions restreintes en part de la paie), si vous avez saisi une prime d’assurance invalidité, une paie de jour férié ou de maladie ou un avantage imposable (oui ou non), le mode de contribution de l’employeur au REER et si vos pourboires passent par la paie — toujours des fourchettes ou oui/non, jamais les montants;",
+   "backing": "manual",
+   "note": "Re-read App.tsx stubExtras/buildBehaviour and lib/telemetry.ts: union dues, other deductions, bonus, other income (share of period gross) and RSUs (share of annual gross) leave only as range labels; LTD, stat/sick pay, taxable benefits as 1/0; match policy and tips_paid as fixed labels. app/api/events/route.ts nulls anything outside those labels. No amount is sent.",
+   "reviewed": "2026-10-06"
   }
  ]
 }
