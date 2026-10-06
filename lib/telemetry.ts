@@ -683,6 +683,8 @@ export function recordCalcEvent(e: {
   reverseTargetMonthly?: number | null;
   /** Ticked "I support a spouse or common-law partner". Only the yes/no, never the spouse's income. */
   spouseClaim?: boolean | null;
+  /** A free offer comparison, as ranges: B's salary against A's, the province B is in when it differs, and vacation days more/same/fewer. Never the salaries. */
+  offer?: { changeBucket: string; toProvince: string | null; vacationDiff: 'more' | 'same' | 'fewer' } | null;
 }) {
   if (!e.annualIncome || e.annualIncome <= 0 || !e.province) return;
   if (isLikelyBot() || isOptedOut()) return;
@@ -703,7 +705,7 @@ export function recordCalcEvent(e: {
       ? `${w.shiftStartHour}-${w.shiftEndHour}-${w.unpaidBreakMin}-${w.daysPerWeek}`
       : '';
     const behaviourKey = b ? `${b.rrspPctBucket}-${b.otHoursBucket}-${b.tipsPctBucket ?? ''}-${b.shiftPremium}-${b.unionDuesBucket ?? ''}${b.ltd ?? ''}${b.otherDeductionsBucket ?? ''}${b.bonusBucket ?? ''}${b.otherIncomeBucket ?? ''}${b.statOrSickPay ?? ''}${b.taxableBenefits ?? ''}${b.rsuBucket ?? ''}${b.matchPolicy ?? ''}${b.tipsPaid ?? ''}` : '';
-    const key = `${source}|${e.mode}|${e.province}|${bracket}|${e.industry ?? ''}|${workKey}|${behaviourKey}|${e.intent ?? ''}|${e.expectation ?? ''}|${e.workArrangement ?? ''}|${e.ageBand ?? ''}|${e.viewedReport ? 'r' : ''}|${e.productInterest ?? ''}|${e.tenureBand ?? ''}${e.unionMember ?? ''}${e.employerSize ?? ''}${e.vacationBand ?? ''}|${e.payChange ? `${e.payChange.direction}-${e.payChange.pctBucket}` : ''}|${hood?.fsa ?? ''}${hood?.source ?? ''}|${reverseTargetBucket(e.reverseTargetMonthly)}|${e.spouseClaim ? 's' : ''}`;
+    const key = `${source}|${e.mode}|${e.province}|${bracket}|${e.industry ?? ''}|${workKey}|${behaviourKey}|${e.intent ?? ''}|${e.expectation ?? ''}|${e.workArrangement ?? ''}|${e.ageBand ?? ''}|${e.viewedReport ? 'r' : ''}|${e.productInterest ?? ''}|${e.tenureBand ?? ''}${e.unionMember ?? ''}${e.employerSize ?? ''}${e.vacationBand ?? ''}|${e.payChange ? `${e.payChange.direction}-${e.payChange.pctBucket}` : ''}|${hood?.fsa ?? ''}${hood?.source ?? ''}|${reverseTargetBucket(e.reverseTargetMonthly)}|${e.spouseClaim ? 's' : ''}|${e.offer ? `${e.offer.changeBucket}${e.offer.toProvince ?? ''}${e.offer.vacationDiff}` : ''}`;
     if (sentThisPageLoad.has(key)) return;
     sentThisPageLoad.add(key);
 
@@ -782,6 +784,9 @@ export function recordCalcEvent(e: {
         is_returning: isReturning(),
         reverse_target_bucket: reverseTargetBucket(e.reverseTargetMonthly),
         spouse_claim: e.spouseClaim == null ? null : e.spouseClaim ? 1 : 0,
+        offer_change_bucket: e.offer?.changeBucket ?? null,
+        offer_to_province: e.offer?.toProvince ?? null,
+        offer_vacation_diff: e.offer?.vacationDiff ?? null,
         time_to_result_bucket: seqCounter === 1 ? bucketTimeToResult(performance.now() - pageLoadedAt) : null,
         edits_bucket: bucketEdits(inputEdits),
     };
@@ -802,4 +807,16 @@ export function recordCalcEvent(e: {
       keepalive: true,
     }).catch((e) => console.debug('telemetry skipped:', (e as Error).message));
   }, 3000);
+}
+
+/** Offer B's salary against offer A's, as a range label. */
+export function offerChangeBucket(a: number, b: number): string {
+  if (!(a > 0)) return 'unknown';
+  const pct = ((b - a) / a) * 100;
+  if (pct < -10) return 'down-10-plus';
+  if (pct < 0) return 'down-0-10';
+  if (pct < 5) return 'up-0-5';
+  if (pct < 10) return 'up-5-10';
+  if (pct < 20) return 'up-10-20';
+  return 'up-20-plus';
 }

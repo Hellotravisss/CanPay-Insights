@@ -8,7 +8,9 @@ const signed = (n: number) => (n >= 0 ? '+' : '−') + money(n);
 /**
  * Two offers, after tax. One verdict number, then the lines that make it.
  */
-export default function OfferReport({ report: r, email, sessionId, permalink }: { report: R; email: string | null; sessionId: string; permalink: string }) {
+export default function OfferReport({ report: r, email = null, sessionId = '', permalink = '', inline = false }: { report: R; email?: string | null; sessionId?: string; permalink?: string; inline?: boolean }) {
+  const Root = inline ? 'section' : 'main';
+  const Title = inline ? 'h2' : 'h1';
   const win = r.winner;
   const W = win === 'b' ? r.b : r.a;
   const tone = win === 'tie' ? 'text-slate-700' : 'text-emerald-700';
@@ -22,20 +24,20 @@ export default function OfferReport({ report: r, email, sessionId, permalink }: 
   ];
 
   return (
-    <main className="mx-auto max-w-3xl px-5 py-10 font-sans text-slate-800 print:py-4">
+    <Root className="mx-auto max-w-3xl px-5 py-10 font-sans text-slate-800 print:py-4">
       <header className="border-b-4 border-red-600 pb-5">
         <div className="flex items-center gap-3">
           <img src="/logo.png" alt="" className="h-9 w-9 rounded-lg" />
           <span className="text-lg font-bold">CanPay <span className="font-normal text-red-600">Insights</span></span>
           <span className="ml-auto text-xs font-bold uppercase tracking-[0.2em] text-slate-500">Offer Comparison · {r.taxYear}</span>
         </div>
-        <h1 className="mt-6 text-3xl font-extrabold tracking-tight text-slate-900 sm:text-4xl">
+        <Title className="mt-6 text-3xl font-extrabold tracking-tight text-slate-900 sm:text-4xl">
           {money(r.a.salary)} in {r.a.province} <span className="text-red-600">vs</span> {money(r.b.salary)} in {r.b.province}
-        </h1>
+        </Title>
         <p className="mt-2 text-sm text-slate-500">{r.taxYear} federal and provincial rates · single filer, standard credits · bonus, RRSP match and vacation priced in</p>
       </header>
 
-      <SaveReport email={email} sessionId={sessionId} permalink={permalink} />
+      {sessionId && <SaveReport email={email} sessionId={sessionId} permalink={permalink} />}
 
       {/* Verdict */}
       <section className={`mt-8 rounded-2xl border p-6 ${win === 'tie' ? 'border-slate-200 bg-slate-50' : 'border-emerald-200 bg-emerald-50'}`}>
@@ -119,10 +121,10 @@ export default function OfferReport({ report: r, email, sessionId, permalink }: 
       </section>
 
       <footer className="mt-10 flex flex-wrap items-center justify-between gap-3 border-t border-slate-200 pt-5 text-xs text-slate-500 print:hidden">
-        <span>Permanent link: <span className="font-mono">{permalink.replace('https://', '')}</span></span>
+        {permalink && <span>Permanent link: <span className="font-mono">{permalink.replace('https://', '')}</span></span>}
         <Link href="/" className="text-red-600 hover:underline">← Back to the calculator</Link>
       </footer>
-    </main>
+    </Root>
   );
 }
 
