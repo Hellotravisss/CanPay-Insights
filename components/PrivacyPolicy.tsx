@@ -21,7 +21,7 @@ const PrivacyPolicy: React.FC<PrivacyPolicyProps> = () => {
   return (
     <LegalChrome
       title="Privacy Policy for CanPay Insights"
-      effective="Effective date: September 28, 2026 (replaces the version of September 27, 2026)"
+      effective="Effective date: October 6, 2026 (replaces the version of September 28, 2026)"
       links={[
         { href: '/fr/confidentialite', label: 'Version française' },
         { href: '/terms', label: 'Terms of Service' },
@@ -73,7 +73,7 @@ const PrivacyPolicy: React.FC<PrivacyPolicyProps> = () => {
           <li>which page of our own site you were on before calculating (the path only — never a link from another site and never anything after a “?”);</li>
           <li>optional answers you choose to give: the industry you compare against (and its position in the list, and whether this browser had chosen it before), why you are calculating, whether the result matched your expectation, where you work (on-site, remote, hybrid), your age group, tenure, union membership, employer size and vacation days;</li>
           <li>your typical work pattern when you use the shift or timesheet calculators (usual start and end hour, days per week, average shift length, unpaid break) — never the calendar dates you worked;</li>
-          <li>broad ranges for entries you make (RRSP contribution as a share of pay, shift premium, overtime hours, tips as a share of pay) — always ranges;</li>
+          <li>broad ranges for entries you make (RRSP contribution as a share of pay, shift premium, overtime hours, tips as a share of pay, union dues, other deductions, bonus, commission or other income, and restricted stock units as a share of pay), whether you entered a disability-insurance premium, holiday or sick pay, or a taxable benefit (yes or no), how your employer matches RRSP contributions, and whether your tips are paid through payroll — always ranges or yes/no, never the amounts;</li>
           <li>if you use “find the salary” to work back from a take-home amount, the monthly take-home you asked for, as a range (such as “$4k–$5k”) — never the amount;</li>
           <li>whether you ticked “I support a spouse or common-law partner” (yes or no) — never your spouse’s income;</li>
           <li>how long it took from opening the page to your first result, as a range (under 10 seconds, 10–30, 30–90, over 90), and how many times you changed the form before a result, as a range (1–3, 4–10, 11–30, over 30) — never timestamps, keystrokes or where you clicked;</li>

@@ -19,6 +19,14 @@ export const metadata: Metadata = {
 // page is the product's history, not a publishing log.
 const ENTRIES: { date: string; title: string; points: string[] }[] = [
   {
+    date: '2026-10-06',
+    title: 'Anonymous counter now records the pay-stub extras you enter, as ranges',
+    points: [
+      'Union dues, other deductions, bonus, commission and RSUs as a share of pay; disability premium, holiday or sick pay and taxable benefits as yes/no; how your employer matches RRSP contributions; whether tips go through payroll. Never the amounts.',
+      'The privacy policy (English and French) lists them. Opting out stops them like everything else.',
+    ],
+  },
+  {
     date: '2026-09-28',
     title: 'Two new anonymous ranges: time to first result, and form changes',
     points: [

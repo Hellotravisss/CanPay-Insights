@@ -22,6 +22,26 @@ export interface BehaviourSignals {
   otHoursBucket: '0' | 'under-5' | '5-10' | '10-plus';
   tipsPctBucket: '0' | '1-10' | '10-20' | '20-30' | '30-plus' | null;
   payFrequency: string | null;
+  // Pay-stub extras the visitor typed (2026-10-06): each as a share-of-gross
+  // range or yes/no, never an amount. They were entered all along and dropped.
+  unionDuesBucket?: '0' | 'under-1' | '1-2' | '2-plus' | null;
+  ltd?: boolean | null;
+  otherDeductionsBucket?: '0' | 'under-2' | '2-5' | '5-plus' | null;
+  bonusBucket?: '0' | 'under-10' | '10-25' | '25-plus' | null;
+  otherIncomeBucket?: '0' | 'under-10' | '10-25' | '25-plus' | null;
+  statOrSickPay?: boolean | null;
+  taxableBenefits?: boolean | null;
+  rsuBucket?: '0' | 'under-10' | '10-25' | '25-plus' | null;
+  matchPolicy?: 'equal' | 'half' | 'custom' | 'none' | null;
+  tipsPaid?: 'payroll' | 'direct' | null;
+}
+
+/** Share of gross as a range label; null when the field does not exist in this mode. */
+export function bucketShare<T extends string>(pct: number | null, edges: number[], labels: T[]): T | null {
+  if (pct === null || !Number.isFinite(pct)) return null;
+  if (pct <= 0) return labels[0];
+  for (let i = 0; i < edges.length; i++) if (pct < edges[i]) return labels[i + 1];
+  return labels[labels.length - 1];
 }
 
 export function bucketRrspPct(pct: number): BehaviourSignals['rrspPctBucket'] {
@@ -682,7 +702,7 @@ export function recordCalcEvent(e: {
     const workKey = w
       ? `${w.shiftStartHour}-${w.shiftEndHour}-${w.unpaidBreakMin}-${w.daysPerWeek}`
       : '';
-    const behaviourKey = b ? `${b.rrspPctBucket}-${b.otHoursBucket}-${b.tipsPctBucket ?? ''}-${b.shiftPremium}` : '';
+    const behaviourKey = b ? `${b.rrspPctBucket}-${b.otHoursBucket}-${b.tipsPctBucket ?? ''}-${b.shiftPremium}-${b.unionDuesBucket ?? ''}${b.ltd ?? ''}${b.otherDeductionsBucket ?? ''}${b.bonusBucket ?? ''}${b.otherIncomeBucket ?? ''}${b.statOrSickPay ?? ''}${b.taxableBenefits ?? ''}${b.rsuBucket ?? ''}${b.matchPolicy ?? ''}${b.tipsPaid ?? ''}` : '';
     const key = `${source}|${e.mode}|${e.province}|${bracket}|${e.industry ?? ''}|${workKey}|${behaviourKey}|${e.intent ?? ''}|${e.expectation ?? ''}|${e.workArrangement ?? ''}|${e.ageBand ?? ''}|${e.viewedReport ? 'r' : ''}|${e.productInterest ?? ''}|${e.tenureBand ?? ''}${e.unionMember ?? ''}${e.employerSize ?? ''}${e.vacationBand ?? ''}|${e.payChange ? `${e.payChange.direction}-${e.payChange.pctBucket}` : ''}|${hood?.fsa ?? ''}${hood?.source ?? ''}|${reverseTargetBucket(e.reverseTargetMonthly)}|${e.spouseClaim ? 's' : ''}`;
     if (sentThisPageLoad.has(key)) return;
     sentThisPageLoad.add(key);
@@ -711,6 +731,16 @@ export function recordCalcEvent(e: {
         premium_rate_bucket: b?.premiumRateBucket ?? null,
         ot_hours_bucket: b?.otHoursBucket ?? null,
         tips_pct_bucket: b?.tipsPctBucket ?? null,
+        union_dues_bucket: b?.unionDuesBucket ?? null,
+        ltd: b?.ltd == null ? null : b.ltd ? 1 : 0,
+        other_deductions_bucket: b?.otherDeductionsBucket ?? null,
+        bonus_bucket: b?.bonusBucket ?? null,
+        other_income_bucket: b?.otherIncomeBucket ?? null,
+        stat_or_sick_pay: b?.statOrSickPay == null ? null : b.statOrSickPay ? 1 : 0,
+        taxable_benefits: b?.taxableBenefits == null ? null : b.taxableBenefits ? 1 : 0,
+        rsu_bucket: b?.rsuBucket ?? null,
+        match_policy: b?.matchPolicy ?? null,
+        tips_paid: b?.tipsPaid ?? null,
         pay_frequency: b?.payFrequency ?? null,
         viewed_report: e.viewedReport ?? false,
         schema_version: SCHEMA_VERSION,

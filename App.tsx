@@ -13,6 +13,7 @@ import {
   bucketPremiumRate,
   bucketOtHours,
   bucketTipsPct,
+  bucketShare,
   buildPayChange,
   deriveEmploymentShape,
   noteInputEdit,
@@ -150,6 +151,34 @@ function buildBehaviour(
         ? bucketTipsPct((tipsThisPeriod / gross) * 100)
         : null,
     payFrequency: inputs.payFrequency ?? null,
+    ...stubExtras(mode, inputs, timesheet, gross, results),
+  };
+}
+
+/**
+ * Pay-stub extras the visitor typed, as ranges. Amounts are per pay period in
+ * the inputs, so each is taken as a share of the period's gross; RSUs are
+ * annual, so they are a share of annual gross. Fields a mode does not have
+ * stay null rather than 0, so "not asked" never reads as "answered none".
+ */
+function stubExtras(mode: CalculationMode, inputs: any, timesheet: TimesheetInputs, gross: number, results: CalculationResult) {
+  const pct = (v: number | undefined) => (gross > 0 ? ((v || 0) / gross) * 100 : null);
+  const ded = inputs.deductions;
+  const add = mode === CalculationMode.TIMESHEET ? null : inputs.additionalIncome;
+  const income = ['0', 'under-10', '10-25', '25-plus'] as const;
+  return {
+    unionDuesBucket: ded ? bucketShare(pct(ded.unionDues), [1, 2], ['0', 'under-1', '1-2', '2-plus'] as const) : null,
+    ltd: ded ? (ded.ltdPremium || 0) > 0 : null,
+    otherDeductionsBucket: ded ? bucketShare(pct(ded.otherDeductions), [2, 5], ['0', 'under-2', '2-5', '5-plus'] as const) : null,
+    bonusBucket: add ? bucketShare(pct(add.bonus), [10, 25], [...income]) : null,
+    otherIncomeBucket: add ? bucketShare(pct(add.otherIncome), [10, 25], [...income]) : null,
+    statOrSickPay: add ? (add.statHolidayPay || 0) + (add.sickPay || 0) > 0 : null,
+    taxableBenefits: add ? (add.taxableBenefits || 0) > 0 : null,
+    rsuBucket: mode === CalculationMode.ANNUAL && results.grossPayAnnual > 0
+      ? bucketShare(((inputs.equityVestingAnnual || 0) / results.grossPayAnnual) * 100, [10, 25], [...income]) : null,
+    matchPolicy: (inputs.rrspEmployerMatch || 0) > 0 || inputs.rrspMatchPolicy
+      ? (['equal', 'half', 'custom', 'none'].includes(inputs.rrspMatchPolicy) ? inputs.rrspMatchPolicy : null) : null,
+    tipsPaid: mode === CalculationMode.TIMESHEET ? (timesheet.tipsPaid ?? null) : null,
   };
 }
 

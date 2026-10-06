@@ -40,7 +40,10 @@ create table if not exists events (
   -- amount), 0 when not. Never the spouse's income. Added in production by ALTER on 2026-09-26.
   spouse_claim integer,
   time_to_result_bucket text,
-  edits_bucket text
+  edits_bucket text,
+  union_dues_bucket text, ltd integer, other_deductions_bucket text, bonus_bucket text,
+  other_income_bucket text, stat_or_sick_pay integer, taxable_benefits integer, rsu_bucket text,
+  match_policy text, tips_paid text
 );
 create index if not exists idx_events_created on events(created_at);
 create index if not exists idx_events_session on events(session_id);
