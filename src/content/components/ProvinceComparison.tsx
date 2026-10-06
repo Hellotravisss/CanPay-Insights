@@ -5,6 +5,7 @@ import { calculateFromAnnualSalary } from '../../../utils/taxEngine';
 import { PayFrequency } from '../../../types';
 import SEO from '../../../components/SEO';
 import CompareMoveOffer from '../../../components/CompareMoveOffer';
+import { recordCalcEvent } from '../../../lib/telemetry';
 
 interface ProvinceComparisonProps {
   onBackToBlog: () => void;
@@ -69,6 +70,8 @@ const ProvinceComparison: React.FC<ProvinceComparisonProps> = ({ onBackToBlog })
   const handleStartComparison = () => {
     if (selectedProvinces.length >= 2) {
       setIsComparing(true);
+      // Relocation intent, measured directly: which provinces, at what income range.
+      recordCalcEvent({ mode: 'annual', province: selectedProvinces[0], annualIncome: annualSalary, lang: 'en', comparedProvinces: selectedProvinces });
     }
   };
 

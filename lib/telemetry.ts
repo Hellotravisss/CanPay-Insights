@@ -685,6 +685,8 @@ export function recordCalcEvent(e: {
   spouseClaim?: boolean | null;
   /** A free offer comparison, as ranges: B's salary against A's, the province B is in when it differs, and vacation days more/same/fewer. Never the salaries. */
   offer?: { changeBucket: string; toProvince: string | null; vacationDiff: 'more' | 'same' | 'fewer' } | null;
+  /** The provinces picked on /compare-provinces, names only. */
+  comparedProvinces?: string[] | null;
 }) {
   if (!e.annualIncome || e.annualIncome <= 0 || !e.province) return;
   if (isLikelyBot() || isOptedOut()) return;
@@ -705,7 +707,7 @@ export function recordCalcEvent(e: {
       ? `${w.shiftStartHour}-${w.shiftEndHour}-${w.unpaidBreakMin}-${w.daysPerWeek}`
       : '';
     const behaviourKey = b ? `${b.rrspPctBucket}-${b.otHoursBucket}-${b.tipsPctBucket ?? ''}-${b.shiftPremium}-${b.unionDuesBucket ?? ''}${b.ltd ?? ''}${b.otherDeductionsBucket ?? ''}${b.bonusBucket ?? ''}${b.otherIncomeBucket ?? ''}${b.statOrSickPay ?? ''}${b.taxableBenefits ?? ''}${b.rsuBucket ?? ''}${b.matchPolicy ?? ''}${b.tipsPaid ?? ''}` : '';
-    const key = `${source}|${e.mode}|${e.province}|${bracket}|${e.industry ?? ''}|${workKey}|${behaviourKey}|${e.intent ?? ''}|${e.expectation ?? ''}|${e.workArrangement ?? ''}|${e.ageBand ?? ''}|${e.viewedReport ? 'r' : ''}|${e.productInterest ?? ''}|${e.tenureBand ?? ''}${e.unionMember ?? ''}${e.employerSize ?? ''}${e.vacationBand ?? ''}|${e.payChange ? `${e.payChange.direction}-${e.payChange.pctBucket}` : ''}|${hood?.fsa ?? ''}${hood?.source ?? ''}|${reverseTargetBucket(e.reverseTargetMonthly)}|${e.spouseClaim ? 's' : ''}|${e.offer ? `${e.offer.changeBucket}${e.offer.toProvince ?? ''}${e.offer.vacationDiff}` : ''}`;
+    const key = `${source}|${e.mode}|${e.province}|${bracket}|${e.industry ?? ''}|${workKey}|${behaviourKey}|${e.intent ?? ''}|${e.expectation ?? ''}|${e.workArrangement ?? ''}|${e.ageBand ?? ''}|${e.viewedReport ? 'r' : ''}|${e.productInterest ?? ''}|${e.tenureBand ?? ''}${e.unionMember ?? ''}${e.employerSize ?? ''}${e.vacationBand ?? ''}|${e.payChange ? `${e.payChange.direction}-${e.payChange.pctBucket}` : ''}|${hood?.fsa ?? ''}${hood?.source ?? ''}|${reverseTargetBucket(e.reverseTargetMonthly)}|${e.spouseClaim ? 's' : ''}|${e.comparedProvinces?.join(',') ?? ''}|${e.offer ? `${e.offer.changeBucket}${e.offer.toProvince ?? ''}${e.offer.vacationDiff}` : ''}`;
     if (sentThisPageLoad.has(key)) return;
     sentThisPageLoad.add(key);
 
@@ -784,6 +786,7 @@ export function recordCalcEvent(e: {
         is_returning: isReturning(),
         reverse_target_bucket: reverseTargetBucket(e.reverseTargetMonthly),
         spouse_claim: e.spouseClaim == null ? null : e.spouseClaim ? 1 : 0,
+        compared_provinces: e.comparedProvinces?.length ? [...e.comparedProvinces].sort().join('|') : null,
         offer_change_bucket: e.offer?.changeBucket ?? null,
         offer_to_province: e.offer?.toProvince ?? null,
         offer_vacation_diff: e.offer?.vacationDiff ?? null,
