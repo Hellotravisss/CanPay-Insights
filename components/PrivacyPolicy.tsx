@@ -75,7 +75,7 @@ const PrivacyPolicy: React.FC<PrivacyPolicyProps> = () => {
           <li>your typical work pattern when you use the shift or timesheet calculators (usual start and end hour, days per week, average shift length, unpaid break) — never the calendar dates you worked;</li>
           <li>broad ranges for entries you make (RRSP contribution as a share of pay, shift premium, overtime hours, tips as a share of pay, union dues, other deductions, bonus, commission or other income, and restricted stock units as a share of pay), whether you entered a disability-insurance premium, holiday or sick pay, or a taxable benefit (yes or no), how your employer matches RRSP contributions, and whether your tips are paid through payroll — always ranges or yes/no, never the amounts;</li>
           <li>if you use the free offer comparison, how offer B’s salary differs from offer A’s as a range (such as “up 5–10%”), the province of offer B when it is a different province, and whether it has more, the same or fewer vacation days — never either salary;</li>
-          <li>on the province comparison page, which provinces you compare (names only) with your salary as a range;</li>
+          <li>on the province comparison page, which provinces you compare (names only) with your salary as a range, and, if you answer, whether you are planning to move, might, or are just curious;</li>
           <li>if you use “find the salary” to work back from a take-home amount, the monthly take-home you asked for, as a range (such as “$4k–$5k”) — never the amount;</li>
           <li>whether you ticked “I support a spouse or common-law partner” (yes or no) — never your spouse’s income;</li>
           <li>how long it took from opening the page to your first result, as a range (under 10 seconds, 10–30, 30–90, over 90), and how many times you changed the form before a result, as a range (1–3, 4–10, 11–30, over 30) — never timestamps, keystrokes or where you clicked;</li>
@@ -162,8 +162,8 @@ const PrivacyPolicy: React.FC<PrivacyPolicyProps> = () => {
         <p>
           <strong className="text-slate-800">Local storage on your device</strong> holds your language choice, your calculator
           settings when signed out, the calculations and timesheet entries you save while signed out, the
-          industry you last compared against, the telemetry opt-out flag, the remembered postal-code prefix and the
-          “has calculated before” flag, plus three entries for page-view counting (below): a session number
+          industry you last compared against, the telemetry opt-out flag, the remembered postal-code prefix, which of the optional questions you have already answered (so you are
+          not asked twice; not your answers) and the “has calculated before” flag, plus three entries for page-view counting (below): a session number
           for the tab (<code>_av_sid</code>), a “visited before” flag (<code>_av_seen</code>) and an off switch
           (<code>_av_off</code>). The tab’s session storage also holds the page your visit started on, and is
           cleared when you close the tab. None of it identifies you, it stays on your device, and clearing your

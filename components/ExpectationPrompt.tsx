@@ -391,6 +391,18 @@ const EMOJI: Record<string, string> = {
   'new-job': '💼', raise: '📈', moving: '📦', budgeting: '🧾', 'tax-filing': '🗂️', curious: '🤔',
 };
 
+/** Questions this browser has already answered, kept on the device only, so a
+ *  returning visitor is asked something new. The answers themselves are not
+ *  stored here and nothing links them across visits on the server. */
+const ASKED_KEY = 'canpay_asked';
+function readAsked(): QKey[] {
+  try { const v = JSON.parse(localStorage.getItem(ASKED_KEY) || '[]'); return Array.isArray(v) ? v : []; } catch { return []; }
+}
+function rememberAsked(k: QKey) {
+  try { const v = readAsked(); if (!v.includes(k)) localStorage.setItem(ASKED_KEY, JSON.stringify([...v, k])); } catch { /* private mode */ }
+}
+const pickFrom = (keys: QKey[]) => keys[Math.floor(Math.random() * keys.length)];
+
 export default function ExpectationPrompt({
   mode,
   province,
@@ -418,12 +430,18 @@ export default function ExpectationPrompt({
    * payoff is computed from the tax engine instead. Never a fabricated share.
    */
   const [asked, setAsked] = useState<QKey[]>([]);
-  const [current, setCurrent] = useState<QKey>(() => POOL[Math.floor(Math.random() * POOL.length)].key);
+  // A returning visitor gets a question they have not answered; once they have
+  // answered every one, the prompt stays out of the way.
+  const [current, setCurrent] = useState<QKey | null>(() => {
+    const before = typeof window === 'undefined' ? [] : readAsked();
+    const left = POOL.map((x) => x.key).filter((k) => !before.includes(k));
+    return left.length ? pickFrom(left) : null;
+  });
   const [payoff, setPayoff] = useState<string | null>(null);
   const [busy, setBusy] = useState(false);
   const [done, setDone] = useState(false);
 
-  if (!annualIncome || annualIncome <= 0) return null;
+  if (!annualIncome || annualIncome <= 0 || current === null) return null;
 
   const q = POOL.find((x) => x.key === current)!;
 
@@ -439,37 +457,45 @@ export default function ExpectationPrompt({
     return t.payRate.replace('{r}', `${rate}%`).replace('{p}', province);
   };
 
-  const answer = async (value: string) => {
+  const answerFor = async (key: QKey, value: string) => {
     setBusy(true);
     recordCalcEvent({
       mode: mode as CalcMode, province, annualIncome, lang,
-      expectation: current === 'expectation' ? (value as Expectation) : null,
-      workArrangement: current === 'work_arrangement' ? (value as WorkArrangement) : null,
-      ageBand: current === 'age_band' ? (value as AgeBand) : null,
-      tenureBand: current === 'tenure_band' ? (value as TenureBand) : null,
-      unionMember: current === 'union_member' ? (value as UnionMember) : null,
-      employerSize: current === 'employer_size' ? (value as EmployerSize) : null,
-      vacationBand: current === 'vacation_band' ? (value as VacationBand) : null,
-      intent: current === 'intent' ? (value as Intent) : null,
+      expectation: key === 'expectation' ? (value as Expectation) : null,
+      workArrangement: key === 'work_arrangement' ? (value as WorkArrangement) : null,
+      ageBand: key === 'age_band' ? (value as AgeBand) : null,
+      tenureBand: key === 'tenure_band' ? (value as TenureBand) : null,
+      unionMember: key === 'union_member' ? (value as UnionMember) : null,
+      employerSize: key === 'employer_size' ? (value as EmployerSize) : null,
+      vacationBand: key === 'vacation_band' ? (value as VacationBand) : null,
+      intent: key === 'intent' ? (value as Intent) : null,
     });
     let line: string | null = null;
     try {
-      const r = await fetch(`/api/peers?q=${current}`, { cache: 'no-store' });
+      const r = await fetch(`/api/peers?q=${key}`, { cache: 'no-store' });
       const d = (await r.json()) as { ready?: boolean; n?: number; dist?: { k: string; pct: number }[] };
       if (d.ready && d.dist) {
         const mine = d.dist.find((x) => x.k === value);
         if (mine) line = t.payPeers.replace('{pct}', `${mine.pct}%`).replace('{n}', String(d.n));
       }
     } catch { /* fall through to the engine payoff */ }
-    setPayoff(line ?? engineFallback(current, value));
-    setAsked((a) => [...a, current]);
+    setPayoff(line ?? engineFallback(key, value));
+    rememberAsked(key);
+    setAsked((a) => [...a, key]);
     setBusy(false);
   };
 
+  const answer = (value: string) => answerFor(current, value);
+
+  // The next question, shown straight under the payoff. A click on "one more"
+  // was the barrier: 18% of answering visits went on to a second question, but
+  // those who did often answered every one.
+  const before = typeof window === 'undefined' ? [] : readAsked();
+  const upcoming = POOL.filter((x) => x.key !== current && !asked.includes(x.key) && !before.includes(x.key));
+
   const next = () => {
-    const left = POOL.filter((x) => x.key !== current && !asked.includes(x.key));
-    if (!left.length) { setDone(true); return; }
-    setCurrent(left[Math.floor(Math.random() * left.length)].key);
+    if (!upcoming.length) { setDone(true); return; }
+    setCurrent(pickFrom(upcoming.map((x) => x.key)));
     setPayoff(null);
   };
 
@@ -486,12 +512,25 @@ export default function ExpectationPrompt({
           <div className="rounded-lg bg-slate-50 px-4 py-3">
             <p className="text-sm leading-6 text-slate-800">{payoff}</p>
           </div>
-          <div className="mt-3 flex flex-wrap items-center gap-2">
-            <button onClick={next} className={pill}>{t.oneMore}</button>
-            <button onClick={() => setDone(true)} className="px-2 py-2 text-sm text-slate-500 hover:text-slate-600">
-              {t.noThanks}
-            </button>
-          </div>
+          {upcoming.length ? (
+            <div className="mt-3">
+              <p className="text-sm font-medium text-slate-700">{upcoming[0].key === 'intent' ? ti.prompt : t[upcoming[0].prompt]}</p>
+              <div className="mt-2 flex flex-wrap gap-2">
+                {upcoming[0].options.map((o) => (
+                  <button key={o} disabled={busy} className={pill}
+                    onClick={() => { setCurrent(upcoming[0].key); setPayoff(null); void answerFor(upcoming[0].key, o); }}>
+                    {EMOJI[o] && <span aria-hidden="true">{EMOJI[o]}</span>}
+                    {upcoming[0].key === 'intent' ? ti[o] : t[o]}
+                  </button>
+                ))}
+                <button onClick={() => setDone(true)} className="px-2 py-2 text-sm text-slate-500 hover:text-slate-600">
+                  {t.noThanks}
+                </button>
+              </div>
+            </div>
+          ) : (
+            <p className="mt-3 text-sm font-medium text-emerald-700">✓ {t.thanks}</p>
+          )}
         </>
       ) : (
         <>

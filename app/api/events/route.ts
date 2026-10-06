@@ -23,7 +23,7 @@ const COLS = [
   'tips_pct_bucket', 'pay_frequency',
   'union_dues_bucket', 'ltd', 'other_deductions_bucket', 'bonus_bucket', 'other_income_bucket',
   'stat_or_sick_pay', 'taxable_benefits', 'rsu_bucket', 'match_policy', 'tips_paid',
-  'offer_change_bucket', 'offer_to_province', 'offer_vacation_diff', 'compared_provinces', 'viewed_report', 'entry_path', 'referrer_path', 'local_hour', 'local_dow',
+  'offer_change_bucket', 'offer_to_province', 'offer_vacation_diff', 'compared_provinces', 'move_intent', 'viewed_report', 'entry_path', 'referrer_path', 'local_hour', 'local_dow',
   'session_id', 'seq', 'industry', 'industry_rank', 'industry_returning', 'intent', 'expectation',
   'work_arrangement', 'age_band', 'employment_shape', 'product_interest', 'is_registered', 'from_history',
   'tenure_band', 'union_member', 'employer_size', 'vacation_band',
@@ -97,6 +97,7 @@ export async function POST(request: Request) {
   only('offer_change_bucket', ['down-10-plus', 'down-0-10', 'up-0-5', 'up-5-10', 'up-10-20', 'up-20-plus']);
   only('offer_vacation_diff', ['more', 'same', 'fewer']);
   only('offer_to_province', PROVINCE_NAMES);
+  only('move_intent', ['planning', 'maybe', 'curious']);
   { const parts = String(body.compared_provinces ?? '').split('|');
     body.compared_provinces = parts.length >= 2 && parts.length <= 6 && parts.every((x) => PROVINCE_NAMES.includes(x)) ? parts.join('|') : null; }
   for (const k of ['ltd', 'stat_or_sick_pay', 'taxable_benefits']) body[k] = body[k] === 1 || body[k] === 0 ? body[k] : null;

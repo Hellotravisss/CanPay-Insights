@@ -72,7 +72,7 @@ const PrivacyPolicyFr: React.FC = () => {
           <li>votre horaire type lorsque vous utilisez les calculateurs de quarts ou de feuilles de temps (heures habituelles de début et de fin, jours par semaine, durée moyenne d’un quart, pause non payée) — jamais les dates réellement travaillées ;</li>
           <li>des fourchettes larges pour vos saisies (cotisation REER en part de la paie, prime de quart, heures supplémentaires, pourboires en part de la paie, cotisations syndicales, autres retenues, prime, commissions ou autres revenus, et unités d’actions restreintes en part de la paie), si vous avez saisi une prime d’assurance invalidité, une paie de jour férié ou de maladie ou un avantage imposable (oui ou non), le mode de contribution de l’employeur au REER et si vos pourboires passent par la paie — toujours des fourchettes ou oui/non, jamais les montants ;</li>
           <li>si vous utilisez la comparaison d’offres gratuite, l’écart entre le salaire de l’offre B et celui de l’offre A sous forme de tranche (par exemple « hausse de 5 à 10 % »), la province de l’offre B si elle diffère, et si elle compte plus, autant ou moins de jours de vacances — jamais aucun des deux salaires ;</li>
-          <li>sur la page de comparaison des provinces, les provinces que vous comparez (leurs noms seulement), avec votre salaire sous forme de tranche ;</li>
+          <li>sur la page de comparaison des provinces, les provinces que vous comparez (leurs noms seulement), avec votre salaire sous forme de tranche, et, si vous répondez, si vous prévoyez de déménager, peut-être, ou par simple curiosité ;</li>
           <li>si vous utilisez « trouver le salaire » pour partir d’un montant net, le montant net mensuel demandé, sous forme de tranche (par exemple « 4 k$–5 k$ ») — jamais le montant ;</li>
           <li>si vous avez coché « Je subviens aux besoins d’un époux ou conjoint de fait » (oui ou non) — jamais le revenu de votre époux ou conjoint ;</li>
           <li>le temps écoulé entre l’ouverture de la page et votre premier résultat, sous forme de tranche (moins de 10 secondes, 10 à 30, 30 à 90, plus de 90), et le nombre de fois où vous avez modifié le formulaire avant un résultat, sous forme de tranche (1 à 3, 4 à 10, 11 à 30, plus de 30) — jamais d’horodatage, de frappes ni d’endroits cliqués ;</li>
@@ -163,7 +163,8 @@ const PrivacyPolicyFr: React.FC = () => {
         <p>
           <strong className="text-slate-800">Le stockage local de votre appareil</strong> contient votre langue, vos réglages de
           calculateur hors connexion, les calculs et entrées de feuille de temps enregistrés hors connexion,
-          le secteur auquel vous vous êtes comparé en dernier, l’indicateur de refus de télémétrie, le préfixe postal mémorisé et
+          le secteur auquel vous vous êtes comparé en dernier, l’indicateur de refus de télémétrie, le préfixe postal mémorisé,
+          les questions facultatives auxquelles vous avez déjà répondu (pour ne pas les reposer ; pas vos réponses) et
           l’indicateur « a déjà calculé », ainsi que trois entrées pour le comptage des pages vues (ci-dessous) :
           un numéro de session pour l’onglet (<code>_av_sid</code>), un indicateur « déjà venu »
           (<code>_av_seen</code>) et un interrupteur (<code>_av_off</code>). Le stockage de session de l’onglet
