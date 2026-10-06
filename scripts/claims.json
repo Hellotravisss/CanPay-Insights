@@ -1982,6 +1982,20 @@
    "backing": "manual",
    "note": "Re-read components/FakeDoors.tsx: the offer comparison no longer calls /api/checkout; only the relocation report does. Stripe product list in app/api/checkout still accepts offer-compare but nothing in the UI calls it.",
    "reviewed": "2026-10-06"
+  },
+  {
+   "page": "/privacy",
+   "text": "on the province comparison page, which provinces you compare (names only) with your salary as a range;",
+   "backing": "manual",
+   "note": "Re-read src/content/components/ProvinceComparison.tsx handleStartComparison and lib/telemetry.ts: only the selected province names (sorted, | joined) and the income bracket are sent; app/api/events/route.ts keeps 2-6 valid province names, else null.",
+   "reviewed": "2026-10-06"
+  },
+  {
+   "page": "/fr/confidentialite",
+   "text": "sur la page de comparaison des provinces, les provinces que vous comparez (leurs noms seulement), avec votre salaire sous forme de tranche;",
+   "backing": "manual",
+   "note": "Re-read src/content/components/ProvinceComparison.tsx handleStartComparison and lib/telemetry.ts: only the selected province names (sorted, | joined) and the income bracket are sent; app/api/events/route.ts keeps 2-6 valid province names, else null.",
+   "reviewed": "2026-10-06"
   }
  ]
 }
