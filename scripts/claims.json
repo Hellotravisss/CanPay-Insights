@@ -72,8 +72,9 @@
   },
   {
    "page": "/privacy",
-   "text": "Local storage on your device holds your language choice, your calculator settings when signed out, the calculations and timesheet entries you save while signed out, the industry you last compared against, the telemetry opt-out flag, the remembered postal-code prefix and the “has calculated before” flag, plus three entries for page-view counting (below): a session number for the tab ( _av_sid ), a “visited before” flag ( _av_seen ) and an off switch ( _av_off ).",
-   "backing": "check:optout-silences-site"
+   "text": "Local storage on your device holds your language choice, your calculator settings when signed out, the calculations and timesheet entries you save while signed out, the industry you last compared against, the telemetry opt-out flag, the remembered postal-code prefix, which of the optional questions you have already answered (so you are not asked twice; not your answers) and the “has calculated before” flag, plus three entries for page-view counting (below): a session number for the tab ( _av_sid ), a “visited before” flag ( _av_seen ) and an off switch ( _av_off ).",
+   "backing": "check:optout-silences-site",
+   "reviewed": "2026-10-06"
   },
   {
    "page": "/privacy",
@@ -1985,16 +1986,16 @@
   },
   {
    "page": "/privacy",
-   "text": "on the province comparison page, which provinces you compare (names only) with your salary as a range;",
+   "text": "on the province comparison page, which provinces you compare (names only) with your salary as a range, and, if you answer, whether you are planning to move, might, or are just curious;",
    "backing": "manual",
-   "note": "Re-read src/content/components/ProvinceComparison.tsx handleStartComparison and lib/telemetry.ts: only the selected province names (sorted, | joined) and the income bracket are sent; app/api/events/route.ts keeps 2-6 valid province names, else null.",
+   "note": "Re-read src/content/components/ProvinceComparison.tsx handleStartComparison and lib/telemetry.ts: only the selected province names (sorted, | joined) and the income bracket are sent; app/api/events/route.ts keeps 2-6 valid province names, else null. Updated 2026-10-06: re-read components/ExpectationPrompt.tsx (canpay_asked holds question keys only) and components/MoveIntentPrompt.tsx (planning/maybe/curious label only).",
    "reviewed": "2026-10-06"
   },
   {
    "page": "/fr/confidentialite",
-   "text": "sur la page de comparaison des provinces, les provinces que vous comparez (leurs noms seulement), avec votre salaire sous forme de tranche;",
+   "text": "sur la page de comparaison des provinces, les provinces que vous comparez (leurs noms seulement), avec votre salaire sous forme de tranche, et, si vous répondez, si vous prévoyez de déménager, peut-être, ou par simple curiosité;",
    "backing": "manual",
-   "note": "Re-read src/content/components/ProvinceComparison.tsx handleStartComparison and lib/telemetry.ts: only the selected province names (sorted, | joined) and the income bracket are sent; app/api/events/route.ts keeps 2-6 valid province names, else null.",
+   "note": "Re-read src/content/components/ProvinceComparison.tsx handleStartComparison and lib/telemetry.ts: only the selected province names (sorted, | joined) and the income bracket are sent; app/api/events/route.ts keeps 2-6 valid province names, else null. Updated 2026-10-06: re-read components/ExpectationPrompt.tsx (canpay_asked holds question keys only) and components/MoveIntentPrompt.tsx (planning/maybe/curious label only).",
    "reviewed": "2026-10-06"
   },
   {
