@@ -207,23 +207,8 @@
   },
   {
    "page": "/about",
-   "text": "We sell two optional paid reports (a province-move report and a job-offer comparison, $9 each) that use the same engine as the free calculator.",
-   "backing": "check:report-price-9"
-  },
-  {
-   "page": "/about",
    "text": "Our 2026 take-home pay figures — net pay, federal and provincial tax, CPP/CPP2, EI and Quebec QPP/QPIP for every province and territory across $30k–$200k — are published as an open dataset under a CC BY 4.0 licence.",
    "backing": "gate:audit:dataset"
-  },
-  {
-   "page": "/terms",
-   "text": "We sell two digital reports (currently the Province Move Report and the Offer Comparison), each priced in Canadian dollars at the price shown at checkout, plus any applicable tax.",
-   "backing": "check:products-two"
-  },
-  {
-   "page": "/refunds",
-   "text": "Everything on CanPay Insights is free except two digital reports — the Province Move Report and the Offer Comparison — sold for a one-time price in Canadian dollars through Stripe.",
-   "backing": "check:products-two"
   },
   {
    "page": "/refunds",
@@ -1947,6 +1932,55 @@
    "text": "des fourchettes larges pour vos saisies (cotisation REER en part de la paie, prime de quart, heures supplémentaires, pourboires en part de la paie, cotisations syndicales, autres retenues, prime, commissions ou autres revenus, et unités d’actions restreintes en part de la paie), si vous avez saisi une prime d’assurance invalidité, une paie de jour férié ou de maladie ou un avantage imposable (oui ou non), le mode de contribution de l’employeur au REER et si vos pourboires passent par la paie — toujours des fourchettes ou oui/non, jamais les montants;",
    "backing": "manual",
    "note": "Re-read App.tsx stubExtras/buildBehaviour and lib/telemetry.ts: union dues, other deductions, bonus, other income (share of period gross) and RSUs (share of annual gross) leave only as range labels; LTD, stat/sick pay, taxable benefits as 1/0; match policy and tips_paid as fixed labels. app/api/events/route.ts nulls anything outside those labels. No amount is sent.",
+   "reviewed": "2026-10-06"
+  },
+  {
+   "page": "/privacy",
+   "text": "if you use the free offer comparison, how offer B’s salary differs from offer A’s as a range (such as “up 5–10%”), the province of offer B when it is a different province, and whether it has more, the same or fewer vacation days — never either salary;",
+   "backing": "manual",
+   "note": "Re-read components/FakeDoors.tsx showOffer and lib/telemetry.ts offerChangeBucket: only the change range, B province if different, and more/same/fewer vacation leave the browser; app/api/events/route.ts nulls anything else. No salary is sent; the report is built client-side by lib/offerReport.ts.",
+   "reviewed": "2026-10-06"
+  },
+  {
+   "page": "/fr/confidentialite",
+   "text": "si vous utilisez la comparaison d’offres gratuite, l’écart entre le salaire de l’offre B et celui de l’offre A sous forme de tranche (par exemple « hausse de 5 à 10 % »), la province de l’offre B si elle diffère, et si elle compte plus, autant ou moins de jours de vacances — jamais aucun des deux salaires;",
+   "backing": "manual",
+   "note": "Re-read components/FakeDoors.tsx showOffer and lib/telemetry.ts offerChangeBucket: only the change range, B province if different, and more/same/fewer vacation leave the browser; app/api/events/route.ts nulls anything else. No salary is sent; the report is built client-side by lib/offerReport.ts.",
+   "reviewed": "2026-10-06"
+  },
+  {
+   "page": "/about",
+   "text": "We sell one optional paid report (a province-move report, $9); the job-offer comparison is free.",
+   "backing": "manual",
+   "note": "Re-read components/FakeDoors.tsx: the offer comparison no longer calls /api/checkout; only the relocation report does. Stripe product list in app/api/checkout still accepts offer-compare but nothing in the UI calls it.",
+   "reviewed": "2026-10-06"
+  },
+  {
+   "page": "/terms",
+   "text": "We sell one digital report (currently the Province Move Report), priced in Canadian dollars at the price shown at checkout, plus any applicable tax.",
+   "backing": "manual",
+   "note": "Re-read components/FakeDoors.tsx: the offer comparison no longer calls /api/checkout; only the relocation report does. Stripe product list in app/api/checkout still accepts offer-compare but nothing in the UI calls it.",
+   "reviewed": "2026-10-06"
+  },
+  {
+   "page": "/terms",
+   "text": "The Offer Comparison is free since October 6, 2026.",
+   "backing": "manual",
+   "note": "Re-read components/FakeDoors.tsx: the offer comparison no longer calls /api/checkout; only the relocation report does. Stripe product list in app/api/checkout still accepts offer-compare but nothing in the UI calls it.",
+   "reviewed": "2026-10-06"
+  },
+  {
+   "page": "/refunds",
+   "text": "Everything on CanPay Insights is free except one digital report — the Province Move Report — sold for a one-time price in Canadian dollars through Stripe.",
+   "backing": "manual",
+   "note": "Re-read components/FakeDoors.tsx: the offer comparison no longer calls /api/checkout; only the relocation report does. Stripe product list in app/api/checkout still accepts offer-compare but nothing in the UI calls it.",
+   "reviewed": "2026-10-06"
+  },
+  {
+   "page": "/refunds",
+   "text": "The Offer Comparison has been free since October 6, 2026; earlier purchases of it are covered by this page too.",
+   "backing": "manual",
+   "note": "Re-read components/FakeDoors.tsx: the offer comparison no longer calls /api/checkout; only the relocation report does. Stripe product list in app/api/checkout still accepts offer-compare but nothing in the UI calls it.",
    "reviewed": "2026-10-06"
   }
  ]
