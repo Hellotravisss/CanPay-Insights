@@ -2004,6 +2004,48 @@
    "backing": "manual",
    "note": "Counted 2026-10-06: 24 expectation answers in total (events.expectation not null), too few for any licensed cut at the k>=20 floor once split by province and income. The sentence says it is still building.",
    "reviewed": "2026-10-06"
+  },
+  {
+   "page": "/privacy",
+   "text": "When you create an account we send one welcome email about the account.",
+   "backing": "manual",
+   "note": "Checked 2026-10-07: lib/welcome.ts queueWelcome is called only in signInAs's new-user branch (lib/auth/core.ts); content lists the account's features only.",
+   "reviewed": "2026-10-07"
+  },
+  {
+   "page": "/privacy",
+   "text": "Tax-change emails, which tell you when new CRA rates change your take-home pay, are off until you turn them on in the account menu; we record when you turned them on.",
+   "backing": "manual",
+   "note": "Checked 2026-10-07: /api/me/alerts PUT sets rate_alerts=1 and rate_alerts_at=now; column default 0 (cloudflare/schema-auth.sql); UserMenu switch is the only caller.",
+   "reviewed": "2026-10-07"
+  },
+  {
+   "page": "/privacy",
+   "text": "Every such email has a one-click unsubscribe.",
+   "backing": "manual",
+   "note": "Checked 2026-10-07: Welcome email carries List-Unsubscribe + List-Unsubscribe-Post (RFC 8058) and a footer link; POST /api/email/unsubscribe sets email_opt_out=1. No alert email is sent yet.",
+   "reviewed": "2026-10-07"
+  },
+  {
+   "page": "/privacy",
+   "text": "Sign-in links and receipts are sent because you ask for them and are not affected by unsubscribing.",
+   "backing": "manual",
+   "note": "Checked 2026-10-07: Magic-link (app/api/auth/magic) and report emails do not read email_opt_out; only welcome/alerts honour it.",
+   "reviewed": "2026-10-07"
+  },
+  {
+   "page": "/fr/confidentialite",
+   "text": "Les courriels de changement fiscal, qui vous préviennent quand les nouveaux taux de l’ARC changent votre salaire net, restent désactivés tant que vous ne les activez pas dans le menu du compte; nous notons le moment où vous les activez.",
+   "backing": "manual",
+   "note": "Checked 2026-10-07: /api/me/alerts PUT sets rate_alerts=1 and rate_alerts_at=now; column default 0 (cloudflare/schema-auth.sql); UserMenu switch is the only caller.",
+   "reviewed": "2026-10-07"
+  },
+  {
+   "page": "/fr/confidentialite",
+   "text": "Les liens de connexion et les reçus sont envoyés parce que vous les demandez et ne sont pas touchés par le désabonnement.",
+   "backing": "manual",
+   "note": "Checked 2026-10-07: Magic-link (app/api/auth/magic) and report emails do not read email_opt_out; only welcome/alerts honour it.",
+   "reviewed": "2026-10-07"
   }
  ]
 }
