@@ -15,7 +15,7 @@ const PrivacyPolicyFr: React.FC = () => {
       backLabel="Retour à l’accueil"
       footnote="Les calculs sont des estimations fondées sur les tranches d’imposition 2026 et les normes du travail provinciales."
       title="Politique de confidentialité de CanPay Insights"
-      effective="En vigueur le 6 octobre 2026 (remplace la version du 28 septembre 2026)"
+      effective="En vigueur le 7 octobre 2026 (remplace la version du 6 octobre 2026)"
       links={[
         { href: '/privacy', label: 'English version' },
         { href: '/terms', label: 'Conditions d’utilisation (anglais)' },
@@ -204,6 +204,14 @@ const PrivacyPolicyFr: React.FC = () => {
           recevons le nom, l’adresse courriel et la photo de profil que ce fournisseur partage ; avec un lien
           par courriel, seulement votre adresse courriel. Nous conservons vos calculs enregistrés, vos feuilles de temps et vos
           réglages pour qu’ils vous suivent d’un appareil à l’autre.
+        </p>
+        <p>
+          <strong className="text-slate-800">Courriels aux titulaires de compte.</strong> À la création d’un compte,
+          nous envoyons un seul courriel de bienvenue au sujet du compte. Les courriels de changement fiscal, qui
+          vous préviennent quand les nouveaux taux de l’ARC changent votre salaire net, restent désactivés tant que
+          vous ne les activez pas dans le menu du compte ; nous notons le moment où vous les activez. Chacun de ces
+          courriels comporte un lien de désabonnement en un clic. Les liens de connexion et les reçus sont envoyés
+          parce que vous les demandez et ne sont pas touchés par le désabonnement.
         </p>
         <p>
           Si vous achetez un rapport, le paiement est encaissé par Stripe sur la page de Stripe ; nous ne

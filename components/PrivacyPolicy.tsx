@@ -21,7 +21,7 @@ const PrivacyPolicy: React.FC<PrivacyPolicyProps> = () => {
   return (
     <LegalChrome
       title="Privacy Policy for CanPay Insights"
-      effective="Effective date: October 6, 2026 (replaces the version of September 28, 2026)"
+      effective="Effective date: October 7, 2026 (replaces the version of October 6, 2026)"
       links={[
         { href: '/fr/confidentialite', label: 'Version française' },
         { href: '/terms', label: 'Terms of Service' },
@@ -198,6 +198,13 @@ const PrivacyPolicy: React.FC<PrivacyPolicyProps> = () => {
           address and profile picture that provider shares; with an emailed link, only your email address. We store
           your saved calculations, timesheets and settings so they follow you across devices. Sign-in
           providers see that you signed in to our site under their own policies.
+        </p>
+        <p>
+          <strong className="text-slate-800">Emails to account holders.</strong> When you create an account we send one
+          welcome email about the account. Tax-change emails, which tell you when new CRA rates change your
+          take-home pay, are off until you turn them on in the account menu; we record when you turned them on.
+          Every such email has a one-click unsubscribe. Sign-in links and receipts are sent because you ask for
+          them and are not affected by unsubscribing.
         </p>
         <p>
           If you buy a report, payment is taken by Stripe on Stripe’s page; we never see your card number.

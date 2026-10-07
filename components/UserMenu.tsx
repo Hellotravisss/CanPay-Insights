@@ -56,6 +56,21 @@ const UserMenu: React.FC<UserMenuProps> = ({ onSwitchToTimesheet, onLoadCalculat
     return () => window.removeEventListener('scroll', onScroll);
   }, []);
   const [showDeleteConfirm, setShowDeleteConfirm] = useState<string | null>(null);
+
+  /** Rate-change alerts: express consent (CASL), so off until the person turns it on. */
+  const [alerts, setAlerts] = useState<boolean | null>(null);
+  useEffect(() => {
+    if (!isOpen || alerts !== null) return;
+    fetch('/api/me/alerts').then((r) => (r.ok ? r.json() : null)).then((d) => d && setAlerts(!!d.rate_alerts)).catch(() => {});
+  }, [isOpen, alerts]);
+  const toggleAlerts = async () => {
+    const next = !alerts;
+    setAlerts(next);
+    try {
+      const r = await fetch('/api/me/alerts', { method: 'PUT', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ on: next }) });
+      if (!r.ok) throw new Error(String(r.status));
+    } catch { setAlerts(!next); }
+  };
   const menuRef = useRef<HTMLDivElement>(null);
 
   // Close menu when clicking outside
@@ -283,6 +298,22 @@ const UserMenu: React.FC<UserMenuProps> = ({ onSwitchToTimesheet, onLoadCalculat
                 <div>
                   <p className="text-sm font-medium">{t('menu.timesheets')}</p>
                   <p className="text-xs text-slate-500">{t('menu.timesheetsDesc')}</p>
+                </div>
+              </button>
+
+              <button
+                role="switch"
+                aria-checked={!!alerts}
+                onClick={toggleAlerts}
+                disabled={alerts === null}
+                className="w-full flex items-center gap-3 px-3 py-2 text-slate-700 hover:bg-slate-50 rounded-lg transition-colors text-left mt-1 disabled:opacity-60"
+              >
+                <span className={`relative inline-flex h-5 w-9 shrink-0 rounded-full transition-colors ${alerts ? 'bg-red-600' : 'bg-slate-300'}`}>
+                  <span className={`absolute top-0.5 h-4 w-4 rounded-full bg-white shadow transition-all ${alerts ? 'left-[18px]' : 'left-0.5'}`} />
+                </span>
+                <div>
+                  <p className="text-sm font-medium">{t('menu.rateAlerts')}</p>
+                  <p className="text-xs text-slate-500">{t('menu.rateAlertsDesc')}</p>
                 </div>
               </button>
 
