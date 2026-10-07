@@ -50,8 +50,11 @@ export async function unsubUrl(userId: string): Promise<string> {
 
 export function welcomeMessage(opts: { email: string; unsub: string; address: string }) {
   const subject = 'Your CanPay Insights account is ready';
+  const esc = (s: string) => s.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
   const text = [
-    `Your CanPay Insights account is set up for ${opts.email}.`,
+    'Your pay, kept in one place.',
+    '',
+    `Your CanPay Insights account is open, signed in as ${opts.email}.`,
     '',
     'What it keeps for you, on the web and in the iOS app:',
     '- calculations you save, so you can reopen them later',
@@ -70,27 +73,56 @@ export function welcomeMessage(opts: { email: string; unsub: string; address: st
     'info@canpayinsights.ca · canpayinsights.ca',
     `Stop emails from us: ${opts.unsub}`,
   ].join('\n');
-  const esc = (s: string) => s.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
-  const html = `<div style="font-family:-apple-system,Helvetica,Arial,sans-serif;max-width:520px;margin:0 auto;color:#0f172a">
-  <table role="presentation" style="margin:28px 0 6px"><tr>
-    <td><img src="${SITE}/logo.png" width="36" height="36" alt="CanPay Insights" style="border-radius:8px;display:block"></td>
-    <td style="padding-left:10px;font-size:17px;font-weight:800">CanPay <span style="color:#dc2626">Insights</span></td>
+  const today = new Date().toLocaleDateString('en-CA', { day: 'numeric', month: 'long', year: 'numeric', timeZone: 'America/Vancouver' });
+  // Pay-stub layout: the product is about pay, so the account reads like the
+  // top of a stub. Email-safe only: tables, inline styles, Georgia/Courier as
+  // the only "fonts" (web fonts are stripped by Gmail), light scheme pinned.
+  const row = (label: string, value: string, last = false) => `<tr>
+        <td style="padding:13px 0;border-bottom:${last ? '0' : '1px dotted #d6cfc3'};font:15px/1.4 Georgia,'Times New Roman',serif;color:#1c1917">${label}</td>
+        <td align="right" style="padding:13px 0;border-bottom:${last ? '0' : '1px dotted #d6cfc3'};font:12px/1.4 'Courier New',Courier,monospace;color:#78716c;letter-spacing:.04em;text-transform:uppercase">${value}</td>
+      </tr>`;
+  const html = `<!doctype html><html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="color-scheme" content="light"><meta name="supported-color-schemes" content="light"><title>${subject}</title></head>
+<body style="margin:0;padding:0;background:#f3efe8">
+<div style="display:none;max-height:0;overflow:hidden">Saved calculations, timesheets and reports — on the web and in the iOS app.</div>
+<table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="background:#f3efe8"><tr><td align="center" style="padding:32px 14px">
+  <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="max-width:540px;background:#ffffff;border:1px solid #e4ddd1">
+    <tr><td style="height:6px;background:#dc2626;font-size:0;line-height:0">&nbsp;</td></tr>
+    <tr><td style="padding:26px 32px 0">
+      <table role="presentation" cellpadding="0" cellspacing="0"><tr>
+        <td style="background:#ffffff;border-radius:9px"><img src="${SITE}/logo.png" width="38" height="38" alt="CanPay Insights" style="display:block;border-radius:9px"></td>
+        <td style="padding-left:11px;font:800 17px/1 -apple-system,'Segoe UI',Helvetica,Arial,sans-serif;color:#1c1917">CanPay <span style="color:#dc2626">Insights</span></td>
+      </tr></table>
+    </td></tr>
+    <tr><td style="padding:30px 32px 0;font:11px/1 'Courier New',Courier,monospace;letter-spacing:.16em;text-transform:uppercase;color:#a8a29e">Account opened &middot; ${esc(today)}</td></tr>
+    <tr><td style="padding:12px 32px 0;font:400 32px/1.15 Georgia,'Times New Roman',serif;color:#1c1917">Your pay, kept in one&nbsp;place.</td></tr>
+    <tr><td style="padding:12px 32px 0;font:14px/1.5 -apple-system,'Segoe UI',Helvetica,Arial,sans-serif;color:#57534e">Signed in as <span style="color:#1c1917">${esc(opts.email)}</span></td></tr>
+    <tr><td style="padding:28px 32px 0">
+      <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="border-top:2px dashed #d6cfc3">
+        <tr><td colspan="2" style="padding:16px 0 4px;font:11px/1 'Courier New',Courier,monospace;letter-spacing:.16em;text-transform:uppercase;color:#a8a29e">What your account keeps</td></tr>
+        ${row('Calculations you save', 'Reopen anytime')}
+        ${row('Timesheets', 'Every device')}
+        ${row('Reports you buy', 'Always in My Reports', true)}
+      </table>
+    </td></tr>
+    <tr><td style="padding:18px 32px 0">
+      <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="background:#faf7f2;border-left:3px solid #dc2626"><tr>
+        <td style="padding:14px 16px;font:14px/1.55 -apple-system,'Segoe UI',Helvetica,Arial,sans-serif;color:#44403c">When the CRA or Revenu Qu&eacute;bec publishes new rates, a saved calculation reopens with the new numbers.</td>
+      </tr></table>
+    </td></tr>
+    <tr><td style="padding:26px 32px 0">
+      <a href="${SITE}" style="display:inline-block;background:#1c1917;color:#ffffff;text-decoration:none;font:700 15px/1 -apple-system,'Segoe UI',Helvetica,Arial,sans-serif;padding:15px 22px;border-radius:8px">Open CanPay Insights &rarr;</a>
+    </td></tr>
+    <tr><td style="padding:22px 32px 30px;font:13px/1.6 -apple-system,'Segoe UI',Helvetica,Arial,sans-serif;color:#78716c">Delete the account and everything in it from the account menu, any time. Questions? Just reply.</td></tr>
+  </table>
+  <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="max-width:540px"><tr>
+    <td style="padding:18px 32px;font:12px/1.7 -apple-system,'Segoe UI',Helvetica,Arial,sans-serif;color:#a8a29e">
+      CanPay Insights &middot; ${esc(opts.address)}<br>
+      <a href="mailto:info@canpayinsights.ca" style="color:#a8a29e">info@canpayinsights.ca</a> &middot; <a href="${SITE}" style="color:#a8a29e">canpayinsights.ca</a> &middot; <a href="${opts.unsub}" style="color:#a8a29e">Stop emails from us</a>
+    </td>
   </tr></table>
-  <h1 style="font-size:20px;margin:14px 0 6px">Your account is ready</h1>
-  <p style="color:#475569;font-size:14px;margin:0 0 14px">Set up for ${esc(opts.email)}. It keeps, on the web and in the iOS app:</p>
-  <ul style="color:#334155;font-size:14px;line-height:1.7;margin:0 0 14px;padding-left:20px">
-    <li>calculations you save, so you can reopen them later</li>
-    <li>timesheets</li>
-    <li>any report you buy</li>
-  </ul>
-  <p style="color:#475569;font-size:14px;margin:0 0 14px">Figures are recomputed whenever the CRA or Revenu Québec publishes new rates, so a saved calculation reopens with the current year's numbers.</p>
-  <p style="color:#475569;font-size:14px;margin:0 0 14px">You can delete the account, and everything saved in it, from the account menu at any time. Questions: just reply.</p>
-  <div style="border-top:1px solid #e2e8f0;margin-top:22px;padding-top:12px;color:#94a3b8;font-size:12px;line-height:1.6">
-    CanPay Insights · ${esc(opts.address)}<br>
-    <a href="mailto:info@canpayinsights.ca" style="color:#94a3b8">info@canpayinsights.ca</a> · <a href="${SITE}" style="color:#94a3b8">canpayinsights.ca</a><br>
-    <a href="${opts.unsub}" style="color:#94a3b8">Stop emails from us</a>
-  </div>
-</div>`;
+</td></tr></table>
+</body></html>`;
   return { subject, text, html };
 }
 
