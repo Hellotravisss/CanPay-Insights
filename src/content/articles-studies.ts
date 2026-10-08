@@ -2887,4 +2887,114 @@ This is a single, deliberately plain scenario — one income, no RRSP contributi
 Every figure above comes from CanPay Insights' own 2026 tax engine — the same engine whose output is checked, row by row, against the CRA's T4032 payroll deduction tables (claim code 1, bi-weekly) for all 13 jurisdictions, plus the CRA's CPP/EI tables and Revenu Québec's source deduction tables, before any release. Figures are rounded to the nearest dollar. To see your own numbers with your actual salary, deductions, and pay frequency, use the [free take-home pay calculator](/), or jump straight to your own province: [Ontario](/ontario), [British Columbia](/bc), [Alberta](/alberta), [Quebec](/quebec), [Manitoba](/manitoba), [Saskatchewan](/saskatchewan), [Nova Scotia](/nova-scotia), [New Brunswick](/new-brunswick), [Newfoundland and Labrador](/newfoundland), [Prince Edward Island](/pei), [Yukon](/yukon), [Northwest Territories](/northwest-territories), or [Nunavut](/nunavut). For a breakdown of CPP and EI specifically, see the [CPP/EI calculator](/cpp-ei-calculator) and [EI Premium Rate for 2027](/blog/ei-premium-rate-2027). This is general information, not financial advice.
 `,
   },
+  {
+    id: 'study-27',
+    slug: 'take-home-pay-100000-by-province-2026',
+    title: '$100,000 Salary: What You Actually Take Home, Province by Province (2026)',
+    subtitle:
+      'We ran a flat $100,000 salary through the same 2026 tax engine that is checked row-by-row against the CRA payroll deduction tables, in all 13 provinces and territories — and the ranking is not the same as it is at $75,000.',
+    excerpt:
+      'A $100,000 salary nets $76,654 a year in Nunavut but only $68,867 in Nova Scotia — a $7,787 gap, almost all of it provincial tax. British Columbia overtakes the Northwest Territories at this income, a ranking flip that does not happen at $75,000. Exact 2026 take-home pay, tax, and deductions for all 13 provinces and territories.',
+    metaTitle: 'Take-Home Pay on $100,000 by Province (2026)',
+    metaDescription:
+      'A $100,000 salary nets $68,867 to $76,654 depending on province in 2026, a $7,787 gap. Exact take-home pay, tax, and deductions for all 13.',
+    keywords: [
+      '100000 salary after tax canada',
+      '100k salary after tax canada',
+      'take home pay 100k canada',
+      'take home pay by province 2026',
+      '100k salary canada tax',
+      'how much is 100000 after tax',
+    ],
+    category: 'news',
+    tags: ['Take-Home Pay', 'Provinces', 'Tax Engine', '2026'],
+    publishedAt: '2026-10-08',
+    readTime: 7,
+    imageUrl: '/blog/take-home-pay-100000-by-province-2026.svg',
+    directAnswer:
+      'A $100,000 salary nets between $68,867 (Nova Scotia) and $76,654 (Nunavut) after federal tax, provincial tax, CPP/CPP2, and EI in 2026 — a $7,787 gap driven almost entirely by provincial income tax. Ontario nets $74,206 a year ($6,184 a month), British Columbia $75,373, Alberta $74,459, and Quebec $69,585. These are CanPay Insights’ own 2026 calculations, from the same tax engine checked row by row against the CRA’s payroll deduction tables, and the provincial ranking is not identical to the one at $75,000 — British Columbia and the Northwest Territories swap places.',
+    faq: [
+      {
+        question: 'How much is $100,000 after tax in Ontario?',
+        answer:
+          'A $100,000 salary nets $74,206 a year in Ontario in 2026, or $6,184 a month, after federal tax, Ontario tax, CPP/CPP2, and EI — an effective deduction rate of 25.8%.',
+      },
+      {
+        question: 'Which province keeps the most of a $100,000 salary?',
+        answer:
+          'Nunavut. A $100,000 salary there nets $76,654 a year, a 23.3% effective deduction rate, the lowest in the country, because the territory has the lowest provincial/territorial tax rates in Canada.',
+      },
+      {
+        question: 'Which province takes the most tax from a $100,000 salary?',
+        answer:
+          'Nova Scotia. The same $100,000 salary nets just $68,867 there, a 31.1% effective deduction rate, the highest of any province or territory in 2026.',
+      },
+      {
+        question: 'How much CPP and EI do I pay on a $100,000 salary?',
+        answer:
+          'Outside Quebec, $5,770 combined — and at this income it is the maximum possible: $4,230.45 of base CPP, $416 of CPP2 (the second tier, which applies between the $74,600 and $85,000 earnings bands), and the maximum EI premium of $1,123.07, since $100,000 clears every 2026 ceiling. In Quebec it is $6,221 combined (maximum QPP, QPP2, and EI, plus $430 of QPIP, which is not yet at its own $103,000 ceiling) — the extra $451 is Quebec’s own parental insurance premium, which the rest of Canada does not pay.',
+      },
+      {
+        question: 'Why does the province ranking change between $75,000 and $100,000?',
+        answer:
+          'At $75,000, British Columbia ranks third, behind Nunavut and the Northwest Territories. At $100,000, BC moves into second place, overtaking the Northwest Territories by about $169 a year. BC’s tax brackets stay flatter through the low-to-middle range and only climb at $100,728, right at the edge of this income, while the Northwest Territories’ rate structure rises more steadily across the same range — a small difference, but enough to flip the order.',
+      },
+      {
+        question: 'What is the gap between the best and worst province on the same salary?',
+        answer:
+          '$7,787 a year, or about $649 a month, between Nunavut ($76,654) and Nova Scotia ($68,867) on an identical $100,000 salary — almost entirely explained by provincial tax, since federal tax and CPP/CPP2/EI are nearly the same everywhere.',
+      },
+    ],
+    content: `
+## A $100,000 salary is not the same paycheque everywhere
+
+We already showed this at [$75,000](/blog/take-home-pay-75000-by-province-2026). The same holds at a rounder, more commonly searched number: $100,000 gross pay looks identical on an offer letter no matter where in Canada the job is, and what lands in the bank account does not. We ran that exact salary — single filer, no other income, bi-weekly pay — through the CanPay Insights tax engine for all 13 provinces and territories, the same engine checked row by row against the CRA's T4032 payroll deduction tables before every release.
+
+## 2026 take-home pay on $100,000, every province and territory
+
+| Rank | Province | Take-home / year | Take-home / month | Federal tax | Provincial tax | CPP/CPP2 + EI | Total deductions | Effective rate |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| 1 | Nunavut | **$76,654** | $6,388 | $13,302 | $4,275 | $5,770 | $23,346 | 23.3% |
+| 2 | British Columbia | **$75,373** | $6,281 | $13,302 | $5,556 | $5,770 | $24,627 | 24.6% |
+| 3 | Northwest Territories | **$75,204** | $6,267 | $13,302 | $5,724 | $5,770 | $24,796 | 24.8% |
+| 4 | Yukon | **$74,998** | $6,250 | $13,302 | $5,931 | $5,770 | $25,002 | 25.0% |
+| 5 | Alberta | **$74,459** | $6,205 | $13,302 | $6,470 | $5,770 | $25,542 | 25.5% |
+| 6 | Ontario | **$74,206** | $6,184 | $13,302 | $6,723 | $5,770 | $25,794 | 25.8% |
+| 7 | Saskatchewan | **$72,288** | $6,024 | $13,302 | $8,641 | $5,770 | $27,712 | 27.7% |
+| 8 | Manitoba | **$71,445** | $5,954 | $13,302 | $9,484 | $5,770 | $28,555 | 28.6% |
+| 9 | New Brunswick | **$71,215** | $5,935 | $13,302 | $9,714 | $5,770 | $28,785 | 28.8% |
+| 10 | Newfoundland and Labrador | **$70,603** | $5,884 | $13,302 | $10,326 | $5,770 | $29,397 | 29.4% |
+| 11 | Prince Edward Island | **$69,789** | $5,816 | $13,302 | $11,140 | $5,770 | $30,211 | 30.2% |
+| 12 | Quebec | **$69,585** | $5,799 | $11,054 | $13,140 | $6,221 | $30,415 | 30.4% |
+| 13 | Nova Scotia | **$68,867** | $5,739 | $13,302 | $12,062 | $5,770 | $31,133 | 31.1% |
+
+The spread between the best and worst outcome on an identical salary is **$7,787 a year** — about $649 a month — between Nunavut and Nova Scotia.
+
+## Why the gap is almost all provincial tax
+
+Look down the federal tax column and it barely moves: **$13,302** in every province except Quebec. CPP/CPP2 and EI don't move either, at **$5,770** everywhere except Quebec — and at this income, that figure is the maximum possible outside Quebec: $100,000 clears every 2026 ceiling, so every worker pays the full $4,230.45 of base CPP, the full $416 of CPP2, and the full $1,123.07 EI premium, regardless of province. The entire $7,787 spread between the best and worst province comes from provincial income tax, which ranges from **$4,275** in Nunavut to **$12,062** in Nova Scotia — close to a threefold difference on the same income.
+
+The three territories and British Columbia take the least, because their tax brackets and basic personal amounts are more generous at this income level. Atlantic Canada and Quebec take the most, because their provincial brackets climb faster.
+
+## The ranking isn't fixed — it shifts with income
+
+At [$75,000](/blog/take-home-pay-75000-by-province-2026), the order running down from the top was Nunavut, Northwest Territories, British Columbia, Yukon, Alberta, Ontario. At $100,000, British Columbia and the Northwest Territories trade places: BC moves into second, ahead of the Northwest Territories, by about $169 a year.
+
+The reason is bracket shape, not a bigger tax cut. BC's tax rate stays relatively flat through the low-to-middle range and only climbs again just past $100,728 — almost exactly the salary in this study — while the Northwest Territories' bracket structure rises more steadily across the same stretch of income. Push the salary from $75,000 to $100,000 and BC's provincial tax grows more slowly than the Northwest Territories' does, enough to flip two provinces that were in the opposite order 25,000 dollars lower. Nobody's bracket table changed; the salary used to compare them did.
+
+## Quebec is a special case
+
+Quebec workers pay **$2,248 less federal tax** on $100,000 than everyone else ($11,054 instead of $13,302) — the federal abatement that exists because Quebec runs its own parental insurance (QPIP) and collects its own pension contributions (QPP) instead of relying entirely on federal programs. Quebec residents also pay an extra **$451** into QPP/QPP2/EI and QPIP combined ($6,221 versus $5,770 outside Quebec), though QPIP itself ($430) hasn't hit its own $103,000 ceiling yet at this salary.
+
+None of that saves Quebec workers money overall: **provincial tax in Quebec is the highest in the country** at $13,140 on a $100,000 salary, more than enough to offset the federal discount. Net result: $69,585 take-home, second-lowest in Canada.
+
+## What this does and doesn't tell you
+
+This is a single, deliberately plain scenario — one income, no RRSP contribution, no dependents, no other credits — so the 13 numbers are directly comparable to each other and to the [$75,000 version](/blog/take-home-pay-75000-by-province-2026) of this same study. Your own take-home pay will differ if you contribute to an RRSP, claim other credits, or have a different pay frequency. Cost of living also varies enormously between, say, Nunavut and Nova Scotia, so the province that keeps the most of your paycheque is not automatically the one where it goes furthest.
+
+## How we calculated this
+
+Every figure above comes from CanPay Insights' own 2026 tax engine — the same engine whose output is checked, row by row, against the CRA's T4032 payroll deduction tables (claim code 1, bi-weekly) for all 13 jurisdictions, plus the CRA's CPP/EI tables and Revenu Québec's source deduction tables, before any release. Figures are rounded to the nearest dollar. To see your own numbers with your actual salary, deductions, and pay frequency, use the [free take-home pay calculator](/), or jump straight to your own province: [Ontario](/ontario), [British Columbia](/bc), [Alberta](/alberta), [Quebec](/quebec), [Manitoba](/manitoba), [Saskatchewan](/saskatchewan), [Nova Scotia](/nova-scotia), [New Brunswick](/new-brunswick), [Newfoundland and Labrador](/newfoundland), [Prince Edward Island](/pei), [Yukon](/yukon), [Northwest Territories](/northwest-territories), or [Nunavut](/nunavut). For a breakdown of CPP and EI specifically, see the [CPP/EI calculator](/cpp-ei-calculator). This is general information, not financial advice.
+`,
+  },
 ];
