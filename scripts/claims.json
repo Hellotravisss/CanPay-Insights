@@ -2027,6 +2027,27 @@
    "backing": "manual",
    "note": "Checked 2026-10-07: Magic-link (app/api/auth/magic) and report emails do not read email_opt_out; only welcome/alerts honour it.",
    "reviewed": "2026-10-07"
+  },
+  {
+   "page": "/privacy",
+   "text": "From version 1.2.4 the app has a “Share anonymous usage data” switch under your results; turn it off and the app sends none of these statistics, and no survey answers.",
+   "backing": "manual",
+   "note": "Checked 2026-10-08 against CanPayApp 1.2.4 (READY_FOR_SALE via ASC API): src/components/TelemetryToggle.tsx rendered under results in App.tsx; setTelemetryEnabled stores an opt-out flag in AsyncStorage; recordCalcEvent and recordAnswer return early when opted out. Replaces the 'no switch yet' sentences.",
+   "reviewed": "2026-10-08"
+  },
+  {
+   "page": "/fr/confidentialite",
+   "text": "Depuis la version 1.2.4, l’application a un interrupteur « Partager des données d’utilisation anonymes » sous vos résultats; désactivé, l’application n’envoie aucune de ces statistiques ni aucune réponse au sondage.",
+   "backing": "manual",
+   "note": "Checked 2026-10-08 against CanPayApp 1.2.4 (READY_FOR_SALE via ASC API): src/components/TelemetryToggle.tsx rendered under results in App.tsx; setTelemetryEnabled stores an opt-out flag in AsyncStorage; recordCalcEvent and recordAnswer return early when opted out. Replaces the 'no switch yet' sentences.",
+   "reviewed": "2026-10-08"
+  },
+  {
+   "page": "/fr/confidentialite",
+   "text": "Ce choix est conservé sur votre appareil.",
+   "backing": "manual",
+   "note": "Checked 2026-10-08 against CanPayApp 1.2.4 (READY_FOR_SALE via ASC API): src/components/TelemetryToggle.tsx rendered under results in App.tsx; setTelemetryEnabled stores an opt-out flag in AsyncStorage; recordCalcEvent and recordAnswer return early when opted out. Replaces the 'no switch yet' sentences.",
+   "reviewed": "2026-10-08"
   }
  ]
 }
