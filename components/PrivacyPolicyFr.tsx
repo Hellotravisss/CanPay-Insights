@@ -15,7 +15,7 @@ const PrivacyPolicyFr: React.FC = () => {
       backLabel="Retour à l’accueil"
       footnote="Les calculs sont des estimations fondées sur les tranches d’imposition 2026 et les normes du travail provinciales."
       title="Politique de confidentialité de CanPay Insights"
-      effective="En vigueur le 7 octobre 2026 (remplace la version du 6 octobre 2026)"
+      effective="En vigueur le 8 octobre 2026 (remplace la version du 7 octobre 2026)"
       links={[
         { href: '/privacy', label: 'English version' },
         { href: '/terms', label: 'Conditions d’utilisation (anglais)' },
@@ -93,7 +93,7 @@ const PrivacyPolicyFr: React.FC = () => {
           (<code>?notelemetry=0</code> réactive). Le calculateur fonctionne exactement de la même façon. Ce choix est gardé dans
           ce navigateur pour ce site : il ne vous suit ni dans d’autres navigateurs ni dans notre calculateur intégré à un autre
           site ; un site qui l’intègre peut couper l’enregistrement pour tous ses visiteurs en ajoutant{' '}
-          <code>&amp;notelemetry=1</code> à l’adresse du widget. L’application iPhone n’a pas encore d’interrupteur (section 6).
+          <code>&amp;notelemetry=1</code> à l’adresse du widget. L’application iPhone a son propre interrupteur (section 6).
         </p>
       </Section>
 
@@ -240,8 +240,9 @@ const PrivacyPolicyFr: React.FC = () => {
           enregistrez l’image d’un rapport. Elle enregistre les mêmes statistiques anonymes que le site
           (section 2), situées au niveau de la ville d’après la connexion (section 3, niveau 1) ; les options
           de code postal et de position de l’appareil de la section 3 n’existent que sur le site Web.
-          L’application n’a pas encore d’interrupteur pour couper ces statistiques ; d’ici là, si vous ne
-          voulez pas qu’elles soient enregistrées, utilisez le site Web avec le refus décrit à la section 2.
+          Depuis la version 1.2.4, l’application a un interrupteur « Partager des données d’utilisation
+          anonymes » sous vos résultats ; désactivé, l’application n’envoie aucune de ces statistiques ni aucune
+          réponse au sondage. Ce choix est conservé sur votre appareil.
         </p>
       </Section>
 

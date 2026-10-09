@@ -98,11 +98,6 @@
   },
   {
    "page": "/privacy",
-   "text": "The app does not yet have a switch to turn these statistics off; until it does, if you do not want them recorded, use the website with the opt-out in section 2.",
-   "backing": "check:optout-silences-site"
-  },
-  {
-   "page": "/privacy",
    "text": "Because the statistical records carry no identity, requests about them cannot be matched to a person — but the opt-out in section 2 stops any further recording from your browser, and “Change” or clearing site data removes a stored postal-code prefix.",
    "backing": "check:optout-silences-site"
   },
@@ -456,13 +451,6 @@
    "text": "Records from one visit are grouped by a random temporary identifier that is discarded when you leave and is never reused.",
    "backing": "manual",
    "note": "Checked on 2026-09-25 against the payload built in lib/telemetry.ts recordCalcEvent (fields sent, ranges not amounts, work pattern numbers); automated browsers never send, so no live test is possible.",
-   "reviewed": "2026-09-25"
-  },
-  {
-   "page": "/privacy",
-   "text": "The iPhone app has no switch yet (section 6).",
-   "backing": "manual",
-   "note": "Checked on 2026-09-25 against CanPayApp/app.json (photo-library permissions only). The app opt-out switch ships in the next release; update these sentences then.",
    "reviewed": "2026-09-25"
   },
   {
@@ -959,13 +947,6 @@
   {
    "page": "/fr/confidentialite",
    "text": "Elle enregistre les mêmes statistiques anonymes que le site (section 2), situées au niveau de la ville d’après la connexion (section 3, niveau 1); les options de code postal et de position de l’appareil de la section 3 n’existent que sur le site Web.",
-   "backing": "manual",
-   "note": "Checked on 2026-09-25 against CanPayApp/app.json (photo-library permissions only). The app opt-out switch ships in the next release; update these sentences then.",
-   "reviewed": "2026-09-25"
-  },
-  {
-   "page": "/fr/confidentialite",
-   "text": "L’application n’a pas encore d’interrupteur pour couper ces statistiques; d’ici là, si vous ne voulez pas qu’elles soient enregistrées, utilisez le site Web avec le refus décrit à la section 2.",
    "backing": "manual",
    "note": "Checked on 2026-09-25 against CanPayApp/app.json (photo-library permissions only). The app opt-out switch ships in the next release; update these sentences then.",
    "reviewed": "2026-09-25"

@@ -21,7 +21,7 @@ const PrivacyPolicy: React.FC<PrivacyPolicyProps> = () => {
   return (
     <LegalChrome
       title="Privacy Policy for CanPay Insights"
-      effective="Effective date: October 7, 2026 (replaces the version of October 6, 2026)"
+      effective="Effective date: October 8, 2026 (replaces the version of October 7, 2026)"
       links={[
         { href: '/fr/confidentialite', label: 'Version française' },
         { href: '/terms', label: 'Terms of Service' },
@@ -96,7 +96,7 @@ const PrivacyPolicy: React.FC<PrivacyPolicyProps> = () => {
           counting (<code>?notelemetry=0</code> turns it back on). The calculator works identically either way. The choice is
           stored in this browser for this site, so it does not follow you to other browsers or into our calculator where
           another website embeds it; a website that embeds it can switch recording off for all its visitors by adding{' '}
-          <code>&amp;notelemetry=1</code> to the widget’s address. The iPhone app has no switch yet (section 6).
+          <code>&amp;notelemetry=1</code> to the widget’s address. The iPhone app has its own switch (section 6).
         </p>
       </Section>
 
@@ -230,8 +230,9 @@ const PrivacyPolicy: React.FC<PrivacyPolicyProps> = () => {
           access. It asks for photo-library access only when you save a report image. It records the same
           anonymous statistics as the website (section 2), placed at city level from the connection
           (section 3, level 1); the postal-code and device-location options in section 3 exist on the
-          website only. The app does not yet have a switch to turn these statistics off; until it does, if you
-          do not want them recorded, use the website with the opt-out in section 2.
+          website only. From version 1.2.4 the app has a “Share anonymous usage data” switch under your
+          results; turn it off and the app sends none of these statistics, and no survey answers. The choice is
+          kept on your device.
         </p>
       </Section>
 
