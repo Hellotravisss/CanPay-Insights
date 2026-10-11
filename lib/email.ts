@@ -88,7 +88,7 @@ export async function sendReportEmail(opts: {
 
 
 /** Plain transactional email (no attachment) from info@canpayinsights.ca. */
-export async function sendPlainEmail(opts: { to: string; subject: string; text: string; html: string }): Promise<void> {
+export async function sendPlainEmail(opts: { to: string; subject: string; text: string; html: string; headers?: string[] }): Promise<void> {
   const { env } = await getCloudflareContext({ async: true });
   const e = env as unknown as Record<string, string | undefined>;
   const token = e.CF_EMAIL_TOKEN; const accountId = e.CF_ACCOUNT_ID;
@@ -96,7 +96,7 @@ export async function sendPlainEmail(opts: { to: string; subject: string; text: 
   const alt = `cpalt-${crypto.randomUUID()}`;
   const raw = [
     `From: ${FROM}`, `To: ${opts.to}`, `Subject: ${opts.subject}`, `Date: ${new Date().toUTCString()}`,
-    `Message-ID: <${crypto.randomUUID()}@canpayinsights.ca>`, 'MIME-Version: 1.0',
+    `Message-ID: <${crypto.randomUUID()}@canpayinsights.ca>`, ...(opts.headers ?? []), 'MIME-Version: 1.0',
     `Content-Type: multipart/alternative; boundary="${alt}"`, '',
     `--${alt}`, 'Content-Type: text/plain; charset=utf-8', 'Content-Transfer-Encoding: 8bit', '', opts.text, '',
     `--${alt}`, 'Content-Type: text/html; charset=utf-8', 'Content-Transfer-Encoding: 8bit', '', opts.html, '',

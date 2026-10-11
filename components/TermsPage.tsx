@@ -53,8 +53,8 @@ const TermsPage: React.FC = () => {
 
       <Section n={3} id="reports" title="Paid reports">
         <p>
-          We sell two digital reports (currently the Province Move Report and the Offer Comparison), each
-          priced in Canadian dollars at the price shown at checkout, plus any applicable tax. Payment is
+          We sell one digital report (currently the Province Move Report), priced in Canadian dollars at the
+          price shown at checkout, plus any applicable tax. The Offer Comparison is free since October 6, 2026. Payment is
           processed by Stripe. The report is generated from the numbers you provide and delivered
           immediately on a page whose link is emailed to you; it is for your personal use. Our{' '}
           <a href="/refunds">Refund Policy</a> sets out when and how we refund a purchase. Prices and product

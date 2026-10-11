@@ -1,4 +1,5 @@
 import { db, secret, type D1 } from '../d1/db';
+import { queueWelcome } from '../welcome';
 
 /**
  * CanPay's own sign-in, on Cloudflare. Three ways in, one session format:
@@ -90,6 +91,7 @@ export async function signInAs(d: D1, email: string, provider: string, profile: 
     await d.prepare('insert into users (id, email, name, avatar_url, provider, created_at, last_login) values (?,?,?,?,?,?,?)')
       .bind(id, mail, profile.name ?? null, profile.avatar ?? null, provider, now, now).run();
     u = { id, email: mail, name: profile.name ?? null, avatar_url: profile.avatar ?? null, provider, created_at: now, session_version: 1 };
+    await queueWelcome({ id, email: mail }); // lib/welcome.ts — sent once, after the response
   } else {
     await d.prepare('update users set last_login = ?, name = coalesce(name, ?), avatar_url = coalesce(avatar_url, ?) where id = ?')
       .bind(now, profile.name ?? null, profile.avatar ?? null, u.id).run();

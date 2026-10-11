@@ -21,7 +21,7 @@ const PrivacyPolicy: React.FC<PrivacyPolicyProps> = () => {
   return (
     <LegalChrome
       title="Privacy Policy for CanPay Insights"
-      effective="Effective date: September 28, 2026 (replaces the version of September 27, 2026)"
+      effective="Effective date: October 8, 2026 (replaces the version of October 7, 2026)"
       links={[
         { href: '/fr/confidentialite', label: 'Version française' },
         { href: '/terms', label: 'Terms of Service' },
@@ -73,7 +73,9 @@ const PrivacyPolicy: React.FC<PrivacyPolicyProps> = () => {
           <li>which page of our own site you were on before calculating (the path only — never a link from another site and never anything after a “?”);</li>
           <li>optional answers you choose to give: the industry you compare against (and its position in the list, and whether this browser had chosen it before), why you are calculating, whether the result matched your expectation, where you work (on-site, remote, hybrid), your age group, tenure, union membership, employer size and vacation days;</li>
           <li>your typical work pattern when you use the shift or timesheet calculators (usual start and end hour, days per week, average shift length, unpaid break) — never the calendar dates you worked;</li>
-          <li>broad ranges for entries you make (RRSP contribution as a share of pay, shift premium, overtime hours, tips as a share of pay) — always ranges;</li>
+          <li>broad ranges for entries you make (RRSP contribution as a share of pay, shift premium, overtime hours, tips as a share of pay, union dues, other deductions, bonus, commission or other income, and restricted stock units as a share of pay), whether you entered a disability-insurance premium, holiday or sick pay, or a taxable benefit (yes or no), how your employer matches RRSP contributions, and whether your tips are paid through payroll — always ranges or yes/no, never the amounts;</li>
+          <li>if you use the free offer comparison, how offer B’s salary differs from offer A’s as a range (such as “up 5–10%”), the province of offer B when it is a different province, and whether it has more, the same or fewer vacation days — never either salary;</li>
+          <li>on the province comparison page, which provinces you compare (names only) with your salary as a range, and, if you answer, whether you are planning to move, might, or are just curious;</li>
           <li>if you use “find the salary” to work back from a take-home amount, the monthly take-home you asked for, as a range (such as “$4k–$5k”) — never the amount;</li>
           <li>whether you ticked “I support a spouse or common-law partner” (yes or no) — never your spouse’s income;</li>
           <li>how long it took from opening the page to your first result, as a range (under 10 seconds, 10–30, 30–90, over 90), and how many times you changed the form before a result, as a range (1–3, 4–10, 11–30, over 30) — never timestamps, keystrokes or where you clicked;</li>
@@ -94,7 +96,7 @@ const PrivacyPolicy: React.FC<PrivacyPolicyProps> = () => {
           counting (<code>?notelemetry=0</code> turns it back on). The calculator works identically either way. The choice is
           stored in this browser for this site, so it does not follow you to other browsers or into our calculator where
           another website embeds it; a website that embeds it can switch recording off for all its visitors by adding{' '}
-          <code>&amp;notelemetry=1</code> to the widget’s address. The iPhone app has no switch yet (section 6).
+          <code>&amp;notelemetry=1</code> to the widget’s address. The iPhone app has its own switch (section 6).
         </p>
       </Section>
 
@@ -160,8 +162,8 @@ const PrivacyPolicy: React.FC<PrivacyPolicyProps> = () => {
         <p>
           <strong className="text-slate-800">Local storage on your device</strong> holds your language choice, your calculator
           settings when signed out, the calculations and timesheet entries you save while signed out, the
-          industry you last compared against, the telemetry opt-out flag, the remembered postal-code prefix and the
-          “has calculated before” flag, plus three entries for page-view counting (below): a session number
+          industry you last compared against, the telemetry opt-out flag, the remembered postal-code prefix, which of the optional questions you have already answered (so you are
+          not asked twice; not your answers) and the “has calculated before” flag, plus three entries for page-view counting (below): a session number
           for the tab (<code>_av_sid</code>), a “visited before” flag (<code>_av_seen</code>) and an off switch
           (<code>_av_off</code>). The tab’s session storage also holds the page your visit started on, and is
           cleared when you close the tab. None of it identifies you, it stays on your device, and clearing your
@@ -198,6 +200,13 @@ const PrivacyPolicy: React.FC<PrivacyPolicyProps> = () => {
           providers see that you signed in to our site under their own policies.
         </p>
         <p>
+          <strong className="text-slate-800">Emails to account holders.</strong> When you create an account we send one
+          welcome email about the account. Tax-change emails, which tell you when new CRA rates change your
+          take-home pay, are off until you turn them on in the account menu; we record when you turned them on.
+          Every such email has a one-click unsubscribe. Sign-in links and receipts are sent because you ask for
+          them and are not affected by unsubscribing.
+        </p>
+        <p>
           If you buy a report, payment is taken by Stripe on Stripe’s page; we never see your card number.
           We keep the purchase record (product, amount, date, the email Stripe gives us, and the province
           and income range the report was about) because tax law requires a seller to keep sales records —
@@ -221,8 +230,9 @@ const PrivacyPolicy: React.FC<PrivacyPolicyProps> = () => {
           access. It asks for photo-library access only when you save a report image. It records the same
           anonymous statistics as the website (section 2), placed at city level from the connection
           (section 3, level 1); the postal-code and device-location options in section 3 exist on the
-          website only. The app does not yet have a switch to turn these statistics off; until it does, if you
-          do not want them recorded, use the website with the opt-out in section 2.
+          website only. From version 1.2.4 the app has a “Share anonymous usage data” switch under your
+          results; turn it off and the app sends none of these statistics, and no survey answers. The choice is
+          kept on your device.
         </p>
       </Section>
 

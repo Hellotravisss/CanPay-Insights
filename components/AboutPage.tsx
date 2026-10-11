@@ -103,8 +103,8 @@ const AboutPage: React.FC = () => {
                   independent developer based in Vancouver, British Columbia, who wrote the open rules engine
                   behind the calculator. It is a small, self-funded project — not a bank, payroll company, or
                   financial institution. That independence is the point: the tool exists to give workers a
-                  straight answer. The calculator stays free. We sell two optional paid reports (a province-move report and a
-                  job-offer comparison, $9 each) that use the same engine as the free calculator. We
+                  straight answer. The calculator stays free. We sell one optional paid report (a province-move report, $9); the job-offer
+                  comparison is free. Both use the same engine as the calculator. We
                   sometimes include a clearly labelled referral link (such as Wealthsimple) and may earn a
                   sign-up bonus, but it never affects our numbers or what we recommend — see our{" "}
                   <a href="/affiliate-disclosure" className="text-red-600 hover:text-red-700 font-medium underline underline-offset-2 transition-colors">affiliate disclosure</a>. Connect on{" "}

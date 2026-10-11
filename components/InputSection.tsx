@@ -241,10 +241,10 @@ const InputSection: React.FC<Props> = ({ inputs, setInputs }) => {
               { key: 'taxableBenefits', label: t('annual.taxBenefits'), hint: t('hourly.taxBenefitsHint') },
             ] as { key: keyof AdditionalIncome; label: string; hint: string }[]).map(({ key, label, hint }) => (
               <div key={key}>
-                <label className="block text-xs font-bold text-red-800 mb-1">{label}</label>
+                <label htmlFor={`hourly-add-${key}`} className="block text-xs font-bold text-red-800 mb-1">{label}</label>
                 <div className="relative">
                   <span className="absolute left-3 top-2.5 text-red-400 text-sm">$</span>
-                  <input
+                  <input id={`hourly-add-${key}`}
                     type="number"
                     min="0"
                     step="1"
@@ -292,10 +292,10 @@ const InputSection: React.FC<Props> = ({ inputs, setInputs }) => {
               { key: 'otherDeductions',  label: t('annual.otherDed'),            hint: t('hourly.otherDedHint') },
             ] as { key: keyof Deductions; label: string; hint: string }[]).map(({ key, label, hint }) => (
               <div key={key}>
-                <label className="block text-xs font-bold text-slate-700 mb-1">{label}</label>
+                <label htmlFor={`hourly-ded-${key}`} className="block text-xs font-bold text-slate-700 mb-1">{label}</label>
                 <div className="relative">
                   <span className="absolute left-3 top-2.5 text-slate-500 text-sm">$</span>
-                  <input
+                  <input id={`hourly-ded-${key}`}
                     type="number"
                     min="0"
                     step="1"

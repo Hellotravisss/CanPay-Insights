@@ -43,7 +43,7 @@ const ALLOWED_HOSTS = new Set([
 const DISCLOSED_STORAGE = new Set([
   'canpay_lang', 'canpay_user_settings', 'canpay_calculation_history', 'canpay_timesheet_entries',
   'timesheetData', 'canpay_industry', 'canpay_no_telemetry', 'canpay_fsa', 'canpay_seen',
-  '_av_sid', '_av_seen', '_av_off', 'canpay_entry_path',
+  '_av_sid', '_av_seen', '_av_off', 'canpay_entry_path', 'canpay_asked',
 ]);
 
 const read = (p) => readFileSync(new URL('../' + p, import.meta.url), 'utf8');

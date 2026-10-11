@@ -21,7 +21,7 @@ const OPTIONS: { key: Intent; emoji: string }[] = [
   { key: 'curious', emoji: '🤔' },
 ];
 
-const DICT: Record<string, Record<string, string>> = {
+export const INTENT_DICT: Record<string, Record<string, string>> = {
   en: {
     prompt: 'What brings you here today?',
     thanks: 'Thanks — that helps.',
@@ -139,7 +139,7 @@ export default function IntentPrompt({
   annualIncome: number;
   lang: string;
 }) {
-  const t = DICT[lang] ?? DICT.en;
+  const t = INTENT_DICT[lang] ?? INTENT_DICT.en;
   const [picked, setPicked] = useState<Intent | null>(null);
 
   if (!annualIncome || annualIncome <= 0) return null;

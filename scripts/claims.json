@@ -72,8 +72,9 @@
   },
   {
    "page": "/privacy",
-   "text": "Local storage on your device holds your language choice, your calculator settings when signed out, the calculations and timesheet entries you save while signed out, the industry you last compared against, the telemetry opt-out flag, the remembered postal-code prefix and the “has calculated before” flag, plus three entries for page-view counting (below): a session number for the tab ( _av_sid ), a “visited before” flag ( _av_seen ) and an off switch ( _av_off ).",
-   "backing": "check:optout-silences-site"
+   "text": "Local storage on your device holds your language choice, your calculator settings when signed out, the calculations and timesheet entries you save while signed out, the industry you last compared against, the telemetry opt-out flag, the remembered postal-code prefix, which of the optional questions you have already answered (so you are not asked twice; not your answers) and the “has calculated before” flag, plus three entries for page-view counting (below): a session number for the tab ( _av_sid ), a “visited before” flag ( _av_seen ) and an off switch ( _av_off ).",
+   "backing": "check:optout-silences-site",
+   "reviewed": "2026-10-06"
   },
   {
    "page": "/privacy",
@@ -94,11 +95,6 @@
    "page": "/privacy",
    "text": "Our own database never receives your IP address.",
    "backing": "check:no-ip-column"
-  },
-  {
-   "page": "/privacy",
-   "text": "The app does not yet have a switch to turn these statistics off; until it does, if you do not want them recorded, use the website with the opt-out in section 2.",
-   "backing": "check:optout-silences-site"
   },
   {
    "page": "/privacy",
@@ -207,23 +203,8 @@
   },
   {
    "page": "/about",
-   "text": "We sell two optional paid reports (a province-move report and a job-offer comparison, $9 each) that use the same engine as the free calculator.",
-   "backing": "check:report-price-9"
-  },
-  {
-   "page": "/about",
    "text": "Our 2026 take-home pay figures — net pay, federal and provincial tax, CPP/CPP2, EI and Quebec QPP/QPIP for every province and territory across $30k–$200k — are published as an open dataset under a CC BY 4.0 licence.",
    "backing": "gate:audit:dataset"
-  },
-  {
-   "page": "/terms",
-   "text": "We sell two digital reports (currently the Province Move Report and the Offer Comparison), each priced in Canadian dollars at the price shown at checkout, plus any applicable tax.",
-   "backing": "check:products-two"
-  },
-  {
-   "page": "/refunds",
-   "text": "Everything on CanPay Insights is free except two digital reports — the Province Move Report and the Offer Comparison — sold for a one-time price in Canadian dollars through Stripe.",
-   "backing": "check:products-two"
   },
   {
    "page": "/refunds",
@@ -470,13 +451,6 @@
    "text": "Records from one visit are grouped by a random temporary identifier that is discarded when you leave and is never reused.",
    "backing": "manual",
    "note": "Checked on 2026-09-25 against the payload built in lib/telemetry.ts recordCalcEvent (fields sent, ranges not amounts, work pattern numbers); automated browsers never send, so no live test is possible.",
-   "reviewed": "2026-09-25"
-  },
-  {
-   "page": "/privacy",
-   "text": "The iPhone app has no switch yet (section 6).",
-   "backing": "manual",
-   "note": "Checked on 2026-09-25 against CanPayApp/app.json (photo-library permissions only). The app opt-out switch ships in the next release; update these sentences then.",
    "reviewed": "2026-09-25"
   },
   {
@@ -973,13 +947,6 @@
   {
    "page": "/fr/confidentialite",
    "text": "Elle enregistre les mêmes statistiques anonymes que le site (section 2), situées au niveau de la ville d’après la connexion (section 3, niveau 1); les options de code postal et de position de l’appareil de la section 3 n’existent que sur le site Web.",
-   "backing": "manual",
-   "note": "Checked on 2026-09-25 against CanPayApp/app.json (photo-library permissions only). The app opt-out switch ships in the next release; update these sentences then.",
-   "reviewed": "2026-09-25"
-  },
-  {
-   "page": "/fr/confidentialite",
-   "text": "L’application n’a pas encore d’interrupteur pour couper ces statistiques; d’ici là, si vous ne voulez pas qu’elles soient enregistrées, utilisez le site Web avec le refus décrit à la section 2.",
    "backing": "manual",
    "note": "Checked on 2026-09-25 against CanPayApp/app.json (photo-library permissions only). The app opt-out switch ships in the next release; update these sentences then.",
    "reviewed": "2026-09-25"
@@ -1934,6 +1901,153 @@
    "backing": "manual",
    "note": "Starting prices set by Travis/Claude on 2026-10-02; a price statement, backed by what we will quote. No checkout exists; enquiries go to the mailto link.",
    "reviewed": "2026-10-02"
+  },
+  {
+   "page": "/privacy",
+   "text": "broad ranges for entries you make (RRSP contribution as a share of pay, shift premium, overtime hours, tips as a share of pay, union dues, other deductions, bonus, commission or other income, and restricted stock units as a share of pay), whether you entered a disability-insurance premium, holiday or sick pay, or a taxable benefit (yes or no), how your employer matches RRSP contributions, and whether your tips are paid through payroll — always ranges or yes/no, never the amounts;",
+   "backing": "manual",
+   "note": "Re-read App.tsx stubExtras/buildBehaviour and lib/telemetry.ts: union dues, other deductions, bonus, other income (share of period gross) and RSUs (share of annual gross) leave only as range labels; LTD, stat/sick pay, taxable benefits as 1/0; match policy and tips_paid as fixed labels. app/api/events/route.ts nulls anything outside those labels. No amount is sent.",
+   "reviewed": "2026-10-06"
+  },
+  {
+   "page": "/fr/confidentialite",
+   "text": "des fourchettes larges pour vos saisies (cotisation REER en part de la paie, prime de quart, heures supplémentaires, pourboires en part de la paie, cotisations syndicales, autres retenues, prime, commissions ou autres revenus, et unités d’actions restreintes en part de la paie), si vous avez saisi une prime d’assurance invalidité, une paie de jour férié ou de maladie ou un avantage imposable (oui ou non), le mode de contribution de l’employeur au REER et si vos pourboires passent par la paie — toujours des fourchettes ou oui/non, jamais les montants;",
+   "backing": "manual",
+   "note": "Re-read App.tsx stubExtras/buildBehaviour and lib/telemetry.ts: union dues, other deductions, bonus, other income (share of period gross) and RSUs (share of annual gross) leave only as range labels; LTD, stat/sick pay, taxable benefits as 1/0; match policy and tips_paid as fixed labels. app/api/events/route.ts nulls anything outside those labels. No amount is sent.",
+   "reviewed": "2026-10-06"
+  },
+  {
+   "page": "/privacy",
+   "text": "if you use the free offer comparison, how offer B’s salary differs from offer A’s as a range (such as “up 5–10%”), the province of offer B when it is a different province, and whether it has more, the same or fewer vacation days — never either salary;",
+   "backing": "manual",
+   "note": "Re-read components/FakeDoors.tsx showOffer and lib/telemetry.ts offerChangeBucket: only the change range, B province if different, and more/same/fewer vacation leave the browser; app/api/events/route.ts nulls anything else. No salary is sent; the report is built client-side by lib/offerReport.ts.",
+   "reviewed": "2026-10-06"
+  },
+  {
+   "page": "/fr/confidentialite",
+   "text": "si vous utilisez la comparaison d’offres gratuite, l’écart entre le salaire de l’offre B et celui de l’offre A sous forme de tranche (par exemple « hausse de 5 à 10 % »), la province de l’offre B si elle diffère, et si elle compte plus, autant ou moins de jours de vacances — jamais aucun des deux salaires;",
+   "backing": "manual",
+   "note": "Re-read components/FakeDoors.tsx showOffer and lib/telemetry.ts offerChangeBucket: only the change range, B province if different, and more/same/fewer vacation leave the browser; app/api/events/route.ts nulls anything else. No salary is sent; the report is built client-side by lib/offerReport.ts.",
+   "reviewed": "2026-10-06"
+  },
+  {
+   "page": "/about",
+   "text": "We sell one optional paid report (a province-move report, $9); the job-offer comparison is free.",
+   "backing": "manual",
+   "note": "Re-read components/FakeDoors.tsx: the offer comparison no longer calls /api/checkout; only the relocation report does. Stripe product list in app/api/checkout still accepts offer-compare but nothing in the UI calls it.",
+   "reviewed": "2026-10-06"
+  },
+  {
+   "page": "/terms",
+   "text": "We sell one digital report (currently the Province Move Report), priced in Canadian dollars at the price shown at checkout, plus any applicable tax.",
+   "backing": "manual",
+   "note": "Re-read components/FakeDoors.tsx: the offer comparison no longer calls /api/checkout; only the relocation report does. Stripe product list in app/api/checkout still accepts offer-compare but nothing in the UI calls it.",
+   "reviewed": "2026-10-06"
+  },
+  {
+   "page": "/terms",
+   "text": "The Offer Comparison is free since October 6, 2026.",
+   "backing": "manual",
+   "note": "Re-read components/FakeDoors.tsx: the offer comparison no longer calls /api/checkout; only the relocation report does. Stripe product list in app/api/checkout still accepts offer-compare but nothing in the UI calls it.",
+   "reviewed": "2026-10-06"
+  },
+  {
+   "page": "/refunds",
+   "text": "Everything on CanPay Insights is free except one digital report — the Province Move Report — sold for a one-time price in Canadian dollars through Stripe.",
+   "backing": "manual",
+   "note": "Re-read components/FakeDoors.tsx: the offer comparison no longer calls /api/checkout; only the relocation report does. Stripe product list in app/api/checkout still accepts offer-compare but nothing in the UI calls it.",
+   "reviewed": "2026-10-06"
+  },
+  {
+   "page": "/refunds",
+   "text": "The Offer Comparison has been free since October 6, 2026; earlier purchases of it are covered by this page too.",
+   "backing": "manual",
+   "note": "Re-read components/FakeDoors.tsx: the offer comparison no longer calls /api/checkout; only the relocation report does. Stripe product list in app/api/checkout still accepts offer-compare but nothing in the UI calls it.",
+   "reviewed": "2026-10-06"
+  },
+  {
+   "page": "/privacy",
+   "text": "on the province comparison page, which provinces you compare (names only) with your salary as a range, and, if you answer, whether you are planning to move, might, or are just curious;",
+   "backing": "manual",
+   "note": "Re-read src/content/components/ProvinceComparison.tsx handleStartComparison and lib/telemetry.ts: only the selected province names (sorted, | joined) and the income bracket are sent; app/api/events/route.ts keeps 2-6 valid province names, else null. Updated 2026-10-06: re-read components/ExpectationPrompt.tsx (canpay_asked holds question keys only) and components/MoveIntentPrompt.tsx (planning/maybe/curious label only).",
+   "reviewed": "2026-10-06"
+  },
+  {
+   "page": "/fr/confidentialite",
+   "text": "sur la page de comparaison des provinces, les provinces que vous comparez (leurs noms seulement), avec votre salaire sous forme de tranche, et, si vous répondez, si vous prévoyez de déménager, peut-être, ou par simple curiosité;",
+   "backing": "manual",
+   "note": "Re-read src/content/components/ProvinceComparison.tsx handleStartComparison and lib/telemetry.ts: only the selected province names (sorted, | joined) and the income bracket are sent; app/api/events/route.ts keeps 2-6 valid province names, else null. Updated 2026-10-06: re-read components/ExpectationPrompt.tsx (canpay_asked holds question keys only) and components/MoveIntentPrompt.tsx (planning/maybe/curious label only).",
+   "reviewed": "2026-10-06"
+  },
+  {
+   "page": "/data",
+   "text": "Expectation gap (still building; not yet large enough to license) — who finds their take-home lower than they thought, by province and income.",
+   "backing": "manual",
+   "note": "Counted 2026-10-06: 24 expectation answers in total (events.expectation not null), too few for any licensed cut at the k>=20 floor once split by province and income. The sentence says it is still building.",
+   "reviewed": "2026-10-06"
+  },
+  {
+   "page": "/privacy",
+   "text": "When you create an account we send one welcome email about the account.",
+   "backing": "manual",
+   "note": "Checked 2026-10-07: lib/welcome.ts queueWelcome is called only in signInAs's new-user branch (lib/auth/core.ts); content lists the account's features only.",
+   "reviewed": "2026-10-07"
+  },
+  {
+   "page": "/privacy",
+   "text": "Tax-change emails, which tell you when new CRA rates change your take-home pay, are off until you turn them on in the account menu; we record when you turned them on.",
+   "backing": "manual",
+   "note": "Checked 2026-10-07: /api/me/alerts PUT sets rate_alerts=1 and rate_alerts_at=now; column default 0 (cloudflare/schema-auth.sql); UserMenu switch is the only caller.",
+   "reviewed": "2026-10-07"
+  },
+  {
+   "page": "/privacy",
+   "text": "Every such email has a one-click unsubscribe.",
+   "backing": "manual",
+   "note": "Checked 2026-10-07: Welcome email carries List-Unsubscribe + List-Unsubscribe-Post (RFC 8058) and a footer link; POST /api/email/unsubscribe sets email_opt_out=1. No alert email is sent yet.",
+   "reviewed": "2026-10-07"
+  },
+  {
+   "page": "/privacy",
+   "text": "Sign-in links and receipts are sent because you ask for them and are not affected by unsubscribing.",
+   "backing": "manual",
+   "note": "Checked 2026-10-07: Magic-link (app/api/auth/magic) and report emails do not read email_opt_out; only welcome/alerts honour it.",
+   "reviewed": "2026-10-07"
+  },
+  {
+   "page": "/fr/confidentialite",
+   "text": "Les courriels de changement fiscal, qui vous préviennent quand les nouveaux taux de l’ARC changent votre salaire net, restent désactivés tant que vous ne les activez pas dans le menu du compte; nous notons le moment où vous les activez.",
+   "backing": "manual",
+   "note": "Checked 2026-10-07: /api/me/alerts PUT sets rate_alerts=1 and rate_alerts_at=now; column default 0 (cloudflare/schema-auth.sql); UserMenu switch is the only caller.",
+   "reviewed": "2026-10-07"
+  },
+  {
+   "page": "/fr/confidentialite",
+   "text": "Les liens de connexion et les reçus sont envoyés parce que vous les demandez et ne sont pas touchés par le désabonnement.",
+   "backing": "manual",
+   "note": "Checked 2026-10-07: Magic-link (app/api/auth/magic) and report emails do not read email_opt_out; only welcome/alerts honour it.",
+   "reviewed": "2026-10-07"
+  },
+  {
+   "page": "/privacy",
+   "text": "From version 1.2.4 the app has a “Share anonymous usage data” switch under your results; turn it off and the app sends none of these statistics, and no survey answers.",
+   "backing": "manual",
+   "note": "Checked 2026-10-08 against CanPayApp 1.2.4 (READY_FOR_SALE via ASC API): src/components/TelemetryToggle.tsx rendered under results in App.tsx; setTelemetryEnabled stores an opt-out flag in AsyncStorage; recordCalcEvent and recordAnswer return early when opted out. Replaces the 'no switch yet' sentences.",
+   "reviewed": "2026-10-08"
+  },
+  {
+   "page": "/fr/confidentialite",
+   "text": "Depuis la version 1.2.4, l’application a un interrupteur « Partager des données d’utilisation anonymes » sous vos résultats; désactivé, l’application n’envoie aucune de ces statistiques ni aucune réponse au sondage.",
+   "backing": "manual",
+   "note": "Checked 2026-10-08 against CanPayApp 1.2.4 (READY_FOR_SALE via ASC API): src/components/TelemetryToggle.tsx rendered under results in App.tsx; setTelemetryEnabled stores an opt-out flag in AsyncStorage; recordCalcEvent and recordAnswer return early when opted out. Replaces the 'no switch yet' sentences.",
+   "reviewed": "2026-10-08"
+  },
+  {
+   "page": "/fr/confidentialite",
+   "text": "Ce choix est conservé sur votre appareil.",
+   "backing": "manual",
+   "note": "Checked 2026-10-08 against CanPayApp 1.2.4 (READY_FOR_SALE via ASC API): src/components/TelemetryToggle.tsx rendered under results in App.tsx; setTelemetryEnabled stores an opt-out flag in AsyncStorage; recordCalcEvent and recordAnswer return early when opted out. Replaces the 'no switch yet' sentences.",
+   "reviewed": "2026-10-08"
   }
  ]
 }

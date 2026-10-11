@@ -1,8 +1,9 @@
 'use client';
 import { ThinkingOrb } from 'thinking-orbs';
 import { useMemo, useState } from 'react';
-import { recordCalcEvent, type ProductInterest } from '../lib/telemetry';
-import { OFFER_LIMITS } from '../lib/offerReport';
+import { recordCalcEvent, offerChangeBucket, type ProductInterest } from '../lib/telemetry';
+import { OFFER_LIMITS, buildOfferReport, type OfferReport as OfferReportData } from '../lib/offerReport';
+import OfferReport from '../app/report/offer/OfferReport';
 import { Province, PayFrequency, type CalculationMode as CalcMode } from '../types';
 import { calculateFromAnnualSalary } from '../utils/taxEngine';
 
@@ -41,7 +42,7 @@ const DICT: Record<string, Record<string, string>> = {
     email: 'Email',
     notify: 'Notify me',
     thanks: 'Got it — one email when it ships.',
-    offerCta: 'Compare my offers — $9',
+    offerCta: 'Compare my offers, free',
     offerA: 'Offer A (this one)',
     offerB: 'Offer B',
     salary: 'Salary',
@@ -77,7 +78,7 @@ const DICT: Record<string, Record<string, string>> = {
     email: '邮箱',
     notify: '通知我',
     thanks: '收到,上线时发一封邮件。',
-    offerCta: '对比我的两份 offer —— $9',
+    offerCta: '免费对比我的两份 offer',
     offerA: 'Offer A(当前这份)',
     offerB: 'Offer B',
     salary: '年薪',
@@ -113,7 +114,7 @@ const DICT: Record<string, Record<string, string>> = {
     email: 'Courriel',
     notify: 'Prévenez-moi',
     thanks: 'Noté — un seul courriel au lancement.',
-    offerCta: 'Comparer mes offres — 9 $',
+    offerCta: 'Comparer mes offres gratuitement',
     offerA: 'Offre A (celle-ci)',
     offerB: 'Offre B',
     salary: 'Salaire',
@@ -149,7 +150,7 @@ const DICT: Record<string, Record<string, string>> = {
     email: 'Correo',
     notify: 'Avisarme',
     thanks: 'Listo: un correo cuando esté disponible.',
-    offerCta: 'Comparar mis ofertas — $9',
+    offerCta: 'Comparar mis ofertas gratis',
     offerA: 'Oferta A (esta)',
     offerB: 'Oferta B',
     salary: 'Salario',
@@ -185,7 +186,7 @@ const DICT: Record<string, Record<string, string>> = {
     email: 'ਈਮੇਲ',
     notify: 'ਮੈਨੂੰ ਦੱਸੋ',
     thanks: 'ਠੀਕ ਹੈ — ਸ਼ੁਰੂ ਹੋਣ ਤੇ ਇੱਕ ਈਮੇਲ।',
-    offerCta: 'ਮੇਰੇ ਆਫ਼ਰਾਂ ਦੀ ਤੁਲਨਾ — $9',
+    offerCta: 'ਮੇਰੇ ਆਫ਼ਰਾਂ ਦੀ ਤੁਲਨਾ — ਮੁਫ਼ਤ',
     offerA: 'ਆਫ਼ਰ A (ਇਹ ਵਾਲਾ)',
     offerB: 'ਆਫ਼ਰ B',
     salary: 'ਤਨਖਾਹ',
@@ -221,7 +222,7 @@ const DICT: Record<string, Record<string, string>> = {
     email: 'ईमेल',
     notify: 'मुझे बताएं',
     thanks: 'ठीक है — लॉन्च पर एक ईमेल।',
-    offerCta: 'मेरे ऑफ़र की तुलना करें — $9',
+    offerCta: 'मेरे ऑफ़र की तुलना करें — मुफ़्त',
     offerA: 'ऑफ़र A (यही वाला)',
     offerB: 'ऑफ़र B',
     salary: 'वेतन',
@@ -257,7 +258,7 @@ const DICT: Record<string, Record<string, string>> = {
     email: 'Email',
     notify: 'Abisuhan ako',
     thanks: 'Salamat — isang email kapag handa na.',
-    offerCta: 'Ihambing ang aking mga alok — $9',
+    offerCta: 'Ihambing ang aking mga alok — libre',
     offerA: 'Alok A (ito)',
     offerB: 'Alok B',
     salary: 'Sahod',
@@ -293,7 +294,7 @@ const DICT: Record<string, Record<string, string>> = {
     email: 'Email',
     notify: 'Повідомити мене',
     thanks: 'Готово — один лист після запуску.',
-    offerCta: 'Порівняти мої пропозиції — $9',
+    offerCta: 'Порівняти мої пропозиції — безкоштовно',
     offerA: 'Пропозиція A (ця)',
     offerB: 'Пропозиція B',
     salary: 'Зарплата',
@@ -329,7 +330,7 @@ const DICT: Record<string, Record<string, string>> = {
     email: '이메일',
     notify: '알려주세요',
     thanks: '확인했습니다 — 출시되면 메일 한 통 보내드립니다.',
-    offerCta: '내 오퍼 비교하기 — $9',
+    offerCta: '내 오퍼 무료로 비교하기',
     offerA: '오퍼 A (현재)',
     offerB: '오퍼 B',
     salary: '연봉',
@@ -365,7 +366,7 @@ const DICT: Record<string, Record<string, string>> = {
     email: 'Email',
     notify: 'Báo cho tôi',
     thanks: 'Đã nhận — một email khi ra mắt.',
-    offerCta: 'So sánh offer của tôi — $9',
+    offerCta: 'So sánh offer của tôi — miễn phí',
     offerA: 'Offer A (cái này)',
     offerB: 'Offer B',
     salary: 'Lương',
@@ -419,6 +420,7 @@ export default function FakeDoors({
   const [offerOpen, setOfferOpen] = useState(false);
   const [offerBuying, setOfferBuying] = useState(false);
   const [offerError, setOfferError] = useState<string | null>(null);
+  const [offerReport, setOfferReport] = useState<OfferReportData | null>(null);
   const [a, setA] = useState({ province: '', salary: '', bonus: '', matchPct: '', vacationDays: '' });
   const [b, setB] = useState({ province: '', salary: '', bonus: '', matchPct: '', vacationDays: '' });
 
@@ -483,24 +485,19 @@ export default function FakeDoors({
     return null;
   })();
   const offerReady = !offerProblem;
-  const buyOffer = async () => {
+  // Free since 2026-10-06: the $9 version sold none in a month. The report is
+  // computed in the browser; only ranges of the difference are recorded.
+  const showOffer = () => {
     if (!offerReady) return;
-    setOfferBuying(true);
-    setOfferError(null);
-    try {
-      const res = await fetch('/api/checkout', {
-        method: 'POST',
-        headers: { 'content-type': 'application/json' },
-        body: JSON.stringify({ product: 'offer-compare', a: toOffer(a), b: toOffer(b), lang }),
-      });
-      let data: { url?: string; error?: string } = {};
-      try { data = await res.json(); } catch { /* empty body */ }
-      if (!res.ok || !data.url) throw new Error(data.error || 'Payments are unavailable right now. Please try again in a few minutes.');
-      window.location.href = data.url;
-    } catch (e) {
-      setOfferError((e as Error).message);
-      setOfferBuying(false);
-    }
+    const A = toOffer(a), B = toOffer(b);
+    setOfferReport(buildOfferReport({ label: 'A', ...A }, { label: 'B', ...B }));
+    const vac = (B.vacationDays || 0) - (A.vacationDays || 0);
+    recordCalcEvent({
+      mode: mode as CalcMode, province: A.province, annualIncome: A.salary, lang,
+      productInterest: 'offer-compare' as ProductInterest,
+      offer: { changeBucket: offerChangeBucket(A.salary, B.salary), toProvince: B.province !== A.province ? B.province : null, vacationDiff: vac > 0 ? 'more' : vac < 0 ? 'fewer' : 'same' },
+    });
+    setTimeout(() => document.getElementById('offer-report')?.scrollIntoView({ behavior: 'smooth' }), 50);
   };
 
   const Chips = ({ text }: { text: string }) => (
@@ -575,7 +572,6 @@ export default function FakeDoors({
               <h3 className="text-base font-bold text-slate-900">{t.offer}</h3>
               <p className="mt-0.5 text-sm text-slate-500">{t.offerLine}</p>
             </div>
-            <Price />
           </div>
           <Chips text={t.offerChips} />
           <div className="mt-auto pt-3">
@@ -591,21 +587,25 @@ export default function FakeDoors({
                 <OfferFields o={a} set={setA} title={t.offerA} t={t} />
                 <OfferFields o={b} set={setB} title={t.offerB} t={t} />
                 <button
-                  onClick={buyOffer}
-                  disabled={!offerReady || offerBuying}
+                  onClick={showOffer}
+                  disabled={!offerReady}
                   className="w-full rounded-md bg-red-600 px-3 py-2.5 text-sm font-semibold text-white hover:bg-red-700 disabled:bg-slate-200 disabled:text-slate-400"
                 >
-                  {offerBuying ? (<span className="inline-flex items-center gap-2"><ThinkingOrb state="connecting" size={20} theme="dark" aria-label={t.buying} />{t.buying}</span>) : t.offerCta}
+                  {t.offerCta}
                 </button>
-                {(offerError || (offerProblem && (a.salary || b.salary))) && (
-                  <p className="text-[11px] text-red-600">{offerError || offerProblem}</p>
+                {offerProblem && (a.salary || b.salary) && (
+                  <p className="text-[11px] text-red-600">{offerProblem}</p>
                 )}
-                <p className="text-[10px] text-slate-500">{t.secure}</p>
               </div>
             )}
           </div>
         </div>
       </div>
+      {offerReport && (
+        <div id="offer-report" className="mt-4 rounded-lg border border-slate-200">
+          <OfferReport report={offerReport} inline />
+        </div>
+      )}
     </div>
   );
 }

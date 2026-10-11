@@ -22,6 +22,26 @@ export interface BehaviourSignals {
   otHoursBucket: '0' | 'under-5' | '5-10' | '10-plus';
   tipsPctBucket: '0' | '1-10' | '10-20' | '20-30' | '30-plus' | null;
   payFrequency: string | null;
+  // Pay-stub extras the visitor typed (2026-10-06): each as a share-of-gross
+  // range or yes/no, never an amount. They were entered all along and dropped.
+  unionDuesBucket?: '0' | 'under-1' | '1-2' | '2-plus' | null;
+  ltd?: boolean | null;
+  otherDeductionsBucket?: '0' | 'under-2' | '2-5' | '5-plus' | null;
+  bonusBucket?: '0' | 'under-10' | '10-25' | '25-plus' | null;
+  otherIncomeBucket?: '0' | 'under-10' | '10-25' | '25-plus' | null;
+  statOrSickPay?: boolean | null;
+  taxableBenefits?: boolean | null;
+  rsuBucket?: '0' | 'under-10' | '10-25' | '25-plus' | null;
+  matchPolicy?: 'equal' | 'half' | 'custom' | 'none' | null;
+  tipsPaid?: 'payroll' | 'direct' | null;
+}
+
+/** Share of gross as a range label; null when the field does not exist in this mode. */
+export function bucketShare<T extends string>(pct: number | null, edges: number[], labels: T[]): T | null {
+  if (pct === null || !Number.isFinite(pct)) return null;
+  if (pct <= 0) return labels[0];
+  for (let i = 0; i < edges.length; i++) if (pct < edges[i]) return labels[i + 1];
+  return labels[labels.length - 1];
 }
 
 export function bucketRrspPct(pct: number): BehaviourSignals['rrspPctBucket'] {
@@ -663,6 +683,12 @@ export function recordCalcEvent(e: {
   reverseTargetMonthly?: number | null;
   /** Ticked "I support a spouse or common-law partner". Only the yes/no, never the spouse's income. */
   spouseClaim?: boolean | null;
+  /** A free offer comparison, as ranges: B's salary against A's, the province B is in when it differs, and vacation days more/same/fewer. Never the salaries. */
+  offer?: { changeBucket: string; toProvince: string | null; vacationDiff: 'more' | 'same' | 'fewer' } | null;
+  /** The provinces picked on /compare-provinces, names only. */
+  comparedProvinces?: string[] | null;
+  /** After a province comparison: planning / maybe / curious. */
+  moveIntent?: 'planning' | 'maybe' | 'curious' | null;
 }) {
   if (!e.annualIncome || e.annualIncome <= 0 || !e.province) return;
   if (isLikelyBot() || isOptedOut()) return;
@@ -682,8 +708,8 @@ export function recordCalcEvent(e: {
     const workKey = w
       ? `${w.shiftStartHour}-${w.shiftEndHour}-${w.unpaidBreakMin}-${w.daysPerWeek}`
       : '';
-    const behaviourKey = b ? `${b.rrspPctBucket}-${b.otHoursBucket}-${b.tipsPctBucket ?? ''}-${b.shiftPremium}` : '';
-    const key = `${source}|${e.mode}|${e.province}|${bracket}|${e.industry ?? ''}|${workKey}|${behaviourKey}|${e.intent ?? ''}|${e.expectation ?? ''}|${e.workArrangement ?? ''}|${e.ageBand ?? ''}|${e.viewedReport ? 'r' : ''}|${e.productInterest ?? ''}|${e.tenureBand ?? ''}${e.unionMember ?? ''}${e.employerSize ?? ''}${e.vacationBand ?? ''}|${e.payChange ? `${e.payChange.direction}-${e.payChange.pctBucket}` : ''}|${hood?.fsa ?? ''}${hood?.source ?? ''}|${reverseTargetBucket(e.reverseTargetMonthly)}|${e.spouseClaim ? 's' : ''}`;
+    const behaviourKey = b ? `${b.rrspPctBucket}-${b.otHoursBucket}-${b.tipsPctBucket ?? ''}-${b.shiftPremium}-${b.unionDuesBucket ?? ''}${b.ltd ?? ''}${b.otherDeductionsBucket ?? ''}${b.bonusBucket ?? ''}${b.otherIncomeBucket ?? ''}${b.statOrSickPay ?? ''}${b.taxableBenefits ?? ''}${b.rsuBucket ?? ''}${b.matchPolicy ?? ''}${b.tipsPaid ?? ''}` : '';
+    const key = `${source}|${e.mode}|${e.province}|${bracket}|${e.industry ?? ''}|${workKey}|${behaviourKey}|${e.intent ?? ''}|${e.expectation ?? ''}|${e.workArrangement ?? ''}|${e.ageBand ?? ''}|${e.viewedReport ? 'r' : ''}|${e.productInterest ?? ''}|${e.tenureBand ?? ''}${e.unionMember ?? ''}${e.employerSize ?? ''}${e.vacationBand ?? ''}|${e.payChange ? `${e.payChange.direction}-${e.payChange.pctBucket}` : ''}|${hood?.fsa ?? ''}${hood?.source ?? ''}|${reverseTargetBucket(e.reverseTargetMonthly)}|${e.spouseClaim ? 's' : ''}|${e.comparedProvinces?.join(',') ?? ''}${e.moveIntent ?? ''}|${e.offer ? `${e.offer.changeBucket}${e.offer.toProvince ?? ''}${e.offer.vacationDiff}` : ''}`;
     if (sentThisPageLoad.has(key)) return;
     sentThisPageLoad.add(key);
 
@@ -711,6 +737,16 @@ export function recordCalcEvent(e: {
         premium_rate_bucket: b?.premiumRateBucket ?? null,
         ot_hours_bucket: b?.otHoursBucket ?? null,
         tips_pct_bucket: b?.tipsPctBucket ?? null,
+        union_dues_bucket: b?.unionDuesBucket ?? null,
+        ltd: b?.ltd == null ? null : b.ltd ? 1 : 0,
+        other_deductions_bucket: b?.otherDeductionsBucket ?? null,
+        bonus_bucket: b?.bonusBucket ?? null,
+        other_income_bucket: b?.otherIncomeBucket ?? null,
+        stat_or_sick_pay: b?.statOrSickPay == null ? null : b.statOrSickPay ? 1 : 0,
+        taxable_benefits: b?.taxableBenefits == null ? null : b.taxableBenefits ? 1 : 0,
+        rsu_bucket: b?.rsuBucket ?? null,
+        match_policy: b?.matchPolicy ?? null,
+        tips_paid: b?.tipsPaid ?? null,
         pay_frequency: b?.payFrequency ?? null,
         viewed_report: e.viewedReport ?? false,
         schema_version: SCHEMA_VERSION,
@@ -752,6 +788,11 @@ export function recordCalcEvent(e: {
         is_returning: isReturning(),
         reverse_target_bucket: reverseTargetBucket(e.reverseTargetMonthly),
         spouse_claim: e.spouseClaim == null ? null : e.spouseClaim ? 1 : 0,
+        move_intent: e.moveIntent ?? null,
+        compared_provinces: e.comparedProvinces?.length ? [...e.comparedProvinces].sort().join('|') : null,
+        offer_change_bucket: e.offer?.changeBucket ?? null,
+        offer_to_province: e.offer?.toProvince ?? null,
+        offer_vacation_diff: e.offer?.vacationDiff ?? null,
         time_to_result_bucket: seqCounter === 1 ? bucketTimeToResult(performance.now() - pageLoadedAt) : null,
         edits_bucket: bucketEdits(inputEdits),
     };
@@ -772,4 +813,16 @@ export function recordCalcEvent(e: {
       keepalive: true,
     }).catch((e) => console.debug('telemetry skipped:', (e as Error).message));
   }, 3000);
+}
+
+/** Offer B's salary against offer A's, as a range label. */
+export function offerChangeBucket(a: number, b: number): string {
+  if (!(a > 0)) return 'unknown';
+  const pct = ((b - a) / a) * 100;
+  if (pct < -10) return 'down-10-plus';
+  if (pct < 0) return 'down-0-10';
+  if (pct < 5) return 'up-0-5';
+  if (pct < 10) return 'up-5-10';
+  if (pct < 20) return 'up-10-20';
+  return 'up-20-plus';
 }

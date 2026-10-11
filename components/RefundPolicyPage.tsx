@@ -18,9 +18,10 @@ const RefundPolicyPage: React.FC = () => {
       ]}
       intro={
         <p>
-          Everything on CanPay Insights is free except two digital reports — the Province Move Report and
-          the Offer Comparison — sold for a one-time price in Canadian dollars through Stripe. This page says
-          when we refund them, and how.
+          Everything on CanPay Insights is free except one digital report — the Province Move Report — sold
+          for a one-time price in Canadian dollars through Stripe. The Offer Comparison has been free since
+          October 6, 2026; earlier purchases of it are covered by this page too. This page says when we refund
+          them, and how.
         </p>
       }
     >

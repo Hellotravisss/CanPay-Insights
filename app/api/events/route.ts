@@ -20,7 +20,10 @@ const COLS = [
   'mode', 'province', 'income_bracket', 'lang', 'source', 'embed_host', 'device', 'browser',
   'shift_start_hour', 'shift_end_hour', 'unpaid_break_min', 'days_per_week', 'works_weekend', 'avg_daily_hours',
   'has_rrsp', 'rrsp_pct_bucket', 'employer_match', 'shift_premium', 'premium_rate_bucket', 'ot_hours_bucket',
-  'tips_pct_bucket', 'pay_frequency', 'viewed_report', 'entry_path', 'referrer_path', 'local_hour', 'local_dow',
+  'tips_pct_bucket', 'pay_frequency',
+  'union_dues_bucket', 'ltd', 'other_deductions_bucket', 'bonus_bucket', 'other_income_bucket',
+  'stat_or_sick_pay', 'taxable_benefits', 'rsu_bucket', 'match_policy', 'tips_paid',
+  'offer_change_bucket', 'offer_to_province', 'offer_vacation_diff', 'compared_provinces', 'move_intent', 'viewed_report', 'entry_path', 'referrer_path', 'local_hour', 'local_dow',
   'session_id', 'seq', 'industry', 'industry_rank', 'industry_returning', 'intent', 'expectation',
   'work_arrangement', 'age_band', 'employment_shape', 'product_interest', 'is_registered', 'from_history',
   'tenure_band', 'union_member', 'employer_size', 'vacation_band',
@@ -39,6 +42,7 @@ const COLS = [
  * device; a zone name is a name, not a coordinate.
  */
 // Same fixed labels as lib/telemetry.ts; anything else is dropped.
+const PROVINCE_NAMES = ['Alberta', 'British Columbia', 'Manitoba', 'New Brunswick', 'Newfoundland and Labrador', 'Nova Scotia', 'Ontario', 'Prince Edward Island', 'Quebec', 'Saskatchewan', 'Northwest Territories', 'Nunavut', 'Yukon'];
 const TIME_BUCKETS = new Set(['under-10s', '10-30s', '30-90s', '90s-plus']);
 const EDIT_BUCKETS = new Set(['1-3', '4-10', '11-30', '31-plus']);
 const REVERSE_BUCKETS = new Set(['under-2k', '2-3k', '3-4k', '4-5k', '5-6k', '6-8k', '8-10k', '10k-plus']);
@@ -84,6 +88,19 @@ export async function POST(request: Request) {
   if (!REVERSE_BUCKETS.has(String(body.reverse_target_bucket))) body.reverse_target_bucket = null;
   if (!TIME_BUCKETS.has(String(body.time_to_result_bucket))) body.time_to_result_bucket = null;
   if (!EDIT_BUCKETS.has(String(body.edits_bucket))) body.edits_bucket = null;
+  const only = (k: string, allowed: string[]) => { if (!allowed.includes(String(body[k]))) body[k] = null; };
+  only('union_dues_bucket', ['0', 'under-1', '1-2', '2-plus']);
+  only('other_deductions_bucket', ['0', 'under-2', '2-5', '5-plus']);
+  for (const k of ['bonus_bucket', 'other_income_bucket', 'rsu_bucket']) only(k, ['0', 'under-10', '10-25', '25-plus']);
+  only('match_policy', ['equal', 'half', 'custom', 'none']);
+  only('tips_paid', ['payroll', 'direct']);
+  only('offer_change_bucket', ['down-10-plus', 'down-0-10', 'up-0-5', 'up-5-10', 'up-10-20', 'up-20-plus']);
+  only('offer_vacation_diff', ['more', 'same', 'fewer']);
+  only('offer_to_province', PROVINCE_NAMES);
+  only('move_intent', ['planning', 'maybe', 'curious']);
+  { const parts = String(body.compared_provinces ?? '').split('|');
+    body.compared_provinces = parts.length >= 2 && parts.length <= 6 && parts.every((x) => PROVINCE_NAMES.includes(x)) ? parts.join('|') : null; }
+  for (const k of ['ltd', 'stat_or_sick_pay', 'taxable_benefits']) body[k] = body[k] === 1 || body[k] === 0 ? body[k] : null;
   body.spouse_claim = body.spouse_claim === 1 || body.spouse_claim === true ? 1 : body.spouse_claim === 0 || body.spouse_claim === false ? 0 : null;
 
   let cf: Record<string, unknown> = {};

@@ -15,7 +15,7 @@ const PrivacyPolicyFr: React.FC = () => {
       backLabel="Retour à l’accueil"
       footnote="Les calculs sont des estimations fondées sur les tranches d’imposition 2026 et les normes du travail provinciales."
       title="Politique de confidentialité de CanPay Insights"
-      effective="En vigueur le 28 septembre 2026 (remplace la version du 27 septembre 2026)"
+      effective="En vigueur le 8 octobre 2026 (remplace la version du 7 octobre 2026)"
       links={[
         { href: '/privacy', label: 'English version' },
         { href: '/terms', label: 'Conditions d’utilisation (anglais)' },
@@ -70,7 +70,9 @@ const PrivacyPolicyFr: React.FC = () => {
           <li>la page de notre propre site où vous étiez avant de calculer (le chemin seulement — jamais un lien d’un autre site, jamais ce qui suit un « ? ») ;</li>
           <li>les réponses facultatives que vous choisissez de donner : le secteur auquel vous vous comparez (avec sa position dans la liste et si ce navigateur l’avait déjà choisi), la raison du calcul, si le résultat correspondait à vos attentes, votre mode de travail (sur place, à distance, hybride), votre groupe d’âge, votre ancienneté, votre appartenance syndicale, la taille de votre employeur et vos jours de vacances ;</li>
           <li>votre horaire type lorsque vous utilisez les calculateurs de quarts ou de feuilles de temps (heures habituelles de début et de fin, jours par semaine, durée moyenne d’un quart, pause non payée) — jamais les dates réellement travaillées ;</li>
-          <li>des fourchettes larges pour vos saisies (cotisation REER en part de la paie, prime de quart, heures supplémentaires, pourboires en part de la paie) — toujours des fourchettes ;</li>
+          <li>des fourchettes larges pour vos saisies (cotisation REER en part de la paie, prime de quart, heures supplémentaires, pourboires en part de la paie, cotisations syndicales, autres retenues, prime, commissions ou autres revenus, et unités d’actions restreintes en part de la paie), si vous avez saisi une prime d’assurance invalidité, une paie de jour férié ou de maladie ou un avantage imposable (oui ou non), le mode de contribution de l’employeur au REER et si vos pourboires passent par la paie — toujours des fourchettes ou oui/non, jamais les montants ;</li>
+          <li>si vous utilisez la comparaison d’offres gratuite, l’écart entre le salaire de l’offre B et celui de l’offre A sous forme de tranche (par exemple « hausse de 5 à 10 % »), la province de l’offre B si elle diffère, et si elle compte plus, autant ou moins de jours de vacances — jamais aucun des deux salaires ;</li>
+          <li>sur la page de comparaison des provinces, les provinces que vous comparez (leurs noms seulement), avec votre salaire sous forme de tranche, et, si vous répondez, si vous prévoyez de déménager, peut-être, ou par simple curiosité ;</li>
           <li>si vous utilisez « trouver le salaire » pour partir d’un montant net, le montant net mensuel demandé, sous forme de tranche (par exemple « 4 k$–5 k$ ») — jamais le montant ;</li>
           <li>si vous avez coché « Je subviens aux besoins d’un époux ou conjoint de fait » (oui ou non) — jamais le revenu de votre époux ou conjoint ;</li>
           <li>le temps écoulé entre l’ouverture de la page et votre premier résultat, sous forme de tranche (moins de 10 secondes, 10 à 30, 30 à 90, plus de 90), et le nombre de fois où vous avez modifié le formulaire avant un résultat, sous forme de tranche (1 à 3, 4 à 10, 11 à 30, plus de 30) — jamais d’horodatage, de frappes ni d’endroits cliqués ;</li>
@@ -91,7 +93,7 @@ const PrivacyPolicyFr: React.FC = () => {
           (<code>?notelemetry=0</code> réactive). Le calculateur fonctionne exactement de la même façon. Ce choix est gardé dans
           ce navigateur pour ce site : il ne vous suit ni dans d’autres navigateurs ni dans notre calculateur intégré à un autre
           site ; un site qui l’intègre peut couper l’enregistrement pour tous ses visiteurs en ajoutant{' '}
-          <code>&amp;notelemetry=1</code> à l’adresse du widget. L’application iPhone n’a pas encore d’interrupteur (section 6).
+          <code>&amp;notelemetry=1</code> à l’adresse du widget. L’application iPhone a son propre interrupteur (section 6).
         </p>
       </Section>
 
@@ -161,7 +163,8 @@ const PrivacyPolicyFr: React.FC = () => {
         <p>
           <strong className="text-slate-800">Le stockage local de votre appareil</strong> contient votre langue, vos réglages de
           calculateur hors connexion, les calculs et entrées de feuille de temps enregistrés hors connexion,
-          le secteur auquel vous vous êtes comparé en dernier, l’indicateur de refus de télémétrie, le préfixe postal mémorisé et
+          le secteur auquel vous vous êtes comparé en dernier, l’indicateur de refus de télémétrie, le préfixe postal mémorisé,
+          les questions facultatives auxquelles vous avez déjà répondu (pour ne pas les reposer ; pas vos réponses) et
           l’indicateur « a déjà calculé », ainsi que trois entrées pour le comptage des pages vues (ci-dessous) :
           un numéro de session pour l’onglet (<code>_av_sid</code>), un indicateur « déjà venu »
           (<code>_av_seen</code>) et un interrupteur (<code>_av_off</code>). Le stockage de session de l’onglet
@@ -203,6 +206,14 @@ const PrivacyPolicyFr: React.FC = () => {
           réglages pour qu’ils vous suivent d’un appareil à l’autre.
         </p>
         <p>
+          <strong className="text-slate-800">Courriels aux titulaires de compte.</strong> À la création d’un compte,
+          nous envoyons un seul courriel de bienvenue au sujet du compte. Les courriels de changement fiscal, qui
+          vous préviennent quand les nouveaux taux de l’ARC changent votre salaire net, restent désactivés tant que
+          vous ne les activez pas dans le menu du compte ; nous notons le moment où vous les activez. Chacun de ces
+          courriels comporte un lien de désabonnement en un clic. Les liens de connexion et les reçus sont envoyés
+          parce que vous les demandez et ne sont pas touchés par le désabonnement.
+        </p>
+        <p>
           Si vous achetez un rapport, le paiement est encaissé par Stripe sur la page de Stripe ; nous ne
           voyons jamais votre numéro de carte. Nous gardons le dossier d’achat (produit, montant, date,
           courriel transmis par Stripe, province et tranche de revenu visées par le rapport) parce que la loi
@@ -229,8 +240,9 @@ const PrivacyPolicyFr: React.FC = () => {
           enregistrez l’image d’un rapport. Elle enregistre les mêmes statistiques anonymes que le site
           (section 2), situées au niveau de la ville d’après la connexion (section 3, niveau 1) ; les options
           de code postal et de position de l’appareil de la section 3 n’existent que sur le site Web.
-          L’application n’a pas encore d’interrupteur pour couper ces statistiques ; d’ici là, si vous ne
-          voulez pas qu’elles soient enregistrées, utilisez le site Web avec le refus décrit à la section 2.
+          Depuis la version 1.2.4, l’application a un interrupteur « Partager des données d’utilisation
+          anonymes » sous vos résultats ; désactivé, l’application n’envoie aucune de ces statistiques ni aucune
+          réponse au sondage. Ce choix est conservé sur votre appareil.
         </p>
       </Section>
 

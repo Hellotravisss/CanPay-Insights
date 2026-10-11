@@ -10,7 +10,14 @@ create table if not exists users (
   provider text,                       -- first provider seen: email | google | apple
   created_at text not null default (strftime('%Y-%m-%dT%H:%M:%fZ','now')),
   last_login text,
-  session_version integer not null default 1
+  session_version integer not null default 1,
+  -- Email (2026-10-07). welcome_sent_at: the one welcome email. rate_alerts: express
+  -- CASL consent to tax-change emails, off by default; rate_alerts_at is when it was
+  -- given. email_opt_out: unsubscribed from everything except mail the person requests.
+  welcome_sent_at text,
+  rate_alerts integer not null default 0,
+  rate_alerts_at text,
+  email_opt_out integer not null default 0
 );
 
 -- One-time magic-link tokens. Only the SHA-256 of the token is stored.
