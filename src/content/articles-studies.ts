@@ -2638,7 +2638,7 @@ The 2027 EI premium rate, maximum insurable earnings, and maximum contribution f
       {
         question: 'What is the cumulative TFSA contribution room by 2027?',
         answer:
-          "For anyone who was a Canadian resident and at least 18 years old in 2009, when the TFSA began, cumulative room reached $109,000 by the end of 2026. If the 2027 limit is confirmed at $7,500 as expected, cumulative room would rise to $109,500 for that same person — assuming no withdrawals or missed years, since unused room carries forward indefinitely.",
+          "For anyone who was a Canadian resident and at least 18 years old in 2009, when the TFSA began, cumulative room reached $109,000 by the end of 2026. If the 2027 limit is confirmed at $7,500 as expected, cumulative room would rise to $116,500 for that same person — assuming no withdrawals or missed years, since unused room carries forward indefinitely.",
       },
       {
         question: "Why isn't the FHSA annual limit rising for 2027 too?",
@@ -2701,7 +2701,7 @@ Someone earning enough to hit the full dollar limit every year — roughly $196,
 
 ### The TFSA math is simpler, and it isn't about this year's tax bill
 
-A TFSA contribution is never tax-deductible, so more TFSA room changes nothing about this year's paycheque or refund. The entire value is that whatever you put in — and whatever it earns — is never taxed again, on withdrawal or otherwise. So the extra $500 of expected 2027 room is best read plainly: it's $500 more of your existing take-home pay you'll be allowed to move into a permanently tax-free account, on top of whatever room you're already carrying forward. For anyone who has been a Canadian resident and at least 18 since the TFSA started in 2009, cumulative room reached $109,000 through 2026; a confirmed $7,500 for 2027 would take that to $109,500.
+A TFSA contribution is never tax-deductible, so more TFSA room changes nothing about this year's paycheque or refund. The entire value is that whatever you put in — and whatever it earns — is never taxed again, on withdrawal or otherwise. So the extra $500 of expected 2027 room is best read plainly: it's $500 more of your existing take-home pay you'll be allowed to move into a permanently tax-free account, on top of whatever room you're already carrying forward. For anyone who has been a Canadian resident and at least 18 since the TFSA started in 2009, cumulative room reached $109,000 through 2026; a confirmed $7,500 for 2027 would take that to $116,500.
 
 ### The FHSA isn't part of this story
 
