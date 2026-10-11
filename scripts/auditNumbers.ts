@@ -34,6 +34,11 @@ import * as C from '../constants';
 // Read from the engine so the audit's idea of "current" can never drift from
 // the constants it audits — when they disagree, the HISTORICAL bucket inverts.
 const CURRENT_YEAR = C.TAX_YEAR;
+// EI benefit side (canada.ca, 2026): not payroll deductions, so not in constants.ts.
+const EI_BENEFIT_RATE = 0.55;
+const EI_MAX_WEEKLY_BENEFIT = 729;
+/** Weekly EI benefit for a salary: 55% of insurable weekly earnings, capped. */
+const eiWeeklyBenefit = (salary: number) => Math.min(EI_MAX_WEEKLY_BENEFIT, (Math.min(salary, C.EI_MAX_INSURABLE_EARNINGS) / 52) * EI_BENEFIT_RATE);
 
 /**
  * Rates and amounts are kept apart and never compared across. A percentage was
@@ -108,6 +113,16 @@ const TOPICS: Topic[] = [
       C.EI_MAX_INSURABLE_EARNINGS,
       C.EI_MAX_CONTRIBUTION * 1.4, // employer pays 1.4×
     ],
+  },
+  {
+    // EI BENEFITS, not premiums (2026-10-11): 55% of average insurable weekly
+    // earnings up to $729 a week (canada.ca EI regular benefits, benefit amount,
+    // 2026). The 30% is the long-tenured test — premiums of at least 30% of the
+    // annual maximum in 7 of 10 years (canada.ca temporary EI measures page).
+    label: 'EI benefits',
+    mentions: /EI benefit|weekly benefit|regular benefits|waiting (?:period|week)|long-tenured|prestations? d.assurance-emploi/i,
+    rates: [EI_BENEFIT_RATE * 100, 30],
+    amounts: [EI_MAX_WEEKLY_BENEFIT, EI_MAX_WEEKLY_BENEFIT * 20],
   },
   {
     label: 'EI (Quebec)',
@@ -387,6 +402,12 @@ function auditText(
       if (a < b)
         for (const { slug: ps } of PROVINCE_SEO_CONFIGS)
           derivedMoney.push(getSalaryFigures(b, ps).netAnnual - getSalaryFigures(a, ps).netAnnual);
+
+  // "At $40,000 the waived week is worth $423, and 20 extra weeks $8,460": the
+  // weekly EI benefit for each salary named, and that week times 20 (the extra
+  // weeks for long-tenured workers). Only when the field is about EI benefits.
+  if (/EI benefit|weekly benefit|waiting (?:period|week)|long-tenured/i.test(context))
+    for (const v of new Set(salaries)) { const w = eiWeeklyBenefit(v); derivedMoney.push(w, w * 20); }
 
   // "A $5,000 RRSP contribution saves $1,423 at $80,000": the tax on the
   // salary minus the tax on the salary less the deduction, per province. Only
