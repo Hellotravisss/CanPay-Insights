@@ -120,7 +120,7 @@ const TOPICS: Topic[] = [
     // 2026). The 30% is the long-tenured test — premiums of at least 30% of the
     // annual maximum in 7 of 10 years (canada.ca temporary EI measures page).
     label: 'EI benefits',
-    mentions: /EI benefit|weekly benefit|regular benefits|waiting (?:period|week)|long-tenured|prestations? d.assurance-emploi/i,
+    mentions: /EI benefit|weekly (?:benefit|maximum)|regular[- ]benefits?|waiting (?:period|week)|long-tenured|extra (?:20 )?weeks|prestations? d.assurance-emploi/i,
     rates: [EI_BENEFIT_RATE * 100, 30],
     amounts: [EI_MAX_WEEKLY_BENEFIT, EI_MAX_WEEKLY_BENEFIT * 20],
   },
@@ -378,6 +378,9 @@ function auditText(
   const derivedMoney: number[] = [];
   const salaries: number[] = [];
   const derivedRates: number[] = [];
+  // Kept apart from derivedMoney: a benefit figure is judged against benefit
+  // derivations only, not the hundreds of tax figures that could match by chance.
+  const eiDerived: number[] = [];
   for (const m of [...context.matchAll(MONEY)]) {
     const v = num(m[1]);
     let salary = v >= 15000 && v <= 500000 ? v : 0;
@@ -407,7 +410,11 @@ function auditText(
   // weekly EI benefit for each salary named, and that week times 20 (the extra
   // weeks for long-tenured workers). Only when the field is about EI benefits.
   if (/EI benefit|weekly benefit|waiting (?:period|week)|long-tenured/i.test(context))
-    for (const v of new Set(salaries)) { const w = eiWeeklyBenefit(v); derivedMoney.push(w, w * 20); }
+    for (const v of new Set(salaries)) {
+      const w = eiWeeklyBenefit(v);
+      // the premium on the same salary may share the sentence ("you pay $978 a year for this cover")
+      eiDerived.push(w, w * 20, ...PROVINCE_SEO_CONFIGS.map(({ slug: ps }) => getSalaryFigures(v, ps).eiPremium));
+    }
 
   // "A $5,000 RRSP contribution saves $1,423 at $80,000": the tax on the
   // salary minus the tax on the salary less the deduction, per province. Only
@@ -454,16 +461,23 @@ function auditText(
     const topics = TOPICS.filter((t) => t.mentions.test(g) && (!t.requires || t.requires.test(g)));
     const quotesTakeHome = derivedMoney.length > 0 && QUOTES_TAKE_HOME.test(gateSelf[i]);
     const statesARule = topics.length > 0 && STATES_A_RULE.test(g);
-    if (!quotesTakeHome && !statesARule) return;
+    // EI benefit figures are derived per salary (weekly benefit, x20) above, so
+    // every sentence about them is judged — a table of benefit values states no
+    // "rule" in words and was skipped whole (a planted $8,640 went through).
+    const aboutEiBenefits = topics.some((t) => t.label === 'EI benefits');
+    if (!quotesTakeHome && !statesARule && !aboutEiBenefits) return;
     // Commission/bonus example tables stack one income on another and quote
     // the marginal outcome — arithmetic across two incomes at once, which the
     // per-salary engine derivation cannot reproduce. Documented blind spot.
     if (/\bcommission\b/i.test(g)) return;
     // A sentence about how much a raise adds is doing arithmetic across two
     // scenarios, not quoting a rule; there is nothing here to compare against.
-    if (DESCRIBES_A_CHANGE.test(g)) return;
+    // ...except EI benefit values, which ARE derived here (weekly x20 for the extra weeks).
+    if (DESCRIBES_A_CHANGE.test(g) && !aboutEiBenefits) return;
 
-    const acceptedAmounts = [...topics.flatMap((t) => t.amounts), ...derivedMoney];
+    const acceptedAmounts = aboutEiBenefits && !quotesTakeHome
+      ? [...topics.flatMap((t) => t.amounts), ...eiDerived]
+      : [...topics.flatMap((t) => t.amounts), ...derivedMoney, ...eiDerived];
     const acceptedRates = topics.flatMap((t) => t.rates);
     // Only a sentence that says it is reporting a computed rate may lean on one.
     if (DESCRIBES_A_COMPUTED_RATE.test(g)) acceptedRates.push(...derivedRates);
@@ -533,7 +547,7 @@ function auditText(
         if (isGross(f.v, f.at, f.raw)) continue;
         if (!NAMES_A_LIMIT.test(g) && !quotesTakeHome) continue;
       }
-      if (f.raw.endsWith('%') && !statesARule) continue;
+      if (f.raw.endsWith('%') && !statesARule && !aboutEiBenefits) continue;
       stats.checked++;
       const pool = f.raw.endsWith('%') ? acceptedRates : acceptedAmounts;
       if (pool.some((a) => matchesAtPrintedPrecision(f.printed, a))) continue;
@@ -631,6 +645,10 @@ if (process.argv.includes('--selftest')) {
     ['The EI maximum premium is $1,077.48 in 2026.', '$1,077.48'],
     ['CPP2 applies between the first ceiling and $81,200.', '$81,200'],
     ['EI is charged at a rate of 1.64% on insurable earnings.', '1.64%'],
+    // EI benefits (2026-10-11): a wrong weekly benefit, and a wrong "20 extra weeks" value
+    // in a sentence that also reads as a change — both slipped through before.
+    ['At a $60,000 salary the weekly EI benefit is $655.', '$655'],
+    ['At a $40,000 salary, the 20 extra weeks for long-tenured workers are worth $8,640.', '$8,640'],
     ['The CPP basic exemption is $3,800 a year.', '$3,800'],
     ['The federal basic personal amount is $16,129 for 2026.', '$16,129'],
     ['The lowest federal tax rate is 15% on the first $58,523.', '15%'],
