@@ -3229,4 +3229,112 @@ The 2.3% figure is a national average across every wage level, industry, and pro
 Wage and employment figures, including the provincial and sector breakdowns, are from Statistics Canada's [Labour Force Survey, September 2026](https://www150.statcan.gc.ca/n1/daily-quotidien/261009/dq261009a-eng.htm), released October 9, 2026. The 3.0% inflation figure is from Statistics Canada's [Consumer Price Index, August 2026](https://www150.statcan.gc.ca/n1/daily-quotidien/260914/dq260914a-eng.htm), released September 14, 2026 — the most recent CPI reading available as of publication, since the September 2026 CPI is not due until October 19, 2026. Take-home pay figures are calculated with the CanPay Insights tax engine using 2026 federal and provincial tax brackets, CPP/CPP2 (QPP/QPP2 and QPIP for Quebec), and EI premiums, for a single full-time worker (2,080 hours/year) with basic personal amounts only — real paycheques vary with credits, benefits, RRSP contributions, and actual hours worked. This is general information, not financial or tax advice.
 `,
   },
+  {
+    id: 'study-30',
+    slug: 'take-home-pay-55000-by-province-2026',
+    title: '$55,000 Salary: What You Actually Take Home, Province by Province (2026)',
+    subtitle:
+      'We ran a flat $55,000 salary — close to a typical full-time wage — through the same 2026 tax engine that is checked row-by-row against the CRA payroll deduction tables, in all 13 provinces and territories.',
+    excerpt:
+      'A $55,000 salary nets $45,152 a year in Nunavut but only $41,523 in Nova Scotia — a $3,629 gap, almost all of it provincial tax. Exact 2026 take-home pay, tax, and deductions for all 13 provinces and territories.',
+    metaTitle: 'Take-Home Pay on $55,000 by Province (2026)',
+    metaDescription:
+      'A $55,000 salary nets $41,523 to $45,152 depending on province in 2026, a $3,629 gap. Exact take-home pay, tax, and deductions for all 13.',
+    keywords: [
+      'take home pay 55000 canada',
+      '55000 salary after tax',
+      'take home pay by province 2026',
+      '55k salary canada tax',
+      'salary after tax canada province comparison',
+      'how much is 55000 after tax',
+    ],
+    category: 'news',
+    tags: ['Take-Home Pay', 'Provinces', 'Tax Engine', '2026'],
+    publishedAt: '2026-10-15',
+    readTime: 6,
+    imageUrl: '/blog/take-home-pay-55000-by-province-2026.svg',
+    directAnswer:
+      'A $55,000 salary nets between $41,523 (Nova Scotia) and $45,152 (Nunavut) after federal tax, provincial tax, CPP/QPP, and EI in 2026 — a $3,629 gap driven almost entirely by provincial income tax. Ontario nets $43,861 a year ($3,655 a month), British Columbia $44,203, Alberta $44,146, and Quebec $42,192. These are CanPay Insights’ own 2026 calculations, from the same tax engine checked row by row against the CRA’s payroll deduction tables.',
+    faq: [
+      {
+        question: 'How much is $55,000 after tax in Ontario?',
+        answer:
+          'A $55,000 salary nets $43,861 a year in Ontario in 2026, or $3,655 a month, after federal tax, Ontario tax, CPP, and EI — an effective deduction rate of 20.3%.',
+      },
+      {
+        question: 'Which province keeps the most of a $55,000 salary?',
+        answer:
+          'Nunavut. A $55,000 salary there nets $45,152 a year, a 17.9% effective deduction rate, the lowest in the country, because the territory has the lowest provincial/territorial tax rates in Canada.',
+      },
+      {
+        question: 'Which province takes the most tax from a $55,000 salary?',
+        answer:
+          'Nova Scotia. The same $55,000 salary nets just $41,523 there, a 24.5% effective deduction rate, the highest of any province or territory in 2026.',
+      },
+      {
+        question: 'How much CPP and EI do I pay on a $55,000 salary?',
+        answer:
+          'CPP and EI together come to $3,961 a year in every province except Quebec, where CPP is replaced by the Quebec Pension Plan and QPIP, totalling $4,196 — the extra $235 is Quebec’s own parental insurance premium, which the rest of Canada does not pay.',
+      },
+      {
+        question: 'Why is federal tax lower in Quebec but take-home pay still near the bottom?',
+        answer:
+          'Quebec residents get a federal tax abatement worth $792 on a $55,000 salary, so federal tax is $3,840 instead of $4,632 everywhere else. But Quebec’s own provincial tax on that salary is $4,772, among the highest in Canada, which more than cancels out the abatement.',
+      },
+      {
+        question: 'Does the provincial ranking change at a lower salary like $55,000 versus a higher one?',
+        answer:
+          'Slightly. At $75,000, the order from most to least take-home pay runs Nunavut, Northwest Territories, British Columbia, Yukon, Alberta, Ontario, Saskatchewan, New Brunswick, Manitoba, Newfoundland and Labrador, Prince Edward Island, Quebec, Nova Scotia. At $55,000, Yukon edges ahead of British Columbia, and Newfoundland and Labrador edges ahead of Manitoba, while Quebec moves ahead of Prince Edward Island — small reorderings caused by where each province sets its lower tax brackets and basic personal amount, but Nunavut and Nova Scotia stay at the top and bottom either way.',
+      },
+    ],
+    content: `
+## A $55,000 salary is not the same paycheque everywhere
+
+Gross pay of $55,000 — close to a typical full-time wage in Canada — looks identical on an offer letter no matter where in Canada the job is. What lands in the bank account does not. We ran that exact salary — single filer, no other income, bi-weekly pay — through the CanPay Insights tax engine for all 13 provinces and territories, the same engine checked row by row against the CRA's T4032 payroll deduction tables before every release.
+
+## 2026 take-home pay on $55,000, every province and territory
+
+| Rank | Province | Take-home / year | Take-home / month | Federal tax | Provincial tax | CPP/QPP + EI | Total deductions | Effective rate |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| 1 | Nunavut | **$45,152** | $3,763 | $4,632 | $1,255 | $3,961 | $9,848 | 17.9% |
+| 2 | Northwest Territories | **$44,430** | $3,702 | $4,632 | $1,978 | $3,961 | $10,570 | 19.2% |
+| 3 | Yukon | **$44,290** | $3,691 | $4,632 | $2,118 | $3,961 | $10,710 | 19.5% |
+| 4 | British Columbia | **$44,203** | $3,684 | $4,632 | $2,205 | $3,961 | $10,797 | 19.6% |
+| 5 | Alberta | **$44,146** | $3,679 | $4,632 | $2,262 | $3,961 | $10,854 | 19.7% |
+| 6 | Ontario | **$43,861** | $3,655 | $4,632 | $2,546 | $3,961 | $11,139 | 20.3% |
+| 7 | Saskatchewan | **$43,188** | $3,599 | $4,632 | $3,219 | $3,961 | $11,812 | 21.5% |
+| 8 | New Brunswick | **$42,795** | $3,566 | $4,632 | $3,612 | $3,961 | $12,205 | 22.2% |
+| 9 | Newfoundland and Labrador | **$42,537** | $3,545 | $4,632 | $3,870 | $3,961 | $12,463 | 22.7% |
+| 10 | Manitoba | **$42,453** | $3,538 | $4,632 | $3,954 | $3,961 | $12,547 | 22.8% |
+| 11 | Quebec | **$42,192** | $3,516 | $3,840 | $4,772 | $4,196 | $12,808 | 23.3% |
+| 12 | Prince Edward Island | **$42,167** | $3,514 | $4,632 | $4,240 | $3,961 | $12,833 | 23.3% |
+| 13 | Nova Scotia | **$41,523** | $3,460 | $4,632 | $4,885 | $3,961 | $13,477 | 24.5% |
+
+The spread between the best and worst outcome on an identical salary is **$3,629 a year** — about $300 a month — between Nunavut and Nova Scotia.
+
+## Why the gap is almost all provincial tax
+
+Look down the federal tax column and it barely moves: **$4,632** in every province except Quebec. CPP and EI barely move either, at **$3,961** everywhere except Quebec. The entire $3,629 spread between the best and worst province comes from provincial income tax, which ranges from **$1,255** in Nunavut to **$4,885** in Nova Scotia — nearly a fourfold difference on the same income.
+
+The three territories and British Columbia take the least, because their tax brackets and basic personal amounts are more generous at this income level. Atlantic Canada and Quebec take the most, because their provincial brackets climb faster and their basic personal amounts are smaller.
+
+## Quebec is a special case
+
+Quebec workers pay **$792 less federal tax** on $55,000 than everyone else ($3,840 instead of $4,632) — the federal abatement that exists because Quebec runs its own parental insurance (QPIP) and collects its own pension contributions (QPP) instead of relying entirely on federal programs. Quebec residents also pay **$235 more** into CPP/QPP and QPIP combined than the rest of Canada ($4,196 versus $3,961).
+
+None of that saves Quebec workers money overall: **provincial tax in Quebec is $4,772** on a $55,000 salary, among the highest in the country, more than enough to offset the federal discount. Net result: $42,192 take-home, fourth-lowest in Canada.
+
+## The ranking shifts slightly at lower income
+
+This is not simply a scaled-down version of the $75,000 or $100,000 comparisons. At $75,000, the order from most to least take-home pay runs Nunavut, Northwest Territories, British Columbia, Yukon, Alberta, Ontario, Saskatchewan, New Brunswick, Manitoba, Newfoundland and Labrador, Prince Edward Island, Quebec, Nova Scotia. At $55,000, Yukon edges ahead of British Columbia, Newfoundland and Labrador edges ahead of Manitoba, and Quebec moves ahead of Prince Edward Island. Nunavut and Nova Scotia stay at the top and bottom of the list either way, but the middle of the pack reorders because each province sets its lowest tax bracket and basic personal amount differently — what matters most at $55,000 is not the same as what matters most at $75,000 or $100,000.
+
+## What this does and doesn't tell you
+
+This is a single, deliberately plain scenario — one income, no RRSP contribution, no dependants, no other credits — so the 13 numbers are directly comparable to each other. Your own take-home pay will differ if you contribute to an RRSP, claim other credits, or have a different pay frequency. Cost of living also varies enormously between, say, Nunavut and Nova Scotia, so the province that keeps the most of your paycheque is not automatically the one where it goes furthest.
+
+## How we calculated this
+
+Every figure above comes from CanPay Insights' own 2026 tax engine — the same engine whose output is checked, row by row, against the CRA's T4032 payroll deduction tables (claim code 1, bi-weekly) for all 13 jurisdictions, plus the CRA's CPP/EI tables and Revenu Québec's source deduction tables, before any release. Figures are rounded to the nearest dollar. To see your own numbers with your actual salary, deductions, and pay frequency, use the [free take-home pay calculator](/), or jump straight to your own province: [Ontario](/ontario), [British Columbia](/bc), [Alberta](/alberta), [Quebec](/quebec), [Manitoba](/manitoba), [Saskatchewan](/saskatchewan), [Nova Scotia](/nova-scotia), [New Brunswick](/new-brunswick), [Newfoundland and Labrador](/newfoundland), [Prince Edward Island](/pei), [Yukon](/yukon), [Northwest Territories](/northwest-territories), or [Nunavut](/nunavut). For the same comparison at higher salaries, see [$75,000 by province](/blog/take-home-pay-75000-by-province-2026) and [$100,000 by province](/blog/take-home-pay-100000-by-province-2026). For a breakdown of CPP and EI specifically, see the [CPP/EI calculator](/cpp-ei-calculator) and [EI Premium Rate for 2027](/blog/ei-premium-rate-2027). This is general information, not financial advice.
+`,
+  },
 ];
