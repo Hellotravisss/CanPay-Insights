@@ -1560,13 +1560,6 @@
   },
   {
    "page": "/data",
-   "text": "Anonymous aggregates from the calculator itself — which income ranges people check, from which province, on which weekday and at what hour of their own evening, and, where a visitor chose to give it, from which postal-code area.",
-   "backing": "manual",
-   "note": "Checked on 2026-09-25 against the payload built in lib/telemetry.ts recordCalcEvent (fields sent, ranges not amounts, work pattern numbers); automated browsers never send, so no live test is possible.",
-   "reviewed": "2026-09-25"
-  },
-  {
-   "page": "/data",
    "text": "Income is recorded only as a range, never an amount; location is a city centre from the connection or a postal-code prefix the visitor typed or a position rounded on their own device.",
    "backing": "manual",
    "note": "Checked on 2026-09-25 against the payload built in lib/telemetry.ts recordCalcEvent (fields sent, ranges not amounts, work pattern numbers); automated browsers never send, so no live test is possible.",
@@ -2048,6 +2041,25 @@
    "backing": "manual",
    "note": "Checked 2026-10-08 against CanPayApp 1.2.4 (READY_FOR_SALE via ASC API): src/components/TelemetryToggle.tsx rendered under results in App.tsx; setTelemetryEnabled stores an opt-out flag in AsyncStorage; recordCalcEvent and recordAnswer return early when opted out. Replaces the 'no switch yet' sentences.",
    "reviewed": "2026-10-08"
+  },
+  {
+   "page": "/data",
+   "text": "Take-home pay, every province",
+   "backing": "not-a-claim",
+   "note": "Card heading / licence label on the redesigned /data page (2026-10-16)."
+  },
+  {
+   "page": "/data",
+   "text": "Free for research · CC BY-NC-SA 4.0",
+   "backing": "not-a-claim",
+   "note": "Card heading / licence label on the redesigned /data page (2026-10-16)."
+  },
+  {
+   "backing": "manual",
+   "note": "Checked on 2026-09-25 against the payload built in lib/telemetry.ts recordCalcEvent (fields sent, ranges not amounts, work pattern numbers); automated browsers never send, so no live test is possible. (2026-10-16: a <details> summary now precedes it; text unchanged.)",
+   "reviewed": "2026-09-25",
+   "page": "/data",
+   "text": "What it records, and what it never does Anonymous aggregates from the calculator itself — which income ranges people check, from which province, on which weekday and at what hour of their own evening, and, where a visitor chose to give it, from which postal-code area."
   }
  ]
 }

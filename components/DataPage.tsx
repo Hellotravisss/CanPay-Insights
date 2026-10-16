@@ -164,7 +164,7 @@ const DataPage: React.FC = () => {
             <details className="mt-5 text-sm text-slate-600">
               <summary className="cursor-pointer font-semibold text-slate-700">Who uses which, and the privacy rules</summary>
               <p className="mt-2 leading-relaxed">
-                Who asks for which: <strong className="text-slate-800">recruiters and compensation-data teams</strong> use
+                Who it is for: <strong className="text-slate-800">recruiters and compensation-data teams</strong>,
                 the pay ranges people actually test and the expectation gap;{' '}
                 <strong className="text-slate-800">lenders and mortgage teams</strong>, neighbourhood demand by income;{' '}
                 <strong className="text-slate-800">real-estate and relocation firms</strong>, the province pairs people
