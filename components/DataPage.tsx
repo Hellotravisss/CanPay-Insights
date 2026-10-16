@@ -2,6 +2,7 @@
 import React from 'react';
 import { useRouter } from 'next/navigation';
 import AvowdCredit from './AvowdCredit';
+import DataPulse from './DataPulse';
 import { DATASET_VERSION } from '../lib/datasetVersion';
 
 // Illustrative slice of the full 455-row dataset (net take-home at $80,000, 2026).
@@ -45,35 +46,144 @@ const DataPage: React.FC = () => {
       <main className="max-w-4xl mx-auto px-4 py-12" role="main">
         <div className="bg-white rounded-2xl shadow-sm border border-slate-200 p-8 md:p-12">
           <h1 className="text-3xl md:text-4xl font-bold text-slate-800 mb-2">Open dataset: Canadian take-home pay 2026</h1>
-          <p className="text-slate-500 mb-8 text-lg">
+          <p className="text-slate-500 mb-6 text-lg">
             Net pay, federal &amp; provincial tax, CPP/CPP2, and EI for every province and territory — free to download and cite under CC BY 4.0.
           </p>
 
-          <div className="prose prose-slate max-w-none">
-            <p className="text-slate-600 text-lg leading-relaxed mb-6">
-              We compute take-home pay for <strong>13 provinces and territories × 35 income levels ($30,000–$200,000) =
-              455 rows</strong> straight from our open 2026 calculation engine, and publish the full result as a
-              machine-readable dataset. Journalists, bloggers, and researchers are welcome to use it.
+          <DataPulse />
+
+          {/* Two datasets, side by side: computed (anyone could rebuild it from the
+              rates) and observed (nobody else has it). Same sentences as before —
+              they are registered claims — only the layout changed (2026-10-16). */}
+          <div className="grid gap-5 md:grid-cols-2 mb-10">
+            <section className="rounded-xl border border-slate-200 p-5 flex flex-col">
+              <p className="text-xs font-bold uppercase tracking-wider text-red-600">Free · CC BY 4.0</p>
+              <h2 className="mt-1 text-xl font-bold text-slate-800">Take-home pay, every province</h2>
+              <p className="mt-2 text-sm leading-relaxed text-slate-600 flex-1">
+                We compute take-home pay for <strong>13 provinces and territories × 35 income levels ($30,000–$200,000) =
+                455 rows</strong> straight from our open 2026 calculation engine, and publish the full result as a
+                machine-readable dataset. Journalists, bloggers, and researchers are welcome to use it.
+              </p>
+              <div className="mt-4 flex flex-wrap gap-2">
+                <a href="/data/canpay-take-home-2026.csv" download className="inline-flex items-center rounded-lg bg-red-600 px-4 py-2 text-sm font-bold text-white no-underline hover:bg-red-700">Download CSV</a>
+                <a href="/data/canpay-take-home-2026.json" download className="inline-flex items-center rounded-lg border border-slate-300 px-4 py-2 text-sm font-bold text-slate-700 no-underline hover:bg-slate-50">Download JSON</a>
+              </div>
+            </section>
+
+            {/* The second dataset. The one on the left is computed from published
+                tax rates — reproducible by anyone with the rates. This one is
+                observed, and nobody else has it. */}
+            <section className="rounded-xl border-2 border-red-100 bg-red-50/40 p-5 flex flex-col">
+              <p className="text-xs font-bold uppercase tracking-wider text-red-600">Free for research · CC BY-NC-SA 4.0</p>
+              <h2 className="mt-1 text-xl font-bold text-slate-800">Second dataset: what Canadians actually check</h2>
+              <p className="mt-2 text-sm leading-relaxed text-slate-600 flex-1">
+                <strong className="text-slate-800">These are people who went looking for a pay
+                calculator, not a random sample of Canadians</strong> — the file carries that warning
+                and the rest of the method inside it, so it stays attached to the data after
+                download.
+              </p>
+              <div className="mt-4 flex flex-wrap gap-2">
+                <a href="/data/usage.json" className="inline-flex items-center rounded-lg bg-slate-900 px-4 py-2 text-sm font-bold text-white no-underline hover:bg-slate-800">Open usage dataset (JSON, CC BY-NC-SA 4.0)</a>
+              </div>
+              <p className="mt-3 text-xs text-slate-500">
+                Updated hourly · <code className="rounded bg-white px-1.5 py-0.5">GET
+                canpayinsights.ca/data/usage.json</code> · CORS open
+              </p>
+              <details className="mt-3 text-sm text-slate-600">
+                <summary className="cursor-pointer font-semibold text-slate-700">What it records, and what it never does</summary>
+                <p className="mt-2 leading-relaxed">
+                  Anonymous aggregates from the calculator itself — which income ranges people check,
+                  from which province, on which weekday and at what hour of their own evening, and,
+                  where a visitor chose to give it, from which postal-code area. Income is recorded
+                  only as a range, never an amount; location is a city centre from the connection or a
+                  postal-code prefix the visitor typed or a position rounded on their own device. Small
+                  cells are withheld rather than shown (twenty people for any postal-area figure), and
+                  the file says how many were withheld so you can see what is missing.
+                </p>
+                <p className="mt-2 text-xs leading-5 text-slate-500">
+                  Free for research, journalism and personal use under{' '}
+                  <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank" rel="noopener noreferrer" className="text-red-600 underline hover:text-red-700">CC BY-NC-SA 4.0</a>.
+                  Commercial use needs a licence — see below.
+                </p>
+              </details>
+            </section>
+          </div>
+
+          {/* The paid tier. Ookla gives its measurements away as coarse open
+              tiles and sells the fine-grained version; the free file is the proof
+              that the paid one exists. Only claims the data can back today. */}
+          <section id="licensing" className="rounded-xl border border-slate-200 bg-white p-5 md:p-6 mb-10 scroll-mt-24">
+            <h2 className="text-xl font-bold text-slate-800 mb-1">Licensed data for organisations</h2>
+            <p className="text-sm leading-relaxed text-slate-600 mb-4">
+              The open file is the coarse view. Under licence we provide extracts that no public
+              statistic carries, because they come from what people do at the moment they check
+              their pay:
+            </p>
+            <ul className="grid gap-3 sm:grid-cols-2 mb-5 list-none p-0">
+              {[
+                ['Neighbourhood demand', 'calculations by postal-code area (FSA) and income range, month by month.'],
+                ['Relocation intent', 'which province pairs people compare in one visit, and at what income.'],
+                ['Observed pay changes', 'direction and size of real raises and cuts, from people who reopen a saved calculation.'],
+                ['Work patterns', 'shift hours, unpaid breaks, overtime and tips by province and sector.'],
+              ].map(([t, d]) => (
+                <li key={t} className="rounded-lg border border-slate-200 p-3 text-sm leading-relaxed text-slate-600">
+                  <strong className="text-slate-800">{t}</strong> — {d}
+                </li>
+              ))}
+              <li className="rounded-lg border border-dashed border-slate-300 p-3 text-sm leading-relaxed text-slate-500">
+                <strong className="text-slate-700">Expectation gap</strong> (still building; not yet large enough to license) — who finds their take-home lower than they thought, by province and income.
+              </li>
+            </ul>
+
+            <div className="grid grid-cols-3 gap-3 mb-4 text-center">
+              {[['CA$250', 'monthly feed', '/month'], ['CA$750', 'one custom extract', ''], ['CA$2,400', 'annual research licence', '']].map(([p, l, u]) => (
+                <div key={l} className="rounded-lg bg-slate-50 p-3">
+                  <p className="text-xl font-bold text-slate-800">{p}<span className="text-xs font-normal text-slate-500">{u}</span></p>
+                  <p className="mt-1 text-xs text-slate-500">{l}</p>
+                </div>
+              ))}
+            </div>
+            <p className="sr-only">
+              <strong>Prices from:</strong> monthly feed CA$250/month · one custom extract CA$750 · annual research licence CA$2,400.
             </p>
 
-            <div className="flex flex-wrap gap-3 mb-10">
-              <a
-                href="/data/canpay-take-home-2026.csv"
-                download
-                className="inline-flex items-center gap-2 rounded-lg bg-red-600 px-5 py-2.5 font-bold text-white no-underline transition-colors hover:bg-red-700"
-              >
-                Download CSV
-              </a>
-              <a
-                href="/data/canpay-take-home-2026.json"
-                download
-                className="inline-flex items-center gap-2 rounded-lg border border-slate-300 px-5 py-2.5 font-bold text-slate-700 no-underline transition-colors hover:bg-slate-50"
-              >
-                Download JSON
-              </a>
-            </div>
+            <p className="text-sm leading-relaxed text-slate-600 mb-4">
+              <strong className="text-slate-800">Free sample, September 2026:</strong>{' '}
+              <a href="/data/sample/2026-09_volume_by_province_income_paytype.csv">volume</a> ·{' '}
+              <a href="/data/sample/2026-09_province_language.csv">language</a> ·{' '}
+              <a href="/data/sample/2026-09_monthly_indicators.csv">monthly indicators</a> ·{' '}
+              <a href="/data/sample/README.txt">field guide</a>
+            </p>
+            <a
+              href="mailto:info@canpayinsights.ca?subject=Data%20licence"
+              className="inline-flex items-center gap-2 rounded-lg bg-slate-900 px-4 py-2 text-sm font-bold text-white no-underline hover:bg-slate-800"
+            >
+              Ask about a licence
+            </a>
 
-            <h2 className="text-2xl font-bold text-slate-800 mb-4">Preview — take-home on an $80,000 salary (2026)</h2>
+            <details className="mt-5 text-sm text-slate-600">
+              <summary className="cursor-pointer font-semibold text-slate-700">Who uses which, and the privacy rules</summary>
+              <p className="mt-2 leading-relaxed">
+                Who asks for which: <strong className="text-slate-800">recruiters and compensation-data teams</strong> use
+                the pay ranges people actually test and the expectation gap;{' '}
+                <strong className="text-slate-800">lenders and mortgage teams</strong>, neighbourhood demand by income;{' '}
+                <strong className="text-slate-800">real-estate and relocation firms</strong>, the province pairs people
+                compare; <strong className="text-slate-800">immigration consultants and settlement agencies</strong>,
+                demand by interface language and province;{' '}
+                <strong className="text-slate-800">payroll and scheduling software</strong>, work patterns by sector.
+              </p>
+              <p className="mt-2 text-xs leading-5 text-slate-500">
+                Always aggregates, never individual records. Any figure for a postal-code area needs at
+                least twenty people behind it; smaller cells are withheld. The sample is people who used
+                the calculator, not a random sample of Canadians, and every extract says so. Licensees
+                agree not to attempt re-identification or resale.
+              </p>
+            </details>
+          </section>
+
+          <details className="mb-10 rounded-xl border border-slate-200 p-5">
+            <summary className="cursor-pointer text-lg font-bold text-slate-800">Preview and methodology — take-home dataset</summary>
+            <h2 className="mt-4 text-lg font-bold text-slate-800 mb-3">Preview — take-home on an $80,000 salary (2026)</h2>
             <div className="mb-3 overflow-hidden rounded-xl border border-slate-200">
               <table className="min-w-full border-collapse">
                 <thead>
@@ -92,113 +202,23 @@ const DataPage: React.FC = () => {
                 </tbody>
               </table>
             </div>
-            <p className="text-sm text-slate-500 mb-10">
+            <p className="text-sm text-slate-500 mb-6">
               The full download covers all 13 jurisdictions across $30,000–$200,000 — this is one slice.
             </p>
-
-            <h2 className="text-2xl font-bold text-slate-800 mb-4">Methodology</h2>
-            <p className="text-slate-600 leading-relaxed mb-4">
+            <h2 className="text-lg font-bold text-slate-800 mb-3">Methodology</h2>
+            <p className="text-sm text-slate-600 leading-relaxed mb-3">
               Figures are verified against published 2026 rates from the Canada Revenue Agency (CRA), Revenu Québec, and
               each provincial government, and apply:
             </p>
-            <ul className="list-disc pl-5 text-slate-600 leading-relaxed space-y-2 mb-4">
+            <ul className="list-disc pl-5 text-sm text-slate-600 leading-relaxed space-y-2">
               <li>Federal income tax — lowest bracket cut to 14% for 2026 — plus each province/territory&apos;s own brackets.</li>
               <li>CPP at 5.95% to the YMPE (~$74,600) and CPP2 (extra 4%) to the YAMPE (~$85,000); QPP/QPIP for Quebec.</li>
               <li>EI at 1.63% to the maximum insurable earnings ($68,900); Quebec uses the lower 1.30% rate.</li>
               <li>The basic personal amount only (no other credits or deductions), so figures are a clean, comparable baseline.</li>
             </ul>
+          </details>
 
-            {/* The second dataset. The one above is computed from published
-                tax rates — reproducible by anyone with the rates. This one is
-                observed, and nobody else has it. */}
-            <div className="rounded-xl border-2 border-red-100 bg-red-50/40 p-5 mb-10">
-              <h2 className="text-xl font-bold text-slate-800 mb-1">
-                Second dataset: what Canadians actually check
-              </h2>
-              <p className="text-sm leading-relaxed text-slate-600 mb-3">
-                Anonymous aggregates from the calculator itself — which income ranges people check,
-                from which province, on which weekday and at what hour of their own evening, and,
-                where a visitor chose to give it, from which postal-code area. Income is recorded
-                only as a range, never an amount; location is a city centre from the connection or a
-                postal-code prefix the visitor typed or a position rounded on their own device. Small
-                cells are withheld rather than shown (twenty people for any postal-area figure), and
-                the file says how many were withheld so you can see what is missing.
-              </p>
-              <p className="text-sm leading-relaxed text-slate-600 mb-4">
-                <strong className="text-slate-800">These are people who went looking for a pay
-                calculator, not a random sample of Canadians</strong> — the file carries that warning
-                and the rest of the method inside it, so it stays attached to the data after
-                download.
-              </p>
-              <a
-                href="/data/usage.json"
-                className="inline-flex items-center gap-2 rounded-lg bg-slate-900 px-4 py-2.5 text-sm font-bold text-white no-underline hover:bg-slate-800"
-              >
-                Open usage dataset (JSON, CC BY-NC-SA 4.0)
-              </a>
-              <p className="mt-3 text-xs text-slate-500">
-                Updated hourly · <code className="rounded bg-white px-1.5 py-0.5">GET
-                canpayinsights.ca/data/usage.json</code> · CORS open
-              </p>
-              <p className="mt-2 text-xs leading-5 text-slate-500">
-                Free for research, journalism and personal use under{' '}
-                <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank" rel="noopener noreferrer" className="text-red-600 underline hover:text-red-700">CC BY-NC-SA 4.0</a>.
-                Commercial use needs a licence — see below.
-              </p>
-            </div>
-
-            {/* The paid tier. Ookla gives its measurements away as coarse open
-                tiles and sells the fine-grained version to carriers, cloud
-                companies and regulators; the free file is the proof that the
-                paid one exists. Same shape here. Only claims the data can
-                back today — no prices, no customer logos, no invented volume. */}
-            <div id="licensing" className="rounded-xl border border-slate-200 bg-white p-5 mb-10 scroll-mt-24">
-              <h2 className="text-xl font-bold text-slate-800 mb-1">Licensed data for organisations</h2>
-              <p className="text-sm leading-relaxed text-slate-600 mb-3">
-                The open file is the coarse view. Under licence we provide extracts that no public
-                statistic carries, because they come from what people do at the moment they check
-                their pay:
-              </p>
-              <ul className="list-disc pl-5 space-y-1.5 text-sm leading-relaxed text-slate-600 mb-3">
-                <li><strong className="text-slate-800">Neighbourhood demand</strong> — calculations by postal-code area (FSA) and income range, month by month.</li>
-                <li><strong className="text-slate-800">Relocation intent</strong> — which province pairs people compare in one visit, and at what income.</li>
-                <li><strong className="text-slate-800">Observed pay changes</strong> — direction and size of real raises and cuts, from people who reopen a saved calculation.</li>
-                <li><strong className="text-slate-800">Expectation gap</strong> (still building; not yet large enough to license) — who finds their take-home lower than they thought, by province and income.</li>
-                <li><strong className="text-slate-800">Work patterns</strong> — shift hours, unpaid breaks, overtime and tips by province and sector.</li>
-              </ul>
-              <p className="text-sm leading-relaxed text-slate-600 mb-3">
-                Who asks for which: <strong className="text-slate-800">recruiters and compensation-data teams</strong> use
-                the pay ranges people actually test and the expectation gap;{' '}
-                <strong className="text-slate-800">lenders and mortgage teams</strong>, neighbourhood demand by income;{' '}
-                <strong className="text-slate-800">real-estate and relocation firms</strong>, the province pairs people
-                compare; <strong className="text-slate-800">immigration consultants and settlement agencies</strong>,
-                demand by interface language and province;{' '}
-                <strong className="text-slate-800">payroll and scheduling software</strong>, work patterns by sector.
-              </p>
-              <p className="text-xs leading-5 text-slate-500 mb-3">
-                Always aggregates, never individual records. Any figure for a postal-code area needs at
-                least twenty people behind it; smaller cells are withheld. The sample is people who used
-                the calculator, not a random sample of Canadians, and every extract says so. Licensees
-                agree not to attempt re-identification or resale.
-              </p>
-              <p className="text-sm leading-relaxed text-slate-600 mb-1">
-                <strong className="text-slate-800">Free sample, September 2026:</strong>{' '}
-                <a href="/data/sample/2026-09_volume_by_province_income_paytype.csv">volume</a> ·{' '}
-                <a href="/data/sample/2026-09_province_language.csv">language</a> ·{' '}
-                <a href="/data/sample/2026-09_monthly_indicators.csv">monthly indicators</a> ·{' '}
-                <a href="/data/sample/README.txt">field guide</a>
-              </p>
-              <p className="text-sm leading-relaxed text-slate-600 mb-3">
-                <strong className="text-slate-800">Prices from:</strong> monthly feed CA$250/month · one custom extract CA$750 · annual research licence CA$2,400.
-              </p>
-              <a
-                href="mailto:info@canpayinsights.ca?subject=Data%20licence"
-                className="inline-flex items-center gap-2 rounded-lg border border-slate-300 px-4 py-2 text-sm font-bold text-slate-800 no-underline hover:border-red-300 hover:text-red-700"
-              >
-                Ask about a licence
-              </a>
-            </div>
-
+          <div className="prose prose-slate max-w-none">
             <h2 className="text-2xl font-bold text-slate-800 mb-4">Cite this dataset</h2>
             <div className="rounded-xl border border-slate-200 bg-slate-50 p-5 mb-6">
               <p className="text-sm leading-relaxed text-slate-700">
