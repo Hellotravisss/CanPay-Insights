@@ -1,5 +1,5 @@
 'use client';
-import { useEffect, useMemo, useState } from 'react';
+import { useEffect, useMemo, useRef, useState } from 'react';
 import { getSalaryFigures, PROVINCE_SEO_CONFIGS } from '../lib/salaryFigures';
 import { recordCalcEvent } from '../lib/telemetry';
 import { provinceLabel } from '../lib/provinceNames';
@@ -89,6 +89,9 @@ const CODE_TO_SLUG: Record<string, string> = {
 };
 
 const HOURS_PER_YEAR = 2080;
+const LANG_SHORT: Record<Lang, string> = {
+  en: 'EN', fr: 'FR', zh: '中文', pa: 'ਪੰਜਾਬੀ', tl: 'TL', hi: 'हिंदी', es: 'ES', uk: 'УКР', ko: '한국어', vi: 'VI',
+};
 
 export default function EmbedCalculator({
   initialProvince,
@@ -97,8 +100,16 @@ export default function EmbedCalculator({
   initialProvince?: string;
   initialLang?: string;
 }) {
-  const lang: Lang = initialLang && DICT[initialLang] ? (initialLang as Lang) : 'en';
+  // The site picks a language with ?lang=; the reader can switch between that
+  // language and Canada's two official ones (2026-10-16 — a Quebec site asked
+  // for both). Ten buttons would crowd a 420px widget, so it is at most three.
+  const baseLang: Lang = initialLang && DICT[initialLang] ? (initialLang as Lang) : 'en';
+  const [lang, setLang] = useState<Lang>(baseLang);
+  const langChoices = [...new Set<Lang>([baseLang, 'en', 'fr'])];
   const t = DICT[lang];
+  const langRef = useRef<Lang>(lang);
+  langRef.current = lang;
+  useEffect(() => { document.documentElement.lang = lang; }, [lang]);
 
   const startSlug =
     (initialProvince && CODE_TO_SLUG[initialProvince.toUpperCase()]) || 'ontario';
@@ -143,11 +154,12 @@ export default function EmbedCalculator({
       mode: unit === 'hour' ? 'simple' : 'annual',
       province: provinceName,
       annualIncome: annual,
-      lang,
+      lang: langRef.current,
       source: 'widget',
       embedHost,
     });
-  }, [touched, annual, provinceName, lang, unit, embedHost]);
+    // Not keyed on lang: switching language is not a new calculation.
+  }, [touched, annual, provinceName, unit, embedHost]);
 
   const locale = lang === 'fr' ? 'fr-CA' : 'en-CA';
   const [announce, setAnnounce] = useState('');
@@ -167,6 +179,20 @@ export default function EmbedCalculator({
       <div className="mb-3 flex items-center gap-2">
         <img src="/logo.png" alt="" width={22} height={22} className="rounded" />
         <span className="text-sm font-bold text-slate-800">{t.title}</span>
+        <div role="group" aria-label="Language / Langue" className="ml-auto flex overflow-hidden rounded-md border border-slate-300 text-[11px] font-semibold">
+          {langChoices.map((l) => (
+            <button
+              key={l}
+              type="button"
+              lang={l}
+              aria-pressed={l === lang}
+              onClick={() => setLang(l)}
+              className={`px-2 py-1 ${l === lang ? 'bg-slate-800 text-white' : 'bg-white text-slate-700 hover:bg-slate-100'}`}
+            >
+              {LANG_SHORT[l]}
+            </button>
+          ))}
+        </div>
       </div>
 
       <label htmlFor="cp-province" className="mb-1 text-[11px] font-semibold uppercase tracking-wide text-slate-500">

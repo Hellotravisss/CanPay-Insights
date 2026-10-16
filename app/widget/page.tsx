@@ -32,7 +32,7 @@ const widgetFaq = [
   {
     question: 'Can I set a default province or language?',
     answer:
-      'Yes — add URL parameters to the iframe src: ?province=BC (two-letter code) and &lang= with one of ten languages: en, fr, zh, pa (Punjabi), hi (Hindi), tl (Tagalog), es (Spanish), uk (Ukrainian), ko (Korean), or vi (Vietnamese).',
+      'Yes — add URL parameters to the iframe src: ?province=BC (two-letter code) and &lang= with one of ten languages: en, fr, zh, pa (Punjabi), hi (Hindi), tl (Tagalog), es (Spanish), uk (Ukrainian), ko (Korean), or vi (Vietnamese). Readers can then switch between that language, English and French from the widget itself.',
   },
   {
     question: 'Does the widget track my visitors?',
