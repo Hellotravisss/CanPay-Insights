@@ -2060,6 +2060,13 @@
    "reviewed": "2026-09-25",
    "page": "/data",
    "text": "What it records, and what it never does Anonymous aggregates from the calculator itself — which income ranges people check, from which province, on which weekday and at what hour of their own evening, and, where a visitor chose to give it, from which postal-code area."
+  },
+  {
+   "page": "/data",
+   "text": "Ask about a licence Who uses which, and the privacy rules Who it is for: recruiters and compensation-data teams, the pay ranges people actually test and the expectation gap; lenders and mortgage teams, neighbourhood demand by income; real-estate and relocation firms, the province pairs people compare; immigration consultants and settlement agencies, demand by interface language and province; payroll and scheduling software, work patterns by sector.",
+   "backing": "manual",
+   "note": "Checked 2026-10-16: describes intended buyer segments for each extract, not existing customers (none yet; the earlier \"Who asks for which\" wording implied requests that had not happened). Each extract named exists as a query on events (fsa, compared_provinces, change_direction, shift fields).",
+   "reviewed": "2026-10-16"
   }
  ]
 }
