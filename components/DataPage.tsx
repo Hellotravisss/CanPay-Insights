@@ -130,7 +130,7 @@ const DataPage: React.FC = () => {
                   <strong className="text-slate-800">{t}</strong> — {d}
                 </li>
               ))}
-              <li className="rounded-lg border border-dashed border-slate-300 p-3 text-sm leading-relaxed text-slate-500">
+              <li className="rounded-lg border border-dashed border-slate-300 p-3 text-sm leading-relaxed text-slate-600">
                 <strong className="text-slate-700">Expectation gap</strong> (still building; not yet large enough to license) — who finds their take-home lower than they thought, by province and income.
               </li>
             </ul>
@@ -138,8 +138,8 @@ const DataPage: React.FC = () => {
             <div className="grid grid-cols-3 gap-3 mb-4 text-center">
               {[['CA$250', 'monthly feed', '/month'], ['CA$750', 'one custom extract', ''], ['CA$2,400', 'annual research licence', '']].map(([p, l, u]) => (
                 <div key={l} className="rounded-lg bg-slate-50 p-3">
-                  <p className="text-xl font-bold text-slate-800">{p}<span className="text-xs font-normal text-slate-500">{u}</span></p>
-                  <p className="mt-1 text-xs text-slate-500">{l}</p>
+                  <p className="text-xl font-bold text-slate-800">{p}<span className="text-xs font-normal text-slate-600">{u}</span></p>
+                  <p className="mt-1 text-xs text-slate-600">{l}</p>
                 </div>
               ))}
             </div>

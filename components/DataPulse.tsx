@@ -45,19 +45,19 @@ const DataPulse: React.FC = () => {
       <div className="mt-4 grid grid-cols-2 gap-4 md:grid-cols-4">
         <div>
           <p className="text-3xl font-bold tabular-nums md:text-4xl">{fmt(u.totals.calculations)}</p>
-          <p className="mt-1 text-xs text-slate-400">anonymous calculations</p>
+          <p className="mt-1 text-xs text-slate-300">anonymous calculations</p>
         </div>
         <div>
           <p className="text-3xl font-bold md:text-4xl">{day(u.totals.first_day).replace(/, \d{4}$/, '')}</p>
-          <p className="mt-1 text-xs text-slate-400">first day logged ({u.totals.first_day.slice(0, 4)})</p>
+          <p className="mt-1 text-xs text-slate-300">first day logged ({u.totals.first_day.slice(0, 4)})</p>
         </div>
         <div>
           <p className="text-3xl font-bold tabular-nums md:text-4xl">{provinces}</p>
-          <p className="mt-1 text-xs text-slate-400">provinces and territories shown</p>
+          <p className="mt-1 text-xs text-slate-300">provinces and territories shown</p>
         </div>
         <div>
           <p className="text-3xl font-bold tabular-nums md:text-4xl">{languages}</p>
-          <p className="mt-1 text-xs text-slate-400">interface languages shown</p>
+          <p className="mt-1 text-xs text-slate-300">interface languages shown</p>
         </div>
       </div>
 
@@ -69,22 +69,22 @@ const DataPulse: React.FC = () => {
               <div key={h} className="flex-1 rounded-t-sm bg-red-500/80" style={{ height: `${Math.max(2, (v / hourMax) * 100)}%` }} title={`${h}:00 — ${fmt(v)}`} />
             ))}
           </div>
-          <div className="mt-1 flex justify-between text-[10px] text-slate-500"><span>midnight</span><span>6 am</span><span>noon</span><span>6 pm</span><span>11 pm</span></div>
+          <div className="mt-1 flex justify-between text-[10px] text-slate-300"><span>midnight</span><span>6 am</span><span>noon</span><span>6 pm</span><span>11 pm</span></div>
         </figure>
         <figure>
           <figcaption className="mb-3 text-sm font-semibold text-slate-200">Income range people enter</figcaption>
           <div className="space-y-1.5">
             {incomeRows.map((r) => (
               <div key={r.k} className="flex items-center gap-2 text-xs">
-                <span className="w-16 shrink-0 text-right text-slate-400">{INCOME_LABEL[r.k]}</span>
+                <span className="w-16 shrink-0 text-right text-slate-300">{INCOME_LABEL[r.k]}</span>
                 <span className="h-3 rounded-sm bg-slate-300/80" style={{ width: `${(r.n / incomeMax) * 100}%` }} />
-                <span className="tabular-nums text-slate-400">{fmt(r.n)}</span>
+                <span className="tabular-nums text-slate-300">{fmt(r.n)}</span>
               </div>
             ))}
           </div>
         </figure>
       </div>
-      <p className="mt-6 text-xs text-slate-400">
+      <p className="mt-6 text-xs text-slate-300">
         Read from <a href="/data/usage.json" className="text-red-300 underline">usage.json</a>; categories under 20 are withheld. People who looked for a pay calculator, not a random sample of Canadians.
       </p>
     </section>
