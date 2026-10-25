@@ -59,3 +59,11 @@ jobs:
       - name: Wipe credentials
         if: always()
         run: rm -rf ~/.canpay-secrets
+      # Email Travis on any failure: a red cross nobody looks at kept the site
+      # three days behind in October 2026.
+      - name: Notify on failure
+        if: failure()
+        run: python3 .github/scripts/notify-failure.py
+        env:
+          CF_EMAIL_TOKEN: ${{ secrets.CF_EMAIL_TOKEN }}
+          CF_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
