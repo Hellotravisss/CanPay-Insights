@@ -19,7 +19,7 @@ jobs:
         with: { node-version: 22, cache: npm }
       - run: npm ci
       # opennextjs-cloudflare build triggers `prebuild` (audit) via next build
-      - run: npx opennextjs-cloudflare build --dangerously-use-unsupported-next-version
+      - run: npx opennextjs-cloudflare build
         env:
           # Cloudflare Web Analytics site token. Public by design — it is in the
           # HTML of every page. Rendered by components/PageTag.tsx, which keeps
