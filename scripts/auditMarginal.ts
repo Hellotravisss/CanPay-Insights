@@ -17,7 +17,7 @@
  * by the payroll contribution, so those incomes are not compared.
  */
 import { calculateFromAnnualSalary } from '../utils/taxEngine';
-import { calculateMarginalRate } from '../utils/taxOptimizer';
+import { calculateMarginalRate, taxSavedByDeduction } from '../utils/taxOptimizer';
 import { PayFrequency, Province } from '../types';
 
 const net = (p: string, i: number) =>
@@ -29,7 +29,7 @@ const TOL = 0.0005; // 0.05 of a percentage point
 let failures = 0, checked = 0;
 for (const [code, p] of Object.entries(Province)) {
   for (const inc of INCOMES) {
-    const viaNet = 1 - (net(p, inc + 500) - net(p, inc - 500)) / 1000;
+    const viaNet = 1 - (net(p, inc) - net(p, inc - 1000)) / 1000; // the $1,000 below, as shown
     const shown = calculateMarginalRate(inc, p).combined;
     checked++;
     if (Math.abs(viaNet - shown) > TOL) {
@@ -45,6 +45,24 @@ checked++;
 if (Math.abs(on - 0.3148) > TOL) {
   failures++;
   console.log(`  ✗ Ontario $100,000: ${(on * 100).toFixed(2)}%, expected 31.48% (20.5% federal + 9.15% × 1.2 surtax)`);
+}
+
+// Quebec $85,000 sits on the QPP2 ceiling: the rate shown beside an RRSP refund
+// must be the rate that refund was worked out at (2026-10-26: 35.3% shown, 34.6% paid).
+{
+  const qc = calculateMarginalRate(85000, Province.QC);
+  const refundRate = taxSavedByDeduction(85000, Province.QC, 5000) / 5000;
+  checked++;
+  if (Math.abs(qc.combined - refundRate) > 0.002) {
+    failures++;
+    console.log(`  ✗ Quebec $85,000: shown ${(qc.combined * 100).toFixed(2)}% beside a refund at ${(refundRate * 100).toFixed(2)}%`);
+  }
+  checked++;
+  const parts = Math.round(qc.federal * 1000) / 10 + Math.round(qc.provincial * 1000) / 10;
+  if (Math.abs(parts - Math.round(qc.combined * 1000) / 10) > 0.11) {
+    failures++;
+    console.log(`  ✗ Quebec $85,000: federal + provincial labels add to ${parts.toFixed(1)}%, total says ${(qc.combined * 100).toFixed(1)}%`);
+  }
 }
 
 if (failures) {

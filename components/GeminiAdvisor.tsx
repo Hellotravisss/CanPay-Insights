@@ -1105,7 +1105,7 @@ const TaxOptimizationPanel: React.FC<TaxOptimizationPanelProps> = ({
         <TaxCard
           title={t('opt.marginalRate')}
           amount={marginalRate.combined * 100}
-          subtitle={`${t('opt.federalShort')} ${(marginalRate.federal * 100).toFixed(0)}% + ${t('opt.provShort')} ${(marginalRate.provincial * 100).toFixed(0)}%`}
+          subtitle={`${t('opt.federalShort')} ${(marginalRate.federal * 100).toFixed(1)}% + ${t('opt.provShort')} ${(marginalRate.provincial * 100).toFixed(1)}%`}
           isPercentage
         />
         <TaxCard

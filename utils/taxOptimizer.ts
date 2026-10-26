@@ -134,9 +134,12 @@ export const calculateMarginalRate = (
   annualIncome: number,
   province: string
 ): { federal: number; provincial: number; combined: number } => {
-  const step = 500;
-  const lo = Math.max(0, annualIncome - step);
-  const hi = lo + 2 * step;
+  // The rate on the $1,000 just BELOW this income: what a deduction (RRSP, FHSA)
+  // removes. A window centred on the income straddled the QPP2/CPP2 ceiling at
+  // $85,000 — Quebec showed 35.3% beside a $1,731 refund on $5,000 (34.6%), and
+  // "Federal 17% + Prov. 19%" that added to 36 (2026-10-26).
+  const hi = annualIncome;
+  const lo = Math.max(0, annualIncome - 1000);
   const taxAt = (income: number) => {
     const r = calculateFromAnnualSalary({ province, annualSalary: income, payFrequency: PayFrequency.BI_WEEKLY } as AnnualSalaryInputs);
     return { fed: r.federalTax * 26, prov: r.provincialTax * 26 };
