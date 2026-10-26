@@ -26,21 +26,33 @@ import {
  */
 
 export type CapEvent = {
-  kind: 'cpp' | 'cpp2' | 'ei' | 'qpip';
-  /** 1-based pay period in which the deduction reaches its maximum. */
+  /** The deductions that reach their maximum in this step (several when they cap on neighbouring cheques). */
+  kinds: Array<'cpp' | 'cpp2' | 'ei' | 'qpip'>;
+  /** 1-based pay period of the first cheque at the new, bigger level. */
   period: number;
-  /** Approximate month (1-12) of that period, assuming pays spread evenly. */
+  /** Month (1-12) of that cheque, assuming pays spread evenly. */
   month: number;
-  /** How much bigger each later cheque is once this deduction stops. */
+  /**
+   * How much bigger each cheque is after this step than before it: deductions
+   * on the cheque before the step minus deductions on the first cheque after it.
+   * Real cheques, so whatever starts on the same pay counts too — CPP2 begins
+   * exactly where CPP ends, and the old per-deduction figure overstated the
+   * jump by the CPP2 that replaces it (review 2026-10-26). Steps telescope:
+   * together they make up the first-to-last difference.
+   */
   perChequeBump: number;
 };
 
 export type CapTimeline = {
   periodsPerYear: number;
   events: CapEvent[];
-  /** First-cheque net vs last-cheque net difference (sum of all bumps). */
+  /** Deductions on the first cheque minus deductions on the last one. */
   lastChequeBump: number;
+  /** Total CPP/QPP, CPP2/QPP2, EI and QPIP deducted on each cheque, 1-based (index 0 unused). */
+  deductionsByPeriod: number[];
 };
+
+const cents = (v: number) => Math.round(v * 100) / 100;
 
 export function buildCapTimeline(annualGross: number, periodsPerYear: number, isQuebec: boolean): CapTimeline | null {
   const P = annualGross / periodsPerYear;
@@ -53,49 +65,69 @@ export function buildCapTimeline(annualGross: number, periodsPerYear: number, is
   const qpipMax = QPIP_RATE * QPIP_MAX_INSURABLE_EARNINGS;
 
   let cpp1 = 0, cpp2 = 0, ei = 0, qpip = 0, pensionable = 0;
-  const events: CapEvent[] = [];
+  const capped: Array<{ kind: CapEvent['kinds'][number]; period: number }> = [];
+  const D: number[] = [0];
   const month = (period: number) => Math.min(12, Math.ceil((period / periodsPerYear) * 12));
+  const caps = (sofar: number, add: number, max: number) => sofar < max && add > 0 && sofar + add >= max - 0.005;
 
   for (let i = 1; i <= periodsPerYear; i++) {
     // CPP/QPP tier 1: rate on pay above the prorated exemption, until the cap.
     const c1 = Math.min(Math.max(0, P - exemptionPerPay) * cpp1Rate, cpp1Max - cpp1);
-    if (cpp1 < cpp1Max && cpp1 + c1 >= cpp1Max - 0.005) {
-      events.push({ kind: 'cpp', period: i, month: month(i), perChequeBump: Math.max(0, P - exemptionPerPay) * cpp1Rate });
-    }
+    if (caps(cpp1, c1, cpp1Max)) capped.push({ kind: 'cpp', period: i });
     cpp1 += c1;
 
-    // CPP2: only on earnings above the first ceiling, to its own cap.
-    const aboveYmpeThisPay = Math.max(0, Math.min(pensionable + P, /* YAMPE-bound handled by cap */ Infinity) - Math.max(pensionable, CPP_MAX_PENSIONABLE_EARNINGS));
+    // CPP2/QPP2: only on cumulative earnings above the first ceiling, to its own cap.
+    const aboveYmpeThisPay = Math.max(0, pensionable + P - Math.max(pensionable, CPP_MAX_PENSIONABLE_EARNINGS));
     const c2 = Math.min(aboveYmpeThisPay * CPP2_RATE, CPP2_MAX_CONTRIBUTION - cpp2);
-    if (cpp2 < CPP2_MAX_CONTRIBUTION && c2 > 0 && cpp2 + c2 >= CPP2_MAX_CONTRIBUTION - 0.005) {
-      events.push({ kind: 'cpp2', period: i, month: month(i), perChequeBump: P * CPP2_RATE });
-    }
+    if (caps(cpp2, c2, CPP2_MAX_CONTRIBUTION)) capped.push({ kind: 'cpp2', period: i });
     cpp2 += c2;
     pensionable += P;
 
     // EI: flat rate on every dollar, until the cap.
     const e = Math.min(P * eiRate, eiMax - ei);
-    if (ei < eiMax && ei + e >= eiMax - 0.005) {
-      events.push({ kind: 'ei', period: i, month: month(i), perChequeBump: P * eiRate });
-    }
+    if (caps(ei, e, eiMax)) capped.push({ kind: 'ei', period: i });
     ei += e;
 
+    let q = 0;
     if (isQuebec) {
-      const q = Math.min(P * QPIP_RATE, qpipMax - qpip);
-      if (qpip < qpipMax && q > 0 && qpip + q >= qpipMax - 0.005) {
-        events.push({ kind: 'qpip', period: i, month: month(i), perChequeBump: P * QPIP_RATE });
-      }
+      q = Math.min(P * QPIP_RATE, qpipMax - qpip);
+      if (caps(qpip, q, qpipMax)) capped.push({ kind: 'qpip', period: i });
       qpip += q;
     }
+    D.push(c1 + c2 + e + q);
   }
 
-  // Only interesting if something actually caps BEFORE the final cheque —
-  // capping on the last pay of the year is just "the math worked out".
-  const early = events.filter((e) => e.period < periodsPerYear);
-  if (!early.length) return null;
-  return {
-    periodsPerYear,
-    events: early.sort((a, b) => a.period - b.period),
-    lastChequeBump: Math.round(early.reduce((s, e) => s + e.perChequeBump, 0) * 100) / 100,
-  };
+  // Only interesting if something caps BEFORE the final cheque and the cheques
+  // after it really are bigger — capping on the last pay is "the math worked out".
+  // A step is a run of consecutive cheques whose deductions change; it ends on
+  // the first cheque at the new level. A run with no cap in it — CPP2 starting
+  // a pay or two after CPP stops — belongs to the step before it, so the steps
+  // add up exactly to the first-to-last difference.
+  const runs: Array<{ first: number; last: number }> = [];
+  for (let i = 2; i <= periodsPerYear; i++) {
+    if (Math.abs(D[i] - D[i - 1]) < 0.005) continue;
+    const prev = runs[runs.length - 1];
+    if (prev && i === prev.last + 1) prev.last = i;
+    else runs.push({ first: i, last: i });
+  }
+  const steps: Array<{ kinds: CapEvent['kinds']; first: number; last: number }> = [];
+  for (const r of runs) {
+    const kinds = capped.filter((c) => c.period >= r.first - 1 && c.period <= r.last).map((c) => c.kind);
+    const prev = steps[steps.length - 1];
+    if (!kinds.length && prev) prev.last = r.last;
+    else steps.push({ kinds, first: r.first, last: r.last });
+  }
+  const events: CapEvent[] = steps
+    // Capping on the last pay is "the math worked out", not a bigger cheque to explain.
+    .filter((st) => st.kinds.length && capped.some((c) => st.kinds.includes(c.kind) && c.period < periodsPerYear))
+    .map((st) => ({
+      kinds: st.kinds,
+      period: st.last,
+      month: month(st.last),
+      perChequeBump: cents(D[st.first - 1] - D[st.last]),
+    }))
+    .filter((e) => e.perChequeBump >= 1);
+  const lastChequeBump = cents(D[1] - D[periodsPerYear]);
+  if (!events.length || lastChequeBump < 1) return null;
+  return { periodsPerYear, events, lastChequeBump, deductionsByPeriod: D };
 }

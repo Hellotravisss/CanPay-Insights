@@ -127,8 +127,8 @@ export default function CapTimeline({ annualIncome, province, lang }: { annualIn
       <p className="mt-1 text-sm text-slate-600">{t.intro}</p>
       <ul className="mt-2 space-y-1">
         {timeline.events.map((e) => (
-          <li key={e.kind} className="flex items-baseline gap-2 text-sm text-slate-700">
-            <span className="font-semibold">{t[e.kind]}:</span>
+          <li key={e.period} className="flex items-baseline gap-2 text-sm text-slate-700">
+            <span className="font-semibold">{e.kinds.map((k) => t[k]).join(' · ')}:</span>
             <span>{t.from.replace('{m}', monthName(e.month)).replace('{v}', money(e.perChequeBump))}</span>
           </li>
         ))}
