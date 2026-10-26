@@ -38,6 +38,10 @@ const CURRENT_YEAR = C.TAX_YEAR;
 const EI_BENEFIT_RATE = 0.55;
 const EI_MAX_WEEKLY_BENEFIT = 729;
 /** Weekly EI benefit for a salary: 55% of insurable weekly earnings, capped. */
+// What makes a field "about EI benefits". One regex for both jobs — choosing the
+// fields to judge, and deriving the accepted weekly-benefit figures — so a wording
+// that is judged can never be judged against an empty list (review 2026-10-26).
+const EI_BENEFIT_TOPIC = /EI benefit|weekly (?:benefit|maximum)|regular[- ]benefits?|waiting (?:period|week)|long-tenured|extra (?:20 )?weeks|prestations? d.assurance-emploi/i;
 const eiWeeklyBenefit = (salary: number) => Math.min(EI_MAX_WEEKLY_BENEFIT, (Math.min(salary, C.EI_MAX_INSURABLE_EARNINGS) / 52) * EI_BENEFIT_RATE);
 
 /**
@@ -120,7 +124,7 @@ const TOPICS: Topic[] = [
     // 2026). The 30% is the long-tenured test — premiums of at least 30% of the
     // annual maximum in 7 of 10 years (canada.ca temporary EI measures page).
     label: 'EI benefits',
-    mentions: /EI benefit|weekly (?:benefit|maximum)|regular[- ]benefits?|waiting (?:period|week)|long-tenured|extra (?:20 )?weeks|prestations? d.assurance-emploi/i,
+    mentions: EI_BENEFIT_TOPIC,
     rates: [EI_BENEFIT_RATE * 100, 30],
     amounts: [EI_MAX_WEEKLY_BENEFIT, EI_MAX_WEEKLY_BENEFIT * 20],
   },
@@ -226,6 +230,8 @@ const STATES_A_RULE =
 /** Negative lookahead on "k"/"K": "$50k earners" is shorthand, not a figure of $50. */
 // The digits group must end on a digit — "jusqu'à $54,345, puis" would
 // otherwise capture the list comma into the figure.
+const DEADLINE =
+  /\b(?:until|till|before|through|by|prior to|ends?|ending|expir\w*|jusqu.(?:au|à|en)|avant)\s+(?:(?:the\s+)?end\s+of\s+|le\s+|la\s+fin\s+de\s+)?(?:\d{1,2}(?:st|nd|rd|th|er)?\s+)?(?:[A-Za-zéû]+\.?\s+)?(?:\d{1,2}(?:st|nd|rd|th)?,?\s+)?(20[0-9]{2})\b/gi;
 const MONEY = /\$\s?([0-9](?:[0-9,]*[0-9])?(?:\.[0-9]{1,2})?)(?![0-9]*[kK])/g;
 // Three decimals matters: QPIP is printed as 0.494% — at two, the regex read
 // it as "494%" and the self-test's planted stale QPIP rate slipped through.
@@ -409,7 +415,7 @@ function auditText(
   // "At $40,000 the waived week is worth $423, and 20 extra weeks $8,460": the
   // weekly EI benefit for each salary named, and that week times 20 (the extra
   // weeks for long-tenured workers). Only when the field is about EI benefits.
-  if (/EI benefit|weekly benefit|waiting (?:period|week)|long-tenured/i.test(context))
+  if (EI_BENEFIT_TOPIC.test(context))
     for (const v of new Set(salaries)) {
       const w = eiWeeklyBenefit(v);
       // the premium on the same salary may share the sentence ("you pay $978 a year for this cover")
@@ -499,7 +505,13 @@ function auditText(
     // judged against the engine's constants. It is reported, not failed; this
     // is also what lets a forward-looking rates article pass the build gate.
     // A sentence that names the current year alongside others IS judged.
-    const years = [...s.matchAll(/\b(20[0-9]{2})\b/g)].map((m) => parseInt(m[1], 10));
+    // A FUTURE deadline ("until October 9, 2027", "before October 2027",
+    // "jusqu'au 9 octobre 2027") says how long a current rule lasts; it does not
+    // date the claim. Without this, any figure in the EI-extension article could
+    // dodge the gate by naming its 2027 end date (review 2026-10-26). A PAST one
+    // ("before 2025, the rate was…") still marks the sentence as history.
+    const dated = s.replace(DEADLINE, (m, y) => (parseInt(y, 10) > CURRENT_YEAR ? ' ' : m));
+    const years = [...dated.matchAll(/\b(20[0-9]{2})\b/g)].map((m) => parseInt(m[1], 10));
     const historical =
       years.length > 0 && !years.includes(CURRENT_YEAR) && years.some((y) => y !== CURRENT_YEAR);
 
@@ -657,6 +669,15 @@ if (process.argv.includes('--selftest')) {
     ['| | Rate | Applies to | Maximum you pay |\n| --- | --- | --- | --- |\n| **CPP** | 5.95% | $3,500 – $74,600 | **$4,341.00** |', '$4,341.00'],
     ["## Les paliers d'impôt fédéral 2026\n| Revenu imposable | Taux 2026 |\n| --- | --- |\n| Jusqu'à 57 375 $ | **14 %** (était 15 %) |", '$57,375'],
     ['QPIP premiums are 0.494% of insurable earnings.', '0.494%'],
+    // Naming the measure's 2027 end date used to mark these "historical" — never failed (2026-10-26).
+    ['Until October 9, 2027, at a $40,000 salary the 20 extra weeks for long-tenured workers are worth $8,640.', '$8,640'],
+    ['The weekly EI benefit is $655 for claims made before October 2027.', '$655'],
+  ];
+  // And the other direction: correct figures that must NOT be flagged. A wording judged
+  // as EI benefits once had no accepted values at all, and failed the build (2026-10-26).
+  const clean: string[] = [
+    'At a $40,000 salary, regular benefits for the extra 20 weeks come to $8,462.',
+    'Until October 9, 2027, at a $40,000 salary the waived week is worth $423.',
   ];
   /**
    * Hand cases rot: a value planted as "wrong" can become next year's real
@@ -704,11 +725,19 @@ if (process.argv.includes('--selftest')) {
   for (const [sentence, expected] of cases) {
     const found: Finding[] = [];
     auditText('selftest', 'x', sentence, found, { checked: 0 });
-    const caught = found.some((f) => f.value.replace(/\s/g, '') === expected);
+    // A historical finding never fails the real run, so it does not count as caught.
+    const caught = found.some((f) => !f.historical && f.value.replace(/\s/g, '') === expected);
     console.log(`${caught ? 'caught  ' : 'MISSED  '} ${expected}  ${sentence}`);
     if (!caught) failed++;
   }
-  console.log(failed ? `\n${failed} case(s) not caught — the audit has holes.` : '\nAll planted errors caught.');
+  for (const sentence of clean) {
+    const found: Finding[] = [];
+    auditText('selftest', 'x', sentence, found, { checked: 0 });
+    const flagged = found.filter((f) => !f.historical);
+    console.log(`${flagged.length ? 'FALSE   ' : 'clean   '} ${sentence}`);
+    if (flagged.length) failed++;
+  }
+  console.log(failed ? `\n${failed} case(s) wrong — the audit has holes or flags correct figures.` : '\nAll planted errors caught; correct figures pass.');
   process.exit(failed ? 1 : 0);
 }
 

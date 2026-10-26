@@ -27,10 +27,14 @@ type Hit = { where: string; sentence: string; result: number; operands: number[]
 // enough: it needs "that/it/this/the total" (a reference back), or "by $B".
 const AMT = String.raw`\$([\d,]+(?:\.\d+)?)`;
 const CUE = new RegExp([
-  String.raw`\b(?:takes?|taking|brings?|bringing|puts?|pushes|lifts|raises)\s+(?:that|it|this|them|the\s+(?:total|sum|figure|room|amount))\b[^$.;]{0,30}?\bto\s+` + AMT,
+  String.raw`\b(?:takes?|taking|brings?|bringing|puts?|pushes|lifts|raises)\s+(?:that|it|this|them|(?:the\s+)?total(?:\s+\w+)?|the\s+(?:sum|figure|room|amount))\b[^$.;]{0,30}?\bto\s+` + AMT,
   String.raw`\bby\s+\$[\d,]+(?:\.\d+)?\s+to\s+` + AMT,
   // "would/will rise to": a projection the article works out itself, unlike a bare "rises to".
   String.raw`\b(?:would|will)\s+(?:rise|grow|climb|increase|fall|drop|come)\s+to\s+` + AMT,
+  // "would reach $Z", "it becomes $Z", "adding … gives $Z" (rewordings that slipped past, 2026-10-26).
+  String.raw`\b(?:would|will)\s+(?:reach|become)\s+` + AMT,
+  String.raw`\b(?:it|that|this|which|the\s+total)\s+(?:reaches|becomes|comes\s+to)\s+` + AMT,
+  String.raw`\b(?:adding|subtracting|taking\s+away)\b[^$.;]{0,60}?\$[\d,]+(?:\.\d+)?[^$.;]{0,30}?\b(?:gives|makes|leaves)\s+` + AMT,
   String.raw`\b(?:for\s+)?(?:a|the|new)\s+(?:combined\s+)?total\s+of\s+` + AMT,
   String.raw`\bplus\s+\$[\d,]+(?:\.\d+)?\s+(?:is|equals|makes|comes\s+to)\s+` + AMT,
   // "$109,000 + $7,500 = $116,500" and "$60,000 minus $12,660 leaves $47,340"
@@ -65,10 +69,17 @@ export function check(where: string, text: string): Hit[] {
       if (!result || result < 100) continue;
       // The amounts it is built from may sit either side of it ("rises by $B to $Z from $A").
       const cut = m.index + m[0].length - raw.length - 1;
-      const scope = `${ss[i - 1] ?? ''} ${s.slice(0, cut)} ${s.slice(cut + raw.length + 1)}`;
+      // Two sentences back: the parts are often laid out over three sentences.
+      const scope = `${ss[i - 2] ?? ''} ${ss[i - 1] ?? ''} ${s.slice(0, cut)} ${s.slice(cut + raw.length + 1)}`;
       const ops = [...scope.matchAll(MONEY)].map((x) => num(x[1])).filter((v) => v > 0 && v !== result);
       if (ops.length < 2) continue; // nothing to add up: not an arithmetic claim this gate can judge
-      const ok = ops.some((a, x) => ops.some((b, y) => x !== y && (Math.abs(a + b - result) <= 1 || Math.abs(a - b - result) <= 1)));
+      const near = (v: number) => Math.abs(v - result) <= 1;
+      const ok = ops.some((a, x) =>
+        ops.some((b, y) =>
+          x !== y &&
+          (near(a + b) || near(a - b) ||
+            // "Adding $4,646 CPP and $1,123 EI brings total deductions to $39,592": tax + CPP + EI.
+            ops.some((c, z) => z !== x && z !== y && near(a + b + c)))));
       if (ok) continue;
       if (ALLOW.some((w) => s.includes(w.fragment))) continue;
       out.push({ where, sentence: s, result, operands: ops });
@@ -95,6 +106,15 @@ if (isMain && process.argv.includes('--selftest')) {
     ['A $60,000 salary minus $12,660 leaves you with $47,340.', false],
     ['A $60,000 salary minus $12,660 leaves you with $47,940.', true],
     ['A $2,000 bonus is taxed at 30%, which takes it to $1,400.', false], // one operand only: not judged
+    // Rewordings of the original error that passed before 2026-10-26.
+    ['Room reached $109,000 through 2026. A confirmed $7,500 for 2027 would reach $109,500.', true],
+    ['Room reached $109,000 through 2026. Adding the 2027 limit of $7,500 gives $109,500.', true],
+    ['Room reached $109,000 through 2026. Add $7,500 for 2027 and it becomes $109,500.', true],
+    ['Room reached $109,000 through 2026. The 2027 limit is $7,500. That would take total room to $109,500.', true],
+    ['Room reached $109,000 through 2026. The 2027 limit is $7,500. That would take total room to $116,500.', false],
+    ['Room reached $109,000 through 2026. Adding the 2027 limit of $7,500 gives $116,500.', false],
+    ['Income tax is $33,823. Adding $4,646 CPP and $1,123 EI brings total deductions to $39,592.', false],
+    ['Income tax is $33,823. Adding $4,646 CPP and $1,123 EI brings total deductions to $39,952.', true],
   ];
   let bad = 0;
   for (const [text, shouldFlag] of planted) {

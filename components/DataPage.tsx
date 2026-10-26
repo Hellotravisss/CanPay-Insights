@@ -4,14 +4,16 @@ import { useRouter } from 'next/navigation';
 import AvowdCredit from './AvowdCredit';
 import DataPulse from './DataPulse';
 import { DATASET_VERSION } from '../lib/datasetVersion';
+import { getSalaryFigures, PROVINCE_SEO_CONFIGS } from '../lib/salaryFigures';
 
 // Illustrative slice of the full 455-row dataset (net take-home at $80,000, 2026).
-const PREVIEW = [
-  { prov: 'British Columbia', net: '$61,157' },
-  { prov: 'Alberta', net: '$60,698' },
-  { prov: 'Ontario', net: '$60,303' },
-  { prov: 'Quebec', net: '$57,012' },
-];
+// Computed by the engine, not typed: no gate can check a figure typed into a table
+// whose salary appears only in a comment (review 2026-10-26).
+const PREVIEW_SALARY = 80000;
+const PREVIEW = (['bc', 'alberta', 'ontario', 'quebec'] as const).map((slug) => ({
+  prov: PROVINCE_SEO_CONFIGS.find((p) => p.slug === slug)!.name,
+  net: '$' + Math.round(getSalaryFigures(PREVIEW_SALARY, slug).netAnnual).toLocaleString('en-CA'),
+}));
 
 const DataPage: React.FC = () => {
   const router = useRouter();

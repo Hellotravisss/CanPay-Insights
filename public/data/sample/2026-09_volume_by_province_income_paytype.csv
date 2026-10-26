@@ -1,6 +1,6 @@
 month,province,pay_type,calculations,sessions
 2026-09,Alberta,hourly,380,99
-2026-09,Alberta,salary,71,37
+2026-09,Alberta,salary,x,37
 2026-09,Alberta,timesheet/shift,<20,<20
 2026-09,British Columbia,hourly,246,67
 2026-09,British Columbia,salary,67,35
@@ -13,19 +13,19 @@ month,province,pay_type,calculations,sessions
 2026-09,Newfoundland and Labrador,hourly,65,<20
 2026-09,Newfoundland and Labrador,salary,<20,<20
 2026-09,Northwest Territories,salary,<20,<20
-2026-09,Nova Scotia,hourly,72,<20
+2026-09,Nova Scotia,hourly,x,<20
 2026-09,Nova Scotia,salary,<20,<20
 2026-09,Nunavut,hourly,<20,<20
 2026-09,Nunavut,salary,<20,<20
 2026-09,Ontario,hourly,1564,425
 2026-09,Ontario,salary,503,269
 2026-09,Ontario,timesheet/shift,143,37
-2026-09,Prince Edward Island,hourly,37,<20
+2026-09,Prince Edward Island,hourly,x,<20
 2026-09,Prince Edward Island,salary,<20,<20
 2026-09,Quebec,hourly,88,23
-2026-09,Quebec,salary,30,<20
+2026-09,Quebec,salary,x,<20
 2026-09,Quebec,timesheet/shift,<20,<20
-2026-09,Saskatchewan,hourly,53,<20
+2026-09,Saskatchewan,hourly,x,<20
 2026-09,Saskatchewan,salary,<20,<20
 2026-09,Yukon,hourly,<20,<20
 2026-09,Yukon,salary,<20,<20

@@ -509,6 +509,22 @@ export function blogEntries(ev: Ev[]) {
   return { started, entries: [...m.entries()].map(([path, x]) => ({ path, calcs: x.calcs, visits: x.visits.size })) };
 }
 
+/**
+ * Withhold every category under `min` — and, when that leaves exactly ONE withheld,
+ * the smallest shown one too. With the total published, a lone withheld cell is
+ * total − shown: the "<20" hides nothing (review 2026-10-26). Two or more withheld
+ * cells only reveal their sum, which is at least `min` once a shown cell joins them.
+ */
+export function suppress(rows: Row[], min: number) {
+  const small = rows.filter((r) => r.n < min);
+  const hidden = new Set(small);
+  if (small.length === 1 && rows.length > 1) hidden.add([...rows].filter((r) => r.n >= min).sort((a, b) => a.n - b.n)[0]);
+  const shown: Record<string, number> = {};
+  let withheld_calculations = 0;
+  for (const r of rows) { if (hidden.has(r)) withheld_calculations += r.n; else shown[String(r.k)] = r.n; }
+  return { shown, withheld_categories: hidden.size, withheld_calculations };
+}
+
 // ── public_usage_dataset ──────────────────────────────────────────────────
 export function publicDataset(ev: Ev[]) {
   // 20, the same floor the privacy policy promises for everything published
@@ -519,19 +535,15 @@ export function publicDataset(ev: Ev[]) {
   const dates = ev.map((r) => localDate(r.created_at as string));
   const months = new Map<string, number>(); for (const d of dates) months.set(d.slice(0, 7), (months.get(d.slice(0, 7)) ?? 0) + 1);
   const dim = (name: string, key: string) => {
-    const rows = countBy(ev, key);
-    const shown: Record<string, number> = {}; let wc = 0, wn = 0;
-    for (const r of rows) { if (r.n >= min_cell) shown[String(r.k)] = r.n; else { wc++; wn += r.n; } }
-    return [name, { shown, withheld_categories: wc, withheld_calculations: wn }] as const;
+    const { shown, withheld_categories, withheld_calculations } = suppress(countBy(ev, key), min_cell);
+    return [name, { shown, withheld_categories, withheld_calculations }] as const;
   };
   const dims = Object.fromEntries([
     dim('province', 'province'), dim('income_bracket', 'income_bracket'), dim('device', 'device'), dim('language', 'lang'),
     dim('calculator', 'mode'), dim('country', 'country'), dim('employment_shape', 'employment_shape'), dim('expectation', 'expectation'),
     dim('weekday', 'local_dow'), dim('local_hour', 'local_hour'),
   ]);
-  const cityRows = countBy(ev, 'city');
-  const cities: Record<string, number> = {}; let wcC = 0, wnC = 0;
-  for (const r of cityRows) { if (r.n >= min_city) cities[String(r.k)] = r.n; else { wcC++; wnC += r.n; } }
+  const { shown: cities, withheld_categories: wcC, withheld_calculations: wnC } = suppress(countBy(ev, 'city'), min_city);
   const t = today();
   return {
     name: 'CanPay Insights — What Canadians check about their pay',

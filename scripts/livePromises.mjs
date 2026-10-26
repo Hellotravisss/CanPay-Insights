@@ -109,10 +109,22 @@ try {
   // 8. "Used by FindJobs Canada" on /widget stays true: their page still carries the embed.
   //    It loads on click ("Open calculator"), so the iframe is not in the DOM until then —
   //    check the page source for the embed URL, not for an <iframe> tag.
-  const partner = 'https://findjobscanada.ca/2025/05/05/highest-paying-jobs-canada/';
-  const pr = await fetch(partner, { headers: { 'user-agent': 'Mozilla/5.0 (CanPay live audit)' } });
-  const ptext = pr.ok ? await pr.text() : '';
-  check(pr.ok && ptext.includes('canpayinsights.ca/embed'), `FindJobs Canada still embeds the widget, as /widget says (HTTP ${pr.status})`);
+  //    /widget names two guides, so both are checked (review 2026-10-26).
+  for (const [guide, partner] of [
+    ['highest-paying jobs', 'https://findjobscanada.ca/2025/05/05/highest-paying-jobs-canada/'],
+    ['salary negotiation', 'https://findjobscanada.ca/2026/03/28/how-to-negotiate-salary-canada-2026/'],
+  ]) {
+    const pr = await fetch(partner, { headers: { 'user-agent': 'Mozilla/5.0 (CanPay live audit)' } });
+    const ptext = pr.ok ? await pr.text() : '';
+    check(pr.ok && ptext.includes('canpayinsights.ca/embed'), `FindJobs Canada's ${guide} guide still embeds the widget, as /widget says (HTTP ${pr.status})`);
+  }
+
+  // 9. Unfloored aggregates stay private. /api/export/snapshot keeps every count (a town
+  //    with 3 calculations); its GET was public from the D1 move until 2026-10-26.
+  for (const path of ['/api/export/snapshot', '/api/export/manifest', '/api/export/day']) {
+    const r = await fetch(BASE + path);
+    check(r.status === 401, `${path} refuses a request without the token (HTTP ${r.status})`);
+  }
 } finally {
   await browser.close();
 }

@@ -17,8 +17,13 @@ export async function POST(request: Request) {
   return NextResponse.json(snap);
 }
 
-export async function GET() {
+// Private like its siblings (day, manifest): a snapshot keeps every count, down
+// to a 3-calculation town, so it must never be readable without the token.
+// It was public from the D1 move until 2026-10-26.
+export async function GET(request: Request) {
+  const auth = request.headers.get('authorization')?.replace(/^Bearer\s+/i, '');
+  if (!tokenOk(auth, await secret('GSC_INGEST_TOKEN'))) return NextResponse.json({ error: 'unauthorized' }, { status: 401 });
   const d = await db();
   const rows = (await d.prepare('select payload from monthly_snapshots order by month').all<{ payload: string }>()).results;
-  return NextResponse.json(rows.map((r) => JSON.parse(r.payload)), { headers: { 'cache-control': 'public, max-age=3600' } });
+  return NextResponse.json(rows.map((r) => JSON.parse(r.payload)), { headers: { 'cache-control': 'private, no-store' } });
 }
