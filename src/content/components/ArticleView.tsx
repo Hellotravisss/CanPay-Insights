@@ -97,7 +97,8 @@ const renderContent = (content: string) => {
     const body = tableRows.slice(1);
     elements.push(
       <div key={`table-${elements.length}`} className="my-7 overflow-hidden rounded-xl border border-slate-200">
-        <div className="overflow-x-auto">
+        {/* Keyboard-reachable scroll region (axe scrollable-region-focusable). */}
+        <div className="overflow-x-auto" tabIndex={0} role="region" aria-label="Scrollable table">
           <table className="min-w-full border-collapse">
             <thead>
               <tr className="border-b border-slate-200 bg-slate-50">
@@ -320,7 +321,7 @@ export default function ArticleView({ slug }: ArticleViewProps) {
                 <time dateTime={article.updatedAt}>{formatDate(article.updatedAt)}</time>
               </span>
             )}
-            {article.province && <span className="rounded bg-slate-100 px-2 py-1">{article.province}</span>}
+            {article.province && <span className="rounded bg-slate-100 px-2 py-1 text-slate-700">{article.province}</span>}
             <span>{article.readTime} min read</span>
           </div>
         </div>

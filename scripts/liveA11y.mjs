@@ -4,7 +4,8 @@
  * Added 2026-09-25 after an embedding partner reviewed the widget for
  * accessibility; the first full run found 276 serious contrast failures on
  * 18 pages. Fails on any "serious" or "critical" violation. Runs after every
- * deploy (text and styles only change on deploy).
+ * deploy (text and styles only change on deploy). Covers every article in
+ * /blog/index.json in addition to the fixed pages below.
  *
  *   node scripts/liveA11y.mjs [baseUrl]
  */
@@ -18,6 +19,15 @@ const PAGES = [
   '/terms', '/refunds', '/widget', '/embed?province=QC&lang=fr', '/wages', '/wages/finance-wages-ontario',
   '/ontario-paycheck-calculator', '/cpp-ei-calculator', '/zh', '/data', '/link-to-canpay',
 ];
+
+// Every article, not a sample (USAPay 2026-10-26: a CTA contrast bug sat on all six of
+// its articles while only one was audited). The list comes from the live feed, so an
+// article the routine publishes is checked from its first deploy on.
+const feed = await (await fetch(`${BASE}/blog/index.json`)).json();
+for (const a of feed.articles) {
+  const path = new URL(a.url).pathname;
+  if (!PAGES.includes(path)) PAGES.push(path);
+}
 
 const browser = await chromium.launch();
 const failures = [];
