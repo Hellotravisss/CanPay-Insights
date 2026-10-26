@@ -165,6 +165,7 @@ export const main: Record<string, string> = {
   'res.breakdown': 'Desglose del cheque de pago',
   'res.earnings': 'Ingresos',
   'res.regularPay': 'Pago regular',
+  'res.salaryPay': 'Salario',
   'res.ot15': 'Tiempo extra 1.5x',
   'res.ot20': 'Tiempo extra 2.0x',
   'res.included': 'Incluido',

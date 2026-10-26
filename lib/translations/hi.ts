@@ -165,6 +165,7 @@ export const main: Record<string, string> = {
   'res.breakdown': 'पेचेक ब्रेकडाउन',
   'res.earnings': 'कमाई',
   'res.regularPay': 'रेगुलर पे',
+  'res.salaryPay': 'वेतन',
   'res.ot15': 'ओवरटाइम 1.5x',
   'res.ot20': 'ओवरटाइम 2.0x',
   'res.included': 'शामिल',

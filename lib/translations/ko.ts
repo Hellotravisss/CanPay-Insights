@@ -165,6 +165,7 @@ export const main: Record<string, string> = {
   'res.breakdown': '급여 명세',
   'res.earnings': '소득',
   'res.regularPay': '정규 급여',
+  'res.salaryPay': '급여',
   'res.ot15': '초과근무 1.5배',
   'res.ot20': '초과근무 2.0배',
   'res.included': '포함됨',

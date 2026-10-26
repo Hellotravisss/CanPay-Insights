@@ -165,6 +165,7 @@ export const main: Record<string, string> = {
   'res.breakdown': 'Chi Tiết Lương',
   'res.earnings': 'Thu Nhập',
   'res.regularPay': 'Lương Thường',
+  'res.salaryPay': 'Lương',
   'res.ot15': 'Tăng Ca 1.5x',
   'res.ot20': 'Tăng Ca 2.0x',
   'res.included': 'Đã Bao Gồm',

@@ -188,6 +188,7 @@ const ResultsSection: React.FC<Props> = ({ results, provinceName }) => {
   ], [t, results.cppDeduction, results.eiDeduction, results.federalTax, results.netPayBiWeekly, results.provincialTax]);
 
   const totalHours = results.regularHours + results.overtimeHours15 + results.overtimeHours20;
+  const earn = results.earnings ?? {};
   const netPayPercent = results.grossPayBiWeekly > 0
     ? Math.round((results.netPayBiWeekly / results.grossPayBiWeekly) * 100)
     : 0;
@@ -297,30 +298,46 @@ const ResultsSection: React.FC<Props> = ({ results, provinceName }) => {
              <div>
                <h4 className="text-xs font-bold text-slate-500 uppercase mb-2">{t('res.earnings')}</h4>
                <div className="space-y-2">
-                 <div className="flex justify-between text-slate-700">
-                   <span>{t('res.regularPay')} ({results.regularHours.toFixed(1)}h)</span>
-                   <span className="font-medium">
-                     {formatCurrency(totalHours > 0 
-                       ? (results.regularHours * (results.grossPayBiWeekly / totalHours)) 
-                       : 0)}
-                   </span>
-                 </div>
+                 {/* Each row is the engine's own amount for that source, so the rows add up to gross pay. */}
+                 {earn.salary !== undefined ? (
+                   <div className="flex justify-between text-slate-700">
+                     <span>{t('res.salaryPay')}</span>
+                     <span className="font-medium">{formatCurrency(earn.salary)}</span>
+                   </div>
+                 ) : (
+                   <div className="flex justify-between text-slate-700">
+                     <span>{t('res.regularPay')} ({results.regularHours.toFixed(1)}h)</span>
+                     <span className="font-medium">{formatCurrency(earn.regular ?? 0)}</span>
+                   </div>
+                 )}
                  {results.overtimeHours15 > 0 && (
                    <div className="flex justify-between text-amber-600">
                      <span>{t('res.ot15')} ({results.overtimeHours15.toFixed(1)}h)</span>
-                     <span className="font-medium">{t('res.included')}</span>
+                     <span className="font-medium">{earn.overtime15 !== undefined ? formatCurrency(earn.overtime15) : t('res.included')}</span>
                    </div>
                  )}
                  {results.overtimeHours20 > 0 && (
                    <div className="flex justify-between text-amber-700 font-bold">
                      <span>{t('res.ot20')} ({results.overtimeHours20.toFixed(1)}h)</span>
-                     <span className="font-medium">{t('res.included')}</span>
+                     <span className="font-medium">{earn.overtime20 !== undefined ? formatCurrency(earn.overtime20) : t('res.included')}</span>
                    </div>
                  )}
                  {results.shiftPremiumHours > 0 && (
                    <div className="flex justify-between text-red-600">
                      <span>{t('hourly.shiftPremium')} ({results.shiftPremiumHours.toFixed(1)}h)</span>
-                     <span className="font-medium">{t('res.plusPremium')}</span>
+                     <span className="font-medium">{earn.shiftPremium !== undefined ? formatCurrency(earn.shiftPremium) : t('res.plusPremium')}</span>
+                   </div>
+                 )}
+                 {(earn.tips ?? 0) > 0 && (
+                   <div className="flex justify-between text-slate-700">
+                     <span>{t('ts.tipsDeclared')}</span>
+                     <span className="font-medium">{formatCurrency(earn.tips!)}</span>
+                   </div>
+                 )}
+                 {(earn.additional ?? 0) > 0 && (
+                   <div className="flex justify-between text-slate-700">
+                     <span>{t('annual.addIncome')}</span>
+                     <span className="font-medium">{formatCurrency(earn.additional!)}</span>
                    </div>
                  )}
                  <div className="flex justify-between text-slate-900 font-bold pt-2 border-t border-slate-100">

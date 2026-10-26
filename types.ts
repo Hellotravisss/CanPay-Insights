@@ -197,6 +197,15 @@ export interface TimesheetInputs {
 }
 
 export interface CalculationResult {
+  /**
+   * This period's gross pay by source, for the breakdown table. Display only:
+   * every figure the engine computes from is unchanged. Before 2026-10-26 the
+   * table split gross pay by hours, so regular pay soaked up overtime.
+   */
+  earnings?: {
+    salary?: number; regular?: number; overtime15?: number; overtime20?: number;
+    shiftPremium?: number; tips?: number; additional?: number;
+  };
   regularHours: number;
   overtimeHours15: number;
   overtimeHours20: number;

@@ -113,9 +113,30 @@ expect('one $200 day annualised', daily.grossPayAnnual, 48000);
   expect('default is payroll (unchanged behaviour)', mk(undefined, 100).netPayPerPeriod ?? 0, payroll.netPayPerPeriod ?? 0);
 }
 
+// Breakdown rows (2026-10-26): the table split gross by hours, so "Regular Pay
+// (88.0h)" read $1,824.84 for 88 h at $20 and overtime said "Included". The engine
+// now returns each source; check the reviewer's case and that rows add to gross.
+{
+  const ot = calculateSalary({
+    province: Province.ON, hourlyWage: 20,
+    shift: { startTime: '08:00', endTime: '18:00', unpaidBreakMinutes: 30, daysActive: [false, true, true, true, true, true, false] },
+    premium: { enabled: false, ratePerHour: 0, startTime: '00:00', endTime: '00:00' },
+  } as never);
+  expect('ON $20/h 9.5 h × 5: regular pay = 88 h × $20', ot.earnings?.regular ?? NaN, 1760);
+  expect('ON $20/h 9.5 h × 5: overtime = 7 h × $30', ot.earnings?.overtime15 ?? NaN, 210);
+  const parts = (r: { earnings?: Record<string, number | undefined> }) => Object.values(r.earnings ?? {}).reduce((a: number, v) => a + (v ?? 0), 0);
+  expect('hourly rows add up to gross', parts(ot), ot.grossPayBiWeekly);
+  const sh = shift('22:00', '06:00');
+  expect('hourly with night premium: rows add up to gross', parts(sh), sh.grossPayBiWeekly);
+  const an = calculateFromAnnualSalary({ province: Province.ON, annualSalary: 100000, payFrequency: PayFrequency.BI_WEEKLY } as AnnualSalaryInputs);
+  expect('annual: one salary row = gross', an.earnings?.salary ?? NaN, an.grossPayBiWeekly);
+  const t1 = ts(['2026-03-02', '2026-03-03', '2026-03-04', '2026-03-05', '2026-03-06', '2026-03-07']);
+  expect('timesheet rows add up to gross', parts(t1), t1.grossPayBiWeekly);
+}
+
 if (failures.length) {
   console.log(failures.map((f) => '  ✗ ' + f).join('\n'));
   console.log(`\nENGINE CASES AUDIT FAIL (${tz}) — ${failures.length} of ${checks}.`);
   process.exit(1);
 }
-console.log(`ENGINE CASES AUDIT PASS (${tz}) — ${checks} checks: timesheet weeks, night premium, one-time pay, non-cash benefits, daily pay, employer match, tips.`);
+console.log(`ENGINE CASES AUDIT PASS (${tz}) — ${checks} checks: timesheet weeks, night premium, one-time pay, non-cash benefits, daily pay, employer match, tips, breakdown rows.`);

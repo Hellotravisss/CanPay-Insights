@@ -541,6 +541,10 @@ const calculateSalaryRecurring = (inputs: SalaryInputs): CalculationResult => {
   const netPayAnnual = annualGross - totalDeductionsAnnual;
 
   return {
+    earnings: {
+      regular: biWeeklyRegularPay, overtime15: biWeeklyOt15Pay, overtime20: biWeeklyOt20Pay,
+      shiftPremium: biWeeklyPremiumPay, additional: additionalPerPeriod,
+    },
     regularHours: regularHours * biWeeklyMultiplier,
     overtimeHours15: otHours15 * biWeeklyMultiplier,
     overtimeHours20: otHours20 * biWeeklyMultiplier,
@@ -665,6 +669,7 @@ export const calculateFromAnnualSalary = (inputs: AnnualSalaryInputs): Calculati
   const netPayPerPeriod = netPayAnnual / periodsPerYear;
   
   return {
+    earnings: { salary: grossPayPerPeriod },
     regularHours: 0,
     overtimeHours15: 0,
     overtimeHours20: 0,
@@ -828,6 +833,7 @@ export const calculateFromTimesheet = (inputs: TimesheetInputs): CalculationResu
   const netPayPerPeriod = netPayAnnual / periodsPerYear;
   
   return {
+    earnings: { regular: regularPay, overtime15: ot15Pay, overtime20: ot20Pay, tips: totalTips },
     regularHours,
     overtimeHours15: otHours15,
     overtimeHours20: otHours20,

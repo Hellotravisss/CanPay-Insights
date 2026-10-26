@@ -165,6 +165,7 @@ export const main: Record<string, string> = {
   'res.breakdown': 'Деталізація виплати',
   'res.earnings': 'Дохід',
   'res.regularPay': 'Звичайна оплата',
+  'res.salaryPay': 'Зарплата',
   'res.ot15': 'Понаднормові 1.5x',
   'res.ot20': 'Понаднормові 2.0x',
   'res.included': 'Включено',
