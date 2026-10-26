@@ -103,7 +103,8 @@ export default function EmbedCalculator({
   // The site picks a language with ?lang=; the reader can switch between that
   // language and Canada's two official ones (2026-10-16 — a Quebec site asked
   // for both). Ten buttons would crowd a 420px widget, so it is at most three.
-  const baseLang: Lang = initialLang && DICT[initialLang] ? (initialLang as Lang) : 'en';
+  // Own keys only: ?lang=constructor found Object's prototype and rendered blank labels.
+  const baseLang: Lang = initialLang && Object.prototype.hasOwnProperty.call(DICT, initialLang) ? (initialLang as Lang) : 'en';
   const [lang, setLang] = useState<Lang>(baseLang);
   const langChoices = [...new Set<Lang>([baseLang, 'en', 'fr'])];
   const t = DICT[lang];
@@ -290,7 +291,7 @@ export default function EmbedCalculator({
           </a>
         </span>
         <a
-          href="https://canpayinsights.ca/?utm_source=embed&utm_medium=widget&utm_content=full"
+          href={`https://canpayinsights.ca/?${lang === 'en' ? '' : `lang=${lang}&`}utm_source=embed&utm_medium=widget&utm_content=full`}
           target="_blank"
           rel="noopener"
           className="text-slate-500 hover:text-red-600 hover:underline"

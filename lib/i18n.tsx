@@ -1135,8 +1135,14 @@ export function useT() {
     // (fr → French for Québec/NB users, zh → Chinese), otherwise English.
     let chosen: Lang | null = null;
     try {
+      // A link that names the language wins (the French widget's "Calculateur
+      // complet →" landed French readers on an English page). Not saved: it is
+      // this visit's language, not a setting the reader chose.
+      const asked = new URLSearchParams(window.location.search).get('lang') as Lang | null;
       const stored = localStorage.getItem('canpay_lang') as Lang | null;
-      if (stored && dicts[stored]) {
+      if (asked && Object.prototype.hasOwnProperty.call(dicts, asked)) {
+        chosen = asked;
+      } else if (stored && dicts[stored]) {
         chosen = stored;
       } else {
         const navLang = (

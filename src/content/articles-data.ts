@@ -15,21 +15,21 @@ const article3: Article = {
   slug: "newcomer-tax-guide-canada-2025",
   title: "Newcomer Tax Guide 2026: Your First Year in Canada",
   subtitle: "Everything you need to know about filing taxes, credits, and benefits as a new permanent resident",
-  excerpt: "Just arrived in Canada? This comprehensive guide explains your tax obligations, available benefits, and how to maximize your first-year returns. Learn about the GST/HST credit, CCB, and more.",
+  excerpt: "Just arrived in Canada? This comprehensive guide explains your tax obligations, available benefits, and how to maximize your first-year returns. Learn about the Canada Groceries and Essentials Benefit (formerly the GST/HST credit), CCB, and more.",
   metaTitle: "Newcomer Tax Guide 2026 - First Year in Canada",
-  metaDescription: "Complete tax guide for newcomers to Canada 2025. Learn about filing requirements, available credits, and benefits for permanent residents.",
+  metaDescription: "Complete tax guide for newcomers to Canada 2026. Learn about filing requirements, available credits, and benefits for permanent residents.",
   keywords: ["newcomer tax guide", "first year canada tax", "new immigrant taxes", "canada tax filing new resident"],
   category: "tax",
-  tags: ["Newcomers", "Immigration", "2025", "Tax Guide"],
+  tags: ["Newcomers", "Immigration", "2026", "Tax Guide"],
   province: "Federal",
   publishedAt: "2025-01-17",
-  updatedAt: "2026-08-11",
+  updatedAt: "2026-10-26",
   readTime: 14,
   imageUrl: "/blog/covers/newcomer-tax-guide-canada-2025.png",
-  directAnswer: "Newcomers to Canada in 2025 must file a tax return even with no income to access benefits like the GST/HST credit and Canada Child Benefit (CCB), which are based on family income.",
+  directAnswer: "Newcomers to Canada must file a tax return for their first year even with no income, to access benefits like the Canada Groceries and Essentials Benefit (formerly the GST/HST credit) and the Canada Child Benefit (CCB), which are based on family income.",
   faq: [
     { question: "Do I need to file taxes in my first year in Canada?", answer: "Yes, you should file a tax return for the year you arrive to establish your eligibility for various credits and benefits, even if you had no income." },
-    { question: "What is the GST/HST credit?", answer: "It is a tax-free quarterly payment for individuals and families with low or modest incomes to help offset the sales tax they pay." },
+    { question: "What is the Canada Groceries and Essentials Benefit?", answer: "It is the tax-free quarterly payment that replaced the GST/HST credit in July 2026, for individuals and families with low or modest incomes. Eligibility is the same: file a return each year and the CRA works out what you get." },
     { question: "How do I claim the Canada Child Benefit (CCB)?", answer: "Newcomers can apply for CCB as soon as they become residents for tax purposes and have children under 18; the amount is based on your family income." },
     { question: "What are the tax residency rules for newcomers?", answer: "Generally, you become a resident of Canada for tax purposes on the date you arrive and establish significant residential ties." },
     { question: "Can I claim moving expenses to Canada?", answer: "Most newcomers cannot claim the cost of moving to Canada, but you may be able to claim moves within Canada for work or study later on." }
@@ -155,7 +155,7 @@ Options for newcomers:
 **Mistake #1: Not Filing Because Income Is Low**
 
 Even with no income, file a return to:
-- Receive GST/HST credit
+- Receive the Canada Groceries and Essentials Benefit (formerly the GST/HST credit)
 - Build RRSP contribution room
 - Establish tax history for future loans/mortgages
 
@@ -187,7 +187,7 @@ Family: Married, two children (ages 4 and 7)
 **Estimated Tax Owing:** ~$11,250
 
 **Benefits Received:**
-- GST/HST credit: ~$800
+- Canada Groceries and Essentials Benefit (formerly the GST/HST credit): ~$800
 - CCB: ~$3,600
 - Ontario Child Benefit: ~$1,200
 
