@@ -217,14 +217,23 @@ export default function EmbedCalculator({
           id="cp-amount"
           type="number"
           inputMode="decimal"
+          min={0}
           value={amount}
-          onChange={(e) => { setAmount(e.target.value); setTouched(true); }}
+          // No minus sign: the number used to drop it silently, pricing −5,000 as 5,000.
+          onChange={(e) => { setAmount(e.target.value.replace(/-/g, '')); setTouched(true); }}
           className="w-full rounded-lg border border-slate-300 px-3 py-2 text-sm text-slate-800"
         />
         <select
           aria-label={`${t.salary} (${t.perYear.replace('/', '').trim()} / ${t.perHour.replace('/', '').trim()})`}
           value={unit}
-          onChange={(e) => { setUnit(e.target.value as 'year' | 'hour'); setTouched(true); }}
+          onChange={(e) => {
+            // Convert the amount with the unit: 60000 a year used to become $60,000 an hour.
+            const next = e.target.value as 'year' | 'hour';
+            const n = parseFloat(amount.replace(/[^0-9.]/g, ''));
+            if (next !== unit && n > 0) setAmount(next === 'hour' ? (n / HOURS_PER_YEAR).toFixed(2) : String(Math.round(n * HOURS_PER_YEAR)));
+            setUnit(next);
+            setTouched(true);
+          }}
           className="rounded-lg border border-slate-300 bg-white px-2 py-2 text-sm text-slate-700"
         >
           <option value="year">{t.perYear}</option>

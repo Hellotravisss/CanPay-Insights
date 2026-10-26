@@ -99,7 +99,7 @@ const AnnualSalaryInput: React.FC<Props> = ({ inputs, setInputs }) => {
                the calculation quietly uses the right number. */
             value={inputs.annualSalary || ''}
             onFocus={(e) => e.target.select()}
-            onChange={(e) => setInputs({ ...inputs, annualSalary: parseFloat(e.target.value) || 0 })}
+            onChange={(e) => setInputs({ ...inputs, annualSalary: Math.max(0, parseFloat(e.target.value) || 0) })}
             className="w-full pl-8 pr-4 py-3 border-2 border-slate-200 rounded-lg focus:border-red-500 focus:outline-none text-lg font-bold"
             placeholder="100,000"
             step="1000"
@@ -250,7 +250,7 @@ const AnnualSalaryInput: React.FC<Props> = ({ inputs, setInputs }) => {
                   step="1000"
                   value={inputs.equityVestingAnnual || ''}
                   onFocus={(e) => e.target.select()}
-                  onChange={(e) => setInputs({ ...inputs, equityVestingAnnual: parseFloat(e.target.value) || 0 })}
+                  onChange={(e) => setInputs({ ...inputs, equityVestingAnnual: Math.max(0, parseFloat(e.target.value) || 0) })}
                   className="w-full pl-8 pr-4 py-2.5 border border-slate-200 rounded-lg focus:border-red-500 focus:outline-none font-bold"
                   placeholder="20,000"
                 />
@@ -328,7 +328,7 @@ const AnnualSalaryInput: React.FC<Props> = ({ inputs, setInputs }) => {
                     className="w-full py-2 pl-7 pr-3 bg-white text-slate-900 border border-red-200 rounded-lg focus:ring-2 focus:ring-red-500 focus:outline-none text-sm font-semibold"
                     value={inputs.rrspContributionPerPeriod || ''}
                     onFocus={(e) => e.target.select()}
-                    onChange={(e) => setInputs({ ...inputs, rrspContributionPerPeriod: parseFloat(e.target.value) || 0 })}
+                    onChange={(e) => setInputs({ ...inputs, rrspContributionPerPeriod: Math.max(0, parseFloat(e.target.value) || 0) })}
                   />
                 </div>
               </div>
@@ -347,7 +347,7 @@ const AnnualSalaryInput: React.FC<Props> = ({ inputs, setInputs }) => {
                         value={inputs.rrspPercentage || ''}
                         onFocus={(e) => e.target.select()}
                         onChange={(e) => {
-                          const val = parseFloat(e.target.value) || 0;
+                          const val = Math.max(0, parseFloat(e.target.value) || 0);
                           setInputs({
                             ...inputs,
                             rrspPercentage: val,
@@ -403,7 +403,7 @@ const AnnualSalaryInput: React.FC<Props> = ({ inputs, setInputs }) => {
                         className="w-full py-2 pl-3 pr-8 bg-white text-slate-900 border border-red-200 rounded-lg focus:ring-2 focus:ring-red-500 focus:outline-none text-sm"
                         value={inputs.rrspEmployerMatch || ''}
                         onFocus={(e) => e.target.select()}
-                        onChange={(e) => setInputs({ ...inputs, rrspEmployerMatch: parseFloat(e.target.value) || 0 })}
+                        onChange={(e) => setInputs({ ...inputs, rrspEmployerMatch: Math.max(0, parseFloat(e.target.value) || 0) })}
                       />
                       <span className="absolute right-3 top-1/2 -translate-y-1/2 text-red-400 font-bold text-xs">%</span>
                     </div>

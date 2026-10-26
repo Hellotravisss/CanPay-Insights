@@ -83,7 +83,7 @@ export default function WidgetPage() {
         </p>
 
         <div className="grid gap-10 md:grid-cols-2">
-          <div>
+          <div className="min-w-0">
             <h2 className="mb-3 text-lg font-bold text-slate-900">Live preview</h2>
             <iframe
               src="/embed?province=ON"
@@ -95,7 +95,7 @@ export default function WidgetPage() {
             />
           </div>
 
-          <div>
+          <div className="min-w-0">
             <h2 className="mb-3 text-lg font-bold text-slate-900">Embed code</h2>
             <CopyEmbedCode code={EMBED_CODE} />
 

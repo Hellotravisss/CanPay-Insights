@@ -44,7 +44,7 @@ const InputSection: React.FC<Props> = ({ inputs, setInputs }) => {
     } else {
       const num = parseFloat(value);
       if (!isNaN(num)) {
-        setInputs({ ...inputs, hourlyWage: num });
+        setInputs({ ...inputs, hourlyWage: Math.max(0, num) });
       }
     }
   };
@@ -142,7 +142,7 @@ const InputSection: React.FC<Props> = ({ inputs, setInputs }) => {
                 className="w-full p-3 bg-white text-slate-900 border border-slate-300 rounded-lg focus:ring-2 focus:ring-red-500 focus:outline-none shadow-sm"
                 value={inputs.shift.unpaidBreakMinutes}
                 onFocus={(e) => e.target.select()}
-                onChange={(e) => setInputs({...inputs, shift: { ...inputs.shift, unpaidBreakMinutes: parseInt(e.target.value) || 0 }})}
+                onChange={(e) => setInputs({...inputs, shift: { ...inputs.shift, unpaidBreakMinutes: Math.max(0, parseInt(e.target.value) || 0) }})}
               />
               <span className="absolute right-4 top-3 text-slate-500 text-sm">min</span>
             </div>
@@ -181,7 +181,7 @@ const InputSection: React.FC<Props> = ({ inputs, setInputs }) => {
                     className="w-full p-2 pl-7 bg-white text-slate-900 border border-red-200 rounded-lg focus:ring-2 focus:ring-red-500 focus:outline-none"
                     value={inputs.premium.ratePerHour}
                     onFocus={(e) => e.target.select()}
-                    onChange={(e) => updatePremium('ratePerHour', parseFloat(e.target.value) || 0)}
+                    onChange={(e) => updatePremium('ratePerHour', Math.max(0, parseFloat(e.target.value) || 0))}
                   />
                 </div>
              </div>
@@ -384,7 +384,7 @@ const InputSection: React.FC<Props> = ({ inputs, setInputs }) => {
                     className="w-full py-2 pl-7 pr-3 bg-white text-slate-900 border border-red-200 rounded-lg focus:ring-2 focus:ring-red-500 focus:outline-none text-sm font-semibold"
                     value={inputs.rrspContributionPerPeriod || ''}
                     onFocus={(e) => e.target.select()}
-                    onChange={(e) => setInputs({ ...inputs, rrspContributionPerPeriod: parseFloat(e.target.value) || 0 })}
+                    onChange={(e) => setInputs({ ...inputs, rrspContributionPerPeriod: Math.max(0, parseFloat(e.target.value) || 0) })}
                   />
                 </div>
               </div>
@@ -403,7 +403,7 @@ const InputSection: React.FC<Props> = ({ inputs, setInputs }) => {
                         value={inputs.rrspPercentage || ''}
                         onFocus={(e) => e.target.select()}
                         onChange={(e) => {
-                          const val = parseFloat(e.target.value) || 0;
+                          const val = Math.max(0, parseFloat(e.target.value) || 0);
                           setInputs({
                             ...inputs,
                             rrspPercentage: val,
@@ -459,7 +459,7 @@ const InputSection: React.FC<Props> = ({ inputs, setInputs }) => {
                         className="w-full py-2 pl-3 pr-8 bg-white text-slate-900 border border-red-200 rounded-lg focus:ring-2 focus:ring-red-500 focus:outline-none text-sm"
                         value={inputs.rrspEmployerMatch || ''}
                         onFocus={(e) => e.target.select()}
-                        onChange={(e) => setInputs({ ...inputs, rrspEmployerMatch: parseFloat(e.target.value) || 0 })}
+                        onChange={(e) => setInputs({ ...inputs, rrspEmployerMatch: Math.max(0, parseFloat(e.target.value) || 0) })}
                       />
                       <span className="absolute right-3 top-1/2 -translate-y-1/2 text-red-400 font-bold text-xs">%</span>
                     </div>

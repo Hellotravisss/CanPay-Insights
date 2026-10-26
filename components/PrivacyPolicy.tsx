@@ -171,7 +171,7 @@ const PrivacyPolicy: React.FC<PrivacyPolicyProps> = () => {
         </p>
         <p>
           <strong className="text-slate-800">Page-view counting.</strong> Two cookieless counters run on this site. The first is
-          ours, served from <code>avowd-analytics.qharbert.workers.dev</code> — a Cloudflare Worker on our own
+          ours, served from <code className="break-all">avowd-analytics.qharbert.workers.dev</code> — a Cloudflare Worker on our own
           account, shared with our sister site Avowd. For each page it records the address (including anything
           after a “?”), the address of the page that linked here, your browser window’s size and language, how
           far down you scrolled, and, when you click a link to another website, an email address or a phone

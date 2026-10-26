@@ -7,6 +7,18 @@ import { useAnonymousTimesheet } from '../hooks/useAnonymousTimesheet';
 import Toast from './Toast';
 import { useT } from '../lib/i18n';
 
+// Calendar dates are LOCAL. toISOString() is UTC, so after 5 pm in Vancouver
+// "today" was already tomorrow, and new Date('YYYY-MM-DD') parses as UTC
+// midnight, so the header read the day before everywhere in Canada (2026-10-26).
+const localToday = () => {
+  const d = new Date();
+  return `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, '0')}-${String(d.getDate()).padStart(2, '0')}`;
+};
+const fromLocalDate = (ymd: string) => {
+  const [y, m, d] = ymd.split('-').map(Number);
+  return new Date(y, m - 1, d);
+};
+
 interface Props {
   inputs: TimesheetInputs;
   setInputs: (inputs: TimesheetInputs) => void;
@@ -62,9 +74,7 @@ const TimesheetInput: React.FC<Props> = ({ inputs, setInputs }) => {
     }
   }, [inputs, isInitialLoad]);
   
-  const [selectedDate, setSelectedDate] = useState<string>(
-    new Date().toISOString().split('T')[0]
-  );
+  const [selectedDate, setSelectedDate] = useState<string>(localToday);
   const [isAddingEntry, setIsAddingEntry] = useState(false);
   const [newEntry, setNewEntry] = useState({
     checkIn: '09:00',
@@ -201,7 +211,7 @@ const TimesheetInput: React.FC<Props> = ({ inputs, setInputs }) => {
     const dateStr = `${year}-${String(month + 1).padStart(2, '0')}-${String(day).padStart(2, '0')}`;
     const entriesForDay = getEntriesForDate(dateStr);
     const isSelected = dateStr === selectedDate;
-    const isToday = dateStr === new Date().toISOString().split('T')[0];
+    const isToday = dateStr === localToday();
     const hasEntries = entriesForDay.length > 0;
     
     return (
@@ -286,7 +296,7 @@ const TimesheetInput: React.FC<Props> = ({ inputs, setInputs }) => {
                 step="0.01"
                 value={inputs.hourlyWage || ''}
                 onFocus={(e) => e.target.select()}
-                onChange={(e) => setInputs({ ...inputs, hourlyWage: parseFloat(e.target.value) || 0 })}
+                onChange={(e) => setInputs({ ...inputs, hourlyWage: Math.max(0, parseFloat(e.target.value) || 0) })}
                 className="w-full pl-8 pr-4 py-2 border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-500"
               />
             </div>
@@ -371,7 +381,7 @@ const TimesheetInput: React.FC<Props> = ({ inputs, setInputs }) => {
                         className="w-full py-2 pl-7 pr-3 bg-white text-slate-900 border border-red-200 rounded-lg focus:ring-2 focus:ring-red-500 focus:outline-none text-sm font-semibold"
                         value={inputs.rrspContributionPerPeriod || ''}
                         onFocus={(e) => e.target.select()}
-                        onChange={(e) => setInputs({ ...inputs, rrspContributionPerPeriod: parseFloat(e.target.value) || 0 })}
+                        onChange={(e) => setInputs({ ...inputs, rrspContributionPerPeriod: Math.max(0, parseFloat(e.target.value) || 0) })}
                       />
                     </div>
                   </div>
@@ -390,7 +400,7 @@ const TimesheetInput: React.FC<Props> = ({ inputs, setInputs }) => {
                             value={inputs.rrspPercentage || ''}
                             onFocus={(e) => e.target.select()}
                             onChange={(e) => {
-                              const val = parseFloat(e.target.value) || 0;
+                              const val = Math.max(0, parseFloat(e.target.value) || 0);
                               setInputs({
                                 ...inputs,
                                 rrspPercentage: val,
@@ -446,7 +456,7 @@ const TimesheetInput: React.FC<Props> = ({ inputs, setInputs }) => {
                         className="w-full py-2 pl-3 pr-8 bg-white text-slate-900 border border-red-200 rounded-lg focus:ring-2 focus:ring-red-500 focus:outline-none text-sm"
                         value={inputs.rrspEmployerMatch || ''}
                         onFocus={(e) => e.target.select()}
-                        onChange={(e) => setInputs({ ...inputs, rrspEmployerMatch: parseFloat(e.target.value) || 0 })}
+                        onChange={(e) => setInputs({ ...inputs, rrspEmployerMatch: Math.max(0, parseFloat(e.target.value) || 0) })}
                       />
                       <span className="absolute right-3 top-1/2 -translate-y-1/2 text-red-400 font-bold text-xs">%</span>
                     </div>
@@ -493,7 +503,7 @@ const TimesheetInput: React.FC<Props> = ({ inputs, setInputs }) => {
         <div className="bg-slate-50 rounded-lg p-4 border border-slate-200">
           <div className="flex items-center justify-between mb-3">
             <h3 className="text-sm font-bold text-slate-800">
-              📅 {new Date(selectedDate).toLocaleDateString(dateLocale, {
+              📅 {fromLocalDate(selectedDate).toLocaleDateString(dateLocale, {
                 weekday: 'long',
                 month: 'long',
                 day: 'numeric'
@@ -582,7 +592,7 @@ const TimesheetInput: React.FC<Props> = ({ inputs, setInputs }) => {
                   <input
                     type="number"
                     value={newEntry.unpaidBreakMinutes}
-                    onChange={(e) => setNewEntry({ ...newEntry, unpaidBreakMinutes: parseInt(e.target.value) || 0 })}
+                    onChange={(e) => setNewEntry({ ...newEntry, unpaidBreakMinutes: Math.max(0, parseInt(e.target.value) || 0) })}
                     className="w-full px-4 py-2 border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-500"
                   />
                 </div>

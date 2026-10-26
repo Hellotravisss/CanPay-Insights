@@ -58,7 +58,8 @@ export default function ReverseSalary({ inputs, setInputs }: {
                 min="0"
                 value={amount}
                 onFocus={(e) => e.target.select()}
-                onChange={(e) => setAmount(e.target.value)}
+                // No minus sign: −100 was read as 100 and answered with a salary.
+                onChange={(e) => setAmount(e.target.value.replace(/-/g, ''))}
                 placeholder={unit === 'month' ? '5,000' : '60,000'}
                 className="w-full rounded-lg border-2 border-slate-200 py-2 pl-7 pr-3 font-bold focus:border-red-500 focus:outline-none"
               />

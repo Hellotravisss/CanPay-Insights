@@ -25,7 +25,9 @@ const ProvinceComparison: React.FC<ProvinceComparisonProps> = ({ onBackToBlog })
   }, []);
 
   const comparisonData = useMemo(() => {
-    if (!isComparing || selectedProvinces.length < 2) {
+    // No salary, no table: 0 divided every effective rate into "NaN%" and the
+    // summary claimed one province paid zero dollars more than another (2026-10-26).
+    if (!isComparing || selectedProvinces.length < 2 || !(annualSalary > 0)) {
       return [];
     }
     try {
@@ -132,7 +134,7 @@ const ProvinceComparison: React.FC<ProvinceComparisonProps> = ({ onBackToBlog })
                 id="compare-salary"
                 type="number"
                 value={annualSalary}
-                onChange={(e) => setAnnualSalary(Number(e.target.value) || 0)}
+                onChange={(e) => setAnnualSalary(Math.max(0, Number(e.target.value) || 0))}
                 className="w-full pl-8 pr-4 py-2 border-2 border-slate-200 rounded-lg focus:border-red-500 focus:outline-none font-bold"
                 step="1000"
                 min="0"

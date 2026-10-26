@@ -175,7 +175,7 @@ const PrivacyPolicyFr: React.FC = () => {
         </p>
         <p>
           <strong className="text-slate-800">Comptage des pages vues.</strong> Deux compteurs sans témoin fonctionnent sur ce site.
-          Le premier est le nôtre, servi depuis <code>avowd-analytics.qharbert.workers.dev</code> — un Worker
+          Le premier est le nôtre, servi depuis <code className="break-all">avowd-analytics.qharbert.workers.dev</code> — un Worker
           Cloudflare de notre propre compte, partagé avec notre site apparenté Avowd. Pour chaque page, il
           enregistre l’adresse (y compris ce qui suit un « ? »), l’adresse de la page qui y menait, la taille et
           la langue de la fenêtre du navigateur, jusqu’où vous avez fait défiler et, si vous cliquez un lien vers
