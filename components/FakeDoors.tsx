@@ -4,6 +4,7 @@ import { useMemo, useState } from 'react';
 import { recordCalcEvent, offerChangeBucket, type ProductInterest } from '../lib/telemetry';
 import { OFFER_LIMITS, buildOfferReport, type OfferReport as OfferReportData } from '../lib/offerReport';
 import OfferReport from '../app/report/offer/OfferReport';
+import { provinceDisplayName } from '../lib/provinceNames';
 import { Province, PayFrequency, type CalculationMode as CalcMode } from '../types';
 import { calculateFromAnnualSalary } from '../utils/taxEngine';
 
@@ -390,14 +391,14 @@ type OfferDraft = { province: string; salary: string; bonus: string; matchPct: s
 
 /** Defined OUTSIDE the page component: an inner component type would be
  *  recreated on every keystroke and the focused input would blur. */
-function OfferFields({ o, set, title, t }: { o: OfferDraft; set: (v: OfferDraft) => void; title: string; t: Record<string, string> }) {
+function OfferFields({ o, set, title, t, lang }: { o: OfferDraft; set: (v: OfferDraft) => void; title: string; t: Record<string, string>; lang: string }) {
   return (
     <fieldset className="rounded-md border border-slate-200 p-2.5">
       <legend className="px-1 text-[11px] font-bold uppercase tracking-wide text-slate-500">{title}</legend>
       <div className="grid grid-cols-2 gap-1.5">
         <select value={o.province} onChange={(e) => set({ ...o, province: e.target.value })} className="col-span-2 rounded border border-slate-200 bg-white px-1.5 py-1 text-xs">
           <option value="">{t.provinceL} —</option>
-          {Object.values(Province).map((pv) => <option key={pv} value={pv}>{pv}</option>)}
+          {Object.values(Province).map((pv) => <option key={pv} value={pv}>{provinceDisplayName(pv, lang)}</option>)}
         </select>
         <input inputMode="numeric" placeholder={t.salary} value={o.salary} onChange={(e) => set({ ...o, salary: e.target.value.replace(/[^0-9]/g, '') })} className="rounded border border-slate-200 px-1.5 py-1 text-xs" />
         <input inputMode="numeric" placeholder={t.bonusL} value={o.bonus} onChange={(e) => set({ ...o, bonus: e.target.value.replace(/[^0-9]/g, '') })} className="rounded border border-slate-200 px-1.5 py-1 text-xs" />
@@ -534,7 +535,7 @@ export default function FakeDoors({
               {Object.values(Province)
                 .filter((pv) => pv !== province)
                 .map((pv) => (
-                  <option key={pv} value={pv}>{pv}</option>
+                  <option key={pv} value={pv}>{provinceDisplayName(pv, lang)}</option>
                 ))}
             </select>
           </div>
@@ -584,8 +585,8 @@ export default function FakeDoors({
               </button>
             ) : (
               <div className="space-y-2">
-                <OfferFields o={a} set={setA} title={t.offerA} t={t} />
-                <OfferFields o={b} set={setB} title={t.offerB} t={t} />
+                <OfferFields o={a} set={setA} title={t.offerA} t={t} lang={lang} />
+                <OfferFields o={b} set={setB} title={t.offerB} t={t} lang={lang} />
                 <button
                   onClick={showOffer}
                   disabled={!offerReady}

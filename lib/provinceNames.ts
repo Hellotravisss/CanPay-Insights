@@ -29,3 +29,15 @@ export function provinceLabel(slug: string, lang: string, english: string): stri
   const i = (SLUGS as readonly string[]).indexOf(slug);
   return (i >= 0 && NAMES[lang]?.[i]) || english;
 }
+
+// The same names keyed by the English name the calculator state holds (Province enum).
+const ENGLISH = [
+  'Ontario', 'British Columbia', 'Alberta', 'Quebec', 'Manitoba', 'Saskatchewan', 'Nova Scotia',
+  'New Brunswick', 'Newfoundland and Labrador', 'Prince Edward Island', 'Yukon', 'Northwest Territories', 'Nunavut',
+];
+
+/** Display name for a province held as its English name. Values and telemetry stay English. */
+export function provinceDisplayName(english: string, lang: string): string {
+  const i = ENGLISH.indexOf(english);
+  return i >= 0 ? provinceLabel(SLUGS[i], lang, english) : english;
+}

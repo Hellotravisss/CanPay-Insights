@@ -1,6 +1,7 @@
 /**
  * audit:links — every internal /blog/<slug> link in the source must reach a
- * live article or a 301 in next.config.ts.
+ * live article or a 301 in next.config.ts; and every root-relative link inside
+ * an article ("[Quebec](/quebec)") must reach a real page.
  *
  * Found 2026-09-23: /compare-provinces and the province landing pages had
  * linked for three months to 2025 guides that were pruned in August, so every
@@ -9,6 +10,7 @@
 import { readFileSync, readdirSync, statSync } from 'node:fs';
 import { join } from 'node:path';
 import { allArticles } from '../src/content/articles-data';
+import sitemap from '../app/sitemap';
 
 const live = new Set(allArticles.map((a) => a.slug));
 const cfg = readFileSync('next.config.ts', 'utf8');
@@ -42,8 +44,37 @@ for (const f of files) {
     }
   }
 }
+// Article bodies link to other pages too, not only /blog. Found 2026-10-26: every
+// "$X salary, province by province" article linked province names to /ontario,
+// /quebec… — 66 links to pages that never existed. A page is real if the sitemap
+// lists it, a static app route renders it, or next.config.ts redirects it.
+const pages = new Set(sitemap().map((e) => new URL(e.url).pathname.replace(/\/$/, '') || '/'));
+const appRoutes = (d: string, base = ''): void => {
+  for (const f of readdirSync(d)) {
+    const p = join(d, f);
+    if (!statSync(p).isDirectory()) { if (/^page\.(tsx?|jsx?)$/.test(f)) pages.add(base || '/'); continue; }
+    if (f.startsWith('[') || f.startsWith('_') || f === 'api') continue;
+    appRoutes(p, f.startsWith('(') ? base : `${base}/${f}`);
+  }
+};
+appRoutes('app');
+// Only unconditional redirects: '/:path*' with a www host condition (and header
+// rules like '/report/:path*') match any path and would pass every link.
+const redirectBlock = cfg.slice(cfg.indexOf('async redirects'));
+const redirectSources = [...redirectBlock.matchAll(/source:\s*'([^']+)',(?![^}]*\bhas:)/g)].map((m) => m[1]);
+const redirectedPath = (path: string) => redirectSources.some((src) => src === path || (src.includes(':') && new RegExp('^' + src.replace(/:[a-z]+\*?/gi, '[^/]+') + '$').test(path)));
+for (const a of allArticles) {
+  const text = [a.content, a.excerpt, a.directAnswer ?? '', ...(a.faq ?? []).map((q) => q.answer)].join('\n');
+  for (const m of text.matchAll(/\]\((\/[^)\s#?]*)[^)]*\)|href=["'](\/[^"'#?]*)/g)) {
+    const path = ((m[1] ?? m[2]).replace(/\/$/, '') || '/');
+    if (path.startsWith('/blog/') || /\.(png|svg|jpe?g|webp|csv|json|txt|pdf)$/.test(path)) continue;
+    n++;
+    if (!pages.has(path) && !redirectedPath(path)) bad.push(`article ${a.slug}: ${path}`);
+  }
+}
+
 if (bad.length) {
   console.error(`LINK AUDIT FAIL — ${bad.length} internal link(s) to no article:\n  ` + [...new Set(bad)].join('\n  '));
   process.exit(1);
 }
-console.log(`LINK AUDIT PASS — ${n} internal blog links, all reach an article or a 301.`);
+console.log(`LINK AUDIT PASS — ${n} internal links, all reach a page, an article or a redirect.`);

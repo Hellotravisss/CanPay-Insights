@@ -3,6 +3,7 @@ import { taxDays } from '../utils/taxDays';
 import React from 'react';
 import AnimatedAmount from './AnimatedAmount';
 import { CalculationResult, Province } from '../types';
+import { provinceDisplayName } from '../lib/provinceNames';
 import { useT } from '../lib/i18n';
 
 interface Props {
@@ -149,7 +150,7 @@ const PaycheckDonutChart = ({
 };
 
 const ResultsSection: React.FC<Props> = ({ results, provinceName }) => {
-  const { t } = useT();
+  const { t, lang } = useT();
   const currencyFormatter = React.useMemo(
     () => new Intl.NumberFormat('en-CA', { style: 'currency', currency: 'CAD' }),
     [],
@@ -338,7 +339,7 @@ const ResultsSection: React.FC<Props> = ({ results, provinceName }) => {
                    <span>- {formatCurrency(results.federalTax)}</span>
                  </div>
                  <div className="flex justify-between text-slate-600">
-                   <span>{t('res.provincialTax')} {provinceName ? `(${provinceName})` : ''}</span>
+                   <span>{t('res.provincialTax')} {provinceName ? `(${provinceDisplayName(provinceName, lang)})` : ''}</span>
                    <span>- {formatCurrency(results.provincialTax)}</span>
                  </div>
                  <div className="flex justify-between text-slate-600">
