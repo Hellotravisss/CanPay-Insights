@@ -2067,6 +2067,11 @@
    "backing": "manual",
    "note": "Checked 2026-10-16: describes intended buyer segments for each extract, not existing customers (none yet; the earlier \"Who asks for which\" wording implied requests that had not happened). Each extract named exists as a query on events (fsa, compared_provinces, change_direction, shift fields).",
    "reviewed": "2026-10-16"
+  },
+  {
+   "page": "/widget",
+   "text": "Used by FindJobs Canada in its guides to the highest-paying jobs and to salary negotiation.",
+   "backing": "gate:audit:live"
   }
  ]
 }

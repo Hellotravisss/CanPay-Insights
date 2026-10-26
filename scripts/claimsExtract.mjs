@@ -17,6 +17,8 @@ const KW = new RegExp(
     'anonymous', String.raw`\bstays?\b`, String.raw`\bleaves?\b`, 'third', String.raw`\bIP\b`, 'fingerprint',
     String.raw`\bopt`, 'notelemetry', String.raw`\bverified\b`, String.raw`\bchecked\b`, String.raw`\bevery\b`,
     String.raw`\bwithin\b`, String.raw`\brefund`, 'licen[cs]e', 'attribut',
+    // Third parties we name as users of the widget: true only while they still embed it.
+    String.raw`\bused by\b`,
     // French
     String.raw`\bjamais\b`, String.raw`\baucun`, String.raw`\bne\b`, 'gratuit', 'conserv', 'témoin', 'transm',
     String.raw`\bseulement\b`, String.raw`\bjours?\b`, 'anonyme', 'licence',

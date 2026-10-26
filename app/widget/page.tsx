@@ -41,6 +41,9 @@ const widgetFaq = [
   },
 ];
 
+/** Sites that embed the widget. Checked daily by scripts/livePromises.mjs; remove an entry the day it fails. */
+export const USED_BY = { name: 'FindJobs Canada', href: 'https://findjobscanada.ca/2025/05/05/highest-paying-jobs-canada/' };
+
 const faqJsonLd = {
   '@context': 'https://schema.org',
   '@type': 'FAQPage',
@@ -71,6 +74,12 @@ export default function WidgetPage() {
           2026 rates for every province and territory, in ten languages, checked line by line against the
           payroll deduction tables the CRA publishes for employers. Perfect for job boards,
           immigration and newcomer resources, HR pages, and personal-finance blogs.
+        </p>
+        {/* Kept true by audit:live (8): the partner page must still carry /embed. */}
+        <p className="-mt-6 mb-10 text-sm text-slate-600">
+          Used by{' '}
+          <a href={USED_BY.href} className="font-semibold text-red-600 hover:underline">FindJobs Canada</a>{' '}
+          in its guides to the highest-paying jobs and to salary negotiation.
         </p>
 
         <div className="grid gap-10 md:grid-cols-2">

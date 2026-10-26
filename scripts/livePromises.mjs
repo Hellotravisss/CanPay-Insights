@@ -105,6 +105,14 @@ try {
     if (/<meta name="robots" content="[^"]*noindex/.test(r.body)) failures.push(`sitemap lists a noindex page: ${u}`);
   }
   passes.push(`sitemap: ${urls.length} non-blog URLs checked for noindex`);
+
+  // 8. "Used by FindJobs Canada" on /widget stays true: their page still carries the embed.
+  //    It loads on click ("Open calculator"), so the iframe is not in the DOM until then —
+  //    check the page source for the embed URL, not for an <iframe> tag.
+  const partner = 'https://findjobscanada.ca/2025/05/05/highest-paying-jobs-canada/';
+  const pr = await fetch(partner, { headers: { 'user-agent': 'Mozilla/5.0 (CanPay live audit)' } });
+  const ptext = pr.ok ? await pr.text() : '';
+  check(pr.ok && ptext.includes('canpayinsights.ca/embed'), `FindJobs Canada still embeds the widget, as /widget says (HTTP ${pr.status})`);
 } finally {
   await browser.close();
 }
