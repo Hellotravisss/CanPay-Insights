@@ -19,6 +19,8 @@ const KW = new RegExp(
     String.raw`\bwithin\b`, String.raw`\brefund`, 'licen[cs]e', 'attribut',
     // Third parties we name as users of the widget: true only while they still embed it.
     String.raw`\bused by\b`,
+    // "…an engine that reproduces the CRA's T4032 tables" is a claim about accuracy (2026-10-26).
+    'reproduc',
     // French
     String.raw`\bjamais\b`, String.raw`\baucun`, String.raw`\bne\b`, 'gratuit', 'conserv', 'témoin', 'transm',
     String.raw`\bseulement\b`, String.raw`\bjours?\b`, 'anonyme', 'licence',
