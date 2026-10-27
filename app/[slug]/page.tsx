@@ -42,6 +42,7 @@ const relatedLinks = [
   { href: '/salary-calculator', label: 'Canadian Salary Calculator' },
   { href: '/cpp-ei-calculator', label: 'CPP & EI Calculator' },
   { href: '/payroll-calculator', label: 'Payroll Calculator for Employers' },
+  { href: '/salary-to-hourly-calculator', label: 'Salary to Hourly Calculator' },
   { href: '/ontario-paycheck-calculator', label: 'Ontario Paycheck Calculator' },
   { href: '/bc-paycheck-calculator', label: 'BC Paycheck Calculator' },
   { href: '/alberta-paycheck-calculator', label: 'Alberta Paycheck Calculator' },

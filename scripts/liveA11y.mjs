@@ -16,7 +16,7 @@ const BASE = (process.argv[2] || process.env.LIVE_BASE || 'https://canpayinsight
 const PAGES = [
   '/', '/compare-provinces', '/research/pay-calculator-behaviour', '/blog',
   '/blog/minimum-wage-increases-october-2026', '/about', '/privacy', '/fr/confidentialite',
-  '/terms', '/refunds', '/widget', '/payroll-calculator', '/embed?province=QC&lang=fr', '/wages', '/wages/finance-wages-ontario',
+  '/terms', '/refunds', '/widget', '/payroll-calculator', '/salary-to-hourly-calculator', '/embed?province=QC&lang=fr', '/wages', '/wages/finance-wages-ontario',
   '/ontario-paycheck-calculator', '/cpp-ei-calculator', '/zh', '/data', '/link-to-canpay',
 ];
 
