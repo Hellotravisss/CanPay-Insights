@@ -385,3 +385,10 @@ export const PROVINCIAL_DATA: Record<string, ProvincialRule> = {
 };
 
 export const DAYS_OF_WEEK = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
+
+// Employer side (2026). The employer matches CPP/CPP2 and QPP/QPP2 dollar for
+// dollar, and pays 1.4× the employee's EI premium (CRA). QPIP employer premium
+// 0.602%, max $620.06 (rqap.gouv.qc.ca, 2026 rates, checked 2026-10-26).
+export const EI_EMPLOYER_MULTIPLIER = 1.4;
+export const QPIP_EMPLOYER_RATE = 0.00602;
+export const QPIP_EMPLOYER_MAX_CONTRIBUTION = 620.06;

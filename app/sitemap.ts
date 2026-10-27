@@ -38,6 +38,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
       priority: 0.8,
     },
     {
+      url: `${BASE_URL}/payroll-calculator`,
+      lastModified: ENGINE_DATE,
+      changeFrequency: 'monthly',
+      priority: 0.9,
+    },
+    {
       url: `${BASE_URL}/widget`,
       lastModified: ENGINE_DATE,
       changeFrequency: 'monthly',

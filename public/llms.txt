@@ -10,6 +10,7 @@ CanPay Insights is an independent project based in Vancouver, Canada. All figure
 - [Ontario paycheck calculator](https://canpayinsights.ca/ontario-paycheck-calculator)
 - [Quebec paycheck calculator](https://canpayinsights.ca/quebec-paycheck-calculator)
 - [CPP & EI calculator](https://canpayinsights.ca/cpp-ei-calculator)
+- [Payroll calculator for employers](https://canpayinsights.ca/payroll-calculator): what to withhold from an employee's pay, the employer's CPP and EI, and what to remit.
 - [Salary after tax in Canada](https://canpayinsights.ca/salary-after-tax-canada)
 - [Gross to net salary calculator](https://canpayinsights.ca/gross-to-net-salary-calculator): gross salary to net pay, any province, 2026.
 - [Bi-weekly paycheque calculator](https://canpayinsights.ca/biweekly-paycheque-calculator): net pay per cheque, 26 pay periods.

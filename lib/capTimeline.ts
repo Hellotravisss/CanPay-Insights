@@ -54,7 +54,22 @@ export type CapTimeline = {
 
 const cents = (v: number) => Math.round(v * 100) / 100;
 
-export function buildCapTimeline(annualGross: number, periodsPerYear: number, isQuebec: boolean): CapTimeline | null {
+export type PaySimulation = {
+  /** Gross pay per period. */
+  pay: number;
+  /** Employee deductions on each pay, 1-based (index 0 unused). */
+  cpp: number[]; cpp2: number[]; ei: number[]; qpip: number[];
+  /** Pay in which each deduction reaches its annual maximum. */
+  capped: Array<{ kind: CapEvent['kinds'][number]; period: number }>;
+};
+
+/**
+ * Employee CPP/QPP, CPP2/QPP2, EI and QPIP on every pay of the year, by the CRA
+ * method: prorated exemption per pay, statutory rate, stop at the cap; CPP2 only
+ * once cumulative pensionable earnings pass the first ceiling. Shared by the
+ * year-end card and the employer payroll calculator.
+ */
+export function simulatePays(annualGross: number, periodsPerYear: number, isQuebec: boolean): PaySimulation {
   const P = annualGross / periodsPerYear;
   const exemptionPerPay = CPP_EXEMPTION / periodsPerYear;
 
@@ -65,37 +80,44 @@ export function buildCapTimeline(annualGross: number, periodsPerYear: number, is
   const qpipMax = QPIP_RATE * QPIP_MAX_INSURABLE_EARNINGS;
 
   let cpp1 = 0, cpp2 = 0, ei = 0, qpip = 0, pensionable = 0;
-  const capped: Array<{ kind: CapEvent['kinds'][number]; period: number }> = [];
-  const D: number[] = [0];
-  const month = (period: number) => Math.min(12, Math.ceil((period / periodsPerYear) * 12));
+  const out: PaySimulation = { pay: P, cpp: [0], cpp2: [0], ei: [0], qpip: [0], capped: [] };
   const caps = (sofar: number, add: number, max: number) => sofar < max && add > 0 && sofar + add >= max - 0.005;
 
   for (let i = 1; i <= periodsPerYear; i++) {
     // CPP/QPP tier 1: rate on pay above the prorated exemption, until the cap.
     const c1 = Math.min(Math.max(0, P - exemptionPerPay) * cpp1Rate, cpp1Max - cpp1);
-    if (caps(cpp1, c1, cpp1Max)) capped.push({ kind: 'cpp', period: i });
+    if (caps(cpp1, c1, cpp1Max)) out.capped.push({ kind: 'cpp', period: i });
     cpp1 += c1;
 
     // CPP2/QPP2: only on cumulative earnings above the first ceiling, to its own cap.
     const aboveYmpeThisPay = Math.max(0, pensionable + P - Math.max(pensionable, CPP_MAX_PENSIONABLE_EARNINGS));
     const c2 = Math.min(aboveYmpeThisPay * CPP2_RATE, CPP2_MAX_CONTRIBUTION - cpp2);
-    if (caps(cpp2, c2, CPP2_MAX_CONTRIBUTION)) capped.push({ kind: 'cpp2', period: i });
+    if (caps(cpp2, c2, CPP2_MAX_CONTRIBUTION)) out.capped.push({ kind: 'cpp2', period: i });
     cpp2 += c2;
     pensionable += P;
 
     // EI: flat rate on every dollar, until the cap.
     const e = Math.min(P * eiRate, eiMax - ei);
-    if (caps(ei, e, eiMax)) capped.push({ kind: 'ei', period: i });
+    if (caps(ei, e, eiMax)) out.capped.push({ kind: 'ei', period: i });
     ei += e;
 
     let q = 0;
     if (isQuebec) {
       q = Math.min(P * QPIP_RATE, qpipMax - qpip);
-      if (caps(qpip, q, qpipMax)) capped.push({ kind: 'qpip', period: i });
+      if (caps(qpip, q, qpipMax)) out.capped.push({ kind: 'qpip', period: i });
       qpip += q;
     }
-    D.push(c1 + c2 + e + q);
+    out.cpp.push(c1); out.cpp2.push(c2); out.ei.push(e); out.qpip.push(q);
   }
+  return out;
+}
+
+export function buildCapTimeline(annualGross: number, periodsPerYear: number, isQuebec: boolean): CapTimeline | null {
+  const sim = simulatePays(annualGross, periodsPerYear, isQuebec);
+  const capped = sim.capped;
+  const D: number[] = [0];
+  for (let i = 1; i <= periodsPerYear; i++) D.push(sim.cpp[i] + sim.cpp2[i] + sim.ei[i] + sim.qpip[i]);
+  const month = (period: number) => Math.min(12, Math.ceil((period / periodsPerYear) * 12));
 
   // Only interesting if something caps BEFORE the final cheque and the cheques
   // after it really are bigger — capping on the last pay is "the math worked out".

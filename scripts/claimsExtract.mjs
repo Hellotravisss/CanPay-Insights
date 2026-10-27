@@ -4,7 +4,7 @@
  * scripts/liveClaims.mjs (the gate) and its --bootstrap mode.
  */
 export const CLAIM_PAGES = [
-  '/', '/zh', '/privacy', '/fr/confidentialite', '/about', '/terms', '/refunds', '/widget',
+  '/', '/zh', '/privacy', '/fr/confidentialite', '/about', '/terms', '/refunds', '/widget', '/payroll-calculator',
   '/research/pay-calculator-behaviour', '/affiliate-disclosure', '/data', '/link-to-canpay',
   '/contact', '/llms.txt',
 ];

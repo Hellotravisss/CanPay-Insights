@@ -2072,6 +2072,37 @@
    "page": "/widget",
    "text": "Used by FindJobs Canada in its guides to the highest-paying jobs and to salary negotiation.",
    "backing": "gate:audit:live"
+  },
+  {
+   "page": "/payroll-calculator",
+   "text": "Income tax comes from an engine that reproduces the CRA's T4032 payroll tables row by row.",
+   "backing": "gate:audit:engine"
+  },
+  {
+   "page": "/payroll-calculator",
+   "text": "It uses the same method for a regular pay early in the year, and its income tax comes from an engine that reproduces the CRA T4032 payroll tables row by row.",
+   "backing": "gate:audit:employer"
+  },
+  {
+   "page": "/payroll-calculator",
+   "text": "Not included: provincial employer health taxes, Quebec HSF and CNESST, workers' compensation, vacation pay, benefits.",
+   "backing": "manual",
+   "note": "Re-read lib/employerPayroll.ts: lines computed are income tax, CPP/CPP2 (QPP/QPP2), EI and QPIP only, employee and employer shares; none of the listed items exists in the code.",
+   "reviewed": "2026-10-26"
+  },
+  {
+   "page": "/payroll-calculator",
+   "text": "Provincial employer health taxes and workers' compensation come on top and are not included here.",
+   "backing": "manual",
+   "note": "Same as the line above: lib/employerPayroll.ts computes no EHT or workers' compensation.",
+   "reviewed": "2026-10-26"
+  },
+  {
+   "page": "/payroll-calculator",
+   "text": "Quebec income tax, QPP and QPIP — the employee and employer shares — go to Revenu Québec, which also collects the Health Services Fund and other employer contributions not included here.",
+   "backing": "manual",
+   "note": "Remittance split in lib/employerPayroll.ts (remitQuebec = Quebec tax + QPP/QPP2 + QPIP, both shares; remitCra = federal tax + EI). Revenu Québec collects source deductions incl. HSF (Revenu Québec employer guide TP-1015.G). Not computed here, as stated.",
+   "reviewed": "2026-10-26"
   }
  ]
 }
