@@ -8,12 +8,13 @@
  * PEI English = 7…), found by an independent review on 2026-10-26.
  *
  * Rule: within every group whose total is published (a province's pay types or
- * languages, against monthly_indicators.csv), the number of hidden calculation cells
- * is 0 or at least 2. Sessions are not checked: one visit can price several pay types,
+ * languages, against monthly_indicators.csv), what the hidden cells add up to —
+ * total minus the shown cells, which anyone can work out — is 0 or at least 20.
+ * One hidden cell fails; so do two that sum to 7. (USAPay's lib/suppress.ts rule.) Sessions are not checked: one visit can price several pay types,
  * so session cells do not add up to the session total.
  *
  *   node scripts/auditSample.mjs         check (prebuild)
- *   node scripts/auditSample.mjs --fix   also withhold ("x") the smallest shown cell next to a lone "<20"
+ *   node scripts/auditSample.mjs --fix   keep withholding ("x") the smallest shown cell until the hidden ones add up to 20+
  */
 import { readFileSync, readdirSync, writeFileSync } from 'node:fs';
 
@@ -60,15 +61,21 @@ for (const ind of files.filter((f) => f.endsWith('_monthly_indicators.csv'))) {
     }
     for (const [k, rows] of byGroup) {
       groups++;
-      const hidden = rows.filter((r) => isHidden(r[calc]));
-      if (hidden.length !== 1) continue;
-      if (FIX) {
-        const next = rows.filter((r) => !isHidden(r[calc])).sort((a, b) => Number(a[calc]) - Number(b[calc]))[0];
-        if (next) { next[calc] = COMPLEMENT; changed = true; console.log(`  fixed ${f}: ${k} — also hid ${next.join(',')}`); continue; }
-      }
-      const shown = rows.filter((r) => !isHidden(r[calc])).reduce((s, r) => s + Number(r[calc]), 0);
       const total = Number(totals.get(rows[0][area]));
-      failures.push(`${f}: ${k} has one hidden cell, recoverable as ${total} − ${shown} = ${total - shown}`);
+      const shownSum = () => rows.filter((r) => !isHidden(r[calc])).reduce((s, r) => s + Number(r[calc]), 0);
+      let hiddenSum = total - shownSum();
+      if (hiddenSum === 0 || hiddenSum >= 20) continue;
+      if (FIX) {
+        while (hiddenSum > 0 && hiddenSum < 20) {
+          const next = rows.filter((r) => !isHidden(r[calc])).sort((a, b) => Number(a[calc]) - Number(b[calc]))[0];
+          if (!next) break;
+          next[calc] = COMPLEMENT; changed = true;
+          console.log(`  fixed ${f}: ${k} — also withheld ${next.join(',')}`);
+          hiddenSum = total - shownSum();
+        }
+        if (hiddenSum === 0 || hiddenSum >= 20) continue;
+      }
+      failures.push(`${f}: ${k} — the hidden cells add up to ${total} − ${shownSum()} = ${hiddenSum}, under 20`);
     }
    }
    if (changed) write(f, tables);
@@ -76,9 +83,9 @@ for (const ind of files.filter((f) => f.endsWith('_monthly_indicators.csv'))) {
 }
 
 if (failures.length) {
-  console.log(`SAMPLE AUDIT FAIL — ${failures.length} "<20" cell(s) recoverable by subtraction:\n`);
+  console.log(`SAMPLE AUDIT FAIL — ${failures.length} group(s) where the hidden cells can be added up by subtraction:\n`);
   for (const x of failures) console.log('  ' + x);
   console.log('\nRun: node scripts/auditSample.mjs --fix');
   process.exit(1);
 }
-console.log(`SAMPLE AUDIT PASS — ${groups} groups with a published total; none has a lone "<20" cell.`);
+console.log(`SAMPLE AUDIT PASS — ${groups} groups with a published total; what is hidden in each adds up to 0 or at least 20.`);

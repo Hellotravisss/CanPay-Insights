@@ -510,19 +510,24 @@ export function blogEntries(ev: Ev[]) {
 }
 
 /**
- * Withhold every category under `min` — and, when that leaves exactly ONE withheld,
- * the smallest shown one too. With the total published, a lone withheld cell is
- * total − shown: the "<20" hides nothing (review 2026-10-26). Two or more withheld
- * cells only reveal their sum, which is at least `min` once a shown cell joins them.
+ * Withhold every category under `min`, then keep withholding the smallest shown
+ * one until what is withheld adds up to at least `min` (or nothing is left).
+ * Totals are published, so the withheld remainder is total − shown: a lone small
+ * cell, or two small ones summing to 7, would be readable (review 2026-10-26).
+ * Same rule as USAPay's lib/suppress.ts, which had it first.
  */
 export function suppress(rows: Row[], min: number) {
-  const small = rows.filter((r) => r.n < min);
-  const hidden = new Set(small);
-  if (small.length === 1 && rows.length > 1) hidden.add([...rows].filter((r) => r.n >= min).sort((a, b) => a.n - b.n)[0]);
+  const hidden = new Set(rows.filter((r) => r.n < min));
+  let withheld = [...hidden].reduce((s, r) => s + r.n, 0);
+  const shownAsc = rows.filter((r) => !hidden.has(r)).sort((a, b) => a.n - b.n);
+  while (withheld > 0 && withheld < min && shownAsc.length) {
+    const r = shownAsc.shift()!;
+    hidden.add(r);
+    withheld += r.n;
+  }
   const shown: Record<string, number> = {};
-  let withheld_calculations = 0;
-  for (const r of rows) { if (hidden.has(r)) withheld_calculations += r.n; else shown[String(r.k)] = r.n; }
-  return { shown, withheld_categories: hidden.size, withheld_calculations };
+  for (const r of rows) if (!hidden.has(r)) shown[String(r.k)] = r.n;
+  return { shown, withheld_categories: hidden.size, withheld_calculations: withheld };
 }
 
 // ── public_usage_dataset ──────────────────────────────────────────────────
