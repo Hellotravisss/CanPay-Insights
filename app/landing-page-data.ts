@@ -438,7 +438,7 @@ const coreLandingPages: LandingPage[] = [
     kicker: 'Ontario take-home pay',
     primaryKeyword: 'Ontario paycheck calculator',
     intro:
-      'On an $80,000 salary in Ontario in 2026, you take home about $60,303 a year — roughly $5,000 a month — after about $9,243 federal tax, $4,885 Ontario tax and health premium, $4,446 CPP/CPP2, and $1,123 EI. Use the free calculator below to estimate your own Ontario paycheque, useful for Toronto, Ottawa, Mississauga, Brampton, Hamilton, and across Ontario.',
+      'On an $80,000 salary in Ontario in 2026, you take home about $60,303 a year — roughly $5,000 a month — after about $9,243 federal tax, $4,885 Ontario tax and health premium, $4,446 CPP/CPP2, and $1,123 EI. Use the calculator on this page to estimate your own Ontario paycheque, useful for Toronto, Ottawa, Mississauga, Brampton, Hamilton, and across Ontario.',
     examples: ['$65,000 after tax Ontario', '$25/hour after tax Ontario', 'Toronto take-home pay calculator'],
     sections: [
       {
@@ -535,7 +535,7 @@ const coreLandingPages: LandingPage[] = [
     kicker: 'Alberta take-home pay',
     primaryKeyword: 'Alberta paycheck calculator',
     intro:
-      'On an $80,000 salary in Alberta in 2026, you take home about $60,698 a year — roughly $5,058 a month — after about $9,243 federal tax, $4,490 Alberta tax, $4,446 CPP/CPP2, and $1,123 EI. Use the free calculator below to estimate your own Alberta paycheque, useful for Calgary, Edmonton, Red Deer, Lethbridge, Fort McMurray, and across Alberta.',
+      'On an $80,000 salary in Alberta in 2026, you take home about $60,698 a year — roughly $5,058 a month — after about $9,243 federal tax, $4,490 Alberta tax, $4,446 CPP/CPP2, and $1,123 EI. Use the calculator on this page to estimate your own Alberta paycheque, useful for Calgary, Edmonton, Red Deer, Lethbridge, Fort McMurray, and across Alberta.',
     examples: ['$80,000 after tax Alberta', '$35/hour after tax Calgary', 'Alberta salary calculator'],
     sections: [
       {
@@ -576,7 +576,7 @@ const coreLandingPages: LandingPage[] = [
     kicker: 'Quebec take-home pay',
     primaryKeyword: 'Quebec paycheck calculator',
     intro:
-      'On an $80,000 salary in Quebec in 2026, you take home about $57,012 a year — roughly $4,751 a month — after about $7,675 federal tax (reduced by the Quebec abatement), $9,378 Quebec tax, $5,039 QPP and QPIP, and $896 EI. Quebec payroll differs from the rest of Canada, so a Quebec-specific estimate matters — use the free calculator below for Montreal, Quebec City, Laval, Gatineau, and across Quebec.',
+      'On an $80,000 salary in Quebec in 2026, you take home about $57,012 a year — roughly $4,751 a month — after about $7,675 federal tax (reduced by the Quebec abatement), $9,378 Quebec tax, $5,039 QPP and QPIP, and $896 EI. Quebec payroll differs from the rest of Canada, so a Quebec-specific estimate matters — use the calculator on this page for Montreal, Quebec City, Laval, Gatineau, and across Quebec.',
     examples: ['$100,000 after tax Quebec', '$65,000 after tax Quebec', 'Montreal take-home pay calculator', 'Quebec salary calculator'],
     sections: [
       {
@@ -626,7 +626,7 @@ const coreLandingPages: LandingPage[] = [
     kicker: 'Manitoba take-home pay',
     primaryKeyword: 'Manitoba paycheck calculator',
     intro:
-      'On an $80,000 salary in Manitoba in 2026, you take home about $58,228 a year \u2014 roughly $4,852 a month \u2014 after about $9,243 federal tax, $6,960 Manitoba tax, $4,446 CPP/CPP2, and $1,123 EI. Use the free calculator below to estimate your own Manitoba paycheque, useful for Winnipeg, Brandon, Steinbach, and across Manitoba.',
+      'On an $80,000 salary in Manitoba in 2026, you take home about $58,228 a year \u2014 roughly $4,852 a month \u2014 after about $9,243 federal tax, $6,960 Manitoba tax, $4,446 CPP/CPP2, and $1,123 EI. Use the calculator on this page to estimate your own Manitoba paycheque, useful for Winnipeg, Brandon, Steinbach, and across Manitoba.',
     examples: ['$65,000 after tax Manitoba', '$25/hour after tax Manitoba', 'Winnipeg take-home pay calculator'],
     sections: [
       {
@@ -672,7 +672,7 @@ const coreLandingPages: LandingPage[] = [
     kicker: 'Saskatchewan take-home pay',
     primaryKeyword: 'Saskatchewan paycheck calculator',
     intro:
-      'On an $80,000 salary in Saskatchewan in 2026, you take home about $59,022 a year \u2014 roughly $4,918 a month \u2014 after about $9,243 federal tax, $6,166 Saskatchewan tax, $4,446 CPP/CPP2, and $1,123 EI. Use the free calculator below to estimate your own Saskatchewan paycheque, useful for Saskatoon, Regina, Prince Albert, and across Saskatchewan.',
+      'On an $80,000 salary in Saskatchewan in 2026, you take home about $59,022 a year \u2014 roughly $4,918 a month \u2014 after about $9,243 federal tax, $6,166 Saskatchewan tax, $4,446 CPP/CPP2, and $1,123 EI. Use the calculator on this page to estimate your own Saskatchewan paycheque, useful for Saskatoon, Regina, Prince Albert, and across Saskatchewan.',
     examples: ['$65,000 after tax Saskatchewan', '$25/hour after tax Saskatchewan', 'Saskatoon take-home pay calculator'],
     sections: [
       {
@@ -718,7 +718,7 @@ const coreLandingPages: LandingPage[] = [
     kicker: 'Nova Scotia take-home pay',
     primaryKeyword: 'Nova Scotia paycheck calculator',
     intro:
-      'On an $80,000 salary in Nova Scotia in 2026, you take home about $56,439 a year \u2014 roughly $4,703 a month \u2014 after about $9,243 federal tax, $8,749 Nova Scotia tax, $4,446 CPP/CPP2, and $1,123 EI. Use the free calculator below to estimate your own Nova Scotia paycheque, useful for Halifax, Dartmouth, Sydney, and across Nova Scotia.',
+      'On an $80,000 salary in Nova Scotia in 2026, you take home about $56,439 a year \u2014 roughly $4,703 a month \u2014 after about $9,243 federal tax, $8,749 Nova Scotia tax, $4,446 CPP/CPP2, and $1,123 EI. Use the calculator on this page to estimate your own Nova Scotia paycheque, useful for Halifax, Dartmouth, Sydney, and across Nova Scotia.',
     examples: ['$65,000 after tax Nova Scotia', '$25/hour after tax Nova Scotia', 'Halifax take-home pay calculator'],
     sections: [
       {
@@ -764,7 +764,7 @@ const coreLandingPages: LandingPage[] = [
     kicker: 'New Brunswick take-home pay',
     primaryKeyword: 'New Brunswick paycheck calculator',
     intro:
-      'On an $80,000 salary in New Brunswick in 2026, you take home about $58,246 a year \u2014 roughly $4,854 a month \u2014 after about $9,243 federal tax, $6,942 New Brunswick tax, $4,446 CPP/CPP2, and $1,123 EI. Use the free calculator below to estimate your own New Brunswick paycheque, useful for Moncton, Saint John, Fredericton, and across New Brunswick.',
+      'On an $80,000 salary in New Brunswick in 2026, you take home about $58,246 a year \u2014 roughly $4,854 a month \u2014 after about $9,243 federal tax, $6,942 New Brunswick tax, $4,446 CPP/CPP2, and $1,123 EI. Use the calculator on this page to estimate your own New Brunswick paycheque, useful for Moncton, Saint John, Fredericton, and across New Brunswick.',
     examples: ['$65,000 after tax New Brunswick', '$25/hour after tax New Brunswick', 'Moncton take-home pay calculator'],
     sections: [
       {
@@ -810,7 +810,7 @@ const coreLandingPages: LandingPage[] = [
     kicker: 'Newfoundland and Labrador take-home pay',
     primaryKeyword: 'Newfoundland and Labrador paycheck calculator',
     intro:
-      'On an $80,000 salary in Newfoundland and Labrador in 2026, you take home about $57,857 a year \u2014 roughly $4,821 a month \u2014 after about $9,243 federal tax, $7,331 Newfoundland and Labrador tax, $4,446 CPP/CPP2, and $1,123 EI. Use the free calculator below to estimate your own Newfoundland and Labrador paycheque, useful for St. John\u2019s, Mount Pearl, Corner Brook, and across Newfoundland and Labrador.',
+      'On an $80,000 salary in Newfoundland and Labrador in 2026, you take home about $57,857 a year \u2014 roughly $4,821 a month \u2014 after about $9,243 federal tax, $7,331 Newfoundland and Labrador tax, $4,446 CPP/CPP2, and $1,123 EI. Use the calculator on this page to estimate your own Newfoundland and Labrador paycheque, useful for St. John\u2019s, Mount Pearl, Corner Brook, and across Newfoundland and Labrador.',
     examples: ['$65,000 after tax Newfoundland and Labrador', '$25/hour after tax Newfoundland and Labrador', 'St. John\u2019s take-home pay calculator'],
     sections: [
       {
@@ -856,7 +856,7 @@ const coreLandingPages: LandingPage[] = [
     kicker: 'Prince Edward Island take-home pay',
     primaryKeyword: 'Prince Edward Island paycheck calculator',
     intro:
-      'On an $80,000 salary in Prince Edward Island in 2026, you take home about $57,335 a year \u2014 roughly $4,778 a month \u2014 after about $9,243 federal tax, $7,853 Prince Edward Island tax, $4,446 CPP/CPP2, and $1,123 EI. Use the free calculator below to estimate your own Prince Edward Island paycheque, useful for Charlottetown, Summerside, and across Prince Edward Island.',
+      'On an $80,000 salary in Prince Edward Island in 2026, you take home about $57,335 a year \u2014 roughly $4,778 a month \u2014 after about $9,243 federal tax, $7,853 Prince Edward Island tax, $4,446 CPP/CPP2, and $1,123 EI. Use the calculator on this page to estimate your own Prince Edward Island paycheque, useful for Charlottetown, Summerside, and across Prince Edward Island.',
     examples: ['$65,000 after tax Prince Edward Island', '$25/hour after tax Prince Edward Island', 'Charlottetown take-home pay calculator'],
     sections: [
       {
@@ -902,7 +902,7 @@ const coreLandingPages: LandingPage[] = [
     kicker: 'Yukon take-home pay',
     primaryKeyword: 'Yukon paycheck calculator',
     intro:
-      'On an $80,000 salary in Yukon in 2026, you take home about $61,039 a year \u2014 roughly $5,087 a month \u2014 after about $9,243 federal tax, $4,149 Yukon tax, $4,446 CPP/CPP2, and $1,123 EI. Use the free calculator below to estimate your own Yukon paycheque, useful for Whitehorse, Dawson City, and across Yukon.',
+      'On an $80,000 salary in Yukon in 2026, you take home about $61,039 a year \u2014 roughly $5,087 a month \u2014 after about $9,243 federal tax, $4,149 Yukon tax, $4,446 CPP/CPP2, and $1,123 EI. Use the calculator on this page to estimate your own Yukon paycheque, useful for Whitehorse, Dawson City, and across Yukon.',
     examples: ['$65,000 after tax Yukon', '$25/hour after tax Yukon', 'Whitehorse take-home pay calculator'],
     sections: [
       {
@@ -948,7 +948,7 @@ const coreLandingPages: LandingPage[] = [
     kicker: 'Northwest Territories take-home pay',
     primaryKeyword: 'Northwest Territories paycheck calculator',
     intro:
-      'On an $80,000 salary in Northwest Territories in 2026, you take home about $61,166 a year \u2014 roughly $5,097 a month \u2014 after about $9,243 federal tax, $4,022 Northwest Territories tax, $4,446 CPP/CPP2, and $1,123 EI. Use the free calculator below to estimate your own Northwest Territories paycheque, useful for Yellowknife, Hay River, Inuvik, and across the Northwest Territories.',
+      'On an $80,000 salary in Northwest Territories in 2026, you take home about $61,166 a year \u2014 roughly $5,097 a month \u2014 after about $9,243 federal tax, $4,022 Northwest Territories tax, $4,446 CPP/CPP2, and $1,123 EI. Use the calculator on this page to estimate your own Northwest Territories paycheque, useful for Yellowknife, Hay River, Inuvik, and across the Northwest Territories.',
     examples: ['$65,000 after tax Northwest Territories', '$25/hour after tax Northwest Territories', 'Yellowknife take-home pay calculator'],
     sections: [
       {
@@ -994,7 +994,7 @@ const coreLandingPages: LandingPage[] = [
     kicker: 'Nunavut take-home pay',
     primaryKeyword: 'Nunavut paycheck calculator',
     intro:
-      'On an $80,000 salary in Nunavut in 2026, you take home about $62,299 a year \u2014 roughly $5,192 a month \u2014 after about $9,243 federal tax, $2,889 Nunavut tax, $4,446 CPP/CPP2, and $1,123 EI. Use the free calculator below to estimate your own Nunavut paycheque, useful for Iqaluit, Rankin Inlet, Arviat, and across Nunavut.',
+      'On an $80,000 salary in Nunavut in 2026, you take home about $62,299 a year \u2014 roughly $5,192 a month \u2014 after about $9,243 federal tax, $2,889 Nunavut tax, $4,446 CPP/CPP2, and $1,123 EI. Use the calculator on this page to estimate your own Nunavut paycheque, useful for Iqaluit, Rankin Inlet, Arviat, and across Nunavut.',
     examples: ['$65,000 after tax Nunavut', '$25/hour after tax Nunavut', 'Iqaluit take-home pay calculator'],
     sections: [
       {

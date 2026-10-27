@@ -11,6 +11,24 @@ import { CalculationMode } from '../../types';
 import SisterSiteCard from '../../components/SisterSiteCard';
 import { getLandingPage, landingPages } from '../landing-page-data';
 import AvowdCredit from '../../components/AvowdCredit';
+import EmbedCalculator from '../../components/EmbedCalculator';
+
+// Pages named "… calculator" carry a working calculator above the fold. Until
+// 2026-10-26 they had an $80,000 example and a button to the home page, so
+// Google ranked the home page for "paycheck calculator ontario" instead, and
+// "salary calculator canada" (1,680 impressions in four weeks) won no clicks.
+const PROVINCE_PAGES: Record<string, string> = {
+  ontario: 'ON', bc: 'BC', alberta: 'AB', quebec: 'QC', manitoba: 'MB', saskatchewan: 'SK',
+  'nova-scotia': 'NS', 'new-brunswick': 'NB', newfoundland: 'NL', pei: 'PE', yukon: 'YT',
+  'northwest-territories': 'NT', nunavut: 'NU',
+};
+function calculatorFor(slug: string): { province?: string; amount: string; unit: 'year' | 'hour' } | null {
+  const prov = slug.match(/^(.+)-paycheck-calculator$/)?.[1];
+  if (prov && PROVINCE_PAGES[prov]) return { province: PROVINCE_PAGES[prov], amount: '80000', unit: 'year' };
+  if (slug === 'hourly-wage-calculator') return { amount: '25', unit: 'hour' };
+  if (/-calculator$/.test(slug) || slug === 'salary-after-tax-canada') return { amount: '60000', unit: 'year' };
+  return null;
+}
 
 const BASE_URL = 'https://canpayinsights.ca';
 
@@ -89,6 +107,7 @@ export default async function LandingPage({ params }: Props) {
   }
 
   const pageUrl = `${BASE_URL}/${page.slug}`;
+  const calc = calculatorFor(page.slug);
   const filteredRelatedLinks = relatedLinks.filter((link) => link.href !== `/${page.slug}`);
 
   const jsonLd = [
@@ -159,9 +178,18 @@ export default async function LandingPage({ params }: Props) {
           <h1 className="text-4xl md:text-5xl font-bold tracking-tight text-slate-950 mb-5">
             {page.h1}
           </h1>
-          <p className="text-lg leading-8 text-slate-600 max-w-3xl">
-            {page.intro}
-          </p>
+          {/* On a phone the calculator comes straight after the heading — the long
+              intro pushed its result below the fold. */}
+          <div className={calc ? 'grid gap-6 md:grid-cols-[minmax(0,1fr)_360px] md:items-start md:gap-8' : ''}>
+            {calc && (
+              <div className="md:order-2">
+                <EmbedCalculator inline initialProvince={calc.province} initialAmount={calc.amount} initialUnit={calc.unit} />
+              </div>
+            )}
+            <p className="min-w-0 text-lg leading-8 text-slate-600 max-w-3xl md:order-1">
+              {page.intro}
+            </p>
+          </div>
           {page.highlights && page.highlights.length > 0 && (
             <div className="grid grid-cols-1 gap-3 md:grid-cols-3 mt-8">
               {page.highlights.map((item) => (

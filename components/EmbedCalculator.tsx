@@ -35,6 +35,7 @@ const DICT: Record<string, Record<string, string>> = {
     ei: 'EI',
     poweredBy: 'Powered by',
     fullCalc: 'Full calculator →',
+    fullCalcInline: 'Overtime, RRSP, bonus or a pay stub breakdown? Use the full calculator →',
     qpp: 'QPP',
     qpip: 'QPIP',
     rates: '2026 tax rates',
@@ -55,6 +56,7 @@ const DICT: Record<string, Record<string, string>> = {
     ei: 'AE',
     poweredBy: 'Propulsé par',
     fullCalc: 'Calculateur complet →',
+    fullCalcInline: 'Heures sup., REER, prime ou détail de la paie? Calculateur complet →',
     qpp: 'RRQ',
     qpip: 'RQAP',
     rates: 'Taux d’imposition 2026',
@@ -75,6 +77,7 @@ const DICT: Record<string, Record<string, string>> = {
     ei: 'EI',
     poweredBy: '技术支持',
     fullCalc: '完整计算器 →',
+    fullCalcInline: '加班、RRSP、奖金或工资单明细？用完整计算器 →',
     qpp: 'QPP',
     qpip: 'QPIP',
     rates: '2026 年税率',
@@ -96,9 +99,22 @@ const LANG_SHORT: Record<Lang, string> = {
 export default function EmbedCalculator({
   initialProvince,
   initialLang,
+  initialAmount = '60000',
+  initialUnit = 'year',
+  inline = false,
 }: {
   initialProvince?: string;
   initialLang?: string;
+  initialAmount?: string;
+  initialUnit?: 'year' | 'hour';
+  /**
+   * Rendered inside one of our own pages rather than in a publisher's iframe
+   * (2026-10-26: the "paycheck calculator" pages had no calculator on them).
+   * Inline it leaves the page's title and language alone, records its
+   * calculations as source=web like the home page, and links to the full
+   * calculator in the same tab.
+   */
+  inline?: boolean;
 }) {
   // The site picks a language with ?lang=; the reader can switch between that
   // language and Canada's two official ones (2026-10-16 — a Quebec site asked
@@ -110,22 +126,22 @@ export default function EmbedCalculator({
   const t = DICT[lang];
   const langRef = useRef<Lang>(lang);
   langRef.current = lang;
-  useEffect(() => { document.documentElement.lang = lang; }, [lang]);
+  useEffect(() => { if (!inline) document.documentElement.lang = lang; }, [lang, inline]);
 
   const startSlug =
     (initialProvince && CODE_TO_SLUG[initialProvince.toUpperCase()]) || 'ontario';
   const [slug, setSlug] = useState(startSlug);
-  const [amount, setAmount] = useState('60000');
-  const [unit, setUnit] = useState<'year' | 'hour'>('year');
+  const [amount, setAmount] = useState(initialAmount);
+  const [unit, setUnit] = useState<'year' | 'hour'>(initialUnit);
   const [embedHost, setEmbedHost] = useState<string | null>(null);
   const [touched, setTouched] = useState(false);
 
-  useEffect(() => { document.title = t.title; }, [t.title]);
+  useEffect(() => { if (!inline) document.title = t.title; }, [t.title, inline]);
 
   useEffect(() => {
     // Which site embedded us — the publisher's hostname, never user data.
     try {
-      if (document.referrer) setEmbedHost(new URL(document.referrer).hostname);
+      if (!inline && document.referrer) setEmbedHost(new URL(document.referrer).hostname);
     } catch {
       /* ignore */
     }
@@ -156,11 +172,11 @@ export default function EmbedCalculator({
       province: provinceName,
       annualIncome: annual,
       lang: langRef.current,
-      source: 'widget',
-      embedHost,
+      source: inline ? 'web' : 'widget',
+      embedHost: inline ? null : embedHost,
     });
     // Not keyed on lang: switching language is not a new calculation.
-  }, [touched, annual, provinceName, unit, embedHost]);
+  }, [touched, annual, provinceName, unit, embedHost, inline]);
 
   const locale = lang === 'fr' ? 'fr-CA' : 'en-CA';
   const [announce, setAnnounce] = useState('');
@@ -176,11 +192,11 @@ export default function EmbedCalculator({
     n.toLocaleString(locale, { style: 'currency', currency: 'CAD', maximumFractionDigits: 0 });
 
   return (
-    <div className="flex min-h-screen flex-col bg-white p-4 font-sans">
+    <div className={inline ? 'flex flex-col rounded-2xl border border-slate-200 bg-white p-4 font-sans shadow-sm' : 'flex min-h-screen flex-col bg-white p-4 font-sans'}>
       <div className="mb-3 flex items-center gap-2">
         <img src="/logo.png" alt="" width={22} height={22} className="rounded" />
         <span className="text-sm font-bold text-slate-800">{t.title}</span>
-        <div role="group" aria-label="Language / Langue" className="ml-auto flex overflow-hidden rounded-md border border-slate-300 text-[11px] font-semibold">
+        {!inline && <div role="group" aria-label="Language / Langue" className="ml-auto flex overflow-hidden rounded-md border border-slate-300 text-[11px] font-semibold">
           {langChoices.map((l) => (
             <button
               key={l}
@@ -193,7 +209,7 @@ export default function EmbedCalculator({
               {LANG_SHORT[l]}
             </button>
           ))}
-        </div>
+        </div>}
       </div>
 
       <label htmlFor="cp-province" className="mb-1 text-[11px] font-semibold uppercase tracking-wide text-slate-500">
@@ -278,6 +294,11 @@ export default function EmbedCalculator({
       {/* One quiet announcement once typing pauses, not one per keystroke. */}
       <p role="status" aria-live="polite" className="sr-only">{announce}</p>
 
+      {inline ? (
+        <div className="mt-3 border-t border-slate-100 pt-3 text-xs">
+          <a href="/" className="font-semibold text-red-600 no-underline hover:underline">{t.fullCalcInline}</a>
+        </div>
+      ) : (
       <div className="mt-auto flex items-center justify-between border-t border-slate-100 pt-3 text-[11px] text-slate-500">
         <span>
           {t.poweredBy}{' '}
@@ -299,6 +320,7 @@ export default function EmbedCalculator({
           {t.fullCalc}
         </a>
       </div>
+      )}
     </div>
   );
 }
