@@ -25,10 +25,10 @@ import { Province } from '../types';
 const OUT = 'public/data/rankings/north-america-2026.json';
 const FX_ARCHIVE = 'data-archive/boc/FXUSDCAD-2025-10-01_2026-09-30.json';
 const SALARIES_USD = [40000, 60000, 80000, 100000, 150000];
-// KFF Employer Health Benefits Survey 2025, summary of findings p.1-2: average
-// worker contribution for single coverage $1,440 (premium $9,325). Paid through
-// a Section 125 plan, so it goes in as a pre-tax deduction, not off net pay.
-const HEALTH_PREMIUM_USD = 1440;
+// A variant with the US worker's average health premium (KFF EHBS 2025: $1,440,
+// single coverage, pre-tax) was built in 81e4978 and withdrawn: whether each state
+// excludes Section 125 premiums from income tax and from its payroll-contribution
+// base is not verified state by state. Do not publish it until it is.
 const USAPAY_CORE = process.env.USAPAY_CORE ?? join(homedir(), 'Code/Vibe_Coding/USPay/core');
 
 type Row = { code: string; country: 'CA' | 'US'; name: string; gross: number; net: number; keptPct: number; rank?: number };
@@ -77,11 +77,8 @@ async function loadUs() {
     dirty: git('status --porcelain -- .') !== '',
     codes: states.ALL_STATE_CODES as string[],
     name: (c: string) => states.STATE_RULES[c].name as string,
-    net: (state: string, annualGross: number, premium = 0) =>
-      round2(engine.calculateTakeHome({
-        annualGross, filingStatus: 'single', state, payFrequency: 'biweekly',
-        ...(premium ? { preTax: { retirement401k: 0, hsa: 0, fsaAndPremiums: premium } } : {}),
-      }).netAnnual),
+    net: (state: string, annualGross: number) =>
+      round2(engine.calculateTakeHome({ annualGross, filingStatus: 'single', state, payFrequency: 'biweekly' }).netAnnual),
     blockers: (state: string, salary: number) => gaps.rankingBlockers(state, salary, 'single') as string[],
     scope: (state: string) => gaps.scopeNotes(state) as string[],
     median: (c: string) => medians.STATE_MEDIAN_WAGE[c].annual as number,
@@ -91,10 +88,10 @@ async function loadUs() {
 async function build(us: NonNullable<Awaited<ReturnType<typeof loadUs>>>) {
   const fx = fxFromArchive();
   const refused: string[] = [];
-  const usRow = (code: string, gross: number, premium = 0): Row => {
+  const usRow = (code: string, gross: number): Row => {
     const b = us.blockers(code, gross);
     if (b.length) refused.push(`${code} $${gross}: ${b.join(' | ')}`);
-    const net = us.net(code, gross, premium);
+    const net = us.net(code, gross);
     return { code, country: 'US', name: us.name(code), gross, net, keptPct: pct(net, gross) };
   };
 
@@ -104,9 +101,6 @@ async function build(us: NonNullable<Awaited<ReturnType<typeof loadUs>>>) {
     return {
       usd, cad,
       rows: rank([...ca, ...us.codes.map((c) => usRow(c, usd))], (r) => r.keptPct),
-      // Same Canadian rows; each US worker also pays the average single-coverage
-      // premium share. Canadians' basic health cover is tax-funded.
-      afterHealthPremium: rank([...ca, ...us.codes.map((c) => usRow(c, usd, HEALTH_PREMIUM_USD))], (r) => r.keptPct),
     };
   });
 
@@ -127,7 +121,6 @@ async function build(us: NonNullable<Awaited<ReturnType<typeof loadUs>>>) {
       basis: 'Canada is what the payroll withholds; the US is the tax owed for the year. For a single salary earner with no other income the two agree to within a few dollars.',
       fx: `Bank of Canada daily USD/CAD, ${fx.days}-day average ${fx.from} to ${fx.to}: ${fx.usdcad}. Canadian salaries are the US salary × this rate, rounded to the dollar.`,
       ranks: 'By share of gross kept, shown to 0.1 point; jurisdictions that print the same share share a rank (1, 1, 3).',
-      healthPremium: `US workers' average contribution for single employer coverage, $${HEALTH_PREMIUM_USD.toLocaleString('en-US')} a year (KFF Employer Health Benefits Survey 2025), deducted pre-tax. Not applied to Canada, where basic coverage is tax-funded.`,
     },
     fx,
     engines: { canada: 'canpay-insights (this repository)', us: { package: '@usapay/engine', version: us.version, commit: us.commit } },
@@ -169,7 +162,7 @@ async function main() {
 
   for (const t of prev.tiers) {
     if (t.cad !== Math.round(t.usd * fx.usdcad)) fail.push(`$${t.usd}: CAD ${t.cad} ≠ ${Math.round(t.usd * fx.usdcad)}`);
-    for (const list of ['rows', 'afterHealthPremium'] as const) {
+    for (const list of ['rows'] as const) {
       const rows: Row[] = t[list];
       if (rows.length !== 64) fail.push(`$${t.usd} ${list}: ${rows.length} rows, expected 64`);
       for (const r of rows.filter((r) => r.country === 'CA')) {

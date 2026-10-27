@@ -7,8 +7,7 @@
   "us": "USAPay Insights engine: 2026 annual liability — federal income tax, Social Security, Medicare, state income tax and statewide payroll contributions at their statutory employee rates.",
   "basis": "Canada is what the payroll withholds; the US is the tax owed for the year. For a single salary earner with no other income the two agree to within a few dollars.",
   "fx": "Bank of Canada daily USD/CAD, 249-day average 2025-10-01 to 2026-09-29: 1.3875. Canadian salaries are the US salary × this rate, rounded to the dollar.",
-  "ranks": "By share of gross kept, shown to 0.1 point; jurisdictions that print the same share share a rank (1, 1, 3).",
-  "healthPremium": "US workers' average contribution for single employer coverage, $1,440 a year (KFF Employer Health Benefits Survey 2025), deducted pre-tax. Not applied to Canada, where basic coverage is tax-funded."
+  "ranks": "By share of gross kept, shown to 0.1 point; jurisdictions that print the same share share a rank (1, 1, 3)."
  },
  "fx": {
   "usdcad": 1.3875,
@@ -21,7 +20,7 @@
   "us": {
    "package": "@usapay/engine",
    "version": "2026.1.0",
-   "commit": "ce2451b"
+   "commit": "00b81dc"
   }
  },
  "tiers": [
@@ -29,15 +28,6 @@
    "usd": 40000,
    "cad": 55500,
    "rows": [
-    {
-     "code": "AK",
-     "country": "US",
-     "name": "Alaska",
-     "gross": 40000,
-     "net": 34320,
-     "keptPct": 85.8,
-     "rank": 1
-    },
     {
      "code": "FL",
      "country": "US",
@@ -109,6 +99,15 @@
      "net": 34320,
      "keptPct": 85.8,
      "rank": 1
+    },
+    {
+     "code": "AK",
+     "country": "US",
+     "name": "Alaska",
+     "gross": 40000,
+     "net": 34120,
+     "keptPct": 85.3,
+     "rank": 9
     },
     {
      "code": "OH",
@@ -183,15 +182,6 @@
      "rank": 16
     },
     {
-     "code": "VT",
-     "country": "US",
-     "name": "Vermont",
-     "gross": 40000,
-     "net": 33417.18,
-     "keptPct": 83.54,
-     "rank": 18
-    },
-    {
      "code": "NE",
      "country": "US",
      "name": "Nebraska",
@@ -207,7 +197,16 @@
      "gross": 40000,
      "net": 33377.33,
      "keptPct": 83.44,
-     "rank": 20
+     "rank": 19
+    },
+    {
+     "code": "VT",
+     "country": "US",
+     "name": "Vermont",
+     "gross": 40000,
+     "net": 33373.18,
+     "keptPct": 83.43,
+     "rank": 19
     },
     {
      "code": "AR",
@@ -264,22 +263,13 @@
      "rank": 24
     },
     {
-     "code": "ME",
-     "country": "US",
-     "name": "Maine",
-     "gross": 40000,
-     "net": 33218,
-     "keptPct": 83.05,
-     "rank": 24
-    },
-    {
      "code": "CA",
      "country": "US",
      "name": "California",
      "gross": 40000,
      "net": 33217.31,
      "keptPct": 83.04,
-     "rank": 28
+     "rank": 27
     },
     {
      "code": "MT",
@@ -288,7 +278,7 @@
      "gross": 40000,
      "net": 33196.7,
      "keptPct": 82.99,
-     "rank": 28
+     "rank": 27
     },
     {
      "code": "IN",
@@ -297,7 +287,7 @@
      "gross": 40000,
      "net": 33169.5,
      "keptPct": 82.92,
-     "rank": 30
+     "rank": 29
     },
     {
      "code": "CO",
@@ -306,16 +296,7 @@
      "gross": 40000,
      "net": 33092.4,
      "keptPct": 82.73,
-     "rank": 31
-    },
-    {
-     "code": "PA",
-     "country": "US",
-     "name": "Pennsylvania",
-     "gross": 40000,
-     "net": 33092,
-     "keptPct": 82.73,
-     "rank": 31
+     "rank": 30
     },
     {
      "code": "DC",
@@ -324,7 +305,7 @@
      "gross": 40000,
      "net": 33086,
      "keptPct": 82.72,
-     "rank": 31
+     "rank": 30
     },
     {
      "code": "GA",
@@ -333,7 +314,7 @@
      "gross": 40000,
      "net": 33072.5,
      "keptPct": 82.68,
-     "rank": 31
+     "rank": 30
     },
     {
      "code": "OK",
@@ -342,7 +323,16 @@
      "gross": 40000,
      "net": 33065.5,
      "keptPct": 82.66,
-     "rank": 31
+     "rank": 30
+    },
+    {
+     "code": "PA",
+     "country": "US",
+     "name": "Pennsylvania",
+     "gross": 40000,
+     "net": 33064,
+     "keptPct": 82.66,
+     "rank": 30
     },
     {
      "code": "ID",
@@ -351,7 +341,7 @@
      "gross": 40000,
      "net": 33053.3,
      "keptPct": 82.63,
-     "rank": 36
+     "rank": 35
     },
     {
      "code": "KY",
@@ -360,7 +350,16 @@
      "gross": 40000,
      "net": 33037.6,
      "keptPct": 82.59,
-     "rank": 36
+     "rank": 35
+    },
+    {
+     "code": "ME",
+     "country": "US",
+     "name": "Maine",
+     "gross": 40000,
+     "net": 33018,
+     "keptPct": 82.55,
+     "rank": 35
     },
     {
      "code": "HI",
@@ -538,8 +537,8 @@
      "country": "US",
      "name": "Oregon",
      "gross": 40000,
-     "net": 31645.88,
-     "keptPct": 79.11,
+     "net": 31605.88,
+     "keptPct": 79.01,
      "rank": 57
     },
     {
@@ -595,584 +594,6 @@
      "net": 42501.19,
      "keptPct": 76.58,
      "rank": 62
-    },
-    {
-     "code": "NS",
-     "country": "CA",
-     "name": "Nova Scotia",
-     "gross": 55500,
-     "net": 41848.96,
-     "keptPct": 75.4,
-     "rank": 64
-    }
-   ],
-   "afterHealthPremium": [
-    {
-     "code": "AK",
-     "country": "US",
-     "name": "Alaska",
-     "gross": 40000,
-     "net": 33162.96,
-     "keptPct": 82.91,
-     "rank": 1
-    },
-    {
-     "code": "FL",
-     "country": "US",
-     "name": "Florida",
-     "gross": 40000,
-     "net": 33162.96,
-     "keptPct": 82.91,
-     "rank": 1
-    },
-    {
-     "code": "ND",
-     "country": "US",
-     "name": "North Dakota",
-     "gross": 40000,
-     "net": 33162.96,
-     "keptPct": 82.91,
-     "rank": 1
-    },
-    {
-     "code": "NH",
-     "country": "US",
-     "name": "New Hampshire",
-     "gross": 40000,
-     "net": 33162.96,
-     "keptPct": 82.91,
-     "rank": 1
-    },
-    {
-     "code": "NV",
-     "country": "US",
-     "name": "Nevada",
-     "gross": 40000,
-     "net": 33162.96,
-     "keptPct": 82.91,
-     "rank": 1
-    },
-    {
-     "code": "SD",
-     "country": "US",
-     "name": "South Dakota",
-     "gross": 40000,
-     "net": 33162.96,
-     "keptPct": 82.91,
-     "rank": 1
-    },
-    {
-     "code": "TN",
-     "country": "US",
-     "name": "Tennessee",
-     "gross": 40000,
-     "net": 33162.96,
-     "keptPct": 82.91,
-     "rank": 1
-    },
-    {
-     "code": "TX",
-     "country": "US",
-     "name": "Texas",
-     "gross": 40000,
-     "net": 33162.96,
-     "keptPct": 82.91,
-     "rank": 1
-    },
-    {
-     "code": "WY",
-     "country": "US",
-     "name": "Wyoming",
-     "gross": 40000,
-     "net": 33162.96,
-     "keptPct": 82.91,
-     "rank": 1
-    },
-    {
-     "code": "OH",
-     "country": "US",
-     "name": "Ohio",
-     "gross": 40000,
-     "net": 32884.94,
-     "keptPct": 82.21,
-     "rank": 10
-    },
-    {
-     "code": "NU",
-     "country": "CA",
-     "name": "Nunavut",
-     "gross": 55500,
-     "net": 45530.89,
-     "keptPct": 82.04,
-     "rank": 11
-    },
-    {
-     "code": "SC",
-     "country": "US",
-     "name": "South Carolina",
-     "gross": 40000,
-     "net": 32694.12,
-     "keptPct": 81.74,
-     "rank": 12
-    },
-    {
-     "code": "WA",
-     "country": "US",
-     "name": "Washington",
-     "gross": 40000,
-     "net": 32608.1,
-     "keptPct": 81.52,
-     "rank": 13
-    },
-    {
-     "code": "AZ",
-     "country": "US",
-     "name": "Arizona",
-     "gross": 40000,
-     "net": 32601.46,
-     "keptPct": 81.5,
-     "rank": 13
-    },
-    {
-     "code": "NM",
-     "country": "US",
-     "name": "New Mexico",
-     "gross": 40000,
-     "net": 32472.18,
-     "keptPct": 81.18,
-     "rank": 15
-    },
-    {
-     "code": "LA",
-     "country": "US",
-     "name": "Louisiana",
-     "gross": 40000,
-     "net": 32392.41,
-     "keptPct": 80.98,
-     "rank": 16
-    },
-    {
-     "code": "MS",
-     "country": "US",
-     "name": "Mississippi",
-     "gross": 40000,
-     "net": 32352.56,
-     "keptPct": 80.88,
-     "rank": 17
-    },
-    {
-     "code": "IA",
-     "country": "US",
-     "name": "Iowa",
-     "gross": 40000,
-     "net": 32349.48,
-     "keptPct": 80.87,
-     "rank": 17
-    },
-    {
-     "code": "VT",
-     "country": "US",
-     "name": "Vermont",
-     "gross": 40000,
-     "net": 32308.38,
-     "keptPct": 80.77,
-     "rank": 19
-    },
-    {
-     "code": "MO",
-     "country": "US",
-     "name": "Missouri",
-     "gross": 40000,
-     "net": 32287.97,
-     "keptPct": 80.72,
-     "rank": 20
-    },
-    {
-     "code": "NE",
-     "country": "US",
-     "name": "Nebraska",
-     "gross": 40000,
-     "net": 32288.02,
-     "keptPct": 80.72,
-     "rank": 20
-    },
-    {
-     "code": "NT",
-     "country": "CA",
-     "name": "Northwest Territories",
-     "gross": 55500,
-     "net": 44786.3,
-     "keptPct": 80.7,
-     "rank": 20
-    },
-    {
-     "code": "AR",
-     "country": "US",
-     "name": "Arkansas",
-     "gross": 40000,
-     "net": 32223.79,
-     "keptPct": 80.56,
-     "rank": 23
-    },
-    {
-     "code": "NJ",
-     "country": "US",
-     "name": "New Jersey",
-     "gross": 40000,
-     "net": 32192.86,
-     "keptPct": 80.48,
-     "rank": 24
-    },
-    {
-     "code": "YT",
-     "country": "CA",
-     "name": "Yukon",
-     "gross": 55500,
-     "net": 44657.49,
-     "keptPct": 80.46,
-     "rank": 24
-    },
-    {
-     "code": "WV",
-     "country": "US",
-     "name": "West Virginia",
-     "gross": 40000,
-     "net": 32165.16,
-     "keptPct": 80.41,
-     "rank": 26
-    },
-    {
-     "code": "UT",
-     "country": "US",
-     "name": "Utah",
-     "gross": 40000,
-     "net": 32154.81,
-     "keptPct": 80.39,
-     "rank": 26
-    },
-    {
-     "code": "WI",
-     "country": "US",
-     "name": "Wisconsin",
-     "gross": 40000,
-     "net": 32149.99,
-     "keptPct": 80.37,
-     "rank": 26
-    },
-    {
-     "code": "ME",
-     "country": "US",
-     "name": "Maine",
-     "gross": 40000,
-     "net": 32144.48,
-     "keptPct": 80.36,
-     "rank": 26
-    },
-    {
-     "code": "NC",
-     "country": "US",
-     "name": "North Carolina",
-     "gross": 40000,
-     "net": 32133.14,
-     "keptPct": 80.33,
-     "rank": 30
-    },
-    {
-     "code": "BC",
-     "country": "CA",
-     "name": "British Columbia",
-     "gross": 55500,
-     "net": 44563.64,
-     "keptPct": 80.29,
-     "rank": 30
-    },
-    {
-     "code": "CA",
-     "country": "US",
-     "name": "California",
-     "gross": 40000,
-     "net": 32117.87,
-     "keptPct": 80.29,
-     "rank": 30
-    },
-    {
-     "code": "MT",
-     "country": "US",
-     "name": "Montana",
-     "gross": 40000,
-     "net": 32107.34,
-     "keptPct": 80.27,
-     "rank": 30
-    },
-    {
-     "code": "AB",
-     "country": "CA",
-     "name": "Alberta",
-     "gross": 55500,
-     "net": 44505.99,
-     "keptPct": 80.19,
-     "rank": 34
-    },
-    {
-     "code": "IN",
-     "country": "US",
-     "name": "Indiana",
-     "gross": 40000,
-     "net": 32054.94,
-     "keptPct": 80.14,
-     "rank": 35
-    },
-    {
-     "code": "DC",
-     "country": "US",
-     "name": "District of Columbia",
-     "gross": 40000,
-     "net": 32015.36,
-     "keptPct": 80.04,
-     "rank": 36
-    },
-    {
-     "code": "CO",
-     "country": "US",
-     "name": "Colorado",
-     "gross": 40000,
-     "net": 31998.72,
-     "keptPct": 80,
-     "rank": 36
-    },
-    {
-     "code": "GA",
-     "country": "US",
-     "name": "Georgia",
-     "gross": 40000,
-     "net": 31987.32,
-     "keptPct": 79.97,
-     "rank": 36
-    },
-    {
-     "code": "PA",
-     "country": "US",
-     "name": "Pennsylvania",
-     "gross": 40000,
-     "net": 31979.17,
-     "keptPct": 79.95,
-     "rank": 36
-    },
-    {
-     "code": "ID",
-     "country": "US",
-     "name": "Idaho",
-     "gross": 40000,
-     "net": 31972.58,
-     "keptPct": 79.93,
-     "rank": 40
-    },
-    {
-     "code": "OK",
-     "country": "US",
-     "name": "Oklahoma",
-     "gross": 40000,
-     "net": 31973.26,
-     "keptPct": 79.93,
-     "rank": 40
-    },
-    {
-     "code": "HI",
-     "country": "US",
-     "name": "Hawaii",
-     "gross": 40000,
-     "net": 31935.47,
-     "keptPct": 79.84,
-     "rank": 42
-    },
-    {
-     "code": "KY",
-     "country": "US",
-     "name": "Kentucky",
-     "gross": 40000,
-     "net": 31930.96,
-     "keptPct": 79.83,
-     "rank": 42
-    },
-    {
-     "code": "RI",
-     "country": "US",
-     "name": "Rhode Island",
-     "gross": 40000,
-     "net": 31893.84,
-     "keptPct": 79.73,
-     "rank": 44
-    },
-    {
-     "code": "ON",
-     "country": "CA",
-     "name": "Ontario",
-     "gross": 55500,
-     "net": 44215.06,
-     "keptPct": 79.67,
-     "rank": 44
-    },
-    {
-     "code": "KS",
-     "country": "US",
-     "name": "Kansas",
-     "gross": 40000,
-     "net": 31811,
-     "keptPct": 79.53,
-     "rank": 46
-    },
-    {
-     "code": "MI",
-     "country": "US",
-     "name": "Michigan",
-     "gross": 40000,
-     "net": 31774.91,
-     "keptPct": 79.44,
-     "rank": 47
-    },
-    {
-     "code": "VA",
-     "country": "US",
-     "name": "Virginia",
-     "gross": 40000,
-     "net": 31759.86,
-     "keptPct": 79.4,
-     "rank": 47
-    },
-    {
-     "code": "CT",
-     "country": "US",
-     "name": "Connecticut",
-     "gross": 40000,
-     "net": 31747.76,
-     "keptPct": 79.37,
-     "rank": 47
-    },
-    {
-     "code": "MN",
-     "country": "US",
-     "name": "Minnesota",
-     "gross": 40000,
-     "net": 31742.55,
-     "keptPct": 79.36,
-     "rank": 47
-    },
-    {
-     "code": "MD",
-     "country": "US",
-     "name": "Maryland",
-     "gross": 40000,
-     "net": 31694.99,
-     "keptPct": 79.24,
-     "rank": 51
-    },
-    {
-     "code": "AL",
-     "country": "US",
-     "name": "Alabama",
-     "gross": 40000,
-     "net": 31597.32,
-     "keptPct": 78.99,
-     "rank": 52
-    },
-    {
-     "code": "DE",
-     "country": "US",
-     "name": "Delaware",
-     "gross": 40000,
-     "net": 31539.76,
-     "keptPct": 78.85,
-     "rank": 53
-    },
-    {
-     "code": "NY",
-     "country": "US",
-     "name": "New York",
-     "gross": 40000,
-     "net": 31473.72,
-     "keptPct": 78.68,
-     "rank": 54
-    },
-    {
-     "code": "IL",
-     "country": "US",
-     "name": "Illinois",
-     "gross": 40000,
-     "net": 31399.03,
-     "keptPct": 78.5,
-     "rank": 55
-    },
-    {
-     "code": "SK",
-     "country": "CA",
-     "name": "Saskatchewan",
-     "gross": 55500,
-     "net": 43527.98,
-     "keptPct": 78.43,
-     "rank": 56
-    },
-    {
-     "code": "MA",
-     "country": "US",
-     "name": "Massachusetts",
-     "gross": 40000,
-     "net": 31270.96,
-     "keptPct": 78.18,
-     "rank": 57
-    },
-    {
-     "code": "NB",
-     "country": "CA",
-     "name": "New Brunswick",
-     "gross": 55500,
-     "net": 43126.11,
-     "keptPct": 77.7,
-     "rank": 58
-    },
-    {
-     "code": "NL",
-     "country": "CA",
-     "name": "Newfoundland and Labrador",
-     "gross": 55500,
-     "net": 42865.63,
-     "keptPct": 77.24,
-     "rank": 59
-    },
-    {
-     "code": "MB",
-     "country": "CA",
-     "name": "Manitoba",
-     "gross": 55500,
-     "net": 42791.07,
-     "keptPct": 77.1,
-     "rank": 60
-    },
-    {
-     "code": "QC",
-     "country": "CA",
-     "name": "Quebec",
-     "gross": 55500,
-     "net": 42528.89,
-     "keptPct": 76.63,
-     "rank": 61
-    },
-    {
-     "code": "PE",
-     "country": "CA",
-     "name": "Prince Edward Island",
-     "gross": 55500,
-     "net": 42501.19,
-     "keptPct": 76.58,
-     "rank": 61
-    },
-    {
-     "code": "OR",
-     "country": "US",
-     "name": "Oregon",
-     "gross": 40000,
-     "net": 30599.72,
-     "keptPct": 76.5,
-     "rank": 63
     },
     {
      "code": "NS",
@@ -1190,15 +611,6 @@
    "cad": 83250,
    "rows": [
     {
-     "code": "AK",
-     "country": "US",
-     "name": "Alaska",
-     "gross": 60000,
-     "net": 50390,
-     "keptPct": 83.98,
-     "rank": 1
-    },
-    {
      "code": "FL",
      "country": "US",
      "name": "Florida",
@@ -1269,6 +681,15 @@
      "net": 50390,
      "keptPct": 83.98,
      "rank": 1
+    },
+    {
+     "code": "AK",
+     "country": "US",
+     "name": "Alaska",
+     "gross": 60000,
+     "net": 50119,
+     "keptPct": 83.53,
+     "rank": 9
     },
     {
      "code": "WA",
@@ -1316,22 +737,22 @@
      "rank": 14
     },
     {
-     "code": "VT",
-     "country": "US",
-     "name": "Vermont",
-     "gross": 60000,
-     "net": 48817.18,
-     "keptPct": 81.36,
-     "rank": 15
-    },
-    {
      "code": "IA",
      "country": "US",
      "name": "Iowa",
      "gross": 60000,
      "net": 48761.8,
      "keptPct": 81.27,
-     "rank": 16
+     "rank": 15
+    },
+    {
+     "code": "VT",
+     "country": "US",
+     "name": "Vermont",
+     "gross": 60000,
+     "net": 48751.18,
+     "keptPct": 81.25,
+     "rank": 15
     },
     {
      "code": "NM",
@@ -1370,15 +791,6 @@
      "rank": 19
     },
     {
-     "code": "PA",
-     "country": "US",
-     "name": "Pennsylvania",
-     "gross": 60000,
-     "net": 48548,
-     "keptPct": 80.91,
-     "rank": 21
-    },
-    {
      "code": "NE",
      "country": "US",
      "name": "Nebraska",
@@ -1412,7 +824,16 @@
      "gross": 60000,
      "net": 48504.73,
      "keptPct": 80.84,
-     "rank": 25
+     "rank": 24
+    },
+    {
+     "code": "PA",
+     "country": "US",
+     "name": "Pennsylvania",
+     "gross": 60000,
+     "net": 48506,
+     "keptPct": 80.84,
+     "rank": 24
     },
     {
      "code": "KY",
@@ -1514,15 +935,6 @@
      "rank": 36
     },
     {
-     "code": "ME",
-     "country": "US",
-     "name": "Maine",
-     "gross": 60000,
-     "net": 48017.8,
-     "keptPct": 80.03,
-     "rank": 37
-    },
-    {
      "code": "CA",
      "country": "US",
      "name": "California",
@@ -1538,7 +950,7 @@
      "gross": 60000,
      "net": 47936.5,
      "keptPct": 79.89,
-     "rank": 39
+     "rank": 38
     },
     {
      "code": "MD",
@@ -1547,7 +959,7 @@
      "gross": 60000,
      "net": 47903.63,
      "keptPct": 79.84,
-     "rank": 40
+     "rank": 39
     },
     {
      "code": "AL",
@@ -1556,7 +968,7 @@
      "gross": 60000,
      "net": 47881,
      "keptPct": 79.8,
-     "rank": 40
+     "rank": 39
     },
     {
      "code": "KS",
@@ -1565,7 +977,7 @@
      "gross": 60000,
      "net": 47841.69,
      "keptPct": 79.74,
-     "rank": 42
+     "rank": 41
     },
     {
      "code": "VA",
@@ -1574,6 +986,15 @@
      "gross": 60000,
      "net": 47754.1,
      "keptPct": 79.59,
+     "rank": 42
+    },
+    {
+     "code": "ME",
+     "country": "US",
+     "name": "Maine",
+     "gross": 60000,
+     "net": 47717.8,
+     "keptPct": 79.53,
      "rank": 43
     },
     {
@@ -1653,8 +1074,8 @@
      "country": "US",
      "name": "Oregon",
      "gross": 60000,
-     "net": 46055.88,
-     "keptPct": 76.76,
+     "net": 45995.88,
+     "keptPct": 76.66,
      "rank": 52
     },
     {
@@ -1700,584 +1121,6 @@
      "gross": 83250,
      "net": 62497.55,
      "keptPct": 75.07,
-     "rank": 57
-    },
-    {
-     "code": "SK",
-     "country": "CA",
-     "name": "Saskatchewan",
-     "gross": 83250,
-     "net": 61112.27,
-     "keptPct": 73.41,
-     "rank": 58
-    },
-    {
-     "code": "MB",
-     "country": "CA",
-     "name": "Manitoba",
-     "gross": 83250,
-     "net": 60310.81,
-     "keptPct": 72.45,
-     "rank": 59
-    },
-    {
-     "code": "NB",
-     "country": "CA",
-     "name": "New Brunswick",
-     "gross": 83250,
-     "net": 60289.39,
-     "keptPct": 72.42,
-     "rank": 60
-    },
-    {
-     "code": "NL",
-     "country": "CA",
-     "name": "Newfoundland and Labrador",
-     "gross": 83250,
-     "net": 59884.7,
-     "keptPct": 71.93,
-     "rank": 61
-    },
-    {
-     "code": "PE",
-     "country": "CA",
-     "name": "Prince Edward Island",
-     "gross": 83250,
-     "net": 59297.39,
-     "keptPct": 71.23,
-     "rank": 62
-    },
-    {
-     "code": "QC",
-     "country": "CA",
-     "name": "Quebec",
-     "gross": 83250,
-     "net": 58993.11,
-     "keptPct": 70.86,
-     "rank": 63
-    },
-    {
-     "code": "NS",
-     "country": "CA",
-     "name": "Nova Scotia",
-     "gross": 83250,
-     "net": 58399.15,
-     "keptPct": 70.15,
-     "rank": 64
-    }
-   ],
-   "afterHealthPremium": [
-    {
-     "code": "AK",
-     "country": "US",
-     "name": "Alaska",
-     "gross": 60000,
-     "net": 49232.96,
-     "keptPct": 82.05,
-     "rank": 1
-    },
-    {
-     "code": "FL",
-     "country": "US",
-     "name": "Florida",
-     "gross": 60000,
-     "net": 49232.96,
-     "keptPct": 82.05,
-     "rank": 1
-    },
-    {
-     "code": "ND",
-     "country": "US",
-     "name": "North Dakota",
-     "gross": 60000,
-     "net": 49232.96,
-     "keptPct": 82.05,
-     "rank": 1
-    },
-    {
-     "code": "NH",
-     "country": "US",
-     "name": "New Hampshire",
-     "gross": 60000,
-     "net": 49232.96,
-     "keptPct": 82.05,
-     "rank": 1
-    },
-    {
-     "code": "NV",
-     "country": "US",
-     "name": "Nevada",
-     "gross": 60000,
-     "net": 49232.96,
-     "keptPct": 82.05,
-     "rank": 1
-    },
-    {
-     "code": "SD",
-     "country": "US",
-     "name": "South Dakota",
-     "gross": 60000,
-     "net": 49232.96,
-     "keptPct": 82.05,
-     "rank": 1
-    },
-    {
-     "code": "TN",
-     "country": "US",
-     "name": "Tennessee",
-     "gross": 60000,
-     "net": 49232.96,
-     "keptPct": 82.05,
-     "rank": 1
-    },
-    {
-     "code": "TX",
-     "country": "US",
-     "name": "Texas",
-     "gross": 60000,
-     "net": 49232.96,
-     "keptPct": 82.05,
-     "rank": 1
-    },
-    {
-     "code": "WY",
-     "country": "US",
-     "name": "Wyoming",
-     "gross": 60000,
-     "net": 49232.96,
-     "keptPct": 82.05,
-     "rank": 1
-    },
-    {
-     "code": "WA",
-     "country": "US",
-     "name": "Washington",
-     "gross": 60000,
-     "net": 48400.66,
-     "keptPct": 80.67,
-     "rank": 10
-    },
-    {
-     "code": "OH",
-     "country": "US",
-     "name": "Ohio",
-     "gross": 60000,
-     "net": 48398.06,
-     "keptPct": 80.66,
-     "rank": 10
-    },
-    {
-     "code": "AZ",
-     "country": "US",
-     "name": "Arizona",
-     "gross": 60000,
-     "net": 48171.46,
-     "keptPct": 80.29,
-     "rank": 12
-    },
-    {
-     "code": "SC",
-     "country": "US",
-     "name": "South Carolina",
-     "gross": 60000,
-     "net": 47929.48,
-     "keptPct": 79.88,
-     "rank": 13
-    },
-    {
-     "code": "LA",
-     "country": "US",
-     "name": "Louisiana",
-     "gross": 60000,
-     "net": 47862.41,
-     "keptPct": 79.77,
-     "rank": 14
-    },
-    {
-     "code": "VT",
-     "country": "US",
-     "name": "Vermont",
-     "gross": 60000,
-     "net": 47708.38,
-     "keptPct": 79.51,
-     "rank": 15
-    },
-    {
-     "code": "IA",
-     "country": "US",
-     "name": "Iowa",
-     "gross": 60000,
-     "net": 47659.48,
-     "keptPct": 79.43,
-     "rank": 16
-    },
-    {
-     "code": "NM",
-     "country": "US",
-     "name": "New Mexico",
-     "gross": 60000,
-     "net": 47646.34,
-     "keptPct": 79.41,
-     "rank": 16
-    },
-    {
-     "code": "MS",
-     "country": "US",
-     "name": "Mississippi",
-     "gross": 60000,
-     "net": 47622.56,
-     "keptPct": 79.37,
-     "rank": 16
-    },
-    {
-     "code": "AR",
-     "country": "US",
-     "name": "Arkansas",
-     "gross": 60000,
-     "net": 47553.79,
-     "keptPct": 79.26,
-     "rank": 19
-    },
-    {
-     "code": "IN",
-     "country": "US",
-     "name": "Indiana",
-     "gross": 60000,
-     "net": 47534.94,
-     "keptPct": 79.22,
-     "rank": 20
-    },
-    {
-     "code": "NE",
-     "country": "US",
-     "name": "Nebraska",
-     "gross": 60000,
-     "net": 47448.02,
-     "keptPct": 79.08,
-     "rank": 21
-    },
-    {
-     "code": "PA",
-     "country": "US",
-     "name": "Pennsylvania",
-     "gross": 60000,
-     "net": 47435.17,
-     "keptPct": 79.06,
-     "rank": 21
-    },
-    {
-     "code": "WV",
-     "country": "US",
-     "name": "West Virginia",
-     "gross": 60000,
-     "net": 47427.63,
-     "keptPct": 79.05,
-     "rank": 21
-    },
-    {
-     "code": "MO",
-     "country": "US",
-     "name": "Missouri",
-     "gross": 60000,
-     "net": 47417.97,
-     "keptPct": 79.03,
-     "rank": 24
-    },
-    {
-     "code": "NC",
-     "country": "US",
-     "name": "North Carolina",
-     "gross": 60000,
-     "net": 47405.14,
-     "keptPct": 79.01,
-     "rank": 24
-    },
-    {
-     "code": "KY",
-     "country": "US",
-     "name": "Kentucky",
-     "gross": 60000,
-     "net": 47300.96,
-     "keptPct": 78.83,
-     "rank": 26
-    },
-    {
-     "code": "MT",
-     "country": "US",
-     "name": "Montana",
-     "gross": 60000,
-     "net": 47237.34,
-     "keptPct": 78.73,
-     "rank": 27
-    },
-    {
-     "code": "WI",
-     "country": "US",
-     "name": "Wisconsin",
-     "gross": 60000,
-     "net": 47234.39,
-     "keptPct": 78.72,
-     "rank": 27
-    },
-    {
-     "code": "OK",
-     "country": "US",
-     "name": "Oklahoma",
-     "gross": 60000,
-     "net": 47143.26,
-     "keptPct": 78.57,
-     "rank": 29
-    },
-    {
-     "code": "CO",
-     "country": "US",
-     "name": "Colorado",
-     "gross": 60000,
-     "net": 47100.72,
-     "keptPct": 78.5,
-     "rank": 30
-    },
-    {
-     "code": "NJ",
-     "country": "US",
-     "name": "New Jersey",
-     "gross": 60000,
-     "net": 47102.87,
-     "keptPct": 78.5,
-     "rank": 30
-    },
-    {
-     "code": "UT",
-     "country": "US",
-     "name": "Utah",
-     "gross": 60000,
-     "net": 47074.81,
-     "keptPct": 78.46,
-     "rank": 30
-    },
-    {
-     "code": "GA",
-     "country": "US",
-     "name": "Georgia",
-     "gross": 60000,
-     "net": 47059.32,
-     "keptPct": 78.43,
-     "rank": 33
-    },
-    {
-     "code": "MI",
-     "country": "US",
-     "name": "Michigan",
-     "gross": 60000,
-     "net": 46994.91,
-     "keptPct": 78.32,
-     "rank": 34
-    },
-    {
-     "code": "RI",
-     "country": "US",
-     "name": "Rhode Island",
-     "gross": 60000,
-     "net": 46993.84,
-     "keptPct": 78.32,
-     "rank": 34
-    },
-    {
-     "code": "ID",
-     "country": "US",
-     "name": "Idaho",
-     "gross": 60000,
-     "net": 46982.58,
-     "keptPct": 78.3,
-     "rank": 34
-    },
-    {
-     "code": "ME",
-     "country": "US",
-     "name": "Maine",
-     "gross": 60000,
-     "net": 46957.96,
-     "keptPct": 78.26,
-     "rank": 34
-    },
-    {
-     "code": "CA",
-     "country": "US",
-     "name": "California",
-     "gross": 60000,
-     "net": 46899.83,
-     "keptPct": 78.17,
-     "rank": 38
-    },
-    {
-     "code": "DC",
-     "country": "US",
-     "name": "District of Columbia",
-     "gross": 60000,
-     "net": 46873.06,
-     "keptPct": 78.12,
-     "rank": 39
-    },
-    {
-     "code": "MD",
-     "country": "US",
-     "name": "Maryland",
-     "gross": 60000,
-     "net": 46814.99,
-     "keptPct": 78.02,
-     "rank": 40
-    },
-    {
-     "code": "AL",
-     "country": "US",
-     "name": "Alabama",
-     "gross": 60000,
-     "net": 46787.32,
-     "keptPct": 77.98,
-     "rank": 40
-    },
-    {
-     "code": "KS",
-     "country": "US",
-     "name": "Kansas",
-     "gross": 60000,
-     "net": 46765,
-     "keptPct": 77.94,
-     "rank": 42
-    },
-    {
-     "code": "VA",
-     "country": "US",
-     "name": "Virginia",
-     "gross": 60000,
-     "net": 46679.86,
-     "keptPct": 77.8,
-     "rank": 43
-    },
-    {
-     "code": "HI",
-     "country": "US",
-     "name": "Hawaii",
-     "gross": 60000,
-     "net": 46586.14,
-     "keptPct": 77.64,
-     "rank": 44
-    },
-    {
-     "code": "NU",
-     "country": "CA",
-     "name": "Nunavut",
-     "gross": 83250,
-     "net": 64560.86,
-     "keptPct": 77.55,
-     "rank": 44
-    },
-    {
-     "code": "MN",
-     "country": "US",
-     "name": "Minnesota",
-     "gross": 60000,
-     "net": 46510.28,
-     "keptPct": 77.52,
-     "rank": 46
-    },
-    {
-     "code": "IL",
-     "country": "US",
-     "name": "Illinois",
-     "gross": 60000,
-     "net": 46479.03,
-     "keptPct": 77.47,
-     "rank": 46
-    },
-    {
-     "code": "CT",
-     "country": "US",
-     "name": "Connecticut",
-     "gross": 60000,
-     "net": 46437.16,
-     "keptPct": 77.4,
-     "rank": 48
-    },
-    {
-     "code": "DE",
-     "country": "US",
-     "name": "Delaware",
-     "gross": 60000,
-     "net": 46419.76,
-     "keptPct": 77.37,
-     "rank": 48
-    },
-    {
-     "code": "NY",
-     "country": "US",
-     "name": "New York",
-     "gross": 60000,
-     "net": 46377.32,
-     "keptPct": 77.3,
-     "rank": 50
-    },
-    {
-     "code": "MA",
-     "country": "US",
-     "name": "Massachusetts",
-     "gross": 60000,
-     "net": 46248.96,
-     "keptPct": 77.08,
-     "rank": 51
-    },
-    {
-     "code": "BC",
-     "country": "CA",
-     "name": "British Columbia",
-     "gross": 83250,
-     "net": 63397.12,
-     "keptPct": 76.15,
-     "rank": 52
-    },
-    {
-     "code": "NT",
-     "country": "CA",
-     "name": "Northwest Territories",
-     "gross": 83250,
-     "net": 63378.36,
-     "keptPct": 76.13,
-     "rank": 53
-    },
-    {
-     "code": "YT",
-     "country": "CA",
-     "name": "Yukon",
-     "gross": 83250,
-     "net": 63238.62,
-     "keptPct": 75.96,
-     "rank": 54
-    },
-    {
-     "code": "AB",
-     "country": "CA",
-     "name": "Alberta",
-     "gross": 83250,
-     "net": 62865.9,
-     "keptPct": 75.51,
-     "rank": 55
-    },
-    {
-     "code": "ON",
-     "country": "CA",
-     "name": "Ontario",
-     "gross": 83250,
-     "net": 62497.55,
-     "keptPct": 75.07,
-     "rank": 56
-    },
-    {
-     "code": "OR",
-     "country": "US",
-     "name": "Oregon",
-     "gross": 60000,
-     "net": 45009.72,
-     "keptPct": 75.02,
      "rank": 57
     },
     {
@@ -2350,15 +1193,6 @@
    "cad": 111000,
    "rows": [
     {
-     "code": "AK",
-     "country": "US",
-     "name": "Alaska",
-     "gross": 80000,
-     "net": 65110,
-     "keptPct": 81.39,
-     "rank": 1
-    },
-    {
      "code": "FL",
      "country": "US",
      "name": "Florida",
@@ -2420,6 +1254,15 @@
      "net": 65110,
      "keptPct": 81.39,
      "rank": 1
+    },
+    {
+     "code": "AK",
+     "country": "US",
+     "name": "Alaska",
+     "gross": 80000,
+     "net": 64839,
+     "keptPct": 81.05,
+     "rank": 8
     },
     {
      "code": "ND",
@@ -2494,15 +1337,6 @@
      "rank": 15
     },
     {
-     "code": "PA",
-     "country": "US",
-     "name": "Pennsylvania",
-     "gross": 80000,
-     "net": 62654,
-     "keptPct": 78.32,
-     "rank": 17
-    },
-    {
      "code": "AR",
      "country": "US",
      "name": "Arkansas",
@@ -2518,6 +1352,15 @@
      "gross": 80000,
      "net": 62642,
      "keptPct": 78.3,
+     "rank": 17
+    },
+    {
+     "code": "PA",
+     "country": "US",
+     "name": "Pennsylvania",
+     "gross": 80000,
+     "net": 62598,
+     "keptPct": 78.25,
      "rank": 17
     },
     {
@@ -2557,15 +1400,6 @@
      "rank": 23
     },
     {
-     "code": "VT",
-     "country": "US",
-     "name": "Vermont",
-     "gross": 80000,
-     "net": 62340.68,
-     "keptPct": 77.93,
-     "rank": 23
-    },
-    {
      "code": "WV",
      "country": "US",
      "name": "West Virginia",
@@ -2582,6 +1416,15 @@
      "net": 62287.33,
      "keptPct": 77.86,
      "rank": 23
+    },
+    {
+     "code": "VT",
+     "country": "US",
+     "name": "Vermont",
+     "gross": 80000,
+     "net": 62252.68,
+     "keptPct": 77.82,
+     "rank": 26
     },
     {
      "code": "OK",
@@ -2701,15 +1544,6 @@
      "rank": 39
     },
     {
-     "code": "ME",
-     "country": "US",
-     "name": "Maine",
-     "gross": 80000,
-     "net": 61387.8,
-     "keptPct": 76.73,
-     "rank": 40
-    },
-    {
      "code": "VA",
      "country": "US",
      "name": "Virginia",
@@ -2725,7 +1559,7 @@
      "gross": 80000,
      "net": 61294.79,
      "keptPct": 76.62,
-     "rank": 42
+     "rank": 41
     },
     {
      "code": "DC",
@@ -2734,7 +1568,7 @@
      "gross": 80000,
      "net": 61278.5,
      "keptPct": 76.6,
-     "rank": 42
+     "rank": 41
     },
     {
      "code": "NY",
@@ -2743,7 +1577,7 @@
      "gross": 80000,
      "net": 61010.2,
      "keptPct": 76.26,
-     "rank": 44
+     "rank": 43
     },
     {
      "code": "NU",
@@ -2752,7 +1586,16 @@
      "gross": 111000,
      "net": 84628.86,
      "keptPct": 76.24,
-     "rank": 45
+     "rank": 44
+    },
+    {
+     "code": "ME",
+     "country": "US",
+     "name": "Maine",
+     "gross": 80000,
+     "net": 60987.8,
+     "keptPct": 76.23,
+     "rank": 44
     },
     {
      "code": "MA",
@@ -2761,7 +1604,7 @@
      "gross": 80000,
      "net": 60962,
      "keptPct": 76.2,
-     "rank": 45
+     "rank": 44
     },
     {
      "code": "CT",
@@ -2770,7 +1613,7 @@
      "gross": 80000,
      "net": 60935,
      "keptPct": 76.17,
-     "rank": 45
+     "rank": 44
     },
     {
      "code": "CA",
@@ -2836,608 +1679,30 @@
      "rank": 54
     },
     {
+     "code": "AB",
+     "country": "CA",
+     "name": "Alberta",
+     "gross": 111000,
+     "net": 82103.5,
+     "keptPct": 73.97,
+     "rank": 55
+    },
+    {
      "code": "OR",
      "country": "US",
      "name": "Oregon",
      "gross": 80000,
-     "net": 59232.25,
-     "keptPct": 74.04,
-     "rank": 55
-    },
-    {
-     "code": "AB",
-     "country": "CA",
-     "name": "Alberta",
-     "gross": 111000,
-     "net": 82103.5,
-     "keptPct": 73.97,
-     "rank": 55
-    },
-    {
-     "code": "ON",
-     "country": "CA",
-     "name": "Ontario",
-     "gross": 111000,
-     "net": 81692.97,
-     "keptPct": 73.6,
-     "rank": 57
-    },
-    {
-     "code": "SK",
-     "country": "CA",
-     "name": "Saskatchewan",
-     "gross": 111000,
-     "net": 79657.87,
-     "keptPct": 71.76,
-     "rank": 58
-    },
-    {
-     "code": "MB",
-     "country": "CA",
-     "name": "Manitoba",
-     "gross": 111000,
-     "net": 78328.11,
-     "keptPct": 70.57,
-     "rank": 59
-    },
-    {
-     "code": "NB",
-     "country": "CA",
-     "name": "New Brunswick",
-     "gross": 111000,
-     "net": 78315.65,
-     "keptPct": 70.55,
-     "rank": 59
-    },
-    {
-     "code": "NL",
-     "country": "CA",
-     "name": "Newfoundland and Labrador",
-     "gross": 111000,
-     "net": 77609.95,
-     "keptPct": 69.92,
-     "rank": 61
-    },
-    {
-     "code": "PE",
-     "country": "CA",
-     "name": "Prince Edward Island",
-     "gross": 111000,
-     "net": 76677.69,
-     "keptPct": 69.08,
-     "rank": 62
-    },
-    {
-     "code": "QC",
-     "country": "CA",
-     "name": "Quebec",
-     "gross": 111000,
-     "net": 76600.79,
-     "keptPct": 69.01,
-     "rank": 63
-    },
-    {
-     "code": "NS",
-     "country": "CA",
-     "name": "Nova Scotia",
-     "gross": 111000,
-     "net": 75687.11,
-     "keptPct": 68.19,
-     "rank": 64
-    }
-   ],
-   "afterHealthPremium": [
-    {
-     "code": "AK",
-     "country": "US",
-     "name": "Alaska",
-     "gross": 80000,
-     "net": 64096.96,
-     "keptPct": 80.12,
-     "rank": 1
-    },
-    {
-     "code": "FL",
-     "country": "US",
-     "name": "Florida",
-     "gross": 80000,
-     "net": 64096.96,
-     "keptPct": 80.12,
-     "rank": 1
-    },
-    {
-     "code": "NH",
-     "country": "US",
-     "name": "New Hampshire",
-     "gross": 80000,
-     "net": 64096.96,
-     "keptPct": 80.12,
-     "rank": 1
-    },
-    {
-     "code": "NV",
-     "country": "US",
-     "name": "Nevada",
-     "gross": 80000,
-     "net": 64096.96,
-     "keptPct": 80.12,
-     "rank": 1
-    },
-    {
-     "code": "SD",
-     "country": "US",
-     "name": "South Dakota",
-     "gross": 80000,
-     "net": 64096.96,
-     "keptPct": 80.12,
-     "rank": 1
-    },
-    {
-     "code": "TN",
-     "country": "US",
-     "name": "Tennessee",
-     "gross": 80000,
-     "net": 64096.96,
-     "keptPct": 80.12,
-     "rank": 1
-    },
-    {
-     "code": "TX",
-     "country": "US",
-     "name": "Texas",
-     "gross": 80000,
-     "net": 64096.96,
-     "keptPct": 80.12,
-     "rank": 1
-    },
-    {
-     "code": "WY",
-     "country": "US",
-     "name": "Wyoming",
-     "gross": 80000,
-     "net": 64096.96,
-     "keptPct": 80.12,
-     "rank": 1
-    },
-    {
-     "code": "ND",
-     "country": "US",
-     "name": "North Dakota",
-     "gross": 80000,
-     "net": 63824.25,
-     "keptPct": 79.78,
-     "rank": 9
-    },
-    {
-     "code": "WA",
-     "country": "US",
-     "name": "Washington",
-     "gross": 80000,
-     "net": 62987.23,
-     "keptPct": 78.73,
-     "rank": 10
-    },
-    {
-     "code": "OH",
-     "country": "US",
-     "name": "Ohio",
-     "gross": 80000,
-     "net": 62712.06,
-     "keptPct": 78.39,
-     "rank": 11
-    },
-    {
-     "code": "AZ",
-     "country": "US",
-     "name": "Arizona",
-     "gross": 80000,
-     "net": 62535.46,
-     "keptPct": 78.17,
-     "rank": 12
-    },
-    {
-     "code": "LA",
-     "country": "US",
-     "name": "Louisiana",
-     "gross": 80000,
-     "net": 62126.41,
-     "keptPct": 77.66,
-     "rank": 13
-    },
-    {
-     "code": "IN",
-     "country": "US",
-     "name": "Indiana",
-     "gross": 80000,
-     "net": 61808.94,
-     "keptPct": 77.26,
-     "rank": 14
-    },
-    {
-     "code": "IA",
-     "country": "US",
-     "name": "Iowa",
-     "gross": 80000,
-     "net": 61763.48,
-     "keptPct": 77.2,
-     "rank": 15
-    },
-    {
-     "code": "SC",
-     "country": "US",
-     "name": "South Carolina",
-     "gross": 80000,
-     "net": 61751.48,
-     "keptPct": 77.19,
-     "rank": 15
-    },
-    {
-     "code": "MS",
-     "country": "US",
-     "name": "Mississippi",
-     "gross": 80000,
-     "net": 61686.56,
-     "keptPct": 77.11,
-     "rank": 17
-    },
-    {
-     "code": "PA",
-     "country": "US",
-     "name": "Pennsylvania",
-     "gross": 80000,
-     "net": 61685.17,
-     "keptPct": 77.11,
-     "rank": 17
-    },
-    {
-     "code": "AR",
-     "country": "US",
-     "name": "Arkansas",
-     "gross": 80000,
-     "net": 61677.79,
-     "keptPct": 77.1,
-     "rank": 17
-    },
-    {
-     "code": "NM",
-     "country": "US",
-     "name": "New Mexico",
-     "gross": 80000,
-     "net": 61570.34,
-     "keptPct": 76.96,
-     "rank": 20
-    },
-    {
-     "code": "NC",
-     "country": "US",
-     "name": "North Carolina",
-     "gross": 80000,
-     "net": 61471.14,
-     "keptPct": 76.84,
-     "rank": 21
-    },
-    {
-     "code": "KY",
-     "country": "US",
-     "name": "Kentucky",
-     "gross": 80000,
-     "net": 61464.96,
-     "keptPct": 76.83,
-     "rank": 21
-    },
-    {
-     "code": "VT",
-     "country": "US",
-     "name": "Vermont",
-     "gross": 80000,
-     "net": 61422.68,
-     "keptPct": 76.78,
-     "rank": 21
-    },
-    {
-     "code": "NE",
-     "country": "US",
-     "name": "Nebraska",
-     "gross": 80000,
-     "net": 61402.02,
-     "keptPct": 76.75,
-     "rank": 21
-    },
-    {
-     "code": "WV",
-     "country": "US",
-     "name": "West Virginia",
-     "gross": 80000,
-     "net": 61388.01,
-     "keptPct": 76.74,
-     "rank": 25
-    },
-    {
-     "code": "MO",
-     "country": "US",
-     "name": "Missouri",
-     "gross": 80000,
-     "net": 61341.97,
-     "keptPct": 76.68,
-     "rank": 25
-    },
-    {
-     "code": "OK",
-     "country": "US",
-     "name": "Oklahoma",
-     "gross": 80000,
-     "net": 61107.26,
-     "keptPct": 76.38,
-     "rank": 27
-    },
-    {
-     "code": "MT",
-     "country": "US",
-     "name": "Montana",
-     "gross": 80000,
-     "net": 61019.22,
-     "keptPct": 76.27,
-     "rank": 28
-    },
-    {
-     "code": "MI",
-     "country": "US",
-     "name": "Michigan",
-     "gross": 80000,
-     "net": 61008.91,
-     "keptPct": 76.26,
-     "rank": 28
-    },
-    {
-     "code": "CO",
-     "country": "US",
-     "name": "Colorado",
-     "gross": 80000,
-     "net": 60996.72,
-     "keptPct": 76.25,
-     "rank": 28
-    },
-    {
-     "code": "NU",
-     "country": "CA",
-     "name": "Nunavut",
-     "gross": 111000,
-     "net": 84628.86,
-     "keptPct": 76.24,
-     "rank": 31
-    },
-    {
-     "code": "WI",
-     "country": "US",
-     "name": "Wisconsin",
-     "gross": 80000,
-     "net": 60942.12,
-     "keptPct": 76.18,
-     "rank": 31
-    },
-    {
-     "code": "GA",
-     "country": "US",
-     "name": "Georgia",
-     "gross": 80000,
-     "net": 60925.32,
-     "keptPct": 76.16,
-     "rank": 31
-    },
-    {
-     "code": "RI",
-     "country": "US",
-     "name": "Rhode Island",
-     "gross": 80000,
-     "net": 60887.84,
-     "keptPct": 76.11,
-     "rank": 34
-    },
-    {
-     "code": "AL",
-     "country": "US",
-     "name": "Alabama",
-     "gross": 80000,
-     "net": 60831.62,
-     "keptPct": 76.04,
-     "rank": 35
-    },
-    {
-     "code": "UT",
-     "country": "US",
-     "name": "Utah",
-     "gross": 80000,
-     "net": 60788.81,
-     "keptPct": 75.99,
-     "rank": 35
-    },
-    {
-     "code": "ID",
-     "country": "US",
-     "name": "Idaho",
-     "gross": 80000,
-     "net": 60786.58,
-     "keptPct": 75.98,
-     "rank": 35
-    },
-    {
-     "code": "NJ",
-     "country": "US",
-     "name": "New Jersey",
-     "gross": 80000,
-     "net": 60756.24,
-     "keptPct": 75.95,
-     "rank": 35
-    },
-    {
-     "code": "MD",
-     "country": "US",
-     "name": "Maryland",
-     "gross": 80000,
-     "net": 60728.99,
-     "keptPct": 75.91,
-     "rank": 39
-    },
-    {
-     "code": "KS",
-     "country": "US",
-     "name": "Kansas",
-     "gross": 80000,
-     "net": 60513,
-     "keptPct": 75.64,
-     "rank": 40
-    },
-    {
-     "code": "ME",
-     "country": "US",
-     "name": "Maine",
-     "gross": 80000,
-     "net": 60471.96,
-     "keptPct": 75.59,
-     "rank": 40
-    },
-    {
-     "code": "VA",
-     "country": "US",
-     "name": "Virginia",
-     "gross": 80000,
-     "net": 60393.86,
-     "keptPct": 75.49,
-     "rank": 42
-    },
-    {
-     "code": "DC",
-     "country": "US",
-     "name": "District of Columbia",
-     "gross": 80000,
-     "net": 60387.86,
-     "keptPct": 75.48,
-     "rank": 42
-    },
-    {
-     "code": "IL",
-     "country": "US",
-     "name": "Illinois",
-     "gross": 80000,
-     "net": 60353.03,
-     "keptPct": 75.44,
-     "rank": 44
-    },
-    {
-     "code": "NY",
-     "country": "US",
-     "name": "New York",
-     "gross": 80000,
-     "net": 60074.92,
-     "keptPct": 75.09,
-     "rank": 45
-    },
-    {
-     "code": "MA",
-     "country": "US",
-     "name": "Massachusetts",
-     "gross": 80000,
-     "net": 60020.96,
-     "keptPct": 75.03,
-     "rank": 46
-    },
-    {
-     "code": "CT",
-     "country": "US",
-     "name": "Connecticut",
-     "gross": 80000,
-     "net": 60001.16,
-     "keptPct": 75,
-     "rank": 46
-    },
-    {
-     "code": "CA",
-     "country": "US",
-     "name": "California",
-     "gross": 80000,
-     "net": 59995.9,
-     "keptPct": 74.99,
-     "rank": 46
-    },
-    {
-     "code": "DE",
-     "country": "US",
-     "name": "Delaware",
-     "gross": 80000,
-     "net": 59933,
-     "keptPct": 74.92,
-     "rank": 49
-    },
-    {
-     "code": "HI",
-     "country": "US",
-     "name": "Hawaii",
-     "gross": 80000,
-     "net": 59930.14,
-     "keptPct": 74.91,
-     "rank": 49
-    },
-    {
-     "code": "MN",
-     "country": "US",
-     "name": "Minnesota",
-     "gross": 80000,
-     "net": 59926.27,
-     "keptPct": 74.91,
-     "rank": 49
-    },
-    {
-     "code": "BC",
-     "country": "CA",
-     "name": "British Columbia",
-     "gross": 111000,
-     "net": 83015.3,
-     "keptPct": 74.79,
-     "rank": 52
-    },
-    {
-     "code": "NT",
-     "country": "CA",
-     "name": "Northwest Territories",
-     "gross": 111000,
-     "net": 82864.37,
-     "keptPct": 74.65,
-     "rank": 53
-    },
-    {
-     "code": "YT",
-     "country": "CA",
-     "name": "Yukon",
-     "gross": 111000,
-     "net": 82753.02,
-     "keptPct": 74.55,
-     "rank": 54
-    },
-    {
-     "code": "AB",
-     "country": "CA",
-     "name": "Alberta",
-     "gross": 111000,
-     "net": 82103.5,
-     "keptPct": 73.97,
-     "rank": 55
-    },
-    {
-     "code": "ON",
-     "country": "CA",
-     "name": "Ontario",
-     "gross": 111000,
-     "net": 81692.97,
-     "keptPct": 73.6,
+     "net": 59152.25,
+     "keptPct": 73.94,
      "rank": 56
     },
     {
-     "code": "OR",
-     "country": "US",
-     "name": "Oregon",
-     "gross": 80000,
-     "net": 58319.24,
-     "keptPct": 72.9,
+     "code": "ON",
+     "country": "CA",
+     "name": "Ontario",
+     "gross": 111000,
+     "net": 81692.97,
+     "keptPct": 73.6,
      "rank": 57
     },
     {
@@ -3510,15 +1775,6 @@
    "cad": 138750,
    "rows": [
     {
-     "code": "AK",
-     "country": "US",
-     "name": "Alaska",
-     "gross": 100000,
-     "net": 79180,
-     "keptPct": 79.18,
-     "rank": 1
-    },
-    {
      "code": "FL",
      "country": "US",
      "name": "Florida",
@@ -3582,6 +1838,15 @@
      "rank": 1
     },
     {
+     "code": "AK",
+     "country": "US",
+     "name": "Alaska",
+     "gross": 100000,
+     "net": 78909,
+     "keptPct": 78.91,
+     "rank": 8
+    },
+    {
      "code": "ND",
      "country": "US",
      "name": "North Dakota",
@@ -3640,8 +1905,8 @@
      "country": "US",
      "name": "Pennsylvania",
      "gross": 100000,
-     "net": 76110,
-     "keptPct": 76.11,
+     "net": 76040,
+     "keptPct": 76.04,
      "rank": 15
     },
     {
@@ -3651,7 +1916,7 @@
      "gross": 100000,
      "net": 76031.8,
      "keptPct": 76.03,
-     "rank": 16
+     "rank": 15
     },
     {
      "code": "MS",
@@ -3753,15 +2018,6 @@
      "rank": 26
     },
     {
-     "code": "VT",
-     "country": "US",
-     "name": "Vermont",
-     "gross": 100000,
-     "net": 75090.68,
-     "keptPct": 75.09,
-     "rank": 28
-    },
-    {
      "code": "AL",
      "country": "US",
      "name": "Alabama",
@@ -3778,6 +2034,15 @@
      "net": 75048.4,
      "keptPct": 75.05,
      "rank": 28
+    },
+    {
+     "code": "VT",
+     "country": "US",
+     "name": "Vermont",
+     "gross": 100000,
+     "net": 74980.68,
+     "keptPct": 74.98,
+     "rank": 30
     },
     {
      "code": "GA",
@@ -3888,22 +2153,13 @@
      "rank": 42
     },
     {
-     "code": "ME",
-     "country": "US",
-     "name": "Maine",
-     "gross": 100000,
-     "net": 74051.2,
-     "keptPct": 74.05,
-     "rank": 43
-    },
-    {
      "code": "MA",
      "country": "US",
      "name": "Massachusetts",
      "gross": 100000,
      "net": 73940,
      "keptPct": 73.94,
-     "rank": 44
+     "rank": 43
     },
     {
      "code": "NY",
@@ -3912,7 +2168,7 @@
      "gross": 100000,
      "net": 73877.14,
      "keptPct": 73.88,
-     "rank": 44
+     "rank": 43
     },
     {
      "code": "CT",
@@ -3921,7 +2177,7 @@
      "gross": 100000,
      "net": 73705,
      "keptPct": 73.71,
-     "rank": 46
+     "rank": 45
     },
     {
      "code": "DC",
@@ -3930,7 +2186,16 @@
      "gross": 100000,
      "net": 73648.5,
      "keptPct": 73.65,
-     "rank": 46
+     "rank": 45
+    },
+    {
+     "code": "ME",
+     "country": "US",
+     "name": "Maine",
+     "gross": 100000,
+     "net": 73551.2,
+     "keptPct": 73.55,
+     "rank": 47
     },
     {
      "code": "DE",
@@ -4009,8 +2274,8 @@
      "country": "US",
      "name": "Oregon",
      "gross": 100000,
-     "net": 71432.25,
-     "keptPct": 71.43,
+     "net": 71332.25,
+     "keptPct": 71.33,
      "rank": 56
     },
     {
@@ -4085,584 +2350,6 @@
      "keptPct": 66.13,
      "rank": 64
     }
-   ],
-   "afterHealthPremium": [
-    {
-     "code": "AK",
-     "country": "US",
-     "name": "Alaska",
-     "gross": 100000,
-     "net": 78166.96,
-     "keptPct": 78.17,
-     "rank": 1
-    },
-    {
-     "code": "FL",
-     "country": "US",
-     "name": "Florida",
-     "gross": 100000,
-     "net": 78166.96,
-     "keptPct": 78.17,
-     "rank": 1
-    },
-    {
-     "code": "NH",
-     "country": "US",
-     "name": "New Hampshire",
-     "gross": 100000,
-     "net": 78166.96,
-     "keptPct": 78.17,
-     "rank": 1
-    },
-    {
-     "code": "NV",
-     "country": "US",
-     "name": "Nevada",
-     "gross": 100000,
-     "net": 78166.96,
-     "keptPct": 78.17,
-     "rank": 1
-    },
-    {
-     "code": "SD",
-     "country": "US",
-     "name": "South Dakota",
-     "gross": 100000,
-     "net": 78166.96,
-     "keptPct": 78.17,
-     "rank": 1
-    },
-    {
-     "code": "TN",
-     "country": "US",
-     "name": "Tennessee",
-     "gross": 100000,
-     "net": 78166.96,
-     "keptPct": 78.17,
-     "rank": 1
-    },
-    {
-     "code": "TX",
-     "country": "US",
-     "name": "Texas",
-     "gross": 100000,
-     "net": 78166.96,
-     "keptPct": 78.17,
-     "rank": 1
-    },
-    {
-     "code": "WY",
-     "country": "US",
-     "name": "Wyoming",
-     "gross": 100000,
-     "net": 78166.96,
-     "keptPct": 78.17,
-     "rank": 1
-    },
-    {
-     "code": "ND",
-     "country": "US",
-     "name": "North Dakota",
-     "gross": 100000,
-     "net": 77504.25,
-     "keptPct": 77.5,
-     "rank": 9
-    },
-    {
-     "code": "WA",
-     "country": "US",
-     "name": "Washington",
-     "gross": 100000,
-     "net": 76779.8,
-     "keptPct": 76.78,
-     "rank": 10
-    },
-    {
-     "code": "OH",
-     "country": "US",
-     "name": "Ohio",
-     "gross": 100000,
-     "net": 76225.19,
-     "keptPct": 76.23,
-     "rank": 11
-    },
-    {
-     "code": "AZ",
-     "country": "US",
-     "name": "Arizona",
-     "gross": 100000,
-     "net": 76105.46,
-     "keptPct": 76.11,
-     "rank": 12
-    },
-    {
-     "code": "LA",
-     "country": "US",
-     "name": "Louisiana",
-     "gross": 100000,
-     "net": 75596.41,
-     "keptPct": 75.6,
-     "rank": 13
-    },
-    {
-     "code": "IN",
-     "country": "US",
-     "name": "Indiana",
-     "gross": 100000,
-     "net": 75288.94,
-     "keptPct": 75.29,
-     "rank": 14
-    },
-    {
-     "code": "PA",
-     "country": "US",
-     "name": "Pennsylvania",
-     "gross": 100000,
-     "net": 75141.17,
-     "keptPct": 75.14,
-     "rank": 15
-    },
-    {
-     "code": "IA",
-     "country": "US",
-     "name": "Iowa",
-     "gross": 100000,
-     "net": 75073.48,
-     "keptPct": 75.07,
-     "rank": 15
-    },
-    {
-     "code": "MS",
-     "country": "US",
-     "name": "Mississippi",
-     "gross": 100000,
-     "net": 74956.56,
-     "keptPct": 74.96,
-     "rank": 17
-    },
-    {
-     "code": "AR",
-     "country": "US",
-     "name": "Arkansas",
-     "gross": 100000,
-     "net": 74880.53,
-     "keptPct": 74.88,
-     "rank": 18
-    },
-    {
-     "code": "KY",
-     "country": "US",
-     "name": "Kentucky",
-     "gross": 100000,
-     "net": 74834.96,
-     "keptPct": 74.83,
-     "rank": 19
-    },
-    {
-     "code": "SC",
-     "country": "US",
-     "name": "South Carolina",
-     "gross": 100000,
-     "net": 74779.48,
-     "keptPct": 74.78,
-     "rank": 19
-    },
-    {
-     "code": "NC",
-     "country": "US",
-     "name": "North Carolina",
-     "gross": 100000,
-     "net": 74743.14,
-     "keptPct": 74.74,
-     "rank": 21
-    },
-    {
-     "code": "NM",
-     "country": "US",
-     "name": "New Mexico",
-     "gross": 100000,
-     "net": 74668.42,
-     "keptPct": 74.67,
-     "rank": 21
-    },
-    {
-     "code": "NE",
-     "country": "US",
-     "name": "Nebraska",
-     "gross": 100000,
-     "net": 74562.02,
-     "keptPct": 74.56,
-     "rank": 23
-    },
-    {
-     "code": "WV",
-     "country": "US",
-     "name": "West Virginia",
-     "gross": 100000,
-     "net": 74542.01,
-     "keptPct": 74.54,
-     "rank": 24
-    },
-    {
-     "code": "MO",
-     "country": "US",
-     "name": "Missouri",
-     "gross": 100000,
-     "net": 74471.97,
-     "keptPct": 74.47,
-     "rank": 24
-    },
-    {
-     "code": "NU",
-     "country": "CA",
-     "name": "Nunavut",
-     "gross": 138750,
-     "net": 103095.4,
-     "keptPct": 74.3,
-     "rank": 26
-    },
-    {
-     "code": "OK",
-     "country": "US",
-     "name": "Oklahoma",
-     "gross": 100000,
-     "net": 74277.26,
-     "keptPct": 74.28,
-     "rank": 26
-    },
-    {
-     "code": "MI",
-     "country": "US",
-     "name": "Michigan",
-     "gross": 100000,
-     "net": 74228.91,
-     "keptPct": 74.23,
-     "rank": 28
-    },
-    {
-     "code": "VT",
-     "country": "US",
-     "name": "Vermont",
-     "gross": 100000,
-     "net": 74172.68,
-     "keptPct": 74.17,
-     "rank": 28
-    },
-    {
-     "code": "AL",
-     "country": "US",
-     "name": "Alabama",
-     "gross": 100000,
-     "net": 74121.62,
-     "keptPct": 74.12,
-     "rank": 30
-    },
-    {
-     "code": "CO",
-     "country": "US",
-     "name": "Colorado",
-     "gross": 100000,
-     "net": 74098.72,
-     "keptPct": 74.1,
-     "rank": 30
-    },
-    {
-     "code": "GA",
-     "country": "US",
-     "name": "Georgia",
-     "gross": 100000,
-     "net": 73997.32,
-     "keptPct": 74,
-     "rank": 32
-    },
-    {
-     "code": "RI",
-     "country": "US",
-     "name": "Rhode Island",
-     "gross": 100000,
-     "net": 73987.24,
-     "keptPct": 73.99,
-     "rank": 32
-    },
-    {
-     "code": "MT",
-     "country": "US",
-     "name": "Montana",
-     "gross": 100000,
-     "net": 73959.22,
-     "keptPct": 73.96,
-     "rank": 32
-    },
-    {
-     "code": "MD",
-     "country": "US",
-     "name": "Maryland",
-     "gross": 100000,
-     "net": 73848.99,
-     "keptPct": 73.85,
-     "rank": 35
-    },
-    {
-     "code": "WI",
-     "country": "US",
-     "name": "Wisconsin",
-     "gross": 100000,
-     "net": 73824.92,
-     "keptPct": 73.82,
-     "rank": 36
-    },
-    {
-     "code": "ID",
-     "country": "US",
-     "name": "Idaho",
-     "gross": 100000,
-     "net": 73796.58,
-     "keptPct": 73.8,
-     "rank": 36
-    },
-    {
-     "code": "UT",
-     "country": "US",
-     "name": "Utah",
-     "gross": 100000,
-     "net": 73781.04,
-     "keptPct": 73.78,
-     "rank": 36
-    },
-    {
-     "code": "KS",
-     "country": "US",
-     "name": "Kansas",
-     "gross": 100000,
-     "net": 73467,
-     "keptPct": 73.47,
-     "rank": 39
-    },
-    {
-     "code": "NJ",
-     "country": "US",
-     "name": "New Jersey",
-     "gross": 100000,
-     "net": 73468.24,
-     "keptPct": 73.47,
-     "rank": 39
-    },
-    {
-     "code": "IL",
-     "country": "US",
-     "name": "Illinois",
-     "gross": 100000,
-     "net": 73433.03,
-     "keptPct": 73.43,
-     "rank": 41
-    },
-    {
-     "code": "VA",
-     "country": "US",
-     "name": "Virginia",
-     "gross": 100000,
-     "net": 73313.86,
-     "keptPct": 73.31,
-     "rank": 42
-    },
-    {
-     "code": "ME",
-     "country": "US",
-     "name": "Maine",
-     "gross": 100000,
-     "net": 73141.12,
-     "keptPct": 73.14,
-     "rank": 43
-    },
-    {
-     "code": "MA",
-     "country": "US",
-     "name": "Massachusetts",
-     "gross": 100000,
-     "net": 72998.96,
-     "keptPct": 73,
-     "rank": 44
-    },
-    {
-     "code": "NY",
-     "country": "US",
-     "name": "New York",
-     "gross": 100000,
-     "net": 72949.06,
-     "keptPct": 72.95,
-     "rank": 44
-    },
-    {
-     "code": "CT",
-     "country": "US",
-     "name": "Connecticut",
-     "gross": 100000,
-     "net": 72771.16,
-     "keptPct": 72.77,
-     "rank": 46
-    },
-    {
-     "code": "DC",
-     "country": "US",
-     "name": "District of Columbia",
-     "gross": 100000,
-     "net": 72757.86,
-     "keptPct": 72.76,
-     "rank": 46
-    },
-    {
-     "code": "YT",
-     "country": "CA",
-     "name": "Yukon",
-     "gross": 138750,
-     "net": 100794,
-     "keptPct": 72.64,
-     "rank": 48
-    },
-    {
-     "code": "DE",
-     "country": "US",
-     "name": "Delaware",
-     "gross": 100000,
-     "net": 72603,
-     "keptPct": 72.6,
-     "rank": 48
-    },
-    {
-     "code": "MN",
-     "country": "US",
-     "name": "Minnesota",
-     "gross": 100000,
-     "net": 72548.27,
-     "keptPct": 72.55,
-     "rank": 48
-    },
-    {
-     "code": "BC",
-     "country": "CA",
-     "name": "British Columbia",
-     "gross": 138750,
-     "net": 100637.66,
-     "keptPct": 72.53,
-     "rank": 51
-    },
-    {
-     "code": "HI",
-     "country": "US",
-     "name": "Hawaii",
-     "gross": 100000,
-     "net": 72480.14,
-     "keptPct": 72.48,
-     "rank": 51
-    },
-    {
-     "code": "NT",
-     "country": "CA",
-     "name": "Northwest Territories",
-     "gross": 138750,
-     "net": 100408.33,
-     "keptPct": 72.37,
-     "rank": 53
-    },
-    {
-     "code": "AB",
-     "country": "CA",
-     "name": "Alberta",
-     "gross": 138750,
-     "net": 100257.96,
-     "keptPct": 72.26,
-     "rank": 54
-    },
-    {
-     "code": "CA",
-     "country": "US",
-     "name": "California",
-     "gross": 100000,
-     "net": 71945.9,
-     "keptPct": 71.95,
-     "rank": 55
-    },
-    {
-     "code": "ON",
-     "country": "CA",
-     "name": "Ontario",
-     "gross": 138750,
-     "net": 97953.47,
-     "keptPct": 70.6,
-     "rank": 56
-    },
-    {
-     "code": "OR",
-     "country": "US",
-     "name": "Oregon",
-     "gross": 100000,
-     "net": 70545.21,
-     "keptPct": 70.55,
-     "rank": 56
-    },
-    {
-     "code": "SK",
-     "country": "CA",
-     "name": "Saskatchewan",
-     "gross": 138750,
-     "net": 97118.58,
-     "keptPct": 70,
-     "rank": 58
-    },
-    {
-     "code": "NB",
-     "country": "CA",
-     "name": "New Brunswick",
-     "gross": 138750,
-     "net": 94805.11,
-     "keptPct": 68.33,
-     "rank": 59
-    },
-    {
-     "code": "MB",
-     "country": "CA",
-     "name": "Manitoba",
-     "gross": 138750,
-     "net": 94429.07,
-     "keptPct": 68.06,
-     "rank": 60
-    },
-    {
-     "code": "NL",
-     "country": "CA",
-     "name": "Newfoundland and Labrador",
-     "gross": 138750,
-     "net": 94154.91,
-     "keptPct": 67.86,
-     "rank": 61
-    },
-    {
-     "code": "PE",
-     "country": "CA",
-     "name": "Prince Edward Island",
-     "gross": 138750,
-     "net": 92717.6,
-     "keptPct": 66.82,
-     "rank": 62
-    },
-    {
-     "code": "QC",
-     "country": "CA",
-     "name": "Quebec",
-     "gross": 138750,
-     "net": 91939.75,
-     "keptPct": 66.26,
-     "rank": 63
-    },
-    {
-     "code": "NS",
-     "country": "CA",
-     "name": "Nova Scotia",
-     "gross": 138750,
-     "net": 91760.32,
-     "keptPct": 66.13,
-     "rank": 64
-    }
    ]
   },
   {
@@ -4670,15 +2357,6 @@
    "cad": 208125,
    "rows": [
     {
-     "code": "AK",
-     "country": "US",
-     "name": "Alaska",
-     "gross": 150000,
-     "net": 113791,
-     "keptPct": 75.86,
-     "rank": 1
-    },
-    {
      "code": "FL",
      "country": "US",
      "name": "Florida",
@@ -4740,6 +2418,15 @@
      "net": 113791,
      "keptPct": 75.86,
      "rank": 1
+    },
+    {
+     "code": "AK",
+     "country": "US",
+     "name": "Alaska",
+     "gross": 150000,
+     "net": 113520,
+     "keptPct": 75.68,
+     "rank": 8
     },
     {
      "code": "ND",
@@ -4800,8 +2487,8 @@
      "country": "US",
      "name": "Pennsylvania",
      "gross": 150000,
-     "net": 109186,
-     "keptPct": 72.79,
+     "net": 109081,
+     "keptPct": 72.72,
      "rank": 15
     },
     {
@@ -5003,15 +2690,6 @@
      "rank": 36
     },
     {
-     "code": "VT",
-     "country": "US",
-     "name": "Vermont",
-     "gross": 150000,
-     "net": 106260.68,
-     "keptPct": 70.84,
-     "rank": 38
-    },
-    {
      "code": "KS",
      "country": "US",
      "name": "Kansas",
@@ -5021,13 +2699,22 @@
      "rank": 38
     },
     {
+     "code": "VT",
+     "country": "US",
+     "name": "Vermont",
+     "gross": 150000,
+     "net": 106095.68,
+     "keptPct": 70.73,
+     "rank": 39
+    },
+    {
      "code": "VA",
      "country": "US",
      "name": "Virginia",
      "gross": 150000,
      "net": 105980.1,
      "keptPct": 70.65,
-     "rank": 40
+     "rank": 39
     },
     {
      "code": "MA",
@@ -5084,22 +2771,13 @@
      "rank": 46
     },
     {
-     "code": "ME",
-     "country": "US",
-     "name": "Maine",
-     "gross": 150000,
-     "net": 104372.47,
-     "keptPct": 69.58,
-     "rank": 47
-    },
-    {
      "code": "MN",
      "country": "US",
      "name": "Minnesota",
      "gross": 150000,
      "net": 104189.06,
      "keptPct": 69.46,
-     "rank": 48
+     "rank": 47
     },
     {
      "code": "HI",
@@ -5108,7 +2786,7 @@
      "gross": 150000,
      "net": 104147.18,
      "keptPct": 69.43,
-     "rank": 49
+     "rank": 48
     },
     {
      "code": "DC",
@@ -5117,6 +2795,15 @@
      "gross": 150000,
      "net": 104009.5,
      "keptPct": 69.34,
+     "rank": 49
+    },
+    {
+     "code": "ME",
+     "country": "US",
+     "name": "Maine",
+     "gross": 150000,
+     "net": 103622.47,
+     "keptPct": 69.08,
      "rank": 50
     },
     {
@@ -5169,8 +2856,8 @@
      "country": "US",
      "name": "Oregon",
      "gross": 150000,
-     "net": 100348.59,
-     "keptPct": 66.9,
+     "net": 100198.59,
+     "keptPct": 66.8,
      "rank": 56
     },
     {
@@ -5181,584 +2868,6 @@
      "net": 137918.22,
      "keptPct": 66.27,
      "rank": 57
-    },
-    {
-     "code": "ON",
-     "country": "CA",
-     "name": "Ontario",
-     "gross": 208125,
-     "net": 135331.78,
-     "keptPct": 65.02,
-     "rank": 58
-    },
-    {
-     "code": "NB",
-     "country": "CA",
-     "name": "New Brunswick",
-     "gross": 208125,
-     "net": 133740.7,
-     "keptPct": 64.26,
-     "rank": 59
-    },
-    {
-     "code": "MB",
-     "country": "CA",
-     "name": "Manitoba",
-     "gross": 208125,
-     "net": 132853.2,
-     "keptPct": 63.83,
-     "rank": 60
-    },
-    {
-     "code": "NL",
-     "country": "CA",
-     "name": "Newfoundland and Labrador",
-     "gross": 208125,
-     "net": 132739.64,
-     "keptPct": 63.78,
-     "rank": 60
-    },
-    {
-     "code": "PE",
-     "country": "CA",
-     "name": "Prince Edward Island",
-     "gross": 208125,
-     "net": 130029.33,
-     "keptPct": 62.48,
-     "rank": 62
-    },
-    {
-     "code": "NS",
-     "country": "CA",
-     "name": "Nova Scotia",
-     "gross": 208125,
-     "net": 128369.48,
-     "keptPct": 61.68,
-     "rank": 63
-    },
-    {
-     "code": "QC",
-     "country": "CA",
-     "name": "Quebec",
-     "gross": 208125,
-     "net": 127686.2,
-     "keptPct": 61.35,
-     "rank": 64
-    }
-   ],
-   "afterHealthPremium": [
-    {
-     "code": "AK",
-     "country": "US",
-     "name": "Alaska",
-     "gross": 150000,
-     "net": 112806.76,
-     "keptPct": 75.2,
-     "rank": 1
-    },
-    {
-     "code": "FL",
-     "country": "US",
-     "name": "Florida",
-     "gross": 150000,
-     "net": 112806.76,
-     "keptPct": 75.2,
-     "rank": 1
-    },
-    {
-     "code": "NH",
-     "country": "US",
-     "name": "New Hampshire",
-     "gross": 150000,
-     "net": 112806.76,
-     "keptPct": 75.2,
-     "rank": 1
-    },
-    {
-     "code": "NV",
-     "country": "US",
-     "name": "Nevada",
-     "gross": 150000,
-     "net": 112806.76,
-     "keptPct": 75.2,
-     "rank": 1
-    },
-    {
-     "code": "SD",
-     "country": "US",
-     "name": "South Dakota",
-     "gross": 150000,
-     "net": 112806.76,
-     "keptPct": 75.2,
-     "rank": 1
-    },
-    {
-     "code": "TN",
-     "country": "US",
-     "name": "Tennessee",
-     "gross": 150000,
-     "net": 112806.76,
-     "keptPct": 75.2,
-     "rank": 1
-    },
-    {
-     "code": "TX",
-     "country": "US",
-     "name": "Texas",
-     "gross": 150000,
-     "net": 112806.76,
-     "keptPct": 75.2,
-     "rank": 1
-    },
-    {
-     "code": "WY",
-     "country": "US",
-     "name": "Wyoming",
-     "gross": 150000,
-     "net": 112806.76,
-     "keptPct": 75.2,
-     "rank": 1
-    },
-    {
-     "code": "ND",
-     "country": "US",
-     "name": "North Dakota",
-     "gross": 150000,
-     "net": 111169.05,
-     "keptPct": 74.11,
-     "rank": 9
-    },
-    {
-     "code": "WA",
-     "country": "US",
-     "name": "Washington",
-     "gross": 150000,
-     "net": 110726.02,
-     "keptPct": 73.82,
-     "rank": 10
-    },
-    {
-     "code": "AZ",
-     "country": "US",
-     "name": "Arizona",
-     "gross": 150000,
-     "net": 109495.26,
-     "keptPct": 73,
-     "rank": 11
-    },
-    {
-     "code": "OH",
-     "country": "US",
-     "name": "Ohio",
-     "gross": 150000,
-     "net": 109489.98,
-     "keptPct": 72.99,
-     "rank": 11
-    },
-    {
-     "code": "LA",
-     "country": "US",
-     "name": "Louisiana",
-     "gross": 150000,
-     "net": 108736.21,
-     "keptPct": 72.49,
-     "rank": 13
-    },
-    {
-     "code": "IN",
-     "country": "US",
-     "name": "Indiana",
-     "gross": 150000,
-     "net": 108453.74,
-     "keptPct": 72.3,
-     "rank": 14
-    },
-    {
-     "code": "PA",
-     "country": "US",
-     "name": "Pennsylvania",
-     "gross": 150000,
-     "net": 108245.97,
-     "keptPct": 72.16,
-     "rank": 15
-    },
-    {
-     "code": "IA",
-     "country": "US",
-     "name": "Iowa",
-     "gross": 150000,
-     "net": 107813.28,
-     "keptPct": 71.88,
-     "rank": 16
-    },
-    {
-     "code": "KY",
-     "country": "US",
-     "name": "Kentucky",
-     "gross": 150000,
-     "net": 107724.76,
-     "keptPct": 71.82,
-     "rank": 17
-    },
-    {
-     "code": "MS",
-     "country": "US",
-     "name": "Mississippi",
-     "gross": 150000,
-     "net": 107596.36,
-     "keptPct": 71.73,
-     "rank": 18
-    },
-    {
-     "code": "AR",
-     "country": "US",
-     "name": "Arkansas",
-     "gross": 150000,
-     "net": 107510.33,
-     "keptPct": 71.67,
-     "rank": 18
-    },
-    {
-     "code": "NC",
-     "country": "US",
-     "name": "North Carolina",
-     "gross": 150000,
-     "net": 107387.94,
-     "keptPct": 71.59,
-     "rank": 20
-    },
-    {
-     "code": "NE",
-     "country": "US",
-     "name": "Nebraska",
-     "gross": 150000,
-     "net": 106926.82,
-     "keptPct": 71.28,
-     "rank": 21
-    },
-    {
-     "code": "WV",
-     "country": "US",
-     "name": "West Virginia",
-     "gross": 150000,
-     "net": 106891.81,
-     "keptPct": 71.26,
-     "rank": 21
-    },
-    {
-     "code": "NM",
-     "country": "US",
-     "name": "New Mexico",
-     "gross": 150000,
-     "net": 106858.22,
-     "keptPct": 71.24,
-     "rank": 23
-    },
-    {
-     "code": "AL",
-     "country": "US",
-     "name": "Alabama",
-     "gross": 150000,
-     "net": 106838.18,
-     "keptPct": 71.23,
-     "rank": 23
-    },
-    {
-     "code": "SC",
-     "country": "US",
-     "name": "South Carolina",
-     "gross": 150000,
-     "net": 106814.28,
-     "keptPct": 71.21,
-     "rank": 23
-    },
-    {
-     "code": "MO",
-     "country": "US",
-     "name": "Missouri",
-     "gross": 150000,
-     "net": 106761.77,
-     "keptPct": 71.17,
-     "rank": 23
-    },
-    {
-     "code": "MI",
-     "country": "US",
-     "name": "Michigan",
-     "gross": 150000,
-     "net": 106743.71,
-     "keptPct": 71.16,
-     "rank": 23
-    },
-    {
-     "code": "OK",
-     "country": "US",
-     "name": "Oklahoma",
-     "gross": 150000,
-     "net": 106667.06,
-     "keptPct": 71.11,
-     "rank": 28
-    },
-    {
-     "code": "CO",
-     "country": "US",
-     "name": "Colorado",
-     "gross": 150000,
-     "net": 106318.52,
-     "keptPct": 70.88,
-     "rank": 29
-    },
-    {
-     "code": "RI",
-     "country": "US",
-     "name": "Rhode Island",
-     "gross": 150000,
-     "net": 106252.04,
-     "keptPct": 70.83,
-     "rank": 30
-    },
-    {
-     "code": "UT",
-     "country": "US",
-     "name": "Utah",
-     "gross": 150000,
-     "net": 106195.84,
-     "keptPct": 70.8,
-     "rank": 30
-    },
-    {
-     "code": "GA",
-     "country": "US",
-     "name": "Georgia",
-     "gross": 150000,
-     "net": 106142.12,
-     "keptPct": 70.76,
-     "rank": 30
-    },
-    {
-     "code": "MD",
-     "country": "US",
-     "name": "Maryland",
-     "gross": 150000,
-     "net": 105966.23,
-     "keptPct": 70.64,
-     "rank": 33
-    },
-    {
-     "code": "ID",
-     "country": "US",
-     "name": "Idaho",
-     "gross": 150000,
-     "net": 105786.38,
-     "keptPct": 70.52,
-     "rank": 34
-    },
-    {
-     "code": "MT",
-     "country": "US",
-     "name": "Montana",
-     "gross": 150000,
-     "net": 105774.02,
-     "keptPct": 70.52,
-     "rank": 34
-    },
-    {
-     "code": "NU",
-     "country": "CA",
-     "name": "Nunavut",
-     "gross": 208125,
-     "net": 146708.06,
-     "keptPct": 70.49,
-     "rank": 34
-    },
-    {
-     "code": "IL",
-     "country": "US",
-     "name": "Illinois",
-     "gross": 150000,
-     "net": 105597.83,
-     "keptPct": 70.4,
-     "rank": 37
-    },
-    {
-     "code": "WI",
-     "country": "US",
-     "name": "Wisconsin",
-     "gross": 150000,
-     "net": 105573.72,
-     "keptPct": 70.38,
-     "rank": 37
-    },
-    {
-     "code": "VT",
-     "country": "US",
-     "name": "Vermont",
-     "gross": 150000,
-     "net": 105385.88,
-     "keptPct": 70.26,
-     "rank": 39
-    },
-    {
-     "code": "KS",
-     "country": "US",
-     "name": "Kansas",
-     "gross": 150000,
-     "net": 105316.8,
-     "keptPct": 70.21,
-     "rank": 40
-    },
-    {
-     "code": "VA",
-     "country": "US",
-     "name": "Virginia",
-     "gross": 150000,
-     "net": 105078.66,
-     "keptPct": 70.05,
-     "rank": 41
-    },
-    {
-     "code": "MA",
-     "country": "US",
-     "name": "Massachusetts",
-     "gross": 150000,
-     "net": 104908.76,
-     "keptPct": 69.94,
-     "rank": 42
-    },
-    {
-     "code": "NJ",
-     "country": "US",
-     "name": "New Jersey",
-     "gross": 150000,
-     "net": 104713.04,
-     "keptPct": 69.81,
-     "rank": 43
-    },
-    {
-     "code": "NY",
-     "country": "US",
-     "name": "New York",
-     "gross": 150000,
-     "net": 104173.92,
-     "keptPct": 69.45,
-     "rank": 44
-    },
-    {
-     "code": "CT",
-     "country": "US",
-     "name": "Connecticut",
-     "gross": 150000,
-     "net": 103918.16,
-     "keptPct": 69.28,
-     "rank": 45
-    },
-    {
-     "code": "DE",
-     "country": "US",
-     "name": "Delaware",
-     "gross": 150000,
-     "net": 103742.8,
-     "keptPct": 69.16,
-     "rank": 46
-    },
-    {
-     "code": "ME",
-     "country": "US",
-     "name": "Maine",
-     "gross": 150000,
-     "net": 103512.75,
-     "keptPct": 69.01,
-     "rank": 47
-    },
-    {
-     "code": "MN",
-     "country": "US",
-     "name": "Minnesota",
-     "gross": 150000,
-     "net": 103317.86,
-     "keptPct": 68.88,
-     "rank": 48
-    },
-    {
-     "code": "HI",
-     "country": "US",
-     "name": "Hawaii",
-     "gross": 150000,
-     "net": 103276.7,
-     "keptPct": 68.85,
-     "rank": 48
-    },
-    {
-     "code": "YT",
-     "country": "CA",
-     "name": "Yukon",
-     "gross": 208125,
-     "net": 143207.45,
-     "keptPct": 68.81,
-     "rank": 50
-    },
-    {
-     "code": "DC",
-     "country": "US",
-     "name": "District of Columbia",
-     "gross": 150000,
-     "net": 103147.66,
-     "keptPct": 68.77,
-     "rank": 50
-    },
-    {
-     "code": "AB",
-     "country": "CA",
-     "name": "Alberta",
-     "gross": 208125,
-     "net": 142542.2,
-     "keptPct": 68.49,
-     "rank": 52
-    },
-    {
-     "code": "NT",
-     "country": "CA",
-     "name": "Northwest Territories",
-     "gross": 208125,
-     "net": 141798.9,
-     "keptPct": 68.13,
-     "rank": 53
-    },
-    {
-     "code": "BC",
-     "country": "CA",
-     "name": "British Columbia",
-     "gross": 208125,
-     "net": 140654.11,
-     "keptPct": 67.58,
-     "rank": 54
-    },
-    {
-     "code": "CA",
-     "country": "US",
-     "name": "California",
-     "gross": 150000,
-     "net": 101285.7,
-     "keptPct": 67.52,
-     "rank": 55
-    },
-    {
-     "code": "OR",
-     "country": "US",
-     "name": "Oregon",
-     "gross": 150000,
-     "net": 99506.91,
-     "keptPct": 66.34,
-     "rank": 56
-    },
-    {
-     "code": "SK",
-     "country": "CA",
-     "name": "Saskatchewan",
-     "gross": 208125,
-     "net": 137918.22,
-     "keptPct": 66.27,
-     "rank": 56
     },
     {
      "code": "ON",
@@ -5999,22 +3108,13 @@
      "rank": 8
     },
     {
-     "code": "AK",
-     "country": "US",
-     "name": "Alaska",
-     "gross": 61000,
-     "net": 51193.5,
-     "keptPct": 83.92,
-     "rank": 9
-    },
-    {
      "code": "MS",
      "country": "US",
      "name": "Mississippi",
      "gross": 40120,
      "net": 33543.62,
      "keptPct": 83.61,
-     "rank": 10
+     "rank": 9
     },
     {
      "code": "OH",
@@ -6023,7 +3123,7 @@
      "gross": 49380,
      "net": 41274.38,
      "keptPct": 83.59,
-     "rank": 10
+     "rank": 9
     },
     {
      "code": "SC",
@@ -6032,7 +3132,16 @@
      "gross": 46490,
      "net": 38860.09,
      "keptPct": 83.59,
-     "rank": 10
+     "rank": 9
+    },
+    {
+     "code": "AK",
+     "country": "US",
+     "name": "Alaska",
+     "gross": 61000,
+     "net": 50922.5,
+     "keptPct": 83.48,
+     "rank": 12
     },
     {
      "code": "AZ",
@@ -6165,17 +3274,17 @@
      "country": "US",
      "name": "Pennsylvania",
      "gross": 49690,
-     "net": 40580.43,
-     "keptPct": 81.67,
-     "rank": 26
+     "net": 40545.65,
+     "keptPct": 81.6,
+     "rank": 27
     },
     {
      "code": "VT",
      "country": "US",
      "name": "Vermont",
      "gross": 56390,
-     "net": 46037.48,
-     "keptPct": 81.64,
+     "net": 45975.45,
+     "keptPct": 81.53,
      "rank": 28
     },
     {
@@ -6185,7 +3294,7 @@
      "gross": 50270,
      "net": 40981.9,
      "keptPct": 81.52,
-     "rank": 29
+     "rank": 28
     },
     {
      "code": "GA",
@@ -6215,22 +3324,13 @@
      "rank": 30
     },
     {
-     "code": "ME",
-     "country": "US",
-     "name": "Maine",
-     "gross": 51430,
-     "net": 41710.28,
-     "keptPct": 81.1,
-     "rank": 33
-    },
-    {
      "code": "MI",
      "country": "US",
      "name": "Michigan",
      "gross": 49270,
      "net": 39925.22,
      "keptPct": 81.03,
-     "rank": 34
+     "rank": 33
     },
     {
      "code": "AL",
@@ -6239,7 +3339,7 @@
      "gross": 45670,
      "net": 36997.37,
      "keptPct": 81.01,
-     "rank": 34
+     "rank": 33
     },
     {
      "code": "KS",
@@ -6248,7 +3348,16 @@
      "gross": 48010,
      "net": 38876.76,
      "keptPct": 80.98,
-     "rank": 34
+     "rank": 33
+    },
+    {
+     "code": "ME",
+     "country": "US",
+     "name": "Maine",
+     "gross": 51430,
+     "net": 41453.13,
+     "keptPct": 80.6,
+     "rank": 36
     },
     {
      "code": "NJ",
@@ -6372,8 +3481,8 @@
      "country": "US",
      "name": "Oregon",
      "gross": 57000,
-     "net": 43894.38,
-     "keptPct": 77.01,
+     "net": 43837.38,
+     "keptPct": 76.91,
      "rank": 50
     },
     {
@@ -6395,6 +3504,9 @@
   "HI": [
    "Hawaii TDI (an employee-side deduction of up to 0.5% of weekly wages, capped) is NOT modelled: it is a private-insurance mandate under HRS ch. 392 and the employer may pay all of it or split it — the deduction is an employer choice with no statutory default, unlike the state-run funds above",
    "the deduction rises again in 2028, 2030 and 2031 and the brackets in 2027 and 2029 — re-check each January"
+  ],
+  "ME": [
+   "Maine Paid Family & Medical Leave is modelled at the 0.5% employee maximum; an employer may absorb part or all of it"
   ],
   "MD": [
    "all 24 county/city rates ARE modelled, opt-in via the city/county selector; without a selection, Maryland take-home is overstated by 2.25%–3.30% of taxable income"
@@ -6418,14 +3530,19 @@
    "Ohio has roughly 600 taxing municipalities; the 17 largest are modelled and the rest are not — select a city to include it"
   ],
   "OR": [
-   "Portland-area transit and supportive-housing taxes not included"
+   "Portland-area taxes not included: Multnomah County Preschool for All (1.5% of county taxable income above $125,000 single / $200,000 joint, another 1.5% above $250,000 / $400,000) and Metro Supportive Housing (1%, thresholds inflation-indexed from 2026), per portland.gov/revenue; TriMet and Lane transit taxes are paid by employers, not withheld",
+   "Workers' Benefit Fund assessment not included: 0.9 cents per hour worked withheld from the employee in 2026 (DCBS, OAR 436-070), about $19 a year full-time; it is charged per hour, not on salary"
   ],
   "PA": [
    "Philadelphia wage tax IS modelled (opt-in); other PA municipal earned income taxes (commonly ~1%) are not",
    "HSA and cafeteria-plan treatment follows federal here; confirm against PA DOR before relying on it"
   ],
+  "VT": [
+   "Child Care Contribution is modelled at the 0.11% employee maximum; an employer may pay all of it"
+  ],
   "WA": [
-   "Washington taxes capital gains at 7%/9% but levies no tax on wage income"
+   "Washington taxes capital gains at 7%/9% but levies no tax on wage income",
+   "Workers' compensation employee share not included: L&I withholds part of the premium per hour worked, at a rate set by industry risk class"
   ]
  }
 }
