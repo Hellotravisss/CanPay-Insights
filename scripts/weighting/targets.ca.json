@@ -1,0 +1,74 @@
+{
+  "retrieved": "2026-10-28",
+  "population": "Full-year full-time workers with employment income, all genders",
+  "income_source": {
+    "table": "11-10-0240-01",
+    "reference_year": 2024,
+    "url": "https://www150.statcan.gc.ca/t1/tbl1/en/tv.action?pid=1110024001"
+  },
+  "growth": {
+    "table": "14-10-0063-01",
+    "vector": "v2132677",
+    "series": "Median weekly wage, full-time employees, Canada, all industries",
+    "base": "2024 average",
+    "base_value": 1264.29,
+    "recent": "2025-10 to 2026-09 average",
+    "recent_value": 1341.65,
+    "factor": 1.06119
+  },
+  "brackets_note": "Calculator brackets with 90-120k, 120-160k and 160k-plus merged into 90k-plus.",
+  "margins": {
+    "province": {
+      "Newfoundland and Labrador": 0.012356,
+      "Prince Edward Island": 0.004304,
+      "Nova Scotia": 0.02559,
+      "New Brunswick": 0.020839,
+      "Quebec": 0.233884,
+      "Ontario": 0.385727,
+      "Manitoba": 0.034636,
+      "Saskatchewan": 0.029157,
+      "Alberta": 0.119566,
+      "British Columbia": 0.130358,
+      "Yukon": 0.001324,
+      "Northwest Territories": 0.001382,
+      "Nunavut": 0.000877
+    },
+    "income": {
+      "under-30k": 0.089613,
+      "30-50k": 0.161653,
+      "50-70k": 0.205826,
+      "70-90k": 0.161603,
+      "90k-plus": 0.381305
+    }
+  },
+  "holdout": {
+    "Ontario": {
+      "under-30k": 0.094004,
+      "30-50k": 0.148451,
+      "50-70k": 0.195004,
+      "70-90k": 0.153135,
+      "90k-plus": 0.409405
+    },
+    "Quebec": {
+      "under-30k": 0.077388,
+      "30-50k": 0.180166,
+      "50-70k": 0.227658,
+      "70-90k": 0.170788,
+      "90k-plus": 0.344
+    },
+    "British Columbia": {
+      "under-30k": 0.084481,
+      "30-50k": 0.14728,
+      "50-70k": 0.206157,
+      "70-90k": 0.165274,
+      "90k-plus": 0.39681
+    },
+    "Alberta": {
+      "under-30k": 0.097215,
+      "30-50k": 0.150565,
+      "50-70k": 0.185468,
+      "70-90k": 0.162903,
+      "90k-plus": 0.403848
+    }
+  }
+}
