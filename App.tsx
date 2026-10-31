@@ -456,6 +456,7 @@ const App: React.FC = () => {
       ),
       viewedReport: reportOpened,
       spouseClaim: (mode === CalculationMode.SIMPLE ? simpleInputs : mode === CalculationMode.ANNUAL ? annualInputs : timesheetInputs).spouseNetIncome != null,
+      under18: (mode === CalculationMode.SIMPLE ? simpleInputs : mode === CalculationMode.ANNUAL ? annualInputs : timesheetInputs).under18 === true,
     });
   }, [currentPage, mode, simpleInputs, annualInputs, timesheetInputs, currentProvince, results, lang, reportOpened, userId, authLoading]);
 

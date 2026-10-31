@@ -45,7 +45,10 @@ create table if not exists events (
   other_income_bucket text, stat_or_sick_pay integer, taxable_benefits integer, rsu_bucket text,
   match_policy text, tips_paid text,
   offer_change_bucket text, offer_to_province text, offer_vacation_diff text,
-  compared_provinces text, move_intent text
+  compared_provinces text, move_intent text,
+  -- 1 when the visitor ticked "I'm under 18" (no CPP/QPP), 0 when not. Never an age or
+  -- birth date. Added in production by ALTER on 2026-10-31.
+  under_18 integer
 );
 create index if not exists idx_events_created on events(created_at);
 create index if not exists idx_events_session on events(session_id);

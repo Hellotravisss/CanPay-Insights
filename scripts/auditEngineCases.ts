@@ -134,9 +134,41 @@ expect('one $200 day annualised', daily.grossPayAnnual, 48000);
   expect('timesheet rows add up to gross', parts(t1), t1.grossPayBiWeekly);
 }
 
+// Under 18 (2026-10-31): no CPP/QPP before the month after the 18th birthday
+// (CRA "Starting and stopping CPP deductions"; Revenu Québec "Employee who
+// turns 18"). EI has no age limit, and age changes nothing else.
+{
+  const teen = (province: string, under18?: boolean) => calculateFromAnnualSalary({
+    province, annualSalary: 17.95 * 12 * 52, payFrequency: PayFrequency.BI_WEEKLY, under18,
+  } as AnnualSalaryInputs);
+  const on18 = teen(Province.ON), on16 = teen(Province.ON, true);
+  expect('ON 12 h/wk at $17.95, 18+: CPP per pay', on18.cppDeduction, 17.62);
+  expect('ON 12 h/wk at $17.95, under 18: no CPP', on16.cppDeduction, 0);
+  expect('under 18: EI unchanged', on16.eiDeduction, on18.eiDeduction);
+  expect('under 18: net = 18+ net + the CPP', on16.netPayPerPeriod ?? 0, (on18.netPayPerPeriod ?? 0) + on18.cppDeduction);
+  // Quebec: QPP goes, QPIP (carried inside cppDeduction) stays.
+  const qc18 = teen(Province.QC), qc16 = teen(Province.QC, true);
+  expect('QC under 18: only QPIP left in the pension row', qc16.cppDeduction, qc16.qpipDeduction ?? NaN);
+  expect('QC under 18: QPIP unchanged', qc16.qpipDeduction ?? NaN, qc18.qpipDeduction ?? NaN);
+  // Above the tax threshold the missing CPP credit raises tax a little; total still falls.
+  const hi = (under18?: boolean) => calculateFromAnnualSalary({ province: Province.BC, annualSalary: 40000, payFrequency: PayFrequency.BI_WEEKLY, under18 } as AnnualSalaryInputs);
+  expect('BC $40k under 18: no CPP', hi(true).cppDeduction, 0);
+  checks++; if (!((hi(true).netPayPerPeriod ?? 0) > (hi().netPayPerPeriod ?? 0))) failures.push('BC $40k under 18: net should exceed 18+ net');
+  const hr = (under18?: boolean) => calculateSalary({
+    province: Province.ON, hourlyWage: 17.95, under18,
+    shift: { startTime: '16:00', endTime: '20:00', unpaidBreakMinutes: 0, daysActive: [true, false, false, false, false, true, true] },
+    premium: { enabled: false, ratePerHour: 0, startTime: '00:00', endTime: '00:00' },
+  } as never);
+  expect('hourly under 18: no CPP', hr(true).cppDeduction, 0);
+  checks++; if (!(hr().cppDeduction > 0)) failures.push('hourly 18+: CPP should be deducted');
+  const t18 = calculateFromTimesheet({ province: Province.ON, hourlyWage: 17.95, payFrequency: PayFrequency.BI_WEEKLY, under18: true,
+    entries: ['2026-03-07', '2026-03-08', '2026-03-14', '2026-03-15'].map((date) => ({ date, checkIn: '10:00', checkOut: '18:00', unpaidBreakMinutes: 0 })) } as never);
+  expect('timesheet under 18: no CPP', t18.cppDeduction, 0);
+}
+
 if (failures.length) {
   console.log(failures.map((f) => '  ✗ ' + f).join('\n'));
   console.log(`\nENGINE CASES AUDIT FAIL (${tz}) — ${failures.length} of ${checks}.`);
   process.exit(1);
 }
-console.log(`ENGINE CASES AUDIT PASS (${tz}) — ${checks} checks: timesheet weeks, night premium, one-time pay, non-cash benefits, daily pay, employer match, tips, breakdown rows.`);
+console.log(`ENGINE CASES AUDIT PASS (${tz}) — ${checks} checks: timesheet weeks, night premium, one-time pay, non-cash benefits, daily pay, employer match, tips, breakdown rows, under 18.`);

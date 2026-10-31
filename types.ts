@@ -96,6 +96,13 @@ export interface SalaryInputs {
    */
   spouseNetIncome?: number | null;
   /**
+   * Under 18 for the whole period: no CPP/QPP. Contributions start with the
+   * first pay dated in the month after the 18th birthday (CRA, "Starting and
+   * stopping CPP deductions"; Revenu Québec, "Employee who turns 18"). Income
+   * tax, EI and QPIP do not depend on age.
+   */
+  under18?: boolean;
+  /**
    * TD1 total claim amounts, used INSTEAD of basic personal amount + spouse
    * amount. For the golden test: CRA computes T4032 claim codes 2–10 at the
    * midpoint of each code's total-claim range, whatever the income.
@@ -122,6 +129,13 @@ export interface AnnualSalaryInputs {
    * federal and provincial, which lowers withholding.
    */
   spouseNetIncome?: number | null;
+  /**
+   * Under 18 for the whole period: no CPP/QPP. Contributions start with the
+   * first pay dated in the month after the 18th birthday (CRA, "Starting and
+   * stopping CPP deductions"; Revenu Québec, "Employee who turns 18"). Income
+   * tax, EI and QPIP do not depend on age.
+   */
+  under18?: boolean;
   /**
    * TD1 total claim amounts, used INSTEAD of basic personal amount + spouse
    * amount. For the golden test: CRA computes T4032 claim codes 2–10 at the
@@ -170,6 +184,13 @@ export interface TimesheetInputs {
    * federal and provincial, which lowers withholding.
    */
   spouseNetIncome?: number | null;
+  /**
+   * Under 18 for the whole period: no CPP/QPP. Contributions start with the
+   * first pay dated in the month after the 18th birthday (CRA, "Starting and
+   * stopping CPP deductions"; Revenu Québec, "Employee who turns 18"). Income
+   * tax, EI and QPIP do not depend on age.
+   */
+  under18?: boolean;
   /**
    * TD1 total claim amounts, used INSTEAD of basic personal amount + spouse
    * amount. For the golden test: CRA computes T4032 claim codes 2–10 at the

@@ -53,6 +53,8 @@ export const main: Record<string, string> = {
   'sp.toggle': 'Mantengo a mi cónyuge o pareja de hecho',
   'sp.income': 'Su ingreso neto estimado este año',
   'sp.hint': 'Añade el monto por cónyuge del TD1, así se retiene menos impuesto. Aplica si su empleador tiene su TD1 que lo solicita. Solo uno de los dos puede pedirlo.',
+  'u18.toggle': 'Tengo menos de 18 años',
+  'u18.hint': 'No se descuenta el CPP (QPP en Quebec) antes de los 18: empieza con el primer pago del mes siguiente a tu cumpleaños 18. El EI sí se descuenta.',
   'annual.revToggle': '¿Sabe cuánto quiere recibir? Calcule el salario',
   'annual.revLabel': 'Neto que quiero',
   'annual.revMonth': 'al mes',

@@ -110,6 +110,9 @@ export const getRRSPPerPeriod = (inputs: any, grossPayPerPeriod: number): number
   return inputs.rrspContributionPerPeriod ?? 0;
 };
 
+/** No CPP/QPP: an employee under 18 (see SalaryInputs.under18). */
+const NO_PENSION = { cpp1: 0, cpp2: 0, total: 0 };
+
 /**
  * Calculate CPP/QPP contributions (including CPP2/QPP2 for high earners)
  * 2026 CPP Structure:
@@ -525,7 +528,7 @@ const calculateSalaryRecurring = (inputs: SalaryInputs): CalculationResult => {
 
   // 6. Deductions
   const isQuebec = inputs.province === Province.QC;
-  const cppResult = calculateCPP(annualGross + annualTaxableBenefits + annualMatch, isQuebec);
+  const cppResult = inputs.under18 ? NO_PENSION : calculateCPP(annualGross + annualTaxableBenefits + annualMatch, isQuebec);
   // Taxable benefits here are NON-CASH (types.ts: "e.g. group life insurance").
   // CRA T4130: "A taxable non-cash or near-cash benefit is generally not
   // insurable. Do not deduct EI premiums." They stay in the CPP base above —
@@ -651,7 +654,7 @@ export const calculateFromAnnualSalary = (inputs: AnnualSalaryInputs): Calculati
   const taxableIncome = Math.max(0, (annualGross + annualTaxableBenefits + annualEquity) - annualRRSP - annualUnionDues);
 
   // Calculate deductions
-  const cppResult = calculateCPP(annualGross + annualTaxableBenefits + annualEquity + annualMatch, isQuebec);
+  const cppResult = inputs.under18 ? NO_PENSION : calculateCPP(annualGross + annualTaxableBenefits + annualEquity + annualMatch, isQuebec);
   // Taxable benefits here are NON-CASH (types.ts: "e.g. group life insurance").
   // CRA T4130: "A taxable non-cash or near-cash benefit is generally not
   // insurable. Do not deduct EI premiums." They stay in the CPP base above —
@@ -815,7 +818,7 @@ export const calculateFromTimesheet = (inputs: TimesheetInputs): CalculationResu
 
   // Calculate deductions
   const isQuebec = province === Province.QC;
-  const cppResult = calculateCPP(annualGross + annualTaxableBenefits + annualMatch - annualDirectTips, isQuebec);
+  const cppResult = inputs.under18 ? NO_PENSION : calculateCPP(annualGross + annualTaxableBenefits + annualMatch - annualDirectTips, isQuebec);
   // Taxable benefits here are NON-CASH (types.ts: "e.g. group life insurance").
   // CRA T4130: "A taxable non-cash or near-cash benefit is generally not
   // insurable. Do not deduct EI premiums." They stay in the CPP base above —

@@ -53,6 +53,8 @@ export const main: Record<string, string> = {
   'sp.toggle': 'Tôi nuôi vợ/chồng hoặc người chung sống',
   'sp.income': 'Thu nhập ròng ước tính của họ năm nay',
   'sp.hint': 'Thêm khoản khấu trừ cho vợ/chồng trên TD1 nên bị khấu trừ thuế ít hơn. Áp dụng khi chủ lao động đã có TD1 của bạn khai khoản này. Chỉ một trong hai người được khai.',
+  'u18.toggle': 'Tôi dưới 18 tuổi',
+  'u18.hint': 'Chưa trừ CPP (QPP ở Quebec) trước 18 tuổi. Khoản này bắt đầu từ kỳ lương đầu tiên của tháng sau sinh nhật 18 tuổi. EI vẫn bị trừ.',
   'annual.revToggle': 'Biết mức thực nhận bạn muốn? Tìm mức lương',
   'annual.revLabel': 'Thực nhận mong muốn',
   'annual.revMonth': 'mỗi tháng',

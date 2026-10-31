@@ -78,6 +78,7 @@ const PrivacyPolicy: React.FC<PrivacyPolicyProps> = () => {
           <li>on the province comparison page, which provinces you compare (names only) with your salary as a range, and, if you answer, whether you are planning to move, might, or are just curious;</li>
           <li>if you use “find the salary” to work back from a take-home amount, the monthly take-home you asked for, as a range (such as “$4k–$5k”) — never the amount;</li>
           <li>whether you ticked “I support a spouse or common-law partner” (yes or no) — never your spouse’s income;</li>
+          <li>whether you ticked “I’m under 18” (yes or no) — never your age or date of birth;</li>
           <li>how long it took from opening the page to your first result, as a range (under 10 seconds, 10–30, 30–90, over 90), and how many times you changed the form before a result, as a range (1–3, 4–10, 11–30, over 30) — never timestamps, keystrokes or where you clicked;</li>
           <li>whether you were signed in (yes/no — never which account), and if you reopen a saved calculation and change it, the direction and rough size of the change and how long ago the original was saved — never the amounts;</li>
           <li>the hour and weekday on your own clock, and the time-zone name your browser reports (such as “America/Toronto”), which we use to check the map, not to place you;</li>

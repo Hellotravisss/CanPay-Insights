@@ -2,6 +2,7 @@
 import React, { useState, useEffect } from 'react';
 import { TimesheetInputs, TimesheetEntry, Province, PayFrequency } from '../types';
 import SpouseClaim from './SpouseClaim';
+import Under18 from './Under18';
 import { PROVINCIAL_DATA } from '../constants';
 import { useAnonymousTimesheet } from '../hooks/useAnonymousTimesheet';
 import Toast from './Toast';
@@ -284,6 +285,7 @@ const TimesheetInput: React.FC<Props> = ({ inputs, setInputs }) => {
               ))}
             </select>
             <SpouseClaim value={inputs.spouseNetIncome} onChange={(v) => setInputs({ ...inputs, spouseNetIncome: v })} />
+            <Under18 value={inputs.under18} onChange={(v) => setInputs({ ...inputs, under18: v })} />
           </div>
 
           {/* Hourly Wage */}

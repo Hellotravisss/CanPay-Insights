@@ -6,6 +6,7 @@ import { useT } from '../lib/i18n';
 import { calculateFromAnnualSalary } from '../utils/taxEngine';
 import ReverseSalary from './ReverseSalary';
 import SpouseClaim from './SpouseClaim';
+import Under18 from './Under18';
 
 interface Props {
   inputs: AnnualSalaryInputs;
@@ -132,6 +133,7 @@ const AnnualSalaryInput: React.FC<Props> = ({ inputs, setInputs }) => {
           💼 {t('annual.provinceHint')}
         </p>
         <SpouseClaim value={inputs.spouseNetIncome} onChange={(v) => setInputs({ ...inputs, spouseNetIncome: v })} />
+        <Under18 value={inputs.under18} onChange={(v) => setInputs({ ...inputs, under18: v })} />
       </div>
 
       <hr className="border-slate-100" />

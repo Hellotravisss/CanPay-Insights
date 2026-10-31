@@ -19,6 +19,15 @@ export const metadata: Metadata = {
 // page is the product's history, not a publishing log.
 const ENTRIES: { date: string; title: string; points: string[] }[] = [
   {
+    date: '2026-10-31',
+    title: 'Under 18: no CPP',
+    points: [
+      'Every calculator now has a box for "I\'m under 18". Employers don\'t deduct CPP (QPP in Quebec) until the first pay in the month after your 18th birthday, so the calculator no longer takes it off. EI and income tax don\'t depend on age and are unchanged.',
+      'At Ontario\'s $17.95 minimum wage and 12 hours a week, that is $17.62 more in each two-week paycheque.',
+      'If you tick it, the anonymous record notes yes or no, never your age. The privacy policy lists it.',
+    ],
+  },
+  {
     date: '2026-10-06',
     title: 'Anonymous counter now records the pay-stub extras you enter, as ranges',
     points: [

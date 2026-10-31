@@ -31,7 +31,7 @@ const COLS = [
   'change_direction', 'change_pct_bucket', 'days_since_saved_bucket', 'province_changed',
   'median_ratio_bucket', 'median_wage_ref', 'schema_version',
   'fsa', 'fsa_source', 'lat2', 'lon2', 'tz', 'is_returning',
-  'reverse_target_bucket', 'spouse_claim', 'time_to_result_bucket', 'edits_bucket',
+  'reverse_target_bucket', 'spouse_claim', 'under_18', 'time_to_result_bucket', 'edits_bucket',
 ] as const;
 
 /**
@@ -102,6 +102,7 @@ export async function POST(request: Request) {
     body.compared_provinces = parts.length >= 2 && parts.length <= 6 && parts.every((x) => PROVINCE_NAMES.includes(x)) ? parts.join('|') : null; }
   for (const k of ['ltd', 'stat_or_sick_pay', 'taxable_benefits']) body[k] = body[k] === 1 || body[k] === 0 ? body[k] : null;
   body.spouse_claim = body.spouse_claim === 1 || body.spouse_claim === true ? 1 : body.spouse_claim === 0 || body.spouse_claim === false ? 0 : null;
+  body.under_18 = body.under_18 === 1 || body.under_18 === true ? 1 : body.under_18 === 0 || body.under_18 === false ? 0 : null;
 
   let cf: Record<string, unknown> = {};
   try { cf = ((await getCloudflareContext({ async: true })).cf ?? {}) as Record<string, unknown>; } catch { /* local dev */ }

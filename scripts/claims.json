@@ -1827,6 +1827,20 @@
   },
   {
    "page": "/privacy",
+   "text": "whether you ticked “I’m under 18” (yes or no) — never your age or date of birth;",
+   "backing": "manual",
+   "reviewed": "2026-10-31",
+   "note": "Checked on 2026-10-31: App.tsx sends under18 as a boolean (inputs.under18 === true); lib/telemetry.ts writes under_18 1/0; app/api/events coerces anything else to null. No age or birth date is asked for or sent; the box is yes/no only."
+  },
+  {
+   "page": "/fr/confidentialite",
+   "text": "si vous avez coché « J’ai moins de 18 ans » (oui ou non) — jamais votre âge ni votre date de naissance;",
+   "backing": "manual",
+   "reviewed": "2026-10-31",
+   "note": "Checked on 2026-10-31: App.tsx sends under18 as a boolean (inputs.under18 === true); lib/telemetry.ts writes under_18 1/0; app/api/events coerces anything else to null. No age or birth date is asked for or sent; the box is yes/no only."
+  },
+  {
+   "page": "/privacy",
    "text": "It also records the approximate location of your connection as our host reports it (country, region, city, time zone and a point rounded to about 11 km) and your device type, browser and operating-system family — never the full browser signature.",
    "backing": "manual",
    "reviewed": "2026-09-27",
