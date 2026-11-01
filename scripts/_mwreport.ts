@@ -1,22 +1,13 @@
 /** Every figure the minimum-wage study prints, from one wage table. */
 import { calculateFromAnnualSalary } from '../utils/taxEngine';
 import { PayFrequency, Province } from '../types';
+import { MIN_WAGES } from './minWages';
 const H = 2080;
-const W: Array<[Province, string, number]> = [
-  [Province.AB, 'Alberta', Number(process.env.AB ?? 15.0)],
-  [Province.SK, 'Saskatchewan', Number(process.env.SK ?? 15.35)],
-  [Province.NB, 'New Brunswick', Number(process.env.NB ?? 15.9)],
-  [Province.MB, 'Manitoba', Number(process.env.MB ?? 16.0)],
-  [Province.NL, 'Newfoundland and Labrador', Number(process.env.NL ?? 16.35)],
-  [Province.QC, 'Quebec', Number(process.env.QC ?? 16.6)],
-  [Province.NS, 'Nova Scotia', Number(process.env.NS ?? 16.75)],
-  [Province.NT, 'Northwest Territories', Number(process.env.NT ?? 16.95)],
-  [Province.PE, 'Prince Edward Island', Number(process.env.PE ?? 17.0)],
-  [Province.ON, 'Ontario', Number(process.env.ON ?? 17.6)],
-  [Province.BC, 'British Columbia', Number(process.env.BC ?? 18.25)],
-  [Province.YT, 'Yukon', Number(process.env.YT ?? 18.51)],
-  [Province.NU, 'Nunavut', Number(process.env.NU ?? 19.75)],
-];
+// Current rates from scripts/minWages.ts (gated by audit:minwage). Env vars
+// still override one jurisdiction, e.g. ON=17.60 for a before/after article.
+// The defaults here used to be a second, hand-kept copy that still held the
+// pre-October-2026 rates after the study had moved on.
+const W: Array<[Province, string, number]> = MIN_WAGES.map((w) => [w.province, w.label, Number(process.env[w.code] ?? w.wage)]);
 const m = (n: number) => '$' + Math.round(n).toLocaleString('en-CA');
 const rows = W.map(([p, label, wage]) => {
   const gross = wage * H;

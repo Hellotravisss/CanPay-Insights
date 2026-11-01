@@ -45,6 +45,10 @@ jobs:
       # in scripts/claims.json with what backs it; new or reworded text fails
       # here until someone classifies it (node scripts/liveClaims.mjs --unregistered).
       - run: npm run audit:claims
+      # The 13 minimum wages (scripts/minWages.ts) against each government's own
+      # page. Inputs, not tax rates, so the golden test cannot see them; NU and
+      # NWT went stale unnoticed on 2026-09-01. Also runs weekly (minwage-audit.yml).
+      - run: npm run audit:minwage
       # Email Travis on any failure: a red cross nobody looks at kept the site
       # three days behind in October 2026.
       - name: Notify on failure
