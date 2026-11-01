@@ -185,3 +185,63 @@ are stored as 1, including people who never update.
 `schema_version = 1`. Every other field in those rows is unaffected, and
 website rows are unaffected.
 
+
+---
+
+## Web schema version 2 — website and widget, from 2026-11-01
+
+A review of the pipeline found three collection errors in the browser code
+(`lib/workPattern.ts`, `lib/telemetry.ts`). None of them can be repaired in
+old rows, so nothing is rewritten; from this build the website and the widget
+send `schema_version = 2`. (The iOS app has its own version 2 above; versions
+are read per `source`.)
+
+1. **`days_per_week` in the timesheet calculator.** Weeks were counted from
+   1 January instead of from Monday. In a year that starts on a Thursday (2026),
+   every Monday-to-Friday week was split in two, so a one- or two-week Mon–Fri
+   timesheet was recorded as **3 days a week**, and `employment_shape` turned a
+   full-time worker into `part-time-hourly` (3 × 7.5 h < 30 h). Weeks now start on Monday.
+2. **`avg_daily_hours` in the hourly and timesheet calculators** dropped the
+   minutes of the start and end times (10:30–16:00 counted as 6 h). The error
+   is under one hour a day in either direction, enough to move a week across
+   the 30-hour part-time line. Hours are now computed from minutes;
+   `shift_start_hour` / `shift_end_hour` are unchanged (hour of day).
+3. **Weekend-only schedule changes were deduplicated away.** The once-per-page
+   dedupe key did not include `works_weekend`, so moving Mon–Fri to Tue–Sat
+   (same hours, same number of days) in the same visit was dropped as a
+   repeat. Such changes are now recorded, which adds a few rows per affected visit.
+
+**Rules for rows with `source IN ('web','widget')` and `schema_version = 1`:**
+- treat `days_per_week` as unknown where `mode = 'timesheet'`;
+- treat `employment_shape` as unknown where `mode = 'timesheet'`, and as
+  approximate for `mode = 'simple'` (hours within ±1 h a day of the line);
+- `avg_daily_hours` is approximate (±1 h a day);
+- every other field is unaffected.
+
+### Analysis-method corrections, 2026-11-01
+
+These change how stored rows are read, not what is stored, so they apply to
+every row at once.
+
+- **Weekend share** (`calcStats`, `monthlySnapshot`, the research note's
+  finding 5) now applies the app rule above: rows with `source = 'app'` and
+  `schema_version = 1` are left out of both numerator and denominator
+  (`weekend_n` is the base). Until this date the published share included
+  them and so was inflated by the app's default Sunday. The research note's
+  sentence that a weekend day "is only ever present because somebody switched
+  it on" was untrue for those rows; it now describes the exclusion.
+  `data-archive/monthly/2026-08.json` was written by the old method and is kept
+  as written.
+- **Visits pricing two or more provinces** (research note finding 3, and the
+  `move_share` column of `research_daily`) is now counted on the same rows as
+  its denominator. It had been a separate SQL query that kept fake-door and
+  offer-comparison taps (`product_interest` rows); an offer comparison records
+  offer A's province, so a visit that calculated only in one province could be
+  counted as comparing two. `research_daily` rows before this date were
+  computed the old way and, as that table promises, are never updated.
+- **"Below the median wage"** on the research note is the share of
+  calculations below the *national* median full-time wage
+  (`median_ratio_bucket`), over every calculation the page counts. The page
+  said "the median wage for the province chosen", which the field has never
+  measured, and took the share from the latest calendar year only, which from
+  1 January would have described a different set of rows from the page's total.

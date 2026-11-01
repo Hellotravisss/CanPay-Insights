@@ -88,7 +88,10 @@ export interface WorkPattern {
 // Schema version for every row written by this build. Bump it — and document
 // the change in docs/telemetry-methodology.md — whenever the MEANING of a
 // field changes. Old rows keep their old version; they are never reinterpreted.
-export const SCHEMA_VERSION = 1;
+// 2 (2026-11-01, web and widget): days_per_week from Monday-start weeks,
+// avg_daily_hours from minutes, weekend-only schedule changes no longer
+// deduplicated away. See "Web schema version 2" in the methodology.
+export const SCHEMA_VERSION = 2;
 
 // National median full-time wage, used to express income as a ratio that stays
 // comparable across decades. Nominal brackets drift with inflation; this does
@@ -707,11 +710,7 @@ export function recordCalcEvent(e: {
       e.neighbourhood ?? (remembered ? { fsa: remembered, source: 'remembered' } : null);
     const w = e.work ?? null;
     const b = e.behaviour ?? null;
-    const workKey = w
-      ? `${w.shiftStartHour}-${w.shiftEndHour}-${w.unpaidBreakMin}-${w.daysPerWeek}`
-      : '';
-    const behaviourKey = b ? `${b.rrspPctBucket}-${b.otHoursBucket}-${b.tipsPctBucket ?? ''}-${b.shiftPremium}-${b.unionDuesBucket ?? ''}${b.ltd ?? ''}${b.otherDeductionsBucket ?? ''}${b.bonusBucket ?? ''}${b.otherIncomeBucket ?? ''}${b.statOrSickPay ?? ''}${b.taxableBenefits ?? ''}${b.rsuBucket ?? ''}${b.matchPolicy ?? ''}${b.tipsPaid ?? ''}` : '';
-    const key = `${source}|${e.mode}|${e.province}|${bracket}|${e.industry ?? ''}|${workKey}|${behaviourKey}|${e.intent ?? ''}|${e.expectation ?? ''}|${e.workArrangement ?? ''}|${e.ageBand ?? ''}|${e.viewedReport ? 'r' : ''}|${e.productInterest ?? ''}|${e.tenureBand ?? ''}${e.unionMember ?? ''}${e.employerSize ?? ''}${e.vacationBand ?? ''}|${e.payChange ? `${e.payChange.direction}-${e.payChange.pctBucket}` : ''}|${hood?.fsa ?? ''}${hood?.source ?? ''}|${reverseTargetBucket(e.reverseTargetMonthly)}|${e.spouseClaim ? 's' : ''}${e.under18 ? 'u' : ''}|${e.comparedProvinces?.join(',') ?? ''}${e.moveIntent ?? ''}|${e.offer ? `${e.offer.changeBucket}${e.offer.toProvince ?? ''}${e.offer.vacationDiff}` : ''}`;
+    const key = dedupeKey(e, source, bracket, hood);
     if (sentThisPageLoad.has(key)) return;
     sentThisPageLoad.add(key);
 
@@ -816,6 +815,23 @@ export function recordCalcEvent(e: {
       keepalive: true,
     }).catch((e) => console.debug('telemetry skipped:', (e as Error).message));
   }, 3000);
+}
+
+type CalcEvent = Parameters<typeof recordCalcEvent>[0];
+
+/**
+ * The once-per-page-load dedupe key. Every field the row carries must either be
+ * in it or be derived from something that is, or a change to that field alone
+ * is silently thrown away as a repeat.
+ */
+export function dedupeKey(e: CalcEvent, source: string, bracket: string, hood: Neighbourhood | null): string {
+  const w = e.work ?? null;
+  const b = e.behaviour ?? null;
+  const workKey = w
+    ? `${w.shiftStartHour}-${w.shiftEndHour}-${w.unpaidBreakMin}-${w.daysPerWeek}-${w.worksWeekend ? 'we' : ''}-${w.avgDailyHours}`
+    : '';
+  const behaviourKey = b ? `${b.rrspPctBucket}-${b.otHoursBucket}-${b.tipsPctBucket ?? ''}-${b.shiftPremium}-${b.unionDuesBucket ?? ''}${b.ltd ?? ''}${b.otherDeductionsBucket ?? ''}${b.bonusBucket ?? ''}${b.otherIncomeBucket ?? ''}${b.statOrSickPay ?? ''}${b.taxableBenefits ?? ''}${b.rsuBucket ?? ''}${b.matchPolicy ?? ''}${b.tipsPaid ?? ''}` : '';
+  return `${source}|${e.mode}|${e.province}|${bracket}|${e.industry ?? ''}|${workKey}|${behaviourKey}|${e.intent ?? ''}|${e.expectation ?? ''}|${e.workArrangement ?? ''}|${e.ageBand ?? ''}|${e.viewedReport ? 'r' : ''}|${e.productInterest ?? ''}|${e.tenureBand ?? ''}${e.unionMember ?? ''}${e.employerSize ?? ''}${e.vacationBand ?? ''}|${e.payChange ? `${e.payChange.direction}-${e.payChange.pctBucket}` : ''}|${hood?.fsa ?? ''}${hood?.source ?? ''}|${reverseTargetBucket(e.reverseTargetMonthly)}|${e.spouseClaim ? 's' : ''}${e.under18 ? 'u' : ''}|${e.comparedProvinces?.join(',') ?? ''}${e.moveIntent ?? ''}|${e.offer ? `${e.offer.changeBucket}${e.offer.toProvince ?? ''}${e.offer.vacationDiff}` : ''}`;
 }
 
 /** Offer B's salary against offer A's, as a range label. */

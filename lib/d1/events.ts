@@ -58,6 +58,17 @@ function addMonths(d: string, n: number): string {
 const round1 = (x: number) => Math.round(x * 10) / 10;
 const pct1 = (num: number, den: number) => (den ? round1((100 * num) / den) : null);
 const truthy = (v: unknown) => v === 1 || v === true;
+/**
+ * Whether `works_weekend` means anything on this row. The iOS app ticked
+ * Sunday by default until 1.3.0, so app rows at schema_version 1 carry the
+ * flag for people who never touched the day buttons (docs/telemetry-
+ * methodology.md, "App schema version 2"). Those rows are unknown, not "no".
+ */
+export const weekendKnown = (r: Ev) => !(r.source === 'app' && Number(r.schema_version ?? 1) === 1);
+const weekendShare = (work: Ev[]) => {
+  const known = work.filter(weekendKnown);
+  return { weekend_share: pct1(known.filter((r) => truthy(r.works_weekend)).length, known.length), weekend_n: known.length };
+};
 
 /** percentile_cont: linear interpolation between order statistics. */
 export function percentile(values: number[], p: number): number | null {
@@ -168,7 +179,7 @@ export function calcStats(all: Ev[], excludedCount: number) {
       n: work.length,
       unpaid_break_share: pct1(work.filter((r) => (r.unpaid_break_min as number) > 0).length, work.length),
       median_break: percentile(work.map((r) => r.unpaid_break_min as number), 0.5),
-      weekend_share: pct1(work.filter((r) => truthy(r.works_weekend)).length, work.length),
+      ...weekendShare(work),
       median_daily_hours: percentile(work.map((r) => r.avg_daily_hours as number), 0.5),
       median_days_week: percentile(work.map((r) => r.days_per_week as number), 0.5),
     },
@@ -615,7 +626,7 @@ export function monthlySnapshot(ev: Ev[], month: string /* YYYY-MM */) {
       n: work.length,
       unpaid_break_share: pct1(work.filter((r) => (r.unpaid_break_min as number) > 0).length, work.length),
       median_break: percentile(work.map((r) => r.unpaid_break_min as number), 0.5),
-      weekend_share: pct1(work.filter((r) => truthy(r.works_weekend)).length, work.length),
+      ...weekendShare(work),
       median_daily_hours: percentile(work.map((r) => r.avg_daily_hours as number), 0.5),
     },
     rrsp: { n: rrsp.length, has_rrsp_share: pct1(rrsp.filter((r) => truthy(r.has_rrsp)).length, rrsp.length) },
@@ -634,9 +645,9 @@ export function monthlySnapshot(ev: Ev[], month: string /* YYYY-MM */) {
  *    an estimate from bracket midpoints — and the top bracket is open, so it
  *    is counted at MIDPOINT_TOP. The median bracket needs no assumption at all,
  *    which is why it is shown beside the estimate rather than under it.
- *  - `below_median_share` compares each person to StatCan's median wage for
- *    THEIR province at the time they calculated (median_ratio_bucket), so it
- *    is a ratio to the country, not a number invented here.
+ *  - `below_median_share` compares each person to the NATIONAL median
+ *    full-time wage of the reference year (median_ratio_bucket, computed in
+ *    the browser against NATIONAL_MEDIAN_ANNUAL) — not their province's.
  *  - This is a self-selected sample: people who check a pay calculator skew
  *    lower-income than the country. A period with fewer than THIN events is
  *    flagged; a quartile over a handful of visits is decoration.

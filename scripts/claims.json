@@ -249,7 +249,7 @@
   },
   {
    "page": "/research/pay-calculator-behaviour",
-   "text": "These are people who went looking for a pay calculator, not a sample of Canadians: 65 % of the calculations sit below the median wage for the province chosen.",
+   "text": "These are people who went looking for a pay calculator, not a sample of Canadians: 65 % of the calculations sit below Canada’s median full-time wage.",
    "backing": "gate:audit:live",
    "note": "research figures are rendered live from the same JSON; audit:live checks page n = JSON n"
   },
@@ -1415,8 +1415,13 @@
   },
   {
    "page": "/research/pay-calculator-behaviour",
-   "text": "The form opens on Monday to Friday with both weekend days switched off, so a weekend day is only ever present because somebody switched it on.",
-   "backing": "gate:audit:live"
+   "text": "The website’s form opens on Monday to Friday with both weekend days switched off, so on the website a weekend day is only ever present because somebody switched it on.",
+   "backing": "check:telemetry-pipeline"
+  },
+  {
+   "page": "/research/pay-calculator-behaviour",
+   "text": "The iOS app opened on Sunday to Thursday until version 1.3.0, so its schedules from before that version are left out of this figure entirely.",
+   "backing": "check:telemetry-pipeline"
   },
   {
    "page": "/research/pay-calculator-behaviour",
