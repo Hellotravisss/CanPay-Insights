@@ -117,7 +117,7 @@ export async function POST(request: Request) {
     lon: cf.longitude ? coarse(cf.longitude) : null,
   };
 
-  // The iOS app never sends schema_version; the column is NOT NULL. Binding an
+  // iOS app builds before 1.3.0 send no schema_version (1.3.0+ send 2); the column is NOT NULL. Binding an
   // explicit null bypasses the column default and the insert fails — which is
   // how every app calculation from 2026-08-27 to 2026-09-15 was lost without a
   // trace. An absent field takes the default; anything else is what was sent.

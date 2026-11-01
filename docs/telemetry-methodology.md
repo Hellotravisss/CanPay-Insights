@@ -98,6 +98,8 @@ elapsed `same-day` … `over-year`.
   the *selected province* is the reliable signal, physical geography is contextual.
 - **Territories** (Yukon, NWT, Nunavut) are not published separately in the Statistics
   Canada wage table used for benchmarks, so wage comparisons fall back to national figures.
+- **`works_weekend` from the iOS app before 1.3.0 is unreliable** (rows with
+  `source = 'app'`, `mode = 'simple'`, `schema_version = 1`). See *App schema version 2*.
 
 ---
 
@@ -163,3 +165,23 @@ version stays at 1; rows written before this date have all six null.
   app data a review risk not worth 4% of the rows.
 - Not backfillable, and never inferred: an FSA is stored only when the visitor
   supplied it or chose to be located. Rows without one stay at city level.
+
+---
+
+## App schema version 2 — iOS app 1.3.0 onward (2026-11)
+
+The hourly calculator in the iOS app defaulted to a Sunday-to-Thursday week from
+2026-06-07 until 1.3.0; the website has always defaulted to Monday to Friday.
+Anyone who did not change the day buttons was recorded with `works_weekend = 1`
+because Sunday was ticked for them. In app rows for a five-day week, 369 of 530
+(70%) carry the flag, against 19% of all website hourly rows.
+
+Only `days_per_week` and `works_weekend` are stored, not which days, so a
+default Sunday cannot be told apart from a real one. Nothing is rewritten.
+From 1.3.0 the app sends `schema_version = 2`; earlier builds send nothing and
+are stored as 1, including people who never update.
+
+**Rule:** treat `works_weekend` as unknown where `source = 'app'` and
+`schema_version = 1`. Every other field in those rows is unaffected, and
+website rows are unaffected.
+
