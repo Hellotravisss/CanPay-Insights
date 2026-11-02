@@ -188,11 +188,15 @@ export const MIN_WAGES: MinWage[] = [
     },
   },
   {
-    province: Province.PE, code: 'PE', label: 'Prince Edward Island', wage: 17.3, effective: '2026-10-01', verified: '2026-09-17',
-    reviewBy: '2027-04-01', reviewBasis: 'Minimum Wage Order: next step announced for April 1, 2027.',
+    province: Province.PE, code: 'PE', label: 'Prince Edward Island', wage: 17.3, effective: '2026-10-01', verified: '2026-11-01',
+    reviewBy: '2027-04-01',
+    // Verified 2026-11-01 from the order itself (Royal Gazette, EC2026-379, 31 March 2026), a PDF
+    // automated clients can read: https://www.princeedwardisland.ca/sites/default/files/89b2/20260331truwww_0.pdf
+    reviewBasis: 'Minimum Wage Order EC2026-379: $17.30 from October 1, 2026, $17.60 from April 1, 2027.',
     next: { wage: 17.6, date: '2027-04-01' },
     source: {
-      url: 'https://www.princeedwardisland.ca/en/information/workforce-advanced-learning-and-population/minimum-wage-order',
+      // The old minimum-wage-order page sent browsers to the site search (2026-11-01).
+      url: 'https://www.princeedwardisland.ca/en/topic/hours-of-work-and-wage-standards',
       rule: 'None yet: the page has never been readable by the gate.',
       extract: null,
       wall: 'Radware "Verifying your browser" challenge for automated clients',
@@ -241,7 +245,7 @@ export const MIN_WAGES: MinWage[] = [
     },
   },
   {
-    province: Province.YT, code: 'YT', label: 'Yukon', wage: 18.51, effective: '2026-04-01', verified: '2026-09-17',
+    province: Province.YT, code: 'YT', label: 'Yukon', wage: 18.51, effective: '2026-04-01', verified: '2026-11-01',
     reviewBy: '2027-04-01', reviewBasis: 'Employment Standards Act: indexed every April 1 to Whitehorse CPI.',
     source: {
       url: 'https://yukon.ca/en/find-minimum-wage-yukon',
@@ -251,10 +255,12 @@ export const MIN_WAGES: MinWage[] = [
     },
   },
   {
-    province: Province.NU, code: 'NU', label: 'Nunavut', wage: 20.17, effective: '2026-09-01', verified: '2026-09-17',
-    reviewBy: '2027-09-01', reviewBasis: 'Annual adjustment formula (2025), in force September 1.',
+    province: Province.NU, code: 'NU', label: 'Nunavut', wage: 20.17, effective: '2026-09-01', verified: '2026-11-01',
+    reviewBy: '2027-09-01', reviewBasis: 'Annual adjustment formula (2025): announced by July 31, in force September 1.',
     source: {
-      url: 'https://www.gov.nu.ca/en/employment-and-income-support/minimum-wage',
+      // The old /employment-and-income-support/minimum-wage page is a 404 in a browser (2026-11-01);
+      // behind the challenge the gate cannot tell a 404 from a live page, so check this URL by hand.
+      url: 'https://www.gov.nu.ca/en/employment-training-and-career-development/labour-and-employment-standards-nunavut',
       rule: 'None yet: the page has never been readable by the gate.',
       extract: null,
       wall: 'Cloudflare "Just a moment..." challenge for automated clients',
