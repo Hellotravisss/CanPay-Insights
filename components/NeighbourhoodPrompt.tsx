@@ -2,6 +2,7 @@
 import { useEffect, useRef, useState } from 'react';
 import { recordCalcEvent, parseFsa, rememberFsa, rememberedFsa, type Neighbourhood } from '../lib/telemetry';
 import type { CalculationMode as CalcMode } from '../types';
+import Icon from './Icon';
 
 /**
  * "Where does your pay sit in your neighbourhood?" — the site's first
@@ -407,7 +408,7 @@ export default function NeighbourhoodPrompt({
         <>
           <div className="flex flex-wrap items-baseline justify-between gap-2">
             <p className="text-sm font-medium text-slate-700">
-              <span aria-hidden="true">📍</span> {fsa}
+              <Icon name="pin" size={18} /> {fsa}
             </p>
             <button type="button" onClick={() => { setEditing(true); setText(''); }} className="text-xs text-slate-500 hover:text-slate-600">
               {t.change}
@@ -423,7 +424,7 @@ export default function NeighbourhoodPrompt({
       ) : (
         <>
           <p className="text-sm font-medium text-slate-700">
-            <span aria-hidden="true">📍</span> {t.title}
+            <Icon name="pin" size={18} /> {t.title}
           </p>
           <p className="mt-0.5 text-xs text-slate-500">{t.hint}</p>
           <form
@@ -443,7 +444,7 @@ export default function NeighbourhoodPrompt({
             />
             <button type="submit" className={pill} disabled={busy || text.length < 3}>{t.compare}</button>
             <button type="button" onClick={useDevice} className={pill} disabled={busy}>
-              <span aria-hidden="true">🧭</span> {busy ? t.locating : t.useLocation}
+              <Icon name="compass" size={18} /> {busy ? t.locating : t.useLocation}
             </button>
           </form>
           {note && <p className="mt-2 text-xs text-red-600" role="status">{note}</p>}

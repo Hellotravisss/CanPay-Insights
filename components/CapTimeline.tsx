@@ -1,5 +1,6 @@
 'use client';
 import { buildCapTimeline } from '../lib/capTimeline';
+import Icon from './Icon';
 
 /**
  * "Why your cheques get bigger late in the year."
@@ -123,7 +124,7 @@ export default function CapTimeline({ annualIncome, province, lang }: { annualIn
 
   return (
     <div className="rounded-xl border border-emerald-200 bg-emerald-50/60 px-5 py-4">
-      <p className="text-sm font-bold text-emerald-900">📈 {t.title}</p>
+      <p className="text-sm font-bold text-emerald-900"><Icon name="raise" size={18} /> {t.title}</p>
       <p className="mt-1 text-sm text-slate-600">{t.intro}</p>
       <ul className="mt-2 space-y-1">
         {timeline.events.map((e) => (
