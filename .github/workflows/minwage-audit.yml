@@ -1,0 +1,30 @@
+# Weekly check that the 13 minimum wages in scripts/minWages.ts still match
+# each government's own page. Wages change on government pages, not in this
+# repo: Nunavut and the NWT both rose on 2026-09-01 and the site kept the old
+# figures because nothing was deployed and nobody looked. Read-only: a failure
+# is a red run plus the failure email; the fix is a PR, never a push from here.
+name: Minimum wage audit
+on:
+  schedule:
+    - cron: '41 15 * * 1' # Mondays 08:41 Vancouver (PDT)
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  minwage:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with: { node-version: 22, cache: npm }
+      - run: npm ci
+      - run: npm run audit:minwage:selftest
+      - run: npm run audit:minwage
+      # Email Travis on any failure: a red cross nobody looks at kept the site
+      # three days behind in October 2026.
+      - name: Notify on failure
+        if: failure()
+        run: python3 .github/scripts/notify-failure.py
+        env:
+          CF_EMAIL_TOKEN: ${{ secrets.CF_EMAIL_TOKEN }}
+          CF_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}

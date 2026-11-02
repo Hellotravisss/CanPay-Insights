@@ -1,0 +1,80 @@
+{
+  "AB": {
+    "url": "https://www.alberta.ca/minimum-wage",
+    "fetched": "2026-11-01",
+    "status": 200,
+    "rate": 15
+  },
+  "SK": {
+    "url": "https://www.saskatchewan.ca/business/employment-standards/payment-of-wages-payroll-administration-benefits-and-time-sheets/minimum-wage-and-reporting-for-duty-pay",
+    "fetched": "2026-11-01",
+    "status": 200,
+    "rate": 15.7
+  },
+  "NB": {
+    "url": "https://www.gnb.ca/en/gov/engagement-consultation/minimum-wage.html",
+    "fetched": "2026-11-01",
+    "status": 200,
+    "rate": 15.9
+  },
+  "MB": {
+    "url": "https://www.gov.mb.ca/labour/standards/doc,minimum-wage,factsheet.html",
+    "fetched": "2026-11-01",
+    "status": 200,
+    "rate": 16.4
+  },
+  "NL": {
+    "url": "https://www.gov.nl.ca/releases/2026/government-services/0226n02/",
+    "fetched": "2026-11-01",
+    "status": 200,
+    "rate": 16.35
+  },
+  "QC": {
+    "url": "https://www.legisquebec.gouv.qc.ca/fr/document/rc/N-1.1,%20r.%203",
+    "fetched": "2026-11-01",
+    "status": 200,
+    "rate": 16.6
+  },
+  "NS": {
+    "url": "https://novascotia.ca/lae/employmentrights/minimumwage.asp",
+    "fetched": "2026-11-01",
+    "status": 200,
+    "rate": 17
+  },
+  "NT": {
+    "url": "https://www.ece.gov.nt.ca/en/services/employment-standards/minimum-wage",
+    "fetched": "2026-11-01",
+    "status": 200,
+    "rate": 17.2
+  },
+  "PE": {
+    "url": "https://www.princeedwardisland.ca/en/topic/hours-of-work-and-wage-standards",
+    "fetched": "2026-11-01",
+    "status": 200,
+    "rate": null
+  },
+  "ON": {
+    "url": "https://www.ontario.ca/document/your-guide-employment-standards-act-0/minimum-wage",
+    "fetched": "2026-11-01",
+    "status": 200,
+    "rate": 17.95
+  },
+  "BC": {
+    "url": "https://www2.gov.bc.ca/gov/content/employment-business/employment-standards-advice/employment-standards/wages/minimum-wage",
+    "fetched": "2026-11-01",
+    "status": 200,
+    "rate": 18.25
+  },
+  "YT": {
+    "url": "https://yukon.ca/en/find-minimum-wage-yukon",
+    "fetched": "2026-11-01",
+    "status": 403,
+    "rate": null
+  },
+  "NU": {
+    "url": "https://www.gov.nu.ca/en/employment-training-and-career-development/labour-and-employment-standards-nunavut",
+    "fetched": "2026-11-01",
+    "status": 403,
+    "rate": null
+  }
+}

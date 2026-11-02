@@ -20,14 +20,18 @@ Accuracy is the product. These rules exist because each one was broken once.
 
 `audit:engine` → `audit:numbers:selftest` → `audit:numbers` → `audit:logo`
 
-No gate covers INPUT rates that are not tax rates. The 13 minimum wages in
-`scripts/minwage-takehome.ts` went stale once (2026-09-01, NU and NWT): check them against each
-government's own page whenever you audit.
+The 13 minimum wages are INPUT rates the golden test cannot see; they went stale once (2026-09-01,
+NU and NWT). They live in `scripts/minWages.ts` with each government's URL and extraction rule, and
+`audit:minwage` (network: after every deploy and weekly in `minwage-audit.yml`, not in prebuild)
+fails on a mismatch, on an adjustment date passing without a re-check, or on a page it cannot read.
+`audit:minwage:selftest` (offline, in prebuild) runs the extractors on pages saved in `tests/minwage/`.
+NU, YT and PE pages block automated clients: the gate reports them BLOCKED and relies on their
+`reviewBy`/`next` dates and a 183-day limit on `verified` — check those three by hand in a browser.
 
 ## After every deploy (live gates, in `.github/workflows/deploy.yml`)
 
 `audit:live` (written promises: widget, research page, data room) → `audit:a11y` (axe, WCAG 2.1 AA,
-19 pages) → `audit:claims`. The last one checks every sentence in which the site describes itself
+19 pages) → `audit:claims` → `audit:minwage`. The last one checks every sentence in which the site describes itself
 (privacy, about, terms, refunds, widget, research, data, /zh, llms.txt…) against `scripts/claims.json`.
 Changing such a sentence fails the deploy check until it is classified:
 `node scripts/liveClaims.mjs --unregistered`, then add each sentence with its backing
