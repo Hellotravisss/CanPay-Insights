@@ -3775,4 +3775,109 @@ This is a single, deliberately plain scenario — one income, no RRSP contributi
 Every figure above comes from CanPay Insights' own 2026 tax engine — the same engine whose output is checked, row by row, against the CRA's T4032 payroll deduction tables (claim code 1, bi-weekly) for all 13 jurisdictions, plus the CRA's CPP/EI tables and Revenu Québec's source deduction tables, before any release. Figures are rounded to the nearest dollar. To see your own numbers with your actual salary, deductions, and pay frequency, use the [free take-home pay calculator](/), or jump straight to your own province: [Ontario](/ontario-paycheck-calculator), [British Columbia](/bc-paycheck-calculator), [Alberta](/alberta-paycheck-calculator), [Quebec](/quebec-paycheck-calculator), [Manitoba](/manitoba-paycheck-calculator), [Saskatchewan](/saskatchewan-paycheck-calculator), [Nova Scotia](/nova-scotia-paycheck-calculator), [New Brunswick](/new-brunswick-paycheck-calculator), [Newfoundland and Labrador](/newfoundland-paycheck-calculator), [Prince Edward Island](/pei-paycheck-calculator), [Yukon](/yukon-paycheck-calculator), [Northwest Territories](/northwest-territories-paycheck-calculator), or [Nunavut](/nunavut-paycheck-calculator). For the same comparison at higher salaries, see [$55,000 by province](/blog/take-home-pay-55000-by-province-2026), [$65,000 by province](/blog/take-home-pay-65000-by-province-2026), [$75,000 by province](/blog/take-home-pay-75000-by-province-2026), [$85,000 by province](/blog/take-home-pay-85000-by-province-2026), and [$100,000 by province](/blog/take-home-pay-100000-by-province-2026). For how minimum wage itself compares across provinces, see [Minimum Wage Take-Home Pay in Every Canadian Province](/blog/minimum-wage-take-home-pay-canada-2026). For a breakdown of CPP and EI specifically, see the [CPP/EI calculator](/cpp-ei-calculator) and [EI Premium Rate for 2027](/blog/ei-premium-rate-2027). This is general information, not financial advice.
 `,
   },
+  {
+    id: 'study-35',
+    slug: 'federal-budget-2026-paycheque',
+    title: 'Budget 2026 Lands November 5: What Already Changes Your Paycheque in 2027',
+    subtitle:
+      'Finance Minister Champagne tables Budget 2026 against a Parliamentary Budget Officer forecast of a $63.3-billion deficit — but the CPP, EI, and RRSP numbers that move your 2027 paycheque were already locked in months before anyone saw the budget.',
+    excerpt:
+      "Budget 2026 lands November 5 against a $63.3-billion deficit forecast. Independently of whatever is inside it, 2027's CPP rate cut, EI premium increase, and RRSP limit are already confirmed — only the TFSA number is still pending.",
+    metaTitle: 'Budget 2026: Nov. 5, $63.3B Deficit, Your 2027 Paycheque',
+    metaDescription:
+      'Budget 2026 lands Nov. 5 amid a $63.3B deficit forecast. See what 2027 CPP, EI, RRSP, and TFSA numbers are already locked in for your paycheque.',
+    keywords: [
+      'budget 2026 canada',
+      'when is the federal budget 2026',
+      'budget 2026 date',
+      'federal budget november 5 2026',
+      'canada deficit 2026 2027',
+      'budget 2026 paycheque',
+    ],
+    category: 'news',
+    tags: ['Federal Budget', 'CRA', 'Payroll Deductions', '2027'],
+    publishedAt: '2026-11-02',
+    readTime: 7,
+    imageUrl: '/blog/federal-budget-2026-paycheque.svg',
+    directAnswer:
+      'Budget 2026 will be tabled by Finance Minister François-Philippe Champagne on November 5, 2026, against a Parliamentary Budget Officer forecast of a $63.3-billion deficit for 2026-27, peaking at $70.2 billion in 2027-28. Separately from whatever the budget itself contains, several 2027 payroll numbers are already locked in: CPP\'s base rate falls to 4.75% for employees (saving up to $142.20 a year), the EI maximum employee premium rises $38.05 to $1,161.12, and the RRSP dollar limit climbs to $35,390 — only the expected $7,500 TFSA limit for 2027 still awaits official CRA confirmation.',
+    faq: [
+      {
+        question: 'When is the 2026 federal budget, and who is tabling it?',
+        answer:
+          'Finance Minister François-Philippe Champagne will table Budget 2026 in the House of Commons on November 5, 2026 — his second budget under Prime Minister Mark Carney. The Department of Finance confirmed the date in a media advisory on October 20, 2026, describing it as a plan to build a more resilient economy "while making life more affordable for Canadians."',
+      },
+      {
+        question: 'What is the federal deficit forecast going into Budget 2026?',
+        answer:
+          'The Parliamentary Budget Officer projected on October 20, 2026 that the federal deficit will be $63.3 billion for 2026-27 — smaller than the $71.8 billion it forecast back in June — before peaking at $70.2 billion in 2027-28. The PBO also trimmed its growth outlook to 0.9% real GDP growth for 2026 and 1.5% for 2027, citing new U.S. tariffs.',
+      },
+      {
+        question: 'Will anything in Budget 2026 change my paycheque right away?',
+        answer:
+          'Almost certainly not immediately. Past measures that touched payroll took months to reach an actual paycheque: the federal tax cut to 14% needed a separate ways-and-means motion before it took effect, and the 2027 CPP rate cut needed a full bill (Bill C-30) plus sign-off from every provincial finance minister before it became law — eight months after it was first announced. Any new payroll measure in Budget 2026 would likely follow a similar path before it shows up in a deduction.',
+      },
+      {
+        question: "What's already decided about my 2027 paycheque, regardless of what's in the budget?",
+        answer:
+          "Four things are already confirmed by law or by regulator, independent of Budget 2026: the CPP base rate falls from 4.95% to 4.75% for employees on January 1, 2027 (worth up to $142.20 a year, confirmed when Bill C-30 received Royal Assent on June 18, 2026); the EI premium rate rises to 1.64% with the earnings ceiling up to $70,800, pushing the maximum employee premium up $38.05 to $1,161.12 (confirmed by the Canada Employment Insurance Commission on September 14, 2026); and the RRSP dollar limit rises $1,580 to $35,390 (confirmed by the CRA on October 30, 2025).",
+      },
+      {
+        question: 'Is the 2027 TFSA contribution limit confirmed yet?',
+        answer:
+          "No. The CRA has not yet announced the 2027 TFSA limit — it typically confirms the coming year's figure in the weeks around the budget each fall, and confirmed the current $7,000 limit for 2026 on December 1, 2025. The CPI-based indexing formula already points to $7,500, an increase several independent trackers have reached the same figure on, but it is not official until the CRA says so.",
+      },
+      {
+        question: "What did last year's budget actually do for take-home pay?",
+        answer:
+          'Budget 2025, tabled a year earlier on November 4, 2025, confirmed the federal tax cut that lowered the lowest federal income tax bracket from 15% to 14%. Because the cut took effect mid-year on July 1, 2025, 2025 itself only saw a blended 14.5% rate — 2026 is the first full year at 14%, worth up to $420 back per person, or $840 for a two-income couple.',
+      },
+    ],
+    content: `
+## Budget day is November 5 — three days from today
+
+On **October 20, 2026**, Finance Minister François-Philippe Champagne confirmed that **Budget 2026 will be tabled in the House of Commons on November 5, 2026** — his second budget as Prime Minister Mark Carney's finance minister. The Department of Finance's own media advisory frames it as a plan to build "a more independent and resilient economy" while "making life more affordable for Canadians." It names no specific tax or benefit changes; those stay unknown until Wednesday.
+
+What is already public is the fiscal backdrop Champagne is working against. The same week, the **Parliamentary Budget Officer (PBO)** published an updated outlook projecting a **$63.3-billion deficit for 2026-27** — smaller than the $71.8 billion the PBO itself forecast back in June, but still large, and the PBO now expects the deficit to **peak at $70.2 billion in 2027-28** before narrowing. The PBO also trimmed its growth outlook, to real GDP growth of **0.9%** for 2026 and **1.5%** for 2027, both down from its June estimates, citing new U.S. tariffs.
+
+None of that tells you what Budget 2026 will actually do to a paycheque — that depends on what Champagne announces. What's useful right now is what's *already* decided, by earlier legislation, formulas, or regulators, completely independent of whatever this budget contains.
+
+## What's already locked in for your 2027 paycheque, budget or no budget
+
+| Measure | 2026 | 2027 | Change |
+| --- | --- | --- | --- |
+| CPP base rate (employee) | 4.95% | **4.75%** (2027) | −0.20 pp |
+| Max CPP saving at $74,600+ income | — | **+$142.20/yr** (2027) | — |
+| EI premium rate (employee) | 1.63% | **1.64%** (2027) | +0.01 pp |
+| EI maximum insurable earnings | $68,900 | **$70,800** (2027) | +$1,900 |
+| EI maximum employee premium | $1,123.07 | **$1,161.12** (2027) | +$38.05 |
+| RRSP dollar limit | $33,810 | **$35,390** (2027) | +$1,580 |
+| TFSA annual limit | $7,000 | **$7,500** (2027, expected) | +$500 |
+| CPP earnings ceiling (YMPE) | $74,600 | Not yet announced | — |
+
+Five of those eight rows are already law or already confirmed in writing by a regulator — months before Budget 2026 exists as a document. The CPP rate cut became law when **Bill C-30** received **Royal Assent on June 18, 2026**, after sign-off from every provincial finance minister. The EI numbers were confirmed by the **Canada Employment Insurance Commission on September 14, 2026**, through its own annual rate-setting process — a seven-year break-even mechanism entirely separate from the federal budget cycle. The RRSP limit was confirmed by the **CRA on October 30, 2025**, from a legislated formula tied to wage growth. None of it can be undone or changed by Wednesday's document.
+
+## November isn't just budget day
+
+Two other numbers that affect take-home pay traditionally land around this same time of year, and neither one is part of the budget itself. The CRA typically confirms the **following year's CPP earnings ceiling (the YMPE)** each November — the 2027 figure, needed to know exactly how much the CPP rate cut above is worth once contributions reach the ceiling, has not been published yet. Separately, the CRA typically confirms the coming year's **TFSA annual limit** around the same time each autumn; it confirmed the current $7,000 limit for 2026 on December 1, 2025. The CPI-based formula behind the TFSA number already points to **$7,500** for 2027, and outlets including The Globe and Mail have run the same calculation and landed on the same figure — but until the CRA says so, it's an expectation, not a fact. For the full detail on that calculation, see our [2027 TFSA and RRSP coverage](/blog/tfsa-rrsp-limits-2027).
+
+## What the last budget actually did to a paycheque
+
+It's worth remembering that a federal budget *can* move the needle on take-home pay — just not instantly. **Budget 2025**, tabled a year earlier on November 4, 2025, confirmed the federal tax cut that lowered the lowest federal income tax bracket from **15% to 14%**. That cut had actually been announced months earlier, in May 2025, and took effect mid-year on July 1, 2025 — which is why 2025 itself only delivered a blended **14.5%** rate. **2026 is the first full year at the lower 14% rate**, which is why it's worth the full **$420 per person** (or **$840** for a two-income couple) this year rather than last year. See [the full breakdown by salary](/blog/federal-tax-cut-2026).
+
+The pattern repeats with the CPP rate cut above: announced in the Spring Economic Update on April 28, 2026, it still needed a full bill and eight months to become law before it takes effect on a 2027 paycheque. If Budget 2026 introduces something new that touches payroll deductions, the precedent suggests it is unlikely to show up before 2027 at the earliest — and CanPay Insights will cover the specifics once they're confirmed, not before.
+
+## What to actually watch for on November 5
+
+The honest answer, three days out, is that nobody outside government knows what Budget 2026 contains yet, and this article makes no attempt to guess. What's worth watching for, based on how recent budgets have touched take-home pay, are changes to federal tax bracket thresholds or rates, adjustments to income-tested benefits like the Canada Workers Benefit or the Canada Child Benefit, and any new payroll-adjacent measure that — like the CPP rate cut — would need its own legislation before it reaches a 2027 or later paycheque. We'll publish the specifics, sourced and run through the CanPay Insights tax engine, once the budget is actually tabled.
+
+## See where you stand right now
+
+None of the 2027 figures above change anything about this year's paycheque. For your exact 2026 take-home pay, use the [free take-home pay calculator](/), or the [CPP & EI calculator](/cpp-ei-calculator) to see this year's deductions broken out. For the confirmed 2027 changes in full detail, see [the CPP rate cut](/blog/cpp-contribution-rate-cut-2027), [the EI premium rate](/blog/ei-premium-rate-2027), and [the TFSA and RRSP limits](/blog/tfsa-rrsp-limits-2027).
+
+## Sources & disclaimer
+
+The November 5, 2026 budget date and its framing language are taken from the Department of Finance Canada's media advisory, ["Government of Canada to release Budget 2026 on November 5, 2026"](https://www.canada.ca/en/department-finance/news/2026/10/government-of-canada-to-release-budget-2026-on-november-5-2026.html) (October 20, 2026), cross-checked against contemporaneous reporting from CP24/CTV News and Advisor.ca. The Parliamentary Budget Officer's deficit and growth figures are from the PBO's October 20, 2026 economic and fiscal outlook, as reported by CP24/CTV News and Investment Executive. The CPP, EI, RRSP, and TFSA figures and their confirmation dates match CanPay Insights' own prior reporting on [the 2027 CPP rate cut](/blog/cpp-contribution-rate-cut-2027), [the 2027 EI premium rate](/blog/ei-premium-rate-2027), and [the 2027 TFSA and RRSP limits](/blog/tfsa-rrsp-limits-2027), each individually sourced to the relevant government announcement. This is general information, not financial advice; Budget 2026 itself had not been tabled at the time this article was published, and nothing here should be read as a prediction of its contents.
+`,
+  },
 ];
