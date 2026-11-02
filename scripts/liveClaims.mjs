@@ -24,6 +24,7 @@
  *   node scripts/liveClaims.mjs --unregistered       print unknown sentences as JSON
  */
 import { readFileSync, existsSync } from 'node:fs';
+import { execFileSync } from 'node:child_process';
 import { chromium } from 'playwright';
 import { CLAIM_PAGES, claimSentences } from './claimsExtract.mjs';
 
@@ -98,6 +99,11 @@ const CHECKS = {
   'publish-floor-20': () => {
     const src = read('lib/d1/events.ts');
     return [/MIN_CELL = 20/.test(src) && /min_cell = 20/.test(src), 'every published cell needs at least 20'];
+  },
+  // The weekend finding's description of what it counts is proven by the pipeline cases.
+  'telemetry-pipeline': () => {
+    try { execFileSync('npx', ['tsx', 'scripts/auditTelemetry.ts'], { cwd: new URL('..', import.meta.url), stdio: 'pipe' }); return [true, 'audit:telemetry passes']; }
+    catch (e) { return [false, `audit:telemetry fails: ${String(e.stdout ?? e.message).slice(0, 300)}`]; }
   },
   'products-two': () => {
     const n = (read('lib/products.ts').match(/amountCents:\s*\d+/g) || []).length;

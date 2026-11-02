@@ -1,5 +1,5 @@
 import { db, type D1 } from './d1/db';
-import { loadEvents, calcStats, calcStatsExtra, calcJourneys, calcSeries, calcIncomeBarometer, type Ev } from './d1/events';
+import { loadEvents, calcStats, calcStatsExtra, calcJourneys, calcSeries, type Ev } from './d1/events';
 
 /**
  * The public research note's figures, computed from D1 at render time.
@@ -22,6 +22,7 @@ import { loadEvents, calcStats, calcStatsExtra, calcJourneys, calcSeries, calcIn
 export type PayBehaviour = Awaited<ReturnType<typeof computePayBehaviour>>;
 export type HistoryRow = { day: string; n: number; raise: number; before7: number; move: number };
 
+const BELOW_MEDIAN = new Set(['under-0.5', '0.5-0.75', '0.75-1']);
 const pct = (n: number, d: number) => (d ? Math.round((100 * n) / d) : 0);
 const sum = (xs: number[]) => xs.reduce((a, b) => a + b, 0);
 
@@ -36,7 +37,6 @@ export async function computePayBehaviour(d: D1, ev: Ev[]) {
   const extra = calcStatsExtra(ev);
   const j = calcJourneys(ev);
   const series = calcSeries(ev);
-  const baro = calcIncomeBarometer(ev);
 
   const N = stats.total;
   const share = (m: { up: number; down: number }) => ({ up: m.up, down: m.down, n: m.up + m.down, upShare: pct(m.up, m.up + m.down) });
@@ -48,12 +48,12 @@ export async function computePayBehaviour(d: D1, ev: Ev[]) {
   const all = hoursOf(extra.by_shift_start), edited = hoursOf(extra.by_shift_start_edited);
   const allTotal = sum(all), editedTotal = sum(edited);
 
-  // Sessions that priced two or more provinces. Done in SQL because it is a
-  // per-session distinct count, not a row count.
-  const mp = await d.prepare(
-    `select count(*) n from (select session_id from events
-       where session_id is not null and (excluded is null or excluded = 0)
-       group by session_id having count(distinct province) > 1)`).first<{ n: number }>();
+  // Visits that priced two or more provinces, counted on the same rows as the
+  // denominator. Until 2026-11-01 this was a separate SQL query over the whole
+  // table, which kept fake-door and offer-comparison taps: an offer comparison
+  // records offer A's province, so a visit that only calculated in Ontario but
+  // compared a BC offer counted as pricing two provinces.
+  const mp = { n: stats.comparison_sessions };
   const sessions = j.sessions;
 
   const langRows = stats.by_lang.filter((r) => r.k !== null);
@@ -73,7 +73,7 @@ export async function computePayBehaviour(d: D1, ev: Ev[]) {
       editedBefore7: pct(sum(edited.slice(0, 7)), editedTotal), editedNight: pct(night(edited), editedTotal),
       edited,
     },
-    move: { share: pct(mp?.n ?? 0, sessions), sessions, multiProv: mp?.n ?? 0 },
+    move: { share: pct(mp.n, sessions), sessions, multiProv: mp.n },
     lang: {
       total: langTotal,
       nonEnglishShare: pct(langTotal - langOf('en'), langTotal),
@@ -90,8 +90,14 @@ export async function computePayBehaviour(d: D1, ev: Ev[]) {
         return small >= 20 ? [...big, { name: 'other languages', n: small }] : big;
       })(),
     },
-    weekend: { share: Math.round(stats.work.weekend_share), n: stats.work.n },
-    belowMedianShare: Math.round(baro.year[baro.year.length - 1]?.below_median_share ?? 0),
+    // Known rows only: app rows before iOS 1.3.0 ticked Sunday by default (methodology, app schema 2).
+    weekend: { share: Math.round(stats.work.weekend_share ?? 0), n: stats.work.weekend_n },
+    // Every calculation the page counts, not the latest calendar year: from
+    // 1 January the year row would cover only the new year's calculations.
+    belowMedianShare: (() => {
+      const rated = ev.filter((r) => r.median_ratio_bucket);
+      return pct(rated.filter((r) => BELOW_MEDIAN.has(r.median_ratio_bucket as string)).length, rated.length);
+    })(),
     sample: {
       days: days.length, caShare: pct(stats.by_country.find((r) => r.k === 'CA')?.n ?? 0, N),
       first: days[0]?.k ?? null, busiest: Math.max(...days.map((x) => x.n), 0),

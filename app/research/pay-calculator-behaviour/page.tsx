@@ -111,8 +111,8 @@ export default async function Page() {
 
         <div className="mt-8 max-w-2xl rounded-xl border border-amber-300 bg-amber-50 px-5 py-4 text-sm leading-6 text-amber-900">
           <strong>Read this first.</strong> These are people who went looking for a pay calculator, not
-          a sample of Canadians: {snap.belowMedianShare}% of the calculations sit below the median wage
-          for the province chosen. Every figure on this page is a share of calculator use. None of it is
+          a sample of Canadians: {snap.belowMedianShare}% of the calculations sit below Canada&rsquo;s
+          median full-time wage. Every figure on this page is a share of calculator use. None of it is
           a statement about what Canadians earn or how many Canadians do anything.
         </div>
 
@@ -221,8 +221,10 @@ export default async function Page() {
               used mostly by people whose week is not the standard one.
             </p>
             <Test>
-              The form opens on Monday to Friday with both weekend days switched off, so a weekend
-              day is only ever present because somebody switched it on. That makes this figure a
+              The website&rsquo;s form opens on Monday to Friday with both weekend days switched off,
+              so on the website a weekend day is only ever present because somebody switched it on.
+              The iOS app opened on Sunday to Thursday until version 1.3.0, so its schedules from
+              before that version are left out of this figure entirely. That makes this figure a
               floor and never an inflated one — the opposite of the trap in finding 2, where the
               default worked the other way. Anyone who works weekends but left the days alone is
               counted here as not working them.

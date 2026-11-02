@@ -17,7 +17,6 @@ import {
   buildPayChange,
   deriveEmploymentShape,
   noteInputEdit,
-  type WorkPattern,
   type BehaviourSignals,
   type PayChange,
 } from './lib/telemetry';
@@ -36,6 +35,7 @@ import UserMenu from './components/UserMenu';
 import AuthModal from './components/AuthModal';
 import LoadingOverlay from './components/LoadingOverlay';
 import SisterSiteCard from './components/SisterSiteCard';
+import { buildWorkPattern } from './lib/workPattern';
 import { SalaryInputs, Province, CalculationMode, AnnualSalaryInputs, PayFrequency, TimesheetInputs, CalculationResult } from './types';
 import { calculateSalary, calculateFromAnnualSalary, calculateFromTimesheet } from './utils/taxEngine';
 import { useAuth, type OAuthProvider } from './hooks/useAuth';
@@ -44,74 +44,6 @@ import { useCalculationHistory, type CalculationRecord } from './hooks/useCalcul
 import AvowdCredit from './components/AvowdCredit';
 
 // Default State - 简易估算（时薪）
-// Derive the anonymous work-schedule PATTERN for telemetry: hour-of-day,
-// days/week, unpaid break length. Deliberately drops calendar dates — the
-// pattern is the dataset ("who works weekends", "whose break is unpaid"),
-// specific dates could identify a person and add nothing analytically.
-const hourOf = (hhmm: string): number | null => {
-  const h = parseInt(hhmm?.split(':')[0] ?? '', 10);
-  return Number.isFinite(h) && h >= 0 && h <= 23 ? h : null;
-};
-const modal = (xs: number[]): number => {
-  const counts = new Map<number, number>();
-  xs.forEach((x) => counts.set(x, (counts.get(x) ?? 0) + 1));
-  return [...counts.entries()].sort((a, b) => b[1] - a[1])[0][0];
-};
-function buildWorkPattern(
-  mode: CalculationMode,
-  simple: SalaryInputs,
-  timesheet: TimesheetInputs
-): WorkPattern | null {
-  if (mode === CalculationMode.SIMPLE) {
-    const s = simple.shift;
-    const start = hourOf(s.startTime);
-    const end = hourOf(s.endTime);
-    const daysPerWeek = s.daysActive.filter(Boolean).length;
-    if (start === null || end === null || daysPerWeek === 0) return null;
-    const span = end - start + (end <= start ? 24 : 0); // overnight shifts wrap
-    const paid = Math.max(0, span - s.unpaidBreakMinutes / 60);
-    return {
-      shiftStartHour: start,
-      shiftEndHour: end,
-      unpaidBreakMin: Math.max(0, Math.min(480, s.unpaidBreakMinutes || 0)),
-      daysPerWeek,
-      worksWeekend: s.daysActive[0] || s.daysActive[6],
-      avgDailyHours: Math.round(paid * 10) / 10,
-    };
-  }
-  if (mode === CalculationMode.TIMESHEET) {
-    const entries = timesheet.entries.filter(
-      (en) => hourOf(en.checkIn) !== null && hourOf(en.checkOut) !== null && en.date
-    );
-    if (entries.length === 0) return null;
-    const starts = entries.map((en) => hourOf(en.checkIn) as number);
-    const ends = entries.map((en) => hourOf(en.checkOut) as number);
-    const breaks = entries.map((en) => Math.max(0, Math.min(480, en.unpaidBreakMinutes || 0)));
-    const paidHours = entries.map((en, i) => {
-      const span = ends[i] - starts[i] + (ends[i] <= starts[i] ? 24 : 0);
-      return Math.max(0, span - breaks[i] / 60);
-    });
-    const dates = [...new Set(entries.map((en) => en.date))];
-    const weeks = new Set(
-      dates.map((d) => {
-        const dt = new Date(`${d}T00:00:00Z`);
-        const jan1 = new Date(Date.UTC(dt.getUTCFullYear(), 0, 1));
-        return `${dt.getUTCFullYear()}-${Math.floor((dt.getTime() - jan1.getTime()) / 604800000)}`;
-      })
-    );
-    return {
-      shiftStartHour: modal(starts),
-      shiftEndHour: modal(ends),
-      unpaidBreakMin: modal(breaks),
-      daysPerWeek: Math.max(1, Math.min(7, Math.round(dates.length / Math.max(1, weeks.size)))),
-      worksWeekend: dates.some((d) => [0, 6].includes(new Date(`${d}T00:00:00Z`).getUTCDay())),
-      avgDailyHours:
-        Math.round((paidHours.reduce((a, b) => a + b, 0) / paidHours.length) * 10) / 10,
-    };
-  }
-  return null; // annual mode has no schedule
-}
-
 // Savings / premium-pay / tips signals, all derived from values the user
 // already entered and stored as buckets — the dataset gains the RRSP, overtime
 // and tipping dimensions without asking anyone an extra question.
