@@ -2,6 +2,7 @@
 import React from 'react';
 import { CalculationMode } from '../types';
 import { useT } from '../lib/i18n';
+import Icon, { type IconName } from './Icon';
 
 interface Props {
   onModeSelect: (mode: CalculationMode) => void;
@@ -14,19 +15,19 @@ const ModeSelector: React.FC<Props> = ({ onModeSelect }) => {
       id: CalculationMode.SIMPLE,
       title: t('mode.hourly.title'),
       subtitle: t('mode.hourly.subtitle'),
-      icon: '💰',
+      icon: 'coins' as IconName,
     },
     {
       id: CalculationMode.ANNUAL,
       title: t('mode.annual.title'),
       subtitle: t('mode.annual.subtitle'),
-      icon: '💼',
+      icon: 'briefcase' as IconName,
     },
     {
       id: CalculationMode.TIMESHEET,
       title: t('mode.timesheet.title'),
       subtitle: t('mode.timesheet.subtitle'),
-      icon: '⏱️',
+      icon: 'calendar' as IconName,
     }
   ];
 
@@ -39,7 +40,7 @@ const ModeSelector: React.FC<Props> = ({ onModeSelect }) => {
           className="group flex min-h-24 items-center gap-4 rounded-2xl border border-slate-200 bg-white p-4 text-left shadow-sm transition-all hover:-translate-y-0.5 hover:border-red-200 hover:shadow-lg focus:outline-none focus:ring-4 focus:ring-red-100 sm:p-5"
         >
           <span className="flex h-14 w-14 shrink-0 items-center justify-center rounded-xl bg-red-50 text-3xl transition-transform group-hover:scale-105" aria-hidden="true">
-            {mode.icon}
+            <Icon name={mode.icon} size={32} />
           </span>
           <span className="min-w-0 flex-1">
             <span className="block text-xl font-bold leading-tight text-slate-900 transition-colors group-hover:text-red-600 sm:text-2xl">

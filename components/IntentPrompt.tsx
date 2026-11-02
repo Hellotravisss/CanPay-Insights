@@ -1,6 +1,7 @@
 'use client';
 import { useState } from 'react';
 import { recordCalcEvent, type CalcMode, type Intent } from '../lib/telemetry';
+import Icon, { type IconName } from './Icon';
 
 // One optional tap: why are you calculating? Voluntary declared data, the same
 // play as the industry picker — no popup, no tracking, nothing required.
@@ -12,13 +13,13 @@ import { recordCalcEvent, type CalcMode, type Intent } from '../lib/telemetry';
 
 type Lang = 'en' | 'fr' | 'zh' | 'pa' | 'tl' | 'hi' | 'es' | 'uk' | 'ko' | 'vi';
 
-const OPTIONS: { key: Intent; emoji: string }[] = [
-  { key: 'new-job', emoji: '💼' },
-  { key: 'raise', emoji: '📈' },
-  { key: 'moving', emoji: '📦' },
-  { key: 'budgeting', emoji: '🧾' },
-  { key: 'tax-filing', emoji: '🗂️' },
-  { key: 'curious', emoji: '🤔' },
+const OPTIONS: { key: Intent; icon: IconName }[] = [
+  { key: 'new-job', icon: 'briefcase' },
+  { key: 'raise', icon: 'raise' },
+  { key: 'moving', icon: 'box' },
+  { key: 'budgeting', icon: 'receipt' },
+  { key: 'tax-filing', icon: 'folder' },
+  { key: 'curious', icon: 'question' },
 ];
 
 export const INTENT_DICT: Record<string, Record<string, string>> = {
@@ -167,7 +168,7 @@ export default function IntentPrompt({
                 onClick={() => choose(o.key)}
                 className="rounded-full border border-slate-200 bg-white px-3 py-1.5 text-sm text-slate-700 transition-colors hover:border-red-300 hover:bg-red-50 hover:text-red-700"
               >
-                <span className="mr-1">{o.emoji}</span>
+                <Icon name={o.icon} size={18} className="mr-1" />
                 {t[o.key]}
               </button>
             ))}

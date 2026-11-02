@@ -2,6 +2,7 @@
 import { ThinkingOrb } from 'thinking-orbs';
 import { useState } from 'react';
 import { currentSessionId } from '../lib/telemetry';
+import Icon from './Icon';
 
 /**
  * Share the calculator, get $3 off any report.
@@ -229,7 +230,7 @@ export default function ShareReward({ lang }: { lang: string }) {
 
       <div className="mt-3 flex flex-wrap gap-2">
         <button onClick={copyLink} className={btn}>
-          🔗 {copied === 'link' ? t.copied : t.copy}
+          <Icon name="link" size={18} /> {copied === 'link' ? t.copied : t.copy}
         </button>
         <button
           onClick={() => open(`https://wa.me/?text=${encodeURIComponent(`${t.shareText} ${LINK}`)}`, 'whatsapp')}

@@ -7,6 +7,7 @@ import { PROVINCIAL_DATA } from '../constants';
 import { useAnonymousTimesheet } from '../hooks/useAnonymousTimesheet';
 import Toast from './Toast';
 import { useT } from '../lib/i18n';
+import Icon from './Icon';
 
 // Calendar dates are LOCAL. toISOString() is UTC, so after 5 pm in Vancouver
 // "today" was already tomorrow, and new Date('YYYY-MM-DD') parses as UTC
@@ -505,7 +506,7 @@ const TimesheetInput: React.FC<Props> = ({ inputs, setInputs }) => {
         <div className="bg-slate-50 rounded-lg p-4 border border-slate-200">
           <div className="flex items-center justify-between mb-3">
             <h3 className="text-sm font-bold text-slate-800">
-              📅 {fromLocalDate(selectedDate).toLocaleDateString(dateLocale, {
+              <Icon name="calendar" size={18} /> {fromLocalDate(selectedDate).toLocaleDateString(dateLocale, {
                 weekday: 'long',
                 month: 'long',
                 day: 'numeric'

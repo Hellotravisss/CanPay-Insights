@@ -5,6 +5,7 @@ import { useCalculationHistory, CalculationRecord } from '../hooks/useCalculatio
 import AuthModal from './AuthModal';
 import { useT } from '../lib/i18n';
 import { CalculationMode } from '../types';
+import Icon, { type IconName } from './Icon';
 
 interface UserMenuProps {
   onSwitchToTimesheet?: () => void;
@@ -185,16 +186,16 @@ const UserMenu: React.FC<UserMenuProps> = ({ onSwitchToTimesheet, onLoadCalculat
   };
 
   // Get mode icon
-  const getModeIcon = (mode: CalculationMode) => {
+  const getModeIcon = (mode: CalculationMode): IconName => {
     switch (mode) {
       case CalculationMode.SIMPLE:
-        return '⚡';
+        return 'coins';
       case CalculationMode.ANNUAL:
-        return '💰';
+        return 'briefcase';
       case CalculationMode.TIMESHEET:
-        return '⏱️';
+        return 'calendar';
       default:
-        return '📊';
+        return 'chart';
     }
   };
 
@@ -427,7 +428,7 @@ const UserMenu: React.FC<UserMenuProps> = ({ onSwitchToTimesheet, onLoadCalculat
                           className="flex-1 text-left"
                         >
                           <div className="flex items-center gap-2 mb-1">
-                            <span className="text-lg">{getModeIcon(record.mode)}</span>
+                            <Icon name={getModeIcon(record.mode)} size={20} />
                             <span className="font-medium text-slate-800">{record.name}</span>
                           </div>
                           <div className="flex items-center gap-4 text-sm text-slate-500">

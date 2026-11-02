@@ -14,6 +14,7 @@ import {
 import { PayFrequency, type CalculationMode as CalcMode } from '../types';
 import { calculateFromAnnualSalary } from '../utils/taxEngine';
 import { INTENT_DICT } from './IntentPrompt';
+import Icon, { type IconName } from './Icon';
 
 /**
  * A progressive prompt: one tap, one question, and the next question only
@@ -350,15 +351,15 @@ const DICT: Record<string, Record<string, string>> = {
   },
 };
 
-const EXPECT_OPTIONS: { key: Expectation; emoji: string }[] = [
-  { key: 'lower', emoji: '😖' },
-  { key: 'as-expected', emoji: '😐' },
-  { key: 'higher', emoji: '🙂' },
+const EXPECT_OPTIONS: { key: Expectation; icon: IconName }[] = [
+  { key: 'lower', icon: 'face-lower' },
+  { key: 'as-expected', icon: 'face-same' },
+  { key: 'higher', icon: 'face-higher' },
 ];
-const WORK_OPTIONS: { key: WorkArrangement; emoji: string }[] = [
-  { key: 'onsite', emoji: '🏢' },
-  { key: 'remote', emoji: '🏠' },
-  { key: 'hybrid', emoji: '🔀' },
+const WORK_OPTIONS: { key: WorkArrangement; icon: IconName }[] = [
+  { key: 'onsite', icon: 'office' },
+  { key: 'remote', icon: 'home' },
+  { key: 'hybrid', icon: 'hybrid' },
 ];
 const AGE_OPTIONS: AgeBand[] = ['under-25', '25-34', '35-44', '45-54', '55-64', '65-plus'];
 
@@ -385,10 +386,10 @@ const POOL: { key: QKey; prompt: string; options: string[] }[] = [
   { key: 'intent', prompt: 'prompt', options: ['new-job', 'raise', 'moving', 'budgeting', 'tax-filing', 'curious'] },
 ];
 
-const EMOJI: Record<string, string> = {
-  lower: '😖', 'as-expected': '😐', higher: '🙂',
-  onsite: '🏢', remote: '🏠', hybrid: '🔀',
-  'new-job': '💼', raise: '📈', moving: '📦', budgeting: '🧾', 'tax-filing': '🗂️', curious: '🤔',
+const ICON: Record<string, IconName> = {
+  lower: 'face-lower', 'as-expected': 'face-same', higher: 'face-higher',
+  onsite: 'office', remote: 'home', hybrid: 'hybrid',
+  'new-job': 'briefcase', raise: 'raise', moving: 'box', budgeting: 'receipt', 'tax-filing': 'folder', curious: 'question',
 };
 
 /** Questions this browser has already answered, kept on the device only, so a
@@ -519,7 +520,7 @@ export default function ExpectationPrompt({
                 {upcoming[0].options.map((o) => (
                   <button key={o} disabled={busy} className={pill}
                     onClick={() => { setCurrent(upcoming[0].key); setPayoff(null); void answerFor(upcoming[0].key, o); }}>
-                    {EMOJI[o] && <span aria-hidden="true">{EMOJI[o]}</span>}
+                    {ICON[o] && <Icon name={ICON[o]} size={18} />}
                     {upcoming[0].key === 'intent' ? ti[o] : t[o]}
                   </button>
                 ))}
@@ -538,7 +539,7 @@ export default function ExpectationPrompt({
           <div className="mt-3 flex flex-wrap gap-2">
             {q.options.map((o) => (
               <button key={o} onClick={() => answer(o)} disabled={busy} className={pill}>
-                {EMOJI[o] && <span aria-hidden="true">{EMOJI[o]}</span>}
+                {ICON[o] && <Icon name={ICON[o]} size={18} />}
                 {q.key === 'intent' ? ti[o] : t[o]}
               </button>
             ))}

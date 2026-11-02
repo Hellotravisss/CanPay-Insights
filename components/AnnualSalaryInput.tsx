@@ -7,6 +7,7 @@ import { calculateFromAnnualSalary } from '../utils/taxEngine';
 import ReverseSalary from './ReverseSalary';
 import SpouseClaim from './SpouseClaim';
 import Under18 from './Under18';
+import Icon from './Icon';
 
 interface Props {
   inputs: AnnualSalaryInputs;
@@ -108,7 +109,7 @@ const AnnualSalaryInput: React.FC<Props> = ({ inputs, setInputs }) => {
           />
         </div>
         <p className="text-xs text-slate-500 mt-1">
-          📊 {t('annual.salaryLabel')}: {formatCurrency(inputs.annualSalary)}
+          <Icon name="chart" size={18} /> {t('annual.salaryLabel')}: {formatCurrency(inputs.annualSalary)}
         </p>
         <ReverseSalary inputs={inputs} setInputs={setInputs} />
       </div>
@@ -130,7 +131,7 @@ const AnnualSalaryInput: React.FC<Props> = ({ inputs, setInputs }) => {
           ))}
         </select>
         <p className="text-xs text-slate-500 mt-1">
-          💼 {t('annual.provinceHint')}
+          <Icon name="briefcase" size={18} /> {t('annual.provinceHint')}
         </p>
         <SpouseClaim value={inputs.spouseNetIncome} onChange={(v) => setInputs({ ...inputs, spouseNetIncome: v })} />
         <Under18 value={inputs.under18} onChange={(v) => setInputs({ ...inputs, under18: v })} />
