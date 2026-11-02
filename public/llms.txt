@@ -8,6 +8,8 @@ CanPay Insights is an independent project based in Vancouver, Canada. All figure
 - [Take-home pay calculator](https://canpayinsights.ca/): net pay by province for hourly wage, annual salary, or timesheet
 - [Compare provinces](https://canpayinsights.ca/compare-provinces): same gross salary, net pay side by side across provinces
 - [Ontario paycheck calculator](https://canpayinsights.ca/ontario-paycheck-calculator)
+- [BC paycheck calculator](https://canpayinsights.ca/bc-paycheck-calculator): BC income tax at five salaries, the 2026 BC and federal brackets, and the deductions on a bi-weekly cheque.
+- [Alberta paycheck calculator](https://canpayinsights.ca/alberta-paycheck-calculator): what comes off an Alberta bi-weekly paycheque at five salaries, and the 2026 brackets.
 - [Quebec paycheck calculator](https://canpayinsights.ca/quebec-paycheck-calculator)
 - [CPP & EI calculator](https://canpayinsights.ca/cpp-ei-calculator)
 - [Salary to hourly calculator](https://canpayinsights.ca/salary-to-hourly-calculator): salary to hourly, weekly and monthly pay, before and after tax.
@@ -17,6 +19,7 @@ CanPay Insights is an independent project based in Vancouver, Canada. All figure
 - [Bi-weekly paycheque calculator](https://canpayinsights.ca/biweekly-paycheque-calculator): net pay per cheque, 26 pay periods.
 - [Marginal vs average tax rate](https://canpayinsights.ca/marginal-vs-average-tax-rate): what a raise is worth versus what you pay overall.
 - [Is overtime taxed more?](https://canpayinsights.ca/is-overtime-taxed-more): why overtime cheques look smaller, and why it evens out at filing.
+- [RRSP tax savings](https://canpayinsights.ca/rrsp-tax-savings): income tax a $5,000 RRSP contribution saves, by salary and province.
 
 ## Open data and research
 - [Open dataset: 2026 take-home pay, 13 provinces & territories](https://canpayinsights.ca/data): 455 rows, CSV + JSON, CC BY 4.0; engine checked against the CRA T4032 tables (10,260 rows) before every release.
