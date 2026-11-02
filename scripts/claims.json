@@ -1420,11 +1420,6 @@
   },
   {
    "page": "/research/pay-calculator-behaviour",
-   "text": "The iOS app opened on Sunday to Thursday until version 1.3.0, so its schedules from before that version are left out of this figure entirely.",
-   "backing": "check:telemetry-pipeline"
-  },
-  {
-   "page": "/research/pay-calculator-behaviour",
    "text": "That makes this figure a floor and never an inflated one — the opposite of the trap in finding 2, where the default worked the other way.",
    "backing": "gate:audit:live"
   },
