@@ -9,7 +9,7 @@
  */
 import { buildWorkPattern } from '../lib/workPattern';
 import { dedupeKey, deriveEmploymentShape, SCHEMA_VERSION, type WorkPattern } from '../lib/telemetry';
-import { calcStats, monthlySnapshot, type Ev } from '../lib/d1/events';
+import { calcStats, calcStatsExtra, monthlySnapshot, type Ev } from '../lib/d1/events';
 import { computePayBehaviour } from '../lib/payBehaviour';
 import type { D1 } from '../lib/d1/db';
 import { CalculationMode, PayFrequency, Province, type SalaryInputs, type TimesheetInputs } from '../types';
@@ -104,6 +104,26 @@ const row = (o: Partial<Ev>): Ev => ({
   const m = monthlySnapshot(ev, '2026-10');
   check('monthlySnapshot: weekend share leaves out app schema 1', m.work.weekend_share, 33.3);
   check('monthlySnapshot: weekend_n', m.work.weekend_n, 6);
+}
+
+// ── 4b. Zero tips is not tipped service ────────────────────────────────────
+// The timesheet calculator always sends a tips bucket, '0' when no tips were
+// entered. '0' is a non-empty string, so every timesheet visitor was recorded as
+// 'tipped-service': in production 408 of 409 such rows had tips_pct_bucket '0'.
+{
+  const noTips = { tipsPctBucket: '0', shiftPremium: false } as Parameters<typeof deriveEmploymentShape>[2];
+  const week = buildWorkPattern(CalculationMode.TIMESHEET, simple('09:00', '17:00', 30, MON_FRI), sheet(['2026-11-02', '2026-11-03', '2026-11-04', '2026-11-05', '2026-11-06']));
+  check('shape: a timesheet with 0% tips is not tipped-service', deriveEmploymentShape('timesheet', week, noTips), 'full-time-hourly');
+  const tips = { tipsPctBucket: '10-20', shiftPremium: false } as Parameters<typeof deriveEmploymentShape>[2];
+  check('shape: a timesheet with tips is tipped-service', deriveEmploymentShape('timesheet', week, tips), 'tipped-service');
+  // Rows already stored that way are read as unknown, not as tipped service.
+  const x = calcStatsExtra([
+    row({ mode: 'timesheet', employment_shape: 'tipped-service', tips_pct_bucket: '0' }),
+    row({ mode: 'timesheet', employment_shape: 'tipped-service', tips_pct_bucket: '1-10' }),
+    row({ employment_shape: 'full-time-hourly' }),
+  ]);
+  const shapes = Object.fromEntries(x.by_shape.map((r) => [r.k, r.n]));
+  check('by_shape: stored tipped-service rows with 0% tips are not counted as tipped', shapes['tipped-service'], 1);
 }
 
 // ── 5. Research page: one filter for numerator and denominator ─────────────

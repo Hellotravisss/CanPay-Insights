@@ -65,6 +65,15 @@ const truthy = (v: unknown) => v === 1 || v === true;
  * methodology.md, "App schema version 2"). Those rows are unknown, not "no".
  */
 export const weekendKnown = (r: Ev) => !(r.source === 'app' && Number(r.schema_version ?? 1) === 1);
+/**
+ * `employment_shape` as it should be read. Rows written before web schema 2
+ * were 'tipped-service' whenever a timesheet sent tips_pct_bucket '0' (no
+ * tips), so those carry no shape. Their days_per_week is also unreliable
+ * (bug 1 in the methodology), so the shape cannot be re-derived: unknown.
+ */
+export const shapeOf = (r: Ev) =>
+  r.employment_shape === 'tipped-service' && r.tips_pct_bucket === '0' ? null : r.employment_shape;
+const withShape = (ev: Ev[]) => ev.map((r) => ({ ...r, employment_shape: shapeOf(r) }));
 const weekendShare = (work: Ev[]) => {
   const known = work.filter(weekendKnown);
   return { weekend_share: pct1(known.filter((r) => truthy(r.works_weekend)).length, known.length), weekend_n: known.length };
@@ -207,7 +216,7 @@ export function calcStatsExtra(ev: Ev[]) {
   const reg = ev.filter((r) => r.is_registered !== null);
   return {
     by_median: countBy(ev, 'median_ratio_bucket', { order: ['under-0.5', '0.5-0.75', '0.75-1', '1-1.25', '1.25-1.5', '1.5-2', '2-3', '3-plus'] }),
-    by_shape: countBy(ev, 'employment_shape'),
+    by_shape: countBy(withShape(ev), 'employment_shape'),
     by_expectation: countBy(ev, 'expectation', { order: ['lower', 'as-expected', 'higher'] }),
     by_paychange: countBy(ev, 'change_direction'),
     by_intent: countBy(ev, 'intent'),
@@ -551,7 +560,7 @@ export function publicDataset(ev: Ev[]) {
   const dates = ev.map((r) => localDate(r.created_at as string));
   const months = new Map<string, number>(); for (const d of dates) months.set(d.slice(0, 7), (months.get(d.slice(0, 7)) ?? 0) + 1);
   const dim = (name: string, key: string) => {
-    const { shown, withheld_categories, withheld_calculations } = suppress(countBy(ev, key), min_cell);
+    const { shown, withheld_categories, withheld_calculations } = suppress(countBy(key === 'employment_shape' ? withShape(ev) : ev, key), min_cell);
     return [name, { shown, withheld_categories, withheld_calculations }] as const;
   };
   const dims = Object.fromEntries([

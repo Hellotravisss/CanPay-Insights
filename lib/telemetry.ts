@@ -195,7 +195,9 @@ export function deriveEmploymentShape(
   behaviour: BehaviourSignals | null
 ): EmploymentShape | null {
   if (mode === 'annual') return 'salaried';
-  if (behaviour?.tipsPctBucket) return 'tipped-service';
+  // The timesheet always sends a bucket, '0' when no tips were entered; until
+  // 2026-11-01 that '0' made every timesheet visitor 'tipped-service'.
+  if (behaviour?.tipsPctBucket && behaviour.tipsPctBucket !== '0') return 'tipped-service';
   if (behaviour?.shiftPremium) return 'shift-worker';
   if (!work) return null;
   const weekly = work.daysPerWeek * work.avgDailyHours;

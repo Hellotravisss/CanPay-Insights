@@ -185,6 +185,25 @@ are stored as 1, including people who never update.
 `schema_version = 1`. Every other field in those rows is unaffected, and
 website rows are unaffected.
 
+---
+
+## App schema version 3 — iOS 1.3.1 and later
+
+The app computes its schedule pattern with its own copy of the website code
+(`CanPayApp/src/lib/telemetry.ts`) and had the same errors as web schema 1
+below: timesheet weeks counted from 1 January (item 1), paid hours without
+the minutes (item 2) and a dedupe key without `works_weekend` (item 3). From
+1.3.1 the app sends `schema_version = 3` with all three fixed, and sends
+`median_ratio_bucket` / `median_wage_ref`, which app rows never carried.
+
+**Rules for rows with `source = 'app'` and `schema_version` 1 or 2:**
+- treat `days_per_week` as unknown where `mode = 'timesheet'`;
+- `avg_daily_hours` is approximate (±1 h a day);
+- `median_ratio_bucket` is absent; it can only be approximated from
+  `income_bracket`;
+- the `works_weekend` rule above still applies to schema 1.
+App rows carry no `employment_shape`.
+
 
 ---
 
@@ -210,12 +229,22 @@ are read per `source`.)
    dedupe key did not include `works_weekend`, so moving Mon–Fri to Tue–Sat
    (same hours, same number of days) in the same visit was dropped as a
    repeat. Such changes are now recorded, which adds a few rows per affected visit.
+4. **`employment_shape = 'tipped-service'` for every timesheet.** The
+   timesheet calculator always sends a tips bucket, `'0'` when no tips were
+   entered, and the shape treated any bucket as tips. In production 408 of the
+   409 rows marked `tipped-service` had `tips_pct_bucket = '0'`. A zero bucket
+   no longer counts. Because this also hid item 1, no stored timesheet row
+   reached the hours-based full-/part-time split; the weighting scope
+   (`salaried`, `full-time-hourly`) never contained timesheet rows either way.
 
 **Rules for rows with `source IN ('web','widget')` and `schema_version = 1`:**
 - treat `days_per_week` as unknown where `mode = 'timesheet'`;
 - treat `employment_shape` as unknown where `mode = 'timesheet'`, and as
   approximate for `mode = 'simple'` (hours within ±1 h a day of the line);
 - `avg_daily_hours` is approximate (±1 h a day);
+- treat `employment_shape` as unknown where it is `'tipped-service'` and
+  `tips_pct_bucket = '0'` (`shapeOf()` in `lib/d1/events.ts` applies this to
+  the published breakdowns);
 - every other field is unaffected.
 
 ### Analysis-method corrections, 2026-11-01
