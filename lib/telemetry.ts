@@ -690,6 +690,8 @@ export function recordCalcEvent(e: {
   spouseClaim?: boolean | null;
   /** Ticked "I'm under 18" (no CPP/QPP). Only the yes/no, never an age or birth date. */
   under18?: boolean | null;
+  /** The wage or salary differs from the value the form opened with. Only the yes/no, never either amount. */
+  wageEdited?: boolean | null;
   /** A free offer comparison, as ranges: B's salary against A's, the province B is in when it differs, and vacation days more/same/fewer. Never the salaries. */
   offer?: { changeBucket: string; toProvince: string | null; vacationDiff: 'more' | 'same' | 'fewer' } | null;
   /** The provinces picked on /compare-provinces, names only. */
@@ -792,6 +794,7 @@ export function recordCalcEvent(e: {
         reverse_target_bucket: reverseTargetBucket(e.reverseTargetMonthly),
         spouse_claim: e.spouseClaim == null ? null : e.spouseClaim ? 1 : 0,
         under_18: e.under18 == null ? null : e.under18 ? 1 : 0,
+        wage_edited: e.wageEdited == null ? null : e.wageEdited ? 1 : 0,
         move_intent: e.moveIntent ?? null,
         compared_provinces: e.comparedProvinces?.length ? [...e.comparedProvinces].sort().join('|') : null,
         offer_change_bucket: e.offer?.changeBucket ?? null,
@@ -833,7 +836,7 @@ export function dedupeKey(e: CalcEvent, source: string, bracket: string, hood: N
     ? `${w.shiftStartHour}-${w.shiftEndHour}-${w.unpaidBreakMin}-${w.daysPerWeek}-${w.worksWeekend ? 'we' : ''}-${w.avgDailyHours}`
     : '';
   const behaviourKey = b ? `${b.rrspPctBucket}-${b.otHoursBucket}-${b.tipsPctBucket ?? ''}-${b.shiftPremium}-${b.unionDuesBucket ?? ''}${b.ltd ?? ''}${b.otherDeductionsBucket ?? ''}${b.bonusBucket ?? ''}${b.otherIncomeBucket ?? ''}${b.statOrSickPay ?? ''}${b.taxableBenefits ?? ''}${b.rsuBucket ?? ''}${b.matchPolicy ?? ''}${b.tipsPaid ?? ''}` : '';
-  return `${source}|${e.mode}|${e.province}|${bracket}|${e.industry ?? ''}|${workKey}|${behaviourKey}|${e.intent ?? ''}|${e.expectation ?? ''}|${e.workArrangement ?? ''}|${e.ageBand ?? ''}|${e.viewedReport ? 'r' : ''}|${e.productInterest ?? ''}|${e.tenureBand ?? ''}${e.unionMember ?? ''}${e.employerSize ?? ''}${e.vacationBand ?? ''}|${e.payChange ? `${e.payChange.direction}-${e.payChange.pctBucket}` : ''}|${hood?.fsa ?? ''}${hood?.source ?? ''}|${reverseTargetBucket(e.reverseTargetMonthly)}|${e.spouseClaim ? 's' : ''}${e.under18 ? 'u' : ''}|${e.comparedProvinces?.join(',') ?? ''}${e.moveIntent ?? ''}|${e.offer ? `${e.offer.changeBucket}${e.offer.toProvince ?? ''}${e.offer.vacationDiff}` : ''}`;
+  return `${source}|${e.mode}|${e.province}|${bracket}|${e.industry ?? ''}|${workKey}|${behaviourKey}|${e.intent ?? ''}|${e.expectation ?? ''}|${e.workArrangement ?? ''}|${e.ageBand ?? ''}|${e.viewedReport ? 'r' : ''}|${e.productInterest ?? ''}|${e.tenureBand ?? ''}${e.unionMember ?? ''}${e.employerSize ?? ''}${e.vacationBand ?? ''}|${e.payChange ? `${e.payChange.direction}-${e.payChange.pctBucket}` : ''}|${hood?.fsa ?? ''}${hood?.source ?? ''}|${reverseTargetBucket(e.reverseTargetMonthly)}|${e.spouseClaim ? 's' : ''}${e.under18 ? 'u' : ''}${e.wageEdited ? 'w' : ''}|${e.comparedProvinces?.join(',') ?? ''}${e.moveIntent ?? ''}|${e.offer ? `${e.offer.changeBucket}${e.offer.toProvince ?? ''}${e.offer.vacationDiff}` : ''}`;
 }
 
 /** Offer B's salary against offer A's, as a range label. */

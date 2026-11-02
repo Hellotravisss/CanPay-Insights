@@ -1846,6 +1846,20 @@
   },
   {
    "page": "/privacy",
+   "text": "whether you changed the wage or salary the calculator opens with (yes or no) — never either amount;",
+   "backing": "manual",
+   "reviewed": "2026-11-01",
+   "note": "Checked on 2026-11-01: App.tsx sends wageEdited as a boolean (the wage or salary !== its DEFAULT_*_INPUTS value), EmbedCalculator sends amount !== initialAmount; lib/telemetry.ts writes wage_edited 1/0; app/api/events coerces anything else to null. No amount is sent for this field."
+  },
+  {
+   "page": "/fr/confidentialite",
+   "text": "si vous avez modifié le salaire affiché à l’ouverture du calculateur (oui ou non) — jamais le montant;",
+   "backing": "manual",
+   "reviewed": "2026-11-01",
+   "note": "Checked on 2026-11-01: App.tsx sends wageEdited as a boolean (the wage or salary !== its DEFAULT_*_INPUTS value), EmbedCalculator sends amount !== initialAmount; lib/telemetry.ts writes wage_edited 1/0; app/api/events coerces anything else to null. No amount is sent for this field."
+  },
+  {
+   "page": "/privacy",
    "text": "It also records the approximate location of your connection as our host reports it (country, region, city, time zone and a point rounded to about 11 km) and your device type, browser and operating-system family — never the full browser signature.",
    "backing": "manual",
    "reviewed": "2026-09-27",

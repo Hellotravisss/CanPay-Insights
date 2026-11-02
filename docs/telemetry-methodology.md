@@ -100,6 +100,15 @@ elapsed `same-day` … `over-year`.
   Canada wage table used for benchmarks, so wage comparisons fall back to national figures.
 - **`works_weekend` from the iOS app before 1.3.0 is unreliable** (rows with
   `source = 'app'`, `mode = 'simple'`, `schema_version = 1`). See *App schema version 2*.
+- **`wage_edited` exists from 2026-11-01** (website and widget; iOS from 1.3.1). 1 = the
+  wage or salary differs from the value the form opened with ($20/h in the hourly and
+  timesheet calculators, $100,000 in the annual one, the page's own amount in the widget);
+  0 = it is that value. Before that date the field is NULL, and a calculation that changed
+  only other fields carried the default's income bracket: in production, 496 simple-mode
+  sessions calculated in the 30–50k bracket and then moved to another one (annual: 67 in
+  90–120k). For income questions, use `wage_edited = 1`, or for older rows, the last
+  calculation of each session. A 0 can be a real $20 wage left in place; it cannot be told
+  apart from a default nobody looked at. Prompt answers and taps leave it NULL.
 
 ---
 

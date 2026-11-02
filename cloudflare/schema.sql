@@ -48,7 +48,11 @@ create table if not exists events (
   compared_provinces text, move_intent text,
   -- 1 when the visitor ticked "I'm under 18" (no CPP/QPP), 0 when not. Never an age or
   -- birth date. Added in production by ALTER on 2026-10-31.
-  under_18 integer
+  under_18 integer,
+  -- 1 when the wage or salary differs from the value the form opened with, 0 when it is the
+  -- opening value. Never an amount. NULL on rows before 2026-11-01 and on prompt/tap rows.
+  -- Added in production by ALTER on 2026-11-01.
+  wage_edited integer
 );
 create index if not exists idx_events_created on events(created_at);
 create index if not exists idx_events_session on events(session_id);

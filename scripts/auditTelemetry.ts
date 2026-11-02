@@ -77,6 +77,11 @@ const noTimesheet = sheet([]);
   const base = { mode: 'simple' as const, province: 'Ontario', annualIncome: 52000, lang: 'en' };
   check('dedupe: Mon-Fri and Tue-Sat are different calculations',
     dedupeKey({ ...base, work: a }, 'web', '50-70k', null) !== dedupeKey({ ...base, work: b }, 'web', '50-70k', null), true);
+  // $20 → $22 an hour stays in the 30-50k bracket. Without wage_edited in the key the
+  // edited calculation was a repeat of the default one, and only the default row survived.
+  const dflt = { mode: 'simple' as const, province: 'Ontario', annualIncome: 41600, lang: 'en' };
+  check('dedupe: editing the opening wage within its bracket is a new calculation',
+    dedupeKey({ ...dflt, wageEdited: false }, 'web', '30-50k', null) !== dedupeKey({ ...dflt, annualIncome: 45760, wageEdited: true }, 'web', '30-50k', null), true);
 }
 
 // Rows written with the corrected schedule maths must be distinguishable.

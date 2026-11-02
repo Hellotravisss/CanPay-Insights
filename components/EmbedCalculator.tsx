@@ -174,9 +174,10 @@ export default function EmbedCalculator({
       lang: langRef.current,
       source: inline ? 'web' : 'widget',
       embedHost: inline ? null : embedHost,
+      wageEdited: amount !== initialAmount,
     });
     // Not keyed on lang: switching language is not a new calculation.
-  }, [touched, annual, provinceName, unit, embedHost, inline]);
+  }, [touched, annual, provinceName, unit, embedHost, inline, amount, initialAmount]);
 
   const locale = lang === 'fr' ? 'fr-CA' : 'en-CA';
   const [announce, setAnnounce] = useState('');

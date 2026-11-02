@@ -76,6 +76,7 @@ const PrivacyPolicyFr: React.FC = () => {
           <li>si vous utilisez « trouver le salaire » pour partir d’un montant net, le montant net mensuel demandé, sous forme de tranche (par exemple « 4 k$–5 k$ ») — jamais le montant ;</li>
           <li>si vous avez coché « Je subviens aux besoins d’un époux ou conjoint de fait » (oui ou non) — jamais le revenu de votre époux ou conjoint ;</li>
           <li>si vous avez coché « J’ai moins de 18 ans » (oui ou non) — jamais votre âge ni votre date de naissance ;</li>
+          <li>si vous avez modifié le salaire affiché à l’ouverture du calculateur (oui ou non) — jamais le montant ;</li>
           <li>le temps écoulé entre l’ouverture de la page et votre premier résultat, sous forme de tranche (moins de 10 secondes, 10 à 30, 30 à 90, plus de 90), et le nombre de fois où vous avez modifié le formulaire avant un résultat, sous forme de tranche (1 à 3, 4 à 10, 11 à 30, plus de 30) — jamais d’horodatage, de frappes ni d’endroits cliqués ;</li>
           <li>si vous étiez connecté (oui/non — jamais quel compte) et, si vous rouvrez un calcul enregistré et le modifiez, le sens et l’ordre de grandeur du changement ainsi que l’ancienneté de l’original — jamais les montants ;</li>
           <li>l’heure et le jour de la semaine selon votre propre horloge, et le nom du fuseau horaire que déclare votre navigateur (par exemple « America/Toronto »), qui sert à vérifier la carte, non à vous situer ;</li>

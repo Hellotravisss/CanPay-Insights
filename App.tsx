@@ -389,6 +389,12 @@ const App: React.FC = () => {
       viewedReport: reportOpened,
       spouseClaim: (mode === CalculationMode.SIMPLE ? simpleInputs : mode === CalculationMode.ANNUAL ? annualInputs : timesheetInputs).spouseNetIncome != null,
       under18: (mode === CalculationMode.SIMPLE ? simpleInputs : mode === CalculationMode.ANNUAL ? annualInputs : timesheetInputs).under18 === true,
+      // A calculation can leave the opening $20/h or $100,000 in place while other fields
+      // change; its income bracket is then the default's, not the visitor's (2.4, 2026-11-01).
+      wageEdited:
+        mode === CalculationMode.SIMPLE ? simpleInputs.hourlyWage !== DEFAULT_SIMPLE_INPUTS.hourlyWage
+        : mode === CalculationMode.ANNUAL ? annualInputs.annualSalary !== DEFAULT_ANNUAL_INPUTS.annualSalary
+        : timesheetInputs.hourlyWage !== DEFAULT_TIMESHEET_INPUTS.hourlyWage,
     });
   }, [currentPage, mode, simpleInputs, annualInputs, timesheetInputs, currentProvince, results, lang, reportOpened, userId, authLoading]);
 
