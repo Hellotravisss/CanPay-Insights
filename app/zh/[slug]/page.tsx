@@ -3,7 +3,9 @@ import { notFound } from 'next/navigation';
 import { getSalaryFigures, PROVINCE_SEO_CONFIGS } from '../../../lib/salaryFigures';
 import { provinceLabel } from '../../../lib/provinceNames';
 import { calculateFromAnnualSalary } from '../../../utils/taxEngine';
-import { PayFrequency } from '../../../types';
+import { PayFrequency, Province } from '../../../types';
+import { FEDERAL_BRACKETS, PROVINCIAL_DATA } from '../../../constants';
+import { bracketRows } from '../../../lib/landingTables';
 
 /**
  * Chinese answer pages for the questions Chinese-speaking users actually type
@@ -27,6 +29,8 @@ type Page = {
   h1: string;
   answer: string;
   table: { caption: string; head: string[]; rows: Row[] };
+  /** A second table — the BC page also answers with the brackets, as the pages engines cite for 「BC省 工资扣税多少」 do. */
+  table2?: { caption: string; head: string[]; rows: Row[] };
   sections: { h: string; b: string }[];
   faq: { q: string; a: string }[];
 };
@@ -158,6 +162,14 @@ function build(slug: string): Page | null {
             cells: [money(f.federalTax), money(f.provincialTax), money(f.pensionContribution + f.eiPremium), money(f.netAnnual)],
           };
         }),
+      },
+      table2: {
+        caption: '2026 年 BC 省和联邦所得税税率（按应税收入分档，每档税率只用于该档内的收入）',
+        head: ['应税收入', '税率'],
+        rows: [
+          ...bracketRows(PROVINCIAL_DATA[Province.BC].brackets).map(([range, rate]) => ({ label: `BC 省 ${range}`, cells: [rate] })),
+          ...bracketRows(FEDERAL_BRACKETS).map(([range, rate]) => ({ label: `联邦 ${range}`, cells: [rate] })),
+        ],
       },
       sections: [
         {
@@ -382,6 +394,24 @@ export default async function ZhAnswerPage({ params }: { params: Promise<{ slug:
             </tbody>
           </table>
         </div>
+        {p.table2 && (
+          <div className="bg-white border border-slate-200 rounded-xl p-5 overflow-x-auto">
+            <table className="w-full text-sm">
+              <caption className="text-left font-bold text-slate-800 mb-3">{p.table2.caption}</caption>
+              <thead>
+                <tr>{p.table2.head.map((h) => <th key={h} scope="col" className="text-left py-2 pr-3 text-slate-600">{h}</th>)}</tr>
+              </thead>
+              <tbody>
+                {p.table2.rows.map((r) => (
+                  <tr key={r.label} className="border-t border-slate-100">
+                    <th scope="row" className="text-left py-2 pr-3 font-semibold text-slate-800">{r.label}</th>
+                    {r.cells.map((c, i) => <td key={i} className="py-2 pr-3 text-slate-700">{c}</td>)}
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        )}
         {p.sections.map((s) => (
           <section key={s.h} className="bg-white border border-slate-200 rounded-xl p-5">
             <h2 className="text-xl font-bold text-slate-900 mb-2">{s.h}</h2>

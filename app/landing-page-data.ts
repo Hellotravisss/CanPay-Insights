@@ -1,4 +1,14 @@
 import { buildSalaryBreakdown, getSalaryFigures, type SalaryBreakdown } from '../lib/salaryFigures';
+import {
+  bracketTables, cppEiBySalaryTable, cppEiParametersTable, paychequeTable, ratesByProvinceTable,
+  rrspSaving, rrspSavingsTable, taxAtSalariesTable, type DataTable,
+} from '../lib/landingTables';
+
+const TABLE_SALARIES = [40000, 60000, 80000, 100000, 150000];
+const dollars = (n: number) => `$${Math.round(n).toLocaleString('en-CA')}`;
+const bc80 = getSalaryFigures(80000, 'bc');
+const ab80 = getSalaryFigures(80000, 'alberta');
+const rrsp80 = (slug: string) => dollars(rrspSaving(80000, slug, 5000));
 
 export type LandingPage = {
   slug: string;
@@ -38,6 +48,7 @@ export type LandingPage = {
     label: string;
   }>;
   salaryBreakdown?: SalaryBreakdown;
+  tables?: DataTable[];
 };
 
 const coreLandingPages: LandingPage[] = [
@@ -136,6 +147,40 @@ const coreLandingPages: LandingPage[] = [
         answer: 'The marginal rate: an RRSP deduction comes off the top of your income, so it saves tax at the rate of your highest dollars.',
       },
     ],
+    tables: [ratesByProvinceTable(80000)],
+  },
+  {
+    slug: 'rrsp-tax-savings',
+    title: 'RRSP Tax Savings 2026: What a Contribution Saves, by Province',
+    description:
+      `A $5,000 RRSP contribution on $80,000 saves ${rrsp80('bc')} of income tax in BC, ${rrsp80('ontario')} in Ontario and ${rrsp80('alberta')} in Alberta in 2026. Table by salary and province, from the same engine as our calculator.`,
+    h1: 'RRSP Tax Savings',
+    kicker: 'What a contribution is worth',
+    primaryKeyword: 'RRSP tax savings calculator',
+    intro:
+      `On an $80,000 salary in 2026, a $5,000 RRSP contribution cuts your income tax by about ${rrsp80('bc')} in British Columbia, ${rrsp80('ontario')} in Ontario, ${rrsp80('alberta')} in Alberta and ${rrsp80('quebec')} in Quebec. The saving is the contribution times the tax rate on your top dollars, so it grows with your income. Enter your salary and an RRSP amount in the full calculator for your own figure.`,
+    examples: ['RRSP contribution tax savings calculator', 'how much tax do I save with RRSP', 'RRSP refund calculator 2026'],
+    sections: [
+      {
+        heading: 'Why the saving depends on your salary',
+        body: 'An RRSP contribution is deducted from your taxable income, and the dollars it removes are your highest-taxed ones. The same contribution therefore saves more at $150,000 than at $50,000, and more in a province with higher top rates.',
+      },
+      {
+        heading: 'When you get the money',
+        body: 'Contribute on your own and the saving arrives as a refund when you file. Contribute through a group RRSP at work and less tax is withheld from each cheque instead. You can also ask CRA, on form T1213, to let your employer withhold less for contributions you make yourself.',
+      },
+    ],
+    faq: [
+      {
+        question: 'How much tax do I save with an RRSP contribution?',
+        answer: `Roughly the contribution times your marginal income-tax rate. On $80,000 in 2026, $5,000 saves about ${rrsp80('bc')} in BC, ${rrsp80('ontario')} in Ontario and ${rrsp80('alberta')} in Alberta.`,
+      },
+      {
+        question: 'Does an RRSP contribution lower CPP or EI?',
+        answer: 'No. CPP and EI are charged on your gross pay, so an RRSP lowers only federal and provincial income tax.',
+      },
+    ],
+    tables: [rrspSavingsTable(5000, [50000, 80000, 100000, 150000], ['bc', 'ontario', 'alberta', 'quebec'])],
   },
   {
     slug: 'is-overtime-taxed-more',
@@ -392,7 +437,7 @@ const coreLandingPages: LandingPage[] = [
     slug: 'cpp-ei-calculator',
     title: 'CPP and EI Calculator Canada 2026 - Payroll Deductions',
     description:
-      'Estimate CPP contributions and EI premiums in Canada for 2026. Learn how CPP, CPP2, and EI affect take-home pay.',
+      'CPP and EI explained for 2026: the rates, the earnings they apply to, the yearly maximums, what they cost at five salaries and the cheque on which each one stops.',
     h1: 'CPP and EI Calculator Canada',
     kicker: 'Payroll deductions explained',
     primaryKeyword: 'CPP EI calculator',
@@ -428,6 +473,7 @@ const coreLandingPages: LandingPage[] = [
           'Most employees pay CPP and EI, but there are exceptions depending on age, employment type, earnings, and province-specific rules.',
       },
     ],
+    tables: [cppEiParametersTable(), cppEiBySalaryTable(TABLE_SALARIES)],
   },
   {
     slug: 'ontario-paycheck-calculator',
@@ -479,7 +525,7 @@ const coreLandingPages: LandingPage[] = [
     slug: 'bc-paycheck-calculator',
     title: 'BC Paycheck Calculator 2026 - British Columbia Take-Home Pay',
     description:
-      'Estimate British Columbia take-home pay with federal tax, BC tax, CPP, EI, salary, hourly wage, and pay period deductions.',
+      `How much tax you pay in BC in 2026: on $80,000, ${dollars(bc80.federalTax)} federal and ${dollars(bc80.provincialTax)} BC income tax, ${dollars(bc80.netAnnual)} take-home. Tables from $40,000 to $150,000, and the 2026 brackets.`,
     h1: 'BC Paycheck Calculator',
     kicker: 'British Columbia take-home pay',
     primaryKeyword: 'BC paycheck calculator',
@@ -525,12 +571,13 @@ const coreLandingPages: LandingPage[] = [
           'Yes. Vancouver, Victoria, Surrey, Burnaby, and Kelowna workers all use the BC calculator, because payroll deductions are set at the provincial (British Columbia) level, not by city.',
       },
     ],
+    tables: [taxAtSalariesTable('bc', TABLE_SALARIES), ...bracketTables('bc'), paychequeTable('bc', TABLE_SALARIES)],
   },
   {
     slug: 'alberta-paycheck-calculator',
     title: 'Alberta Paycheck Calculator 2026 - Take-Home Pay',
     description:
-      'Calculate Alberta take-home pay with federal tax, Alberta tax, CPP, EI, salary, hourly wage, and bi-weekly pay estimates.',
+      `What comes off an Alberta paycheque in 2026: on $80,000 paid bi-weekly, ${dollars(ab80.federalTax / 26)} federal tax, ${dollars(ab80.provincialTax / 26)} Alberta tax, then CPP and EI, for ${dollars(ab80.netBiWeekly)} net. Tables from $40,000 to $150,000.`,
     h1: 'Alberta Paycheck Calculator',
     kicker: 'Alberta take-home pay',
     primaryKeyword: 'Alberta paycheck calculator',
@@ -566,6 +613,7 @@ const coreLandingPages: LandingPage[] = [
           'Alberta has no provincial sales tax, but it does have provincial income tax. Employees also pay federal tax, CPP, and EI.',
       },
     ],
+    tables: [paychequeTable('alberta', TABLE_SALARIES), taxAtSalariesTable('alberta', TABLE_SALARIES), ...bracketTables('alberta')],
   },
   {
     slug: 'quebec-paycheck-calculator',

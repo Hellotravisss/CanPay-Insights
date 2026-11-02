@@ -264,6 +264,37 @@ export default async function LandingPage({ params }: Props) {
               );
             })()}
 
+            {/* Engine-computed tables (lib/landingTables.ts). Answer engines cite
+                pages that answer "how much" with a table; one prose example lost
+                to them on every question it covered (Avowd, November 2026). */}
+            {page.tables?.map((table) => (
+              <section key={table.heading} className="bg-white border border-slate-200 rounded-xl p-6 shadow-sm">
+                <h2 className="text-2xl font-bold text-slate-900 mb-3">{table.heading}</h2>
+                {table.intro && <p className="leading-7 text-slate-600 mb-4">{table.intro}</p>}
+                <div className="overflow-x-auto" tabIndex={0} role="region" aria-label={table.heading}>
+                  <table className="w-full text-sm text-left border-collapse">
+                    <thead>
+                      <tr className="border-b-2 border-slate-200">
+                        {table.columns.map((c) => (
+                          <th key={c} scope="col" className="py-2 pr-4 font-semibold text-slate-900 whitespace-nowrap">{c}</th>
+                        ))}
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {table.rows.map((row) => (
+                        <tr key={row[0]} className="border-b border-slate-100">
+                          {row.map((cell, i) => i === 0
+                            ? <th key={i} scope="row" className="py-2 pr-4 font-semibold text-slate-900 whitespace-nowrap">{cell}</th>
+                            : <td key={i} className="py-2 pr-4 text-slate-700 tabular-nums whitespace-nowrap">{cell}</td>)}
+                        </tr>
+                      ))}
+                    </tbody>
+                  </table>
+                </div>
+                {table.note && <p className="mt-3 text-sm leading-6 text-slate-500">{table.note}</p>}
+              </section>
+            ))}
+
             {page.sections.map((section) => (
               <section key={section.heading} className="bg-white border border-slate-200 rounded-xl p-6 shadow-sm">
                 <h2 className="text-2xl font-bold text-slate-900 mb-3">
