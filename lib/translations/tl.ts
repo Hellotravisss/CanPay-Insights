@@ -51,7 +51,7 @@ export const main: Record<string, string> = {
   'annual.subtitle': 'Ilagay ang taunang sweldo mo para makita ang take-home pay',
   'annual.salaryLabel': 'Annual Salary',
   'sp.toggle': 'Sinusuportahan ko ang asawa o common-law partner',
-  'sp.income': 'Tantiyang net income nila ngayong taon',
+  'sp.income': 'Tantiyang sariling net income ng iyong asawa o partner ngayong taon (hindi pinagsama)',
   'sp.hint': 'Idinaragdag ang spouse amount sa TD1, kaya mas maliit ang buwis na kinakaltas. Nalalapat kung nasa employer mo ang TD1 mong humihingi nito. Isa lang sa inyo ang puwedeng mag-claim.',
   'u18.toggle': 'Wala pa akong 18 taong gulang',
   'u18.hint': 'Walang ibinabawas na CPP (QPP sa Quebec) bago mag-18. Nagsisimula ito sa unang sahod sa buwan pagkatapos ng iyong ika-18 kaarawan. May bawas pa ring EI.',
