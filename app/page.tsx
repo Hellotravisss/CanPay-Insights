@@ -67,21 +67,25 @@ export default function HomePage() {
       <App />
       <section className="border-t border-slate-200 bg-white">
         <div className="mx-auto max-w-3xl px-4 py-12">
-          <h2 className="mb-3 text-xl font-bold text-slate-900">
-            What is CanPay Insights?
-          </h2>
-          <p className="mb-3 text-lg leading-8 text-slate-800">
-            CanPay Insights is a free take-home pay calculator for people who work in Canada.
-          </p>
-          <p className="mb-8 text-sm leading-6 text-slate-500">
-            Enter
+          {/* The answer to "what is this" stays in the HTML for search and AI
+              engines, collapsed like the topics below: on a phone it was a
+              13-line wall of text (Travis, 2026-11-03). */}
+          <details className="group border-t border-slate-200">
+            <summary className="cursor-pointer list-none py-4 marker:content-none [&::-webkit-details-marker]:hidden flex items-center gap-3">
+              <img src="/logo.png" alt="" aria-hidden="true" className="h-[22px] w-[22px] rounded-md" />
+              <h2 className="m-0 text-[15px] font-semibold text-slate-900">What is CanPay Insights?</h2>
+              <span className="ml-auto flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-slate-100 text-slate-500 transition-transform group-open:rotate-90" aria-hidden="true">›</span>
+            </summary>
+            <p className="pb-5 leading-7 text-slate-600">
+              CanPay Insights is a free take-home pay calculator for people who work in Canada. Enter
             your salary or hourly wage and your province, and it shows exactly how much you keep after
             federal and provincial income tax, CPP/CPP2, and EI for the 2026 tax year. It is a
             paycheck calculator for employees and hourly workers — not a payroll service, a payment
             processor, or a merchant-services provider. No signup and no spreadsheet, in ten
             languages: English, French, Chinese, Punjabi, Hindi, Tagalog, Spanish, Ukrainian,
             Korean, and Vietnamese.
-          </p>
+            </p>
+          </details>
 
           {/* Collapsed on all viewports: full text stays in the HTML for
               crawlers/AI engines (details content is fully indexed), while
