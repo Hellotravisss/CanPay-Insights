@@ -531,10 +531,10 @@ Same rules apply:
 ### Calculating Your Potential Overtime
 
 Use our calculator to:
-✅ Determine your overtime rate
-✅ Calculate what you're owed
-✅ Compare scenarios (weekly vs averaged)
-✅ See after-tax overtime pay
+- Determine your overtime rate
+- Calculate what you're owed
+- Compare scenarios (weekly vs averaged)
+- See after-tax overtime pay
 
 <b>Calculate Your Overtime Pay →</b> (Use our calculator at the top of the page)
 

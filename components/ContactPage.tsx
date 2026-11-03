@@ -2,6 +2,7 @@
 import React from 'react';
 import { useRouter } from 'next/navigation';
 import AvowdCredit from './AvowdCredit';
+import Icon from '@/components/Icon';
 
 const ContactPage: React.FC = () => {
   const router = useRouter();
@@ -54,7 +55,7 @@ const ContactPage: React.FC = () => {
               >
                 info@canpayinsights.ca
               </a>
-              <p className="text-slate-500 mt-3 text-sm">Vancouver, British Columbia, Canada 🇨🇦</p>
+              <p className="text-slate-500 mt-3 text-sm">Vancouver, British Columbia, Canada <Icon name="maple" size={14} /></p>
             </div>
 
             <h2 className="text-2xl font-bold text-slate-800 mb-4">What you can reach us about</h2>
@@ -82,7 +83,7 @@ const ContactPage: React.FC = () => {
           <a href="/contact" className="text-slate-500 hover:text-red-600 transition-colors">Contact</a>
           <a href="/privacy" className="text-slate-500 hover:text-red-600 transition-colors">Privacy</a>
         </div>
-        <p className="mt-4">Proudly Canadian 🇨🇦 Built for Workers.</p>
+        <p className="mt-4">Proudly Canadian <Icon name="maple" size={14} /> Built for Workers.</p>
         <p><AvowdCredit /></p>
       </footer>
     </div>

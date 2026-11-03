@@ -2,6 +2,7 @@
 import React from 'react';
 import { useRouter } from 'next/navigation';
 import AvowdCredit from './AvowdCredit';
+import Icon from '@/components/Icon';
 
 const AffiliateDisclosurePage: React.FC = () => {
   const router = useRouter();
@@ -84,7 +85,7 @@ const AffiliateDisclosurePage: React.FC = () => {
           <a href="/affiliate-disclosure" className="text-slate-500 hover:text-red-600 transition-colors">Affiliate Disclosure</a>
           <a href="/privacy" className="text-slate-500 hover:text-red-600 transition-colors">Privacy</a>
         </div>
-        <p className="mt-4">Proudly Canadian 🇨🇦 Built for Workers.</p>
+        <p className="mt-4">Proudly Canadian <Icon name="maple" size={14} /> Built for Workers.</p>
         <p><AvowdCredit /></p>
       </footer>
     </div>

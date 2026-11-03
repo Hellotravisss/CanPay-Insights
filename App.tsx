@@ -42,6 +42,7 @@ import { useAuth, type OAuthProvider } from './hooks/useAuth';
 import { useUserSettings } from './hooks/useUserSettings';
 import { useCalculationHistory, type CalculationRecord } from './hooks/useCalculationHistory';
 import AvowdCredit from './components/AvowdCredit';
+import Icon from '@/components/Icon';
 
 // Default State - 简易估算（时薪）
 // Savings / premium-pay / tips signals, all derived from values the user
@@ -918,7 +919,7 @@ const App: React.FC = () => {
             <span className="w-2 h-2 rounded-full bg-red-400 opacity-50"></span>
           </div>
           
-          <p className="mt-4">Proudly Canadian 🇨🇦 Built for Workers.</p>
+          <p className="mt-4">Proudly Canadian <Icon name="maple" size={14} /> Built for Workers.</p>
 
           <p className="mt-3">
             <AvowdCredit />

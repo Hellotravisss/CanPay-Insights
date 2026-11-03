@@ -371,7 +371,7 @@ const GeminiAdvisor: React.FC<Props> = ({ results, inputs, onReportOpen }) => {
             </div>
             <div className="bg-slate-950 p-3 rounded-lg border border-slate-800 mt-4">
               <p className="text-amber-400 text-xs sm:text-sm">
-                <Icon name="bulb" size={16} /> {t('rep.everyDollarPre')}<span className="font-bold">{(marginalRate.combined * 100).toFixed(1)}%</span>{t('rep.everyDollarPost')}
+                <Icon name="bulb" tone="white" size={16} /> {t('rep.everyDollarPre')}<span className="font-bold">{(marginalRate.combined * 100).toFixed(1)}%</span>{t('rep.everyDollarPost')}
               </p>
             </div>
           </div>
@@ -388,7 +388,7 @@ const GeminiAdvisor: React.FC<Props> = ({ results, inputs, onReportOpen }) => {
           </div>
           {bracketInfo.nextThreshold !== Infinity && (
             <p className="text-amber-400 text-xs sm:text-sm mt-2 border-t border-slate-800 pt-2">
-              <Icon name="warning" size={16} /> {t('rep.nextBracketPre')}{bracketInfo.next}{t('rep.nextBracketMid')}<span className="font-bold">{formatCurrency(bracketInfo.nextThreshold)}</span>{t('rep.nextBracketPost')}
+              <Icon name="warning" tone="white" size={16} /> {t('rep.nextBracketPre')}{bracketInfo.next}{t('rep.nextBracketMid')}<span className="font-bold">{formatCurrency(bracketInfo.nextThreshold)}</span>{t('rep.nextBracketPost')}
             </p>
           )}
         </div>
@@ -396,7 +396,7 @@ const GeminiAdvisor: React.FC<Props> = ({ results, inputs, onReportOpen }) => {
         {/* RRSP Strategy Card */}
         <div className="bg-slate-900/60 p-5 rounded-xl border border-slate-700/50">
           <h4 className="text-red-400 font-bold text-base sm:text-lg mb-3">
-            <Icon name="bank" size={20} /> {t('rep.rrspStrategy')}
+            <Icon name="bank" tone="white" size={20} /> {t('rep.rrspStrategy')}
           </h4>
           {annualRRSPActual > 0 ? (
             <div className="space-y-4">
@@ -404,7 +404,7 @@ const GeminiAdvisor: React.FC<Props> = ({ results, inputs, onReportOpen }) => {
                 {t('opt.optimumRoom')}: {formatCurrency(remainingRRSPOptimum)}
               </p>
               <p className="text-slate-300">
-                <Icon name="confetti" size={16} /> {t('rep.greatA')}<span className="text-white font-bold">{formatCurrency(annualRRSPActual)}</span>{t('rep.greatB')}
+                <Icon name="confetti" tone="white" size={16} /> {t('rep.greatA')}<span className="text-white font-bold">{formatCurrency(annualRRSPActual)}</span>{t('rep.greatB')}
                 {annualEmployerMatchActual > 0 ? <>{t('rep.greatC')}<span className="text-green-400 font-bold">+{formatCurrency(annualEmployerMatchActual)}{t('rep.greatD')}</span></> : ''}{t('rep.greatE')}
               </p>
               <div className="space-y-2 border-t border-slate-800 pt-3 text-sm text-slate-300">
@@ -426,7 +426,7 @@ const GeminiAdvisor: React.FC<Props> = ({ results, inputs, onReportOpen }) => {
                     </div>
                     <div className="bg-slate-950 p-3 rounded-lg border border-slate-800 mt-2">
                       <p className="text-green-400 text-xs sm:text-sm">
-                        <Icon name="bulb" size={16} /> {t('rep.topupEarnPre')}<span className="font-bold">{formatCurrency(biweeklyTopUp)}{t('rep.perBiweekly')}</span>{t('rep.topupEarnMid')}<span className="font-bold">{formatCurrency(extraRefund)}</span>{t('rep.topupEarnPost')}
+                        <Icon name="bulb" tone="white" size={16} /> {t('rep.topupEarnPre')}<span className="font-bold">{formatCurrency(biweeklyTopUp)}{t('rep.perBiweekly')}</span>{t('rep.topupEarnMid')}<span className="font-bold">{formatCurrency(extraRefund)}</span>{t('rep.topupEarnPost')}
                       </p>
                     </div>
                   </>
@@ -458,7 +458,7 @@ const GeminiAdvisor: React.FC<Props> = ({ results, inputs, onReportOpen }) => {
         {/* TFSA Strategy Card */}
         <div className="bg-slate-900/60 p-5 rounded-xl border border-slate-700/50">
           <h4 className="text-blue-400 font-bold text-base sm:text-lg mb-3">
-            <Icon name="piggy" size={20} /> {t('rep.tfsaStrategy')}
+            <Icon name="piggy" tone="white" size={20} /> {t('rep.tfsaStrategy')}
           </h4>
           <p className="text-green-400 font-bold text-lg mb-2">
             {t('rep.maxOutPre')}{formatCurrency(taxOptimization.tfsa.recommendedAmount)}
@@ -481,13 +481,13 @@ const GeminiAdvisor: React.FC<Props> = ({ results, inputs, onReportOpen }) => {
         {/* Action Steps Checklist */}
         <div className="bg-emerald-950/60 p-5 rounded-xl border border-emerald-800/40 text-left">
           <h4 className="text-emerald-400 font-bold text-base sm:text-lg mb-3">
-            ✅ {t('rep.checklist')}
+            <Icon name="check" tone="white" size={20} /> {t('rep.checklist')}
           </h4>
           <ul className="space-y-2.5 text-slate-200 text-sm">
             {annualRRSPActual === 0 && (
               <>
                 <li className="flex items-start gap-2.5">
-                  <span className="text-emerald-400 mt-0.5">☐</span>
+                  <Icon name="checkbox" tone="white" size={16} className="mt-0.5" />
                   <span>
                     {t('rep.openRRSP')}{' — '}
                     <a
@@ -501,7 +501,7 @@ const GeminiAdvisor: React.FC<Props> = ({ results, inputs, onReportOpen }) => {
                   </span>
                 </li>
                 <li className="flex items-start gap-2.5">
-                  <span className="text-emerald-400 mt-0.5">☐</span>
+                  <Icon name="checkbox" tone="white" size={16} className="mt-0.5" />
                   <span>{t('rep.setupDepositPre')}<span className="font-semibold">{formatCurrency(Math.round(taxOptimization.rrsp.recommendedAmount / periodsPerYear))}</span></span>
                 </li>
               </>
@@ -509,25 +509,25 @@ const GeminiAdvisor: React.FC<Props> = ({ results, inputs, onReportOpen }) => {
             {remainingRRSPOptimum > 0 && annualRRSPActual > 0 && (
               <>
                 <li className="flex items-start gap-2.5">
-                  <span className="text-emerald-400 mt-0.5">☐</span>
+                  <Icon name="checkbox" tone="white" size={16} className="mt-0.5" />
                   <span>{t('rep.topupBeforePre')}<span className="font-semibold">{formatCurrency(remainingRRSPOptimum)}</span>{t('rep.topupBeforePost')}</span>
                 </li>
                 <li className="flex items-start gap-2.5">
-                  <span className="text-emerald-400 mt-0.5">☐</span>
+                  <Icon name="checkbox" tone="white" size={16} className="mt-0.5" />
                   <span>{t('rep.autosavePre')}<span className="font-semibold">{formatCurrency(biweeklyTopUp)}{t('rep.perBiweekly')}</span>{t('rep.autosavePost')}</span>
                 </li>
               </>
             )}
             <li className="flex items-start gap-2.5">
-              <span className="text-emerald-400 mt-0.5">☐</span>
+              <Icon name="checkbox" tone="white" size={16} className="mt-0.5" />
               <span>{t('rep.investPre')}<span className="font-semibold">{formatCurrency(taxOptimization.tfsa.recommendedAmount)}</span>{t('rep.investPost')}</span>
             </li>
             <li className="flex items-start gap-2.5">
-              <span className="text-emerald-400 mt-0.5">☐</span>
+              <Icon name="checkbox" tone="white" size={16} className="mt-0.5" />
               <span>{t('rep.fileTaxes')}</span>
             </li>
             <li className="flex items-start gap-2.5">
-              <span className="text-emerald-400 mt-0.5">☐</span>
+              <Icon name="checkbox" tone="white" size={16} className="mt-0.5" />
               <span>{t('rep.claimReceipts')}</span>
             </li>
           </ul>
@@ -536,7 +536,7 @@ const GeminiAdvisor: React.FC<Props> = ({ results, inputs, onReportOpen }) => {
         {/* Tax Filing Tips */}
         <div className="bg-slate-900/60 p-5 rounded-xl border border-slate-700/50 text-left">
           <h4 className="text-cyan-400 font-bold text-base sm:text-lg mb-3">
-            <Icon name="checklist" size={20} /> {t('rep.filingTips')}
+            <Icon name="checklist" tone="white" size={20} /> {t('rep.filingTips')}
           </h4>
           <ul className="space-y-2 text-slate-300 text-sm">
             <li className="flex items-start gap-2">
@@ -926,7 +926,7 @@ const GeminiAdvisor: React.FC<Props> = ({ results, inputs, onReportOpen }) => {
 
               {/* Manual Instructions */}
               <div className="bg-slate-800 p-4 rounded-xl text-sm text-slate-300">
-                <p className="font-semibold mb-2"><Icon name="bulb" size={18} /> Tip:</p>
+                <p className="font-semibold mb-2"><Icon name="bulb" tone="white" size={18} /> Tip:</p>
                 <p>If the buttons don't work:</p>
                 <ol className="list-decimal list-inside mt-1 space-y-1 text-slate-500">
                   <li>Long press the image above</li>
@@ -1004,7 +1004,7 @@ const GeminiAdvisor: React.FC<Props> = ({ results, inputs, onReportOpen }) => {
           {/* ✦ Smart Tax Strategy (Synchronized with App) */}
           <div className="mb-12 border-t border-slate-800 pt-12 text-left">
             <h3 className="text-3.5xl font-extrabold text-white mb-8 flex items-center gap-3 border-b-2 border-red-600 pb-3 w-fit">
-              <span className="text-red-500 text-4xl">✦</span> Smart Tax Strategy
+              <Icon name="sparkle" size={36} /> Smart Tax Strategy
             </h3>
             <div className="max-w-[850px]">
               {renderSmartReport(true)}

@@ -5,6 +5,7 @@ import AvowdCredit from './AvowdCredit';
 import DataPulse from './DataPulse';
 import { DATASET_VERSION } from '../lib/datasetVersion';
 import { getSalaryFigures, PROVINCE_SEO_CONFIGS } from '../lib/salaryFigures';
+import Icon from '@/components/Icon';
 
 // Illustrative slice of the full 455-row dataset (net take-home at $80,000, 2026).
 // Computed by the engine, not typed: no gate can check a figure typed into a table
@@ -283,7 +284,7 @@ const DataPage: React.FC = () => {
           <a href="/contact" className="text-slate-500 hover:text-red-600 transition-colors">Contact</a>
           <a href="/privacy" className="text-slate-500 hover:text-red-600 transition-colors">Privacy</a>
         </div>
-        <p className="mt-4">Proudly Canadian 🇨🇦 Built for Workers.</p>
+        <p className="mt-4">Proudly Canadian <Icon name="maple" size={14} /> Built for Workers.</p>
         <p><AvowdCredit /></p>
       </footer>
     </div>

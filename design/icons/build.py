@@ -13,9 +13,12 @@ NAMES = {
  'sheet1': ['coins','briefcase','raise','chart','box','receipt','folder','question',
             'face-lower','face-same','face-higher','office','home','hybrid','pin','compass'],
  'sheet2': ['bank','piggy','checklist','bulb','confetti','warning','calendar','lock',
-            'link','camera','phone','book','save','globe','robot','slabs'],
+            'link','camera','phone','book','save','globe','robot',None],
+ 'sheet3': ['stopwatch','check','checkbox','sparkle','maple',None],
 }
-BASE, DARK = '#DC2625', '#A51C1C'
+# Each icon is written twice: red slabs with a darker facet (for light backgrounds),
+# and white slabs with a light grey facet like the logo's inukshuk (for red or dark ones).
+TONES = {'': ('#DC2625', '#A51C1C'), '-white': ('#FFFFFF', '#E3E3E3')}
 HERE = Path(__file__).parent
 OUT = HERE.parents[1] / 'public' / 'icons'; OUT.mkdir(exist_ok=True)
 TMP = Path(tempfile.mkdtemp())
@@ -41,10 +44,12 @@ for sheet, names in NAMES.items():
     im = np.asarray(Image.open(HERE / f'{sheet}.png').convert('RGB')).astype(float)
     red = (im[...,0]-im[...,1]) > 60
     cols, rows = cuts(red, 0), cuts(red, 1)
-    assert len(cols)==4 and len(rows)==4, (sheet, cols, rows)
+    assert len(cols)*len(rows) == len(names), (sheet, cols, rows)
     k = 0
     for (y0,y1) in rows:
         for (x0,x1) in cols:
+            name = names[k]; k += 1
+            if name is None: continue      # empty or spare cell
             cell = im[y0:y1, x0:x1]; m = (cell[...,0]-cell[...,1]) > 60
             ys, xs = np.nonzero(m)
             cy0, cy1, cx0, cx1 = ys.min(), ys.max()+1, xs.min(), xs.max()+1
@@ -59,13 +64,12 @@ for sheet, names in NAMES.items():
             r, g = chans[0], chans[1]
             sil = (r-g) > 60
             dark = sil & (r < 192)
-            name = names[k]; k += 1
-            if name == 'slabs': continue   # spare cell, unused
             t1, d1 = trace(sil, name+'-base'); t2, d2 = trace(dark, name+'-dark')
-            (OUT/f'{name}.svg').write_text(
+            for suffix, (base, facet) in TONES.items():
+                (OUT/f'{name}{suffix}.svg').write_text(
 f'''<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 {S} {S}">
-<g transform="{t1}" style="fill:var(--icon-base, {BASE})"><path d="{d1}"/></g>
-<g transform="{t2}" style="fill:var(--icon-facet, {DARK})"><path d="{d2}"/></g>
+<g transform="{t1}" fill="{base}"><path d="{d1}"/></g>
+<g transform="{t2}" fill="{facet}"><path d="{d2}"/></g>
 </svg>
 ''')
 print('built', len(list(OUT.glob('*.svg'))), 'svgs')

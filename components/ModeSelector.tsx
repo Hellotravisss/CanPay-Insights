@@ -27,7 +27,7 @@ const ModeSelector: React.FC<Props> = ({ onModeSelect }) => {
       id: CalculationMode.TIMESHEET,
       title: t('mode.timesheet.title'),
       subtitle: t('mode.timesheet.subtitle'),
-      icon: 'calendar' as IconName,
+      icon: 'stopwatch' as IconName,
     }
   ];
 
