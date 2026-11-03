@@ -1,4 +1,5 @@
 import type { Metadata } from 'next';
+import Icon from '../components/Icon';
 import App from '../App';
 
 export const metadata: Metadata = {
@@ -66,11 +67,14 @@ export default function HomePage() {
       <App />
       <section className="border-t border-slate-200 bg-white">
         <div className="mx-auto max-w-3xl px-4 py-12">
-          <h2 className="mb-3 text-2xl font-bold text-slate-900">
+          <h2 className="mb-3 text-xl font-bold text-slate-900">
             What is CanPay Insights?
           </h2>
-          <p className="mb-8 leading-7 text-slate-600">
-            CanPay Insights is a free take-home pay calculator for people who work in Canada. Enter
+          <p className="mb-3 text-lg leading-8 text-slate-800">
+            CanPay Insights is a free take-home pay calculator for people who work in Canada.
+          </p>
+          <p className="mb-8 text-sm leading-6 text-slate-500">
+            Enter
             your salary or hourly wage and your province, and it shows exactly how much you keep after
             federal and provincial income tax, CPP/CPP2, and EI for the 2026 tax year. It is a
             paycheck calculator for employees and hourly workers — not a payroll service, a payment
@@ -84,9 +88,10 @@ export default function HomePage() {
               mobile users see one tappable line per topic instead of screens
               of text. */}
           <details className="group border-t border-slate-200">
-            <summary className="cursor-pointer list-none py-4 text-base font-bold text-slate-800 marker:content-none [&::-webkit-details-marker]:hidden flex items-center justify-between">
-              How CPP deductions work in 2026
-              <span className="ml-3 text-slate-500 transition-transform group-open:rotate-90">›</span>
+            <summary className="cursor-pointer list-none py-4 text-[15px] font-medium text-slate-800 marker:content-none [&::-webkit-details-marker]:hidden flex items-center gap-3">
+              <Icon name="bank" size={22} />
+              <span>How CPP deductions work in 2026</span>
+              <span className="ml-auto flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-slate-100 text-slate-500 transition-transform group-open:rotate-90" aria-hidden="true">›</span>
             </summary>
             <p className="pb-5 leading-7 text-slate-600">
               The Canada Pension Plan (CPP) takes 5.95% of your earnings between the $3,500 basic
@@ -98,9 +103,10 @@ export default function HomePage() {
           </details>
 
           <details className="group border-t border-slate-200">
-            <summary className="cursor-pointer list-none py-4 text-base font-bold text-slate-800 marker:content-none [&::-webkit-details-marker]:hidden flex items-center justify-between">
-              EI premiums and rates across Canada
-              <span className="ml-3 text-slate-500 transition-transform group-open:rotate-90">›</span>
+            <summary className="cursor-pointer list-none py-4 text-[15px] font-medium text-slate-800 marker:content-none [&::-webkit-details-marker]:hidden flex items-center gap-3">
+              <Icon name="briefcase" size={22} />
+              <span>EI premiums and rates across Canada</span>
+              <span className="ml-auto flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-slate-100 text-slate-500 transition-transform group-open:rotate-90" aria-hidden="true">›</span>
             </summary>
             <p className="pb-5 leading-7 text-slate-600">
               Employment Insurance (EI) is deducted at 1.63% of insurable earnings in 2026, up to a
@@ -111,9 +117,10 @@ export default function HomePage() {
           </details>
 
           <details className="group border-t border-b border-slate-200">
-            <summary className="cursor-pointer list-none py-4 text-base font-bold text-slate-800 marker:content-none [&::-webkit-details-marker]:hidden flex items-center justify-between">
-              How provincial tax changes your take-home pay
-              <span className="ml-3 text-slate-500 transition-transform group-open:rotate-90">›</span>
+            <summary className="cursor-pointer list-none py-4 text-[15px] font-medium text-slate-800 marker:content-none [&::-webkit-details-marker]:hidden flex items-center gap-3">
+              <Icon name="map" size={22} />
+              <span>How provincial tax changes your take-home pay</span>
+              <span className="ml-auto flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-slate-100 text-slate-500 transition-transform group-open:rotate-90" aria-hidden="true">›</span>
             </summary>
             <p className="pb-5 leading-7 text-slate-600">
               Your net pay depends heavily on where you live. The same $65,000 salary keeps a different
@@ -129,9 +136,10 @@ export default function HomePage() {
       <section className="border-t border-slate-200 bg-white">
         <div className="mx-auto max-w-3xl px-4 py-12">
           <details className="group border-t border-slate-200">
-            <summary className="cursor-pointer list-none py-4 text-base font-bold text-slate-800 marker:content-none [&::-webkit-details-marker]:hidden flex items-center justify-between">
-              2026 take-home pay by province: an $80,000 salary compared
-              <span className="ml-3 text-slate-500 transition-transform group-open:rotate-90">›</span>
+            <summary className="cursor-pointer list-none py-4 text-[15px] font-medium text-slate-800 marker:content-none [&::-webkit-details-marker]:hidden flex items-center gap-3">
+              <Icon name="chart" size={22} />
+              <span>2026 take-home pay by province: an $80,000 salary compared</span>
+              <span className="ml-auto flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-slate-100 text-slate-500 transition-transform group-open:rotate-90" aria-hidden="true">›</span>
             </summary>
             <div className="pb-5">
           <p className="mb-6 leading-7 text-slate-600">
@@ -170,9 +178,10 @@ export default function HomePage() {
           </details>
 
           <details className="group border-t border-slate-200">
-            <summary className="cursor-pointer list-none py-4 text-base font-bold text-slate-800 marker:content-none [&::-webkit-details-marker]:hidden flex items-center justify-between">
-              How take-home pay changes as your salary rises
-              <span className="ml-3 text-slate-500 transition-transform group-open:rotate-90">›</span>
+            <summary className="cursor-pointer list-none py-4 text-[15px] font-medium text-slate-800 marker:content-none [&::-webkit-details-marker]:hidden flex items-center gap-3">
+              <Icon name="raise" size={22} />
+              <span>How take-home pay changes as your salary rises</span>
+              <span className="ml-auto flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-slate-100 text-slate-500 transition-transform group-open:rotate-90" aria-hidden="true">›</span>
             </summary>
             <div className="pb-5">
           <p className="mb-6 leading-7 text-slate-600">
@@ -201,15 +210,15 @@ export default function HomePage() {
             </div>
           </details>
 
-          <h2 className="mb-2 mt-10 text-2xl font-bold text-slate-900">
+          <h2 className="mb-2 mt-10 text-xl font-bold text-slate-900">
             Frequently asked questions
           </h2>
           <div>
             {homeFaqJsonLd.mainEntity.map((item, i) => (
               <details key={item.name} className={`group border-t border-slate-200 ${i === homeFaqJsonLd.mainEntity.length - 1 ? 'border-b' : ''}`}>
-                <summary className="cursor-pointer list-none py-4 text-base font-bold text-slate-800 marker:content-none [&::-webkit-details-marker]:hidden flex items-center justify-between">
+                <summary className="cursor-pointer list-none py-4 text-[15px] font-medium text-slate-800 marker:content-none [&::-webkit-details-marker]:hidden flex items-center gap-3">
                   {item.name}
-                  <span className="ml-3 text-slate-500 transition-transform group-open:rotate-90">›</span>
+                  <span className="ml-auto flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-slate-100 text-slate-500 transition-transform group-open:rotate-90" aria-hidden="true">›</span>
                 </summary>
                 <p className="pb-5 leading-7 text-slate-600">{item.acceptedAnswer.text}</p>
               </details>

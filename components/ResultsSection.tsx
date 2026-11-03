@@ -178,15 +178,29 @@ const ResultsSection: React.FC<Props> = ({ results, provinceName }) => {
 
   // On a phone the inputs sit above the results, so the answer is off screen
   // while the reader edits them. A frosted bar keeps it in view until the red
-  // card itself is visible again.
+  // card is reached; once the reader has scrolled past it to read on, the bar
+  // goes away rather than covering the text below.
   const heroRef = React.useRef<HTMLDivElement>(null);
-  const [heroVisible, setHeroVisible] = React.useState(true);
+  const [heroBelow, setHeroBelow] = React.useState(false);
+  // A scroll check, not an IntersectionObserver: a jump straight past the card
+  // (anchor link, fast fling) never makes it intersect, so the observer would
+  // leave the bar showing over the text further down.
   React.useEffect(() => {
-    const el = heroRef.current;
-    if (!el || typeof IntersectionObserver === 'undefined') return;
-    const io = new IntersectionObserver(([e]) => setHeroVisible(e.isIntersecting), { threshold: 0.15 });
-    io.observe(el);
-    return () => io.disconnect();
+    let frame = 0;
+    const check = () => {
+      frame = 0;
+      const el = heroRef.current;
+      if (el) setHeroBelow(el.getBoundingClientRect().top > window.innerHeight - 48);
+    };
+    const onScroll = () => { if (!frame) frame = requestAnimationFrame(check); };
+    check();
+    window.addEventListener('scroll', onScroll, { passive: true });
+    window.addEventListener('resize', onScroll);
+    return () => {
+      window.removeEventListener('scroll', onScroll);
+      window.removeEventListener('resize', onScroll);
+      if (frame) cancelAnimationFrame(frame);
+    };
   }, []);
   const days = taxDays(results);
   // 是否是年薪或打卡模式（有 payFrequency 字段）
@@ -242,7 +256,7 @@ const ResultsSection: React.FC<Props> = ({ results, provinceName }) => {
           <InukshukWatermark className="absolute -right-4 -bottom-8 w-28 h-28 opacity-20 transform group-hover:scale-110 transition-transform duration-500" />
         </div>
 
-        {!heroVisible && (
+        {heroBelow && (
           <button
             type="button"
             onClick={() => heroRef.current?.scrollIntoView({ behavior: 'smooth', block: 'center' })}
