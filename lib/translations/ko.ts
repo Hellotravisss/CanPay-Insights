@@ -51,7 +51,7 @@ export const main: Record<string, string> = {
   'annual.subtitle': '연봉을 입력하면 실수령액을 확인할 수 있어요',
   'annual.salaryLabel': '연봉',
   'sp.toggle': '배우자 또는 사실혼 파트너를 부양합니다',
-  'sp.income': '올해 배우자의 예상 순소득',
+  'sp.income': '올해 배우자 본인의 예상 순소득 (합산 아님)',
   'sp.hint': 'TD1의 배우자 공제를 더해 원천징수 세금이 줄어듭니다. 이를 신청한 TD1을 고용주에게 제출했을 때 적용됩니다. 두 사람 중 한 명만 신청할 수 있습니다.',
   'u18.toggle': '18세 미만입니다',
   'u18.hint': '18세 전에는 CPP(퀘벡은 QPP)가 공제되지 않습니다. 18번째 생일이 지난 다음 달 첫 급여부터 공제됩니다. EI는 그대로 공제됩니다.',

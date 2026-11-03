@@ -196,67 +196,65 @@ const ResultsSection: React.FC<Props> = ({ results, provinceName }) => {
   return (
     <div className="space-y-6">
       
-      {/* Summary Cards */}
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-        {/* 主收入卡片 - 根据模式显示不同内容 */}
-        <div className="bg-gradient-to-br from-red-600 to-red-700 rounded-xl shadow-lg p-6 text-white relative overflow-hidden group">
-          <div className="relative z-10">
-            <div className="flex justify-between items-start">
-               <div>
-                  <h3 className="text-red-100 text-xs font-bold uppercase tracking-widest mb-1">
-                    {payPeriodLabel} · {t('res.netPay')}
-                  </h3>
-                  <p className="text-4xl font-extrabold tracking-tight tabular-nums">
-                    <AnimatedAmount
-                      value={hasCustomFrequency ? (results.netPayPerPeriod || results.netPayBiWeekly) : results.netPayBiWeekly}
-                      format={formatCurrency}
-                    />
-                  </p>
-               </div>
-               <div className="bg-white/20 px-3 py-1 rounded text-xs font-semibold backdrop-blur-sm">
-                 {totalHours > 0 ? `${totalHours.toFixed(1)} ${t('res.hoursCap')}` : payPeriodLabel}
-               </div>
+      {/* Summary: one slim red band for this cheque, the year in a row beneath it.
+          Side by side, the red card was stretched to the annual card's height and
+          left a large empty red block (Travis, 2026-11-02). */}
+      <div className="space-y-4">
+        <div className="bg-gradient-to-br from-red-600 to-red-700 rounded-xl shadow-lg px-6 py-5 text-white relative overflow-hidden group">
+          <div className="relative z-10 flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
+            <div>
+              <h3 className="text-red-100 text-xs font-bold uppercase tracking-widest mb-1">
+                {payPeriodLabel} · {t('res.netPay')}
+              </h3>
+              <p className="text-4xl font-extrabold tracking-tight tabular-nums">
+                <AnimatedAmount
+                  value={hasCustomFrequency ? (results.netPayPerPeriod || results.netPayBiWeekly) : results.netPayBiWeekly}
+                  format={formatCurrency}
+                />
+              </p>
             </div>
-            
-            <div className="mt-6 pt-4 border-t border-red-400/30 space-y-1">
-              <div className="flex justify-between items-center text-sm text-red-50 font-medium">
-                <span>{t('res.grossPrePeriod')}</span>
-                <span>{formatCurrency(hasCustomFrequency ? (results.grossPayPerPeriod || results.grossPayBiWeekly) : results.grossPayBiWeekly)}</span>
-              </div>
+            <div className="flex flex-wrap items-center gap-x-5 gap-y-2 text-sm text-red-50 font-medium sm:justify-end">
+              <span className="bg-white/20 px-3 py-1 rounded text-xs font-semibold backdrop-blur-sm">
+                {totalHours > 0 ? `${totalHours.toFixed(1)} ${t('res.hoursCap')}` : payPeriodLabel}
+              </span>
+              <span className="tabular-nums">
+                {t('res.grossPrePeriod')}{' '}
+                <span className="font-bold text-white">
+                  {formatCurrency(hasCustomFrequency ? (results.grossPayPerPeriod || results.grossPayBiWeekly) : results.grossPayBiWeekly)}
+                </span>
+              </span>
             </div>
           </div>
           {/* Decorative Icon */}
-          <InukshukWatermark className="absolute -right-6 -bottom-6 w-40 h-40 opacity-20 transform group-hover:scale-110 transition-transform duration-500" />
+          <InukshukWatermark className="absolute -right-4 -bottom-8 w-28 h-28 opacity-20 transform group-hover:scale-110 transition-transform duration-500" />
         </div>
 
         {/* Annual Card */}
         <div className="bg-white rounded-xl shadow-sm border border-slate-100 p-6 relative overflow-hidden">
-            <div className="flex items-center gap-2 mb-4">
-               <span className="w-1.5 h-1.5 bg-red-600 rounded-full flex-shrink-0" />
-               <img src="/logo.png" alt="" aria-hidden="true" className="w-5 h-5 rounded-sm" />
-               <h3 className="text-lg font-bold text-slate-800">{t('res.annualProjection')}</h3>
-           </div>
-           
-           <div className="space-y-4">
-              <div className="flex justify-between items-baseline border-b border-slate-100 pb-2">
-                 <span className="text-slate-500 text-sm">{t('res.grossIncomePre')}</span>
-                 <span className="text-xl font-bold text-slate-900">{formatCurrency(results.grossPayAnnual)}</span>
-              </div>
-              <div className="flex justify-between items-center text-sm text-red-500">
-                 <span>{t('res.totalTaxDed')}</span>
-                 <span>- {formatCurrency(results.totalDeductionsAnnual)}</span>
-              </div>
-              <div className="flex justify-between items-baseline pt-2 bg-slate-50 p-3 rounded-lg border border-slate-200">
-                 <span className="text-slate-700 font-bold text-sm">{t('res.netIncomePost')}</span>
-                 <span className="text-2xl font-extrabold text-red-600">{formatCurrency(results.netPayAnnual)}</span>
-              </div>
-              {days && (
-                <p className="text-xs leading-5 text-slate-600">
-                  {t('res.taxDays').replace('{tax}', String(days.tax)).replace('{contrib}', String(days.contributions))}
-                </p>
-              )}
-           </div>
-           <InukshukWatermark className="absolute top-4 right-4 w-16 h-16 -rotate-12 opacity-10" />
+          <div className="flex items-center gap-2 mb-4">
+            <img src="/logo.png" alt="" aria-hidden="true" className="w-5 h-5 rounded-sm" />
+            <h3 className="text-lg font-bold text-slate-800">{t('res.annualProjection')}</h3>
+          </div>
+
+          <div className="space-y-3">
+            <div className="flex justify-between items-baseline gap-4 border-b border-slate-100 pb-2">
+              <span className="text-slate-500 text-sm">{t('res.grossIncomePre')}</span>
+              <span className="text-xl font-bold text-slate-900 tabular-nums">{formatCurrency(results.grossPayAnnual)}</span>
+            </div>
+            <div className="flex justify-between items-center gap-4 text-sm text-red-500">
+              <span>{t('res.totalTaxDed')}</span>
+              <span className="tabular-nums">- {formatCurrency(results.totalDeductionsAnnual)}</span>
+            </div>
+            <div className="flex justify-between items-baseline gap-4 bg-slate-50 p-3 rounded-lg border border-slate-200">
+              <span className="text-slate-700 font-bold text-sm">{t('res.netIncomePost')}</span>
+              <span className="text-2xl font-extrabold text-red-600 tabular-nums whitespace-nowrap">{formatCurrency(results.netPayAnnual)}</span>
+            </div>
+          </div>
+          {days && (
+            <p className="mt-4 text-xs leading-5 text-slate-600">
+              {t('res.taxDays').replace('{tax}', String(days.tax)).replace('{contrib}', String(days.contributions))}
+            </p>
+          )}
         </div>
       </div>
 
