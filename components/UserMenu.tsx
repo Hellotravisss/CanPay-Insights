@@ -193,7 +193,7 @@ const UserMenu: React.FC<UserMenuProps> = ({ onSwitchToTimesheet, onLoadCalculat
       case CalculationMode.ANNUAL:
         return 'briefcase';
       case CalculationMode.TIMESHEET:
-        return 'calendar';
+        return 'stopwatch';
       default:
         return 'chart';
     }

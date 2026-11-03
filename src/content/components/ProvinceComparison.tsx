@@ -7,6 +7,7 @@ import SEO from '../../../components/SEO';
 import CompareMoveOffer from '../../../components/CompareMoveOffer';
 import MoveIntentPrompt from '../../../components/MoveIntentPrompt';
 import { recordCalcEvent } from '../../../lib/telemetry';
+import Icon from '@/components/Icon';
 
 interface ProvinceComparisonProps {
   onBackToBlog: () => void;
@@ -187,13 +188,13 @@ const ProvinceComparison: React.FC<ProvinceComparisonProps> = ({ onBackToBlog })
               }`}
             >
               {selectedProvinces.length < 2 
-                ? `➕ Select ${2 - selectedProvinces.length} More`
-                : '🚀 Start Comparison'
+                ? `Select ${2 - selectedProvinces.length} More`
+                : 'Start Comparison'
               }
             </button>
             {selectedProvinces.length >= 2 && (
               <span className="text-green-600 font-medium text-sm animate-pulse">
-                👆 Click to compare!
+                Click to compare!
               </span>
             )}
           </div>
@@ -211,10 +212,10 @@ const ProvinceComparison: React.FC<ProvinceComparisonProps> = ({ onBackToBlog })
             </div>
             <h3 className="text-xl font-bold text-slate-800 mb-3">
               {selectedProvinces.length === 0 
-                ? '👆 Select Provinces Above'
+                ? 'Select Provinces Above'
                 : selectedProvinces.length === 1
-                ? '➕ Select 1 More Province'
-                : '👇 Click Start Comparison Button Above'
+                ? 'Select 1 More Province'
+                : 'Click Start Comparison Button Above'
               }
             </h3>
             <p className="text-slate-500 mb-2">
@@ -224,7 +225,7 @@ const ProvinceComparison: React.FC<ProvinceComparisonProps> = ({ onBackToBlog })
               }
             </p>
             <p className="text-sm text-slate-500">
-              💡 Tip: Select 2-6 provinces to compare their tax differences
+              <Icon name="bulb" size={16} /> Tip: Select 2-6 provinces to compare their tax differences
             </p>
             {selectedProvinces.length > 0 && (
               <div className="mt-4 inline-flex items-center gap-2 px-4 py-2 bg-slate-100 rounded-full text-sm text-slate-600">

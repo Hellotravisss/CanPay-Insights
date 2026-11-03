@@ -2,6 +2,7 @@
 import React from 'react';
 import { useRouter } from 'next/navigation';
 import AvowdCredit from './AvowdCredit';
+import Icon from '@/components/Icon';
 
 const Badge = ({ n }: { n: number }) => (
   <span className="flex items-center justify-center w-8 h-8 bg-red-100 text-red-700 rounded-lg text-sm font-bold">{n}</span>
@@ -158,7 +159,7 @@ const AboutPage: React.FC = () => {
           <a href="/contact" className="text-slate-500 hover:text-red-600 transition-colors">Contact</a>
           <a href="/privacy" className="text-slate-500 hover:text-red-600 transition-colors">Privacy</a>
         </div>
-        <p className="mt-4">Proudly Canadian 🇨🇦 Built for Workers.</p>
+        <p className="mt-4">Proudly Canadian <Icon name="maple" size={14} /> Built for Workers.</p>
         <p><AvowdCredit /></p>
       </footer>
     </div>

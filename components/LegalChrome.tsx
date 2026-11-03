@@ -2,6 +2,7 @@
 import React from 'react';
 import { useRouter } from 'next/navigation';
 import AvowdCredit from './AvowdCredit';
+import Icon from '@/components/Icon';
 
 /**
  * The shared frame for the legal pages (privacy, terms, refunds, and their
@@ -96,7 +97,7 @@ export default function LegalChrome({
           <span className="h-2 w-2 rounded-full bg-red-400 opacity-50"></span>
           <span className="h-2 w-2 rounded-full bg-red-400 opacity-50"></span>
         </div>
-        <p className="mt-4">Proudly Canadian 🇨🇦 Built for Workers.</p>
+        <p className="mt-4">Proudly Canadian <Icon name="maple" size={14} /> Built for Workers.</p>
         <p><AvowdCredit /></p>
       </footer>
     </div>

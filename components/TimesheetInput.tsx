@@ -245,7 +245,7 @@ const TimesheetInput: React.FC<Props> = ({ inputs, setInputs }) => {
       <div className="bg-gradient-to-br from-slate-900 to-slate-800 p-6 text-white">
         <div className="flex items-center justify-between">
           <div>
-            <h2 className="text-xl font-bold mb-1">⏱️ {t('ts.title')}</h2>
+            <h2 className="text-xl font-bold mb-1"><Icon name="stopwatch" tone="white" size={20} /> {t('ts.title')}</h2>
             <p className="text-slate-300 text-sm">{t('ts.subtitle')}</p>
           </div>
           {/* Cloud sync indicator */}
