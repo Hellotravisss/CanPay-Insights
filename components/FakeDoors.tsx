@@ -558,7 +558,7 @@ export default function FakeDoors({
           <button
             onClick={buyRelocation}
             disabled={!dest || buying}
-            className="mt-3 w-full rounded-md bg-red-600 px-3 py-2.5 text-sm font-semibold text-white hover:bg-red-700 disabled:bg-slate-200 disabled:text-slate-400"
+            className="mt-3 w-full rounded-md btn-red-3d px-3 py-2.5 text-sm font-semibold text-white disabled:bg-slate-200 disabled:text-slate-400"
           >
             {buying ? (<span className="inline-flex items-center gap-2"><ThinkingOrb state="connecting" size={20} theme="dark" aria-label={t.buying} />{t.buying}</span>) : t.buy}
           </button>
@@ -590,7 +590,7 @@ export default function FakeDoors({
                 <button
                   onClick={showOffer}
                   disabled={!offerReady}
-                  className="w-full rounded-md bg-red-600 px-3 py-2.5 text-sm font-semibold text-white hover:bg-red-700 disabled:bg-slate-200 disabled:text-slate-400"
+                  className="w-full rounded-md btn-red-3d px-3 py-2.5 text-sm font-semibold text-white disabled:bg-slate-200 disabled:text-slate-400"
                 >
                   {t.offerCta}
                 </button>

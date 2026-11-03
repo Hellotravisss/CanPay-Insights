@@ -175,6 +175,19 @@ const ResultsSection: React.FC<Props> = ({ results, provinceName }) => {
   };
 
   const netPayLabel = t('res.netPay');
+
+  // On a phone the inputs sit above the results, so the answer is off screen
+  // while the reader edits them. A frosted bar keeps it in view until the red
+  // card itself is visible again.
+  const heroRef = React.useRef<HTMLDivElement>(null);
+  const [heroVisible, setHeroVisible] = React.useState(true);
+  React.useEffect(() => {
+    const el = heroRef.current;
+    if (!el || typeof IntersectionObserver === 'undefined') return;
+    const io = new IntersectionObserver(([e]) => setHeroVisible(e.isIntersecting), { threshold: 0.15 });
+    io.observe(el);
+    return () => io.disconnect();
+  }, []);
   const days = taxDays(results);
   // 是否是年薪或打卡模式（有 payFrequency 字段）
   const hasCustomFrequency = !!results.payFrequency;
@@ -200,7 +213,7 @@ const ResultsSection: React.FC<Props> = ({ results, provinceName }) => {
           Side by side, the red card was stretched to the annual card's height and
           left a large empty red block (Travis, 2026-11-02). */}
       <div className="space-y-4">
-        <div className="bg-gradient-to-br from-red-600 to-red-700 rounded-xl shadow-lg px-6 py-5 text-white relative overflow-hidden group">
+        <div ref={heroRef} className="card-red-3d rounded-2xl px-6 py-5 text-white relative overflow-hidden group">
           <div className="relative z-10 flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
             <div>
               <h3 className="text-red-100 text-xs font-bold uppercase tracking-widest mb-1">
@@ -213,11 +226,11 @@ const ResultsSection: React.FC<Props> = ({ results, provinceName }) => {
                 />
               </p>
             </div>
-            <div className="flex flex-wrap items-center gap-x-5 gap-y-2 text-sm text-red-50 font-medium sm:justify-end">
-              <span className="bg-white/20 px-3 py-1 rounded text-xs font-semibold backdrop-blur-sm">
+            <div className="flex flex-wrap items-center gap-2 text-sm text-red-50 font-medium sm:justify-end">
+              <span className="chip-glass px-3 py-1 rounded-full text-xs font-semibold">
                 {totalHours > 0 ? `${totalHours.toFixed(1)} ${t('res.hoursCap')}` : payPeriodLabel}
               </span>
-              <span className="tabular-nums">
+              <span className="chip-glass px-3 py-1 rounded-full tabular-nums">
                 {t('res.grossPrePeriod')}{' '}
                 <span className="font-bold text-white">
                   {formatCurrency(hasCustomFrequency ? (results.grossPayPerPeriod || results.grossPayBiWeekly) : results.grossPayBiWeekly)}
@@ -228,6 +241,19 @@ const ResultsSection: React.FC<Props> = ({ results, provinceName }) => {
           {/* Decorative Icon */}
           <InukshukWatermark className="absolute -right-4 -bottom-8 w-28 h-28 opacity-20 transform group-hover:scale-110 transition-transform duration-500" />
         </div>
+
+        {!heroVisible && (
+          <button
+            type="button"
+            onClick={() => heroRef.current?.scrollIntoView({ behavior: 'smooth', block: 'center' })}
+            className="glass-bar lg:hidden fixed inset-x-4 bottom-4 z-40 flex items-center justify-between gap-3 rounded-full border border-white/60 px-5 py-3 text-left shadow-[0_10px_30px_-8px_rgba(15,23,42,0.35)]"
+          >
+            <span className="text-xs font-bold uppercase tracking-widest text-slate-600">{payPeriodLabel} · {t('res.netPay')}</span>
+            <span className="text-xl font-extrabold tabular-nums text-red-600">
+              {formatCurrency(hasCustomFrequency ? (results.netPayPerPeriod || results.netPayBiWeekly) : results.netPayBiWeekly)}
+            </span>
+          </button>
+        )}
 
         {/* Annual Card */}
         <div className="bg-white rounded-xl shadow-sm border border-slate-100 p-6 relative overflow-hidden">
