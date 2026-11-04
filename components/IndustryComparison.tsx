@@ -87,6 +87,7 @@ const DICT: Record<string, Record<string, string>> = {
     noteFull: "Compared rate to rate. The official figure is a base hourly wage at standard full-time hours, so measuring a gross that includes overtime against it would count hours worked as pay earned.",
     notePart: "Compared rate to rate: you are working part-time hours, and the official figure covers full-time employees — an annual comparison would read fewer hours as underpayment.",
     otNote: "Separately: your gross includes {n} overtime hours this pay period. That raises what you take home without changing what your hour is worth — two different questions, kept apart on purpose.",
+    how: "How this is compared",
     source: "Statistics Canada, Table 14-10-0064-01, {year} — median wage of full-time employees, all industries. Refreshed semi-annually.",
     sharpen: "Sharpen it — what do you do?",
     prompt: 'Pick your industry to see where your pay stands',
@@ -124,6 +125,7 @@ const DICT: Record<string, Record<string, string>> = {
     noteFull: "Comparaison taux à taux. Le chiffre officiel est un taux horaire de base à temps plein ; comparer un brut incluant les heures supplémentaires reviendrait à compter des heures travaillées comme du salaire gagné.",
     notePart: "Comparaison taux à taux : vous travaillez à temps partiel et le chiffre officiel couvre les employés à temps plein — une comparaison annuelle lirait moins d’heures comme un sous-paiement.",
     otNote: "Par ailleurs : votre brut comprend {n} heures supplémentaires cette période. Cela augmente votre paie sans changer la valeur de votre heure — deux questions distinctes.",
+    how: "Méthode et source",
     source: "Statistique Canada, tableau 14-10-0064-01, {year} — salaire médian des employés à temps plein, toutes industries. Mis à jour deux fois par an.",
     sharpen: "Précisez — quel est votre métier ?",
     prompt: 'Choisissez votre secteur pour situer votre salaire',
@@ -161,6 +163,7 @@ const DICT: Record<string, Record<string, string>> = {
     noteFull: "这是费率对费率的比较。官方数字是标准全职工时下的基础时薪,如果拿含加班的总收入去比,等于把多干的工时算成了多挣的钱。",
     notePart: "这是费率对费率的比较:你目前是兼职工时,而官方数字统计的是全职雇员 —— 用年收入去比,会把工时少误读成工资低。",
     otNote: "另外:这个发薪周期你的总收入里含 {n} 小时加班。这会让到手变多,但不改变你每小时值多少 —— 两个不同的问题,刻意分开算。",
+    how: "比较方法与数据来源",
     source: "加拿大统计局,表 14-10-0064-01,{year} —— 全职雇员工资中位数,全行业。每半年更新。",
     sharpen: "再精确一点 —— 你做哪一行?",
     prompt: '选择你的行业,看看你的工资在行业中的位置',
@@ -464,19 +467,17 @@ export default function IndustryComparison({
               headline.pct === 0 ? 'text-slate-900' : headline.pct > 0 ? 'text-emerald-700' : 'text-red-700',
             )}
           </p>
-          {headline.basis === 'hourly' && (
-            <p className="mt-1.5 text-[11px] leading-4 text-slate-500">
-              {headline.partTime ? t.notePart : t.noteFull}
-            </p>
-          )}
-          {headline.otHours > 0 && (
-            <p className="mt-1.5 text-[11px] leading-4 text-slate-500">
-              {t.otNote.replace('{n}', String(Math.round(headline.otHours)))}
-            </p>
-          )}
-          <p className="mt-1.5 text-[11px] leading-4 text-slate-500">
-            {t.source.replace('{year}', String(WAGE_DATA_YEAR))}
-          </p>
+          <details className="group mt-2 text-xs text-slate-500">
+            <summary className="inline-flex cursor-pointer list-none items-center gap-1 marker:content-none [&::-webkit-details-marker]:hidden">
+              {t.how}
+              <span className="transition-transform group-open:rotate-90" aria-hidden="true">›</span>
+            </summary>
+            <div className="mt-1.5 space-y-1.5 leading-5">
+              {headline.basis === 'hourly' && <p>{headline.partTime ? t.notePart : t.noteFull}</p>}
+              {headline.otHours > 0 && <p>{t.otNote.replace('{n}', String(Math.round(headline.otHours)))}</p>}
+              <p>{t.source.replace('{year}', String(WAGE_DATA_YEAR))}</p>
+            </div>
+          </details>
         </div>
       )}
 

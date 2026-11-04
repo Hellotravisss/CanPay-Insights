@@ -23,52 +23,52 @@ const APP_URL = 'https://apps.apple.com/app/canpayinsights/id6759822038';
 const DICT: Record<string, { title: string; body: string; cta: string }> = {
   en: {
     title: 'Keep this on your phone',
-    body: 'The iPhone app runs the same engine offline — track a timesheet on the job site with no signal, and your saved calculations are there when you reopen it.',
+    body: 'The iPhone app runs the same engine offline.',
     cta: 'Get the free app',
   },
   zh: {
     title: '把它放进手机',
-    body: 'iPhone App 用的是同一套计算引擎,而且可以离线使用 —— 在没信号的工地记工时,保存过的计算下次打开就在。',
+    body: 'iPhone App 用的是同一套计算引擎,而且可以离线使用。',
     cta: '免费下载',
   },
   fr: {
     title: 'Gardez-le sur votre téléphone',
-    body: 'L’application iPhone utilise le même moteur, hors ligne — suivez une feuille de temps sans réseau, et vos calculs enregistrés sont là à la réouverture.',
+    body: 'L’application iPhone utilise le même moteur, hors ligne.',
     cta: 'Télécharger gratuitement',
   },
   es: {
     title: 'Llévelo en su teléfono',
-    body: 'La app para iPhone usa el mismo motor y funciona sin conexión: registre su hoja de horas sin señal y encuentre sus cálculos guardados al volver.',
+    body: 'La app para iPhone usa el mismo motor y funciona sin conexión.',
     cta: 'Descargar gratis',
   },
   pa: {
     title: 'ਇਸਨੂੰ ਆਪਣੇ ਫ਼ੋਨ ਵਿੱਚ ਰੱਖੋ',
-    body: 'iPhone ਐਪ ਉਹੀ ਇੰਜਣ ਵਰਤਦੀ ਹੈ ਅਤੇ ਬਿਨਾਂ ਇੰਟਰਨੈੱਟ ਚੱਲਦੀ ਹੈ — ਸਿਗਨਲ ਤੋਂ ਬਿਨਾਂ ਟਾਈਮਸ਼ੀਟ ਰੱਖੋ, ਅਤੇ ਸੰਭਾਲੇ ਹੋਏ ਹਿਸਾਬ ਮੁੜ ਖੋਲ੍ਹਣ ’ਤੇ ਮੌਜੂਦ ਹੁੰਦੇ ਹਨ।',
+    body: 'iPhone ਐਪ ਉਹੀ ਇੰਜਣ ਵਰਤਦੀ ਹੈ ਅਤੇ ਬਿਨਾਂ ਇੰਟਰਨੈੱਟ ਚੱਲਦੀ ਹੈ.',
     cta: 'ਮੁਫ਼ਤ ਐਪ ਲਵੋ',
   },
   hi: {
     title: 'इसे अपने फ़ोन में रखें',
-    body: 'iPhone ऐप वही इंजन चलाता है और ऑफ़लाइन काम करता है — बिना सिग्नल के टाइमशीट रखें, और सहेजे गए हिसाब दोबारा खोलने पर मौजूद रहते हैं।',
+    body: 'iPhone ऐप वही इंजन चलाता है और ऑफ़लाइन काम करता है.',
     cta: 'मुफ़्त ऐप लें',
   },
   tl: {
     title: 'Dalhin ito sa telepono mo',
-    body: 'Ang iPhone app ay gumagamit ng parehong makina at gumagana offline — mag-timesheet kahit walang signal, at naroon ang mga naka-save mong kalkulasyon pagbalik mo.',
+    body: 'Ang iPhone app ay gumagamit ng parehong makina at gumagana offline.',
     cta: 'Kunin ang libreng app',
   },
   uk: {
     title: 'Тримайте це в телефоні',
-    body: 'Застосунок для iPhone працює на тому самому рушії та офлайн — ведіть табель без зв’язку, а збережені розрахунки будуть на місці.',
+    body: 'Застосунок для iPhone працює на тому самому рушії та офлайн.',
     cta: 'Завантажити безкоштовно',
   },
   ko: {
     title: '휴대폰에 담아두세요',
-    body: 'iPhone 앱은 동일한 계산 엔진을 오프라인에서도 사용합니다. 신호가 없는 현장에서도 근무시간을 기록하고, 저장한 계산은 다시 열 때 그대로 있습니다.',
+    body: 'iPhone 앱은 동일한 계산 엔진을 오프라인에서도 사용합니다.',
     cta: '무료 앱 받기',
   },
   vi: {
     title: 'Giữ nó trong điện thoại',
-    body: 'Ứng dụng iPhone dùng cùng một công cụ tính và chạy ngoại tuyến — chấm công ngay cả khi mất sóng, và các phép tính đã lưu vẫn còn khi bạn mở lại.',
+    body: 'Ứng dụng iPhone dùng cùng một công cụ tính và chạy ngoại tuyến.',
     cta: 'Tải ứng dụng miễn phí',
   },
 };
