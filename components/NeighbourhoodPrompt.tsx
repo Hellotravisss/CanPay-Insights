@@ -110,6 +110,7 @@ const DICT: Record<string, Record<string, string>> = {
     compare: 'Compare',
     useLocation: 'Use my location',
     locating: 'Locating…',
+    consentShort: 'Optional. Only area totals are ever shared.',
     consent:
       'Optional. Only the first three characters of a postal code are kept, and a shared location is rounded to about 1 km on your device before it is sent. Used for neighbourhood statistics we publish and license to others, such as researchers and real-estate or financial companies — always as counts for areas of thousands of households, never your own record.',
     privacy: 'Privacy policy',
@@ -130,6 +131,7 @@ const DICT: Record<string, Record<string, string>> = {
     compare: '对比',
     useLocation: '使用我的位置',
     locating: '定位中…',
+    consentShort: '可选。对外只提供区域汇总数据。',
     consent:
       '可选。只保留邮编的前三位;分享的位置会先在你的设备上四舍五入到约 1 公里再发送。用于我们发布并授权给研究机构、地产或金融公司等第三方的社区级统计 —— 始终是覆盖数千户区域的计数,绝不是你个人的记录。',
     privacy: '隐私政策',
@@ -150,6 +152,7 @@ const DICT: Record<string, Record<string, string>> = {
     compare: 'Comparer',
     useLocation: 'Utiliser ma position',
     locating: 'Localisation…',
+    consentShort: 'Facultatif. Seuls des totaux par zone sont partagés.',
     consent:
       'Facultatif. Seuls les trois premiers caractères du code postal sont conservés, et une position partagée est arrondie à environ 1 km sur votre appareil avant l’envoi. Sert à des statistiques de quartier que nous publions et concédons sous licence à des tiers, comme des chercheurs ou des entreprises immobilières ou financières — toujours sous forme de décomptes pour des zones de milliers de ménages, jamais votre propre fiche.',
     privacy: 'Politique de confidentialité',
@@ -170,6 +173,7 @@ const DICT: Record<string, Record<string, string>> = {
     compare: 'Comparar',
     useLocation: 'Usar mi ubicación',
     locating: 'Ubicando…',
+    consentShort: 'Opcional. Solo se comparten totales por zona.',
     consent:
       'Opcional. Solo se guardan los tres primeros caracteres del código postal, y una ubicación compartida se redondea a aproximadamente 1 km en su dispositivo antes de enviarse. Se usa para estadísticas por vecindario que publicamos y licenciamos a terceros, como investigadores o empresas inmobiliarias o financieras — siempre como recuentos de zonas de miles de hogares, nunca su registro individual.',
     privacy: 'Política de privacidad',
@@ -190,6 +194,7 @@ const DICT: Record<string, Record<string, string>> = {
     compare: 'ਤੁਲਨਾ ਕਰੋ',
     useLocation: 'ਮੇਰੀ ਲੋਕੇਸ਼ਨ ਵਰਤੋ',
     locating: 'ਲੱਭ ਰਹੇ ਹਾਂ…',
+    consentShort: 'ਵਿਕਲਪਿਕ। ਸਿਰਫ਼ ਖੇਤਰ ਦੇ ਕੁੱਲ ਅੰਕੜੇ ਸਾਂਝੇ ਕੀਤੇ ਜਾਂਦੇ ਹਨ।',
     consent:
       'ਵਿਕਲਪਿਕ। ਪੋਸਟਲ ਕੋਡ ਦੇ ਸਿਰਫ਼ ਪਹਿਲੇ ਤਿੰਨ ਅੱਖਰ ਰੱਖੇ ਜਾਂਦੇ ਹਨ, ਅਤੇ ਸਾਂਝੀ ਕੀਤੀ ਲੋਕੇਸ਼ਨ ਭੇਜਣ ਤੋਂ ਪਹਿਲਾਂ ਤੁਹਾਡੇ ਡਿਵਾਈਸ ਉੱਤੇ ਲਗਭਗ 1 ਕਿ.ਮੀ. ਤੱਕ ਗੋਲ ਕੀਤੀ ਜਾਂਦੀ ਹੈ। ਇਹ ਇਲਾਕਾ-ਪੱਧਰ ਦੇ ਅੰਕੜਿਆਂ ਲਈ ਵਰਤੀ ਜਾਂਦੀ ਹੈ ਜੋ ਅਸੀਂ ਪ੍ਰਕਾਸ਼ਿਤ ਕਰਦੇ ਹਾਂ ਅਤੇ ਖੋਜਕਾਰਾਂ ਜਾਂ ਰੀਅਲ-ਅਸਟੇਟ/ਵਿੱਤੀ ਕੰਪਨੀਆਂ ਵਰਗੇ ਤੀਜੇ ਪੱਖਾਂ ਨੂੰ ਲਾਇਸੈਂਸ ਦਿੰਦੇ ਹਾਂ — ਹਮੇਸ਼ਾ ਹਜ਼ਾਰਾਂ ਘਰਾਂ ਵਾਲੇ ਇਲਾਕਿਆਂ ਦੀ ਗਿਣਤੀ ਵਜੋਂ, ਕਦੇ ਵੀ ਤੁਹਾਡਾ ਆਪਣਾ ਰਿਕਾਰਡ ਨਹੀਂ।',
     privacy: 'ਪਰਾਈਵੇਸੀ ਨੀਤੀ',
@@ -210,6 +215,7 @@ const DICT: Record<string, Record<string, string>> = {
     compare: 'तुलना करें',
     useLocation: 'मेरी लोकेशन इस्तेमाल करें',
     locating: 'खोज रहे हैं…',
+    consentShort: 'वैकल्पिक। केवल क्षेत्र-स्तर के कुल आँकड़े साझा किए जाते हैं।',
     consent:
       'वैकल्पिक। पोस्टल कोड के केवल पहले तीन अक्षर रखे जाते हैं, और साझा की गई लोकेशन भेजने से पहले आपके डिवाइस पर लगभग 1 किमी तक गोल कर दी जाती है। इसका उपयोग इलाका-स्तर के आँकड़ों के लिए होता है जिन्हें हम प्रकाशित करते हैं और शोधकर्ताओं या रियल-एस्टेट/वित्तीय कंपनियों जैसे तीसरे पक्षों को लाइसेंस देते हैं — हमेशा हज़ारों घरों वाले क्षेत्रों की गिनती के रूप में, कभी आपका अपना रिकॉर्ड नहीं।',
     privacy: 'गोपनीयता नीति',
@@ -230,6 +236,7 @@ const DICT: Record<string, Record<string, string>> = {
     compare: 'Ihambing',
     useLocation: 'Gamitin ang lokasyon ko',
     locating: 'Hinahanap…',
+    consentShort: 'Opsyonal. Mga kabuuan lang ng lugar ang ibinabahagi.',
     consent:
       'Opsyonal. Tanging ang unang tatlong karakter ng postal code ang itinatabi, at ang ibinahaging lokasyon ay ini-round sa humigit-kumulang 1 km sa device mo bago ipadala. Ginagamit para sa estadistika ng lugar na inilalathala namin at nililisensya sa iba, gaya ng mga mananaliksik o kumpanya ng real estate o pananalapi — palaging bilang bilangan para sa mga lugar na libu-libong sambahayan, hindi kailanman ang sarili mong rekord.',
     privacy: 'Patakaran sa privacy',
@@ -250,6 +257,7 @@ const DICT: Record<string, Record<string, string>> = {
     compare: 'Порівняти',
     useLocation: 'Використати моє місцезнаходження',
     locating: 'Визначаємо…',
+    consentShort: 'Необов’язково. Передаються лише підсумки по району.',
     consent:
       'Необов’язково. Зберігаються лише перші три символи поштового індексу, а надане місцезнаходження округлюється приблизно до 1 км на вашому пристрої перед надсиланням. Використовується для статистики за районами, яку ми публікуємо та ліцензуємо третім сторонам, як-от дослідникам чи компаніям з нерухомості або фінансів — завжди як підрахунки для територій із тисячами домогосподарств, ніколи як ваш власний запис.',
     privacy: 'Політика конфіденційності',
@@ -270,6 +278,7 @@ const DICT: Record<string, Record<string, string>> = {
     compare: '비교',
     useLocation: '내 위치 사용',
     locating: '위치 확인 중…',
+    consentShort: '선택 사항입니다. 지역 단위 합계만 공유됩니다.',
     consent:
       '선택 사항입니다. 우편번호의 앞 세 글자만 보관되며, 공유된 위치는 전송 전에 기기에서 약 1km 단위로 반올림됩니다. 저희가 발표하고 연구자나 부동산·금융 회사 등 제3자에게 라이선스하는 동네 단위 통계에 사용됩니다 — 항상 수천 가구 규모 지역의 집계일 뿐, 귀하의 개인 기록은 결코 아닙니다.',
     privacy: '개인정보 처리방침',
@@ -290,6 +299,7 @@ const DICT: Record<string, Record<string, string>> = {
     compare: 'So sánh',
     useLocation: 'Dùng vị trí của tôi',
     locating: 'Đang định vị…',
+    consentShort: 'Không bắt buộc. Chỉ chia sẻ số liệu tổng theo khu vực.',
     consent:
       'Không bắt buộc. Chỉ giữ ba ký tự đầu của mã bưu điện, và vị trí được chia sẻ sẽ được làm tròn khoảng 1 km ngay trên thiết bị của bạn trước khi gửi. Dùng cho thống kê theo khu phố mà chúng tôi công bố và cấp phép cho bên thứ ba như nhà nghiên cứu hoặc công ty bất động sản, tài chính — luôn là số đếm cho khu vực hàng nghìn hộ gia đình, không bao giờ là hồ sơ riêng của bạn.',
     privacy: 'Chính sách quyền riêng tư',
@@ -448,10 +458,17 @@ export default function NeighbourhoodPrompt({
             </button>
           </form>
           {note && <p className="mt-2 text-xs text-red-600" role="status">{note}</p>}
-          <p className="mt-3 text-[11px] leading-4 text-slate-500">
-            {t.consent}{' '}
-            <a href="/privacy#location" className="underline decoration-slate-300 underline-offset-2 hover:text-slate-600">{t.privacy}</a>
-          </p>
+          {/* Layered notice: the one line that matters, the full purpose a tap away. */}
+          <details className="group mt-3 text-xs text-slate-500">
+            <summary className="inline-flex cursor-pointer list-none items-center gap-1 marker:content-none [&::-webkit-details-marker]:hidden">
+              {t.consentShort}
+              <span className="transition-transform group-open:rotate-90" aria-hidden="true">›</span>
+            </summary>
+            <p className="mt-1.5 leading-5">
+              {t.consent}{' '}
+              <a href="/privacy#location" className="underline decoration-slate-300 underline-offset-2 hover:text-slate-600">{t.privacy}</a>
+            </p>
+          </details>
         </>
       )}
     </div>
