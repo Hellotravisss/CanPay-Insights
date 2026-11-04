@@ -1,5 +1,6 @@
 'use client';
 import { taxDays } from '../utils/taxDays';
+import { useBelowViewport } from './useBelowViewport';
 import React from 'react';
 import AnimatedAmount from './AnimatedAmount';
 import { CalculationResult, Province } from '../types';
@@ -177,31 +178,9 @@ const ResultsSection: React.FC<Props> = ({ results, provinceName }) => {
   const netPayLabel = t('res.netPay');
 
   // On a phone the inputs sit above the results, so the answer is off screen
-  // while the reader edits them. A frosted bar keeps it in view until the red
-  // card is reached; once the reader has scrolled past it to read on, the bar
-  // goes away rather than covering the text below.
+  // while the reader edits them; a frosted bar shows it until the card is reached.
   const heroRef = React.useRef<HTMLDivElement>(null);
-  const [heroBelow, setHeroBelow] = React.useState(false);
-  // A scroll check, not an IntersectionObserver: a jump straight past the card
-  // (anchor link, fast fling) never makes it intersect, so the observer would
-  // leave the bar showing over the text further down.
-  React.useEffect(() => {
-    let frame = 0;
-    const check = () => {
-      frame = 0;
-      const el = heroRef.current;
-      if (el) setHeroBelow(el.getBoundingClientRect().top > window.innerHeight - 48);
-    };
-    const onScroll = () => { if (!frame) frame = requestAnimationFrame(check); };
-    check();
-    window.addEventListener('scroll', onScroll, { passive: true });
-    window.addEventListener('resize', onScroll);
-    return () => {
-      window.removeEventListener('scroll', onScroll);
-      window.removeEventListener('resize', onScroll);
-      if (frame) cancelAnimationFrame(frame);
-    };
-  }, []);
+  const heroBelow = useBelowViewport(heroRef);
   const days = taxDays(results);
   // 是否是年薪或打卡模式（有 payFrequency 字段）
   const hasCustomFrequency = !!results.payFrequency;
@@ -227,7 +206,7 @@ const ResultsSection: React.FC<Props> = ({ results, provinceName }) => {
           Side by side, the red card was stretched to the annual card's height and
           left a large empty red block (Travis, 2026-11-02). */}
       <div className="space-y-4">
-        <div ref={heroRef} className="card-red-3d rounded-2xl px-6 py-5 text-white relative overflow-hidden group">
+        <div ref={heroRef} className="card-brand-3d rounded-2xl px-6 py-5 text-white relative overflow-hidden group">
           <div className="relative z-10 flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
             <div>
               <h3 className="text-red-100 text-xs font-bold uppercase tracking-widest mb-1">

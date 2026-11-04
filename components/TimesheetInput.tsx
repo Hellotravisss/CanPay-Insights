@@ -223,7 +223,7 @@ const TimesheetInput: React.FC<Props> = ({ inputs, setInputs }) => {
         className={`
           aspect-square p-2 rounded-lg text-sm font-medium transition-all relative
           ${isSelected 
-            ? 'btn-red-3d text-white scale-105' 
+            ? 'btn-brand-3d text-white scale-105' 
             : hasEntries
             ? 'bg-slate-100 text-slate-900 hover:bg-slate-200'
             : 'text-slate-600 hover:bg-slate-50'
@@ -514,7 +514,7 @@ const TimesheetInput: React.FC<Props> = ({ inputs, setInputs }) => {
             </h3>
             <button
               onClick={() => setIsAddingEntry(true)}
-              className="px-3 py-1 btn-red-3d text-white text-sm rounded-lg font-medium"
+              className="px-3 py-1 btn-brand-3d text-white text-sm rounded-lg font-medium"
             >
               {t('ts.addEntry')}
             </button>
@@ -660,7 +660,7 @@ const TimesheetInput: React.FC<Props> = ({ inputs, setInputs }) => {
                 </button>
                 <button
                   onClick={handleAddEntry}
-                  className="flex-1 px-4 py-2 btn-red-3d text-white rounded-lg font-medium"
+                  className="flex-1 px-4 py-2 btn-brand-3d text-white rounded-lg font-medium"
                 >
                   {t('ts.addTimeEntry')}
                 </button>

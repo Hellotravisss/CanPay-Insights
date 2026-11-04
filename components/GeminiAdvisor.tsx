@@ -819,7 +819,7 @@ const GeminiAdvisor: React.FC<Props> = ({ results, inputs, onReportOpen }) => {
         {analysisState === 'idle' && (
           <button
             onClick={runAnalysis}
-            className="w-full rounded-xl btn-red-3d py-4 text-base font-bold text-white"
+            className="w-full rounded-xl btn-brand-3d py-4 text-base font-bold text-white"
           >
             {t('opt.runAnalysis')}
           </button>
@@ -842,7 +842,7 @@ const GeminiAdvisor: React.FC<Props> = ({ results, inputs, onReportOpen }) => {
             <button
               onClick={handleExport}
               disabled={exporting || !qrBase64}
-              className="w-full sm:w-auto px-6 py-3 btn-red-3d disabled:bg-slate-600 text-white font-bold rounded-lg flex items-center justify-center gap-2"
+              className="w-full sm:w-auto px-6 py-3 btn-brand-3d disabled:bg-slate-600 text-white font-bold rounded-lg flex items-center justify-center gap-2"
             >
               {exporting ? (
                 <>

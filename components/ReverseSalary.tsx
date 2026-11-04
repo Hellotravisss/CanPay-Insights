@@ -88,7 +88,7 @@ export default function ReverseSalary({ inputs, setInputs }: {
                   <button
                     type="button"
                     onClick={use}
-                    className="mt-2 rounded-md btn-red-3d px-3 py-1.5 text-sm font-semibold text-white"
+                    className="mt-2 rounded-md btn-brand-3d px-3 py-1.5 text-sm font-semibold text-white"
                   >
                     {t('annual.revUse')}
                   </button>

@@ -664,7 +664,7 @@ const App: React.FC = () => {
                     className={`flex items-center gap-2 px-4 py-2 rounded-lg transition-all text-sm font-medium ${
                       saveSuccess
                         ? 'bg-green-100 text-green-700'
-                        : 'btn-red-3d text-white'
+                        : 'btn-brand-3d text-white'
                     }`}
                   >
                     {saveSuccess ? (
