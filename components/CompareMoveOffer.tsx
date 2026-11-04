@@ -87,7 +87,7 @@ export default function CompareMoveOffer({ provinces, annualSalary }: { province
       <button
         onClick={buy}
         disabled={gap === null || buying}
-        className="mt-3 w-full rounded-md btn-red-3d px-3 py-2.5 text-sm font-semibold text-white disabled:bg-slate-200 disabled:text-slate-400"
+        className="mt-3 w-full rounded-md btn-brand-3d px-3 py-2.5 text-sm font-semibold text-white disabled:bg-slate-200 disabled:text-slate-400"
       >
         {buying ? 'Opening secure checkout…' : 'Get the full report: $9'}
       </button>

@@ -105,7 +105,7 @@ const InputSection: React.FC<Props> = ({ inputs, setInputs }) => {
               onClick={() => handleDayToggle(idx)}
               className={`flex-1 min-w-[55px] py-2.5 rounded-lg text-xs font-bold transition-all transform active:scale-95 border ${
                 inputs.shift.daysActive[idx] 
-                ? 'btn-red-3d text-white border-red-700' 
+                ? 'btn-brand-3d text-white border-red-700' 
                 : 'bg-white text-slate-500 border-slate-200 hover:bg-slate-50'
               }`}
             >
