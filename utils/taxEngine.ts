@@ -514,7 +514,8 @@ const calculateSalaryRecurring = (inputs: SalaryInputs): CalculationResult => {
   const annualRRSP = rrspPerPeriod * 26;
   const annualMatch = getEmployerMatchPerPeriod(inputs, grossPayBiWeekly) * 26;
 
-  // Post-tax deductions (LTD, union dues, other) — do NOT reduce taxable income
+  // LTD and other deductions are after tax. Union dues and pension (RPP)
+  // contributions come off taxable income: see calculateFromAnnualSalary.
   const ded = inputs.deductions;
   const postTaxDeductionsPerPeriod = ded
     ? (ded.ltdPremium + ded.otherDeductions)
@@ -524,7 +525,8 @@ const calculateSalaryRecurring = (inputs: SalaryInputs): CalculationResult => {
   const annualTaxableBenefits = taxableBenefitsPerPeriod * 26;
 
   const annualUnionDuesBw = ded ? ded.unionDues * 26 : 0;
-  const taxableIncome = Math.max(0, (annualGross + annualTaxableBenefits) - annualRRSP - annualUnionDuesBw);
+  const annualPensionBw = (ded?.pension ?? 0) * 26;
+  const taxableIncome = Math.max(0, (annualGross + annualTaxableBenefits) - annualRRSP - annualUnionDuesBw - annualPensionBw);
 
   // 6. Deductions
   const isQuebec = inputs.province === Province.QC;
@@ -540,7 +542,7 @@ const calculateSalaryRecurring = (inputs: SalaryInputs): CalculationResult => {
   
   const totalTaxAnnual = taxResult.total;
   const annualPostTaxDeductions = postTaxDeductionsPerPeriod * 26;
-  const totalDeductionsAnnual = totalTaxAnnual + cppResult.total + eiAnnual + qpipAnnual + annualRRSP + annualPostTaxDeductions + annualUnionDuesBw;
+  const totalDeductionsAnnual = totalTaxAnnual + cppResult.total + eiAnnual + qpipAnnual + annualRRSP + annualPostTaxDeductions + annualUnionDuesBw + annualPensionBw;
   const netPayAnnual = annualGross - totalDeductionsAnnual;
 
   return {
@@ -560,6 +562,8 @@ const calculateSalaryRecurring = (inputs: SalaryInputs): CalculationResult => {
     qpipDeduction: qpipAnnual / 26,
     eiDeduction: eiAnnual / 26,
     rrspDeduction: rrspPerPeriod,
+    pensionDeduction: annualPensionBw / 26,
+    otherDeductions: (annualPostTaxDeductions + annualUnionDuesBw) / 26,
     netPayBiWeekly: netPayAnnual / 26,
 
     grossPayAnnual: annualGross,
@@ -627,10 +631,18 @@ export const calculateFromAnnualSalary = (inputs: AnnualSalaryInputs): Calculati
    *
    * Dues do not reduce pensionable or insurable earnings: CPP and EI are still
    * computed on gross.
+   *
+   * Pension (RPP) contributions deducted at source work the same way: T4127
+   * factor F takes them off income before federal and provincial tax, and
+   * CPP and EI stay on gross. The app had no field for them until 2026-11-07,
+   * so anyone with a workplace pension saw a take-home too high by the
+   * contribution less its tax (a Manitoba user's 4% plan: $46 a cheque).
+   * scripts/auditPension.ts checks this against CRA's PDOC.
    */
   const postTaxPerPeriod = ded ? (ded.ltdPremium + ded.otherDeductions) : 0;
   const annualPostTax = postTaxPerPeriod * periodsPerYear;
   const annualUnionDues = ded ? ded.unionDues * periodsPerYear : 0;
+  const annualPension = (ded?.pension ?? 0) * periodsPerYear;
 
   const taxableBenefitsPerPeriod = inputs.additionalIncome?.taxableBenefits ?? 0;
   const annualTaxableBenefits = taxableBenefitsPerPeriod * periodsPerYear;
@@ -651,7 +663,7 @@ export const calculateFromAnnualSalary = (inputs: AnnualSalaryInputs): Calculati
    */
   const annualEquity = Math.max(0, inputs.equityVestingAnnual ?? 0);
 
-  const taxableIncome = Math.max(0, (annualGross + annualTaxableBenefits + annualEquity) - annualRRSP - annualUnionDues);
+  const taxableIncome = Math.max(0, (annualGross + annualTaxableBenefits + annualEquity) - annualRRSP - annualUnionDues - annualPension);
 
   // Calculate deductions
   const cppResult = inputs.under18 ? NO_PENSION : calculateCPP(annualGross + annualTaxableBenefits + annualEquity + annualMatch, isQuebec);
@@ -665,7 +677,7 @@ export const calculateFromAnnualSalary = (inputs: AnnualSalaryInputs): Calculati
   const taxResult = calculateTotalTax(taxableIncome, cppResult, province, eiAnnual, qpipAnnual, { spouseNetIncome: inputs.spouseNetIncome, totalClaims: inputs.totalClaims });
 
   const totalTaxAnnual = taxResult.total;
-  const totalDeductionsAnnual = totalTaxAnnual + cppResult.total + eiAnnual + qpipAnnual + annualRRSP + annualPostTax + annualUnionDues;
+  const totalDeductionsAnnual = totalTaxAnnual + cppResult.total + eiAnnual + qpipAnnual + annualRRSP + annualPostTax + annualUnionDues + annualPension;
   const netPayAnnual = (annualGross + annualEquity) - totalDeductionsAnnual;
 
   const grossPayPerPeriod = annualGross / periodsPerYear;
@@ -685,6 +697,8 @@ export const calculateFromAnnualSalary = (inputs: AnnualSalaryInputs): Calculati
     qpipDeduction: qpipAnnual / periodsPerYear,
     eiDeduction: eiAnnual / periodsPerYear,
     rrspDeduction: rrspPerPeriod,
+    pensionDeduction: annualPension / periodsPerYear,
+    otherDeductions: (annualPostTax + annualUnionDues) / periodsPerYear,
     netPayBiWeekly: netPayPerPeriod,
     
     grossPayAnnual: annualGross,
@@ -806,15 +820,23 @@ export const calculateFromTimesheet = (inputs: TimesheetInputs): CalculationResu
    *
    * Dues do not reduce pensionable or insurable earnings: CPP and EI are still
    * computed on gross.
+   *
+   * Pension (RPP) contributions deducted at source work the same way: T4127
+   * factor F takes them off income before federal and provincial tax, and
+   * CPP and EI stay on gross. The app had no field for them until 2026-11-07,
+   * so anyone with a workplace pension saw a take-home too high by the
+   * contribution less its tax (a Manitoba user's 4% plan: $46 a cheque).
+   * scripts/auditPension.ts checks this against CRA's PDOC.
    */
   const postTaxPerPeriod = ded ? (ded.ltdPremium + ded.otherDeductions) : 0;
   const annualPostTax = postTaxPerPeriod * periodsPerYear;
   const annualUnionDues = ded ? ded.unionDues * periodsPerYear : 0;
+  const annualPension = (ded?.pension ?? 0) * periodsPerYear;
 
   const taxableBenefitsPerPeriod = inputs.deductions ? 0 : (inputs as any).additionalIncome?.taxableBenefits ?? 0; // fallback safety
   const annualTaxableBenefits = taxableBenefitsPerPeriod * periodsPerYear;
 
-  const taxableIncome = Math.max(0, (annualGross + annualTaxableBenefits) - annualRRSP - annualUnionDues);
+  const taxableIncome = Math.max(0, (annualGross + annualTaxableBenefits) - annualRRSP - annualUnionDues - annualPension);
 
   // Calculate deductions
   const isQuebec = province === Province.QC;
@@ -829,7 +851,7 @@ export const calculateFromTimesheet = (inputs: TimesheetInputs): CalculationResu
   const taxResult = calculateTotalTax(taxableIncome, cppResult, province, eiAnnual, qpipAnnual, { spouseNetIncome: inputs.spouseNetIncome, totalClaims: inputs.totalClaims });
 
   const totalTaxAnnual = taxResult.total;
-  const totalDeductionsAnnual = totalTaxAnnual + cppResult.total + eiAnnual + qpipAnnual + annualRRSP + annualPostTax + annualUnionDues;
+  const totalDeductionsAnnual = totalTaxAnnual + cppResult.total + eiAnnual + qpipAnnual + annualRRSP + annualPostTax + annualUnionDues + annualPension;
   const netPayAnnual = annualGross - totalDeductionsAnnual;
 
   const grossPayPerPeriod = totalGross;
@@ -849,6 +871,8 @@ export const calculateFromTimesheet = (inputs: TimesheetInputs): CalculationResu
     qpipDeduction: qpipAnnual / periodsPerYear,
     eiDeduction: eiAnnual / periodsPerYear,
     rrspDeduction: rrspPerPeriod,
+    pensionDeduction: annualPension / periodsPerYear,
+    otherDeductions: (annualPostTax + annualUnionDues) / periodsPerYear,
     netPayBiWeekly: netPayPerPeriod,
     
     grossPayAnnual: annualGross,

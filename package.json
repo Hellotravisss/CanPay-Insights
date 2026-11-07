@@ -5,7 +5,7 @@
   "type": "module",
   "scripts": {
     "dev": "next dev",
-    "prebuild": "npm run audit:conflicts && npm run audit:engine && npm run audit:claimcodes && npm run audit:enginecases && npm run audit:marginal && npm run audit:reverse && npm run audit:taxdays && npm run audit:captimeline && npm run audit:employer && npm run audit:consistency && npm run audit:advisor && npm run audit:dbroutes && npm run audit:sitemap && npm run audit:links && npm run audit:dataset && npm run audit:telemetry && npm run audit:ranking && npm run audit:sample && npm run audit:hygiene:selftest && npm run audit:minwage:selftest && npm run audit:numbers:selftest && npm run audit:numbers && npm run audit:arithmetic:selftest && npm run audit:arithmetic && npm run audit:logo",
+    "prebuild": "npm run audit:conflicts && npm run audit:engine && npm run audit:claimcodes && npm run audit:enginecases && npm run audit:pension && npm run audit:marginal && npm run audit:reverse && npm run audit:taxdays && npm run audit:captimeline && npm run audit:employer && npm run audit:consistency && npm run audit:advisor && npm run audit:dbroutes && npm run audit:sitemap && npm run audit:links && npm run audit:dataset && npm run audit:telemetry && npm run audit:ranking && npm run audit:sample && npm run audit:hygiene:selftest && npm run audit:minwage:selftest && npm run audit:numbers:selftest && npm run audit:numbers && npm run audit:arithmetic:selftest && npm run audit:arithmetic && npm run audit:logo",
     "audit:engine": "tsx scripts/goldenT4032.ts",
     "build": "next build",
     "start": "next start",
@@ -25,6 +25,7 @@
     "audit:sitemap": "tsx scripts/auditSitemap.ts",
     "audit:links": "tsx scripts/auditLinks.ts",
     "audit:live": "node scripts/livePromises.mjs",
+    "audit:pension": "tsx scripts/auditPension.ts",
     "audit:enginecases": "TZ=America/Vancouver tsx scripts/auditEngineCases.ts && TZ=America/St_Johns tsx scripts/auditEngineCases.ts",
     "audit:a11y": "node scripts/liveA11y.mjs",
     "audit:dataset": "tsx scripts/generate-dataset.ts --check",

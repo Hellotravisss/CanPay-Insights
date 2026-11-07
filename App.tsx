@@ -141,6 +141,7 @@ const DEFAULT_SIMPLE_INPUTS: SalaryInputs = {
     ltdPremium: 0,
     unionDues: 0,
     otherDeductions: 0,
+    pension: 0,
   },
 };
 
@@ -150,7 +151,7 @@ const DEFAULT_ANNUAL_INPUTS: AnnualSalaryInputs = {
   annualSalary: 100000,
   payFrequency: PayFrequency.BI_WEEKLY,
   additionalIncome: { statHolidayPay: 0, sickPay: 0, bonus: 0, otherIncome: 0, taxableBenefits: 0 },
-  deductions: { ltdPremium: 0, unionDues: 0, otherDeductions: 0 },
+  deductions: { ltdPremium: 0, unionDues: 0, otherDeductions: 0, pension: 0 },
 };
 
 // Default State - Timesheet
@@ -159,7 +160,7 @@ const DEFAULT_TIMESHEET_INPUTS: TimesheetInputs = {
   hourlyWage: 20.00,
   payFrequency: PayFrequency.WEEKLY,
   entries: [],
-  deductions: { ltdPremium: 0, unionDues: 0, otherDeductions: 0 },
+  deductions: { ltdPremium: 0, unionDues: 0, otherDeductions: 0, pension: 0 },
 };
 
 type AppPage = 'home' | 'calculator';
