@@ -182,7 +182,7 @@ export const MIN_WAGES: MinWage[] = [
     province: Province.NT, code: 'NT', label: 'Northwest Territories', wage: 17.2, effective: '2026-09-01', verified: '2026-11-01',
     reviewBy: '2027-09-01', reviewBasis: 'Indexed every September 1.',
     source: {
-      url: 'https://www.ece.gov.nt.ca/en/services/employment-standards/minimum-wage',
+      url: 'https://www.ece.gov.nt.ca/en/minimum-wage',
       rule: 'Sentence "In the Northwest Territories (NWT), the minimum wage is $X per hour."',
       extract: sentence(new RegExp(String.raw`Northwest Territories \(NWT\), the minimum wage is \$${RATE} per hour`), { rate: 1 }),
     },
