@@ -42,8 +42,8 @@
     "rate": 17
   },
   "NT": {
-    "url": "https://www.ece.gov.nt.ca/en/services/employment-standards/minimum-wage",
-    "fetched": "2026-11-01",
+    "url": "https://www.ece.gov.nt.ca/en/minimum-wage",
+    "fetched": "2026-11-07",
     "status": 200,
     "rate": 17.2
   },
