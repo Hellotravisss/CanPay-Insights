@@ -86,6 +86,12 @@ export interface Deductions {
   ltdPremium: number;          // Long-term disability insurance per period
   unionDues: number;           // Union dues per period
   otherDeductions: number;     // Other pre/post-tax deductions per period
+  /**
+   * Employee pension (RPP) contribution per period, as the pay stub shows it.
+   * Comes off income before tax; CPP and EI stay on gross. Optional so
+   * settings saved before 2026-11-07 still load.
+   */
+  pension?: number;
 }
 
 export interface SalaryInputs {
@@ -244,6 +250,9 @@ export interface CalculationResult {
   qpipDeduction?: number;
   eiDeduction: number;
   rrspDeduction: number;       // RRSP per period (0 if not used)
+  pensionDeduction?: number;   // Pension (RPP) per period (0 if not used)
+  /** Union dues, LTD and other deductions per period: the rest of gross − net. */
+  otherDeductions?: number;
   netPayBiWeekly: number;
   
   grossPayAnnual: number;

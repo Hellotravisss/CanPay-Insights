@@ -198,6 +198,7 @@ const AnnualSalaryInput: React.FC<Props> = ({ inputs, setInputs }) => {
         {showDeductions && (
           <div className="mt-3 bg-slate-100 p-4 rounded-xl border border-slate-200 space-y-3">
             {([
+              { key: 'pension',         label: t('ded.pension') },
               { key: 'ltdPremium',      label: t('annual.ltd') },
               { key: 'unionDues',       label: t('annual.unionDues') },
               { key: 'otherDeductions', label: t('annual.otherDedItem') },

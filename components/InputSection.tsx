@@ -289,6 +289,7 @@ const InputSection: React.FC<Props> = ({ inputs, setInputs }) => {
         {showDeductions && (
           <div className="bg-slate-100 p-4 rounded-xl border border-slate-200 space-y-3 animate-fadeIn">
             {([
+              { key: 'pension',          label: t('ded.pension'),                       hint: t('ded.pensionHint') },
               { key: 'ltdPremium',       label: t('annual.ltd'), hint: t('hourly.ltdHint') },
               { key: 'unionDues',        label: t('annual.unionDues'),                  hint: t('hourly.unionDuesHint') },
               { key: 'otherDeductions',  label: t('annual.otherDed'),            hint: t('hourly.otherDedHint') },

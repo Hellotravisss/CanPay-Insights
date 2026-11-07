@@ -191,7 +191,10 @@ const ResultsSection: React.FC<Props> = ({ results, provinceName }) => {
     { name: t('res.fedTax'), value: results.federalTax, color: '#334155' }, // Slate-700
     { name: t('res.provTax'), value: results.provincialTax, color: '#64748b' }, // Slate-500
     { name: t('res.cppEi'), value: results.cppDeduction + results.eiDeduction, color: '#94a3b8' }, // Slate-400
-  ], [t, results.cppDeduction, results.eiDeduction, results.federalTax, results.netPayBiWeekly, results.provincialTax]);
+    // Pension, RRSP, union dues and the rest: without this slice the donut's
+    // shares summed to less than gross and overstated the net-pay percentage.
+    { name: t('annual.otherDed'), value: (results.rrspDeduction ?? 0) + (results.pensionDeduction ?? 0) + (results.otherDeductions ?? 0), color: '#cbd5e1' }, // Slate-300
+  ].filter((d) => d.value > 0), [t, results.cppDeduction, results.eiDeduction, results.federalTax, results.netPayBiWeekly, results.provincialTax, results.rrspDeduction, results.pensionDeduction, results.otherDeductions]);
 
   const totalHours = results.regularHours + results.overtimeHours15 + results.overtimeHours20;
   const earn = results.earnings ?? {};
@@ -386,9 +389,21 @@ const ResultsSection: React.FC<Props> = ({ results, provinceName }) => {
                      <span>- {formatCurrency(results.rrspDeduction ?? 0)}</span>
                    </div>
                  )}
+                 {(results.pensionDeduction ?? 0) > 0 && (
+                   <div className="flex justify-between text-slate-600">
+                     <span>{t('ded.pension')}</span>
+                     <span>- {formatCurrency(results.pensionDeduction ?? 0)}</span>
+                   </div>
+                 )}
+                 {(results.otherDeductions ?? 0) > 0 && (
+                   <div className="flex justify-between text-slate-600">
+                     <span>{t('res.otherDed')}</span>
+                     <span>- {formatCurrency(results.otherDeductions ?? 0)}</span>
+                   </div>
+                 )}
                  <div className="flex justify-between text-red-600 font-bold pt-2 border-t border-slate-100">
                    <span>{t('res.totalDeductions')}</span>
-                   <span>- {formatCurrency(results.federalTax + results.provincialTax + results.cppDeduction + results.eiDeduction + (results.rrspDeduction ?? 0))}</span>
+                   <span>- {formatCurrency(results.federalTax + results.provincialTax + results.cppDeduction + results.eiDeduction + (results.rrspDeduction ?? 0) + (results.pensionDeduction ?? 0) + (results.otherDeductions ?? 0))}</span>
                  </div>
                </div>
              </div>
