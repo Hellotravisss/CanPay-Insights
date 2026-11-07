@@ -3,7 +3,7 @@ import { taxDays } from '../utils/taxDays';
 import { useBelowViewport } from './useBelowViewport';
 import React from 'react';
 import AnimatedAmount from './AnimatedAmount';
-import { CalculationResult, Province } from '../types';
+import { CalculationResult, PayFrequency, Province } from '../types';
 import { provinceDisplayName } from '../lib/provinceNames';
 import { useT } from '../lib/i18n';
 
@@ -221,6 +221,14 @@ const ResultsSection: React.FC<Props> = ({ results, provinceName }) => {
                   format={formatCurrency}
                 />
               </p>
+              {/* People budget by the month; on bi-weekly pay "two cheques" is not a
+                  month (26 a year, so two months have three). A user compared two
+                  cheques with a monthly figure and read a $200 gap as an error. */}
+              {results.payFrequency !== PayFrequency.MONTHLY && results.netPayAnnual > 0 && (
+                <p className="text-sm text-red-100 mt-1 tabular-nums">
+                  {t('res.monthlyAvg')} <span className="font-bold text-white">{formatCurrency(results.netPayAnnual / 12)}</span>
+                </p>
+              )}
             </div>
             <div className="flex flex-wrap items-center gap-2 text-sm text-red-50 font-medium sm:justify-end">
               <span className="chip-glass px-3 py-1 rounded-full text-xs font-semibold">

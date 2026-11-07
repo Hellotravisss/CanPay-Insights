@@ -160,6 +160,7 @@ export const main: Record<string, string> = {
   'res.biweekly': 'Cada 2 semanas',
   'res.semiMonthly': 'Quincenal (2 al mes)',
   'res.grossPrePeriod': 'Pago bruto (antes de impuestos)',
+  'res.monthlyAvg': "Promedio mensual (año ÷ 12)",
   'res.annualProjection': 'Proyección anual',
   'res.grossIncomePre': 'Ingreso bruto (antes de impuestos)',
   'res.totalTaxDed': 'Impuestos y deducciones totales',

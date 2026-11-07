@@ -160,6 +160,7 @@ export const main: Record<string, string> = {
   'res.biweekly': 'Hai Tuần',
   'res.semiMonthly': 'Nửa Tháng',
   'res.grossPrePeriod': 'Lương Gộp (Trước Thuế)',
+  'res.monthlyAvg': "Trung bình mỗi tháng (cả năm ÷ 12)",
   'res.annualProjection': 'Dự Kiến Hàng Năm',
   'res.grossIncomePre': 'Thu Nhập Gộp (Trước Thuế)',
   'res.totalTaxDed': 'Tổng Thuế & Khấu Trừ',

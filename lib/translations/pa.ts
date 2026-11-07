@@ -160,6 +160,7 @@ export const main: Record<string, string> = {
   'res.biweekly': 'ਦੋ-ਹਫ਼ਤਾਵਾਰੀ',
   'res.semiMonthly': 'ਅੱਧ-ਮਹੀਨਾਵਾਰੀ',
   'res.grossPrePeriod': 'ਕੁੱਲ ਤਨਖਾਹ (ਟੈਕਸ ਤੋਂ ਪਹਿਲਾਂ)',
+  'res.monthlyAvg': "ਮਹੀਨਾਵਾਰ ਔਸਤ (ਸਾਲ ÷ 12)",
   'res.annualProjection': 'ਸਲਾਨਾ ਅੰਦਾਜ਼ਾ',
   'res.grossIncomePre': 'ਕੁੱਲ ਆਮਦਨ (ਟੈਕਸ ਤੋਂ ਪਹਿਲਾਂ)',
   'res.totalTaxDed': 'ਕੁੱਲ ਟੈਕਸ ਅਤੇ ਕਟੌਤੀਆਂ',

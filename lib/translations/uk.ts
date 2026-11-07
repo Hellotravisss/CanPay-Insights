@@ -160,6 +160,7 @@ export const main: Record<string, string> = {
   'res.biweekly': 'Раз на 2 тижні',
   'res.semiMonthly': 'Двічі на місяць',
   'res.grossPrePeriod': 'Валова зарплата (до податків)',
+  'res.monthlyAvg': "У середньому на місяць (рік ÷ 12)",
   'res.annualProjection': 'Річна прогнозна сума',
   'res.grossIncomePre': 'Валовий дохід (до податків)',
   'res.totalTaxDed': 'Загальні податки й відрахування',

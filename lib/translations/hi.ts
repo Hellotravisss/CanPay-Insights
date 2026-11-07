@@ -160,6 +160,7 @@ export const main: Record<string, string> = {
   'res.biweekly': 'हर 2 हफ्ते में',
   'res.semiMonthly': 'महीने में दो बार',
   'res.grossPrePeriod': 'ग्रॉस पे (टैक्स से पहले)',
+  'res.monthlyAvg': "मासिक औसत (साल ÷ 12)",
   'res.annualProjection': 'सालाना अनुमान',
   'res.grossIncomePre': 'ग्रॉस इनकम (टैक्स से पहले)',
   'res.totalTaxDed': 'कुल टैक्स और कटौतियां',

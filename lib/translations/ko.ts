@@ -160,6 +160,7 @@ export const main: Record<string, string> = {
   'res.biweekly': '격주',
   'res.semiMonthly': '월 2회',
   'res.grossPrePeriod': '세전 총급여',
+  'res.monthlyAvg': "월 평균 (연간 ÷ 12)",
   'res.annualProjection': '연간 예상액',
   'res.grossIncomePre': '세전 총소득',
   'res.totalTaxDed': '총 세금 및 공제액',

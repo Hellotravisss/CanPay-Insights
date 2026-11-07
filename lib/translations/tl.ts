@@ -160,6 +160,7 @@ export const main: Record<string, string> = {
   'res.biweekly': 'Bi-Weekly',
   'res.semiMonthly': 'Semi-Monthly',
   'res.grossPrePeriod': 'Gross Pay (Bago ang Buwis)',
+  'res.monthlyAvg': "Karaniwan bawat buwan (taon ÷ 12)",
   'res.annualProjection': 'Annual Projection',
   'res.grossIncomePre': 'Gross Income (Bago ang Buwis)',
   'res.totalTaxDed': 'Kabuuang Buwis at Deductions',
