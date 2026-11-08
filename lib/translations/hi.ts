@@ -251,6 +251,7 @@ export const main: Record<string, string> = {
   'opt.noMatchNote': 'आप फिलहाल पेरोल कटौती कर रहे हैं। अपने टैक्स रिफंड को अधिकतम करने के लिए, डेडलाइन से पहले बची हुई जगह को स्वैच्छिक योगदान से भरने पर विचार करें।',
   'opt.recommended': 'सुझाया गया',
   'opt.maxDeductible': 'अधिकतम डिडक्टिबल',
+  'opt.paNote': "आपका पेंशन एडजस्टमेंट, लगभग {pa}, पहले ही घटा दिया गया है (मानकर कि नियोक्ता आपके बराबर योगदान देता है)। सही RRSP सीमा आपके CRA Notice of Assessment पर है।",
   'opt.taxSavings': 'टैक्स बचत',
   'opt.netCost': 'नेट लागत',
   'opt.contribution': 'योगदान',

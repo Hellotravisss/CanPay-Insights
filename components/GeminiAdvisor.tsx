@@ -251,6 +251,12 @@ const GeminiAdvisor: React.FC<Props> = ({ results, inputs, onReportOpen }) => {
     return results.annual?.rrsp ?? (results.rrspDeduction || 0) * periodsPerYear;
   }, [results.rrspDeduction, periodsPerYear]);
 
+  // The employee's own RPP contribution for the year. It lowers taxable income
+  // before any RRSP does, and its pension adjustment comes off RRSP room.
+  const pensionAnnual = useMemo(() => {
+    return results.annual?.pension ?? (results.pensionDeduction || 0) * periodsPerYear;
+  }, [results.annual?.pension, results.pensionDeduction, periodsPerYear]);
+
   const annualEmployerMatchActual = useMemo(() => {
     const inp = inputs as any;
     if (inp.rrspType === 'percent' && inp.rrspEmployerMatch && inp.rrspEmployerMatch > 0) {
@@ -262,16 +268,16 @@ const GeminiAdvisor: React.FC<Props> = ({ results, inputs, onReportOpen }) => {
 
   // Local tax optimization calculations
   const taxOptimization = useMemo(() => {
-    return generateTaxOptimization(results.grossPayAnnual, inputs.province);
-  }, [results.grossPayAnnual, inputs.province]);
+    return generateTaxOptimization(results.grossPayAnnual, inputs.province, pensionAnnual);
+  }, [results.grossPayAnnual, inputs.province, pensionAnnual]);
 
   const rrspScenarios = useMemo(() => {
-    return calculateRRSPScenarios(results.grossPayAnnual, inputs.province);
-  }, [results.grossPayAnnual, inputs.province]);
+    return calculateRRSPScenarios(results.grossPayAnnual, inputs.province, pensionAnnual);
+  }, [results.grossPayAnnual, inputs.province, pensionAnnual]);
 
   const marginalRate = useMemo(() => {
-    return calculateMarginalRate(results.grossPayAnnual, inputs.province);
-  }, [results.grossPayAnnual, inputs.province]);
+    return calculateMarginalRate(results.grossPayAnnual, inputs.province, pensionAnnual);
+  }, [results.grossPayAnnual, inputs.province, pensionAnnual]);
 
   const renderSmartReport = (isSnapshot = false) => {
     const annualIncome = results.grossPayAnnual || 0;
@@ -289,7 +295,7 @@ const GeminiAdvisor: React.FC<Props> = ({ results, inputs, onReportOpen }) => {
     // Measured by the engine from where the visitor already is (income less the
     // RRSP they already make), not "amount × top rate", which overstates a
     // top-up that reaches into a lower bracket.
-    const extraRefund = taxSavedByDeduction(annualIncome - annualRRSPActual, inputs.province, remainingRRSPOptimum);
+    const extraRefund = taxSavedByDeduction(annualIncome - annualRRSPActual, inputs.province, remainingRRSPOptimum, pensionAnnual);
 
     // Read from FEDERAL_BRACKETS, the table the engine uses. This used to be a
     // hand-typed copy of the 2025 brackets (15% to $57,375 …), so every visitor
@@ -807,6 +813,7 @@ const GeminiAdvisor: React.FC<Props> = ({ results, inputs, onReportOpen }) => {
         annualEmployerMatchActual={annualEmployerMatchActual}
         annualIncome={results.grossPayAnnual || 0}
         province={inputs.province}
+        pensionAnnual={pensionAnnual}
       />
 
       <div className="mt-6 pt-6 border-t border-slate-700">
@@ -1057,6 +1064,8 @@ interface TaxOptimizationPanelProps {
   /** Needed to measure a top-up's saving with the engine rather than × top rate. */
   annualIncome: number;
   province: string;
+  /** Employee RPP contribution for the year (0 without a pension). */
+  pensionAnnual?: number;
 }
 
 const TaxOptimizationPanel: React.FC<TaxOptimizationPanelProps> = ({
@@ -1069,6 +1078,7 @@ const TaxOptimizationPanel: React.FC<TaxOptimizationPanelProps> = ({
   annualEmployerMatchActual = 0,
   annualIncome,
   province,
+  pensionAnnual = 0,
 }) => {
   const { rrsp, tfsa, fhsa, otherStrategies, summary } = optimization;
 
@@ -1082,7 +1092,7 @@ const TaxOptimizationPanel: React.FC<TaxOptimizationPanelProps> = ({
   const { t } = useT();
   const hasActualRRSP = annualRRSPActual > 0;
   const remainingRRSPOptimum = Math.max(0, rrsp.recommendedAmount - annualRRSPActual);
-  const potentialExtraRefund = taxSavedByDeduction(annualIncome - annualRRSPActual, province, remainingRRSPOptimum);
+  const potentialExtraRefund = taxSavedByDeduction(annualIncome - annualRRSPActual, province, remainingRRSPOptimum, pensionAnnual);
 
   return (
     <div className="space-y-6">
@@ -1191,6 +1201,9 @@ const TaxOptimizationPanel: React.FC<TaxOptimizationPanelProps> = ({
             <MetricBox label={t('opt.taxSavings')} value={formatCurrency(rrsp.taxSavings)} accent />
             <MetricBox label={t('opt.netCost')} value={formatCurrency(rrsp.effectiveCost)} />
           </div>
+          {rrsp.pensionAdjustment > 0 && (
+            <p className="text-xs text-slate-400 mb-4">{t('opt.paNote').replace('{pa}', formatCurrency(rrsp.pensionAdjustment))}</p>
+          )}
 
           {showScenarios && (
             <div className="mt-4 overflow-x-auto">
@@ -1382,6 +1395,7 @@ You are a professional Canadian tax planner. Based on the following client's spe
   - Employer Matching Contribution Rate: ${isPercent ? `${rrspEmployerMatch}%` : 'No matching'}
   - Employer Annual RRSP Matching Contribution (Already Received): $${annualEmployerMatchActual.toLocaleString()}
   - Total Current RRSP Annual Saving (Personal + Employer): $${(annualRRSPActual + annualEmployerMatchActual).toLocaleString()}
+- Registered Pension Plan (RPP): ${rrsp.pensionAdjustment > 0 ? `member; RRSP room below already reduced by an estimated pension adjustment of $${rrsp.pensionAdjustment.toLocaleString()} (employee contribution × 2). Exact room: CRA Notice of Assessment.` : 'none entered'}
 
 ## System-Calculated Optimization Plan (Use this as basis for professional interpretation)
 

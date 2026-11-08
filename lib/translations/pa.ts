@@ -251,6 +251,7 @@ export const main: Record<string, string> = {
   'opt.noMatchNote': 'ਤੁਸੀਂ ਇਸ ਵੇਲੇ ਪੇਰੋਲ ਕਟੌਤੀਆਂ ਕਰ ਰਹੇ ਹੋ। ਆਪਣਾ ਟੈਕਸ ਰਿਫੰਡ ਵਧਾਉਣ ਲਈ, ਆਖਰੀ ਤਾਰੀਖ ਤੋਂ ਪਹਿਲਾਂ ਬਾਕੀ ਥਾਂ ਨੂੰ ਸਵੈ-ਇੱਛਤ ਯੋਗਦਾਨ ਵਜੋਂ ਪੂਰਾ ਕਰਨ ਬਾਰੇ ਸੋਚੋ।',
   'opt.recommended': 'ਸਿਫਾਰਸ਼ੀ',
   'opt.maxDeductible': 'ਵੱਧ ਤੋਂ ਵੱਧ ਕਟੌਤੀਯੋਗ',
+  'opt.paNote': "ਤੁਹਾਡਾ ਪੈਨਸ਼ਨ ਐਡਜਸਟਮੈਂਟ, ਲਗਭਗ {pa}, ਪਹਿਲਾਂ ਹੀ ਘਟਾ ਦਿੱਤਾ ਗਿਆ ਹੈ (ਮੰਨ ਕੇ ਕਿ ਮਾਲਕ ਤੁਹਾਡੇ ਜਿੰਨਾ ਪਾਉਂਦਾ ਹੈ)। ਸਹੀ RRSP ਸੀਮਾ ਤੁਹਾਡੇ CRA Notice of Assessment ਉੱਤੇ ਹੈ।",
   'opt.taxSavings': 'ਟੈਕਸ ਬੱਚਤ',
   'opt.netCost': 'ਨੈੱਟ ਲਾਗਤ',
   'opt.contribution': 'ਯੋਗਦਾਨ',

@@ -251,6 +251,7 @@ export const main: Record<string, string> = {
   'opt.noMatchNote': 'Kasalukuyan kang gumagawa ng payroll deductions. Para ma-maximize ang tax refund mo, isaalang-alang na dagdagan ang natitirang room bilang voluntary contribution bago ang deadline.',
   'opt.recommended': 'Rekomendado',
   'opt.maxDeductible': 'Max Deductible',
+  'opt.paNote': "Nabawas na ang pension adjustment mo: mga {pa}, kung pareho ang hulog ng employer mo. Ang eksaktong RRSP room ay nasa CRA Notice of Assessment mo.",
   'opt.taxSavings': 'Tax Savings',
   'opt.netCost': 'Net Cost',
   'opt.contribution': 'Contribution',
