@@ -7,8 +7,9 @@
  *
  *   npx tsx scripts/auditTelemetry.ts
  */
+import { readFileSync } from 'node:fs';
 import { buildWorkPattern } from '../lib/workPattern';
-import { dedupeKey, deriveEmploymentShape, SCHEMA_VERSION, type WorkPattern } from '../lib/telemetry';
+import { bucketPensionPct, dedupeKey, deriveEmploymentShape, SCHEMA_VERSION, type BehaviourSignals, type WorkPattern } from '../lib/telemetry';
 import { calcStats, calcStatsExtra, monthlySnapshot, type Ev } from '../lib/d1/events';
 import { computePayBehaviour } from '../lib/payBehaviour';
 import type { D1 } from '../lib/d1/db';
@@ -82,6 +83,31 @@ const noTimesheet = sheet([]);
   const dflt = { mode: 'simple' as const, province: 'Ontario', annualIncome: 41600, lang: 'en' };
   check('dedupe: editing the opening wage within its bracket is a new calculation',
     dedupeKey({ ...dflt, wageEdited: false }, 'web', '30-50k', null) !== dedupeKey({ ...dflt, annualIncome: 45760, wageEdited: true }, 'web', '30-50k', null), true);
+}
+
+// ── Pension (RPP) share of pay, 2026-11-07 ─────────────────────────────────
+// A Manitoba pay stub had 4% (60.81 of 1,520.26). 9-plus is the public-sector
+// defined-benefit range the buckets exist to separate; an amount never leaves.
+{
+  for (const [pct, want] of [[null, null], [0, '0'], [0.5, 'under-3'], [2.99, 'under-3'], [3, '3-6'], [4, '3-6'],
+    [6, '6-9'], [8.99, '6-9'], [9, '9-plus'], [11, '9-plus'], [Number.NaN, null]] as [number | null, string | null][]) {
+    check(`pension bucket: ${pct}%`, bucketPensionPct(pct), want);
+  }
+  check('pension bucket: the Manitoba stub (60.81 of 1,520.26) is 3-6', bucketPensionPct((60.81 / 1520.26) * 100), '3-6');
+  // Same calculation except the pension: without the bucket in the key the second was dropped as a repeat.
+  const beh = (pensionPctBucket: BehaviourSignals['pensionPctBucket']) => ({ hasRrsp: false, rrspPctBucket: '0', employerMatch: false,
+    shiftPremium: false, premiumRateBucket: null, otHoursBucket: '0', tipsPctBucket: null, payFrequency: null, pensionPctBucket }) as BehaviourSignals;
+  const ev = { mode: 'simple' as const, province: 'Manitoba', annualIncome: 39527, lang: 'zh' };
+  check('dedupe: adding a pension is a new calculation',
+    dedupeKey({ ...ev, behaviour: beh('0') }, 'web', '30-50k', null) !== dedupeKey({ ...ev, behaviour: beh('3-6') }, 'web', '30-50k', null), true);
+}
+// The API keeps only the five labels. Read from the route so the two cannot drift.
+{
+  const route = readFileSync(new URL('../app/api/events/route.ts', import.meta.url), 'utf8');
+  check('API whitelists pension_pct_bucket', /'union_dues_bucket', 'pension_pct_bucket'/.test(route), true);
+  check("API accepts only 0/under-3/3-6/6-9/9-plus", route.includes("only('pension_pct_bucket', ['0', 'under-3', '3-6', '6-9', '9-plus'])"), true);
+  const schema = readFileSync(new URL('../cloudflare/schema.sql', import.meta.url), 'utf8');
+  check('schema.sql mirrors pension_pct_bucket', /pension_pct_bucket text/.test(schema), true);
 }
 
 // Rows written with the corrected schedule maths must be distinguishable.
