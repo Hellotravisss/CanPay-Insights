@@ -387,6 +387,17 @@ const ResultsSection: React.FC<Props> = ({ results, provinceName }) => {
                    <span>{t('res.provincialTax')} {provinceName ? `(${provinceDisplayName(provinceName, lang)})` : ''}</span>
                    <span>- {formatCurrency(results.provincialTax)}</span>
                  </div>
+                 {/* Outside Québec, CRA withholds both taxes together and most stubs print one line
+                     (often labelled "Federal Tax"). Québec stubs list Revenu Québec tax separately. */}
+                 {provinceName !== Province.QC && (
+                   <div className="pl-3 border-l-2 border-slate-200">
+                     <div className="flex justify-between text-slate-800 font-medium">
+                       <span>{t('res.incomeTaxTotal')}</span>
+                       <span>- {formatCurrency(results.federalTax + results.provincialTax)}</span>
+                     </div>
+                     <p className="text-xs text-slate-400">{t('res.incomeTaxTotalHint')}</p>
+                   </div>
+                 )}
                  <div className="flex justify-between text-slate-600">
                    <span>{t('res.cppEiAmp')}</span>
                    <span>- {formatCurrency(results.cppDeduction + results.eiDeduction)}</span>

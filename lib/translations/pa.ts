@@ -180,6 +180,8 @@ export const main: Record<string, string> = {
   'res.deductions': 'ਕਟੌਤੀਆਂ',
   'res.federalTax': 'ਫੈਡਰਲ ਟੈਕਸ',
   'res.provincialTax': 'ਸੂਬਾਈ ਟੈਕਸ',
+  'res.incomeTaxTotal': "ਕੁੱਲ ਇਨਕਮ ਟੈਕਸ",
+  'res.incomeTaxTotalHint': "ਪੇ ਸਟੱਬ ਉੱਤੇ ਇਹ ਅਕਸਰ ਇੱਕੋ ਲਾਈਨ ਵਿੱਚ ਹੁੰਦਾ ਹੈ: \"Federal Tax\" ਜਾਂ \"Income Tax\"।",
   'res.cppEiAmp': 'CPP ਅਤੇ EI',
   'res.totalDeductions': 'ਕੁੱਲ ਕਟੌਤੀਆਂ',
   'res.hoursCap': 'ਘੰਟੇ',

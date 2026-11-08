@@ -180,6 +180,8 @@ export const main: Record<string, string> = {
   'res.deductions': '공제',
   'res.federalTax': '연방세',
   'res.provincialTax': '주세',
+  'res.incomeTaxTotal': "소득세 합계",
+  'res.incomeTaxTotalHint': "급여 명세서에는 보통 한 줄로 표시됩니다: \"Federal Tax\" 또는 \"Income Tax\".",
   'res.cppEiAmp': 'CPP & EI',
   'res.totalDeductions': '총 공제액',
   'res.hoursCap': '시간',

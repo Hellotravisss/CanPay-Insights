@@ -180,6 +180,8 @@ export const main: Record<string, string> = {
   'res.deductions': 'Deductions',
   'res.federalTax': 'Federal Tax',
   'res.provincialTax': 'Provincial Tax',
+  'res.incomeTaxTotal': "Kabuuang income tax",
+  'res.incomeTaxTotalHint': "Kadalasang iisang linya ito sa pay stub: \"Federal Tax\" o \"Income Tax\".",
   'res.cppEiAmp': 'CPP at EI',
   'res.totalDeductions': 'Kabuuang Deductions',
   'res.hoursCap': 'Oras',
