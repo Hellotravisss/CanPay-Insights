@@ -58,6 +58,21 @@ import {
 // ============================================
 
 /**
+ * Engine keys are the Province enum VALUES ('Ontario'). Callers also pass the
+ * two-letter code ('ON': the saved defaults, the embed widget's ?province=).
+ * Until 2026-11-07 every lookup fell back to Ontario on a key it did not know,
+ * so 'MB' or 'QC' was silently taxed as Ontario with nothing to show for it.
+ * Accept the value or the code; anything else is a bug in the caller — throw.
+ */
+export const resolveProvince = (p: string): Province => {
+  const values = Object.values(Province) as string[];
+  if (values.includes(p)) return p as Province;
+  const code = String(p ?? '').toUpperCase();
+  if (Object.prototype.hasOwnProperty.call(Province, code)) return Province[code as keyof typeof Province];
+  throw new Error(`Unknown province: ${JSON.stringify(p)}`);
+};
+
+/**
  * Calculate tax based on progressive brackets
  */
 const calculateProgressiveTax = (income: number, brackets: TaxBracket[]): number => {
@@ -218,8 +233,9 @@ const calculateTotalTax = (
   qpipAnnual: number = 0,
   claims: { spouseNetIncome?: number | null; totalClaims?: { federal?: number; provincial?: number } } = {}
 ): { federalTax: number; provincialTax: number; total: number } => {
+  province = resolveProvince(province);
   const isQuebec = province === Province.QC;
-  const provinceRule = PROVINCIAL_DATA[province] || PROVINCIAL_DATA[Province.ON];
+  const provinceRule = PROVINCIAL_DATA[province];
 
   // T4127 factor F5: enhanced CPP/QPP comes off income before tax (factor A),
   // and only the base slice of tier 1 is credited (factor K2). Until
@@ -431,7 +447,8 @@ export const calculateSalary = (inputs: SalaryInputs): CalculationResult => {
 };
 
 const calculateSalaryRecurring = (inputs: SalaryInputs): CalculationResult => {
-  const provinceRule = PROVINCIAL_DATA[inputs.province] || PROVINCIAL_DATA[Province.ON];
+  inputs = { ...inputs, province: resolveProvince(inputs.province) };
+  const provinceRule = PROVINCIAL_DATA[inputs.province];
   
   // 1. Calculate Daily Hours & Shift Premium
   const startMins = timeToMinutes(inputs.shift.startTime);
@@ -594,12 +611,9 @@ const getPeriodsPerYear = (frequency: PayFrequency): number => {
 };
 
 export const calculateFromAnnualSalary = (inputs: AnnualSalaryInputs): CalculationResult => {
-  const { annualSalary, province, payFrequency } = inputs;
-  
-  const provinceRule = PROVINCIAL_DATA[province as keyof typeof PROVINCIAL_DATA] || PROVINCIAL_DATA[Province.ON];
-  if (!provinceRule) {
-    throw new Error(`Invalid province: ${province}`);
-  }
+  const { annualSalary, payFrequency } = inputs;
+  const province = resolveProvince(inputs.province);
+  const provinceRule = PROVINCIAL_DATA[province];
   
   const isQuebec = province === Province.QC;
   const periodsPerYear = getPeriodsPerYear(payFrequency);
@@ -717,12 +731,9 @@ export const calculateFromAnnualSalary = (inputs: AnnualSalaryInputs): Calculati
 // ============================================
 
 export const calculateFromTimesheet = (inputs: TimesheetInputs): CalculationResult => {
-  const { hourlyWage, province, payFrequency, entries } = inputs;
-  
-  const provinceRule = PROVINCIAL_DATA[province as keyof typeof PROVINCIAL_DATA] || PROVINCIAL_DATA[Province.ON];
-  if (!provinceRule) {
-    throw new Error(`Invalid province: ${province}`);
-  }
+  const { hourlyWage, payFrequency, entries } = inputs;
+  const province = resolveProvince(inputs.province);
+  const provinceRule = PROVINCIAL_DATA[province];
   
   const calculateEntryHours = (entry: TimesheetEntry): number => {
     const [inH, inM] = entry.checkIn.split(':').map(Number);

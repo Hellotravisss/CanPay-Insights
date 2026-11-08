@@ -166,9 +166,39 @@ expect('one $200 day annualised', daily.grossPayAnnual, 48000);
   expect('timesheet under 18: no CPP', t18.cppDeduction, 0);
 }
 
+// Province keys: the name or the two-letter code, nothing else. Until
+// 2026-11-07 an unknown key was silently taxed as Ontario ('MB' gave Ontario
+// tax with no error), and the saved defaults send 'ON', so both forms must work.
+{
+  const run = (province: string, mode: 'annual' | 'hourly' | 'timesheet') => {
+    if (mode === 'annual') return calculateFromAnnualSalary({ province, annualSalary: 52000, payFrequency: PayFrequency.BI_WEEKLY } as never);
+    if (mode === 'hourly') return calculateSalary({ province, hourlyWage: 25,
+      shift: { startTime: '09:00', endTime: '17:00', unpaidBreakMinutes: 30, daysActive: [false, true, true, true, true, true, false] },
+      premium: { enabled: false, ratePerHour: 0, startTime: '00:00', endTime: '00:00' } } as never);
+    return calculateFromTimesheet({ province, hourlyWage: 25, payFrequency: PayFrequency.BI_WEEKLY,
+      entries: ['02', '03', '04', '05', '06', '09', '10', '11', '12', '13'].map((d) => `2026-03-${d}`).map((date) => ({ date, checkIn: '09:00', checkOut: '17:00', unpaidBreakMinutes: 0 })) } as never);
+  };
+  for (const mode of ['annual', 'hourly', 'timesheet'] as const) {
+    for (const [code, name] of Object.entries(Province)) {
+      const byName = run(name, mode), byCode = run(code, mode), lower = run(code.toLowerCase(), mode);
+      expect(`${mode} ${code}: code = name (provincial tax)`, byCode.provincialTax, byName.provincialTax, 0);
+      expect(`${mode} ${code}: lower-case code = name (net)`, lower.netPayBiWeekly, byName.netPayBiWeekly, 0);
+    }
+    // The bug itself: Manitoba by code must not come out as Ontario.
+    checks++;
+    if (run('MB', mode).provincialTax === run('Ontario', mode).provincialTax) failures.push(`${mode}: 'MB' is still taxed as Ontario`);
+    for (const bad of ['', 'Ontaria', 'XX', 'toString', '__proto__']) {
+      checks++;
+      let threw = false;
+      try { run(bad, mode); } catch { threw = true; }
+      if (!threw) failures.push(`${mode}: unknown province ${JSON.stringify(bad)} should throw, got a result`);
+    }
+  }
+}
+
 if (failures.length) {
   console.log(failures.map((f) => '  ✗ ' + f).join('\n'));
   console.log(`\nENGINE CASES AUDIT FAIL (${tz}) — ${failures.length} of ${checks}.`);
   process.exit(1);
 }
-console.log(`ENGINE CASES AUDIT PASS (${tz}) — ${checks} checks: timesheet weeks, night premium, one-time pay, non-cash benefits, daily pay, employer match, tips, breakdown rows, under 18.`);
+console.log(`ENGINE CASES AUDIT PASS (${tz}) — ${checks} checks: timesheet weeks, night premium, one-time pay, non-cash benefits, daily pay, employer match, tips, breakdown rows, under 18, province keys.`);
