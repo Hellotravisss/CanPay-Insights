@@ -3992,4 +3992,113 @@ This is a single, deliberately plain scenario — one income, no RRSP contributi
 Every figure above comes from CanPay Insights' own 2026 tax engine — the same engine whose output is checked, row by row, against the CRA's T4032 payroll deduction tables (claim code 1, bi-weekly) for all 13 jurisdictions, plus the CRA's CPP/EI tables and Revenu Québec's source deduction tables, before any release. Figures are rounded to the nearest dollar. To see your own numbers with your actual salary, deductions, and pay frequency, use the [free take-home pay calculator](/), or jump straight to your own province: [Ontario](/ontario-paycheck-calculator), [British Columbia](/bc-paycheck-calculator), [Alberta](/alberta-paycheck-calculator), [Quebec](/quebec-paycheck-calculator), [Manitoba](/manitoba-paycheck-calculator), [Saskatchewan](/saskatchewan-paycheck-calculator), [Nova Scotia](/nova-scotia-paycheck-calculator), [New Brunswick](/new-brunswick-paycheck-calculator), [Newfoundland and Labrador](/newfoundland-paycheck-calculator), [Prince Edward Island](/pei-paycheck-calculator), [Yukon](/yukon-paycheck-calculator), [Northwest Territories](/northwest-territories-paycheck-calculator), or [Nunavut](/nunavut-paycheck-calculator). For a breakdown of CPP and EI specifically, see the [CPP/EI calculator](/cpp-ei-calculator). This is general information, not financial advice.
 `,
   },
+  {
+    id: 'study-37',
+    slug: 'budget-2026-workers-benefit-caregiver-credit',
+    title: "Budget 2026: Workers Benefit Jumps to $1,859 as the Caregiver Credit Goes Refundable",
+    subtitle:
+      'Tabled November 5 against a $62.3-billion deficit, Budget 2026 enhances three benefits that reach a paycheque or a tax refund directly — the renamed "Build Canada Workers Benefit," a fully refundable Canada Caregiver Credit, and a one-time grocery top-up — all starting in 2027, none of it law yet.',
+    excerpt:
+      "Budget 2026 raises the maximum Canada Workers Benefit to $1,859 for singles and $3,143 for families starting the 2027 tax year, reaching 1.9 million low-income workers. The Canada Caregiver Credit becomes fully refundable for the first time, worth up to $1,260 for 585,000 caregivers. Here is exactly what changed, for whom, and when.",
+    metaTitle: 'Budget 2026: Workers Benefit Jumps to $1,859',
+    metaDescription:
+      "Budget 2026 raises the Canada Workers Benefit to $1,859/$3,143 and makes the Caregiver Credit refundable up to $1,260, starting 2027.",
+    keywords: [
+      'build canada workers benefit',
+      'canada workers benefit 2027',
+      'canada caregiver credit refundable',
+      'budget 2026 benefits',
+      'canada groceries essentials benefit 2027',
+      'budget 2026 deficit',
+    ],
+    category: 'news',
+    tags: ['Federal Budget', 'CRA', 'Benefits', '2027'],
+    publishedAt: '2026-11-09',
+    readTime: 6,
+    imageUrl: '/blog/budget-2026-workers-benefit-caregiver-credit.svg',
+    directAnswer:
+      "Budget 2026, tabled November 5, 2026, raises the maximum Canada Workers Benefit (renamed the \"Build Canada Workers Benefit\") to $1,859 for single workers and $3,143 for families starting the 2027 tax year, up from $1,665 and $2,869 for 2026 — reaching an estimated 1.9 million low-income workers, including 180,000 who get nothing from it today. The Canada Caregiver Credit becomes fully refundable for the first time starting in 2027, worth up to $1,260 a year for an estimated 585,000 caregivers, and a one-time 50% top-up to the Canada Groceries and Essentials Benefit — up to $339 for a single person and $679 for a couple with two children — lands in early 2027. None of this changes a 2026 paycheque, and all of it still needs to pass as legislation.",
+    faq: [
+      {
+        question: 'What did Budget 2026 do to the Canada Workers Benefit?',
+        answer:
+          'Budget 2026, tabled November 5, 2026, renames the Canada Workers Benefit the "Build Canada Workers Benefit" and raises its maximum starting the 2027 tax year: to $1,859 for single workers without children (from $1,665 for 2026) and $3,143 for families (from $2,869). The minimum working income needed to start receiving it drops from $3,000 to $500, and the disability supplement\'s threshold drops from $1,150 to $200. Finance Canada estimates this reaches 1.9 million low-income workers, including 180,000 who get nothing from the benefit today, and lifts about 240,000 people out of poverty.',
+      },
+      {
+        question: 'How much of that increase is just inflation indexing?',
+        answer:
+          "Some of it. Under the Canada Workers Benefit's existing indexing formula, the 2027 maximum would have climbed on its own to roughly $1,709 for singles and $2,943 for families just to keep pace with inflation. Budget 2026 goes further than that, to $1,859 and $3,143 — about $150 extra for singles and $200 extra for families beyond what indexing alone would have delivered.",
+      },
+      {
+        question: 'What changed with the Canada Caregiver Credit?',
+        answer:
+          'Budget 2026 makes the Canada Caregiver Credit fully refundable starting with the 2027 tax year, worth up to $1,260 annually, indexed in future years. Because the credit was previously non-refundable, caregivers whose income was too low to owe tax got nothing from it. The government estimates 585,000 caregivers will now receive the credit, including about 180,000 who get no benefit from it today, lifting an estimated 15,000 people out of poverty.',
+      },
+      {
+        question: 'What is the one-time Canada Groceries and Essentials Benefit top-up?',
+        answer:
+          'A one-time 50% increase to the 2026-27 benefit year, paid in early 2027 on top of the usual quarterly payments — worth up to $339 for a single person with no children and up to $679 for a couple with two children. It is separate from, and in addition to, the 25% increase to the underlying benefit amount that already took effect in July 2026.',
+      },
+      {
+        question: 'Does any of this change my paycheque right now?',
+        answer:
+          "No. All three measures take effect for the 2027 tax year or later and arrive through a tax refund or a benefit payment, not payroll withholding — none of them touches a 2026 deduction. They are also still budget proposals, not law: they need to pass as legislation first, the same step the 2027 CPP rate cut needed eight months to clear last year. See what is already legally locked in for 2027 paycheques, independent of this budget, in [our pre-budget coverage](/blog/federal-budget-2026-paycheque).",
+      },
+      {
+        question: "What is Budget 2026's deficit, and how does it compare to earlier estimates?",
+        answer:
+          "Finance Minister François-Philippe Champagne put the 2026-27 deficit at $62.3 billion — about $1 billion smaller than the Parliamentary Budget Officer's pre-budget estimate of $63.3 billion, and roughly $9.5 billion smaller than the PBO's original June forecast of $71.8 billion.",
+      },
+    ],
+    content: `
+## Budget 2026 landed November 5 — this time, with actual numbers
+
+On **November 5, 2026**, Finance Minister François-Philippe Champagne tabled **Budget 2026** in the House of Commons, putting the federal deficit for 2026-27 at **$62.3 billion** — smaller than the Parliamentary Budget Officer's pre-budget estimate of $63.3 billion, and well below the PBO's original June forecast of $71.8 billion. [Our pre-budget coverage](/blog/federal-budget-2026-paycheque) laid out what was already legally locked in for 2027 paycheques regardless of what the budget said — the CPP rate cut, the EI premium increase, the RRSP limit. This article covers what the budget itself actually proposed on top of that: three measures that reach a paycheque or a tax refund directly. None of them changes a 2026 payroll deduction, and none of them is law yet — each still needs to pass as legislation before it takes effect.
+
+## The Canada Workers Benefit becomes the "Build Canada Workers Benefit" — and gets bigger
+
+The single biggest change for workers' take-home income is a rename and enhancement of the **Canada Workers Benefit (CWB)**, rebranded the **Build Canada Workers Benefit (BCWB)**, starting with the **2027 tax year**.
+
+| Measure | 2026 (current) | 2027 (proposed) | Change |
+| --- | --- | --- | --- |
+| Max basic benefit, single worker | $1,665 | **$1,859** | +$194 |
+| Max basic benefit, family | $2,869 | **$3,143** | +$274 |
+| Minimum earnings to qualify | $3,000 | **$500** | &#8722;$2,500 |
+| Disability supplement earnings threshold | $1,150 | **$200** | &#8722;$950 |
+| Workers reached | ~current base | **1.9 million**, incl. 180,000 new | — |
+| People lifted out of poverty | — | **~240,000** | — |
+
+Some of that increase is ordinary inflation indexing, which would have happened with or without a budget: under the CWB's existing formula, the 2027 maximum would have climbed on its own to roughly **$1,709** for singles and **$2,943** for families. Budget 2026 goes further than that baseline, to $1,859 and $3,143 — a genuine enhancement of about $150 and $200 respectively, on top of indexing.
+
+The bigger practical change for low-income workers may be the earnings threshold. Today you need **$3,000** of working income before the basic CWB starts phasing in; that drops to **$500**. The disability supplement's own threshold falls from $1,150 to $200. Together, Finance Canada estimates the changes reach **1.9 million** low-income workers — **180,000** of whom get nothing from the benefit as it exists today — and lift roughly **240,000 people** out of poverty.
+
+One more change: advance payments (the quarterly ACWB instalments [covered in our 2026 CWB piece](/blog/canada-workers-benefit-payments-2026)) are being wound down. They drop starting in July 2027 and are eliminated entirely from the 2028 tax year onward, after which the full BCWB arrives as a lump sum once you file your return rather than in instalments through the year.
+
+## The Canada Caregiver Credit becomes refundable for the first time
+
+Budget 2026 also makes the **Canada Caregiver Credit** fully **refundable**, starting with the **2027 tax year**, worth up to **$1,260 annually** (indexed in future years for an adult dependant; a related amount applies for a spouse, common-law partner, or child under 18).
+
+The credit has existed for years, but as a **non-refundable** credit it only reduced tax owing — a caregiver with income too low to owe tax got nothing from it at all, no matter how much caregiving they did. Making it refundable fixes that specific gap. The government estimates **585,000 caregivers** will receive the credit once it is refundable, including about **180,000** who currently get no benefit from it whatsoever, lifting an estimated **15,000 people** out of poverty.
+
+## A one-time grocery top-up lands in early 2027
+
+The third measure is narrower and temporary: a **one-time 50% top-up** to the **2026-27 Canada Groceries and Essentials Benefit** (the benefit that replaced the GST/HST credit in July 2026 — see [our coverage of that change](/blog/canada-groceries-essentials-benefit-2026)), paid in **early 2027** on top of the usual quarterly payments. It is worth up to **$339** for a single person with no children and up to **$679** for a couple with two children — on top of, not instead of, the 25% increase to the underlying benefit amount that already took effect in July 2026.
+
+## None of this is law yet
+
+Every figure above is a **budget proposal**, not a confirmed payroll or benefit change. Past budget measures that touched take-home income took months to become law: the 2027 CPP rate cut was announced in April 2026 and needed a full bill, Bill C-30, plus sign-off from every provincial finance minister, before receiving Royal Assent on June 18, 2026 — eight months start to finish. The Build Canada Workers Benefit, the refundable Caregiver Credit, and the grocery top-up all need to clear Parliament the same way before any of the numbers above land in an actual bank account. CanPay Insights will cover the specifics again once each measure is actually confirmed in force, not before.
+
+## What this doesn't change
+
+None of the three measures above adjusts a 2026 or 2027 payroll deduction — no change to CPP, EI, or federal/provincial tax withholding comes out of this budget. The 2027 numbers that already were locked in before the budget — the CPP rate cut, the EI premium increase, the RRSP dollar limit — are unaffected and covered in full in [our pre-budget article](/blog/federal-budget-2026-paycheque) and in the dedicated pieces on [the CPP rate cut](/blog/cpp-contribution-rate-cut-2027), [the EI premium rate](/blog/ei-premium-rate-2027), and [the TFSA and RRSP limits](/blog/tfsa-rrsp-limits-2027).
+
+## See where you stand right now
+
+For your exact 2026 take-home pay under today's rules, use the [free take-home pay calculator](/), or the [CPP & EI calculator](/cpp-ei-calculator) to see this year's deductions broken out on their own.
+
+## Sources & disclaimer
+
+The November 5, 2026 budget date, the $62.3-billion deficit figure, and the Build Canada Workers Benefit, Canada Caregiver Credit, and Canada Groceries and Essentials Benefit measures are drawn from the Department of Finance Canada's own "Budget 2026: Key Measures" backgrounder (canada.ca, November 2026), cross-checked against reporting from The Globe and Mail ("Budget 2026: Ottawa bets spending boost will deliver future economic gains") and Daily Hive ("Here's how Canada's 2026 federal budget could save you money"), both published November 5-6, 2026. The 2026 CWB baseline figures match CanPay Insights' own prior reporting in [our July 2026 Canada Workers Benefit piece](/blog/canada-workers-benefit-payments-2026), sourced to the CRA. All 2027 figures are budget proposals and not yet law; this is general information, not financial or tax advice.
+`,
+  },
 ];
