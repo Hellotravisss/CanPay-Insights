@@ -586,7 +586,7 @@ const calculateSalaryRecurring = (inputs: SalaryInputs): CalculationResult => {
     grossPayAnnual: annualGross,
     netPayAnnual,
     totalDeductionsAnnual,
-    annual: { federalTax: taxResult.federalTax, provincialTax: taxResult.provincialTax, cpp: cppResult.total + qpipAnnual, qpip: qpipAnnual, ei: eiAnnual, rrsp: annualRRSP },
+    annual: { federalTax: taxResult.federalTax, provincialTax: taxResult.provincialTax, cpp: cppResult.total + qpipAnnual, qpip: qpipAnnual, ei: eiAnnual, rrsp: annualRRSP, pension: annualPensionBw },
   };
 };
 
@@ -718,7 +718,7 @@ export const calculateFromAnnualSalary = (inputs: AnnualSalaryInputs): Calculati
     grossPayAnnual: annualGross,
     netPayAnnual,
     totalDeductionsAnnual,
-    annual: { federalTax: taxResult.federalTax, provincialTax: taxResult.provincialTax, cpp: cppResult.total + qpipAnnual, qpip: qpipAnnual, ei: eiAnnual, rrsp: annualRRSP },
+    annual: { federalTax: taxResult.federalTax, provincialTax: taxResult.provincialTax, cpp: cppResult.total + qpipAnnual, qpip: qpipAnnual, ei: eiAnnual, rrsp: annualRRSP, pension: annualPension },
     
     grossPayPerPeriod,
     netPayPerPeriod,
@@ -889,7 +889,7 @@ export const calculateFromTimesheet = (inputs: TimesheetInputs): CalculationResu
     grossPayAnnual: annualGross,
     netPayAnnual,
     totalDeductionsAnnual,
-    annual: { federalTax: taxResult.federalTax, provincialTax: taxResult.provincialTax, cpp: cppResult.total + qpipAnnual, qpip: qpipAnnual, ei: eiAnnual, rrsp: annualRRSP },
+    annual: { federalTax: taxResult.federalTax, provincialTax: taxResult.provincialTax, cpp: cppResult.total + qpipAnnual, qpip: qpipAnnual, ei: eiAnnual, rrsp: annualRRSP, pension: annualPension },
     
     grossPayPerPeriod,
     netPayPerPeriod,

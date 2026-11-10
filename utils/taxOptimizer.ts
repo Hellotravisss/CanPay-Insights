@@ -14,6 +14,8 @@ export interface TaxOptimizationResult {
   rrsp: {
     recommendedAmount: number;
     maxDeductible: number;
+    /** Estimated pension adjustment already taken off maxDeductible (0 with no RPP). */
+    pensionAdjustment: number;
     taxSavings: number;
     effectiveCost: number;
     refundAmount: number;
@@ -95,8 +97,16 @@ const FHSA_LIFETIME_LIMIT = 40000;
  * the next bracket's rate.
  */
 /** Federal + provincial income tax for a year, from the engine. */
-export const incomeTaxAt = (annualIncome: number, province: string): number => {
-  const r = calculateFromAnnualSalary({ province, annualSalary: Math.max(0, annualIncome), payFrequency: PayFrequency.BI_WEEKLY } as AnnualSalaryInputs);
+/**
+ * `pensionAnnual` is the employee's own RPP contribution for the year. It comes off
+ * taxable income before any RRSP does, so a pension member's RRSP is valued on the
+ * lower income — the engine applies it exactly as it does on the results page.
+ */
+const pensionInputs = (pensionAnnual: number) =>
+  pensionAnnual > 0 ? { deductions: { ltdPremium: 0, unionDues: 0, otherDeductions: 0, pension: pensionAnnual / 26 } } : {};
+
+export const incomeTaxAt = (annualIncome: number, province: string, pensionAnnual = 0): number => {
+  const r = calculateFromAnnualSalary({ province, annualSalary: Math.max(0, annualIncome), payFrequency: PayFrequency.BI_WEEKLY, ...pensionInputs(pensionAnnual) } as AnnualSalaryInputs);
   return (r.federalTax + r.provincialTax) * 26;
 };
 
@@ -110,8 +120,8 @@ export const incomeTaxAt = (annualIncome: number, province: string): number => {
  * saving: Ontario, $120,000, a $17,280 RRSP was shown saving $7,501 when it
  * saves $6,007. The marginal rate is right only for the next dollar.
  */
-export const taxSavedByDeduction = (annualIncome: number, province: string, amount: number): number =>
-  Math.max(0, Math.floor(incomeTaxAt(annualIncome, province) - incomeTaxAt(annualIncome - Math.max(0, amount), province)));
+export const taxSavedByDeduction = (annualIncome: number, province: string, amount: number, pensionAnnual = 0): number =>
+  Math.max(0, Math.floor(incomeTaxAt(annualIncome, province, pensionAnnual) - incomeTaxAt(annualIncome - Math.max(0, amount), province, pensionAnnual)));
 
 /**
  * The nearest income below this one at which the combined marginal rate
@@ -120,9 +130,9 @@ export const taxSavedByDeduction = (annualIncome: number, province: string, amou
  * a lower bracket" is only ever said when it is true — the advisor used to aim
  * at a hard-coded $90,000, which is not a bracket boundary anywhere in Canada.
  */
-export const nextRateDrop = (annualIncome: number, province: string, maxDown: number): number | null => {
+export const nextRateDrop = (annualIncome: number, province: string, maxDown: number, pensionAnnual = 0): number | null => {
   const step = 250;
-  const rateAt = (x: number) => (incomeTaxAt(x, province) - incomeTaxAt(x - step, province)) / step;
+  const rateAt = (x: number) => (incomeTaxAt(x, province, pensionAnnual) - incomeTaxAt(x - step, province, pensionAnnual)) / step;
   const top = rateAt(annualIncome);
   for (let x = annualIncome - step; x >= Math.max(step, annualIncome - maxDown); x -= step) {
     if (top - rateAt(x) >= 0.01) return x;
@@ -132,7 +142,8 @@ export const nextRateDrop = (annualIncome: number, province: string, maxDown: nu
 
 export const calculateMarginalRate = (
   annualIncome: number,
-  province: string
+  province: string,
+  pensionAnnual = 0
 ): { federal: number; provincial: number; combined: number } => {
   // The rate on the $1,000 just BELOW this income: what a deduction (RRSP, FHSA)
   // removes. A window centred on the income straddled the QPP2/CPP2 ceiling at
@@ -141,7 +152,7 @@ export const calculateMarginalRate = (
   const hi = annualIncome;
   const lo = Math.max(0, annualIncome - 1000);
   const taxAt = (income: number) => {
-    const r = calculateFromAnnualSalary({ province, annualSalary: income, payFrequency: PayFrequency.BI_WEEKLY } as AnnualSalaryInputs);
+    const r = calculateFromAnnualSalary({ province, annualSalary: income, payFrequency: PayFrequency.BI_WEEKLY, ...pensionInputs(pensionAnnual) } as AnnualSalaryInputs);
     return { fed: r.federalTax * 26, prov: r.provincialTax * 26 };
   };  // split federal/provincial here; incomeTaxAt gives the combined figure
   const a = taxAt(lo), b = taxAt(hi);
@@ -151,20 +162,39 @@ export const calculateMarginalRate = (
 };
 
 /**
+ * Pension adjustment (PA, box 52 of the T4) from the employee's own RPP contribution.
+ *
+ * Membership in a registered pension plan takes the PA off next year's RRSP room
+ * (CRA: RRSP deduction limit = 18% of earned income, capped, minus last year's PA).
+ * The PA counts the employer's contributions too (money-purchase plan), or 9 × the
+ * pension earned that year − $600 (defined-benefit plan). We see only the employee's
+ * share, so we assume the employer puts in as much again: exact for a matched DC plan,
+ * close to the PA of a typical 1.5–2% DB plan. Where the employer adds less, this
+ * overstates the PA and understates the room, which is the safe side: CRA charges 1%
+ * a month on an RRSP over-contribution beyond $2,000. The UI says the exact room is
+ * on the CRA Notice of Assessment.
+ */
+export const estimatePensionAdjustment = (employeePensionAnnual: number): number =>
+  Math.max(0, Math.round(employeePensionAnnual * 2));
+
+/**
  * Calculate optimal RRSP contribution amount
  */
 const calculateRRSPRecommendation = (
   annualIncome: number,
-  province: string
+  province: string,
+  pensionAnnual = 0
 ) => {
-  const marginalRate = calculateMarginalRate(annualIncome, province);
+  const marginalRate = calculateMarginalRate(annualIncome, province, pensionAnnual);
   const combinedRate = marginalRate.combined;
 
-  // Calculate maximum deductible amount (18% of income, capped)
-  const maxDeductible = Math.min(
+  // 18% of earned income (which an RPP contribution does not reduce), capped,
+  // minus the estimated pension adjustment.
+  const pensionAdjustment = estimatePensionAdjustment(pensionAnnual);
+  const maxDeductible = Math.max(0, Math.min(
     Math.floor(annualIncome * 0.18),
     RRSP_DOLLAR_LIMIT
-  );
+  ) - pensionAdjustment);
 
   // Recommendations based on income tier
   let recommendedAmount = 0;
@@ -177,7 +207,7 @@ const calculateRRSPRecommendation = (
   } else if (annualIncome <= 100000) {
     // Medium income: contribute down to where the marginal rate really drops,
     // if that point is within reach; otherwise don't promise a bracket change.
-    const drop = nextRateDrop(annualIncome, province, maxDeductible);
+    const drop = nextRateDrop(annualIncome, province, maxDeductible, pensionAnnual);
     if (drop !== null) {
       recommendedAmount = Math.min(annualIncome - drop, maxDeductible);
       tierRecommendation = 'tier.bracket';
@@ -199,13 +229,14 @@ const calculateRRSPRecommendation = (
   }
 
   // Tax saved, measured by the engine across the whole contribution
-  const taxSavings = taxSavedByDeduction(annualIncome, province, recommendedAmount);
+  const taxSavings = taxSavedByDeduction(annualIncome, province, recommendedAmount, pensionAnnual);
   const effectiveCost = recommendedAmount - taxSavings;
   const refundAmount = taxSavings;
 
   return {
     recommendedAmount,
     maxDeductible,
+    pensionAdjustment,
     taxSavings,
     effectiveCost,
     refundAmount,
@@ -239,11 +270,12 @@ const calculateTFSARecommendation = (annualIncome: number) => {
  */
 const calculateFHSARecommendation = (
   annualIncome: number,
-  province: string
+  province: string,
+  pensionAnnual = 0
 ) => {
-  const marginalRate = calculateMarginalRate(annualIncome, province);
+  const marginalRate = calculateMarginalRate(annualIncome, province, pensionAnnual);
   const recommendedAmount = Math.min(FHSA_ANNUAL_LIMIT, Math.floor(annualIncome * 0.1));
-  const taxSavings = taxSavedByDeduction(annualIncome, province, recommendedAmount);
+  const taxSavings = taxSavedByDeduction(annualIncome, province, recommendedAmount, pensionAnnual);
 
   return {
     annualLimit: FHSA_ANNUAL_LIMIT,
@@ -395,11 +427,12 @@ const generateOtherStrategies = (
  */
 export const generateTaxOptimization = (
   annualIncome: number,
-  province: string
+  province: string,
+  pensionAnnual = 0
 ): TaxOptimizationResult => {
-  const rrsp = calculateRRSPRecommendation(annualIncome, province);
+  const rrsp = calculateRRSPRecommendation(annualIncome, province, pensionAnnual);
   const tfsa = calculateTFSARecommendation(annualIncome);
-  const fhsa = calculateFHSARecommendation(annualIncome, province);
+  const fhsa = calculateFHSARecommendation(annualIncome, province, pensionAnnual);
   const otherStrategies = generateOtherStrategies(annualIncome, province);
 
   // Calculate total potential savings
@@ -451,13 +484,13 @@ export const generateTaxOptimization = (
  */
 export const calculateRRSPScenarios = (
   annualIncome: number,
-  province: string
+  province: string,
+  pensionAnnual = 0
 ): { amount: number; taxSavings: number; effectiveCost: number; refundRate: number }[] => {
-  const marginalRate = calculateMarginalRate(annualIncome, province);
-  const maxDeductible = Math.min(
+  const maxDeductible = Math.max(0, Math.min(
     Math.floor(annualIncome * 0.18),
     RRSP_DOLLAR_LIMIT
-  );
+  ) - estimatePensionAdjustment(pensionAnnual));
 
   const scenarios = [
     Math.min(3000, maxDeductible),
@@ -469,7 +502,7 @@ export const calculateRRSPScenarios = (
   ].filter((v, i, a) => a.indexOf(v) === i);
 
   return scenarios.map((amount) => {
-    const taxSavings = taxSavedByDeduction(annualIncome, province, amount);
+    const taxSavings = taxSavedByDeduction(annualIncome, province, amount, pensionAnnual);
     return {
       amount,
       taxSavings,

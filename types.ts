@@ -264,7 +264,7 @@ export interface CalculationResult {
    * the period's tax includes the whole bonus's tax, so multiplying it out
    * would charge that tax 26 times.
    */
-  annual?: { federalTax: number; provincialTax: number; cpp: number; qpip: number; ei: number; rrsp: number };
+  annual?: { federalTax: number; provincialTax: number; cpp: number; qpip: number; ei: number; rrsp: number; pension?: number };
   
   grossPayPerPeriod?: number;
   netPayPerPeriod?: number;

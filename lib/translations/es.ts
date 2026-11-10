@@ -253,6 +253,7 @@ export const main: Record<string, string> = {
   'opt.noMatchNote': 'Actualmente estás haciendo deducciones de nómina. Para maximizar tu reembolso fiscal, considera completar el espacio restante como aportación voluntaria antes de la fecha límite.',
   'opt.recommended': 'Recomendado',
   'opt.maxDeductible': 'Máximo deducible',
+  'opt.paNote': "Ya descuenta tu ajuste por pensión: unos {pa}, suponiendo que tu empleador aporta lo mismo que tú. Tu margen exacto de RRSP figura en tu Notice of Assessment de la CRA.",
   'opt.taxSavings': 'Ahorro fiscal',
   'opt.netCost': 'Costo neto',
   'opt.contribution': 'Aportación',

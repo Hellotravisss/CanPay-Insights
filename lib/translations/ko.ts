@@ -253,6 +253,7 @@ export const main: Record<string, string> = {
   'opt.noMatchNote': '현재 급여에서 공제를 통해 납입하고 있습니다. 세금 환급을 최대화하려면 마감일 전에 남은 한도를 자발적으로 추가 납입하는 것을 고려해 보세요.',
   'opt.recommended': '추천',
   'opt.maxDeductible': '최대 공제 가능액',
+  'opt.paNote': "연금 조정액 약 {pa}를 이미 뺐습니다(고용주가 본인과 같은 금액을 낸다고 가정). 정확한 RRSP 한도는 CRA Notice of Assessment에 나옵니다.",
   'opt.taxSavings': '절세액',
   'opt.netCost': '순 비용',
   'opt.contribution': '납입액',

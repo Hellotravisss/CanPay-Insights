@@ -253,6 +253,7 @@ export const main: Record<string, string> = {
   'opt.noMatchNote': 'Bạn hiện đang khấu trừ qua bảng lương. Để tối đa hóa khoản hoàn thuế, hãy cân nhắc đóng thêm phần hạn mức còn lại dưới dạng đóng góp tự nguyện trước hạn chót.',
   'opt.recommended': 'Đề Xuất',
   'opt.maxDeductible': 'Mức Khấu Trừ Tối Đa',
+  'opt.paNote': "Đã trừ phần điều chỉnh lương hưu: khoảng {pa}, giả định chủ lao động đóng bằng bạn. Hạn mức RRSP chính xác ghi trên Notice of Assessment của CRA.",
   'opt.taxSavings': 'Tiết Kiệm Thuế',
   'opt.netCost': 'Chi Phí Ròng',
   'opt.contribution': 'Đóng Góp',
