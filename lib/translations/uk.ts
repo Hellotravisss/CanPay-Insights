@@ -180,6 +180,8 @@ export const main: Record<string, string> = {
   'res.deductions': 'Відрахування',
   'res.federalTax': 'Федеральний податок',
   'res.provincialTax': 'Провінційний податок',
+  'res.incomeTaxTotal': "Усього податку на дохід",
+  'res.incomeTaxTotalHint': "У розрахунковому листі це часто один рядок: «Federal Tax» або «Income Tax».",
   'res.cppEiAmp': 'CPP та EI',
   'res.totalDeductions': 'Загальні відрахування',
   'res.hoursCap': 'Години',

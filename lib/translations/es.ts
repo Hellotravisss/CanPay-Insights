@@ -180,6 +180,8 @@ export const main: Record<string, string> = {
   'res.deductions': 'Deducciones',
   'res.federalTax': 'Impuesto federal',
   'res.provincialTax': 'Impuesto provincial',
+  'res.incomeTaxTotal': "Total de impuesto sobre la renta",
+  'res.incomeTaxTotalHint': "En el talón de pago suele ir en una sola línea: \"Federal Tax\" o \"Income Tax\".",
   'res.cppEiAmp': 'CPP y EI',
   'res.totalDeductions': 'Deducciones totales',
   'res.hoursCap': 'Horas',

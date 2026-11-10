@@ -180,6 +180,8 @@ export const main: Record<string, string> = {
   'res.deductions': 'Khoản Khấu Trừ',
   'res.federalTax': 'Thuế Liên Bang',
   'res.provincialTax': 'Thuế Tỉnh Bang',
+  'res.incomeTaxTotal': "Tổng thuế thu nhập",
+  'res.incomeTaxTotalHint': "Phiếu lương thường gộp thành một dòng: \"Federal Tax\" hoặc \"Income Tax\".",
   'res.cppEiAmp': 'CPP & EI',
   'res.totalDeductions': 'Tổng Khấu Trừ',
   'res.hoursCap': 'Giờ',
