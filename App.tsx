@@ -14,6 +14,7 @@ import {
   bucketOtHours,
   bucketTipsPct,
   bucketShare,
+  bucketPensionPct,
   buildPayChange,
   deriveEmploymentShape,
   noteInputEdit,
@@ -100,6 +101,7 @@ function stubExtras(mode: CalculationMode, inputs: any, timesheet: TimesheetInpu
   const income = ['0', 'under-10', '10-25', '25-plus'] as const;
   return {
     unionDuesBucket: ded ? bucketShare(pct(ded.unionDues), [1, 2], ['0', 'under-1', '1-2', '2-plus'] as const) : null,
+    pensionPctBucket: ded ? bucketPensionPct(pct(ded.pension)) : null,
     ltd: ded ? (ded.ltdPremium || 0) > 0 : null,
     otherDeductionsBucket: ded ? bucketShare(pct(ded.otherDeductions), [2, 5], ['0', 'under-2', '2-5', '5-plus'] as const) : null,
     bonusBucket: add ? bucketShare(pct(add.bonus), [10, 25], [...income]) : null,

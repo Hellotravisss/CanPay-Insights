@@ -52,7 +52,11 @@ create table if not exists events (
   -- 1 when the wage or salary differs from the value the form opened with, 0 when it is the
   -- opening value. Never an amount. NULL on rows before 2026-11-01 and on prompt/tap rows.
   -- Added in production by ALTER on 2026-11-01.
-  wage_edited integer
+  wage_edited integer,
+  -- Pension (RPP) contribution as a share of the period's gross: '0', 'under-3', '3-6', '6-9',
+  -- '9-plus'. Never an amount. NULL before 2026-11-07, on prompt/tap rows and where the form
+  -- has no pension field. Added in production by ALTER on 2026-11-07.
+  pension_pct_bucket text
 );
 create index if not exists idx_events_created on events(created_at);
 create index if not exists idx_events_session on events(session_id);

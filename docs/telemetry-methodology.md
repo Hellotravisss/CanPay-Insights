@@ -110,6 +110,12 @@ elapsed `same-day` … `over-year`.
   90–120k). For income questions, use `wage_edited = 1`, or for older rows, the last
   calculation of each session. A 0 can be a real $20 wage left in place; it cannot be told
   apart from a default nobody looked at. Prompt answers and taps leave it NULL.
+- **`pension_pct_bucket` exists from 2026-11-07** (website; iOS from 1.3.3). The pension
+  (RPP) contribution the visitor entered, as a share of the period's gross: `0`, `under-3`,
+  `3-6`, `6-9`, `9-plus`. Before that date the field is NULL, and so is it on rows from
+  forms without a pension field. `0` means the field was left empty, not that the visitor
+  has no pension: the field is new and optional. `9-plus` is where public-sector
+  defined-benefit plans sit (typically 9–11%); treat it as a hint, not a sector label.
 
 ---
 

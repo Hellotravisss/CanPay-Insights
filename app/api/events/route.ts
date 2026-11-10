@@ -21,7 +21,7 @@ const COLS = [
   'shift_start_hour', 'shift_end_hour', 'unpaid_break_min', 'days_per_week', 'works_weekend', 'avg_daily_hours',
   'has_rrsp', 'rrsp_pct_bucket', 'employer_match', 'shift_premium', 'premium_rate_bucket', 'ot_hours_bucket',
   'tips_pct_bucket', 'pay_frequency',
-  'union_dues_bucket', 'ltd', 'other_deductions_bucket', 'bonus_bucket', 'other_income_bucket',
+  'union_dues_bucket', 'pension_pct_bucket', 'ltd', 'other_deductions_bucket', 'bonus_bucket', 'other_income_bucket',
   'stat_or_sick_pay', 'taxable_benefits', 'rsu_bucket', 'match_policy', 'tips_paid',
   'offer_change_bucket', 'offer_to_province', 'offer_vacation_diff', 'compared_provinces', 'move_intent', 'viewed_report', 'entry_path', 'referrer_path', 'local_hour', 'local_dow',
   'session_id', 'seq', 'industry', 'industry_rank', 'industry_returning', 'intent', 'expectation',
@@ -90,6 +90,7 @@ export async function POST(request: Request) {
   if (!EDIT_BUCKETS.has(String(body.edits_bucket))) body.edits_bucket = null;
   const only = (k: string, allowed: string[]) => { if (!allowed.includes(String(body[k]))) body[k] = null; };
   only('union_dues_bucket', ['0', 'under-1', '1-2', '2-plus']);
+  only('pension_pct_bucket', ['0', 'under-3', '3-6', '6-9', '9-plus']);
   only('other_deductions_bucket', ['0', 'under-2', '2-5', '5-plus']);
   for (const k of ['bonus_bucket', 'other_income_bucket', 'rsu_bucket']) only(k, ['0', 'under-10', '10-25', '25-plus']);
   only('match_policy', ['equal', 'half', 'custom', 'none']);

@@ -25,6 +25,9 @@ export interface BehaviourSignals {
   // Pay-stub extras the visitor typed (2026-10-06): each as a share-of-gross
   // range or yes/no, never an amount. They were entered all along and dropped.
   unionDuesBucket?: '0' | 'under-1' | '1-2' | '2-plus' | null;
+  // Pension (RPP) contribution as a share of the period's gross (2026-11-07). 9-plus is
+  // where public-sector defined-benefit plans sit (teachers, nurses, government: 9–11%).
+  pensionPctBucket?: PensionPctBucket | null;
   ltd?: boolean | null;
   otherDeductionsBucket?: '0' | 'under-2' | '2-5' | '5-plus' | null;
   bonusBucket?: '0' | 'under-10' | '10-25' | '25-plus' | null;
@@ -43,6 +46,12 @@ export function bucketShare<T extends string>(pct: number | null, edges: number[
   for (let i = 0; i < edges.length; i++) if (pct < edges[i]) return labels[i + 1];
   return labels[labels.length - 1];
 }
+
+export const PENSION_PCT_BUCKETS = ['0', 'under-3', '3-6', '6-9', '9-plus'] as const;
+export type PensionPctBucket = (typeof PENSION_PCT_BUCKETS)[number];
+/** Pension (RPP) contribution, % of gross pay → range label. Never the amount. */
+export const bucketPensionPct = (pct: number | null): PensionPctBucket | null =>
+  bucketShare(pct, [3, 6, 9], [...PENSION_PCT_BUCKETS]);
 
 export function bucketRrspPct(pct: number): BehaviourSignals['rrspPctBucket'] {
   if (pct <= 0) return '0';
@@ -743,6 +752,7 @@ export function recordCalcEvent(e: {
         ot_hours_bucket: b?.otHoursBucket ?? null,
         tips_pct_bucket: b?.tipsPctBucket ?? null,
         union_dues_bucket: b?.unionDuesBucket ?? null,
+        pension_pct_bucket: b?.pensionPctBucket ?? null,
         ltd: b?.ltd == null ? null : b.ltd ? 1 : 0,
         other_deductions_bucket: b?.otherDeductionsBucket ?? null,
         bonus_bucket: b?.bonusBucket ?? null,
@@ -835,7 +845,7 @@ export function dedupeKey(e: CalcEvent, source: string, bracket: string, hood: N
   const workKey = w
     ? `${w.shiftStartHour}-${w.shiftEndHour}-${w.unpaidBreakMin}-${w.daysPerWeek}-${w.worksWeekend ? 'we' : ''}-${w.avgDailyHours}`
     : '';
-  const behaviourKey = b ? `${b.rrspPctBucket}-${b.otHoursBucket}-${b.tipsPctBucket ?? ''}-${b.shiftPremium}-${b.unionDuesBucket ?? ''}${b.ltd ?? ''}${b.otherDeductionsBucket ?? ''}${b.bonusBucket ?? ''}${b.otherIncomeBucket ?? ''}${b.statOrSickPay ?? ''}${b.taxableBenefits ?? ''}${b.rsuBucket ?? ''}${b.matchPolicy ?? ''}${b.tipsPaid ?? ''}` : '';
+  const behaviourKey = b ? `${b.rrspPctBucket}-${b.otHoursBucket}-${b.tipsPctBucket ?? ''}-${b.shiftPremium}-${b.unionDuesBucket ?? ''}${b.pensionPctBucket ?? ''}${b.ltd ?? ''}${b.otherDeductionsBucket ?? ''}${b.bonusBucket ?? ''}${b.otherIncomeBucket ?? ''}${b.statOrSickPay ?? ''}${b.taxableBenefits ?? ''}${b.rsuBucket ?? ''}${b.matchPolicy ?? ''}${b.tipsPaid ?? ''}` : '';
   return `${source}|${e.mode}|${e.province}|${bracket}|${e.industry ?? ''}|${workKey}|${behaviourKey}|${e.intent ?? ''}|${e.expectation ?? ''}|${e.workArrangement ?? ''}|${e.ageBand ?? ''}|${e.viewedReport ? 'r' : ''}|${e.productInterest ?? ''}|${e.tenureBand ?? ''}${e.unionMember ?? ''}${e.employerSize ?? ''}${e.vacationBand ?? ''}|${e.payChange ? `${e.payChange.direction}-${e.payChange.pctBucket}` : ''}|${hood?.fsa ?? ''}${hood?.source ?? ''}|${reverseTargetBucket(e.reverseTargetMonthly)}|${e.spouseClaim ? 's' : ''}${e.under18 ? 'u' : ''}${e.wageEdited ? 'w' : ''}|${e.comparedProvinces?.join(',') ?? ''}${e.moveIntent ?? ''}|${e.offer ? `${e.offer.changeBucket}${e.offer.toProvince ?? ''}${e.offer.vacationDiff}` : ''}`;
 }
 
