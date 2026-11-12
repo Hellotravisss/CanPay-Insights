@@ -57,7 +57,8 @@ export function pageText(html: string): string {
 /** Cloudflare / Radware interstitials served instead of the page. */
 export function isChallenge(status: number, html: string): boolean {
   // Unambiguous interstitials, whatever the status (PE's Radware page is a 200).
-  if (/<title>\s*(Just a moment\.\.\.|Radware Page|Attention Required)/i.test(html) || /Verifying your browser before proceeding/i.test(html)) return true;
+  // "Radware Captcha Page" replaced PEI's "Radware Page" on 2026-11-10.
+  if (/<title>\s*(Just a moment\.\.\.|Radware (Captcha )?Page|Attention Required)/i.test(html) || /Verifying your browser before proceeding/i.test(html)) return true;
   // Weaker markers only count on a refusal or a near-empty page.
   return /challenges\.cloudflare\.com|cf-chl-|perfdrive\.com/i.test(html) && (status === 403 || status === 503 || status === 429 || html.length < 20000);
 }
@@ -202,6 +203,14 @@ function selftest() {
       expect(`${w.code} wall comes down`, judgePage(w, { ok: true, status: 200, html: '<p>Minimum wage is $99.00</p>' }, m.fetched), 'BLOCKED');
     }
   }
+
+  // 2026-11-10: PEI changed its wall to a captcha page (HTTP 200, a title the gate did not know),
+  // and the gate reported "the wall is gone" for two deploys while the wage had not moved.
+  const pe = MIN_WAGES.find((w) => w.code === 'PE')!;
+  const captcha = readFileSync(join(dir, 'PE-captcha.html'), 'utf8');
+  expect('PE wall changes to the Radware captcha page', judgePage(pe, { ok: true, status: 200, html: captcha }, '2026-11-10'), 'PASS');
+  const ns = MIN_WAGES.find((w) => w.code === 'NS')!;
+  expect('NS starts serving the Radware captcha page', judgePage(ns, { ok: true, status: 200, html: captcha }, '2026-11-10'), 'BLOCKED');
 
   // Date checks — the 2026-09-01 failure, replayed.
   const nu = MIN_WAGES.find((w) => w.code === 'NU')!;
