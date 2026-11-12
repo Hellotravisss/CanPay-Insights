@@ -4101,4 +4101,119 @@ For your exact 2026 take-home pay under today's rules, use the [free take-home p
 The November 5, 2026 budget date, the $62.3-billion deficit figure, and the Build Canada Workers Benefit, Canada Caregiver Credit, and Canada Groceries and Essentials Benefit measures are drawn from the Department of Finance Canada's own "Budget 2026: Key Measures" backgrounder (canada.ca, November 2026), cross-checked against reporting from The Globe and Mail ("Budget 2026: Ottawa bets spending boost will deliver future economic gains") and Daily Hive ("Here's how Canada's 2026 federal budget could save you money"), both published November 5-6, 2026. The 2026 CWB baseline figures match CanPay Insights' own prior reporting in [our July 2026 Canada Workers Benefit piece](/blog/canada-workers-benefit-payments-2026), sourced to the CRA. All 2027 figures are budget proposals and not yet law; this is general information, not financial or tax advice.
 `,
   },
+  {
+    id: 'study-38',
+    slug: 'cpp-2027-ceiling-confirmed',
+    title: 'CRA Confirms the 2027 CPP Ceiling: $76,700 — But Your Maximum CPP Deduction Actually Falls to $4,209',
+    subtitle:
+      "The CRA quietly posted the missing number our earlier CPP rate-cut coverage was waiting on: the 2027 earnings ceiling is $76,700, up from $74,600. Because the base rate is also falling under Bill C-30, the maximum employee CPP deduction drops for the first time in years — to $4,209.00, down from $4,230.45.",
+    excerpt:
+      "The CRA has posted the 2027 CPP numbers: the earnings ceiling (YMPE) rises to $76,700 and the second ceiling (YAMPE) to $87,400, while the base contribution rate falls to 5.75% under the legislated rate cut. The result is unusual: the 2027 maximum base CPP deduction actually falls to $4,209.00, down from $4,230.45, even as the ceiling climbs. Here is exactly what that means by salary.",
+    metaTitle: 'CPP 2027: Ceiling Hits $76,700, Max Drops to $4,209',
+    metaDescription:
+      'CRA confirms the 2027 CPP earnings ceiling at $76,700 — but the rate cut means the maximum CPP deduction falls to $4,209, down from $4,230.45 in 2026.',
+    keywords: [
+      'cpp 2027',
+      'cpp maximum pensionable earnings 2027',
+      'cpp ympe 2027',
+      'cpp contribution rate 2027',
+      'cpp2 yampe 2027',
+      'how much cpp will i pay 2027',
+    ],
+    category: 'news',
+    tags: ['CPP', 'CRA', 'Payroll', '2027'],
+    publishedAt: '2026-11-12',
+    readTime: 6,
+    imageUrl: '/blog/cpp-2027-ceiling-confirmed.svg',
+    directAnswer:
+      "The Canada Revenue Agency has posted the 2027 CPP figures: the earnings ceiling (YMPE) rises to $76,700 from $74,600, and the second ceiling (YAMPE) rises to $87,400 from $85,000. Because the base CPP rate is also falling from 5.95% to 5.75% under the already-legislated Bill C-30 rate cut, the maximum base CPP deduction actually falls to $4,209.00 in 2027, down from $4,230.45 in 2026 — the first drop in years, even though the earnings ceiling went up. Including CPP2 (unchanged at 4% on earnings between the two ceilings), the combined maximum employee contribution falls slightly too, down from $4,646.45 to $4,637.00. Workers earning between $76,700 and $85,000 see the biggest dollar saving, $105.45; workers above $87,400 see the smallest, $9.45.",
+    faq: [
+      {
+        question: 'What is the 2027 CPP earnings ceiling (YMPE)?',
+        answer:
+          "$76,700, up from $74,600 in 2026 — a $2,100 increase. This is the Year's Maximum Pensionable Earnings, the income level up to which the base CPP contribution applies. It is confirmed directly on the CRA's CPP contribution rates and maximums page on canada.ca, which now carries a 2027 row.",
+      },
+      {
+        question: 'Why is the maximum CPP deduction going down if the earnings ceiling is going up?',
+        answer:
+          'Because two numbers moved in opposite directions, and the rate cut won. The ceiling (the amount of income CPP applies to) rose by $2,100, but the contribution rate fell from 5.95% to 5.75% under the rate cut Bill C-30 legislated for January 1, 2027. On the $73,200 of contributory earnings between the $3,500 exemption and the new $76,700 ceiling, 5.75% works out to $4,209.00 — about $21 less than the $4,230.45 that 5.95% produced on the smaller 2026 base. The rate cut outweighs the ceiling increase at every income level.',
+      },
+      {
+        question: 'What is the CPP2 ceiling (YAMPE) for 2027, and does CPP2 change too?',
+        answer:
+          "The second ceiling (YAMPE) rises to $87,400 in 2027, up from $85,000. The CPP2 rate itself is unchanged — still 4% on earnings between the two ceilings for employees and employers, 8% for the self-employed — only the ceilings move. That puts the 2027 maximum CPP2 contribution at $428.00 (4% of the $10,700 band between $76,700 and $87,400), up from $416.00 in 2026, since the CPP2 band widened even though the rate stayed flat.",
+      },
+      {
+        question: 'How much will I actually save on CPP in 2027 compared to 2026?',
+        answer:
+          "It depends on your salary. At $50,000 you save about $93.00 for the year; at $70,000, about $133.00. The saving is highest, down from the lower bands, at $105.45 for anyone earning between $76,700 and $85,000, because that band gets the full base-rate cut while paying noticeably less CPP2 than before. Above $87,400, where both years hit their total ceiling, the saving drops to its smallest value: $9.45 a year, because the wider 2027 CPP2 band claws back most of the base-rate saving at the very top.",
+      },
+      {
+        question: 'Is this confirmed, or still a projection like the TFSA limit?',
+        answer:
+          "Confirmed, not projected. Unlike the 2027 TFSA limit (still an inflation-formula estimate as of this writing — see our [TFSA and RRSP coverage](/blog/tfsa-rrsp-limits-2027)), the 2027 CPP ceiling and rate are both posted directly on canada.ca: the earnings ceilings on the CRA's registered-plans YMPE/YAMPE table, and the exact dollar maximums on the CRA's own CPP contribution rates and maximums page, which carries the figures in a row explicitly marked \"New 2027.\"",
+      },
+      {
+        question: 'Does any of this change my 2026 paycheque right now?',
+        answer:
+          "No. None of these figures apply until pay dated January 1, 2027 or later. Your 2026 CPP deduction stays at 5.95% up to the $74,600 ceiling, plus 4% CPP2 up to $85,000, exactly as it has been all year — see [how much CPP you pay in 2026](/blog/how-much-cpp-will-i-pay-2026) for the current-year numbers.",
+      },
+    ],
+    content: `
+## The number our own CPP rate-cut coverage was waiting on just landed
+
+Back in the spring, Bill C-30 locked in a cut to the base CPP contribution rate, from 9.9% to 9.5% split between employer and employee (5.95% to 5.75% on the employee side), effective January 1, 2027. We covered that law in detail in [our piece on the 2027 CPP rate cut](/blog/cpp-contribution-rate-cut-2027) — but at the time, one number was still missing: the 2027 CPP earnings ceiling, which the CRA typically confirms each November and hadn't yet when that article was written. Our [federal budget preview](/blog/federal-budget-2026-paycheque) flagged the same gap on November 2.
+
+That number is now posted. The CRA's CPP contribution rates and maximums page on canada.ca carries a row explicitly marked **"New 2027"**, and the registered-plans YMPE/YAMPE table confirms the same figures from a second angle:
+
+| Figure | 2026 | 2027 | Change |
+| --- | --- | --- | --- |
+| Earnings ceiling (YMPE) | $74,600 | **$76,700** | +$2,100 |
+| Second ceiling (YAMPE) | $85,000 | **$87,400** | +$2,400 |
+| Basic exemption | $3,500 | $3,500 | No change |
+| Base contribution rate (employee) | 5.95% | **5.75%** | cut 0.20 pp |
+| CPP2 rate (employee) | 4% | 4% | No change |
+| Max base contribution (employee) | $4,230.45 | **$4,209.00** | &#8722;$21.45 |
+| Max CPP2 contribution (employee) | $416.00 | **$428.00** | rose $12.00 |
+| Max combined CPP + CPP2 (employee) | $4,646.45 | **$4,637.00** | &#8722;$9.45 |
+
+## The counterintuitive part: the ceiling rose, but the maximum deduction fell
+
+Normally, a higher earnings ceiling means a bigger maximum deduction — more income is subject to CPP, so the dollar cap climbs most years. Not this time. The ceiling climbed by $2,100, but the rate cut from 5.95% to 5.75% was large enough to more than offset it: 5.75% of the new $73,200 contributory-earnings band ($76,700 minus the $3,500 exemption) comes to **$4,209.00**, about $21 less than the $4,230.45 that 5.95% produced on the smaller 2026 band. This is the first year-over-year drop in the maximum base CPP contribution in recent memory — a direct, deliberate result of the rate cut, not an accident of indexing.
+
+CPP2 moves the other way, but by less. The CPP2 rate itself didn't change — it's still 4% for employees and employers, 8% for the self-employed — but the band it applies to widened from $10,400 (between $74,600 and $85,000) to $10,700 (between $76,700 and $87,400), so the maximum CPP2 contribution rises from $416.00 to $428.00, a $12.00 increase. *(The CRA's CPP2-specific maximums page did not have a 2027 row at the time of writing; the $428.00 and $856.00 self-employed figures above are CanPay Insights' own calculation — 4% and 8% respectively of the confirmed $10,700 band between the two confirmed ceilings — not a figure quoted directly from a CRA table.)*
+
+Net effect: the base-rate saving ($21.45) outweighs the CPP2 increase ($12.00), so the combined maximum CPP + CPP2 contribution still falls, from $4,646.45 to $4,637.00 — a $9.45 reduction for anyone earning at or above the top ceiling.
+
+## What this is worth at your salary
+
+The saving isn't the same for everyone. It grows as your income approaches the 2026 ceiling, peaks for a band of upper-middle earners, then shrinks again at the very top:
+
+| Annual salary | 2026 CPP + CPP2 | 2027 CPP + CPP2 | Saving |
+| --- | --- | --- | --- |
+| $40,000 | $2,171.75 | $2,098.75 | $73.00 |
+| $50,000 | $2,766.75 | $2,673.75 | $93.00 |
+| $60,000 | $3,361.75 | $3,248.75 | $113.00 |
+| $70,000 | $3,956.75 | $3,823.75 | $133.00 |
+| $76,700 | $4,314.45 | $4,209.00 | **$105.45** |
+| $85,000 | $4,646.45 (max) | $4,541.00 | **$105.45** |
+| $87,400 or more | $4,646.45 (max) | $4,637.00 (max) | $9.45 |
+
+*CPP + CPP2 for 2027 uses the confirmed 5.75% base rate on pensionable earnings between the $3,500 exemption and the YMPE, plus 4% CPP2 between the YMPE and the YAMPE. CPP + CPP2 for the prior year uses that year's 5.95% base rate and the same 4% CPP2 rate on its own ceilings. Figures assume a single employment income with no other CPP-exempt periods.*
+
+The pattern has a simple explanation. Below the 2026 ceiling, only the rate cut is in play, so the saving grows steadily with income — roughly 20 cents of saving per $100 of pensionable earnings. Between $76,700 and $85,000, the saving hits its peak of $105.45: earners here get the full base-rate cut while still paying noticeably less CPP2 than before, because 2027's CPP2 doesn't start until $76,700 instead of $74,600. Above $87,400, both years are maxed out on every component, so the saving collapses to the smallest, flattest number in the table: $9.45, the net of the $21.45 base-rate saving and the $12.00 CPP2 increase.
+
+## None of this touches a 2026 paycheque
+
+Every figure above takes effect with pay dated January 1, 2027 or later. Your CPP deduction for the rest of 2026 stays exactly where it's been all year — 5.95% up to $74,600, plus 4% CPP2 up to $85,000. See [how much CPP you pay in 2026](/blog/how-much-cpp-will-i-pay-2026) for this year's numbers in full, or [how much EI you pay in 2026](/blog/how-much-ei-will-i-pay-2026) for the other payroll deduction that moves independently of CPP (EI's own 2027 rate, already confirmed separately by the CEIC, is covered in [our EI premium piece](/blog/ei-premium-rate-2027)).
+
+## See it against your own paycheque
+
+For your exact 2026 take-home pay under today's rules, use the [free take-home pay calculator](/), or see this year's CPP and EI deductions broken out on their own with the [CPP & EI calculator](/cpp-ei-calculator).
+
+## Sources & disclaimer
+
+The 2027 CPP earnings ceiling ($76,700), the second ceiling ($87,400), the basic exemption ($3,500), the base contribution rate (5.75%), and the maximum base contribution ($4,209.00, with a combined employee-and-employer maximum of $8,418.00) are quoted directly from the Canada Revenue Agency's ["Canada Pension Plan contribution rates, maximums and exemptions" page](https://www.canada.ca/en/revenue-agency/services/tax/businesses/topics/payroll/payroll-deductions-contributions/canada-pension-plan-cpp/cpp-contribution-rates-maximums-exemptions.html), which carries the figures in a row marked "New 2027". That CRA page's own details are dated November 9, 2026. The 2027 YMPE ($76,700) and YAMPE ($87,400) are independently confirmed on the CRA's ["MP, DB, RRSP, DPSP, ALDA, TFSA limits, YMPE and the YAMPE" page](https://www.canada.ca/en/revenue-agency/services/tax/registered-plans-administrators/pspa/mp-rrsp-dpsp-tfsa-limits-ympe.html). The CPP2 contribution rate (4% employee/employer, 8% self-employed) is unchanged from the CRA's existing CPP2 guidance and CanPay Insights' own prior reporting in [the 2027 CPP rate cut piece](/blog/cpp-contribution-rate-cut-2027); the 2027 CPP2 dollar maximums ($428.00 employee/employer, $856.00 self-employed) are CanPay Insights' own calculation from the confirmed 2027 ceilings and are not quoted from a CRA table, since the CRA's CPP2-specific maximums page had not been updated with a 2027 row at the time of writing. The Bill C-30 base-rate cut itself (9.9% to 9.5%, split 5.95%-to-5.75% on the employee side) received Royal Assent on June 18, 2026, as covered in our prior reporting. All salary-band figures are CanPay Insights' own arithmetic applying the confirmed rates and ceilings; this is general information, not tax advice.
+`,
+  },
 ];
