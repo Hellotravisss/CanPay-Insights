@@ -1932,10 +1932,17 @@
   },
   {
    "page": "/fr/confidentialite",
-   "text": "des fourchettes larges pour vos saisies (cotisation REER en part de la paie, prime de quart, heures supplémentaires, pourboires en part de la paie, cotisations syndicales, cotisations au régime de retraite (RPA) en part de la paie, autres retenues, prime, commissions ou autres revenus, et unités d’actions restreintes en part de la paie), si vous avez saisi une prime d’assurance invalidité, une paie de jour férié ou de maladie ou un avantage imposable (oui ou non), le mode de contribution de l’employeur au REER et si vos pourboires passent par la paie — toujours des fourchettes ou oui/non, jamais les montants;",
+   "text": "des fourchettes larges pour vos saisies (cotisation REER en part de la paie, prime de quart, heures supplémentaires, pourboires en part de la paie, cotisations syndicales, cotisations au régime de retraite (RPA) en part de la paie, autres retenues, prime, commissions ou autres revenus, et unités d’actions restreintes en part de la paie) — toujours des fourchettes, jamais les montants;",
    "backing": "manual",
-   "note": "Re-read App.tsx stubExtras/buildBehaviour and lib/telemetry.ts: union dues, pension (RPP) contributions, other deductions, bonus, other income (share of period gross) and RSUs (share of annual gross) leave only as range labels; LTD, stat/sick pay, taxable benefits as 1/0; match policy and tips_paid as fixed labels. Pension: lib/telemetry.ts bucketPensionPct (0/under-3/3-6/6-9/9-plus). app/api/events/route.ts nulls anything outside those labels. No amount is sent.",
-   "reviewed": "2026-11-07"
+   "note": "Re-read App.tsx stubExtras/buildBehaviour and lib/telemetry.ts: union dues, pension (RPP) contributions, other deductions, bonus, other income (share of period gross) and RSUs (share of annual gross) leave only as range labels; LTD, stat/sick pay, taxable benefits as 1/0; match policy and tips_paid as fixed labels. Pension: lib/telemetry.ts bucketPensionPct (0/under-3/3-6/6-9/9-plus). app/api/events/route.ts nulls anything outside those labels. No amount is sent. 2026-11-10: split in two list items — the single sentence had grown past the extractor's 600-character cap and was no longer being read.",
+   "reviewed": "2026-11-10"
+  },
+  {
+   "page": "/fr/confidentialite",
+   "text": "si vous avez saisi une prime d’assurance invalidité, une paie de jour férié ou de maladie ou un avantage imposable (oui ou non), le mode de contribution de l’employeur au REER et si vos pourboires passent par la paie — toujours oui/non ou un libellé fixe, jamais les montants;",
+   "backing": "manual",
+   "note": "Re-read App.tsx stubExtras/buildBehaviour and lib/telemetry.ts: union dues, pension (RPP) contributions, other deductions, bonus, other income (share of period gross) and RSUs (share of annual gross) leave only as range labels; LTD, stat/sick pay, taxable benefits as 1/0; match policy and tips_paid as fixed labels. Pension: lib/telemetry.ts bucketPensionPct (0/under-3/3-6/6-9/9-plus). app/api/events/route.ts nulls anything outside those labels. No amount is sent. 2026-11-10: split in two list items — the single sentence had grown past the extractor's 600-character cap and was no longer being read.",
+   "reviewed": "2026-11-10"
   },
   {
    "page": "/privacy",
@@ -2069,6 +2076,13 @@
    "backing": "manual",
    "note": "Checked 2026-10-08 against CanPayApp 1.2.4 (READY_FOR_SALE via ASC API): src/components/TelemetryToggle.tsx rendered under results in App.tsx; setTelemetryEnabled stores an opt-out flag in AsyncStorage; recordCalcEvent and recordAnswer return early when opted out. Replaces the 'no switch yet' sentences.",
    "reviewed": "2026-10-08"
+  },
+  {
+   "page": "/fr/confidentialite",
+   "text": "Le stockage local de votre appareil contient votre langue, vos réglages de calculateur hors connexion, les calculs et entrées de feuille de temps enregistrés hors connexion, le secteur auquel vous vous êtes comparé en dernier, l’indicateur de refus de télémétrie, le préfixe postal mémorisé, les questions facultatives auxquelles vous avez déjà répondu (pour ne pas les reposer; pas vos réponses) et l’indicateur « a déjà calculé ».",
+   "backing": "manual",
+   "note": "French of the /privacy sentence backed by check:storage-disclosed. Until 2026-11-10 it ran on into the page-view entries, 623 characters, over the extractor's cap, and was never read; now its own sentence. Re-read every localStorage/sessionStorage call 2026-11-10: canpay_lang, canpay_user_settings (hooks/useUserSettings), canpay_calculation_history and canpay_timesheet_entries / timesheetData (hooks), the industry store, canpay_no_telemetry, canpay_fsa, canpay_asked, canpay_seen; sessionStorage canpay_entry_path. utils/anonymousUser.ts defines an id key but nothing imports it.",
+   "reviewed": "2026-11-10"
   },
   {
    "page": "/data",
