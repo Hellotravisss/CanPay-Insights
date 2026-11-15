@@ -197,9 +197,12 @@ export const MIN_WAGES: MinWage[] = [
     source: {
       // The old minimum-wage-order page sent browsers to the site search (2026-11-01).
       url: 'https://www.princeedwardisland.ca/en/topic/hours-of-work-and-wage-standards',
-      rule: 'None yet: the page has never been readable by the gate.',
-      extract: null,
-      wall: 'Radware bot challenge for automated clients ("Verifying your browser", a captcha page since 2026-11-10)',
+      rule: 'Sentence "As of <date>, the minimum wage rate is $X per hour."',
+      extract: sentence(new RegExp(String.raw`As of (${DATE}), the minimum wage rate is \$${RATE} per hour`), { rate: 2, date: 1 }),
+      // The wall comes and goes by client: GitHub's runners got the page on 2026-11-15 while a home
+      // connection got the captcha. With both set, a wall page is BLOCKED (not a failure) and a
+      // readable page is checked like any other.
+      wall: 'Radware bot challenge for some automated clients ("Verifying your browser", or a captcha page since 2026-11-10)',
     },
   },
   {
