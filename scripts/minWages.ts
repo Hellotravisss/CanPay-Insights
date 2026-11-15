@@ -199,7 +199,7 @@ export const MIN_WAGES: MinWage[] = [
       url: 'https://www.princeedwardisland.ca/en/topic/hours-of-work-and-wage-standards',
       rule: 'None yet: the page has never been readable by the gate.',
       extract: null,
-      wall: 'Radware "Verifying your browser" challenge for automated clients',
+      wall: 'Radware bot challenge for automated clients ("Verifying your browser", a captcha page since 2026-11-10)',
     },
   },
   {
