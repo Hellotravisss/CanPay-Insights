@@ -154,8 +154,11 @@ const keyOf = (page, text) => page + '\u0000' + (LIVE_FIGURE_PAGES.has(page)
 const known = new Map(REGISTER.claims.map((c) => [keyOf(c.page, c.text), c]));
 const unknown = [];
 const live = new Set();
+const overlong = [];
 for (const page of CLAIM_PAGES) {
-  for (const text of await claimSentences(BASE, page)) {
+  const sentences = await claimSentences(BASE, page);
+  for (const text of sentences.tooLong) overlong.push({ page, text });
+  for (const text of sentences) {
     const key = keyOf(page, text);
     live.add(key);
     if (!known.has(key)) unknown.push({ page, text });
@@ -184,6 +187,7 @@ try {
 
 for (const [ok, id, msg] of results) { console.log(`  ${ok ? 'ok  ' : 'FAIL'} ${id}: ${msg}`); if (!ok) failures.push(`${id}: ${msg}`); }
 for (const u of unknown) failures.push(`unregistered sentence on ${u.page}: "${u.text.slice(0, 140)}"`);
+for (const o of overlong) failures.push(`sentence too long to check (${o.text.length} characters) on ${o.page} — split it in the page: "${o.text.slice(0, 100)}"`);
 for (const g of gone) failures.push(`registered sentence no longer on ${g.page}: "${g.text.slice(0, 140)}"`);
 
 const tally = {};

@@ -32,6 +32,9 @@ const KW = new RegExp(
 
 export const norm = (s) => s.replace(/\s+/g, ' ').replace(/\s+([.,;:!?])/g, '$1').trim();
 
+export const MAX_SENTENCE = 600;
+
+/** Sentences to check; `.tooLong` holds keyword sentences over MAX_SENTENCE (the page must split them). */
 export async function claimSentences(base, path) {
   const r = await fetch(base + path, { headers: { 'User-Agent': 'Mozilla/5.0 canpay-claims-audit', Accept: 'text/html' } });
   let raw = await r.text();
@@ -46,14 +49,20 @@ export async function claimSentences(base, path) {
       .replace(/&quot;/g, '"').replace(/&#x27;|&#39;/g, "'").replace(/&#x2F;/g, '/');
   }
   const out = new Set();
+  // A sentence over the cap used to be dropped without a word: on 2026-11-10 a French privacy
+  // sentence grew to 616 characters and stopped being checked. Report them instead.
+  const tooLong = new Set();
   for (const line of text.split('\n')) {
     // llms.txt article links are titles added by the article routine, not
     // statements about CanPay; skipping them keeps that routine from failing the gate.
     if (path.endsWith('.txt') && /^\s*- \[/.test(line)) continue;
     for (const s of line.split(/(?<=[.!?。！？])\s+/)) {
       const t = norm(s);
-      if (t.length >= 25 && t.length <= 600 && KW.test(t)) out.add(t);
+      if (t.length >= 25 && t.length <= MAX_SENTENCE && KW.test(t)) out.add(t);
+      else if (t.length > MAX_SENTENCE && KW.test(t)) tooLong.add(t);
     }
   }
-  return [...out];
+  const list = [...out];
+  list.tooLong = [...tooLong];
+  return list;
 }
