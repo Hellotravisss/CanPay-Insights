@@ -194,8 +194,13 @@ function selftest() {
       expect(`${w.code} page 404`, judgePage(asSaved, { ok: true, status: 404, html: '<title>Not found</title>' }, m.fetched), 'UNREADABLE');
       expect(`${w.code} server error 504`, judgePage(asSaved, { ok: true, status: 504, html: '<title>Gateway Timeout</title>' }, m.fetched), 'UNREADABLE');
       expect(`${w.code} network error`, judgePage(asSaved, { ok: false, error: 'ECONNRESET' }, m.fetched), 'UNREADABLE');
-      const challenge = readFileSync(join(dir, `${MIN_WAGES.find((x) => x.source.wall)!.code}.html`), 'utf8');
-      expect(`${w.code} starts serving a bot challenge`, judgePage(asSaved, { ok: true, status: 403, html: challenge }, m.fetched), 'BLOCKED');
+      const challenge = readFileSync(join(dir, 'PE-verifying.html'), 'utf8');
+      const walled = judgePage(asSaved, { ok: true, status: 403, html: challenge }, m.fetched);
+      if (w.source.wall) {
+        // A source with a known, intermittent wall (PE): BLOCKED, reported, not a failure.
+        expect(`${w.code} serves its known bot wall`, walled, 'PASS');
+        if (!walled.some((v) => v.kind === 'BLOCKED')) { bad++; console.log(`WRONG  ${w.code}: known wall not reported as BLOCKED`); }
+      } else expect(`${w.code} starts serving a bot challenge`, walled, 'BLOCKED');
     } else {
       expect(`${w.code} saved challenge page (walled source)`, judgePage(w, page, m.fetched), 'PASS');
       const blocked = judgePage(w, page, m.fetched);
@@ -209,6 +214,10 @@ function selftest() {
   const pe = MIN_WAGES.find((w) => w.code === 'PE')!;
   const captcha = readFileSync(join(dir, 'PE-captcha.html'), 'utf8');
   expect('PE wall changes to the Radware captcha page', judgePage(pe, { ok: true, status: 200, html: captcha }, '2026-11-10'), 'PASS');
+  // 2026-11-15: the wall let GitHub's runners through and the gate failed "no extractor". PE now has
+  // both: either wall page is BLOCKED without failing; a readable page goes through the extractor.
+  expect('PE serves its old "Verifying your browser" wall', judgePage(pe, { ok: true, status: 200, html: readFileSync(join(dir, 'PE-verifying.html'), 'utf8') }, '2026-11-15'), 'PASS');
+  if (!judgePage(pe, { ok: true, status: 200, html: captcha }, '2026-11-15').some((v) => v.kind === 'BLOCKED')) { bad++; console.log('WRONG  PE captcha page not reported as BLOCKED'); }
   const ns = MIN_WAGES.find((w) => w.code === 'NS')!;
   expect('NS starts serving the Radware captcha page', judgePage(ns, { ok: true, status: 200, html: captcha }, '2026-11-10'), 'BLOCKED');
 

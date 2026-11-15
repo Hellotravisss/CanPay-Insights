@@ -49,9 +49,9 @@
   },
   "PE": {
     "url": "https://www.princeedwardisland.ca/en/topic/hours-of-work-and-wage-standards",
-    "fetched": "2026-11-01",
+    "fetched": "2026-11-14",
     "status": 200,
-    "rate": null
+    "rate": 17.3
   },
   "ON": {
     "url": "https://www.ontario.ca/document/your-guide-employment-standards-act-0/minimum-wage",
