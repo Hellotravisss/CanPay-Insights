@@ -4216,4 +4216,135 @@ For your exact 2026 take-home pay under today's rules, use the [free take-home p
 The 2027 CPP earnings ceiling ($76,700), the second ceiling ($87,400), the basic exemption ($3,500), the base contribution rate (5.75%), and the maximum base contribution ($4,209.00, with a combined employee-and-employer maximum of $8,418.00) are quoted directly from the Canada Revenue Agency's ["Canada Pension Plan contribution rates, maximums and exemptions" page](https://www.canada.ca/en/revenue-agency/services/tax/businesses/topics/payroll/payroll-deductions-contributions/canada-pension-plan-cpp/cpp-contribution-rates-maximums-exemptions.html), which carries the figures in a row marked "New 2027". That CRA page's own details are dated November 9, 2026. The 2027 YMPE ($76,700) and YAMPE ($87,400) are independently confirmed on the CRA's ["MP, DB, RRSP, DPSP, ALDA, TFSA limits, YMPE and the YAMPE" page](https://www.canada.ca/en/revenue-agency/services/tax/registered-plans-administrators/pspa/mp-rrsp-dpsp-tfsa-limits-ympe.html). The CPP2 contribution rate (4% employee/employer, 8% self-employed) is unchanged from the CRA's existing CPP2 guidance and CanPay Insights' own prior reporting in [the 2027 CPP rate cut piece](/blog/cpp-contribution-rate-cut-2027); the 2027 CPP2 dollar maximums ($428.00 employee/employer, $856.00 self-employed) are CanPay Insights' own calculation from the confirmed 2027 ceilings and are not quoted from a CRA table, since the CRA's CPP2-specific maximums page had not been updated with a 2027 row at the time of writing. The Bill C-30 base-rate cut itself (9.9% to 9.5%, split 5.95%-to-5.75% on the employee side) received Royal Assent on June 18, 2026, as covered in our prior reporting. All salary-band figures are CanPay Insights' own arithmetic applying the confirmed rates and ceilings; this is general information, not tax advice.
 `,
   },
+  {
+    id: 'study-39',
+    slug: 'real-wage-gap-october-2026',
+    title: 'Wages Rose 2.2% in October — Inflation Held at 3.1%, and the Real-Pay Gap Widened Again',
+    subtitle:
+      "Statistics Canada's October Labour Force Survey and Consumer Price Index, both covering the same month for once, show wage growth cooling for a second straight month while unemployment hit a six-month high. We ran the new numbers through the CanPay Insights tax engine to see what the gap costs after tax, in every province.",
+    excerpt:
+      'Average hourly wages rose just 2.2% year-over-year in October 2026, down from 2.3% in September, while inflation held at 3.1%. Run through the CanPay Insights tax engine, that gap costs a full-time worker on the national average wage roughly $641 to $680 a year in after-tax purchasing power — wider than September, though not quite back to August\'s low.',
+    metaTitle: 'Wages Up 2.2%, Inflation 3.1%: Pay Gap Widens Again',
+    metaDescription:
+      'StatCan: Canadian wages rose 2.2% in October 2026, inflation held at 3.1%. See the after-tax real-wage gap in every province from our tax engine.',
+    keywords: [
+      'real wage growth canada 2026',
+      'wage growth october 2026',
+      'canada inflation october 2026',
+      'is my raise keeping up with inflation canada',
+      'canada unemployment rate october 2026',
+      'real wage gap canada',
+    ],
+    category: 'news',
+    tags: ['Wage Growth', 'Inflation', 'Jobs Report', '2026', 'Data Study', 'All Provinces'],
+    publishedAt: '2026-11-16',
+    readTime: 7,
+    imageUrl: '/blog/real-wage-gap-october-2026.svg',
+    directAnswer:
+      "Statistics Canada's October 2026 Labour Force Survey (released November 6, 2026) put average hourly wage growth at 2.2% year-over-year, down from 2.3% in September, while the Consumer Price Index for the same month (released November 16, 2026) held at 3.1%, unchanged from September. That is a real-wage gap of roughly 0.9 percentage points, which the CanPay Insights tax engine converts to about $641 to $680 a year in lost after-tax purchasing power for a full-time worker on the national average wage — wider than September's $587-to-$632 gap, though not quite back to August's $700-to-$750 low. Unemployment also rose to 6.7%, its highest level since April, even though the economy shed only 4,700 jobs in October, far fewer than September's 68,000.",
+    faq: [
+      {
+        question: 'Did Canadian wages keep pace with inflation in October 2026?',
+        answer:
+          "No. Statistics Canada's Labour Force Survey reported average hourly wages up 2.2% year-over-year in October 2026 (reaching $37.89, up $0.83 from October 2025's $37.06), down from 2.3% growth in September. The Consumer Price Index for the same month held at 3.1% year-over-year, unchanged from September. Subtracting, real (inflation-adjusted) wage growth was roughly -0.9 percentage points — the average paycheque grew, but noticeably slower than the cost of living.",
+      },
+      {
+        question: "How much did the real-wage gap cost an Ontario worker, after tax?",
+        answer:
+          'Running the national average hourly wage through the CanPay Insights tax engine for a full-time (2,080 hours/year) Ontario worker: take-home pay rose from about $58,334 in October 2025 to $59,500 in October 2026 — a $1,166 raise after tax. But matching 3.1% inflation would have required $60,142 after tax, a shortfall of about $642 a year, or roughly 31 cents an hour.',
+      },
+      {
+        question: 'Which province had the smallest and largest real-wage gap in October 2026?',
+        answer:
+          'Among the province and territory take-home figures we calculated, Manitoba had the smallest real (after-inflation) shortfall at about $641 a year for a full-time worker on the national average wage; Prince Edward Island had the largest, at about $680 a year. Every province and territory we checked showed a negative real gap in October 2026.',
+      },
+      {
+        question: 'Why did unemployment rise to a six-month high when job losses were small in October?',
+        answer:
+          "Statistics Canada's October data shows the unemployment rate climbing 0.2 points to 6.7% — its highest since April's 6.9% peak — even though overall employment fell by only 4,700, a much smaller drop than August's 42,000 or September's 68,000 (a three-month total of about 114,700 jobs lost). The rate rose mainly because more people searched for work (+33,000), not because of a surge in layoffs; the layoff rate itself was 0.7%, little changed from a year earlier. Underneath the small headline number, private-sector employment fell by 53,000 — its first decline since February — while the public sector gained 50,000, and wholesale and retail trade lost 29,000 jobs, the largest sectoral loss. Youth unemployment (ages 15-24) rose 0.7 points to 13.7%.",
+      },
+      {
+        question: "Is October's real-wage gap better or worse than earlier in 2026?",
+        answer:
+          "Worse than September, better than August. The gap (wage growth minus inflation) was roughly +0.5 percentage points in June (wages still outpacing prices), turned negative at -0.2 points in July, widened sharply to about -1.0 points in August as wage growth hit its slowest pace since 2017, narrowed to -0.8 points in September as wage growth sped back up, and widened again to -0.9 points in October as wage growth cooled for a second month. In after-tax dollars for the national-average full-time worker, that is roughly $300 (July), $700-750 (August), $587-632 (September), and $641-680 (October).",
+      },
+      {
+        question: 'Where do these figures come from?',
+        answer:
+          "Wage, employment, and unemployment figures are from Statistics Canada's Labour Force Survey, October 2026 (released November 6, 2026). Inflation figures are from Statistics Canada's Consumer Price Index, October 2026 (released November 16, 2026). Take-home pay figures are calculated with the CanPay Insights tax engine using 2026 federal and provincial tax rates, CPP/CPP2 (QPP/QPP2 and QPIP in Quebec), and EI, for a single full-time worker (2,080 hours/year) with basic personal amounts only.",
+      },
+    ],
+    content: `
+## Wages rose 2.2%. Prices rose 3.1%. For once, both figures are for the same month.
+
+Two Statistics Canada releases, ten days apart, cover October 2026 end to end:
+
+- **November 6, 2026 — [Labour Force Survey, October 2026](https://www150.statcan.gc.ca/n1/daily-quotidien/261106/dq261106a-eng.htm):** average hourly wages rose **2.2%** year-over-year, reaching **$37.89** (up $0.83 from October 2025's $37.06) — down from 2.3% growth in September. The unemployment rate climbed 0.2 points to **6.7%**, its highest since April's 6.9% peak, even though overall employment fell by only **4,700** — far smaller than August's 42,000 or September's 68,000.
+- **November 16, 2026 — [Consumer Price Index, October 2026](https://www150.statcan.gc.ca/n1/daily-quotidien/261116/dq261116a-eng.htm):** the CPI held at **3.1%** year-over-year, unchanged from September, as a 30.9% year-over-year jump in gasoline prices (up from 27.8% in September) offset cooling core inflation. Core CPI excluding energy eased to 2.0%, from 2.1%.
+
+Subtract one from the other and October 2026 posted a **real-wage gap of about 0.9 percentage points** — wider than September's -0.8 points, as wage growth cooled for a second straight month against unchanged inflation. We ran the national average wage through the CanPay Insights tax engine to see exactly what that gap is worth after tax, in every province.
+
+### Key findings
+
+- **A full-time worker on the national average wage gained $1,726 in gross pay** year-over-year (2,080 hours × $0.83/hour) — but needed 3.1% more just to stand still against inflation.
+- **After tax, every province and territory came up short.** The real (inflation-adjusted) gap ranged from about **-$641 a year in Manitoba** to **-$680 a year in Prince Edward Island**.
+- **In Ontario**, take-home pay for that same worker rose from $58,334 to $59,500 — a $1,166 raise after tax, but about **$642 short** of matching inflation.
+- **Unemployment hit a six-month high even though job losses were small.** The rate rose mainly because more people started searching for work, not because of a wave of layoffs — but private-sector employment still fell 53,000, its first decline since February, while wholesale and retail trade alone lost 29,000 jobs.
+
+### What the gap costs, province by province
+
+Figures use Statistics Canada's national average hourly wage (October 2025: $37.06; October 2026: $37.89) at full-time hours (2,080/year), run through the CanPay Insights tax engine with 2026 federal and provincial rates, CPP/CPP2, and EI. "Needed to match inflation" is October 2025 take-home pay multiplied by 1.031, the CPI figure StatCan reported for October 2026.
+
+| Province | Take-home Oct. 2025 | Take-home Oct. 2026 | Nominal after-tax gain | Needed to match 3.1% inflation | Real (after-inflation) gap |
+| --- | --- | --- | --- | --- | --- |
+| Manitoba | $56,360 | $57,466 | +$1,106 | $58,107 | -$641 |
+| Ontario | $58,334 | $59,500 | +$1,166 | $60,142 | -$642 |
+| British Columbia | $59,148 | $60,338 | +$1,190 | $60,981 | -$644 |
+| Nova Scotia | $54,680 | $55,722 | +$1,041 | $56,376 | -$654 |
+| Northwest Territories | $59,182 | $60,357 | +$1,175 | $61,017 | -$660 |
+| Newfoundland and Labrador | $56,038 | $57,115 | +$1,077 | $57,775 | -$660 |
+| Quebec | $55,236 | $56,288 | +$1,052 | $56,948 | -$660 |
+| Saskatchewan | $57,147 | $58,257 | +$1,110 | $58,918 | -$661 |
+| Yukon | $59,066 | $60,234 | +$1,168 | $60,897 | -$663 |
+| New Brunswick | $56,413 | $57,498 | +$1,086 | $58,162 | -$663 |
+| Nunavut | $60,270 | $61,471 | +$1,202 | $62,138 | -$667 |
+| Alberta | $58,752 | $59,904 | +$1,152 | $60,574 | -$669 |
+| Prince Edward Island | $55,575 | $56,617 | +$1,042 | $57,297 | -$680 |
+
+*"Needed to match 3.1% inflation" is illustrative: it assumes the whole household budget inflates at the headline CPI rate, which will not match every worker's actual spending. Provinces with higher after-tax pay (and therefore higher nominal dollar increases) tend to show a slightly larger real-dollar gap even at the same 3.1% shortfall, because 3.1% of a bigger number is a bigger number.*
+
+### A soft labour market behind the headline number
+
+The unemployment rate's climb to 6.7% looks, on the surface, like a hiring freeze — but the details point somewhere more specific:
+
+1. **More people looking for work, not more layoffs.** The number of people searching for work rose by 33,000 (+2.2%), while the layoff rate held at 0.7%, little changed from a year earlier. The headline job count barely moved (-4,700).
+2. **Private sector shrank; public sector grew.** Private-sector employment fell 53,000 (-0.4%) — its first monthly decline since February — while the public sector added 50,000. Wholesale and retail trade lost 29,000 jobs, the largest sectoral drop.
+3. **Three months of losses add up.** August (-42,000), September (-68,000), and October (-4,700) together erased about 114,700 jobs, even though October's own number looked mild in isolation.
+4. **Young workers felt it more.** The youth (15-24) unemployment rate jumped 0.7 points to 13.7%, after three months of little change.
+
+### How October compares to the rest of 2026
+
+The gap between wage growth and inflation has swung through most of the year:
+
+| Month | Wage growth (YoY) | Inflation (YoY) | Gap (points) | After-tax cost, national-average full-time worker |
+| --- | --- | --- | --- | --- |
+| June | 3.3% | 2.8% | +0.5 | Wages outpaced inflation |
+| July | 2.8% | 3.0% | -0.2 | ~$290-370 |
+| August | 2.0% | 3.0%* | -1.0 | ~$700-750 |
+| September | 2.3% | 3.1% | -0.8 | ~$587-632 |
+| October | 2.2% | 3.1% | -0.9 | ~$641-680 |
+
+*\\*August's wage figure was compared against the most recently available inflation reading (July's 3.0%) at the time of our original August coverage; August's own CPI, released later, also came in at 3.0%.*
+
+Wage growth hit its slowest pace since 2017 in August, recovered somewhat in September, and cooled again in October — while inflation has now held at 3.1% for two months straight, kept there mainly by gasoline prices (+30.9% year-over-year in October, accelerating from +27.8% in September) even as core inflation and grocery price growth moved in calmer, mixed directions.
+
+### What it means for your own paycheque
+
+The national average wage is exactly that — an average. Your own raise, tax bracket, province, and pay frequency will all move these numbers. If you got a raise this year, or are negotiating one, run your real numbers through the free [CanPay Insights salary calculator](/salary-after-tax-canada) to see what it's actually worth after federal tax, provincial tax, CPP, and EI, or use [compare provinces](/compare-provinces) to see how the same raise lands in a different province. CPP and EI deduction rates are covered in detail in [how much CPP you'll pay in 2026](/blog/how-much-cpp-will-i-pay-2026) and [how much EI you'll pay in 2026](/blog/how-much-ei-will-i-pay-2026). For the rest of this year's wage-and-inflation series, see our coverage of [July](/blog/real-wage-growth-inflation-july-2026), [August](/blog/wage-growth-slowdown-august-2026), and [September](/blog/wage-growth-september-2026) and [September's inflation reading](/blog/canada-inflation-september-2026).
+
+## Sources & disclaimer
+
+Wage, employment, and unemployment figures are from Statistics Canada's [Labour Force Survey, October 2026](https://www150.statcan.gc.ca/n1/daily-quotidien/261106/dq261106a-eng.htm), released November 6, 2026, cross-checked against reporting from [BNN Bloomberg](https://www.bnnbloomberg.ca/business/economics/2026/11/06/unemployment-rate-rose-to-67-in-october-statcan-says/) and HR trade press (HCAMag, Advisor.ca), all published November 6, 2026. Inflation figures are from Statistics Canada's [Consumer Price Index, October 2026](https://www150.statcan.gc.ca/n1/daily-quotidien/261116/dq261116a-eng.htm), released November 16, 2026. Take-home pay figures are calculated with the CanPay Insights tax engine using 2026 federal and provincial tax brackets, CPP/CPP2 (QPP/QPP2 and QPIP for Quebec), and EI premiums, for a single full-time worker (2,080 hours/year) with basic personal amounts only — real paycheques vary with credits, benefits, RRSP contributions, and actual hours worked. This is general information, not financial or tax advice.
+`,
+  },
 ];
