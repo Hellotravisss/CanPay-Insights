@@ -83,6 +83,9 @@ CanPay Insights is an independent project based in Vancouver, Canada. All figure
 - Annual take-home by salary and province (2026): $50,000 → BC ~$40,574 / Ontario ~$40,145 / Alberta ~$40,541 / Quebec ~$38,824. $75,000 → BC ~$57,711 / Ontario ~$56,926 / Alberta ~$57,362 / Quebec ~$53,965. $100,000 → BC ~$75,373 / Ontario ~$74,206 / Alberta ~$74,459 / Quebec ~$69,585.
 - Minimum-wage full-time take-home ranges from ~$26,989/yr (Alberta, $15.00/hr) to ~$35,265/yr (Nunavut, $20.17/hr).
 
+## Featured in
+- [What 8,000 paycheque checks reveal about how Canadians think about money](https://findependencehub.com/what-8000-paycheque-checks-reveal-about-how-canadians-think-about-money/): guest article by Travis Zhang in Financial Independence Hub, November 16, 2026, drawing on the calculator's anonymous usage data.
+
 ## About
 - [About CanPay Insights](https://canpayinsights.ca/about)
 - [Contact](https://canpayinsights.ca/contact) — info@canpayinsights.ca

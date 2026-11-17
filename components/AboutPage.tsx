@@ -116,7 +116,19 @@ const AboutPage: React.FC = () => {
 
             <section className="mb-10">
               <h2 className="text-2xl font-bold text-slate-800 mb-4 flex items-center gap-3">
-                <Badge n={4} /> Open data — free to cite
+                <Badge n={4} /> Featured in
+              </h2>
+              <div className="pl-11">
+                <p className="text-slate-600 leading-relaxed">
+                  <strong>Financial Independence Hub</strong>, November 16, 2026:{" "}
+                  <a href="https://findependencehub.com/what-8000-paycheque-checks-reveal-about-how-canadians-think-about-money/" target="_blank" rel="noopener noreferrer" className="text-red-600 hover:text-red-700 font-medium underline underline-offset-2 transition-colors">What 8,000 paycheque checks reveal about how Canadians think about money</a>, a guest article by Travis Zhang.
+                </p>
+              </div>
+            </section>
+
+            <section className="mb-10">
+              <h2 className="text-2xl font-bold text-slate-800 mb-4 flex items-center gap-3">
+                <Badge n={5} /> Open data — free to cite
               </h2>
               <div className="pl-11">
                 <p className="text-slate-600 leading-relaxed mb-4">
@@ -135,7 +147,7 @@ const AboutPage: React.FC = () => {
 
             <section className="mb-6">
               <h2 className="text-2xl font-bold text-slate-800 mb-4 flex items-center gap-3">
-                <Badge n={5} /> A note on accuracy
+                <Badge n={6} /> A note on accuracy
               </h2>
               <div className="pl-11">
                 <p className="text-slate-600 leading-relaxed">

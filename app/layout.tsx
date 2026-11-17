@@ -120,6 +120,18 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
                 email: 'info@canpayinsights.ca',
                 availableLanguage: ['en', 'fr', 'zh', 'pa', 'hi', 'tl', 'es', 'uk', 'ko', 'vi'],
               },
+              // Coverage by other publishers. Each entry must be a live page that
+              // names CanPay Insights; /about lists the same articles under "Featured in".
+              subjectOf: [
+                {
+                  '@type': 'Article',
+                  headline: 'What 8,000 paycheque checks reveal about how Canadians think about money',
+                  url: 'https://findependencehub.com/what-8000-paycheque-checks-reveal-about-how-canadians-think-about-money/',
+                  datePublished: '2026-11-16',
+                  author: { '@id': 'https://canpayinsights.ca/#founder' },
+                  publisher: { '@type': 'Organization', name: 'Financial Independence Hub', url: 'https://findependencehub.com' },
+                },
+              ],
               knowsAbout: ['take-home pay', 'net pay', 'paycheck calculator', 'salary after tax', 'hourly wage after tax', 'income tax', 'payroll deductions', 'CPP', 'CPP2', 'EI', 'RRSP', 'TFSA', 'QPP', 'QPIP'],
             },
             {
