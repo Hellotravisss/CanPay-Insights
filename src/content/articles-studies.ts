@@ -4482,4 +4482,134 @@ If you earn minimum wage, or are negotiating a raise toward a living-wage figure
 Living-wage figures are from the Ontario Living Wage Network's November 9, 2026 regional rate update (ontariolivingwage.ca), the Canadian Centre for Policy Alternatives Atlantic office's *"2026 Living Wages for Newfoundland and Labrador, Nova Scotia, and Prince Edward Island: Beyond Affordability"* (policyalternatives.ca, published November 9, 2026), Vibrant Communities Calgary's 2026 living wage calculation with the Alberta Living Wage Network, and Living Wage BC's 2026 wage-gap analysis for Metro Vancouver (livingwagebc.ca) — all cross-checked against reporting from Canadian HR Reporter ("Minimum wage falls short of living wage across Canada: report," November 16, 2026), CTV News (Ottawa and Kitchener), Daily Hive, Narcity, and ToDoCanada. Minimum-wage figures match CanPay Insights' own verified rate table (scripts/minWages.ts), sourced directly to each province's labour ministry and re-checked November 1, 2026. Take-home pay figures are calculated with the CanPay Insights tax engine using 2026 federal and provincial tax brackets, CPP/CPP2, and EI, for a single full-time worker (2,080 hours/year) with basic personal amounts only — real paycheques vary with credits, benefits, RRSP contributions, and actual hours worked. This is general information, not financial or tax advice.
 `,
   },
+  {
+    id: 'study-41',
+    slug: 'canada-post-raise-after-tax-2027',
+    title: "Canada Post's New Contract: A 2.6% Raise for 2027 — Here's What Actually Survives Tax",
+    subtitle:
+      "On November 13, 2026, Canada Post and the union representing its rural postmasters reached a tentative two-year deal: 2.6% in 2027, 2.5% in 2028. We ran both numbers through the CanPay Insights tax engine, and checked them against October's 3.1% inflation print.",
+    excerpt:
+      "Canada Post and the Canadian Postmasters and Assistants Association reached a tentative deal on November 13, 2026: a 2.6% raise in 2027, 2.5% in 2028, plus a $500 ratification bonus. Run through the CanPay Insights tax engine, a $65,000 Ontario salary keeps only 64.3% of that raise after tax — and because October inflation held at 3.1%, the raise doesn't even keep pace with the cost of living before deductions are taken off.",
+    metaTitle: "Canada Post's 2.6% Raise: What It Means After Tax",
+    metaDescription:
+      "Canada Post's new contract gives postmasters a 2.6% raise for 2027. See how much survives tax at different salaries, using the CanPay Insights engine.",
+    keywords: [
+      'canada post wage increase 2027',
+      'canada post raise after tax',
+      'cpaa canada post contract 2026',
+      'is a raise keeping up with inflation canada',
+      'canada post postmaster pay',
+      'raise after tax canada calculator',
+    ],
+    category: 'news',
+    tags: ['Canada Post', 'Wages', '2027', 'Real Wages'],
+    publishedAt: '2026-11-23',
+    readTime: 7,
+    imageUrl: '/blog/canada-post-raise-after-tax-2027.svg',
+    directAnswer:
+      "On November 13, 2026, Canada Post and the Canadian Postmasters and Assistants Association (CPAA) — the company's second-largest union, representing rural postmasters and their assistants — reached a tentative two-year deal: a 2.6% wage increase effective 2027 and 2.5% in 2028 (5.17% combined), plus a one-time ratification bonus of $500 for postmasters and other full-time employees ($250 for everyone else), non-pensionable. Run through the CanPay Insights tax engine at 2026 rates, a 2.6% raise on a $65,000 Ontario salary — $1,690 more a year — keeps only $1,087, or 64.3%, after federal and provincial tax, CPP, and EI; at $55,000 it keeps 70.8%. Because Statistics Canada's October 2026 inflation reading held at 3.1%, a 2.6% raise does not even keep pace with the cost of living before any deduction comes off it, let alone after.",
+    faq: [
+      {
+        question: 'What did Canada Post and the CPAA agree to on November 13, 2026?',
+        answer:
+          "A tentative two-year collective agreement, announced by Canada Post on November 13, 2026, covering the Canadian Postmasters and Assistants Association (CPAA) — the company's second-largest bargaining agent, representing postmasters and assistants who mainly run rural post offices. The deal runs January 1, 2027 to December 31, 2028 (the current agreement expires December 31, 2026) and includes wage increases totalling 5.17% over the two years: 2.6% in 2027 and 2.5% in 2028. It also includes a one-time, non-pensionable ratification bonus — $500 for postmasters and other full-time employees, $250 for everyone else, less applicable withholdings — paid to anyone employed with Canada Post on the date of ratification. The release does not specify a headcount, pension change, or benefit change beyond the bonus.",
+      },
+      {
+        question: "How much of the CPAA's 2.6% raise will postmasters actually see in their bank account?",
+        answer:
+          "It depends heavily on current salary and province. Running a 2.6% raise through the CanPay Insights tax engine at 2026 rates for a single Ontario worker: at $45,000, a $1,170 raise keeps $875 (74.8%) after tax; at $55,000, a $1,430 raise keeps $1,012 (70.8%); at $65,000, a $1,690 raise keeps just $1,087 (64.3%); at $75,000, a $1,950 raise keeps $1,317 (67.5%); at $85,000, a $2,210 raise keeps $1,555 (70.4%). The share kept doesn't fall in a straight line as income rises — Ontario's surtax (an extra 20%, and 36% above a second threshold, applied on top of provincial tax itself once it crosses $5,818) can take a sharper bite out of a raise at some income levels than at higher ones.",
+      },
+      {
+        question: 'Does a 2.6% raise in 2027 actually keep up with inflation?',
+        answer:
+          "Not based on the most recent data available. Statistics Canada's Consumer Price Index for October 2026 (released November 16, 2026) held annual inflation at 3.1%, unchanged from September. A 2.6% wage increase is already 0.5 percentage points below that reading before any tax is withheld — and after tax, where only 64–75% of the raise survives deductions depending on income and province, the real, after-tax increase in purchasing power is smaller still. The 2027 CPI figure that will actually apply isn't out yet, so this compares the raise to the latest available inflation reading, not a forecast of 2027's own rate.",
+      },
+      {
+        question: 'What is the ratification bonus actually worth after tax?',
+        answer:
+          'Taxed like any other lump sum added to a paycheque, at the same marginal rate as the raise itself: on a $55,000 Ontario salary, the $500 bonus (for postmasters and full-time employees) nets about $354 after tax, and the $250 bonus (for other employees) nets about $177 — both keeping the same 70.8% share as the raise at that income level. At a $65,000 salary, the extra from the $500 bonus comes to about $322 after tax, and the extra from the $250 bonus comes to about $161 — both again at the 64.3% share. These are pre-ratification estimates using 2026 tax rates; actual withholding in 2027 will use whatever rates and brackets the CRA confirms for that year.',
+      },
+      {
+        question: 'Is this deal final, or could the numbers still change?',
+        answer:
+          "It is tentative, not final. Canada Post's November 13, 2026 release says CPAA shared the tentative terms with its members the same day; the deal still requires ratification by CPAA-represented employees, and no vote date was given in the release. Until ratified, none of these figures — the 2.6%/2.5% wage increases or the $500/$250 bonus — are contractually locked in, though they reflect what both parties have tentatively agreed to.",
+      },
+      {
+        question: 'Which province would keep the most of a 2.6% raise, and which the least?',
+        answer:
+          "Among the provinces checked at a $55,000 salary using the CanPay Insights tax engine, British Columbia keeps the most of a 2.6% raise (72.2%), just ahead of Alberta (72.1%); Nova Scotia keeps the least (65.3%), with Quebec close behind (67.0%). At $65,000, the order shifts slightly: British Columbia still leads (65.8%), while Quebec (57.0%) and Nova Scotia (57.1%) keep the smallest share. The gap comes from provincial tax brackets and surtaxes, not from CPP or EI, which apply the same way nationally (Quebec's QPP/QPIP replace CPP and part of EI but land in a similar range).",
+      },
+    ],
+    content: `
+## A smaller raise than last time, for Canada Post's rural postmasters
+
+On **November 13, 2026**, Canada Post announced a tentative two-year collective agreement with the Canadian Postmasters and Assistants Association (CPAA) — the company's second-largest union, representing postmasters and their assistants who mainly run rural post offices across Canada. CPAA shared the tentative terms with its members the same day.
+
+The headline numbers:
+
+- **Wage increases totalling 5.17% over two years**: 2.6% in 2027, 2.5% in 2028.
+- **A one-time ratification bonus**: $500 for postmasters and other full-time employees, $250 for everyone else, non-pensionable and less applicable withholdings, paid to anyone employed with Canada Post on the date of ratification.
+- **Contract term**: January 1, 2027 to December 31, 2028. The current agreement expires December 31, 2026.
+- **Still tentative**: the deal requires ratification by CPAA-represented employees; Canada Post's release gives no vote date.
+
+For context, the CPAA's previous contract — announced in June 2025 — carried wage increases of 6%, 3%, and 2% over three years (11% total), retroactive to January 1, 2024. The new deal's 2.6%-then-2.5% pace is noticeably slower.
+
+We ran both the raise and the bonus through the CanPay Insights tax engine to see what they are actually worth once federal tax, provincial tax, CPP, and EI come off — and checked the raise against the most recent inflation reading.
+
+### Key findings
+
+- **At a $65,000 Ontario salary, only 64.3% of the 2.6% raise survives tax** — $1,087 of a $1,690 gross increase. At $55,000, it's 70.8%.
+- **The share kept doesn't move in a straight line as income rises.** Ontario's surtax — an extra charge on top of provincial tax itself, once that tax crosses certain thresholds — means a raise can lose a bigger share at some salaries than at higher ones.
+- **A 2.6% raise is already below October 2026's 3.1% inflation reading**, before any tax comes off it.
+- **British Columbia keeps the largest share of a raise like this (72.2% at $55,000); Nova Scotia keeps the smallest (65.3%).**
+
+### What a 2.6% raise is worth after tax, by salary (Ontario, 2026 tax rates)
+
+| Current salary | Gross after 2.6% raise | Gross raise | Net (after-tax) raise | Share of raise kept |
+| --- | --- | --- | --- | --- |
+| $45,000 | $46,170 | $1,170 | $875 | 74.8% |
+| $55,000 | $56,430 | $1,430 | $1,012 | 70.8% |
+| $65,000 | $66,690 | $1,690 | $1,087 | 64.3% |
+| $75,000 | $76,950 | $1,950 | $1,317 | 67.5% |
+| $85,000 | $87,210 | $2,210 | $1,555 | 70.4% |
+
+These figures use the CanPay Insights tax engine's current 2026 federal and provincial tax brackets, CPP/CPP2, and EI, for a single filer with basic personal amounts only, paid bi-weekly. The actual 2027 brackets have not yet been published by the CRA at the time of writing, so this shows how much of a same-size raise survives deductions under the most recent confirmed rates — the real 2027 share will shift slightly once 2027's own indexed brackets are out.
+
+### By province: how much of the raise survives, at $55,000 and $65,000
+
+| Province | Share kept at $55,000 | Share kept at $65,000 |
+| --- | --- | --- |
+| British Columbia | 72.2% | 65.8% |
+| Alberta | 72.1% | 63.7% |
+| Ontario | 70.8% | 64.3% |
+| Saskatchewan | 67.9% | 61.4% |
+| Manitoba | 67.6% | 61.1% |
+| Quebec | 67.0% | 57.0% |
+| Prince Edward Island | 66.8% | 59.9% |
+| New Brunswick | 66.2% | 59.8% |
+| Newfoundland and Labrador | 65.7% | 59.3% |
+| Nova Scotia | 65.3% | 57.1% |
+
+### Does 2.6% keep up with inflation?
+
+Statistics Canada's Consumer Price Index for October 2026, released November 16, 2026, held annual inflation at 3.1%, unchanged from September. A 2.6% wage increase sits half a percentage point below that reading — before any tax is withheld. After tax, where only 64% to 75% of the raise reaches a bank account depending on income and province, the gap between the raise and the cost of living only widens in real terms. The 2027 inflation rate that will actually apply when the raise lands isn't out yet, so this compares the new contract against the latest confirmed CPI print, not a forecast.
+
+### The ratification bonus, after tax
+
+The bonus is taxed the same way the raise is — added to income and withheld at the same marginal rate:
+
+| Salary | $500 bonus (postmasters/full-time) nets | $250 bonus (other employees) nets |
+| --- | --- | --- |
+| $55,000 | $354 (70.8%) | $177 (70.8%) |
+| $65,000 | $322 (64.3%) | $161 (64.3%) |
+
+### What this means for your own paycheque
+
+If you're negotiating a raise of your own, or just want to see what a specific percentage increase or bonus is actually worth after tax at your real salary and province, use the free [CanPay Insights take-home pay calculator](/), or see how a raise shifts between a lower and higher tax bracket with the [marginal vs. average tax rate guide](/marginal-vs-average-tax-rate). For a province-by-province look at take-home pay, see [compare provinces](/compare-provinces) or the [Ontario](/ontario-paycheck-calculator) and [British Columbia](/bc-paycheck-calculator) paycheck calculators used above. For the inflation context, see our coverage of [October's wage and inflation data](/blog/real-wage-gap-october-2026).
+
+## Sources & disclaimer
+
+The November 13, 2026 contract terms (wage increases, ratification bonus, contract dates) are from Canada Post's own news release, *"Canada Post and CPAA reach tentative two-year collective agreement"* (canadapost-postescanada.ca). Context on the CPAA's prior contract (11% over three years, 2024–2026) is drawn from contemporaneous news coverage of that June 2025 settlement. The October 2026 Consumer Price Index figure (3.1%, unchanged from September) is from Statistics Canada's November 16, 2026 release, as previously reported by CanPay Insights. All take-home pay, raise, and bonus figures are calculated by the CanPay Insights tax engine using 2026 federal and provincial tax brackets, CPP/CPP2, and EI, for a single filer with basic personal amounts only, paid bi-weekly; the engine does not yet model 2027 rates, which the CRA had not published at the time of writing, so these are current-year approximations of the deductions a similar raise would face, not a 2027 forecast. The deal itself remains tentative and subject to ratification. This is general information, not financial or tax advice.
+`,
+  },
 ];
