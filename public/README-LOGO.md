@@ -3,6 +3,7 @@
 ## 唯一真源
 
 **`public/logo.png`** —— 这是唯一正确的 logo(红底 + 有厚度切面的 Inukshuk 石板)。
+红色底上用它的反色版 **`public/logo_reverse.png`**(2026-04-25 入库;省份指南封面、结果卡片在用),同样只许原样嵌入。
 PDF 里用的是同一张图,经 `lib/logoBase64.ts` 内嵌。
 
 ## 🔴 铁律:永远不要手画这个 mark
@@ -12,7 +13,8 @@ PDF 里用的是同一张图,经 `lib/logoBase64.ts` 内嵌。
 历史上这么干过,后果是**错误 logo 反复上线**:曾经有人把当年抬头的内联 SVG
 提取成 `logo-inukshuk.svg` 和 `logo-full.svg` 并写进文档说这是「logo 文件」,
 于是后续每做一个新东西(文章封面、加载动画、favicon 生成器)都去拿那份**手画的赝品** ——
-细圆角条组成的简笔画,和真 logo 完全不是一个东西。那三个文件已于 2026-08-23 删除。
+细圆角条组成的简笔画,和真 logo 完全不是一个东西。那三个文件已于 2026-08-23 删除;
+08-27 一次无关提交又把 `logo-inukshuk.svg`、`logo-full.svg` 带了回来,2026-11-23 再次删除。
 
 ## 怎么用
 
@@ -39,5 +41,5 @@ node scripts/coverLogo.mjs     # 输出可直接粘贴的 <!-- brand --> 组
 ## 构建关卡
 
 `npm run audit:logo`(已挂在 `prebuild` 上,和数字审计同级)。任何 `public/blog/*.svg`
-只要带手画 mark 或没内嵌真 logo,**构建直接失败**。散文规则拦不住,这个拦得住。
+只要带手画 mark、没内嵌真 logo,或内嵌的图和 `logo.png` / `logo_reverse.png` 逐像素对不上,**构建直接失败**。散文规则拦不住,这个拦得住。
 自动发文机器人的提示词也已改成先跑这个关卡。
