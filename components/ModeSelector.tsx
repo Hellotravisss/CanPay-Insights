@@ -39,7 +39,7 @@ const ModeSelector: React.FC<Props> = ({ onModeSelect }) => {
         <button
           key={mode.id}
           onClick={() => onModeSelect(mode.id)}
-          className="group flex min-h-24 items-center gap-4 rounded-2xl border border-slate-200 bg-white p-4 text-left shadow-sm transition-all hover:-translate-y-0.5 hover:border-red-200 hover:shadow-lg focus:outline-none focus:ring-4 focus:ring-red-100 sm:p-5"
+          className="group flex min-h-24 items-center gap-4 rounded-2xl border border-line bg-white p-4 text-left transition-all duration-150 hover:-translate-y-0.5 hover:border-ink-5 hover:shadow-[0_12px_28px_-18px_rgba(21,23,28,0.45)] focus:outline-none focus-visible:ring-4 focus-visible:ring-red-100 sm:p-5"
         >
           {/* the three modes as the app icon draws things: pearly 3D type ($/hr · $/yr · hrs) on the red tile (PayFamily-brand/15-icons/3d, 2026-11-24) */}
           <span className="flex h-14 w-14 shrink-0 items-center justify-center transition-transform group-hover:scale-105" aria-hidden="true">
@@ -47,14 +47,14 @@ const ModeSelector: React.FC<Props> = ({ onModeSelect }) => {
             <img src={`/brand/icons/mode-${MODE_TILE[mode.icon] ?? 'hourly'}.png`} width={56} height={56} alt="" className="h-14 w-14 drop-shadow-[0_4px_8px_rgba(158,11,16,0.25)]" />
           </span>
           <span className="min-w-0 flex-1">
-            <span className="block text-xl font-bold leading-tight text-slate-900 transition-colors group-hover:text-red-600 sm:text-2xl">
+            <span className="block font-display text-xl font-semibold leading-tight text-ink sm:text-[1.4rem]">
               {mode.title}
             </span>
-            <span className="mt-1 block text-sm font-semibold leading-6 text-slate-500 sm:text-base">
+            <span className="mt-1 block text-sm leading-6 text-mute">
               {mode.subtitle}
             </span>
           </span>
-          <span className="text-red-400 transition-transform group-hover:translate-x-1 group-hover:text-red-600" aria-hidden="true">
+          <span className="text-ink-5 transition-transform group-hover:translate-x-1 group-hover:text-red-600" aria-hidden="true">
             <svg className="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M13 7l5 5m0 0l-5 5m5-5H6" />
             </svg>

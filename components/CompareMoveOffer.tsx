@@ -45,25 +45,25 @@ export default function CompareMoveOffer({ provinces, annualSalary }: { province
 
   const pick = (value: string, set: (v: string) => void, label: string) => (
     <label className="flex min-w-0 flex-1 flex-col gap-1">
-      <span className="text-[11px] font-semibold uppercase tracking-wide text-slate-500">{label}</span>
-      <select value={value} onChange={(e) => set(e.target.value)} className="rounded-md border border-slate-200 bg-white px-2 py-1.5 text-sm">
+      <span className="text-[11px] font-semibold uppercase tracking-wide text-mute">{label}</span>
+      <select value={value} onChange={(e) => set(e.target.value)} className="rounded-md border border-line bg-white px-2 py-1.5 text-sm">
         {provinces.map((p) => <option key={p} value={p}>{p}</option>)}
       </select>
     </label>
   );
 
   return (
-    <div className="mb-8 rounded-xl border border-slate-200 bg-white p-6 shadow-sm">
+    <div className="mb-8 rounded-xl border border-line bg-white p-6 shadow-sm">
       <div className="flex items-start justify-between gap-4">
         <div>
           <p className="text-xs font-bold uppercase tracking-[0.15em] text-red-600">Actually moving?</p>
-          <h2 className="mt-1 text-xl font-bold text-slate-800">Province Move Report</h2>
-          <p className="mt-1 text-sm text-slate-600">
+          <h2 className="mt-1 text-xl font-bold text-ink">Province Move Report</h2>
+          <p className="mt-1 text-sm text-ink-3">
             Your take-home in both provinces, which province taxes you for the year (where you live on December 31),
             the moving-expense deduction, and the sales-tax difference, computed from your salary.
           </p>
         </div>
-        <span className="shrink-0 text-2xl font-extrabold text-slate-900">$9</span>
+        <span className="shrink-0 text-2xl font-extrabold text-ink">$9</span>
       </div>
 
       <div className="mt-4 flex gap-3">
@@ -71,15 +71,15 @@ export default function CompareMoveOffer({ provinces, annualSalary }: { province
         {pick(to, setTo, 'Moving to')}
       </div>
 
-      <div className="mt-3 rounded-lg bg-slate-50 px-4 py-3">
+      <div className="mt-3 rounded-lg bg-pearl-soft px-4 py-3">
         {gap === null ? (
-          <p className="text-sm text-slate-500">Pick two different provinces.</p>
+          <p className="text-sm text-mute">Pick two different provinces.</p>
         ) : (
           <p className="flex items-baseline gap-2">
-            <span className={`text-3xl font-extrabold tabular-nums ${gap >= 0 ? 'text-emerald-700' : 'text-red-600'}`}>
+            <span className={`text-3xl font-extrabold tabular-nums ${gap >= 0 ? 'text-red-600' : 'text-red-600'}`}>
               {gap >= 0 ? '+' : '−'}{money(gap)}
             </span>
-            <span className="text-sm text-slate-500">a year in take-home pay, free. The report covers the rest.</span>
+            <span className="text-sm text-mute">a year in take-home pay, free. The report covers the rest.</span>
           </p>
         )}
       </div>
@@ -87,12 +87,12 @@ export default function CompareMoveOffer({ provinces, annualSalary }: { province
       <button
         onClick={buy}
         disabled={gap === null || buying}
-        className="mt-3 w-full rounded-md btn-brand-3d px-3 py-2.5 text-sm font-semibold text-white disabled:bg-slate-200 disabled:text-slate-400"
+        className="mt-3 w-full rounded-md btn-brand-3d px-3 py-2.5 text-sm font-semibold text-white disabled:bg-slate-200 disabled:text-ink-4"
       >
         {buying ? 'Opening secure checkout…' : 'Get the full report: $9'}
       </button>
       {error && <p className="mt-1.5 text-xs text-red-600">{error}</p>}
-      <p className="mt-1.5 text-[11px] text-slate-500">Paid through Stripe · link works forever</p>
+      <p className="mt-1.5 text-[11px] text-mute">Paid through Stripe · link works forever</p>
     </div>
   );
 }

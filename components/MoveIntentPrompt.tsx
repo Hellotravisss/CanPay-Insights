@@ -22,19 +22,19 @@ export default function MoveIntentPrompt({ provinces, annualSalary }: { province
     recordCalcEvent({ mode: 'annual', province: provinces[0], annualIncome: annualSalary, lang: 'en', comparedProvinces: provinces, moveIntent: k });
   };
   return (
-    <div className="mb-6 rounded-xl border border-slate-200 bg-white px-5 py-4">
+    <div className="mb-6 rounded-xl border border-line bg-white px-5 py-4">
       {picked ? (
-        <p className="text-sm leading-6 text-slate-700">
+        <p className="text-sm leading-6 text-ink-2">
           Thanks. Worth knowing if you do move: you pay that year’s provincial tax to the province you live in on
           December 31, for the whole year.
         </p>
       ) : (
         <>
-          <p className="text-sm font-medium text-slate-700">Are you actually thinking of moving?</p>
+          <p className="text-sm font-medium text-ink-2">Are you actually thinking of moving?</p>
           <div className="mt-3 flex flex-wrap gap-2">
             {OPTIONS.map((o) => (
               <button key={o.key} onClick={() => pick(o.key)}
-                className="inline-flex min-h-10 items-center rounded-full border border-slate-200 bg-white px-4 py-2 text-sm font-medium text-slate-700 hover:border-red-300 hover:bg-red-50 hover:text-red-700">
+                className="inline-flex min-h-10 items-center rounded-full border border-line bg-white px-4 py-2 text-sm font-medium text-ink-2 hover:border-red-300 hover:bg-red-50 hover:text-red-700">
                 {o.label}
               </button>
             ))}

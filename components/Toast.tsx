@@ -34,8 +34,8 @@ const Toast: React.FC<ToastProps> = ({ message, type = 'error', duration = 3000,
 
   const bgColors = {
     error: 'bg-red-600',
-    success: 'bg-green-700',
-    info: 'bg-blue-600',
+    success: 'bg-ink',
+    info: 'bg-ink',
   };
 
   const icons = {

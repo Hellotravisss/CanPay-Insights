@@ -220,13 +220,13 @@ export default function ShareReward({ lang }: { lang: string }) {
   };
 
   const btn =
-    'inline-flex min-h-10 items-center gap-1.5 rounded-full border border-slate-200 bg-white px-4 py-2 text-sm font-medium text-slate-700 transition-colors hover:border-red-300 hover:bg-red-50 hover:text-red-700';
+    'inline-flex min-h-10 items-center gap-1.5 rounded-full border border-line bg-white px-4 py-2 text-sm font-medium text-ink-2 transition-colors hover:border-red-300 hover:bg-red-50 hover:text-red-700';
 
   return (
-    <div className="rounded-xl border border-slate-200 bg-white px-5 py-4">
+    <div className="rounded-xl border border-line bg-white px-5 py-4">
       <p className="text-xs font-bold uppercase tracking-[0.15em] text-red-600">{t.kicker}</p>
-      <p className="mt-2 text-base font-bold text-slate-900">{t.title}</p>
-      <p className="mt-0.5 text-sm text-slate-500">{t.line}</p>
+      <p className="mt-2 text-base font-bold text-ink">{t.title}</p>
+      <p className="mt-0.5 text-sm text-mute">{t.line}</p>
 
       <div className="mt-3 flex flex-wrap gap-2">
         <button onClick={copyLink} className={btn}>
@@ -256,17 +256,17 @@ export default function ShareReward({ lang }: { lang: string }) {
       </div>
 
       {state === 'working' && (
-        <p className="mt-3 flex items-center gap-2 text-sm text-slate-500">
+        <p className="mt-3 flex items-center gap-2 text-sm text-mute">
           <ThinkingOrb state="weaving" size={20} theme="light" aria-label={t.working} />
           {t.working}
         </p>
       )}
-      {state === 'failed' && <p className="mt-3 text-sm text-slate-500">{t.failed}</p>}
+      {state === 'failed' && <p className="mt-3 text-sm text-mute">{t.failed}</p>}
       {code && (
         <div className="mt-4 rounded-lg border-2 border-dashed border-red-300 bg-red-50 px-4 py-3">
           <p className="text-[11px] font-bold uppercase tracking-wide text-red-600">{t.unlocked}</p>
           <div className="mt-1 flex flex-wrap items-center gap-3">
-            <span className="font-mono text-xl font-extrabold tracking-wider text-slate-900">{code}</span>
+            <span className="font-mono text-xl font-extrabold tracking-wider text-ink">{code}</span>
             <button
               onClick={async () => {
                 await navigator.clipboard?.writeText(code).catch(() => {});
@@ -278,7 +278,7 @@ export default function ShareReward({ lang }: { lang: string }) {
               {copied === 'code' ? t.codeCopied : t.copyCode}
             </button>
           </div>
-          <p className="mt-2 text-xs text-slate-600">{t.useIt}</p>
+          <p className="mt-2 text-xs text-ink-3">{t.useIt}</p>
         </div>
       )}
     </div>

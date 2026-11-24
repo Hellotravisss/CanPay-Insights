@@ -501,21 +501,21 @@ export default function ExpectationPrompt({
   };
 
   const pill =
-    'inline-flex min-h-10 items-center gap-1.5 rounded-full border border-slate-200 bg-white px-4 py-2 text-sm font-medium text-slate-700 transition-colors hover:border-red-300 hover:bg-red-50 hover:text-red-700 disabled:opacity-50';
+    'inline-flex min-h-10 items-center gap-1.5 rounded-full border border-line bg-white px-4 py-2 text-sm font-medium text-ink-2 transition-colors hover:border-red-300 hover:bg-red-50 hover:text-red-700 disabled:opacity-50';
 
   return (
-    <div className="rounded-xl border border-slate-200 bg-white px-5 py-4">
+    <div className="rounded-xl border border-line bg-white px-5 py-4">
       {done ? (
-        <p className="text-sm font-medium text-emerald-700">✓ {t.thanks}</p>
+        <p className="text-sm font-medium text-red-600">✓ {t.thanks}</p>
       ) : payoff ? (
         <>
           {/* The payoff. This is the whole point of asking. */}
-          <div className="rounded-lg bg-slate-50 px-4 py-3">
-            <p className="text-sm leading-6 text-slate-800">{payoff}</p>
+          <div className="rounded-lg bg-pearl-soft px-4 py-3">
+            <p className="text-sm leading-6 text-ink">{payoff}</p>
           </div>
           {upcoming.length ? (
             <div className="mt-3">
-              <p className="text-sm font-medium text-slate-700">{upcoming[0].key === 'intent' ? ti.prompt : t[upcoming[0].prompt]}</p>
+              <p className="text-sm font-medium text-ink-2">{upcoming[0].key === 'intent' ? ti.prompt : t[upcoming[0].prompt]}</p>
               <div className="mt-2 flex flex-wrap gap-2">
                 {upcoming[0].options.map((o) => (
                   <button key={o} disabled={busy} className={pill}
@@ -524,18 +524,18 @@ export default function ExpectationPrompt({
                     {upcoming[0].key === 'intent' ? ti[o] : t[o]}
                   </button>
                 ))}
-                <button onClick={() => setDone(true)} className="px-2 py-2 text-sm text-slate-500 hover:text-slate-600">
+                <button onClick={() => setDone(true)} className="px-2 py-2 text-sm text-mute hover:text-ink-3">
                   {t.noThanks}
                 </button>
               </div>
             </div>
           ) : (
-            <p className="mt-3 text-sm font-medium text-emerald-700">✓ {t.thanks}</p>
+            <p className="mt-3 text-sm font-medium text-red-600">✓ {t.thanks}</p>
           )}
         </>
       ) : (
         <>
-          <p className="text-sm font-medium text-slate-700">{q.key === 'intent' ? ti.prompt : t[q.prompt]}</p>
+          <p className="text-sm font-medium text-ink-2">{q.key === 'intent' ? ti.prompt : t[q.prompt]}</p>
           <div className="mt-3 flex flex-wrap gap-2">
             {q.options.map((o) => (
               <button key={o} onClick={() => answer(o)} disabled={busy} className={pill}>

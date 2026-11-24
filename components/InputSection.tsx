@@ -51,35 +51,35 @@ const InputSection: React.FC<Props> = ({ inputs, setInputs }) => {
   };
 
   return (
-    <div className="bg-white rounded-xl shadow-sm border border-slate-200 p-6 space-y-8 relative overflow-hidden">
+    <div className="bg-white rounded-xl shadow-sm border border-line p-6 space-y-8 relative overflow-hidden">
       <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-red-500 to-red-600"></div>
 
       {/* Province & Wage */}
       <div className="grid grid-cols-1 gap-6">
         <div>
-          <label className="block text-sm font-bold text-slate-700 mb-2">{t('hourly.provinceTerritory')}</label>
+          <label className="block text-sm font-bold text-ink-2 mb-2">{t('hourly.provinceTerritory')}</label>
           <select 
-            className="w-full p-3 bg-white text-slate-900 border border-slate-300 rounded-lg focus:ring-2 focus:ring-red-500 focus:outline-none transition-all cursor-pointer hover:border-red-300 shadow-sm"
+            className="w-full p-3 bg-white text-ink border border-ink-5 rounded-lg focus:ring-2 focus:ring-red-500 focus:outline-none transition-all cursor-pointer hover:border-red-300 shadow-sm"
             value={inputs.province}
             onChange={(e) => setInputs({...inputs, province: e.target.value})}
           >
             {Object.entries(PROVINCIAL_DATA).map(([key, data]) => (
-              <option key={key} value={key} className="text-slate-900">{data.name}</option>
+              <option key={key} value={key} className="text-ink">{data.name}</option>
             ))}
           </select>
           <SpouseClaim value={inputs.spouseNetIncome} onChange={(v) => setInputs({ ...inputs, spouseNetIncome: v })} />
           <Under18 value={inputs.under18} onChange={(v) => setInputs({ ...inputs, under18: v })} />
         </div>
         <div>
-          <label className="block text-sm font-bold text-slate-700 mb-2">{t('hourly.wage')}</label>
+          <label className="block text-sm font-bold text-ink-2 mb-2">{t('hourly.wage')}</label>
           <div className="relative">
-            <span className="absolute left-4 top-3.5 text-slate-500 font-bold">$</span>
+            <span className="absolute left-4 top-3.5 text-mute font-bold">$</span>
             <input 
               type="number" 
               inputMode="decimal"
               step="0.01"
               min="0"
-              className="w-full p-3.5 pl-10 bg-white text-slate-900 border border-slate-300 rounded-lg focus:ring-2 focus:ring-red-500 focus:outline-none font-bold text-lg shadow-sm"
+              className="w-full p-3.5 pl-10 bg-white text-ink border border-ink-5 rounded-lg focus:ring-2 focus:ring-red-500 focus:outline-none font-bold text-lg shadow-sm"
               value={inputs.hourlyWage || ''}
               onFocus={(e) => e.target.select()} // 点击自动全选，方便覆盖
               onChange={(e) => handleWageChange(e.target.value)}
@@ -89,11 +89,11 @@ const InputSection: React.FC<Props> = ({ inputs, setInputs }) => {
         </div>
       </div>
 
-      <hr className="border-slate-100" />
+      <hr className="border-line" />
 
       {/* Schedule */}
       <div>
-        <h3 className="text-lg font-bold text-slate-800 mb-4 flex items-center">
+        <h3 className="text-lg font-bold text-ink mb-4 flex items-center">
           <svg className="w-5 h-5 mr-2 text-red-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
           {t('hourly.schedule')}
         </h3>
@@ -106,7 +106,7 @@ const InputSection: React.FC<Props> = ({ inputs, setInputs }) => {
               className={`flex-1 min-w-[55px] py-2.5 rounded-lg text-xs font-bold transition-all transform active:scale-95 border ${
                 inputs.shift.daysActive[idx] 
                 ? 'btn-brand-3d text-white border-red-700' 
-                : 'bg-white text-slate-500 border-slate-200 hover:bg-slate-50'
+                : 'bg-white text-mute border-line hover:bg-pearl-soft'
               }`}
             >
               {t(`day.${idx}`)}
@@ -118,46 +118,46 @@ const InputSection: React.FC<Props> = ({ inputs, setInputs }) => {
         <div className="space-y-4">
           <div className="grid grid-cols-2 gap-4">
             <div className="min-w-0">
-              <label className="block text-xs font-bold text-slate-500 uppercase mb-1.5 ml-1">{t('hourly.startTime')}</label>
+              <label className="block text-xs font-bold text-mute uppercase mb-1.5 ml-1">{t('hourly.startTime')}</label>
               <input 
                 type="time" 
-                className="w-full p-3 bg-white text-slate-900 border border-slate-300 rounded-lg focus:ring-2 focus:ring-red-500 focus:outline-none shadow-sm min-h-[48px]"
+                className="w-full p-3 bg-white text-ink border border-ink-5 rounded-lg focus:ring-2 focus:ring-red-500 focus:outline-none shadow-sm min-h-[48px]"
                 value={inputs.shift.startTime}
                 onChange={(e) => setInputs({...inputs, shift: { ...inputs.shift, startTime: e.target.value }})}
               />
             </div>
             <div className="min-w-0">
-              <label className="block text-xs font-bold text-slate-500 uppercase mb-1.5 ml-1">{t('hourly.endTime')}</label>
+              <label className="block text-xs font-bold text-mute uppercase mb-1.5 ml-1">{t('hourly.endTime')}</label>
               <input 
                 type="time" 
-                className="w-full p-3 bg-white text-slate-900 border border-slate-300 rounded-lg focus:ring-2 focus:ring-red-500 focus:outline-none shadow-sm min-h-[48px]"
+                className="w-full p-3 bg-white text-ink border border-ink-5 rounded-lg focus:ring-2 focus:ring-red-500 focus:outline-none shadow-sm min-h-[48px]"
                 value={inputs.shift.endTime}
                 onChange={(e) => setInputs({...inputs, shift: { ...inputs.shift, endTime: e.target.value }})}
               />
             </div>
           </div>
           <div>
-            <label className="block text-xs font-bold text-slate-500 uppercase mb-1.5 ml-1">{t('hourly.unpaidBreak')}</label>
+            <label className="block text-xs font-bold text-mute uppercase mb-1.5 ml-1">{t('hourly.unpaidBreak')}</label>
             <div className="relative">
               <input 
                 type="number" 
-                className="w-full p-3 bg-white text-slate-900 border border-slate-300 rounded-lg focus:ring-2 focus:ring-red-500 focus:outline-none shadow-sm"
+                className="w-full p-3 bg-white text-ink border border-ink-5 rounded-lg focus:ring-2 focus:ring-red-500 focus:outline-none shadow-sm"
                 value={inputs.shift.unpaidBreakMinutes}
                 onFocus={(e) => e.target.select()}
                 onChange={(e) => setInputs({...inputs, shift: { ...inputs.shift, unpaidBreakMinutes: Math.max(0, parseInt(e.target.value) || 0) }})}
               />
-              <span className="absolute right-4 top-3 text-slate-500 text-sm">min</span>
+              <span className="absolute right-4 top-3 text-mute text-sm">min</span>
             </div>
           </div>
         </div>
       </div>
 
-      <hr className="border-slate-100" />
+      <hr className="border-line" />
 
       {/* Shift Premium */}
       <div>
         <div className="flex items-center justify-between mb-4">
-          <h3 className="text-lg font-bold text-slate-800 flex items-center">
+          <h3 className="text-lg font-bold text-ink flex items-center">
             <svg className="w-5 h-5 mr-2 text-red-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>
             {t('hourly.shiftPremium')}
           </h3>
@@ -180,7 +180,7 @@ const InputSection: React.FC<Props> = ({ inputs, setInputs }) => {
                   <span className="absolute left-3 top-2 text-red-400">$</span>
                   <input 
                     type="number" 
-                    className="w-full p-2 pl-7 bg-white text-slate-900 border border-red-200 rounded-lg focus:ring-2 focus:ring-red-500 focus:outline-none"
+                    className="w-full p-2 pl-7 bg-white text-ink border border-red-200 rounded-lg focus:ring-2 focus:ring-red-500 focus:outline-none"
                     value={inputs.premium.ratePerHour}
                     onFocus={(e) => e.target.select()}
                     onChange={(e) => updatePremium('ratePerHour', Math.max(0, parseFloat(e.target.value) || 0))}
@@ -192,7 +192,7 @@ const InputSection: React.FC<Props> = ({ inputs, setInputs }) => {
                   <label className="block text-xs font-bold text-red-800 mb-1.5 ml-1">{t('hourly.from')}</label>
                   <input 
                     type="time" 
-                    className="w-full p-2.5 bg-white text-slate-900 border border-red-200 rounded-lg focus:ring-2 focus:ring-red-500 focus:outline-none"
+                    className="w-full p-2.5 bg-white text-ink border border-red-200 rounded-lg focus:ring-2 focus:ring-red-500 focus:outline-none"
                     value={inputs.premium.startTime}
                     onChange={(e) => updatePremium('startTime', e.target.value)}
                   />
@@ -201,7 +201,7 @@ const InputSection: React.FC<Props> = ({ inputs, setInputs }) => {
                   <label className="block text-xs font-bold text-red-800 mb-1.5 ml-1">{t('hourly.to')}</label>
                   <input 
                     type="time" 
-                    className="w-full p-2.5 bg-white text-slate-900 border border-red-200 rounded-lg focus:ring-2 focus:ring-red-500 focus:outline-none"
+                    className="w-full p-2.5 bg-white text-ink border border-red-200 rounded-lg focus:ring-2 focus:ring-red-500 focus:outline-none"
                     value={inputs.premium.endTime}
                     onChange={(e) => updatePremium('endTime', e.target.value)}
                   />
@@ -211,7 +211,7 @@ const InputSection: React.FC<Props> = ({ inputs, setInputs }) => {
         )}
       </div>
 
-      <hr className="border-slate-100" />
+      <hr className="border-line" />
 
       {/* Additional Income */}
       <div>
@@ -220,7 +220,7 @@ const InputSection: React.FC<Props> = ({ inputs, setInputs }) => {
           onClick={() => setShowAdditional(v => !v)}
           className="w-full flex items-center justify-between text-left"
         >
-          <h3 className="text-lg font-bold text-slate-800 flex items-center">
+          <h3 className="text-lg font-bold text-ink flex items-center">
             <svg className="w-5 h-5 mr-2 text-red-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 4v16m8-8H4" /></svg>
             {t('annual.addIncome')}
           </h3>
@@ -228,10 +228,10 @@ const InputSection: React.FC<Props> = ({ inputs, setInputs }) => {
             {(inputs.additionalIncome && Object.values(inputs.additionalIncome).some(v => v > 0)) && (
               <span className="text-xs bg-red-100 text-red-700 font-semibold px-2 py-0.5 rounded-full">{t('common.active')}</span>
             )}
-            <svg className={`w-5 h-5 text-slate-500 transition-transform ${showAdditional ? 'rotate-180' : ''}`} fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" /></svg>
+            <svg className={`w-5 h-5 text-mute transition-transform ${showAdditional ? 'rotate-180' : ''}`} fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" /></svg>
           </div>
         </button>
-        <p className="text-xs text-slate-500 mt-1 mb-3">{t('hourly.addIncomeHint')}</p>
+        <p className="text-xs text-mute mt-1 mb-3">{t('hourly.addIncomeHint')}</p>
 
         {showAdditional && (
           <div className="bg-red-50 p-4 rounded-xl border border-red-100 space-y-3 animate-fadeIn">
@@ -250,7 +250,7 @@ const InputSection: React.FC<Props> = ({ inputs, setInputs }) => {
                     type="number"
                     min="0"
                     step="1"
-                    className="w-full p-2.5 pl-7 bg-white text-slate-900 border border-red-200 rounded-lg focus:ring-2 focus:ring-red-500 focus:outline-none"
+                    className="w-full p-2.5 pl-7 bg-white text-ink border border-red-200 rounded-lg focus:ring-2 focus:ring-red-500 focus:outline-none"
                     value={inputs.additionalIncome?.[key] || ''}
                     placeholder="0"
                     onFocus={(e) => e.target.select()}
@@ -264,7 +264,7 @@ const InputSection: React.FC<Props> = ({ inputs, setInputs }) => {
         )}
       </div>
 
-      <hr className="border-slate-100" />
+      <hr className="border-line" />
 
       {/* Deductions */}
       <div>
@@ -273,7 +273,7 @@ const InputSection: React.FC<Props> = ({ inputs, setInputs }) => {
           onClick={() => setShowDeductions(v => !v)}
           className="w-full flex items-center justify-between text-left"
         >
-          <h3 className="text-lg font-bold text-slate-800 flex items-center">
+          <h3 className="text-lg font-bold text-ink flex items-center">
             <svg className="w-5 h-5 mr-2 text-red-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M20 12H4" /></svg>
             {t('annual.otherDed')}
           </h3>
@@ -281,13 +281,13 @@ const InputSection: React.FC<Props> = ({ inputs, setInputs }) => {
             {(inputs.deductions && Object.values(inputs.deductions).some(v => v > 0)) && (
               <span className="text-xs bg-red-100 text-red-700 font-semibold px-2 py-0.5 rounded-full">{t('common.active')}</span>
             )}
-            <svg className={`w-5 h-5 text-slate-500 transition-transform ${showDeductions ? 'rotate-180' : ''}`} fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" /></svg>
+            <svg className={`w-5 h-5 text-mute transition-transform ${showDeductions ? 'rotate-180' : ''}`} fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" /></svg>
           </div>
         </button>
-        <p className="text-xs text-slate-500 mt-1 mb-3">{t('hourly.dedHint')}</p>
+        <p className="text-xs text-mute mt-1 mb-3">{t('hourly.dedHint')}</p>
 
         {showDeductions && (
-          <div className="bg-slate-100 p-4 rounded-xl border border-slate-200 space-y-3 animate-fadeIn">
+          <div className="bg-pearl p-4 rounded-xl border border-line space-y-3 animate-fadeIn">
             {([
               { key: 'pension',          label: t('ded.pension'),                       hint: t('ded.pensionHint') },
               { key: 'ltdPremium',       label: t('annual.ltd'), hint: t('hourly.ltdHint') },
@@ -295,36 +295,36 @@ const InputSection: React.FC<Props> = ({ inputs, setInputs }) => {
               { key: 'otherDeductions',  label: t('annual.otherDed'),            hint: t('hourly.otherDedHint') },
             ] as { key: keyof Deductions; label: string; hint: string }[]).map(({ key, label, hint }) => (
               <div key={key}>
-                <label htmlFor={`hourly-ded-${key}`} className="block text-xs font-bold text-slate-700 mb-1">{label}</label>
+                <label htmlFor={`hourly-ded-${key}`} className="block text-xs font-bold text-ink-2 mb-1">{label}</label>
                 <div className="relative">
-                  <span className="absolute left-3 top-2.5 text-slate-500 text-sm">$</span>
+                  <span className="absolute left-3 top-2.5 text-mute text-sm">$</span>
                   <input id={`hourly-ded-${key}`}
                     type="number"
                     min="0"
                     step="1"
-                    className="w-full p-2.5 pl-7 bg-white text-slate-900 border border-slate-300 rounded-lg focus:ring-2 focus:ring-red-500 focus:outline-none"
+                    className="w-full p-2.5 pl-7 bg-white text-ink border border-ink-5 rounded-lg focus:ring-2 focus:ring-red-500 focus:outline-none"
                     value={inputs.deductions?.[key] || ''}
                     placeholder="0"
                     onFocus={(e) => e.target.select()}
                     onChange={(e) => updateDeductions(key, parseAmount(e.target.value))}
                   />
                 </div>
-                <p className="text-xs text-slate-500 mt-0.5 ml-1">{hint}</p>
+                <p className="text-xs text-mute mt-0.5 ml-1">{hint}</p>
               </div>
             ))}
-            <p className="text-xs text-slate-500 bg-white border border-slate-200 rounded-md px-3 py-2">
+            <p className="text-xs text-mute bg-white border border-line rounded-md px-3 py-2">
               {t('hourly.dedNote')}
             </p>
           </div>
         )}
       </div>
 
-      <hr className="border-slate-100" />
+      <hr className="border-line" />
 
       {/* RRSP Contribution */}
       <div>
         <div className="flex items-center justify-between mb-4">
-          <h3 className="text-lg font-bold text-slate-800 flex items-center">
+          <h3 className="text-lg font-bold text-ink flex items-center">
             <svg className="w-5 h-5 mr-2 text-red-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"></path></svg>
             {t('annual.rrsp')}
           </h3>
@@ -349,13 +349,13 @@ const InputSection: React.FC<Props> = ({ inputs, setInputs }) => {
         {!!((inputs.rrspType === 'percent' ? inputs.rrspPercentage : inputs.rrspContributionPerPeriod) && ((inputs.rrspPercentage || 0) > 0 || (inputs.rrspContributionPerPeriod || 0) > 0)) && (
           <div className="bg-red-50/50 p-4 rounded-xl border border-red-100/70 animate-fadeIn space-y-4">
             {/* Toggle between Amount and Percent */}
-            <div className="flex rounded-lg bg-slate-100 p-0.5" role="group">
+            <div className="flex rounded-lg bg-pearl p-0.5" role="group">
               <button
                 type="button"
                 className={`flex-1 py-1 text-xs font-semibold rounded-md transition-all ${
                   (inputs.rrspType || 'amount') === 'amount'
-                    ? 'bg-white text-slate-800 shadow-sm'
-                    : 'text-slate-500 hover:text-slate-800'
+                    ? 'bg-white text-ink shadow-sm'
+                    : 'text-mute hover:text-ink'
                 }`}
                 onClick={() => setInputs({ ...inputs, rrspType: 'amount' })}
               >
@@ -365,8 +365,8 @@ const InputSection: React.FC<Props> = ({ inputs, setInputs }) => {
                 type="button"
                 className={`flex-1 py-1 text-xs font-semibold rounded-md transition-all ${
                   inputs.rrspType === 'percent'
-                    ? 'bg-white text-slate-800 shadow-sm'
-                    : 'text-slate-500 hover:text-slate-800'
+                    ? 'bg-white text-ink shadow-sm'
+                    : 'text-mute hover:text-ink'
                 }`}
                 onClick={() => setInputs({ ...inputs, rrspType: 'percent' })}
               >
@@ -384,7 +384,7 @@ const InputSection: React.FC<Props> = ({ inputs, setInputs }) => {
                     type="number"
                     min="0"
                     step="25"
-                    className="w-full py-2 pl-7 pr-3 bg-white text-slate-900 border border-red-200 rounded-lg focus:ring-2 focus:ring-red-500 focus:outline-none text-sm font-semibold"
+                    className="w-full py-2 pl-7 pr-3 bg-white text-ink border border-red-200 rounded-lg focus:ring-2 focus:ring-red-500 focus:outline-none text-sm font-semibold"
                     value={inputs.rrspContributionPerPeriod || ''}
                     onFocus={(e) => e.target.select()}
                     onChange={(e) => setInputs({ ...inputs, rrspContributionPerPeriod: Math.max(0, parseFloat(e.target.value) || 0) })}
@@ -402,7 +402,7 @@ const InputSection: React.FC<Props> = ({ inputs, setInputs }) => {
                         min="0"
                         max="100"
                         step="0.5"
-                        className="w-full py-2 pl-3 pr-8 bg-white text-slate-900 border border-red-200 rounded-lg focus:ring-2 focus:ring-red-500 focus:outline-none text-sm font-semibold"
+                        className="w-full py-2 pl-3 pr-8 bg-white text-ink border border-red-200 rounded-lg focus:ring-2 focus:ring-red-500 focus:outline-none text-sm font-semibold"
                         value={inputs.rrspPercentage || ''}
                         onFocus={(e) => e.target.select()}
                         onChange={(e) => {
@@ -420,7 +420,7 @@ const InputSection: React.FC<Props> = ({ inputs, setInputs }) => {
                   <div>
                     <label className="block text-xs font-bold text-red-800 mb-1.5 ml-1">{t('annual.employerMatch')}</label>
                     <select
-                      className="w-full py-2 pl-2 pr-7 bg-white text-slate-900 border border-red-200 rounded-lg focus:ring-2 focus:ring-red-500 focus:outline-none text-xs sm:text-sm font-semibold truncate"
+                      className="w-full py-2 pl-2 pr-7 bg-white text-ink border border-red-200 rounded-lg focus:ring-2 focus:ring-red-500 focus:outline-none text-xs sm:text-sm font-semibold truncate"
                       value={(inputs as any).rrspMatchPolicy || 'equal'}
                       onChange={(e) => {
                         const policy = e.target.value;
@@ -459,7 +459,7 @@ const InputSection: React.FC<Props> = ({ inputs, setInputs }) => {
                         min="0"
                         max="100"
                         step="0.5"
-                        className="w-full py-2 pl-3 pr-8 bg-white text-slate-900 border border-red-200 rounded-lg focus:ring-2 focus:ring-red-500 focus:outline-none text-sm"
+                        className="w-full py-2 pl-3 pr-8 bg-white text-ink border border-red-200 rounded-lg focus:ring-2 focus:ring-red-500 focus:outline-none text-sm"
                         value={inputs.rrspEmployerMatch || ''}
                         onFocus={(e) => e.target.select()}
                         onChange={(e) => setInputs({ ...inputs, rrspEmployerMatch: Math.max(0, parseFloat(e.target.value) || 0) })}
