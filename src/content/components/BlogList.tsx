@@ -1,7 +1,10 @@
 'use client';
+import { useEffect, useState } from 'react';
 import { useT } from '../../../lib/i18n';
 import PreferredSource from '../../../components/PreferredSource';
-import AvowdCredit from '../../../components/AvowdCredit';
+import SiteHeader from '../../../components/site/SiteHeader';
+import SiteFooter from '../../../components/site/SiteFooter';
+import { PageHero, Card, ButtonLink } from '../../../components/site/ui';
 
 /**
  * Client component so the chrome follows the language switcher — but it is
@@ -15,13 +18,18 @@ export type BlogCard = {
   category: string; publishedAt: string; readTime: number; imageUrl?: string;
 };
 
+// 2026-11: categories are plain labels (no colour per category); the chips are white pills, the active one ink.
 const CATEGORY_KEYS = [
-  { id: 'all', key: 'blog.catAll', color: 'bg-slate-600' },
-  { id: 'salary', key: 'blog.catSalary', color: 'bg-blue-600' },
-  { id: 'province', key: 'blog.catProvince', color: 'bg-green-700' },
-  { id: 'tips', key: 'blog.catTips', color: 'bg-amber-700' },
-  { id: 'tax', key: 'blog.catTax', color: 'bg-red-600' },
+  { id: 'all', key: 'blog.catAll' },
+  { id: 'salary', key: 'blog.catSalary' },
+  { id: 'province', key: 'blog.catProvince' },
+  { id: 'tips', key: 'blog.catTips' },
+  { id: 'tax', key: 'blog.catTax' },
 ];
+
+const FOCUS = 'focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-red-600';
+const COVER_IMG =
+  'transition-transform duration-[320ms] ease-[cubic-bezier(0.2,0,0,1)] group-hover:scale-[1.02] motion-reduce:transition-none motion-reduce:group-hover:scale-100';
 
 const formatDate = (dateString: string) => {
   return new Date(`${dateString}T00:00:00`).toLocaleDateString('en-US', {
@@ -36,208 +44,192 @@ const getCategoryLabel = (categoryId: string, t: (k: string) => string) => {
   return c ? t(c.key) : categoryId;
 };
 
-const getCategoryColor = (categoryId: string) => {
-  return CATEGORY_KEYS.find((x) => x.id === categoryId)?.color || 'bg-slate-600';
-};
-
 const getCategoryCount = (articles: BlogCard[], categoryId: string) => {
   return categoryId === 'all'
     ? articles.length
     : articles.filter((article) => article.category === categoryId).length;
 };
 
+/** date · read time, in mute tabular figures */
+const Meta = ({ article, className = '' }: { article: BlogCard; className?: string }) => (
+  <div className={`flex items-center justify-between gap-3 font-medium tabular-nums text-mute ${className}`}>
+    <span>{formatDate(article.publishedAt)}</span>
+    <span>{article.readTime} min read</span>
+  </div>
+);
+
 const ArticleCard = ({ article, t }: { article: BlogCard; t: (k: string) => string }) => {
   return (
     <a
       href={`/blog/${article.slug}`}
-      className="group block overflow-hidden rounded-2xl border border-slate-200 bg-white text-left no-underline shadow-sm transition-all hover:-translate-y-0.5 hover:shadow-lg"
+      className={`group flex flex-col overflow-hidden rounded-2xl border border-line bg-white text-left no-underline transition-colors duration-150 hover:border-ink-5 ${FOCUS}`}
     >
       {article.imageUrl && (
-        <div className="cover-frame">
-          <img
-            src={article.imageUrl}
-            alt={article.title}
-            className="transition-transform duration-300 group-hover:scale-105"
-          />
+        <div className="cover-frame border-b border-line !bg-pearl-soft">
+          <img src={article.imageUrl} alt={article.title} className={COVER_IMG} />
         </div>
       )}
 
-      <div className="p-5">
-        <span className={`mb-3 inline-flex rounded-md px-2.5 py-1 ${getCategoryColor(article.category)} text-xs font-bold text-white`}>
+      <div className="flex flex-1 flex-col p-5">
+        <span className="mb-2 text-[11px] font-semibold uppercase tracking-[0.14em] text-mute">
           {getCategoryLabel(article.category, t)}
         </span>
-        <h3 className="mb-2 line-clamp-2 text-lg font-bold leading-snug text-slate-900 transition-colors group-hover:text-red-600">
+        <h3 className="mb-2 line-clamp-2 font-display text-lg font-semibold leading-snug text-ink transition-colors group-hover:text-red-600">
           {article.title}
         </h3>
-        <p className="mb-5 line-clamp-2 text-sm leading-6 text-slate-600">
+        <p className="mb-5 line-clamp-2 text-sm leading-6 text-ink-3">
           {article.excerpt}
         </p>
-        <div className="flex items-center justify-between text-xs font-medium text-slate-500">
-          <span>{formatDate(article.publishedAt)}</span>
-          <span>{article.readTime} min read</span>
-        </div>
+        <Meta article={article} className="mt-auto border-t border-line pt-4 text-xs" />
       </div>
     </a>
   );
 };
 
 export default function BlogList({ articles }: { articles: BlogCard[] }) {
-  const { t } = useT();
+  const { t, lang } = useT();
+  const siteLang = lang === 'zh' ? 'zh' : lang === 'fr' ? 'fr' : 'en';
   const featuredArticle = articles[0];
   const remainingArticles = articles.slice(1);
 
-  return (
-    <main className="min-h-screen bg-slate-50">
-      <header className="border-b border-slate-200 bg-white">
-        <div className="mx-auto max-w-6xl px-4 py-4">
-          <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
-            <a href="/blog" className="inline-flex items-center gap-3 no-underline">
-              <img src="/logo.png" alt="CanPay Insights" className="h-10 w-10 rounded-xl object-contain shadow-sm shadow-red-100" />
-              <span className="text-lg font-bold text-slate-950">CanPay Insights</span>
-            </a>
-            <a
-              href="/"
-              className="inline-flex w-fit items-center gap-2 rounded-lg border border-slate-200 bg-white px-4 py-2 text-sm font-bold text-slate-600 no-underline shadow-sm transition-colors hover:border-red-200 hover:text-red-600"
-            >
-              Back to Calculator
-            </a>
-          </div>
+  // Which chip is "on": the category named in the URL hash, otherwise "all".
+  const [active, setActive] = useState('all');
+  useEffect(() => {
+    const read = () => {
+      const h = window.location.hash.replace('#', '');
+      setActive(CATEGORY_KEYS.some((c) => c.id === h) ? h : 'all');
+    };
+    read();
+    window.addEventListener('hashchange', read);
+    return () => window.removeEventListener('hashchange', read);
+  }, []);
 
-          <div className="grid gap-6 py-8 md:grid-cols-[1fr_24rem] md:items-end md:py-10">
-            <div>
-              <p className="mb-3 text-sm font-bold uppercase tracking-[0.16em] text-red-600">{t('blog.kicker')}</p>
-              <h1 className="max-w-3xl text-4xl font-bold leading-tight tracking-tight text-slate-950 md:text-5xl">
-                {t('blog.h1')}
-              </h1>
-              <p className="mt-4 max-w-2xl text-lg leading-8 text-slate-500">
+  return (
+    <div className="min-h-screen bg-pearl">
+      <SiteHeader lang={siteLang} current="guides" />
+
+      <main className="mx-auto max-w-6xl px-4" role="main">
+        <div className="grid md:grid-cols-[1fr_22rem] md:items-end md:gap-10">
+          <PageHero
+            eyebrow={t('blog.kicker')}
+            title={t('blog.h1')}
+            lead={
+              <>
                 Practical articles for comparing job offers, provinces, deductions, and salary decisions in
                 Canada — plus what changes to tax and benefit rules mean for your paycheque, twice a week.
-              </p>
-            </div>
+              </>
+            }
+          />
 
-            <a
-              href="/compare-provinces"
-              className="group rounded-2xl border border-blue-100 bg-blue-50 p-5 text-left no-underline shadow-sm transition-all hover:-translate-y-0.5 hover:border-blue-200 hover:shadow-md"
-            >
-              <span className="mb-4 flex h-11 w-11 items-center justify-center rounded-xl bg-blue-600 text-white">
-                <svg className="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
-                </svg>
-              </span>
-              <h2 className="text-xl font-bold text-slate-950">{t('blog.compareTitle')}</h2>
-              <p className="mt-2 text-sm font-medium leading-6 text-slate-600">
-                {t('blog.compareBody')}
-              </p>
-              <span className="mt-4 inline-flex text-sm font-bold text-blue-700 transition-transform group-hover:translate-x-1">
-                Open tool →
-              </span>
-            </a>
-          </div>
-        </div>
-      </header>
-
-      <nav className="border-b border-slate-200 bg-white" aria-label="Blog categories">
-        <div className="mx-auto max-w-6xl px-4 py-4">
-          <div className="flex gap-2 overflow-x-auto pb-2">
-            {CATEGORY_KEYS.map((category) => (
-              <a
-                key={category.id}
-                href={category.id === 'all' ? '/blog' : `/blog#${category.id}`}
-                className="whitespace-nowrap rounded-full bg-slate-100 px-4 py-2 text-sm font-medium text-slate-600 no-underline hover:bg-slate-200"
-              >
-                {t(category.key)}
-                <span className="ml-2">{getCategoryCount(articles, category.id)}</span>
-              </a>
-            ))}
-          </div>
-        </div>
-      </nav>
-
-      <div className="mx-auto max-w-6xl px-4 py-8">
-        <div className="mb-5 flex items-end justify-between gap-4">
-          <div>
-            <h2 className="text-2xl font-bold text-slate-950">{t('blog.latest')}</h2>
-            <p className="mt-1 text-sm font-medium text-slate-500">{t('blog.count').replace('{n}', String(articles.length))}</p>
-          </div>
-        </div>
-
-        {featuredArticle && (
+          {/* tool card */}
           <a
-            href={`/blog/${featuredArticle.slug}`}
-            className="group mb-6 grid overflow-hidden rounded-2xl border border-slate-200 bg-white text-left no-underline shadow-sm transition-all hover:-translate-y-0.5 hover:shadow-lg md:grid-cols-[1.05fr_0.95fr]"
+            href="/compare-provinces"
+            className={`group mb-8 block rounded-2xl border border-line bg-white p-5 text-left no-underline transition-colors duration-150 hover:border-ink-5 md:mb-12 ${FOCUS}`}
           >
-            {featuredArticle.imageUrl && (
-              <div className="cover-frame cover-frame-featured">
-                <img
-                  src={featuredArticle.imageUrl}
-                  alt={featuredArticle.title}
-                  className="transition-transform duration-300 group-hover:scale-105"
-                />
-              </div>
-            )}
-            <div className="flex flex-col justify-center p-6 md:p-8">
-              <span className={`mb-4 inline-flex w-fit rounded-lg px-3 py-1.5 ${getCategoryColor(featuredArticle.category)} text-xs font-bold uppercase tracking-[0.08em] text-white`}>
-                Featured · {getCategoryLabel(featuredArticle.category, t)}
-              </span>
-              <h2 className="text-2xl font-bold leading-tight text-slate-950 transition-colors group-hover:text-red-600 md:text-3xl">
-                {featuredArticle.title}
-              </h2>
-              <p className="mt-4 line-clamp-3 text-base leading-7 text-slate-600">
-                {featuredArticle.excerpt}
-              </p>
-              <div className="mt-6 flex items-center justify-between text-sm font-medium text-slate-500">
-                <span>{formatDate(featuredArticle.publishedAt)}</span>
-                <span>{featuredArticle.readTime} min read</span>
-              </div>
-            </div>
+            <span className="mb-4 flex h-10 w-10 items-center justify-center rounded-xl border border-line bg-pearl-soft text-ink">
+              <svg className="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.75} d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
+              </svg>
+            </span>
+            <h2 className="font-display text-xl font-semibold text-ink">{t('blog.compareTitle')}</h2>
+            <p className="mt-2 text-sm leading-6 text-ink-3">
+              {t('blog.compareBody')}
+            </p>
+            <span className="mt-4 inline-flex text-sm font-semibold text-red-600 transition-transform duration-150 group-hover:translate-x-0.5 motion-reduce:transition-none">
+              Open tool →
+            </span>
           </a>
-        )}
+        </div>
 
-        <section className="grid grid-cols-1 gap-5 md:grid-cols-2 lg:grid-cols-3" aria-label="All articles">
-          {remainingArticles.map((article) => (
-            <ArticleCard key={article.id} article={article} t={t} />
-          ))}
-        </section>
+        <nav className="border-y border-line py-4" aria-label="Blog categories">
+          <div className="-mx-4 flex gap-2 overflow-x-auto px-4 pb-1">
+            {CATEGORY_KEYS.map((category) => {
+              const on = active === category.id;
+              return (
+                <a
+                  key={category.id}
+                  href={category.id === 'all' ? '/blog' : `/blog#${category.id}`}
+                  aria-current={on ? 'true' : undefined}
+                  className={`whitespace-nowrap rounded-full border px-4 py-2 text-sm font-medium no-underline transition-colors duration-150 ${FOCUS} ${
+                    on ? 'border-ink bg-ink text-white' : 'border-line bg-white text-ink-2 hover:border-ink-5'
+                  }`}
+                >
+                  {t(category.key)}
+                  <span className={`ml-2 tabular-nums ${on ? 'text-pearl-shade' : 'text-mute'}`}>{getCategoryCount(articles, category.id)}</span>
+                </a>
+              );
+            })}
+          </div>
+        </nav>
 
-        {CATEGORY_KEYS.filter((category) => category.id !== 'all').map((category) => {
-          const inCategory = articles.filter((article) => article.category === category.id);
-          if (inCategory.length === 0) {
-            return null;
-          }
+        <div className="py-10">
+          <div className="mb-6">
+            <h2 className="font-display text-2xl font-semibold leading-tight text-ink md:text-[2rem]">{t('blog.latest')}</h2>
+            <p className="mt-1 text-sm font-medium tabular-nums text-mute">{t('blog.count').replace('{n}', String(articles.length))}</p>
+          </div>
 
-          return (
-            <section key={category.id} id={category.id} className="mt-12 scroll-mt-20">
-              <h2 className="mb-5 text-2xl font-bold text-slate-950">{t(category.key)}</h2>
-              <div className="grid grid-cols-1 gap-5 md:grid-cols-2 lg:grid-cols-3">
-                {inCategory.map((article) => (
-                  <ArticleCard key={`${category.id}-${article.id}`} article={article} t={t} />
-                ))}
+          {featuredArticle && (
+            <a
+              href={`/blog/${featuredArticle.slug}`}
+              className={`group mb-6 grid overflow-hidden rounded-2xl border border-line bg-white text-left no-underline transition-colors duration-150 hover:border-ink-5 md:grid-cols-[1.15fr_0.85fr] ${FOCUS}`}
+            >
+              {featuredArticle.imageUrl && (
+                <div className="cover-frame cover-frame-featured border-b border-line !bg-pearl-soft md:border-b-0 md:border-r">
+                  <img src={featuredArticle.imageUrl} alt={featuredArticle.title} className={COVER_IMG} />
+                </div>
+              )}
+              <div className="flex flex-col justify-center p-6 md:p-10">
+                <span className="mb-4 text-[11px] font-semibold uppercase tracking-[0.14em] text-red-600">
+                  Featured · {getCategoryLabel(featuredArticle.category, t)}
+                </span>
+                <h2 className="font-display text-2xl font-semibold leading-[1.15] text-ink transition-colors group-hover:text-red-600 md:text-[2rem]">
+                  {featuredArticle.title}
+                </h2>
+                <p className="mt-4 line-clamp-3 text-base leading-7 text-ink-3">
+                  {featuredArticle.excerpt}
+                </p>
+                <Meta article={featuredArticle} className="mt-6 border-t border-line pt-4 text-sm" />
               </div>
-            </section>
-          );
-        })}
-      </div>
+            </a>
+          )}
 
-      <section className="mt-8 border-t border-slate-200 bg-white py-12">
-        <div className="mx-auto max-w-4xl px-4 text-center">
-          <h2 className="mb-4 text-2xl font-bold text-slate-950">{t('blog.ctaTitle')}</h2>
-          <p className="mb-6 text-slate-600">
+          <section className="grid grid-cols-1 gap-5 md:grid-cols-2 lg:grid-cols-3" aria-label="All articles">
+            {remainingArticles.map((article) => (
+              <ArticleCard key={article.id} article={article} t={t} />
+            ))}
+          </section>
+
+          {CATEGORY_KEYS.filter((category) => category.id !== 'all').map((category) => {
+            const inCategory = articles.filter((article) => article.category === category.id);
+            if (inCategory.length === 0) {
+              return null;
+            }
+
+            return (
+              <section key={category.id} id={category.id} className="mt-14 scroll-mt-24 border-t border-line pt-10">
+                <h2 className="mb-6 font-display text-2xl font-semibold leading-tight text-ink md:text-[2rem]">{t(category.key)}</h2>
+                <div className="grid grid-cols-1 gap-5 md:grid-cols-2 lg:grid-cols-3">
+                  {inCategory.map((article) => (
+                    <ArticleCard key={`${category.id}-${article.id}`} article={article} t={t} />
+                  ))}
+                </div>
+              </section>
+            );
+          })}
+        </div>
+
+        <Card className="mb-10 px-6 py-10 text-center md:py-12">
+          <h2 className="mb-3 font-display text-2xl font-semibold text-ink md:text-[2rem]">{t('blog.ctaTitle')}</h2>
+          <p className="mx-auto mb-6 max-w-xl text-ink-3">
             {t('blog.ctaBody')}
           </p>
-          <a
-            href="/"
-            className="inline-flex items-center gap-2 rounded-xl bg-red-600 px-6 py-3 font-bold text-white no-underline shadow-sm transition-all hover:bg-red-700 hover:shadow-md"
-          >
-            {t('blog.ctaBtn')}
-          </a>
-        </div>
-      </section>
+          <ButtonLink href="/">{t('blog.ctaBtn')}</ButtonLink>
+        </Card>
+      </main>
 
       <PreferredSource />
 
-      <footer className="mx-auto max-w-5xl px-4 pb-10 pt-6 text-center text-xs text-slate-500" role="contentinfo">
-        <p>© CanPay Insights · <AvowdCredit /></p>
-      </footer>
-    </main>
+      <SiteFooter lang={siteLang} />
+    </div>
   );
 }
