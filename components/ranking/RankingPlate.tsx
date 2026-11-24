@@ -45,8 +45,9 @@ const T = 52; // tile size
 function Cartogram({ tier, selected, onSelect }: { tier: Tier; selected: string | null; onSelect: (c: string) => void }) {
   const s = scaleOf(tier);
   return (
-    <svg viewBox={`-3 -3 ${GRID.cols * S + 2} ${GRID.rows * S + 2}`} className="w-full" aria-hidden="true">
-      {tier.rows.map((r) => {
+    <svg viewBox={`-3 -3 ${GRID.cols * S + 2} ${GRID.rows * S + 2}`} className="pc w-full" aria-hidden="true">
+      {/* the map arrives as a wave in rank order, best first (globals.css .pm-tile, 6 ms apart) */}
+      {tier.rows.map((r, i) => {
         const [c, row] = TILE[r.code];
         const x = c * S;
         const y = row * S;
@@ -55,7 +56,7 @@ function Cartogram({ tier, selected, onSelect }: { tier: Tier; selected: string 
         const fill = RAMP[r.country][b];
         const ink = LABEL_ON[b];
         return (
-          <g key={r.code} onClick={() => onSelect(r.code)} className="cursor-pointer">
+          <g key={r.code} onClick={() => onSelect(r.code)} className="pm-tile cursor-pointer" style={{ ['--i' as string]: i }}>
             <title>{`${r.name}: ${r.keptPct.toFixed(1)}% kept`}</title>
             <rect x={x} y={y} width={T} height={T} rx={8} fill={fill} stroke={on ? INK : 'none'} strokeWidth={on ? 3 : 0} />
             {on ? <rect x={x - 3} y={y - 3} width={T + 6} height={T + 6} rx={10} fill="none" stroke="#FFFFFF" strokeWidth={1.5} /> : null}

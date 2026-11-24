@@ -57,23 +57,33 @@ export default function PayDonut({
   });
 
   return (
-    <div className="flex flex-col items-center gap-6 sm:flex-row sm:items-center sm:gap-8">
+    <div className="pc flex flex-col items-center gap-6 sm:flex-row sm:items-center sm:gap-8">
       <svg viewBox="0 0 200 200" className="h-[190px] w-[190px] shrink-0" role="img"
         aria-label={`Of ${money(gross)} gross, ${money(netAnnual)} is take-home pay`}>
-        {drawn.map((s) => (
-          <path key={s.label} d={s.d} fill={s.color} stroke="#fff" strokeWidth="2" />
-        ))}
-        <text x={CX} y={CY - 4} textAnchor="middle" className="fill-ink font-display text-[26px] font-semibold">
+        {/* revealed once by a ring that sweeps clockwise from 12 o'clock (globals.css .pm-sweep); without JS or
+            with reduced motion the mask is simply full */}
+        <defs>
+          <mask id="paydonut-sweep" maskUnits="userSpaceOnUse" x="0" y="0" width="200" height="200">
+            <circle className="pm-sweep" cx={CX} cy={CY} r={(R_OUT + R_IN) / 2} fill="none" stroke="#fff"
+              strokeWidth={R_OUT - R_IN + 6} pathLength={1} strokeDasharray="1" transform={`rotate(-90 ${CX} ${CY})`} />
+          </mask>
+        </defs>
+        <g mask="url(#paydonut-sweep)">
+          {drawn.map((s) => (
+            <path key={s.label} d={s.d} fill={s.color} stroke="#fff" strokeWidth="2" />
+          ))}
+        </g>
+        <text x={CX} y={CY - 4} textAnchor="middle" className="pm-fade fill-red-600 font-display text-[26px] font-semibold">
           {keptPct}%
         </text>
-        <text x={CX} y={CY + 15} textAnchor="middle" className="fill-mute text-[10px]">
+        <text x={CX} y={CY + 15} textAnchor="middle" className="pm-fade fill-mute text-[10px]">
           you keep
         </text>
       </svg>
 
       <ul className="w-full divide-y divide-line">
-        {drawn.map((s) => (
-          <li key={s.label} className="flex items-center gap-3 py-2 text-sm">
+        {drawn.map((s, i) => (
+          <li key={s.label} className="pm-fade flex items-center gap-3 py-2 text-sm" style={{ ['--i' as string]: 4 + i * 2 }}>
             <span className="h-3 w-3 shrink-0 rounded-sm" style={{ background: s.color }} />
             <span className="text-ink-2">{s.label}</span>
             <span className="ml-auto font-semibold tabular-nums text-ink">{money(s.value)}</span>

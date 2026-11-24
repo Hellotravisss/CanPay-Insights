@@ -232,7 +232,7 @@ div:has(> input[type="datetime-local"]) {
   --pm-stagger: 30ms;
 }
 
-@media (prefers-reduced-motion: no-preference) {
+@media (prefers-reduced-motion: no-preference) and (scripting: enabled) {
   /* ── entrance: rise + fade (cards, rows, panels) ── */
   [data-motion="rise"]:not(.pm-in), .pr:not(.pm-in) .pr-row { opacity: 0; transform: translateY(8px); }
   [data-motion="rise"].pm-in, .pr.pm-in .pr-row {

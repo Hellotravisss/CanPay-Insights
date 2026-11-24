@@ -1,3 +1,4 @@
+import MotionRuntime from '../components/MotionRuntime';
 import type { Metadata, Viewport } from 'next';
 import PageTag, { CfBeacon } from '../components/PageTag';
 import TelemetrySwitch from '../components/TelemetrySwitch';
@@ -204,6 +205,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         />
       </head>
       <body>
+        <MotionRuntime />
         {/* Page-traffic tag on the shared multi-site worker (site=canpay). Calc
             telemetry is separate — this is page views only, and PageTag keeps
             it off /embed, which renders inside other people's sites. */}
