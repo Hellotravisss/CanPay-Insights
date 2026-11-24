@@ -124,7 +124,7 @@ export default function CompareProvincesPage() {
         </div>
       </section>
 
-      <footer className="mx-auto max-w-5xl px-4 pb-10 pt-6 text-center text-xs text-slate-500" role="contentinfo">
+      <footer className="mx-auto max-w-5xl px-4 pb-10 pt-6 text-center text-xs text-slate-600" role="contentinfo">
         <p>© CanPay Insights · <AvowdCredit /></p>
       </footer>
     </>
