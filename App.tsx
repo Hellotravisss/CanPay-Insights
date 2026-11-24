@@ -36,14 +36,15 @@ import UserMenu from './components/UserMenu';
 import AuthModal from './components/AuthModal';
 import LoadingOverlay from './components/LoadingOverlay';
 import SisterSiteCard from './components/SisterSiteCard';
+import HomeExample from './components/HomeExample';
+import { TAX_YEAR } from './constants';
+import SiteHeader from './components/site/SiteHeader';
 import { buildWorkPattern } from './lib/workPattern';
 import { SalaryInputs, Province, CalculationMode, AnnualSalaryInputs, PayFrequency, TimesheetInputs, CalculationResult } from './types';
 import { calculateSalary, calculateFromAnnualSalary, calculateFromTimesheet } from './utils/taxEngine';
 import { useAuth, type OAuthProvider } from './hooks/useAuth';
 import { useUserSettings } from './hooks/useUserSettings';
 import { useCalculationHistory, type CalculationRecord } from './hooks/useCalculationHistory';
-import AvowdCredit from './components/AvowdCredit';
-import Icon from '@/components/Icon';
 
 // Default State - 简易估算（时薪）
 // Savings / premium-pay / tips signals, all derived from values the user
@@ -476,129 +477,86 @@ const App: React.FC = () => {
   const DONATION_URL = "https://www.buymeacoffee.com/canpay"; 
 
   return (
-    <div className="min-h-screen bg-slate-50 pb-20 font-sans">
+    <div className="min-h-screen bg-pearl font-sans">
       {/* Header */}
+      <SiteHeader
+        lang={lang === 'fr' || lang === 'zh' ? lang : 'en'}
+        current="calculator"
+        onHome={handleBackToHome}
+        extra={
+          <>
+            {/* The switcher lived only on the home screen, so anyone who started calculating was stuck in
+                whatever language the browser had guessed for them. It belongs wherever the reader is. */}
+            <LanguageSwitcher />
+            <UserMenu onSwitchToTimesheet={handleSwitchToTimesheet} onLoadCalculation={handleLoadCalculation} />
+          </>
+        }
+      />
       {currentPage === 'calculator' && (
-        <header className="glass-bar border-b border-slate-200/70 sticky top-0 z-30" role="banner">
-          <div className="max-w-6xl mx-auto px-4 py-3 flex items-center justify-between">
-            <button 
-              onClick={handleBackToHome}
-              className="flex items-center gap-3 hover:opacity-80 transition-opacity"
-            >
-              <img src="/logo.png" alt="CanPay" className="w-10 h-10 rounded-lg object-contain shadow-lg" />
-              <p className="text-xl font-bold text-slate-800 tracking-tight hidden sm:block">CanPay <span className="text-red-600 font-light">Insights</span></p>
-            </button>
-            
-            <div className="flex items-center gap-2">
-              {/* The switcher lived only on the home screen, so anyone who
-                  started calculating was stuck in whatever language the browser
-                  had guessed for them. It belongs wherever the reader is. */}
-              <LanguageSwitcher />
-
-              {/* User Menu / Sign In */}
-              <UserMenu 
-                onSwitchToTimesheet={handleSwitchToTimesheet}
-                onLoadCalculation={handleLoadCalculation}
-              />
-
-              {currentPage === 'calculator' && (
-                <button 
-                  onClick={handleGoToBlog}
-                  className="hidden sm:flex items-center gap-2 px-4 py-2 bg-slate-100 hover:bg-slate-200 text-slate-700 rounded-lg transition-all text-sm font-medium mr-2"
-                >
-                  <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 20H5a2 2 0 01-2-2V6a2 2 0 012-2h10a2 2 0 012 2v1m2 13a2 2 0 01-2-2V7m2 13a2 2 0 002-2V9.5a2.5 2.5 0 00-2.5-2.5H14" />
-                  </svg>
-                  {t('nav.taxGuides')}
-                </button>
-              )}
-              <button 
-                onClick={handleBackToHome}
-                className="flex items-center gap-2 px-4 py-2 bg-slate-100 hover:bg-slate-200 text-slate-700 rounded-lg transition-all text-sm font-medium"
-              >
-                <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 19l-7-7m0 0l7-7m-7 7h18" />
-                </svg>
-                {t('nav.back')}
-              </button>
-            </div>
-          </div>
-        </header>
+        <div className="mx-auto max-w-6xl px-4 pt-4">
+          <button
+            onClick={handleBackToHome}
+            className="inline-flex items-center gap-1.5 text-sm font-medium text-mute transition-colors hover:text-ink"
+          >
+            <span aria-hidden="true">←</span> {t('nav.back')}
+          </button>
+        </div>
       )}
 
       {/* Main Content */}
       <main className="max-w-6xl mx-auto px-4 py-5 md:py-8" role="main" aria-label="Payroll Calculator">
           {/* Home Page - Mode Selection */}
           {currentPage === 'home' && (
-            <div className="mx-auto flex min-h-[82vh] w-full max-w-6xl flex-col">
-              <div className="flex items-center justify-between gap-2 py-4">
-                <LanguageSwitcher />
-                <nav className="flex flex-wrap items-center gap-2" aria-label="Home navigation">
-                  <a
-                    href="/blog"
-                    className="rounded-lg border border-slate-200 bg-white px-4 py-2 text-sm font-bold text-slate-600 no-underline shadow-sm transition-colors hover:border-red-200 hover:text-red-600"
-                  >
-                    {t('nav.taxGuides')}
-                  </a>
-                  <a
-                    href="/compare-provinces"
-                    className="rounded-lg border border-slate-200 bg-white px-4 py-2 text-sm font-bold text-slate-600 no-underline shadow-sm transition-colors hover:border-red-200 hover:text-red-600"
-                  >
-                    {t('nav.compare')}
-                  </a>
-                </nav>
-              </div>
+            <div className="mx-auto w-full max-w-6xl">
+              <section className="grid items-center gap-10 pb-12 pt-6 md:grid-cols-[1.05fr_0.95fr] md:gap-14 md:pb-20 md:pt-12">
+                <div>
+                  <p className="text-[11px] font-semibold uppercase tracking-[0.14em] text-red-600">{TAX_YEAR} · CRA T4032</p>
+                  <h1 className="mt-3 font-display text-[2.6rem] font-semibold leading-[1.04] tracking-[-0.015em] text-ink md:text-[3.75rem]">
+                    {t('brand.tagline')}
+                  </h1>
+                  <p className="mt-5 max-w-md text-lg leading-8 text-ink-3">{t('home.subtitle')}</p>
 
-              <section className="flex flex-1 items-center justify-center py-4 md:py-8">
-                <div className="w-full max-w-xl rounded-[2rem] border border-slate-200 bg-white p-5 text-center shadow-xl shadow-slate-200/80 sm:p-7 md:max-w-5xl md:p-8 lg:p-10">
-                  <div className="grid gap-7 md:grid-cols-[0.85fr_1.15fr] md:items-center md:gap-10">
-                    <div className="flex flex-col items-center md:items-start md:text-left">
-                      <img src="/logo.png" alt="" aria-hidden="true" className="h-16 w-16 rounded-2xl object-contain shadow-lg shadow-red-100 sm:h-20 sm:w-20 md:h-24 md:w-24" />
-                      <h1 className="mt-4 text-3xl font-bold tracking-tight text-slate-950 sm:text-4xl md:text-5xl">
-                        <span className="font-brand font-extrabold tracking-tight">CanPay</span> <span className="font-brand font-normal tracking-tight text-red-600">Insights</span>
-                      </h1>
-                      <p className="mt-2 text-base font-semibold text-slate-500 md:text-lg">
-                        {t('brand.tagline')}
-                      </p>
-                      <p className="mt-5 hidden max-w-sm text-base font-medium leading-7 text-slate-500 md:block">
-                        {t('home.subtitle')}
-                      </p>
-                    </div>
-
-                    <div className="md:rounded-3xl md:border md:border-slate-100 md:bg-slate-50 md:p-4">
-                      <ModeSelector onModeSelect={handleModeSelect} />
-                    </div>
+                  <div className="mt-8 max-w-lg">
+                    <ModeSelector onModeSelect={handleModeSelect} />
                   </div>
 
-                  <div className="mt-5 grid grid-cols-1 gap-3 rounded-2xl bg-slate-50 p-3 sm:grid-cols-2 md:ml-auto md:max-w-[34rem]">
-                    <a
-                      href={DONATION_URL}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="inline-flex min-h-11 items-center justify-center gap-2 rounded-full bg-[#FFDD00] px-4 py-2.5 text-sm font-bold text-slate-900 no-underline shadow-sm transition-all hover:bg-[#FFEA00] hover:shadow-md"
-                    >
-                      <span className="text-lg" aria-hidden="true">☕</span>
-                      <span>Buy me a double-double</span>
-                    </a>
+                  <div className="mt-6 flex flex-wrap items-center gap-3">
                     <a
                       href="https://apps.apple.com/app/canpayinsights/id6759822038"
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="inline-flex min-h-11 items-center justify-center gap-2 rounded-full bg-slate-950 px-4 py-2.5 text-sm font-bold text-white no-underline shadow-sm transition-all hover:bg-slate-800 hover:shadow-md"
+                      className="inline-flex min-h-11 items-center justify-center gap-2 rounded-xl bg-ink px-4 py-2.5 text-sm font-semibold text-white no-underline transition-colors hover:bg-ink-2"
                     >
                       <svg className="h-5 w-5" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
                         <path d="M17.05 20.28c-.98.95-2.05.88-3.08.4-1.09-.5-2.08-.48-3.24 0-1.44.62-2.2.44-3.06-.4C2.79 15.25 3.51 7.59 9.05 7.31c1.35.07 2.29.74 3.08.74s1.79-.75 3.16-.64c1.35.1 2.47.69 3.18 1.8-2.88 1.45-2.38 5.13.58 6.13-.57 1.5-1.31 2.99-2.54 4.09zM12.03 7.25c-.15-2.23 1.66-4.07 3.74-4.25.29 2.58-2.34 4.5-3.74 4.25z"/>
                       </svg>
                       <span>App Store</span>
                     </a>
+                    <a
+                      href={DONATION_URL}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex min-h-11 items-center justify-center gap-2 rounded-xl border border-line bg-white px-4 py-2.5 text-sm font-semibold text-ink no-underline transition-colors hover:border-ink-5"
+                    >
+                      <span aria-hidden="true">☕</span>
+                      <span>Buy me a double-double</span>
+                    </a>
                   </div>
+                </div>
+
+                <div className="md:pl-4">
+                  <HomeExample
+                    base={DEFAULT_ANNUAL_INPUTS}
+                    onTry={() => {
+                      setAnnualInputs({ ...DEFAULT_ANNUAL_INPUTS, province: Province.ON, annualSalary: 60000, payFrequency: PayFrequency.BI_WEEKLY });
+                      handleModeSelect(CalculationMode.ANNUAL);
+                    }}
+                  />
                 </div>
               </section>
 
-              {/* Sister site — U.S. edition, honest same-team recommendation */}
-              {/* Same width as the hero card above — at full container width it
-                  read as a banner from somewhere else rather than part of the page. */}
-              <div className="mx-auto mt-6 w-full max-w-xl md:max-w-5xl">
+              {/* Sister site — U.S. edition, honest same-team recommendation. It keeps its own brand colours. */}
+              <div className="mb-4">
                 <SisterSiteCard />
               </div>
             </div>
@@ -624,15 +582,15 @@ const App: React.FC = () => {
 
                 {/* Sign In Prompt in Calculator */}
                 {!isAuthenticated && (
-                  <div className="mt-6 bg-gradient-to-br from-red-50 to-red-100 rounded-xl p-4 border border-red-200">
+                  <div className="mt-6 rounded-2xl border border-line bg-white p-5">
                     <div className="flex items-start gap-3">
-                      <div className="w-10 h-10 bg-white rounded-lg flex items-center justify-center flex-shrink-0 shadow-sm">
+                      <div className="w-10 h-10 bg-pearl rounded-xl flex items-center justify-center flex-shrink-0">
                         <svg className="w-5 h-5 text-red-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7H5a2 2 0 00-2 2v9a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2h-3m-1 4l-3 3m0 0l-3-3m3 3V4" />
                         </svg>
                       </div>
                       <div className="flex-1">
-                        <h3 className="font-bold text-slate-800 mb-1">{t('auth.cardTitle')}</h3>
+                        <h3 className="font-display text-lg font-semibold text-ink mb-1">{t('auth.cardTitle')}</h3>
                         <p className="text-sm text-slate-600 mb-3">
                           {t('auth.cardDesc')}
                         </p>
@@ -666,8 +624,8 @@ const App: React.FC = () => {
                     onClick={handleSaveCalculation}
                     className={`flex items-center gap-2 px-4 py-2 rounded-lg transition-all text-sm font-medium ${
                       saveSuccess
-                        ? 'bg-green-100 text-green-700'
-                        : 'btn-brand-3d text-white'
+                        ? 'border border-line bg-white text-ink'
+                        : 'border border-line bg-white text-ink hover:border-ink-5'
                     }`}
                   >
                     {saveSuccess ? (
@@ -773,169 +731,7 @@ const App: React.FC = () => {
           )}
       </main>
 
-      {/* Footer */}
-      {currentPage === 'home' && (
-        <footer className="pb-8 text-center text-xs text-slate-500" role="contentinfo">
-          <div className="flex flex-wrap items-center justify-center gap-x-4 gap-y-2">
-            <span>© CanPay Insights</span>
-            <a href="/about" className="text-slate-500 no-underline transition-colors hover:text-red-600">
-              About
-            </a>
-            <a href="/contact" className="text-slate-500 no-underline transition-colors hover:text-red-600">
-              Contact
-            </a>
-            <a href="/privacy" className="text-slate-500 no-underline transition-colors hover:text-red-600">
-              Privacy
-            </a>
-            <a href="/affiliate-disclosure" className="text-slate-500 no-underline transition-colors hover:text-red-600">
-              Disclosure
-            </a>
-            <a href="/terms" className="text-slate-500 no-underline transition-colors hover:text-red-600">
-              Terms
-            </a>
-            <a href="/refunds" className="text-slate-500 no-underline transition-colors hover:text-red-600">
-              Refunds
-            </a>
-            <a href="/link-to-canpay" className="text-slate-500 no-underline transition-colors hover:text-red-600">
-              Link to Us
-            </a>
-            <a href="/wages" className="text-slate-500 no-underline transition-colors hover:text-red-600">
-              Wages by industry
-            </a>
-            <a href="/widget" className="text-slate-500 no-underline transition-colors hover:text-red-600">
-              Embed this calculator
-            </a>
-            <a href="/changelog" className="text-slate-500 no-underline transition-colors hover:text-red-600">
-              Changelog
-            </a>
-          </div>
-          {/* Every calculator page, linked from the page Google crawls most.
-              On 2026-09-15 URL Inspection reported /bc-paycheck-calculator,
-              /cpp-ei-calculator and /timesheet-tracker as "unknown to Google"
-              after four months in the sitemap: nothing linked to them. */}
-          <nav aria-label="Calculators" className="mt-4 flex flex-wrap items-center justify-center gap-x-3 gap-y-1">
-            <span className="text-slate-500">Calculators:</span>
-            {[
-              ['/ontario-paycheck-calculator', 'Ontario'], ['/bc-paycheck-calculator', 'BC'], ['/alberta-paycheck-calculator', 'Alberta'],
-              ['/quebec-paycheck-calculator', 'Quebec'], ['/compare-provinces', 'All provinces'],
-              ['/hourly-wage-calculator', 'Hourly wage'], ['/salary-calculator', 'Salary'], ['/cpp-ei-calculator', 'CPP & EI'],
-              ['/timesheet-tracker', 'Timesheet'], ['/salary-after-tax-canada', 'Salary after tax'],
-            ].map(([href, label]) => (
-              <a key={href} href={href} className="text-slate-500 no-underline transition-colors hover:text-red-600">{label}</a>
-            ))}
-          </nav>
-          <p className="mt-3">
-            <AvowdCredit />
-          </p>
-        </footer>
-      )}
-
-      {currentPage === 'calculator' && (
-        <footer className="text-center text-slate-500 text-xs py-8 space-y-4" role="contentinfo">
-          <p>Calculations are estimates based on 2025/2026 tax brackets and provincial employment standards.</p>
-          
-          {/* Buy Me a Coffee + App Store */}
-          <div className="flex flex-wrap justify-center items-center gap-3">
-            <a 
-              href={DONATION_URL}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="flex items-center gap-2 bg-[#FFDD00] text-slate-900 px-6 py-2.5 rounded-full font-bold shadow-md hover:bg-[#FFEA00] hover:shadow-lg transition-all transform hover:-translate-y-1 group decoration-none"
-            >
-              <span className="text-xl group-hover:rotate-12 transition-transform duration-300">☕</span>
-              <span>Buy me a double-double</span>
-            </a>
-            <a
-              href="https://apps.apple.com/app/canpayinsights/id6759822038"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="flex items-center gap-2 bg-black text-white px-5 py-2.5 rounded-full font-semibold shadow-md hover:bg-slate-800 hover:shadow-lg transition-all transform hover:-translate-y-1 decoration-none"
-            >
-              <svg className="w-5 h-5" viewBox="0 0 24 24" fill="currentColor">
-                <path d="M17.05 20.28c-.98.95-2.05.88-3.08.4-1.09-.5-2.08-.48-3.24 0-1.44.62-2.2.44-3.06-.4C2.79 15.25 3.51 7.59 9.05 7.31c1.35.07 2.29.74 3.08.74s1.79-.75 3.16-.64c1.35.1 2.47.69 3.18 1.8-2.88 1.45-2.38 5.13.58 6.13-.57 1.5-1.31 2.99-2.54 4.09zM12.03 7.25c-.15-2.23 1.66-4.07 3.74-4.25.29 2.58-2.34 4.5-3.74 4.25z"/>
-              </svg>
-              <span>Download on App Store</span>
-            </a>
-          </div>
-
-          {/* Quick Links */}
-          <div className="flex flex-wrap justify-center items-center gap-x-6 gap-y-2 mt-4">
-            <a
-              href="/blog"
-              className="text-slate-500 hover:text-red-600 transition-colors"
-            >
-              Insights Hub
-            </a>
-            <a
-              href="/compare-provinces"
-              className="text-slate-500 hover:text-red-600 transition-colors"
-            >
-              Compare Provinces
-            </a>
-            <a
-              href="/about"
-              className="text-slate-500 hover:text-red-600 transition-colors"
-            >
-              About
-            </a>
-            <a
-              href="/contact"
-              className="text-slate-500 hover:text-red-600 transition-colors"
-            >
-              Contact
-            </a>
-            <a
-              href="/privacy"
-              className="text-slate-500 hover:text-red-600 transition-colors"
-            >
-              Privacy Policy
-            </a>
-            <a
-              href="/affiliate-disclosure"
-              className="text-slate-500 hover:text-red-600 transition-colors"
-            >
-              Affiliate Disclosure
-            </a>
-            <a
-              href="/terms"
-              className="text-slate-500 hover:text-red-600 transition-colors"
-            >
-              Terms of Service
-            </a>
-            <a
-              href="/refunds"
-              className="text-slate-500 hover:text-red-600 transition-colors"
-            >
-              Refund Policy
-            </a>
-            <a
-              href="/link-to-canpay"
-              className="text-slate-500 hover:text-red-600 transition-colors"
-            >
-              Link to Us
-            </a>
-          </div>
-          
-          <div className="mt-2 flex justify-center gap-2">
-            <span className="w-2 h-2 rounded-full bg-red-400 opacity-50"></span>
-            <span className="w-2 h-2 rounded-full bg-red-400 opacity-50"></span>
-            <span className="w-2 h-2 rounded-full bg-red-400 opacity-50"></span>
-          </div>
-          
-          <p className="mt-4">Proudly Canadian <Icon name="maple" size={14} /> Built for Workers.</p>
-
-          <p className="mt-3">
-            <AvowdCredit />
-          </p>
-
-          {/* A second switcher at the end of the page: someone who has read to
-              the bottom in the wrong language should not have to scroll back up
-              to change it. */}
-          <div className="mt-6 flex justify-center">
-            <LanguageSwitcher />
-          </div>
-        </footer>
-      )}
+      {/* The shared footer is rendered by app/page.tsx, after the home page's reference sections. */}
 
       {/* Auth Modal */}
       <AuthModal

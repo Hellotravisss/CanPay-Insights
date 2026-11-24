@@ -8,7 +8,8 @@ import {
   annualFromHourly,
 } from '../../../lib/provincialWages';
 import { getSalaryFigures } from '../../../lib/salaryFigures';
-import { WageHeader, WageFooter } from '../WageChrome';
+import { WageHeader, WageFooter, chipClass } from '../WageChrome';
+import { PageHero, Card, Stat, ButtonLink } from '@/components/site/ui';
 import PayDonut from '../PayDonut';
 
 // One page per industry × province, built entirely from Statistics Canada's
@@ -136,46 +137,40 @@ export default async function IndustryProvincePage({ params }: Props) {
     })),
   };
 
+  const h2 = 'font-display text-2xl font-semibold leading-tight text-ink md:text-[2rem]';
+
   return (
-    <div className="min-h-screen bg-slate-50 font-sans">
+    <div className="min-h-screen bg-pearl font-sans">
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
       <WageHeader />
-      <main className="mx-auto max-w-3xl px-4 py-10">
-        <p className="text-xs font-bold uppercase tracking-[0.18em] text-red-600">
-          {province} · {WAGE_DATA_YEAR} wage data
-        </p>
-        <h1 className="mt-2 text-3xl font-bold leading-tight text-slate-900 md:text-4xl">
-          {industry} salary in {province}: what you actually take home
-        </h1>
+      <main className="mx-auto max-w-3xl px-4 pb-16" role="main">
+        <PageHero
+          eyebrow={<>{province} · {WAGE_DATA_YEAR} wage data</>}
+          title={<>{industry} salary in {province}: what you actually take home</>}
+          lead={
+            /* Answer-first paragraph: the whole point in the first 40 words. */
+            <>
+              The median full-time {industry.toLowerCase()} wage in {province} is{' '}
+              <strong className="font-semibold text-ink">${hourly.toFixed(2)} an hour</strong>, about <strong className="font-semibold text-ink">{money(annual)} a year</strong>{' '}
+              before tax.
+              {' '}After federal tax, {province} tax, CPP and EI, that leaves roughly{' '}
+              <strong className="font-semibold text-ink">{money(figures.netAnnual)} a year</strong> — {money(figures.netMonthly)} a month, or{' '}
+              {money(figures.netBiWeekly)} on a bi-weekly paycheque.
+            </>
+          }
+        />
 
-        {/* Answer-first paragraph: the whole point in the first 40 words. */}
-        <p className="mt-4 text-lg leading-8 text-slate-700">
-          The median full-time {industry.toLowerCase()} wage in {province} is{' '}
-          <strong>${hourly.toFixed(2)} an hour</strong>, about <strong>{money(annual)} a year</strong>{' '}
-          before tax.
-          {' '}After federal tax, {province} tax, CPP and EI, that leaves roughly{' '}
-          <strong>{money(figures.netAnnual)} a year</strong> — {money(figures.netMonthly)} a month, or{' '}
-          {money(figures.netBiWeekly)} on a bi-weekly paycheque.
-        </p>
-
-        <div className="mt-8 grid grid-cols-2 gap-3 md:grid-cols-4">
-          {[
-            { l: 'Gross salary', v: money(annual), tone: 'bg-slate-900 text-white' },
-            { l: 'Take-home', v: money(figures.netAnnual), tone: 'bg-emerald-700 text-white' },
-            { l: 'Total deductions', v: money(annual - figures.netAnnual), tone: 'bg-red-700 text-white' },
-            { l: 'Per month', v: money(figures.netMonthly), tone: 'bg-white text-slate-900 ring-1 ring-slate-200' },
-          ].map((s) => (
-            <div key={s.l} className={`rounded-2xl p-4 shadow-sm ${s.tone}`}>
-              <div className="text-xl font-bold tabular-nums md:text-2xl">{s.v}</div>
-              <div className="mt-1 text-xs">{s.l}</div>
-            </div>
-          ))}
+        <div className="grid grid-cols-2 gap-3 md:grid-cols-4">
+          <Stat label="Gross salary" value={money(annual)} />
+          <Stat label="Take-home" value={money(figures.netAnnual)} tone="kept" />
+          <Stat label="Total deductions" value={money(annual - figures.netAnnual)} />
+          <Stat label="Per month" value={money(figures.netMonthly)} />
         </div>
 
         {/* Where the money goes */}
-        <section className="mt-8 rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
-          <h2 className="mb-1 text-lg font-bold text-slate-900">Where the money goes</h2>
-          <p className="mb-5 text-sm text-slate-500">
+        <Card as="section" className="mt-6 p-6 md:p-8">
+          <h2 className="mb-1 font-display text-xl font-semibold text-ink md:text-2xl">Where the money goes</h2>
+          <p className="mb-6 text-sm text-mute">
             Every dollar of that {money(annual)}, split between what you keep and what is deducted.
           </p>
           <PayDonut
@@ -187,46 +182,48 @@ export default async function IndustryProvincePage({ params }: Props) {
             ei={figures.eiPremium}
             provinceLabel={province}
           />
-        </section>
+        </Card>
 
-        <h2 className="mt-12 text-2xl font-bold text-slate-900">
+        <h2 className={`mt-14 ${h2}`}>
           How {province} compares for {industry.toLowerCase()} workers
         </h2>
-        <p className="mt-2 leading-7 text-slate-600">
+        <p className="mt-3 leading-7 text-ink-3">
           Same job, same sector, different province — and different take-home pay, because each
           province sets its own tax brackets. This table takes the median full-time wage in each
           province and runs it through the 2026 tax rules.
         </p>
-        <div className="mt-4 overflow-x-auto">
-          <table className="w-full border-collapse text-left text-sm">
+        <Card className="mt-6 overflow-x-auto px-3 py-2 sm:px-6">
+          <table className="w-full border-collapse text-left text-[13px] sm:text-sm">
             <thead>
-              <tr className="border-b-2 border-slate-300 text-slate-900">
-                <th className="py-2 pr-4 font-bold">Province</th>
-                <th className="py-2 pr-4 font-bold">Median wage</th>
-                <th className="py-2 pr-4 font-bold">Gross year</th>
-                <th className="py-2 font-bold">Take-home</th>
+              <tr className="border-b border-ink-5 text-[11px] uppercase tracking-[0.12em] text-mute">
+                <th scope="col" className="py-3 pr-2 font-semibold sm:pr-4">Province</th>
+                <th scope="col" className="py-3 pr-2 text-right font-semibold sm:pr-4">Median wage</th>
+                <th scope="col" className="py-3 pr-2 text-right font-semibold sm:pr-4">Gross year</th>
+                <th scope="col" className="py-3 text-right font-semibold">Take-home</th>
               </tr>
             </thead>
-            <tbody className="text-slate-600">
+            <tbody className="divide-y divide-line text-ink-2">
               {acrossProvinces.map((r) => {
                 const top = acrossProvinces[0].net;
+                const current = r.code === combo.province;
                 return (
                   <tr
                     key={r.code}
-                    className={`border-b border-slate-200 ${r.code === combo.province ? 'bg-red-50 font-semibold text-slate-900' : ''}`}
+                    aria-current={current ? 'true' : undefined}
+                    className={current ? 'bg-pearl-soft font-semibold text-ink' : ''}
                   >
-                    <td className="py-2.5 pr-4 whitespace-nowrap">{PROVINCE_LABELS[r.code]}</td>
-                    <td className="py-2.5 pr-4 tabular-nums">${r.wage.toFixed(2)}/hr</td>
-                    <td className="py-2.5 pr-4 tabular-nums">{money(r.annual)}</td>
-                    <td className="py-2.5">
-                      <div className="flex items-center gap-2">
-                        <div className="h-2 w-24 shrink-0 rounded-full bg-slate-100">
+                    <td className={`py-3 pr-2 sm:pr-4 sm:whitespace-nowrap ${current ? 'pl-2 shadow-[inset_2px_0_0_#C8161A]' : ''}`}>{PROVINCE_LABELS[r.code]}</td>
+                    <td className="py-3 pr-2 text-right tabular-nums whitespace-nowrap sm:pr-4">${r.wage.toFixed(2)}/hr</td>
+                    <td className="py-3 pr-2 text-right tabular-nums sm:pr-4">{money(r.annual)}</td>
+                    <td className="py-3">
+                      <div className="flex items-center justify-end gap-3">
+                        <div className="hidden h-1.5 w-20 shrink-0 rounded-full bg-pearl sm:block" aria-hidden="true">
                           <div
-                            className={`h-2 rounded-full ${r.code === combo.province ? 'bg-red-600' : 'bg-emerald-500'}`}
+                            className={`h-1.5 rounded-full ${current ? 'bg-red-600' : 'bg-ink-2'}`}
                             style={{ width: `${Math.round((r.net / top) * 100)}%` }}
                           />
                         </div>
-                        <span className="tabular-nums">{money(r.net)}</span>
+                        <span className={`tabular-nums ${current ? 'text-red-600' : ''}`}>{money(r.net)}</span>
                       </div>
                     </td>
                   </tr>
@@ -234,63 +231,60 @@ export default async function IndustryProvincePage({ params }: Props) {
               })}
             </tbody>
           </table>
-        </div>
+        </Card>
 
-        <h2 className="mt-12 text-2xl font-bold text-slate-900">Where this sits against other work</h2>
-        <p className="mt-2 leading-7 text-slate-600">
+        <h2 className={`mt-14 ${h2}`}>Where this sits against other work</h2>
+        <p className="mt-3 leading-7 text-ink-2">
           Across all industries in {province}, the median full-time wage is $
           {allIndustryHourly.toFixed(2)} an hour. {industry} therefore pays{' '}
           {vsAllIndustries >= 0 ? (
             <>
-              <strong>${vsAllIndustries.toFixed(2)} an hour more</strong> than the typical {province}{' '}
+              <strong className="font-semibold text-ink">${vsAllIndustries.toFixed(2)} an hour more</strong> than the typical {province}{' '}
               job — {money(Math.abs(annualFromHourly(vsAllIndustries)))} a year before tax.
             </>
           ) : (
             <>
-              <strong>${Math.abs(vsAllIndustries).toFixed(2)} an hour less</strong> than the typical{' '}
+              <strong className="font-semibold text-ink">${Math.abs(vsAllIndustries).toFixed(2)} an hour less</strong> than the typical{' '}
               {province} job — {money(Math.abs(annualFromHourly(vsAllIndustries)))} a year before tax.
             </>
           )}{' '}
           Nationally, this sector's median is ${nationalHourly.toFixed(2)} an hour.
         </p>
 
-        <div className="mt-10 rounded-2xl border border-red-200 bg-white p-6">
-          <h2 className="text-xl font-bold text-slate-900">Calculate your own pay</h2>
-          <p className="mt-2 text-sm leading-6 text-slate-600">
+        <Card className="mt-10 p-6 md:p-8">
+          <h2 className="font-display text-xl font-semibold text-ink md:text-2xl">Calculate your own pay</h2>
+          <p className="mt-2 text-sm leading-6 text-ink-3">
             These are medians — your own wage, overtime, RRSP contributions and benefits change the
             result. The calculator does the 2026 numbers for any salary or hourly rate, in every
             province and territory.
           </p>
-          <a
-            href="/"
-            className="mt-4 inline-block rounded-xl bg-red-600 px-5 py-3 font-bold text-white hover:bg-red-700"
-          >
+          <ButtonLink href="/" className="mt-5">
             Open the take-home pay calculator →
-          </a>
-        </div>
+          </ButtonLink>
+        </Card>
 
-        <h2 className="mt-12 text-2xl font-bold text-slate-900">Frequently asked questions</h2>
-        <div className="mt-2">
-          {faq.map((f, i) => (
-            <details key={f.q} className={`group border-t border-slate-200 ${i === faq.length - 1 ? 'border-b' : ''}`}>
-              <summary className="flex cursor-pointer list-none items-center justify-between py-4 text-base font-bold text-slate-800 marker:content-none [&::-webkit-details-marker]:hidden">
+        <h2 className={`mt-14 ${h2}`}>Frequently asked questions</h2>
+        <div className="mt-4 divide-y divide-line border-y border-line">
+          {faq.map((f) => (
+            <details key={f.q} className="group">
+              <summary className="flex cursor-pointer list-none items-center justify-between py-4 text-base font-semibold text-ink marker:content-none focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-red-600 [&::-webkit-details-marker]:hidden">
                 {f.q}
-                <span className="ml-3 text-slate-500 transition-transform group-open:rotate-90">›</span>
+                <span className="ml-3 text-mute transition-transform group-open:rotate-90" aria-hidden="true">›</span>
               </summary>
-              <p className="pb-5 leading-7 text-slate-600">{f.a}</p>
+              <p className="pb-5 leading-7 text-ink-2">{f.a}</p>
             </details>
           ))}
         </div>
 
-        <p className="mt-8 text-xs leading-5 text-slate-500">
+        <p className="mt-8 text-xs leading-5 text-mute">
           Wage figures: Statistics Canada, Table 14-10-0064-01, “Employee wages by industry, annual”,
           median hourly wage of full-time employees, {WAGE_DATA_YEAR}. Annualised at 2,080 hours.
           Take-home figures computed with the CanPay Insights 2026 tax engine (federal and provincial
           income tax, CPP/CPP2, EI) for a single employee with no additional credits.
         </p>
 
-        <nav className="mt-10 border-t border-slate-200 pt-6">
-          <h2 className="mb-3 text-sm font-bold text-slate-700">Other sectors in {province}</h2>
+        <nav className="mt-10 border-t border-line pt-6">
+          <h2 className="mb-3 text-sm font-semibold text-ink">Other sectors in {province}</h2>
           <div className="flex flex-wrap gap-2">
             {Object.keys(PROVINCIAL_WAGES)
               .filter((i) => i !== combo.industry && PROVINCIAL_WAGES[i]?.[combo.province])
@@ -298,13 +292,13 @@ export default async function IndustryProvincePage({ params }: Props) {
                 <a
                   key={i}
                   href={`/wages/${i}-wages-${PROVINCE_SLUGS[combo.province]}`}
-                  className="rounded-full bg-slate-100 px-3 py-1.5 text-xs font-medium text-slate-700 hover:bg-slate-200"
+                  className={chipClass}
                 >
                   {INDUSTRY_LABELS[i]}
                 </a>
               ))}
           </div>
-          <h2 className="mb-3 mt-6 text-sm font-bold text-slate-700">
+          <h2 className="mb-3 mt-6 text-sm font-semibold text-ink">
             {industry} in other provinces
           </h2>
           <div className="flex flex-wrap gap-2">
@@ -314,7 +308,7 @@ export default async function IndustryProvincePage({ params }: Props) {
                 <a
                   key={code}
                   href={`/wages/${combo.industry}-wages-${pslug}`}
-                  className="rounded-full bg-slate-100 px-3 py-1.5 text-xs font-medium text-slate-700 hover:bg-slate-200"
+                  className={chipClass}
                 >
                   {PROVINCE_LABELS[code]}
                 </a>

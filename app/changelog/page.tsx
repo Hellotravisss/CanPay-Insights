@@ -1,5 +1,7 @@
 import type { Metadata } from 'next';
-import AvowdCredit from '../../components/AvowdCredit';
+import SiteHeader from '../../components/site/SiteHeader';
+import SiteFooter from '../../components/site/SiteFooter';
+import { PageHero } from '../../components/site/ui';
 
 export const metadata: Metadata = {
   title: 'Changelog – What’s New',
@@ -244,34 +246,33 @@ const ENTRIES: { date: string; title: string; points: string[] }[] = [
 
 export default function ChangelogPage() {
   return (
-    <div className="min-h-screen bg-slate-50 font-sans">
-      <main className="mx-auto max-w-3xl px-4 py-12">
-        <a href="/" className="text-sm font-medium text-red-600 hover:text-red-700">← CanPay Insights</a>
-        <h1 className="mt-4 text-3xl font-bold text-slate-900">Changelog</h1>
-        <p className="mt-2 mb-10 text-slate-500">
-          Every meaningful update to the calculator, newest first. Built continuously since March 2026.
-        </p>
-        <ol className="relative space-y-10 border-l-2 border-slate-200 pl-6">
+    <div className="min-h-screen bg-pearl font-sans">
+      <SiteHeader lang="en" />
+      <main className="mx-auto max-w-3xl px-4" role="main">
+        <PageHero
+          title="Changelog"
+          lead="Every meaningful update to the calculator, newest first. Built continuously since March 2026."
+        />
+        <ol className="relative space-y-6 border-l border-line pl-6 md:pl-8">
           {ENTRIES.map((e) => (
             <li key={e.date + e.title} className="relative">
-              <span className="absolute -left-[31px] top-1.5 h-3 w-3 rounded-full border-2 border-white bg-red-600" />
-              <time dateTime={e.date} className="text-xs font-semibold uppercase tracking-wide text-slate-500">
-                {e.date}
-              </time>
-              <h2 className="mt-1 text-lg font-bold text-slate-800">{e.title}</h2>
-              <ul className="mt-2 list-disc space-y-1 pl-5 text-sm leading-6 text-slate-600">
-                {e.points.map((p) => (
-                  <li key={p}>{p}</li>
-                ))}
-              </ul>
+              <span aria-hidden="true" className="absolute -left-[29px] top-6 h-2.5 w-2.5 rounded-full bg-red-600 ring-4 ring-pearl md:-left-[37px]" />
+              <article className="rounded-2xl border border-line bg-white p-5 md:p-6">
+                <time dateTime={e.date} className="text-[11px] font-semibold uppercase tracking-[0.14em] tabular-nums text-mute">
+                  {e.date}
+                </time>
+                <h2 className="mt-1.5 font-display text-xl font-semibold leading-snug text-ink">{e.title}</h2>
+                <ul className="mt-3 list-disc space-y-1.5 pl-5 text-sm leading-6 text-ink-2 marker:text-ink-5">
+                  {e.points.map((p) => (
+                    <li key={p}>{p}</li>
+                  ))}
+                </ul>
+              </article>
             </li>
           ))}
         </ol>
-
-      <footer className="mx-auto max-w-5xl px-4 pb-10 pt-6 text-center text-xs text-slate-500" role="contentinfo">
-        <p>© CanPay Insights · <AvowdCredit /></p>
-      </footer>
       </main>
+      <SiteFooter lang="en" />
     </div>
   );
 }

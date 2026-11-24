@@ -124,7 +124,7 @@ const AuthModal: React.FC<Props> = ({
         {/* Close button */}
         <button
           onClick={onClose}
-          className="absolute top-4 right-4 text-slate-500 hover:text-slate-600 transition-colors"
+          className="absolute top-4 right-4 text-mute hover:text-ink-3 transition-colors"
           aria-label="Close"
         >
           <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -142,28 +142,28 @@ const AuthModal: React.FC<Props> = ({
         </div>
 
         {/* Content */}
-        <h2 className="text-2xl font-bold text-slate-900 text-center mb-2">
+        <h2 className="text-2xl font-bold text-ink text-center mb-2">
           {t('auth.title')}
         </h2>
 
-        <p className="text-slate-600 text-center mb-6 leading-relaxed">
+        <p className="text-ink-3 text-center mb-6 leading-relaxed">
           {message || t('auth.defaultMsg')}
         </p>
 
         {/* Benefits */}
-        <div className="bg-slate-50 rounded-xl p-4 mb-6 space-y-3">
+        <div className="bg-pearl-soft rounded-xl p-4 mb-6 space-y-3">
           {[
             { title: t('auth.benefit1t'), desc: t('auth.benefit1d') },
             { title: t('auth.benefit2t'), desc: t('auth.benefit2d') },
             { title: t('auth.benefit3t'), desc: t('auth.benefit3d') },
           ].map(({ title, desc }) => (
             <div key={title} className="flex items-start gap-3">
-              <svg className="w-5 h-5 text-green-600 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+              <svg className="w-5 h-5 text-red-600 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
                 <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
               </svg>
               <div>
-                <p className="text-sm font-semibold text-slate-800">{title}</p>
-                <p className="text-xs text-slate-600">{desc}</p>
+                <p className="text-sm font-semibold text-ink">{title}</p>
+                <p className="text-xs text-ink-3">{desc}</p>
               </div>
             </div>
           ))}
@@ -172,19 +172,19 @@ const AuthModal: React.FC<Props> = ({
         {emailSent ? (
           /* Magic-link success state */
           <div className="text-center py-4">
-            <div className="w-12 h-12 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-3">
-              <svg className="w-6 h-6 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <div className="w-12 h-12 bg-red-50 rounded-full flex items-center justify-center mx-auto mb-3">
+              <svg className="w-6 h-6 text-red-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7" />
               </svg>
             </div>
-            <p className="font-semibold text-slate-800 mb-1">{t('auth.checkEmail')}</p>
-            <p className="text-sm text-slate-600">
+            <p className="font-semibold text-ink mb-1">{t('auth.checkEmail')}</p>
+            <p className="text-sm text-ink-3">
               {t('auth.linkSent')} <span className="font-medium">{email}</span>.<br />
               {t('auth.linkNoPw')}
             </p>
             <button
               onClick={() => { setEmailSent(false); }}
-              className="mt-4 text-sm text-slate-500 hover:text-slate-700 underline"
+              className="mt-4 text-sm text-mute hover:text-ink-2 underline"
             >
               {t('auth.backToSignin')}
             </button>
@@ -198,7 +198,7 @@ const AuthModal: React.FC<Props> = ({
               <>
                 <button
                   onClick={() => onSignIn('apple')}
-                  className="w-full bg-black hover:bg-gray-900 text-white font-semibold py-3 px-4 rounded-lg transition-all flex items-center justify-center gap-3 hover:shadow-md active:scale-[0.98]"
+                  className="w-full bg-black hover:bg-ink text-white font-semibold py-3 px-4 rounded-lg transition-all flex items-center justify-center gap-3 hover:shadow-md active:scale-[0.98]"
                 >
                   <svg className="w-5 h-5" viewBox="0 0 24 24" fill="currentColor">
                     <path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/>
@@ -208,7 +208,7 @@ const AuthModal: React.FC<Props> = ({
 
                 <button
                   onClick={() => onSignIn('google')}
-                  className="w-full mt-3 bg-white hover:bg-gray-50 border border-slate-200 text-slate-700 font-semibold py-3 px-4 rounded-lg transition-all flex items-center justify-center gap-3 hover:shadow-md active:scale-[0.98]"
+                  className="w-full mt-3 bg-white hover:bg-pearl-soft border border-line text-ink-2 font-semibold py-3 px-4 rounded-lg transition-all flex items-center justify-center gap-3 hover:shadow-md active:scale-[0.98]"
                 >
                   <svg className="w-5 h-5" viewBox="0 0 24 24">
                     <path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/>
@@ -221,10 +221,10 @@ const AuthModal: React.FC<Props> = ({
 
                 <div className="relative my-4">
                   <div className="absolute inset-0 flex items-center">
-                    <div className="w-full border-t border-slate-200"></div>
+                    <div className="w-full border-t border-line"></div>
                   </div>
                   <div className="relative flex justify-center text-xs uppercase">
-                    <span className="bg-white px-2 text-slate-500">{t('auth.or')}</span>
+                    <span className="bg-white px-2 text-mute">{t('auth.or')}</span>
                   </div>
                 </div>
               </>
@@ -239,7 +239,7 @@ const AuthModal: React.FC<Props> = ({
                 placeholder={t('auth.emailPlaceholder')}
                 autoComplete="email"
                 required
-                className="w-full border border-slate-200 rounded-lg py-3 px-4 text-sm text-slate-800 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-red-400 focus:border-transparent"
+                className="w-full border border-line rounded-lg py-3 px-4 text-sm text-ink placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-red-400 focus:border-transparent"
               />
               <input
                 type="password"
@@ -249,14 +249,14 @@ const AuthModal: React.FC<Props> = ({
                 autoComplete={pwMode === 'signin' ? 'current-password' : 'new-password'}
                 required
                 minLength={6}
-                className="w-full border border-slate-200 rounded-lg py-3 px-4 text-sm text-slate-800 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-red-400 focus:border-transparent"
+                className="w-full border border-line rounded-lg py-3 px-4 text-sm text-ink placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-red-400 focus:border-transparent"
               />
               {pwError && <p className="text-xs text-red-500">{pwError}</p>}
-              {pwNotice && <p className="text-xs text-green-600">{pwNotice}</p>}
+              {pwNotice && <p className="text-xs text-red-600">{pwNotice}</p>}
               <button
                 type="submit"
                 disabled={pwLoading || !email.trim() || !password.trim()}
-                className="w-full bg-red-500 hover:bg-red-600 disabled:bg-slate-300 text-white font-semibold py-3 px-4 rounded-lg transition-all hover:shadow-md active:scale-[0.98] disabled:cursor-not-allowed"
+                className="w-full bg-red-500 hover:bg-red-600 disabled:bg-ink-5 text-white font-semibold py-3 px-4 rounded-lg transition-all hover:shadow-md active:scale-[0.98] disabled:cursor-not-allowed"
               >
                 {pwLoading
                   ? t('auth.pleaseWait')
@@ -272,7 +272,7 @@ const AuthModal: React.FC<Props> = ({
                 setPwError('');
                 setPwNotice('');
               }}
-              className="w-full mt-3 text-sm text-slate-500 hover:text-slate-700"
+              className="w-full mt-3 text-sm text-mute hover:text-ink-2"
             >
               {pwMode === 'signin'
                 ? t('auth.noAccount')
@@ -286,20 +286,20 @@ const AuthModal: React.FC<Props> = ({
         {/* Divider */}
         <div className="relative my-5">
           <div className="absolute inset-0 flex items-center">
-            <div className="w-full border-t border-slate-200"></div>
+            <div className="w-full border-t border-line"></div>
           </div>
         </div>
 
         {/* Continue without sign in */}
         <button
           onClick={onClose}
-          className="w-full text-slate-500 hover:text-slate-700 text-sm font-medium transition-colors"
+          className="w-full text-mute hover:text-ink-2 text-sm font-medium transition-colors"
         >
           {t('auth.continueWithout')}
         </button>
 
         {/* Privacy note */}
-        <p className="text-xs text-slate-500 text-center mt-4">
+        <p className="text-xs text-mute text-center mt-4">
           {t('auth.privacy')}
         </p>
       </div>

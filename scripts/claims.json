@@ -1282,7 +1282,7 @@
   },
   {
    "page": "/widget",
-   "text": "← CanPay Insights Add a free take-home pay calculator to your website",
+   "text": "Add a free take-home pay calculator to your website",
    "backing": "not-a-claim"
   },
   {
@@ -2145,6 +2145,11 @@
    "backing": "manual",
    "note": "Remittance split in lib/employerPayroll.ts (remitQuebec = Quebec tax + QPP/QPP2 + QPIP, both shares; remitCra = federal tax + EI). Revenu Québec collects source deductions incl. HSF (Revenu Québec employer guide TP-1015.G). Not computed here, as stated.",
    "reviewed": "2026-10-26"
+  },
+  {
+   "page": "/",
+   "text": "App Store ☕ Buy me a double-double",
+   "backing": "not-a-claim"
   }
  ]
 }

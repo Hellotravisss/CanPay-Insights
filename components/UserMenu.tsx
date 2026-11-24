@@ -121,8 +121,8 @@ const UserMenu: React.FC<UserMenuProps> = ({ onSwitchToTimesheet, onLoadCalculat
   // Loading state
   if (loading) {
     return (
-      <div className="flex items-center gap-2 px-4 py-2 text-slate-500">
-        <div className="w-5 h-5 border-2 border-slate-300 border-t-red-600 rounded-full animate-spin"></div>
+      <div className="flex items-center gap-2 px-4 py-2 text-mute">
+        <div className="w-5 h-5 border-2 border-ink-5 border-t-red-600 rounded-full animate-spin"></div>
         <span className="text-sm">Loading...</span>
       </div>
     );
@@ -135,14 +135,12 @@ const UserMenu: React.FC<UserMenuProps> = ({ onSwitchToTimesheet, onLoadCalculat
         <button
           onClick={() => setShowAuthModal(true)}
           aria-label={t('nav.signIn')}
-          className={`flex items-center justify-center gap-2 py-2 btn-brand-3d text-white rounded-lg text-sm font-medium ${
-            scrolled ? 'px-2.5 sm:px-4' : 'px-4'
-          }`}
+          className="flex h-9 min-w-9 items-center justify-center gap-2 rounded-lg border border-line bg-white px-2.5 text-sm font-semibold text-ink transition-colors hover:border-ink-5 sm:px-3.5"
         >
           <svg className="w-4 h-4 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
           </svg>
-          <span className={scrolled ? 'hidden sm:inline' : ''}>{t('nav.signIn')}</span>
+          <span className="hidden sm:inline">{t('nav.signIn')}</span>
         </button>
 
         <AuthModal
@@ -206,7 +204,7 @@ const UserMenu: React.FC<UserMenuProps> = ({ onSwitchToTimesheet, onLoadCalculat
         {/* User Avatar Button */}
         <button
           onClick={() => setIsOpen(!isOpen)}
-          className="flex items-center gap-2 px-3 py-2 bg-slate-100 hover:bg-slate-200 rounded-lg transition-all"
+          className="flex items-center gap-2 px-3 py-2 bg-pearl hover:bg-pearl-shade rounded-lg transition-all"
         >
           {avatar ? (
             <img 
@@ -219,14 +217,14 @@ const UserMenu: React.FC<UserMenuProps> = ({ onSwitchToTimesheet, onLoadCalculat
               {initials}
             </div>
           )}
-          <svg className={`w-4 h-4 text-slate-600 transition-transform ${isOpen ? 'rotate-180' : ''}`} fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <svg className={`w-4 h-4 text-ink-3 transition-transform ${isOpen ? 'rotate-180' : ''}`} fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 9l-7 7-7-7" />
           </svg>
         </button>
 
         {/* Dropdown Menu */}
         {isOpen && (
-          <div className="absolute right-0 mt-2 w-64 bg-white rounded-xl shadow-xl border border-slate-200 overflow-hidden z-50">
+          <div className="absolute right-0 mt-2 w-64 bg-white rounded-xl shadow-xl border border-line overflow-hidden z-50">
             {/* User Info */}
             <div className="bg-gradient-to-br from-red-600 to-red-700 p-4 text-white">
               <div className="flex items-center gap-3">
@@ -252,7 +250,7 @@ const UserMenu: React.FC<UserMenuProps> = ({ onSwitchToTimesheet, onLoadCalculat
             <div className="p-2">
               {/* Sync Status */}
               <div className="px-3 py-2 mb-2">
-                <div className="flex items-center gap-2 text-xs text-green-600">
+                <div className="flex items-center gap-2 text-xs text-red-600">
                   <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
                     <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
                   </svg>
@@ -265,40 +263,40 @@ const UserMenu: React.FC<UserMenuProps> = ({ onSwitchToTimesheet, onLoadCalculat
                   setIsOpen(false);
                   setShowHistoryModal(true);
                 }}
-                className="w-full flex items-center gap-3 px-3 py-2 text-slate-700 hover:bg-slate-50 rounded-lg transition-colors text-left"
+                className="w-full flex items-center gap-3 px-3 py-2 text-ink-2 hover:bg-pearl-soft rounded-lg transition-colors text-left"
               >
-                <svg className="w-5 h-5 text-slate-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <svg className="w-5 h-5 text-mute" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
                 </svg>
                 <div>
                   <p className="text-sm font-medium">{t('menu.history')}</p>
-                  <p className="text-xs text-slate-500">{t('menu.historyDesc')}</p>
+                  <p className="text-xs text-mute">{t('menu.historyDesc')}</p>
                 </div>
               </button>
 
               <a
                 href="/account/reports"
-                className="w-full flex items-center gap-3 px-3 py-2 text-slate-700 hover:bg-slate-50 rounded-lg transition-colors text-left mt-1"
+                className="w-full flex items-center gap-3 px-3 py-2 text-ink-2 hover:bg-pearl-soft rounded-lg transition-colors text-left mt-1"
               >
-                <svg className="w-5 h-5 text-slate-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <svg className="w-5 h-5 text-mute" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
                 </svg>
                 <div>
                   <p className="text-sm font-medium">{t('menu.reports')}</p>
-                  <p className="text-xs text-slate-500">{t('menu.reportsDesc')}</p>
+                  <p className="text-xs text-mute">{t('menu.reportsDesc')}</p>
                 </div>
               </a>
 
               <button
                 onClick={handleTimesheetClick}
-                className="w-full flex items-center gap-3 px-3 py-2 text-slate-700 hover:bg-slate-50 rounded-lg transition-colors text-left mt-1"
+                className="w-full flex items-center gap-3 px-3 py-2 text-ink-2 hover:bg-pearl-soft rounded-lg transition-colors text-left mt-1"
               >
-                <svg className="w-5 h-5 text-slate-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <svg className="w-5 h-5 text-mute" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
                 </svg>
                 <div>
                   <p className="text-sm font-medium">{t('menu.timesheets')}</p>
-                  <p className="text-xs text-slate-500">{t('menu.timesheetsDesc')}</p>
+                  <p className="text-xs text-mute">{t('menu.timesheetsDesc')}</p>
                 </div>
               </button>
 
@@ -307,18 +305,18 @@ const UserMenu: React.FC<UserMenuProps> = ({ onSwitchToTimesheet, onLoadCalculat
                 aria-checked={!!alerts}
                 onClick={toggleAlerts}
                 disabled={alerts === null}
-                className="w-full flex items-center gap-3 px-3 py-2 text-slate-700 hover:bg-slate-50 rounded-lg transition-colors text-left mt-1 disabled:opacity-60"
+                className="w-full flex items-center gap-3 px-3 py-2 text-ink-2 hover:bg-pearl-soft rounded-lg transition-colors text-left mt-1 disabled:opacity-60"
               >
-                <span className={`relative inline-flex h-5 w-9 shrink-0 rounded-full transition-colors ${alerts ? 'bg-red-600' : 'bg-slate-300'}`}>
+                <span className={`relative inline-flex h-5 w-9 shrink-0 rounded-full transition-colors ${alerts ? 'bg-red-600' : 'bg-ink-5'}`}>
                   <span className={`absolute top-0.5 h-4 w-4 rounded-full bg-white shadow transition-all ${alerts ? 'left-[18px]' : 'left-0.5'}`} />
                 </span>
                 <div>
                   <p className="text-sm font-medium">{t('menu.rateAlerts')}</p>
-                  <p className="text-xs text-slate-500">{t('menu.rateAlertsDesc')}</p>
+                  <p className="text-xs text-mute">{t('menu.rateAlertsDesc')}</p>
                 </div>
               </button>
 
-              <div className="border-t border-slate-200 my-2"></div>
+              <div className="border-t border-line my-2"></div>
 
               <button
                 onClick={() => {
@@ -335,7 +333,7 @@ const UserMenu: React.FC<UserMenuProps> = ({ onSwitchToTimesheet, onLoadCalculat
 
               <button
                 onClick={() => setShowDeleteAccount(true)}
-                className="mt-1 w-full flex items-center gap-3 px-3 py-2 text-slate-500 hover:bg-red-50 hover:text-red-600 rounded-lg transition-colors text-left"
+                className="mt-1 w-full flex items-center gap-3 px-3 py-2 text-mute hover:bg-red-50 hover:text-red-600 rounded-lg transition-colors text-left"
               >
                 <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
@@ -352,14 +350,14 @@ const UserMenu: React.FC<UserMenuProps> = ({ onSwitchToTimesheet, onLoadCalculat
       {showDeleteAccount && (
         <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4">
           <div className="bg-white rounded-xl shadow-2xl max-w-md w-full p-6">
-            <h2 className="text-xl font-bold text-slate-800">{t('menu.deleteAccount')}</h2>
-            <p className="mt-3 text-sm leading-6 text-slate-600">{t('menu.deleteAccountBody')}</p>
+            <h2 className="text-xl font-bold text-ink">{t('menu.deleteAccount')}</h2>
+            <p className="mt-3 text-sm leading-6 text-ink-3">{t('menu.deleteAccountBody')}</p>
             {deleteError && <p className="mt-3 text-sm font-medium text-red-600">{deleteError}</p>}
             <div className="mt-6 flex justify-end gap-3">
               <button
                 onClick={() => setShowDeleteAccount(false)}
                 disabled={deleting}
-                className="rounded-lg px-4 py-2 text-sm font-semibold text-slate-600 hover:bg-slate-100 disabled:opacity-50"
+                className="rounded-lg px-4 py-2 text-sm font-semibold text-ink-3 hover:bg-pearl disabled:opacity-50"
               >
                 {t('common.cancel')}
               </button>
@@ -380,18 +378,18 @@ const UserMenu: React.FC<UserMenuProps> = ({ onSwitchToTimesheet, onLoadCalculat
         <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4">
           <div className="bg-white rounded-xl shadow-2xl max-w-2xl w-full max-h-[80vh] flex flex-col">
             {/* Header */}
-            <div className="p-6 border-b border-slate-200 flex items-center justify-between">
+            <div className="p-6 border-b border-line flex items-center justify-between">
               <div>
-                <h2 className="text-xl font-bold text-slate-800">{t('menu.history')}</h2>
-                <p className="text-sm text-slate-500 mt-1">
+                <h2 className="text-xl font-bold text-ink">{t('menu.history')}</h2>
+                <p className="text-sm text-mute mt-1">
                   {records.length} {t('menu.savedCalcs')}
                 </p>
               </div>
               <button
                 onClick={() => setShowHistoryModal(false)}
-                className="p-2 hover:bg-slate-100 rounded-lg transition-colors"
+                className="p-2 hover:bg-pearl rounded-lg transition-colors"
               >
-                <svg className="w-5 h-5 text-slate-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <svg className="w-5 h-5 text-mute" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M6 18L18 6M6 6l12 12" />
                 </svg>
               </button>
@@ -401,17 +399,17 @@ const UserMenu: React.FC<UserMenuProps> = ({ onSwitchToTimesheet, onLoadCalculat
             <div className="flex-1 overflow-auto p-6">
               {isHistoryLoading ? (
                 <div className="flex items-center justify-center py-12">
-                  <div className="w-8 h-8 border-2 border-slate-300 border-t-red-600 rounded-full animate-spin"></div>
+                  <div className="w-8 h-8 border-2 border-ink-5 border-t-red-600 rounded-full animate-spin"></div>
                 </div>
               ) : records.length === 0 ? (
                 <div className="text-center py-12">
-                  <div className="w-16 h-16 bg-slate-100 rounded-full flex items-center justify-center mx-auto mb-4">
-                    <svg className="w-8 h-8 text-slate-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <div className="w-16 h-16 bg-pearl rounded-full flex items-center justify-center mx-auto mb-4">
+                    <svg className="w-8 h-8 text-mute" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
                     </svg>
                   </div>
-                  <p className="text-slate-600 font-medium">{t('menu.noCalc')}</p>
-                  <p className="text-sm text-slate-500 mt-1">
+                  <p className="text-ink-3 font-medium">{t('menu.noCalc')}</p>
+                  <p className="text-sm text-mute mt-1">
                     Your calculations will appear here when you save them
                   </p>
                 </div>
@@ -420,7 +418,7 @@ const UserMenu: React.FC<UserMenuProps> = ({ onSwitchToTimesheet, onLoadCalculat
                   {records.map((record) => (
                     <div
                       key={record.id}
-                      className="bg-slate-50 rounded-lg p-4 hover:bg-slate-100 transition-colors group"
+                      className="bg-pearl-soft rounded-lg p-4 hover:bg-pearl transition-colors group"
                     >
                       <div className="flex items-start justify-between">
                         <button
@@ -429,12 +427,12 @@ const UserMenu: React.FC<UserMenuProps> = ({ onSwitchToTimesheet, onLoadCalculat
                         >
                           <div className="flex items-center gap-2 mb-1">
                             <Icon name={getModeIcon(record.mode)} size={20} />
-                            <span className="font-medium text-slate-800">{record.name}</span>
+                            <span className="font-medium text-ink">{record.name}</span>
                           </div>
-                          <div className="flex items-center gap-4 text-sm text-slate-500">
+                          <div className="flex items-center gap-4 text-sm text-mute">
                             <span>{formatDate(record.createdAt)}</span>
-                            <span className="w-1 h-1 bg-slate-300 rounded-full"></span>
-                            <span className="text-green-600 font-medium">
+                            <span className="w-1 h-1 bg-ink-5 rounded-full"></span>
+                            <span className="text-red-600 font-medium">
                               Net: ${record.results.netPayPerPeriod?.toFixed(2) || record.results.netPayBiWeekly.toFixed(2)}
                             </span>
                           </div>
@@ -449,7 +447,7 @@ const UserMenu: React.FC<UserMenuProps> = ({ onSwitchToTimesheet, onLoadCalculat
                           </button>
                           <button
                             onClick={() => setShowDeleteConfirm(record.id)}
-                            className="p-1.5 text-slate-500 hover:text-red-600 hover:bg-slate-100 rounded-lg transition-colors"
+                            className="p-1.5 text-mute hover:text-red-600 hover:bg-pearl rounded-lg transition-colors"
                           >
                             <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
@@ -465,7 +463,7 @@ const UserMenu: React.FC<UserMenuProps> = ({ onSwitchToTimesheet, onLoadCalculat
                           <div className="flex items-center gap-2">
                             <button
                               onClick={() => setShowDeleteConfirm(null)}
-                              className="px-3 py-1 text-sm text-slate-600 hover:text-slate-800"
+                              className="px-3 py-1 text-sm text-ink-3 hover:text-ink"
                             >
                               {t('common.cancel')}
                             </button>
@@ -489,7 +487,7 @@ const UserMenu: React.FC<UserMenuProps> = ({ onSwitchToTimesheet, onLoadCalculat
 
             {/* Footer */}
             {records.length > 0 && (
-              <div className="p-4 border-t border-slate-200 bg-slate-50 rounded-b-xl">
+              <div className="p-4 border-t border-line bg-pearl-soft rounded-b-xl">
                 <button
                   onClick={() => {
                     if (confirm(t('menu.clearConfirm'))) {

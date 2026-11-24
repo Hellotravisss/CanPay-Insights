@@ -110,12 +110,12 @@ export default function AppSlot({
           productInterest: 'ios-app',
         })
       }
-      className="flex items-start gap-3 rounded-xl border border-slate-200 bg-white px-5 py-4 no-underline transition-colors hover:border-red-300 hover:bg-red-50/40"
+      className="flex items-start gap-3 rounded-xl border border-line bg-white px-5 py-4 no-underline transition-colors hover:border-red-300 hover:bg-red-50/40"
     >
       <img src="/logo.png" alt="" className="mt-0.5 h-10 w-10 shrink-0 rounded-lg object-contain" />
       <span className="min-w-0">
-        <span className="block text-sm font-bold text-slate-800">{t.title}</span>
-        <span className="mt-0.5 block text-xs leading-5 text-slate-500">{t.body}</span>
+        <span className="block text-sm font-bold text-ink">{t.title}</span>
+        <span className="mt-0.5 block text-xs leading-5 text-mute">{t.body}</span>
         <span className="mt-2 inline-flex items-center gap-1.5 text-sm font-bold text-red-600">
           <svg className="h-4 w-4" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
             <path d="M17.05 20.28c-.98.95-2.05.88-3.08.4-1.09-.5-2.08-.48-3.24 0-1.44.62-2.2.44-3.06-.4C2.79 15.25 3.51 7.59 9.05 7.31c1.35.07 2.29.74 3.05.8 1.13-.23 2.21-.89 3.42-.8 1.45.12 2.54.7 3.26 1.74-2.99 1.79-2.28 5.73.46 6.83-.55 1.44-1.26 2.87-2.2 4.41zM12.03 7.25c-.15-2.23 1.66-4.07 3.74-4.25.29 2.58-2.34 4.5-3.74 4.25z" />

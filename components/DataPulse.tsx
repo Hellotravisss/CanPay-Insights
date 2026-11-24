@@ -9,6 +9,9 @@ import React, { useEffect, useState } from 'react';
  * that file applies to the charts too. Nothing is hard-coded: a stale "7,000"
  * on a data page is the kind of claim that loses a researcher's trust.
  * If the file cannot be read, the block simply does not render.
+ *
+ * 2026-11 system: a white card, not a dark block. Red is the one subject of each
+ * chart (the hour bars); the income bars are the ink ramp.
  */
 type Usage = {
   totals: { calculations: number; first_day: string; last_day: string };
@@ -39,53 +42,56 @@ const DataPulse: React.FC = () => {
   const provinces = Object.keys(u.breakdowns.province?.shown ?? {}).length;
   const languages = Object.keys(u.breakdowns.language?.shown ?? {}).length;
 
+  const figure = 'font-display text-[1.75rem] font-semibold leading-none tabular-nums text-ink md:text-[2.25rem]';
+  const label = 'mt-2 text-xs leading-5 text-mute';
+
   return (
-    <section aria-labelledby="pulse-h" className="mb-10 rounded-2xl border border-slate-200 bg-slate-900 p-6 text-white md:p-8">
-      <p id="pulse-h" className="text-xs font-bold uppercase tracking-[0.18em] text-red-300">Live from the calculator</p>
-      <div className="mt-4 grid grid-cols-2 gap-4 md:grid-cols-4">
-        <div>
-          <p className="text-3xl font-bold tabular-nums md:text-4xl">{fmt(u.totals.calculations)}</p>
-          <p className="mt-1 text-xs text-slate-300">anonymous calculations</p>
+    <section aria-labelledby="pulse-h" className="mb-10 rounded-2xl border border-line bg-white p-6 md:p-8">
+      <p id="pulse-h" className="text-[11px] font-semibold uppercase tracking-[0.14em] text-red-600">Live from the calculator</p>
+      <div className="mt-5 grid grid-cols-2 gap-px overflow-hidden rounded-xl border border-line bg-line md:grid-cols-4">
+        <div className="bg-white p-4">
+          <p className={figure}>{fmt(u.totals.calculations)}</p>
+          <p className={label}>anonymous calculations</p>
         </div>
-        <div>
-          <p className="text-3xl font-bold md:text-4xl">{day(u.totals.first_day).replace(/, \d{4}$/, '')}</p>
-          <p className="mt-1 text-xs text-slate-300">first day logged ({u.totals.first_day.slice(0, 4)})</p>
+        <div className="bg-white p-4">
+          <p className={figure}>{day(u.totals.first_day).replace(/, \d{4}$/, '')}</p>
+          <p className={label}>first day logged ({u.totals.first_day.slice(0, 4)})</p>
         </div>
-        <div>
-          <p className="text-3xl font-bold tabular-nums md:text-4xl">{provinces}</p>
-          <p className="mt-1 text-xs text-slate-300">provinces and territories shown</p>
+        <div className="bg-white p-4">
+          <p className={figure}>{provinces}</p>
+          <p className={label}>provinces and territories shown</p>
         </div>
-        <div>
-          <p className="text-3xl font-bold tabular-nums md:text-4xl">{languages}</p>
-          <p className="mt-1 text-xs text-slate-300">interface languages shown</p>
+        <div className="bg-white p-4">
+          <p className={figure}>{languages}</p>
+          <p className={label}>interface languages shown</p>
         </div>
       </div>
 
       <div className="mt-8 grid gap-8 md:grid-cols-2">
         <figure>
-          <figcaption className="mb-3 text-sm font-semibold text-slate-200">When people check their pay (their local hour)</figcaption>
-          <div className="flex h-28 items-end gap-[3px]" role="img" aria-label="Calculations by local hour of day, midnight to 11 pm">
+          <figcaption className="mb-3 text-sm font-semibold text-ink">When people check their pay (their local hour)</figcaption>
+          <div className="flex h-28 items-end gap-[3px] border-b border-line" role="img" aria-label="Calculations by local hour of day, midnight to 11 pm">
             {hourVals.map((v, h) => (
-              <div key={h} className="flex-1 rounded-t-sm bg-red-500/80" style={{ height: `${Math.max(2, (v / hourMax) * 100)}%` }} title={`${h}:00 — ${fmt(v)}`} />
+              <div key={h} className="flex-1 rounded-t-[2px] bg-red-600" style={{ height: `${Math.max(2, (v / hourMax) * 100)}%` }} title={`${h}:00 — ${fmt(v)}`} />
             ))}
           </div>
-          <div className="mt-1 flex justify-between text-[10px] text-slate-300"><span>midnight</span><span>6 am</span><span>noon</span><span>6 pm</span><span>11 pm</span></div>
+          <div className="mt-1.5 flex justify-between text-[10px] text-mute"><span>midnight</span><span>6 am</span><span>noon</span><span>6 pm</span><span>11 pm</span></div>
         </figure>
         <figure>
-          <figcaption className="mb-3 text-sm font-semibold text-slate-200">Income range people enter</figcaption>
+          <figcaption className="mb-3 text-sm font-semibold text-ink">Income range people enter</figcaption>
           <div className="space-y-1.5">
             {incomeRows.map((r) => (
               <div key={r.k} className="flex items-center gap-2 text-xs">
-                <span className="w-16 shrink-0 text-right text-slate-300">{INCOME_LABEL[r.k]}</span>
-                <span className="h-3 rounded-sm bg-slate-300/80" style={{ width: `${(r.n / incomeMax) * 100}%` }} />
-                <span className="tabular-nums text-slate-300">{fmt(r.n)}</span>
+                <span className="w-16 shrink-0 text-right tabular-nums text-ink-3">{INCOME_LABEL[r.k]}</span>
+                <span className="h-3 rounded-[2px] bg-ink-5" style={{ width: `${(r.n / incomeMax) * 100}%` }} />
+                <span className="tabular-nums text-mute">{fmt(r.n)}</span>
               </div>
             ))}
           </div>
         </figure>
       </div>
-      <p className="mt-6 text-xs text-slate-300">
-        Read from <a href="/data/usage.json" className="text-red-300 underline">usage.json</a>; categories under 20 are withheld. People who looked for a pay calculator, not a random sample of Canadians.
+      <p className="mt-6 border-t border-line pt-4 text-xs leading-5 text-mute">
+        Read from <a href="/data/usage.json" className="font-medium text-red-600 underline decoration-red-200 underline-offset-2 hover:decoration-red-600">usage.json</a>; categories under 20 are withheld. People who looked for a pay calculator, not a random sample of Canadians.
       </p>
     </section>
   );

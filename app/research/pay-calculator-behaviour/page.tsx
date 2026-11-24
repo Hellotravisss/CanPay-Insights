@@ -1,6 +1,8 @@
 import type { Metadata } from 'next';
 import { payBehaviour } from '../../../lib/payBehaviour';
-import AvowdCredit from '../../../components/AvowdCredit';
+import SiteHeader from '../../../components/site/SiteHeader';
+import SiteFooter from '../../../components/site/SiteFooter';
+import { PageHero, Callout, ButtonLink } from '../../../components/site/ui';
 
 /**
  * Rendered from D1 on every request. It was `revalidate = 3600`, which let the
@@ -59,21 +61,22 @@ const jsonLdFor = (generated: string) => ({
   isAccessibleForFree: true,
 });
 
-function Finding({ k, figure, claim, children, img, alt }: { k: string; figure: string; claim: string; children: React.ReactNode; img?: string; alt?: string }) {
+// `headline` marks the one figure printed in brand red (finding 1); the rest are ink.
+function Finding({ k, figure, claim, children, img, alt, headline = false }: { k: string; figure: string; claim: string; children: React.ReactNode; img?: string; alt?: string; headline?: boolean }) {
   return (
-    <section className="border-t border-slate-200 py-12">
-      <p className="mb-4 text-xs font-bold uppercase tracking-[0.2em] text-red-600">{k}</p>
+    <section className="border-t border-line py-12 md:py-16">
+      <p className="mb-4 text-[11px] font-semibold uppercase tracking-[0.14em] text-red-600">{k}</p>
       <div className="grid gap-x-10 gap-y-4 md:grid-cols-[auto_1fr] md:items-baseline">
-        <p className="text-7xl font-extrabold leading-none tracking-tight text-slate-900 md:text-8xl">{figure}</p>
-        <h2 className="text-2xl font-bold leading-snug text-slate-900">{claim}</h2>
+        <p className={`font-display text-7xl font-semibold leading-none tracking-[-0.02em] tabular-nums md:text-8xl ${headline ? 'text-red-600' : 'text-ink'}`}>{figure}</p>
+        <h2 className="font-display text-2xl font-semibold leading-snug text-ink">{claim}</h2>
       </div>
-      <div className="mt-6 max-w-2xl space-y-4 text-[15px] leading-7 text-slate-700">{children}</div>
+      <div className="mt-6 max-w-2xl space-y-4 text-[15px] leading-7 text-ink-2">{children}</div>
       {img ? (
       <figure className="mt-8">
-        <img src={`/research/${img}.svg`} alt={alt} width={1200} height={630} className="w-full rounded-xl border border-slate-200" loading="lazy" />
-        <figcaption className="mt-2 text-xs text-slate-500">
+        <img src={`/research/${img}.svg`} alt={alt} width={1200} height={630} className="w-full rounded-2xl border border-line bg-white" loading="lazy" />
+        <figcaption className="mt-2 text-xs text-mute">
           Free to reuse with credit to CanPay Insights ·{' '}
-          <a href={`/research/${img}.svg`} download className="font-semibold text-red-600 hover:underline">Download SVG</a>
+          <a href={`/research/${img}.svg`} download className="font-semibold text-red-600 underline decoration-red-200 underline-offset-4 hover:decoration-red-600">Download SVG</a>
         </figcaption>
       </figure>
       ) : null}
@@ -82,9 +85,9 @@ function Finding({ k, figure, claim, children, img, alt }: { k: string; figure: 
 }
 
 const Test = ({ children }: { children: React.ReactNode }) => (
-  <p className="rounded-lg border-l-4 border-slate-300 bg-slate-100 px-4 py-3 text-sm leading-6 text-slate-600">
-    <strong className="text-slate-800">How this was tested. </strong>{children}
-  </p>
+  <Callout>
+    <strong className="text-ink">How this was tested. </strong>{children}
+  </Callout>
 );
 
 export default async function Page() {
@@ -93,28 +96,28 @@ export default async function Page() {
   const day = longDate(snap.generated);
   const since = longDate(snap.since);
   return (
-    <div className="min-h-screen bg-slate-50">
+    <div className="min-h-screen bg-pearl">
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLdFor(snap.generated)) }} />
-      <article className="mx-auto max-w-4xl px-4 py-12">
-        <a href="/" className="mb-10 inline-flex items-center gap-2 text-sm font-semibold text-red-600 hover:underline">← CanPay Insights</a>
-
-        <p className="mb-3 text-xs font-bold uppercase tracking-[0.2em] text-slate-500">Research note · figures as of {day}</p>
-        <h1 className="mb-5 max-w-3xl text-4xl font-extrabold leading-tight tracking-tight text-slate-900 md:text-5xl">
-          What people do with a pay number
-        </h1>
-        <p className="max-w-2xl text-lg leading-8 text-slate-600">
+      <SiteHeader lang="en" />
+      <main className="mx-auto max-w-4xl px-4" role="main">
+      <article>
+        <PageHero
+          eyebrow={<>Research note · figures as of {day}</>}
+          title="What people do with a pay number"
+          lead={<>
           CanPay Insights is a free Canadian take-home pay calculator. Between {since} and {day} it
           recorded {n(snap.n)} anonymous calculations across {n(snap.sessions)} visits. It never learns
           what anyone earns — income is kept only as one of seven ranges — but it does see something no
           wage survey records: how people use a pay figure once they have one.
-        </p>
+          </>}
+        />
 
-        <div className="mt-8 max-w-2xl rounded-xl border border-amber-300 bg-amber-50 px-5 py-4 text-sm leading-6 text-amber-900">
-          <strong>Read this first.</strong> These are people who went looking for a pay calculator, not
+        <Callout tone="caution" className="max-w-2xl px-5 py-4">
+          <strong className="text-ink">Read this first.</strong> These are people who went looking for a pay calculator, not
           a sample of Canadians: {snap.belowMedianShare}% of the calculations sit below Canada&rsquo;s
           median full-time wage. Every figure on this page is a share of calculator use. None of it is
           a statement about what Canadians earn or how many Canadians do anything.
-        </div>
+        </Callout>
 
         <div className="mt-12">
           <Finding
@@ -123,6 +126,7 @@ export default async function Page() {
             claim="of visitors who changed the income ended on a higher figure than they started with."
             img="pricing-the-raise"
             alt={`${raise.net.upShare}% of visitors who changed the income ended on a higher figure`}
+            headline
           >
             <p>
               {raise.multiShare}% of visits run more than one calculation, and {raise.variedIncomeShare}% of
@@ -237,108 +241,103 @@ export default async function Page() {
             and whether they were picked on a flattering day. This section
             answers both with evidence rather than assurance, and hands over
             the file so nobody has to take our word for the sums. */}
-        <section className="border-t border-slate-200 py-12">
-          <p className="mb-4 text-xs font-bold uppercase tracking-[0.2em] text-red-600">Checking this</p>
-          <h2 className="mb-5 text-2xl font-bold text-slate-900">Where the numbers come from, and whether they hold</h2>
+        <section className="border-t border-line py-12 md:py-16">
+          <p className="mb-4 text-[11px] font-semibold uppercase tracking-[0.14em] text-red-600">Checking this</p>
+          <h2 className="mb-5 font-display text-2xl font-semibold leading-snug text-ink md:text-[2rem]">Where the numbers come from, and whether they hold</h2>
 
-          <div className="max-w-2xl space-y-4 text-[15px] leading-7 text-slate-700">
+          <div className="max-w-2xl space-y-4 text-[15px] leading-7 text-ink-2">
             <p>
               The {n(snap.n)} calculations arrived across {sample.days} {sample.days === 1 ? 'day' : 'days'} without a gap, from{' '}
               {since} onward — between a few dozen and {n(sample.busiest)} a day.{' '}
-              <strong className="text-slate-900">{sample.caShare}% came from inside Canada.</strong>{' '}
+              <strong className="text-ink">{sample.caShare}% came from inside Canada.</strong>{' '}
               The busiest provinces are{' '}
               {sample.provinces.slice(0, 4).map((p) => `${p.k} (${n(p.n)})`).join(', ')}.
             </p>
           </div>
 
           <figure className="mt-8">
-            <img src="/research/the-sample.svg" alt={`Daily calculations across ${sample.days} days`} width={1200} height={630} className="w-full rounded-xl border border-slate-200" loading="lazy" />
-            <figcaption className="mt-2 text-xs text-slate-500">
+            <img src="/research/the-sample.svg" alt={`Daily calculations across ${sample.days} days`} width={1200} height={630} className="w-full rounded-2xl border border-line bg-white" loading="lazy" />
+            <figcaption className="mt-2 text-xs text-mute">
               Free to reuse with credit to CanPay Insights ·{' '}
-              <a href="/research/the-sample.svg" download className="font-semibold text-red-600 hover:underline">Download SVG</a>
+              <a href="/research/the-sample.svg" download className="font-semibold text-red-600 underline decoration-red-200 underline-offset-4 hover:decoration-red-600">Download SVG</a>
             </figcaption>
           </figure>
 
-          <h3 className="mb-3 mt-10 text-lg font-bold text-slate-900">Have the figures moved as the sample grew?</h3>
-          <p className="mb-4 max-w-2xl text-[15px] leading-7 text-slate-700">
+          <h3 className="mb-3 mt-12 font-display text-xl font-semibold text-ink">Have the figures moved as the sample grew?</h3>
+          <p className="mb-4 max-w-2xl text-[15px] leading-7 text-ink-2">
             The page writes down what it said the first time it was opened each day, and never edits
             those rows; the figures at the top are live. A figure that stays put while the sample grows
             was not a lucky week — and if you quoted this page on a particular day, that day's row is
             here from the next day on.
           </p>
-          <div className="max-w-2xl overflow-x-auto">
-            <table className="w-full border-collapse text-sm">
+          <div className="max-w-2xl overflow-x-auto rounded-2xl border border-line bg-white">
+            <table className="w-full border-collapse text-sm tabular-nums">
               <thead>
-                <tr className="border-b border-slate-300 text-left text-slate-500">
-                  <th className="py-2 pr-4 font-semibold">Date</th>
-                  <th className="py-2 pr-4 font-semibold">Calculations</th>
-                  <th className="py-2 pr-4 font-semibold">Ended higher</th>
-                  <th className="py-2 pr-4 font-semibold">Start before 7 a.m.</th>
-                  <th className="py-2 font-semibold">Two provinces</th>
+                <tr className="border-b border-line bg-pearl-soft text-left text-[11px] uppercase tracking-[0.1em] text-mute">
+                  <th scope="col" className="px-4 py-2.5 font-semibold">Date</th>
+                  <th scope="col" className="px-4 py-2.5 text-right font-semibold">Calculations</th>
+                  <th scope="col" className="px-4 py-2.5 text-right font-semibold">Ended higher</th>
+                  <th scope="col" className="px-4 py-2.5 text-right font-semibold">Start before 7 a.m.</th>
+                  <th scope="col" className="px-4 py-2.5 text-right font-semibold">Two provinces</th>
                 </tr>
               </thead>
-              <tbody>
+              <tbody className="divide-y divide-line">
                 {history.filter((h) => h.day < snap.generated).map((h) => (
-                  <tr key={h.day} className="border-b border-slate-200 text-slate-700">
-                    <td className="py-2 pr-4">{h.day}</td>
-                    <td className="py-2 pr-4 tabular-nums">{n(h.n)}</td>
-                    <td className="py-2 pr-4 tabular-nums">{h.raise}%</td>
-                    <td className="py-2 pr-4 tabular-nums">{h.before7}%</td>
-                    <td className="py-2 tabular-nums">{h.move}%</td>
+                  <tr key={h.day} className="text-ink-2">
+                    <td className="whitespace-nowrap px-4 py-2 text-ink">{h.day}</td>
+                    <td className="px-4 py-2 text-right">{n(h.n)}</td>
+                    <td className="px-4 py-2 text-right">{h.raise}%</td>
+                    <td className="px-4 py-2 text-right">{h.before7}%</td>
+                    <td className="px-4 py-2 text-right">{h.move}%</td>
                   </tr>
                 ))}
               </tbody>
             </table>
           </div>
 
-          <h3 className="mb-3 mt-10 text-lg font-bold text-slate-900">Every number on this page, as a file</h3>
-          <p className="max-w-2xl text-[15px] leading-7 text-slate-700">
+          <h3 className="mb-3 mt-12 font-display text-xl font-semibold text-ink">Every number on this page, as a file</h3>
+          <p className="max-w-2xl text-[15px] leading-7 text-ink-2">
             The page and its charts are rendered from one object, and that object is served as JSON
             at the link below. It holds the counts behind every percentage — including the rows that
             were left out and why — so the arithmetic can be checked without asking us for anything.
           </p>
-          <a
-            href="/research/pay-behaviour.json"
-            download
-            className="mt-4 inline-flex items-center gap-2 rounded-lg border border-slate-300 px-4 py-2 text-sm font-bold text-slate-800 no-underline hover:border-red-300 hover:text-red-700"
-          >
+          <ButtonLink href="/research/pay-behaviour.json" download variant="secondary" className="mt-5">
             Download the figures (JSON)
-          </a>
+          </ButtonLink>
         </section>
 
-        <section className="border-t border-slate-200 py-12">
-          <h2 className="mb-5 text-2xl font-bold text-slate-900">Method</h2>
-          <ul className="max-w-2xl list-disc space-y-3 pl-5 text-[15px] leading-7 text-slate-700">
-            <li><strong className="text-slate-900">Source.</strong> Calculations made on canpayinsights.ca and in the CanPay Insights iPhone app, {since} to {day}. Calculations made by the site&rsquo;s owner or in testing are excluded.</li>
-            <li><strong className="text-slate-900">What is recorded.</strong> The province, one of seven income ranges, the kind of calculation and, for hourly workers, the shift. No name, account, exact income, IP address or device fingerprint. A &ldquo;visit&rdquo; is a random identifier held in the page&rsquo;s memory and gone when the page is closed or reloaded; it cannot link one day to the next, or one device to another. Details are in the <a href="/privacy" className="font-semibold text-red-600 hover:underline">privacy policy</a>.</li>
-            <li><strong className="text-slate-900">What is not recorded.</strong> A calculator opened and left on its default values sends nothing, so the defaults do not count as calculations.</li>
-            <li><strong className="text-slate-900">This page keeps itself current.</strong> The figures are recomputed from the record at most once an hour, so they move as the sample grows. What each figure was on any given day stays in the table above, which is where a citation should point.</li>
-            <li><strong className="text-slate-900">The tax engine behind the calculator</strong> is compared with the CRA&rsquo;s payroll deduction tables before every release. That concerns the pay figures visitors see, not the usage figures on this page.</li>
+        <section className="border-t border-line py-12 md:py-16">
+          <h2 className="mb-5 font-display text-2xl font-semibold text-ink md:text-[2rem]">Method</h2>
+          <ul className="max-w-2xl list-disc space-y-3 pl-5 text-[15px] leading-7 text-ink-2 marker:text-ink-4">
+            <li><strong className="text-ink">Source.</strong> Calculations made on canpayinsights.ca and in the CanPay Insights iPhone app, {since} to {day}. Calculations made by the site&rsquo;s owner or in testing are excluded.</li>
+            <li><strong className="text-ink">What is recorded.</strong> The province, one of seven income ranges, the kind of calculation and, for hourly workers, the shift. No name, account, exact income, IP address or device fingerprint. A &ldquo;visit&rdquo; is a random identifier held in the page&rsquo;s memory and gone when the page is closed or reloaded; it cannot link one day to the next, or one device to another. Details are in the <a href="/privacy" className="font-semibold text-red-600 underline decoration-red-200 underline-offset-4 hover:decoration-red-600">privacy policy</a>.</li>
+            <li><strong className="text-ink">What is not recorded.</strong> A calculator opened and left on its default values sends nothing, so the defaults do not count as calculations.</li>
+            <li><strong className="text-ink">This page keeps itself current.</strong> The figures are recomputed from the record at most once an hour, so they move as the sample grows. What each figure was on any given day stays in the table above, which is where a citation should point.</li>
+            <li><strong className="text-ink">The tax engine behind the calculator</strong> is compared with the CRA&rsquo;s payroll deduction tables before every release. That concerns the pay figures visitors see, not the usage figures on this page.</li>
           </ul>
         </section>
 
-        <section className="border-t border-slate-200 py-12">
-          <h2 className="mb-4 text-2xl font-bold text-slate-900">Citing and reusing</h2>
-          <p className="max-w-2xl text-[15px] leading-7 text-slate-700">
+        <section className="border-t border-line py-12 md:py-16">
+          <h2 className="mb-4 font-display text-2xl font-semibold text-ink md:text-[2rem]">Citing and reusing</h2>
+          <p className="max-w-2xl text-[15px] leading-7 text-ink-2">
             The text, figures and charts on this page are free to quote and republish with credit
-            (<a href="https://creativecommons.org/licenses/by/4.0/" target="_blank" rel="noopener noreferrer" className="font-semibold text-red-600 hover:underline">CC BY 4.0</a>).
+            (<a href="https://creativecommons.org/licenses/by/4.0/" target="_blank" rel="noopener noreferrer" className="font-semibold text-red-600 underline decoration-red-200 underline-offset-4 hover:decoration-red-600">CC BY 4.0</a>).
             Please describe the source as &ldquo;people who used the CanPay Insights pay calculator&rdquo;.
           </p>
-          <p className="mt-4 max-w-2xl rounded-xl border border-slate-200 bg-white p-5 text-sm leading-6 text-slate-700">
+          <p className="mt-5 max-w-2xl rounded-2xl border border-line bg-white p-5 text-sm leading-6 text-ink-2">
             CanPay Insights, <em>What people do with a pay number</em>, {n(snap.n)} anonymous calculations,
             figures as of {day}. {URL}
           </p>
-          <p className="mt-6 max-w-2xl text-[15px] leading-7 text-slate-700">
+          <p className="mt-6 max-w-2xl text-[15px] leading-7 text-ink-2">
             Journalists and researchers: if a cut by province or income range would help, write to{' '}
-            <a href="mailto:info@canpayinsights.ca?subject=Research%20note" className="font-semibold text-red-600 hover:underline">info@canpayinsights.ca</a>.
+            <a href="mailto:info@canpayinsights.ca?subject=Research%20note" className="font-semibold text-red-600 underline decoration-red-200 underline-offset-4 hover:decoration-red-600">info@canpayinsights.ca</a>.
             Any figure we send has at least twenty visits behind it. The coarse open files are on the{' '}
-            <a href="/data" className="font-semibold text-red-600 hover:underline">data page</a>.
+            <a href="/data" className="font-semibold text-red-600 underline decoration-red-200 underline-offset-4 hover:decoration-red-600">data page</a>.
           </p>
         </section>
       </article>
-      <footer className="mx-auto max-w-5xl px-4 pb-10 pt-6 text-center text-xs text-slate-500" role="contentinfo">
-        <p>© CanPay Insights · <AvowdCredit /></p>
-      </footer>
+      </main>
+      <SiteFooter lang="en" />
     </div>
   );
 }

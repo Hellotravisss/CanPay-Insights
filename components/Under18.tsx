@@ -10,8 +10,8 @@ export default function Under18({ value, onChange }: {
 }) {
   const { t } = useT();
   return (
-    <div className="mt-3 rounded-lg border border-slate-200 bg-white p-3">
-      <label className="flex cursor-pointer items-start gap-2 text-sm font-semibold text-slate-700">
+    <div className="mt-3 rounded-lg border border-line bg-white p-3">
+      <label className="flex cursor-pointer items-start gap-2 text-sm font-semibold text-ink-2">
         <input
           type="checkbox"
           checked={!!value}
@@ -20,7 +20,7 @@ export default function Under18({ value, onChange }: {
         />
         <span>{t('u18.toggle')}</span>
       </label>
-      {value && <p className="mt-1.5 pl-6 text-xs leading-5 text-slate-500">{t('u18.hint')}</p>}
+      {value && <p className="mt-1.5 pl-6 text-xs leading-5 text-mute">{t('u18.hint')}</p>}
     </div>
   );
 }

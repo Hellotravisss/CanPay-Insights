@@ -1,6 +1,8 @@
 import type { Metadata } from 'next';
 import CopyEmbedCode from './CopyEmbedCode';
-import AvowdCredit from '../../components/AvowdCredit';
+import SiteHeader from '../../components/site/SiteHeader';
+import SiteFooter from '../../components/site/SiteFooter';
+import { PageHero, Card } from '../../components/site/ui';
 
 export const metadata: Metadata = {
   title: 'Free Embeddable Take-Home Pay Calculator Widget for Your Website',
@@ -56,81 +58,75 @@ const faqJsonLd = {
 
 export default function WidgetPage() {
   return (
-    <div className="min-h-screen bg-slate-50">
+    <div className="min-h-screen bg-pearl">
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }}
       />
-      <div className="mx-auto max-w-4xl px-4 py-12">
-        <a href="/" className="mb-8 inline-flex items-center gap-2 text-sm font-semibold text-red-600 hover:underline">
-          ← CanPay Insights
-        </a>
-
-        <h1 className="mb-3 text-3xl font-extrabold tracking-tight text-slate-900 md:text-4xl">
-          Add a free take-home pay calculator to your website
-        </h1>
-        <p className="mb-10 max-w-2xl leading-7 text-slate-600">
+      <SiteHeader lang="en" />
+      <main className="mx-auto max-w-5xl px-4" role="main">
+        <PageHero
+          title="Add a free take-home pay calculator to your website"
+          lead={<>
           One line of HTML gives your visitors an accurate Canadian salary-after-tax calculator —
           2026 rates for every province and territory, in ten languages, checked line by line against the
           payroll deduction tables the CRA publishes for employers. Perfect for job boards,
           immigration and newcomer resources, HR pages, and personal-finance blogs.
-        </p>
+          </>}
+        />
         {/* Kept true by audit:live (8): the partner page must still carry /embed. */}
-        <p className="-mt-6 mb-10 text-sm text-slate-600">
+        <p className="-mt-2 mb-10 max-w-3xl text-sm text-mute md:-mt-6">
           Used by{' '}
-          <a href={USED_BY.href} className="font-semibold text-red-600 hover:underline">FindJobs Canada</a>{' '}
+          <a href={USED_BY.href} className="font-semibold text-red-600 underline decoration-red-200 underline-offset-4 hover:decoration-red-600">FindJobs Canada</a>{' '}
           in its guides to the highest-paying jobs and to salary negotiation.
         </p>
 
-        <div className="grid gap-10 md:grid-cols-2">
-          <div className="min-w-0">
-            <h2 className="mb-3 text-lg font-bold text-slate-900">Live preview</h2>
+        <div className="grid gap-6 md:grid-cols-2 md:gap-8">
+          <Card className="min-w-0 p-5 md:p-6">
+            <h2 className="mb-4 font-display text-xl font-semibold text-ink">Live preview</h2>
             <iframe
               src="/embed?province=ON"
               width="100%"
               height={560}
               loading="lazy"
-              style={{ border: '1px solid #e2e8f0', borderRadius: 12, maxWidth: 420 }}
+              style={{ border: '1px solid #E3E3EA', borderRadius: 12, maxWidth: 420 }}
               title="Canadian Take-Home Pay Calculator"
             />
-          </div>
+          </Card>
 
-          <div className="min-w-0">
-            <h2 className="mb-3 text-lg font-bold text-slate-900">Embed code</h2>
+          <Card className="min-w-0 p-5 md:p-6">
+            <h2 className="mb-4 font-display text-xl font-semibold text-ink">Embed code</h2>
             <CopyEmbedCode code={EMBED_CODE} />
 
-            <h3 className="mb-2 mt-6 text-sm font-bold text-slate-900">Options</h3>
-            <ul className="space-y-1.5 text-sm leading-6 text-slate-600">
-              <li><code className="rounded bg-slate-200 px-1.5 py-0.5 text-xs">?province=BC</code> — default province (ON, BC, AB, QC, MB, SK, NS, NB, PE, NL, YT, NT, NU)</li>
-              <li><code className="rounded bg-slate-200 px-1.5 py-0.5 text-xs">&amp;lang=fr</code> — interface language: <code className="text-xs">en</code>, <code className="text-xs">fr</code>, <code className="text-xs">zh</code>, <code className="text-xs">pa</code>, <code className="text-xs">hi</code>, <code className="text-xs">tl</code>, <code className="text-xs">es</code>, <code className="text-xs">uk</code>, <code className="text-xs">ko</code>, <code className="text-xs">vi</code></li>
+            <h3 className="mb-2 mt-7 text-sm font-semibold text-ink">Options</h3>
+            <ul className="space-y-1.5 text-sm leading-6 text-ink-2">
+              <li><code className="rounded-md border border-line bg-pearl-soft px-1.5 py-0.5 text-xs text-ink">?province=BC</code> — default province (ON, BC, AB, QC, MB, SK, NS, NB, PE, NL, YT, NT, NU)</li>
+              <li><code className="rounded-md border border-line bg-pearl-soft px-1.5 py-0.5 text-xs text-ink">&amp;lang=fr</code> — interface language: <code className="text-xs text-ink">en</code>, <code className="text-xs text-ink">fr</code>, <code className="text-xs text-ink">zh</code>, <code className="text-xs text-ink">pa</code>, <code className="text-xs text-ink">hi</code>, <code className="text-xs text-ink">tl</code>, <code className="text-xs text-ink">es</code>, <code className="text-xs text-ink">uk</code>, <code className="text-xs text-ink">ko</code>, <code className="text-xs text-ink">vi</code></li>
             </ul>
 
-            <h3 className="mb-2 mt-6 text-sm font-bold text-slate-900">Need something custom?</h3>
-            <p className="text-sm leading-6 text-slate-600">
+            <h3 className="mb-2 mt-7 border-t border-line pt-6 text-sm font-semibold text-ink">Need something custom?</h3>
+            <p className="text-sm leading-6 text-ink-2">
               White-label or custom-branded versions for your platform:{' '}
-              <a href="mailto:info@canpayinsights.ca" className="font-semibold text-red-600 hover:underline">
+              <a href="mailto:info@canpayinsights.ca" className="font-semibold text-red-600 underline decoration-red-200 underline-offset-4 hover:decoration-red-600">
                 info@canpayinsights.ca
               </a>
             </p>
-          </div>
+          </Card>
         </div>
 
-        <div className="mt-14">
-          <h2 className="mb-5 text-2xl font-bold text-slate-900">Frequently asked questions</h2>
-          <div className="space-y-6">
+        <section className="py-14 md:py-20">
+          <h2 className="mb-6 font-display text-2xl font-semibold leading-tight text-ink md:text-[2rem]">Frequently asked questions</h2>
+          <div className="max-w-3xl divide-y divide-line border-y border-line">
             {widgetFaq.map((item) => (
-              <div key={item.question}>
-                <h3 className="mb-1.5 text-base font-bold text-slate-900">{item.question}</h3>
-                <p className="max-w-2xl text-sm leading-6 text-slate-600">{item.answer}</p>
+              <div key={item.question} className="py-6">
+                <h3 className="mb-2 text-base font-semibold text-ink">{item.question}</h3>
+                <p className="text-sm leading-6 text-ink-2">{item.answer}</p>
               </div>
             ))}
           </div>
-        </div>
-      </div>
-
-      <footer className="mx-auto max-w-5xl px-4 pb-10 pt-6 text-center text-xs text-slate-500" role="contentinfo">
-        <p>© CanPay Insights · <AvowdCredit /></p>
-      </footer>
+        </section>
+      </main>
+      <SiteFooter lang="en" />
     </div>
   );
 }

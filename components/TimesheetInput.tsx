@@ -225,8 +225,8 @@ const TimesheetInput: React.FC<Props> = ({ inputs, setInputs }) => {
           ${isSelected 
             ? 'btn-brand-3d text-white scale-105' 
             : hasEntries
-            ? 'bg-slate-100 text-slate-900 hover:bg-slate-200'
-            : 'text-slate-600 hover:bg-slate-50'
+            ? 'bg-pearl text-ink hover:bg-pearl-shade'
+            : 'text-ink-3 hover:bg-pearl-soft'
           }
           ${isToday && !isSelected ? 'ring-2 ring-red-400' : ''}
         `}
@@ -240,18 +240,18 @@ const TimesheetInput: React.FC<Props> = ({ inputs, setInputs }) => {
   };
 
   return (
-    <div className="bg-white rounded-xl shadow-sm border border-slate-200 overflow-hidden">
+    <div className="bg-white rounded-xl shadow-sm border border-line overflow-hidden">
       {/* Header */}
-      <div className="bg-gradient-to-br from-slate-900 to-slate-800 p-6 text-white">
+      <div className="border-b border-line bg-white p-6">
         <div className="flex items-center justify-between">
           <div>
-            <h2 className="text-xl font-bold mb-1"><Icon name="stopwatch" tone="white" size={20} /> {t('ts.title')}</h2>
-            <p className="text-slate-300 text-sm">{t('ts.subtitle')}</p>
+            <h2 className="mb-1 flex items-center gap-2 font-display text-xl font-semibold text-ink"><Icon name="stopwatch" size={22} /> {t('ts.title')}</h2>
+            <p className="text-sm text-mute">{t('ts.subtitle')}</p>
           </div>
           {/* Cloud sync indicator */}
           <div className="flex items-center gap-2 text-xs">
             {isSyncing ? (
-              <div className="flex items-center gap-1 text-yellow-400">
+              <div className="flex items-center gap-1 text-mute">
                 <svg className="animate-spin h-4 w-4" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
                   <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
                   <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
@@ -259,7 +259,7 @@ const TimesheetInput: React.FC<Props> = ({ inputs, setInputs }) => {
                 <span>{t('ts.syncing')}</span>
               </div>
             ) : lastSyncTime ? (
-              <div className="flex items-center gap-1 text-green-400">
+              <div className="flex items-center gap-1 text-mute">
                 <svg className="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7"></path>
                 </svg>
@@ -275,11 +275,11 @@ const TimesheetInput: React.FC<Props> = ({ inputs, setInputs }) => {
         <div className="grid grid-cols-2 gap-4">
           {/* Province */}
           <div>
-            <label className="block text-sm font-semibold text-slate-700 mb-2">{t('common.province')}</label>
+            <label className="block text-sm font-semibold text-ink-2 mb-2">{t('common.province')}</label>
             <select
               value={inputs.province}
               onChange={(e) => setInputs({ ...inputs, province: e.target.value })}
-              className="w-full px-4 py-2 border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-500 bg-white text-slate-800"
+              className="w-full px-4 py-2 border border-ink-5 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-500 bg-white text-ink"
             >
               {Object.entries(PROVINCIAL_DATA).map(([key, data]) => (
                 <option key={key} value={key}>{data.name}</option>
@@ -291,27 +291,27 @@ const TimesheetInput: React.FC<Props> = ({ inputs, setInputs }) => {
 
           {/* Hourly Wage */}
           <div>
-            <label className="block text-sm font-semibold text-slate-700 mb-2">{t('ts.hourlyWage')}</label>
+            <label className="block text-sm font-semibold text-ink-2 mb-2">{t('ts.hourlyWage')}</label>
             <div className="relative">
-              <span className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-500">$</span>
+              <span className="absolute left-3 top-1/2 -translate-y-1/2 text-mute">$</span>
               <input
                 type="number"
                 step="0.01"
                 value={inputs.hourlyWage || ''}
                 onFocus={(e) => e.target.select()}
                 onChange={(e) => setInputs({ ...inputs, hourlyWage: Math.max(0, parseFloat(e.target.value) || 0) })}
-                className="w-full pl-8 pr-4 py-2 border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-500"
+                className="w-full pl-8 pr-4 py-2 border border-ink-5 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-500"
               />
             </div>
           </div>
 
           {/* Pay Frequency */}
           <div className="col-span-2">
-            <label className="block text-sm font-semibold text-slate-700 mb-2">{t('ts.payFrequency')}</label>
+            <label className="block text-sm font-semibold text-ink-2 mb-2">{t('ts.payFrequency')}</label>
             <select
               value={inputs.payFrequency}
               onChange={(e) => setInputs({ ...inputs, payFrequency: e.target.value as PayFrequency })}
-              className="w-full px-4 py-2 border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-500 bg-white text-slate-800"
+              className="w-full px-4 py-2 border border-ink-5 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-500 bg-white text-ink"
             >
               <option value={PayFrequency.DAILY}>{t('ts.daily')}</option>
               <option value={PayFrequency.WEEKLY}>{t('ts.weekly')}</option>
@@ -324,7 +324,7 @@ const TimesheetInput: React.FC<Props> = ({ inputs, setInputs }) => {
           {/* RRSP Contribution */}
           <div className="col-span-2">
             <div className="flex items-center justify-between mb-4">
-              <label className="block text-sm font-semibold text-slate-700">{t('annual.rrsp')}</label>
+              <label className="block text-sm font-semibold text-ink-2">{t('annual.rrsp')}</label>
               <label className="relative inline-flex items-center cursor-pointer">
                 <input
                   type="checkbox"
@@ -339,20 +339,20 @@ const TimesheetInput: React.FC<Props> = ({ inputs, setInputs }) => {
                     rrspEmployerMatch: e.target.checked ? (inputs.rrspEmployerMatch || 5) : 0
                   })}
                 />
-                <div className="w-11 h-6 bg-slate-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-red-300 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-red-600"></div>
+                <div className="w-11 h-6 bg-pearl-shade peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-red-300 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-ink-5 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-red-600"></div>
               </label>
             </div>
 
             {!!((inputs.rrspType === 'percent' ? inputs.rrspPercentage : inputs.rrspContributionPerPeriod) && ((inputs.rrspPercentage || 0) > 0 || (inputs.rrspContributionPerPeriod || 0) > 0)) && (
               <div className="bg-red-50/50 p-4 rounded-xl border border-red-100/70 animate-fadeIn space-y-4">
                 {/* Toggle between Amount and Percent */}
-                <div className="flex rounded-lg bg-slate-100 p-0.5" role="group">
+                <div className="flex rounded-lg bg-pearl p-0.5" role="group">
                   <button
                     type="button"
                     className={`flex-1 py-1 text-xs font-semibold rounded-md transition-all ${
                       (inputs.rrspType || 'amount') === 'amount'
-                        ? 'bg-white text-slate-800 shadow-sm'
-                        : 'text-slate-500 hover:text-slate-800'
+                        ? 'bg-white text-ink shadow-sm'
+                        : 'text-mute hover:text-ink'
                     }`}
                     onClick={() => setInputs({ ...inputs, rrspType: 'amount' })}
                   >
@@ -362,8 +362,8 @@ const TimesheetInput: React.FC<Props> = ({ inputs, setInputs }) => {
                     type="button"
                     className={`flex-1 py-1 text-xs font-semibold rounded-md transition-all ${
                       inputs.rrspType === 'percent'
-                        ? 'bg-white text-slate-800 shadow-sm'
-                        : 'text-slate-500 hover:text-slate-800'
+                        ? 'bg-white text-ink shadow-sm'
+                        : 'text-mute hover:text-ink'
                     }`}
                     onClick={() => setInputs({ ...inputs, rrspType: 'percent' })}
                   >
@@ -381,7 +381,7 @@ const TimesheetInput: React.FC<Props> = ({ inputs, setInputs }) => {
                         type="number"
                         min="0"
                         step="25"
-                        className="w-full py-2 pl-7 pr-3 bg-white text-slate-900 border border-red-200 rounded-lg focus:ring-2 focus:ring-red-500 focus:outline-none text-sm font-semibold"
+                        className="w-full py-2 pl-7 pr-3 bg-white text-ink border border-red-200 rounded-lg focus:ring-2 focus:ring-red-500 focus:outline-none text-sm font-semibold"
                         value={inputs.rrspContributionPerPeriod || ''}
                         onFocus={(e) => e.target.select()}
                         onChange={(e) => setInputs({ ...inputs, rrspContributionPerPeriod: Math.max(0, parseFloat(e.target.value) || 0) })}
@@ -399,7 +399,7 @@ const TimesheetInput: React.FC<Props> = ({ inputs, setInputs }) => {
                             min="0"
                             max="100"
                             step="0.5"
-                            className="w-full py-2 pl-3 pr-8 bg-white text-slate-900 border border-red-200 rounded-lg focus:ring-2 focus:ring-red-500 focus:outline-none text-sm font-semibold"
+                            className="w-full py-2 pl-3 pr-8 bg-white text-ink border border-red-200 rounded-lg focus:ring-2 focus:ring-red-500 focus:outline-none text-sm font-semibold"
                             value={inputs.rrspPercentage || ''}
                             onFocus={(e) => e.target.select()}
                             onChange={(e) => {
@@ -417,7 +417,7 @@ const TimesheetInput: React.FC<Props> = ({ inputs, setInputs }) => {
                       <div>
                         <label className="block text-xs font-bold text-red-800 mb-1.5 ml-1">{t('annual.employerMatch')}</label>
                         <select
-                          className="w-full py-2 pl-2 pr-7 bg-white text-slate-900 border border-red-200 rounded-lg focus:ring-2 focus:ring-red-500 focus:outline-none text-xs sm:text-sm font-semibold truncate"
+                          className="w-full py-2 pl-2 pr-7 bg-white text-ink border border-red-200 rounded-lg focus:ring-2 focus:ring-red-500 focus:outline-none text-xs sm:text-sm font-semibold truncate"
                           value={(inputs as any).rrspMatchPolicy || 'equal'}
                           onChange={(e) => {
                             const policy = e.target.value;
@@ -456,7 +456,7 @@ const TimesheetInput: React.FC<Props> = ({ inputs, setInputs }) => {
                         min="0"
                         max="100"
                         step="0.5"
-                        className="w-full py-2 pl-3 pr-8 bg-white text-slate-900 border border-red-200 rounded-lg focus:ring-2 focus:ring-red-500 focus:outline-none text-sm"
+                        className="w-full py-2 pl-3 pr-8 bg-white text-ink border border-red-200 rounded-lg focus:ring-2 focus:ring-red-500 focus:outline-none text-sm"
                         value={inputs.rrspEmployerMatch || ''}
                         onFocus={(e) => e.target.select()}
                         onChange={(e) => setInputs({ ...inputs, rrspEmployerMatch: Math.max(0, parseFloat(e.target.value) || 0) })}
@@ -480,14 +480,14 @@ const TimesheetInput: React.FC<Props> = ({ inputs, setInputs }) => {
 
         {/* Calendar */}
         <div>
-          <h3 className="text-sm font-bold text-slate-800 mb-3">
+          <h3 className="text-sm font-bold text-ink mb-3">
             {new Date(year, month, 1).toLocaleDateString(dateLocale, { month: 'long' })} {year}
           </h3>
           
           <div className="grid grid-cols-7 gap-2">
             {/* Weekday headers */}
             {[0, 1, 2, 3, 4, 5, 6].map((idx) => (
-              <div key={idx} className="text-center text-xs font-semibold text-slate-500 py-2">
+              <div key={idx} className="text-center text-xs font-semibold text-mute py-2">
                 {t(`day.${idx}`)}
               </div>
             ))}
@@ -503,9 +503,9 @@ const TimesheetInput: React.FC<Props> = ({ inputs, setInputs }) => {
         </div>
 
         {/* Selected Date Info */}
-        <div className="bg-slate-50 rounded-lg p-4 border border-slate-200">
+        <div className="bg-pearl-soft rounded-lg p-4 border border-line">
           <div className="flex items-center justify-between mb-3">
-            <h3 className="text-sm font-bold text-slate-800">
+            <h3 className="text-sm font-bold text-ink">
               <Icon name="calendar" size={18} /> {fromLocalDate(selectedDate).toLocaleDateString(dateLocale, {
                 weekday: 'long',
                 month: 'long',
@@ -522,30 +522,30 @@ const TimesheetInput: React.FC<Props> = ({ inputs, setInputs }) => {
 
           {/* Entry list for selected date */}
           {getEntriesForDate(selectedDate).length === 0 ? (
-            <p className="text-sm text-slate-500 italic">{t('ts.noEntries')}</p>
+            <p className="text-sm text-mute italic">{t('ts.noEntries')}</p>
           ) : (
             <div className="space-y-2">
               {getEntriesForDate(selectedDate).map(entry => (
-                <div key={entry.id} className="bg-white p-3 rounded-lg border border-slate-200 flex items-center justify-between">
+                <div key={entry.id} className="bg-white p-3 rounded-lg border border-line flex items-center justify-between">
                   <div className="min-w-0">
                     <div className="flex items-center gap-3 text-sm">
-                      <span className="font-semibold text-slate-800">
+                      <span className="font-semibold text-ink">
                         {entry.checkIn} → {entry.checkOut}
                       </span>
-                      <span className="text-slate-600">
+                      <span className="text-ink-3">
                         ({calculateEntryHours(entry)}h)
                       </span>
                       {entry.unpaidBreakMinutes > 0 && (
-                        <span className="text-xs text-slate-500">
+                        <span className="text-xs text-mute">
                           {t('ts.break')}: {entry.unpaidBreakMinutes}min
                         </span>
                       )}
                     </div>
                     {entry.tips ? (
-                      <p className="text-xs text-green-700 font-medium mt-1">+${entry.tips.toFixed(2)} {t('ts.tips')}</p>
+                      <p className="text-xs text-red-600 font-medium mt-1">+${entry.tips.toFixed(2)} {t('ts.tips')}</p>
                     ) : null}
                     {entry.notes && (
-                      <p className="text-xs text-slate-600 mt-1">{entry.notes}</p>
+                      <p className="text-xs text-ink-3 mt-1">{entry.notes}</p>
                     )}
                   </div>
                   <button
@@ -564,47 +564,47 @@ const TimesheetInput: React.FC<Props> = ({ inputs, setInputs }) => {
         {isAddingEntry && (
           <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4">
             <div className="bg-white rounded-xl shadow-2xl max-w-md w-full p-6">
-              <h3 className="text-lg font-bold text-slate-800 mb-4">{t('ts.addTimeEntry')}</h3>
+              <h3 className="text-lg font-bold text-ink mb-4">{t('ts.addTimeEntry')}</h3>
               
               <div className="space-y-4">
                 {/* Check-in */}
                 <div>
-                  <label className="block text-sm font-semibold text-slate-700 mb-2">{t('ts.checkIn')}</label>
+                  <label className="block text-sm font-semibold text-ink-2 mb-2">{t('ts.checkIn')}</label>
                   <input
                     type="time"
                     value={newEntry.checkIn}
                     onChange={(e) => setNewEntry({ ...newEntry, checkIn: e.target.value })}
-                    className="w-full px-4 py-2 border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-500"
+                    className="w-full px-4 py-2 border border-ink-5 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-500"
                   />
                 </div>
 
                 {/* Check-out */}
                 <div>
-                  <label className="block text-sm font-semibold text-slate-700 mb-2">{t('ts.checkOut')}</label>
+                  <label className="block text-sm font-semibold text-ink-2 mb-2">{t('ts.checkOut')}</label>
                   <input
                     type="time"
                     value={newEntry.checkOut}
                     onChange={(e) => setNewEntry({ ...newEntry, checkOut: e.target.value })}
-                    className="w-full px-4 py-2 border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-500"
+                    className="w-full px-4 py-2 border border-ink-5 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-500"
                   />
                 </div>
 
                 {/* Break */}
                 <div>
-                  <label className="block text-sm font-semibold text-slate-700 mb-2">{t('ts.unpaidBreakMin')}</label>
+                  <label className="block text-sm font-semibold text-ink-2 mb-2">{t('ts.unpaidBreakMin')}</label>
                   <input
                     type="number"
                     value={newEntry.unpaidBreakMinutes}
                     onChange={(e) => setNewEntry({ ...newEntry, unpaidBreakMinutes: Math.max(0, parseInt(e.target.value) || 0) })}
-                    className="w-full px-4 py-2 border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-500"
+                    className="w-full px-4 py-2 border border-ink-5 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-500"
                   />
                 </div>
 
                 {/* Tips */}
                 <div>
-                  <label className="block text-sm font-semibold text-slate-700 mb-2">{t('ts.tipsDeclared')} <span className="font-normal text-slate-500">{t('ts.optionalTaxable')}</span></label>
+                  <label className="block text-sm font-semibold text-ink-2 mb-2">{t('ts.tipsDeclared')} <span className="font-normal text-mute">{t('ts.optionalTaxable')}</span></label>
                   <div className="relative">
-                    <span className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-500 font-bold">$</span>
+                    <span className="absolute left-3 top-1/2 -translate-y-1/2 text-mute font-bold">$</span>
                     <input
                       type="number"
                       min="0"
@@ -612,40 +612,40 @@ const TimesheetInput: React.FC<Props> = ({ inputs, setInputs }) => {
                       placeholder="0"
                       value={newEntry.tips || ''}
                       onChange={(e) => setNewEntry({ ...newEntry, tips: Math.max(0, parseFloat(e.target.value) || 0) })}
-                      className="w-full pl-8 pr-4 py-2 border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-500"
+                      className="w-full pl-8 pr-4 py-2 border border-ink-5 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-500"
                     />
                   </div>
                   {/* How tips are paid decides what is withheld (CRA "Tips and
                       gratuities"): controlled tips carry CPP and EI, direct
                       tips carry neither. One setting for the whole timesheet. */}
-                  <div className="mt-2 flex rounded-lg bg-slate-100 p-0.5" role="group" aria-label={t('ts.tipsHow')}>
+                  <div className="mt-2 flex rounded-lg bg-pearl p-0.5" role="group" aria-label={t('ts.tipsHow')}>
                     {(['payroll', 'direct'] as const).map((k) => (
                       <button
                         key={k}
                         type="button"
                         onClick={() => setInputs({ ...inputs, tipsPaid: k })}
                         className={`flex-1 rounded-md py-1 text-xs font-semibold transition-all ${
-                          (inputs.tipsPaid ?? 'payroll') === k ? 'bg-white text-slate-800 shadow-sm' : 'text-slate-500 hover:text-slate-800'
+                          (inputs.tipsPaid ?? 'payroll') === k ? 'bg-white text-ink shadow-sm' : 'text-mute hover:text-ink'
                         }`}
                       >
                         {t(k === 'payroll' ? 'ts.tipsPayroll' : 'ts.tipsDirect')}
                       </button>
                     ))}
                   </div>
-                  <p className="text-xs text-slate-500 mt-1">
+                  <p className="text-xs text-mute mt-1">
                     {t((inputs.tipsPaid ?? 'payroll') === 'direct' ? 'ts.tipsHintDirect' : 'ts.tipsHint')}
                   </p>
                 </div>
 
                 {/* Notes */}
                 <div>
-                  <label className="block text-sm font-semibold text-slate-700 mb-2">{t('ts.notesOpt')}</label>
+                  <label className="block text-sm font-semibold text-ink-2 mb-2">{t('ts.notesOpt')}</label>
                   <input
                     type="text"
                     placeholder={t('ts.notesPlaceholder')}
                     value={newEntry.notes}
                     onChange={(e) => setNewEntry({ ...newEntry, notes: e.target.value })}
-                    className="w-full px-4 py-2 border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-500"
+                    className="w-full px-4 py-2 border border-ink-5 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-500"
                   />
                 </div>
               </div>
@@ -654,7 +654,7 @@ const TimesheetInput: React.FC<Props> = ({ inputs, setInputs }) => {
               <div className="flex gap-3 mt-6">
                 <button
                   onClick={() => setIsAddingEntry(false)}
-                  className="flex-1 px-4 py-2 bg-slate-200 text-slate-700 rounded-lg hover:bg-slate-300 transition-colors font-medium"
+                  className="flex-1 px-4 py-2 bg-pearl-shade text-ink-2 rounded-lg hover:bg-ink-5 transition-colors font-medium"
                 >
                   {t('common.cancel')}
                 </button>

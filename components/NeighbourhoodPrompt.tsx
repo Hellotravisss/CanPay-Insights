@@ -410,33 +410,33 @@ export default function NeighbourhoodPrompt({
   };
 
   const pill =
-    'inline-flex min-h-10 items-center gap-1.5 rounded-full border border-slate-200 bg-white px-4 py-2 text-sm font-medium text-slate-700 transition-colors hover:border-red-300 hover:bg-red-50 hover:text-red-700 disabled:opacity-50';
+    'inline-flex min-h-10 items-center gap-1.5 rounded-full border border-line bg-white px-4 py-2 text-sm font-medium text-ink-2 transition-colors hover:border-red-300 hover:bg-red-50 hover:text-red-700 disabled:opacity-50';
 
   return (
-    <div className="rounded-xl border border-slate-200 bg-white px-5 py-4">
+    <div className="rounded-xl border border-line bg-white px-5 py-4">
       {fsa && !editing ? (
         <>
           <div className="flex flex-wrap items-baseline justify-between gap-2">
-            <p className="text-sm font-medium text-slate-700">
+            <p className="text-sm font-medium text-ink-2">
               <Icon name="pin" size={18} /> {fsa}
             </p>
-            <button type="button" onClick={() => { setEditing(true); setText(''); }} className="text-xs text-slate-500 hover:text-slate-600">
+            <button type="button" onClick={() => { setEditing(true); setText(''); }} className="text-xs text-mute hover:text-ink-3">
               {t.change}
             </button>
           </div>
           {payoff && (
-            <div className="mt-3 rounded-lg bg-slate-50 px-4 py-3" aria-live="polite">
-              <p className="text-sm leading-6 text-slate-800">{payoff.line}</p>
-              {payoff.basis && <p className="mt-1 text-xs leading-5 text-slate-500">{payoff.basis}</p>}
+            <div className="mt-3 rounded-lg bg-pearl-soft px-4 py-3" aria-live="polite">
+              <p className="text-sm leading-6 text-ink">{payoff.line}</p>
+              {payoff.basis && <p className="mt-1 text-xs leading-5 text-mute">{payoff.basis}</p>}
             </div>
           )}
         </>
       ) : (
         <>
-          <p className="text-sm font-medium text-slate-700">
+          <p className="text-sm font-medium text-ink-2">
             <Icon name="pin" size={18} /> {t.title}
           </p>
-          <p className="mt-0.5 text-xs text-slate-500">{t.hint}</p>
+          <p className="mt-0.5 text-xs text-mute">{t.hint}</p>
           <form
             className="mt-3 flex flex-wrap items-center gap-2"
             onSubmit={(e) => { e.preventDefault(); submitTyped(); }}
@@ -450,7 +450,7 @@ export default function NeighbourhoodPrompt({
               maxLength={3}
               autoComplete="postal-code"
               inputMode="text"
-              className="w-24 rounded-full border border-slate-200 px-4 py-2 text-center text-sm font-semibold uppercase tracking-widest text-slate-800 focus:border-red-400 focus:outline-none"
+              className="w-24 rounded-full border border-line px-4 py-2 text-center text-sm font-semibold uppercase tracking-widest text-ink focus:border-red-400 focus:outline-none"
             />
             <button type="submit" className={pill} disabled={busy || text.length < 3}>{t.compare}</button>
             <button type="button" onClick={useDevice} className={pill} disabled={busy}>
@@ -459,14 +459,14 @@ export default function NeighbourhoodPrompt({
           </form>
           {note && <p className="mt-2 text-xs text-red-600" role="status">{note}</p>}
           {/* Layered notice: the one line that matters, the full purpose a tap away. */}
-          <details className="group mt-3 text-xs text-slate-500">
+          <details className="group mt-3 text-xs text-mute">
             <summary className="inline-flex cursor-pointer list-none items-center gap-1 marker:content-none [&::-webkit-details-marker]:hidden">
               {t.consentShort}
               <span className="transition-transform group-open:rotate-90" aria-hidden="true">›</span>
             </summary>
             <p className="mt-1.5 leading-5">
               {t.consent}{' '}
-              <a href="/privacy#location" className="underline decoration-slate-300 underline-offset-2 hover:text-slate-600">{t.privacy}</a>
+              <a href="/privacy#location" className="underline decoration-slate-300 underline-offset-2 hover:text-ink-3">{t.privacy}</a>
             </p>
           </details>
         </>

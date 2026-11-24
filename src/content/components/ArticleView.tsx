@@ -2,7 +2,9 @@ import type { JSX } from 'react';
 import { allArticles, getArticleBySlug } from '../articles-data';
 import type { Article } from '../types';
 import ArticleShareButtons from './ArticleShareButtons';
-import AvowdCredit from '../../../components/AvowdCredit';
+import SiteHeader from '../../../components/site/SiteHeader';
+import SiteFooter from '../../../components/site/SiteFooter';
+import { Eyebrow, Card, Callout, ButtonLink } from '../../../components/site/ui';
 
 interface ArticleViewProps {
   slug: string;
@@ -82,7 +84,7 @@ const renderContent = (content: string) => {
 
   const renderInlineHtml = (text: string) => {
     const withFormatting = text
-      .replace(/\*\*(.+?)\*\*/g, '<strong class="font-semibold text-slate-900">$1</strong>')
+      .replace(/\*\*(.+?)\*\*/g, '<strong class="font-semibold text-ink">$1</strong>')
       .replace(/\*(.+?)\*/g, '<em>$1</em>')
       .replace(/\[([^\]]+)\]\(([^)]+)\)/g, '<a href="$2" class="font-medium text-red-600 underline decoration-red-200 underline-offset-2 hover:text-red-700 hover:decoration-red-400">$1</a>');
     return { __html: withFormatting };
@@ -95,27 +97,30 @@ const renderContent = (content: string) => {
 
     const header = tableRows[0];
     const body = tableRows.slice(1);
+    // A column whose every body cell starts with a figure ($72,000 · 76.5% · #6 · −$1,200) is right-aligned.
+    const isFigure = (cell: string | undefined) => /^[\s*]*[-−+~≈#]?\s*\$?\d/.test(cell ?? '');
+    const numericCol = header.map((_, col) => col > 0 && body.length > 0 && body.every((row) => isFigure(row[col])));
     elements.push(
-      <div key={`table-${elements.length}`} className="my-7 overflow-hidden rounded-xl border border-slate-200">
+      <div key={`table-${elements.length}`} className="my-8 overflow-hidden rounded-xl border border-line bg-white">
         {/* Keyboard-reachable scroll region (axe scrollable-region-focusable). */}
-        <div className="overflow-x-auto" tabIndex={0} role="region" aria-label="Scrollable table">
+        <div className="overflow-x-auto focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-red-600" tabIndex={0} role="region" aria-label="Scrollable table">
           <table className="min-w-full border-collapse">
             <thead>
-              <tr className="border-b border-slate-200 bg-slate-50">
+              <tr className="border-b border-line bg-pearl-soft">
                 {header.map((cell, index) => (
-                  <th key={index} className="px-4 py-3 text-left text-xs font-bold uppercase tracking-wide text-slate-500">
+                  <th key={index} className={`px-4 py-3 text-[11px] font-semibold uppercase tracking-[0.12em] text-mute ${numericCol[index] ? 'text-right' : 'text-left'}`}>
                     {cell.trim()}
                   </th>
                 ))}
               </tr>
             </thead>
-            <tbody className="divide-y divide-slate-100">
+            <tbody className="divide-y divide-line">
               {body.map((row, rowIndex) => (
                 <tr key={rowIndex}>
                   {row.map((cell, cellIndex) => (
                     <td
                       key={cellIndex}
-                      className={`px-4 py-3 text-sm ${cellIndex === 0 ? 'font-medium text-slate-800' : 'text-slate-600'}`}
+                      className={`px-4 py-3 text-[15px] leading-6 tabular-nums ${numericCol[cellIndex] ? 'whitespace-nowrap text-right' : ''} ${cellIndex === 0 ? 'font-medium text-ink' : 'text-ink-2'}`}
                       dangerouslySetInnerHTML={renderInlineHtml(cell.trim())}
                     />
                   ))}
@@ -136,7 +141,7 @@ const renderContent = (content: string) => {
 
     const ListTag = listType === 'ul' ? 'ul' : 'ol';
     elements.push(
-      <ListTag key={`list-${elements.length}`} className={`my-5 ${listType === 'ul' ? 'list-disc' : 'list-decimal'} space-y-2.5 pl-6 text-[17px] leading-[1.8] text-slate-700 marker:text-red-400`}>
+      <ListTag key={`list-${elements.length}`} className={`my-6 ${listType === 'ul' ? 'list-disc' : 'list-decimal'} space-y-2.5 pl-6 text-[18px] leading-[1.75] text-ink-2 marker:text-ink-4 ${listType === 'ol' ? 'marker:tabular-nums' : ''}`}>
         {listItems.map((item, index) => (
           <li key={index} className="pl-1" dangerouslySetInnerHTML={renderInlineHtml(item)} />
         ))}
@@ -179,15 +184,15 @@ const renderContent = (content: string) => {
     flushList();
 
     if (trimmed.startsWith('# ')) {
-      elements.push(<h1 key={index} className="mb-5 mt-10 text-3xl font-bold tracking-tight text-slate-900">{trimmed.substring(2)}</h1>);
+      elements.push(<h1 key={index} className="mb-5 mt-12 font-display text-[1.75rem] font-semibold leading-tight text-ink md:text-[2rem]">{trimmed.substring(2)}</h1>);
     } else if (trimmed.startsWith('## ')) {
-      elements.push(<h2 key={index} className="mb-4 mt-10 text-2xl font-bold tracking-tight text-slate-900">{trimmed.substring(3)}</h2>);
+      elements.push(<h2 key={index} className="mb-4 mt-12 font-display text-[1.5rem] font-semibold leading-snug text-ink md:text-[1.75rem]">{trimmed.substring(3)}</h2>);
     } else if (trimmed.startsWith('### ')) {
-      elements.push(<h3 key={index} className="mb-3 mt-8 text-xl font-semibold text-slate-900">{trimmed.substring(4)}</h3>);
+      elements.push(<h3 key={index} className="mb-3 mt-8 text-lg font-semibold leading-snug text-ink">{trimmed.substring(4)}</h3>);
     } else if (trimmed === '---') {
-      elements.push(<hr key={index} className="my-8 border-slate-200" />);
+      elements.push(<hr key={index} className="my-10 border-line" />);
     } else if (trimmed !== '') {
-      elements.push(<p key={index} className="my-5 text-[17px] leading-[1.85] text-slate-700" dangerouslySetInnerHTML={renderInlineHtml(trimmed)} />);
+      elements.push(<p key={index} className="my-5 text-[18px] leading-[1.75] text-ink-2" dangerouslySetInnerHTML={renderInlineHtml(trimmed)} />);
     }
   });
 
@@ -197,20 +202,19 @@ const renderContent = (content: string) => {
   return elements;
 };
 
+const FOCUS = 'focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-red-600';
+
 const CalculatorCTA = () => {
   return (
-    <div className="my-8 rounded-xl bg-gradient-to-br from-red-600 to-red-700 p-6 text-white">
-      <h2 className="mb-2 text-xl font-bold">Calculate Your Take-Home Pay</h2>
-      <p className="mb-4 text-sm text-red-100">
+    <Card className="my-10 p-6 md:p-8">
+      <h2 className="mb-2 font-display text-2xl font-semibold text-ink">Calculate Your Take-Home Pay</h2>
+      <p className="mb-5 text-base leading-7 text-ink-3">
         Enter your salary and province to see detailed tax breakdowns instantly.
       </p>
-      <a
-        href="/"
-        className="inline-flex items-center gap-2 rounded-lg bg-white px-5 py-2.5 font-bold text-red-600 no-underline transition-colors hover:bg-red-50"
-      >
+      <ButtonLink href="/">
         Use Free Calculator
-      </a>
-    </div>
+      </ButtonLink>
+    </Card>
   );
 };
 
@@ -222,23 +226,23 @@ const WEALTHSIMPLE_ARTICLE_SLUGS = ['tfsa-vs-rrsp-2026', 'rrsp-tax-savings-canad
 
 const WealthsimpleCTA = () => {
   return (
-    <div className="my-8 rounded-xl border border-slate-200 bg-slate-50 p-6">
-      <h2 className="mb-2 text-xl font-bold text-slate-900">Where Canadians actually hold TFSAs and RRSPs</h2>
-      <p className="mb-4 text-sm leading-6 text-slate-600">
+    <div className="my-10 rounded-2xl border border-line bg-pearl-soft p-6">
+      <h2 className="mb-2 font-display text-xl font-semibold text-ink">Where Canadians actually hold TFSAs and RRSPs</h2>
+      <p className="mb-4 text-sm leading-6 text-ink-2">
         If you&apos;re opening one of these accounts, Wealthsimple is a low-fee option many Canadians use for
         self-directed and automated investing.
       </p>
-      <a
+      <ButtonLink
         href={WEALTHSIMPLE_REFERRAL_URL}
+        variant="secondary"
         target="_blank"
         rel="noopener noreferrer sponsored"
-        className="inline-flex items-center gap-2 rounded-lg bg-slate-900 px-5 py-2.5 font-bold text-white no-underline transition-colors hover:bg-slate-700"
       >
         See Wealthsimple
-      </a>
-      <p className="mt-3 text-xs text-slate-500">
+      </ButtonLink>
+      <p className="mt-3 text-xs text-mute">
         Paid referral link — we may earn a bonus if you sign up, at no extra cost to you.{' '}
-        <a href="/affiliate-disclosure" className="underline hover:text-slate-600">Learn more</a>.
+        <a href="/affiliate-disclosure" className="underline hover:text-ink">Learn more</a>.
       </p>
     </div>
   );
@@ -248,17 +252,17 @@ const CalculatorLinksPanel = ({ article }: { article: Article }) => {
   const calculatorLinks = getCalculatorLinks(article);
 
   return (
-    <div className="mb-8 rounded-xl border border-slate-200 bg-slate-50 p-5">
-      <h2 className="mb-3 text-lg font-bold text-slate-900">Useful calculators for this guide</h2>
+    <div className="mb-8 rounded-2xl border border-line bg-pearl-soft p-5">
+      <h2 className="mb-4 font-display text-xl font-semibold text-ink">Useful calculators for this guide</h2>
       <div className="grid grid-cols-1 gap-3 md:grid-cols-3">
         {calculatorLinks.map((link) => (
           <a
             key={link.href}
             href={link.href}
-            className="block rounded-lg border border-slate-200 bg-white p-4 no-underline transition-colors hover:border-red-200 hover:bg-red-50"
+            className={`group block rounded-xl border border-line bg-white p-4 no-underline transition-colors duration-150 hover:border-ink-5 ${FOCUS}`}
           >
-            <h3 className="text-sm font-bold text-slate-900">{link.label}</h3>
-            <p className="mt-2 text-sm leading-6 text-slate-600">{link.description}</p>
+            <h3 className="text-sm font-semibold text-ink transition-colors group-hover:text-red-600">{link.label}</h3>
+            <p className="mt-2 text-sm leading-6 text-ink-3">{link.description}</p>
           </a>
         ))}
       </div>
@@ -271,134 +275,139 @@ export default function ArticleView({ slug }: ArticleViewProps) {
 
   if (!article) {
     return (
-      <main className="flex min-h-screen items-center justify-center bg-slate-50">
-        <div className="text-center">
-          <h1 className="mb-2 text-2xl font-bold text-slate-800">Article Not Found</h1>
-          <p className="mb-4 text-slate-500">This article may have been removed or does not exist.</p>
-          <a href="/blog" className="font-medium text-red-600 hover:underline">
-            Back to Articles
-          </a>
-        </div>
-      </main>
+      <div className="min-h-screen bg-pearl">
+        <SiteHeader current="guides" />
+        <main className="mx-auto flex max-w-3xl items-center justify-center px-4 py-24" role="main">
+          <div className="text-center">
+            <h1 className="mb-2 font-display text-3xl font-semibold text-ink">Article Not Found</h1>
+            <p className="mb-4 text-mute">This article may have been removed or does not exist.</p>
+            <a href="/blog" className="font-medium text-red-600 hover:underline">
+              Back to Articles
+            </a>
+          </div>
+        </main>
+        <SiteFooter />
+      </div>
     );
   }
 
   const relatedArticles = getRelatedArticles(article);
   const categoryLabel = categoryLabels[article.category] || article.category;
+  const siteLang = article.lang === 'fr' ? 'fr' : 'en';
 
   return (
-    <main className="min-h-screen bg-slate-50">
-      <header className="border-b border-slate-200 bg-white">
-        <div className="mx-auto max-w-3xl px-4 py-10">
-          <nav className="mb-4 flex items-center gap-2 text-sm text-slate-500" aria-label="Breadcrumb">
-            <a href="/blog" className="no-underline hover:text-red-600">
+    <div className="min-h-screen bg-pearl">
+      <SiteHeader lang={siteLang} current="guides" />
+
+      <main className="mx-auto max-w-3xl px-4" role="main">
+        <header className="pb-8 pt-8 md:pb-10 md:pt-12">
+          <nav className="mb-6 flex items-center gap-2 text-xs text-mute" aria-label="Breadcrumb">
+            <a href="/blog" className="text-mute no-underline hover:text-red-600">
               Tax Guides
             </a>
-            <span>/</span>
-            <span className="text-slate-800">{categoryLabel}</span>
+            <span aria-hidden="true">/</span>
+            <span className="text-ink-2">{categoryLabel}</span>
           </nav>
 
-          <span className="mb-4 inline-block rounded-full bg-red-100 px-3 py-1 text-sm font-medium text-red-700">
-            {categoryLabel}
-          </span>
+          <Eyebrow className="mb-4">{categoryLabel}</Eyebrow>
 
-          <h1 className="mb-4 text-3xl font-bold text-slate-900 md:text-4xl">
+          <h1 className="font-display text-[2.125rem] font-semibold leading-[1.1] tracking-[-0.01em] text-ink md:text-[2.75rem]">
             {article.title}
           </h1>
 
           {article.subtitle && (
-            <p className="mb-6 text-xl text-slate-600">
+            <p className="mt-4 text-lg leading-8 text-ink-3 md:text-xl">
               {article.subtitle}
             </p>
           )}
 
-          <div className="flex flex-wrap items-center gap-4 text-sm text-slate-500">
-            <span>By <a href="/about" className="font-medium text-slate-700 underline-offset-2 hover:text-red-600 hover:underline">Travis Zhang</a></span>
+          <div className="mt-6 flex flex-wrap items-center gap-x-4 gap-y-2 text-sm tabular-nums text-mute">
+            <span>By <a href="/about" className="font-medium text-ink-2 underline-offset-2 hover:text-red-600 hover:underline">Travis Zhang</a></span>
             <time dateTime={article.publishedAt}>{formatDate(article.publishedAt)}</time>
             {article.updatedAt && (
-              <span className="text-slate-500">
+              <span>
                 {' · '}Updated{' '}
                 <time dateTime={article.updatedAt}>{formatDate(article.updatedAt)}</time>
               </span>
             )}
-            {article.province && <span className="rounded bg-slate-100 px-2 py-1 text-slate-700">{article.province}</span>}
+            {article.province && <span className="rounded-full border border-line bg-white px-2.5 py-0.5 text-xs font-medium text-ink-2">{article.province}</span>}
             <span>{article.readTime} min read</span>
           </div>
-        </div>
-      </header>
+        </header>
 
-      <div className="mx-auto max-w-3xl px-4 py-8">
-        <article className="rounded-xl border border-slate-200 bg-white p-6 shadow-sm md:p-10">
+        {/* phone: the sheet runs edge to edge so the 18px reading column keeps its width */}
+        <article className="-mx-4 border-y border-line bg-white px-4 py-6 sm:mx-0 sm:rounded-2xl sm:border sm:p-8 md:p-12">
           {article.imageUrl && (
-            <div className="cover-frame mb-8 rounded-lg">
+            <div className="cover-frame mb-10 rounded-xl border border-line !bg-pearl-soft">
               <img src={article.imageUrl} alt={article.title} />
             </div>
           )}
 
-          {article.directAnswer && (
-            <div className="mb-8 rounded-xl border border-red-100/70 bg-red-50/50 p-5">
-              <p className="mb-2 text-xs font-semibold uppercase tracking-wide text-red-600">Quick Answer</p>
-              <p className="text-base leading-relaxed text-slate-800">{article.directAnswer}</p>
+          <div className="mx-auto max-w-[68ch]">
+            {article.directAnswer && (
+              <Callout title={<span className="text-[11px] font-semibold uppercase tracking-[0.14em] text-red-600">Quick Answer</span>} className="mb-10 !text-base !leading-7">
+                <p className="text-ink">{article.directAnswer}</p>
+              </Callout>
+            )}
+
+            <div className="max-w-none">
+              {renderContent(article.content)}
             </div>
-          )}
 
-          <div className="prose prose-slate max-w-none">
-            {renderContent(article.content)}
-          </div>
+            <CalculatorCTA />
 
-          <CalculatorCTA />
+            {WEALTHSIMPLE_ARTICLE_SLUGS.includes(article.slug) && <WealthsimpleCTA />}
 
-          {WEALTHSIMPLE_ARTICLE_SLUGS.includes(article.slug) && <WealthsimpleCTA />}
+            {article.faq && article.faq.length > 0 && (
+              <section className="mt-12 border-t border-line pt-10">
+                <h2 className="mb-6 font-display text-[1.5rem] font-semibold text-ink md:text-[1.75rem]">Frequently Asked Questions</h2>
+                <div className="divide-y divide-line overflow-hidden rounded-xl border border-line">
+                  {article.faq.map((item, index) => (
+                    <details key={index} className="group bg-white">
+                      <summary className={`flex cursor-pointer list-none items-center justify-between gap-3 p-5 font-semibold text-ink transition-colors hover:bg-pearl-soft ${FOCUS} focus-visible:outline-offset-[-2px]`}>
+                        <span>{item.question}</span>
+                        <span className="ml-3 flex-shrink-0 text-mute transition-transform duration-150 group-open:rotate-180 motion-reduce:transition-none" aria-hidden="true">⌄</span>
+                      </summary>
+                      <div className="px-5 pb-5 text-base leading-7 text-ink-2">
+                        {item.answer}
+                      </div>
+                    </details>
+                  ))}
+                </div>
+              </section>
+            )}
 
-          {article.faq && article.faq.length > 0 && (
-            <section className="mt-10 border-t border-slate-200 pt-8">
-              <h2 className="mb-6 text-2xl font-bold text-slate-900">Frequently Asked Questions</h2>
-              <div className="space-y-4">
-                {article.faq.map((item, index) => (
-                  <details key={index} className="group overflow-hidden rounded-xl border border-slate-200 bg-slate-50">
-                    <summary className="flex cursor-pointer list-none items-center justify-between p-5 font-semibold text-slate-800 transition-colors hover:bg-slate-100">
-                      <span>{item.question}</span>
-                      <span className="ml-3 flex-shrink-0 text-slate-500 group-open:rotate-180">⌄</span>
-                    </summary>
-                    <div className="px-5 pb-5 text-sm leading-relaxed text-slate-600">
-                      {item.answer}
-                    </div>
-                  </details>
-                ))}
-              </div>
-            </section>
-          )}
+            <div className="mt-12">
+              <CalculatorLinksPanel article={article} />
+            </div>
 
-          <div className="mt-10">
-            <CalculatorLinksPanel article={article} />
-          </div>
+            <ArticleShareButtons slug={article.slug} title={article.title} excerpt={article.excerpt} />
 
-          <ArticleShareButtons slug={article.slug} title={article.title} excerpt={article.excerpt} />
-
-          <div className="mt-8 rounded-xl border border-yellow-100/60 bg-yellow-50/50 p-4">
-            <p className="text-sm text-yellow-800">
-              <strong>Disclaimer:</strong> This content is based on publicly available information and general tax knowledge for reference only. Individual tax situations may vary. Please consult a qualified tax professional or accountant for personalized advice.
-            </p>
+            <Callout className="mt-8">
+              <p>
+                <strong className="text-ink">Disclaimer:</strong> This content is based on publicly available information and general tax knowledge for reference only. Individual tax situations may vary. Please consult a qualified tax professional or accountant for personalized advice.
+              </p>
+            </Callout>
           </div>
         </article>
 
         {relatedArticles.length > 0 && (
-          <section className="mt-12">
-            <h2 className="mb-6 text-2xl font-bold text-slate-800">Related Articles</h2>
+          <section className="mt-14 pb-16">
+            <h2 className="mb-6 font-display text-2xl font-semibold text-ink md:text-[2rem]">Related Articles</h2>
             <div className="grid grid-cols-1 gap-4 md:grid-cols-3">
               {relatedArticles.map((related) => (
                 <a
                   key={related.id}
                   href={`/blog/${related.slug}`}
-                  className="block rounded-lg border border-slate-200 bg-white p-4 text-left no-underline transition-shadow hover:shadow-md"
+                  className={`group flex flex-col rounded-2xl border border-line bg-white p-5 text-left no-underline transition-colors duration-150 hover:border-ink-5 ${FOCUS}`}
                 >
-                  <span className="text-xs font-medium uppercase text-red-600">
+                  <span className="text-[11px] font-semibold uppercase tracking-[0.14em] text-mute">
                     {categoryLabels[related.category]}
                   </span>
-                  <h3 className="mt-1 line-clamp-2 font-bold text-slate-800">
+                  <h3 className="mt-2 line-clamp-2 font-display text-lg font-semibold leading-snug text-ink transition-colors group-hover:text-red-600">
                     {related.title}
                   </h3>
-                  <p className="mt-2 line-clamp-2 text-sm text-slate-500">
+                  <p className="mt-2 line-clamp-2 text-sm leading-6 text-ink-3">
                     {related.excerpt}
                   </p>
                 </a>
@@ -406,17 +415,10 @@ export default function ArticleView({ slug }: ArticleViewProps) {
             </div>
           </section>
         )}
+        {relatedArticles.length === 0 && <div className="pb-16" />}
+      </main>
 
-        <div className="mt-12 text-center">
-          <a href="/blog" className="inline-flex items-center gap-2 font-medium text-red-600 no-underline hover:text-red-700">
-            ← View All Articles
-          </a>
-        </div>
-
-        <footer className="mt-12 border-t border-slate-200 pt-6 text-center text-xs text-slate-500" role="contentinfo">
-          <p>© CanPay Insights · <AvowdCredit /></p>
-        </footer>
-      </div>
-    </main>
+      <SiteFooter lang={siteLang} />
+    </div>
   );
 }

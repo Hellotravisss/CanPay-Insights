@@ -1254,7 +1254,7 @@ const TaxOptimizationPanel: React.FC<TaxOptimizationPanelProps> = ({
             </div>
             <div className="flex justify-between">
               <span className="text-[#5E6270]">{t('opt.recommendedContribution')}</span>
-              <span className="text-[#2F5DA8] font-semibold">{formatCurrency(tfsa.recommendedAmount)}</span>
+              <span className="text-ink font-semibold tabular-nums">{formatCurrency(tfsa.recommendedAmount)}</span>
             </div>
             <div className="flex justify-between">
               <span className="text-[#5E6270]">{t('opt.lifetimeRoom')}</span>
@@ -1278,7 +1278,7 @@ const TaxOptimizationPanel: React.FC<TaxOptimizationPanelProps> = ({
             </div>
             <div className="flex justify-between">
               <span className="text-[#5E6270]">{t('opt.recommendedContribution')}</span>
-              <span className="text-red-600 font-semibold">{formatCurrency(fhsa.recommendedAmount)}</span>
+              <span className="text-ink font-semibold tabular-nums">{formatCurrency(fhsa.recommendedAmount)}</span>
             </div>
             <div className="flex justify-between">
               <span className="text-[#5E6270]">{t('opt.lifetimeLimit')}</span>

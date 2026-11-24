@@ -153,20 +153,20 @@ export default function IntentPrompt({
   };
 
   return (
-    <div className="rounded-xl border border-slate-200 bg-white p-5 shadow-sm">
+    <div className="rounded-xl border border-line bg-white p-5 shadow-sm">
       {picked ? (
-        <p className="text-sm font-medium text-emerald-700">
-          ✓ {t.thanks} <span className="font-normal text-slate-500">({t[picked]})</span>
+        <p className="text-sm font-medium text-red-600">
+          ✓ {t.thanks} <span className="font-normal text-mute">({t[picked]})</span>
         </p>
       ) : (
         <>
-          <p className="text-sm font-medium text-slate-600">{t.prompt}</p>
+          <p className="text-sm font-medium text-ink-3">{t.prompt}</p>
           <div className="mt-3 flex flex-wrap gap-2">
             {OPTIONS.map((o) => (
               <button
                 key={o.key}
                 onClick={() => choose(o.key)}
-                className="rounded-full border border-slate-200 bg-white px-3 py-1.5 text-sm text-slate-700 transition-colors hover:border-red-300 hover:bg-red-50 hover:text-red-700"
+                className="rounded-full border border-line bg-white px-3 py-1.5 text-sm text-ink-2 transition-colors hover:border-red-300 hover:bg-red-50 hover:text-red-700"
               >
                 <Icon name={o.icon} size={18} className="mr-1" />
                 {t[o.key]}

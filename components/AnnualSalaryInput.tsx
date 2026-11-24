@@ -39,10 +39,10 @@ function EquityPayoff({ inputs }: { inputs: AnnualSalaryInputs }) {
 
   return (
     <div className="rounded-lg bg-white border border-red-100 px-4 py-3">
-      <p className="text-[11px] font-bold uppercase tracking-wide text-slate-500">{t('annual.equityKeepLabel')}</p>
+      <p className="text-[11px] font-bold uppercase tracking-wide text-mute">{t('annual.equityKeepLabel')}</p>
       <p className="mt-1 flex flex-wrap items-baseline gap-x-2">
-        <span className="text-2xl font-extrabold tabular-nums text-slate-900">{money(kept)}</span>
-        <span className="text-sm text-slate-500">{t('annual.equityOf').replace('{v}', money(equity))}</span>
+        <span className="text-2xl font-extrabold tabular-nums text-ink">{money(kept)}</span>
+        <span className="text-sm text-mute">{t('annual.equityOf').replace('{v}', money(equity))}</span>
       </p>
       <p className="mt-1 text-xs text-red-700">
         {t('annual.equityLost').replace('{v}', money(lost)).replace('{p}', `${pct}%`)}
@@ -69,7 +69,7 @@ const AnnualSalaryInput: React.FC<Props> = ({ inputs, setInputs }) => {
   };
 
   return (
-    <div className="bg-white rounded-xl shadow-sm border border-slate-200 p-6 space-y-6">
+    <div className="bg-white rounded-xl shadow-sm border border-line p-6 space-y-6">
       <div className="flex items-center gap-3 mb-4">
         <div className="w-10 h-10 bg-red-600 rounded-lg flex items-center justify-center">
           <svg className="w-6 h-6 text-white" fill="currentColor" viewBox="0 0 20 20">
@@ -78,18 +78,18 @@ const AnnualSalaryInput: React.FC<Props> = ({ inputs, setInputs }) => {
           </svg>
         </div>
         <div>
-          <h2 className="text-lg font-bold text-slate-800">{t('annual.title')}</h2>
-          <p className="text-xs text-slate-500">{t('annual.subtitle')}</p>
+          <h2 className="font-display text-xl font-semibold text-ink">{t('annual.title')}</h2>
+          <p className="text-xs text-mute">{t('annual.subtitle')}</p>
         </div>
       </div>
 
       {/* Annual Salary Input */}
       <div>
-        <label className="block text-sm font-bold text-slate-700 mb-2">
+        <label className="block text-sm font-bold text-ink-2 mb-2">
           {t('annual.salaryLabel')} <span className="text-red-600">*</span>
         </label>
         <div className="relative">
-          <span className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-500 font-bold">$</span>
+          <span className="absolute left-3 top-1/2 -translate-y-1/2 text-mute font-bold">$</span>
           <input
             type="number"
             /* `|| ''` and select-on-focus are BOTH needed, and every sibling
@@ -102,13 +102,13 @@ const AnnualSalaryInput: React.FC<Props> = ({ inputs, setInputs }) => {
             value={inputs.annualSalary || ''}
             onFocus={(e) => e.target.select()}
             onChange={(e) => setInputs({ ...inputs, annualSalary: Math.max(0, parseFloat(e.target.value) || 0) })}
-            className="w-full pl-8 pr-4 py-3 border-2 border-slate-200 rounded-lg focus:border-red-500 focus:outline-none text-lg font-bold"
+            className="w-full pl-8 pr-4 py-3 border-2 border-line rounded-lg focus:border-red-500 focus:outline-none text-lg font-bold"
             placeholder="100,000"
             step="1000"
             min="0"
           />
         </div>
-        <p className="text-xs text-slate-500 mt-1">
+        <p className="text-xs text-mute mt-1">
           <Icon name="chart" size={18} /> {t('annual.salaryLabel')}: {formatCurrency(inputs.annualSalary)}
         </p>
         <ReverseSalary inputs={inputs} setInputs={setInputs} />
@@ -116,13 +116,13 @@ const AnnualSalaryInput: React.FC<Props> = ({ inputs, setInputs }) => {
 
       {/* Province Selection */}
       <div>
-        <label className="block text-sm font-bold text-slate-700 mb-2">
+        <label className="block text-sm font-bold text-ink-2 mb-2">
           {t('common.province')} <span className="text-red-600">*</span>
         </label>
         <select
           value={inputs.province}
           onChange={(e) => setInputs({ ...inputs, province: e.target.value })}
-          className="w-full px-4 py-3 border-2 border-slate-200 rounded-lg focus:border-red-500 focus:outline-none font-medium"
+          className="w-full px-4 py-3 border-2 border-line rounded-lg focus:border-red-500 focus:outline-none font-medium"
         >
           {Object.entries(PROVINCIAL_DATA).map(([key, data]) => (
             <option key={key} value={key}>
@@ -130,27 +130,27 @@ const AnnualSalaryInput: React.FC<Props> = ({ inputs, setInputs }) => {
             </option>
           ))}
         </select>
-        <p className="text-xs text-slate-500 mt-1">
+        <p className="text-xs text-mute mt-1">
           <Icon name="briefcase" size={18} /> {t('annual.provinceHint')}
         </p>
         <SpouseClaim value={inputs.spouseNetIncome} onChange={(v) => setInputs({ ...inputs, spouseNetIncome: v })} />
         <Under18 value={inputs.under18} onChange={(v) => setInputs({ ...inputs, under18: v })} />
       </div>
 
-      <hr className="border-slate-100" />
+      <hr className="border-line" />
 
       {/* Additional Income */}
       <div>
         <button type="button" onClick={() => setShowAdditional(v => !v)} className="w-full flex items-center justify-between text-left">
           <div>
-            <p className="text-sm font-bold text-slate-700">{t('annual.addIncome')}</p>
-            <p className="text-xs text-slate-500">{t('annual.addIncomeHint')}</p>
+            <p className="text-sm font-bold text-ink-2">{t('annual.addIncome')}</p>
+            <p className="text-xs text-mute">{t('annual.addIncomeHint')}</p>
           </div>
           <div className="flex items-center gap-2">
             {(inputs.additionalIncome && Object.values(inputs.additionalIncome).some(v => v > 0)) && (
               <span className="text-xs bg-red-100 text-red-700 font-semibold px-2 py-0.5 rounded-full">{t('common.active')}</span>
             )}
-            <svg className={`w-5 h-5 text-slate-500 transition-transform ${showAdditional ? 'rotate-180' : ''}`} fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" /></svg>
+            <svg className={`w-5 h-5 text-mute transition-transform ${showAdditional ? 'rotate-180' : ''}`} fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" /></svg>
           </div>
         </button>
         {showAdditional && (
@@ -179,24 +179,24 @@ const AnnualSalaryInput: React.FC<Props> = ({ inputs, setInputs }) => {
         )}
       </div>
 
-      <hr className="border-slate-100" />
+      <hr className="border-line" />
 
       {/* Other Deductions */}
       <div>
         <button type="button" onClick={() => setShowDeductions(v => !v)} className="w-full flex items-center justify-between text-left">
           <div>
-            <p className="text-sm font-bold text-slate-700">{t('annual.otherDed')}</p>
-            <p className="text-xs text-slate-500">{t('annual.otherDedHint')}</p>
+            <p className="text-sm font-bold text-ink-2">{t('annual.otherDed')}</p>
+            <p className="text-xs text-mute">{t('annual.otherDedHint')}</p>
           </div>
           <div className="flex items-center gap-2">
             {(inputs.deductions && Object.values(inputs.deductions).some(v => v > 0)) && (
               <span className="text-xs bg-red-100 text-red-700 font-semibold px-2 py-0.5 rounded-full">{t('common.active')}</span>
             )}
-            <svg className={`w-5 h-5 text-slate-500 transition-transform ${showDeductions ? 'rotate-180' : ''}`} fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" /></svg>
+            <svg className={`w-5 h-5 text-mute transition-transform ${showDeductions ? 'rotate-180' : ''}`} fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" /></svg>
           </div>
         </button>
         {showDeductions && (
-          <div className="mt-3 bg-slate-100 p-4 rounded-xl border border-slate-200 space-y-3">
+          <div className="mt-3 bg-pearl p-4 rounded-xl border border-line space-y-3">
             {([
               { key: 'pension',         label: t('ded.pension') },
               { key: 'ltdPremium',      label: t('annual.ltd') },
@@ -204,11 +204,11 @@ const AnnualSalaryInput: React.FC<Props> = ({ inputs, setInputs }) => {
               { key: 'otherDeductions', label: t('annual.otherDedItem') },
             ] as { key: keyof Deductions; label: string }[]).map(({ key, label }) => (
               <div key={key}>
-                <label htmlFor={`annual-ded-${key}`} className="block text-xs font-bold text-slate-700 mb-1">{label}</label>
+                <label htmlFor={`annual-ded-${key}`} className="block text-xs font-bold text-ink-2 mb-1">{label}</label>
                 <div className="relative">
-                  <span className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-500 font-bold">$</span>
+                  <span className="absolute left-3 top-1/2 -translate-y-1/2 text-mute font-bold">$</span>
                   <input id={`annual-ded-${key}`} type="number" min="0" step="1" placeholder="0"
-                    className="w-full pl-8 pr-4 py-2.5 border border-slate-300 rounded-lg bg-white focus:outline-none focus:ring-2 focus:ring-red-500"
+                    className="w-full pl-8 pr-4 py-2.5 border border-ink-5 rounded-lg bg-white focus:outline-none focus:ring-2 focus:ring-red-500"
                     value={inputs.deductions?.[key] || ''}
                     onFocus={(e) => e.target.select()}
                     onChange={(e) => updateDeductions(key, parseAmt(e.target.value))}
@@ -220,16 +220,16 @@ const AnnualSalaryInput: React.FC<Props> = ({ inputs, setInputs }) => {
         )}
       </div>
 
-      <hr className="border-slate-100" />
+      <hr className="border-line" />
 
       {/* Equity (RSUs) — its own block, because it is not "additional income":
           it is taxed in full, it is pensionable but not insurable, and the
           person is paid in shares rather than cash. */}
-      <div className="bg-white rounded-xl shadow-sm border border-slate-100 p-6 mt-6">
+      <div className="bg-white rounded-xl shadow-sm border border-line p-6 mt-6">
         <div className="flex items-center justify-between mb-4">
           <div>
-            <label className="block text-sm font-bold text-slate-700">{t('annual.equity')}</label>
-            <p className="text-xs text-slate-500">{t('annual.equityHint')}</p>
+            <label className="block text-sm font-bold text-ink-2">{t('annual.equity')}</label>
+            <p className="text-xs text-mute">{t('annual.equityHint')}</p>
           </div>
           <label className="relative inline-flex items-center cursor-pointer">
             <input
@@ -238,16 +238,16 @@ const AnnualSalaryInput: React.FC<Props> = ({ inputs, setInputs }) => {
               checked={!!(inputs.equityVestingAnnual && inputs.equityVestingAnnual > 0)}
               onChange={(e) => setInputs({ ...inputs, equityVestingAnnual: e.target.checked ? (inputs.equityVestingAnnual || 20000) : 0 })}
             />
-            <div className="w-11 h-6 bg-slate-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-red-300 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-red-600"></div>
+            <div className="w-11 h-6 bg-pearl-shade peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-red-300 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-ink-5 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-red-600"></div>
           </label>
         </div>
 
         {!!(inputs.equityVestingAnnual && inputs.equityVestingAnnual > 0) && (
           <div className="bg-red-50/50 p-4 rounded-xl border border-red-100/70 animate-fadeIn space-y-3">
             <div>
-              <label className="block text-xs font-bold text-slate-600 mb-1.5">{t('annual.equityLabel')}</label>
+              <label className="block text-xs font-bold text-ink-3 mb-1.5">{t('annual.equityLabel')}</label>
               <div className="relative">
-                <span className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-500 font-bold">$</span>
+                <span className="absolute left-3 top-1/2 -translate-y-1/2 text-mute font-bold">$</span>
                 <input
                   type="number"
                   min="0"
@@ -255,23 +255,23 @@ const AnnualSalaryInput: React.FC<Props> = ({ inputs, setInputs }) => {
                   value={inputs.equityVestingAnnual || ''}
                   onFocus={(e) => e.target.select()}
                   onChange={(e) => setInputs({ ...inputs, equityVestingAnnual: Math.max(0, parseFloat(e.target.value) || 0) })}
-                  className="w-full pl-8 pr-4 py-2.5 border border-slate-200 rounded-lg focus:border-red-500 focus:outline-none font-bold"
+                  className="w-full pl-8 pr-4 py-2.5 border border-line rounded-lg focus:border-red-500 focus:outline-none font-bold"
                   placeholder="20,000"
                 />
               </div>
             </div>
             <EquityPayoff inputs={inputs} />
-            <p className="text-[11px] leading-4 text-slate-500">{t('annual.equityNote')}</p>
+            <p className="text-[11px] leading-4 text-mute">{t('annual.equityNote')}</p>
           </div>
         )}
       </div>
 
       {/* RRSP Contribution */}
-      <div className="bg-white rounded-xl shadow-sm border border-slate-100 p-6 mt-6">
+      <div className="bg-white rounded-xl shadow-sm border border-line p-6 mt-6">
         <div className="flex items-center justify-between mb-4">
           <div>
-            <label className="block text-sm font-bold text-slate-700">{t('annual.rrsp')}</label>
-            <p className="text-xs text-slate-500">{t('annual.rrspHint')}</p>
+            <label className="block text-sm font-bold text-ink-2">{t('annual.rrsp')}</label>
+            <p className="text-xs text-mute">{t('annual.rrspHint')}</p>
           </div>
           <label className="relative inline-flex items-center cursor-pointer">
             <input
@@ -287,20 +287,20 @@ const AnnualSalaryInput: React.FC<Props> = ({ inputs, setInputs }) => {
                 rrspEmployerMatch: e.target.checked ? (inputs.rrspEmployerMatch || 5) : 0
               })}
             />
-            <div className="w-11 h-6 bg-slate-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-red-300 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-red-600"></div>
+            <div className="w-11 h-6 bg-pearl-shade peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-red-300 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-ink-5 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-red-600"></div>
           </label>
         </div>
 
         {!!((inputs.rrspType === 'percent' ? inputs.rrspPercentage : inputs.rrspContributionPerPeriod) && ((inputs.rrspPercentage || 0) > 0 || (inputs.rrspContributionPerPeriod || 0) > 0)) && (
           <div className="bg-red-50/50 p-4 rounded-xl border border-red-100/70 animate-fadeIn space-y-4">
             {/* Toggle between Amount and Percent */}
-            <div className="flex rounded-lg bg-slate-100 p-0.5" role="group">
+            <div className="flex rounded-lg bg-pearl p-0.5" role="group">
               <button
                 type="button"
                 className={`flex-1 py-1 text-xs font-semibold rounded-md transition-all ${
                   (inputs.rrspType || 'amount') === 'amount'
-                    ? 'bg-white text-slate-800 shadow-sm'
-                    : 'text-slate-500 hover:text-slate-800'
+                    ? 'bg-white text-ink shadow-sm'
+                    : 'text-mute hover:text-ink'
                 }`}
                 onClick={() => setInputs({ ...inputs, rrspType: 'amount' })}
               >
@@ -310,8 +310,8 @@ const AnnualSalaryInput: React.FC<Props> = ({ inputs, setInputs }) => {
                 type="button"
                 className={`flex-1 py-1 text-xs font-semibold rounded-md transition-all ${
                   inputs.rrspType === 'percent'
-                    ? 'bg-white text-slate-800 shadow-sm'
-                    : 'text-slate-500 hover:text-slate-800'
+                    ? 'bg-white text-ink shadow-sm'
+                    : 'text-mute hover:text-ink'
                 }`}
                 onClick={() => setInputs({ ...inputs, rrspType: 'percent' })}
               >
@@ -329,7 +329,7 @@ const AnnualSalaryInput: React.FC<Props> = ({ inputs, setInputs }) => {
                     type="number"
                     min="0"
                     step="50"
-                    className="w-full py-2 pl-7 pr-3 bg-white text-slate-900 border border-red-200 rounded-lg focus:ring-2 focus:ring-red-500 focus:outline-none text-sm font-semibold"
+                    className="w-full py-2 pl-7 pr-3 bg-white text-ink border border-red-200 rounded-lg focus:ring-2 focus:ring-red-500 focus:outline-none text-sm font-semibold"
                     value={inputs.rrspContributionPerPeriod || ''}
                     onFocus={(e) => e.target.select()}
                     onChange={(e) => setInputs({ ...inputs, rrspContributionPerPeriod: Math.max(0, parseFloat(e.target.value) || 0) })}
@@ -347,7 +347,7 @@ const AnnualSalaryInput: React.FC<Props> = ({ inputs, setInputs }) => {
                         min="0"
                         max="100"
                         step="0.5"
-                        className="w-full py-2 pl-3 pr-8 bg-white text-slate-900 border border-red-200 rounded-lg focus:ring-2 focus:ring-red-500 focus:outline-none text-sm font-semibold"
+                        className="w-full py-2 pl-3 pr-8 bg-white text-ink border border-red-200 rounded-lg focus:ring-2 focus:ring-red-500 focus:outline-none text-sm font-semibold"
                         value={inputs.rrspPercentage || ''}
                         onFocus={(e) => e.target.select()}
                         onChange={(e) => {
@@ -365,7 +365,7 @@ const AnnualSalaryInput: React.FC<Props> = ({ inputs, setInputs }) => {
                   <div>
                     <label className="block text-xs font-bold text-red-800 mb-1.5 ml-1">{t('annual.employerMatch')}</label>
                     <select
-                      className="w-full py-2 pl-2 pr-7 bg-white text-slate-900 border border-red-200 rounded-lg focus:ring-2 focus:ring-red-500 focus:outline-none text-xs sm:text-sm font-semibold truncate"
+                      className="w-full py-2 pl-2 pr-7 bg-white text-ink border border-red-200 rounded-lg focus:ring-2 focus:ring-red-500 focus:outline-none text-xs sm:text-sm font-semibold truncate"
                       value={(inputs as any).rrspMatchPolicy || 'equal'}
                       onChange={(e) => {
                         const policy = e.target.value;
@@ -404,7 +404,7 @@ const AnnualSalaryInput: React.FC<Props> = ({ inputs, setInputs }) => {
                         min="0"
                         max="100"
                         step="0.5"
-                        className="w-full py-2 pl-3 pr-8 bg-white text-slate-900 border border-red-200 rounded-lg focus:ring-2 focus:ring-red-500 focus:outline-none text-sm"
+                        className="w-full py-2 pl-3 pr-8 bg-white text-ink border border-red-200 rounded-lg focus:ring-2 focus:ring-red-500 focus:outline-none text-sm"
                         value={inputs.rrspEmployerMatch || ''}
                         onFocus={(e) => e.target.select()}
                         onChange={(e) => setInputs({ ...inputs, rrspEmployerMatch: Math.max(0, parseFloat(e.target.value) || 0) })}

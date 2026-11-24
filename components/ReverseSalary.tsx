@@ -36,7 +36,7 @@ export default function ReverseSalary({ inputs, setInputs }: {
   };
 
   return (
-    <div className="mt-3 rounded-lg border border-slate-200 bg-slate-50 p-3">
+    <div className="mt-3 rounded-lg border border-line bg-pearl-soft p-3">
       <button
         type="button"
         onClick={() => setOpen(!open)}
@@ -47,10 +47,10 @@ export default function ReverseSalary({ inputs, setInputs }: {
       </button>
       {open && (
         <div className="mt-3">
-          <label htmlFor="rev-amount" className="block text-xs font-bold text-slate-700 mb-1">{t('annual.revLabel')}</label>
+          <label htmlFor="rev-amount" className="block text-xs font-bold text-ink-2 mb-1">{t('annual.revLabel')}</label>
           <div className="flex gap-2">
             <div className="relative flex-1">
-              <span className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-500 font-bold">$</span>
+              <span className="absolute left-3 top-1/2 -translate-y-1/2 text-mute font-bold">$</span>
               <input
                 id="rev-amount"
                 type="number"
@@ -61,14 +61,14 @@ export default function ReverseSalary({ inputs, setInputs }: {
                 // No minus sign: −100 was read as 100 and answered with a salary.
                 onChange={(e) => setAmount(e.target.value.replace(/-/g, ''))}
                 placeholder={unit === 'month' ? '5,000' : '60,000'}
-                className="w-full rounded-lg border-2 border-slate-200 py-2 pl-7 pr-3 font-bold focus:border-red-500 focus:outline-none"
+                className="w-full rounded-lg border-2 border-line py-2 pl-7 pr-3 font-bold focus:border-red-500 focus:outline-none"
               />
             </div>
             <select
               aria-label={t('annual.revLabel')}
               value={unit}
               onChange={(e) => setUnit(e.target.value as 'month' | 'year')}
-              className="rounded-lg border-2 border-slate-200 bg-white px-2 text-sm"
+              className="rounded-lg border-2 border-line bg-white px-2 text-sm"
             >
               <option value="month">{t('annual.revMonth')}</option>
               <option value="year">{t('annual.revYear')}</option>
@@ -77,14 +77,14 @@ export default function ReverseSalary({ inputs, setInputs }: {
           {targetAnnual > 0 && (
             <div className="mt-3" role="status" aria-live="polite">
               {gross === null ? (
-                <p className="text-sm text-slate-600">{t('annual.revNone')}</p>
+                <p className="text-sm text-ink-3">{t('annual.revNone')}</p>
               ) : (
                 <>
-                  <p className="text-sm text-slate-700">
+                  <p className="text-sm text-ink-2">
                     {t('annual.revResult')}
-                    <strong className="text-lg text-slate-900"> {money(gross)}</strong>
+                    <strong className="text-lg text-ink"> {money(gross)}</strong>
                   </p>
-                  <p className="mt-1 text-xs text-slate-500">{t('annual.revBasis')}</p>
+                  <p className="mt-1 text-xs text-mute">{t('annual.revBasis')}</p>
                   <button
                     type="button"
                     onClick={use}

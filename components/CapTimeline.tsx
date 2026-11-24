@@ -123,21 +123,21 @@ export default function CapTimeline({ annualIncome, province, lang }: { annualIn
   };
 
   return (
-    <div className="rounded-xl border border-emerald-200 bg-emerald-50/60 px-5 py-4">
-      <p className="text-sm font-bold text-emerald-900"><Icon name="raise" size={18} /> {t.title}</p>
-      <p className="mt-1 text-sm text-slate-600">{t.intro}</p>
+    <div className="rounded-2xl border border-line bg-white p-5 sm:p-6">
+      <p className="flex items-center gap-2 font-display text-lg font-semibold text-ink"><Icon name="raise" size={20} /> {t.title}</p>
+      <p className="mt-1 text-sm text-ink-3">{t.intro}</p>
       <ul className="mt-2 space-y-1">
         {timeline.events.map((e) => (
-          <li key={e.period} className="flex items-baseline gap-2 text-sm text-slate-700">
+          <li key={e.period} className="flex items-baseline gap-2 text-sm text-ink-2">
             <span className="font-semibold">{e.kinds.map((k) => t[k]).join(' · ')}:</span>
             <span>{t.from.replace('{m}', monthName(e.month)).replace('{v}', money(e.perChequeBump))}</span>
           </li>
         ))}
       </ul>
-      <p className="mt-2 text-sm font-semibold text-emerald-900">
+      <p className="mt-3 border-t border-line pt-3 text-sm font-semibold text-red-600">
         {t.total.replace('{v}', money(timeline.lastChequeBump))}
       </p>
-      <p className="mt-1 text-xs text-slate-500">{t.warn}</p>
+      <p className="mt-1 text-xs text-mute">{t.warn}</p>
     </div>
   );
 }

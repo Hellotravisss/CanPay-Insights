@@ -33,21 +33,21 @@ const PrivacyPolicyFr: React.FC = () => {
     >
       <Section n={1} id="local" title="Ce qui reste sur votre appareil, et ce qui n’y reste pas">
         <p>
-          Chaque calcul de paie et d’impôt s’exécute <strong className="text-slate-800">entièrement dans votre navigateur ou sur
+          Chaque calcul de paie et d’impôt s’exécute <strong className="text-ink">entièrement dans votre navigateur ou sur
           votre téléphone</strong>. Les montants exacts que vous saisissez — taux horaire, salaire, pourboires,
           cotisations REER — ne nous sont jamais transmis, sauf dans un cas que vous choisissez : l’achat d’un rapport, construit à partir du salaire que vous saisissez pour lui (section 5). Si vous enregistrez un calcul dans un compte, ce seul
           calcul est conservé pour que vous puissiez le rouvrir sur un autre appareil, et vous pouvez le
           supprimer à tout moment.
         </p>
         <p>
-          Ce qui <strong className="text-slate-800">est</strong> transmis, c’est un enregistrement anonyme de chaque calcul, décrit en entier à
+          Ce qui <strong className="text-ink">est</strong> transmis, c’est un enregistrement anonyme de chaque calcul, décrit en entier à
           la section 2. Les montants n’y figurent que sous forme de tranches. Votre horaire de travail est la
           seule chose transmise en chiffres exacts : lorsque vous utilisez le calculateur par quart ou par
           feuille de temps, l’heure habituelle de début et de fin, le nombre de jours par semaine, la durée
           moyenne d’un quart et la pause non payée. Vous pouvez tout désactiver (section 2).
         </p>
         <p>
-          <strong className="text-slate-800">Le calculateur que d’autres sites intègrent (notre « widget ») transmet moins :</strong> la
+          <strong className="text-ink">Le calculateur que d’autres sites intègrent (notre « widget ») transmet moins :</strong> la
           province, le revenu sous forme de tranche, annuel ou horaire, la langue, le type d’appareil et la
           famille de navigateur, l’heure et le jour de la semaine, le nom du fuseau horaire, un identifiant de
           visite temporaire et le domaine où il est intégré. Il ne transmet aucun horaire de travail, ne
@@ -60,10 +60,10 @@ const PrivacyPolicyFr: React.FC = () => {
         <p>
           Pour comprendre l’usage du calculateur et publier des travaux tels que « quelles tranches de revenu
           les Canadiens calculent le plus, par province », nous enregistrons{' '}
-          <strong className="text-slate-800">une fiche anonyme par calcul stabilisé</strong>. Elle contient :
+          <strong className="text-ink">une fiche anonyme par calcul stabilisé</strong>. Elle contient :
         </p>
         <ul className="list-disc space-y-1.5 pl-5">
-          <li>le calculateur utilisé, la province choisie et votre revenu brut sous forme de <strong className="text-slate-800">tranche</strong> (par exemple « 50 k$–70 k$ ») — jamais le montant ;</li>
+          <li>le calculateur utilisé, la province choisie et votre revenu brut sous forme de <strong className="text-ink">tranche</strong> (par exemple « 50 k$–70 k$ ») — jamais le montant ;</li>
           <li>la langue de l’interface, votre type d’appareil (téléphone, tablette ou ordinateur), la famille de navigateur, la famille de système d’exploitation et, sur certains téléphones, le fabricant — jamais la signature complète du navigateur ni une empreinte d’appareil ;</li>
           <li>la fréquence de paie choisie, une catégorie de travail déduite de vos saisies (horaire à temps plein ou partiel, salarié, à pourboires, par quarts) — déduite, jamais demandée — et la position de votre paie par rapport à la médiane de Statistique Canada pour votre province, sous forme de fourchette, avec la médiane utilisée ;</li>
           <li>si vous avez ouvert le détail du calcul et, si vous touchez un rapport payant, lequel — jamais rien sur un achat ;</li>
@@ -87,11 +87,11 @@ const PrivacyPolicyFr: React.FC = () => {
         </ul>
         <p>
           Les fiches d’une même visite sont regroupées par un identifiant temporaire aléatoire, supprimé à
-          votre départ et jamais réutilisé. Ces fiches ne contiennent <strong className="text-slate-800">ni nom, ni identifiant
+          votre départ et jamais réutilisé. Ces fiches ne contiennent <strong className="text-ink">ni nom, ni identifiant
           de compte, ni adresse IP, ni empreinte d’appareil</strong>, et ne sont pas reliées à vous.
         </p>
         <p>
-          <strong className="text-slate-800">Refuser.</strong> Ouvrez n’importe quelle page du site avec <code>?notelemetry=1</code>{' '}
+          <strong className="text-ink">Refuser.</strong> Ouvrez n’importe quelle page du site avec <code>?notelemetry=1</code>{' '}
           ajouté à l’adresse et ce navigateur n’enregistrera plus rien — ni fiche de calcul, ni comptage des pages vues
           (<code>?notelemetry=0</code> réactive). Le calculateur fonctionne exactement de la même façon. Ce choix est gardé dans
           ce navigateur pour ce site : il ne vous suit ni dans d’autres navigateurs ni dans notre calculateur intégré à un autre
@@ -104,14 +104,14 @@ const PrivacyPolicyFr: React.FC = () => {
         <p>Il y a trois niveaux, et seul le premier se produit sans action de votre part.</p>
         <ol className="list-decimal space-y-3 pl-5">
           <li>
-            <strong className="text-slate-800">À partir de votre connexion.</strong> Notre hébergeur indique à notre serveur le
+            <strong className="text-ink">À partir de votre connexion.</strong> Notre hébergeur indique à notre serveur le
             pays, la région et la ville d’où semble provenir votre connexion, ainsi qu’un point approximatif pour
-            cette connexion, situé en général dans cette ville. Nous conservons ce point arrondi à environ 11 km. <strong className="text-slate-800">Votre adresse IP
+            cette connexion, situé en général dans cette ville. Nous conservons ce point arrondi à environ 11 km. <strong className="text-ink">Votre adresse IP
             n’est pas conservée</strong> — ni dans ces fiches, ni dans des journaux que nous garderions. C’est
             au niveau de la ville, et c’est identique que vous répondiez ou non à ce qui suit.
           </li>
           <li>
-            <strong className="text-slate-800">Le début de votre code postal, si vous le saisissez.</strong> Sous le résultat, vous
+            <strong className="text-ink">Le début de votre code postal, si vous le saisissez.</strong> Sous le résultat, vous
             pouvez entrer les trois premiers caractères de votre code postal (une « région de tri
             d’acheminement », soit quelques milliers de ménages). En retour, vous voyez où ce revenu se situe
             parmi les personnes qui produisent une déclaration dans cette zone, d’après les statistiques de
@@ -122,10 +122,10 @@ const PrivacyPolicyFr: React.FC = () => {
             de site de votre navigateur pour le supprimer et arrêter cela.
           </li>
           <li>
-            <strong className="text-slate-800">La position de votre appareil, si vous appuyez sur « Utiliser ma position ».</strong>{' '}
+            <strong className="text-ink">La position de votre appareil, si vous appuyez sur « Utiliser ma position ».</strong>{' '}
             Cette fonction est désactivée tant que vous n’appuyez pas sur le bouton, et votre navigateur vous
             demande ensuite aussi votre accord. La position est{' '}
-            <strong className="text-slate-800">arrondie sur votre appareil avant tout envoi</strong> : à deux décimales
+            <strong className="text-ink">arrondie sur votre appareil avant tout envoi</strong> : à deux décimales
             (environ 1 km) en zone urbaine, et à une décimale (environ 11 km) en zone rurale, où un carré
             d’un kilomètre peut correspondre à une seule habitation. Elle est aussi rattachée, sur votre
             appareil, au préfixe postal le plus proche. Ce qui nous parvient, c’est ce point arrondi et ce
@@ -134,9 +134,9 @@ const PrivacyPolicyFr: React.FC = () => {
           </li>
         </ol>
         <p>
-          <strong className="text-slate-800">Pourquoi nous le demandons, dit clairement.</strong> Les réponses au niveau du quartier
+          <strong className="text-ink">Pourquoi nous le demandons, dit clairement.</strong> Les réponses au niveau du quartier
           nous permettent de publier et de concéder sous licence des{' '}
-          <strong className="text-slate-800">statistiques agrégées</strong> — par exemple, combien de personnes d’une zone postale
+          <strong className="text-ink">statistiques agrégées</strong> — par exemple, combien de personnes d’une zone postale
           donnée ont calculé une paie dans une tranche de revenu donnée ce trimestre — à des organisations qui
           en ont l’usage, y compris des chercheurs, des journalistes et des entreprises immobilières ou
           financières. Chaque chiffre publié ou concédé est un décompte pour une zone de milliers de ménages
@@ -145,7 +145,7 @@ const PrivacyPolicyFr: React.FC = () => {
           toute revente. Nous ne vendons, ne louons ni ne partageons de renseignements personnels.
         </p>
         <p>
-          <strong className="text-slate-800">Résidents du Québec.</strong> Les options du préfixe postal et de la position de
+          <strong className="text-ink">Résidents du Québec.</strong> Les options du préfixe postal et de la position de
           l’appareil (niveaux 2 et 3) restent désactivées tant que vous ne les activez pas. La localisation
           d’après la connexion (niveau 1) est toujours active : elle est au niveau de la ville, arrondie à
           environ 11 km, et conservée sans nom, compte, adresse IP ni autre identifiant. Cette section
@@ -156,7 +156,7 @@ const PrivacyPolicyFr: React.FC = () => {
 
       <Section n={4} id="cookies" title="Témoins, stockage local et mesure d’audience">
         <p>
-          <strong className="text-slate-800">Des témoins seulement si vous vous connectez.</strong> La connexion dépose un
+          <strong className="text-ink">Des témoins seulement si vous vous connectez.</strong> La connexion dépose un
           témoin nommé <code>cp_session</code> qui vous garde connecté pendant 30 jours. Pendant une connexion par
           Google ou Apple, un second témoin (<code>cp_oauth</code> ou <code>cp_apple</code>) porte la demande de
           connexion pendant dix minutes au plus, puis est supprimé. Ils sont essentiels à cette fonction, ne
@@ -164,7 +164,7 @@ const PrivacyPolicyFr: React.FC = () => {
           site n’a pas de bandeau de témoins.
         </p>
         <p>
-          <strong className="text-slate-800">Le stockage local de votre appareil</strong> contient votre langue, vos réglages de
+          <strong className="text-ink">Le stockage local de votre appareil</strong> contient votre langue, vos réglages de
           calculateur hors connexion, les calculs et entrées de feuille de temps enregistrés hors connexion,
           le secteur auquel vous vous êtes comparé en dernier, l’indicateur de refus de télémétrie, le préfixe postal mémorisé,
           les questions facultatives auxquelles vous avez déjà répondu (pour ne pas les reposer ; pas vos réponses) et
@@ -177,7 +177,7 @@ const PrivacyPolicyFr: React.FC = () => {
           sites ne stocke rien.
         </p>
         <p>
-          <strong className="text-slate-800">Comptage des pages vues.</strong> Deux compteurs sans témoin fonctionnent sur ce site.
+          <strong className="text-ink">Comptage des pages vues.</strong> Deux compteurs sans témoin fonctionnent sur ce site.
           Le premier est le nôtre, servi depuis <code className="break-all">avowd-analytics.qharbert.workers.dev</code> — un Worker
           Cloudflare de notre propre compte, partagé avec notre site apparenté Avowd. Pour chaque page, il
           enregistre l’adresse (y compris ce qui suit un « ? »), l’adresse de la page qui y menait, la taille et
@@ -194,7 +194,7 @@ const PrivacyPolicyFr: React.FC = () => {
           votre rapport. Nous n’utilisons ni Google Analytics ni aucun réseau publicitaire.
         </p>
         <p>
-          <strong className="text-slate-800">Hébergement.</strong> Le site fonctionne sur Cloudflare, qui traite chaque requête pour
+          <strong className="text-ink">Hébergement.</strong> Le site fonctionne sur Cloudflare, qui traite chaque requête pour
           la servir et la protéger des abus ; Cloudflare peut conserver de courts journaux de connexion selon
           sa propre politique. Notre propre base de données ne reçoit jamais votre adresse IP.
         </p>
@@ -209,7 +209,7 @@ const PrivacyPolicyFr: React.FC = () => {
           réglages pour qu’ils vous suivent d’un appareil à l’autre.
         </p>
         <p>
-          <strong className="text-slate-800">Courriels aux titulaires de compte.</strong> À la création d’un compte,
+          <strong className="text-ink">Courriels aux titulaires de compte.</strong> À la création d’un compte,
           nous envoyons un seul courriel de bienvenue au sujet du compte. Les courriels de changement fiscal, qui
           vous préviennent quand les nouveaux taux de l’ARC changent votre salaire net, restent désactivés tant que
           vous ne les activez pas dans le menu du compte ; nous notons le moment où vous les activez. Chacun de ces
@@ -228,7 +228,7 @@ const PrivacyPolicyFr: React.FC = () => {
           <a href="/refunds">politique de remboursement</a>.
         </p>
         <p>
-          <strong className="text-slate-800">Supprimer votre compte.</strong> Ouvrez le menu du compte sur ce site, ou le tiroir
+          <strong className="text-ink">Supprimer votre compte.</strong> Ouvrez le menu du compte sur ce site, ou le tiroir
           d’historique dans l’application, et choisissez « Supprimer le compte ». Votre compte, vos calculs
           enregistrés, vos feuilles de temps et vos réglages sont supprimés immédiatement et définitivement.
           Les dossiers d’achat sont conservés sans votre nom ni votre courriel. Les statistiques anonymes des
@@ -251,10 +251,10 @@ const PrivacyPolicyFr: React.FC = () => {
 
       <Section n={7} id="sharing" title="Qui reçoit des données">
         <ul className="list-disc space-y-1.5 pl-5">
-          <li><strong className="text-slate-800">Des fournisseurs de services</strong> qui traitent des données pour notre compte : Cloudflare (hébergement, base de données, envoi de courriels et les deux compteurs de pages vues), Stripe (paiements), Google et Apple (connexion). Chacun agit selon ses propres engagements de confidentialité et ne reçoit que ce que sa fonction exige.</li>
-          <li><strong className="text-slate-800">Des licenciés de statistiques agrégées</strong>, comme décrit à la section 3 — des statistiques seulement, jamais des fiches, sous des ententes interdisant la réidentification et la revente.</li>
-          <li><strong className="text-slate-800">Le public</strong>, par les jeux de données ouverts de notre <a href="/data">page de données</a>, qui contiennent les mêmes statistiques agrégées avec les petits groupes retenus.</li>
-          <li><strong className="text-slate-800">Les autorités</strong>, lorsque la loi l’exige.</li>
+          <li><strong className="text-ink">Des fournisseurs de services</strong> qui traitent des données pour notre compte : Cloudflare (hébergement, base de données, envoi de courriels et les deux compteurs de pages vues), Stripe (paiements), Google et Apple (connexion). Chacun agit selon ses propres engagements de confidentialité et ne reçoit que ce que sa fonction exige.</li>
+          <li><strong className="text-ink">Des licenciés de statistiques agrégées</strong>, comme décrit à la section 3 — des statistiques seulement, jamais des fiches, sous des ententes interdisant la réidentification et la revente.</li>
+          <li><strong className="text-ink">Le public</strong>, par les jeux de données ouverts de notre <a href="/data">page de données</a>, qui contiennent les mêmes statistiques agrégées avec les petits groupes retenus.</li>
+          <li><strong className="text-ink">Les autorités</strong>, lorsque la loi l’exige.</li>
         </ul>
         <p>Les données sont traitées au Canada et aux États-Unis, où nos fournisseurs exercent.</p>
       </Section>
@@ -277,7 +277,7 @@ const PrivacyPolicyFr: React.FC = () => {
           navigateur, et « Modifier » ou l’effacement des données de site retire un préfixe postal mémorisé.
         </p>
         <p>
-          <strong className="text-slate-800">Responsable de la protection des renseignements personnels :</strong> Qi Zhang,{' '}
+          <strong className="text-ink">Responsable de la protection des renseignements personnels :</strong> Qi Zhang,{' '}
           <a href="mailto:info@canpayinsights.ca">info@canpayinsights.ca</a>. Nous répondons dans les 30 jours.
         </p>
         <p>

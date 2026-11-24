@@ -38,20 +38,20 @@ const PrivacyPolicy: React.FC<PrivacyPolicyProps> = () => {
     >
       <Section n={1} id="local" title="What stays on your device, and what does not">
         <p>
-          Every payroll and tax calculation runs <strong className="text-slate-800">entirely in your browser or on your phone</strong>.
+          Every payroll and tax calculation runs <strong className="text-ink">entirely in your browser or on your phone</strong>.
           The exact money amounts you type — hourly wage, salary, tips, RRSP amounts — are never sent to us,
           with one exception you choose: buying a report, which is built from the salary you enter for it
           (section 5). If you save a calculation to an account, that one calculation is stored so you can reopen it on
           another device, and you can delete it at any time.
         </p>
         <p>
-          What <strong className="text-slate-800">is</strong> sent is an anonymous record of each calculation, listed in full in section 2.
+          What <strong className="text-ink">is</strong> sent is an anonymous record of each calculation, listed in full in section 2.
           Money appears in it only as ranges. Your work pattern is the one thing sent as plain numbers: when you
           use the shift or timesheet calculator, the usual start and end hour, days per week, average shift
           length and unpaid break. You can switch all of it off (section 2).
         </p>
         <p>
-          <strong className="text-slate-800">The calculator other websites embed (our “widget”) sends less:</strong> the province,
+          <strong className="text-ink">The calculator other websites embed (our “widget”) sends less:</strong> the province,
           income as a range, annual or hourly, language, device and browser family, the hour and weekday, the
           time-zone name, a temporary visit identifier and the domain it is embedded on. It sends no work
           pattern, stores nothing in the browser, and loads nothing from any other website. A website that
@@ -62,11 +62,11 @@ const PrivacyPolicy: React.FC<PrivacyPolicyProps> = () => {
       <Section n={2} id="statistics" title="Anonymous usage statistics">
         <p>
           To understand how the calculator is used and to publish research such as “which income ranges
-          Canadians calculate most, by province”, we record <strong className="text-slate-800">one anonymous
+          Canadians calculate most, by province”, we record <strong className="text-ink">one anonymous
           record per settled calculation</strong>. It contains:
         </p>
         <ul className="list-disc space-y-1.5 pl-5">
-          <li>the calculator used, the province selected, and your gross income as a <strong className="text-slate-800">range</strong> (such as “$50k–$70k”) — never the amount;</li>
+          <li>the calculator used, the province selected, and your gross income as a <strong className="text-ink">range</strong> (such as “$50k–$70k”) — never the amount;</li>
           <li>the interface language, your device type (phone, tablet or computer), browser family, operating-system family and, on some phones, the handset maker — never the full browser signature or a device fingerprint;</li>
           <li>the pay frequency you chose, a work-type label worked out from what you entered (full-time or part-time hourly, salaried, tipped, shift) — worked out, never asked — and where your pay sits against Statistics Canada’s median for your province, as a range, together with the median we compared it with;</li>
           <li>whether you opened the detailed breakdown, and, if you tap a paid report, which one — never anything about a purchase;</li>
@@ -89,11 +89,11 @@ const PrivacyPolicy: React.FC<PrivacyPolicyProps> = () => {
         </ul>
         <p>
           Records from one visit are grouped by a random temporary identifier that is discarded when you
-          leave and is never reused. These records contain <strong className="text-slate-800">no names, no account
+          leave and is never reused. These records contain <strong className="text-ink">no names, no account
           identifiers, no IP addresses and no device fingerprints</strong>, and are not linked back to you.
         </p>
         <p>
-          <strong className="text-slate-800">Opting out.</strong> Open any page of this site with <code>?notelemetry=1</code>{' '}
+          <strong className="text-ink">Opting out.</strong> Open any page of this site with <code>?notelemetry=1</code>{' '}
           added to the address and this browser will record nothing from then on — no calculation records and no page-view
           counting (<code>?notelemetry=0</code> turns it back on). The calculator works identically either way. The choice is
           stored in this browser for this site, so it does not follow you to other browsers or into our calculator where
@@ -106,14 +106,14 @@ const PrivacyPolicy: React.FC<PrivacyPolicyProps> = () => {
         <p>There are three levels, and only the first happens without you doing anything.</p>
         <ol className="list-decimal space-y-3 pl-5">
           <li>
-            <strong className="text-slate-800">From your connection.</strong> Our hosting provider tells our server the
+            <strong className="text-ink">From your connection.</strong> Our hosting provider tells our server the
             country, region and city your connection appears to come from, and an approximate point for
-            that connection, which is usually somewhere in that city. We keep that point rounded to about 11 km. <strong className="text-slate-800">Your IP address is
+            that connection, which is usually somewhere in that city. We keep that point rounded to about 11 km. <strong className="text-ink">Your IP address is
             not stored</strong> — not in these records, not in logs we keep. This is city-level and it is the
             same whether or not you answer anything below.
           </li>
           <li>
-            <strong className="text-slate-800">Your postal-code prefix, if you type it.</strong> Under the result you may enter
+            <strong className="text-ink">Your postal-code prefix, if you type it.</strong> Under the result you may enter
             the first three characters of your postal code (a “forward sortation area”, an area of a few
             thousand households). In return you see where that income sits among the people who file
             taxes in that area, from Canada Revenue Agency statistics. We keep the three characters only.
@@ -123,9 +123,9 @@ const PrivacyPolicy: React.FC<PrivacyPolicyProps> = () => {
             browser’s site data to remove it and stop that.
           </li>
           <li>
-            <strong className="text-slate-800">Your device location, if you press “Use my location”.</strong> This is off until
+            <strong className="text-ink">Your device location, if you press “Use my location”.</strong> This is off until
             you press the button, and your browser then asks you as well. The position is{' '}
-            <strong className="text-slate-800">rounded on your device before anything is sent</strong>: to two decimal places
+            <strong className="text-ink">rounded on your device before anything is sent</strong>: to two decimal places
             (about 1 km) in urban areas, and to one decimal place (about 11 km) in rural areas, where a
             1 km square could be a single home. It is also matched, on your device, to the nearest
             postal-code prefix. What reaches us is that rounded point and that prefix — never the precise
@@ -134,8 +134,8 @@ const PrivacyPolicy: React.FC<PrivacyPolicyProps> = () => {
           </li>
         </ol>
         <p>
-          <strong className="text-slate-800">Why we ask, stated plainly.</strong> Neighbourhood-level answers let us publish and
-          license <strong className="text-slate-800">aggregated statistics</strong> — for example, how many people in a given
+          <strong className="text-ink">Why we ask, stated plainly.</strong> Neighbourhood-level answers let us publish and
+          license <strong className="text-ink">aggregated statistics</strong> — for example, how many people in a given
           postal-code area calculated pay in a given income range this quarter — to organisations that
           have a use for them, including researchers, journalists, and real-estate or financial companies.
           Every figure we publish or license is a count for an area of thousands of households and is
@@ -144,7 +144,7 @@ const PrivacyPolicy: React.FC<PrivacyPolicyProps> = () => {
           data. We do not sell, rent or share personal information.
         </p>
         <p>
-          <strong className="text-slate-800">Quebec residents.</strong> The postal-code and device-location options in levels 2
+          <strong className="text-ink">Quebec residents.</strong> The postal-code and device-location options in levels 2
           and 3 are off until you turn them on. The connection-based location in level 1 is always on: it is
           city-level, rounded to about 11 km, and stored with no name, account, IP address or other
           identifier. This section is our notice about the location functions. A French
@@ -154,7 +154,7 @@ const PrivacyPolicy: React.FC<PrivacyPolicyProps> = () => {
 
       <Section n={4} id="cookies" title="Cookies, local storage and analytics">
         <p>
-          <strong className="text-slate-800">Cookies only if you sign in.</strong> Signing in sets a cookie named{' '}
+          <strong className="text-ink">Cookies only if you sign in.</strong> Signing in sets a cookie named{' '}
           <code>cp_session</code> that keeps you signed in for 30 days. While you sign in with Google or Apple, a
           second cookie (<code>cp_oauth</code> or <code>cp_apple</code>) carries the sign-in request for up to ten
           minutes and is then removed. They are essential to that feature, are not used for tracking or
@@ -162,7 +162,7 @@ const PrivacyPolicy: React.FC<PrivacyPolicyProps> = () => {
           cookies, which is why this site has no cookie banner.
         </p>
         <p>
-          <strong className="text-slate-800">Local storage on your device</strong> holds your language choice, your calculator
+          <strong className="text-ink">Local storage on your device</strong> holds your language choice, your calculator
           settings when signed out, the calculations and timesheet entries you save while signed out, the
           industry you last compared against, the telemetry opt-out flag, the remembered postal-code prefix, which of the optional questions you have already answered (so you are
           not asked twice; not your answers) and the “has calculated before” flag, plus three entries for page-view counting (below): a session number
@@ -172,7 +172,7 @@ const PrivacyPolicy: React.FC<PrivacyPolicyProps> = () => {
           browser’s site data removes all of it. The calculator other websites embed stores nothing.
         </p>
         <p>
-          <strong className="text-slate-800">Page-view counting.</strong> Two cookieless counters run on this site. The first is
+          <strong className="text-ink">Page-view counting.</strong> Two cookieless counters run on this site. The first is
           ours, served from <code className="break-all">avowd-analytics.qharbert.workers.dev</code> — a Cloudflare Worker on our own
           account, shared with our sister site Avowd. For each page it records the address (including anything
           after a “?”), the address of the page that linked here, your browser window’s size and language, how
@@ -187,7 +187,7 @@ const PrivacyPolicy: React.FC<PrivacyPolicyProps> = () => {
           the key to your report. We do not use Google Analytics or any advertising network.
         </p>
         <p>
-          <strong className="text-slate-800">Hosting.</strong> The site runs on Cloudflare, which processes every request to
+          <strong className="text-ink">Hosting.</strong> The site runs on Cloudflare, which processes every request to
           deliver it and protect it from abuse; Cloudflare may keep short-lived connection logs under its
           own privacy policy. Our own database never receives your IP address.
         </p>
@@ -202,7 +202,7 @@ const PrivacyPolicy: React.FC<PrivacyPolicyProps> = () => {
           providers see that you signed in to our site under their own policies.
         </p>
         <p>
-          <strong className="text-slate-800">Emails to account holders.</strong> When you create an account we send one
+          <strong className="text-ink">Emails to account holders.</strong> When you create an account we send one
           welcome email about the account. Tax-change emails, which tell you when new CRA rates change your
           take-home pay, are off until you turn them on in the account menu; we record when you turned them on.
           Every such email has a one-click unsubscribe. Sign-in links and receipts are sent because you ask for
@@ -218,7 +218,7 @@ const PrivacyPolicy: React.FC<PrivacyPolicyProps> = () => {
           records keep only the income range. See the <a href="/refunds">Refund Policy</a>.
         </p>
         <p>
-          <strong className="text-slate-800">Deleting your account.</strong> Open the account menu on this site, or the history
+          <strong className="text-ink">Deleting your account.</strong> Open the account menu on this site, or the history
           drawer in the app, and choose “Delete Account”. Your account, saved calculations, timesheets and
           settings are removed immediately and permanently. Purchase records are kept with your name and
           email stripped. The anonymous statistics in sections 2 and 3 are unaffected — they carry nothing
@@ -240,10 +240,10 @@ const PrivacyPolicy: React.FC<PrivacyPolicyProps> = () => {
 
       <Section n={7} id="sharing" title="Who receives data">
         <ul className="list-disc space-y-1.5 pl-5">
-          <li><strong className="text-slate-800">Service providers</strong> that process data on our behalf: Cloudflare (hosting, database, email delivery and both page-view counters), Stripe (payments), Google and Apple (sign-in). Each acts under its own privacy commitments and receives only what its function needs.</li>
-          <li><strong className="text-slate-800">Licensees of aggregated statistics</strong>, as described in section 3 — statistics only, never records, under agreements that prohibit re-identification and resale.</li>
-          <li><strong className="text-slate-800">The public</strong>, through the open datasets on our <a href="/data">data page</a>, which contain the same aggregated statistics with small groups withheld.</li>
-          <li><strong className="text-slate-800">Authorities</strong>, where the law requires it.</li>
+          <li><strong className="text-ink">Service providers</strong> that process data on our behalf: Cloudflare (hosting, database, email delivery and both page-view counters), Stripe (payments), Google and Apple (sign-in). Each acts under its own privacy commitments and receives only what its function needs.</li>
+          <li><strong className="text-ink">Licensees of aggregated statistics</strong>, as described in section 3 — statistics only, never records, under agreements that prohibit re-identification and resale.</li>
+          <li><strong className="text-ink">The public</strong>, through the open datasets on our <a href="/data">data page</a>, which contain the same aggregated statistics with small groups withheld.</li>
+          <li><strong className="text-ink">Authorities</strong>, where the law requires it.</li>
         </ul>
         <p>Data is processed in Canada and the United States, where our providers operate.</p>
       </Section>
@@ -265,7 +265,7 @@ const PrivacyPolicy: React.FC<PrivacyPolicyProps> = () => {
           your browser, and “Change” or clearing site data removes a stored postal-code prefix.
         </p>
         <p>
-          <strong className="text-slate-800">Person in charge of personal information (privacy officer):</strong> Qi Zhang,{' '}
+          <strong className="text-ink">Person in charge of personal information (privacy officer):</strong> Qi Zhang,{' '}
           <a href="mailto:info@canpayinsights.ca">info@canpayinsights.ca</a>. We answer within 30 days.
         </p>
         <p>

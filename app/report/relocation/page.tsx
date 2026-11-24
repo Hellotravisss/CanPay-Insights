@@ -3,6 +3,7 @@ import Link from 'next/link';
 import { stripeClient } from '../../../lib/stripe';
 import { buildRelocationReport, isProvince, SALES_TAX } from '../../../lib/relocationReport';
 import RelocationReport from './RelocationReport';
+import { ReportFrame, ReportGate } from '../ReportFrame';
 
 export const dynamic = 'force-dynamic';
 export const metadata: Metadata = {
@@ -47,6 +48,7 @@ export default async function Page({
 
   const report = buildRelocationReport(from, to, income);
   return (
+    <ReportFrame>
     <RelocationReport
       report={report}
       salesTax={{ from: SALES_TAX[from], to: SALES_TAX[to] }}
@@ -54,6 +56,7 @@ export default async function Page({
       permalink={`https://canpayinsights.ca/report/relocation?session_id=${session_id}`}
       sessionId={session_id}
     />
+    </ReportFrame>
   );
 }
 
@@ -65,13 +68,11 @@ function Gate({ reason }: { reason: 'missing' | 'unpaid' | 'lookup' | 'inputs' }
     inputs: 'This report’s inputs could not be read. Reply to your receipt and we will regenerate it.',
   };
   return (
-    <main className="mx-auto max-w-xl px-6 py-24 text-center">
-      <p className="text-xs font-bold uppercase tracking-[0.2em] text-red-600">Province Move Report</p>
-      <h1 className="mt-3 text-2xl font-bold text-slate-900">Report unavailable</h1>
-      <p className="mt-3 text-sm leading-6 text-slate-600">{copy[reason]}</p>
-      <Link href="/" className="mt-8 inline-block rounded-full bg-slate-900 px-5 py-2.5 text-sm font-semibold text-white">
+    <ReportGate eyebrow="Province Move Report" title="Report unavailable">
+      <p className="mt-3 text-sm leading-6 text-mute">{copy[reason]}</p>
+      <Link href="/" className="btn-brand-3d mt-7 inline-flex items-center justify-center rounded-xl px-5 py-3 text-sm font-semibold text-white no-underline">
         Back to the calculator
       </Link>
-    </main>
+    </ReportGate>
   );
 }

@@ -26,15 +26,15 @@ export default function PreferredSource() {
   const { t } = useT();
   return (
     <section className="mx-auto max-w-3xl px-4 pb-14">
-      <div className="rounded-2xl border border-slate-200 bg-white p-6">
-        <h2 className="text-lg font-bold text-slate-900">{t('ps.title')}</h2>
-        <p className="mt-2 text-sm leading-6 text-slate-600">{t('ps.body')}</p>
-        <p className="mt-2 text-xs leading-5 text-slate-500">{t('ps.honest')}</p>
+      <div className="rounded-2xl border border-line bg-white p-6 md:p-8">
+        <h2 className="font-display text-xl font-semibold text-ink">{t('ps.title')}</h2>
+        <p className="mt-2 text-sm leading-6 text-ink-2">{t('ps.body')}</p>
+        <p className="mt-2 text-xs leading-5 text-mute">{t('ps.honest')}</p>
         <a
           href="https://www.google.com/preferences/source?q=canpayinsights.ca"
           target="_blank"
           rel="noopener"
-          className="mt-4 inline-flex items-center gap-2 rounded-xl border-2 border-slate-900 px-5 py-2.5 text-sm font-bold text-slate-900 no-underline transition-colors hover:bg-slate-900 hover:text-white"
+          className="mt-5 inline-flex items-center gap-2 rounded-xl border border-line bg-white px-5 py-3 text-sm font-semibold text-ink no-underline transition-colors hover:border-ink-5 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-red-600"
         >
           {t('ps.cta')}
           <span aria-hidden="true">→</span>

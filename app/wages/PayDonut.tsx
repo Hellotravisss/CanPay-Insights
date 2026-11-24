@@ -63,21 +63,21 @@ export default function PayDonut({
         {drawn.map((s) => (
           <path key={s.label} d={s.d} fill={s.color} stroke="#fff" strokeWidth="2" />
         ))}
-        <text x={CX} y={CY - 4} textAnchor="middle" className="fill-slate-900 text-[26px] font-bold">
+        <text x={CX} y={CY - 4} textAnchor="middle" className="fill-ink font-display text-[26px] font-semibold">
           {keptPct}%
         </text>
-        <text x={CX} y={CY + 15} textAnchor="middle" className="fill-slate-500 text-[10px]">
+        <text x={CX} y={CY + 15} textAnchor="middle" className="fill-mute text-[10px]">
           you keep
         </text>
       </svg>
 
-      <ul className="w-full space-y-2">
+      <ul className="w-full divide-y divide-line">
         {drawn.map((s) => (
-          <li key={s.label} className="flex items-center gap-3 text-sm">
+          <li key={s.label} className="flex items-center gap-3 py-2 text-sm">
             <span className="h-3 w-3 shrink-0 rounded-sm" style={{ background: s.color }} />
-            <span className="text-slate-700">{s.label}</span>
-            <span className="ml-auto font-semibold tabular-nums text-slate-900">{money(s.value)}</span>
-            <span className="w-10 shrink-0 text-right text-xs tabular-nums text-slate-500">{s.pct}%</span>
+            <span className="text-ink-2">{s.label}</span>
+            <span className="ml-auto font-semibold tabular-nums text-ink">{money(s.value)}</span>
+            <span className="w-10 shrink-0 text-right text-xs tabular-nums text-mute">{s.pct}%</span>
           </li>
         ))}
       </ul>

@@ -393,17 +393,17 @@ type OfferDraft = { province: string; salary: string; bonus: string; matchPct: s
  *  recreated on every keystroke and the focused input would blur. */
 function OfferFields({ o, set, title, t, lang }: { o: OfferDraft; set: (v: OfferDraft) => void; title: string; t: Record<string, string>; lang: string }) {
   return (
-    <fieldset className="rounded-md border border-slate-200 p-2.5">
-      <legend className="px-1 text-[11px] font-bold uppercase tracking-wide text-slate-500">{title}</legend>
+    <fieldset className="rounded-md border border-line p-2.5">
+      <legend className="px-1 text-[11px] font-bold uppercase tracking-wide text-mute">{title}</legend>
       <div className="grid grid-cols-2 gap-1.5">
-        <select value={o.province} onChange={(e) => set({ ...o, province: e.target.value })} className="col-span-2 rounded border border-slate-200 bg-white px-1.5 py-1 text-xs">
+        <select value={o.province} onChange={(e) => set({ ...o, province: e.target.value })} className="col-span-2 rounded border border-line bg-white px-1.5 py-1 text-xs">
           <option value="">{t.provinceL} —</option>
           {Object.values(Province).map((pv) => <option key={pv} value={pv}>{provinceDisplayName(pv, lang)}</option>)}
         </select>
-        <input inputMode="numeric" placeholder={t.salary} value={o.salary} onChange={(e) => set({ ...o, salary: e.target.value.replace(/[^0-9]/g, '') })} className="rounded border border-slate-200 px-1.5 py-1 text-xs" />
-        <input inputMode="numeric" placeholder={t.bonusL} value={o.bonus} onChange={(e) => set({ ...o, bonus: e.target.value.replace(/[^0-9]/g, '') })} className="rounded border border-slate-200 px-1.5 py-1 text-xs" />
-        <input inputMode="numeric" placeholder={t.matchL} value={o.matchPct} onChange={(e) => set({ ...o, matchPct: e.target.value.replace(/[^0-9.]/g, '') })} className="rounded border border-slate-200 px-1.5 py-1 text-xs" />
-        <input inputMode="numeric" placeholder={t.vacL} value={o.vacationDays} onChange={(e) => set({ ...o, vacationDays: e.target.value.replace(/[^0-9]/g, '') })} className="rounded border border-slate-200 px-1.5 py-1 text-xs" />
+        <input inputMode="numeric" placeholder={t.salary} value={o.salary} onChange={(e) => set({ ...o, salary: e.target.value.replace(/[^0-9]/g, '') })} className="rounded border border-line px-1.5 py-1 text-xs" />
+        <input inputMode="numeric" placeholder={t.bonusL} value={o.bonus} onChange={(e) => set({ ...o, bonus: e.target.value.replace(/[^0-9]/g, '') })} className="rounded border border-line px-1.5 py-1 text-xs" />
+        <input inputMode="numeric" placeholder={t.matchL} value={o.matchPct} onChange={(e) => set({ ...o, matchPct: e.target.value.replace(/[^0-9.]/g, '') })} className="rounded border border-line px-1.5 py-1 text-xs" />
+        <input inputMode="numeric" placeholder={t.vacL} value={o.vacationDays} onChange={(e) => set({ ...o, vacationDays: e.target.value.replace(/[^0-9]/g, '') })} className="rounded border border-line px-1.5 py-1 text-xs" />
       </div>
     </fieldset>
   );
@@ -502,34 +502,34 @@ export default function FakeDoors({
   };
 
   const Chips = ({ text }: { text: string }) => (
-    <p className="mt-2 text-[11px] tracking-wide text-slate-500">{text}</p>
+    <p className="mt-2 text-[11px] tracking-wide text-mute">{text}</p>
   );
   const Price = () => (
-    <span className="shrink-0 rounded-full bg-slate-100 px-2.5 py-1 text-xs font-bold tabular-nums text-slate-700">
-      {t.price9} <span className="font-medium text-slate-500">{t.once}</span>
+    <span className="shrink-0 rounded-full bg-pearl px-2.5 py-1 text-xs font-bold tabular-nums text-ink-2">
+      {t.price9} <span className="font-medium text-mute">{t.once}</span>
     </span>
   );
 
   return (
-    <div className="rounded-xl border border-slate-200 bg-white px-5 py-4">
+    <div className="rounded-xl border border-line bg-white px-5 py-4">
       <p className="text-xs font-bold uppercase tracking-[0.15em] text-red-600">{t.kicker}</p>
       <div className="mt-3 grid gap-3 md:grid-cols-2">
         {/* Province move — real */}
-        <div className="rounded-lg border border-slate-200 p-4">
+        <div className="rounded-lg border border-line p-4">
           <div className="flex items-start justify-between gap-3">
             <div>
-              <h3 className="text-base font-bold text-slate-900">{t.relocation}</h3>
-              <p className="mt-0.5 text-sm text-slate-500">{t.relocationLine}</p>
+              <h3 className="text-base font-bold text-ink">{t.relocation}</h3>
+              <p className="mt-0.5 text-sm text-mute">{t.relocationLine}</p>
             </div>
             <Price />
           </div>
 
           <div className="mt-3 flex items-center gap-2">
-            <span className="text-[11px] font-semibold uppercase tracking-wide text-slate-500">{t.moveTo}</span>
+            <span className="text-[11px] font-semibold uppercase tracking-wide text-mute">{t.moveTo}</span>
             <select
               value={dest}
               onChange={(e) => setDest(e.target.value)}
-              className="min-w-0 flex-1 rounded-md border border-slate-200 bg-white px-2 py-1.5 text-sm"
+              className="min-w-0 flex-1 rounded-md border border-line bg-white px-2 py-1.5 text-sm"
             >
               <option value="">—</option>
               {Object.values(Province)
@@ -541,15 +541,15 @@ export default function FakeDoors({
           </div>
 
           {/* The live number */}
-          <div className="mt-3 rounded-lg bg-slate-50 px-4 py-3">
+          <div className="mt-3 rounded-lg bg-pearl-soft px-4 py-3">
             {gap === null ? (
-              <p className="text-sm text-slate-500">{t.pick}</p>
+              <p className="text-sm text-mute">{t.pick}</p>
             ) : (
               <p className="flex items-baseline gap-2">
-                <span className={`text-3xl font-extrabold tabular-nums ${gap >= 0 ? 'text-emerald-700' : 'text-red-600'}`}>
+                <span className={`text-3xl font-extrabold tabular-nums ${gap >= 0 ? 'text-red-600' : 'text-red-600'}`}>
                   {gap >= 0 ? '+' : '−'}{money(gap)}
                 </span>
-                <span className="text-sm text-slate-500">{t.perYear}</span>
+                <span className="text-sm text-mute">{t.perYear}</span>
               </p>
             )}
           </div>
@@ -558,20 +558,20 @@ export default function FakeDoors({
           <button
             onClick={buyRelocation}
             disabled={!dest || buying}
-            className="mt-3 w-full rounded-md btn-brand-3d px-3 py-2.5 text-sm font-semibold text-white disabled:bg-slate-200 disabled:text-slate-400"
+            className="mt-3 w-full rounded-md btn-brand-3d px-3 py-2.5 text-sm font-semibold text-white disabled:cursor-not-allowed disabled:[background:#E3E3EA] disabled:text-mute disabled:shadow-none"
           >
             {buying ? (<span className="inline-flex items-center gap-2"><ThinkingOrb state="connecting" size={20} theme="dark" aria-label={t.buying} />{t.buying}</span>) : t.buy}
           </button>
           {buyError && <p className="mt-1.5 text-[11px] text-red-600">{buyError}</p>}
-          <p className="mt-1.5 text-[10px] text-slate-500">{t.secure}</p>
+          <p className="mt-1.5 text-[10px] text-mute">{t.secure}</p>
         </div>
 
         {/* Offer comparison — real */}
-        <div className="flex flex-col rounded-lg border border-slate-200 p-4">
+        <div className="flex flex-col rounded-lg border border-line p-4">
           <div className="flex items-start justify-between gap-3">
             <div>
-              <h3 className="text-base font-bold text-slate-900">{t.offer}</h3>
-              <p className="mt-0.5 text-sm text-slate-500">{t.offerLine}</p>
+              <h3 className="text-base font-bold text-ink">{t.offer}</h3>
+              <p className="mt-0.5 text-sm text-mute">{t.offerLine}</p>
             </div>
           </div>
           <Chips text={t.offerChips} />
@@ -579,7 +579,7 @@ export default function FakeDoors({
             {!offerOpen ? (
               <button
                 onClick={tapOffer}
-                className="w-full rounded-md bg-slate-900 px-3 py-2.5 text-sm font-semibold text-white hover:bg-red-600"
+                className="w-full rounded-md btn-brand-3d px-3 py-2.5 text-sm font-semibold text-white"
               >
                 {t.offerStart}
               </button>
@@ -590,7 +590,7 @@ export default function FakeDoors({
                 <button
                   onClick={showOffer}
                   disabled={!offerReady}
-                  className="w-full rounded-md btn-brand-3d px-3 py-2.5 text-sm font-semibold text-white disabled:bg-slate-200 disabled:text-slate-400"
+                  className="w-full rounded-md btn-brand-3d px-3 py-2.5 text-sm font-semibold text-white disabled:cursor-not-allowed disabled:[background:#E3E3EA] disabled:text-mute disabled:shadow-none"
                 >
                   {t.offerCta}
                 </button>
@@ -603,7 +603,7 @@ export default function FakeDoors({
         </div>
       </div>
       {offerReport && (
-        <div id="offer-report" className="mt-4 rounded-lg border border-slate-200">
+        <div id="offer-report" className="mt-4 rounded-lg border border-line">
           <OfferReport report={offerReport} inline />
         </div>
       )}

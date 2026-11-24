@@ -6,7 +6,8 @@ import {
   WAGE_DATA_YEAR,
   annualFromHourly,
 } from '../../lib/provincialWages';
-import { WageHeader, WageFooter } from './WageChrome';
+import { WageHeader, WageFooter, chipClass } from './WageChrome';
+import { PageHero, Card } from '@/components/site/ui';
 
 export const metadata: Metadata = {
   title: `Canadian Wages by Industry and Province (${WAGE_DATA_YEAR} data) — Take-Home Pay at 2026 Rates`,
@@ -28,60 +29,60 @@ export default function WagesIndex() {
     .sort((a, b) => b.hourly - a.hourly);
 
   return (
-    <div className="min-h-screen bg-slate-50 font-sans">
+    <div className="min-h-screen bg-pearl font-sans">
       <WageHeader />
-      <main className="mx-auto max-w-4xl px-4 py-10">
-        <p className="text-xs font-bold uppercase tracking-[0.18em] text-red-600">
-          Statistics Canada {WAGE_DATA_YEAR}
-        </p>
-        <h1 className="mt-2 text-3xl font-bold text-slate-900 md:text-4xl">
-          Canadian wages by industry and province
-        </h1>
-        <p className="mt-3 max-w-2xl text-lg leading-8 text-slate-700">
-          Statistics Canada publishes what each industry pays. It does not tell you what you keep.
-          These pages put the two together: the official median wage for {industries.length}{' '}
-          industries in every province, and the take-home pay it produces under the 2026 tax rules.
-        </p>
+      <main className="mx-auto max-w-4xl px-4 pb-16" role="main">
+        <PageHero
+          eyebrow={<>Statistics Canada {WAGE_DATA_YEAR}</>}
+          title="Canadian wages by industry and province"
+          lead={
+            <>
+              Statistics Canada publishes what each industry pays. It does not tell you what you keep.
+              These pages put the two together: the official median wage for {industries.length}{' '}
+              industries in every province, and the take-home pay it produces under the 2026 tax rules.
+            </>
+          }
+        />
 
-        <h2 className="mt-10 text-xl font-bold text-slate-900">
+        <h2 className="font-display text-2xl font-semibold leading-tight text-ink md:text-[2rem]">
           Median full-time wage by industry, Canada ({WAGE_DATA_YEAR})
         </h2>
-        <div className="mt-4 overflow-x-auto">
+        <Card className="mt-6 overflow-x-auto px-4 py-2 sm:px-6">
           <table className="w-full border-collapse text-left text-sm">
             <thead>
-              <tr className="border-b-2 border-slate-300 text-slate-900">
-                <th className="py-2 pr-4 font-bold">Industry</th>
-                <th className="py-2 pr-4 font-bold">Median wage</th>
-                <th className="py-2 font-bold">≈ Annual, full-time</th>
+              <tr className="border-b border-ink-5 text-[11px] uppercase tracking-[0.12em] text-mute">
+                <th scope="col" className="py-3 pr-4 font-semibold">Industry</th>
+                <th scope="col" className="py-3 pr-4 text-right font-semibold">Median wage</th>
+                <th scope="col" className="py-3 text-right font-semibold">≈ Annual, full-time</th>
               </tr>
             </thead>
-            <tbody className="text-slate-600">
+            <tbody className="divide-y divide-line text-ink-2">
               {national.map((r) => (
-                <tr key={r.slug} className="border-b border-slate-200">
-                  <td className="py-2.5 pr-4 font-medium text-slate-800">{INDUSTRY_LABELS[r.slug]}</td>
-                  <td className="py-2.5 pr-4">
-                    <div className="flex items-center gap-2">
-                      <div className="h-2 w-20 shrink-0 rounded-full bg-slate-100">
+                <tr key={r.slug}>
+                  <td className="py-3 pr-4 font-medium text-ink">{INDUSTRY_LABELS[r.slug]}</td>
+                  <td className="py-3 pr-4">
+                    <div className="flex items-center justify-end gap-3">
+                      <div className="hidden h-1.5 w-24 shrink-0 rounded-full bg-pearl sm:block" aria-hidden="true">
                         <div
-                          className="h-2 rounded-full bg-red-600"
+                          className="h-1.5 rounded-full bg-ink-2"
                           style={{ width: `${Math.round((r.hourly / national[0].hourly) * 100)}%` }}
                         />
                       </div>
-                      <span className="tabular-nums">${r.hourly.toFixed(2)}/hr</span>
+                      <span className="whitespace-nowrap tabular-nums">${r.hourly.toFixed(2)}/hr</span>
                     </div>
                   </td>
-                  <td className="py-2.5 tabular-nums">${annualFromHourly(r.hourly).toLocaleString('en-CA')}</td>
+                  <td className="py-3 text-right tabular-nums">${annualFromHourly(r.hourly).toLocaleString('en-CA')}</td>
                 </tr>
               ))}
             </tbody>
           </table>
-        </div>
+        </Card>
 
-        <h2 className="mt-12 text-xl font-bold text-slate-900">Pick an industry and province</h2>
-        <div className="mt-4 space-y-6">
+        <h2 className="mt-14 font-display text-2xl font-semibold leading-tight text-ink md:text-[2rem]">Pick an industry and province</h2>
+        <div className="mt-6 divide-y divide-line border-y border-line">
           {national.map((r) => (
-            <div key={r.slug}>
-              <h3 className="mb-2 text-sm font-bold text-slate-700">{INDUSTRY_LABELS[r.slug]}</h3>
+            <div key={r.slug} className="py-4">
+              <h3 className="mb-3 text-sm font-semibold text-ink">{INDUSTRY_LABELS[r.slug]}</h3>
               <div className="flex flex-wrap gap-2">
                 {Object.entries(PROVINCE_SLUGS)
                   .filter(([code]) => PROVINCIAL_WAGES[r.slug]?.[code])
@@ -89,7 +90,7 @@ export default function WagesIndex() {
                     <a
                       key={code}
                       href={`/wages/${r.slug}-wages-${pslug}`}
-                      className="rounded-full bg-white px-3 py-1.5 text-xs font-medium text-slate-700 ring-1 ring-slate-200 hover:bg-slate-100"
+                      className={chipClass}
                     >
                       {PROVINCE_LABELS[code]}
                     </a>
@@ -99,7 +100,7 @@ export default function WagesIndex() {
           ))}
         </div>
 
-        <p className="mt-10 text-xs leading-5 text-slate-500">
+        <p className="mt-10 max-w-3xl text-xs leading-5 text-mute">
           Source: Statistics Canada, Table 14-10-0064-01, “Employee wages by industry, annual”, median
           hourly wage of full-time employees, {WAGE_DATA_YEAR}. Annualised at 2,080 hours. Take-home
           figures on each page are computed with the CanPay Insights 2026 tax engine. The three

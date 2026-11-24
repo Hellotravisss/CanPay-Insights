@@ -445,16 +445,16 @@ export default function IndustryComparison({
   }
 
   return (
-    <div className="rounded-xl border border-slate-200 bg-white p-5 shadow-sm">
+    <div className="rounded-xl border border-line bg-white p-5 shadow-sm">
       {/* The answer first. Picking an industry sharpens it; it is no longer
           the toll you pay to see anything at all. */}
       {headline && (
-        <div className="mb-4 rounded-xl bg-slate-50 p-4">
+        <div className="mb-4 rounded-xl bg-pearl-soft p-4">
           {/* Every string here comes from the dictionary. This block used to be
               hardcoded English, so a reader on the Chinese or Punjabi site was
               told their own pay was "29% below the median" in a language they
               had just chosen not to read. */}
-          <p className="text-sm leading-6 text-slate-700">
+          <p className="text-sm leading-6 text-ink-2">
             {bold(
               (headline.pct === 0 ? t.hlRightAt : t.hlOff)
                 .replace('{pct}', String(Math.abs(headline.pct)))
@@ -464,10 +464,10 @@ export default function IndustryComparison({
                 .replace('{amt}', headline.basis === 'hourly'
                   ? `$${headline.median.toFixed(2)}/h`
                   : `$${Math.round(headline.median).toLocaleString('en-CA')}`),
-              headline.pct === 0 ? 'text-slate-900' : headline.pct > 0 ? 'text-emerald-700' : 'text-red-700',
+              headline.pct === 0 ? 'text-ink' : headline.pct > 0 ? 'text-red-600' : 'text-red-700',
             )}
           </p>
-          <details className="group mt-2 text-xs text-slate-500">
+          <details className="group mt-2 text-xs text-mute">
             <summary className="inline-flex cursor-pointer list-none items-center gap-1 marker:content-none [&::-webkit-details-marker]:hidden">
               {t.how}
               <span className="transition-transform group-open:rotate-90" aria-hidden="true">›</span>
@@ -481,16 +481,16 @@ export default function IndustryComparison({
         </div>
       )}
 
-      <p className="mb-3 text-sm font-medium text-slate-600">
+      <p className="mb-3 text-sm font-medium text-ink-3">
         {headline ? t.sharpen : t.prompt}
       </p>
-      <label className="mb-1 block text-[11px] font-semibold uppercase tracking-wide text-slate-500">
+      <label className="mb-1 block text-[11px] font-semibold uppercase tracking-wide text-mute">
         {t.industry}
       </label>
       <select
         value={slug}
         onChange={(e) => onSelect(e.target.value)}
-        className="mb-1 w-full rounded-lg border border-slate-300 bg-white px-3 py-2 text-sm text-slate-800"
+        className="mb-1 w-full rounded-lg border border-ink-5 bg-white px-3 py-2 text-sm text-ink"
       >
         <option value="">{t.choose}</option>
         {BENCHMARKS.map((b) => (
@@ -504,11 +504,11 @@ export default function IndustryComparison({
           <div className="relative mt-8 mb-7 h-3 w-full rounded-full bg-gradient-to-r from-slate-200 via-red-200 to-red-600">
             {/* median tick */}
             <div
-              className="absolute -top-1 h-5 w-0.5 bg-slate-500"
+              className="absolute -top-1 h-5 w-0.5 bg-ink-4"
               style={{ left: `${chart.medX}%` }}
             />
             <div
-              className="absolute top-6 -translate-x-1/2 whitespace-nowrap text-[10px] text-slate-500"
+              className="absolute top-6 -translate-x-1/2 whitespace-nowrap text-[10px] text-mute"
               style={{ left: `${chart.medX}%` }}
             >
               {t.median} {money(bench.p[2])}
@@ -519,28 +519,28 @@ export default function IndustryComparison({
               style={{ left: `${chart.youX}%` }}
             />
             <div
-              className="absolute -top-8 -translate-x-1/2 whitespace-nowrap rounded-md bg-slate-900 px-2 py-0.5 text-[11px] font-bold text-white"
+              className="absolute -top-8 -translate-x-1/2 whitespace-nowrap rounded-md bg-ink px-2 py-0.5 text-[11px] font-bold text-white"
               style={{ left: `${chart.youX}%` }}
             >
               {t.youAreHere}: {money(annualIncome)}
             </div>
           </div>
-          <div className="mb-3 flex justify-between text-[10px] text-slate-500">
+          <div className="mb-3 flex justify-between text-[10px] text-mute">
             <span>← {t.low}</span>
             <span>{t.high} →</span>
           </div>
-          <p className="text-sm font-semibold text-slate-800">{chart.verdict}</p>
+          <p className="text-sm font-semibold text-ink">{chart.verdict}</p>
           {local?.provincial && local.medianHourly ? (
-            <p className="mt-3 rounded-lg bg-slate-50 px-3 py-2 text-[11px] leading-5 text-slate-500">
+            <p className="mt-3 rounded-lg bg-pearl-soft px-3 py-2 text-[11px] leading-5 text-mute">
               The median full-time wage for {t[slug] ?? slug} in {province} is{' '}
-              <strong className="text-slate-700">${local.medianHourly.toFixed(2)}/hour</strong> — about{' '}
-              <strong className="text-slate-700">
+              <strong className="text-ink-2">${local.medianHourly.toFixed(2)}/hour</strong> — about{' '}
+              <strong className="text-ink-2">
                 ${annualFromHourly(local.medianHourly).toLocaleString('en-CA')} a year
               </strong>{' '}
               before tax. Source: Statistics Canada, Table 14-10-0064-01, {WAGE_DATA_YEAR}.
             </p>
           ) : (
-            <p className="mt-2 text-[11px] leading-4 text-slate-500">{t.note}</p>
+            <p className="mt-2 text-[11px] leading-4 text-mute">{t.note}</p>
           )}
         </div>
       )}

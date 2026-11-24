@@ -1,105 +1,58 @@
-'use client';
 import React from 'react';
-import { useRouter } from 'next/navigation';
-import AvowdCredit from './AvowdCredit';
-import Icon from '@/components/Icon';
+import SiteHeader from './site/SiteHeader';
+import SiteFooter from './site/SiteFooter';
+import { PageHero } from './site/ui';
+import { Section } from './LegalChrome';
 
-const Badge = ({ n }: { n: number }) => (
-  <span className="flex items-center justify-center w-8 h-8 bg-red-100 text-red-700 rounded-lg text-sm font-bold">{n}</span>
-);
+const LINK = 'font-medium text-red-600 underline decoration-red-200 underline-offset-4 transition-colors hover:decoration-red-600';
 
 const AboutPage: React.FC = () => {
-  const router = useRouter();
-  const handleBack = () => router.push('/');
   return (
-    <div className="min-h-screen bg-slate-50 pb-20 font-sans">
-      {/* Header */}
-      <header className="bg-white border-b border-red-100 sticky top-0 z-30 shadow-sm" role="banner">
-        <div className="max-w-6xl mx-auto px-4 py-4 flex items-center justify-between">
-          <div className="flex items-center gap-3">
-            <img
-              src="/logo.png"
-              alt="CanPay Insights"
-              onClick={handleBack}
-              className="w-10 h-10 rounded-lg object-contain shadow-lg shadow-red-200 hover:scale-105 transition-transform cursor-pointer"
-            />
-            <p className="text-xl font-bold text-slate-800 tracking-tight cursor-pointer" onClick={handleBack}>
-              <span className="font-brand font-extrabold tracking-tight">CanPay</span> <span className="font-brand font-normal tracking-tight text-red-600">Insights</span>
-            </p>
-          </div>
-          <button
-            onClick={handleBack}
-            className="flex items-center gap-2 px-4 py-2 bg-slate-100 hover:bg-slate-200 text-slate-700 rounded-lg transition-all text-sm font-medium"
-          >
-            <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M10 19l-7-7m0 0l7-7m-7 7h18" />
-            </svg>
-            Back to Home
-          </button>
-        </div>
-      </header>
-
-      {/* Main Content */}
-      <main className="max-w-4xl mx-auto px-4 py-12" role="main">
-        <div className="bg-white rounded-2xl shadow-sm border border-slate-200 p-8 md:p-12">
-          <h1 className="text-3xl md:text-4xl font-bold text-slate-800 mb-2">About CanPay Insights</h1>
-          <p className="text-slate-500 mb-8 text-lg">A free, independent Canadian take-home pay calculator.</p>
-
-          <div className="prose prose-slate max-w-none">
-            <p className="text-slate-600 text-lg leading-relaxed mb-8">
+    <div className="min-h-screen bg-pearl font-sans">
+      <SiteHeader lang="en" />
+      <main className="mx-auto max-w-3xl px-4" role="main">
+        <PageHero title="About CanPay Insights" lead="A free, independent Canadian take-home pay calculator." />
+        <article className="rounded-2xl border border-line bg-white p-6 md:p-12">
+            <p className="mb-10 text-lg leading-8 text-ink-2">
               CanPay Insights is a free payroll and take-home pay calculator built for people who work in Canada.
               Enter an hourly wage, annual salary, or timesheet and instantly see what you actually keep after
               federal tax, provincial tax, CPP/CPP2, and EI — for any province or territory, in ten languages. No signup is needed. The calculation runs on
               your device and the exact amounts you type are never sent to us (unless you buy a report, which is built from them); we record anonymous
               statistics about each calculation (income as a range, never the figure), which you can switch
               off. What is recorded, and how to stop it, is set out in our{" "}
-              <a href="/privacy" className="text-red-600 hover:text-red-700 font-medium underline underline-offset-2">privacy policy</a>.
+              <a href="/privacy" className={LINK}>privacy policy</a>.
             </p>
 
-            <section className="mb-10">
-              <h2 className="text-2xl font-bold text-slate-800 mb-4 flex items-center gap-3">
-                <Badge n={1} /> Why we built it
-              </h2>
-              <div className="pl-11">
-                <p className="text-slate-600 leading-relaxed">
+            <Section n={1} title="Why we built it">
+                <p>
                   Most Canadians find out their real take-home pay only after their first paycheque — when a chunk
                   of their gross salary has already disappeared into deductions. Comparing two job offers, two
                   provinces, or the impact of a raise should not require a spreadsheet or a meeting with an
                   accountant. We built CanPay Insights so anyone can get an accurate, transparent answer in seconds,
                   for free.
                 </p>
-              </div>
-            </section>
+              </Section>
 
-            <section className="mb-10">
-              <h2 className="text-2xl font-bold text-slate-800 mb-4 flex items-center gap-3">
-                <Badge n={2} /> How our numbers are calculated
-              </h2>
-              <div className="pl-11">
-                <p className="text-slate-600 leading-relaxed mb-4">
+            <Section n={2} title="How our numbers are calculated">
+                <p>
                   Every result comes from a transparent calculation engine that applies the current rules, not a
                   rough estimate. For the 2026 tax year, our engine accounts for:
                 </p>
-                <ul className="list-disc pl-5 text-slate-600 leading-relaxed space-y-2 mb-4">
+                <ul className="list-disc space-y-2 pl-5">
                   <li><strong>Federal income tax</strong> — including the 2026 cut to the lowest bracket (15% → 14%) and the basic personal amount.</li>
                   <li><strong>Provincial &amp; territorial income tax</strong> — each province&apos;s own brackets and basic personal amount, plus Quebec&apos;s separate system.</li>
                   <li><strong>CPP and CPP2</strong> — 5.95% up to the YMPE (~$74,600), plus the second additional CPP2 (4%) up to the YAMPE (~$85,000).</li>
                   <li><strong>QPP, QPIP and the Quebec EI rate</strong> for workers in Quebec.</li>
                   <li><strong>Employment Insurance (EI)</strong> premiums and the annual maximum.</li>
                 </ul>
-                <p className="text-slate-600 leading-relaxed">
+                <p>
                   Our figures are based on published rates from the Canada Revenue Agency (CRA), Revenu Québec, and
                   each provincial government. We update the engine when new rates are announced.
                 </p>
-              </div>
-            </section>
+              </Section>
 
-            <section className="mb-10">
-              <h2 className="text-2xl font-bold text-slate-800 mb-4 flex items-center gap-3">
-                <Badge n={3} /> Who builds it
-              </h2>
-              <div className="pl-11">
-                <p className="text-slate-600 leading-relaxed">
+            <Section n={3} title="Who builds it">
+                <p>
                   CanPay Insights is built and maintained by <strong>Travis Zhang</strong> (Qi Zhang), an
                   independent developer based in Vancouver, British Columbia, who wrote the open rules engine
                   behind the calculator. It is a small, self-funded project — not a bank, payroll company, or
@@ -108,72 +61,44 @@ const AboutPage: React.FC = () => {
                   comparison is free. Both use the same engine as the calculator. We
                   sometimes include a clearly labelled referral link (such as Wealthsimple) and may earn a
                   sign-up bonus, but it never affects our numbers or what we recommend — see our{" "}
-                  <a href="/affiliate-disclosure" className="text-red-600 hover:text-red-700 font-medium underline underline-offset-2 transition-colors">affiliate disclosure</a>. Connect on{" "}
-                  <a href="https://www.linkedin.com/in/travis-z" target="_blank" rel="noopener noreferrer me" className="text-red-600 hover:text-red-700 font-medium underline underline-offset-2 transition-colors">LinkedIn</a>.
+                  <a href="/affiliate-disclosure" className={LINK}>affiliate disclosure</a>. Connect on{" "}
+                  <a href="https://www.linkedin.com/in/travis-z" target="_blank" rel="noopener noreferrer me" className={LINK}>LinkedIn</a>.
                 </p>
-              </div>
-            </section>
+              </Section>
 
-            <section className="mb-10">
-              <h2 className="text-2xl font-bold text-slate-800 mb-4 flex items-center gap-3">
-                <Badge n={4} /> Featured in
-              </h2>
-              <div className="pl-11">
-                <p className="text-slate-600 leading-relaxed">
+            <Section n={4} title="Featured in">
+                <p>
                   <strong>Financial Independence Hub</strong>, November 16, 2026:{" "}
-                  <a href="https://findependencehub.com/what-8000-paycheque-checks-reveal-about-how-canadians-think-about-money/" target="_blank" rel="noopener noreferrer" className="text-red-600 hover:text-red-700 font-medium underline underline-offset-2 transition-colors">What 8,000 paycheque checks reveal about how Canadians think about money</a>, a guest article by Travis Zhang.
+                  <a href="https://findependencehub.com/what-8000-paycheque-checks-reveal-about-how-canadians-think-about-money/" target="_blank" rel="noopener noreferrer" className={LINK}>What 8,000 paycheque checks reveal about how Canadians think about money</a>, a guest article by Travis Zhang.
                 </p>
-              </div>
-            </section>
+              </Section>
 
-            <section className="mb-10">
-              <h2 className="text-2xl font-bold text-slate-800 mb-4 flex items-center gap-3">
-                <Badge n={5} /> Open data — free to cite
-              </h2>
-              <div className="pl-11">
-                <p className="text-slate-600 leading-relaxed mb-4">
+            <Section n={5} title="Open data — free to cite">
+                <p>
                   Our 2026 take-home pay figures — net pay, federal and provincial tax, CPP/CPP2, EI and Quebec
                   QPP/QPIP for every province and territory across $30k–$200k — are published as an open dataset
                   under a{" "}
-                  <a href="https://creativecommons.org/licenses/by/4.0/" target="_blank" rel="noopener noreferrer" className="text-red-600 hover:text-red-700 font-medium underline underline-offset-2">CC BY 4.0</a>{" "}
+                  <a href="https://creativecommons.org/licenses/by/4.0/" target="_blank" rel="noopener noreferrer" className={LINK}>CC BY 4.0</a>{" "}
                   licence. Free to use, republish, or cite — please attribute and link to canpayinsights.ca.
                 </p>
                 <div className="flex flex-wrap gap-3">
-                  <a href="/data/canpay-take-home-2026.csv" download className="inline-flex items-center rounded-lg border border-slate-300 bg-white px-4 py-2 font-semibold text-slate-700 hover:border-red-200 hover:text-red-600 no-underline">Download CSV</a>
-                  <a href="/data/canpay-take-home-2026.json" download className="inline-flex items-center rounded-lg border border-slate-300 bg-white px-4 py-2 font-semibold text-slate-700 hover:border-red-200 hover:text-red-600 no-underline">Download JSON</a>
+                  <a href="/data/canpay-take-home-2026.csv" download className="inline-flex items-center rounded-xl border border-line bg-white px-4 py-2.5 text-sm font-semibold text-ink no-underline transition-colors hover:border-ink-5">Download CSV</a>
+                  <a href="/data/canpay-take-home-2026.json" download className="inline-flex items-center rounded-xl border border-line bg-white px-4 py-2.5 text-sm font-semibold text-ink no-underline transition-colors hover:border-ink-5">Download JSON</a>
                 </div>
-              </div>
-            </section>
+              </Section>
 
-            <section className="mb-6">
-              <h2 className="text-2xl font-bold text-slate-800 mb-4 flex items-center gap-3">
-                <Badge n={6} /> A note on accuracy
-              </h2>
-              <div className="pl-11">
-                <p className="text-slate-600 leading-relaxed">
+            <Section n={6} title="A note on accuracy">
+                <p>
                   CanPay Insights provides estimates for general information only and is not tax, legal, or financial
                   advice. Real paycheques can differ because of benefits, additional credits, union dues, pension
                   adjustments, or employer-specific deductions. For decisions that matter, confirm with a qualified
                   accountant or the CRA. Questions, corrections, or data requests are always welcome — see our{" "}
-                  <a href="/contact" className="text-red-600 hover:text-red-700 font-medium underline underline-offset-2 transition-colors">Contact page</a>.
+                  <a href="/contact" className={LINK}>Contact page</a>.
                 </p>
-              </div>
-            </section>
-          </div>
-        </div>
+              </Section>
+        </article>
       </main>
-
-      {/* Footer */}
-      <footer className="text-center text-slate-500 text-xs py-8 space-y-4" role="contentinfo">
-        <p>Calculations are estimates based on 2026 tax brackets and provincial employment standards.</p>
-        <div className="flex flex-wrap items-center justify-center gap-x-4 gap-y-2">
-          <a href="/about" className="text-slate-500 hover:text-red-600 transition-colors">About</a>
-          <a href="/contact" className="text-slate-500 hover:text-red-600 transition-colors">Contact</a>
-          <a href="/privacy" className="text-slate-500 hover:text-red-600 transition-colors">Privacy</a>
-        </div>
-        <p className="mt-4">Proudly Canadian <Icon name="maple" size={14} /> Built for Workers.</p>
-        <p><AvowdCredit /></p>
-      </footer>
+      <SiteFooter lang="en" note="Calculations are estimates based on 2026 tax brackets and provincial employment standards." />
     </div>
   );
 };

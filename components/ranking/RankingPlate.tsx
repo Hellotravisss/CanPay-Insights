@@ -3,46 +3,29 @@
 import { useEffect, useMemo, useState } from 'react';
 import { GRID, TILE, bestOf, firstPlace, lastPlace, type Row, type Tier } from '../../lib/naRanking';
 
-// The plate's inks. Paper and ink follow the engraving language of avowd.ai;
-// Canada is printed in a second, red ink so the 13 read as one block.
-const PAPER = '#FBF5E7';
-const INK = '#1A1408';
-const INK70 = '#4A3D22';
-const DIM = '#6E6043';
-const RULE = '#DCCBA4';
-const RED = '#A3271B';
-const inkOf = (r: Pick<Row, 'country'>) => (r.country === 'CA' ? RED : INK);
+// The 2026-11 chart rules (PayFamily-brand/18-charts): country is the categorical colour
+// (Canada = brand red, United States = ink), the share kept is lightness within that colour,
+// text is ink or grey and never wears a series colour — the swatch beside it carries identity.
+const RED = '#C8161A';
+const INK = '#15171C';
+const US_INK = '#2B2E36';
+const LINE = '#E3E3EA';
+const swatchOf = (r: Pick<Row, 'country'>) => (r.country === 'CA' ? RED : US_INK);
 
-const display = { fontFamily: 'var(--font-display), Didot, Georgia, serif' };
-const mono = { fontFamily: 'var(--font-mono), ui-monospace, monospace' };
+// Five lightness steps per country, lightest = least kept. Each step's label colour passes 4.5:1 on its fill.
+const RAMP = {
+  CA: ['#F7C3BA', '#EC8E80', '#DB5649', '#C8161A', '#9E0B10'],
+  US: ['#DCDEE5', '#B9BCC6', '#8F939E', '#535866', '#2B2E36'],
+} as const;
+const LABEL_ON = ['#15171C', '#15171C', '#15171C', '#FFFFFF', '#FFFFFF'];
 
-// Hatching weight carries the share that goes to tax: more ink, less kept.
-// The scale runs from the tier's highest share to its lowest, so the lightest
-// and the darkest square are always the two ends; the legend prints the
-// shares each weight stands for at the salary shown.
-const STEPS = 20;
+// The scale runs from the tier's lowest share to its highest, so the lightest and the darkest
+// square are always the two ends; the legend prints the share each step stands for at the salary shown.
+const STEPS = RAMP.CA.length - 1;
 type Scale = { hi: number; lo: number };
 const scaleOf = (t: Tier): Scale => ({ hi: t.rows[0].keptPct, lo: t.rows[t.rows.length - 1].keptPct });
-const bucket = (keptPct: number, s: Scale) =>
-  Math.round(Math.min(1, Math.max(0, (s.hi - keptPct) / (s.hi - s.lo))) * STEPS);
-
-function HatchDefs() {
-  const defs = [];
-  for (const [key, color] of [['us', INK], ['ca', RED]] as const) {
-    for (let b = 0; b <= STEPS; b++) {
-      const d = b / STEPS;
-      const w = 0.3 + d * 2.4;
-      const cross = d > 0.55 ? (d - 0.55) * 3 : 0;
-      defs.push(
-        <pattern key={`${key}${b}`} id={`hatch-${key}-${b}`} width="4" height="4" patternUnits="userSpaceOnUse" patternTransform="rotate(45)">
-          <line x1="0" y1="2" x2="4" y2="2" stroke={color} strokeWidth={w} />
-          {cross ? <line x1="2" y1="0" x2="2" y2="4" stroke={color} strokeWidth={cross} /> : null}
-        </pattern>,
-      );
-    }
-  }
-  return <defs>{defs}</defs>;
-}
+const step = (keptPct: number, s: Scale) =>
+  Math.round(Math.min(1, Math.max(0, (keptPct - s.lo) / (s.hi - s.lo || 1))) * STEPS);
 
 const money = (r: Row, n: number) => `${r.country === 'CA' ? 'C$' : 'US$'}${Math.round(n).toLocaleString('en-US')}`;
 const k = (usd: number) => `${usd / 1000}k`;
@@ -52,28 +35,32 @@ function rankLabel(rows: Row[], r: Row) {
   return rows.filter((x) => x.rank === r.rank).length > 1 ? `=${r.rank}` : `${r.rank}`;
 }
 
+const Swatch = ({ color, className = '' }: { color: string; className?: string }) => (
+  <i aria-hidden="true" className={`inline-block h-2.5 w-2.5 shrink-0 rounded-[3px] ${className}`} style={{ background: color }} />
+);
+
 const S = 56; // tile pitch
-const T = 50; // tile size
-const BAND = 17; // the paper label at the foot of each tile
+const T = 52; // tile size
 
 function Cartogram({ tier, selected, onSelect }: { tier: Tier; selected: string | null; onSelect: (c: string) => void }) {
   const s = scaleOf(tier);
   return (
-    <svg viewBox={`-2 -2 ${GRID.cols * S + 2} ${GRID.rows * S + 2}`} className="w-full" aria-hidden="true">
-      <HatchDefs />
+    <svg viewBox={`-3 -3 ${GRID.cols * S + 2} ${GRID.rows * S + 2}`} className="w-full" aria-hidden="true">
       {tier.rows.map((r) => {
         const [c, row] = TILE[r.code];
         const x = c * S;
         const y = row * S;
         const on = selected === r.code;
+        const b = step(r.keptPct, s);
+        const fill = RAMP[r.country][b];
+        const ink = LABEL_ON[b];
         return (
           <g key={r.code} onClick={() => onSelect(r.code)} className="cursor-pointer">
-            <rect x={x} y={y} width={T} height={T - BAND} fill={`url(#hatch-${r.country === 'CA' ? 'ca' : 'us'}-${bucket(r.keptPct, s)})`} />
-            <rect x={x} y={y + T - BAND} width={T} height={BAND} fill={PAPER} />
-            <line x1={x} x2={x + T} y1={y + T - BAND} y2={y + T - BAND} stroke={inkOf(r)} strokeWidth="0.75" />
-            <rect x={x} y={y} width={T} height={T} fill="none" stroke={inkOf(r)} strokeWidth={on ? 3 : 0.9} />
-            <text x={x + 4} y={y + T - 4} fill={inkOf(r)} style={mono} fontWeight={600} className="text-[14px] sm:text-[10.5px]">{r.code}</text>
-            <text x={x + T - 4} y={y + T - 5} fontSize="10" fill={INK70} textAnchor="end" style={mono} className="hidden sm:inline">
+            <title>{`${r.name}: ${r.keptPct.toFixed(1)}% kept`}</title>
+            <rect x={x} y={y} width={T} height={T} rx={8} fill={fill} stroke={on ? INK : 'none'} strokeWidth={on ? 3 : 0} />
+            {on ? <rect x={x - 3} y={y - 3} width={T + 6} height={T + 6} rx={10} fill="none" stroke="#FFFFFF" strokeWidth={1.5} /> : null}
+            <text x={x + T / 2} y={y + 23} textAnchor="middle" fill={ink} fontWeight={700} className="text-[15px] sm:text-[13px]">{r.code}</text>
+            <text x={x + T / 2} y={y + 40} textAnchor="middle" fontSize="10.5" fill={ink} className="hidden tabular-nums sm:inline">
               {r.keptPct.toFixed(1)}
             </text>
           </g>
@@ -85,21 +72,26 @@ function Cartogram({ tier, selected, onSelect }: { tier: Tier; selected: string 
 
 function Legend({ tier }: { tier: Tier }) {
   const s = scaleOf(tier);
-  const marks = [0, 0.25, 0.5, 0.75, 1].map((f) => s.hi - f * (s.hi - s.lo));
+  const marks = [0, 0.25, 0.5, 0.75, 1].map((f) => s.lo + f * (s.hi - s.lo));
   return (
-    <div className="flex flex-wrap items-center gap-x-5 gap-y-2 text-[11px]" style={{ ...mono, color: DIM }}>
-      <span>% of gross kept</span>
-      {/* Patterns come from the cartogram's <defs> on the same page — one copy, no duplicate ids. */}
-      <svg width={marks.length * 40} height="26" aria-hidden="true">
-        {marks.map((m, i) => (
-          <g key={m}>
-            <rect x={i * 40} y="0" width="34" height="14" fill={`url(#hatch-us-${bucket(m, s)})`} stroke={INK} strokeWidth="0.75" />
-            <text x={i * 40 + 17} y="25" fontSize="9.5" textAnchor="middle" fill={DIM}>{m.toFixed(1)}</text>
-          </g>
-        ))}
-      </svg>
-      <span className="flex items-center gap-2"><i className="inline-block h-3 w-3 border" style={{ borderColor: RED, background: RED }} /> Canada</span>
-      <span className="flex items-center gap-2"><i className="inline-block h-3 w-3 border" style={{ borderColor: INK, background: INK }} /> United States</span>
+    <div className="flex flex-wrap items-start gap-x-8 gap-y-3 text-xs text-mute">
+      <div>
+        <p className="mb-2 text-[11px] font-semibold uppercase tracking-[0.12em]">% of gross kept</p>
+        <div className="grid grid-cols-[auto_repeat(5,2.5rem)] items-center gap-x-1 gap-y-1">
+          {(['CA', 'US'] as const).map((c) => (
+            <div key={c} className="contents">
+              <span className="pr-2 text-ink-2">{c === 'CA' ? 'Canada' : 'United States'}</span>
+              {marks.map((m) => (
+                <i key={m} aria-hidden="true" className="block h-3 rounded-[3px]" style={{ background: RAMP[c][step(m, s)] }} />
+              ))}
+            </div>
+          ))}
+          <span />
+          {marks.map((m) => (
+            <span key={m} className="text-center text-[10.5px] tabular-nums">{m.toFixed(1)}</span>
+          ))}
+        </div>
+      </div>
     </div>
   );
 }
@@ -111,21 +103,24 @@ function Strip({ r }: { r: Row }) {
   const at = ((r.keptPct - lo) / (hi - lo)) * 100;
   return (
     <div className="relative h-3 w-full" aria-hidden="true">
-      <div className="absolute inset-x-0 top-1/2 h-px" style={{ background: RULE }} />
+      <div className="absolute inset-x-0 top-1/2 h-px" style={{ background: LINE }} />
       {[65, 70, 75, 80, 85].map((t) => (
-        <div key={t} className="absolute top-0 h-3 w-px" style={{ left: `${((t - lo) / (hi - lo)) * 100}%`, background: RULE }} />
+        <div key={t} className="absolute top-0.5 h-2 w-px" style={{ left: `${((t - lo) / (hi - lo)) * 100}%`, background: LINE }} />
       ))}
-      <div className="absolute top-1/2 h-2.5 w-2.5 -translate-x-1/2 -translate-y-1/2 rounded-full" style={{ left: `${at}%`, background: inkOf(r) }} />
+      <div
+        className="absolute top-1/2 h-3 w-3 -translate-x-1/2 -translate-y-1/2 rounded-full"
+        style={{ left: `${at}%`, background: swatchOf(r), boxShadow: '0 0 0 2px #FFFFFF' }}
+      />
     </div>
   );
 }
 
-function Figure({ label, value, note, color = INK }: { label: string; value: string; note: string; color?: string }) {
+function Figure({ label, value, note, highlight = false }: { label: string; value: string; note: string; highlight?: boolean }) {
   return (
-    <div className="min-w-0 border-t pt-3" style={{ borderColor: INK }}>
-      <p className="text-[10px] uppercase tracking-[0.14em] sm:text-[11px] sm:tracking-[0.18em]" style={{ ...mono, color: DIM }}>{label}</p>
-      <p className="mt-1 text-[1.9rem] leading-none sm:text-5xl" style={{ ...display, color }}>{value}</p>
-      <p className="mt-2 text-xs leading-4 sm:text-sm sm:leading-5" style={{ color: INK70 }}>{note}</p>
+    <div className="min-w-0 rounded-2xl border border-line bg-white p-3 sm:p-5">
+      <p className="text-[10px] font-semibold uppercase tracking-[0.1em] text-mute sm:text-[11px] sm:tracking-[0.12em]">{label}</p>
+      <p className={`mt-2 font-display text-[1.6rem] font-semibold leading-none tabular-nums sm:text-[2.5rem] ${highlight ? 'text-red-600' : 'text-ink'}`}>{value}</p>
+      <p className="mt-2 text-xs leading-4 text-ink-3 sm:text-sm sm:leading-5">{note}</p>
     </div>
   );
 }
@@ -166,7 +161,7 @@ export default function RankingPlate({ tiers, medians }: { tiers: Tier[]; median
   return (
     <div>
       {/* Salary */}
-      <div role="group" aria-label="Salary" className="grid grid-cols-5 border" style={{ borderColor: INK }}>
+      <div role="group" aria-label="Salary" className="grid grid-cols-5 gap-1 rounded-2xl border border-line bg-white p-1">
         {tiers.map((t) => {
           const on = t.usd === usd;
           return (
@@ -176,11 +171,10 @@ export default function RankingPlate({ tiers, medians }: { tiers: Tier[]; median
               aria-pressed={on}
               aria-label={`US$${t.usd.toLocaleString('en-US')}, C$${t.cad.toLocaleString('en-US')}`}
               onClick={() => setUsd(t.usd)}
-              className="min-w-0 border-r px-1.5 py-2 text-left last:border-r-0 sm:px-3"
-              style={{ borderColor: INK, background: on ? INK : 'transparent', color: on ? PAPER : INK }}
+              className={`min-w-0 rounded-xl px-1.5 py-2 text-left transition-colors duration-150 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-red-600 focus-visible:ring-offset-1 sm:px-3 sm:py-2.5 ${on ? 'bg-ink text-white' : 'text-ink hover:bg-pearl-soft'}`}
             >
-              <span className="block text-base leading-tight sm:text-xl" style={display}><span className="hidden sm:inline">US</span>${k(t.usd)}</span>
-              <span className="block text-[10px] sm:text-[11px]" style={{ ...mono, opacity: 0.75 }}>
+              <span className="block font-display text-base font-semibold leading-tight tabular-nums sm:text-xl"><span className="hidden sm:inline">US</span>${k(t.usd)}</span>
+              <span className={`block text-[10px] tabular-nums sm:text-[11px] ${on ? 'text-pearl-shade' : 'text-mute'}`}>
                 <span className="sm:hidden">C${Math.round(t.cad / 1000)}k</span>
                 <span className="hidden sm:inline">C${t.cad.toLocaleString('en-US')}</span>
               </span>
@@ -190,84 +184,87 @@ export default function RankingPlate({ tiers, medians }: { tiers: Tier[]; median
       </div>
 
       {/* Three figures */}
-      <div className="mt-10 grid grid-cols-3 gap-3 sm:gap-8">
+      <div className="mt-6 grid grid-cols-3 gap-2 sm:gap-4">
         <Figure label="Keeps the most" value={`${top[0].keptPct.toFixed(1)}%`} note={names(top)} />
-        <Figure label="Best in Canada" value={`#${ca.rank}`} color={RED} note={`${ca.name}, ${ca.keptPct.toFixed(1)}% kept — of 64`} />
+        <Figure label="Best in Canada" value={`#${ca.rank}`} highlight note={`${ca.name}, ${ca.keptPct.toFixed(1)}% kept — of 64`} />
         <Figure label="Keeps the least" value={`${bottom[0].keptPct.toFixed(1)}%`} note={names(bottom)} />
       </div>
 
       {/* Map */}
-      <figure className="mt-12">
+      <figure className="mt-6 rounded-2xl border border-line bg-white p-4 sm:p-8">
         <Cartogram tier={tier} selected={at} onSelect={(c) => setAt(c === at ? null : c)} />
-        <figcaption className="mt-4">
+        <figcaption className="mt-6 border-t border-line pt-5">
           <Legend tier={tier} />
         </figcaption>
       </figure>
 
       {/* You */}
-      <div className="mt-10 border p-5" style={{ borderColor: INK, background: '#FFFCF4' }}>
-        <label htmlFor="at" className="text-[11px] uppercase tracking-[0.18em]" style={{ ...mono, color: DIM }}>Where you work</label>
+      <div className="mt-6 rounded-2xl border border-line bg-white p-5 sm:p-6">
+        <label htmlFor="at" className="text-[11px] font-semibold uppercase tracking-[0.12em] text-mute">Where you work</label>
         <select
           id="at"
           value={at ?? ''}
           onChange={(e) => setAt(e.target.value || null)}
-          className="mt-2 block w-full border bg-transparent px-3 py-2 text-base"
-          style={{ borderColor: INK, color: INK }}
+          className="mt-2 block w-full rounded-xl border border-line bg-white px-3 py-2.5 text-base text-ink focus:border-ink focus:outline-none focus:ring-2 focus:ring-ink/10"
         >
           <option value="">Choose a province, territory or state</option>
           <optgroup label="Canada">{byName.filter((r) => r.country === 'CA').map((r) => <option key={r.code} value={r.code}>{r.name}</option>)}</optgroup>
           <optgroup label="United States">{byName.filter((r) => r.country === 'US').map((r) => <option key={r.code} value={r.code}>{r.name}</option>)}</optgroup>
         </select>
         {pick ? (
-          <p className="mt-4 text-lg leading-7" style={{ color: INK }} aria-live="polite">
-            <span className="text-4xl leading-none" style={{ ...display, color: inkOf(pick) }}>{rankLabel(tier.rows, pick)}</span>
-            <span style={{ color: DIM }}> of 64 · </span>
-            {pick.name} keeps <strong>{money(pick, pick.net)}</strong> of {money(pick, pick.gross)}, {pick.keptPct.toFixed(1)}%.{' '}
+          <p className="mt-4 text-lg leading-7 text-ink-2" aria-live="polite">
+            <span className="font-display text-4xl font-semibold leading-none tabular-nums text-ink">{rankLabel(tier.rows, pick)}</span>
+            <span className="text-mute"> of 64 · </span>
+            {pick.name} keeps <strong className="tabular-nums text-ink">{money(pick, pick.net)}</strong> of {money(pick, pick.gross)}, {pick.keptPct.toFixed(1)}%.{' '}
             {ahead ? `${ahead} place${ahead > 1 ? 's' : ''} keep more.` : 'Nowhere keeps more.'}
           </p>
         ) : null}
       </div>
 
       {/* Table */}
-      <h2 className="mt-14 text-3xl" style={display}>All 64, at US${k(usd)}</h2>
-      <ol className="mt-4 border-t" style={{ borderColor: INK }}>
+      <h2 className="mt-14 font-display text-2xl font-semibold text-ink md:text-[2rem]">All 64, at US${k(usd)}</h2>
+      <ol className="mt-5 divide-y divide-line border-y border-line tabular-nums">
         {tier.rows.map((r) => (
           <li
             key={r.code}
             onClick={() => setAt(r.code)}
-            className="grid cursor-pointer grid-cols-[2.75rem_1fr_auto] items-center gap-x-3 border-b py-2 sm:grid-cols-[2.75rem_11rem_1fr_4rem_7.5rem]"
-            style={{ borderColor: RULE, background: r.code === at ? '#FDF0C4' : undefined }}
+            className={`grid cursor-pointer grid-cols-[2.75rem_1fr_auto] items-center gap-x-3 px-1 py-2.5 transition-colors duration-150 hover:bg-white sm:grid-cols-[2.75rem_12rem_1fr_4rem_7.5rem] ${r.code === at ? 'bg-white' : ''}`}
+            style={r.code === at ? { boxShadow: `inset 3px 0 0 ${INK}` } : undefined}
           >
-            <span className="text-xl leading-none" style={{ ...display, color: inkOf(r) }}>{rankLabel(tier.rows, r)}</span>
+            <span className="text-right font-display text-xl font-semibold leading-none text-ink-3">{rankLabel(tier.rows, r)}</span>
             <span className="leading-tight">
-              <span style={{ color: INK }}>{r.name}</span>{' '}
-              <span className="text-[10px] tracking-wider" style={{ ...mono, color: inkOf(r) }}>{r.country === 'CA' ? 'CAN' : 'USA'}</span>
-              <span className="block text-xs sm:hidden" style={{ ...mono, color: DIM }}>{money(r, r.net)}</span>
+              <span className="text-ink">{r.name}</span>{' '}
+              <span className="ml-1 inline-flex items-center gap-1 align-middle text-[10px] font-semibold tracking-wider text-mute">
+                <Swatch color={swatchOf(r)} className="h-2 w-2" />{r.country === 'CA' ? 'CAN' : 'USA'}
+              </span>
+              <span className="block text-xs text-mute sm:hidden">{money(r, r.net)}</span>
             </span>
             <span className="hidden sm:block"><Strip r={r} /></span>
-            <span className="text-right text-base" style={{ ...mono, color: INK }}>{r.keptPct.toFixed(1)}%</span>
-            <span className="hidden text-right text-sm sm:block" style={{ ...mono, color: INK70 }}>{money(r, r.net)}</span>
+            <span className="text-right text-base font-semibold text-ink">{r.keptPct.toFixed(1)}%</span>
+            <span className="hidden text-right text-sm text-ink-3 sm:block">{money(r, r.net)}</span>
           </li>
         ))}
       </ol>
-      <p className="mt-2 hidden justify-between text-[10px] sm:flex" style={{ ...mono, color: DIM }}>
+      <p className="mt-2 hidden justify-between text-[11px] text-mute sm:flex">
         <span>Places that print the same share share a rank.</span>
         <span>Dot scale 60–90% kept</span>
       </p>
 
       {/* Medians */}
-      <details className="mt-12 border-t pt-4" style={{ borderColor: INK }}>
-        <summary className="cursor-pointer text-2xl" style={display}>At each place&rsquo;s own median wage</summary>
-        <p className="mt-3 text-sm" style={{ color: INK70 }}>Ranked within each country. The two countries measure the median differently.</p>
+      <details className="mt-12 rounded-2xl border border-line bg-white p-5 sm:p-6">
+        <summary className="cursor-pointer font-display text-2xl font-semibold text-ink">At each place&rsquo;s own median wage</summary>
+        <p className="mt-3 text-sm text-ink-3">Ranked within each country. The two countries measure the median differently.</p>
         <div className="mt-6 grid gap-10 md:grid-cols-2">
           {(['CA', 'US'] as const).map((c) => (
-            <ol key={c}>
-              <li className="mb-2 text-[11px] uppercase tracking-[0.18em]" style={{ ...mono, color: c === 'CA' ? RED : DIM }}>{c === 'CA' ? 'Canada · provinces' : 'United States'}</li>
+            <ol key={c} className="tabular-nums">
+              <li className="mb-2 flex items-center gap-2 text-[11px] font-semibold uppercase tracking-[0.12em] text-mute">
+                <Swatch color={c === 'CA' ? RED : US_INK} />{c === 'CA' ? 'Canada · provinces' : 'United States'}
+              </li>
               {medians[c].map((r) => (
-                <li key={r.code} className="grid grid-cols-[2.25rem_1fr_auto] gap-x-2 border-b py-1 text-sm" style={{ borderColor: RULE }}>
-                  <span style={{ ...display, color: inkOf(r) }}>{rankLabel(medians[c], r)}</span>
-                  <span style={{ color: INK }}>{r.name} <span style={{ ...mono, color: DIM }} className="text-xs">{money(r, r.gross)}</span></span>
-                  <span style={{ ...mono, color: INK }}>{r.keptPct.toFixed(1)}%</span>
+                <li key={r.code} className="grid grid-cols-[2.25rem_1fr_auto] gap-x-2 border-t border-line py-1.5 text-sm">
+                  <span className="font-display font-semibold text-ink-3">{rankLabel(medians[c], r)}</span>
+                  <span className="text-ink">{r.name} <span className="text-xs text-mute">{money(r, r.gross)}</span></span>
+                  <span className="text-ink">{r.keptPct.toFixed(1)}%</span>
                 </li>
               ))}
             </ol>

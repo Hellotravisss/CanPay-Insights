@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
 import Icon from '../components/Icon';
 import App from '../App';
+import SiteFooter from '../components/site/SiteFooter';
 
 export const metadata: Metadata = {
   title: 'Canadian Payroll & Take-Home Pay Calculator 2026 – Paycheck After Tax',
@@ -65,18 +66,18 @@ export default function HomePage() {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(homeFaqJsonLd) }}
       />
       <App />
-      <section className="border-t border-slate-200 bg-white">
-        <div className="mx-auto max-w-3xl px-4 py-12">
+      <section className="bg-pearl">
+        <div className="mx-auto max-w-3xl px-4 py-6 md:py-8"><div className="rounded-2xl border border-line bg-white px-5 md:px-8">
           {/* The answer to "what is this" stays in the HTML for search and AI
               engines, collapsed like the topics below: on a phone it was a
               13-line wall of text (Travis, 2026-11-03). */}
-          <details className="group border-t border-slate-200">
+          <details className="group border-t border-line">
             <summary className="cursor-pointer list-none py-4 marker:content-none [&::-webkit-details-marker]:hidden flex items-center gap-3">
               <img src="/logo.png" alt="" aria-hidden="true" className="h-[22px] w-[22px] rounded-md" />
-              <h2 className="m-0 text-[15px] font-semibold text-slate-900">What is CanPay Insights?</h2>
-              <span className="ml-auto flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-slate-100 text-slate-500 transition-transform group-open:rotate-90" aria-hidden="true">›</span>
+              <h2 className="m-0 text-[15px] font-semibold text-ink">What is CanPay Insights?</h2>
+              <span className="ml-auto flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-pearl text-mute transition-transform group-open:rotate-90" aria-hidden="true">›</span>
             </summary>
-            <p className="pb-5 leading-7 text-slate-600">
+            <p className="pb-5 leading-7 text-ink-2">
               CanPay Insights is a free take-home pay calculator for people who work in Canada. Enter
             your salary or hourly wage and your province, and it shows exactly how much you keep after
             federal and provincial income tax, CPP/CPP2, and EI for the 2026 tax year. It is a
@@ -91,13 +92,13 @@ export default function HomePage() {
               crawlers/AI engines (details content is fully indexed), while
               mobile users see one tappable line per topic instead of screens
               of text. */}
-          <details className="group border-t border-slate-200">
-            <summary className="cursor-pointer list-none py-4 text-[15px] font-medium text-slate-800 marker:content-none [&::-webkit-details-marker]:hidden flex items-center gap-3">
+          <details className="group border-t border-line">
+            <summary className="cursor-pointer list-none py-4 text-[15px] font-medium text-ink marker:content-none [&::-webkit-details-marker]:hidden flex items-center gap-3">
               <Icon name="bank" size={22} />
               <span>How CPP deductions work in 2026</span>
-              <span className="ml-auto flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-slate-100 text-slate-500 transition-transform group-open:rotate-90" aria-hidden="true">›</span>
+              <span className="ml-auto flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-pearl text-mute transition-transform group-open:rotate-90" aria-hidden="true">›</span>
             </summary>
-            <p className="pb-5 leading-7 text-slate-600">
+            <p className="pb-5 leading-7 text-ink-2">
               The Canada Pension Plan (CPP) takes 5.95% of your earnings between the $3,500 basic
               exemption and the yearly maximum ($74,600 in 2026), for a maximum employee contribution
               of about $4,230. Higher earners also pay CPP2 — an extra 4% on income between $74,600 and
@@ -106,13 +107,13 @@ export default function HomePage() {
             </p>
           </details>
 
-          <details className="group border-t border-slate-200">
-            <summary className="cursor-pointer list-none py-4 text-[15px] font-medium text-slate-800 marker:content-none [&::-webkit-details-marker]:hidden flex items-center gap-3">
+          <details className="group border-t border-line">
+            <summary className="cursor-pointer list-none py-4 text-[15px] font-medium text-ink marker:content-none [&::-webkit-details-marker]:hidden flex items-center gap-3">
               <Icon name="briefcase" size={22} />
               <span>EI premiums and rates across Canada</span>
-              <span className="ml-auto flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-slate-100 text-slate-500 transition-transform group-open:rotate-90" aria-hidden="true">›</span>
+              <span className="ml-auto flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-pearl text-mute transition-transform group-open:rotate-90" aria-hidden="true">›</span>
             </summary>
-            <p className="pb-5 leading-7 text-slate-600">
+            <p className="pb-5 leading-7 text-ink-2">
               Employment Insurance (EI) is deducted at 1.63% of insurable earnings in 2026, up to a
               maximum of about $1,123 per year. Quebec uses a lower EI rate because it runs its own
               parental insurance plan (QPIP) separately. CanPay Insights applies the correct EI and
@@ -120,13 +121,13 @@ export default function HomePage() {
             </p>
           </details>
 
-          <details className="group border-t border-b border-slate-200">
-            <summary className="cursor-pointer list-none py-4 text-[15px] font-medium text-slate-800 marker:content-none [&::-webkit-details-marker]:hidden flex items-center gap-3">
+          <details className="group border-t border-b border-line">
+            <summary className="cursor-pointer list-none py-4 text-[15px] font-medium text-ink marker:content-none [&::-webkit-details-marker]:hidden flex items-center gap-3">
               <Icon name="map" size={22} />
               <span>How provincial tax changes your take-home pay</span>
-              <span className="ml-auto flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-slate-100 text-slate-500 transition-transform group-open:rotate-90" aria-hidden="true">›</span>
+              <span className="ml-auto flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-pearl text-mute transition-transform group-open:rotate-90" aria-hidden="true">›</span>
             </summary>
-            <p className="pb-5 leading-7 text-slate-600">
+            <p className="pb-5 leading-7 text-ink-2">
               Your net pay depends heavily on where you live. The same $65,000 salary keeps a different
               amount in Alberta, Ontario, BC, or Quebec, because each province sets its own tax
               brackets and basic personal amount. Alberta has the highest basic personal amount and no
@@ -134,19 +135,19 @@ export default function HomePage() {
               calculator above to compare your real take-home pay by province in 2026.
             </p>
           </details>
-        </div>
+        </div></div>
       </section>
 
-      <section className="border-t border-slate-200 bg-white">
-        <div className="mx-auto max-w-3xl px-4 py-12">
-          <details className="group border-t border-slate-200">
-            <summary className="cursor-pointer list-none py-4 text-[15px] font-medium text-slate-800 marker:content-none [&::-webkit-details-marker]:hidden flex items-center gap-3">
+      <section className="bg-pearl">
+        <div className="mx-auto max-w-3xl px-4 py-6 md:py-8"><div className="rounded-2xl border border-line bg-white px-5 md:px-8">
+          <details className="group border-t border-line">
+            <summary className="cursor-pointer list-none py-4 text-[15px] font-medium text-ink marker:content-none [&::-webkit-details-marker]:hidden flex items-center gap-3">
               <Icon name="chart" size={22} />
               <span>2026 take-home pay by province: an $80,000 salary compared</span>
-              <span className="ml-auto flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-slate-100 text-slate-500 transition-transform group-open:rotate-90" aria-hidden="true">›</span>
+              <span className="ml-auto flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-pearl text-mute transition-transform group-open:rotate-90" aria-hidden="true">›</span>
             </summary>
             <div className="pb-5">
-          <p className="mb-6 leading-7 text-slate-600">
+          <p className="mb-6 leading-7 text-ink-2">
             On an $80,000 salary in 2026, your take-home pay ranges from about $56,439 in Nova
             Scotia to about $61,157 in British Columbia — a gap of nearly $4,800 a year on the exact
             same gross salary, simply because of where you live. The table below shows the annual take-home,
@@ -156,24 +157,24 @@ export default function HomePage() {
           <div className="overflow-x-auto">
             <table className="w-full border-collapse text-left text-sm">
               <thead>
-                <tr className="border-b-2 border-slate-300 text-slate-900">
+                <tr className="border-b-2 border-ink-5 text-ink">
                   <th scope="col" className="py-2 pr-4 font-bold">Province</th>
                   <th scope="col" className="py-2 pr-4 font-bold">Take-home (year)</th>
                   <th scope="col" className="py-2 pr-4 font-bold">Per month</th>
                   <th scope="col" className="py-2 font-bold">Total deductions</th>
                 </tr>
               </thead>
-              <tbody className="text-slate-600">
-                <tr className="border-b border-slate-200"><td className="py-2 pr-4 font-medium text-slate-800">British Columbia</td><td className="py-2 pr-4">$61,157</td><td className="py-2 pr-4">$5,096</td><td className="py-2">$18,843</td></tr>
-                <tr className="border-b border-slate-200"><td className="py-2 pr-4 font-medium text-slate-800">Alberta</td><td className="py-2 pr-4">$60,698</td><td className="py-2 pr-4">$5,058</td><td className="py-2">$19,302</td></tr>
-                <tr className="border-b border-slate-200"><td className="py-2 pr-4 font-medium text-slate-800">Ontario</td><td className="py-2 pr-4">$60,303</td><td className="py-2 pr-4">$5,025</td><td className="py-2">$19,697</td></tr>
-                <tr className="border-b border-slate-200"><td className="py-2 pr-4 font-medium text-slate-800">Manitoba</td><td className="py-2 pr-4">$58,228</td><td className="py-2 pr-4">$4,852</td><td className="py-2">$21,772</td></tr>
-                <tr className="border-b border-slate-200"><td className="py-2 pr-4 font-medium text-slate-800">Quebec</td><td className="py-2 pr-4">$57,012</td><td className="py-2 pr-4">$4,751</td><td className="py-2">$22,988</td></tr>
-                <tr><td className="py-2 pr-4 font-medium text-slate-800">Nova Scotia</td><td className="py-2 pr-4">$56,439</td><td className="py-2 pr-4">$4,703</td><td className="py-2">$23,561</td></tr>
+              <tbody className="text-ink-2">
+                <tr className="border-b border-line"><td className="py-2 pr-4 font-medium text-ink">British Columbia</td><td className="py-2 pr-4">$61,157</td><td className="py-2 pr-4">$5,096</td><td className="py-2">$18,843</td></tr>
+                <tr className="border-b border-line"><td className="py-2 pr-4 font-medium text-ink">Alberta</td><td className="py-2 pr-4">$60,698</td><td className="py-2 pr-4">$5,058</td><td className="py-2">$19,302</td></tr>
+                <tr className="border-b border-line"><td className="py-2 pr-4 font-medium text-ink">Ontario</td><td className="py-2 pr-4">$60,303</td><td className="py-2 pr-4">$5,025</td><td className="py-2">$19,697</td></tr>
+                <tr className="border-b border-line"><td className="py-2 pr-4 font-medium text-ink">Manitoba</td><td className="py-2 pr-4">$58,228</td><td className="py-2 pr-4">$4,852</td><td className="py-2">$21,772</td></tr>
+                <tr className="border-b border-line"><td className="py-2 pr-4 font-medium text-ink">Quebec</td><td className="py-2 pr-4">$57,012</td><td className="py-2 pr-4">$4,751</td><td className="py-2">$22,988</td></tr>
+                <tr><td className="py-2 pr-4 font-medium text-ink">Nova Scotia</td><td className="py-2 pr-4">$56,439</td><td className="py-2 pr-4">$4,703</td><td className="py-2">$23,561</td></tr>
               </tbody>
             </table>
           </div>
-          <p className="mt-3 text-xs leading-5 text-slate-500">
+          <p className="mt-3 text-xs leading-5 text-mute">
             2026 estimates for employment income, single with no additional credits, from the CanPay
             Insights rules engine using CRA and provincial rates. Your own result will vary with RRSP
             contributions, dependants, and other credits.
@@ -181,14 +182,14 @@ export default function HomePage() {
             </div>
           </details>
 
-          <details className="group border-t border-slate-200">
-            <summary className="cursor-pointer list-none py-4 text-[15px] font-medium text-slate-800 marker:content-none [&::-webkit-details-marker]:hidden flex items-center gap-3">
+          <details className="group border-t border-line">
+            <summary className="cursor-pointer list-none py-4 text-[15px] font-medium text-ink marker:content-none [&::-webkit-details-marker]:hidden flex items-center gap-3">
               <Icon name="raise" size={22} />
               <span>How take-home pay changes as your salary rises</span>
-              <span className="ml-auto flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-slate-100 text-slate-500 transition-transform group-open:rotate-90" aria-hidden="true">›</span>
+              <span className="ml-auto flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-pearl text-mute transition-transform group-open:rotate-90" aria-hidden="true">›</span>
             </summary>
             <div className="pb-5">
-          <p className="mb-6 leading-7 text-slate-600">
+          <p className="mb-6 leading-7 text-ink-2">
             Canada uses progressive tax brackets, so each extra dollar is taxed at a higher rate and a
             larger salary keeps a smaller share. Here is the 2026 annual take-home pay at three income
             levels in the four largest provinces.
@@ -196,7 +197,7 @@ export default function HomePage() {
           <div className="overflow-x-auto">
             <table className="w-full border-collapse text-left text-sm">
               <thead>
-                <tr className="border-b-2 border-slate-300 text-slate-900">
+                <tr className="border-b-2 border-ink-5 text-ink">
                   <th scope="col" className="py-2 pr-4 font-bold">Gross salary</th>
                   <th scope="col" className="py-2 pr-4 font-bold">BC</th>
                   <th scope="col" className="py-2 pr-4 font-bold">Ontario</th>
@@ -204,32 +205,33 @@ export default function HomePage() {
                   <th scope="col" className="py-2 font-bold">Quebec</th>
                 </tr>
               </thead>
-              <tbody className="text-slate-600">
-                <tr className="border-b border-slate-200"><td className="py-2 pr-4 font-medium text-slate-800">$50,000</td><td className="py-2 pr-4">$40,574</td><td className="py-2 pr-4">$40,145</td><td className="py-2 pr-4">$40,541</td><td className="py-2">$38,824</td></tr>
-                <tr className="border-b border-slate-200"><td className="py-2 pr-4 font-medium text-slate-800">$75,000</td><td className="py-2 pr-4">$57,711</td><td className="py-2 pr-4">$56,926</td><td className="py-2 pr-4">$57,362</td><td className="py-2">$53,965</td></tr>
-                <tr><td className="py-2 pr-4 font-medium text-slate-800">$100,000</td><td className="py-2 pr-4">$75,373</td><td className="py-2 pr-4">$74,206</td><td className="py-2 pr-4">$74,459</td><td className="py-2">$69,585</td></tr>
+              <tbody className="text-ink-2">
+                <tr className="border-b border-line"><td className="py-2 pr-4 font-medium text-ink">$50,000</td><td className="py-2 pr-4">$40,574</td><td className="py-2 pr-4">$40,145</td><td className="py-2 pr-4">$40,541</td><td className="py-2">$38,824</td></tr>
+                <tr className="border-b border-line"><td className="py-2 pr-4 font-medium text-ink">$75,000</td><td className="py-2 pr-4">$57,711</td><td className="py-2 pr-4">$56,926</td><td className="py-2 pr-4">$57,362</td><td className="py-2">$53,965</td></tr>
+                <tr><td className="py-2 pr-4 font-medium text-ink">$100,000</td><td className="py-2 pr-4">$75,373</td><td className="py-2 pr-4">$74,206</td><td className="py-2 pr-4">$74,459</td><td className="py-2">$69,585</td></tr>
               </tbody>
             </table>
           </div>
             </div>
           </details>
 
-          <h2 className="mb-2 mt-10 text-xl font-bold text-slate-900">
+          <h2 className="mb-2 mt-10 font-display text-2xl font-semibold text-ink">
             Frequently asked questions
           </h2>
           <div>
             {homeFaqJsonLd.mainEntity.map((item, i) => (
-              <details key={item.name} className={`group border-t border-slate-200 ${i === homeFaqJsonLd.mainEntity.length - 1 ? 'border-b' : ''}`}>
-                <summary className="cursor-pointer list-none py-4 text-[15px] font-medium text-slate-800 marker:content-none [&::-webkit-details-marker]:hidden flex items-center gap-3">
+              <details key={item.name} className={`group border-t border-line ${i === homeFaqJsonLd.mainEntity.length - 1 ? 'border-b' : ''}`}>
+                <summary className="cursor-pointer list-none py-4 text-[15px] font-medium text-ink marker:content-none [&::-webkit-details-marker]:hidden flex items-center gap-3">
                   {item.name}
-                  <span className="ml-auto flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-slate-100 text-slate-500 transition-transform group-open:rotate-90" aria-hidden="true">›</span>
+                  <span className="ml-auto flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-pearl text-mute transition-transform group-open:rotate-90" aria-hidden="true">›</span>
                 </summary>
-                <p className="pb-5 leading-7 text-slate-600">{item.acceptedAnswer.text}</p>
+                <p className="pb-5 leading-7 text-ink-2">{item.acceptedAnswer.text}</p>
               </details>
             ))}
           </div>
-        </div>
+        </div></div>
       </section>
+      <SiteFooter note="Calculations are estimates based on 2025/2026 tax brackets and provincial employment standards." />
     </>
   );
 }
