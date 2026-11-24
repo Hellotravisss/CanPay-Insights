@@ -8,6 +8,8 @@ interface Props {
   onModeSelect: (mode: CalculationMode) => void;
 }
 
+const MODE_TILE: Partial<Record<IconName, string>> = { coins: 'hourly', briefcase: 'annual', stopwatch: 'timesheet' };
+
 const ModeSelector: React.FC<Props> = ({ onModeSelect }) => {
   const { t } = useT();
   const modes = [
@@ -39,10 +41,10 @@ const ModeSelector: React.FC<Props> = ({ onModeSelect }) => {
           onClick={() => onModeSelect(mode.id)}
           className="group flex min-h-24 items-center gap-4 rounded-2xl border border-slate-200 bg-white p-4 text-left shadow-sm transition-all hover:-translate-y-0.5 hover:border-red-200 hover:shadow-lg focus:outline-none focus:ring-4 focus:ring-red-100 sm:p-5"
         >
-          {/* the three modes are drawn like the app icon: pearly glyph on the red tile (PayFamily-brand/15-icons/3d) */}
+          {/* the three modes as the app icon draws things: pearly 3D type ($/hr · $/yr · hrs) on the red tile (PayFamily-brand/15-icons/3d, 2026-11-24) */}
           <span className="flex h-14 w-14 shrink-0 items-center justify-center transition-transform group-hover:scale-105" aria-hidden="true">
             {/* eslint-disable-next-line @next/next/no-img-element -- static 3x PNG, next/image adds nothing */}
-            <img src={`/brand/icons/${mode.icon}-3d.png`} width={56} height={56} alt="" className="h-14 w-14 drop-shadow-[0_4px_8px_rgba(158,11,16,0.25)]" />
+            <img src={`/brand/icons/mode-${MODE_TILE[mode.icon] ?? 'hourly'}.png`} width={56} height={56} alt="" className="h-14 w-14 drop-shadow-[0_4px_8px_rgba(158,11,16,0.25)]" />
           </span>
           <span className="min-w-0 flex-1">
             <span className="block text-xl font-bold leading-tight text-slate-900 transition-colors group-hover:text-red-600 sm:text-2xl">
