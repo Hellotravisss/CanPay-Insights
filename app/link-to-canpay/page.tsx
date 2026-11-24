@@ -1,6 +1,8 @@
 import type { Metadata } from 'next';
 import ShareLinks from '../../components/ShareLinks';
-import AvowdCredit from '../../components/AvowdCredit';
+import SiteHeader from '../../components/site/SiteHeader';
+import SiteFooter from '../../components/site/SiteFooter';
+import { PageHero, Card } from '../../components/site/ui';
 
 export const metadata: Metadata = {
   title: 'Link to CanPay Insights - Free Canadian Payroll Calculator',
@@ -33,77 +35,67 @@ const snippets = [
   },
 ];
 
+const PAGE_LINK = "flex items-center justify-between gap-3 py-3 after:text-red-600 after:content-['→'] text-sm font-semibold text-ink no-underline transition-colors hover:text-red-600";
+
 export default function LinkToCanPayPage() {
   return (
-    <main className="min-h-screen bg-slate-50 text-slate-900">
-      <section className="border-b border-slate-200 bg-white">
-        <div className="mx-auto max-w-5xl px-4 py-12 md:py-16">
-          <a href="/" className="mb-8 inline-flex items-center gap-2 text-sm font-semibold text-red-600 no-underline">
-            <img src="/logo.png" alt="" className="h-8 w-8 rounded-lg" />
-            CanPay Insights
-          </a>
-          <p className="mb-3 text-sm font-bold uppercase tracking-wide text-red-600">Share the calculator</p>
-          <h1 className="mb-5 text-4xl font-bold tracking-tight text-slate-950 md:text-5xl">
-            Link to a Free Canadian Payroll Calculator
-          </h1>
-          <p className="max-w-3xl text-lg leading-8 text-slate-600">
-            CanPay Insights helps Canadian workers estimate take-home pay by province. Use the snippets below when
-            adding the calculator to a job offer guide, HR resource page, newcomer checklist, payroll article, or
-            personal finance newsletter.
-          </p>
-        </div>
-      </section>
+    <div className="min-h-screen bg-pearl font-sans text-ink">
+      <SiteHeader lang="en" />
+      <main className="mx-auto max-w-6xl px-4" role="main">
+        <PageHero
+          eyebrow="Share the calculator"
+          title="Link to a Free Canadian Payroll Calculator"
+          lead="CanPay Insights helps Canadian workers estimate take-home pay by province. Use the snippets below when adding the calculator to a job offer guide, HR resource page, newcomer checklist, payroll article, or personal finance newsletter."
+        />
 
-      <section className="mx-auto grid max-w-5xl grid-cols-1 gap-6 px-4 py-10 lg:grid-cols-[1fr_320px]">
-        <div className="space-y-4">
-          {snippets.map((snippet) => (
-            <article key={snippet.title} className="rounded-xl border border-slate-200 bg-white p-6 shadow-sm">
-              <h2 className="mb-3 text-xl font-bold text-slate-900">{snippet.title}</h2>
-              <pre className="whitespace-pre-wrap rounded-lg border border-slate-200 bg-slate-50 p-4 text-sm leading-7 text-slate-700">
-                {snippet.body}
-              </pre>
-            </article>
-          ))}
+        <div className="grid grid-cols-1 gap-6 lg:grid-cols-[1fr_320px]">
+          <div className="space-y-4">
+            {snippets.map((snippet) => (
+              <Card as="article" key={snippet.title} className="p-6">
+                <h2 className="mb-3 font-display text-xl font-semibold text-ink">{snippet.title}</h2>
+                <pre className={`whitespace-pre-wrap break-words rounded-xl border border-line bg-pearl-soft p-4 text-sm leading-7 text-ink-2 ${snippet.body.startsWith("<") ? "font-mono" : "font-sans"}`}>
+                  {snippet.body}
+                </pre>
+              </Card>
+            ))}
 
-          <article className="rounded-xl border border-slate-200 bg-white p-6 shadow-sm">
-            <h2 className="mb-3 text-xl font-bold text-slate-900">Best pages to link</h2>
-            <div className="grid grid-cols-1 gap-2 md:grid-cols-2">
-              <a className="rounded-lg bg-slate-50 px-3 py-2 text-sm font-bold text-slate-700 no-underline hover:text-red-600" href="/">
-                Free Canadian Payroll Calculator
-              </a>
-              <a className="rounded-lg bg-slate-50 px-3 py-2 text-sm font-bold text-slate-700 no-underline hover:text-red-600" href="/salary-after-tax-canada">
-                Salary After Tax Canada
-              </a>
-              <a className="rounded-lg bg-slate-50 px-3 py-2 text-sm font-bold text-slate-700 no-underline hover:text-red-600" href="/cpp-ei-calculator">
-                CPP and EI Calculator
-              </a>
-              <a className="rounded-lg bg-slate-50 px-3 py-2 text-sm font-bold text-slate-700 no-underline hover:text-red-600" href="/compare-provinces">
-                Compare Provinces
-              </a>
-            </div>
-          </article>
-        </div>
-
-        <aside className="space-y-4">
-          <ShareLinks
-            compact
-            url="https://canpayinsights.ca/"
-            title="Free Canadian Payroll Calculator 2026"
-            description="Estimate Canadian take-home pay by province with CPP, EI, income tax, salary, hourly wage, and timesheet tools."
-          />
-          <div className="rounded-xl bg-slate-900 p-6 text-white shadow-sm">
-            <h2 className="mb-2 text-xl font-bold">Who should use it?</h2>
-            <p className="text-sm leading-6 text-slate-300">
-              Workers comparing job offers, newcomers planning a budget, students starting hourly work, HR teams,
-              bookkeepers, and Canadian personal finance writers.
-            </p>
+            <Card as="article" className="p-6">
+              <h2 className="mb-2 font-display text-xl font-semibold text-ink">Best pages to link</h2>
+              <div className="divide-y divide-line border-y border-line">
+                <a className={PAGE_LINK} href="/">
+                  Free Canadian Payroll Calculator
+                </a>
+                <a className={PAGE_LINK} href="/salary-after-tax-canada">
+                  Salary After Tax Canada
+                </a>
+                <a className={PAGE_LINK} href="/cpp-ei-calculator">
+                  CPP and EI Calculator
+                </a>
+                <a className={PAGE_LINK} href="/compare-provinces">
+                  Compare Provinces
+                </a>
+              </div>
+            </Card>
           </div>
-        </aside>
-      </section>
 
-      <footer className="mx-auto max-w-5xl px-4 pb-10 pt-6 text-center text-xs text-slate-500" role="contentinfo">
-        <p>© CanPay Insights · <AvowdCredit /></p>
-      </footer>
-    </main>
+          <aside className="space-y-4">
+            <ShareLinks
+              compact
+              url="https://canpayinsights.ca/"
+              title="Free Canadian Payroll Calculator 2026"
+              description="Estimate Canadian take-home pay by province with CPP, EI, income tax, salary, hourly wage, and timesheet tools."
+            />
+            <Card className="p-6">
+              <h2 className="mb-2 font-display text-xl font-semibold text-ink">Who should use it?</h2>
+              <p className="text-sm leading-6 text-ink-3">
+                Workers comparing job offers, newcomers planning a budget, students starting hourly work, HR teams,
+                bookkeepers, and Canadian personal finance writers.
+              </p>
+            </Card>
+          </aside>
+        </div>
+      </main>
+      <SiteFooter lang="en" />
+    </div>
   );
 }

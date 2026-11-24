@@ -3,6 +3,7 @@ import Link from 'next/link';
 import { stripeClient } from '../../../lib/stripe';
 import { buildOfferReport, parseOffer } from '../../../lib/offerReport';
 import OfferReport from './OfferReport';
+import { ReportFrame, ReportGate } from '../ReportFrame';
 
 export const dynamic = 'force-dynamic';
 export const metadata: Metadata = { title: 'Offer Comparison | CanPay Insights', robots: { index: false, follow: false } };
@@ -20,15 +21,18 @@ export default async function Page({ searchParams }: { searchParams: Promise<{ s
     email = s.customer_details?.email ?? null;
   } catch { return <Gate />; }
   if (!a || !b) return <Gate />;
-  return <OfferReport report={buildOfferReport(a, b)} email={email} sessionId={session_id} permalink={`https://canpayinsights.ca/report/offer?session_id=${session_id}`} />;
+  return (
+    <ReportFrame>
+      <OfferReport report={buildOfferReport(a, b)} email={email} sessionId={session_id} permalink={`https://canpayinsights.ca/report/offer?session_id=${session_id}`} />
+    </ReportFrame>
+  );
 }
 
 function Gate() {
   return (
-    <main className="mx-auto max-w-xl px-5 py-20 text-center font-sans">
-      <h1 className="text-xl font-bold text-slate-900">This report link is not valid.</h1>
-      <p className="mt-3 text-sm text-slate-500">Open the link from your receipt email, or buy the comparison from the calculator.</p>
-      <Link href="/" className="mt-6 inline-block text-sm font-semibold text-red-600">← Back to the calculator</Link>
-    </main>
+    <ReportGate title="This report link is not valid.">
+      <p className="mt-3 text-sm leading-6 text-mute">Open the link from your receipt email, or buy the comparison from the calculator.</p>
+      <Link href="/" className="btn-brand-3d mt-7 inline-flex items-center justify-center rounded-xl px-5 py-3 text-sm font-semibold text-white no-underline">← Back to the calculator</Link>
+    </ReportGate>
   );
 }

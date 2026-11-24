@@ -1,91 +1,52 @@
-'use client';
 import React from 'react';
-import { useRouter } from 'next/navigation';
-import AvowdCredit from './AvowdCredit';
 import Icon from '@/components/Icon';
+import SiteHeader from './site/SiteHeader';
+import SiteFooter from './site/SiteFooter';
+import { PageHero, Card } from './site/ui';
 
 const ContactPage: React.FC = () => {
-  const router = useRouter();
-  const handleBack = () => router.push('/');
   return (
-    <div className="min-h-screen bg-slate-50 pb-20 font-sans">
-      {/* Header */}
-      <header className="bg-white border-b border-red-100 sticky top-0 z-30 shadow-sm" role="banner">
-        <div className="max-w-6xl mx-auto px-4 py-4 flex items-center justify-between">
-          <div className="flex items-center gap-3">
-            <img
-              src="/logo.png"
-              alt="CanPay Insights"
-              onClick={handleBack}
-              className="w-10 h-10 rounded-lg object-contain shadow-lg shadow-red-200 hover:scale-105 transition-transform cursor-pointer"
-            />
-            <p className="text-xl font-bold text-slate-800 tracking-tight cursor-pointer" onClick={handleBack}>
-              <span className="font-brand font-extrabold tracking-tight">CanPay</span> <span className="font-brand font-normal tracking-tight text-red-600">Insights</span>
-            </p>
-          </div>
-          <button
-            onClick={handleBack}
-            className="flex items-center gap-2 px-4 py-2 bg-slate-100 hover:bg-slate-200 text-slate-700 rounded-lg transition-all text-sm font-medium"
-          >
-            <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M10 19l-7-7m0 0l7-7m-7 7h18" />
-            </svg>
-            Back to Home
-          </button>
-        </div>
-      </header>
+    <div className="min-h-screen bg-pearl font-sans">
+      <SiteHeader lang="en" />
+      <main className="mx-auto max-w-3xl px-4" role="main">
+        <PageHero
+          title="Contact Us"
+          lead={<>Questions, corrections, data requests, or press — we&apos;d love to hear from you.</>}
+        />
 
-      {/* Main Content */}
-      <main className="max-w-4xl mx-auto px-4 py-12" role="main">
-        <div className="bg-white rounded-2xl shadow-sm border border-slate-200 p-8 md:p-12">
-          <h1 className="text-3xl md:text-4xl font-bold text-slate-800 mb-2">Contact Us</h1>
-          <p className="text-slate-500 mb-8 text-lg">Questions, corrections, data requests, or press — we&apos;d love to hear from you.</p>
+        <article className="rounded-2xl border border-line bg-white p-6 md:p-12">
+          <p className="mb-8 text-lg leading-8 text-ink-2">
+            CanPay Insights is built and maintained by an independent developer in Vancouver, British Columbia.
+            We read every message and aim to reply within a few business days.
+          </p>
 
-          <div className="prose prose-slate max-w-none">
-            <p className="text-slate-600 text-lg leading-relaxed mb-8">
-              CanPay Insights is built and maintained by an independent developer in Vancouver, British Columbia.
-              We read every message and aim to reply within a few business days.
-            </p>
+          <Card className="mb-12 bg-pearl-soft p-5 md:p-6">
+            <p className="mb-2 text-[11px] font-semibold uppercase tracking-[0.14em] text-mute">Email</p>
+            <a
+              href="mailto:info@canpayinsights.ca"
+              className="break-words font-display text-xl font-semibold text-red-600 underline decoration-red-200 underline-offset-4 transition-colors hover:decoration-red-600 md:text-3xl"
+            >
+              info@canpayinsights.ca
+            </a>
+            <p className="mt-3 text-sm text-mute">Vancouver, British Columbia, Canada <Icon name="maple" size={14} /></p>
+          </Card>
 
-            <div className="rounded-xl border border-slate-200 bg-slate-50 p-6 mb-10">
-              <p className="text-sm font-semibold uppercase tracking-wide text-slate-500 mb-1">Email</p>
-              <a
-                href="mailto:info@canpayinsights.ca"
-                className="text-2xl font-bold text-red-600 hover:text-red-700 underline underline-offset-4 transition-colors"
-              >
-                info@canpayinsights.ca
-              </a>
-              <p className="text-slate-500 mt-3 text-sm">Vancouver, British Columbia, Canada <Icon name="maple" size={14} /></p>
-            </div>
+          <h2 className="mb-4 font-display text-2xl font-semibold leading-snug text-ink">What you can reach us about</h2>
+          <ul className="mb-10 divide-y divide-line border-y border-line">
+            <li className="py-3 leading-7 text-ink-2"><strong className="text-ink">Spotted an error?</strong> If a number looks off for your province or year, tell us — we&apos;ll check the engine and fix it.</li>
+            <li className="py-3 leading-7 text-ink-2"><strong className="text-ink">Data &amp; media requests.</strong> Journalists and bloggers are welcome to cite our take-home pay, CPP/EI, and minimum-wage data; we&apos;re happy to pull a custom figure for any province.</li>
+            <li className="py-3 leading-7 text-ink-2"><strong className="text-ink">Feature ideas.</strong> Want a new year, a new breakdown, or another language? Let us know.</li>
+            <li className="py-3 leading-7 text-ink-2"><strong className="text-ink">General feedback.</strong> Good or bad, it helps make the tool better for everyone.</li>
+          </ul>
 
-            <h2 className="text-2xl font-bold text-slate-800 mb-4">What you can reach us about</h2>
-            <ul className="list-disc pl-5 text-slate-600 leading-relaxed space-y-2 mb-8">
-              <li><strong>Spotted an error?</strong> If a number looks off for your province or year, tell us — we&apos;ll check the engine and fix it.</li>
-              <li><strong>Data &amp; media requests.</strong> Journalists and bloggers are welcome to cite our take-home pay, CPP/EI, and minimum-wage data; we&apos;re happy to pull a custom figure for any province.</li>
-              <li><strong>Feature ideas.</strong> Want a new year, a new breakdown, or another language? Let us know.</li>
-              <li><strong>General feedback.</strong> Good or bad, it helps make the tool better for everyone.</li>
-            </ul>
-
-            <p className="text-slate-600 leading-relaxed">
-              Please note that CanPay Insights provides general information only and cannot give personalized tax,
-              legal, or financial advice. For decisions that matter, please consult a qualified accountant or the
-              Canada Revenue Agency.
-            </p>
-          </div>
-        </div>
+          <p className="text-sm leading-6 text-mute">
+            Please note that CanPay Insights provides general information only and cannot give personalized tax,
+            legal, or financial advice. For decisions that matter, please consult a qualified accountant or the
+            Canada Revenue Agency.
+          </p>
+        </article>
       </main>
-
-      {/* Footer */}
-      <footer className="text-center text-slate-500 text-xs py-8 space-y-4" role="contentinfo">
-        <p>Calculations are estimates based on 2026 tax brackets and provincial employment standards.</p>
-        <div className="flex flex-wrap items-center justify-center gap-x-4 gap-y-2">
-          <a href="/about" className="text-slate-500 hover:text-red-600 transition-colors">About</a>
-          <a href="/contact" className="text-slate-500 hover:text-red-600 transition-colors">Contact</a>
-          <a href="/privacy" className="text-slate-500 hover:text-red-600 transition-colors">Privacy</a>
-        </div>
-        <p className="mt-4">Proudly Canadian <Icon name="maple" size={14} /> Built for Workers.</p>
-        <p><AvowdCredit /></p>
-      </footer>
+      <SiteFooter lang="en" note="Calculations are estimates based on 2026 tax brackets and provincial employment standards." />
     </div>
   );
 };
