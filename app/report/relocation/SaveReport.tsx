@@ -69,27 +69,27 @@ export default function SaveReport({
   return (
     <div className="mt-6 grid gap-3 sm:grid-cols-[1fr_auto]">
       {/* Account */}
-      <div className="rounded-2xl border border-slate-200 bg-white p-5">
+      <div className="rounded-2xl border border-line bg-white p-5">
         {state === 'claimed' ? (
           <>
-            <p className="text-sm font-bold text-emerald-700">✓ Saved to your account</p>
-            <p className="mt-1 text-sm text-slate-500">
-              This report now lives under <span className="font-medium text-slate-700">My reports</span> on canpayinsights.ca, next to your saved calculations.
+            <p className="text-sm font-bold text-red-600">✓ Saved to your account</p>
+            <p className="mt-1 text-sm text-mute">
+              This report now lives under <span className="font-medium text-ink-2">My reports</span> on canpayinsights.ca, next to your saved calculations.
             </p>
           </>
         ) : state === 'signedin' ? (
-          <p className="text-sm text-slate-500">Signed in — attaching this report to your account…</p>
+          <p className="text-sm text-mute">Signed in — attaching this report to your account…</p>
         ) : state === 'sent' ? (
           <>
-            <p className="text-sm font-bold text-slate-900">Check your inbox</p>
-            <p className="mt-1 text-sm text-slate-500">
-              We sent a sign-in link to <span className="font-medium text-slate-700">{email || initialEmail}</span>. Open it on any device and this report is saved to your account — no password to remember.
+            <p className="text-sm font-bold text-ink">Check your inbox</p>
+            <p className="mt-1 text-sm text-mute">
+              We sent a sign-in link to <span className="font-medium text-ink-2">{email || initialEmail}</span>. Open it on any device and this report is saved to your account — no password to remember.
             </p>
           </>
         ) : (
           <>
-            <p className="text-sm font-bold text-slate-900">Keep this report, and your pay history</p>
-            <p className="mt-1 text-sm text-slate-500">
+            <p className="text-sm font-bold text-ink">Keep this report, and your pay history</p>
+            <p className="mt-1 text-sm text-mute">
               A free account saves every calculation you run, shows your pay over time, and keeps this report one click away on any device.
             </p>
             <div className="mt-3 flex flex-col gap-2 sm:flex-row">
@@ -98,7 +98,7 @@ export default function SaveReport({
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 placeholder="you@example.com"
-                className="min-w-0 flex-1 rounded-lg border border-slate-300 px-3 py-2 text-sm"
+                className="min-w-0 flex-1 rounded-lg border border-ink-5 px-3 py-2 text-sm"
               />
               <button
                 onClick={createAccount}
@@ -111,7 +111,7 @@ export default function SaveReport({
               </button>
             </div>
             {err && <p className="mt-2 text-xs text-red-600">{err}</p>}
-            <p className="mt-2 text-[11px] text-slate-500">One sign-in link by email. No password, no newsletter.</p>
+            <p className="mt-2 text-[11px] text-mute">One sign-in link by email. No password, no newsletter.</p>
           </>
         )}
       </div>
@@ -120,7 +120,7 @@ export default function SaveReport({
       <a
         href={`/api/report/pdf?session_id=${encodeURIComponent(sessionId)}`}
         onClick={downloadAlsoRegisters}
-        className="flex items-center justify-center gap-2 rounded-2xl border-2 border-slate-900 px-5 py-4 text-sm font-bold text-slate-900 hover:bg-slate-900 hover:text-white print:hidden"
+        className="flex items-center justify-center gap-2 rounded-2xl border-2 border-ink px-5 py-4 text-sm font-bold text-ink hover:bg-ink hover:text-white print:hidden"
       >
         <svg className="h-5 w-5" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
           <path d="M10 2a1 1 0 011 1v8.586l2.293-2.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 111.414-1.414L9 11.586V3a1 1 0 011-1z" />
