@@ -1,5 +1,6 @@
 'use client';
 import { taxDays } from '../utils/taxDays';
+import { TAX_YEAR } from '../constants';
 import { useBelowViewport } from './useBelowViewport';
 import React from 'react';
 import AnimatedAmount from './AnimatedAmount';
@@ -11,10 +12,6 @@ interface Props {
   results: CalculationResult;
   provinceName?: string;
 }
-
-const InukshukWatermark = ({ className, style }: { className?: string; style?: React.CSSProperties }) => (
-  <img src="/logo_reverse.png" alt="" aria-hidden="true" className={className} style={style} />
-);
 
 type ChartDatum = {
   name: string;
@@ -37,14 +34,14 @@ const PaycheckDonutChart = ({
   const size = 220;
   const center = size / 2;
   const radius = 72;
-  const strokeWidth = 28;
+  const strokeWidth = 22;
   const circumference = 2 * Math.PI * radius;
   const total = data.reduce((sum, item) => sum + Math.max(item.value, 0), 0);
 
   const segments = React.useMemo(() => {
     if (total <= 0) return [];
 
-    const gap = 4;
+    const gap = 3; // a 2px-ish surface gap between segments (chart rule)
     let cursor = 0;
 
     return data
@@ -68,7 +65,7 @@ const PaycheckDonutChart = ({
   const activeSegment = activeIndex === null ? null : segments.find((segment) => segment.index === activeIndex);
 
   return (
-    <div className="relative mx-auto flex min-h-[16rem] w-full max-w-sm flex-col items-center justify-center">
+    <div className="relative mx-auto flex w-full max-w-sm flex-col items-center justify-center">
       <style>
         {`
           @keyframes paycheckDonutIn {
@@ -95,7 +92,7 @@ const PaycheckDonutChart = ({
             cy={center}
             r={radius}
             fill="none"
-            stroke="#e2e8f0"
+            stroke="#EEEEF3"
             strokeWidth={strokeWidth}
           />
           {segments.map((segment) => (
@@ -124,28 +121,35 @@ const PaycheckDonutChart = ({
           ))}
         </svg>
         <div className="pointer-events-none absolute inset-0 flex flex-col items-center justify-center text-center">
-          <span className="text-xs font-bold uppercase text-slate-500">{netPayLabel}</span>
-          <p className="text-2xl font-bold text-slate-800">{netPayPercent}%</p>
+          <p className="font-display text-[2.5rem] leading-none font-semibold text-red-600 tabular-nums">{netPayPercent}<span className="text-xl align-top">%</span></p>
+          <span className="mt-1 text-[11px] font-semibold uppercase tracking-[0.14em] text-[#5E6270]">{netPayLabel}</span>
         </div>
       </div>
 
       {activeSegment && (
-        <div className="absolute top-2 z-10 rounded-lg border border-slate-200 bg-white px-3 py-2 text-xs shadow-lg">
+        <div className="absolute top-2 z-10 rounded-lg border border-[#E3E3EA] bg-white px-3 py-2 text-xs shadow-lg tabular-nums">
           <p className="font-bold text-slate-900">{activeSegment.name}</p>
-          <p className="text-slate-600">
+          <p className="text-[#535866]">
             {formatCurrency(activeSegment.value)} · {activeSegment.percent}%
           </p>
         </div>
       )}
 
-      <div className="mt-2 flex flex-wrap items-center justify-center gap-x-4 gap-y-2 text-sm font-medium text-slate-600">
-        {data.map((item) => (
-          <div key={item.name} className="inline-flex items-center gap-2">
-            <span className="h-3 w-3 rounded-full" style={{ backgroundColor: item.color }} />
-            <span>{item.name}</span>
-          </div>
+      {/* legend: identity + share, amounts live in the table beside it */}
+      <ul className="mt-4 grid w-full grid-cols-2 gap-x-5 gap-y-2 text-[13px]">
+        {segments.map((item) => (
+          <li
+            key={item.name}
+            className="flex items-center gap-2 min-w-0"
+            onMouseEnter={() => setActiveIndex(item.index)}
+            onMouseLeave={() => setActiveIndex(null)}
+          >
+            <span className="h-2.5 w-2.5 shrink-0 rounded-[3px]" style={{ backgroundColor: item.color }} />
+            <span className="truncate text-[#2B2E36]">{item.name}</span>
+            <span className="ml-auto tabular-nums text-[#5E6270]">{item.percent}%</span>
+          </li>
         ))}
-      </div>
+      </ul>
     </div>
   );
 };
@@ -252,8 +256,6 @@ const ResultsSection: React.FC<Props> = ({ results, provinceName }) => {
               </span>
             </div>
           </div>
-          {/* Decorative Icon */}
-          <InukshukWatermark className="absolute -right-4 -bottom-8 w-28 h-28 opacity-20 transform group-hover:scale-110 transition-transform duration-500" />
         </div>
 
         {heroBelow && (
@@ -262,36 +264,47 @@ const ResultsSection: React.FC<Props> = ({ results, provinceName }) => {
             onClick={() => heroRef.current?.scrollIntoView({ behavior: 'smooth', block: 'center' })}
             className="glass-bar lg:hidden fixed inset-x-4 bottom-4 z-40 flex items-center justify-between gap-3 rounded-full border border-white/60 px-5 py-3 text-left shadow-[0_10px_30px_-8px_rgba(15,23,42,0.35)]"
           >
-            <span className="text-xs font-bold uppercase tracking-widest text-slate-600">{payPeriodLabel} · {t('res.netPay')}</span>
+            <span className="text-xs font-bold uppercase tracking-widest text-[#535866]">{payPeriodLabel} · {t('res.netPay')}</span>
             <span className="text-xl font-extrabold tabular-nums text-red-600">
               {formatCurrency(hasCustomFrequency ? (results.netPayPerPeriod || results.netPayBiWeekly) : results.netPayBiWeekly)}
             </span>
           </button>
         )}
 
-        {/* Annual Card */}
-        <div className="bg-white rounded-xl shadow-sm border border-slate-100 p-6 relative overflow-hidden">
-          <div className="flex items-center gap-2 mb-4">
-            <img src="/logo.png" alt="" aria-hidden="true" className="w-5 h-5 rounded-sm" />
-            <h3 className="text-lg font-bold text-slate-800">{t('res.annualProjection')}</h3>
-          </div>
+        {/* Annual Card: the year in one bar (kept vs deducted), then three ruled lines */}
+        <div className="bg-white rounded-2xl border border-[#E3E3EA] p-6 relative overflow-hidden">
+          <p className="text-[11px] font-semibold uppercase tracking-[0.14em] text-[#5E6270]">{TAX_YEAR}</p>
+          <h3 className="font-display text-xl font-semibold text-[#15171C] mb-4">{t('res.annualProjection')}</h3>
 
-          <div className="space-y-3">
-            <div className="flex justify-between items-baseline gap-4 border-b border-slate-100 pb-2">
-              <span className="text-slate-500 text-sm">{t('res.grossIncomePre')}</span>
-              <span className="text-xl font-bold text-slate-900 tabular-nums">{formatCurrency(results.grossPayAnnual)}</span>
+          {results.grossPayAnnual > 0 && (
+            <div className="mb-5" aria-hidden="true">
+              <div className="flex h-2.5 w-full gap-[2px] overflow-hidden rounded-full">
+                <div className="h-full rounded-l-full bg-[#C8161A] transition-[width] duration-500 ease-[cubic-bezier(0.2,0,0,1)]" style={{ width: `${Math.max(0, Math.min(100, (results.netPayAnnual / results.grossPayAnnual) * 100))}%` }} />
+                <div className="h-full flex-1 rounded-r-full bg-[#A2A6B0]" />
+              </div>
+              <div className="mt-1.5 flex justify-between text-[11px] text-[#5E6270] tabular-nums">
+                <span><span className="font-semibold text-red-600">{Math.round((results.netPayAnnual / results.grossPayAnnual) * 100)}%</span> {t('res.netPay')}</span>
+                <span>{Math.round((results.totalDeductionsAnnual / results.grossPayAnnual) * 100)}% {t('res.deductions')}</span>
+              </div>
             </div>
-            <div className="flex justify-between items-center gap-4 text-sm text-red-500">
-              <span>{t('res.totalTaxDed')}</span>
-              <span className="tabular-nums">- {formatCurrency(results.totalDeductionsAnnual)}</span>
+          )}
+
+          <dl className="divide-y divide-[#E3E3EA] border-y border-[#E3E3EA]">
+            <div className="flex justify-between items-baseline gap-4 py-2.5">
+              <dt className="text-sm text-[#5E6270]">{t('res.grossIncomePre')}</dt>
+              <dd className="text-lg font-semibold text-[#15171C] tabular-nums">{formatCurrency(results.grossPayAnnual)}</dd>
             </div>
-            <div className="flex justify-between items-baseline gap-4 bg-slate-50 p-3 rounded-lg border border-slate-200">
-              <span className="text-slate-700 font-bold text-sm">{t('res.netIncomePost')}</span>
-              <span className="text-2xl font-extrabold text-red-600 tabular-nums whitespace-nowrap">{formatCurrency(results.netPayAnnual)}</span>
+            <div className="flex justify-between items-baseline gap-4 py-2.5">
+              <dt className="text-sm text-[#5E6270]">{t('res.totalTaxDed')}</dt>
+              <dd className="text-base text-[#535866] tabular-nums">− {formatCurrency(results.totalDeductionsAnnual)}</dd>
             </div>
-          </div>
+            <div className="flex justify-between items-baseline gap-4 py-3">
+              <dt className="text-sm font-semibold text-[#15171C]">{t('res.netIncomePost')}</dt>
+              <dd className="font-display text-[1.9rem] leading-none font-semibold text-red-600 tabular-nums whitespace-nowrap">{formatCurrency(results.netPayAnnual)}</dd>
+            </div>
+          </dl>
           {days && (
-            <p className="mt-4 text-xs leading-5 text-slate-600">
+            <p className="mt-4 text-xs leading-5 text-[#5E6270]">
               {t('res.taxDays').replace('{tax}', String(days.tax)).replace('{contrib}', String(days.contributions))}
             </p>
           )}
@@ -316,12 +329,13 @@ const ResultsSection: React.FC<Props> = ({ results, provinceName }) => {
       )}
 
       {/* Detail Breakdown */}
-      <div className="bg-white rounded-xl shadow-sm border border-slate-200 p-6">
-        <h3 className="text-lg font-bold text-slate-800 mb-6">{payPeriodLabel} · {t('res.breakdown')}</h3>
+      <div className="bg-white rounded-2xl border border-[#E3E3EA] p-6">
+        <p className="text-[11px] font-semibold uppercase tracking-[0.14em] text-[#5E6270]">{payPeriodLabel}</p>
+        <h3 className="font-display text-xl font-semibold text-[#15171C] mb-6">{t('res.breakdown')}</h3>
         
         <div className="flex flex-col md:flex-row gap-8 items-center">
           {/* Chart */}
-          <div className="w-full md:w-1/2 h-64 relative">
+          <div className="w-full md:w-1/2 relative">
             <PaycheckDonutChart
               data={chartData}
               formatCurrency={formatCurrency}
@@ -331,19 +345,19 @@ const ResultsSection: React.FC<Props> = ({ results, provinceName }) => {
           </div>
 
           {/* Detailed Table */}
-          <div className="w-full md:w-1/2 text-sm space-y-4">
+          <div className="w-full md:w-1/2 text-sm space-y-6 tabular-nums">
              {/* Earnings */}
              <div>
-               <h4 className="text-xs font-bold text-slate-500 uppercase mb-2">{t('res.earnings')}</h4>
+               <h4 className="text-[11px] font-semibold uppercase tracking-[0.14em] text-[#5E6270] mb-2">{t('res.earnings')}</h4>
                <div className="space-y-2">
                  {/* Each row is the engine's own amount for that source, so the rows add up to gross pay. */}
                  {earn.salary !== undefined ? (
-                   <div className="flex justify-between text-slate-700">
+                   <div className="flex justify-between text-[#2B2E36]">
                      <span>{t('res.salaryPay')}</span>
                      <span className="font-medium">{formatCurrency(earn.salary)}</span>
                    </div>
                  ) : (
-                   <div className="flex justify-between text-slate-700">
+                   <div className="flex justify-between text-[#2B2E36]">
                      <span>{t('res.regularPay')} ({results.regularHours.toFixed(1)}h)</span>
                      <span className="font-medium">{formatCurrency(earn.regular ?? 0)}</span>
                    </div>
@@ -367,18 +381,18 @@ const ResultsSection: React.FC<Props> = ({ results, provinceName }) => {
                    </div>
                  )}
                  {(earn.tips ?? 0) > 0 && (
-                   <div className="flex justify-between text-slate-700">
+                   <div className="flex justify-between text-[#2B2E36]">
                      <span>{t('ts.tipsDeclared')}</span>
                      <span className="font-medium">{formatCurrency(earn.tips!)}</span>
                    </div>
                  )}
                  {(earn.additional ?? 0) > 0 && (
-                   <div className="flex justify-between text-slate-700">
+                   <div className="flex justify-between text-[#2B2E36]">
                      <span>{t('annual.addIncome')}</span>
                      <span className="font-medium">{formatCurrency(earn.additional!)}</span>
                    </div>
                  )}
-                 <div className="flex justify-between text-slate-900 font-bold pt-2 border-t border-slate-100">
+                 <div className="flex justify-between text-[#15171C] font-semibold pt-2 border-t border-[#15171C]/80">
                    <span>{t('res.grossPay')}</span>
                    <span>{formatCurrency(results.grossPayBiWeekly)}</span>
                  </div>
@@ -387,52 +401,52 @@ const ResultsSection: React.FC<Props> = ({ results, provinceName }) => {
 
              {/* Deductions */}
              <div>
-               <h4 className="text-xs font-bold text-slate-500 uppercase mb-2">{t('res.deductions')}</h4>
+               <h4 className="text-[11px] font-semibold uppercase tracking-[0.14em] text-[#5E6270] mb-2">{t('res.deductions')}</h4>
                <div className="space-y-2">
-                 <div className="flex justify-between text-slate-600">
+                 <div className="flex justify-between text-[#535866]">
                    <span>{t('res.federalTax')}</span>
-                   <span>- {formatCurrency(results.federalTax)}</span>
+                   <span>− {formatCurrency(results.federalTax)}</span>
                  </div>
-                 <div className="flex justify-between text-slate-600">
+                 <div className="flex justify-between text-[#535866]">
                    <span>{t('res.provincialTax')} {provinceName ? `(${provinceDisplayName(provinceName, lang)})` : ''}</span>
-                   <span>- {formatCurrency(results.provincialTax)}</span>
+                   <span>− {formatCurrency(results.provincialTax)}</span>
                  </div>
                  {/* Outside Québec, CRA withholds both taxes together and most stubs print one line
                      (often labelled "Federal Tax"). Québec stubs list Revenu Québec tax separately. */}
                  {provinceName !== Province.QC && (
-                   <div className="pl-3 border-l-2 border-slate-200">
+                   <div className="pl-3 border-l-2 border-[#E3E3EA]">
                      <div className="flex justify-between text-slate-800 font-medium">
                        <span>{t('res.incomeTaxTotal')}</span>
-                       <span>- {formatCurrency(results.federalTax + results.provincialTax)}</span>
+                       <span>− {formatCurrency(results.federalTax + results.provincialTax)}</span>
                      </div>
                      <p className="text-xs text-slate-400">{t('res.incomeTaxTotalHint')}</p>
                    </div>
                  )}
-                 <div className="flex justify-between text-slate-600">
+                 <div className="flex justify-between text-[#535866]">
                    <span>{t('res.cppEiAmp')}</span>
-                   <span>- {formatCurrency(results.cppDeduction + results.eiDeduction)}</span>
+                   <span>− {formatCurrency(results.cppDeduction + results.eiDeduction)}</span>
                  </div>
                  {(results.rrspDeduction ?? 0) > 0 && (
-                   <div className="flex justify-between text-slate-600">
+                   <div className="flex justify-between text-[#535866]">
                      <span>{t('annual.rrsp')}</span>
-                     <span>- {formatCurrency(results.rrspDeduction ?? 0)}</span>
+                     <span>− {formatCurrency(results.rrspDeduction ?? 0)}</span>
                    </div>
                  )}
                  {(results.pensionDeduction ?? 0) > 0 && (
-                   <div className="flex justify-between text-slate-600">
+                   <div className="flex justify-between text-[#535866]">
                      <span>{t('ded.pension')}</span>
-                     <span>- {formatCurrency(results.pensionDeduction ?? 0)}</span>
+                     <span>− {formatCurrency(results.pensionDeduction ?? 0)}</span>
                    </div>
                  )}
                  {(results.otherDeductions ?? 0) > 0 && (
-                   <div className="flex justify-between text-slate-600">
+                   <div className="flex justify-between text-[#535866]">
                      <span>{t('res.otherDed')}</span>
-                     <span>- {formatCurrency(results.otherDeductions ?? 0)}</span>
+                     <span>− {formatCurrency(results.otherDeductions ?? 0)}</span>
                    </div>
                  )}
-                 <div className="flex justify-between text-red-600 font-bold pt-2 border-t border-slate-100">
+                 <div className="flex justify-between text-[#15171C] font-semibold pt-2 border-t border-[#15171C]/80">
                    <span>{t('res.totalDeductions')}</span>
-                   <span>- {formatCurrency(results.federalTax + results.provincialTax + results.cppDeduction + results.eiDeduction + (results.rrspDeduction ?? 0) + (results.pensionDeduction ?? 0) + (results.otherDeductions ?? 0))}</span>
+                   <span>− {formatCurrency(results.federalTax + results.provincialTax + results.cppDeduction + results.eiDeduction + (results.rrspDeduction ?? 0) + (results.pensionDeduction ?? 0) + (results.otherDeductions ?? 0))}</span>
                  </div>
                </div>
              </div>
