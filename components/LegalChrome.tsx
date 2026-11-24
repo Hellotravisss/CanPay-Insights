@@ -9,7 +9,7 @@ import SiteFooter from './site/SiteFooter';
  * use, so a fourth copy of that markup does not have to be kept in step.
  */
 export const Badge = ({ n }: { n: number | string }) => (
-  <span className="mt-1 w-8 shrink-0 font-display text-lg font-semibold tabular-nums text-red-600">{String(n).padStart(2, '0')}</span>
+  <span className="mt-1 w-8 shrink-0 font-display text-lg font-semibold tabular-nums text-red-600">{n}</span>
 );
 
 export function Section({ n, id, title, children }: { n: number | string; id?: string; title: string; children: React.ReactNode }) {
