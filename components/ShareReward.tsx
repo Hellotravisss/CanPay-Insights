@@ -273,7 +273,7 @@ export default function ShareReward({ lang }: { lang: string }) {
                 setCopied('code');
                 setTimeout(() => setCopied(null), 2000);
               }}
-              className="rounded-md bg-slate-900 px-3 py-1.5 text-xs font-semibold text-white hover:bg-red-600"
+              className="rounded-md bg-ink px-3 py-1.5 text-xs font-semibold text-white hover:bg-red-600"
             >
               {copied === 'code' ? t.codeCopied : t.copyCode}
             </button>

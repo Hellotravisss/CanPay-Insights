@@ -504,7 +504,7 @@ export default function IndustryComparison({
           <div className="relative mt-8 mb-7 h-3 w-full rounded-full bg-gradient-to-r from-slate-200 via-red-200 to-red-600">
             {/* median tick */}
             <div
-              className="absolute -top-1 h-5 w-0.5 bg-slate-500"
+              className="absolute -top-1 h-5 w-0.5 bg-ink-4"
               style={{ left: `${chart.medX}%` }}
             />
             <div
@@ -519,7 +519,7 @@ export default function IndustryComparison({
               style={{ left: `${chart.youX}%` }}
             />
             <div
-              className="absolute -top-8 -translate-x-1/2 whitespace-nowrap rounded-md bg-slate-900 px-2 py-0.5 text-[11px] font-bold text-white"
+              className="absolute -top-8 -translate-x-1/2 whitespace-nowrap rounded-md bg-ink px-2 py-0.5 text-[11px] font-bold text-white"
               style={{ left: `${chart.youX}%` }}
             >
               {t.youAreHere}: {money(annualIncome)}

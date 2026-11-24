@@ -32,7 +32,7 @@ const LoadingOverlay: React.FC<LoadingOverlayProps> = ({
         </div>
 
         {/* Message */}
-        <p className="text-slate-600 font-medium">{message}</p>
+        <p className="text-ink-3 font-medium">{message}</p>
       </div>
     </div>
   );

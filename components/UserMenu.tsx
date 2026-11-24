@@ -204,7 +204,7 @@ const UserMenu: React.FC<UserMenuProps> = ({ onSwitchToTimesheet, onLoadCalculat
         {/* User Avatar Button */}
         <button
           onClick={() => setIsOpen(!isOpen)}
-          className="flex items-center gap-2 px-3 py-2 bg-pearl hover:bg-slate-200 rounded-lg transition-all"
+          className="flex items-center gap-2 px-3 py-2 bg-pearl hover:bg-pearl-shade rounded-lg transition-all"
         >
           {avatar ? (
             <img 
@@ -307,7 +307,7 @@ const UserMenu: React.FC<UserMenuProps> = ({ onSwitchToTimesheet, onLoadCalculat
                 disabled={alerts === null}
                 className="w-full flex items-center gap-3 px-3 py-2 text-ink-2 hover:bg-pearl-soft rounded-lg transition-colors text-left mt-1 disabled:opacity-60"
               >
-                <span className={`relative inline-flex h-5 w-9 shrink-0 rounded-full transition-colors ${alerts ? 'bg-red-600' : 'bg-slate-300'}`}>
+                <span className={`relative inline-flex h-5 w-9 shrink-0 rounded-full transition-colors ${alerts ? 'bg-red-600' : 'bg-ink-5'}`}>
                   <span className={`absolute top-0.5 h-4 w-4 rounded-full bg-white shadow transition-all ${alerts ? 'left-[18px]' : 'left-0.5'}`} />
                 </span>
                 <div>
@@ -431,7 +431,7 @@ const UserMenu: React.FC<UserMenuProps> = ({ onSwitchToTimesheet, onLoadCalculat
                           </div>
                           <div className="flex items-center gap-4 text-sm text-mute">
                             <span>{formatDate(record.createdAt)}</span>
-                            <span className="w-1 h-1 bg-slate-300 rounded-full"></span>
+                            <span className="w-1 h-1 bg-ink-5 rounded-full"></span>
                             <span className="text-red-600 font-medium">
                               Net: ${record.results.netPayPerPeriod?.toFixed(2) || record.results.netPayBiWeekly.toFixed(2)}
                             </span>

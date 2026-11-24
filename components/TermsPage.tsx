@@ -31,7 +31,7 @@ const TermsPage: React.FC = () => {
         <p>
           The calculators apply the Canada Revenue Agency’s payroll deduction formulas and published
           provincial rules to the numbers you enter. The results are{' '}
-          <strong className="text-slate-800">estimates for information only</strong>. They are not tax, legal, accounting or
+          <strong className="text-ink">estimates for information only</strong>. They are not tax, legal, accounting or
           financial advice, they do not account for every credit, deduction or employer practice, and your
           actual pay is determined by your employer and the CRA. Check important decisions against your pay
           statement, your employer’s payroll department or a licensed professional.

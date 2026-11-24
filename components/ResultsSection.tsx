@@ -128,7 +128,7 @@ const PaycheckDonutChart = ({
 
       {activeSegment && (
         <div className="absolute top-2 z-10 rounded-lg border border-[#E3E3EA] bg-white px-3 py-2 text-xs shadow-lg tabular-nums">
-          <p className="font-bold text-slate-900">{activeSegment.name}</p>
+          <p className="font-bold text-ink">{activeSegment.name}</p>
           <p className="text-[#535866]">
             {formatCurrency(activeSegment.value)} · {activeSegment.percent}%
           </p>
@@ -313,14 +313,14 @@ const ResultsSection: React.FC<Props> = ({ results, provinceName }) => {
 
       {/* Quebec Information */}
       {provinceName === Province.QC && (
-        <div className="bg-blue-50/40 border border-blue-100/60 p-4 rounded-xl">
+        <div className="bg-white border border-line p-4 rounded-xl">
           <div className="flex items-start gap-3">
-            <svg className="w-5 h-5 text-blue-600 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <svg className="w-5 h-5 text-ink mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
             </svg>
             <div>
-              <p className="text-sm font-semibold text-blue-800">{t('res.qcTitle')}</p>
-              <p className="text-xs text-blue-700 mt-1">
+              <p className="text-sm font-semibold text-ink">{t('res.qcTitle')}</p>
+              <p className="text-xs text-ink-2 mt-1">
                 {t('res.qcDesc')}
               </p>
             </div>
@@ -363,13 +363,13 @@ const ResultsSection: React.FC<Props> = ({ results, provinceName }) => {
                    </div>
                  )}
                  {results.overtimeHours15 > 0 && (
-                   <div className="flex justify-between text-amber-600">
+                   <div className="flex justify-between text-ink-2">
                      <span>{t('res.ot15')} ({results.overtimeHours15.toFixed(1)}h)</span>
                      <span className="font-medium">{earn.overtime15 !== undefined ? formatCurrency(earn.overtime15) : t('res.included')}</span>
                    </div>
                  )}
                  {results.overtimeHours20 > 0 && (
-                   <div className="flex justify-between text-amber-700 font-bold">
+                   <div className="flex justify-between text-ink font-bold">
                      <span>{t('res.ot20')} ({results.overtimeHours20.toFixed(1)}h)</span>
                      <span className="font-medium">{earn.overtime20 !== undefined ? formatCurrency(earn.overtime20) : t('res.included')}</span>
                    </div>
@@ -415,11 +415,11 @@ const ResultsSection: React.FC<Props> = ({ results, provinceName }) => {
                      (often labelled "Federal Tax"). Québec stubs list Revenu Québec tax separately. */}
                  {provinceName !== Province.QC && (
                    <div className="pl-3 border-l-2 border-[#E3E3EA]">
-                     <div className="flex justify-between text-slate-800 font-medium">
+                     <div className="flex justify-between text-ink font-medium">
                        <span>{t('res.incomeTaxTotal')}</span>
                        <span>− {formatCurrency(results.federalTax + results.provincialTax)}</span>
                      </div>
-                     <p className="text-xs text-slate-400">{t('res.incomeTaxTotalHint')}</p>
+                     <p className="text-xs text-ink-4">{t('res.incomeTaxTotalHint')}</p>
                    </div>
                  )}
                  <div className="flex justify-between text-[#535866]">

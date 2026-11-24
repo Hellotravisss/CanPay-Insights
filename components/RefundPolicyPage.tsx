@@ -33,7 +33,7 @@ const RefundPolicyPage: React.FC = () => {
           <li>the report contains a calculation error that we confirm (we will also correct it).</li>
         </ul>
         <p>
-          If you are unhappy for any other reason, write to us within <strong className="text-slate-800">14 days of purchase</strong>{' '}
+          If you are unhappy for any other reason, write to us within <strong className="text-ink">14 days of purchase</strong>{' '}
           and tell us what went wrong. A report is generated from your own numbers and delivered instantly,
           so it cannot be “returned”, but in practice we refund these requests too — we would rather learn
           why the report fell short than keep nine dollars.

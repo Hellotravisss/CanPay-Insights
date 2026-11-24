@@ -78,7 +78,7 @@ const AnnualSalaryInput: React.FC<Props> = ({ inputs, setInputs }) => {
           </svg>
         </div>
         <div>
-          <h2 className="text-lg font-bold text-ink">{t('annual.title')}</h2>
+          <h2 className="font-display text-xl font-semibold text-ink">{t('annual.title')}</h2>
           <p className="text-xs text-mute">{t('annual.subtitle')}</p>
         </div>
       </div>
@@ -238,7 +238,7 @@ const AnnualSalaryInput: React.FC<Props> = ({ inputs, setInputs }) => {
               checked={!!(inputs.equityVestingAnnual && inputs.equityVestingAnnual > 0)}
               onChange={(e) => setInputs({ ...inputs, equityVestingAnnual: e.target.checked ? (inputs.equityVestingAnnual || 20000) : 0 })}
             />
-            <div className="w-11 h-6 bg-slate-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-red-300 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-red-600"></div>
+            <div className="w-11 h-6 bg-pearl-shade peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-red-300 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-ink-5 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-red-600"></div>
           </label>
         </div>
 
@@ -287,7 +287,7 @@ const AnnualSalaryInput: React.FC<Props> = ({ inputs, setInputs }) => {
                 rrspEmployerMatch: e.target.checked ? (inputs.rrspEmployerMatch || 5) : 0
               })}
             />
-            <div className="w-11 h-6 bg-slate-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-red-300 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-red-600"></div>
+            <div className="w-11 h-6 bg-pearl-shade peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-red-300 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-ink-5 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-red-600"></div>
           </label>
         </div>
 
