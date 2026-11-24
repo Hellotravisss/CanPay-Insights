@@ -177,27 +177,25 @@ export default function SalaryBreakdownPanel({ breakdown, locale = 'en' }: Salar
 
   return (
     <div className="space-y-6">
-      <section className="rounded-xl border border-slate-200 bg-white p-6 shadow-sm md:p-8">
-        <p className="text-xs font-bold uppercase tracking-wide text-red-600">{t.kicker}</p>
-        <p className="mt-3 text-4xl font-bold tracking-tight text-slate-950 md:text-5xl">
+      <section className="card-brand-3d rounded-2xl p-6 text-white shadow-[0_10px_24px_-14px_rgba(158,11,16,0.7)] md:p-8">
+        <p className="text-[11px] font-semibold uppercase tracking-[0.14em] text-red-100">{t.kicker}</p>
+        <p className="mt-3 font-display text-4xl font-semibold leading-none tabular-nums text-white md:text-5xl">
           {money(figures.netAnnual)}
-          <span className="ml-2 text-base font-semibold text-slate-500">{t.perYear}</span>
+          <span className="ml-2 font-sans text-base font-semibold text-red-100">{t.perYear}</span>
         </p>
-        <div className="mt-5 grid grid-cols-1 gap-3 sm:grid-cols-3">
-          <div className="rounded-lg border border-slate-200 bg-slate-50 px-4 py-3">
-            <p className="text-xs font-bold uppercase tracking-wide text-slate-500">{t.monthly}</p>
-            <p className="mt-1 text-xl font-bold text-slate-900">{money(figures.netMonthly)}</p>
-          </div>
-          <div className="rounded-lg border border-slate-200 bg-slate-50 px-4 py-3">
-            <p className="text-xs font-bold uppercase tracking-wide text-slate-500">{t.biWeekly}</p>
-            <p className="mt-1 text-xl font-bold text-slate-900">{money(figures.netBiWeekly)}</p>
-          </div>
-          <div className="rounded-lg border border-slate-200 bg-slate-50 px-4 py-3">
-            <p className="text-xs font-bold uppercase tracking-wide text-slate-500">{t.weekly}</p>
-            <p className="mt-1 text-xl font-bold text-slate-900">{money(figures.netWeekly)}</p>
-          </div>
+        <div className="mt-6 grid grid-cols-1 gap-3 sm:grid-cols-3">
+          {[
+            { label: t.monthly, value: figures.netMonthly },
+            { label: t.biWeekly, value: figures.netBiWeekly },
+            { label: t.weekly, value: figures.netWeekly },
+          ].map((x) => (
+            <div key={x.label} className="rounded-xl border border-white/20 bg-white/10 px-4 py-3">
+              <p className="text-[11px] font-semibold uppercase tracking-[0.12em] text-red-100">{x.label}</p>
+              <p className="mt-1 font-display text-xl font-semibold tabular-nums text-white">{money(x.value)}</p>
+            </div>
+          ))}
         </div>
-        <p className="mt-5 leading-7 text-slate-600">
+        <p className="mt-5 leading-7 text-red-50">
           {t.summary(
             money(figures.gross),
             locale === 'fr' ? 'Québec' : breakdown.provinceName,
@@ -207,34 +205,34 @@ export default function SalaryBreakdownPanel({ breakdown, locale = 'en' }: Salar
         </p>
       </section>
 
-      <section className="rounded-xl border border-slate-200 bg-white p-6 shadow-sm">
-        <h2 className="mb-4 text-2xl font-bold text-slate-900">{t.whereItGoes}</h2>
+      <section className="rounded-2xl border border-line bg-white p-6">
+        <h2 className="mb-4 font-display text-2xl font-semibold leading-tight text-ink">{t.whereItGoes}</h2>
         <div className="overflow-x-auto">
-          <table className="min-w-full text-sm">
+          <table className="min-w-full text-sm tabular-nums">
             <thead>
-              <tr className="border-b border-slate-200 text-left text-xs font-bold uppercase tracking-wide text-slate-500">
+              <tr className="border-b border-line text-left text-[11px] font-semibold uppercase tracking-[0.12em] text-mute">
                 <th className="py-2.5 pr-4">{t.deduction}</th>
                 <th className="py-2.5 pr-4 text-right">{t.amountCol}</th>
                 <th className="py-2.5 text-right">{t.shareCol}</th>
               </tr>
             </thead>
-            <tbody className="divide-y divide-slate-100">
+            <tbody className="divide-y divide-line">
               <tr>
-                <td className="py-2.5 pr-4 font-semibold text-slate-900">{t.grossSalary}</td>
-                <td className="py-2.5 pr-4 text-right font-semibold text-slate-900">{money(figures.gross)}</td>
-                <td className="py-2.5 text-right text-slate-500">{percent(1)}</td>
+                <td className="py-2.5 pr-4 font-semibold text-ink">{t.grossSalary}</td>
+                <td className="py-2.5 pr-4 text-right font-semibold text-ink">{money(figures.gross)}</td>
+                <td className="py-2.5 text-right text-mute">{percent(1)}</td>
               </tr>
               {deductionRows.map((row) => (
                 <tr key={row.label}>
-                  <td className="py-2.5 pr-4 text-slate-600">{row.label}</td>
-                  <td className="py-2.5 pr-4 text-right text-slate-700">−{money(row.value)}</td>
-                  <td className="py-2.5 text-right text-slate-500">{percent(row.value / figures.gross)}</td>
+                  <td className="py-2.5 pr-4 text-ink-3">{row.label}</td>
+                  <td className="py-2.5 pr-4 text-right text-ink-2">−{money(row.value)}</td>
+                  <td className="py-2.5 text-right text-mute">{percent(row.value / figures.gross)}</td>
                 </tr>
               ))}
               <tr>
-                <td className="py-2.5 pr-4 font-semibold text-slate-700">{t.totalDeductions}</td>
-                <td className="py-2.5 pr-4 text-right font-semibold text-slate-700">−{money(figures.totalDeductions)}</td>
-                <td className="py-2.5 text-right font-semibold text-slate-500">{percent(figures.totalDeductionRate)}</td>
+                <td className="py-2.5 pr-4 font-semibold text-ink-2">{t.totalDeductions}</td>
+                <td className="py-2.5 pr-4 text-right font-semibold text-ink-2">−{money(figures.totalDeductions)}</td>
+                <td className="py-2.5 text-right font-semibold text-mute">{percent(figures.totalDeductionRate)}</td>
               </tr>
               <tr className="bg-red-50/60">
                 <td className="rounded-l-lg py-3 pl-2 pr-4 font-bold text-red-700">{t.takeHome}</td>
@@ -246,26 +244,26 @@ export default function SalaryBreakdownPanel({ breakdown, locale = 'en' }: Salar
             </tbody>
           </table>
         </div>
-        <p className="mt-4 text-sm leading-6 text-slate-500">
+        <p className="mt-4 text-sm leading-6 text-mute">
           {t.rates(percent(figures.averageTaxRate), percent(figures.marginalRate))}
         </p>
       </section>
 
-      <section className="rounded-xl border border-slate-200 bg-white p-6 shadow-sm">
-        <h2 className="mb-4 text-2xl font-bold text-slate-900">{t.paySchedule}</h2>
+      <section className="rounded-2xl border border-line bg-white p-6">
+        <h2 className="mb-4 font-display text-2xl font-semibold leading-tight text-ink">{t.paySchedule}</h2>
         <div className="overflow-x-auto">
-          <table className="min-w-full text-sm">
+          <table className="min-w-full text-sm tabular-nums">
             <thead>
-              <tr className="border-b border-slate-200 text-left text-xs font-bold uppercase tracking-wide text-slate-500">
+              <tr className="border-b border-line text-left text-[11px] font-semibold uppercase tracking-[0.12em] text-mute">
                 <th className="py-2.5 pr-4">{t.frequency}</th>
                 <th className="py-2.5 text-right">{t.netPay}</th>
               </tr>
             </thead>
-            <tbody className="divide-y divide-slate-100">
+            <tbody className="divide-y divide-line">
               {scheduleRows.map((row) => (
                 <tr key={row.label}>
-                  <td className="py-2.5 pr-4 text-slate-600">{row.label}</td>
-                  <td className="py-2.5 text-right font-semibold text-slate-900">{money(row.value)}</td>
+                  <td className="py-2.5 pr-4 text-ink-3">{row.label}</td>
+                  <td className="py-2.5 text-right font-semibold text-ink">{money(row.value)}</td>
                 </tr>
               ))}
             </tbody>
@@ -273,19 +271,19 @@ export default function SalaryBreakdownPanel({ breakdown, locale = 'en' }: Salar
         </div>
       </section>
 
-      <section className="rounded-xl border border-slate-200 bg-white p-6 shadow-sm">
-        <h2 className="mb-2 text-2xl font-bold text-slate-900">{t.compareTitle(money(figures.gross))}</h2>
-        <p className="mb-4 leading-7 text-slate-600">{t.compareIntro(breakdown.provinceShortName)}</p>
+      <section className="rounded-2xl border border-line bg-white p-6">
+        <h2 className="mb-2 font-display text-2xl font-semibold leading-tight text-ink">{t.compareTitle(money(figures.gross))}</h2>
+        <p className="mb-4 leading-7 text-ink-3">{t.compareIntro(breakdown.provinceShortName)}</p>
         <div className="overflow-x-auto">
-          <table className="min-w-full text-sm">
+          <table className="min-w-full text-sm tabular-nums">
             <thead>
-              <tr className="border-b border-slate-200 text-left text-xs font-bold uppercase tracking-wide text-slate-500">
+              <tr className="border-b border-line text-left text-[11px] font-semibold uppercase tracking-[0.12em] text-mute">
                 <th className="py-2.5 pr-4">{t.provinceCol}</th>
                 <th className="py-2.5 pr-4 text-right">{t.netAnnualCol}</th>
                 <th className="py-2.5 text-right">{t.netMonthlyCol}</th>
               </tr>
             </thead>
-            <tbody className="divide-y divide-slate-100">
+            <tbody className="divide-y divide-line">
               {breakdown.provinceComparison.map((row) => {
                 const isCurrent = row.slug === breakdown.provinceSlug;
                 return (
@@ -297,15 +295,15 @@ export default function SalaryBreakdownPanel({ breakdown, locale = 'en' }: Salar
                           <span className="ml-2 rounded-full bg-red-100 px-2 py-0.5 text-xs font-bold">{t.current}</span>
                         </span>
                       ) : (
-                        <a href={row.href} className="text-slate-700 no-underline hover:text-red-600 hover:underline">
+                        <a href={row.href} className="text-ink-2 no-underline hover:text-red-600 hover:underline">
                           {row.shortName}
                         </a>
                       )}
                     </td>
-                    <td className={`py-2.5 pr-4 text-right ${isCurrent ? 'text-red-700' : 'text-slate-900'}`}>
+                    <td className={`py-2.5 pr-4 text-right ${isCurrent ? 'text-red-700' : 'text-ink'}`}>
                       {money(row.netAnnual)}
                     </td>
-                    <td className={`py-2.5 text-right ${isCurrent ? 'text-red-700' : 'text-slate-600'}`}>
+                    <td className={`py-2.5 text-right ${isCurrent ? 'text-red-700' : 'text-ink-3'}`}>
                       {money(row.netMonthly)}
                     </td>
                   </tr>
@@ -316,35 +314,35 @@ export default function SalaryBreakdownPanel({ breakdown, locale = 'en' }: Salar
         </div>
       </section>
 
-      <section className="rounded-xl border border-slate-200 bg-white p-6 shadow-sm">
-        <h2 className="mb-4 text-2xl font-bold text-slate-900">{t.nearbyTitle(breakdown.provinceShortName)}</h2>
+      <section className="rounded-2xl border border-line bg-white p-6">
+        <h2 className="mb-4 font-display text-2xl font-semibold leading-tight text-ink">{t.nearbyTitle(breakdown.provinceShortName)}</h2>
         <div className="overflow-x-auto">
-          <table className="min-w-full text-sm">
+          <table className="min-w-full text-sm tabular-nums">
             <thead>
-              <tr className="border-b border-slate-200 text-left text-xs font-bold uppercase tracking-wide text-slate-500">
+              <tr className="border-b border-line text-left text-[11px] font-semibold uppercase tracking-[0.12em] text-mute">
                 <th className="py-2.5 pr-4">{t.salaryCol}</th>
                 <th className="py-2.5 pr-4 text-right">{t.netAnnualCol}</th>
                 <th className="py-2.5 pr-4 text-right">{t.netMonthlyCol}</th>
                 <th className="py-2.5 text-right">{t.netBiWeeklyCol}</th>
               </tr>
             </thead>
-            <tbody className="divide-y divide-slate-100">
+            <tbody className="divide-y divide-line">
               {breakdown.nearbySalaries.map((row) => (
                 <tr key={row.amount}>
                   <td className="py-2.5 pr-4">
-                    <a href={row.href} className="font-semibold text-slate-800 no-underline hover:text-red-600 hover:underline">
+                    <a href={row.href} className="font-semibold text-ink no-underline hover:text-red-600 hover:underline">
                       {money(row.amount)}
                     </a>
                   </td>
-                  <td className="py-2.5 pr-4 text-right text-slate-900">{money(row.netAnnual)}</td>
-                  <td className="py-2.5 pr-4 text-right text-slate-600">{money(row.netMonthly)}</td>
-                  <td className="py-2.5 text-right text-slate-600">{money(row.netBiWeekly)}</td>
+                  <td className="py-2.5 pr-4 text-right text-ink">{money(row.netAnnual)}</td>
+                  <td className="py-2.5 pr-4 text-right text-ink-3">{money(row.netMonthly)}</td>
+                  <td className="py-2.5 text-right text-ink-3">{money(row.netBiWeekly)}</td>
                 </tr>
               ))}
             </tbody>
           </table>
         </div>
-        <p className="mt-4 text-sm leading-6 text-slate-500">{t.assumptions}</p>
+        <p className="mt-4 text-sm leading-6 text-mute">{t.assumptions}</p>
       </section>
     </div>
   );

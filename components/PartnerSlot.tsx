@@ -60,19 +60,19 @@ export default function PartnerSlot({ id, track }: { id: string; track?: Partner
   };
 
   return (
-    <aside className="mt-8 rounded-2xl border border-slate-200 bg-white p-5">
-      <p className="text-sm leading-6 text-slate-600">{copy.blurb}</p>
+    <aside className="mt-8 rounded-2xl border border-line bg-white p-5">
+      <p className="text-sm leading-6 text-ink-3">{copy.blurb}</p>
       <a
         href={p.url}
         target="_blank"
         rel={p.paid ? 'sponsored noopener noreferrer' : 'noopener noreferrer'}
         onClick={onClick}
-        className="mt-3 inline-block rounded-xl bg-slate-900 px-4 py-2.5 text-sm font-bold text-white no-underline hover:bg-slate-800"
+        className="mt-3 inline-block rounded-xl bg-ink px-4 py-2.5 text-sm font-semibold text-white no-underline hover:bg-ink-2"
       >
         {copy.label} →
       </a>
       {p.paid && (
-        <p className="mt-2 text-[11px] text-slate-500">
+        <p className="mt-2 text-[11px] text-mute">
           {disc.text} <a href="/affiliate-disclosure" className="underline">{disc.how}</a>.
         </p>
       )}

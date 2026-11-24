@@ -1,5 +1,8 @@
 import type { Metadata } from 'next';
 import EmployerPayrollCalculator from '../../components/EmployerPayrollCalculator';
+import SiteHeader from '../../components/site/SiteHeader';
+import SiteFooter from '../../components/site/SiteFooter';
+import { PageHero } from '../../components/site/ui';
 import {
   TAX_YEAR, CPP_EXEMPTION, CPP_RATE, CPP2_RATE, CPP_MAX_CONTRIBUTION, CPP2_MAX_CONTRIBUTION, CPP_MAX_PENSIONABLE_EARNINGS,
   CPP2_MAX_PENSIONABLE_EARNINGS, EI_RATE, EI_MAX_CONTRIBUTION, EI_MAX_INSURABLE_EARNINGS, EI_EMPLOYER_MULTIPLIER,
@@ -58,38 +61,36 @@ export default function PayrollCalculatorPage() {
     },
   ];
   return (
-    <main className="min-h-screen bg-slate-50 text-slate-900">
+    <div className="min-h-screen bg-pearl">
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
-      <section className="border-b border-slate-200 bg-white">
-        <div className="mx-auto max-w-4xl px-4 py-10 md:py-14">
-          <a href="/" className="mb-8 inline-flex items-center gap-2 text-sm font-semibold text-red-600 no-underline">
-            <img src="/logo.png" alt="" className="h-8 w-8 rounded-lg" />
-            CanPay Insights
-          </a>
-          <p className="mb-3 text-sm font-bold uppercase tracking-wide text-red-700">For employers · {TAX_YEAR}</p>
-          <h1 className="mb-4 text-4xl font-bold tracking-tight text-slate-950 md:text-5xl">Canadian Payroll Calculator</h1>
-          <p className="mb-8 max-w-2xl text-lg leading-8 text-slate-600">
+      <SiteHeader current="calculator" />
+      <main className="mx-auto max-w-4xl px-4" role="main">
+        <PageHero
+          eyebrow={<>For employers · {TAX_YEAR}</>}
+          title="Canadian Payroll Calculator"
+          lead={<>
             What to withhold from an employee&apos;s pay, what you add as the employer, and what to remit.
             Income tax comes from an engine that reproduces the CRA&apos;s T4032 payroll tables row by row.
-          </p>
-          <EmployerPayrollCalculator />
-          <p className="mt-4 text-sm text-slate-600">
-            Paying yourself or checking your own pay? Use the{' '}
-            <a href="/" className="font-semibold text-red-700">take-home pay calculator</a>.
-          </p>
-        </div>
-      </section>
-      <section className="mx-auto max-w-4xl px-4 py-10">
-        <h2 className="mb-4 text-2xl font-bold text-slate-950">Questions employers ask</h2>
-        <div className="space-y-3">
-          {FAQ.map((f) => (
-            <details key={f.q} className="rounded-xl border border-slate-200 bg-white p-4">
-              <summary className="cursor-pointer font-semibold text-slate-900">{f.q}</summary>
-              <p className="mt-2 leading-7 text-slate-700">{f.a}</p>
-            </details>
-          ))}
-        </div>
-      </section>
-    </main>
+          </>}
+        />
+        <EmployerPayrollCalculator />
+        <p className="mt-4 text-sm text-ink-3">
+          Paying yourself or checking your own pay? Use the{' '}
+          <a href="/" className="font-semibold text-red-700">take-home pay calculator</a>.
+        </p>
+        <section className="pb-16 pt-12">
+          <h2 className="mb-5 font-display text-2xl font-semibold leading-tight text-ink md:text-[2rem]">Questions employers ask</h2>
+          <div className="space-y-3">
+            {FAQ.map((f) => (
+              <details key={f.q} className="rounded-2xl border border-line bg-white p-5">
+                <summary className="cursor-pointer font-display text-lg font-semibold leading-snug text-ink marker:text-red-600">{f.q}</summary>
+                <p className="mt-3 leading-7 text-ink-3">{f.a}</p>
+              </details>
+            ))}
+          </div>
+        </section>
+      </main>
+      <SiteFooter />
+    </div>
   );
 }

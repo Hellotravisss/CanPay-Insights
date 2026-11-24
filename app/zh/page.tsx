@@ -1,7 +1,9 @@
 import type { Metadata } from 'next';
 import SalaryBreakdownPanel from '../../components/SalaryBreakdownPanel';
 import { buildSalaryBreakdown } from '../../lib/salaryFigures';
-import AvowdCredit from '../../components/AvowdCredit';
+import SiteHeader from '../../components/site/SiteHeader';
+import SiteFooter from '../../components/site/SiteFooter';
+import { ButtonLink, Card, Eyebrow, Stat } from '../../components/site/ui';
 
 const BASE_URL = 'https://canpayinsights.ca';
 const PAGE_URL = `${BASE_URL}/zh`;
@@ -127,95 +129,86 @@ export default function ChineseHubPage() {
     },
   ];
 
-  return (
-    <main lang="zh-CN" className="min-h-screen bg-slate-50 text-slate-900">
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
+  const chip = 'rounded-lg border border-line bg-pearl-soft px-3 py-2 text-sm font-medium text-ink-2 no-underline transition-colors hover:border-ink-5 hover:text-ink';
+  const langChip = 'rounded-lg border border-line bg-white px-3 py-2 text-sm font-semibold text-red-700 no-underline transition-colors hover:border-red-200';
+  const sideLink = 'block py-2.5 text-sm font-medium text-ink-2 no-underline hover:text-red-600';
 
-      <section className="bg-white border-b border-slate-200">
-        <div className="max-w-5xl mx-auto px-4 py-12 md:py-16">
-          <a href="/" className="inline-flex items-center gap-2 text-sm font-semibold text-red-600 no-underline mb-8">
-            <img src="/logo.png" alt="" className="w-8 h-8 rounded-lg" />
-            CanPay Insights
-          </a>
-          <p className="text-sm font-bold uppercase tracking-wide text-red-600 mb-3">加拿大工资税后计算器</p>
-          <h1 className="text-4xl md:text-5xl font-bold tracking-tight text-slate-950 mb-5">
+  return (
+    <div lang="zh-CN" className="min-h-screen bg-pearl">
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
+      <SiteHeader lang="zh" current="calculator" />
+
+      <main className="mx-auto max-w-6xl px-4" role="main">
+        <div className="max-w-4xl pb-10 pt-10 md:pb-14 md:pt-16">
+          <Eyebrow className="mb-4">加拿大工资税后计算器</Eyebrow>
+          <h1 className="mb-6 font-display text-[2.25rem] font-semibold leading-[1.15] tracking-[-0.01em] text-ink md:text-[3.25rem]">
             加拿大工资税后怎么算？2026 免费税后工资计算器
           </h1>
-          <p className="text-lg leading-8 text-slate-600 max-w-3xl">
-            CanPay Insights 是一个<strong>免费的加拿大工资税后计算器</strong>，按省计算联邦税、省税、CPP/CPP2、EI
+          <p className="max-w-3xl text-lg leading-8 text-ink-3">
+            CanPay Insights 是一个<strong className="text-ink">免费的加拿大工资税后计算器</strong>，按省计算联邦税、省税、CPP/CPP2、EI
             （魁省为 QPP/QPP2/QPIP）后的到手工资，数据基于 2026 年 CRA 与各省最新税率。支持中文、英文、法语等十种语言，无需注册、无广告墙。
           </p>
-          <p className="text-lg leading-8 text-slate-700 max-w-3xl mt-4">
-            简单说：<strong>税后到手 = 税前工资 − 联邦税 − 省税 − CPP − EI</strong>。以安大略省年薪 $60,000 为例，
-            2026 年到手约 <strong>{netA}</strong>（每月约 {netM}）。
+          <p className="mt-4 max-w-3xl text-lg leading-8 text-ink-2">
+            简单说：<strong className="text-ink">税后到手 = 税前工资 − 联邦税 − 省税 − CPP − EI</strong>。以安大略省年薪 $60,000 为例，
+            2026 年到手约 <strong className="text-red-700">{netA}</strong>（每月约 {netM}）。
           </p>
-          <div className="grid grid-cols-1 gap-3 md:grid-cols-3 mt-8">
-            {highlights.map((item) => (
-              <div key={item.label} className="rounded-xl border border-slate-200 bg-slate-50 p-4">
-                <p className="text-xs font-bold uppercase tracking-wide text-slate-500">{item.label}</p>
-                <p className="mt-2 text-2xl font-bold text-slate-950">{item.value}</p>
-                <p className="mt-2 text-sm leading-6 text-slate-600">{item.detail}</p>
-              </div>
-            ))}
-          </div>
-          <div className="flex flex-wrap gap-3 mt-8">
-            <a href="/" className="inline-flex items-center justify-center rounded-lg bg-red-600 px-5 py-3 font-bold text-white hover:bg-red-700 no-underline">
-              打开计算器
-            </a>
-            <a href="/compare-provinces" className="inline-flex items-center justify-center rounded-lg border border-slate-300 bg-white px-5 py-3 font-bold text-slate-700 hover:border-red-200 hover:text-red-600 no-underline">
-              比较各省
-            </a>
-          </div>
         </div>
-      </section>
+        <div className="grid grid-cols-1 gap-3 md:grid-cols-3">
+          {highlights.map((item) => (
+            <Stat key={item.label} label={item.label} value={item.value} sub={item.detail} />
+          ))}
+        </div>
+        <div className="mt-8 flex flex-wrap gap-3 pb-10 md:pb-14">
+          <ButtonLink href="/">打开计算器</ButtonLink>
+          <ButtonLink href="/compare-provinces" variant="secondary">比较各省</ButtonLink>
+        </div>
 
-      <section className="max-w-5xl mx-auto px-4 py-10">
-        <div className="grid grid-cols-1 lg:grid-cols-[1fr_320px] gap-8">
-          <article className="space-y-6">
+        <div className="grid grid-cols-1 gap-8 border-t border-line pb-16 pt-10 lg:grid-cols-[minmax(0,1fr)_320px]">
+          <article className="min-w-0 space-y-6">
             <SalaryBreakdownPanel breakdown={breakdown} locale="zh" />
 
             {sections.map((s) => (
-              <section key={s.h} className="bg-white border border-slate-200 rounded-xl p-6 shadow-sm">
-                <h2 className="text-2xl font-bold text-slate-900 mb-3">{s.h}</h2>
-                <p className="leading-8 text-slate-600">{s.b}</p>
-              </section>
+              <Card as="section" key={s.h} className="p-6">
+                <h2 className="mb-3 font-display text-2xl font-semibold leading-tight text-ink">{s.h}</h2>
+                <p className="leading-8 text-ink-3">{s.b}</p>
+              </Card>
             ))}
 
-            <nav className="bg-white border border-slate-200 rounded-xl p-5 shadow-sm" aria-label="常见问题页面">
-              <h2 className="text-lg font-bold text-slate-900 mb-3">大家常问</h2>
+            <Card as="nav" className="p-5" aria-label="常见问题页面">
+              <h2 className="mb-3 font-display text-lg font-semibold text-ink">大家常问</h2>
               <div className="flex flex-wrap gap-2">
-                <a href="/zh/100k-after-tax" className="rounded-md border border-slate-200 px-3 py-2 text-sm font-semibold no-underline">年薪十万到手多少</a>
-                <a href="/zh/ontario-60k-after-tax" className="rounded-md border border-slate-200 px-3 py-2 text-sm font-semibold no-underline">安省年薪 6 万到手多少</a>
-                <a href="/zh/ontario-80k-after-tax" className="rounded-md border border-slate-200 px-3 py-2 text-sm font-semibold no-underline">安省年薪 8 万到手多少</a>
-                <a href="/zh/hourly-20" className="rounded-md border border-slate-200 px-3 py-2 text-sm font-semibold no-underline">时薪 $20 一年到手多少</a>
-                <a href="/zh/hourly-25" className="rounded-md border border-slate-200 px-3 py-2 text-sm font-semibold no-underline">时薪 $25 一年到手多少</a>
-                <a href="/zh/hourly-30" className="rounded-md border border-slate-200 px-3 py-2 text-sm font-semibold no-underline">时薪 $30 一年到手多少</a>
-                <a href="/zh/bc-payroll-tax" className="rounded-md border border-slate-200 px-3 py-2 text-sm font-semibold no-underline">BC 省工资扣税多少</a>
-                <a href="/zh/alberta-vs-bc" className="rounded-md border border-slate-200 px-3 py-2 text-sm font-semibold no-underline">阿省和 BC 哪个到手多</a>
-                <a href="/zh/spouse-amount" className="rounded-md border border-slate-200 px-3 py-2 text-sm font-semibold no-underline">配偶抵免能省多少</a>
-                <a href="/zh/overtime-tax" className="rounded-md border border-slate-200 px-3 py-2 text-sm font-semibold no-underline">加班是不是扣税更多</a>
-                <a href="/zh/newcomer-tax" className="rounded-md border border-slate-200 px-3 py-2 text-sm font-semibold no-underline">新移民工资扣多少税</a>
+                <a href="/zh/100k-after-tax" className={chip}>年薪十万到手多少</a>
+                <a href="/zh/ontario-60k-after-tax" className={chip}>安省年薪 6 万到手多少</a>
+                <a href="/zh/ontario-80k-after-tax" className={chip}>安省年薪 8 万到手多少</a>
+                <a href="/zh/hourly-20" className={chip}>时薪 $20 一年到手多少</a>
+                <a href="/zh/hourly-25" className={chip}>时薪 $25 一年到手多少</a>
+                <a href="/zh/hourly-30" className={chip}>时薪 $30 一年到手多少</a>
+                <a href="/zh/bc-payroll-tax" className={chip}>BC 省工资扣税多少</a>
+                <a href="/zh/alberta-vs-bc" className={chip}>阿省和 BC 哪个到手多</a>
+                <a href="/zh/spouse-amount" className={chip}>配偶抵免能省多少</a>
+                <a href="/zh/overtime-tax" className={chip}>加班是不是扣税更多</a>
+                <a href="/zh/newcomer-tax" className={chip}>新移民工资扣多少税</a>
               </div>
-            </nav>
-            <nav className="bg-white border border-slate-200 rounded-xl p-5 shadow-sm" aria-label="其他语言">
-              <h2 className="text-lg font-bold text-slate-900 mb-3">其他语言版本</h2>
+            </Card>
+            <Card as="nav" className="p-5" aria-label="其他语言">
+              <h2 className="mb-3 font-display text-lg font-semibold text-ink">其他语言版本</h2>
               <div className="flex flex-wrap gap-2">
-                <a href="/salary-after-tax-canada" hrefLang="en-CA" className="rounded-md border border-red-100 bg-red-50 px-3 py-2 text-sm font-semibold text-red-700 no-underline hover:border-red-200 hover:bg-red-100">
+                <a href="/salary-after-tax-canada" hrefLang="en-CA" className={langChip}>
                   English — Salary After Tax Canada
                 </a>
-                <a href="/fr/calculateur-salaire-net-quebec" hrefLang="fr-CA" className="rounded-md border border-red-100 bg-red-50 px-3 py-2 text-sm font-semibold text-red-700 no-underline hover:border-red-200 hover:bg-red-100">
+                <a href="/fr/calculateur-salaire-net-quebec" hrefLang="fr-CA" className={langChip}>
                   Français — Calculateur salaire net Québec
                 </a>
               </div>
-            </nav>
+            </Card>
 
-            <section className="bg-white border border-slate-200 rounded-xl p-6 shadow-sm">
-              <h2 className="text-2xl font-bold text-slate-900 mb-5">常见问题</h2>
-              <div className="space-y-4">
+            <section>
+              <h2 className="mb-5 font-display text-2xl font-semibold leading-tight text-ink">常见问题</h2>
+              <div className="space-y-3">
                 {faq.map((item) => (
-                  <details key={item.q} className="rounded-lg border border-slate-200 bg-slate-50 p-4">
-                    <summary className="cursor-pointer font-bold text-slate-800">{item.q}</summary>
-                    <p className="mt-3 leading-7 text-slate-600">{item.a}</p>
+                  <details key={item.q} className="rounded-2xl border border-line bg-white p-5">
+                    <summary className="cursor-pointer font-display text-lg font-semibold leading-snug text-ink marker:text-red-600">{item.q}</summary>
+                    <p className="mt-3 leading-7 text-ink-3">{item.a}</p>
                   </details>
                 ))}
               </div>
@@ -223,30 +216,26 @@ export default function ChineseHubPage() {
           </article>
 
           <aside className="space-y-4">
-            <div className="bg-slate-900 text-white rounded-xl p-6 shadow-sm">
-              <h2 className="text-xl font-bold mb-2">算你的工资</h2>
-              <p className="text-sm leading-6 text-slate-300 mb-5">输入薪水和省份，立即估算税后到手、联邦税、省税、CPP 和 EI。</p>
-              <a href="/" className="block rounded-lg bg-red-600 px-4 py-3 text-center font-bold text-white hover:bg-red-700 no-underline">
-                打开计算器
-              </a>
-            </div>
+            <Card className="p-6">
+              <h2 className="mb-2 font-display text-xl font-semibold text-ink">算你的工资</h2>
+              <p className="mb-5 text-sm leading-6 text-ink-3">输入薪水和省份，立即估算税后到手、联邦税、省税、CPP 和 EI。</p>
+              <ButtonLink href="/" className="w-full">打开计算器</ButtonLink>
+            </Card>
 
-            <div className="bg-white border border-slate-200 rounded-xl p-6 shadow-sm">
-              <h2 className="text-lg font-bold mb-4">相关页面</h2>
-              <div className="space-y-2">
-                <a href="/compare-provinces" className="block rounded-lg px-3 py-2 text-sm font-semibold text-slate-800 hover:bg-slate-100 no-underline">各省税后对比</a>
-                <a href="/salary-after-tax-canada" className="block rounded-lg px-3 py-2 text-sm font-semibold text-slate-800 hover:bg-slate-100 no-underline">Salary After Tax Canada (EN)</a>
-                <a href="/cpp-ei-calculator" className="block rounded-lg px-3 py-2 text-sm font-semibold text-slate-800 hover:bg-slate-100 no-underline">CPP &amp; EI Calculator</a>
-                <a href="/blog" className="block rounded-lg px-3 py-2 text-sm font-semibold text-slate-800 hover:bg-slate-100 no-underline">报税与工资指南</a>
+            <Card className="p-6">
+              <h2 className="mb-2 font-display text-lg font-semibold text-ink">相关页面</h2>
+              <div className="divide-y divide-line">
+                <a href="/compare-provinces" className={sideLink}>各省税后对比</a>
+                <a href="/salary-after-tax-canada" className={sideLink}>Salary After Tax Canada (EN)</a>
+                <a href="/cpp-ei-calculator" className={sideLink}>CPP &amp; EI Calculator</a>
+                <a href="/blog" className={sideLink}>报税与工资指南</a>
               </div>
-            </div>
+            </Card>
           </aside>
         </div>
+      </main>
 
-        <footer className="mt-10 border-t border-slate-200 pt-6 text-center text-xs text-slate-500" role="contentinfo">
-          <p>© CanPay Insights · <AvowdCredit lang="zh" /></p>
-        </footer>
-      </section>
-    </main>
+      <SiteFooter lang="zh" />
+    </div>
   );
 }
