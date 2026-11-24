@@ -31,6 +31,7 @@ const PaycheckDonutChart = ({
   netPayLabel: string;
 }) => {
   const [activeIndex, setActiveIndex] = React.useState<number | null>(null);
+  const maskId = `donut-sweep-${React.useId().replace(/:/g, '')}`;
   const size = 220;
   const center = size / 2;
   const radius = 72;
@@ -65,21 +66,7 @@ const PaycheckDonutChart = ({
   const activeSegment = activeIndex === null ? null : segments.find((segment) => segment.index === activeIndex);
 
   return (
-    <div className="relative mx-auto flex w-full max-w-sm flex-col items-center justify-center">
-      <style>
-        {`
-          @keyframes paycheckDonutIn {
-            from {
-              opacity: 0;
-              transform: rotate(-90deg) scale(0.96);
-            }
-            to {
-              opacity: 1;
-              transform: rotate(-90deg) scale(1);
-            }
-          }
-        `}
-      </style>
+    <div className="pc relative mx-auto flex w-full max-w-sm flex-col items-center justify-center">
       <div className="relative h-[220px] w-[220px]">
         <svg
           viewBox={`0 0 ${size} ${size}`}
@@ -87,40 +74,54 @@ const PaycheckDonutChart = ({
           aria-label="Paycheck breakdown donut chart"
           className="h-full w-full overflow-visible"
         >
-          <circle
-            cx={center}
-            cy={center}
-            r={radius}
-            fill="none"
-            stroke="#EEEEF3"
-            strokeWidth={strokeWidth}
-          />
-          {segments.map((segment) => (
-            <circle
-              key={segment.name}
-              cx={center}
-              cy={center}
-              r={radius}
-              fill="none"
-              stroke={segment.color}
-              strokeWidth={strokeWidth}
-              strokeLinecap="butt"
-              strokeDasharray={`${segment.length} ${circumference - segment.length}`}
-              strokeDashoffset={segment.offset}
-              className="cursor-default transition-opacity duration-150"
-              style={{
-                animation: `paycheckDonutIn 420ms ease-out ${segment.index * 45}ms both`,
-                opacity: activeIndex === null || activeIndex === segment.index ? 1 : 0.42,
-                transformOrigin: `${center}px ${center}px`,
-              }}
-              onMouseEnter={() => setActiveIndex(segment.index)}
-              onMouseLeave={() => setActiveIndex(null)}
-            >
-              <title>{`${segment.name}: ${formatCurrency(segment.value)}`}</title>
-            </circle>
-          ))}
+          {/* the ring is revealed by a mask that sweeps clockwise from 12 o'clock once (globals.css .pm-sweep);
+              when the figures change, each segment slides to its new share instead of redrawing */}
+          <defs>
+            <mask id={maskId} maskUnits="userSpaceOnUse" x="0" y="0" width={size} height={size}>
+              <circle
+                className="pm-sweep"
+                cx={center}
+                cy={center}
+                r={radius}
+                fill="none"
+                stroke="#fff"
+                strokeWidth={strokeWidth + 4}
+                pathLength={1}
+                strokeDasharray="1"
+                transform={`rotate(-90 ${center} ${center})`}
+              />
+            </mask>
+          </defs>
+          <g mask={`url(#${maskId})`}>
+            <circle cx={center} cy={center} r={radius} fill="none" stroke="#EEEEF3" strokeWidth={strokeWidth} />
+            <g transform={`rotate(-90 ${center} ${center})`}>
+              {segments.map((segment) => (
+                <circle
+                  key={segment.name}
+                  cx={center}
+                  cy={center}
+                  r={radius}
+                  fill="none"
+                  stroke={segment.color}
+                  strokeWidth={strokeWidth}
+                  strokeLinecap="butt"
+                  strokeDasharray={`${segment.length} ${circumference - segment.length}`}
+                  strokeDashoffset={segment.offset}
+                  className="cursor-default"
+                  style={{
+                    opacity: activeIndex === null || activeIndex === segment.index ? 1 : 0.42,
+                    transition: 'opacity 150ms cubic-bezier(0.2,0,0,1), stroke-dasharray 320ms cubic-bezier(0.2,0,0,1), stroke-dashoffset 320ms cubic-bezier(0.2,0,0,1)',
+                  }}
+                  onMouseEnter={() => setActiveIndex(segment.index)}
+                  onMouseLeave={() => setActiveIndex(null)}
+                >
+                  <title>{`${segment.name}: ${formatCurrency(segment.value)}`}</title>
+                </circle>
+              ))}
+            </g>
+          </g>
         </svg>
-        <div className="pointer-events-none absolute inset-0 flex flex-col items-center justify-center text-center">
+        <div className="pm-fade pointer-events-none absolute inset-0 flex flex-col items-center justify-center text-center" style={{ ['--i' as string]: 8 }}>
           <p className="font-display text-[2.5rem] leading-none font-semibold text-red-600 tabular-nums">{netPayPercent}<span className="text-xl align-top">%</span></p>
           <span className="mt-1 text-[11px] font-semibold uppercase tracking-[0.14em] text-[#5E6270]">{netPayLabel}</span>
         </div>
@@ -140,7 +141,8 @@ const PaycheckDonutChart = ({
         {segments.map((item) => (
           <li
             key={item.name}
-            className="flex items-center gap-2 min-w-0"
+            className="pm-fade flex items-center gap-2 min-w-0"
+            style={{ ['--i' as string]: 10 + item.index * 2 }}
             onMouseEnter={() => setActiveIndex(item.index)}
             onMouseLeave={() => setActiveIndex(null)}
           >
@@ -277,8 +279,8 @@ const ResultsSection: React.FC<Props> = ({ results, provinceName }) => {
           <h3 className="font-display text-xl font-semibold text-[#15171C] mb-4">{t('res.annualProjection')}</h3>
 
           {results.grossPayAnnual > 0 && (
-            <div className="mb-5" aria-hidden="true">
-              <div className="flex h-2.5 w-full gap-[2px] overflow-hidden rounded-full">
+            <div className="pc mb-5" aria-hidden="true">
+              <div className="pm-x flex h-2.5 w-full gap-[2px] overflow-hidden rounded-full">
                 <div className="h-full rounded-l-full bg-[#C8161A] transition-[width] duration-500 ease-[cubic-bezier(0.2,0,0,1)]" style={{ width: `${Math.max(0, Math.min(100, (results.netPayAnnual / results.grossPayAnnual) * 100))}%` }} />
                 <div className="h-full flex-1 rounded-r-full bg-[#A2A6B0]" />
               </div>

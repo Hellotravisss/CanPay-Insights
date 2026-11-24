@@ -192,7 +192,7 @@ export default async function IndustryProvincePage({ params }: Props) {
           province sets its own tax brackets. This table takes the median full-time wage in each
           province and runs it through the 2026 tax rules.
         </p>
-        <Card className="mt-6 overflow-x-auto px-3 py-2 sm:px-6">
+        <Card className="pc mt-6 overflow-x-auto px-3 py-2 sm:px-6">
           <table className="w-full border-collapse text-left text-[13px] sm:text-sm">
             <thead>
               <tr className="border-b border-ink-5 text-[11px] uppercase tracking-[0.12em] text-mute">
@@ -203,7 +203,7 @@ export default async function IndustryProvincePage({ params }: Props) {
               </tr>
             </thead>
             <tbody className="divide-y divide-line text-ink-2">
-              {acrossProvinces.map((r) => {
+              {acrossProvinces.map((r, i) => {
                 const top = acrossProvinces[0].net;
                 const current = r.code === combo.province;
                 return (
@@ -219,8 +219,8 @@ export default async function IndustryProvincePage({ params }: Props) {
                       <div className="flex items-center justify-end gap-3">
                         <div className="hidden h-1.5 w-20 shrink-0 rounded-full bg-pearl sm:block" aria-hidden="true">
                           <div
-                            className={`h-1.5 rounded-full ${current ? 'bg-red-600' : 'bg-ink-2'}`}
-                            style={{ width: `${Math.round((r.net / top) * 100)}%` }}
+                            className={`pm-x h-1.5 rounded-full ${current ? 'bg-red-600' : 'bg-ink-2'}`}
+                            style={{ width: `${Math.round((r.net / top) * 100)}%`, ['--i' as string]: Math.min(i, 16) }}
                           />
                         </div>
                         <span className={`tabular-nums ${current ? 'text-red-600' : ''}`}>{money(r.net)}</span>

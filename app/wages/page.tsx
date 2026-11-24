@@ -47,7 +47,7 @@ export default function WagesIndex() {
         <h2 className="font-display text-2xl font-semibold leading-tight text-ink md:text-[2rem]">
           Median full-time wage by industry, Canada ({WAGE_DATA_YEAR})
         </h2>
-        <Card className="mt-6 overflow-x-auto px-4 py-2 sm:px-6">
+        <Card className="pc mt-6 overflow-x-auto px-4 py-2 sm:px-6">
           <table className="w-full border-collapse text-left text-sm">
             <thead>
               <tr className="border-b border-ink-5 text-[11px] uppercase tracking-[0.12em] text-mute">
@@ -57,15 +57,15 @@ export default function WagesIndex() {
               </tr>
             </thead>
             <tbody className="divide-y divide-line text-ink-2">
-              {national.map((r) => (
+              {national.map((r, i) => (
                 <tr key={r.slug}>
                   <td className="py-3 pr-4 font-medium text-ink">{INDUSTRY_LABELS[r.slug]}</td>
                   <td className="py-3 pr-4">
                     <div className="flex items-center justify-end gap-3">
                       <div className="hidden h-1.5 w-24 shrink-0 rounded-full bg-pearl sm:block" aria-hidden="true">
                         <div
-                          className="h-1.5 rounded-full bg-ink-2"
-                          style={{ width: `${Math.round((r.hourly / national[0].hourly) * 100)}%` }}
+                          className="pm-x h-1.5 rounded-full bg-ink-2"
+                          style={{ width: `${Math.round((r.hourly / national[0].hourly) * 100)}%`, ['--i' as string]: Math.min(i, 16) }}
                         />
                       </div>
                       <span className="whitespace-nowrap tabular-nums">${r.hourly.toFixed(2)}/hr</span>
