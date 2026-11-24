@@ -109,7 +109,7 @@ h1, h2 { font-family: "Fraunces", Georgia, "Noto Serif SC", "Songti SC", serif; 
 .cover-frame {
   aspect-ratio: 1200 / 630;
   overflow: hidden;
-  background: #f1f5f9;
+  background: #F7F7FA;  /* pearl-soft */
 }
 .cover-frame > img {
   width: 100%;
