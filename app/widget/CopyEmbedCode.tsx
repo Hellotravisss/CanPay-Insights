@@ -16,13 +16,14 @@ export default function CopyEmbedCode({ code }: { code: string }) {
 
   return (
     <div className="relative">
-      <pre tabIndex={0} aria-label="Embed code" className="overflow-x-auto rounded-xl border border-slate-200 bg-slate-900 p-4 text-xs leading-6 text-slate-100">
+      <pre tabIndex={0} aria-label="Embed code" className="overflow-x-auto rounded-xl bg-[#15171C] p-4 pt-12 text-xs leading-6 text-pearl focus:outline-none focus-visible:ring-2 focus-visible:ring-red-600 focus-visible:ring-offset-2">
         <code>{code}</code>
       </pre>
       <button
         onClick={copy}
-        className={`absolute right-3 top-3 rounded-lg px-3 py-1.5 text-xs font-bold transition-colors ${
-          copied ? 'bg-green-700 text-white' : 'bg-red-600 text-white hover:bg-red-700'
+        type="button"
+        className={`absolute right-3 top-3 rounded-lg px-3 py-1.5 text-xs font-semibold transition-colors duration-150 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white ${
+          copied ? 'bg-pearl-shade text-ink' : 'bg-white text-ink hover:bg-pearl'
         }`}
       >
         {copied ? 'Copied!' : 'Copy'}

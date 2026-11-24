@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
 import ProvinceComparisonClient from './ProvinceComparisonClient';
-import AvowdCredit from '../../components/AvowdCredit';
+import SiteHeader from '../../components/site/SiteHeader';
+import SiteFooter from '../../components/site/SiteFooter';
 
 export const metadata: Metadata = {
   title: 'Compare Canadian Provinces — Tax & Salary 2026',
@@ -61,72 +62,72 @@ const compareJsonLd = [
 
 export default function CompareProvincesPage() {
   return (
-    <>
+    <div className="min-h-screen bg-pearl">
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(compareJsonLd) }}
       />
-      <ProvinceComparisonClient />
-      <section className="border-t border-slate-200 bg-white">
-        <div className="mx-auto max-w-3xl px-4 py-12">
-          <h2 className="mb-3 text-2xl font-bold text-slate-900">
-            Take-home pay by province in 2026: an $80,000 salary compared
-          </h2>
-          <p className="mb-6 leading-7 text-slate-600">
-            On an $80,000 salary in 2026, take-home pay ranges from about $56,439 a year in Nova
-            Scotia to about $62,299 in Nunavut — a spread of nearly $5,900 a year, or about $490 a
-            month, on the exact same gross salary. Federal tax is identical across Canada; the entire
-            difference comes from provincial and territorial income tax. The table below ranks all 13
-            provinces and territories by annual take-home pay (single employee, after federal and
-            provincial tax, CPP/CPP2, and EI).
-          </p>
-          <div className="overflow-x-auto">
-            <table className="w-full border-collapse text-left text-sm">
+      <SiteHeader lang="en" current="compare" />
+      <main className="mx-auto max-w-6xl px-4" role="main">
+        <ProvinceComparisonClient />
+        <section className="border-t border-line py-12 md:py-16">
+          <div className="max-w-3xl">
+            <h2 className="mb-3 font-display text-2xl font-semibold leading-tight text-ink md:text-[2rem]">
+              Take-home pay by province in 2026: an $80,000 salary compared
+            </h2>
+            <p className="mb-6 leading-7 text-ink-2">
+              On an $80,000 salary in 2026, take-home pay ranges from about $56,439 a year in Nova
+              Scotia to about $62,299 in Nunavut — a spread of nearly $5,900 a year, or about $490 a
+              month, on the exact same gross salary. Federal tax is identical across Canada; the entire
+              difference comes from provincial and territorial income tax. The table below ranks all 13
+              provinces and territories by annual take-home pay (single employee, after federal and
+              provincial tax, CPP/CPP2, and EI).
+            </p>
+          </div>
+          <div className="overflow-x-auto rounded-2xl border border-line bg-white">
+            <table className="w-full border-collapse text-left text-sm tabular-nums">
               <thead>
-                <tr className="border-b-2 border-slate-300 text-slate-900">
-                  <th scope="col" className="py-2 pr-4 font-bold">Province / territory</th>
-                  <th scope="col" className="py-2 pr-4 font-bold">Take-home (year)</th>
-                  <th scope="col" className="py-2 pr-4 font-bold">Per month</th>
-                  <th scope="col" className="py-2 pr-4 font-bold">Total deductions</th>
-                  <th scope="col" className="py-2 font-bold">Deduction rate</th>
+                <tr className="border-b border-line bg-pearl-soft text-[11px] uppercase tracking-[0.1em] text-mute">
+                  <th scope="col" className="px-4 py-3 font-semibold">Province / territory</th>
+                  <th scope="col" className="px-4 py-3 text-right font-semibold">Take-home (year)</th>
+                  <th scope="col" className="px-4 py-3 text-right font-semibold">Per month</th>
+                  <th scope="col" className="px-4 py-3 text-right font-semibold">Total deductions</th>
+                  <th scope="col" className="px-4 py-3 text-right font-semibold">Deduction rate</th>
                 </tr>
               </thead>
-              <tbody className="text-slate-600">
+              <tbody className="divide-y divide-line text-ink-2">
                 {COMPARISON_2026.map((row) => (
-                  <tr key={row.prov} className="border-b border-slate-200 last:border-0">
-                    <td className="py-2 pr-4 font-medium text-slate-800">{row.prov}</td>
-                    <td className="py-2 pr-4">{row.net}</td>
-                    <td className="py-2 pr-4">{row.mo}</td>
-                    <td className="py-2 pr-4">{row.ded}</td>
-                    <td className="py-2">{row.rate}</td>
+                  <tr key={row.prov}>
+                    <td className="px-4 py-3 font-medium text-ink">{row.prov}</td>
+                    <td className="px-4 py-3 text-right font-semibold text-red-600">{row.net}</td>
+                    <td className="px-4 py-3 text-right text-ink">{row.mo}</td>
+                    <td className="px-4 py-3 text-right">{row.ded}</td>
+                    <td className="px-4 py-3 text-right">{row.rate}</td>
                   </tr>
                 ))}
               </tbody>
             </table>
           </div>
-          <p className="mt-3 text-xs leading-5 text-slate-500">
+          <p className="mt-3 max-w-3xl text-xs leading-5 text-mute">
             2026 estimates for employment income, single with no additional credits, from the CanPay
             Insights rules engine using CRA and provincial/territorial rates. Use the interactive tool
             above to compare your own salary across provinces.
           </p>
 
-          <h2 className="mb-5 mt-12 text-2xl font-bold text-slate-900">
+          <h2 className="mb-6 mt-14 font-display text-2xl font-semibold leading-tight text-ink md:text-[2rem]">
             Frequently asked questions
           </h2>
-          <div className="space-y-6">
+          <div className="max-w-3xl divide-y divide-line border-y border-line">
             {compareFaq.map((item) => (
-              <div key={item.question}>
-                <h3 className="mb-2 text-lg font-bold text-slate-900">{item.question}</h3>
-                <p className="leading-7 text-slate-600">{item.answer}</p>
+              <div key={item.question} className="py-6">
+                <h3 className="mb-2 text-lg font-semibold text-ink">{item.question}</h3>
+                <p className="leading-7 text-ink-2">{item.answer}</p>
               </div>
             ))}
           </div>
-        </div>
-      </section>
-
-      <footer className="mx-auto max-w-5xl px-4 pb-10 pt-6 text-center text-xs text-slate-600" role="contentinfo">
-        <p>© CanPay Insights · <AvowdCredit /></p>
-      </footer>
-    </>
+        </section>
+      </main>
+      <SiteFooter lang="en" />
+    </div>
   );
 }
