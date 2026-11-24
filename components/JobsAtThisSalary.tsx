@@ -20,11 +20,11 @@ export default function JobsAtThisSalary({
   const salary = `$${amount.toLocaleString('en-CA')}`;
 
   return (
-    <section className="mt-10 rounded-2xl border border-slate-200 bg-white p-6">
-      <h2 className="text-xl font-bold text-slate-900">
+    <section className="mt-10 rounded-2xl border border-line bg-white p-6">
+      <h2 className="font-display text-xl font-semibold text-ink">
         Jobs paying around {salary} in {provinceName}
       </h2>
-      <p className="mt-2 text-sm leading-6 text-slate-600">
+      <p className="mt-2 text-sm leading-6 text-ink-3">
         Most people checking the take-home pay on a specific salary are weighing an offer or
         job-hunting. These searches are pre-filled for {salary} in {provinceName}.
       </p>
@@ -35,13 +35,13 @@ export default function JobsAtThisSalary({
             href={l.url}
             target="_blank"
             rel={l.paid ? 'sponsored noopener noreferrer' : 'noopener noreferrer'}
-            className="rounded-xl border border-slate-300 px-4 py-2.5 text-sm font-semibold text-slate-800 no-underline hover:bg-slate-50"
+            className="rounded-xl border border-line px-4 py-2.5 text-sm font-semibold text-ink no-underline hover:bg-pearl"
           >
             Search on {l.label} →
           </a>
         ))}
       </div>
-      <p className="mt-3 text-[11px] text-slate-500">
+      <p className="mt-3 text-[11px] text-mute">
         {anyPaid
           ? 'Some job links are paid placements. They never affect our tax figures or rankings.'
           : 'Plain links to third-party job sites. We earn nothing from them and have no relationship with either site.'}

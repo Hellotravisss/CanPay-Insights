@@ -6,6 +6,9 @@ import { calculateFromAnnualSalary } from '../../../utils/taxEngine';
 import { PayFrequency, Province } from '../../../types';
 import { FEDERAL_BRACKETS, PROVINCIAL_DATA } from '../../../constants';
 import { bracketRows } from '../../../lib/landingTables';
+import SiteHeader from '../../../components/site/SiteHeader';
+import SiteFooter from '../../../components/site/SiteFooter';
+import { ButtonLink, Card } from '../../../components/site/ui';
 
 /**
  * Chinese answer pages for the questions Chinese-speaking users actually type
@@ -362,87 +365,79 @@ export default async function ZhAnswerPage({ params }: { params: Promise<{ slug:
     },
   ];
   return (
-    <main lang="zh-CN" className="min-h-screen bg-slate-50 text-slate-900">
+    <div lang="zh-CN" className="min-h-screen bg-pearl">
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
-      <section className="bg-white border-b border-slate-200">
-        <div className="max-w-3xl mx-auto px-4 py-10">
-          <a href="/zh" className="inline-flex items-center gap-2 text-sm font-semibold text-red-700 no-underline mb-6">
-            <img src="/logo.png" alt="" className="w-8 h-8 rounded-lg" />
-            加拿大工资税后计算器
-          </a>
-          <h1 className="text-3xl md:text-4xl font-bold tracking-tight text-slate-950 mb-4">{p.h1}</h1>
-          <p className="text-lg leading-8 text-slate-700">{p.answer}</p>
-          <a href="/" className="mt-6 inline-flex items-center justify-center rounded-lg bg-red-700 px-5 py-3 font-bold text-white no-underline hover:bg-red-800">
-            用计算器算我的工资
-          </a>
-        </div>
-      </section>
-      <section className="max-w-3xl mx-auto px-4 py-8 space-y-6">
-        <div className="bg-white border border-slate-200 rounded-xl p-5 overflow-x-auto">
-          <table className="w-full text-sm">
-            <caption className="text-left font-bold text-slate-800 mb-3">{p.table.caption}</caption>
-            <thead>
-              <tr>{p.table.head.map((h) => <th key={h} scope="col" className="text-left py-2 pr-3 text-slate-600">{h}</th>)}</tr>
-            </thead>
-            <tbody>
-              {p.table.rows.map((r) => (
-                <tr key={r.label} className="border-t border-slate-100">
-                  <th scope="row" className="text-left py-2 pr-3 font-semibold text-slate-800">{r.label}</th>
-                  {r.cells.map((c, i) => <td key={i} className="py-2 pr-3 text-slate-700">{c}</td>)}
-                </tr>
-              ))}
-            </tbody>
-          </table>
-        </div>
-        {p.table2 && (
-          <div className="bg-white border border-slate-200 rounded-xl p-5 overflow-x-auto">
-            <table className="w-full text-sm">
-              <caption className="text-left font-bold text-slate-800 mb-3">{p.table2.caption}</caption>
-              <thead>
-                <tr>{p.table2.head.map((h) => <th key={h} scope="col" className="text-left py-2 pr-3 text-slate-600">{h}</th>)}</tr>
-              </thead>
-              <tbody>
-                {p.table2.rows.map((r) => (
-                  <tr key={r.label} className="border-t border-slate-100">
-                    <th scope="row" className="text-left py-2 pr-3 font-semibold text-slate-800">{r.label}</th>
-                    {r.cells.map((c, i) => <td key={i} className="py-2 pr-3 text-slate-700">{c}</td>)}
-                  </tr>
-                ))}
-              </tbody>
-            </table>
+      <SiteHeader lang="zh" current="calculator" />
+      <main className="mx-auto max-w-3xl px-4" role="main">
+        <div className="pb-8 pt-10 md:pb-12 md:pt-16">
+          <h1 className="mb-5 font-display text-[2.25rem] font-semibold leading-[1.15] tracking-[-0.01em] text-ink md:text-[3rem]">{p.h1}</h1>
+          <p className="text-lg leading-8 text-ink-2">{p.answer}</p>
+          <div className="mt-7">
+            <ButtonLink href="/">用计算器算我的工资</ButtonLink>
           </div>
-        )}
-        {p.sections.map((s) => (
-          <section key={s.h} className="bg-white border border-slate-200 rounded-xl p-5">
-            <h2 className="text-xl font-bold text-slate-900 mb-2">{s.h}</h2>
-            <p className="leading-8 text-slate-700">{s.b}</p>
-          </section>
-        ))}
-        <section className="bg-white border border-slate-200 rounded-xl p-5">
-          <h2 className="text-xl font-bold text-slate-900 mb-3">常见问题</h2>
-          {p.faq.map((x) => (
-            <div key={x.q} className="mb-4">
-              <h3 className="font-bold text-slate-800">{x.q}</h3>
-              <p className="leading-7 text-slate-700">{x.a}</p>
-            </div>
+        </div>
+        <div className="space-y-6 border-t border-line pb-16 pt-10">
+          {[p.table, p.table2].filter((t): t is Page['table'] => Boolean(t)).map((t) => {
+            const numeric = t.head.slice(1).map((_, i) => t.rows.every((r) => /^[$\d]/.test(r.cells[i] ?? '')));
+            return (
+              <Card key={t.caption} className="overflow-x-auto p-5 sm:p-6">
+                <table className="w-full text-sm tabular-nums">
+                  <caption className="mb-4 text-left font-display text-lg font-semibold leading-snug text-ink">{t.caption}</caption>
+                  <thead>
+                    <tr className="border-b border-ink-5">
+                      {t.head.map((h, i) => (
+                        <th key={h} scope="col" className={`py-2 pr-3 text-[11px] font-semibold uppercase tracking-[0.12em] text-mute ${i > 0 && numeric[i - 1] ? 'text-right' : 'text-left'}`}>{h}</th>
+                      ))}
+                    </tr>
+                  </thead>
+                  <tbody className="divide-y divide-line">
+                    {t.rows.map((r) => (
+                      <tr key={r.label}>
+                        <th scope="row" className="py-2.5 pr-3 text-left font-semibold text-ink">{r.label}</th>
+                        {r.cells.map((c, i) => <td key={i} className={`py-2.5 pr-3 text-ink-2 ${numeric[i] ? 'text-right' : ''}`}>{c}</td>)}
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </Card>
+            );
+          })}
+          {p.sections.map((s) => (
+            <Card as="section" key={s.h} className="p-5 sm:p-6">
+              <h2 className="mb-2 font-display text-xl font-semibold text-ink">{s.h}</h2>
+              <p className="leading-8 text-ink-2">{s.b}</p>
+            </Card>
           ))}
-        </section>
-        <p className="text-sm leading-6 text-slate-600">
-          数字由 CanPay Insights 的计算引擎按 2026 年联邦和各省税率实时算出，引擎每次发布前都与 CRA 官方扣税表逐行核对。
-          {slug === 'newcomer-tax' && (
-            <>
-              {' '}新移民规定来源：
-              <a href="https://www.canada.ca/en/revenue-agency/services/tax/international-non-residents/individuals-leaving-entering-canada-non-residents/newcomers-canada-immigrants.html">CRA 新移民页面</a>、
-              <a href="https://www.canada.ca/en/revenue-agency/services/forms-publications/forms/rc151.html">RC151 表</a>。
-            </>
-          )}
-          {' '}仅供参考，不构成税务建议。
-        </p>
-        <nav className="text-sm" aria-label="相关页面">
-          <a href="/zh" className="mr-4">返回中文首页（全部问题）</a>
-          <a href="/zh/100k-after-tax" className="mr-4">年薪十万到手多少</a>
-          <a href="/zh/hourly-25" className="mr-4">时薪 $25 一年到手多少</a></nav>
-      </section>
-    </main>
+          <section>
+            <h2 className="mb-4 font-display text-2xl font-semibold leading-tight text-ink">常见问题</h2>
+            <Card className="divide-y divide-line px-5 sm:px-6">
+              {p.faq.map((x) => (
+                <div key={x.q} className="py-4">
+                  <h3 className="font-semibold text-ink">{x.q}</h3>
+                  <p className="mt-1 leading-7 text-ink-2">{x.a}</p>
+                </div>
+              ))}
+            </Card>
+          </section>
+          <p className="text-sm leading-6 text-mute">
+            数字由 CanPay Insights 的计算引擎按 2026 年联邦和各省税率实时算出，引擎每次发布前都与 CRA 官方扣税表逐行核对。
+            {slug === 'newcomer-tax' && (
+              <>
+                {' '}新移民规定来源：
+                <a href="https://www.canada.ca/en/revenue-agency/services/tax/international-non-residents/individuals-leaving-entering-canada-non-residents/newcomers-canada-immigrants.html">CRA 新移民页面</a>、
+                <a href="https://www.canada.ca/en/revenue-agency/services/forms-publications/forms/rc151.html">RC151 表</a>。
+              </>
+            )}
+            {' '}仅供参考，不构成税务建议。
+          </p>
+          <nav className="flex flex-wrap gap-x-5 gap-y-2 text-sm font-medium" aria-label="相关页面">
+            <a href="/zh" className="text-red-700">返回中文首页（全部问题）</a>
+            <a href="/zh/100k-after-tax" className="text-red-700">年薪十万到手多少</a>
+            <a href="/zh/hourly-25" className="text-red-700">时薪 $25 一年到手多少</a>
+          </nav>
+        </div>
+      </main>
+      <SiteFooter lang="zh" />
+    </div>
   );
 }

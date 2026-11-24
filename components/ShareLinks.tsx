@@ -48,17 +48,17 @@ export default function ShareLinks({
 
   return (
     <section
-      className={`bg-white border border-slate-200 rounded-xl shadow-sm ${
+      className={`rounded-2xl border border-line bg-white ${
         compact ? 'p-4' : 'p-6'
       }`}
       aria-labelledby="share-canpay"
     >
       <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
         <div>
-          <h2 id="share-canpay" className={`${compact ? 'text-lg' : 'text-xl'} font-bold text-slate-900`}>
+          <h2 id="share-canpay" className={`${compact ? 'text-lg' : 'text-xl'} font-bold text-ink`}>
             {heading}
           </h2>
-          <p className="mt-1 text-sm leading-6 text-slate-600">
+          <p className="mt-1 text-sm leading-6 text-ink-3">
             {helperText}
           </p>
         </div>
@@ -69,7 +69,7 @@ export default function ShareLinks({
               href={link.href}
               target={link.href.startsWith('mailto:') ? undefined : '_blank'}
               rel={link.href.startsWith('mailto:') ? undefined : 'noopener noreferrer'}
-              className="inline-flex items-center justify-center rounded-lg border border-slate-200 bg-slate-50 px-3 py-2 text-sm font-bold text-slate-800 no-underline transition-colors hover:border-slate-300 hover:bg-slate-100 hover:text-slate-900"
+              className="inline-flex items-center justify-center rounded-lg border border-line bg-pearl-soft px-3 py-2 text-sm font-bold text-ink no-underline transition-colors hover:border-line hover:bg-pearl hover:text-ink"
             >
               {link.label}
             </a>

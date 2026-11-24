@@ -1,5 +1,8 @@
 import type { Metadata } from 'next';
 import SalaryHourlyConverter from '../../components/SalaryHourlyConverter';
+import SiteHeader from '../../components/site/SiteHeader';
+import SiteFooter from '../../components/site/SiteFooter';
+import { PageHero } from '../../components/site/ui';
 import { getSalaryFigures } from '../../lib/salaryFigures';
 import { TAX_YEAR } from '../../constants';
 
@@ -59,37 +62,35 @@ export default function SalaryToHourlyPage() {
     },
   ];
   return (
-    <main className="min-h-screen bg-slate-50 text-slate-900">
+    <div className="min-h-screen bg-pearl">
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
-      <section className="border-b border-slate-200 bg-white">
-        <div className="mx-auto max-w-3xl px-4 py-10 md:py-14">
-          <a href="/" className="mb-8 inline-flex items-center gap-2 text-sm font-semibold text-red-600 no-underline">
-            <img src="/logo.png" alt="" className="h-8 w-8 rounded-lg" />
-            CanPay Insights
-          </a>
-          <p className="mb-3 text-sm font-bold uppercase tracking-wide text-red-700">Salary ↔ hourly · {TAX_YEAR}</p>
-          <h1 className="mb-4 text-4xl font-bold tracking-tight text-slate-950 md:text-5xl">Salary to Hourly Calculator</h1>
-          <p className="mb-8 max-w-2xl text-lg leading-8 text-slate-600">
+      <SiteHeader current="calculator" />
+      <main className="mx-auto max-w-3xl px-4" role="main">
+        <PageHero
+          eyebrow={<>Salary ↔ hourly · {TAX_YEAR}</>}
+          title="Salary to Hourly Calculator"
+          lead={<>
             {$(EX_SALARY)} a year is {$(EX_SALARY / FULL, 2)} an hour at 40 hours a week. Enter yours — and see what is left after tax.
-          </p>
-          <SalaryHourlyConverter />
-          <p className="mt-4 text-sm text-slate-600">
-            Shifts, overtime or a full pay stub? Use the{' '}
-            <a href="/hourly-wage-calculator" className="font-semibold text-red-700">hourly wage calculator</a>.
-          </p>
-        </div>
-      </section>
-      <section className="mx-auto max-w-3xl px-4 py-10">
-        <h2 className="mb-4 text-2xl font-bold text-slate-950">Questions</h2>
-        <div className="space-y-3">
-          {FAQ.map((f) => (
-            <details key={f.q} className="rounded-xl border border-slate-200 bg-white p-4">
-              <summary className="cursor-pointer font-semibold text-slate-900">{f.q}</summary>
-              <p className="mt-2 leading-7 text-slate-700">{f.a}</p>
-            </details>
-          ))}
-        </div>
-      </section>
-    </main>
+          </>}
+        />
+        <SalaryHourlyConverter />
+        <p className="mt-4 text-sm text-ink-3">
+          Shifts, overtime or a full pay stub? Use the{' '}
+          <a href="/hourly-wage-calculator" className="font-semibold text-red-700">hourly wage calculator</a>.
+        </p>
+        <section className="pb-16 pt-12">
+          <h2 className="mb-5 font-display text-2xl font-semibold leading-tight text-ink md:text-[2rem]">Questions</h2>
+          <div className="space-y-3">
+            {FAQ.map((f) => (
+              <details key={f.q} className="rounded-2xl border border-line bg-white p-5">
+                <summary className="cursor-pointer font-display text-lg font-semibold leading-snug text-ink marker:text-red-600">{f.q}</summary>
+                <p className="mt-3 leading-7 text-ink-3">{f.a}</p>
+              </details>
+            ))}
+          </div>
+        </section>
+      </main>
+      <SiteFooter />
+    </div>
   );
 }

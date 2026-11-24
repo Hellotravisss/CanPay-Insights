@@ -2,6 +2,7 @@
 import { useMemo, useState } from 'react';
 import { employerPayroll, PERIODS } from '../lib/employerPayroll';
 import { PayFrequency, Province } from '../types';
+import { Stat } from './site/ui';
 
 /**
  * Employer view of one employee's pay: what to withhold, what the employer adds,
@@ -50,22 +51,22 @@ export default function EmployerPayrollCalculator() {
   const added = rows.reduce((s, r) => s + (r.er ?? 0), 0);
 
   return (
-    <div className="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm">
+    <div className="rounded-2xl border border-line bg-white p-5 sm:p-6">
       <div className="grid gap-4 sm:grid-cols-2">
-        <label className="text-xs font-semibold uppercase tracking-wide text-slate-600">
+        <label className="text-xs font-semibold uppercase tracking-wide text-mute">
           Province of employment
-          <select value={province} onChange={(e) => setProvince(e.target.value)} className="mt-1 block w-full rounded-lg border border-slate-300 bg-white px-3 py-2 text-sm font-normal normal-case tracking-normal text-slate-800">
+          <select value={province} onChange={(e) => setProvince(e.target.value)} className="mt-1 block w-full rounded-lg border border-line bg-white px-3 py-2 text-sm focus:border-ink-3 focus:outline-none focus:ring-2 focus:ring-ink/10 font-normal normal-case tracking-normal text-ink">
             {Object.values(Province).map((pv) => <option key={pv} value={pv}>{pv}</option>)}
           </select>
         </label>
-        <label className="text-xs font-semibold uppercase tracking-wide text-slate-600">
+        <label className="text-xs font-semibold uppercase tracking-wide text-mute">
           Pay frequency
-          <select value={freq} onChange={(e) => setFreq(e.target.value as PayFrequency)} className="mt-1 block w-full rounded-lg border border-slate-300 bg-white px-3 py-2 text-sm font-normal normal-case tracking-normal text-slate-800">
+          <select value={freq} onChange={(e) => setFreq(e.target.value as PayFrequency)} className="mt-1 block w-full rounded-lg border border-line bg-white px-3 py-2 text-sm focus:border-ink-3 focus:outline-none focus:ring-2 focus:ring-ink/10 font-normal normal-case tracking-normal text-ink">
             {Object.keys(PERIODS).map((f) => <option key={f} value={f}>{FREQ_LABEL[f]}</option>)}
           </select>
         </label>
         <div className="sm:col-span-2">
-          <label htmlFor="er-amount" className="text-xs font-semibold uppercase tracking-wide text-slate-600">Employee&apos;s gross pay</label>
+          <label htmlFor="er-amount" className="text-xs font-semibold uppercase tracking-wide text-mute">Employee&apos;s gross pay</label>
           <div className="mt-1 flex gap-2">
             <input
               id="er-amount"
@@ -74,7 +75,7 @@ export default function EmployerPayrollCalculator() {
               min={0}
               value={amount}
               onChange={(e) => setAmount(e.target.value.replace(/-/g, ''))}
-              className="w-full rounded-lg border border-slate-300 px-3 py-2 text-sm text-slate-800"
+              className="w-full rounded-lg border border-line px-3 py-2 text-sm focus:border-ink-3 focus:outline-none focus:ring-2 focus:ring-ink/10 text-ink"
             />
             <select
               aria-label="Amount is per year or per pay"
@@ -85,7 +86,7 @@ export default function EmployerPayrollCalculator() {
                 if (next !== unit && v > 0) setAmount(next === 'pay' ? (v / n).toFixed(2) : String(Math.round(v * n)));
                 setUnit(next);
               }}
-              className="rounded-lg border border-slate-300 bg-white px-2 py-2 text-sm text-slate-700"
+              className="rounded-lg border border-line bg-white px-2 py-2 text-sm focus:border-ink-3 focus:outline-none focus:ring-2 focus:ring-ink/10 text-ink-2"
             >
               <option value="year">per year</option>
               <option value="pay">per pay</option>
@@ -98,25 +99,25 @@ export default function EmployerPayrollCalculator() {
         <>
           <div className="mt-5 overflow-x-auto" tabIndex={0} role="region" aria-label="Deductions on this pay">
             <table className="min-w-full text-sm">
-              <caption className="mb-2 text-left text-sm font-bold text-slate-900">
+              <caption className="mb-3 text-left font-display text-lg font-semibold leading-snug text-ink">
                 One pay of {money(p.grossPerPay)} — the first of the year
               </caption>
               <thead>
-                <tr className="border-b border-slate-200 text-left text-xs uppercase tracking-wide text-slate-600">
+                <tr className="border-b border-line text-left text-xs uppercase tracking-wide text-mute">
                   <th scope="col" className="py-2 pr-3 font-semibold"></th>
                   <th scope="col" className="py-2 pr-3 text-right font-semibold">Withhold from employee</th>
                   <th scope="col" className="py-2 text-right font-semibold">Employer adds</th>
                 </tr>
               </thead>
-              <tbody className="divide-y divide-slate-100">
+              <tbody className="divide-y divide-line">
                 {rows.map((r) => (
                   <tr key={r.label}>
-                    <th scope="row" className="py-2 pr-3 text-left font-medium text-slate-700">{r.label}</th>
-                    <td className="py-2 pr-3 text-right tabular-nums text-slate-800">{money(r.emp)}</td>
-                    <td className="py-2 text-right tabular-nums text-slate-800">{r.er === null ? '—' : money(r.er)}</td>
+                    <th scope="row" className="py-2 pr-3 text-left font-medium text-ink-2">{r.label}</th>
+                    <td className="py-2 pr-3 text-right tabular-nums text-ink">{money(r.emp)}</td>
+                    <td className="py-2 text-right tabular-nums text-ink">{r.er === null ? '—' : money(r.er)}</td>
                   </tr>
                 ))}
-                <tr className="font-bold text-slate-900">
+                <tr className="border-t border-ink-5 font-bold text-ink">
                   <th scope="row" className="py-2 pr-3 text-left">Total</th>
                   <td className="py-2 pr-3 text-right tabular-nums">{money(withheld)}</td>
                   <td className="py-2 text-right tabular-nums">{money(added)}</td>
@@ -126,22 +127,16 @@ export default function EmployerPayrollCalculator() {
           </div>
 
           <div className="mt-4 grid gap-3 sm:grid-cols-3">
-            <div className="rounded-xl bg-slate-50 p-3">
-              <p className="text-xs font-semibold uppercase tracking-wide text-slate-600">Employee&apos;s net pay</p>
-              <p className="mt-1 text-xl font-extrabold tabular-nums text-slate-900">{money(p.firstPay.netPay)}</p>
-            </div>
-            <div className="rounded-xl bg-red-700 p-3 text-white">
-              <p className="text-xs font-semibold uppercase tracking-wide opacity-90">Remit to the CRA</p>
-              <p className="mt-1 text-xl font-extrabold tabular-nums">{money(p.firstPay.remitCra)}</p>
-              {qc && <p className="mt-1 text-xs opacity-90">+ {money(p.firstPay.remitQuebec)} to Revenu Québec</p>}
-            </div>
-            <div className="rounded-xl bg-slate-50 p-3">
-              <p className="text-xs font-semibold uppercase tracking-wide text-slate-600">Cost of this pay</p>
-              <p className="mt-1 text-xl font-extrabold tabular-nums text-slate-900">{money(p.firstPay.employerCost)}</p>
-            </div>
+            <Stat tone="kept" label={<>Employee&apos;s net pay</>} value={money(p.firstPay.netPay)} />
+            <Stat
+              label="Remit to the CRA"
+              value={money(p.firstPay.remitCra)}
+              sub={qc ? <>+ {money(p.firstPay.remitQuebec)} to Revenu Québec</> : undefined}
+            />
+            <Stat label="Cost of this pay" value={money(p.firstPay.employerCost)} />
           </div>
 
-          <div className="mt-4 text-sm leading-6 text-slate-700">
+          <div className="mt-4 text-sm leading-6 text-ink-2">
             <p>
               <strong>Over the year:</strong> {money(p.year.gross)} gross costs you{' '}
               <strong>{money(p.year.employerCost)}</strong> ({money(p.year.employerCost - p.year.gross)} in employer{' '}
@@ -161,7 +156,7 @@ export default function EmployerPayrollCalculator() {
         </>
       )}
 
-      <p className="mt-4 text-xs leading-5 text-slate-600">
+      <p className="mt-4 text-xs leading-5 text-mute">
         2026 rates, basic personal amounts (TD1 claim code 1), nothing deducted yet this year. Not included: provincial
         employer health taxes, Quebec HSF and CNESST, workers&apos; compensation, vacation pay, benefits.
       </p>

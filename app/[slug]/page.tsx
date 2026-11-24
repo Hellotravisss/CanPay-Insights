@@ -10,7 +10,9 @@ import { getProvinceSeoConfig } from '../../lib/salaryFigures';
 import { CalculationMode } from '../../types';
 import SisterSiteCard from '../../components/SisterSiteCard';
 import { getLandingPage, landingPages } from '../landing-page-data';
-import AvowdCredit from '../../components/AvowdCredit';
+import SiteHeader from '../../components/site/SiteHeader';
+import SiteFooter from '../../components/site/SiteFooter';
+import { ButtonLink, Card, Eyebrow, Stat } from '../../components/site/ui';
 import EmbedCalculator from '../../components/EmbedCalculator';
 
 // Pages named "… calculator" carry a working calculator above the fold. Until
@@ -162,76 +164,48 @@ export default async function LandingPage({ params }: Props) {
   ];
 
   return (
-    <main className="min-h-screen bg-slate-50 text-slate-900">
+    <div className="min-h-screen bg-pearl">
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
+      <SiteHeader current="calculator" />
 
-      <section className="bg-white border-b border-slate-200">
-        <div className="max-w-5xl mx-auto px-4 py-12 md:py-16">
-          <a href="/" className="inline-flex items-center gap-2 text-sm font-semibold text-red-600 no-underline mb-8">
-            <img src="/logo.png" alt="" className="w-8 h-8 rounded-lg" />
-            CanPay Insights
-          </a>
-          <p className="text-sm font-bold uppercase tracking-wide text-red-600 mb-3">
-            {page.kicker}
-          </p>
-          <h1 className="text-4xl md:text-5xl font-bold tracking-tight text-slate-950 mb-5">
+      <main className="mx-auto max-w-6xl px-4" role="main">
+        <div className="pb-10 pt-10 md:pb-14 md:pt-16">
+          <Eyebrow className="mb-4">{page.kicker}</Eyebrow>
+          <h1 className="mb-6 max-w-4xl font-display text-[2.25rem] font-semibold leading-[1.08] tracking-[-0.01em] text-ink md:text-[3.25rem]">
             {page.h1}
           </h1>
           {/* On a phone the calculator comes straight after the heading — the long
               intro pushed its result below the fold. */}
-          <div className={calc ? 'grid gap-6 md:grid-cols-[minmax(0,1fr)_360px] md:items-start md:gap-8' : ''}>
+          <div className={calc ? 'grid gap-6 md:grid-cols-[minmax(0,1fr)_380px] md:items-start md:gap-10' : ''}>
             {calc && (
               <div className="md:order-2">
                 <EmbedCalculator inline initialProvince={calc.province} initialAmount={calc.amount} initialUnit={calc.unit} />
               </div>
             )}
-            <p className="min-w-0 text-lg leading-8 text-slate-600 max-w-3xl md:order-1">
-              {page.intro}
-            </p>
+            <div className="min-w-0 max-w-3xl md:order-1">
+              <p className="text-lg leading-8 text-ink-3">
+                {page.intro}
+              </p>
+              <div className="mt-8 flex flex-wrap gap-3">
+                <ButtonLink href="/">Use Free Calculator</ButtonLink>
+                <ButtonLink href="/compare-provinces" variant="secondary">Compare Provinces</ButtonLink>
+              </div>
+            </div>
           </div>
           {page.highlights && page.highlights.length > 0 && (
-            <div className="grid grid-cols-1 gap-3 md:grid-cols-3 mt-8">
+            <div className="mt-8 grid grid-cols-1 gap-3 md:grid-cols-3">
               {page.highlights.map((item) => (
-                <div
-                  key={item.label}
-                  className="rounded-xl border border-slate-200 bg-slate-50 p-4"
-                >
-                  <p className="text-xs font-bold uppercase tracking-wide text-slate-500">
-                    {item.label}
-                  </p>
-                  <p className="mt-2 text-2xl font-bold text-slate-950">
-                    {item.value}
-                  </p>
-                  <p className="mt-2 text-sm leading-6 text-slate-600">
-                    {item.detail}
-                  </p>
-                </div>
+                <Stat key={item.label} label={item.label} value={item.value} sub={item.detail} />
               ))}
             </div>
           )}
-          <div className="flex flex-wrap gap-3 mt-8">
-            <a
-              href="/"
-              className="inline-flex items-center justify-center rounded-lg bg-red-600 px-5 py-3 font-bold text-white hover:bg-red-700 no-underline"
-            >
-              Use Free Calculator
-            </a>
-            <a
-              href="/compare-provinces"
-              className="inline-flex items-center justify-center rounded-lg border border-slate-300 bg-white px-5 py-3 font-bold text-slate-700 hover:border-red-200 hover:text-red-600 no-underline"
-            >
-              Compare Provinces
-            </a>
-          </div>
         </div>
-      </section>
 
-      <section className="max-w-5xl mx-auto px-4 py-10">
-        <div className="grid grid-cols-1 lg:grid-cols-[1fr_320px] gap-8">
-          <article className="space-y-6">
+        <div className="grid grid-cols-1 gap-8 border-t border-line pb-16 pt-10 lg:grid-cols-[minmax(0,1fr)_320px]">
+          <article className="min-w-0 space-y-6">
             {page.salaryBreakdown && (
               <SalaryBreakdownPanel breakdown={page.salaryBreakdown} locale="en" />
             )}
@@ -268,50 +242,47 @@ export default async function LandingPage({ params }: Props) {
                 pages that answer "how much" with a table; one prose example lost
                 to them on every question it covered (Avowd, November 2026). */}
             {page.tables?.map((table) => (
-              <section key={table.heading} className="bg-white border border-slate-200 rounded-xl p-6 shadow-sm">
-                <h2 className="text-2xl font-bold text-slate-900 mb-3">{table.heading}</h2>
-                {table.intro && <p className="leading-7 text-slate-600 mb-4">{table.intro}</p>}
+              <Card as="section" key={table.heading} className="p-6">
+                <h2 className="mb-3 font-display text-2xl font-semibold leading-tight text-ink">{table.heading}</h2>
+                {table.intro && <p className="mb-4 leading-7 text-ink-3">{table.intro}</p>}
                 <div className="overflow-x-auto" tabIndex={0} role="region" aria-label={table.heading}>
-                  <table className="w-full text-sm text-left border-collapse">
+                  <table className="w-full border-collapse text-left text-sm tabular-nums">
                     <thead>
-                      <tr className="border-b-2 border-slate-200">
-                        {table.columns.map((c) => (
-                          <th key={c} scope="col" className="py-2 pr-4 font-semibold text-slate-900 whitespace-nowrap">{c}</th>
+                      <tr className="border-b border-ink-5">
+                        {table.columns.map((c, i) => (
+                          <th key={c} scope="col" className={`whitespace-nowrap py-2 pr-4 text-[11px] font-semibold uppercase tracking-[0.12em] text-mute ${i > 0 ? 'text-right' : ''}`}>{c}</th>
                         ))}
                       </tr>
                     </thead>
-                    <tbody>
+                    <tbody className="divide-y divide-line">
                       {table.rows.map((row) => (
-                        <tr key={row[0]} className="border-b border-slate-100">
+                        <tr key={row[0]}>
                           {row.map((cell, i) => i === 0
-                            ? <th key={i} scope="row" className="py-2 pr-4 font-semibold text-slate-900 whitespace-nowrap">{cell}</th>
-                            : <td key={i} className="py-2 pr-4 text-slate-700 tabular-nums whitespace-nowrap">{cell}</td>)}
+                            ? <th key={i} scope="row" className="whitespace-nowrap py-2.5 pr-4 font-semibold text-ink">{cell}</th>
+                            : <td key={i} className="whitespace-nowrap py-2.5 pr-4 text-right text-ink-2">{cell}</td>)}
                         </tr>
                       ))}
                     </tbody>
                   </table>
                 </div>
-                {table.note && <p className="mt-3 text-sm leading-6 text-slate-500">{table.note}</p>}
-              </section>
+                {table.note && <p className="mt-3 text-sm leading-6 text-mute">{table.note}</p>}
+              </Card>
             ))}
 
             {page.sections.map((section) => (
-              <section key={section.heading} className="bg-white border border-slate-200 rounded-xl p-6 shadow-sm">
-                <h2 className="text-2xl font-bold text-slate-900 mb-3">
+              <Card as="section" key={section.heading} className="p-6">
+                <h2 className="mb-3 font-display text-2xl font-semibold leading-tight text-ink">
                   {section.heading}
                 </h2>
-                <p className="leading-8 text-slate-600">
+                <p className="leading-8 text-ink-3">
                   {section.body}
                 </p>
-              </section>
+              </Card>
             ))}
 
             {page.relatedSalaryLinks && page.relatedSalaryLinks.length > 0 && (
-              <nav
-                className="bg-white border border-slate-200 rounded-xl p-5 shadow-sm"
-                aria-label="Related salary after tax searches"
-              >
-                <h2 className="text-lg font-bold text-slate-900 mb-3">
+              <Card as="nav" className="p-5" aria-label="Related salary after tax searches">
+                <h2 className="mb-3 font-display text-lg font-semibold text-ink">
                   Related Salary After Tax Searches
                 </h2>
                 <div className="flex flex-wrap gap-2">
@@ -319,21 +290,18 @@ export default async function LandingPage({ params }: Props) {
                     <a
                       key={link.href}
                       href={link.href}
-                      className="rounded-md border border-slate-200 bg-slate-50 px-3 py-2 text-sm font-semibold text-slate-800 no-underline transition-colors hover:border-slate-300 hover:bg-slate-100 hover:text-slate-900"
+                      className="rounded-lg border border-line bg-pearl-soft px-3 py-2 text-sm font-medium text-ink-2 no-underline transition-colors hover:border-ink-5 hover:text-ink"
                     >
                       {link.label}
                     </a>
                   ))}
                 </div>
-              </nav>
+              </Card>
             )}
 
             {page.alternateLanguages && page.alternateLanguages.length > 0 && (
-              <nav
-                className="bg-white border border-slate-200 rounded-xl p-5 shadow-sm"
-                aria-label="Language alternatives"
-              >
-                <h2 className="text-lg font-bold text-slate-900 mb-3">
+              <Card as="nav" className="p-5" aria-label="Language alternatives">
+                <h2 className="mb-3 font-display text-lg font-semibold text-ink">
                   Other Language Versions
                 </h2>
                 <div className="flex flex-wrap gap-2">
@@ -342,18 +310,18 @@ export default async function LandingPage({ params }: Props) {
                       key={link.href}
                       href={link.href}
                       hrefLang={link.hrefLang}
-                      className="rounded-md border border-red-100 bg-red-50 px-3 py-2 text-sm font-semibold text-red-700 no-underline transition-colors hover:border-red-200 hover:bg-red-100"
+                      className="rounded-lg border border-line bg-white px-3 py-2 text-sm font-semibold text-red-700 no-underline transition-colors hover:border-red-200"
                     >
                       {link.label}
                     </a>
                   ))}
                 </div>
-              </nav>
+              </Card>
             )}
 
             {page.nextSteps && page.nextSteps.length > 0 && (
-              <section className="bg-white border border-slate-200 rounded-xl p-6 shadow-sm">
-                <h2 className="text-2xl font-bold text-slate-900 mb-4">
+              <Card as="section" className="p-6">
+                <h2 className="mb-4 font-display text-2xl font-semibold leading-tight text-ink">
                   Recommended Next Steps
                 </h2>
                 <div className="grid grid-cols-1 gap-3 md:grid-cols-3">
@@ -361,43 +329,43 @@ export default async function LandingPage({ params }: Props) {
                     <a
                       key={`${step.href}-${step.title}`}
                       href={step.href}
-                      className="block rounded-xl border border-slate-200 bg-slate-50 p-4 no-underline transition-colors hover:border-red-200 hover:bg-red-50"
+                      className="flex flex-col rounded-xl border border-line bg-pearl-soft p-4 no-underline transition-colors hover:border-ink-5 hover:bg-white"
                     >
-                      <h3 className="text-base font-bold text-slate-900">
+                      <h3 className="font-display text-base font-semibold text-ink">
                         {step.title}
                       </h3>
-                      <p className="mt-2 text-sm leading-6 text-slate-600">
+                      <p className="mt-2 text-sm leading-6 text-ink-3">
                         {step.body}
                       </p>
-                      <span className="mt-3 inline-flex text-sm font-bold text-red-600">
+                      <span className="mt-auto inline-flex pt-3 text-sm font-semibold text-red-600">
                         {step.label} →
                       </span>
                     </a>
                   ))}
                 </div>
-              </section>
+              </Card>
             )}
 
-            <div className="bg-white border border-slate-200 rounded-xl p-6 shadow-sm">
-              <h2 className="text-2xl font-bold mb-4">Common Searches</h2>
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
+            <Card className="p-6">
+              <h2 className="mb-4 font-display text-2xl font-semibold leading-tight text-ink">Common Searches</h2>
+              <div className="grid grid-cols-1 gap-3 md:grid-cols-3">
                 {page.examples.map((example) => (
-                  <div key={example} className="rounded-lg bg-slate-50 border border-slate-200 p-4 text-sm font-semibold text-slate-700">
+                  <div key={example} className="rounded-xl border border-line bg-pearl-soft p-4 text-sm font-medium text-ink-2">
                     {example}
                   </div>
                 ))}
               </div>
-            </div>
+            </Card>
 
-            <section className="bg-white border border-slate-200 rounded-xl p-6 shadow-sm">
-              <h2 className="text-2xl font-bold text-slate-900 mb-5">Frequently Asked Questions</h2>
-              <div className="space-y-4">
+            <section>
+              <h2 className="mb-5 font-display text-2xl font-semibold leading-tight text-ink">Frequently Asked Questions</h2>
+              <div className="space-y-3">
                 {page.faq.map((item) => (
-                  <details key={item.question} className="rounded-lg border border-slate-200 bg-slate-50 p-4">
-                    <summary className="cursor-pointer font-bold text-slate-800">
+                  <details key={item.question} className="rounded-2xl border border-line bg-white p-5">
+                    <summary className="cursor-pointer font-display text-lg font-semibold leading-snug text-ink marker:text-red-600">
                       {item.question}
                     </summary>
-                    <p className="mt-3 leading-7 text-slate-600">
+                    <p className="mt-3 leading-7 text-ink-3">
                       {item.answer}
                     </p>
                   </details>
@@ -416,50 +384,43 @@ export default async function LandingPage({ params }: Props) {
           </article>
 
           <aside className="space-y-4">
-            <div className="bg-slate-900 text-white rounded-xl p-6 shadow-sm">
-              <h2 className="text-xl font-bold mb-2">Calculate Your Pay</h2>
-              <p className="text-sm leading-6 text-slate-300 mb-5">
+            <Card className="p-6">
+              <h2 className="mb-2 font-display text-xl font-semibold text-ink">Calculate Your Pay</h2>
+              <p className="mb-5 text-sm leading-6 text-ink-3">
                 Enter your wage or salary and province to estimate net pay, taxes, CPP, and EI.
               </p>
-              <a
-                href="/"
-                className="block rounded-lg bg-red-600 px-4 py-3 text-center font-bold text-white hover:bg-red-700 no-underline"
-              >
-                Open Calculator
-              </a>
-            </div>
+              <ButtonLink href="/" className="w-full">Open Calculator</ButtonLink>
+            </Card>
 
-            <div className="bg-white border border-slate-200 rounded-xl p-6 shadow-sm">
-              <h2 className="text-lg font-bold mb-4">Related Calculators</h2>
-              <div className="space-y-2">
+            <Card className="p-6">
+              <h2 className="mb-2 font-display text-lg font-semibold text-ink">Related Calculators</h2>
+              <div className="divide-y divide-line">
                 {filteredRelatedLinks.slice(0, 7).map((link) => (
                   <a
                     key={link.href}
                     href={link.href}
-                    className="block rounded-lg px-3 py-2 text-sm font-semibold text-slate-800 hover:bg-slate-100 hover:text-slate-900 no-underline"
+                    className="block py-2.5 text-sm font-medium text-ink-2 no-underline hover:text-red-600"
                   >
                     {link.label}
                   </a>
                 ))}
               </div>
-            </div>
+            </Card>
 
-            <div className="bg-white border border-slate-200 rounded-xl p-6 shadow-sm">
-              <h2 className="text-lg font-bold mb-3">Tax Guides</h2>
-              <p className="text-sm leading-6 text-slate-600 mb-4">
+            <Card className="p-6">
+              <h2 className="mb-3 font-display text-lg font-semibold text-ink">Tax Guides</h2>
+              <p className="mb-4 text-sm leading-6 text-ink-3">
                 Read Canadian tax, RRSP, CPP, EI, and provincial pay guides.
               </p>
-              <a href="/blog" className="text-sm font-bold text-red-600 hover:text-red-700 no-underline">
+              <a href="/blog" className="text-sm font-semibold text-red-600 no-underline hover:text-red-700">
                 Browse Insights Hub
               </a>
-            </div>
+            </Card>
           </aside>
         </div>
-      </section>
+      </main>
 
-      <footer className="mx-auto max-w-5xl px-4 pb-10 text-center text-xs text-slate-500" role="contentinfo">
-        <p>© CanPay Insights · <AvowdCredit /></p>
-      </footer>
-    </main>
+      <SiteFooter />
+    </div>
   );
 }

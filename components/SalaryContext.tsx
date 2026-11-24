@@ -65,24 +65,24 @@ export default function SalaryContext({
         : `about ${Math.abs(pct)}% below the ${province} median`;
 
   return (
-    <section className="rounded-xl border border-slate-200 bg-white p-6 shadow-sm">
-      <h2 className="mb-3 text-2xl font-bold text-slate-900">
+    <section className="rounded-2xl border border-line bg-white p-6">
+      <h2 className="mb-3 font-display text-2xl font-semibold leading-tight text-ink">
         Is {money(amount)} a good salary in {province}?
       </h2>
 
-      <p className="leading-8 text-slate-600">
+      <p className="leading-8 text-ink-3">
         The median full-time wage in {province} is{' '}
-        <strong className="text-slate-800">${medianHourly.toFixed(2)} an hour</strong> — about{' '}
-        <strong className="text-slate-800">{money(medianAnnual)} a year</strong>. At {money(amount)},
-        this salary is <strong className="text-slate-800">{verdict}</strong>, and works out to{' '}
-        <strong className="text-slate-800">${hourly.toFixed(2)} an hour</strong> on a 40-hour week.
+        <strong className="text-ink">${medianHourly.toFixed(2)} an hour</strong> — about{' '}
+        <strong className="text-ink">{money(medianAnnual)} a year</strong>. At {money(amount)},
+        this salary is <strong className="text-ink">{verdict}</strong>, and works out to{' '}
+        <strong className="text-ink">${hourly.toFixed(2)} an hour</strong> on a 40-hour week.
       </p>
 
       {/* Position bar: one glance instead of a paragraph of comparison. */}
       <div className="mt-5">
-        <div className="relative h-2.5 rounded-full bg-gradient-to-r from-slate-200 via-slate-300 to-red-500">
+        <div className="relative h-2.5 rounded-full bg-gradient-to-r from-pearl-shade via-ink-5 to-red-500">
           <div
-            className="absolute -top-1 h-4.5 w-1 rounded bg-slate-600"
+            className="absolute -top-1 h-4.5 w-1 rounded bg-ink-3"
             style={{ left: '50%', height: '18px', top: '-4px' }}
             aria-hidden="true"
           />
@@ -92,32 +92,32 @@ export default function SalaryContext({
             aria-hidden="true"
           />
         </div>
-        <div className="mt-1.5 flex justify-between text-[11px] text-slate-500">
+        <div className="mt-1.5 flex justify-between text-[11px] text-mute">
           <span>lower</span>
           <span>{province} median · {money(medianAnnual)}</span>
           <span>2× median</span>
         </div>
       </div>
 
-      <h3 className="mb-2 mt-8 text-lg font-bold text-slate-800">
+      <h3 className="mb-2 mt-8 font-display text-lg font-semibold text-ink">
         Which industries pay around {money(amount)} in {province}?
       </h3>
       <div className="overflow-x-auto">
         <table className="w-full border-collapse text-left text-sm">
           <thead>
-            <tr className="border-b-2 border-slate-300 text-slate-900">
+            <tr className="border-b border-ink-5 text-ink">
               <th className="py-2 pr-4 font-bold">Industry</th>
               <th className="py-2 pr-4 font-bold">Median wage</th>
               <th className="py-2 font-bold">Median salary</th>
             </tr>
           </thead>
-          <tbody className="text-slate-600">
+          <tbody className="text-ink-3">
             {sectors.map((s) => (
-              <tr key={s.slug} className="border-b border-slate-200">
+              <tr key={s.slug} className="border-b border-line">
                 <td className="py-2 pr-4">
                   <a
                     href={`/wages/${s.slug}-wages-${provinceSlug === 'bc' ? 'british-columbia' : provinceSlug}`}
-                    className="font-medium text-slate-800 underline-offset-2 hover:text-red-600 hover:underline"
+                    className="font-medium text-ink underline-offset-2 hover:text-red-600 hover:underline"
                   >
                     {s.label}
                   </a>
@@ -130,7 +130,7 @@ export default function SalaryContext({
         </table>
       </div>
 
-      <p className="mt-3 text-xs leading-5 text-slate-500">
+      <p className="mt-3 text-xs leading-5 text-mute">
         Wage figures: Statistics Canada, Table 14-10-0064-01, median hourly wage of full-time
         employees, {WAGE_DATA_YEAR}. Take-home figures on this page are computed with the CanPay
         Insights 2026 tax engine.
