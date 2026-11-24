@@ -284,3 +284,7 @@ div:has(> input[type="datetime-local"]) {
   .pay-btn { transition: transform var(--pm-quick) var(--pm-ease), filter var(--pm-quick) var(--pm-ease); }
   .switch::after { transition: left var(--pm-quick) var(--pm-ease); } .switch { transition: background-color var(--pm-quick) var(--pm-ease); }
 }
+
+/* site header phone menu (components/site/SiteHeader.tsx) */
+.site-menu > summary::-webkit-details-marker { display: none; }
+.site-menu:not([open]) > div { display: none; }
