@@ -193,11 +193,11 @@ export default function EmbedCalculator({
     n.toLocaleString(locale, { style: 'currency', currency: 'CAD', maximumFractionDigits: 0 });
 
   return (
-    <div className={inline ? 'flex flex-col rounded-2xl border border-line bg-white p-4 sm:p-5 font-sans' : 'flex min-h-screen flex-col bg-white p-4 font-sans'}>
+    <div className={inline ? 'flex flex-col rounded-2xl border border-slate-200 bg-white p-4 font-sans shadow-sm' : 'flex min-h-screen flex-col bg-white p-4 font-sans'}>
       <div className="mb-3 flex items-center gap-2">
         <img src="/logo.png" alt="" width={22} height={22} className="rounded" />
-        <span className="text-sm font-semibold text-ink">{t.title}</span>
-        {!inline && <div role="group" aria-label="Language / Langue" className="ml-auto flex overflow-hidden rounded-md border border-line text-[11px] font-semibold">
+        <span className="text-sm font-bold text-slate-800">{t.title}</span>
+        {!inline && <div role="group" aria-label="Language / Langue" className="ml-auto flex overflow-hidden rounded-md border border-slate-300 text-[11px] font-semibold">
           {langChoices.map((l) => (
             <button
               key={l}
@@ -205,7 +205,7 @@ export default function EmbedCalculator({
               lang={l}
               aria-pressed={l === lang}
               onClick={() => setLang(l)}
-              className={`px-2 py-1 ${l === lang ? 'bg-ink text-white' : 'bg-white text-ink-2 hover:bg-pearl'}`}
+              className={`px-2 py-1 ${l === lang ? 'bg-slate-800 text-white' : 'bg-white text-slate-700 hover:bg-slate-100'}`}
             >
               {LANG_SHORT[l]}
             </button>
@@ -213,21 +213,21 @@ export default function EmbedCalculator({
         </div>}
       </div>
 
-      <label htmlFor="cp-province" className="mb-1 text-[11px] font-semibold uppercase tracking-[0.12em] text-mute">
+      <label htmlFor="cp-province" className="mb-1 text-[11px] font-semibold uppercase tracking-wide text-slate-500">
         {t.province}
       </label>
       <select
         id="cp-province"
         value={slug}
         onChange={(e) => { setSlug(e.target.value); setTouched(true); }}
-        className="mb-3 w-full rounded-lg border border-line bg-white px-3 py-2 text-sm text-ink focus:border-ink-3 focus:outline-none focus:ring-2 focus:ring-ink/10"
+        className="mb-3 w-full rounded-lg border border-slate-300 bg-white px-3 py-2 text-sm text-slate-800"
       >
         {PROVINCE_SEO_CONFIGS.map((c) => (
           <option key={c.slug} value={c.slug}>{provinceLabel(c.slug, lang, c.name)}</option>
         ))}
       </select>
 
-      <label htmlFor="cp-amount" className="mb-1 text-[11px] font-semibold uppercase tracking-[0.12em] text-mute">
+      <label htmlFor="cp-amount" className="mb-1 text-[11px] font-semibold uppercase tracking-wide text-slate-500">
         {t.salary}
       </label>
       <div className="mb-4 flex gap-2">
@@ -239,7 +239,7 @@ export default function EmbedCalculator({
           value={amount}
           // No minus sign: the number used to drop it silently, pricing −5,000 as 5,000.
           onChange={(e) => { setAmount(e.target.value.replace(/-/g, '')); setTouched(true); }}
-          className="w-full rounded-lg border border-line px-3 py-2 text-sm text-ink focus:border-ink-3 focus:outline-none focus:ring-2 focus:ring-ink/10"
+          className="w-full rounded-lg border border-slate-300 px-3 py-2 text-sm text-slate-800"
         />
         <select
           aria-label={`${t.salary} (${t.perYear.replace('/', '').trim()} / ${t.perHour.replace('/', '').trim()})`}
@@ -252,7 +252,7 @@ export default function EmbedCalculator({
             setUnit(next);
             setTouched(true);
           }}
-          className="rounded-lg border border-line bg-white px-2 py-2 text-sm text-ink focus:border-ink-3 focus:outline-none focus:ring-2 focus:ring-ink/10"
+          className="rounded-lg border border-slate-300 bg-white px-2 py-2 text-sm text-slate-700"
         >
           <option value="year">{t.perYear}</option>
           <option value="hour">{t.perHour}</option>
@@ -261,32 +261,32 @@ export default function EmbedCalculator({
 
       {fig && (
         <>
-          <div className="card-brand-3d mb-3 rounded-xl px-4 py-3 text-white shadow-[0_10px_24px_-14px_rgba(158,11,16,0.7)]">
-            <div className="text-[11px] font-semibold uppercase tracking-[0.12em] text-red-100">{t.net}</div>
-            <div className="mt-1 font-display text-[1.75rem] font-semibold leading-none tabular-nums">{money(fig.netAnnual)}<span className="font-sans text-sm font-medium text-red-100">{t.perYear}</span></div>
-            <div className="mt-2 flex gap-4 text-xs tabular-nums text-red-50">
+          <div className="mb-3 rounded-xl bg-red-700 px-4 py-3 text-white">
+            <div className="text-[11px] font-semibold uppercase tracking-wide opacity-80">{t.net}</div>
+            <div className="text-2xl font-extrabold">{money(fig.netAnnual)}<span className="text-sm font-medium opacity-80">{t.perYear}</span></div>
+            <div className="mt-1 flex gap-4 text-xs opacity-90">
               <span>{t.monthly}: <strong>{money(fig.netMonthly)}</strong></span>
               <span>{t.biweekly}: <strong>{money(fig.netBiWeekly)}</strong></span>
             </div>
           </div>
 
-          <div className="grid grid-cols-2 gap-x-4 gap-y-1 text-xs tabular-nums text-mute">
-            <span>{t.fed}: <strong className="text-ink">-{money(fig.federalTax)}</strong></span>
-            <span>{t.prov}: <strong className="text-ink">-{money(fig.provincialTax)}</strong></span>
+          <div className="grid grid-cols-2 gap-x-4 gap-y-1 text-xs text-slate-600">
+            <span>{t.fed}: <strong className="text-slate-800">-{money(fig.federalTax)}</strong></span>
+            <span>{t.prov}: <strong className="text-slate-800">-{money(fig.provincialTax)}</strong></span>
             {/* Quebec: QPP and QPIP are different programmes, so they get a line
                 each. pensionContribution includes QPIP; subtract it for QPP. */}
             {fig.qpip > 0 ? (
               <>
-                <span>{t.qpp}: <strong className="text-ink">-{money(fig.pensionContribution - fig.qpip)}</strong></span>
-                <span>{t.qpip}: <strong className="text-ink">-{money(fig.qpip)}</strong></span>
+                <span>{t.qpp}: <strong className="text-slate-800">-{money(fig.pensionContribution - fig.qpip)}</strong></span>
+                <span>{t.qpip}: <strong className="text-slate-800">-{money(fig.qpip)}</strong></span>
               </>
             ) : (
-              <span>{t.cpp}: <strong className="text-ink">-{money(fig.pensionContribution)}</strong></span>
+              <span>{t.cpp}: <strong className="text-slate-800">-{money(fig.pensionContribution)}</strong></span>
             )}
-            <span>{t.ei}: <strong className="text-ink">-{money(fig.eiPremium)}</strong></span>
+            <span>{t.ei}: <strong className="text-slate-800">-{money(fig.eiPremium)}</strong></span>
           </div>
           {/* State the assumptions a reader would otherwise have to guess. */}
-          <p className="mt-2 text-xs leading-5 text-mute">
+          <p className="mt-2 text-xs leading-5 text-slate-600">
             {t.rates}{unit === 'hour' ? ` · ${t.hours}` : ''}
           </p>
         </>
@@ -296,11 +296,11 @@ export default function EmbedCalculator({
       <p role="status" aria-live="polite" className="sr-only">{announce}</p>
 
       {inline ? (
-        <div className="mt-3 border-t border-line pt-3 text-xs">
+        <div className="mt-3 border-t border-slate-100 pt-3 text-xs">
           <a href="/" className="font-semibold text-red-600 no-underline hover:underline">{t.fullCalcInline}</a>
         </div>
       ) : (
-      <div className="mt-auto flex items-center justify-between border-t border-line pt-3 text-[11px] text-mute">
+      <div className="mt-auto flex items-center justify-between border-t border-slate-100 pt-3 text-[11px] text-slate-500">
         <span>
           {t.poweredBy}{' '}
           <a
@@ -316,7 +316,7 @@ export default function EmbedCalculator({
           href={`https://canpayinsights.ca/?${lang === 'en' ? '' : `lang=${lang}&`}utm_source=embed&utm_medium=widget&utm_content=full`}
           target="_blank"
           rel="noopener"
-          className="text-mute hover:text-red-600 hover:underline"
+          className="text-slate-500 hover:text-red-600 hover:underline"
         >
           {t.fullCalc}
         </a>
