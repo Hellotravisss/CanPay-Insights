@@ -36,7 +36,6 @@ import UserMenu from './components/UserMenu';
 import AuthModal from './components/AuthModal';
 import LoadingOverlay from './components/LoadingOverlay';
 import SisterSiteCard from './components/SisterSiteCard';
-import HomeExample from './components/HomeExample';
 import { TAX_YEAR } from './constants';
 import SiteHeader from './components/site/SiteHeader';
 import { buildWorkPattern } from './lib/workPattern';
@@ -508,7 +507,7 @@ const App: React.FC = () => {
           {/* Home Page - Mode Selection */}
           {currentPage === 'home' && (
             <div className="mx-auto w-full max-w-6xl">
-              <section className="grid items-center gap-10 pb-12 pt-6 md:grid-cols-[1.05fr_0.95fr] md:gap-14 md:pb-20 md:pt-12">
+              <section className="mx-auto max-w-xl pb-12 pt-6 md:pb-20 md:pt-14">
                 <div>
                   <p className="text-[11px] font-semibold uppercase tracking-[0.14em] text-red-600">{TAX_YEAR} · CRA T4032</p>
                   <h1 className="mt-3 font-display text-[2.6rem] font-semibold leading-[1.04] tracking-[-0.015em] text-ink md:text-[3.75rem]">
@@ -544,15 +543,6 @@ const App: React.FC = () => {
                   </div>
                 </div>
 
-                <div className="md:pl-4">
-                  <HomeExample
-                    base={DEFAULT_ANNUAL_INPUTS}
-                    onTry={() => {
-                      setAnnualInputs({ ...DEFAULT_ANNUAL_INPUTS, province: Province.ON, annualSalary: 60000, payFrequency: PayFrequency.BI_WEEKLY });
-                      handleModeSelect(CalculationMode.ANNUAL);
-                    }}
-                  />
-                </div>
               </section>
 
               {/* Sister site — U.S. edition, honest same-team recommendation. It keeps its own brand colours. */}
