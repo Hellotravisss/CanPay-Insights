@@ -57,16 +57,16 @@ const sanitizeHTML = (html: string): string => {
   // Then restore safe formatting tags
   // Bold: **text** or __text__ -> <b>text</b>
   sanitized = sanitized.replace(/&lt;b&gt;(.*?)&lt;\/b&gt;/g, '<b>$1</b>');
-  sanitized = sanitized.replace(/\*\*(.*?)\*\*/g, '<b class="text-red-400 font-bold">$1</b>');
+  sanitized = sanitized.replace(/\*\*(.*?)\*\*/g, '<b class="text-red-600 font-bold">$1</b>');
   
   // List items
   sanitized = sanitized.replace(/^\* (.*)$/gm, '<li class="ml-4 mb-2">$1</li>');
   sanitized = sanitized.replace(/^- (.*)$/gm, '<li class="ml-4 mb-2">$1</li>');
   
   // Headers (allow h3, h4 and h5)
-  sanitized = sanitized.replace(/^# (.*)$/gm, '<h3 class="text-xl font-bold text-white mt-6 mb-3 border-b border-slate-700/50 pb-2">$1</h3>');
-  sanitized = sanitized.replace(/^## (.*)$/gm, '<h4 class="text-lg font-bold text-red-400 mt-5 mb-2">$1</h4>');
-  sanitized = sanitized.replace(/^### (.*)$/gm, '<h5 class="text-base md:text-lg font-bold text-red-400 mt-6 mb-3">$1</h5>');
+  sanitized = sanitized.replace(/^# (.*)$/gm, '<h3 class="text-xl font-bold text-[#15171C] mt-6 mb-3 border-b border-[#E3E3EA] pb-2">$1</h3>');
+  sanitized = sanitized.replace(/^## (.*)$/gm, '<h4 class="text-lg font-bold text-red-600 mt-5 mb-2">$1</h4>');
+  sanitized = sanitized.replace(/^### (.*)$/gm, '<h5 class="text-base md:text-lg font-bold text-red-600 mt-6 mb-3">$1</h5>');
   
   // Paragraphs - wrap lines that don't start with special characters
   sanitized = sanitized.replace(/^(?!<[lh]|<b)(.+)$/gm, '<p class="mb-4 text-justify leading-relaxed">$1</p>');
@@ -77,9 +77,9 @@ const sanitizeHTML = (html: string): string => {
 /**
  * 🚀 High-end inline Markdown parser for PDF/Image Export and Web Rendering
  * Dynamically colors bold text based on financial accounts:
- * - RRSP / Salaries -> Warm Coral Red (text-red-400)
- * - TFSA / Room -> Emerald Green (text-emerald-400)
- * - FHSA / Housing -> Sky Blue (text-sky-400)
+ * - RRSP / Salaries -> Warm Coral Red (text-red-600)
+ * - TFSA / Room -> Emerald Green (text-red-600)
+ * - FHSA / Housing -> Sky Blue (text-[#15171C])
  */
 const renderInlineMarkdown = (text: string): React.ReactNode[] => {
   if (!text) return [];
@@ -87,25 +87,25 @@ const renderInlineMarkdown = (text: string): React.ReactNode[] => {
   return parts.map((part, index) => {
     if (index % 2 === 1) {
       const cleanPart = part.toLowerCase();
-      let colorClass = 'text-white font-bold'; // Default bold is bright white
+      let colorClass = 'text-[#15171C] font-bold'; // Default bold is bright white
 
       // Check if it contains digits, percentages, or dollar signs to apply custom accounts coloring
       if (/[\d$%]/.test(part)) {
         if (cleanPart.includes('tfsa') || cleanPart.includes('$7,000') || cleanPart.includes('$102,000')) {
-          colorClass = 'text-emerald-400 font-extrabold'; // Green for TFSA
+          colorClass = 'text-red-600 font-extrabold'; // Green for TFSA
         } else if (cleanPart.includes('fhsa') || cleanPart.includes('$8,000') || cleanPart.includes('$40,000')) {
-          colorClass = 'text-sky-400 font-extrabold'; // Blue for FHSA
+          colorClass = 'text-[#15171C] font-extrabold'; // Blue for FHSA
         } else {
-          colorClass = 'text-red-400 font-extrabold'; // Coral-Red for RRSP & General Income
+          colorClass = 'text-red-600 font-extrabold'; // Coral-Red for RRSP & General Income
         }
       } else {
         // Highlighting account names even if they don't have numbers
         if (cleanPart.includes('tfsa') || cleanPart.includes('tax-free savings')) {
-          colorClass = 'text-emerald-400 font-bold';
+          colorClass = 'text-red-600 font-bold';
         } else if (cleanPart.includes('fhsa') || cleanPart.includes('first home savings')) {
-          colorClass = 'text-sky-400 font-bold';
+          colorClass = 'text-[#15171C] font-bold';
         } else if (cleanPart.includes('rrsp') || cleanPart.includes('retirement savings')) {
-          colorClass = 'text-red-400 font-bold';
+          colorClass = 'text-red-600 font-bold';
         }
       }
 
@@ -119,7 +119,7 @@ const renderInlineMarkdown = (text: string): React.ReactNode[] => {
     const subParts = part.split('*');
     return subParts.map((subPart, subIndex) => {
       if (subIndex % 2 === 1) {
-        return <em key={subIndex} className="italic text-slate-300 font-medium">{subPart}</em>;
+        return <em key={subIndex} className="italic text-[#2B2E36] font-medium">{subPart}</em>;
       }
       return subPart;
     }) as any;
@@ -144,13 +144,13 @@ const renderMarkdownLine = (line: string, isImage: boolean): React.ReactNode => 
     const cleanText = text.toLowerCase();
     
     // Colorful, themed headings
-    let colorClass = 'text-red-400'; // Default Coral-Red
+    let colorClass = 'text-red-600'; // Default Coral-Red
     if (cleanText.includes('tfsa')) {
-      colorClass = 'text-emerald-400'; // Green for TFSA
+      colorClass = 'text-red-600'; // Green for TFSA
     } else if (cleanText.includes('fhsa')) {
-      colorClass = 'text-sky-400'; // Blue for FHSA
+      colorClass = 'text-[#15171C]'; // Blue for FHSA
     } else if (cleanText.includes('action') || cleanText.includes('step')) {
-      colorClass = 'text-white border-b border-slate-700/50 pb-2 w-full';
+      colorClass = 'text-[#15171C] border-b border-[#E3E3EA] pb-2 w-full';
     } else if (cleanText.includes('pitfall') || cleanText.includes('warning')) {
       colorClass = 'text-amber-500'; // Warning Orange
     }
@@ -165,7 +165,7 @@ const renderMarkdownLine = (line: string, isImage: boolean): React.ReactNode => 
   if (cleanLine.startsWith('##')) {
     const text = cleanLine.replace('##', '').trim();
     return (
-      <h3 key={text} className={`${h2Size} font-extrabold text-red-500 mt-10 mb-4 border-b border-slate-800 pb-2`}>
+      <h3 key={text} className={`${h2Size} font-extrabold text-red-500 mt-10 mb-4 border-b border-[#E3E3EA] pb-2`}>
         {renderInlineMarkdown(text)}
       </h3>
     );
@@ -178,21 +178,21 @@ const renderMarkdownLine = (line: string, isImage: boolean): React.ReactNode => 
     // Color-coded bullet points for high-end look
     let bulletColor = 'text-red-500';
     if (cleanText.includes('tfsa')) {
-      bulletColor = 'text-emerald-500';
+      bulletColor = 'text-[#00897A]';
     } else if (cleanText.includes('fhsa')) {
-      bulletColor = 'text-sky-500';
+      bulletColor = 'text-[#2F5DA8]';
     } else if (cleanText.includes('step 1') || cleanText.includes('open')) {
-      bulletColor = 'text-amber-400';
+      bulletColor = 'text-[#8A5A00]';
     } else if (cleanText.includes('step 2') || cleanText.includes('contribute')) {
-      bulletColor = 'text-emerald-400';
+      bulletColor = 'text-red-600';
     } else if (cleanText.includes('step 3')) {
-      bulletColor = 'text-sky-400';
+      bulletColor = 'text-[#15171C]';
     } else if (cleanText.includes('step 4')) {
-      bulletColor = 'text-violet-400';
+      bulletColor = 'text-[#15171C]';
     }
 
     return (
-      <li key={text} className={`ml-4 list-none flex items-start gap-2 ${pSize} text-slate-300 mb-2`}>
+      <li key={text} className={`ml-4 list-none flex items-start gap-2 ${pSize} text-[#2B2E36] mb-2`}>
         <span className={`${bulletColor} font-bold text-lg mt-0.5 flex-shrink-0 select-none`}>•</span>
         <span className="flex-1">{renderInlineMarkdown(text)}</span>
       </li>
@@ -200,7 +200,7 @@ const renderMarkdownLine = (line: string, isImage: boolean): React.ReactNode => 
   }
 
   return (
-    <p className={`${pSize} text-slate-300 text-justify font-sans mb-4`}>
+    <p className={`${pSize} text-[#2B2E36] text-justify font-sans mb-4`}>
       {renderInlineMarkdown(cleanLine)}
     </p>
   );
@@ -316,123 +316,123 @@ const GeminiAdvisor: React.FC<Props> = ({ results, inputs, onReportOpen }) => {
       <div className={`space-y-6 text-left ${isSnapshot ? 'text-xl' : 'text-sm sm:text-base'}`}>
         
         {/* Executive Summary Card */}
-        <div className="bg-slate-900/80 p-6 rounded-xl border border-slate-700/50">
-          <h4 className="text-amber-400 font-extrabold text-lg sm:text-xl mb-3">
+        <div className="bg-white p-5 sm:p-6 rounded-xl border border-[#E3E3EA]">
+          <h4 className="font-display text-[#15171C] font-semibold text-xl mb-3">
             {t('rep.execSummary')}
           </h4>
-          <p className="text-slate-200 leading-relaxed">
-            {t('rep.execA')}<span className="text-red-400 font-bold">{formatCurrency(annualIncome)}</span>{t('rep.execB')}<span className="text-red-400 font-bold">{inputs.province}</span>{t('rep.execC')}<span className="text-red-400 font-bold">{formatCurrency(annualTax)}</span>{t('rep.execD')}<span className="text-red-400 font-bold">{effectiveRate}</span>{t('rep.execE')}<span className="text-green-400 font-bold">{formatCurrency(taxOptimization.summary.totalPotentialSavings + annualEmployerMatchActual)}</span>{t('rep.execF')}
+          <p className="text-[#15171C] leading-relaxed">
+            {t('rep.execA')}<span className="text-red-600 font-bold">{formatCurrency(annualIncome)}</span>{t('rep.execB')}<span className="text-red-600 font-bold">{inputs.province}</span>{t('rep.execC')}<span className="text-red-600 font-bold">{formatCurrency(annualTax)}</span>{t('rep.execD')}<span className="text-red-600 font-bold">{effectiveRate}</span>{t('rep.execE')}<span className="text-red-600 font-bold">{formatCurrency(taxOptimization.summary.totalPotentialSavings + annualEmployerMatchActual)}</span>{t('rep.execF')}
           </p>
         </div>
 
         {/* Income & Tax Analysis + Monthly Breakdown */}
         <div className={`grid grid-cols-1 ${isSnapshot ? 'grid-cols-2 gap-6' : 'md:grid-cols-2 gap-4'}`}>
-          <div className="bg-slate-900/60 p-5 rounded-xl border border-slate-700/50">
-            <h4 className="text-sky-400 font-bold text-base sm:text-lg mb-3">
+          <div className="bg-white p-5 rounded-xl border border-[#E3E3EA]">
+            <h4 className="font-display text-[#15171C] font-semibold text-lg mb-3">
               {t('rep.incomeAnalysis')}
             </h4>
-            <ul className="space-y-2 text-slate-300">
+            <ul className="space-y-2 text-[#2B2E36]">
               <li className="flex justify-between">
                 <span>{t('rep.grossAnnual')}:</span>
-                <span className="text-white font-bold">{formatCurrency(annualIncome)}</span>
+                <span className="text-[#15171C] font-bold">{formatCurrency(annualIncome)}</span>
               </li>
               <li className="flex justify-between">
                 <span>{t('rep.netTakeHome')}:</span>
-                <span className="text-white font-bold">{formatCurrency(netIncome)}</span>
+                <span className="text-[#15171C] font-bold">{formatCurrency(netIncome)}</span>
               </li>
               <li className="flex justify-between">
                 <span>{t('rep.totalTaxFedProv')}:</span>
-                <span className="text-white font-bold">{formatCurrency(annualTax)}</span>
+                <span className="text-[#15171C] font-bold">{formatCurrency(annualTax)}</span>
               </li>
               <li className="flex justify-between">
                 <span>{t('rep.cppContrib')}:</span>
-                <span className="text-white font-bold">{formatCurrency(annualCPP)}</span>
+                <span className="text-[#15171C] font-bold">{formatCurrency(annualCPP)}</span>
               </li>
               <li className="flex justify-between">
                 <span>{t('rep.eiPremiums')}:</span>
-                <span className="text-white font-bold">{formatCurrency(annualEI)}</span>
+                <span className="text-[#15171C] font-bold">{formatCurrency(annualEI)}</span>
               </li>
-              <li className="flex justify-between border-t border-slate-700/50 pt-2 mt-2">
+              <li className="flex justify-between border-t border-[#E3E3EA] pt-2 mt-2">
                 <span>{t('rep.marginalRate')}:</span>
-                <span className="text-red-400 font-bold">{(marginalRate.combined * 100).toFixed(1)}%</span>
+                <span className="text-red-600 font-bold">{(marginalRate.combined * 100).toFixed(1)}%</span>
               </li>
             </ul>
           </div>
 
-          <div className="bg-slate-900/60 p-5 rounded-xl border border-slate-700/50 flex flex-col justify-between">
+          <div className="bg-white p-5 rounded-xl border border-[#E3E3EA] flex flex-col justify-between">
             <div>
-              <h4 className="text-violet-400 font-bold text-base sm:text-lg mb-3">
+              <h4 className="font-display text-[#15171C] font-semibold text-lg mb-3">
                 {t('rep.monthlyBreakdown')}
               </h4>
-              <ul className="space-y-2 text-slate-300">
+              <ul className="space-y-2 text-[#2B2E36]">
                 <li className="flex justify-between">
                   <span>{t('rep.monthlyNet')}:</span>
-                  <span className="text-white font-bold">{formatCurrency(netIncome / 12)}</span>
+                  <span className="text-[#15171C] font-bold">{formatCurrency(netIncome / 12)}</span>
                 </li>
                 <li className="flex justify-between">
                   <span>{t('rep.monthlyTax')}:</span>
-                  <span className="text-white font-bold">{formatCurrency(annualTax / 12)}</span>
+                  <span className="text-[#15171C] font-bold">{formatCurrency(annualTax / 12)}</span>
                 </li>
               </ul>
             </div>
-            <div className="bg-slate-950 p-3 rounded-lg border border-slate-800 mt-4">
-              <p className="text-amber-400 text-xs sm:text-sm">
-                <Icon name="bulb" tone="white" size={16} /> {t('rep.everyDollarPre')}<span className="font-bold">{(marginalRate.combined * 100).toFixed(1)}%</span>{t('rep.everyDollarPost')}
+            <div className="bg-white p-3 rounded-lg border border-[#E3E3EA] mt-4">
+              <p className="text-[#8A5A00] text-xs sm:text-sm">
+                <Icon name="bulb" tone="red" size={16} /> {t('rep.everyDollarPre')}<span className="font-bold">{(marginalRate.combined * 100).toFixed(1)}%</span>{t('rep.everyDollarPost')}
               </p>
             </div>
           </div>
         </div>
 
         {/* Federal Tax Bracket warning */}
-        <div className="bg-slate-900/60 p-5 rounded-xl border border-slate-700/50">
-          <h4 className="text-orange-400 font-bold text-base sm:text-lg mb-2">
+        <div className="bg-white p-5 rounded-xl border border-[#E3E3EA]">
+          <h4 className="font-display text-[#15171C] font-semibold text-lg mb-2">
             {t('rep.fedBracket')}
           </h4>
-          <div className="flex justify-between items-center text-slate-300 text-sm">
+          <div className="flex justify-between items-center text-[#2B2E36] text-sm">
             <span>{t('rep.currentBracket')}:</span>
-            <span className="text-white font-bold">{bracketInfo.current}</span>
+            <span className="text-[#15171C] font-bold">{bracketInfo.current}</span>
           </div>
           {bracketInfo.nextThreshold !== Infinity && (
-            <p className="text-amber-400 text-xs sm:text-sm mt-2 border-t border-slate-800 pt-2">
-              <Icon name="warning" tone="white" size={16} /> {t('rep.nextBracketPre')}{bracketInfo.next}{t('rep.nextBracketMid')}<span className="font-bold">{formatCurrency(bracketInfo.nextThreshold)}</span>{t('rep.nextBracketPost')}
+            <p className="text-[#8A5A00] text-xs sm:text-sm mt-2 border-t border-[#E3E3EA] pt-2">
+              <Icon name="warning" tone="red" size={16} /> {t('rep.nextBracketPre')}{bracketInfo.next}{t('rep.nextBracketMid')}<span className="font-bold">{formatCurrency(bracketInfo.nextThreshold)}</span>{t('rep.nextBracketPost')}
             </p>
           )}
         </div>
 
         {/* RRSP Strategy Card */}
-        <div className="bg-slate-900/60 p-5 rounded-xl border border-slate-700/50">
-          <h4 className="text-red-400 font-bold text-base sm:text-lg mb-3">
-            <Icon name="bank" tone="white" size={20} /> {t('rep.rrspStrategy')}
+        <div className="bg-white p-5 rounded-xl border border-[#E3E3EA]">
+          <h4 className="font-display text-[#15171C] font-semibold text-lg mb-3">
+            <Icon name="bank" tone="red" size={20} /> {t('rep.rrspStrategy')}
           </h4>
           {annualRRSPActual > 0 ? (
             <div className="space-y-4">
-              <p className="text-emerald-400 font-bold text-base">
+              <p className="text-red-600 font-bold text-base">
                 {t('opt.optimumRoom')}: {formatCurrency(remainingRRSPOptimum)}
               </p>
-              <p className="text-slate-300">
-                <Icon name="confetti" tone="white" size={16} /> {t('rep.greatA')}<span className="text-white font-bold">{formatCurrency(annualRRSPActual)}</span>{t('rep.greatB')}
-                {annualEmployerMatchActual > 0 ? <>{t('rep.greatC')}<span className="text-green-400 font-bold">+{formatCurrency(annualEmployerMatchActual)}{t('rep.greatD')}</span></> : ''}{t('rep.greatE')}
+              <p className="text-[#2B2E36]">
+                <Icon name="confetti" tone="red" size={16} /> {t('rep.greatA')}<span className="text-[#15171C] font-bold">{formatCurrency(annualRRSPActual)}</span>{t('rep.greatB')}
+                {annualEmployerMatchActual > 0 ? <>{t('rep.greatC')}<span className="text-red-600 font-bold">+{formatCurrency(annualEmployerMatchActual)}{t('rep.greatD')}</span></> : ''}{t('rep.greatE')}
               </p>
-              <div className="space-y-2 border-t border-slate-800 pt-3 text-sm text-slate-300">
+              <div className="space-y-2 border-t border-[#E3E3EA] pt-3 text-sm text-[#2B2E36]">
                 <div className="flex justify-between">
                   <span>{t('rep.yourContribution')}:</span>
                   <span>{formatCurrency(annualRRSPActual)}{t('opt.perYr')}</span>
                 </div>
                 {annualEmployerMatchActual > 0 && (
-                  <div className="flex justify-between text-green-400">
+                  <div className="flex justify-between text-red-600">
                     <span>{t('rep.employerMatch')}:</span>
                     <span>+{formatCurrency(annualEmployerMatchActual)}{t('opt.perYr')} {t('rep.free')}</span>
                   </div>
                 )}
                 {remainingRRSPOptimum > 0 && (
                   <>
-                    <div className="flex justify-between text-amber-400">
+                    <div className="flex justify-between text-[#8A5A00]">
                       <span>{t('rep.topupNeeded')}:</span>
                       <span>{formatCurrency(remainingRRSPOptimum)}{t('opt.perYr')} (≈ {formatCurrency(biweeklyTopUp)}{t('rep.perBiweekly')})</span>
                     </div>
-                    <div className="bg-slate-950 p-3 rounded-lg border border-slate-800 mt-2">
-                      <p className="text-green-400 text-xs sm:text-sm">
-                        <Icon name="bulb" tone="white" size={16} /> {t('rep.topupEarnPre')}<span className="font-bold">{formatCurrency(biweeklyTopUp)}{t('rep.perBiweekly')}</span>{t('rep.topupEarnMid')}<span className="font-bold">{formatCurrency(extraRefund)}</span>{t('rep.topupEarnPost')}
+                    <div className="bg-white p-3 rounded-lg border border-[#E3E3EA] mt-2">
+                      <p className="text-red-600 text-xs sm:text-sm">
+                        <Icon name="bulb" tone="red" size={16} /> {t('rep.topupEarnPre')}<span className="font-bold">{formatCurrency(biweeklyTopUp)}{t('rep.perBiweekly')}</span>{t('rep.topupEarnMid')}<span className="font-bold">{formatCurrency(extraRefund)}</span>{t('rep.topupEarnPost')}
                       </p>
                     </div>
                   </>
@@ -441,20 +441,20 @@ const GeminiAdvisor: React.FC<Props> = ({ results, inputs, onReportOpen }) => {
             </div>
           ) : (
             <div className="space-y-3">
-              <p className="text-green-400 font-bold text-lg">
+              <p className="text-red-600 font-bold text-lg">
                 {t('rep.contributePre')}{formatCurrency(taxOptimization.rrsp.recommendedAmount)}{t('rep.contributePost')}
               </p>
-              <p className="text-slate-300">
-                {t('rep.savesPre')}<span className="text-white font-bold">{(marginalRate.combined * 100).toFixed(0)}¢</span>{t('rep.savesPost')}
+              <p className="text-[#2B2E36]">
+                {t('rep.savesPre')}<span className="text-[#15171C] font-bold">{(marginalRate.combined * 100).toFixed(0)}¢</span>{t('rep.savesPost')}
               </p>
-              <div className="space-y-2 border-t border-slate-800 pt-3 text-sm text-slate-300">
+              <div className="space-y-2 border-t border-[#E3E3EA] pt-3 text-sm text-[#2B2E36]">
                 <div className="flex justify-between">
                   <span>{t('rep.estRefund')}:</span>
-                  <span className="text-amber-400 font-bold">{formatCurrency(taxOptimization.rrsp.taxSavings)}</span>
+                  <span className="text-red-600 font-bold">{formatCurrency(taxOptimization.rrsp.taxSavings)}</span>
                 </div>
                 <div className="flex justify-between">
                   <span>{t('rep.biweeklyDeposit')}:</span>
-                  <span className="text-white font-bold">{formatCurrency(Math.round(taxOptimization.rrsp.recommendedAmount / periodsPerYear))}</span>
+                  <span className="text-[#15171C] font-bold">{formatCurrency(Math.round(taxOptimization.rrsp.recommendedAmount / periodsPerYear))}</span>
                 </div>
               </div>
             </div>
@@ -462,52 +462,52 @@ const GeminiAdvisor: React.FC<Props> = ({ results, inputs, onReportOpen }) => {
         </div>
 
         {/* TFSA Strategy Card */}
-        <div className="bg-slate-900/60 p-5 rounded-xl border border-slate-700/50">
-          <h4 className="text-blue-400 font-bold text-base sm:text-lg mb-3">
-            <Icon name="piggy" tone="white" size={20} /> {t('rep.tfsaStrategy')}
+        <div className="bg-white p-5 rounded-xl border border-[#E3E3EA]">
+          <h4 className="font-display text-[#15171C] font-semibold text-lg mb-3">
+            <Icon name="piggy" tone="red" size={20} /> {t('rep.tfsaStrategy')}
           </h4>
-          <p className="text-green-400 font-bold text-lg mb-2">
+          <p className="text-red-600 font-bold text-lg mb-2">
             {t('rep.maxOutPre')}{formatCurrency(taxOptimization.tfsa.recommendedAmount)}
           </p>
-          <div className="space-y-2 text-sm text-slate-300">
+          <div className="space-y-2 text-sm text-[#2B2E36]">
             <div className="flex justify-between">
               <span>{t('rep.tfsaRoom2026')}:</span>
-              <span className="text-white font-bold">$7,000</span>
+              <span className="text-[#15171C] font-bold">$7,000</span>
             </div>
             <div className="flex justify-between">
               <span>{t('rep.lifetimeRoom')}:</span>
-              <span className="text-white">{formatCurrency(taxOptimization.tfsa.lifetimeRoom)}</span>
+              <span className="text-[#15171C]">{formatCurrency(taxOptimization.tfsa.lifetimeRoom)}</span>
             </div>
-            <p className="text-xs text-slate-500 pt-2 border-t border-slate-800">
+            <p className="text-xs text-[#5E6270] pt-2 border-t border-[#E3E3EA]">
               {t('rep.tfsaNote')}
             </p>
           </div>
         </div>
 
         {/* Action Steps Checklist */}
-        <div className="bg-emerald-950/60 p-5 rounded-xl border border-emerald-800/40 text-left">
-          <h4 className="text-emerald-400 font-bold text-base sm:text-lg mb-3">
-            <Icon name="check" tone="white" size={20} /> {t('rep.checklist')}
+        <div className="bg-red-50/60 p-5 rounded-xl border border-red-100 text-left">
+          <h4 className="font-display text-[#15171C] font-semibold text-lg mb-3">
+            <Icon name="check" tone="red" size={20} /> {t('rep.checklist')}
           </h4>
-          <ul className="space-y-2.5 text-slate-200 text-sm">
+          <ul className="space-y-2.5 text-[#15171C] text-sm">
             {annualRRSPActual === 0 && (
               <>
                 <li className="flex items-start gap-2.5">
-                  <Icon name="checkbox" tone="white" size={16} className="mt-0.5" />
+                  <Icon name="checkbox" tone="red" size={16} className="mt-0.5" />
                   <span>
                     {t('rep.openRRSP')}{' — '}
                     <a
                       href={WEALTHSIMPLE_REFERRAL_URL}
                       target="_blank"
                       rel="sponsored noopener noreferrer"
-                      className="font-semibold text-emerald-300 underline underline-offset-2 hover:text-emerald-200"
+                      className="font-semibold text-red-700 underline underline-offset-2 hover:text-red-800"
                     >
                       {t('rep.wsCta')}
                     </a>
                   </span>
                 </li>
                 <li className="flex items-start gap-2.5">
-                  <Icon name="checkbox" tone="white" size={16} className="mt-0.5" />
+                  <Icon name="checkbox" tone="red" size={16} className="mt-0.5" />
                   <span>{t('rep.setupDepositPre')}<span className="font-semibold">{formatCurrency(Math.round(taxOptimization.rrsp.recommendedAmount / periodsPerYear))}</span></span>
                 </li>
               </>
@@ -515,50 +515,50 @@ const GeminiAdvisor: React.FC<Props> = ({ results, inputs, onReportOpen }) => {
             {remainingRRSPOptimum > 0 && annualRRSPActual > 0 && (
               <>
                 <li className="flex items-start gap-2.5">
-                  <Icon name="checkbox" tone="white" size={16} className="mt-0.5" />
+                  <Icon name="checkbox" tone="red" size={16} className="mt-0.5" />
                   <span>{t('rep.topupBeforePre')}<span className="font-semibold">{formatCurrency(remainingRRSPOptimum)}</span>{t('rep.topupBeforePost')}</span>
                 </li>
                 <li className="flex items-start gap-2.5">
-                  <Icon name="checkbox" tone="white" size={16} className="mt-0.5" />
+                  <Icon name="checkbox" tone="red" size={16} className="mt-0.5" />
                   <span>{t('rep.autosavePre')}<span className="font-semibold">{formatCurrency(biweeklyTopUp)}{t('rep.perBiweekly')}</span>{t('rep.autosavePost')}</span>
                 </li>
               </>
             )}
             <li className="flex items-start gap-2.5">
-              <Icon name="checkbox" tone="white" size={16} className="mt-0.5" />
+              <Icon name="checkbox" tone="red" size={16} className="mt-0.5" />
               <span>{t('rep.investPre')}<span className="font-semibold">{formatCurrency(taxOptimization.tfsa.recommendedAmount)}</span>{t('rep.investPost')}</span>
             </li>
             <li className="flex items-start gap-2.5">
-              <Icon name="checkbox" tone="white" size={16} className="mt-0.5" />
+              <Icon name="checkbox" tone="red" size={16} className="mt-0.5" />
               <span>{t('rep.fileTaxes')}</span>
             </li>
             <li className="flex items-start gap-2.5">
-              <Icon name="checkbox" tone="white" size={16} className="mt-0.5" />
+              <Icon name="checkbox" tone="red" size={16} className="mt-0.5" />
               <span>{t('rep.claimReceipts')}</span>
             </li>
           </ul>
         </div>
 
         {/* Tax Filing Tips */}
-        <div className="bg-slate-900/60 p-5 rounded-xl border border-slate-700/50 text-left">
-          <h4 className="text-cyan-400 font-bold text-base sm:text-lg mb-3">
-            <Icon name="checklist" tone="white" size={20} /> {t('rep.filingTips')}
+        <div className="bg-white p-5 rounded-xl border border-[#E3E3EA] text-left">
+          <h4 className="font-display text-[#15171C] font-semibold text-lg mb-3">
+            <Icon name="checklist" tone="red" size={20} /> {t('rep.filingTips')}
           </h4>
-          <ul className="space-y-2 text-slate-300 text-sm">
+          <ul className="space-y-2 text-[#2B2E36] text-sm">
             <li className="flex items-start gap-2">
-              <span className="text-cyan-400">•</span>
+              <span className="text-red-600">•</span>
               <span>{t('rep.tipFile')}</span>
             </li>
             <li className="flex items-start gap-2">
-              <span className="text-cyan-400">•</span>
+              <span className="text-red-600">•</span>
               <span>{t('rep.tipWFH')}</span>
             </li>
             <li className="flex items-start gap-2">
-              <span className="text-cyan-400">•</span>
+              <span className="text-red-600">•</span>
               <span>{t('rep.tipMedical')}</span>
             </li>
             <li className="flex items-start gap-2">
-              <span className="text-cyan-400">•</span>
+              <span className="text-red-600">•</span>
               <span>{t('rep.tipCharity')}</span>
             </li>
           </ul>
@@ -781,7 +781,7 @@ const GeminiAdvisor: React.FC<Props> = ({ results, inputs, onReportOpen }) => {
   };
 
   return (
-    <div className="bg-slate-800/80 rounded-xl shadow-lg p-4 sm:p-6 text-white mt-6 border border-slate-700/40 relative overflow-hidden transition-all backdrop-blur-sm">
+    <div className="bg-white rounded-2xl shadow-[0_1px_2px_rgba(21,23,28,0.04)] p-4 sm:p-6 text-[#15171C] mt-6 border border-[#E3E3EA] relative overflow-hidden transition-all ">
       {loading && (
         <div className="absolute top-0 left-0 w-full h-1 bg-red-500 overflow-hidden">
           <div className="w-full h-full bg-red-400 animate-shimmer-loading" />
@@ -790,14 +790,14 @@ const GeminiAdvisor: React.FC<Props> = ({ results, inputs, onReportOpen }) => {
       
       <div className="flex flex-wrap items-center justify-between gap-3 mb-4">
         <div className="flex items-center gap-3">
-          <div className="w-8 h-8 bg-red-600 rounded-lg flex items-center justify-center">
+          <div className="card-brand-3d w-10 h-10 text-white rounded-xl flex items-center justify-center shadow-sm">
             <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
               <path fillRule="evenodd" d="M4 4a2 2 0 00-2 2v4a2 2 0 002 2V6h10a2 2 0 00-2-2H4zm2 6a2 2 0 012-2h8a2 2 0 012 2v4a2 2 0 01-2 2H8a2 2 0 01-2-2v-4zm6 4a1 1 0 100-2 1 1 0 000 2z" clipRule="evenodd" />
             </svg>
           </div>
           <div>
-            <h3 className="text-lg font-bold">{t('opt.title')}</h3>
-            <p className="text-xs text-slate-500">{t('opt.subtitle')}</p>
+            <h3 className="font-display text-xl font-semibold leading-tight">{t('opt.title')}</h3>
+            <p className="text-xs text-[#5E6270]">{t('opt.subtitle')}</p>
           </div>
         </div>
       </div>
@@ -816,8 +816,8 @@ const GeminiAdvisor: React.FC<Props> = ({ results, inputs, onReportOpen }) => {
         pensionAnnual={pensionAnnual}
       />
 
-      <div className="mt-6 pt-6 border-t border-slate-700">
-        <h4 className="text-sm font-bold text-red-400 mb-3 flex items-center gap-2">
+      <div className="mt-6 pt-6 border-t border-[#E3E3EA]">
+        <h4 className="text-sm font-bold text-red-600 mb-3 flex items-center gap-2">
           <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
             <path fillRule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clipRule="evenodd" />
           </svg>
@@ -832,20 +832,20 @@ const GeminiAdvisor: React.FC<Props> = ({ results, inputs, onReportOpen }) => {
           </button>
         )}
         {analysisState === 'thinking' && (
-          <div className="flex flex-col items-center gap-3 rounded-xl border border-slate-700/50 bg-slate-900/60 py-10">
+          <div className="flex flex-col items-center gap-3 rounded-xl border border-[#E3E3EA] bg-[#F7F7FA] py-10">
             <div className="h-8 w-8 animate-spin rounded-full border-4 border-red-600/30 border-t-red-600" />
-            <p className="text-sm font-medium text-slate-300 animate-fadeIn" key={thinkStep}>
+            <p className="text-sm font-medium text-[#2B2E36] animate-fadeIn" key={thinkStep}>
               {t(thinkStep === 0 ? 'opt.think1' : thinkStep === 1 ? 'opt.think2' : 'opt.think3')}
             </p>
           </div>
         )}
         {analysisState === 'done' && (
-        <div className="bg-slate-900/60 p-5 rounded-xl border border-slate-700/50 animate-fadeIn">
+        <div className="bg-[#F7F7FA] p-3 sm:p-5 rounded-2xl border border-[#E3E3EA] animate-fadeIn">
           <div className="max-w-none">
             {renderSmartReport(false)}
           </div>
           {/* Save Report Button - Mobile Optimized */}
-          <div className="mt-6 pt-4 border-t border-slate-700/50">
+          <div className="mt-6 pt-4 border-t border-[#E3E3EA]">
             <button
               onClick={handleExport}
               disabled={exporting || !qrBase64}
@@ -868,7 +868,7 @@ const GeminiAdvisor: React.FC<Props> = ({ results, inputs, onReportOpen }) => {
                 </>
               )}
             </button>
-            <p className="text-xs text-slate-500 mt-2">{t('opt.saveReportHint')}</p>
+            <p className="text-xs text-[#5E6270] mt-2">{t('opt.saveReportHint')}</p>
           </div>
         </div>
         )}
@@ -950,27 +950,27 @@ const GeminiAdvisor: React.FC<Props> = ({ results, inputs, onReportOpen }) => {
       <div style={{ position: 'absolute', left: '-9999px', top: 0, overflow: 'hidden' }}>
         <div
           ref={snapshotRef}
-          className="w-[1000px] bg-slate-900 text-white p-16 font-sans block"
+          className="w-[1000px] bg-[#F4F4F8] text-[#15171C] p-16 font-sans block"
           style={{ height: 'auto' }}
         >
           {/* Header */}
-          <div className="border-b border-slate-700 pb-10 mb-12 flex justify-between items-end">
+          <div className="border-b border-[#E3E3EA] pb-10 mb-12 flex justify-between items-end">
             <div>
               <div className="flex items-center gap-5 mb-5">
-                <img src="/logo_reverse.png" alt="" className="w-14 h-14 object-contain flex-shrink-0 rounded-xl shadow-lg border border-slate-800" />
+                <img src="/logo_reverse.png" alt="" className="w-14 h-14 object-contain flex-shrink-0 rounded-xl shadow-lg border border-[#E3E3EA]" />
                 <h1 className="text-5xl font-bold tracking-tight">
                   <span className="font-brand font-extrabold tracking-tight">CanPay</span> <span className="font-brand font-normal tracking-tight text-red-600">Insights</span>
                 </h1>
               </div>
-              <p className="text-slate-500 text-2xl font-medium">2026 Tax Report</p>
+              <p className="text-[#5E6270] text-2xl font-medium">2026 Tax Report</p>
             </div>
             <div className="flex gap-12 text-right">
               <div>
-                <p className="text-slate-500 text-xs font-bold uppercase tracking-[0.3em] mb-2">Annual Income</p>
+                <p className="text-[#5E6270] text-xs font-bold uppercase tracking-[0.3em] mb-2">Annual Income</p>
                 <p className="text-4xl font-bold text-red-500">{formatCurrency(results.grossPayAnnual)}</p>
               </div>
               <div>
-                <p className="text-slate-500 text-xs font-bold uppercase tracking-[0.3em] mb-2">Province</p>
+                <p className="text-[#5E6270] text-xs font-bold uppercase tracking-[0.3em] mb-2">Province</p>
                 <p className="text-4xl font-bold">{inputs.province}</p>
               </div>
             </div>
@@ -978,18 +978,18 @@ const GeminiAdvisor: React.FC<Props> = ({ results, inputs, onReportOpen }) => {
 
           {/* Tax Optimization Summary */}
           <div className="mb-10">
-            <h2 className="text-2xl font-bold text-white mb-6">Core Tax Optimization Recommendations</h2>
-            <div className="bg-slate-800 p-6 rounded-xl mb-6">
+            <h2 className="text-2xl font-bold text-[#15171C] mb-6">Core Tax Optimization Recommendations</h2>
+            <div className="bg-white p-6 rounded-xl mb-6">
               <div className="grid grid-cols-2 gap-8">
                 <div>
-                  <p className="text-slate-500 text-sm mb-1">Recommended RRSP Contribution</p>
-                  <p className="text-3xl font-bold text-green-400">{formatCurrency(taxOptimization.rrsp.recommendedAmount)}</p>
-                  <p className="text-slate-500 text-sm mt-1">Estimated Refund: {formatCurrency(taxOptimization.rrsp.refundAmount)}</p>
+                  <p className="text-[#5E6270] text-sm mb-1">Recommended RRSP Contribution</p>
+                  <p className="text-3xl font-bold text-red-600">{formatCurrency(taxOptimization.rrsp.recommendedAmount)}</p>
+                  <p className="text-[#5E6270] text-sm mt-1">Estimated Refund: {formatCurrency(taxOptimization.rrsp.refundAmount)}</p>
                 </div>
                 <div>
-                  <p className="text-slate-500 text-sm mb-1">Total Tax Savings Potential</p>
-                  <p className="text-3xl font-bold text-red-400">{formatCurrency(taxOptimization.summary.totalPotentialSavings + annualEmployerMatchActual)}</p>
-                  <p className="text-slate-500 text-sm mt-1">Marginal Rate: {(taxOptimization.rrsp.marginalRate * 100).toFixed(1)}%</p>
+                  <p className="text-[#5E6270] text-sm mb-1">Total Tax Savings Potential</p>
+                  <p className="text-3xl font-bold text-red-600">{formatCurrency(taxOptimization.summary.totalPotentialSavings + annualEmployerMatchActual)}</p>
+                  <p className="text-[#5E6270] text-sm mt-1">Marginal Rate: {(taxOptimization.rrsp.marginalRate * 100).toFixed(1)}%</p>
                 </div>
               </div>
             </div>
@@ -997,10 +997,10 @@ const GeminiAdvisor: React.FC<Props> = ({ results, inputs, onReportOpen }) => {
 
           {/* Action Plan */}
           <div className="mb-12">
-            <h3 className="text-xl font-bold text-white mb-4">Action Plan</h3>
+            <h3 className="text-xl font-bold text-[#15171C] mb-4">Action Plan</h3>
             <ul className="space-y-3">
               {taxOptimization.summary.actionPlan.map((action, idx) => (
-                <li key={idx} className="flex items-start gap-3 text-slate-300">
+                <li key={idx} className="flex items-start gap-3 text-[#2B2E36]">
                   <span className="text-red-500 font-bold">{idx + 1}.</span>
                   {action}
                 </li>
@@ -1009,8 +1009,8 @@ const GeminiAdvisor: React.FC<Props> = ({ results, inputs, onReportOpen }) => {
           </div>
 
           {/* ✦ Smart Tax Strategy (Synchronized with App) */}
-          <div className="mb-12 border-t border-slate-800 pt-12 text-left">
-            <h3 className="text-3.5xl font-extrabold text-white mb-8 flex items-center gap-3 border-b-2 border-red-600 pb-3 w-fit">
+          <div className="mb-12 border-t border-[#E3E3EA] pt-12 text-left">
+            <h3 className="text-3.5xl font-extrabold text-[#15171C] mb-8 flex items-center gap-3 border-b-2 border-red-600 pb-3 w-fit">
               <Icon name="sparkle" size={36} /> Smart Tax Strategy
             </h3>
             <div className="max-w-[850px]">
@@ -1019,17 +1019,17 @@ const GeminiAdvisor: React.FC<Props> = ({ results, inputs, onReportOpen }) => {
           </div>
 
           {/* Footer */}
-          <div className="pt-12 border-t border-slate-800 flex justify-between items-center">
+          <div className="pt-12 border-t border-[#E3E3EA] flex justify-between items-center">
             <div>
-              <p className="text-2xl font-bold text-slate-100 mb-2">Plan your future with confidence.</p>
-              <p className="text-slate-500 font-mono text-lg">{APP_URL}</p>
+              <p className="text-2xl font-bold text-[#15171C] mb-2">Plan your future with confidence.</p>
+              <p className="text-[#5E6270] font-mono text-lg">{APP_URL}</p>
             </div>
             <div className="flex items-center gap-10">
               <div className="text-right">
-                <p className="text-xs text-slate-600 font-bold uppercase tracking-[0.4em] mb-2">Based on {TAX_YEAR} Tax Rules</p>
-                <p className="text-sm text-slate-500 italic">For reference only. Consult a tax professional for personalized advice.</p>
+                <p className="text-xs text-[#7C818D] font-bold uppercase tracking-[0.4em] mb-2">Based on {TAX_YEAR} Tax Rules</p>
+                <p className="text-sm text-[#5E6270] italic">For reference only. Consult a tax professional for personalized advice.</p>
               </div>
-              <div className="w-32 h-32 p-1.5 bg-white rounded-2xl shadow-2xl border-4 border-slate-800 flex-shrink-0 flex items-center justify-center aspect-square">
+              <div className="w-32 h-32 p-1.5 bg-white rounded-2xl shadow-2xl border-4 border-[#E3E3EA] flex-shrink-0 flex items-center justify-center aspect-square">
                 {qrBase64 ? (
                   <img src={qrBase64} alt="QR" className="w-full h-full block object-contain aspect-square" style={{ imageRendering: 'crisp-edges' }} />
                 ) : (
@@ -1129,49 +1129,49 @@ const TaxOptimizationPanel: React.FC<TaxOptimizationPanelProps> = ({
 
       {/* RRSP Detailed Recommendation */}
       {rrsp.recommendedAmount > 0 && (
-        <div className="bg-slate-900/60 p-5 rounded-xl border border-slate-700/50">
-          <div className="flex items-center justify-between mb-4">
-            <h4 className="text-md font-bold text-white flex items-center gap-2">
-              <span className="w-6 h-6 rounded bg-red-600 flex items-center justify-center text-xs">1</span>
+        <div className="bg-[#F7F7FA] p-5 rounded-xl border border-[#E3E3EA]">
+          <div className="flex flex-col gap-2 sm:flex-row sm:items-start sm:justify-between mb-4">
+            <h4 className="font-display text-lg leading-snug font-semibold text-[#15171C] flex items-start gap-2.5">
+              <span className="mt-0.5 w-6 h-6 shrink-0 rounded-md bg-red-600 text-white flex items-center justify-center text-xs">1</span>
               {t('opt.rrspTitle')}
             </h4>
             <button
               onClick={onToggleScenarios}
-              className="text-xs text-red-400 hover:text-red-300 underline"
+              className="self-start shrink-0 text-xs font-semibold text-red-600 hover:text-red-800 underline underline-offset-2"
             >
               {showScenarios ? t('opt.hideComparison') : t('opt.viewScenarios')}
             </button>
           </div>
           
-          <p className="text-sm text-slate-300 mb-4">{t(rrsp.tierRecommendation)}</p>
+          <p className="text-sm text-[#2B2E36] mb-4">{t(rrsp.tierRecommendation)}</p>
 
           {/* Visual Progress Bar and Matching stats if they have actual RRSP */}
           {hasActualRRSP && (
-            <div className="mb-5 p-4 rounded-xl bg-slate-800/60 border border-slate-700/50 space-y-3">
-              <h5 className="text-xs font-bold text-slate-500 uppercase tracking-wider">{t('opt.rrspStatus')}</h5>
+            <div className="mb-5 p-4 rounded-xl bg-white border border-[#E3E3EA] space-y-3">
+              <h5 className="text-xs font-bold text-[#5E6270] uppercase tracking-wider">{t('opt.rrspStatus')}</h5>
               
               <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 text-sm">
                 <div>
-                  <span className="text-slate-500 block text-xs">{t('opt.myPayroll')}</span>
-                  <span className="font-semibold text-white">{formatCurrency(annualRRSPActual)}{t('opt.perYr')}</span>
+                  <span className="text-[#5E6270] block text-xs">{t('opt.myPayroll')}</span>
+                  <span className="font-semibold text-[#15171C]">{formatCurrency(annualRRSPActual)}{t('opt.perYr')}</span>
                 </div>
                 {annualEmployerMatchActual > 0 && (
                   <div>
-                    <span className="text-green-400 block text-xs flex items-center gap-1">
-                      <span className="w-1.5 h-1.5 bg-green-500 rounded-full animate-pulse" />
+                    <span className="text-red-600 block text-xs flex items-center gap-1">
+                      <span className="w-1.5 h-1.5 bg-red-500 rounded-full animate-pulse" />
                       {t('opt.employerMatching')}
                     </span>
-                    <span className="font-semibold text-green-400">+{formatCurrency(annualEmployerMatchActual)}{t('opt.perYr')}</span>
+                    <span className="font-semibold text-red-600">+{formatCurrency(annualEmployerMatchActual)}{t('opt.perYr')}</span>
                   </div>
                 )}
                 <div>
-                  <span className="text-slate-500 block text-xs">{t('opt.optimumSpace')}</span>
-                  <span className="font-semibold text-red-400">{formatCurrency(remainingRRSPOptimum)} {t('opt.left')}</span>
+                  <span className="text-[#5E6270] block text-xs">{t('opt.optimumSpace')}</span>
+                  <span className="font-semibold text-red-600">{formatCurrency(remainingRRSPOptimum)} {t('opt.left')}</span>
                 </div>
               </div>
 
               {/* Progress Bar */}
-              <div className="w-full h-2 bg-slate-700 rounded-full overflow-hidden flex">
+              <div className="w-full h-2 bg-[#E3E3EA] rounded-full overflow-hidden flex">
                 <div 
                   className="bg-red-500 h-full" 
                   style={{ width: `${Math.min(100, (annualRRSPActual / rrsp.recommendedAmount) * 100)}%` }} 
@@ -1179,14 +1179,14 @@ const TaxOptimizationPanel: React.FC<TaxOptimizationPanelProps> = ({
                 />
                 {annualEmployerMatchActual > 0 && (
                   <div 
-                    className="bg-green-500 h-full border-l border-slate-800" 
+                    className="bg-red-300 h-full border-l border-[#E3E3EA]" 
                     style={{ width: `${Math.min(100 - (annualRRSPActual / rrsp.recommendedAmount) * 100, (annualEmployerMatchActual / rrsp.recommendedAmount) * 100)}%` }} 
                     title={`Employer Match: ${((annualEmployerMatchActual / rrsp.recommendedAmount) * 100).toFixed(0)}%`}
                   />
                 )}
               </div>
               
-              <p className="text-[11px] text-slate-500 italic">
+              <p className="text-[11px] text-[#5E6270] italic">
                 {annualEmployerMatchActual > 0
                   ? t('opt.matchNote')
                   : t('opt.noMatchNote')
@@ -1202,14 +1202,14 @@ const TaxOptimizationPanel: React.FC<TaxOptimizationPanelProps> = ({
             <MetricBox label={t('opt.netCost')} value={formatCurrency(rrsp.effectiveCost)} />
           </div>
           {rrsp.pensionAdjustment > 0 && (
-            <p className="text-xs text-slate-400 mb-4">{t('opt.paNote').replace('{pa}', formatCurrency(rrsp.pensionAdjustment))}</p>
+            <p className="text-xs text-[#5E6270] mb-4">{t('opt.paNote').replace('{pa}', formatCurrency(rrsp.pensionAdjustment))}</p>
           )}
 
           {showScenarios && (
             <div className="mt-4 overflow-x-auto">
               <table className="w-full text-sm">
                 <thead>
-                  <tr className="text-slate-500 border-b border-slate-700">
+                  <tr className="text-[#5E6270] border-b border-[#E3E3EA]">
                     <th className="text-left py-2">{t('opt.contribution')}</th>
                     <th className="text-right py-2">{t('opt.taxRefund')}</th>
                     <th className="text-right py-2">{t('opt.netCost')}</th>
@@ -1220,17 +1220,17 @@ const TaxOptimizationPanel: React.FC<TaxOptimizationPanelProps> = ({
                   {rrspScenarios.map((scenario, idx) => (
                     <tr 
                       key={idx} 
-                      className={`border-b border-slate-800 ${scenario.amount === rrsp.recommendedAmount ? 'bg-red-900/20' : ''}`}
+                      className={`border-b border-[#E3E3EA] ${scenario.amount === rrsp.recommendedAmount ? 'bg-red-50' : ''}`}
                     >
-                      <td className="py-2 text-slate-300">
+                      <td className="py-2 text-[#2B2E36]">
                         {formatCurrency(scenario.amount)}
                         {scenario.amount === rrsp.recommendedAmount && (
-                          <span className="ml-2 text-xs text-red-400">{t('opt.recommended')}</span>
+                          <span className="ml-2 text-xs text-red-600">{t('opt.recommended')}</span>
                         )}
                       </td>
-                      <td className="py-2 text-right text-green-400">{formatCurrency(scenario.taxSavings)}</td>
-                      <td className="py-2 text-right text-slate-500">{formatCurrency(scenario.effectiveCost)}</td>
-                      <td className="py-2 text-right text-slate-500">{scenario.refundRate.toFixed(1)}%</td>
+                      <td className="py-2 text-right text-red-600">{formatCurrency(scenario.taxSavings)}</td>
+                      <td className="py-2 text-right text-[#5E6270]">{formatCurrency(scenario.effectiveCost)}</td>
+                      <td className="py-2 text-right text-[#5E6270]">{scenario.refundRate.toFixed(1)}%</td>
                     </tr>
                   ))}
                 </tbody>
@@ -1242,56 +1242,56 @@ const TaxOptimizationPanel: React.FC<TaxOptimizationPanelProps> = ({
 
       {/* TFSA & FHSA */}
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-        <div className="bg-slate-900/60 p-5 rounded-xl border border-slate-700/50">
-          <h4 className="text-md font-bold text-white mb-3 flex items-center gap-2">
-            <span className="w-6 h-6 rounded bg-blue-600 flex items-center justify-center text-xs">2</span>
+        <div className="bg-[#F7F7FA] p-5 rounded-xl border border-[#E3E3EA]">
+          <h4 className="font-display text-lg font-semibold text-[#15171C] mb-3 flex items-center gap-2">
+            <span className="mt-0.5 w-6 h-6 shrink-0 rounded-md bg-[#2F5DA8] text-white flex items-center justify-center text-xs">2</span>
             {t('opt.tfsaTitle')}
           </h4>
           <div className="space-y-2 text-sm">
             <div className="flex justify-between">
-              <span className="text-slate-500">{t('opt.tfsaRoom')}</span>
-              <span className="text-white font-semibold">{formatCurrency(tfsa.annualLimit)}</span>
+              <span className="text-[#5E6270]">{t('opt.tfsaRoom')}</span>
+              <span className="text-[#15171C] font-semibold">{formatCurrency(tfsa.annualLimit)}</span>
             </div>
             <div className="flex justify-between">
-              <span className="text-slate-500">{t('opt.recommendedContribution')}</span>
-              <span className="text-blue-400 font-semibold">{formatCurrency(tfsa.recommendedAmount)}</span>
+              <span className="text-[#5E6270]">{t('opt.recommendedContribution')}</span>
+              <span className="text-[#2F5DA8] font-semibold">{formatCurrency(tfsa.recommendedAmount)}</span>
             </div>
             <div className="flex justify-between">
-              <span className="text-slate-500">{t('opt.lifetimeRoom')}</span>
-              <span className="text-slate-300">{formatCurrency(tfsa.lifetimeRoom)}</span>
+              <span className="text-[#5E6270]">{t('opt.lifetimeRoom')}</span>
+              <span className="text-[#2B2E36]">{formatCurrency(tfsa.lifetimeRoom)}</span>
             </div>
           </div>
-          <p className="text-xs text-slate-500 mt-3">
+          <p className="text-xs text-[#5E6270] mt-3">
             {t('opt.tfsaNote')}
           </p>
         </div>
 
-        <div className="bg-slate-900/60 p-5 rounded-xl border border-slate-700/50">
-          <h4 className="text-md font-bold text-white mb-3 flex items-center gap-2">
-            <span className="w-6 h-6 rounded bg-green-700 flex items-center justify-center text-xs">3</span>
+        <div className="bg-[#F7F7FA] p-5 rounded-xl border border-[#E3E3EA]">
+          <h4 className="font-display text-lg font-semibold text-[#15171C] mb-3 flex items-center gap-2">
+            <span className="mt-0.5 w-6 h-6 shrink-0 rounded-md bg-[#00897A] text-white flex items-center justify-center text-xs">3</span>
             {t('opt.fhsaTitle')}
           </h4>
           <div className="space-y-2 text-sm">
             <div className="flex justify-between">
-              <span className="text-slate-500">{t('opt.annualLimit')}</span>
-              <span className="text-white font-semibold">{formatCurrency(fhsa.annualLimit)}</span>
+              <span className="text-[#5E6270]">{t('opt.annualLimit')}</span>
+              <span className="text-[#15171C] font-semibold">{formatCurrency(fhsa.annualLimit)}</span>
             </div>
             <div className="flex justify-between">
-              <span className="text-slate-500">{t('opt.recommendedContribution')}</span>
-              <span className="text-green-400 font-semibold">{formatCurrency(fhsa.recommendedAmount)}</span>
+              <span className="text-[#5E6270]">{t('opt.recommendedContribution')}</span>
+              <span className="text-red-600 font-semibold">{formatCurrency(fhsa.recommendedAmount)}</span>
             </div>
             <div className="flex justify-between">
-              <span className="text-slate-500">{t('opt.lifetimeLimit')}</span>
-              <span className="text-slate-300">{formatCurrency(fhsa.lifetimeLimit)}</span>
+              <span className="text-[#5E6270]">{t('opt.lifetimeLimit')}</span>
+              <span className="text-[#2B2E36]">{formatCurrency(fhsa.lifetimeLimit)}</span>
             </div>
           </div>
-          <p className="text-xs text-slate-500 mt-3">
+          <p className="text-xs text-[#5E6270] mt-3">
             {t('opt.fhsaNote')}
           </p>
         </div>
       </div>
 
-      <p className="text-xs text-slate-500 text-center">
+      <p className="text-xs text-[#5E6270] text-center">
         {t('opt.disclaimer')}
       </p>
     </div>
@@ -1307,12 +1307,12 @@ const TaxCard: React.FC<{
   isPercentage?: boolean;
   accent?: 'green' | 'red';
 }> = ({ title, amount, subtitle, highlight, isPercentage, accent }) => (
-  <div className={`p-4 rounded-xl ${highlight ? 'bg-red-600' : 'bg-slate-900/60 border border-slate-700/50'}`}>
-    <p className={`text-xs mb-1 ${highlight ? 'text-red-100' : 'text-slate-500'}`}>{title}</p>
-    <p className={`text-2xl font-bold ${accent === 'green' ? 'text-green-400' : highlight ? 'text-white' : 'text-slate-100'}`}>
+  <div className={`relative overflow-hidden rounded-2xl p-4 sm:p-5 ${highlight ? 'card-brand-3d text-white shadow-[0_10px_24px_-14px_rgba(158,11,16,0.7)]' : 'bg-white border border-[#E3E3EA]'}`}>
+    <p className={`text-[11px] font-semibold uppercase tracking-[0.12em] mb-2 ${highlight ? 'text-red-100' : 'text-[#5E6270]'}`}>{title}</p>
+    <p className={`font-display text-[1.75rem] leading-none font-semibold tabular-nums ${accent === 'green' ? 'text-red-600' : highlight ? 'text-white' : 'text-[#15171C]'}`}>
       {isPercentage ? `${amount.toFixed(1)}%` : formatCurrency(amount)}
     </p>
-    <p className={`text-xs mt-1 ${highlight ? 'text-red-200' : 'text-slate-500'}`}>{subtitle}</p>
+    <p className={`text-xs mt-2 ${highlight ? 'text-red-100' : 'text-[#5E6270]'}`}>{subtitle}</p>
   </div>
 );
 
@@ -1321,33 +1321,33 @@ const MetricBox: React.FC<{
   value: string;
   accent?: boolean;
 }> = ({ label, value, accent }) => (
-  <div className="bg-slate-800 p-3 rounded-lg text-center">
-    <p className="text-xs text-slate-500 mb-1">{label}</p>
-    <p className={`text-sm font-bold ${accent ? 'text-green-400' : 'text-slate-200'}`}>{value}</p>
+  <div className="rounded-xl border border-[#E3E3EA] bg-white px-3 py-3">
+    <p className="text-[11px] text-[#5E6270] mb-1">{label}</p>
+    <p className={`text-base font-semibold tabular-nums ${accent ? 'text-red-600' : 'text-[#15171C]'}`}>{value}</p>
   </div>
 );
 
 const StrategyItem: React.FC<{ strategy: import('../utils/taxOptimizer').TaxStrategy }> = ({ strategy }) => (
   <div className="border-l-2 border-red-500 pl-4">
     <div className="flex items-center justify-between mb-1">
-      <h5 className="text-sm font-semibold text-slate-200">{strategy.name}</h5>
+      <h5 className="text-sm font-semibold text-[#15171C]">{strategy.name}</h5>
       <span className={`text-xs px-2 py-0.5 rounded ${
-        strategy.effort === 'low' ? 'bg-green-900/50 text-green-400' :
-        strategy.effort === 'medium' ? 'bg-yellow-900/50 text-yellow-400' :
-        'bg-red-900/50 text-red-400'
+        strategy.effort === 'low' ? 'bg-red-50 text-red-600' :
+        strategy.effort === 'medium' ? 'bg-amber-50 text-[#8A5A00]' :
+        'bg-red-50 text-red-600'
       }`}>
         {strategy.effort === 'low' ? 'Easy' : strategy.effort === 'medium' ? 'Moderate' : 'Complex'}
       </span>
     </div>
-    <p className="text-xs text-slate-500 mb-2">{strategy.description}</p>
+    <p className="text-xs text-[#5E6270] mb-2">{strategy.description}</p>
     <div className="flex items-center gap-4 text-xs">
-      <span className="text-green-400">Est. Savings: {formatCurrency(strategy.estimatedSavings)}</span>
-      <span className="text-slate-500">Max: {formatCurrency(strategy.maxBenefit)}</span>
+      <span className="text-red-600">Est. Savings: {formatCurrency(strategy.estimatedSavings)}</span>
+      <span className="text-[#5E6270]">Max: {formatCurrency(strategy.maxBenefit)}</span>
     </div>
     <ul className="mt-2 space-y-1">
       {strategy.actionItems.slice(0, 2).map((item, idx) => (
-        <li key={idx} className="text-xs text-slate-500 flex items-start gap-2">
-          <span className="text-slate-600">→</span>
+        <li key={idx} className="text-xs text-[#5E6270] flex items-start gap-2">
+          <span className="text-[#7C818D]">→</span>
           {item}
         </li>
       ))}
