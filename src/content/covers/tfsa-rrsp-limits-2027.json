@@ -1,0 +1,33 @@
+{
+ "head": [
+  [
+   "TFSA room hits ",
+   "$7,500",
+   ""
+  ],
+  [
+   "RRSP jumps to $35,390."
+  ]
+ ],
+ "sub": "RRSP confirmed by the CRA. TFSA expected — official in November 2026.",
+ "pill": "Extra $1,580 RRSP room saves $284–$457 in tax, by province",
+ "label": "RRSP & TFSA LIMITS · 2027 · CANADA REVENUE AGENCY",
+ "tiles": [
+  [
+   "$35,390 RRSP",
+   "Confirmed Oct 30, 2025 — up $1,580"
+  ],
+  [
+   "$7,500 TFSA (expected)",
+   "Up from $7,000 — not yet official"
+  ],
+  [
+   "18%–29% range",
+   "Effective tax rate on the extra RRSP room"
+  ],
+  [
+   "$8,000 FHSA",
+   "Unchanged — fixed, not indexed"
+  ]
+ ]
+}

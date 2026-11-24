@@ -48,7 +48,7 @@ export default function RelocationReport({
         <div className="flex items-center gap-3">
           <img src="/logo.png" alt="" className="h-9 w-9 rounded-lg" />
           <span className="text-lg font-bold">
-            CanPay <span className="font-normal text-red-600">Insights</span>
+            <span className="font-brand font-extrabold tracking-tight">CanPay</span> <span className="font-brand font-normal tracking-tight text-red-600">Insights</span>
           </span>
           <span className="ml-auto text-xs font-bold uppercase tracking-[0.2em] text-slate-500">
             Province Move Report · {r.taxYear}

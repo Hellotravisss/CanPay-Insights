@@ -16,7 +16,7 @@ export function WageHeader() {
             className="h-9 w-9 rounded-lg object-contain shadow-lg shadow-red-200"
           />
           <span className="text-lg font-bold tracking-tight text-slate-800">
-            CanPay <span className="font-light text-red-600">Insights</span>
+            <span className="font-brand font-extrabold tracking-tight">CanPay</span> <span className="font-brand font-normal tracking-tight text-red-600">Insights</span>
           </span>
         </a>
         <nav className="flex items-center gap-2 text-sm">

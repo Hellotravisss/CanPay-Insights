@@ -1,0 +1,33 @@
+{
+ "head": [
+  [
+   "Saskatchewan Wage"
+  ],
+  [
+   "Rises to ",
+   "$15.70",
+   ""
+  ]
+ ],
+ "sub": "Minimum wage +35¢ on October 1, 2026 — still #2-lowest in Canada.",
+ "pill": "$15.35 → $15.70 / hour",
+ "label": "Saskatchewan minimum wage · full-time impact",
+ "tiles": [
+  [
+   "Effective October 1, 2026",
+   "CPI + average wage formula"
+  ],
+  [
+   "+$508 take-home / year",
+   "Full-time, after tax, CPP & EI"
+  ],
+  [
+   "+$20 / biweekly cheque",
+   "2,080 hours a year"
+  ],
+  [
+   "2nd-lowest in Canada",
+   "Ahead only of Alberta's $15.00"
+  ]
+ ]
+}

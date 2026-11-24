@@ -270,7 +270,7 @@ export default function Globe({
       ctx.fill();
       ctx.beginPath();
       ctx.arc(p[0], p[1], r, 0, Math.PI * 2);
-      ctx.fillStyle = '#ef4444';
+      ctx.fillStyle = '#D42422';
       ctx.fill();
       ctx.lineWidth = 0.9;
       ctx.strokeStyle = '#ffffff';

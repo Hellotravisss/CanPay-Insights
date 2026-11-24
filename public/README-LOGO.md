@@ -1,45 +1,21 @@
-# CanPay Insights — logo 规则
+# CanPay Insights — logo 规则（2026-11 新标识）
 
 ## 唯一真源
 
-**`public/logo.png`** —— 这是唯一正确的 logo(红底 + 有厚度切面的 Inukshuk 石板)。
-红色底上用它的反色版 **`public/logo_reverse.png`**(2026-04-25 入库;省份指南封面、结果卡片在用),同样只许原样嵌入。
-PDF 里用的是同一张图,经 `lib/logoBase64.ts` 内嵌。
+**`public/logo.png`** —— 唯一正确的 logo：红色圆角方块上的珍珠白海狸，外面绕一圈圈「回声线」（纸币雕版纹）。
+`public/logo_reverse.png` 自 2026-11 起与它是同一张图，只为兼容旧引用而保留。PDF 里经 `lib/logoBase64.ts` 内嵌同一张图。
 
-## 🔴 铁律:永远不要手画这个 mark
+字标：**Bricolage Grotesque**，「CanPay」用 ExtraBold、「Insights」用 Regular（2026-11-24 定，第 07 版）。
+网页里写成文字：`font-brand font-extrabold` + `font-brand font-normal text-red-600`；图片里用 `lib/brand/wordmark.json` 的曲线路径。
 
-不要在 SVG / JSX 里用 `<path>`、`<rect>` 去「重画」Inukshuk。
+## 🔴 铁律：永远不要手画这个 mark
 
-历史上这么干过,后果是**错误 logo 反复上线**:曾经有人把当年抬头的内联 SVG
-提取成 `logo-inukshuk.svg` 和 `logo-full.svg` 并写进文档说这是「logo 文件」,
-于是后续每做一个新东西(文章封面、加载动画、favicon 生成器)都去拿那份**手画的赝品** ——
-细圆角条组成的简笔画,和真 logo 完全不是一个东西。那三个文件已于 2026-08-23 删除;
-08-27 一次无关提交又把 `logo-inukshuk.svg`、`logo-full.svg` 带了回来,2026-11-23 再次删除。
+不要在 SVG / JSX 里用 `<path>`、`<rect>` 去「重画」海狸或旧的 Inukshuk。只许原样使用 `public/logo.png`。
 
-## 怎么用
+## 文章封面
 
-| 场景 | 做法 |
-|------|------|
-| 网页 / JSX | `<img src="/logo.png" />` |
-| PDF(pdf-lib) | `LOGO_PNG_BASE64`(`lib/logoBase64.ts`) |
-| 邮件 HTML | `<img src="https://canpayinsights.ca/logo.png">` |
-| SVG 封面(必须自包含) | `<image href="data:image/png;base64,…">` 内嵌 96px 版本,**不要** `<path>` |
-| favicon / app icon | 已生成好,别再重做:`favicon-*.png`、`apple-touch-icon.png`、`android-chrome-*.png` |
+一律用 `scripts/brandCovers.mjs` 生成（入口 `npx tsx scripts/genAllCovers.ts`）：
+- 新闻数据卡：写 `src/content/covers/<slug>.json`，再 `node scripts/brandCovers.mjs news <slug>`；
+- 省份指南：引擎数字自动生成；其余文章：标题封面。
 
-SVG 被 `<img>` 加载时外部引用会被浏览器拦掉,所以封面 SVG 必须内嵌 base64,
-不能写 `href="/logo.png"`。96px 的 PNG 约 4.6 KB,够用且不占地方。
-
-## 文章封面:不要手写,调脚本
-
-```bash
-node scripts/coverLogo.mjs     # 输出可直接粘贴的 <!-- brand --> 组
-```
-
-`scripts/coverLogo.mjs` 是封面 logo 的**唯一出处**。别再「从现有封面照抄 brand 组」——
-正是这条捷径让赝品在三次事故里传播到八张封面上。
-
-## 构建关卡
-
-`npm run audit:logo`(已挂在 `prebuild` 上,和数字审计同级)。任何 `public/blog/*.svg`
-只要带手画 mark、没内嵌真 logo,或内嵌的图和 `logo.png` / `logo_reverse.png` 逐像素对不上,**构建直接失败**。散文规则拦不住,这个拦得住。
-自动发文机器人的提示词也已改成先跑这个关卡。
+`npm run audit:logo` 逐张检查封面左上角（`LOGO_BOX`）是不是真的 `public/logo.png`，不是就构建失败。

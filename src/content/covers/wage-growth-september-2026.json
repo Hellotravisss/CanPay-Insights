@@ -1,0 +1,35 @@
+{
+ "head": [
+  [
+   "Wages up ",
+   "2.3%",
+   " —"
+  ],
+  [
+   "Canada lost ",
+   "68,000 jobs",
+   "."
+  ]
+ ],
+ "sub": "September 2026 Labour Force Survey, released October 9, 2026.",
+ "pill": "Unemployment climbs to 6.5% — back to its January 2026 level",
+ "label": "SEPTEMBER 2026 LFS · AFTER-TAX FIGURES · CANPAY INSIGHTS TAX ENGINE",
+ "tiles": [
+  [
+   "$37.64/hr average wage",
+   "Up $0.86, or 2.3%, year-over-year"
+  ],
+  [
+   "68,000 jobs lost",
+   "Split -35,000 full-time, -33,000 part-time"
+  ],
+  [
+   "6.5% unemployment",
+   "Up from a two-year low of 6.4% in August"
+  ],
+  [
+   "$530–$580 real gap",
+   "After-tax, vs. 3.0% inflation (Aug. CPI)"
+  ]
+ ]
+}

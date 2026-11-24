@@ -114,8 +114,8 @@ export default function PayCurve({ records }: { records: CalculationRecord[] }) 
       <svg viewBox={`0 0 ${W} ${H}`} className="w-full">
         <defs>
           <linearGradient id="payFill" x1="0" y1="0" x2="0" y2="1">
-            <stop offset="0%" stopColor="#dc2626" stopOpacity="0.18" />
-            <stop offset="100%" stopColor="#dc2626" stopOpacity="0" />
+            <stop offset="0%" stopColor="#C8161A" stopOpacity="0.18" />
+            <stop offset="100%" stopColor="#C8161A" stopOpacity="0" />
           </linearGradient>
         </defs>
 
@@ -123,7 +123,7 @@ export default function PayCurve({ records }: { records: CalculationRecord[] }) 
         <polyline
           points={line}
           fill="none"
-          stroke="#dc2626"
+          stroke="#C8161A"
           strokeWidth="2.5"
           strokeLinejoin="round"
           strokeLinecap="round"
@@ -131,7 +131,7 @@ export default function PayCurve({ records }: { records: CalculationRecord[] }) 
 
         {xy.map((p, i) => (
           <g key={i}>
-            <circle cx={p.x} cy={p.y} r="4.5" fill="#fff" stroke="#dc2626" strokeWidth="2.5" />
+            <circle cx={p.x} cy={p.y} r="4.5" fill="#fff" stroke="#C8161A" strokeWidth="2.5" />
             {(i === 0 || i === xy.length - 1) && (
               <text
                 x={Math.min(Math.max(p.x, 30), W - 30)}

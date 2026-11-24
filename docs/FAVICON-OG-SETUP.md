@@ -1,3 +1,7 @@
+> **2026-11-24：本文档已过时。** favicon、`og-image.png`、PWA 图标都已换成新标识，按品牌套件出图（`favicon.svg`、`favicon-16/32`、
+> `apple-touch-icon`、`android-chrome-192/512` 和 `-maskable-512`）。文中提到的 `og-image-generator.html`、`favicon-generator.html` 已删除。
+> logo 和封面的规则见 `public/README-LOGO.md`。
+
 # 🎨 Favicon 和 OG 图片设置指南
 
 ## 📋 **概述**

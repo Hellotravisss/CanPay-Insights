@@ -28,7 +28,7 @@ export default function OfferReport({ report: r, email = null, sessionId = '', p
       <header className="border-b-4 border-red-600 pb-5">
         <div className="flex items-center gap-3">
           <img src="/logo.png" alt="" className="h-9 w-9 rounded-lg" />
-          <span className="text-lg font-bold">CanPay <span className="font-normal text-red-600">Insights</span></span>
+          <span className="text-lg font-bold"><span className="font-brand font-extrabold tracking-tight">CanPay</span> <span className="font-brand font-normal tracking-tight text-red-600">Insights</span></span>
           <span className="ml-auto text-xs font-bold uppercase tracking-[0.2em] text-slate-500">Offer Comparison · {r.taxYear}</span>
         </div>
         <Title className="mt-6 text-3xl font-extrabold tracking-tight text-slate-900 sm:text-4xl">

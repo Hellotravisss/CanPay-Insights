@@ -19,7 +19,7 @@ const foot = (s: PayBehaviour) =>
 const big = (s: PayBehaviour, title: string, lead: string[], figure: string, tail: string, notes: string[]) =>
   head(title) +
   lead.map((t, i) => `<text x="60" y="${95 + i * 50}" ${F} font-size="40" fill="#e2e8f0">${t}</text>`).join('') +
-  `<text x="60" y="${lead.length > 1 ? 355 : 330}" ${F} font-size="200" font-weight="700" fill="#dc2626">${figure}</text>` +
+  `<text x="60" y="${lead.length > 1 ? 355 : 330}" ${F} font-size="200" font-weight="700" fill="#C8161A">${figure}</text>` +
   `<text x="60" y="${lead.length > 1 ? 430 : 420}" ${F} font-size="40" fill="#e2e8f0">${tail}</text>` +
   notes.map((t, i) => `<text x="60" y="${488 + i * 36}" ${F} font-size="${i ? 22 : 24}" fill="#94a3b8">${t}</text>`).join('') +
   foot(s);
@@ -51,7 +51,7 @@ export function chart(name: string, s: PayBehaviour): string | null {
     const max = Math.max(...s.shifts.edited, 1);
     const bars = s.shifts.edited.map((n, h) => {
       const x = 60 + h * 45, hgt = Math.round((n / max) * 270);
-      return `<rect x="${x}" y="${470 - hgt}" width="34" height="${hgt}" fill="${h >= 18 || h < 6 ? '#dc2626' : '#64748b'}"/>` +
+      return `<rect x="${x}" y="${470 - hgt}" width="34" height="${hgt}" fill="${h >= 18 || h < 6 ? '#C8161A' : '#64748b'}"/>` +
         `<text x="${x + 17}" y="500" ${F} font-size="16" fill="#94a3b8" text-anchor="middle">${h}</text>`;
     }).join('');
     return head('When shifts start') +
@@ -70,7 +70,7 @@ export function chart(name: string, s: PayBehaviour): string | null {
       `<text x="60" y="145" ${F} font-size="40" fill="#e2e8f0">${s.sample.caShare}% of them from inside Canada.</text>` +
       d.map((x, i) => {
         const hgt = Math.round((x.n / max) * 300);
-        return `<rect x="${60 + i * bw}" y="${490 - hgt}" width="${Math.max(2, bw - 2)}" height="${hgt}" fill="#dc2626"/>`;
+        return `<rect x="${60 + i * bw}" y="${490 - hgt}" width="${Math.max(2, bw - 2)}" height="${hgt}" fill="#C8161A"/>`;
       }).join('') +
       `<text x="60" y="525" ${F} font-size="22" fill="#94a3b8">${d[0]?.k ?? ''}</text>` +
       `<text x="1140" y="525" ${F} font-size="22" fill="#94a3b8" text-anchor="end">${d[d.length - 1]?.k ?? ''}</text>` +

@@ -22,11 +22,11 @@ export async function POST(request: Request) {
       html: `<div style="font-family:-apple-system,Helvetica,Arial,sans-serif;max-width:520px;margin:0 auto;color:#0f172a">
   <table role="presentation" style="margin:28px 0 6px"><tr>
     <td><img src="https://canpayinsights.ca/logo.png" width="36" height="36" alt="CanPay Insights" style="border-radius:8px;display:block"></td>
-    <td style="padding-left:10px;font-size:17px;font-weight:800">CanPay <span style="color:#dc2626">Insights</span></td>
+    <td style="padding-left:10px;font-size:17px;font-weight:800">CanPay <span style="color:#C8161A">Insights</span></td>
   </tr></table>
   <h1 style="font-size:20px;margin:14px 0 6px">Your sign-in link</h1>
   <p style="color:#475569;font-size:14px;margin:0 0 16px">No password to remember — this link signs you in.</p>
-  <p><a href="${link}" style="display:inline-block;background:#dc2626;color:#fff;text-decoration:none;font-weight:700;padding:12px 20px;border-radius:10px">Sign in to CanPay Insights</a></p>
+  <p><a href="${link}" style="display:inline-block;background:#C8161A;color:#fff;text-decoration:none;font-weight:700;padding:12px 20px;border-radius:10px">Sign in to CanPay Insights</a></p>
   <p style="color:#64748b;font-size:13px">The link works once and expires in 15 minutes. If you did not request it, you can ignore this email.</p>
   <div style="border-top:1px solid #e2e8f0;margin-top:24px;padding-top:14px">
     <p style="color:#64748b;font-size:12.5px;line-height:1.6;margin:0">

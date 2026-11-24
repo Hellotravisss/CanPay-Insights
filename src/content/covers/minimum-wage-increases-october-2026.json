@@ -1,0 +1,35 @@
+{
+ "head": [
+  [
+   "",
+   "4",
+   " Provinces Raise"
+  ],
+  [
+   "Minimum Wage ",
+   "Oct. 1",
+   ""
+  ]
+ ],
+ "sub": "Ontario, Nova Scotia, PEI & Manitoba — new rates and real take-home.",
+ "pill": "Effective October 1, 2026",
+ "label": "New hourly rate · extra take-home per month",
+ "tiles": [
+  [
+   "Ontario  $17.95/hr",
+   "+$45 more take-home / month"
+  ],
+  [
+   "Nova Scotia  $17.00/hr",
+   "+$28 more take-home / month"
+  ],
+  [
+   "PEI  $17.30/hr",
+   "+$35 more take-home / month"
+  ],
+  [
+   "Manitoba  $16.40/hr",
+   "+$48 more take-home / month"
+  ]
+ ]
+}

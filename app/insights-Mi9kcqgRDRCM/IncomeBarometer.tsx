@@ -61,10 +61,10 @@ export default function IncomeBarometer({ data, zh }: { data: BarometerData; zh:
       {spark ? (
         <svg viewBox={`0 0 ${spark.W} ${spark.H}`} className="mb-4 block w-full" role="img" aria-label={T('Estimated mean income over time', '收入估计均值随时间变化')}>
           <line x1="12" x2={spark.W - 12} y1={spark.H - 12} y2={spark.H - 12} stroke="#e2e8f0" />
-          <polyline fill="none" stroke="#dc2626" strokeWidth="2" strokeLinejoin="round" points={spark.pts.map((p) => `${p.x.toFixed(1)},${p.y.toFixed(1)}`).join(' ')} />
+          <polyline fill="none" stroke="#C8161A" strokeWidth="2" strokeLinejoin="round" points={spark.pts.map((p) => `${p.x.toFixed(1)},${p.y.toFixed(1)}`).join(' ')} />
           {spark.pts.map((p) => (
             <g key={p.r.k}>
-              <circle cx={p.x} cy={p.y} r={p.r.thin ? 2.5 : 3.5} fill={p.r.thin ? '#fff' : '#dc2626'} stroke="#dc2626" strokeWidth="1.5">
+              <circle cx={p.x} cy={p.y} r={p.r.thin ? 2.5 : 3.5} fill={p.r.thin ? '#fff' : '#C8161A'} stroke="#C8161A" strokeWidth="1.5">
                 <title>{p.r.k} · {money(p.r.mean_est)} · n={p.r.n}</title>
               </circle>
               <text x={p.x} y={spark.H - 1} fontSize="9" textAnchor="middle" fill="#94a3b8">{p.r.k}</text>

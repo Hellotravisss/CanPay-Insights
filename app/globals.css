@@ -1,11 +1,27 @@
+/* Brand fonts (2026-11 identity), self-hosted, OFL — public/fonts. Instrument Sans for everything you read or compare;
+   Fraunces for headings and the one big number. */
+@font-face { font-family: "Fraunces"; src: url("/fonts/fraunces-latin-400-normal.woff2") format("woff2"); font-weight: 400; font-display: swap; }
+@font-face { font-family: "Fraunces"; src: url("/fonts/fraunces-latin-600-normal.woff2") format("woff2"); font-weight: 600; font-display: swap; }
+@font-face { font-family: "Fraunces"; src: url("/fonts/fraunces-latin-700-normal.woff2") format("woff2"); font-weight: 700; font-display: swap; }
+/* The wordmark (version 07, Travis 2026-11-24): Bricolage Grotesque ExtraBold "CanPay" + Regular "Insights". */
+@font-face { font-family: "Bricolage Grotesque"; src: url("/fonts/bricolage-grotesque-latin-800-normal.woff2") format("woff2"); font-weight: 800; font-display: swap; }
+@font-face { font-family: "Bricolage Grotesque"; src: url("/fonts/bricolage-grotesque-latin-400-normal.woff2") format("woff2"); font-weight: 400; font-display: swap; }
+@font-face { font-family: "Instrument Sans"; src: url("/fonts/instrument-sans-latin-400-normal.woff2") format("woff2"); font-weight: 400; font-display: swap; }
+@font-face { font-family: "Instrument Sans"; src: url("/fonts/instrument-sans-latin-500-normal.woff2") format("woff2"); font-weight: 500; font-display: swap; }
+@font-face { font-family: "Instrument Sans"; src: url("/fonts/instrument-sans-latin-600-normal.woff2") format("woff2"); font-weight: 600; font-display: swap; }
+@font-face { font-family: "Instrument Sans"; src: url("/fonts/instrument-sans-latin-700-normal.woff2") format("woff2"); font-weight: 700; font-display: swap; }
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 body {
-  font-family: 'Inter', sans-serif;
-  background-color: #f8fafc;
+  font-family: "Instrument Sans", "PingFang SC", "Noto Sans SC", "Microsoft YaHei", sans-serif;
+  background-color: #F4F4F8; /* pearl, from the logo's fur */
 }
+/* Headings speak in the brand voice; numbers in tables stay in Instrument Sans with tabular figures. */
+h1, h2 { font-family: "Fraunces", Georgia, "Noto Serif SC", "Songti SC", serif; font-weight: 600; letter-spacing: -0.015em; }
+:lang(zh) h1, :lang(zh) h2 { letter-spacing: 0; }
 
 /*
  * Pay Insights material (from CanPay, 2026-11-03). Red things are solid and lit
@@ -14,10 +30,10 @@ body {
  * Canonical copy: insights-kit/components/material.css. Keep the two in step.
  */
 :root {
-  --brand: #dc2626;          /* the button colour */
-  --brand-light: #ef4444;    /* top of the gradient */
-  --brand-dark: #c81e1e;     /* bottom of the gradient */
-  --brand-rgb: 220 38 38;    /* for the coloured shadow */
+  --brand: #C8161A;          /* the button colour: the logo wordmark's red (2026-11) */
+  --brand-light: #D42422;    /* top of the gradient: top of the icon background */
+  --brand-dark: #9E0B10;     /* bottom of the gradient */
+  --brand-rgb: 200 22 26;    /* for the coloured shadow */
 }
 
 @layer components {
@@ -48,7 +64,10 @@ body {
   /* The one big result card (net pay). Lit from the top left, lifted. */
   .card-brand-3d {
     background-color: var(--brand);
-    background-image: radial-gradient(120% 90% at 15% 0%, var(--brand-light) 0%, var(--brand) 45%, var(--brand-dark) 100%);
+    /* the icon's own background, with the banknote waves from the logo's guilloche */
+    background-image: url("/brand/waves-card.svg"), radial-gradient(130% 110% at 15% 0%, #D42422 0%, #B00B0D 50%, #74030A 100%);
+    background-size: cover, auto; background-position: right center, 0 0; background-repeat: no-repeat;
+    position: relative; overflow: hidden;
     box-shadow:
       inset 0 1px 0 rgba(255, 255, 255, 0.3),
       inset 0 -1px 0 rgba(0, 0, 0, 0.15),
@@ -200,4 +219,68 @@ div:has(> input[type="time"]),
 div:has(> input[type="date"]),
 div:has(> input[type="datetime-local"]) {
   min-width: 0;
+}
+
+
+/* ── Motion (canonical: PayFamily-brand/18-charts/pay-motion.css) ── */
+/* Pay Insights motion — small, once, calm. Pairs with pay-motion.mjs (adds .pm-in when a block first scrolls into view).
+ * Identity: one curve (decisive start, soft landing), three durations, one entrance (rise 8px + fade), stagger 30ms ≤ 500ms total.
+ * No loops, no overshoot, numbers never count up. prefers-reduced-motion: everything is simply there. */
+:root {
+  --pm-ease: cubic-bezier(0.2, 0, 0, 1);
+  --pm-quick: 150ms; --pm-std: 320ms; --pm-slow: 600ms;
+  --pm-stagger: 30ms;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  /* ── entrance: rise + fade (cards, rows, panels) ── */
+  [data-motion="rise"]:not(.pm-in), .pr:not(.pm-in) .pr-row { opacity: 0; transform: translateY(8px); }
+  [data-motion="rise"].pm-in, .pr.pm-in .pr-row {
+    transition: opacity var(--pm-std) var(--pm-ease), transform var(--pm-std) var(--pm-ease);
+    transition-delay: calc(var(--i, 0) * var(--pm-stagger));
+  }
+
+  /* ── charts (classes set by pay-charts.mjs) ── */
+  /* bars grow from the baseline; columns grow up. transform-box keeps the origin on the bar itself */
+  .pc .pm-x, .pc .pm-y { transform-box: fill-box; }
+  .pc .pm-x { transform-origin: left center; } .pc .pm-y { transform-origin: center bottom; }
+  .pc:not(.pm-in) .pm-x { transform: scaleX(0); } .pc:not(.pm-in) .pm-y { transform: scaleY(0); }
+  .pc.pm-in .pm-x, .pc.pm-in .pm-y { transition: transform var(--pm-slow) var(--pm-ease); transition-delay: calc(var(--i, 0) * var(--pm-stagger)); }
+  /* value labels, dots, tiles: arrive with their mark */
+  .pc:not(.pm-in) .pm-fade { opacity: 0; }
+  .pc.pm-in .pm-fade { transition: opacity var(--pm-std) var(--pm-ease); transition-delay: calc(var(--i, 0) * var(--pm-stagger) + 240ms); }
+  .pc .pm-pop { transform-box: fill-box; transform-origin: center; }
+  .pc:not(.pm-in) .pm-pop { opacity: 0; transform: scale(.6); }
+  .pc.pm-in .pm-pop { transition: opacity var(--pm-std) var(--pm-ease), transform var(--pm-std) var(--pm-ease); transition-delay: calc(var(--i, 0) * var(--pm-stagger)); }
+  /* lines draw left to right (path has pathLength="1") */
+  .pc:not(.pm-in) .pm-draw { stroke-dasharray: 1; stroke-dashoffset: 1; }
+  .pc.pm-in .pm-draw { stroke-dasharray: 1; stroke-dashoffset: 0; transition: stroke-dashoffset var(--pm-slow) var(--pm-ease); transition-delay: calc(var(--i, 0) * 80ms); }
+  /* donut: a mask ring sweeps clockwise once */
+  .pc:not(.pm-in) .pm-sweep { stroke-dashoffset: 1; }
+  .pc.pm-in .pm-sweep { stroke-dashoffset: 0; transition: stroke-dashoffset var(--pm-slow) var(--pm-ease); }
+  /* tiles: a wave by rank, the whole map within 500 ms */
+  .pc .pm-tile { transform-box: fill-box; transform-origin: center; }
+  .pc:not(.pm-in) .pm-tile { opacity: 0; transform: scale(.85); }
+  .pc.pm-in .pm-tile { transition: opacity var(--pm-std) var(--pm-ease), transform var(--pm-std) var(--pm-ease); transition-delay: calc(var(--i, 0) * 6ms); }
+  /* ranking bars */
+  .pr:not(.pm-in) .pr-bar i { transform: scaleX(0); }
+  .pr-bar i { transform-origin: left center; }
+  .pr.pm-in .pr-bar i { transition: transform var(--pm-slow) var(--pm-ease); transition-delay: calc(var(--i, 0) * var(--pm-stagger) + 80ms); }
+
+  /* ── net-pay card: one pass of light across the banknote lines when a new result lands ── */
+  .pay-card-brand, .card-brand-3d { isolation: isolate; }
+  .pay-card-brand.pm-foil::after, .card-brand-3d.pm-foil::after {
+    content: ""; position: absolute; inset: -20% -40%; pointer-events: none; z-index: 0;
+    background: linear-gradient(105deg, transparent 36%, rgba(255,255,255,.10) 44%, rgba(255,255,255,.26) 50%, rgba(255,255,255,.10) 56%, transparent 64%);
+    /* travels across the card, so it eases at both ends (on-screen motion), unlike entrances */
+    transform: translateX(-60%); animation: pm-foil 900ms cubic-bezier(0.4, 0, 0.2, 1) 120ms 1 both;
+  }
+  @keyframes pm-foil { to { transform: translateX(60%); } }
+  /* the figure changes by cross-fade, never by counting */
+  .pay-figure.pm-swap { animation: pm-swap 180ms var(--pm-ease) 1 both; }
+  @keyframes pm-swap { from { opacity: 0; transform: translateY(4px); } }
+
+  /* ── press & toggles ── */
+  .pay-btn { transition: transform var(--pm-quick) var(--pm-ease), filter var(--pm-quick) var(--pm-ease); }
+  .switch::after { transition: left var(--pm-quick) var(--pm-ease); } .switch { transition: background-color var(--pm-quick) var(--pm-ease); }
 }

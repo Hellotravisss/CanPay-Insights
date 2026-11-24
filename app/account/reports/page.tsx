@@ -28,7 +28,7 @@ export default function MyReports() {
       <header className="border-b-4 border-red-600 pb-4">
         <div className="flex items-center gap-3">
           <img src="/logo.png" alt="" className="h-8 w-8 rounded-lg" />
-          <span className="text-lg font-bold">CanPay <span className="font-normal text-red-600">Insights</span></span>
+          <span className="text-lg font-bold"><span className="font-brand font-extrabold tracking-tight">CanPay</span> <span className="font-brand font-normal tracking-tight text-red-600">Insights</span></span>
         </div>
         <h1 className="mt-5 text-2xl font-extrabold tracking-tight text-slate-900">My Reports</h1>
         <p className="mt-1 text-sm text-slate-500">Every report you have bought, one click away — the links never expire.</p>

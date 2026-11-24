@@ -150,7 +150,7 @@ export default function SearchPanel() {
         <div className="mb-6">
           <svg viewBox={`0 0 ${W} ${H}`} className="w-full">
             <polyline points={line('i', maxI)} fill="none" stroke="#7dd3fc" strokeWidth="2" />
-            <polyline points={line('n', maxC)} fill="none" stroke="#dc2626" strokeWidth="2" />
+            <polyline points={line('n', maxC)} fill="none" stroke="#C8161A" strokeWidth="2" />
             <text x={PAD} y={14} className="fill-slate-400 text-[10px]">
               impressions (light) · clicks (red) — last 60 days, each scaled to its own maximum
             </text>

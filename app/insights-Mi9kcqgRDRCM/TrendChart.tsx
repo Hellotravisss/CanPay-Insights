@@ -219,7 +219,7 @@ export default function TrendChart({ series }: { series: Series }) {
                 width={b.w}
                 height={Math.max(b.h, b.n > 0 ? 2 : 0)}
                 rx={Math.min(4, b.w / 2)}
-                fill={hover === i ? '#b91c1c' : '#dc2626'}
+                fill={hover === i ? '#9E0B10' : '#C8161A'}
                 opacity={b.n === 0 ? 0.15 : 1}
               />
             </g>

@@ -1,0 +1,35 @@
+{
+ "head": [
+  [
+   "CPP Rate Cut ",
+   "2027",
+   ""
+  ],
+  [
+   "Save Up to ",
+   "$142",
+   "/yr"
+  ]
+ ],
+ "sub": "Base CPP falls from 9.9% to 9.5% — what it's really worth.",
+ "pill": "Effective January 1, 2027",
+ "label": "Employee rate change · extra take-home per year",
+ "tiles": [
+  [
+   "4.95% → 4.75% base rate",
+   "−0.20 percentage points"
+  ],
+  [
+   "$70,000 salary",
+   "+$133 more take-home / year"
+  ],
+  [
+   "$74,600+ salary (max)",
+   "+$142.20 more take-home / year"
+  ],
+  [
+   "Self-employed (max)",
+   "+$284.40 more take-home / year"
+  ]
+ ]
+}
