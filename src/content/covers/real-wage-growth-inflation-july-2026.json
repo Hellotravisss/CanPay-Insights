@@ -1,0 +1,35 @@
+{
+ "head": [
+  [
+   "Wages Grew ",
+   "2.8%",
+   ""
+  ],
+  [
+   "Inflation Hit ",
+   "3.0%",
+   ""
+  ]
+ ],
+ "sub": "Real, after-tax pay fell in every province in July 2026.",
+ "pill": "StatCan LFS & CPI, July 2026",
+ "label": "National average wage, run through the CanPay tax engine",
+ "tiles": [
+  [
+   "-$316/year real gap, Ontario",
+   "After-tax raise vs. 3.0% inflation"
+  ],
+  [
+   "$37.17/hr avg wage",
+   "+$1.01 YoY, StatCan LFS July 2026"
+  ],
+  [
+   "-$292 to -$367/year",
+   "Real gap range, all provinces & territories"
+  ],
+  [
+   "Gasoline +25.7%",
+   "Drove July's CPI spike, StatCan"
+  ]
+ ]
+}

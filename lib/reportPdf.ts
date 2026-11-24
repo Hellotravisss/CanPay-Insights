@@ -16,7 +16,7 @@ import { FIRST_WEEKS, SPOUSE_JOB, SCHOOLS, WHO_HELPS } from './landingGuide';
  * WinAnsi (arrows, true minus) are avoided on purpose; "to" and "-" are used.
  */
 
-const RED = rgb(0.86, 0.15, 0.15);      // #dc2626
+const RED = rgb(0.86, 0.15, 0.15);      // #C8161A
 const INK = rgb(0.06, 0.09, 0.16);      // slate-900
 const MUTED = rgb(0.39, 0.45, 0.55);    // slate-500
 const LINE = rgb(0.89, 0.91, 0.94);     // slate-200

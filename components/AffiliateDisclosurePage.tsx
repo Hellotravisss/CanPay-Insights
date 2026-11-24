@@ -20,7 +20,7 @@ const AffiliateDisclosurePage: React.FC = () => {
               className="w-10 h-10 rounded-lg object-contain shadow-lg shadow-red-200 hover:scale-105 transition-transform cursor-pointer"
             />
             <p className="text-xl font-bold text-slate-800 tracking-tight cursor-pointer" onClick={handleBack}>
-              CanPay <span className="text-red-600 font-light">Insights</span>
+              <span className="font-brand font-extrabold tracking-tight">CanPay</span> <span className="font-brand font-normal tracking-tight text-red-600">Insights</span>
             </p>
           </div>
           <button

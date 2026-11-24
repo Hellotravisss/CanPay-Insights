@@ -1,0 +1,35 @@
+{
+ "head": [
+  [
+   "A ",
+   "$85,000",
+   " salary."
+  ],
+  [
+   "Up to ",
+   "$6,324",
+   " apart."
+  ]
+ ],
+ "sub": "Same salary, same year — what 13 provinces actually pay you.",
+ "pill": "Nunavut nets $65,779 — Nova Scotia nets just $59,455",
+ "label": "2026 TAX BRACKETS · SAME $85,000 SALARY · CANPAY INSIGHTS TAX ENGINE",
+ "tiles": [
+  [
+   "$65,779/yr — Nunavut",
+   "Lowest effective rate in Canada, 22.6%"
+  ],
+  [
+   "$59,455/yr — Nova Scotia",
+   "Highest effective rate in Canada, 30.1%"
+  ],
+  [
+   "$10,227 federal tax",
+   "Nearly identical everywhere except Quebec"
+  ],
+  [
+   "$6,324 gap",
+   "Almost entirely provincial tax, not federal"
+  ]
+ ]
+}

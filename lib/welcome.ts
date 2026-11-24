@@ -87,11 +87,11 @@ export function welcomeMessage(opts: { email: string; unsub: string; address: st
 <div style="display:none;max-height:0;overflow:hidden">Saved calculations, timesheets and reports — on the web and in the iOS app.</div>
 <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="background:#f3efe8"><tr><td align="center" style="padding:32px 14px">
   <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="max-width:540px;background:#ffffff;border:1px solid #e4ddd1">
-    <tr><td style="height:6px;background:#dc2626;font-size:0;line-height:0">&nbsp;</td></tr>
+    <tr><td style="height:6px;background:#C8161A;font-size:0;line-height:0">&nbsp;</td></tr>
     <tr><td style="padding:26px 32px 0">
       <table role="presentation" cellpadding="0" cellspacing="0"><tr>
         <td style="background:#ffffff;border-radius:9px"><img src="${SITE}/logo.png" width="38" height="38" alt="CanPay Insights" style="display:block;border-radius:9px"></td>
-        <td style="padding-left:11px;font:800 17px/1 -apple-system,'Segoe UI',Helvetica,Arial,sans-serif;color:#1c1917">CanPay <span style="color:#dc2626">Insights</span></td>
+        <td style="padding-left:11px;font:800 17px/1 -apple-system,'Segoe UI',Helvetica,Arial,sans-serif;color:#1c1917">CanPay <span style="color:#C8161A">Insights</span></td>
       </tr></table>
     </td></tr>
     <tr><td style="padding:30px 32px 0;font:11px/1 'Courier New',Courier,monospace;letter-spacing:.16em;text-transform:uppercase;color:#a8a29e">Account opened &middot; ${esc(today)}</td></tr>
@@ -106,7 +106,7 @@ export function welcomeMessage(opts: { email: string; unsub: string; address: st
       </table>
     </td></tr>
     <tr><td style="padding:18px 32px 0">
-      <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="background:#faf7f2;border-left:3px solid #dc2626"><tr>
+      <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="background:#faf7f2;border-left:3px solid #C8161A"><tr>
         <td style="padding:14px 16px;font:14px/1.55 -apple-system,'Segoe UI',Helvetica,Arial,sans-serif;color:#44403c">When the CRA or Revenu Qu&eacute;bec publishes new rates, a saved calculation reopens with the new numbers.</td>
       </tr></table>
     </td></tr>

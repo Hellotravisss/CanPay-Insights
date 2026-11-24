@@ -7,7 +7,7 @@ import { useState } from 'react';
 
 type Row = { k: string | number; n: number };
 
-const PALETTE = ['#dc2626', '#f97316', '#eab308', '#0d9488', '#0284c7', '#4f46e5', '#9333ea', '#db2777', '#64748b', '#78716c'];
+const PALETTE = ['#C8161A', '#f97316', '#eab308', '#0d9488', '#0284c7', '#4f46e5', '#9333ea', '#db2777', '#64748b', '#78716c'];
 
 const CX = 80;
 const CY = 80;

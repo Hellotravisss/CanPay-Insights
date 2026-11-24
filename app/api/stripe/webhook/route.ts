@@ -118,14 +118,14 @@ export async function POST(request: Request) {
           `CanPay Insights · canpayinsights.ca`,
         ].join('\n'),
         html: `<div style="font-family:-apple-system,Helvetica,Arial,sans-serif;max-width:560px;margin:0 auto;color:#0f172a">
-  <p style="font-size:13px;letter-spacing:.15em;text-transform:uppercase;color:#dc2626;font-weight:700;margin:24px 0 6px">Province move report</p>
+  <p style="font-size:13px;letter-spacing:.15em;text-transform:uppercase;color:#C8161A;font-weight:700;margin:24px 0 6px">Province move report</p>
   <h1 style="font-size:22px;margin:0 0 6px">${m.from} &rarr; ${m.to}</h1>
   <p style="color:#64748b;margin:0 0 18px">On a $${income.toLocaleString('en-CA')} salary</p>
   <div style="background:#fef2f2;border:1px solid #fecaca;border-radius:12px;padding:16px 18px;margin-bottom:18px">
     <div style="font-size:12px;font-weight:700;letter-spacing:.12em;color:#64748b">TAKE-HOME PAY AFTER THE MOVE</div>
-    <div style="font-size:30px;font-weight:800;color:${gap >= 0 ? '#047857' : '#dc2626'};margin-top:4px">${gapText}</div>
+    <div style="font-size:30px;font-weight:800;color:${gap >= 0 ? '#047857' : '#C8161A'};margin-top:4px">${gapText}</div>
   </div>
-  <p>Your full report is attached as a PDF and lives permanently at<br><a href="${link}" style="color:#dc2626">${link}</a></p>
+  <p>Your full report is attached as a PDF and lives permanently at<br><a href="${link}" style="color:#C8161A">${link}</a></p>
   <p style="color:#64748b;font-size:13px">Every figure is computed by the same tax engine as the free calculator. This is a calculation, not tax advice.</p>
   <p style="color:#94a3b8;font-size:12px;margin-top:28px">CanPay Insights · <a href="https://canpayinsights.ca" style="color:#94a3b8">canpayinsights.ca</a></p>
 </div>`,
@@ -170,13 +170,13 @@ export async function POST(request: Request) {
           subject: `Your Offer Comparison: ${a.province} vs ${b.province}`,
           text: `Your Offer Comparison is attached as a PDF.\n\nTotal package after tax: ${headline}.\n\nIt is also online, permanently, at:\n${link}\n\nEvery figure is computed by the same tax engine as the free calculator. This is a calculation, not advice.\n\nCanPay Insights · canpayinsights.ca`,
           html: `<div style="font-family:-apple-system,Helvetica,Arial,sans-serif;max-width:560px;margin:0 auto;color:#0f172a">
-  <p style="font-size:13px;letter-spacing:.15em;text-transform:uppercase;color:#dc2626;font-weight:700;margin:24px 0 6px">Offer comparison</p>
+  <p style="font-size:13px;letter-spacing:.15em;text-transform:uppercase;color:#C8161A;font-weight:700;margin:24px 0 6px">Offer comparison</p>
   <h1 style="font-size:22px;margin:0 0 6px">$${a.salary.toLocaleString('en-CA')} in ${a.province} vs $${b.salary.toLocaleString('en-CA')} in ${b.province}</h1>
   <div style="background:#ecfdf5;border:1px solid #a7f3d0;border-radius:12px;padding:16px 18px;margin:18px 0">
     <div style="font-size:12px;font-weight:700;letter-spacing:.12em;color:#64748b">TOTAL PACKAGE, AFTER TAX</div>
     <div style="font-size:26px;font-weight:800;color:#047857;margin-top:4px">${headline}</div>
   </div>
-  <p>Your full comparison is attached as a PDF and lives permanently at<br><a href="${link}" style="color:#dc2626">${link}</a></p>
+  <p>Your full comparison is attached as a PDF and lives permanently at<br><a href="${link}" style="color:#C8161A">${link}</a></p>
   <p style="color:#64748b;font-size:13px">Every figure is computed by the same tax engine as the free calculator. This is a calculation, not advice.</p>
   <p style="color:#94a3b8;font-size:12px;margin-top:28px">CanPay Insights · <a href="https://canpayinsights.ca" style="color:#94a3b8">canpayinsights.ca</a></p>
 </div>`,

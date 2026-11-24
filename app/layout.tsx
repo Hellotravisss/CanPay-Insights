@@ -1,11 +1,8 @@
 import type { Metadata, Viewport } from 'next';
 import PageTag, { CfBeacon } from '../components/PageTag';
 import TelemetrySwitch from '../components/TelemetrySwitch';
-import { Inter } from 'next/font/google';
 import './globals.css';
 import { DATASET_VERSION } from '../lib/datasetVersion';
-
-const inter = Inter({ subsets: ['latin'] });
 
 export const metadata: Metadata = {
   metadataBase: new URL('https://canpayinsights.ca'),
@@ -46,6 +43,7 @@ export const metadata: Metadata = {
   },
   icons: {
     icon: [
+      { url: '/favicon.svg', type: 'image/svg+xml' },
       { url: '/favicon-32x32.png', sizes: '32x32', type: 'image/png' },
       { url: '/favicon-16x16.png', sizes: '16x16', type: 'image/png' },
     ],
@@ -62,7 +60,7 @@ export const metadata: Metadata = {
 };
 
 export const viewport: Viewport = {
-  themeColor: '#dc2626',
+  themeColor: '#C8161A',
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
@@ -205,7 +203,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           }}
         />
       </head>
-      <body className={inter.className}>
+      <body>
         {/* Page-traffic tag on the shared multi-site worker (site=canpay). Calc
             telemetry is separate — this is page views only, and PageTag keeps
             it off /embed, which renders inside other people's sites. */}

@@ -38,11 +38,11 @@ export default function PayDonut({
   provinceLabel: string;
 }) {
   const slices: Slice[] = [
-    { label: 'Take-home pay', value: netAnnual, color: '#16a34a' },
-    { label: 'Federal tax', value: federalTax, color: '#dc2626' },
-    { label: `${provinceLabel} tax`, value: provincialTax, color: '#f97316' },
-    { label: 'CPP / QPP', value: pension, color: '#0284c7' },
-    { label: 'EI', value: ei, color: '#7c3aed' },
+    { label: 'Take-home pay', value: netAnnual, color: '#C8161A' },
+    { label: 'Federal tax', value: federalTax, color: '#2B2E36' },
+    { label: `${provinceLabel} tax`, value: provincialTax, color: '#535866' },
+    { label: 'CPP / QPP', value: pension, color: '#7C818D' },
+    { label: 'EI', value: ei, color: '#A2A6B0' },
   ].filter((s) => s.value > 0);
 
   const total = slices.reduce((a, s) => a + s.value, 0) || 1;

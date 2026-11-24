@@ -59,7 +59,7 @@ export default function LegalChrome({
               className="h-10 w-10 cursor-pointer rounded-lg object-contain shadow-lg shadow-red-200 transition-transform hover:scale-105"
             />
             <h1 className="cursor-pointer text-xl font-bold tracking-tight text-slate-800" onClick={handleBack}>
-              CanPay <span className="font-light text-red-600">Insights</span>
+              <span className="font-brand font-extrabold tracking-tight">CanPay</span> <span className="font-brand font-normal tracking-tight text-red-600">Insights</span>
             </h1>
           </div>
           <button

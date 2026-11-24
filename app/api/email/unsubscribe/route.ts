@@ -33,7 +33,7 @@ export async function GET(request: Request) {
   return page(`<h1 style="font-size:20px">Stop emails from CanPay Insights?</h1>
 <p style="color:#475569">Sign-in links and receipts you ask for will still arrive.</p>
 <form method="post"><input type="hidden" name="u" value="${esc(u)}"><input type="hidden" name="t" value="${esc(t)}">
-<button style="background:#dc2626;color:#fff;border:0;border-radius:10px;padding:12px 20px;font-weight:700;font-size:15px">Stop emails</button></form>`);
+<button style="background:#C8161A;color:#fff;border:0;border-radius:10px;padding:12px 20px;font-weight:700;font-size:15px">Stop emails</button></form>`);
 }
 
 export async function POST(request: Request) {

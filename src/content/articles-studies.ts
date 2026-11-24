@@ -28,7 +28,7 @@ export const studyArticles: Article[] = [
     publishedAt: '2026-06-12',
     updatedAt: '2026-10-01',
     readTime: 9,
-    imageUrl: '/blog/minimum-wage-take-home-2026.png',
+    imageUrl: '/blog/covers/minimum-wage-take-home-2026.png',
     directAnswer:
       'As of October 2026, a full-time minimum wage worker takes home between $26,989 a year (Alberta, $15.00/hr) and $35,265 a year (Nunavut, $20.17/hr) after federal tax, provincial tax, CPP, and EI. In Ontario ($17.95/hr), full-time minimum wage works out to $30,911 a year or about $2,576 a month after deductions.',
     faq: [
@@ -541,7 +541,7 @@ Add your **base + expected commission** together and drop the total into the [fr
     tags: ['CRA', 'benefits', 'GST/HST credit', 'cost of living', '2026'],
     publishedAt: '2026-06-26',
     readTime: 5,
-    imageUrl: '/blog/groceries-essentials-benefit-2026.svg',
+    imageUrl: '/blog/covers/groceries-essentials-benefit-2026.png',
     directAnswer:
       'The Canada Groceries and Essentials Benefit (CGEB) replaces the GST/HST credit starting with the July 3, 2026 payment. It keeps the same eligibility and quarterly schedule, but maximum amounts are 25% higher, an increase that lasts five years (2026 to 2031) — so a couple with two children can receive up to $1,358 from July 2026 to June 2027, versus $1,066 under the old GST/HST credit. Most people get it automatically once they have filed their taxes, and there is also a one-time top-up landing by June 2026 equal to 50% of your 2025–26 GST/HST credit.',
     faq: [
@@ -646,7 +646,7 @@ Amounts and dates are from the CRA's own pages: [how much you can get](https://w
     tags: ['CRA', 'benefits', 'CCB', 'families', '2026'],
     publishedAt: '2026-07-15',
     readTime: 5,
-    imageUrl: '/blog/canada-child-benefit-2026.svg',
+    imageUrl: '/blog/covers/canada-child-benefit-2026.png',
     directAnswer:
       'For the new benefit year starting July 2026, the Canada Child Benefit rises 2%: up to $8,157 per year ($679.75 per month) for each child under 6, and up to $6,883 per year ($573.58 per month) for each child aged 6 to 17. Families with adjusted family net income under $38,237 (from the 2025 tax return) get the full amount; it phases down above that. The first payment at the new rates lands July 20, 2026, and the money is tax-free and automatic once you have filed your taxes.',
     faq: [
@@ -741,7 +741,7 @@ Based on CRA indexation figures for the 2026–27 benefit year as reported in Ju
     tags: ['CRA', 'benefits', 'CWB', 'workers', '2026'],
     publishedAt: '2026-07-15',
     readTime: 5,
-    imageUrl: '/blog/canada-workers-benefit-2026.svg',
+    imageUrl: '/blog/covers/canada-workers-benefit-2026.png',
     directAnswer:
       'The Canada Workers Benefit (CWB) is a refundable tax credit for low- and modest-income workers. Advance payments (ACWB) for the 2026–27 cycle are paid in three instalments — July 10, 2026, October 2026, and January 2027 — worth up to about $272 per instalment for a single worker and about $469 for a family, based on your 2025 tax return. For the 2026 tax year itself, the maximum basic CWB rises to $1,665 for singles and $2,869 for families, plus a disability supplement of up to $860. It is automatic: if you qualified on your 2025 return, the CRA pays you without any application.',
     faq: [
@@ -845,7 +845,7 @@ Based on CRA figures for the 2026–27 ACWB cycle and 2026 tax-year indexation a
     tags: ['Minimum Wage', 'Ontario', 'Saskatchewan', 'Nova Scotia', 'PEI', 'Manitoba', '2026'],
     publishedAt: '2026-08-10',
     readTime: 6,
-    imageUrl: '/blog/minimum-wage-increases-october-2026.svg',
+    imageUrl: '/blog/covers/minimum-wage-increases-october-2026.png',
     directAnswer:
       'On October 1, 2026, five provinces raised their general minimum wage: Ontario from $17.60 to $17.95, Saskatchewan from $15.35 to $15.70, Nova Scotia from $16.75 to $17.00, Prince Edward Island from $17.00 to $17.30, and Manitoba from $16.00 to $16.40. Running the new rates through the CanPay Insights tax engine, a full-time (2,080 hours/year) minimum wage worker gained about $501 more take-home pay a year in Ontario, $508 in Saskatchewan, $339 in Nova Scotia, $417 in PEI, and $578 in Manitoba, after federal tax, provincial tax, CPP, and EI.',
     faq: [
@@ -953,7 +953,7 @@ Rate and effective-date figures are based on official government announcements: 
     tags: ['CRA', 'CPP', 'Payroll Deductions', 'Federal Budget', '2027'],
     publishedAt: '2026-08-13',
     readTime: 6,
-    imageUrl: '/blog/cpp-contribution-rate-cut-2027.svg',
+    imageUrl: '/blog/covers/cpp-contribution-rate-cut-2027.png',
     directAnswer:
       'Starting January 1, 2027, the base CPP contribution rate falls from 9.9% to 9.5% combined, with the employee share dropping from 4.95% to 4.75% and employers matching. The cut was legislated by Bill C-30, which received Royal Assent in June 2026. For an employee earning $70,000, the 2027 rate cut is worth about $133 more take-home pay a year, and anyone earning $74,600 or more saves the 2027 maximum of about $142.20. Self-employed workers, who pay both the employee and employer share, save roughly double. The CPP2 rate of 4% on income above the first ceiling is unchanged.',
     faq: [
@@ -1071,7 +1071,7 @@ Based on the Government of Canada's Spring Economic Update 2026 and the Departme
     tags: ['BC', 'Provincial Budget', 'CRA', 'Payroll Deductions', '2026'],
     publishedAt: '2026-08-17',
     readTime: 6,
-    imageUrl: '/blog/bc-tax-rate-increase-2026.svg',
+    imageUrl: '/blog/covers/bc-tax-rate-increase-2026.png',
     directAnswer:
       "British Columbia's lowest personal income tax rate rose from 5.06% to 5.60% for all of 2026, under a budget tabled February 17, 2026. Because payroll software had already withheld six months of pay at the old 5.06% rate before the change was finalized, the CRA's July 2026 payroll tables apply a prorated rate of 6.14% to BC's first tax bracket from July through December 2026, so the full year averages out to 5.60%. In practice, this made BC paycheques noticeably smaller starting with the first July payday, on top of the roughly $130–$165 a year the rate increase itself adds for anyone earning $40,000 or more.",
     faq: [
@@ -1177,7 +1177,7 @@ Based on the Province of British Columbia's official [personal income tax rates 
     tags: ['Federal Tax', 'CRA', '2026', 'Take-Home Pay', 'Tax Cut'],
     publishedAt: '2026-08-20',
     readTime: 6,
-    imageUrl: '/blog/federal-tax-cut-2026.svg',
+    imageUrl: '/blog/covers/federal-tax-cut-2026.png',
     directAnswer:
       "The federal government reduced Canada's lowest personal income tax rate from 15% to 14%, effective July 1, 2025. Because the cut landed mid-year, the 2025 full-year rate was a blended 14.5%; 2026 is the first full calendar year at 14%, so it delivers the complete benefit. The maximum saving is $420 per person in 2026 (up to $840 for a two-income couple), reached once your taxable income passes the top of the first bracket ($58,523). Roughly 22 million Canadians benefit, which is why many workers' 2026 paycheques are slightly larger than their 2025 ones even with no raise.",
     faq: [
@@ -1288,7 +1288,7 @@ Based on the Government of Canada's announcement [Delivering a middle-class tax 
     tags: ['Saskatchewan', 'Minimum Wage', '2026'],
     publishedAt: '2026-08-24',
     readTime: 5,
-    imageUrl: '/blog/saskatchewan-minimum-wage-october-2026.svg',
+    imageUrl: '/blog/covers/saskatchewan-minimum-wage-october-2026.png',
     directAnswer:
       "Saskatchewan's general minimum wage rose from $15.35 to $15.70 an hour on October 1, 2026, a 35-cent increase set under the province's indexation formula, which gives equal weight to changes in the Consumer Price Index and the average hourly wage in Saskatchewan. Running the new rate through the CanPay Insights tax engine, a full-time (2,080 hours/year) minimum wage worker in Saskatchewan gained about $508 more take-home pay a year — roughly $20 more per biweekly paycheque. Even after the increase, Saskatchewan keeps Canada's second-lowest minimum wage, ahead only of Alberta's $15.00, which has been frozen since 2018.",
     faq: [
@@ -1391,7 +1391,7 @@ Rate and effective-date figures are based on the Government of Saskatchewan's Ju
     tags: ['Wage Growth', 'Inflation', '2026', 'Data Study', 'All Provinces'],
     publishedAt: '2026-08-28',
     readTime: 7,
-    imageUrl: '/blog/real-wage-growth-inflation-july-2026.svg',
+    imageUrl: '/blog/covers/real-wage-growth-inflation-july-2026.png',
     directAnswer:
       "Statistics Canada's Labour Force Survey (released August 7, 2026) put average hourly wage growth at 2.8% year-over-year in July, while the Consumer Price Index (released August 17, 2026) showed inflation at 3.0% year-over-year the same month — a negative real wage gap of about 0.2 percentage points. Run through the CanPay Insights tax engine for a full-time worker earning the national average wage, that gap works out to roughly $290 to $370 a year in lost after-tax purchasing power, depending on province, with Prince Edward Island losing the most and British Columbia the least.",
     faq: [
@@ -1505,7 +1505,7 @@ Wage and employment figures are from Statistics Canada's [Labour Force Survey, J
     tags: ['RSU', 'equity', 'total compensation', 'tax'],
     publishedAt: '2026-08-29',
     readTime: 7,
-    imageUrl: '/blog/rsu-take-home-pay-canada-2026.svg',
+    imageUrl: '/blog/covers/rsu-take-home-pay-canada-2026.png',
     directAnswer:
       'RSUs are employment income in full at their vest-date value — there is no 50% deduction, and they are taxed at your marginal rate on top of your salary. On a $140,000 Ontario salary, a $60,000 RSU vest leaves $32,617 after tax and CPP; $27,383, or 45.6% of the grant, goes to deductions. The keep rate ranges from $37,990 in Nunavut to $31,044 in Quebec on identical numbers.',
     faq: [
@@ -1635,7 +1635,7 @@ Take-home figures are calculated with the CanPay Insights tax engine using 2026 
     tags: ['OAS', 'Seniors', 'Government Benefits', '2026', 'Payment Dates'],
     publishedAt: '2026-08-31',
     readTime: 6,
-    imageUrl: '/blog/oas-increase-october-2026.svg',
+    imageUrl: '/blog/covers/oas-increase-october-2026.png',
     directAnswer:
       'Old Age Security payments increase 1.4% for the October–December 2026 quarter, effective with the October 28, 2026 payment — the fourth OAS indexation of 2026, following a 1.2% rise in July, for a combined 3.0% increase over the past 12 months. Applying that confirmed rate to the confirmed July–September 2026 maximums works out to roughly $762.50 a month for ages 65–74 (up from $751.97) and $838.75 for ages 75-and-over (up from $827.17). The Guaranteed Income Supplement and the Allowance rise by the same 1.4%.',
     faq: [
@@ -1744,7 +1744,7 @@ OAS, GIS, and Allowance payment amounts and the confirmed October–December 202
     tags: ['CRA', 'Disability', 'Government Benefits', '2026', 'Payment Dates'],
     publishedAt: '2026-09-03',
     readTime: 6,
-    imageUrl: '/blog/canada-disability-benefit-changes-september-2026.svg',
+    imageUrl: '/blog/covers/canada-disability-benefit-changes-september-2026.png',
     directAnswer:
       'Five regulatory changes to the Canada Disability Benefit (CDB) took legal effect September 1, 2026. The headline change is a one-time, tax-free $150 lump-sum payment for anyone who was approved for the Disability Tax Credit and has ever received a CDB payment — paid automatically, no application needed, to help cover the cost of getting a doctor to complete the DTC application. The other four changes let youth apply up to 6 months before turning 18, let Service Canada treat a recipient as single when their spouse cannot file taxes, stop interest from accruing on disputed overpayments during an appeal, and confirm CDB payments cannot be clawed back through other federal benefits like the Canada Child Benefit. Separately, the confirmed maximum regular CDB payment for the July 2026–June 2027 benefit year is $204.20 a month, up from $200.',
     faq: [
@@ -1858,7 +1858,7 @@ The $150 supplement, the five regulatory changes, and their September 1, 2026 ef
     tags: ['Wage Growth', 'Inflation', 'Jobs Report', '2026', 'Data Study', 'All Provinces'],
     publishedAt: '2026-09-07',
     readTime: 7,
-    imageUrl: '/blog/wage-growth-slowdown-august-2026.svg',
+    imageUrl: '/blog/covers/wage-growth-slowdown-august-2026.png',
     directAnswer:
       "Canadian wages grew just 2.0% year-over-year in August 2026 — the slowest pace since November 2017, excluding the pandemic — as the economy shed 42,000 jobs and the unemployment rate held at 6.4%. Against the most recent inflation reading of 3.0% (July 2026, the latest available), that gap works out to roughly $700 to $750 a year in lost after-tax purchasing power for a full-time worker on the national average wage, more than double July's gap. The lowest-paid quarter of workers, earning $18.66 an hour, got the smallest raise of all four wage quartiles: just 1.1%.",
     faq: [
@@ -1994,7 +1994,7 @@ Wage and employment figures, including the wage-quartile breakdown and the "slow
     tags: ['Nunavut', 'Northwest Territories', 'Minimum Wage', '2026'],
     publishedAt: '2026-09-10',
     readTime: 6,
-    imageUrl: '/blog/nunavut-nwt-minimum-wage-september-2026.svg',
+    imageUrl: '/blog/covers/nunavut-nwt-minimum-wage-september-2026.png',
     directAnswer:
       "Nunavut's minimum wage rose from $19.75 to $20.17 an hour on September 1, 2026 — the first minimum wage in Canada to pass $20, and now more than $2.00 above the federal minimum wage of $18.15. The Northwest Territories raised its own minimum wage the same day, from $16.95 to $17.20 an hour. Run through the CanPay Insights tax engine, a full-time (2,080 hours/year) Nunavut minimum-wage worker gains about $662 a year in take-home pay from the raise, and a full-time NWT worker gains about $385.",
     faq: [
@@ -2112,7 +2112,7 @@ Rate and effective-date figures are based on the [Government of Nunavut's June 3
     tags: ['Ontario', 'CRA', 'Government Benefits', '2026', 'Payment Dates'],
     publishedAt: '2026-09-14',
     readTime: 7,
-    imageUrl: '/blog/ontario-trillium-benefit-2026.svg',
+    imageUrl: '/blog/covers/ontario-trillium-benefit-2026.png',
     directAnswer:
       'For the July 2026 to June 2027 benefit year (based on your 2025 tax return), the Ontario Trillium Benefit\'s three credits all rose about 1.9%: the Ontario Sales Tax Credit (OSTC) now maxes out at $378 per adult and per child (up from $371), the Ontario Energy and Property Tax Credit (OEPTC) at $1,307 a year for those 18-64 and $1,488 for seniors 65+ (up from $1,283 and $1,461), and the Northern Ontario Energy Credit (NOEC) at $189 for a single person with no children and $290 for a couple or single parent (up from $185 and $285). The CRA pays the combined total on the 10th of each month; the September 10, 2026 deposit was the third of twelve payments under the new rates, and most recipients see the same amount they got in July and August unless their eligibility changed.',
     faq: [
@@ -2239,7 +2239,7 @@ For other federal benefits also paying out or changing this fall, see our covera
     tags: ['Alberta', 'Government Benefits', '2026', 'Payment Dates'],
     publishedAt: '2026-09-17',
     readTime: 7,
-    imageUrl: '/blog/alberta-energy-rebate-2026.svg',
+    imageUrl: '/blog/covers/alberta-energy-rebate-2026.png',
     directAnswer:
       "The Alberta Energy Rebate pays $100 to each eligible adult — up to $200 for a married or common-law couple who both qualify — and applications close September 30, 2026. To qualify you must be 18 or older as of July 1, 2026, an Alberta resident, have filed a 2025 tax return, and have total household income of $225,000 or less. Most people have to apply themselves at alberta.ca/alberta-energy-rebate; only Albertans already receiving the Alberta Seniors Benefit, AISH/ADAP, or Income Support are automatically enrolled. Payments arrive by e-transfer within 14 days of applying and are non-taxable. Because it isn't taxed, the CanPay Insights tax engine shows the $100 is worth more than a $100 raise would be — at most Alberta income levels it would take a $139 to $156 pre-tax raise to net the same amount after payroll deductions.",
     faq: [
@@ -2369,7 +2369,7 @@ Program terms — the $100/$200 payment amounts, eligibility criteria, applicati
     tags: ['Nova Scotia', 'Overtime', 'Labour Law', '2026'],
     publishedAt: '2026-09-27',
     readTime: 6,
-    imageUrl: '/blog/nova-scotia-overtime-44-hours-2027.svg',
+    imageUrl: '/blog/covers/nova-scotia-overtime-44-hours-2027.png',
     directAnswer:
       "Nova Scotia's Bill 256, tabled September 8, 2026, lowers the weekly overtime threshold from 48 hours to 44 hours, extends overtime eligibility to extra hours worked voluntarily (not just when required by an employer), and bans employers from keeping workers' tips and gratuities. The overtime and tips provisions take effect April 1, 2027; wage-recovery measures follow once regulations are developed. Construction and agriculture workers are excluded. For a worker earning Nova Scotia's $17.00 minimum wage (effective October 1, 2026) who regularly works 48 hours a week, the change is worth about $34 more a week, or roughly $1,768 more a year, once hours 45 through 48 switch from straight time to time-and-a-half.",
     faq: [
@@ -2489,7 +2489,7 @@ Bill 256's provisions — the 44-hour overtime threshold, voluntary-overtime eli
     tags: ['EI', 'CRA', 'Payroll Deductions', '2027'],
     publishedAt: '2026-09-27',
     readTime: 6,
-    imageUrl: '/blog/ei-premium-rate-2027.svg',
+    imageUrl: '/blog/covers/ei-premium-rate-2027.png',
     directAnswer:
       'The Canada Employment Insurance Commission confirmed on September 14, 2026 that the 2027 EI premium rate rises to $1.64 per $100 of insurable earnings (up from $1.63 in 2026), while the maximum insurable earnings climbs to $70,800 from $68,900. Together, those two changes push the maximum annual employee EI premium up $38.05, to $1,161.12, and the maximum employer premium up $53.27, to $1,625.57 per employee — both effective January 1, 2027. Workers earning under the 2026 ceiling see a much smaller increase of $4 to $7 a year; Quebec\'s reduced EI rate actually ticks down slightly, to 1.29%, though its own maximum still rises because of the higher earnings ceiling.',
     faq: [
@@ -2611,7 +2611,7 @@ The 2027 EI premium rate, maximum insurable earnings, and maximum contribution f
     tags: ['TFSA', 'RRSP', 'CRA', '2027'],
     publishedAt: '2026-09-28',
     readTime: 7,
-    imageUrl: '/blog/tfsa-rrsp-limits-2027.svg',
+    imageUrl: '/blog/covers/tfsa-rrsp-limits-2027.png',
     directAnswer:
       "The Canada Revenue Agency confirmed on October 30, 2025 that the 2027 RRSP dollar limit is $35,390, up from $33,810 in 2026 by $1,580. The 2027 TFSA limit is not official yet — the CRA typically confirms it in November — but the CPI-based indexing formula that sets it already points to $7,500, up from $7,000 in 2026, since the unrounded 2027 figure (about $7,300–$7,400 on current inflation data) clears the $7,250 threshold needed to round up to the next $500 increment. Run through the CanPay Insights tax engine, the extra $1,580 of 2027 RRSP room is worth $284 (Nunavut) to $457 (Nova Scotia) in immediate tax savings at a $90,000 salary, depending on province — the TFSA increase saves no tax today, since TFSA contributions are never deductible, but it is $500 more you can move from your take-home pay into an account that is never taxed again.",
     faq: [
@@ -2731,7 +2731,7 @@ The confirmed 2026 and 2027 RRSP dollar limits ($33,810 and $35,390) and the con
     tags: ['TFSA', 'RRSP', 'Comparison', '2026'],
     publishedAt: '2026-10-01',
     readTime: 6,
-    imageUrl: '/blog/tfsa-rrsp-limits-2027.svg',
+    imageUrl: '/blog/covers/tfsa-rrsp-limits-2027.png',
     directAnswer:
       'An RRSP lowers your tax now and taxes the money when you withdraw it; a TFSA gives no deduction now and never taxes the money. In 2026 a $5,000 RRSP contribution saves about $1,423 in Ontario at an $80,000 salary but about $880 at $45,000, so the RRSP pays off most for higher earners who expect a lower income in retirement. The 2026 limits are $7,000 for a TFSA and $33,810 for an RRSP.',
     faq: [
@@ -2806,7 +2806,7 @@ The tax savings above are CanPay Insights' own calculations: the 2026 federal an
     tags: ['Take-Home Pay', 'Provinces', 'Tax Engine', '2026'],
     publishedAt: '2026-10-01',
     readTime: 6,
-    imageUrl: '/blog/take-home-pay-75000-by-province-2026.svg',
+    imageUrl: '/blog/covers/take-home-pay-75000-by-province-2026.png',
     directAnswer:
       'A $75,000 salary nets between $53,423 (Nova Scotia) and $58,819 (Nunavut) after federal tax, provincial tax, CPP/QPP, and EI in 2026 — a $5,396 gap driven almost entirely by provincial income tax. Ontario nets $56,926 a year ($4,744 a month), British Columbia $57,711, Alberta $57,362, and Quebec $53,965. These are CanPay Insights’ own 2026 calculations, from the same tax engine checked row-by-row against the CRA’s payroll deduction tables.',
     faq: [
@@ -2910,7 +2910,7 @@ Every figure above comes from CanPay Insights' own 2026 tax engine — the same 
     tags: ['Take-Home Pay', 'Provinces', 'Tax Engine', '2026'],
     publishedAt: '2026-10-08',
     readTime: 7,
-    imageUrl: '/blog/take-home-pay-100000-by-province-2026.svg',
+    imageUrl: '/blog/covers/take-home-pay-100000-by-province-2026.png',
     directAnswer:
       'A $100,000 salary nets between $68,867 (Nova Scotia) and $76,654 (Nunavut) after federal tax, provincial tax, CPP/CPP2, and EI in 2026 — a $7,787 gap driven almost entirely by provincial income tax. Ontario nets $74,206 a year ($6,184 a month), British Columbia $75,373, Alberta $74,459, and Quebec $69,585. These are CanPay Insights’ own 2026 calculations, from the same tax engine checked row by row against the CRA’s payroll deduction tables, and the provincial ranking is not identical to the one at $75,000 — British Columbia and the Northwest Territories swap places.',
     faq: [
@@ -3020,7 +3020,7 @@ Every figure above comes from CanPay Insights' own 2026 tax engine — the same 
     tags: ['EI', 'Employment Insurance', '2027', 'Tariffs'],
     publishedAt: '2026-10-11',
     readTime: 7,
-    imageUrl: '/blog/ei-temporary-measures-extended-2027.svg',
+    imageUrl: '/blog/covers/ei-temporary-measures-extended-2027.png',
     directAnswer:
       'On August 25, 2026, the federal government extended three temporary EI relief measures that were due to expire October 10, 2026, as part of a $7.5 billion tariff-support package. The one-week EI waiting-period waiver and the rule that stops severance and vacation pay from delaying benefits are both extended by one year, to claims that start by October 9, 2027. The extra 20 weeks of regular benefits for long-tenured workers (raising the maximum from 45 to 65 weeks) is extended by eight months, to claims that start by June 12, 2027. A new, separate measure also removes the EI penalty, for claims starting October 11, 2026 to October 9, 2027, for workers who voluntarily left a job, as long as their most recent job loss was through no fault of their own. The waived waiting week alone is worth up to $729 — the 2026 maximum weekly EI benefit — and the extra 20 weeks can be worth up to $14,580 to a long-tenured worker at the earnings ceiling.',
     faq: [
@@ -3124,7 +3124,7 @@ The $7.5 billion support package and the extension of the three temporary EI mea
     tags: ['Wage Growth', 'Jobs Report', 'Inflation', '2026', 'Data Study', 'All Provinces'],
     publishedAt: '2026-10-12',
     readTime: 7,
-    imageUrl: '/blog/wage-growth-september-2026.svg',
+    imageUrl: '/blog/covers/wage-growth-september-2026.png',
     directAnswer:
       "Canadian wages grew 2.3% year-over-year in September 2026 — up from 2.0% in August — even as the economy lost 68,000 jobs, its steepest monthly drop since the spring, and the unemployment rate rose to 6.5%, back to where it stood in January. Against the most recent inflation reading of 3.0% (August 2026, the latest available), that gap works out to roughly $530 to $580 a year in lost after-tax purchasing power for a full-time worker on the national average wage, narrower than August's gap of more than $700 because wage growth sped up while inflation held flat.",
     faq: [
@@ -3252,7 +3252,7 @@ Wage and employment figures, including the provincial and sector breakdowns, are
     tags: ['Take-Home Pay', 'Provinces', 'Tax Engine', '2026'],
     publishedAt: '2026-10-15',
     readTime: 6,
-    imageUrl: '/blog/take-home-pay-55000-by-province-2026.svg',
+    imageUrl: '/blog/covers/take-home-pay-55000-by-province-2026.png',
     directAnswer:
       'A $55,000 salary nets between $41,523 (Nova Scotia) and $45,152 (Nunavut) after federal tax, provincial tax, CPP/QPP, and EI in 2026 — a $3,629 gap driven almost entirely by provincial income tax. Ontario nets $43,861 a year ($3,655 a month), British Columbia $44,203, Alberta $44,146, and Quebec $42,192. These are CanPay Insights’ own 2026 calculations, from the same tax engine checked row by row against the CRA’s payroll deduction tables.',
     faq: [
@@ -3360,7 +3360,7 @@ Every figure above comes from CanPay Insights' own 2026 tax engine — the same 
     tags: ['Inflation', 'CPI', 'Real Wages', '2026', 'Data Study', 'All Provinces'],
     publishedAt: '2026-10-19',
     readTime: 7,
-    imageUrl: '/blog/canada-inflation-september-2026.svg',
+    imageUrl: '/blog/covers/canada-inflation-september-2026.png',
     directAnswer:
       "Canada's Consumer Price Index rose 3.1% year over year in September 2026, Statistics Canada reported on October 19, 2026, up from 3.0% in August and driven mainly by a 27.8% jump in gasoline prices. Inflation excluding gasoline actually eased, to 2.2% from 2.4%. Against September's 2.3% wage growth, a full-time worker on the national average wage is now losing roughly $587 to $632 a year in after-tax purchasing power, depending on province.",
     faq: [
@@ -3482,7 +3482,7 @@ Inflation figures are from Statistics Canada's [Consumer Price Index, September 
     tags: ['Take-Home Pay', 'Provinces', 'Tax Engine', '2026'],
     publishedAt: '2026-10-22',
     readTime: 6,
-    imageUrl: '/blog/take-home-pay-65000-by-province-2026.svg',
+    imageUrl: '/blog/covers/take-home-pay-65000-by-province-2026.png',
     directAnswer:
       'A $65,000 salary nets between $47,626 (Nova Scotia) and $52,092 (Nunavut) after federal tax, provincial tax, CPP/QPP, and EI in 2026 — a $4,466 gap driven almost entirely by provincial income tax. Ontario nets $50,556 a year ($4,213 a month), British Columbia $51,044, Alberta $50,910, and Quebec $48,180. These are CanPay Insights’ own 2026 calculations, from the same tax engine checked row-by-row against the CRA’s payroll deduction tables.',
     faq: [
@@ -3586,7 +3586,7 @@ Every figure above comes from CanPay Insights' own 2026 tax engine — the same 
     tags: ['Take-Home Pay', 'Provinces', 'Tax Engine', '2026'],
     publishedAt: '2026-10-26',
     readTime: 6,
-    imageUrl: '/blog/take-home-pay-85000-by-province-2026.svg',
+    imageUrl: '/blog/covers/take-home-pay-85000-by-province-2026.png',
     directAnswer:
       'A $85,000 salary nets between $59,455 (Nova Scotia) and $65,779 (Nunavut) after federal tax, provincial tax, CPP/QPP, and EI in 2026 — a $6,324 gap driven almost entirely by provincial income tax. Ontario nets $63,679 a year ($5,307 a month), British Columbia $64,603, Alberta $64,034, and Quebec $60,060. These are CanPay Insights’ own 2026 calculations, from the same tax engine checked row by row against the CRA’s payroll deduction tables.',
     faq: [
@@ -3690,7 +3690,7 @@ Every figure above comes from CanPay Insights' own 2026 tax engine — the same 
     tags: ['Take-Home Pay', 'Provinces', 'Tax Engine', '2026'],
     publishedAt: '2026-10-29',
     readTime: 6,
-    imageUrl: '/blog/take-home-pay-45000-by-province-2026.svg',
+    imageUrl: '/blog/covers/take-home-pay-45000-by-province-2026.png',
     directAnswer:
       'A $45,000 salary nets between $34,997 (Nova Scotia) and $37,574 (Nunavut) after federal tax, provincial tax, CPP/QPP, and EI in 2026 — a $2,577 gap driven almost entirely by provincial income tax. Ontario nets $36,554 a year ($3,046 a month), British Columbia $36,872, Alberta $36,937, and Quebec $35,456. These are CanPay Insights’ own 2026 calculations, from the same tax engine checked row by row against the CRA’s payroll deduction tables.',
     faq: [
@@ -3798,7 +3798,7 @@ Every figure above comes from CanPay Insights' own 2026 tax engine — the same 
     tags: ['Federal Budget', 'CRA', 'Payroll Deductions', '2027'],
     publishedAt: '2026-11-02',
     readTime: 7,
-    imageUrl: '/blog/federal-budget-2026-paycheque.svg',
+    imageUrl: '/blog/covers/federal-budget-2026-paycheque.png',
     directAnswer:
       'Budget 2026 will be tabled by Finance Minister François-Philippe Champagne on November 5, 2026, against a Parliamentary Budget Officer forecast of a $63.3-billion deficit for 2026-27, peaking at $70.2 billion in 2027-28. Separately from whatever the budget itself contains, several 2027 payroll numbers are already locked in: CPP\'s base rate falls to 4.75% for employees (saving up to $142.20 a year), the EI maximum employee premium rises $38.05 to $1,161.12, and the RRSP dollar limit climbs to $35,390 — only the expected $7,500 TFSA limit for 2027 still awaits official CRA confirmation.',
     faq: [
@@ -3903,7 +3903,7 @@ The November 5, 2026 budget date and its framing language are taken from the Dep
     tags: ['Take-Home Pay', 'Provinces', 'Tax Engine', '2026'],
     publishedAt: '2026-11-05',
     readTime: 7,
-    imageUrl: '/blog/take-home-pay-120000-by-province-2026.svg',
+    imageUrl: '/blog/covers/take-home-pay-120000-by-province-2026.png',
     directAnswer:
       'A $120,000 salary nets between $81,167 (Nova Scotia) and $90,908 (Nunavut) after federal tax, provincial tax, CPP/CPP2, and EI in 2026 — a $9,741 gap driven almost entirely by provincial income tax. Ontario nets $87,343 a year ($7,279 a month), British Columbia $89,067, Alberta $88,258, and Quebec $81,829. These are CanPay Insights\' own 2026 calculations, from the same tax engine checked row by row against the CRA\'s payroll deduction tables — and at this income, every CPP, CPP2, and EI ceiling is already maxed out everywhere, so the entire provincial spread comes down to tax brackets alone.',
     faq: [
@@ -4015,7 +4015,7 @@ Every figure above comes from CanPay Insights' own 2026 tax engine — the same 
     tags: ['Federal Budget', 'CRA', 'Benefits', '2027'],
     publishedAt: '2026-11-09',
     readTime: 6,
-    imageUrl: '/blog/budget-2026-workers-benefit-caregiver-credit.svg',
+    imageUrl: '/blog/covers/budget-2026-workers-benefit-caregiver-credit.png',
     directAnswer:
       "Budget 2026, tabled November 5, 2026, raises the maximum Canada Workers Benefit (renamed the \"Build Canada Workers Benefit\") to $1,859 for single workers and $3,143 for families starting the 2027 tax year, up from $1,665 and $2,869 for 2026 — reaching an estimated 1.9 million low-income workers, including 180,000 who get nothing from it today. The Canada Caregiver Credit becomes fully refundable for the first time starting in 2027, worth up to $1,260 a year for an estimated 585,000 caregivers, and a one-time 50% top-up to the Canada Groceries and Essentials Benefit — up to $339 for a single person and $679 for a couple with two children — lands in early 2027. None of this changes a 2026 paycheque, and all of it still needs to pass as legislation.",
     faq: [
@@ -4124,7 +4124,7 @@ The November 5, 2026 budget date, the $62.3-billion deficit figure, and the Buil
     tags: ['CPP', 'CRA', 'Payroll', '2027'],
     publishedAt: '2026-11-12',
     readTime: 6,
-    imageUrl: '/blog/cpp-2027-ceiling-confirmed.svg',
+    imageUrl: '/blog/covers/cpp-2027-ceiling-confirmed.png',
     directAnswer:
       "The Canada Revenue Agency has posted the 2027 CPP figures: the earnings ceiling (YMPE) rises to $76,700 from $74,600, and the second ceiling (YAMPE) rises to $87,400 from $85,000. Because the base CPP rate is also falling from 5.95% to 5.75% under the already-legislated Bill C-30 rate cut, the maximum base CPP deduction actually falls to $4,209.00 in 2027, down from $4,230.45 in 2026 — the first drop in years, even though the earnings ceiling went up. Including CPP2 (unchanged at 4% on earnings between the two ceilings), the combined maximum employee contribution falls slightly too, down from $4,646.45 to $4,637.00. Workers earning between $76,700 and $85,000 see the biggest dollar saving, $105.45; workers above $87,400 see the smallest, $9.45.",
     faq: [
@@ -4239,7 +4239,7 @@ The 2027 CPP earnings ceiling ($76,700), the second ceiling ($87,400), the basic
     tags: ['Wage Growth', 'Inflation', 'Jobs Report', '2026', 'Data Study', 'All Provinces'],
     publishedAt: '2026-11-16',
     readTime: 7,
-    imageUrl: '/blog/real-wage-gap-october-2026.svg',
+    imageUrl: '/blog/covers/real-wage-gap-october-2026.png',
     directAnswer:
       "Statistics Canada's October 2026 Labour Force Survey (released November 6, 2026) put average hourly wage growth at 2.2% year-over-year, down from 2.3% in September, while the Consumer Price Index for the same month (released November 16, 2026) held at 3.1%, unchanged from September. That is a real-wage gap of roughly 0.9 percentage points, which the CanPay Insights tax engine converts to about $641 to $680 a year in lost after-tax purchasing power for a full-time worker on the national average wage — wider than September's $587-to-$632 gap, though not quite back to August's $700-to-$750 low. Unemployment also rose to 6.7%, its highest level since April, even though the economy shed only 4,700 jobs in October, far fewer than September's 68,000.",
     faq: [
@@ -4370,7 +4370,7 @@ Wage, employment, and unemployment figures are from Statistics Canada's [Labour 
     tags: ['Minimum Wage', 'Living Wage', '2026', 'Data Study', 'All Provinces'],
     publishedAt: '2026-11-19',
     readTime: 7,
-    imageUrl: '/blog/minimum-wage-vs-living-wage-november-2026.svg',
+    imageUrl: '/blog/covers/minimum-wage-vs-living-wage-november-2026.png',
     directAnswer:
       "In the first three weeks of November 2026, four living-wage research networks released updated 2026 figures: the Ontario Living Wage Network and the Canadian Centre for Policy Alternatives' Atlantic office both published on November 9, with Vibrant Communities Calgary (with the Alberta Living Wage Network) and Living Wage BC's wage-gap analysis following shortly after. Every region they measured shows the local minimum wage falling short of the calculated living wage, by $7.40 an hour in Charlottetown, PE up to $13.00 an hour in Halifax, NS. Using the CanPay Insights tax engine to convert full-time (2,080 hours/year) earnings at each rate into actual take-home pay, the after-tax gap for a full-time worker ranges from about $10,277 a year in Charlottetown to $17,843 a year in Calgary — noticeably less than the raw hourly gap times 2,080 hours, because 27% to 36% of the extra gross pay between minimum wage and a living wage is absorbed by federal and provincial tax, CPP/CPP2, and EI before it reaches a paycheque.",
     faq: [
@@ -4505,7 +4505,7 @@ Living-wage figures are from the Ontario Living Wage Network's November 9, 2026 
     tags: ['Canada Post', 'Wages', '2027', 'Real Wages'],
     publishedAt: '2026-11-23',
     readTime: 7,
-    imageUrl: '/blog/canada-post-raise-after-tax-2027.svg',
+    imageUrl: '/blog/covers/canada-post-raise-after-tax-2027.png',
     directAnswer:
       "On November 13, 2026, Canada Post and the Canadian Postmasters and Assistants Association (CPAA) — the company's second-largest union, representing rural postmasters and their assistants — reached a tentative two-year deal: a 2.6% wage increase effective 2027 and 2.5% in 2028 (5.17% combined), plus a one-time ratification bonus of $500 for postmasters and other full-time employees ($250 for everyone else), non-pensionable. Run through the CanPay Insights tax engine at 2026 rates, a 2.6% raise on a $65,000 Ontario salary — $1,690 more a year — keeps only $1,087, or 64.3%, after federal and provincial tax, CPP, and EI; at $55,000 it keeps 70.8%. Because Statistics Canada's October 2026 inflation reading held at 3.1%, a 2.6% raise does not even keep pace with the cost of living before any deduction comes off it, let alone after.",
     faq: [

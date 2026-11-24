@@ -181,19 +181,29 @@ const ResultsSection: React.FC<Props> = ({ results, provinceName }) => {
   // while the reader edits them; a frosted bar shows it until the card is reached.
   const heroRef = React.useRef<HTMLDivElement>(null);
   const heroBelow = useBelowViewport(heroRef);
+  // One pass of light across the card's banknote lines when a NEW result lands (not on first render).
+  const netForFoil = hasCustomFrequency_(results) ? (results.netPayPerPeriod || results.netPayBiWeekly) : results.netPayBiWeekly;
+  const foilFirst = React.useRef(true);
+  React.useEffect(() => {
+    if (foilFirst.current) { foilFirst.current = false; return; }
+    const el = heroRef.current;
+    if (!el || window.matchMedia?.('(prefers-reduced-motion: reduce)').matches) return;
+    el.classList.remove('pm-foil'); void el.offsetWidth; el.classList.add('pm-foil');
+  }, [netForFoil]);
   const days = taxDays(results);
   // 是否是年薪或打卡模式（有 payFrequency 字段）
   const hasCustomFrequency = !!results.payFrequency;
   const payPeriodLabel = hasCustomFrequency ? getPayFrequencyLabel(results.payFrequency) : t('res.biweekly');
 
   const chartData = React.useMemo(() => [
-    { name: t('res.netPay'), value: results.netPayBiWeekly, color: '#dc2626' }, // Red-600
-    { name: t('res.fedTax'), value: results.federalTax, color: '#334155' }, // Slate-700
-    { name: t('res.provTax'), value: results.provincialTax, color: '#64748b' }, // Slate-500
-    { name: t('res.cppEi'), value: results.cppDeduction + results.eiDeduction, color: '#94a3b8' }, // Slate-400
+    { name: t('res.netPay'), value: results.netPayBiWeekly, color: '#C8161A' }, // brand red = the money you keep
+    // deductions: the ink ramp in pay-stub order (PayFamily-brand/18-charts, validated: light end 2.44:1 on white)
+    { name: t('res.fedTax'), value: results.federalTax, color: '#2B2E36' },
+    { name: t('res.provTax'), value: results.provincialTax, color: '#535866' },
+    { name: t('res.cppEi'), value: results.cppDeduction + results.eiDeduction, color: '#7C818D' },
     // Pension, RRSP, union dues and the rest: without this slice the donut's
     // shares summed to less than gross and overstated the net-pay percentage.
-    { name: t('annual.otherDed'), value: (results.rrspDeduction ?? 0) + (results.pensionDeduction ?? 0) + (results.otherDeductions ?? 0), color: '#cbd5e1' }, // Slate-300
+    { name: t('annual.otherDed'), value: (results.rrspDeduction ?? 0) + (results.pensionDeduction ?? 0) + (results.otherDeductions ?? 0), color: '#A2A6B0' },
   ].filter((d) => d.value > 0), [t, results.cppDeduction, results.eiDeduction, results.federalTax, results.netPayBiWeekly, results.provincialTax, results.rrspDeduction, results.pensionDeduction, results.otherDeductions]);
 
   const totalHours = results.regularHours + results.overtimeHours15 + results.overtimeHours20;
@@ -432,5 +442,7 @@ const ResultsSection: React.FC<Props> = ({ results, provinceName }) => {
     </div>
   );
 };
+
+function hasCustomFrequency_(r: CalculationResult) { return !!r.payFrequency; }
 
 export default ResultsSection;

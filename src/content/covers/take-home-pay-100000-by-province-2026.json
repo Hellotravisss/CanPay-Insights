@@ -1,0 +1,33 @@
+{
+ "head": [
+  [
+   "You keep ",
+   "$68,867–$76,654",
+   ""
+  ],
+  [
+   "on the same $100,000 salary."
+  ]
+ ],
+ "sub": "2026 take-home pay, computed for all 13 provinces and territories.",
+ "pill": "Nunavut $76,654/yr vs. Nova Scotia $68,867/yr — a $7,787 gap",
+ "label": "TAKE-HOME PAY ON $100,000 · 2026 · CANPAY INSIGHTS TAX ENGINE",
+ "tiles": [
+  [
+   "$76,654 Nunavut",
+   "Best take-home — 23.3% effective rate"
+  ],
+  [
+   "$68,867 Nova Scotia",
+   "Lowest take-home — 31.1% effective rate"
+  ],
+  [
+   "$7,787 gap",
+   "Same salary, different province"
+  ],
+  [
+   "25.8% Ontario",
+   "Effective deduction rate on $100,000"
+  ]
+ ]
+}

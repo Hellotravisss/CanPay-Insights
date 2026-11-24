@@ -1,0 +1,35 @@
+{
+ "head": [
+  [
+   "Same ",
+   "$55,000",
+   " salary."
+  ],
+  [
+   "Up to ",
+   "$3,629",
+   " apart."
+  ]
+ ],
+ "sub": "2026 take-home pay on an identical salary, 13 provinces and territories.",
+ "pill": "Nunavut nets $45,152 — Nova Scotia nets just $41,523",
+ "label": "2026 TAX YEAR · SINGLE FILER, BI-WEEKLY PAY · CANPAY INSIGHTS TAX ENGINE",
+ "tiles": [
+  [
+   "$45,152 take-home",
+   "Nunavut — lowest effective rate, 17.9%"
+  ],
+  [
+   "$41,523 take-home",
+   "Nova Scotia — highest effective rate, 24.5%"
+  ],
+  [
+   "$3,629/year gap",
+   "About $300/month, same salary, different province"
+  ],
+  [
+   "$43,861 in Ontario",
+   "20.3% effective deduction rate"
+  ]
+ ]
+}

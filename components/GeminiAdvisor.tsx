@@ -959,7 +959,7 @@ const GeminiAdvisor: React.FC<Props> = ({ results, inputs, onReportOpen }) => {
               <div className="flex items-center gap-5 mb-5">
                 <img src="/logo_reverse.png" alt="" className="w-14 h-14 object-contain flex-shrink-0 rounded-xl shadow-lg border border-slate-800" />
                 <h1 className="text-5xl font-bold tracking-tight">
-                  CanPay <span className="text-red-500">Insights</span>
+                  <span className="font-brand font-extrabold tracking-tight">CanPay</span> <span className="font-brand font-normal tracking-tight text-red-600">Insights</span>
                 </h1>
               </div>
               <p className="text-slate-500 text-2xl font-medium">2026 Tax Report</p>

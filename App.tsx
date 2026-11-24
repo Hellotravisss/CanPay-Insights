@@ -555,7 +555,7 @@ const App: React.FC = () => {
                     <div className="flex flex-col items-center md:items-start md:text-left">
                       <img src="/logo.png" alt="" aria-hidden="true" className="h-16 w-16 rounded-2xl object-contain shadow-lg shadow-red-100 sm:h-20 sm:w-20 md:h-24 md:w-24" />
                       <h1 className="mt-4 text-3xl font-bold tracking-tight text-slate-950 sm:text-4xl md:text-5xl">
-                        CanPay <span className="text-red-600">Insights</span>
+                        <span className="font-brand font-extrabold tracking-tight">CanPay</span> <span className="font-brand font-normal tracking-tight text-red-600">Insights</span>
                       </h1>
                       <p className="mt-2 text-base font-semibold text-slate-500 md:text-lg">
                         {t('brand.tagline')}

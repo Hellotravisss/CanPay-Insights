@@ -54,7 +54,9 @@ They were published here by mistake for three days in September 2026 — do not 
 
 ## Never
 
-- Draw the logo. `public/logo.png` is the only source.
+- Draw the logo. `public/logo.png` is the only source (2026-11: the pearly beaver on the red tile; wordmark Bricolage Grotesque).
+- Hand-write a cover. Every article cover comes from `scripts/brandCovers.mjs` (`npx tsx scripts/genAllCovers.ts`); a news card
+  is a spec in `src/content/covers/<slug>.json`. `audit:logo` checks the real logo sits at `LOGO_BOX` on every cover.
 - Present the calculator's self-selected sample as national statistics.
 - Store IP addresses, full user agents, exact income, or a full postal code.
 - Publish or link the private data room.
