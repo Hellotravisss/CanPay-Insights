@@ -237,7 +237,7 @@ const ProvinceComparison: React.FC = () => {
                 <table className="w-full text-sm tabular-nums">
                   <thead>
                     <tr className="border-b border-line bg-pearl-soft text-[11px] uppercase tracking-[0.1em] text-mute">
-                      <th scope="col" className="px-4 py-3 text-left font-semibold">Province</th>
+                      <th scope="col" className="sticky left-0 z-10 bg-pearl-soft px-4 py-3 text-left font-semibold shadow-[1px_0_0_#E3E3EA]">Province</th>
                       <th scope="col" className="px-4 py-3 text-right font-semibold">Net Annual</th>
                       <th scope="col" className="px-4 py-3 text-right font-semibold">Net Monthly</th>
                       <th scope="col" className="px-4 py-3 text-right font-semibold">Federal Tax</th>
@@ -250,7 +250,7 @@ const ProvinceComparison: React.FC = () => {
                   <tbody className="divide-y divide-line">
                     {comparisonData.map((data, index) => (
                       <tr key={data.province}>
-                        <td className="px-4 py-3.5">
+                        <td className="sticky left-0 z-10 bg-white px-4 py-3.5 shadow-[1px_0_0_#E3E3EA]">
                           <div className="flex items-center gap-2">
                             <span className="whitespace-nowrap font-semibold text-ink">{data.provinceName}</span>
                             {index === 0 && (
