@@ -118,7 +118,7 @@ const DICT: Record<string, Record<string, string>> = {
   },
   fr: {
     hlRightAt: "Vous êtes exactement au salaire médian {basis} en {prov} — {amt}.",
-    hlOff: "Vous êtes {pct}% {dir} du salaire médian {basis} en {prov} — {amt}.",
+    hlOff: "Vous êtes {pct}\u00A0% {dir} du salaire médian {basis} en {prov} — {amt}.",
     dirAbove: "au-dessus",
     dirBelow: "en dessous",
     basisHourly: "horaire",
@@ -136,7 +136,7 @@ const DICT: Record<string, Record<string, string>> = {
     median: 'Médiane du secteur',
     low: 'Moins',
     high: 'Plus',
-    verdictTop: 'Votre taux horaire de base se situe dans le top {pct}% du secteur {industry} au Canada.',
+    verdictTop: 'Votre taux horaire de base se situe dans le top {pct}\u00A0% du secteur {industry} au Canada.',
     verdictAbove: 'Votre taux de base est au-dessus de la médiane du secteur {industry} au Canada.',
     verdictBelow: 'Votre salaire brut est sous la médiane du secteur {industry} au Canada.',
     note: 'Repères approximatifs basés sur les données salariales de Statistique Canada (temps plein).',

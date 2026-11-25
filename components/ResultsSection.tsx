@@ -7,7 +7,7 @@ import AnimatedAmount from './AnimatedAmount';
 import { CalculationResult, PayFrequency, Province } from '../types';
 import { provinceDisplayName } from '../lib/provinceNames';
 import { useT } from '../lib/i18n';
-import { formatMoney } from '../lib/money';
+import { formatMoney, formatPercent } from '../lib/money';
 
 interface Props {
   results: CalculationResult;
@@ -25,7 +25,9 @@ const PaycheckDonutChart = ({
   formatCurrency,
   netPayPercent,
   netPayLabel,
+  lang,
 }: {
+  lang: string;
   data: ChartDatum[];
   formatCurrency: (value: number) => string;
   netPayPercent: number;
@@ -123,7 +125,7 @@ const PaycheckDonutChart = ({
           </g>
         </svg>
         <div className="pm-fade pointer-events-none absolute inset-0 flex flex-col items-center justify-center text-center" style={{ ['--i' as string]: 8 }}>
-          <p className="font-display text-[2.5rem] leading-none font-semibold text-red-600 tabular-nums">{netPayPercent}<span className="text-xl align-top">%</span></p>
+          <p className="font-display text-[2.5rem] leading-none font-semibold text-red-600 tabular-nums">{netPayPercent}<span className={`text-xl align-top${lang === 'fr' ? ' ml-1' : ''}`}>%</span></p>
           <span className="mt-1 text-[11px] font-semibold uppercase tracking-[0.14em] text-[#5E6270]">{netPayLabel}</span>
         </div>
       </div>
@@ -132,7 +134,7 @@ const PaycheckDonutChart = ({
         <div className="absolute top-2 z-10 rounded-lg border border-[#E3E3EA] bg-white px-3 py-2 text-xs shadow-lg tabular-nums">
           <p className="font-bold text-ink">{activeSegment.name}</p>
           <p className="text-[#535866]">
-            {formatCurrency(activeSegment.value)} · {activeSegment.percent}%
+            {formatCurrency(activeSegment.value)} · {formatPercent(activeSegment.percent, lang)}
           </p>
         </div>
       )}
@@ -149,7 +151,7 @@ const PaycheckDonutChart = ({
           >
             <span className="h-2.5 w-2.5 shrink-0 rounded-[3px]" style={{ backgroundColor: item.color }} />
             <span className="truncate text-[#2B2E36]">{item.name}</span>
-            <span className="ml-auto tabular-nums text-[#5E6270]">{item.percent}%</span>
+            <span className="ml-auto tabular-nums text-[#5E6270]">{formatPercent(item.percent, lang)}</span>
           </li>
         ))}
       </ul>
@@ -282,8 +284,8 @@ const ResultsSection: React.FC<Props> = ({ results, provinceName }) => {
                 <div className="h-full flex-1 rounded-r-full bg-[#A2A6B0]" />
               </div>
               <div className="mt-1.5 flex justify-between text-[11px] text-[#5E6270] tabular-nums">
-                <span><span className="font-semibold text-red-600">{Math.round((results.netPayAnnual / totalPay) * 100)}%</span> {t('res.netPay')}</span>
-                <span>{Math.round((results.totalDeductionsAnnual / totalPay) * 100)}% {t('res.deductions')}</span>
+                <span><span className="font-semibold text-red-600">{formatPercent(Math.round((results.netPayAnnual / totalPay) * 100), lang)}</span> {t('res.netPay')}</span>
+                <span>{formatPercent(Math.round((results.totalDeductionsAnnual / totalPay) * 100), lang)} {t('res.deductions')}</span>
               </div>
             </div>
           )}
@@ -351,6 +353,7 @@ const ResultsSection: React.FC<Props> = ({ results, provinceName }) => {
               formatCurrency={formatCurrency}
               netPayPercent={netPayPercent}
               netPayLabel={netPayLabel}
+              lang={lang}
             />
           </div>
 

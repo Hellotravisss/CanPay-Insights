@@ -15,7 +15,7 @@ import { PayFrequency, type CalculationMode as CalcMode } from '../types';
 import { calculateFromAnnualSalary } from '../utils/taxEngine';
 import { INTENT_DICT } from './IntentPrompt';
 import Icon, { type IconName } from './Icon';
-import { formatMoney } from '../lib/money';
+import { formatMoney, formatPercent } from '../lib/money';
 
 /**
  * A progressive prompt: one tap, one question, and the next question only
@@ -456,7 +456,7 @@ export default function ExpectationPrompt({
       const worth = Math.round((days * annualIncome) / 260);
       return t.payVacation.replace('{d}', String(days)).replace('{v}', formatMoney(worth, lang));
     }
-    return t.payRate.replace('{r}', `${rate}%`).replace('{p}', province);
+    return t.payRate.replace('{r}', formatPercent(rate, lang)).replace('{p}', province);
   };
 
   const answerFor = async (key: QKey, value: string) => {
@@ -478,7 +478,7 @@ export default function ExpectationPrompt({
       const d = (await r.json()) as { ready?: boolean; n?: number; dist?: { k: string; pct: number }[] };
       if (d.ready && d.dist) {
         const mine = d.dist.find((x) => x.k === value);
-        if (mine) line = t.payPeers.replace('{pct}', `${mine.pct}%`).replace('{n}', String(d.n));
+        if (mine) line = t.payPeers.replace('{pct}', formatPercent(mine.pct, lang)).replace('{n}', String(d.n));
       }
     } catch { /* fall through to the engine payoff */ }
     setPayoff(line ?? engineFallback(key, value));

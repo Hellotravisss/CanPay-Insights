@@ -2,7 +2,7 @@
 import { useMemo } from 'react';
 import { useT } from '../lib/i18n';
 import type { CalculationRecord } from '../hooks/useCalculationHistory';
-import { formatMoney } from '../lib/money';
+import { formatMoney, formatPercent } from '../lib/money';
 
 // Your own pay history, drawn from calculations you saved.
 //
@@ -94,7 +94,7 @@ export default function PayCurve({ records }: { records: CalculationRecord[] }) 
         <div>
           <span className={`text-2xl font-bold tabular-nums ${up ? 'text-red-600' : 'text-ink'}`}>
             {up ? '+' : ''}
-            {changePct.toFixed(1)}%
+            {formatPercent(changePct, lang, 1)}
           </span>
           <span className="ml-2 text-xs text-mute">
             {t('curve.since')}{' '}

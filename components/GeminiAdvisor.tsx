@@ -16,7 +16,7 @@ import {
   TIER_EN,
 } from '../utils/taxOptimizer';
 import Icon from './Icon';
-import { formatMoney } from '../lib/money';
+import { formatMoney, formatPercent } from '../lib/money';
 
 interface Props {
   results: CalculationResult;
@@ -309,7 +309,7 @@ const GeminiAdvisor: React.FC<Props> = ({ results, inputs, onReportOpen }) => {
     // was told a 15% bracket that no longer exists (found 2026-09-22). Note that
     // each entry's `threshold` is the bracket's UPPER limit.
     const getTaxBracketInfo = (income: number) => {
-      const pct = (r: number) => `${+(r * 100).toFixed(2)}%`;
+      const pct = (r: number) => formatPercent(+(r * 100).toFixed(2), lang);
       const i = FEDERAL_BRACKETS.findIndex((b) => income <= b.threshold);
       const idx = i === -1 ? FEDERAL_BRACKETS.length - 1 : i;
       const cur = FEDERAL_BRACKETS[idx], nxt = FEDERAL_BRACKETS[idx + 1];
@@ -328,7 +328,7 @@ const GeminiAdvisor: React.FC<Props> = ({ results, inputs, onReportOpen }) => {
             {t('rep.execSummary')}
           </h4>
           <p className="text-[#15171C] leading-relaxed">
-            {t('rep.execA')}<span className="text-red-600 font-bold">{formatCurrency(annualIncome)}</span>{t('rep.execB')}<span className="text-red-600 font-bold">{inputs.province}</span>{t('rep.execC')}<span className="text-red-600 font-bold">{formatCurrency(annualTax)}</span>{t('rep.execD')}<span className="text-red-600 font-bold">{effectiveRate}</span>{t('rep.execE')}<span className="text-red-600 font-bold">{formatCurrency(taxOptimization.summary.totalPotentialSavings + annualEmployerMatchActual)}</span>{t('rep.execF')}
+            {t('rep.execA')}<span className="text-red-600 font-bold">{formatCurrency(annualIncome)}</span>{t('rep.execB')}<span className="text-red-600 font-bold">{inputs.province}</span>{t('rep.execC')}<span className="text-red-600 font-bold">{formatCurrency(annualTax)}</span>{t('rep.execD')}<span className="text-red-600 font-bold">{lang === 'fr' ? effectiveRate.replace('.', ',') : effectiveRate}</span>{t('rep.execE')}<span className="text-red-600 font-bold">{formatCurrency(taxOptimization.summary.totalPotentialSavings + annualEmployerMatchActual)}</span>{t('rep.execF')}
           </p>
         </div>
 
@@ -361,7 +361,7 @@ const GeminiAdvisor: React.FC<Props> = ({ results, inputs, onReportOpen }) => {
               </li>
               <li className="flex justify-between border-t border-[#E3E3EA] pt-2 mt-2">
                 <span>{t('rep.marginalRate')}:</span>
-                <span className="text-red-600 font-bold">{(marginalRate.combined * 100).toFixed(1)}%</span>
+                <span className="text-red-600 font-bold">{formatPercent(marginalRate.combined * 100, lang, 1)}</span>
               </li>
             </ul>
           </div>
@@ -384,7 +384,7 @@ const GeminiAdvisor: React.FC<Props> = ({ results, inputs, onReportOpen }) => {
             </div>
             <div className="bg-white p-3 rounded-lg border border-[#E3E3EA] mt-4">
               <p className="text-[#8A5A00] text-xs sm:text-sm">
-                <Icon name="bulb" tone="red" size={16} /> {t('rep.everyDollarPre')}<span className="font-bold">{(marginalRate.combined * 100).toFixed(1)}%</span>{t('rep.everyDollarPost')}
+                <Icon name="bulb" tone="red" size={16} /> {t('rep.everyDollarPre')}<span className="font-bold">{formatPercent(marginalRate.combined * 100, lang, 1)}</span>{t('rep.everyDollarPost')}
               </p>
             </div>
           </div>
@@ -1124,7 +1124,7 @@ const TaxOptimizationPanel: React.FC<TaxOptimizationPanelProps> = ({
         <TaxCard
           title={t('opt.marginalRate')}
           amount={marginalRate.combined * 100}
-          subtitle={`${t('opt.federalShort')} ${(marginalRate.federal * 100).toFixed(1)}% + ${t('opt.provShort')} ${(marginalRate.provincial * 100).toFixed(1)}%`}
+          subtitle={`${t('opt.federalShort')} ${formatPercent(marginalRate.federal * 100, lang, 1)} + ${t('opt.provShort')} ${formatPercent(marginalRate.provincial * 100, lang, 1)}`}
           isPercentage
         />
         <TaxCard
@@ -1238,7 +1238,7 @@ const TaxOptimizationPanel: React.FC<TaxOptimizationPanelProps> = ({
                       </td>
                       <td className="py-2 text-right text-red-600">{formatCurrency(scenario.taxSavings)}</td>
                       <td className="py-2 text-right text-[#5E6270]">{formatCurrency(scenario.effectiveCost)}</td>
-                      <td className="py-2 text-right text-[#5E6270]">{scenario.refundRate.toFixed(1)}%</td>
+                      <td className="py-2 text-right text-[#5E6270]">{formatPercent(scenario.refundRate, lang, 1)}</td>
                     </tr>
                   ))}
                 </tbody>
@@ -1320,7 +1320,7 @@ const TaxCard: React.FC<{
   <div className={`relative overflow-hidden rounded-2xl p-4 sm:p-5 ${highlight ? 'card-brand-3d text-white shadow-[0_10px_24px_-14px_rgba(158,11,16,0.7)]' : 'bg-white border border-[#E3E3EA]'}`}>
     <p className={`text-[11px] font-semibold uppercase tracking-[0.12em] mb-2 ${highlight ? 'text-red-100' : 'text-[#5E6270]'}`}>{title}</p>
     <p className={`font-display text-[1.75rem] leading-none font-semibold tabular-nums ${accent === 'green' ? 'text-red-600' : highlight ? 'text-white' : 'text-[#15171C]'}`}>
-      {isPercentage ? `${amount.toFixed(1)}%` : formatMoney(amount, lang)}
+      {isPercentage ? formatPercent(amount, lang, 1) : formatMoney(amount, lang)}
     </p>
     <p className={`text-xs mt-2 ${highlight ? 'text-red-100' : 'text-[#5E6270]'}`}>{subtitle}</p>
   </div>

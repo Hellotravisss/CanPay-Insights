@@ -20,3 +20,15 @@ export function formatMoney(n: number, lang: string, digits = 0): string {
     maximumFractionDigits: digits,
   }).format(value);
 }
+
+/**
+ * A percentage the same way: French 30,5 % (comma, no-break space before %), every other
+ * language 30.5% — the English output is exactly what the pages printed before.
+ * `n` is already in percent (30.5, not 0.305). With `digits` it is fixed to that many
+ * decimals; without, the number prints as it is (30.5, 30).
+ */
+export function formatPercent(n: number, lang: string, digits?: number): string {
+  const value = Number.isFinite(n) ? n : 0;
+  const s = digits === undefined ? String(value) : value.toFixed(digits);
+  return lang === 'fr' ? `${s.replace('.', ',')} %` : `${s}%`;
+}

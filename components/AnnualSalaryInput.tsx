@@ -8,7 +8,7 @@ import ReverseSalary from './ReverseSalary';
 import SpouseClaim from './SpouseClaim';
 import Under18 from './Under18';
 import Icon from './Icon';
-import { formatMoney } from '../lib/money';
+import { formatMoney, formatPercent } from '../lib/money';
 
 interface Props {
   inputs: AnnualSalaryInputs;
@@ -46,7 +46,7 @@ function EquityPayoff({ inputs }: { inputs: AnnualSalaryInputs }) {
         <span className="text-sm text-mute">{t('annual.equityOf').replace('{v}', money(equity))}</span>
       </p>
       <p className="mt-1 text-xs text-red-700">
-        {t('annual.equityLost').replace('{v}', money(lost)).replace('{p}', `${pct}%`)}
+        {t('annual.equityLost').replace('{v}', money(lost)).replace('{p}', formatPercent(pct, lang))}
       </p>
     </div>
   );
