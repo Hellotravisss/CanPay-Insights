@@ -162,6 +162,9 @@ const PaycheckDonutChart = ({
 const ResultsSection: React.FC<Props> = ({ results, provinceName }) => {
   const { t, lang } = useT();
   const formatCurrency = React.useCallback((val: number) => formatMoney(val, lang, 2), [lang]);
+  // Hours: French writes 75,0 h (decimal comma, space before the unit), as for money.
+  const hoursNum = (n: number) => (lang === 'fr' ? n.toFixed(1).replace('.', ',') : n.toFixed(1));
+  const hoursUnit = (n: number) => (lang === 'fr' ? `${hoursNum(n)}\u00A0h` : `${hoursNum(n)}h`);
   // RSUs (annual mode): in the year's totals, not on the cheque. totalPay is what the year's
   // deductions come out of, so the bar and the three rows add up.
   const equity = results.equityAnnual ?? 0;
@@ -247,7 +250,7 @@ const ResultsSection: React.FC<Props> = ({ results, provinceName }) => {
             </div>
             <div className="flex flex-wrap items-center gap-2 text-sm text-red-50 font-medium sm:justify-end">
               <span className="chip-glass px-3 py-1 rounded-full text-xs font-semibold">
-                {totalHours > 0 ? `${totalHours.toFixed(1)} ${t('res.hoursCap')}` : payPeriodLabel}
+                {totalHours > 0 ? `${hoursNum(totalHours)} ${t('res.hoursCap')}` : payPeriodLabel}
               </span>
               <span className="chip-glass px-3 py-1 rounded-full tabular-nums">
                 {t('res.grossPrePeriod')}{' '}
@@ -371,25 +374,25 @@ const ResultsSection: React.FC<Props> = ({ results, provinceName }) => {
                    </div>
                  ) : (
                    <div className="flex justify-between text-[#2B2E36]">
-                     <span>{t('res.regularPay')} ({results.regularHours.toFixed(1)}h)</span>
+                     <span>{t('res.regularPay')} ({hoursUnit(results.regularHours)})</span>
                      <span className="font-medium">{formatCurrency(earn.regular ?? 0)}</span>
                    </div>
                  )}
                  {results.overtimeHours15 > 0 && (
                    <div className="flex justify-between text-ink-2">
-                     <span>{t('res.ot15')} ({results.overtimeHours15.toFixed(1)}h)</span>
+                     <span>{t('res.ot15')} ({hoursUnit(results.overtimeHours15)})</span>
                      <span className="font-medium">{earn.overtime15 !== undefined ? formatCurrency(earn.overtime15) : t('res.included')}</span>
                    </div>
                  )}
                  {results.overtimeHours20 > 0 && (
                    <div className="flex justify-between text-ink font-bold">
-                     <span>{t('res.ot20')} ({results.overtimeHours20.toFixed(1)}h)</span>
+                     <span>{t('res.ot20')} ({hoursUnit(results.overtimeHours20)})</span>
                      <span className="font-medium">{earn.overtime20 !== undefined ? formatCurrency(earn.overtime20) : t('res.included')}</span>
                    </div>
                  )}
                  {results.shiftPremiumHours > 0 && (
                    <div className="flex justify-between text-red-600">
-                     <span>{t('hourly.shiftPremium')} ({results.shiftPremiumHours.toFixed(1)}h)</span>
+                     <span>{t('hourly.shiftPremium')} ({hoursUnit(results.shiftPremiumHours)})</span>
                      <span className="font-medium">{earn.shiftPremium !== undefined ? formatCurrency(earn.shiftPremium) : t('res.plusPremium')}</span>
                    </div>
                  )}
