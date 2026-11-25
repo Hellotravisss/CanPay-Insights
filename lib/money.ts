@@ -9,7 +9,7 @@
  * the stub they compare against. Decided 2026-11-25 (Travis): French only.
  *
  * Display only. Inputs keep accepting plain digits in every language.
- * The CanPay iOS app has the same function in src/lib/money.ts — keep them identical.
+ * Same file in the CanPay website (lib/money.ts) and the iOS app (src/lib/money.ts) — keep them identical.
  */
 export function formatMoney(n: number, lang: string, digits = 0): string {
   const value = Number.isFinite(n) ? n : 0;
