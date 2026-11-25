@@ -8,6 +8,7 @@ import ReverseSalary from './ReverseSalary';
 import SpouseClaim from './SpouseClaim';
 import Under18 from './Under18';
 import Icon from './Icon';
+import { formatMoney } from '../lib/money';
 
 interface Props {
   inputs: AnnualSalaryInputs;
@@ -26,7 +27,7 @@ interface Props {
  * bonus, so the two products can never disagree.
  */
 function EquityPayoff({ inputs }: { inputs: AnnualSalaryInputs }) {
-  const { t } = useT();
+  const { t, lang } = useT();
   const equity = inputs.equityVestingAnnual ?? 0;
   if (!equity || !inputs.annualSalary) return null;
 
@@ -35,7 +36,7 @@ function EquityPayoff({ inputs }: { inputs: AnnualSalaryInputs }) {
   const kept = Math.max(0, withIt - withOut);
   const lost = Math.max(0, equity - kept);
   const pct = equity > 0 ? Math.round((lost / equity) * 1000) / 10 : 0;
-  const money = (n: number) => `$${Math.round(n).toLocaleString('en-CA')}`;
+  const money = (n: number) => formatMoney(Math.round(n), lang);
 
   return (
     <div className="rounded-lg bg-white border border-red-100 px-4 py-3">
@@ -52,7 +53,7 @@ function EquityPayoff({ inputs }: { inputs: AnnualSalaryInputs }) {
 }
 
 const AnnualSalaryInput: React.FC<Props> = ({ inputs, setInputs }) => {
-  const { t } = useT();
+  const { t, lang } = useT();
   const [showAdditional, setShowAdditional] = useState(false);
   const [showDeductions, setShowDeductions] = useState(false);
 
@@ -65,7 +66,7 @@ const AnnualSalaryInput: React.FC<Props> = ({ inputs, setInputs }) => {
   const parseAmt = (v: string) => Math.max(0, parseFloat(v) || 0);
 
   const formatCurrency = (value: number) => {
-    return new Intl.NumberFormat('en-CA', { style: 'currency', currency: 'CAD', maximumFractionDigits: 0 }).format(value);
+    return formatMoney(value, lang);
   };
 
   return (

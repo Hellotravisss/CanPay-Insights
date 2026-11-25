@@ -7,6 +7,7 @@ import AnimatedAmount from './AnimatedAmount';
 import { CalculationResult, PayFrequency, Province } from '../types';
 import { provinceDisplayName } from '../lib/provinceNames';
 import { useT } from '../lib/i18n';
+import { formatMoney } from '../lib/money';
 
 interface Props {
   results: CalculationResult;
@@ -158,15 +159,7 @@ const PaycheckDonutChart = ({
 
 const ResultsSection: React.FC<Props> = ({ results, provinceName }) => {
   const { t, lang } = useT();
-  const currencyFormatter = React.useMemo(
-    () => new Intl.NumberFormat('en-CA', { style: 'currency', currency: 'CAD' }),
-    [],
-  );
-
-  const formatCurrency = React.useCallback(
-    (val: number) => currencyFormatter.format(Number.isFinite(val) ? val : 0),
-    [currencyFormatter],
-  );
+  const formatCurrency = React.useCallback((val: number) => formatMoney(val, lang, 2), [lang]);
   
   // Get pay frequency display label
   const getPayFrequencyLabel = (frequency?: string) => {

@@ -16,6 +16,7 @@ import {
   TIER_EN,
 } from '../utils/taxOptimizer';
 import Icon from './Icon';
+import { formatMoney } from '../lib/money';
 
 interface Props {
   results: CalculationResult;
@@ -28,8 +29,6 @@ interface Props {
 // (same constant as in src/content/components/ArticleView.tsx).
 const WEALTHSIMPLE_REFERRAL_URL = 'https://www.wealthsimple.com/invite/KGAAWL';
 
-const formatCurrency = (val: number) =>
-  new Intl.NumberFormat('en-CA', { style: 'currency', currency: 'CAD', maximumFractionDigits: 0 }).format(val);
 
 // Detect mobile devices
 const isMobileDevice = () => {
@@ -207,7 +206,8 @@ const renderMarkdownLine = (line: string, isImage: boolean): React.ReactNode => 
 };
 
 const GeminiAdvisor: React.FC<Props> = ({ results, inputs, onReportOpen }) => {
-  const { t } = useT();
+  const { t, lang } = useT();
+  const formatCurrency = (val: number) => formatMoney(val, lang);
   const APP_URL = 'https://canpayinsights.ca/';
 
   const [advice, setAdvice] = useState<string | null>(null);
@@ -967,7 +967,7 @@ const GeminiAdvisor: React.FC<Props> = ({ results, inputs, onReportOpen }) => {
             <div className="flex gap-12 text-right">
               <div>
                 <p className="text-[#5E6270] text-xs font-bold uppercase tracking-[0.3em] mb-2">Annual Income</p>
-                <p className="text-4xl font-bold text-red-500">{formatCurrency(results.grossPayAnnual)}</p>
+                <p className="text-4xl font-bold text-red-500">{formatMoney(results.grossPayAnnual, 'en')}</p>
               </div>
               <div>
                 <p className="text-[#5E6270] text-xs font-bold uppercase tracking-[0.3em] mb-2">Province</p>
@@ -983,12 +983,12 @@ const GeminiAdvisor: React.FC<Props> = ({ results, inputs, onReportOpen }) => {
               <div className="grid grid-cols-2 gap-8">
                 <div>
                   <p className="text-[#5E6270] text-sm mb-1">Recommended RRSP Contribution</p>
-                  <p className="text-3xl font-bold text-red-600">{formatCurrency(taxOptimization.rrsp.recommendedAmount)}</p>
-                  <p className="text-[#5E6270] text-sm mt-1">Estimated Refund: {formatCurrency(taxOptimization.rrsp.refundAmount)}</p>
+                  <p className="text-3xl font-bold text-red-600">{formatMoney(taxOptimization.rrsp.recommendedAmount, 'en')}</p>
+                  <p className="text-[#5E6270] text-sm mt-1">Estimated Refund: {formatMoney(taxOptimization.rrsp.refundAmount, 'en')}</p>
                 </div>
                 <div>
                   <p className="text-[#5E6270] text-sm mb-1">Total Tax Savings Potential</p>
-                  <p className="text-3xl font-bold text-red-600">{formatCurrency(taxOptimization.summary.totalPotentialSavings + annualEmployerMatchActual)}</p>
+                  <p className="text-3xl font-bold text-red-600">{formatMoney(taxOptimization.summary.totalPotentialSavings + annualEmployerMatchActual, 'en')}</p>
                   <p className="text-[#5E6270] text-sm mt-1">Marginal Rate: {(taxOptimization.rrsp.marginalRate * 100).toFixed(1)}%</p>
                 </div>
               </div>
@@ -1089,7 +1089,8 @@ const TaxOptimizationPanel: React.FC<TaxOptimizationPanelProps> = ({
     s => s.suitability === 'recommended'
   );
 
-  const { t } = useT();
+  const { t, lang } = useT();
+  const formatCurrency = (val: number) => formatMoney(val, lang);
   const hasActualRRSP = annualRRSPActual > 0;
   const remainingRRSPOptimum = Math.max(0, rrsp.recommendedAmount - annualRRSPActual);
   const potentialExtraRefund = taxSavedByDeduction(annualIncome - annualRRSPActual, province, remainingRRSPOptimum, pensionAnnual);
@@ -1306,15 +1307,18 @@ const TaxCard: React.FC<{
   highlight?: boolean;
   isPercentage?: boolean;
   accent?: 'green' | 'red';
-}> = ({ title, amount, subtitle, highlight, isPercentage, accent }) => (
+}> = ({ title, amount, subtitle, highlight, isPercentage, accent }) => {
+  const { lang } = useT();
+  return (
   <div className={`relative overflow-hidden rounded-2xl p-4 sm:p-5 ${highlight ? 'card-brand-3d text-white shadow-[0_10px_24px_-14px_rgba(158,11,16,0.7)]' : 'bg-white border border-[#E3E3EA]'}`}>
     <p className={`text-[11px] font-semibold uppercase tracking-[0.12em] mb-2 ${highlight ? 'text-red-100' : 'text-[#5E6270]'}`}>{title}</p>
     <p className={`font-display text-[1.75rem] leading-none font-semibold tabular-nums ${accent === 'green' ? 'text-red-600' : highlight ? 'text-white' : 'text-[#15171C]'}`}>
-      {isPercentage ? `${amount.toFixed(1)}%` : formatCurrency(amount)}
+      {isPercentage ? `${amount.toFixed(1)}%` : formatMoney(amount, lang)}
     </p>
     <p className={`text-xs mt-2 ${highlight ? 'text-red-100' : 'text-[#5E6270]'}`}>{subtitle}</p>
   </div>
-);
+  );
+};
 
 const MetricBox: React.FC<{
   label: string;
@@ -1341,8 +1345,8 @@ const StrategyItem: React.FC<{ strategy: import('../utils/taxOptimizer').TaxStra
     </div>
     <p className="text-xs text-[#5E6270] mb-2">{strategy.description}</p>
     <div className="flex items-center gap-4 text-xs">
-      <span className="text-red-600">Est. Savings: {formatCurrency(strategy.estimatedSavings)}</span>
-      <span className="text-[#5E6270]">Max: {formatCurrency(strategy.maxBenefit)}</span>
+      <span className="text-red-600">Est. Savings: {formatMoney(strategy.estimatedSavings, 'en')}</span>
+      <span className="text-[#5E6270]">Max: {formatMoney(strategy.maxBenefit, 'en')}</span>
     </div>
     <ul className="mt-2 space-y-1">
       {strategy.actionItems.slice(0, 2).map((item, idx) => (

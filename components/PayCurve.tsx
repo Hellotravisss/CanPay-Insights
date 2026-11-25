@@ -2,6 +2,7 @@
 import { useMemo } from 'react';
 import { useT } from '../lib/i18n';
 import type { CalculationRecord } from '../hooks/useCalculationHistory';
+import { formatMoney } from '../lib/money';
 
 // Your own pay history, drawn from calculations you saved.
 //
@@ -13,7 +14,7 @@ import type { CalculationRecord } from '../hooks/useCalculationHistory';
 type Point = { date: Date; gross: number; net: number; province: string; label: string };
 
 export default function PayCurve({ records }: { records: CalculationRecord[] }) {
-  const { t } = useT();
+  const { t, lang } = useT();
 
   const points = useMemo<Point[]>(() => {
     return records
@@ -30,7 +31,7 @@ export default function PayCurve({ records }: { records: CalculationRecord[] }) 
 
   if (points.length === 0) return null;
 
-  const money = (n: number) => `$${Math.round(n).toLocaleString('en-CA')}`;
+  const money = (n: number) => formatMoney(Math.round(n), lang);
   const first = points[0];
   const last = points[points.length - 1];
   const spanDays = (+last.date - +first.date) / 86_400_000;

@@ -7,6 +7,7 @@ import OfferReport from '../app/report/offer/OfferReport';
 import { provinceDisplayName } from '../lib/provinceNames';
 import { Province, PayFrequency, type CalculationMode as CalcMode } from '../types';
 import { calculateFromAnnualSalary } from '../utils/taxEngine';
+import { formatMoney } from '../lib/money';
 
 /**
  * Paid products under the result. Both are REAL (Stripe Checkout): the
@@ -409,7 +410,7 @@ function OfferFields({ o, set, title, t, lang }: { o: OfferDraft; set: (v: Offer
   );
 }
 
-const money = (n: number) => `$${Math.abs(Math.round(n)).toLocaleString('en-CA')}`;
+const money = (n: number, lang: string) => formatMoney(Math.abs(Math.round(n)), lang);
 
 export default function FakeDoors({
   mode, province, annualIncome, lang,
@@ -547,7 +548,7 @@ export default function FakeDoors({
             ) : (
               <p className="flex items-baseline gap-2">
                 <span className={`text-3xl font-extrabold tabular-nums ${gap >= 0 ? 'text-red-600' : 'text-red-600'}`}>
-                  {gap >= 0 ? '+' : '−'}{money(gap)}
+                  {gap >= 0 ? '+' : '−'}{money(gap, lang)}
                 </span>
                 <span className="text-sm text-mute">{t.perYear}</span>
               </p>

@@ -1,6 +1,7 @@
 'use client';
 import { buildCapTimeline } from '../lib/capTimeline';
 import Icon from './Icon';
+import { formatMoney } from '../lib/money';
 
 /**
  * "Why your cheques get bigger late in the year."
@@ -102,7 +103,7 @@ const D: Record<string, Record<string, string>> = {
   },
 };
 
-const money = (n: number) => `$${Math.round(n).toLocaleString('en-CA')}`;
+const money = (n: number, lang: string) => formatMoney(Math.round(n), lang);
 
 export default function CapTimeline({ annualIncome, province, lang }: { annualIncome: number; province: string; lang: string }) {
   const t = D[lang] ?? D.en;
@@ -130,12 +131,12 @@ export default function CapTimeline({ annualIncome, province, lang }: { annualIn
         {timeline.events.map((e) => (
           <li key={e.period} className="flex items-baseline gap-2 text-sm text-ink-2">
             <span className="font-semibold">{e.kinds.map((k) => t[k]).join(' · ')}:</span>
-            <span>{t.from.replace('{m}', monthName(e.month)).replace('{v}', money(e.perChequeBump))}</span>
+            <span>{t.from.replace('{m}', monthName(e.month)).replace('{v}', money(e.perChequeBump, lang))}</span>
           </li>
         ))}
       </ul>
       <p className="mt-3 border-t border-line pt-3 text-sm font-semibold text-red-600">
-        {t.total.replace('{v}', money(timeline.lastChequeBump))}
+        {t.total.replace('{v}', money(timeline.lastChequeBump, lang))}
       </p>
       <p className="mt-1 text-xs text-mute">{t.warn}</p>
     </div>

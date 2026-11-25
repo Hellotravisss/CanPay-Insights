@@ -3,6 +3,7 @@ import { useEffect, useRef, useState } from 'react';
 import { recordCalcEvent, parseFsa, rememberFsa, rememberedFsa, type Neighbourhood } from '../lib/telemetry';
 import type { CalculationMode as CalcMode } from '../types';
 import Icon from './Icon';
+import { formatMoney } from '../lib/money';
 
 /**
  * "Where does your pay sit in your neighbourhood?" — the site's first
@@ -315,7 +316,7 @@ const DICT: Record<string, Record<string, string>> = {
   },
 };
 
-const money = (n: number) => '$' + Math.round(n).toLocaleString('en-CA');
+const money = (n: number, lang: string) => formatMoney(Math.round(n), lang);
 const fill = (s: string, vars: Record<string, string | number>) =>
   Object.entries(vars).reduce((acc, [k, v]) => acc.split(`{${k}}`).join(String(v)), s);
 
@@ -354,7 +355,7 @@ export default function NeighbourhoodPrompt({
       const rec = tab?.fsa[fsa];
       if (!tab || !rec) { setPayoff({ line: fill(t.noData, { fsa }), basis: '' }); return; }
       const { pct, median } = placeInFsa(rec, tab.brackets, annualIncome);
-      const vars = { n: rec.n.toLocaleString('en-CA'), year: tab.year, fsa, income: money(annualIncome), pct: pct ?? 0, top: Math.max(1, 100 - (pct ?? 0)), med: median === null ? '—' : money(median) };
+      const vars = { n: rec.n.toLocaleString('en-CA'), year: tab.year, fsa, income: money(annualIncome, lang), pct: pct ?? 0, top: Math.max(1, 100 - (pct ?? 0)), med: median === null ? '—' : money(median, lang) };
       const line = fill((pct ?? 0) >= 90 ? t.payoffTop : t.payoff, vars);
       setPayoff({ line, basis: fill(t.basis, { year: tab.year }) });
     });

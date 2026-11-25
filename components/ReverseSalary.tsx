@@ -4,11 +4,12 @@ import type { AnnualSalaryInputs } from '../types';
 import { useT } from '../lib/i18n';
 import { grossForNet } from '../utils/reverseSalary';
 import { recordCalcEvent } from '../lib/telemetry';
+import { formatMoney } from '../lib/money';
 
 // Net → gross: "I want to keep $X; what salary is that?" The answer comes from
 // the engine itself (utils/reverseSalary), with every other input the visitor
 // has set, so it can never disagree with the forward calculation.
-const money = (n: number) => '$' + Math.round(n).toLocaleString('en-CA');
+const money = (n: number, lang: string) => formatMoney(Math.round(n), lang);
 
 export default function ReverseSalary({ inputs, setInputs }: {
   inputs: AnnualSalaryInputs;
@@ -82,7 +83,7 @@ export default function ReverseSalary({ inputs, setInputs }: {
                 <>
                   <p className="text-sm text-ink-2">
                     {t('annual.revResult')}
-                    <strong className="text-lg text-ink"> {money(gross)}</strong>
+                    <strong className="text-lg text-ink"> {money(gross, lang)}</strong>
                   </p>
                   <p className="mt-1 text-xs text-mute">{t('annual.revBasis')}</p>
                   <button

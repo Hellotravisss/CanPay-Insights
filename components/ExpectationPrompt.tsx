@@ -15,6 +15,7 @@ import { PayFrequency, type CalculationMode as CalcMode } from '../types';
 import { calculateFromAnnualSalary } from '../utils/taxEngine';
 import { INTENT_DICT } from './IntentPrompt';
 import Icon, { type IconName } from './Icon';
+import { formatMoney } from '../lib/money';
 
 /**
  * A progressive prompt: one tap, one question, and the next question only
@@ -453,7 +454,7 @@ export default function ExpectationPrompt({
       // The pay attached to the days off — the same maths the offer report uses.
       const days = { '0-10': 8, '11-15': 13, '16-20': 18, '21-25': 23, '26-plus': 28 }[value] ?? 15;
       const worth = Math.round((days * annualIncome) / 260);
-      return t.payVacation.replace('{d}', String(days)).replace('{v}', `$${worth.toLocaleString('en-CA')}`);
+      return t.payVacation.replace('{d}', String(days)).replace('{v}', formatMoney(worth, lang));
     }
     return t.payRate.replace('{r}', `${rate}%`).replace('{p}', province);
   };

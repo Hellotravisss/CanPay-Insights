@@ -15,6 +15,7 @@ import { industry as esInd } from '../lib/translations/es';
 import { industry as ukInd } from '../lib/translations/uk';
 import { industry as koInd } from '../lib/translations/ko';
 import { industry as viInd } from '../lib/translations/vi';
+import { formatMoney } from '../lib/money';
 
 type Lang = 'en' | 'fr' | 'zh' | 'pa' | 'tl' | 'hi' | 'es' | 'uk' | 'ko' | 'vi';
 
@@ -462,8 +463,8 @@ export default function IndustryComparison({
                 .replace('{basis}', headline.basis === 'hourly' ? t.basisHourly : t.basisAnnual)
                 .replace('{prov}', province)
                 .replace('{amt}', headline.basis === 'hourly'
-                  ? `$${headline.median.toFixed(2)}/h`
-                  : `$${Math.round(headline.median).toLocaleString('en-CA')}`),
+                  ? `${formatMoney(headline.median, lang, 2)}/h`
+                  : formatMoney(Math.round(headline.median), lang)),
               headline.pct === 0 ? 'text-ink' : headline.pct > 0 ? 'text-red-600' : 'text-red-700',
             )}
           </p>
