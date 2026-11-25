@@ -27,6 +27,13 @@ interface Props {
 
 // Personal invite link — swap to the Wealthsimple Affiliate Program URL once approved
 // (same constant as in src/content/components/ArticleView.tsx).
+/**
+ * Employment income for the year: cash pay plus RSUs vesting. RRSP room (18% of earned
+ * income), the marginal rate and the refund all depend on it; grossPayAnnual alone left the
+ * shares out and understated all three for anyone with RSUs (fixed 2026-11-25).
+ */
+const employmentIncome = (r: CalculationResult) => r.grossPayAnnual + (r.equityAnnual ?? 0);
+
 const WEALTHSIMPLE_REFERRAL_URL = 'https://www.wealthsimple.com/invite/KGAAWL';
 
 
@@ -268,19 +275,19 @@ const GeminiAdvisor: React.FC<Props> = ({ results, inputs, onReportOpen }) => {
 
   // Local tax optimization calculations
   const taxOptimization = useMemo(() => {
-    return generateTaxOptimization(results.grossPayAnnual, inputs.province, pensionAnnual);
-  }, [results.grossPayAnnual, inputs.province, pensionAnnual]);
+    return generateTaxOptimization(employmentIncome(results), inputs.province, pensionAnnual);
+  }, [employmentIncome(results), inputs.province, pensionAnnual]);
 
   const rrspScenarios = useMemo(() => {
-    return calculateRRSPScenarios(results.grossPayAnnual, inputs.province, pensionAnnual);
-  }, [results.grossPayAnnual, inputs.province, pensionAnnual]);
+    return calculateRRSPScenarios(employmentIncome(results), inputs.province, pensionAnnual);
+  }, [employmentIncome(results), inputs.province, pensionAnnual]);
 
   const marginalRate = useMemo(() => {
-    return calculateMarginalRate(results.grossPayAnnual, inputs.province, pensionAnnual);
-  }, [results.grossPayAnnual, inputs.province, pensionAnnual]);
+    return calculateMarginalRate(employmentIncome(results), inputs.province, pensionAnnual);
+  }, [employmentIncome(results), inputs.province, pensionAnnual]);
 
   const renderSmartReport = (isSnapshot = false) => {
-    const annualIncome = results.grossPayAnnual || 0;
+    const annualIncome = employmentIncome(results) || 0;
     const netIncome = results.netPayAnnual || 0;
     const totalDeductions = results.totalDeductionsAnnual || 0;
     // The year's own figures from the engine. "Per period × periods" charged a
@@ -811,7 +818,7 @@ const GeminiAdvisor: React.FC<Props> = ({ results, inputs, onReportOpen }) => {
         onToggleScenarios={() => setShowRRSPScenarios(!showRRSPScenarios)}
         annualRRSPActual={annualRRSPActual}
         annualEmployerMatchActual={annualEmployerMatchActual}
-        annualIncome={results.grossPayAnnual || 0}
+        annualIncome={employmentIncome(results) || 0}
         province={inputs.province}
         pensionAnnual={pensionAnnual}
       />
@@ -967,7 +974,7 @@ const GeminiAdvisor: React.FC<Props> = ({ results, inputs, onReportOpen }) => {
             <div className="flex gap-12 text-right">
               <div>
                 <p className="text-[#5E6270] text-xs font-bold uppercase tracking-[0.3em] mb-2">Annual Income</p>
-                <p className="text-4xl font-bold text-red-500">{formatMoney(results.grossPayAnnual, 'en')}</p>
+                <p className="text-4xl font-bold text-red-500">{formatMoney(employmentIncome(results), 'en')}</p>
               </div>
               <div>
                 <p className="text-[#5E6270] text-xs font-bold uppercase tracking-[0.3em] mb-2">Province</p>
@@ -1390,7 +1397,7 @@ You are a professional Canadian tax planner. Based on the following client's spe
 
 ## Client Basic Information
 - Province: ${inputs.province}
-- Annual Income: $${results.grossPayAnnual.toLocaleString()}
+- Annual Income: $${employmentIncome(results).toLocaleString()}
 - Marginal Tax Rate: ${(rrsp.marginalRate * 100).toFixed(1)}%
 - Client's Current RRSP Setup:
   - Calculation Type: ${isPercent ? 'Percentage-based' : 'Fixed-amount'}
@@ -1443,7 +1450,7 @@ Your advice MUST be tailored to their current situation:
    - Explain tax implications when withdrawing from RRSP in retirement.
 
 2. **TFSA vs RRSP Priority Advice** (2-3 sentences)
-   - Choice recommendations based on client's income level ($${results.grossPayAnnual.toLocaleString()}) and tax bracket (${(rrsp.marginalRate * 100).toFixed(1)}%).
+   - Choice recommendations based on client's income level ($${employmentIncome(results).toLocaleString()}) and tax bracket (${(rrsp.marginalRate * 100).toFixed(1)}%).
    - Best use cases for each account type.
 
 3. **FHSA Usage Recommendations** (2-3 sentences)

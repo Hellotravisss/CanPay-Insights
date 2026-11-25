@@ -255,9 +255,19 @@ export interface CalculationResult {
   otherDeductions?: number;
   netPayBiWeekly: number;
   
+  /** Cash pay for the year (salary and other cash income). Excludes RSUs — see equityAnnual. */
   grossPayAnnual: number;
+  /** The year's take-home including RSUs kept after tax: grossPayAnnual + (equityAnnual ?? 0) − totalDeductionsAnnual. */
   netPayAnnual: number;
   totalDeductionsAnnual: number;
+  /**
+   * RSUs vesting this year (annual mode), set only when > 0. In netPayAnnual,
+   * totalDeductionsAnnual and annual.*; NOT in grossPayAnnual and NOT in any
+   * per-period figure — the per-period figures are the pay cheque, which is cash.
+   */
+  equityAnnual?: number;
+  /** What the pay cheques add up to over the year (net without the shares). Set only with equityAnnual. */
+  netPayAnnualCash?: number;
   /**
    * The year's deductions by kind. Use these for annual figures — never
    * "per-period × periods": after a one-off payment (a bonus paid this period)

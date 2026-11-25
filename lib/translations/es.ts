@@ -165,6 +165,8 @@ export const main: Record<string, string> = {
   'res.grossIncomePre': 'Ingreso bruto (antes de impuestos)',
   'res.totalTaxDed': 'Impuestos y deducciones totales',
   'res.netIncomePost': 'Ingreso neto (después de impuestos)',
+  'res.equityRow': 'RSU adquiridas este año (acciones)',
+  'res.netInclShares': 'Incluye {v} que conserva en acciones después de impuestos, no en efectivo en sus cheques de pago.',
   'res.taxDays': 'De 260 días laborables al año, unos {tax} días de sueldo van al impuesto sobre la renta y {contrib} días al CPP/QPP y al EI, que vuelven a usted como pensión y seguro.',
   'res.qcTitle': 'Reglas fiscales especiales de Quebec aplicadas',
   'res.qcDesc': 'Este cálculo incluye el sistema único de Quebec: QPP, QPIP, una tasa de EI más baja y la reducción del impuesto federal. Los resultados son estimados basados en las tasas de {year}.',

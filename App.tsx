@@ -637,11 +637,15 @@ const App: React.FC = () => {
                     it evaporates the moment the reader scrolls on. */}
                 {/* Above the ceilings, real paycheques jump mid-year when
                     CPP/EI max out — named month + exact size, engine-derived. */}
-                <CapTimeline
-                  annualIncome={results.grossPayAnnual}
-                  province={currentProvince}
-                  lang={lang}
-                />
+                {/* Not with RSUs: CPP is also taken at each vest, so the month the
+                    cheques jump depends on vest dates this calculator does not know. */}
+                {!(results.equityAnnual && results.equityAnnual > 0) && (
+                  <CapTimeline
+                    annualIncome={results.grossPayAnnual}
+                    province={currentProvince}
+                    lang={lang}
+                  />
+                )}
                 <ExpectationPrompt
                   mode={mode}
                   province={currentProvince}

@@ -21,7 +21,7 @@ export default function PayCurve({ records }: { records: CalculationRecord[] }) 
       .map((r) => ({
         date: new Date(r.createdAt),
         gross: r.results?.grossPayAnnual ?? 0,
-        net: r.results?.netPayAnnual ?? 0,
+        net: r.results?.netPayAnnualCash ?? r.results?.netPayAnnual ?? 0,
         province: r.province,
         label: r.name,
       }))

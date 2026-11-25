@@ -160,6 +160,10 @@ const PaycheckDonutChart = ({
 const ResultsSection: React.FC<Props> = ({ results, provinceName }) => {
   const { t, lang } = useT();
   const formatCurrency = React.useCallback((val: number) => formatMoney(val, lang, 2), [lang]);
+  // RSUs (annual mode): in the year's totals, not on the cheque. totalPay is what the year's
+  // deductions come out of, so the bar and the three rows add up.
+  const equity = results.equityAnnual ?? 0;
+  const totalPay = results.grossPayAnnual + equity;
   
   // Get pay frequency display label
   const getPayFrequencyLabel = (frequency?: string) => {
@@ -235,7 +239,7 @@ const ResultsSection: React.FC<Props> = ({ results, provinceName }) => {
                   cheques with a monthly figure and read a $200 gap as an error. */}
               {results.payFrequency !== PayFrequency.MONTHLY && results.netPayAnnual > 0 && (
                 <p className="text-sm text-red-100 mt-1 tabular-nums">
-                  {t('res.monthlyAvg')} <span className="font-bold text-white">{formatCurrency(results.netPayAnnual / 12)}</span>
+                  {t('res.monthlyAvg')} <span className="font-bold text-white">{formatCurrency((results.netPayAnnualCash ?? results.netPayAnnual) / 12)}</span>
                 </p>
               )}
             </div>
@@ -271,15 +275,15 @@ const ResultsSection: React.FC<Props> = ({ results, provinceName }) => {
           <p className="text-[11px] font-semibold uppercase tracking-[0.14em] text-[#5E6270]">{TAX_YEAR}</p>
           <h3 className="font-display text-xl font-semibold text-[#15171C] mb-4">{t('res.annualProjection')}</h3>
 
-          {results.grossPayAnnual > 0 && (
+          {totalPay > 0 && (
             <div className="pc mb-5" aria-hidden="true">
               <div className="pm-x flex h-2.5 w-full gap-[2px] overflow-hidden rounded-full">
-                <div className="h-full rounded-l-full bg-[#C8161A] transition-[width] duration-500 ease-[cubic-bezier(0.2,0,0,1)]" style={{ width: `${Math.max(0, Math.min(100, (results.netPayAnnual / results.grossPayAnnual) * 100))}%` }} />
+                <div className="h-full rounded-l-full bg-[#C8161A] transition-[width] duration-500 ease-[cubic-bezier(0.2,0,0,1)]" style={{ width: `${Math.max(0, Math.min(100, (results.netPayAnnual / totalPay) * 100))}%` }} />
                 <div className="h-full flex-1 rounded-r-full bg-[#A2A6B0]" />
               </div>
               <div className="mt-1.5 flex justify-between text-[11px] text-[#5E6270] tabular-nums">
-                <span><span className="font-semibold text-red-600">{Math.round((results.netPayAnnual / results.grossPayAnnual) * 100)}%</span> {t('res.netPay')}</span>
-                <span>{Math.round((results.totalDeductionsAnnual / results.grossPayAnnual) * 100)}% {t('res.deductions')}</span>
+                <span><span className="font-semibold text-red-600">{Math.round((results.netPayAnnual / totalPay) * 100)}%</span> {t('res.netPay')}</span>
+                <span>{Math.round((results.totalDeductionsAnnual / totalPay) * 100)}% {t('res.deductions')}</span>
               </div>
             </div>
           )}
@@ -289,6 +293,12 @@ const ResultsSection: React.FC<Props> = ({ results, provinceName }) => {
               <dt className="text-sm text-[#5E6270]">{t('res.grossIncomePre')}</dt>
               <dd className="text-lg font-semibold text-[#15171C] tabular-nums">{formatCurrency(results.grossPayAnnual)}</dd>
             </div>
+            {equity > 0 && (
+              <div className="flex justify-between items-baseline gap-4 py-2.5">
+                <dt className="text-sm text-[#5E6270]">{t('res.equityRow')}</dt>
+                <dd className="text-base font-semibold text-[#15171C] tabular-nums">+ {formatCurrency(equity)}</dd>
+              </div>
+            )}
             <div className="flex justify-between items-baseline gap-4 py-2.5">
               <dt className="text-sm text-[#5E6270]">{t('res.totalTaxDed')}</dt>
               <dd className="text-base text-[#535866] tabular-nums">− {formatCurrency(results.totalDeductionsAnnual)}</dd>
@@ -298,6 +308,11 @@ const ResultsSection: React.FC<Props> = ({ results, provinceName }) => {
               <dd className="font-display text-[1.9rem] leading-none font-semibold text-red-600 tabular-nums whitespace-nowrap">{formatCurrency(results.netPayAnnual)}</dd>
             </div>
           </dl>
+          {equity > 0 && results.netPayAnnualCash !== undefined && (
+            <p className="mt-2 text-xs leading-5 text-[#5E6270]">
+              {t('res.netInclShares').replace('{v}', formatCurrency(results.netPayAnnual - results.netPayAnnualCash))}
+            </p>
+          )}
           {days && (
             <p className="mt-4 text-xs leading-5 text-[#5E6270]">
               {t('res.taxDays').replace('{tax}', String(days.tax)).replace('{contrib}', String(days.contributions))}

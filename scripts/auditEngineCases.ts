@@ -196,9 +196,55 @@ expect('one $200 day annualised', daily.grossPayAnnual, 48000);
   }
 }
 
+// RSUs (2026-11-25). Until then the pay cheque included the shares (net per
+// cheque above gross per cheque) and the year did not add up (gross without the
+// shares, net with them). Rules checked, each against the engine's own
+// salary-only path that the CRA golden test covers:
+//   - the YEAR is taxed as salary + shares: CPP/QPP equal a salary of S + E,
+//     EI equals a salary of S alone (shares are pensionable, not insurable);
+//     income tax equals S + E's except the smaller EI credit (a few dollars);
+//   - the PAY CHEQUE is cash: every per-period figure equals the salary-only run
+//     (CRA's periodic formula ignores a vest; its tax is usually sold-to-cover);
+//   - the year adds up: gross + shares − deductions = net, and the cheques'
+//     yearly net (netPayAnnualCash) is the salary-only net.
+{
+  const annualRun = (province: string, annualSalary: number, equityVestingAnnual = 0) =>
+    calculateFromAnnualSalary({ province, annualSalary, payFrequency: PayFrequency.BI_WEEKLY, equityVestingAnnual } as never);
+  const cppOnly = (r: ReturnType<typeof annualRun>) => (r.annual?.cpp ?? 0) - (r.annual?.qpip ?? 0);
+  for (const province of ['Ontario', 'Quebec', 'British Columbia', 'Alberta', 'Nova Scotia']) {
+    for (const S of [45000, 140000, 300000]) {
+      for (const E of [20000, 60000]) {
+        const tag = `RSU ${province} $${S} + $${E}`;
+        const withE = annualRun(province, S, E);
+        const salaryOnly = annualRun(province, S);
+        const asSalary = annualRun(province, S + E);
+        expect(`${tag}: equityAnnual`, withE.equityAnnual ?? NaN, E);
+        expect(`${tag}: gross + shares − deductions = net`, withE.grossPayAnnual + E - withE.totalDeductionsAnnual, withE.netPayAnnual);
+        expect(`${tag}: grossPayAnnual is the cash salary`, withE.grossPayAnnual, S);
+        expect(`${tag}: CPP/QPP as a salary of S + E`, cppOnly(withE), cppOnly(asSalary));
+        expect(`${tag}: EI as a salary of S`, withE.annual?.ei ?? NaN, salaryOnly.annual?.ei ?? NaN);
+        const taxWith = (withE.annual?.federalTax ?? 0) + (withE.annual?.provincialTax ?? 0);
+        const taxAsSalary = (asSalary.annual?.federalTax ?? 0) + (asSalary.annual?.provincialTax ?? 0);
+        checks++;
+        if (!(taxWith >= taxAsSalary - 0.01 && taxWith - taxAsSalary <= 100)) {
+          failures.push(`${tag}: income tax ${taxWith.toFixed(2)} should be S + E's ${taxAsSalary.toFixed(2)} plus at most the smaller EI credit`);
+        }
+        for (const k of ['grossPayBiWeekly', 'netPayBiWeekly', 'federalTax', 'provincialTax', 'cppDeduction', 'eiDeduction', 'grossPayPerPeriod', 'netPayPerPeriod'] as const) {
+          expect(`${tag}: cheque ${k} = salary-only`, (withE[k] as number) ?? NaN, (salaryOnly[k] as number) ?? NaN);
+        }
+        expect(`${tag}: netPayAnnualCash = salary-only net`, withE.netPayAnnualCash ?? NaN, salaryOnly.netPayAnnual);
+        expect(`${tag}: cheque rows add up`, withE.grossPayBiWeekly - withE.federalTax - withE.provincialTax - withE.cppDeduction - withE.eiDeduction - (withE.rrspDeduction ?? 0) - (withE.pensionDeduction ?? 0) - (withE.otherDeductions ?? 0), withE.netPayBiWeekly);
+      }
+    }
+  }
+  const plain = annualRun('Ontario', 80000);
+  checks++;
+  if (plain.equityAnnual !== undefined || plain.netPayAnnualCash !== undefined) failures.push('no RSUs: equityAnnual / netPayAnnualCash must stay unset');
+}
+
 if (failures.length) {
   console.log(failures.map((f) => '  ✗ ' + f).join('\n'));
   console.log(`\nENGINE CASES AUDIT FAIL (${tz}) — ${failures.length} of ${checks}.`);
   process.exit(1);
 }
-console.log(`ENGINE CASES AUDIT PASS (${tz}) — ${checks} checks: timesheet weeks, night premium, one-time pay, non-cash benefits, daily pay, employer match, tips, breakdown rows, under 18, province keys.`);
+console.log(`ENGINE CASES AUDIT PASS (${tz}) — ${checks} checks: timesheet weeks, night premium, one-time pay, non-cash benefits, daily pay, employer match, tips, breakdown rows, under 18, province keys, RSUs.`);

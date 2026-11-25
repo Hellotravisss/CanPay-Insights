@@ -165,6 +165,8 @@ export const main: Record<string, string> = {
   'res.grossIncomePre': 'Thu Nhập Gộp (Trước Thuế)',
   'res.totalTaxDed': 'Tổng Thuế & Khấu Trừ',
   'res.netIncomePost': 'Thu Nhập Thực Nhận (Sau Thuế)',
+  'res.equityRow': 'RSU nhận trong năm nay (cổ phiếu)',
+  'res.netInclShares': 'Trong đó có {v} là cổ phiếu còn lại sau thuế — không phải tiền mặt trong các kỳ lương.',
   'res.taxDays': 'Trong 260 ngày làm việc mỗi năm, khoảng {tax} ngày lương dành cho thuế thu nhập, và {contrib} ngày cho CPP/QPP và EI, những khoản sẽ quay lại với bạn dưới dạng lương hưu và bảo hiểm.',
   'res.qcTitle': 'Đã Áp Dụng Quy Tắc Thuế Đặc Biệt Của Québec',
   'res.qcDesc': 'Tính toán này bao gồm hệ thống riêng của Québec: QPP, QPIP, mức EI thấp hơn và giảm trừ thuế liên bang. Kết quả là ước tính dựa trên mức thuế năm {year}.',

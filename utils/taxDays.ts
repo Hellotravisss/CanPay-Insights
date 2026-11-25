@@ -14,7 +14,8 @@ export const WORK_DAYS = 260;
 
 export function taxDays(r: CalculationResult): { tax: number; contributions: number } | null {
   const a = r.annual;
-  const gross = r.grossPayAnnual;
+  // RSUs are taxed in the year (annual.*) but are not in grossPayAnnual (cash pay).
+  const gross = r.grossPayAnnual + (r.equityAnnual ?? 0);
   if (!a || !gross || gross <= 0) return null;
   const tax = a.federalTax + a.provincialTax;
   // annual.cpp already includes QPIP in Quebec (annual.qpip is that part again,

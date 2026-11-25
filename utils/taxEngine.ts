@@ -694,9 +694,30 @@ export const calculateFromAnnualSalary = (inputs: AnnualSalaryInputs): Calculati
   const totalDeductionsAnnual = totalTaxAnnual + cppResult.total + eiAnnual + qpipAnnual + annualRRSP + annualPostTax + annualUnionDues + annualPension;
   const netPayAnnual = (annualGross + annualEquity) - totalDeductionsAnnual;
 
+  /**
+   * RSUs: the YEAR above includes them; the PAY CHEQUE does not. Shares are not
+   * paid on a cheque, and CRA's periodic formula withholds on the salary as if it
+   * were the whole year — a vest is a separate non-periodic payment whose tax is
+   * usually covered by selling some of the shares. So every per-period figure is
+   * the salary-only run, and only the annual totals carry the equity. Until
+   * 2026-11-25 the cheque included the shares (net per cheque above gross).
+   * Checked by audit:enginecases (RSU block).
+   */
+  if (annualEquity > 0) {
+    const cheque = calculateFromAnnualSalary({ ...inputs, equityVestingAnnual: 0 });
+    return {
+      ...cheque,
+      netPayAnnual,
+      totalDeductionsAnnual,
+      annual: { federalTax: taxResult.federalTax, provincialTax: taxResult.provincialTax, cpp: cppResult.total + qpipAnnual, qpip: qpipAnnual, ei: eiAnnual, rrsp: annualRRSP, pension: annualPension },
+      equityAnnual: annualEquity,
+      netPayAnnualCash: cheque.netPayAnnual,
+    };
+  }
+
   const grossPayPerPeriod = annualGross / periodsPerYear;
   const netPayPerPeriod = netPayAnnual / periodsPerYear;
-  
+
   return {
     earnings: { salary: grossPayPerPeriod },
     regularHours: 0,
