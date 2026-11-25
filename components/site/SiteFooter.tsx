@@ -10,6 +10,8 @@ const SITE = [
   ['/about', 'About'], ['/contact', 'Contact'], ['/blog', 'Guides & news'], ['/data', 'Open data'],
   ['/research/pay-calculator-behaviour', 'Research'], ['/wages', 'Wages by industry'], ['/widget', 'Embed this calculator'],
   ['/link-to-canpay', 'Link to us'], ['/changelog', 'Changelog'],
+  // moved here from the home page, which now holds only the title and the three choices (2026-11-24)
+  ['https://apps.apple.com/app/canpayinsights/id6759822038', 'iPhone app'], ['https://www.buymeacoffee.com/canpay', 'Buy me a double-double'],
 ];
 const LEGAL = [
   ['/privacy', 'Privacy'], ['/terms', 'Terms'], ['/refunds', 'Refunds'], ['/affiliate-disclosure', 'Disclosure'],

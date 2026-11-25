@@ -313,13 +313,6 @@
    "backing": "check:ten-languages"
   },
   {
-   "page": "/",
-   "text": "No signup, no spreadsheet, just a quick take-home pay estimate.",
-   "backing": "manual",
-   "note": "The calculator and widget have no paywall or sign-up gate; the only paid items are the two reports (check:products-two).",
-   "reviewed": "2026-09-25"
-  },
-  {
    "page": "/privacy",
    "text": "Version française Terms of Service Refund Policy",
    "backing": "not-a-claim"
@@ -2142,9 +2135,54 @@
    "reviewed": "2026-10-26"
   },
   {
-   "page": "/",
-   "text": "App Store ☕ Buy me a double-double",
-   "backing": "not-a-claim"
+   "page": "/about",
+   "text": "› CanPay Insights is a free take-home pay calculator for people who work in Canada.",
+   "backing": "manual",
+   "note": "The calculator and widget have no paywall or sign-up gate; the only paid items are the two reports (check:products-two).",
+   "reviewed": "2026-11-24"
+  },
+  {
+   "page": "/about",
+   "text": "It is a paycheck calculator for employees and hourly workers — not a payroll service, a payment processor, or a merchant-services provider.",
+   "backing": "manual",
+   "note": "The site has no payroll-running, payment-processing or merchant code: the only payment flow is the Stripe checkout for the two reports (check:products-two).",
+   "reviewed": "2026-11-24"
+  },
+  {
+   "page": "/about",
+   "text": "No signup and no spreadsheet, in ten languages: English, French, Chinese, Punjabi, Hindi, Tagalog, Spanish, Ukrainian, Korean, and Vietnamese.",
+   "backing": "check:ten-languages"
+  },
+  {
+   "page": "/about",
+   "text": "Our calculator applies these brackets automatically for every province and territory.",
+   "backing": "gate:audit:engine"
+  },
+  {
+   "page": "/about",
+   "text": "Alberta has the highest basic personal amount and no provincial sales tax, while Quebec runs its own system with QPP and QPIP.",
+   "backing": "manual",
+   "note": "constants.ts 2026 provincial BPAs: Alberta 22,769 is the highest of the 13 (next Saskatchewan 20,381); Alberta levies no PST (only the 5% GST); Quebec runs QPP (lib/quebec) and QPIP instead of CPP/EI-parental, as the engine applies.",
+   "reviewed": "2026-11-24"
+  },
+  {
+   "page": "/about",
+   "text": "2026 estimates for employment income, single with no additional credits, from the CanPay Insights rules engine using CRA and provincial rates.",
+   "backing": "gate:audit:numbers"
+  },
+  {
+   "page": "/about",
+   "text": "Use our free calculator to get exact numbers for your province and income.",
+   "backing": "manual",
+   "note": "The calculator and widget have no paywall or sign-up gate; the only paid items are the two reports (check:products-two).",
+   "reviewed": "2026-11-24"
+  },
+  {
+   "page": "/about",
+   "text": "› Alberta has the highest basic personal amount and no provincial sales tax, making it very tax-friendly for higher earners.",
+   "backing": "manual",
+   "note": "constants.ts 2026 provincial BPAs: Alberta 22,769 is the highest of the 13 (next Saskatchewan 20,381); Alberta levies no PST (only the 5% GST); Quebec runs QPP (lib/quebec) and QPIP instead of CPP/EI-parental, as the engine applies. Alberta's top provincial rate (15%) is below BC (20.5%), Ontario (13.16% + surtax) and Quebec (25.75%).",
+   "reviewed": "2026-11-24"
   }
  ]
 }

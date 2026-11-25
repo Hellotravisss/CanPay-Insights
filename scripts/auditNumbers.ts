@@ -583,6 +583,7 @@ const SURFACE_SOURCES = [
   'app/landing-page-data.ts',
   'components/DataPage.tsx',
   'components/AboutPage.tsx',
+  'components/AboutTopics.tsx',   // home topics + FAQ, moved here 2026-11-24
   'app/compare-provinces/page.tsx',
   // The province comparison body lives in a content component, not a page —
   // "Alberta's flat 10%" sat here unaudited for months.

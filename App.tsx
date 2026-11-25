@@ -472,11 +472,9 @@ const App: React.FC = () => {
     setCurrentPage('calculator');
   }, []);
 
-  // Donation URL
-  const DONATION_URL = "https://www.buymeacoffee.com/canpay"; 
 
   return (
-    <div className="min-h-screen bg-pearl font-sans">
+    <div className={`bg-pearl font-sans ${currentPage === 'home' ? '' : 'min-h-screen'}`}>{/* home: the server-rendered topics follow directly, no full-screen gap */}
       {/* Header */}
       <SiteHeader
         lang={lang === 'fr' || lang === 'zh' ? lang : 'en'}
@@ -507,48 +505,36 @@ const App: React.FC = () => {
           {/* Home Page - Mode Selection */}
           {currentPage === 'home' && (
             <div className="mx-auto w-full max-w-6xl">
-              <section className="mx-auto max-w-xl pb-12 pt-6 md:pb-20 md:pt-14">
-                <div>
-                  <p className="text-[11px] font-semibold uppercase tracking-[0.14em] text-red-600">{TAX_YEAR} · CRA T4032</p>
-                  <h1 className="mt-3 font-display text-[2.6rem] font-semibold leading-[1.04] tracking-[-0.015em] text-ink md:text-[3.75rem]">
+              {/* Home (Travis picked 2026-11-24 from two rounds of mock-ups): desktop = mock-up A, title + the three
+                  choices left and the logo in its echo rings right; phone = mock-up E, a red banknote-wave panel with
+                  the logo and the title, the choices below. Only the title and the three choices; no figures. */}
+              <section className="-mx-4 -mt-5 pb-10 md:-mt-8 lg:mx-0 lg:mt-0 lg:grid lg:min-h-[34rem] lg:grid-cols-2 lg:items-center lg:gap-10 lg:pb-14 lg:pt-6">
+                <div
+                  className="relative overflow-hidden px-4 pb-7 pt-6 text-white lg:hidden"
+                  style={{ background: "url('/brand/waves-ca-dark.svg') center/480px repeat, radial-gradient(130% 120% at 15% 0%, #D42422, #B00B0D 50%, #74030A)" }}
+                >
+                  <img src="/logo.png" alt="" aria-hidden="true" width={96} height={96} className="h-24 w-24 rounded-[22px] shadow-[0_24px_40px_-18px_rgba(0,0,0,0.5)]" />
+                  <p className="mt-16 font-display text-[2.4rem] font-semibold leading-[1.04] tracking-[-0.015em]" aria-hidden="true">{t('brand.tagline')}</p>
+                </div>
+
+                <div className="px-4 pt-6 lg:px-0 lg:pt-0">
+                  <h1 className="sr-only font-display text-[4rem] font-semibold leading-[1.04] tracking-[-0.015em] text-ink lg:not-sr-only lg:mb-9 lg:block">
                     {t('brand.tagline')}
                   </h1>
-                  <p className="mt-5 max-w-md text-lg leading-8 text-ink-3">{t('home.subtitle')}</p>
-
-                  <div className="mt-8 max-w-lg">
+                  <div className="lg:max-w-[26rem]">
                     <ModeSelector onModeSelect={handleModeSelect} />
                   </div>
-
-                  <div className="mt-6 flex flex-wrap items-center gap-3">
-                    <a
-                      href="https://apps.apple.com/app/canpayinsights/id6759822038"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="inline-flex min-h-11 items-center justify-center gap-2 rounded-xl bg-ink px-4 py-2.5 text-sm font-semibold text-white no-underline transition-colors hover:bg-ink-2"
-                    >
-                      <svg className="h-5 w-5" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
-                        <path d="M17.05 20.28c-.98.95-2.05.88-3.08.4-1.09-.5-2.08-.48-3.24 0-1.44.62-2.2.44-3.06-.4C2.79 15.25 3.51 7.59 9.05 7.31c1.35.07 2.29.74 3.08.74s1.79-.75 3.16-.64c1.35.1 2.47.69 3.18 1.8-2.88 1.45-2.38 5.13.58 6.13-.57 1.5-1.31 2.99-2.54 4.09zM12.03 7.25c-.15-2.23 1.66-4.07 3.74-4.25.29 2.58-2.34 4.5-3.74 4.25z"/>
-                      </svg>
-                      <span>App Store</span>
-                    </a>
-                    <a
-                      href={DONATION_URL}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="inline-flex min-h-11 items-center justify-center gap-2 rounded-xl border border-line bg-white px-4 py-2.5 text-sm font-semibold text-ink no-underline transition-colors hover:border-ink-5"
-                    >
-                      <span aria-hidden="true">☕</span>
-                      <span>Buy me a double-double</span>
-                    </a>
+                  <div className="mt-6">
+                    <SisterSiteCard />
                   </div>
                 </div>
 
+                <div className="relative mx-auto hidden aspect-square w-full max-w-[32rem] lg:block" aria-hidden="true">
+                  <img src="/brand/echo-hero.svg" alt="" className="absolute inset-0 h-full w-full" />
+                  <img src="/logo.png" alt="" width={200} height={200} className="absolute left-[31%] top-[31%] w-[38%] rounded-[22%] shadow-[0_30px_60px_-24px_rgba(158,11,16,0.55)]" />
+                </div>
               </section>
-
-              {/* Sister site — U.S. edition, honest same-team recommendation. It keeps its own brand colours. */}
-              <div className="mb-4">
-                <SisterSiteCard />
-              </div>
+              <div className="-mx-4 hidden h-3.5 bg-[url('/brand/microtext-ca-light.svg')] bg-[length:auto_14px] bg-repeat-x lg:block" aria-hidden="true" />
             </div>
           )}
 

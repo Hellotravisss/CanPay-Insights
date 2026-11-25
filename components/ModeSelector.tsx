@@ -39,7 +39,7 @@ const ModeSelector: React.FC<Props> = ({ onModeSelect }) => {
         <button
           key={mode.id}
           onClick={() => onModeSelect(mode.id)}
-          className="group flex min-h-24 items-center gap-4 rounded-2xl border border-line bg-white p-4 text-left transition-all duration-150 hover:-translate-y-0.5 hover:border-ink-5 hover:shadow-[0_12px_28px_-18px_rgba(21,23,28,0.45)] focus:outline-none focus-visible:ring-4 focus-visible:ring-red-100 sm:p-5"
+          className="group flex items-center gap-4 rounded-2xl border border-line bg-white px-4 py-3 text-left shadow-[0_10px_30px_-20px_rgba(21,23,28,0.35)] transition-all duration-150 hover:-translate-y-0.5 hover:border-ink-5 hover:shadow-[0_12px_28px_-16px_rgba(21,23,28,0.45)] focus:outline-none focus-visible:ring-4 focus-visible:ring-red-100 sm:px-5"
         >
           {/* the three modes as the app icon draws things: pearly 3D type ($/hr · $/yr · hrs) on the red tile (PayFamily-brand/15-icons/3d, 2026-11-24) */}
           <span className="flex h-14 w-14 shrink-0 items-center justify-center transition-transform group-hover:scale-105" aria-hidden="true">
@@ -49,9 +49,6 @@ const ModeSelector: React.FC<Props> = ({ onModeSelect }) => {
           <span className="min-w-0 flex-1">
             <span className="block font-display text-xl font-semibold leading-tight text-ink sm:text-[1.4rem]">
               {mode.title}
-            </span>
-            <span className="mt-1 block text-sm leading-6 text-mute">
-              {mode.subtitle}
             </span>
           </span>
           <span className="text-ink-5 transition-transform group-hover:translate-x-1 group-hover:text-red-600" aria-hidden="true">

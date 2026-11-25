@@ -3,6 +3,7 @@ import SiteHeader from './site/SiteHeader';
 import SiteFooter from './site/SiteFooter';
 import { PageHero } from './site/ui';
 import { Section } from './LegalChrome';
+import AboutTopics from './AboutTopics';
 
 const LINK = 'font-medium text-red-600 underline decoration-red-200 underline-offset-4 transition-colors hover:decoration-red-600';
 
@@ -97,6 +98,7 @@ const AboutPage: React.FC = () => {
                 </p>
               </Section>
         </article>
+        <div className="pb-12"><AboutTopics /></div>
       </main>
       <SiteFooter lang="en" note="Calculations are estimates based on 2026 tax brackets and provincial employment standards." />
     </div>
