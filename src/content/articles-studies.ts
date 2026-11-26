@@ -4612,4 +4612,130 @@ If you're negotiating a raise of your own, or just want to see what a specific p
 The November 13, 2026 contract terms (wage increases, ratification bonus, contract dates) are from Canada Post's own news release, *"Canada Post and CPAA reach tentative two-year collective agreement"* (canadapost-postescanada.ca). Context on the CPAA's prior contract (11% over three years, 2024–2026) is drawn from contemporaneous news coverage of that June 2025 settlement. The October 2026 Consumer Price Index figure (3.1%, unchanged from September) is from Statistics Canada's November 16, 2026 release, as previously reported by CanPay Insights. All take-home pay, raise, and bonus figures are calculated by the CanPay Insights tax engine using 2026 federal and provincial tax brackets, CPP/CPP2, and EI, for a single filer with basic personal amounts only, paid bi-weekly; the engine does not yet model 2027 rates, which the CRA had not published at the time of writing, so these are current-year approximations of the deductions a similar raise would face, not a 2027 forecast. The deal itself remains tentative and subject to ratification. This is general information, not financial or tax advice.
 `,
   },
+  {
+    id: 'study-42',
+    slug: 'year-end-bonus-after-tax-2026',
+    title: "What a $5,000 Year-End Bonus Actually Nets You, Province by Province (2026)",
+    subtitle:
+      "A bonus is taxed exactly like the rest of your income — but where that income lands matters. We ran $1,000, $2,000, and $5,000 bonuses through the CanPay Insights tax engine at two salaries, and found a bonus is worth noticeably more once your pay has already cleared this year's CPP and EI ceilings.",
+    excerpt:
+      "A $5,000 year-end bonus on a $60,000 Ontario salary nets $3,216 after tax — 64.3%. The same $5,000 bonus on a $90,000 Ontario salary nets $3,517.50, or 70.4%, because that salary has already hit the 2026 CPP and EI maximums, so the bonus skips those deductions entirely and loses only income tax. Here is what a bonus like yours is actually worth, province by province.",
+    metaTitle: "Year-End Bonus After Tax: What $5,000 Nets You",
+    metaDescription:
+      "See what a $1,000–$5,000 year-end bonus is actually worth after tax in every province, using the CanPay Insights tax engine for 2026.",
+    keywords: [
+      'bonus after tax canada',
+      'year end bonus tax calculator',
+      'how much tax on a bonus in canada',
+      'bonus take home pay by province',
+      'is a bonus taxed differently than salary',
+      'cpp ei maximum year end bonus',
+    ],
+    category: 'news',
+    tags: ['Bonus', 'Take-Home Pay', 'Provinces', '2026'],
+    publishedAt: '2026-11-26',
+    readTime: 7,
+    imageUrl: '/blog/covers/year-end-bonus-after-tax-2026.png',
+    directAnswer:
+      "A year-end bonus is taxed as ordinary employment income, not at some special higher rate — any extra withholding your employer applies at bonus time is just a withholding method; what you actually keep depends on your marginal tax rate and whether you've already hit the 2026 CPP ($74,600 maximum pensionable earnings) and EI ($68,900 maximum insurable earnings) ceilings for the year. Run through the CanPay Insights tax engine, a $5,000 bonus on a $60,000 Ontario salary (below both ceilings) nets $3,216, or 64.3%; the same $5,000 bonus on a $90,000 Ontario salary (above both ceilings) nets $3,517.50, or 70.4%, because it skips CPP and EI entirely and loses only income tax. The gap is smaller but still real in every other province checked.",
+    faq: [
+      {
+        question: 'Is a bonus taxed at a higher rate than regular salary in Canada?',
+        answer:
+          "No — a bonus is employment income like any other pay, taxed at your marginal tax rate for the year once everything you earned is added up. What confuses people is the withholding: employers often withhold a flat, higher-looking percentage from a bonus cheque (the CRA's 'bonus method' of calculating withholding), but that is just how much is held back up front, not how much you ultimately owe. If too much was withheld, it comes back as part of your tax refund when you file.",
+      },
+      {
+        question: 'Why does the same $5,000 bonus net more at a higher salary?',
+        answer:
+          "Because CPP and EI are only deducted up to a ceiling each year — the 2026 maximum pensionable earnings for CPP is $74,600, and the maximum insurable earnings for EI is $68,900. Once your salary alone has already passed both ceilings, every dollar of a year-end bonus owes no further CPP or EI at all — only income tax. Run through the CanPay Insights tax engine for a single Ontario filer, a $5,000 bonus nets $3,216 (64.3%) on a $60,000 salary, which sits below both ceilings, versus a $5,000 bonus netting $3,517.50 (70.4%) on a $90,000 salary, which sits above both.",
+      },
+      {
+        question: 'What does a $1,000 or $2,000 bonus actually net, province by province?',
+        answer:
+          "On a $60,000 salary (bringing gross income for the year to $61,000) using the CanPay Insights tax engine at 2026 rates, for a single filer paid bi-weekly, a $1,000 bonus nets: Alberta $656.53 (65.7%), British Columbia $657.92 (65.8%), Manitoba $611.34 (61.1%), New Brunswick $598.05 (59.8%), Newfoundland and Labrador $592.64 (59.3%), Nova Scotia $588.24 (58.8%), Ontario $643.20 (64.3%), Prince Edward Island $603.36 (60.3%), Quebec $570.35 (57.0%), and Saskatchewan $613.62 (61.4%). A $2,000 bonus nets almost exactly double each of those figures at the same salary, since both bonus sizes sit inside the same tax bracket for every province checked.",
+      },
+      {
+        question: 'Does it matter when in the year I receive the bonus?',
+        answer:
+          "Only through the CPP/EI-ceiling effect above, not through any special year-end rule. CPP and EI are calculated on your total earnings for the calendar year, so a December bonus added on top of everything already earned since January is what can push you past, or keep you under, the $74,600 and $68,900 ceilings — not the month it happens to land in. If your year-to-date earnings before the bonus already exceed those ceilings, the bonus itself owes no additional CPP or EI regardless of which month it arrives.",
+      },
+      {
+        question: 'Which province keeps the most of a bonus, and which the least?',
+        answer:
+          "Among the provinces checked, on a $5,000 bonus on top of a $60,000 salary, British Columbia keeps the most ($3,289.58, 65.8%), just ahead of Alberta ($3,218.93, 64.4%) and Ontario ($3,216.00, 64.3%); Quebec keeps the least ($2,851.77, 57.0%), with Nova Scotia next lowest ($2,900.03, 58.0%). On the same $5,000 bonus on top of a $90,000 salary, British Columbia again leads ($3,590.00, 71.8%), while Nova Scotia ($3,141.50, 62.8%) and Prince Edward Island ($3,145.00, 62.9%) keep the smallest share. The gap comes mainly from provincial tax brackets; Quebec's QPP and QPIP apply instead of CPP and part of EI but land in a broadly similar range.",
+      },
+      {
+        question: 'Is this the same as how my employer will actually withhold tax from my bonus cheque?',
+        answer:
+          "Not necessarily cheque-by-cheque, but the same amount by the time you file. Payroll software commonly uses the CRA's bonus method, which applies a different formula to work out withholding for an irregular payment like a bonus, usually resulting in more being held back from that one cheque than a flat percentage of it. These figures are the actual tax, CPP, and EI owed on the bonus for the year — what you keep once everything is settled — not a prediction of what a specific pay stub will show.",
+      },
+    ],
+    content: `
+## A bonus isn't taxed differently — but where it lands is
+
+Year-end bonus season raises the same question every year: how much of it do you actually keep? The short answer is that a bonus is ordinary employment income, taxed at your marginal rate once it's added to everything else you earned in the year — there is no separate "bonus tax rate." What an employer withholds from the bonus cheque itself can look higher, because payroll software often uses the CRA's bonus method to calculate withholding on an irregular payment, but that's just a withholding mechanic. It settles out at tax time either way.
+
+What genuinely changes how much of a bonus you keep is whether your salary has already passed this year's **CPP and EI ceilings** — the points past which no more CPP or EI is deducted for the rest of the calendar year. For **2026**, those are:
+
+- **CPP maximum pensionable earnings: $74,600**
+- **EI maximum insurable earnings: $68,900**
+
+Once your year-to-date earnings clear both, a bonus on top loses nothing to CPP or EI — only income tax. Below both, it loses the full CPP (5.95%) and EI (1.63%) rates on top of tax, same as any other dollar of pay.
+
+We ran $1,000, $2,000, and $5,000 bonuses through the CanPay Insights tax engine at two salaries — $60,000 (below both ceilings) and $90,000 (above both) — for a single filer paid bi-weekly, in every province.
+
+### Key findings
+
+- **A $5,000 bonus on a $60,000 Ontario salary nets $3,216 (64.3%).** The same $5,000 bonus on a $90,000 Ontario salary nets $3,517.50 (70.4%) — six points more, almost entirely because the higher salary has already cleared the CPP and EI ceilings for the year.
+- **The gap between the two salaries holds in every province checked**, though its size varies with provincial tax brackets: from about 2.6 points in Prince Edward Island to about 6.5 points in Quebec.
+- **Bonus size barely changes the percentage kept, at a given salary.** A $1,000 and a $5,000 bonus keep almost the same share, because both usually sit inside the same tax bracket — it's the salary underneath the bonus, not the bonus's own size, that moves the percentage.
+- **British Columbia keeps the largest share of a bonus at both salaries checked; Quebec and Nova Scotia keep the smallest.**
+
+### What a bonus nets you, by province — $60,000 salary (below the 2026 CPP/EI ceilings)
+
+Add the bonus to a $60,000 salary and gross income for the year becomes $61,000, $62,000, or $65,000.
+
+| Province | $1,000 bonus nets | $2,000 bonus nets | $5,000 bonus nets |
+| --- | --- | --- | --- |
+| British Columbia | $657.92 (65.8%) | $1,315.83 (65.8%) | $3,289.58 (65.8%) |
+| Alberta | $656.53 (65.7%) | $1,308.75 (65.4%) | $3,218.93 (64.4%) |
+| Ontario | $643.20 (64.3%) | $1,286.40 (64.3%) | $3,216.00 (64.3%) |
+| Saskatchewan | $613.62 (61.4%) | $1,227.24 (61.4%) | $3,068.11 (61.4%) |
+| Manitoba | $611.34 (61.1%) | $1,222.69 (61.1%) | $3,056.72 (61.1%) |
+| Prince Edward Island | $603.36 (60.3%) | $1,206.72 (60.3%) | $3,016.80 (60.3%) |
+| New Brunswick | $598.05 (59.8%) | $1,196.09 (59.8%) | $2,990.24 (59.8%) |
+| Newfoundland and Labrador | $592.64 (59.3%) | $1,185.27 (59.3%) | $2,963.18 (59.3%) |
+| Nova Scotia | $588.24 (58.8%) | $1,176.48 (58.8%) | $2,900.03 (58.0%) |
+| Quebec | $570.35 (57.0%) | $1,140.71 (57.0%) | $2,851.77 (57.0%) |
+
+### What a bonus nets you, by province — $90,000 salary (above the 2026 CPP/EI ceilings)
+
+Add the bonus to a $90,000 salary and gross income for the year becomes $91,000, $92,000, or $95,000.
+
+| Province | $1,000 bonus nets | $2,000 bonus nets | $5,000 bonus nets |
+| --- | --- | --- | --- |
+| British Columbia | $718.00 (71.8%) | $1,436.00 (71.8%) | $3,590.00 (71.8%) |
+| Ontario | $703.50 (70.4%) | $1,407.00 (70.4%) | $3,517.50 (70.4%) |
+| Alberta | $695.00 (69.5%) | $1,390.00 (69.5%) | $3,475.00 (69.5%) |
+| Saskatchewan | $670.00 (67.0%) | $1,340.00 (67.0%) | $3,350.00 (67.0%) |
+| Manitoba | $667.50 (66.8%) | $1,335.00 (66.8%) | $3,337.50 (66.8%) |
+| New Brunswick | $655.00 (65.5%) | $1,310.00 (65.5%) | $3,275.00 (65.5%) |
+| Newfoundland and Labrador | $643.25 (64.3%) | $1,280.25 (64.0%) | $3,191.25 (63.8%) |
+| Quebec | $635.03 (63.5%) | $1,270.06 (63.5%) | $3,175.14 (63.5%) |
+| Nova Scotia | $628.30 (62.8%) | $1,256.60 (62.8%) | $3,141.50 (62.8%) |
+| Prince Edward Island | $629.00 (62.9%) | $1,258.00 (62.9%) | $3,145.00 (62.9%) |
+
+### Why the gap exists
+
+Compare Ontario at both salaries: a $5,000 bonus nets $3,216 (64.3%) at $60,000, but the same $5,000 bonus nets $3,517.50 (70.4%) at $90,000 — a 6.0-point gap. Ontario's own marginal income tax rate is actually *higher* around $90,000 than around $60,000, which should cut the other way. The reason the bonus still nets more at $90,000 is that CPP (5.95%) and EI (1.63%) — nearly 7.6 cents of every dollar between them — simply don't apply once the salary underneath has already passed $74,600 and $68,900 for the year. The income tax bite grows a little; the CPP/EI bite disappears entirely; the second effect wins.
+
+### What this means for your own bonus
+
+If your 2026 salary is already above $74,600, a year-end bonus on top of it will cost you only income tax — no CPP, no EI. If it's below that, expect the bonus to carry the same CPP and EI load as a regular paycheque, on top of tax. Either way, the actual percentage kept depends on your real salary, province, and how your employer's payroll already withheld CPP and EI earlier in the year. To check your own numbers, use the free [CanPay Insights take-home pay calculator](/), or see the mechanics of why one extra dollar of income is taxed differently from your average dollar in the [marginal vs. average tax rate guide](/marginal-vs-average-tax-rate). For deductions on their own, see the [CPP & EI calculator](/cpp-ei-calculator); for a province-by-province view of take-home pay generally, see [compare provinces](/compare-provinces) or the [Ontario](/ontario-paycheck-calculator) and [British Columbia](/bc-paycheck-calculator) paycheck calculators used above.
+
+## Sources & disclaimer
+
+The 2026 CPP maximum pensionable earnings ($74,600) and EI maximum insurable earnings ($68,900) are the figures the Canada Revenue Agency and Service Canada publish each year for CPP and EI payroll deductions, and match the constants the CanPay Insights tax engine already uses throughout its 2026 coverage, including [our CPP 2027 ceiling article](/blog/cpp-2027-ceiling-confirmed) and [EI premium rate article](/blog/ei-premium-rate-2027). The general description of the CRA's bonus withholding method reflects how Canadian payroll software commonly calculates withholding on irregular payments; it describes withholding only, not final tax liability, which this article computes directly. All bonus and take-home figures are calculated by the CanPay Insights tax engine using 2026 federal and provincial tax brackets, CPP/CPP2, and EI, for a single filer with basic personal amounts only, paid bi-weekly, with no other deductions or credits claimed. This is general information, not financial or tax advice.
+`,
+  },
 ];

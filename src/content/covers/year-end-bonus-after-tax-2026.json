@@ -1,0 +1,35 @@
+{
+ "head": [
+  [
+   "A $5,000 bonus nets ",
+   "$3,518",
+   "…"
+  ],
+  [
+   "…or just ",
+   "$3,216",
+   "."
+  ]
+ ],
+ "sub": "Same bonus, same province — the gap is the 2026 CPP/EI ceiling.",
+ "pill": "Below $74,600 CPP and $68,900 EI, a bonus pays full CPP + EI too",
+ "label": "CANPAY INSIGHTS TAX ENGINE · 2026 RATES · YEAR-END BONUS",
+ "tiles": [
+  [
+   "$3,518 kept — $90,000 salary",
+   "70.3% of a $5,000 bonus, Ontario"
+  ],
+  [
+   "$3,216 kept — $60,000 salary",
+   "64.3% of a $5,000 bonus, Ontario"
+  ],
+  [
+   "$74,600 — 2026 CPP ceiling",
+   "No more CPP owed once you clear it"
+  ],
+  [
+   "$68,900 — 2026 EI ceiling",
+   "No more EI owed once you clear it"
+  ]
+ ]
+}
